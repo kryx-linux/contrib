@@ -1,0 +1,22 @@
+# Description:	Text-based web browser
+# URL:		http://lynx.isc.org/
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+# Depends on:	ncurses, openssl, zlib
+
+name=lynx
+version=2.8.6
+release=1
+source=(http://lynx.isc.org/lynx$version/lynx$version.tar.bz2)
+
+build() {
+	cd lynx${version//\./-}
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--with-ssl \
+		--enable-color-style \
+		--enable-ipv6 \
+		--with-zlib
+	make
+	make DESTDIR=$PKG install
+}
