@@ -1,0 +1,20 @@
+# Description: return the canonicalized absolute pathname
+# URL: http://packages.debian.org/unstable/utils/realpath.html
+# Maintainer: Simon Gloﬂner, viper at hometux dot de
+
+name=realpath
+version=1.10
+release=1
+source=(http://ftp.debian.org/debian/pool/main/r/${name}/${name}_${version}.tar.gz)
+
+build() {
+    cd $name-$version
+
+    make VERSION=$version realpath
+
+    mkdir -p $PKG/usr/bin
+    mkdir -p $PKG/usr/man/man1
+
+    install -m 755 realpath $PKG/usr/bin/realpath
+    install -m 644 man/realpath.1 $PKG/usr/man/man1
+}

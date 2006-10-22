@@ -1,0 +1,22 @@
+# Description: practical wrapper for cryptsetup-luks
+# URL: http://www.grml.org
+# Maintainer: Simon Gloﬂner, viper at hometux dot de
+# Depends on: realpath, grml-shlib
+
+name=grml-crypt
+version=0.14
+release=2
+source=(http://grml.org/repos/${name}_${version}.tar.gz \
+	grml-crypt.8 $name-$version.patch)
+
+build() {
+    cd $name
+
+    patch -p1 < $SRC/$name-$version.patch
+   
+    mkdir -p $PKG/usr/sbin
+    mkdir -p $PKG/usr/man/man8
+
+    install -m 755 grml-crypt $PKG/usr/sbin/grml-crypt
+    install -m 644 $SRC/grml-crypt.8 $PKG/usr/man/man8
+}

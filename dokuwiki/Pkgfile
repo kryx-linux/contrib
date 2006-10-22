@@ -1,0 +1,22 @@
+# Description: Standards compliant, nice and powerful Wiki
+# URL: http://wiki.splitbrain.org/wiki:dokuwiki
+# Maintainer: Simon Gloﬂner, viper at hometux dot de
+# Depends on: apache, mod_php
+
+name=dokuwiki
+version=2006-03-09e
+release=1
+source=(http://www.splitbrain.org/_media/projects/dokuwiki/${name}-${version}.tgz)
+
+build() {
+    cd $name-$version
+    
+    touch data/changes.log
+    
+    mkdir -p $PKG/var/www/htdocs/dokuwiki/
+    cp -R ./ $PKG/var/www/htdocs/dokuwiki/
+    
+    rm -f  $PKG/var/www/htdocs/dokuwiki/{COPYING,README,VERSION}
+    find $PKG -path '*lang/*' ! -wholename '*/en*' -type d | xargs rm -rf 
+    chown -R nobody.nobody $PKG/var/www/htdocs/dokuwiki/data
+}

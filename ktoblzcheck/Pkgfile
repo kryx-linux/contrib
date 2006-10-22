@@ -1,0 +1,16 @@
+# Description: Checks account numbers and bank codes
+# URL: http://ktoblzcheck.sourceforge.net/
+# Maintainer: Simon Gloﬂner, viper at hometux dot de
+
+name=ktoblzcheck
+version=1.11
+release=1
+source=(http://dl.sourceforge.net/${name}/${name}-${version}.tar.gz)
+
+build() {
+    cd $name-$version
+
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+}

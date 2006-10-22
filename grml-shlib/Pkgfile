@@ -1,0 +1,19 @@
+# Description: shell script library used by grml tools
+# URL: http://www.grml.org
+# Maintainer: Simon Gloﬂner, viper at hometux dot de
+
+name=grml-shlib
+version=1.02.11
+release=1
+source=(http://grml.org/repos/${name}_${version}.tar.gz \
+	grml-shlib.3)
+
+build() {
+    cd $name
+
+    mkdir -p $PKG/usr/lib/grml
+    mkdir -p $PKG/usr/man/man3
+    
+    install -m 755 sh-lib $PKG/usr/lib/grml/sh-lib
+    install -m 644 $SRC/grml-shlib.3 $PKG/usr/man/man3
+}

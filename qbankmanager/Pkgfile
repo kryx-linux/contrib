@@ -1,0 +1,27 @@
+# Description: QT3-based online banking program 
+# URL: http://www.aquamaniac.de/aqbanking/
+# Maintainer: Simon Gloﬂner, viper at hometux dot de
+# Depends on: aqbanking, qt3
+
+name=qbankmanager
+version=0.9.38
+release=2
+source=(http://dl.sourceforge.net/aqbanking/${name}-${version}.tar.gz \
+	categories.db)
+
+build() {
+    cd $name-$version
+
+    ./configure \
+	--prefix=/usr \
+	--enable-gwenhywfar \
+	--enable-aqbanking
+    make
+    make DESTDIR=$PKG install
+
+    rm -f $PKG/usr/share/qbankmanager/categories/gnucash-full.db
+    rm -rf $PKG/usr/share/qbankmanager/home/de
+    rm -rf $PKG/usr/share/qbankmanager/i18n
+    
+    install -m 644 ../categories.db $PKG/usr/share/qbankmanager/categories/gnucash-full.db
+}
