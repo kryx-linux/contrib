@@ -1,0 +1,22 @@
+# Description:	Music playback daemon
+# URL:		http://www.musicpd.org/
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+# Depends on:	faad2, flac, libid3tag, libmad, libmikmod, libvorbis
+
+name=mpd
+version=0.12.1
+release=1
+source=(http://www.musicpd.org/uploads/files/mpd-$version.tar.bz2)
+
+build() {
+	cd mpd-$version
+	./configure \
+		--prefix=/usr \
+		--disable-static
+	make
+	make DESTDIR=$PKG install
+	mkdir -p $PKG/etc
+	cp doc/mpdconf.example $PKG/etc/mpd.conf
+	rm -r $PKG/usr/share/doc
+	rmdir $PKG/usr/share
+}
