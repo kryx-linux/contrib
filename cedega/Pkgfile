@@ -1,0 +1,16 @@
+# Description: TransGaming's flagship Linux portability product
+# URL: http://www.transgaming.com/
+# Maintainer: Matt Housh, jaeger at morpheus dot net
+# Depends on: x11, gtk, python, pygtk
+
+name=cedega
+version=5.2.3
+release=1
+source=(file:///$name-small-$version.tgz)
+
+build() {
+	cp -a $SRC/* $PKG/
+	rm -rf $PKG/usr/share $PKG/opt $PKG/etc
+	sed -i -e 's|/usr/bin/X11"$|/usr/bin/X11:/usr/X11R6/bin"|' \
+		$PKG/usr/lib/transgaming_cedega/system_detection.py
+}
