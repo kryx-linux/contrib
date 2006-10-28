@@ -1,0 +1,14 @@
+# Description: Distributed version control system  
+# URL:         http://www.darcs.net/
+# Maintainer:  Jürgen Daubert, juergen dot daubert at t-online dot de
+
+name=darcs
+version=1.0.8
+release=1
+source=(http://jue.li/crux/files/$name-$version-linux-i586.tar.bz2) 
+
+build() {
+    cd $name-$version
+    install -D -m 755 darcs $PKG/usr/bin/darcs
+    install -D -m 644 darcs.1 $PKG/usr/man/man1/darcs.1
+}
