@@ -1,0 +1,56 @@
+README for zabbix server
+
+REQUIREMENTS
+See http://www.zabbix.com/manual/v1.1/install.php for full software
+requirements.
+
+PRE-INSTALL
+For upgrading see http://www.zabbix.com/manual/v1.1/config_upgrading.php
+You might have to change patch.sql to use MyISAM tables before applying 
+patches.
+
+POST-INSTALL
+You should decide on tabeles format: InnoDB is used in default sql scripts.
+But MyISAM gives some advantages... Before creating database you can untar
+source somewhere and run:
+  sed -i s/"type\=InnoDB"/"type\=MyISAM"/g zabbix-1.x.x/create/mysql/schema.sql
+
+1. Choose host for the database, edit /etc/zabbix_server.conf:
+  change DBHost, DBUser, DBPassword, comment out DBSocket.
+
+2. Create mysql zabbix database (user, password):
+  shell> mysql -u<username> -p<password>
+  mysql> create database zabbix;
+  
+ maniac's corner
+ [
+  mysql> CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'password_as_is';
+  mysql> GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost';
+ ]
+  mysql> quit;
+  shell> cd create/mysql
+  shell> cat schema.sql |mysql -u<username> -p<password> zabbix
+  shell> cd ../data
+  shell> cat data.sql |mysql -u<username> -p<password> zabbix
+
+3. Change these values in frontends/php/include/db.inc.php:
+  $DB_SERVER  ="localhost";
+  $DB_DATABASE = "zabbix";
+  $DB_USER     = "zabbix"; /* if one was created */
+  $DB_PASSWORD = "db_user_password";
+
+4. Change these values in /etc/zabbix/zabbix_server.conf:
+  DBHost=localhost
+  DBName=zabbix
+  DBUser=zabbix
+  DBPassword=password_as_is
+
+5. Copy frontends/php to your webserver document root, change it's permissions.
+  Default user is 'Admin', password is empty.
+
+6. Run post-install to create dedicated zabbix user.
+
+RESOURCES
+http://www.zabbix.com/manual/v1.1
+http://www.zabbix.com/forum
+http://www.zabbix.com/doku

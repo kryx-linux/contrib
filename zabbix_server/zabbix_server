@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# /etc/rc.d/zabbix_server: start/stop zabbix server
+#
+
+case $1 in
+start)
+	su daemon -c /usr/bin/zabbix_server
+	;;
+stop)
+	killall -q /usr/bin/zabbix_server
+	;;
+restart)
+	$0 stop
+	sleep 1
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
+
+# End of file
