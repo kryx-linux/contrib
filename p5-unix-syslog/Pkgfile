@@ -1,0 +1,18 @@
+# Description: Perl interface to the UNIX syslog(3) calls
+# URL: http://search.cpan.org/~mharnisch/Unix-Syslog-0.100/Syslog.pm
+# Maintainer: mike at openbunker dot org
+# Depends on:
+
+name=p5-unix-syslog
+version=0.100
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/M/MH/MHARNISCH/Unix-Syslog-$version.tar.gz)
+
+build () {
+	cd Unix-Syslog-$version
+	perl Makefile.PL
+	make OPTIMIZE="${CFLAGS}"
+	make DESTDIR=${PKG} install
+	find ${PKG} -name perllocal.pod -exec rm {} \;
+	find $PKG -type d -depth -empty -exec rm -rf {} \;
+}
