@@ -1,0 +1,15 @@
+# Description:	Advanced memory diagnostic tool
+# URL:		http://www.memtest.org/
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+
+name=memtest86+
+version=1.65
+release=1
+source=(http://www.memtest.org/download/$version/memtest86+-$version.tar.gz)
+
+build() {
+	cd memtest86+-$version
+	make memtest.bin
+	install -d $PKG/boot
+	install -m 644 memtest.bin $PKG/boot
+}
