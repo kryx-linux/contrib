@@ -1,0 +1,17 @@
+# Description: A combined network and serial communication software 
+# URL: http://www.columbia.edu/kermit/ck80.html
+# Maintainer: mike at openbunker dot org
+# Depends on: ncurses
+
+name=ckermit
+version=8.0.211
+release=3
+# Broken link on official site
+#source=(ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz)
+source=(http://fresh.t-systems-sfr.com/unix/src/privat2/cku211.tar.gz)
+
+build() {
+	make linux
+	/usr/bin/install -D -m 755 wermit $PKG/usr/bin/kermit
+	/usr/bin/install -D -m 644 ckuker.nr $PKG/usr/man/man1/kermit.1
+}
