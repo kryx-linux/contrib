@@ -1,0 +1,15 @@
+# Description: Synaptics TouchPad driver for XOrg/XFree86
+# URL: http://web.telia.com/~u89404340/touchpad/
+# Maintainer: mike at openbunker dot org
+# Depends on: x11
+
+name=synaptics
+version=0.14.6
+release=1
+source=(http://web.telia.com/~u89404340/touchpad/files/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	make
+	make BINDIR=$PKG/usr/bin MANDIR=$PKG/usr/man DESTDIR=$PKG install
+}
