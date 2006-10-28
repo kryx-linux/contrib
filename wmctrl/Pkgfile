@@ -1,0 +1,16 @@
+# Description: A cli tool to interact with an EWMH/NetWM compatible wm
+# URL: http://www.sweb.cz/tripie/utils/wmctrl/
+# Maintainer: mike at openbunker dot org
+# Depends on: x11 glib
+
+name=wmctrl
+version=1.07
+release=1
+source=(http://www.sweb.cz/tripie/utils/wmctrl/dist/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr --disable-nls
+	make
+	make DESTDIR=$PKG install
+}
