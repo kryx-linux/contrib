@@ -1,0 +1,16 @@
+# Description: Some themes for sylpheed-claws email client
+# URL: http://claws.sylpheed.org
+# Maintainer: mike at openbunker dot org
+# Depends on: sylpheed-claws
+
+name=sylpheed-claws-themes
+version=20060615
+release=1
+source=(http://dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-claws-themes-20060615.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}
