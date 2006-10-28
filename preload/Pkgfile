@@ -1,0 +1,22 @@
+# Description:	Adaptive readahead daemon
+# URL:		http://sourceforge.net/projects/preload/
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+# Depends on:	glib
+
+name=preload
+version=0.4
+release=1
+source=(http://dl.sourceforge.net/sourceforge/preload/preload-$version.tar.gz)
+
+build() {
+	cd preload-$version
+	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+	make
+	make DESTDIR=$PKG install
+
+	cd $PKG
+	rm -r etc/{rc.d,logrotate.d,sysconfig} \
+	      usr/share/doc
+	rmdir usr/share
+	chmod -v 660 var/lib/preload/preload.state
+}
