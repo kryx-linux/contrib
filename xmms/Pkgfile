@@ -7,13 +7,15 @@
 
 name=xmms
 version=1.2.10
-release=3
+release=4
 source=(http://www.xmms.org/files/1.2.x/$name-$version.tar.bz2 \
-		$name-$version-gcc4.patch)
+		$name-$version-gcc4.patch \
+		$name-${version}_alsa_unpause.patch)
 
 build() {
 	cd $name-$version
 	patch -p1 -i $SRC/$name-$version-gcc4.patch
+	patch -p1 -i $SRC/$name-${version}_alsa_unpause.patch
 	./configure --prefix=/usr \
 				--disable-mikmod \
 				--disable-nls \
