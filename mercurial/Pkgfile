@@ -1,0 +1,14 @@
+# Description:	Distributed source code management system
+# URL:		http://www.selenic.com/mercurial/
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+# Depends on:	python
+
+name=mercurial
+version=0.9.1
+release=1
+source=(http://www.selenic.com/mercurial/release/mercurial-$version.tar.gz)
+
+build() {
+	cd mercurial-$version
+	python setup.py install --root=$PKG
+}
