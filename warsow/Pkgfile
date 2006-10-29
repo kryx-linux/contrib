@@ -5,7 +5,7 @@
 
 name=warsow
 version=0.21
-release=1
+release=2
 source=(http://ftp.club-internet.fr/pub/games/nofrag/warsow/warsow_${version}_linux.tar.gz
 	http://ftp.club-internet.fr/pub/games/nofrag/warsow/warsow_${version}_sdk.zip)
 
@@ -18,7 +18,7 @@ build() {
 		BUILD_SND_OPENAL=NO \
 		CLIENT_EXE=warsow
 	mkdir -p $PKG/usr/{bin,games/warsow}
-	mv source/release/warsow		$PKG/usr/bin
-	cp -r source/release/*			$PKG/usr/games/warsow
-	cp -r warsow/basewsw/{huds,*.pk3}	$PKG/usr/games/warsow/basewsw
+	mv source/release/warsow	$PKG/usr/bin
+	cp -r source/release/*		$PKG/usr/games/warsow
+	cp -r warsow/basewsw/*.pk3	$PKG/usr/games/warsow/basewsw
 }
