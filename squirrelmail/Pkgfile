@@ -1,0 +1,19 @@
+# Description: A webmail package written in PHP
+# URL: http://www.squirrelmail.org
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: apache mod_php
+
+name=squirrelmail
+version=1.4.8
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+
+build() {
+	if [[ -z $SQM_HTDOCS_ROOT ]]; then
+		SQM_HTDOCS_ROOT="var/www/htdocs"
+	fi
+	cd $name-$version
+	mkdir -p $PKG/$SQM_HTDOCS_ROOT/squirrelmail
+	cp -r {class,config,contrib,data,functions,help,images,include,locale,plugins,po,src,themes} $PKG/$SQM_HTDOCS_ROOT/squirrelmail
+	cp index.php $PKG/$SQM_HTDOCS_ROOT/squirrelmail/
+}
