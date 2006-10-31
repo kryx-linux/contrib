@@ -1,0 +1,17 @@
+# $Id: Pkgfile,v 1.5 2006/09/08 19:39:35 aon Exp $
+# Description: Debian's fork of cdrtools
+# URL: http://debburn.alioth.debian.org/
+# Maintainer: Antti Nykänen, aon at iki dot fi
+# Depends on: cmake, libcap
+
+name=cdrkit
+version=1.0pre4
+release=1
+source=(http://debburn.alioth.debian.org/cdrkit-$version.tar.gz)
+
+build () {
+	cd cdrkit-$version
+	find . -name "CMakeLists.txt" -exec sed -i 's:share/\(man\):\1:g' {} \;
+	cmake -DCMAKE_INSTALL_PREFIX=$PKG/usr
+	make install
+}
