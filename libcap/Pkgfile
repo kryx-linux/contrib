@@ -1,0 +1,23 @@
+# $Id: Pkgfile,v 1.1 2006/09/07 11:44:29 aon Exp $
+# Description: POSIX.1e capabilities library
+# URL: http://linux.kernel.org/pub/linux/libs/security/linux-privs/
+# Maintainer: Antti Nykänen, aon at iki dot fi
+# Depends on:
+
+name=libcap
+version=1.10
+release=1
+source=(ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.4/libcap-$version.tar.gz)
+
+build () {
+	cd libcap-$version
+	make
+	make \
+		INCDIR=$PKG/usr/include \
+		LIBDIR=$PKG/usr/lib \
+		SBINDIR=$PKG/usr/sbin \
+		MANDIR=$PKG/usr/man install
+
+	# these conflict with core/man-pages
+	rm $PKG/usr/man/man2/cap{get,set}.2
+}
