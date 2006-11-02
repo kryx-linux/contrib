@@ -1,0 +1,15 @@
+# Description: A dockable app that displays flashing lights for IRQ's
+# URL: http://www.cs.mun.ca/~gstarkes/wmaker/dockapps/sys.html
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: x11
+
+name=wmint
+version=0.8
+release=2
+source=(http://web.cs.mun.ca/~gstarkes/wmaker/dockapps/files/$name-$version.tar.gz)
+
+build() {
+	cd $name.app/wmint
+	make
+	/usr/bin/install -D -m 755 wmint $PKG/usr/bin/wmint
+}
