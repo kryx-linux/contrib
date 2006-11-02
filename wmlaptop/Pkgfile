@@ -1,0 +1,17 @@
+# Description: A dockapp able to satisfy most requirements of a linux user with a laptop
+# URL: http://wmlaptop.sourceforge.net/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: x11
+
+name=wmlaptop
+version=1.4
+release=2
+source=(http://wmlaptop.sourceforge.net/$name-$version.tar.bz2 \
+		$name-$version-makefile.patch)
+
+build() {
+	cd $name-$version
+	patch -p1 -i $SRC/$name-$version-makefile.patch
+	make
+	make install
+}
