@@ -1,0 +1,15 @@
+# Description: A port of KAME's IPsec utilities to the Linux-2.6
+# URL: http://ipsec-tools.sourceforge.net/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on:
+
+name=ipsec-tools
+version=0.6.6
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}
