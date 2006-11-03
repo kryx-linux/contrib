@@ -1,0 +1,23 @@
+# Description:	Uptime record tracking daemon
+# URL:		http://podgorny.cz/uptimed/
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+
+name=uptimed
+version=0.3.8
+release=1
+source=(http://podgorny.cz/uptimed/releases/uptimed-$version.tar.bz2
+	rc.uptimed)
+
+build() {
+	cd uptimed-$version
+	sed -i s:/var/spool/uptimed:'$(DESTDIR)&': Makefile.in
+	sed -i etc/uptimed.conf-dist \
+	    -e /^SENDMAIL=/s:lib:sbin: \
+	    -e s:^PIDFILE=.*:'&.pid':
+	./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/man
+	make
+	make DESTDIR=$PKG install
+	mv $PKG/etc/uptimed.conf-dist $PKG/etc/uptimed.conf
+	install -d $PKG/etc/rc.d
+	install ../rc.uptimed $PKG/etc/rc.d/uptimed
+}
