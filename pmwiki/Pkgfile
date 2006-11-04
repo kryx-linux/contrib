@@ -5,10 +5,12 @@
 
 name=pmwiki
 version=2.1.26
-release=1
-source=(http://www.pmwiki.org/pub/$name/$name-$version.tgz)
+release=2
+source=(http://www.pmwiki.org/pub/$name/$name-$version.tgz \
+        $name-$version.patch)
 
 build () {
+    (cd $name-$version; patch -p1 -i $SRC/$name-$version.patch)
     install -d $PKG/var/www/$name
     install -d -o nobody -m 700 $PKG/var/www/$name/{wiki.d,uploads}
     cp -R $name-$version/* $PKG/var/www/$name
