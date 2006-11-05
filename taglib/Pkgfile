@@ -1,0 +1,15 @@
+# Description:	Library to read and edit the meta-data of popular audio formats
+# URL:		http://ktown.kde.org/~wheeler/taglib.html
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+
+name=taglib
+version=1.4
+release=1
+source=(http://ktown.kde.org/~wheeler/files/src/taglib-$version.tar.gz)
+
+build() {
+	cd taglib-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}
