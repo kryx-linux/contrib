@@ -1,0 +1,20 @@
+# $Id: $
+# Description:	Portable C++ application framework for threading, sockets, realtime network streaming, persistance, and file access
+# URL:		http://www.gnu.org/software/commoncpp/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	libxml2
+# Nice to have:	hoard
+
+name=commoncpp2
+version=1.5.0
+release=2
+source=(http://dl.sourceforge.net/sourceforge/gnutelephony/$name-$version.tar.gz)
+
+build () {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/info
+	sed -i s/^Libs:\ /Libs:\ -lz\ / $PKG/usr/lib/pkgconfig/libccext2.pc
+}
