@@ -1,0 +1,20 @@
+# $Id: $
+# Description: Multiplatform disk encryption software
+# URL: http://www.truecrypt.org
+# Packager:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: libdevmapper
+
+name=truecrypt
+version=4.2a
+release=1
+source=(http://www.truecrypt.org/downloads/$name-$version-source-code.tar.gz)
+
+build () {
+	cd $name-$version/Linux
+	./build.sh
+	install -m 755 -D Cli/truecrypt $PKG/usr/bin/truecrypt
+	install -m 644 -D Cli/Man/truecrypt.1 $PKG/usr/man/man1/truecrypt.1
+	install -m 644 -D Kernel/truecrypt.ko $PKG/lib/modules/$(uname -r)/extra/truecrypt.ko
+
+}
