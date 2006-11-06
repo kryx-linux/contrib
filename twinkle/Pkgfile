@@ -1,0 +1,21 @@
+# $Id: $
+# Description:	SIP softphone for Linux
+# URL:		http://www.twinklephone.com/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	kdelibs, libsndfile, speex, commoncpp2, ccrtp, libzrtcpp, ilbc, boost
+
+name=twinkle
+version=0.9
+release=2
+source=(http://www.xs4all.nl/%7Emfnboer/twinkle/download/$name-$version.tar.gz twinkle.desktop)
+
+build () {
+	cd $name-$version
+	QTDIR=/usr
+	export QTDIR
+	./configure --prefix=/usr --with-qt-dir=/usr --with-qt-includes=/usr/include/qt
+	echo "INCLUDEPATH += /usr/include/qt" >> qtccxxincl.pro
+	make
+	make DESTDIR=$PKG install
+	install -m 644 -D ../twinkle.desktop $PKG/usr/share/applications/kde/twinkle.desktop
+}
