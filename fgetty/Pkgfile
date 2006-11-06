@@ -1,0 +1,19 @@
+# $Id: $
+# Description: Small getty for Linux
+# URL: http://www.fefe.de/fgetty/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: dietlibc
+
+name=fgetty
+version=0.6
+release=1
+source=(http://www.fefe.de/$name/$name-$version.tar.bz2 $name-$version.patch)
+
+build() {
+	cd $name-$version
+	patch -p1 < ../$name-$version.patch
+	make DIET="/usr/dietlibc/bin/diet"
+	mkdir -p $PKG/usr/man/man8
+	make DESTDIR=$PKG install
+	rm -f $PKG/bin/{login1,login2,checkpassword.login}
+}
