@@ -1,0 +1,17 @@
+# Description: Linux IEEE 802.1d ethernet bridging utilities
+# URL: http://linux-net.osdl.org/index.php/Bridge
+# Maintainer: Matt Housh, jaeger at morpheus dot net
+
+name=bridge-utils
+version=1.2
+release=1
+source=(http://dl.sourceforge.net/sourceforge/bridge/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	autoconf
+	./configure --prefix=/usr \
+		--mandir=/usr/man
+	make
+	make DESTDIR=$PKG install
+}
