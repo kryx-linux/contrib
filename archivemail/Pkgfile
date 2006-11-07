@@ -1,12 +1,12 @@
-# Description: tool for archiving and compressing old email in mailboxes
+# Description: Tool for archiving and compressing old mails 
 # URL: http://archivemail.sourceforge.net/
 # Maintainer: Simon Gloﬂner, viper at hometux dot de
 # Depends on: python
 
 name=archivemail
-version=0.6.2
+version=0.7.0
 release=1
-source=(http://dl.sourceforge.net/archivemail/$name-$version.tar.gz archivemail.1)
+source=(http://dl.sourceforge.net/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
@@ -14,6 +14,6 @@ build() {
     mkdir -p $PKG/usr/bin
     mkdir -p $PKG/usr/man/man1
     
-    install -m 755 archivemail.py $PKG/usr/bin/archivemail
-    install -m 644 $SRC/archivemail.1 $PKG/usr/man/man1
+    install -m 755 archivemail $PKG/usr/bin/archivemail
+    install -m 644 archivemail.1 $PKG/usr/man/man1
 }
