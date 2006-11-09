@@ -5,7 +5,7 @@
 
 name=squirrelmail
 version=1.4.8
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
@@ -16,4 +16,7 @@ build() {
 	mkdir -p $PKG/$SQM_HTDOCS_ROOT/squirrelmail
 	cp -r {class,config,contrib,data,functions,help,images,include,locale,plugins,po,src,themes} $PKG/$SQM_HTDOCS_ROOT/squirrelmail
 	cp index.php $PKG/$SQM_HTDOCS_ROOT/squirrelmail/
+	rm $PKG/$SQM_HTDOCS_ROOT/squirrelmail/locale/README.locales
+	rm $PKG/$SQM_HTDOCS_ROOT/squirrelmail/themes/README.themes
+	find $PKG/$SQM_HTDOCS_ROOT/squirrelmail/plugins -name "INSTALL" -o -name "README*" -o -name "ChangeLog" | xargs rm
 }
