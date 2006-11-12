@@ -5,7 +5,7 @@
 
 name=cdrkit
 version=1.0pre5
-release=1
+release=2
 source=(http://debburn.alioth.debian.org/cdrkit-$version.tar.gz)
 
 build () {
@@ -13,4 +13,8 @@ build () {
 	find . -name "CMakeLists.txt" -exec sed -i 's:share/\(man\):\1:g' {} \;
 	cmake -DCMAKE_INSTALL_PREFIX=$PKG/usr
 	make install
+
+	# Create cdrecord symlinks for compatibility
+	ln -s wodim $PKG/usr/bin/cdrecord
+	ln -s wodim.1 $PKG/usr/man/man1/cdrecord.1
 }
