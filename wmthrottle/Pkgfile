@@ -1,0 +1,18 @@
+# Description: The version of wmthrottle dockapp that supports acpi/performance and Enhanced Speedstep
+# URL: http://rffr.de/acpi
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: x11
+
+name=wmthrottle
+version=0.1.1
+release=1
+source=(http://rffr.de/$name-$version.tar.bz2 \
+		$name-$version-acl-am.patch)
+
+build() {
+	cd $name-$version
+	patch -p1 -i $SRC/$name-$version-acl-am.patch
+	./configure --prefix=/usr --disable-nls
+	make
+	make DESTDIR=$PKG install
+}
