@@ -1,0 +1,19 @@
+# $Id: Pkgfile 1331 2006-11-13 21:03:29Z prologic $
+# Description:	Pythonic, object-oriented web development framework.
+# URL:			http://www.cherrypy.org/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:	python
+
+name=cherrypy
+version=2.2.1
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/CherryPy-$version.tar.gz)
+
+build() {
+	cd CherryPy-$version
+	python setup.py install --root=$PKG
+	rm -rf $PKG/usr/lib/python*/site-packages/$name/tutorial
+	chown -R root:root $PKG
+}

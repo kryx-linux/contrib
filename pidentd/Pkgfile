@@ -1,0 +1,18 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Much improved ident daemon.
+# URL:			http://freshmeat.net/redir/pidentd/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Depends on:	openssl
+
+name=pidentd
+version=3.0.19
+release=1
+source=(http://freshmeat.net/redir/$name/8081/url_tgz/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=$PKG/usr
+	make && make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}
