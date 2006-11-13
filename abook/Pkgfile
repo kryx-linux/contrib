@@ -1,23 +1,19 @@
-# Description: text-based ncurses address book 
-# URL: http://abook.sourceforge.net/
-# Maintainer: Simon Gloﬂner, viper at hometux dot de
-# Packager: James Mills, prologic at shortcircuit dot net dot au
-# Depends on: ncurses, readline
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Text-based addressbook program designed to use with mutt.
+# URL:			http://abook.sourceforge.net/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Depends on:	
 
 name=abook
 version=0.5.6
-release=3
-source=(http://dl.sourceforge.net/${name}/${name}-${version}.tar.gz \
-	$name-$version.patch)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
-    cd $name-$version
-
-    patch -p0 < $SRC/$name-$version.patch
-
-    ./configure --prefix=/usr
-    make
-    make DESTDIR=$PKG install
-
-    rm -r $PKG/usr/share/
+	cd $name-$version
+	./configure --prefix=/usr
+	make && make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/
+	chown -R root:root $PKG
 }
