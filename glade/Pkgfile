@@ -1,0 +1,28 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	GTK Interface Builder.
+# URL:			http://glade.gnome.org/
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Depends on:	libglade, p5-xml-parser
+
+name=glade
+version=2.10.0
+release=3
+source=(http://ftp.gnome.org/pub/GNOME/sources/$name/2.10/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	touch scrollkeeper-config
+	chmod +x scrollkeeper-config
+	export SCROLLKEEPER_CONFIG="$PATH:$PWD"
+	sed -i "/scrollkeeper-update/d" omf-install/Makefile.in
+
+	./configure \
+		--prefix=/usr \
+		--disable-gnome \
+		--disable-gnome-db
+
+	make && make DESTDIR=$PKG install
+	ln -sf /usr/bin/glade-2 $PKG/usr/bin/glade
+	rm -rf $PKG/usr/share/{locale,gnome,omf}
+}

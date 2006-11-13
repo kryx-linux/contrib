@@ -1,0 +1,25 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	GTK+ Diagramming Creation Software.
+# URL:			http://www.gnome.org/projects/dia/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Younès Hafri <ycrux@club-internet.fr>
+# Depends on:	libxslt, libart_lgpl, popt, gtk, p5-xml-parser, docbook-xsl
+
+name=dia
+version=0.95
+release=1
+source=(ftp://ftp.gnome.org/pub/gnome/sources/$name/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--disable-db2html
+
+	make && make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/locale
+	rmdir $PKG/usr/share/oaf
+	chown -R root:root $PKG
+}

@@ -1,0 +1,22 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Window Maker configuration tool
+# URL:			http://www.starplot.org/wmakerconf/
+# Maintainer: 	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Olle Gustafsson <ogg at linux dot se>
+# Depends on:	libproplist, windowmaker
+
+name=wmakerconf
+version=2.11
+release=1
+source=(http://www.starplot.org/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls
+
+	make && make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}

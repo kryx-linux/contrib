@@ -1,0 +1,17 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Python extension module to speed up Python code.
+# URL:			http://psyco.sourceforge.net
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Depends on:	python
+
+name=psyco
+version=1.5.1
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version-src.tar.gz)
+
+build () {
+	cd $name-$version
+	python setup.py install --root=$PKG
+	chown root:root $PKG
+}

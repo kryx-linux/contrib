@@ -1,0 +1,36 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Simple TV Viewer.
+# URL:			http://linux.bytesex.org/xawtv/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Christoph Anderegg <ca256@gmx.net>
+# Depends on:	xaw3d, libxvid
+
+name=xawtv
+version=3.95
+release=5
+source=(http://dl.bytesex.org/releases/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--enable-xfree-ex \
+		--enable-motif \
+		--enable-xvideo \
+		--enable-aa \
+		--enable-alsa \
+		--enable-zvbi \
+		--enable-gl \
+		--enable-dv \
+		--enable-mmx \
+		--enable-xft
+
+	make && make DESTDIR=$PKG install
+
+	rm -rf \
+		$PKG/etc/X11/{de*,fr,it} \
+		$PKG/usr/man/{es,fr}
+
+	chown -R root:root $PKG
+}

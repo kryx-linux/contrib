@@ -1,0 +1,20 @@
+# $Id: Pkgfile 1257 2006-09-30 10:44:00Z romster $
+# Description:	Converts HTML into Adobe PDF
+# URL:			http://www.htmldoc.org/
+# Maintainer:	James Mills, prologic at shortcircuit dot net dot au
+# Packager:		James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:
+
+name=htmldoc
+version=1.8.27
+release=2
+source=(http://ftp.easysw.com/pub/$name/$version/$name-$version-source.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make  prefix=$PKG/usr bindir=$PKG/usr/bin install
+	rm -rf $PKG/usr/share/doc
+}

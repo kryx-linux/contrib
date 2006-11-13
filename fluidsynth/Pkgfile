@@ -1,0 +1,22 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	A real-time software synthesizer.
+# URL:			http://www.fluidsynth.org/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Olle Gustafsson <ogg at linux dot se>
+# Depends on:
+
+name=fluidsynth
+version=1.0.7a
+release=1
+source=(http://savannah.nongnu.org/download/fluid/$name-$version.tar.gz)
+
+build() {
+	cd $name-1.0.7
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls
+
+	make && make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}

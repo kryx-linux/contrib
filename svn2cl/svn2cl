@@ -1,0 +1,40 @@
+#!/bin/sh
+# Usage: svn2cl [-s path]
+#
+# This script uses a XSL stylesheet to parse and convert
+# the output of a SubVersion log file (in XML) and
+# produce a nice GNU Style ChangeLog file.
+#
+# Author: James Mills (prologic@shortcircuit.net.au)
+# Version: 0.1.0 CopyRight 2005 (C) by James Mills
+# Version: 0.1.1 "Added -s option"
+
+if [ ! -d .svn ]; then
+	echo "ERROR: `pwd` is not a subversion directory!"
+	exit 1
+fi
+
+usage="Usage: `basename $0` [-s path]"
+
+while getopts "s:h-" opt ; do
+	case "$opt" in
+	s) STRIP_PATH=$OPTARG;;
+	h) echo $usage; exit 0;;
+	-) break;;
+	*) echo $usage 1>&2; exit 1;;
+	esac
+done
+
+shift $(($OPTIND - 1))
+
+XSL=/usr/share/xml/xsl/svn2cl/svn2cl.xsl
+TMPFILE=`mktemp /tmp/svn-log.XXXXXXXXXX` || exit 1
+
+svn log --xml --verbose . > $TMPFILE
+if [[ "$STRIP_PATH" = "" ]]; then
+	xsltproc $XSL $TMPFILE > ChangeLog
+else
+	xsltproc --stringparam strip-prefix "$STRIP_PATH" $XSL $TMPFILE > ChangeLog
+fi
+
+rm $TMPFILE

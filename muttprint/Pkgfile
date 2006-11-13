@@ -1,0 +1,25 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Pretty prints your eMails.
+# URL:			http://muttprint.sourceforge.net/
+# Packager:		Vincenzo Colosimo <vico@bicisport.de>
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Depends on:	
+
+name=muttprint
+version=0.72
+release=2
+source=(http://dl.sourceforge.net/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	make \
+		prefix=$PKG/usr \
+		mandir=$PKG/usr/man install
+
+	rm -rf \
+		$PKG/usr/man/{cs,de,es,it} \
+		$PKG/usr/share/$name/{Debian*,Gentoo*}
+
+	chown -R root:root $PKG
+}

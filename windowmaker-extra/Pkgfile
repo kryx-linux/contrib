@@ -1,0 +1,22 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Extra themes and icons for Window Maker.
+# URL:			http://www.windowmaker.info
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Vincenzo Colosimo <vico@bicisport.de>
+# Depends on:
+
+name=windowmaker-extra
+version=0.1
+release=2
+source=(http://www.windowmaker.info/pub/source/release/WindowMaker-extra-$version.tar.gz)
+
+build () {
+	cd WindowMaker-extra-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls
+
+	make && make DESTDIR=$PKG install
+	rm -f $PKG/usr/share/WindowMaker/Icons/xv.xpm
+}

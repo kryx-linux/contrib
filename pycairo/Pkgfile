@@ -1,0 +1,19 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Python interface to Cairo library
+# URL:			http://cairographics.org/pycairo
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:	pygtk
+
+name=pycairo
+version=1.2.2
+release=1
+source=(http://cairographics.org/releases/$name-$version.tar.gz)
+
+build () {
+	cd $name-$version
+	./configure --prefix=/usr
+	make && make prefix=$PKG/usr install
+	chown -R root:root $PKG
+}

@@ -1,0 +1,36 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Python bindings for subversion.
+# URL:			http://subversion.tigris.org
+# Packager:		Johannes Winkelmann <jw@tks6.net>
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Depends on:	subversion, swig
+
+name=subversion-python
+version=1.3.2
+release=1
+source=(http://subversion.tigris.org/tarballs/subversion-$version.tar.bz2)
+pythonver=2.4
+
+build() {
+	cd subversion-$version
+#	patch -p1 -i $SRC/subversion-$version-apr.diff
+	LDFLAGS="-L$PKG/usr/lib" \
+	
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--with-neon=/usr \
+		--disable-mod-activation \
+		--with-apr=/usr \
+		--with-apr-util=/usr
+
+	make &&	make DESTDIR=$PKG install-swig-py-lib install-swig-py
+	install -d $PKG/usr/lib/python$pythonver/site-packages/
+	
+	mv \
+		$PKG/usr/lib/svn-python/{svn,libsvn} \
+		$PKG/usr/lib/python$pythonver/site-packages/
+
+	rm -r $PKG/usr/lib/svn-python
+	chown -R root:root $PKG
+}

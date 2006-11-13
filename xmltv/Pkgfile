@@ -1,0 +1,21 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Set of utilities to manage your TV viewing.
+# URL:			http://membled.com/work/apps/xmltv/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Depends on:	p5-term-readkey, p5-date-manip, p5-xml-twig, p5-xml-writer
+
+name=xmltv
+version=0.5.43
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	yes | perl Makefile.PL PREFIX=$PKG/usr
+	make
+	make test
+	make install
+	find $PKG -type f -regex ".*perllocal.pod$" -exec rm {} \;
+	chown -R root:root $PKG
+}

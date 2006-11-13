@@ -1,0 +1,22 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	A fast commandline-driven image viewer for X.
+# URL:			http://www.linuxbrit.co.uk/feh
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Vincenzo Colosimo <vico@bicisport.de>
+# Depends on:	giblib
+
+name=feh
+version=1.3.4
+release=1
+source=(http://www.linuxbrit.co.uk/downloads/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls
+
+	make && make DESTDIR=$PKG install
+	rm -rf $PKG/usr/doc
+}

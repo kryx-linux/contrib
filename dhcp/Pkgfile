@@ -1,0 +1,23 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	ISC's DHCP server, client and relay agent.
+# URL:			http://www.isc.org/sw/dhcp/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Mark Rosenstand, mark at borkware dot net
+# Depends on:	
+
+name=dhcp
+version=3.0.4
+release=1
+source=(http://ftp.isc.org/isc/dhcp/dhcp-$version.tar.gz \
+	dhcpd default-config.diff)
+
+build() {
+	cd dhcp-$version
+	patch -p1 -i $SRC/default-config.diff
+	./configure
+	make && make DESTDIR=$PKG INCDIR=/usr/include LIBDIR=/usr/lib install
+	install -m644 client/dhclient.conf server/dhcpd.conf -t $PKG/etc
+	install -D ../dhcpd $PKG/etc/rc.d/dhcpd
+	find $PKG/usr/man -type f -exec chmod 644 {} \;
+	chown -R root:root $PKG
+}

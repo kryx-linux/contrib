@@ -1,0 +1,31 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	A graphical login manager for the vesa framebuffer.
+# URL:			http://qingy.sourceforge.net
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		Johannes Winkelmann, jw@tks6.net
+# Depends on:	directfb, xorg-libxscrnsaver
+
+name=qingy
+version=0.9.1
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	install -d $PKG/var/lib/misc
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--enable-static-build \
+		--disable-pam
+
+	make && make DESTDIR=$PKG install
+
+	#mkdir -p $PKG/usr/share/qingy/themes 
+	#cp -r media/default $PKG/usr/share/qingy/themes
+	#rm -rf $PKG/{usr/share/info,etc/pam.d,usr/share/emacs,usr/info,etc}
+	
+	rm -fr $PKG/{etc/pam.d,usr/info}
+	chown -R root:root $PKG
+}

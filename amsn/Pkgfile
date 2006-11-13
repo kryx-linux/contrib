@@ -1,0 +1,30 @@
+# $Id:
+# Description:	MSN Messenger Client for Linux.
+# URL:			http://amsn.sourceforge.net
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Depends on:	tk
+
+name=amsn
+version=0.95
+release=5
+source=(http://dl.sourceforge.net/$name/$name-$version.tar.gz \
+	$name-$version-makefile.patch)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls
+
+	patch -p0 -i $SRC/$name-$version-makefile.patch
+	make && make DESTDIR=$PKG install
+
+	rm -fr \
+		$PKG/usr/share/amsn/{icons, lang/LANG-HOWTO} \
+		$PKG/usr/share/amsn/utils/BWidget-1.7.0/{CHANGES.txt, ChangeLog, LICENSE.txt, Makefile.in, README.txt} \
+		$PKG/usr/share/amsn/{skins/default/winicons, utils/snit0.97/license.txt}
+
+	chown -R root:root $PKG
+}

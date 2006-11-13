@@ -1,0 +1,34 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Program to stream audio to listeners.
+# URL:			http://www.icecast.org 
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:	libxslt, libvorbis
+
+name=icecast
+version=2.3.1
+release=1
+source=(http://downloads.us.xiph.org/releases/icecast/$name-$version.tar.gz \
+	icecast)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var
+
+	make && make DESTDIR=$PKG install
+	
+	install -d \
+		$PKG/usr/share/icecast \
+		$PKG/var/log/icecast
+
+	touch $PKG/var/log/icecast/{access.log,error.log}
+	install -D -m755 $SRC/icecast $PKG/etc/rc.d/icecast
+	rm -fr $PKG/usr/share/{doc,icecast/doc}
+
+	chown -R root:root $PKG
+}

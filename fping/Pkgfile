@@ -1,0 +1,22 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	fping - send ICMP ECHO_REQUEST packets to network hosts.
+# URL:			http://www.fping.com/
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Depends on:
+
+name=fping
+version=2.4b2_to
+release=1
+source=(http://www.fping.com/download/$name-$version.tar.gz)
+
+build () {
+	cd $name-$version
+	./configure --prefix=/usr
+	sed -i "/^CFLAGS/s/-O2 -pipe/$CFLAGS/" Makefile
+	install -d $PKG/usr/bin
+	make && make prefix=$PKG/usr install
+	sed "s|$PKG||g" $SRC/$name-$version/$name.8 > $PKG/usr/man/man8/$name.8
+	chmod u+s $PKG/usr/sbin/$name
+	ln -sf /usr/sbin/$name $PKG/usr/bin/$name
+}

@@ -1,0 +1,49 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Tiny/Turbo/Throttling HTTP Server.
+# URL:			http://www.acme.com/software/thttpd/thttpd.html
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Depends on:	
+
+name=thttpd
+version=2.25b
+release=5
+source=(http://www.acme.com/software/$name/$name-$version.tar.gz \
+	thttpd.rc thttpd.conf config.h.patch)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	patch -i $SRC/config.h.patch
+	make
+
+	install -d $PKG/{var/log,home/www/{cgi-bin,users}}
+	
+	install -D -m755 thttpd $PKG/usr/sbin/thttpd
+	install -D -m644 thttpd.8 $PKG/usr/man/man8/thttpd.8
+	install -D -m755 ../thttpd.rc $PKG/etc/rc.d/thttpd
+	install -D -m644 ../thttpd.conf $PKG/etc/thttpd.conf
+
+	# Install 'extras'
+	install -D -m755 extras/htpasswd $PKG/usr/bin/htpasswd
+	install -D -m755 extras/htpasswd.1 $PKG/usr/man/man1/htpasswd.1
+
+	install -D -m755 extras/syslogtocern $PKG/usr/sbin/syslogtocern
+	install -D -m755 extras/syslogtocern.8 $PKG/usr/man/man8/syslogtocern.8
+
+	# Install CGI
+	install -D -m755 cgi-src/phf $PKG/home/www/cgi-bin/phf
+	install -D -m755 cgi-bin/printenv $PKG/home/www/cgi-bin/printenv
+
+	install -D -m755 cgi-src/redirect $PKG/home/www/cgi-bin/redirect
+	install -D -m755 cgi-src/redirect.8 $PKG/usr/man/man8/redirect.8
+
+	install -D -m755 cgi-src/ssi $PKG/home/www/cgi-bin/ssi
+	install -D -m755 cgi-src/ssi.8 $PKG/usr/man/man8/ssi.8
+
+	chmod 755 $PKG/home/www
+	chmod 1777 $PKG/home/www/users
+	touch $PKG/var/log/thttpd.log
+	chown -R root:root $PKG
+}
+

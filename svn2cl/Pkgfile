@@ -1,0 +1,16 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Script and XSL stylesheet to convert svn logs to ChangeLog.
+# URL:			None
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Depends on:	libxslt
+
+name=svn2cl
+version=1.1
+release=1
+source=(svn2cl.xsl svn2cl)
+
+build() {
+	install -D -m644 -groot -oroot svn2cl.xsl $PKG/usr/share/xml/xsl/$name/svn2cl.xsl
+	install -D -m755 -groot -oroot $name $PKG/usr/bin/$name
+}

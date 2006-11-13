@@ -1,0 +1,19 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Freeciv is a free turn-based multiplayer strategy game, in which each player becomes the leader of a civilization, fighting to obtain the ultimate goal, to become the greatest civilization.
+# URL:			http://www.freeciv.org
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Depends on:	gtk, sdl_mixer
+
+name=freeciv
+version=2.0.8
+release=1
+source=(http://dl.sourceforge.net/sourceforge/freeciv/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make && make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/locale/
+	chown -R root:root $PKG
+}

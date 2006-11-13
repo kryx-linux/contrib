@@ -1,0 +1,19 @@
+# $Id: Pkgfile 1330 2006-11-13 20:54:04Z prologic $
+# Description:	Perl XML-Twig Library.
+# URL:			http://xmltwig.com/xmltwig/
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Depends on:	
+
+name=p5-xml-twig
+version=3.22
+release=2
+source=(http://xmltwig.com/xmltwig/XML-Twig-$version.tar.gz)
+
+build() {
+	cd XML-Twig-$version
+	yes | perl Makefile.PL PREFIX=$PKG/usr
+	make && make install
+	find $PKG -name "perllocal.pod" -exec rm {} \;
+	chown -R root:root $PKG
+}
