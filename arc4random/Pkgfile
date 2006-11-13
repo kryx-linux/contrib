@@ -1,0 +1,22 @@
+# Description: OpenBSD-library to generate true random numbers
+# URL:         http://www.openbsd.org/cgi-bin/cvsweb/src/lib/libc/crypt/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=arc4random
+version=1.0
+release=3
+source="http://www.xs4all.nl/~hanb/software/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    make \
+        prefix=/usr \
+        mandir=/usr/man
+    make install \
+        prefix=/usr \
+        mandir=/usr/man \
+        DESTDIR=$PKG
+}
