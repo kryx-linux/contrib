@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# /etc/rc.d/snmpd: start/stop net-snmpd daemon
+#
+
+SNMP_LOG=/var/log/snmp/snmpd.log
+SNMP_PID=/var/run/snmp/snmpd.pid
+
+SNMPD_ARGS="-A -p $SNMP_PID -Lf $SNMP_LOG -u daemon -g daemon"
+
+case $1 in
+start)
+	/usr/sbin/snmpd ${SNMPD_ARGS}
+	;;
+stop)
+	kill -TERM `cat $SNMP_PID`
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "Usage: $0 [start|stop|restart]";
+	;;
+esac
+
+# End of file
