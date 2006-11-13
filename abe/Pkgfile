@@ -1,0 +1,26 @@
+# $Id: Pkgfile 1328 2006-11-13 20:18:54Z prologic $
+# Description:	A fun platform game exploring a pyramid.
+# URL:			http://abe.sourceforge.net
+# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:	sdl_mixer
+
+name=abe
+version=1.1
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+
+build () {
+	cd $name-$version
+
+	./configure \
+		--prefix=$PKG/usr \
+		--with-data-dir=/usr/share/abe
+
+	install -d $PKG/usr/{bin,share/$name/{images,sounds,maps}}
+	make && make prefix=$PKG/usr install
+	install -m644 images/* -t $PKG/usr/share/$name/images/
+	install -m644 sounds/* -t $PKG/usr/share/$name/sounds/
+	install -m644 maps/* -t $PKG/usr/share/$name/maps/
+}
