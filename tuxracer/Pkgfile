@@ -28,4 +28,5 @@ build() {
 	chmod -Rv a+r tuxracer-data-$version
 	mkdir -p $PKG/usr/share
 	cp -r tuxracer-data-$version $PKG/usr/share/tuxracer
+	find $PKG/usr/share/tuxracer -type d -exec chmod -v g-s {} \;
 }
