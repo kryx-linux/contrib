@@ -1,0 +1,22 @@
+# Description: Chinese (Big5) TTF fonts donated by Arphic company.
+# URL:         ftp://linux.tmtc.edu.tw/pub/arphic/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  x11
+
+name=x11-fonts-chinese
+version=2.11
+release=1
+source="ftp://freebsd.sinica.edu.tw/pub/keith/zh-arphicttf-$version.tar.gz"
+
+
+build() {
+    install -d $PKG/usr/share/fonts/ttf/chinese
+    install -m 0644 arphic/font/*.ttf $PKG/usr/share/fonts/ttf/chinese
+    cd $PKG/usr/share/fonts/ttf/chinese
+    mkfontscale
+    mkfontdir
+    fc-cache . || touch fonts.cache-1
+
+}
+

@@ -1,0 +1,31 @@
+# Description: FICS chess-server interface
+# URL:         http://eboard.sf.net
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  gtk1
+
+name=eboard
+version=0.9.5
+release=2
+source="
+    http://dl.sf.net/$name/$name-$version.tar.gz
+    http://dl.sf.net/$name/$name-extras-1pl2.tar.gz
+    http://dl.sf.net/$name/$name-extras-2.tar.gz
+    README
+    eboard.conf
+"
+
+build()
+{
+    cd $name-$version
+    ./configure --prefix=/usr --disable-nls
+    sed -i "s/-O6/$CXXFLAGS/" Makefile
+    patch -p0 -i $SRC/patch-mainwindow_cc
+    make
+    cat $SRC/$name-extras-1pl2/extras1.conf >> eboard_themes.conf
+    cat $SRC/$name-extras-2/extras2.conf    >> eboard_themes.conf
+    make install bindir=$PKG/usr/bin \
+        datadir=$PKG/usr/share/$name \
+        mandir=$PKG/usr/man
+    install -m 0444 $SRC/$name-extras-*/*.{png,wav} $PKG/usr/share/$name
+}

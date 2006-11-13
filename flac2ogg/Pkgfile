@@ -1,0 +1,15 @@
+# Description: convert flac to ogg files while retaining tags
+# URL:         http://members.fortunecity.com/stateq/flac2ogg.html
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  python vorbis-tools flac
+# Nice to have: shntool
+
+name=flac2ogg
+version=0.6
+release=1
+source="http://members.fortunecity.com/stateq/scripts/$name-$version.zip"
+
+build() {
+    install -D -m 755 $name-$version/$name $PKG/usr/bin/$name
+}

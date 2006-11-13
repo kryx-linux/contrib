@@ -1,0 +1,29 @@
+# Description: Enlightenment DR17 window manager.
+# URL:         http://www.enlightenment.org/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  elicit entice entrance iconbar
+
+name=qemacs
+version=cvs
+release=1
+
+build()
+{
+    cd $PKGMK_SOURCE_DIR
+    if cd qemacs ; then
+	cvs -z3 -q up -dAP
+    else
+	cvs -d:pserver:anonymous:@cvs.savannah.nongnu.org:/sources/qemacs co qemacs
+    fi
+
+    cp -r $PKGMK_SOURCE_DIR/qemacs $SRC
+    cd $SRC/qemacs
+    ./configure \
+	--prefix=/usr \
+	--disable-x11
+    sed -i 's|texi2html|true|' Makefile
+    make
+    install -d $PKG/usr/{bin,man/man1,share}
+    make install prefix=$PKG/usr/
+}

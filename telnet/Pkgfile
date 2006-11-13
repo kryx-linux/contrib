@@ -1,0 +1,22 @@
+# Description: telnet-client
+# URL:         http://www.xs4all.nl/~hanb/software/telnet/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=telnet
+version=20051104
+release=1
+source="http://www.xs4all.nl/~hanb/software/telnet/telnet-$version.tar.gz"
+
+build()
+{
+    unset CFLAGS
+    cd $name-$version
+    sed -i 's|-Werror||' Makefile.in
+    ./configure
+    make all install \
+        prefix=/usr \
+        mandir=/usr/man \
+        DESTDIR=$PKG
+}

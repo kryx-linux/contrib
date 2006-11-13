@@ -1,0 +1,26 @@
+# Description: Automatic text wrapping and reformatting
+# URL:         http://search.cpan.org/author/DCONWAY/Text-Autoformat-1.12/lib/Text/Autoformat.pm
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  p5-text-reform
+# Nice to have: p5-tex-hyphen
+
+name=p5-text-autoformat
+version=1.12
+release=1
+source="ftp://ftp.demon.co.uk/pub/CPAN/modules/by-module/Text/Text-Autoformat-$version.tar.gz"
+
+build() {
+    cd Text-Autoformat-$version
+    perl Makefile.PL
+    make
+    make DESTDIR=$PKG install
+    # Remove perlcrap
+    find $PKG \
+        -name .packlist -or \
+        -name '*.bs' -or \
+        -name autosplit.ix -or \
+        -name perllocal.pod | xargs rm
+    # Remove empty directories
+    find $PKG -depth -empty -exec rm -rf {} \;
+}

@@ -1,0 +1,20 @@
+# Description: fast file compressor based on lzo
+# URL:         http://www.lzop.org/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  lzo
+
+name=lzop
+version=1.01
+release=1
+source="http://www.lzop.org/download/$name-$version.tar.gz"
+
+build() {
+	cd $name-$version
+        sed -i 's|<malloc.h>|<stdlib.h>|' src/acc_ince.h
+	./configure \
+            --prefix=/usr \
+            --enable-shared
+	make
+	make install DESTDIR=$PKG
+}

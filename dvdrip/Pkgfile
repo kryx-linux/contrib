@@ -1,0 +1,24 @@
+# Description: Perl-gtk frontend for transcode
+# URL:         http://www.exit1.org/dvdrip
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  transcode gtk-perl p5-libintl
+
+name=dvdrip
+version=0.52.5
+release=1
+source="http://www.exit1.org/$name/dist/Video-DVDRip-$version.tar.gz"
+
+build()
+{
+    cd Video-DVDRip-$version
+    perl Makefile.PL
+    make
+    make install DESTDIR=$PKG
+    find $PKG \
+        -name perllocal.pod \
+        -o -name "*.bs" \
+	-o -name "*LocaleData*" \
+        -o -name .packlist | xargs rm -rf
+    find $PKG -depth -empty -exec rm -rf {} \;
+}

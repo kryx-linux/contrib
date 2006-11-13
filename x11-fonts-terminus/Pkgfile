@@ -1,0 +1,30 @@
+# Description: fixed with font especially for long hacking-sessions
+# URL:         http://www.is-vn.bg/hamster/jimmy-en.html
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Depends on:  perl x11
+
+name=x11-fonts-terminus
+version=4.20
+release=2
+source="
+    http://www.is-vn.bg/hamster/terminus-font-$version.tar.gz
+    http://www.is-vn.bg/hamster/terminus-font-4.20-gq2.diff.gz
+"
+
+build ()
+{
+    local xfontdir=/usr/share/fonts/$name
+    local consolefontdir=/usr/share/kbd/consolefonts
+    zcat terminus-font-4.20-gq2.diff.gz | patch -d terminus-font-$version
+    cd terminus-font-$version
+    ./configure
+    make pcf psf
+    gzip *.pcf *.psf
+    install -d                $PKG/$consolefontdir
+    install -m 644   *.psf.gz $PKG/$consolefontdir
+    install -d                $PKG/$xfontdir
+    install -m 644   *.pcf.gz $PKG/$xfontdir
+    cd                        $PKG/$xfontdir
+    mkfontdir
+    sed -e 's/.pcf.gz//' fonts.dir|grep terminus > fonts.alias
+}

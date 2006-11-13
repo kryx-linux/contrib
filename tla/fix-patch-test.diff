@@ -1,0 +1,11 @@
+--- src/build-tools/auto-conf-lib/gnu-patch-test.orig	2005-03-27 00:31:58.188078360 +0100
++++ src/build-tools/auto-conf-lib/gnu-patch-test	2005-03-27 00:32:43.116248240 +0100
+@@ -116,7 +116,7 @@
+ 
+ 
+ FAIL=""
+-if [ -x "`which "$PATCHPROG"  2>/dev/null`" ] ; then
++if type "$PATCHPROG"  2>/dev/null; then
+     
+     testresults "$ORIG_A" "$PATCHED_A" "$EXPECTED_A" "$ORIG_PRISTINE_A" "$PATCH_A"
+     testresults "$ORIG_B" "$PATCHED_B" "$EXPECTED_B" "$ORIG_PRISTINE_B" "$PATCH_B"

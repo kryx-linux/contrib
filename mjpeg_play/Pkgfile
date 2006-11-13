@@ -1,0 +1,49 @@
+# Description: Tools record and playback videos
+# URL:         http://mjpeg.sourceforge.net/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  cvs fontconfig libpng
+
+name=mjpeg_play
+version=cvs
+release=1
+unset source
+
+build()
+{
+
+    local SERVER=:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/mjpeg
+
+    cd $PKGMK_SOURCE_DIR
+    if [ ! -d $PKGMK_SOURCE_DIR/$name ];then
+        if [ -e $PKGMK_SOURCE_DIR/$name-cvs.source.tar.gz ]; then
+	    info "I'm unpacking the sourcetree. This will take a long time."
+	    # To avoid trouble incase you interupt the unpacking.
+	    trap 'info "interupted: cleaning up"; rm -rf $name'  HUP INT QUIT TERM
+            tar xzf $name-cvs.source.tar.gz
+	    trap HUP INT QUIT TERM
+        else
+	    cvs -d $SERVER co -P $name/ChangeLog
+        fi
+    fi
+
+    if cd $PKGMK_SOURCE_DIR/$name; then
+	cvs -z3 -qz3 up -PAd
+	install -d $SRC/$name
+	cd $SRC/$name
+	# lndir is provided by x11
+	lndir $PKGMK_SOURCE_DIR/$name
+	# Use -N for the patches since the source is kept.
+	./autogen.sh
+	./configure --prefix=/usr
+        make
+        make install DESTDIR=$PKG
+    else
+        exit 1
+    fi
+    cd $PKGMK_SOURCE_DIR
+    info "I'm packing up the sourcetree. This saves lots of space."
+    tar czf $name-cvs.source.tar.gz $name
+    rm -rf $name
+    rm -rf $PKG/usr/info/
+}

@@ -1,0 +1,27 @@
+# Description: Most popular cursor-themes from kde-look.org
+# URL:         http://www.kde-look.org/index.php?xcontentmode=36&?xsortmode=high&page=0
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=x11-cursor-themes
+version=1.0
+release=1
+source="
+    http://www.kde-look.org/content/files/19506-pinux's-tux-cursors-theme-0.3-cur.tar.bz2
+    http://www.kde-look.org/content/files/14484-Grounation-0.3.tar.bz2
+    http://www.kde-look.org/content/files/6550-Jimmac.tar.gz
+"
+
+build()
+{
+    install -d $PKG/usr/X11R6/lib/X11/icons/
+    cd $SRC/cursors
+    cp -R * $PKG/usr/X11R6/lib/X11/icons/
+    cd $SRC/Grounation-0.3
+    cp -R Grounation* $PKG/usr/X11R6/lib/X11/icons/
+    cd $SRC/Jimmac
+    cp -R jimmac $PKG/usr/X11R6/lib/X11/icons/
+    # ACHOO!
+    find $PKG|grep -i gentoo|xargs rm -rf
+}

@@ -1,0 +1,20 @@
+# Description: lightweight userspace bandwidth shaper
+# URL:         http://monkey.org/~marius/trickle/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libevent
+
+name=trickle
+version=1.06
+release=1
+source="http://monkey.org/~marius/trickle/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}

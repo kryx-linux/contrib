@@ -1,0 +1,19 @@
+# Packager:    Vincenzo Colosimo <vico@bicisport.de>
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Description: A portable library for controlling Audio CDs
+# URL:         http://libcdaudio.sourceforge.net/
+
+name=libcdaudio
+version=0.99.12p2
+release=1
+source="http://dl.sourceforge.net/sourceforge/libcdaudio/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+	--prefix=/usr \
+	--disable-nls ||: # configure may fail
+    make
+    make install DESTDIR=$PKG
+}

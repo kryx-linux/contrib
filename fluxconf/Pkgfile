@@ -1,0 +1,25 @@
+# Description: Fluxbox configuration tool
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Olle Gustafsson <ogg@linux.se>
+# URL:         http://devaux.fabien.free.fr/flux/
+# Depends on:  gtk
+
+# Note: It will build without gtk2 but then fluxmenu won't work...
+
+name=fluxconf
+version=0.9.9
+release=1
+source="http://devaux.fabien.free.fr/flux/$name-$version.tar.gz"
+
+build () {
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    install -d                   $PKG/usr/bin/
+    install -m 755 src/fluxconf  $PKG/usr/bin/fluxconf
+    ln -s fluxconf               $PKG/usr/bin/fluxkeys
+    ln -s fluxconf               $PKG/usr/bin/fluxmenu
+    ln -s fluxconf               $PKG/usr/bin/fluxbare
+}

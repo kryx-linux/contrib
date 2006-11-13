@@ -1,0 +1,19 @@
+# Description: t1utilseton for a port
+# URL:         http://www.lcdf.org/~eddietwo/type/#t1utils
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  
+
+name=t1utils
+version=1.32
+release=1
+source="http://www.lcdf.org/~eddietwo/type/$name-$version.tar.gz"
+
+build() {
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}

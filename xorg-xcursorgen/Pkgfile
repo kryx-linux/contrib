@@ -1,0 +1,20 @@
+# Description: create an X cursor file from a collection of PNG images
+# URL:
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=xorg-xcursorgen
+version=1.0.1
+release=1
+source="
+    http://xorg.freedesktop.org/releases/individual/app/xcursorgen-$version.tar.gz
+"
+
+build()
+{
+    cd xcursorgen-$version
+    ./configure --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

@@ -1,0 +1,53 @@
+# Description: daemontools is a collection of tools for managing UNIX services
+# URL:         http://cr.yp.to/daemontools.html
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  
+
+#
+# Kudo's to the FreeBSD porter Dom Mitchell :)
+#
+
+name=daemontools
+version=0.76
+release=2
+source="
+    http://cr.yp.to/$name/$name-$version.tar.gz
+    http://smarden.org/pape/djb/manpages/$name-$version-man-20020131.tar.gz
+    patch-Makefile
+    patch-error_h
+    serviced
+    README
+"
+
+build() {
+    cd admin/$name-$version/src
+    patch < $SRC/patch-Makefile
+    patch < $SRC/patch-error_h
+    echo "gcc $CFLAGS"  > conf-cc
+    echo "gcc $LDFLAGS" > conf-ld
+    make
+    for i in $(<../package/commands); do
+        install -D $i $PKG/usr/bin/$i
+    done
+    # more Conform man hier. Sorry Dan.
+    cat << EOF > $PKG/usr/bin/svscanboot
+#!/bin/sh
+PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
+
+exec </dev/null
+exec >/dev/null
+exec 2>/dev/null
+
+/usr/bin/svc -dx /var/service/* /var/service/*/log
+
+env - PATH=\$PATH /usr/bin/svscan /var/service 2>&1 | \
+env - PATH=\$PATH /usr/bin/readproctitle service errors: ................................................................................................................................................................................................................................................................................................................................................................................................................&
+
+EOF
+
+    cd $SRC/$name-man
+    install -d         $PKG/usr/man/man8
+    install -m 444 *.8 $PKG/usr/man/man8
+    install -D $SRC/serviced $PKG/etc/rc.d/serviced
+}

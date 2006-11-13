@@ -1,0 +1,17 @@
+# Description: event notification library
+# URL:         http://www.monkey.org/~provos/libevent/
+# Packager:    Robert McMeekin <rrm3@rrm3.org>
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+
+name=libevent
+version=1.1b
+release=1
+source="http://www.monkey.org/~provos/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

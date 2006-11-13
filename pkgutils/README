@@ -1,0 +1,115 @@
+CHANGES:
+
+  My version of pkgmk has a few changes:
+
+  * You don't have to build packages as root anymore, it won't
+    even work. This is a very good security feature.
+
+    To make this work right pkgmk will now use /usr/pkgmk as the
+    workdir.
+
+  * pkgmk doesn't error out if it finds a mismatch in the md5sum
+    or the footprint, it asks you what to do.
+
+  * The PKGMK_KEEP_ON_ERROR=yes option will keep pkgmk from
+    removing the builddir if an error occured, for debugging
+    purposes.
+
+  * The -s or --short-circuit option skips the unpacking of the
+    source and other steps so you can finish a build where you
+    left it. Very practical if you just build mozilla and you
+    notice you forgot the permissions of one file.
+    If you comment out lines in the Pkgfile at least keep one
+    command.
+    And don't forget to use the -kw option.
+
+  * The -up or --update-port option is a macro. First it checks if
+    your $EDITOR env. var. is set, then it removes all source-
+    files, edits the Pkgmk file with $EDITOR and then attempts to
+    upgrade the package. This is a usefull macro for packagebuild-
+    ers.
+
+  * I added support for partial downloads.
+
+  * A few changes that make the pkgmk script more efficient.
+
+
+INSTALLATION:
+
+  You have to change the ownership of the builddirectory to your
+  useraccount.
+
+      chown -R username:users /usr/pkgmk
+
+  Also add this to your /etc/pkgadd.conf:
+
+      UPGRADE         ^usr/pkgmk/.*$          NO
+
+
+USING SUDO:
+
+  To make pkgmk still be able to install and update packages you
+  will have to add the following line to your sudoers file with
+  the command /usr/sbin/visudo
+
+    username ALL=PASSWD:/usr/bin/pkgadd, /usr/bin/pkgrm
+
+  If you don't want sudo to ask for your password add a line like this:
+
+    username ALL=NOPASSWD:/usr/bin/pkgadd, /usr/bin/pkgrm
+
+  After that you can add packages with for example:
+
+    sudo pkgadd -u /usr/pkgmk/package*
+
+
+OTHER PROGRAMS:
+
+  * ports is another program which requires root permissions by
+    default. I recommend you use the ports version included in my
+    tree.
+
+    With this command you can change the ownership of the
+    ports-tree to your own account:
+
+      chown -R username:users /usr/ports
+
+
+  * prt-get doesn't require root to work either. It's very easy to
+    make it use sudo for adding packages. Add this line to your
+    /etc/prt-get.conf:
+
+      addcommand         sudo pkgadd
+      removecommand      sudo pkgrm
+      runscriptcommand   sudo /usr/local/bin/ask_prepost
+
+    Is what my prt-get.conf looks like.
+
+
+SOME PORTS REALLY NEED ROOT:
+
+  It may happen you find a package which really requires root to
+  be build; for example the procps package runs ldconfig during
+  install. This is IMHO an error in the package. The whole idea of
+  doing a _fake_ install is that it doesn't touch _any_ file on
+  the live filesystem.
+
+  You can find a modified version of the procps package in my
+  repository. Please send the author of such a package a request
+  to modify his package and send me a CC:
+
+  In the odd case your package really really needs root permis-
+  sions to be build there is the -rb option.
+
+TODO:
+
+  * Add an option to disable interactiveness for automated script
+    usage.
+
+BUGS:
+
+  If you think you found a bug please read this document
+
+    http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
+
+  Before you send me all the details.

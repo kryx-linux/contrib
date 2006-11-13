@@ -1,0 +1,21 @@
+# Description: legendary game from 1983
+# URL:         http://www.digger.org/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libsdl
+
+name=digger
+version=20020314
+release=1
+source="
+    http://www.digger.org/$name-$version.tar.gz
+    $name.diff
+"
+
+build()
+{
+    cd $name-$version
+    patch < $SRC/$name.diff
+    make -f Makefile.sdl
+    install -D digger $PKG/usr/bin/digger
+}

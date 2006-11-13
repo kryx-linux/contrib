@@ -1,0 +1,20 @@
+# Description: parses .torrent files and provides a summary of their contents.
+# URL:         http://acherondevelopment.com/project.php?name=torrentinfo
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  python
+
+name=torrentinfo
+version=1.0.0
+release=1
+source="
+    http://acherondevelopment.com/files/torrentinfo/torrentinfo-$version.tar.gz
+"
+
+build()
+{
+    cd $name-$version
+    ./setup.py install \
+	--prefix /usr \
+	--root $PKG
+}

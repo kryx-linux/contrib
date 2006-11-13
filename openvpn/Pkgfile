@@ -1,0 +1,32 @@
+# Description: robust, highly configurable and portable VPN
+# URL:         http://openvpn.sourceforge.net/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  lzo
+
+name=openvpn
+version=2.0.6
+release=1
+br_version=0.7.1
+source="
+    http://openvpn.net/release/openvpn-$version.tar.gz
+    http://www.xs4all.nl/~hanb/software/braindead-rsa/braindead-rsa-$br_version.tar.gz
+"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+    install -d $PKG/usr/share/$name/
+    cp -r \
+        sample-config-files \
+        sample-scripts \
+        easy-rsa \
+        $PKG/usr/share/$name/
+    cp -r \
+        $SRC/braindead-rsa-$br_version \
+        $PKG/usr/share/$name/braindead-rsa
+}

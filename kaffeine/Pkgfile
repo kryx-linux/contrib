@@ -1,0 +1,23 @@
+# Description: mediaplayer for KDE
+# URL:         http://kaffeine.sourceforge.net
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  xine-lib kdelibs
+
+name=kaffeine
+version=0.8
+release=1
+source="http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls \
+	--with-xorg
+    make
+    make install DESTDIR=$PKG
+    rm -rf $PKG/usr/share/{locale,doc}
+    rm -rf $PKG/usr/man/??/
+}

@@ -1,0 +1,18 @@
+# Description: tools to create, alter and inspect Matroska files
+# URL:         http://www.matroska.org/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on: libmatroska
+
+name=mkvtoolnix
+version=1.7.0
+release=1
+source="http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.bz2"
+
+build()
+{
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make install-programs install-mans DESTDIR=$PKG
+}

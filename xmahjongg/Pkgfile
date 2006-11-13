@@ -1,0 +1,20 @@
+# Description: fun solitaire game based on mahjong
+# URL:         http://skel.sf.net
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  
+
+name=xmahjongg
+version=3.6.1
+release=1
+source="http://www.lcdf.org/~eddietwo/xmahjongg/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install prefix=$PKG/usr
+}

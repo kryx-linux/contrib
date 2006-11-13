@@ -1,0 +1,18 @@
+# Description: Chess-engine that can also play bughouse and crazyhouse
+# URL:         http://sjeng.org/indexold.html
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  
+
+name=sjeng
+version=11.2
+release=1
+source="http://sjeng.org/ftp/Sjeng-Free-$version.tar.gz"
+
+build() {
+    cd Sjeng-Free-$version
+    ./configure \
+        --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

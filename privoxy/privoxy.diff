@@ -1,0 +1,226 @@
+$OpenBSD: patch-GNUmakefile_in,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- GNUmakefile.in.orig	Mon Nov  4 02:04:03 2002
++++ GNUmakefile.in	Sat Mar 29 18:17:02 2003
+@@ -226,7 +226,7 @@ PTHREAD_LIB  = @PTHREAD_ONLY@@PTHREAD_LI
+ SRCS         = $(C_SRC)  $(W32_SRC)  $(PCRS_SRC)  $(PCRE_SRC)  $(REGEX_SRC)
+ OBJS         = $(C_OBJS) $(W32_OBJS) $(PCRS_OBJS) $(PCRE_OBJS) $(REGEX_OBJS)
+ HDRS         = $(C_HDRS) $(W32_HDRS) $(PCRS_HDRS) $(PCRE_OBJS) $(REGEX_HDRS)
+-LIBS         = @LIBS@ $(W32_LIB) $(SOCKET_LIB) $(PTHREAD_LIB)
++LIBS         = @LDFLAGS@ @LIBS@ $(W32_LIB) $(SOCKET_LIB) $(PTHREAD_LIB)
+ 
+ 
+ #############################################################################
+$OpenBSD: patch-cgi_c,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- cgi.c.orig	Tue Mar 11 20:26:25 2003
++++ cgi.c	Sat Mar 29 18:17:02 2003
+@@ -1399,7 +1399,7 @@ jb_err cgi_error_unknown(struct client_s
+    rsp->head_length = 0;
+    rsp->is_static = 0;
+ 
+-   sprintf(errnumbuf, "%d", error_to_report);
++   snprintf(errnumbuf, sizeof(errnumbuf), "%d", error_to_report);
+ 
+    rsp->body = malloc(strlen(body_prefix) + strlen(errnumbuf) + strlen(body_suffix) + 1);
+    if (rsp->body == NULL)
+@@ -1596,7 +1596,7 @@ struct http_response *finish_http_respon
+    /* 
+     * Fill in the HTTP Status
+     */
+-   sprintf(buf, "HTTP/1.0 %s", rsp->status ? rsp->status : "200 OK");
++   snprintf(buf, sizeof(buf), "HTTP/1.0 %s", rsp->status ? rsp->status : "200 OK");
+    err = enlist_first(rsp->headers, buf);
+ 
+    /* 
+@@ -1608,7 +1608,7 @@ struct http_response *finish_http_respon
+    }
+    if (!err)
+    {
+-      sprintf(buf, "Content-Length: %d", (int)rsp->content_length);
++      snprintf(buf, sizeof(buf), "Content-Length: %d", (int)rsp->content_length);
+       err = enlist(rsp->headers, buf);
+    }
+ 
+$OpenBSD: patch-cgisimple_c,v 1.1.1.1 2002/11/29 09:41:39 sturm Exp $
+--- cgisimple.c.orig	Sun Nov 17 12:20:12 2002
++++ cgisimple.c	Sun Nov 17 12:21:30 2002
+@@ -843,13 +843,13 @@ jb_err cgi_show_status(struct client_sta
+       perc_rej = (float)local_urls_rejected * 100.0F /
+             (float)local_urls_read;
+ 
+-      sprintf(buf, "%d", local_urls_read);
++      snprintf(buf, sizeof(buf), "%d", local_urls_read);
+       if (!err) err = map(exports, "requests-received", 1, buf, 1);
+ 
+-      sprintf(buf, "%d", local_urls_rejected);
++      snprintf(buf, sizeof(buf), "%d", local_urls_rejected);
+       if (!err) err = map(exports, "requests-blocked", 1, buf, 1);
+ 
+-      sprintf(buf, "%6.2f", perc_rej);
++      snprintf(buf, sizeof(buf), "%6.2f", perc_rej);
+       if (!err) err = map(exports, "percent-blocked", 1, buf, 1);
+    }
+ 
+@@ -1382,7 +1382,7 @@ static char *show_rcs(void)
+ #define SHOW_RCS(__x)              \
+    {                               \
+       extern const char __x[];     \
+-      sprintf(buf, "%s\n", __x);   \
++      snprintf(buf, sizeof(buf), "%s\n", __x);   \
+       string_append(&result, buf); \
+    }
+ 
+$OpenBSD: patch-configure_in,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- configure.in.orig	Tue Mar 25 19:25:00 2003
++++ configure.in	Sat Mar 29 18:17:02 2003
+@@ -1,4 +1,4 @@
+-dnl Process this file with autoconf to produce a configure script.
++/rdnl Process this file with autoconf to produce a configure script.
+ dnl 
+ dnl $Id: patch-configure_in,v 1.2 2003/04/01 20:52:59 sturm Exp $
+ dnl 
+@@ -705,24 +705,6 @@ if test $dodk != no; then
+ fi
+ AC_SUBST(WDUMP)
+ AC_SUBST(DB2HTML)
+-
+-dnl If we use rpm, we need to check where %_topdir is
+-AC_CHECK_PROGS(RPMBIN,rpm,false)
+-if test $RPMBIN != false; then
+-		RPM_BASE=`rpm --eval "%{_topdir}"`
+-		if test "$RPM_BASE" = ""; then
+-			RPM_BASE=/usr/src/redhat
+-		fi
+-fi
+-AC_SUBST(RPM_BASE)
+-
+-dnl Check for jade, so we can build the documentation
+-AC_CHECK_PROGS(JADEBIN,jade openjade,false)
+-AC_SUBST(JADEBIN)
+-
+-dnl Check for man2html for docs.
+-AC_CHECK_PROGS(MAN2HTML,man2html,false)
+-AC_SUBST(MAN2HTML)
+ 
+ dnl Set doc status flag for conditional content inclusions
+ DOC_STATUS=p-not-stable
+$OpenBSD: patch-errlog_c,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- errlog.c.orig	Thu Mar  6 22:41:04 2003
++++ errlog.c	Sat Mar 29 18:17:02 2003
+@@ -564,7 +564,7 @@ void log_error(int loglevel, char *fmt, 
+          case 'd':
+             ival = va_arg( ap, int );
+             oldoutc = outc;
+-            outc += sprintf(tempbuf, "%d", ival);
++            outc += snprintf(tempbuf, sizeof(tempbuf), "%d", ival);
+             if (outc < BUFFER_SIZE-1) 
+             {
+                strcpy(outbuf + oldoutc, tempbuf);
+@@ -577,7 +577,7 @@ void log_error(int loglevel, char *fmt, 
+          case 'u':
+             uval = va_arg( ap, unsigned );
+             oldoutc = outc;
+-            outc += sprintf(tempbuf, "%u", uval);
++            outc += snprintf(tempbuf, sizeof(tempbuf), "%u", uval);
+             if (outc < BUFFER_SIZE-1) 
+             {
+                strcpy(outbuf + oldoutc, tempbuf);
+@@ -594,13 +594,13 @@ void log_error(int loglevel, char *fmt, 
+             {
+                lval = va_arg( ap, long );
+                oldoutc = outc;
+-               outc += sprintf(tempbuf, "%ld", lval);
++               outc += snprintf(tempbuf, sizeof(tempbuf), "%ld", lval);
+             }
+             else if (ch == 'u')
+             {
+                ulval = va_arg( ap, unsigned long );
+                oldoutc = outc;
+-               outc += sprintf(tempbuf, "%lu", ulval);
++               outc += snprintf(tempbuf, sizeof(tempbuf), "%lu", ulval);
+             }
+             else
+             {
+@@ -700,7 +700,7 @@ void log_error(int loglevel, char *fmt, 
+ #endif /* ndef HAVE_STRERROR */
+             if (sval == NULL)
+             {
+-               sprintf(tempbuf, "(errno = %d)", ival);
++               snprintf(tempbuf, sizeof(tempbuf), "(errno = %d)", ival);
+                sval = tempbuf;
+             }
+ #endif /* ndef _WIN32 */
+@@ -754,7 +754,7 @@ void log_error(int loglevel, char *fmt, 
+                hrs = ((days < -1 ? 24 : 1 < days ? -24 : days * 24) + tm_now->tm_hour - gmt.tm_hour); 
+                mins = hrs * 60 + tm_now->tm_min - gmt.tm_min; 
+                strftime (tempbuf, BUFFER_SIZE-6, "%d/%b/%Y:%H:%M:%S ", tm_now); 
+-               sprintf (tempbuf + strlen(tempbuf), "%+03d%02d", mins / 60, abs(mins) % 60); 
++               snprintf (tempbuf + strlen(tempbuf), sizeof(tempbuf) - strlen(tempbuf), "%+03d%02d", mins / 60, abs(mins) % 60); 
+             }
+             oldoutc = outc;
+             outc += strlen(tempbuf);
+$OpenBSD: patch-filters_c,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- filters.c.orig	Fri Feb 28 07:52:45 2003
++++ filters.c	Sat Mar 29 18:17:02 2003
+@@ -958,7 +958,7 @@ struct http_response *trust_url(struct c
+    p = strdup("");
+    for (tl = csp->config->trust_list; (t = *tl) != NULL ; tl++)
+    {
+-      sprintf(buf, "<li>%s</li>\n", t->spec);
++      snprintf(buf, sizeof(buf), "<li>%s</li>\n", t->spec);
+       string_append(&p, buf);
+    }
+    err = map(exports, "trusted-referrers", 1, p, 0);
+@@ -980,7 +980,7 @@ struct http_response *trust_url(struct c
+       p = strdup("");
+       for (l = csp->config->trust_info->first; l ; l = l->next)
+       {
+-         sprintf(buf, "<li> <a href=\"%s\">%s</a><br>\n",l->str, l->str);
++         snprintf(buf, sizeof(buf), "<li> <a href=\"%s\">%s</a><br>\n",l->str, l->str);
+          string_append(&p, buf);
+       }
+       err = map(exports, "trust-info", 1, p, 0);
+$OpenBSD: patch-jcc_c,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- jcc.c.orig	Mon Mar 17 11:48:59 2003
++++ jcc.c	Sat Mar 29 19:10:14 2003
+@@ -1417,7 +1417,7 @@ static void chat(struct client_state *cs
+              * This is NOT the body, so
+              * Let's pretend the server just sent us a blank line.
+              */
+-            len = sprintf(buf, "\r\n");
++            len = snprintf(buf, sizeof(buf), "\r\n");
+ 
+             /*
+              * Now, let the normal header parsing algorithm below do its
+@@ -2438,7 +2438,7 @@ static void listen_loop(void)
+ 
+             log_error(LOG_LEVEL_ERROR, "can't fork: %E");
+ 
+-            sprintf(buf , "Privoxy: can't fork: errno = %d", errno);
++            snprintf(buf, sizeof(buf), "Privoxy: can't fork: errno = %d", errno);
+ 
+             write_socket(csp->cfd, buf, strlen(buf));
+             close_socket(csp->cfd);
+$OpenBSD: patch-miscutil_c,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- miscutil.c.orig	Tue Nov 12 09:28:18 2002
++++ miscutil.c	Sat Mar 29 18:17:03 2003
+@@ -382,7 +382,7 @@ char *safe_strerror(int err)
+ 
+    if (s == NULL)
+    {
+-      sprintf(buf, "(errno = %d)", err);
++      snprintf(buf, sizeof(buf), "(errno = %d)", err);
+       s = buf;
+    }
+ 
+$OpenBSD: patch-urlmatch_c,v 1.2 2003/04/01 20:52:59 sturm Exp $
+--- urlmatch.c.orig	Fri Feb 28 08:09:29 2003
++++ urlmatch.c	Sat Mar 29 18:17:03 2003
+@@ -686,7 +686,7 @@ jb_err create_url_spec(struct url_spec *
+          return JB_ERR_MEMORY;
+       }
+ 
+-      sprintf(rebuf, "^(%s)", url->path);
++      snprintf(rebuf, sizeof(rebuf), "^(%s)", url->path);
+ 
+       errcode = regcomp(url->preg, rebuf,
+             (REG_EXTENDED|REG_NOSUB|REG_ICASE));

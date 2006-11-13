@@ -1,0 +1,37 @@
+# Description: Perl bindings for GTK+
+# URL:         http://www.gtkperl.org
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Depends on:  gdk-pixbuf p5-xml-parser p5-xml-writer
+
+name=gtk-perl
+version=0.7008
+release=1
+source="
+    http://www.cpan.org/modules/by-module/Gtk/Gtk-Perl-$version.tar.gz
+"
+
+build()
+{
+    cd Gtk-Perl-$version
+    sed -i 's|fi/m|fi/mg|' */Makefile.PL
+    # available modules
+    # gtk gtkglarea gdkimlib gdkpixbuf gtkhtml gtkxmhtml gnome glade applets gnomeprint
+    # Use --without-guessing for a bare bottom package
+    perl Makefile.PL \
+        --without-gdkimlib \
+        --without-gnome \
+        --without-applets \
+        --without-gnomeprint \
+        --without-glade \
+        --with-gdkpixbuf-force
+
+    make OPTIMIZE="$CFLAGS"
+    make install DESTDIR=$PKG
+    # perhaps "*.ix" is also obsolete.
+    find $PKG \
+        -name perllocal.pod \
+        -o -name "*.bs" \
+        -o -name .packlist | xargs rm
+    find $PKG -empty | xargs rm -rf
+    find $PKG -empty | xargs rm -rf
+}

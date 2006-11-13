@@ -1,0 +1,30 @@
+# Description: enlighted display manager
+# URL:         http://www.enlightenment.org/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  esmart
+
+name=entrance
+version=cvs
+release=1
+source="$name.rc.d"
+
+build()
+{
+    cd $PKGMK_SOURCE_DIR
+    if cd e17/apps/$name ; then
+	cvs -z3 -q up -dAP
+    else
+	cvs -z3 -q -d :pserver:anonymous@anoncvs.enlightenment.org:/var/cvs/e co e17/apps/$name
+    fi
+
+    cp -r $PKGMK_SOURCE_DIR/e17/apps/$name $SRC
+    cd $SRC/$name
+
+    ./autogen.sh --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+    install -m 755 -D $SRC/$name.rc.d $PKG/etc/rc.d/$name
+    install -D README $PKG/usr/share/$name/README
+    rm -r $PKG/etc/pam.d
+}

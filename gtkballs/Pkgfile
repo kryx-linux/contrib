@@ -1,0 +1,22 @@
+# Description: clone of well-known DOS game "Lines"
+# URL:         http://gtkballs.antex.ru/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  gtk
+
+name=gtkballs
+version=3.1.5
+release=1
+source="http://gtkballs.antex.ru/dist/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls \
+        --localstatedir=/var/games
+    make
+    make install DESTDIR=$PKG
+    chown :games $PKG/var/games/gtkballs-scores
+}

@@ -1,0 +1,21 @@
+#!/bin/sh
+# wrapper for pre/post script execution.
+
+red=$(echo -e '\e[31m')
+normal=$(echo -e '\e[0m')
+
+echo "prt-get wants to execute this script:"
+
+printf "$red\n"
+cat "$1"
+printf "$normal\n"
+echo -n "run ${1}? [y/N] "
+echo -e '\a'
+read answer
+case $answer in
+    y|Y)
+        . "$1"
+	;;
+    *)
+	exit 1
+esac

@@ -1,0 +1,28 @@
+# Description: internationalization library for Perl compatible with gettext
+# URL:         http://search.cpan.org/~guido/libintl-p5-1.11/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  perl
+
+name=p5-libintl
+capsname=libintl-perl
+version=1.16
+release=1
+source="http://www.cpan.org/modules/by-module/Locale/$capsname-$version.tar.gz"
+
+build()
+{
+    cd $capsname-$version
+    perl Makefile.PL
+    make OPTIMIZE="$CFLAGS"
+    make install DESTDIR=$PKG
+    chmod -R u+w $PKG
+    # Remove perlcrap
+    find $PKG \
+	-name .packlist -or \
+	-name '*.bs' -or \
+	-name autosplit.ix -or \
+	-name perllocal.pod | xargs rm
+    # Remove empty directories
+    find $PKG -depth -empty -exec rm -rf {} \;
+}

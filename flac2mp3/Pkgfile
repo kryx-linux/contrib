@@ -1,0 +1,21 @@
+# Description:  convert flac to mp3 files while retaining tags
+# URL:         https://projects.robinbowes.com/projects/flac2mp3
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  perl flac lame
+# Nice to have:
+
+name=flac2mp3
+version=0.2.7
+release=1
+source="http://robinbowes.com/download/flac2mp3/flac2mp3-$version.tar.gz"
+
+build()
+{
+    local version
+    perlversion=$(perl -V:version)
+    eval $perlversion
+    install -d                 $PKG/usr/lib/perl5/$version/
+    cp -r lib/*                $PKG/usr/lib/perl5/$version/
+    install -D -m 755 $name.pl $PKG/usr/bin/$name
+}

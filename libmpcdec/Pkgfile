@@ -1,0 +1,19 @@
+# $Id$
+# Description: Encoder, Decoder and replaygain for Musepack audio streams
+# URL:         http://www.personal.uni-jena.de/~pfk/MPP/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Jukka Heino <vector@pp.nic.fi>
+# Depends on:  nasm
+
+name=libmpcdec
+version=1.2.2
+release=1
+source="http://files2.musepack.net/source/libmpcdec-$version.tar.bz2"
+
+build()
+{
+    cd libmpcdec-$version
+    ./configure --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

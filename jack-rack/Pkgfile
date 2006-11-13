@@ -1,0 +1,20 @@
+# Description: effects-rack for the JACK low latency audio API
+# URL:         http://jack-rack.sourceforge.net/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  jack ladspa
+
+name=jack-rack
+version=1.4.4
+release=1
+source="http://dl.sf.net/jack-rack/jack-rack-$version.tar.gz"
+
+build()
+{
+    cd jack-rack-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}

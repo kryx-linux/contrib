@@ -1,0 +1,20 @@
+# Description: multi-purpose WAVE data processing and reporting utility
+# URL:         http://www.etree.org/shnutils/shntool/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  
+# Nice to have: anything that does audio, cuetools
+
+name=shntool
+version=2.0.3
+release=1
+source="http://www.etree.org/shnutils/$name/source/$name-$version.tar.gz"
+
+build() {
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}

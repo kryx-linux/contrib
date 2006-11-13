@@ -1,0 +1,24 @@
+# Description: Fuel the social music revolution and listen with Last.fm
+# URL:         http://last.fm
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=lastfm
+version=1.0.0b
+release=1
+source="http://static.last.fm/client/Linux/LastFM_Linux_$version.tar.bz2"
+
+build()
+{
+    install -d $PKG/usr/{bin,lib}
+    mv Last.fm_Client_* $PKG/usr/lib/lastfm
+    rm $PKG/usr/lib/lastfm/[A-Z]*
+    cat << EOF > $PKG/usr/bin/lastfm
+#!/bin/sh
+cd /usr/lib/lastfm
+export LD_LIBRARY_PATH=/usr/lib/lastfm:$LD_LIBRARY_PATH
+./bin_LastFM &
+EOF
+    chmod 755 $PKG/usr/bin/lastfm
+}

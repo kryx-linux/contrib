@@ -1,0 +1,173 @@
+Index: src/Slit.cc
+===================================================================
+--- src/Slit.cc	(revision 4226)
++++ src/Slit.cc	(working copy)
+@@ -85,6 +85,8 @@
+ #include <algorithm>
+ using namespace std;
+ 
++namespace FbTk {
++
+ template<>
+ void FbTk::Resource<Slit::Placement>::setFromString(const char *strval) {
+     if (strcasecmp(strval, "TopLeft")==0)
+@@ -164,7 +166,7 @@
+     // default string
+     return string("Vertical");
+ }
+-
++} // end namespace FbTk
+ namespace { 
+ 
+ class SlitClientMenuItem: public FbTk::MenuItem{
+Index: src/MenuTheme.cc
+===================================================================
+--- src/MenuTheme.cc	(revision 4226)
++++ src/MenuTheme.cc	(working copy)
+@@ -26,6 +26,8 @@
+ #include <iostream>
+ using namespace std;
+ 
++namespace FbTk {
++
+ template <>
+ void FbTk::ThemeItem<Shape::ShapePlace>::load(const std::string *name, const std::string *altname) { }
+ 
+@@ -49,7 +51,7 @@
+ 
+     *(*this) = static_cast<Shape::ShapePlace>(places);
+ }
+-
++} // end namespace FbTk
+ MenuTheme::MenuTheme(int screen_num):FbTk::MenuTheme(screen_num),
+                                      m_shapeplace(*this, "menu.roundCorners", "Menu.RoundCorners") {
+     *m_shapeplace = Shape::NONE;
+Index: src/Resources.cc
+===================================================================
+--- src/Resources.cc	(revision 4226)
++++ src/Resources.cc	(working copy)
+@@ -39,6 +39,7 @@
+ //-----------------------------------------------------------------
+ //---- accessors for int, bool, and some enums with Resource ------
+ //-----------------------------------------------------------------
++namespace FbTk {
+ 
+ template<>
+ void FbTk::Resource<int>::
+@@ -254,3 +255,4 @@
+     sprintf(tmpstr, "%ld", m_value);
+     return string(tmpstr);
+ }
++} // end namespace FbTk
+Index: src/ClockTool.cc
+===================================================================
+--- src/ClockTool.cc	(revision 4226)
++++ src/ClockTool.cc	(working copy)
+@@ -50,7 +50,7 @@
+ 
+ class ClockMenuItem: public FbTk::MenuItem {
+ public:
+-    explicit ClockMenuItem::ClockMenuItem(ClockTool &tool):
++    explicit ClockMenuItem(ClockTool &tool):
+         FbTk::MenuItem(""), m_tool(tool) { 
+         // determine 12/24 hour format
+         _FB_USES_NLS;
+Index: src/FocusControl.cc
+===================================================================
+--- src/FocusControl.cc	(revision 4226)
++++ src/FocusControl.cc	(working copy)
+@@ -636,6 +636,8 @@
+ }
+ 
+ ////////////////////// FocusControl RESOURCES
++namespace FbTk {
++
+ template<>
+ std::string FbTk::Resource<FocusControl::FocusModel>::getString() const {
+     switch (m_value) {
+@@ -682,4 +684,4 @@
+     else
+         setDefaultValue();
+ }
+-
++} // end namespace FbTk
+Index: src/ScreenPlacement.cc
+===================================================================
+--- src/ScreenPlacement.cc	(revision 4226)
++++ src/ScreenPlacement.cc	(working copy)
+@@ -129,6 +129,8 @@
+ 
+ 
+ ////////////////////// Placement Resources
++namespace FbTk {
++    
+ template <>
+ void FbTk::Resource<ScreenPlacement::PlacementPolicy>::setFromString(const char *str) {
+     if (strcasecmp("RowSmartPlacement", str) == 0)
+@@ -205,3 +207,4 @@
+ 
+     return "TopToBottom";
+ }
++} // end namespace FbTk
+Index: src/ScreenResources.cc
+===================================================================
+--- src/ScreenResources.cc	(revision 4226)
++++ src/ScreenResources.cc	(working copy)
+@@ -29,6 +29,7 @@
+ #include <string>
+ using namespace std;
+ 
++namespace FbTk {
+ 
+ template <>
+ string FbTk::Resource<FbTk::MenuTheme::MenuMode>::getString() const {
+@@ -199,4 +200,4 @@
+     else
+         setDefaultValue();
+ }
+-
++} // end namespace FbTk
+Index: src/Toolbar.cc
+===================================================================
+--- src/Toolbar.cc	(revision 4226)
++++ src/Toolbar.cc	(working copy)
+@@ -78,6 +78,8 @@
+ 
+ using namespace std;
+ 
++namespace FbTk {
++
+ template<>
+ void FbTk::Resource<Toolbar::Placement>::
+ setFromString(const char *strval) {
+@@ -153,8 +155,8 @@
+     //default string
+     return string("BottomCenter");
+ }
++} // end namespace FbTk
+ 
+-
+ namespace {
+ class SetToolbarPlacementCmd: public FbTk::Command {
+ public:
+Index: src/IconbarTool.cc
+===================================================================
+--- src/IconbarTool.cc	(revision 4226)
++++ src/IconbarTool.cc	(working copy)
+@@ -51,6 +51,8 @@
+ #include <iterator>
+ using namespace std;
+ 
++namespace FbTk {
++
+ template<>
+ void FbTk::Resource<IconbarTool::Mode>::setFromString(const char *strval) {
+     if (strcasecmp(strval, "None") == 0) 
+@@ -192,6 +194,7 @@
+     // default string
+     return string("Icons");
+ }
++} // end namespace FbTk
+ 
+ namespace {
+ 

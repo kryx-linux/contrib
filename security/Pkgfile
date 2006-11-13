@@ -1,0 +1,22 @@
+# Description: script from OpenBSD to backup files in /etc
+# URL:         http://openbsd.org
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=security
+version=0.5
+release=5
+source="
+    security
+    changelist
+    changelist.local
+    changelist.5
+"
+
+build() {
+    install -D -m 744 security         $PKG/etc/cron/daily/security
+    install -D -m 644 changelist       $PKG/etc/changelist
+    install -D -m 644 changelist.local $PKG/etc/changelist.local
+    install -D -m 644 changelist.5     $PKG/usr/man/man5/changelist.5
+}

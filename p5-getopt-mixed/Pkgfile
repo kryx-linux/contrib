@@ -1,0 +1,25 @@
+# Description: Manipulate / fetch info from MP3 audio files
+# URL:         http://search.cpan.org/~cjm/Getopt-Mixed-1.008/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  perl
+
+name=p5-getopt-mixed
+version=1.008
+release=1
+source="http://www.cpan.org/modules/by-module/Getopt/Getopt-Mixed-$version.tar.gz"
+
+build() {
+  cd Getopt-Mixed-$version
+  perl Makefile.PL
+  make OPTIMIZE="$CFLAGS"
+  make install DESTDIR=$PKG
+  # Remove perlcrap
+  find $PKG \
+      -name .packlist -or \
+      -name '*.bs' -or \
+      -name autosplit.ix -or \
+      -name perllocal.pod | xargs rm
+  # Remove empty directories
+  find $PKG -depth -empty -exec rm -rf {} \;
+}

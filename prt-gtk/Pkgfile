@@ -1,0 +1,20 @@
+# Description: gtk-frontend for prt-get
+# URL:         http://itn2002.at.infoseek.co.jp/entrance.html
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  gtk prt-utils
+
+name=prt-gtk
+version=0.1.5
+release=1
+source="http://itn2002.at.infoseek.co.jp/Files/prt-gtk/prt-gtk-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}

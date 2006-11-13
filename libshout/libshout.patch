@@ -1,0 +1,187 @@
+$OpenBSD: patch-src_avl_avl_c,v 1.4 2005/04/19 20:23:44 sturm Exp $
+--- src/avl/avl.c.orig	Mon Jul  5 22:44:13 2004
++++ src/avl/avl.c	Tue Apr 19 22:18:54 2005
+@@ -35,6 +35,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
+ 
+ #include "avl.h"
+ 
+@@ -1063,9 +1064,11 @@ typedef struct _link_node {
+ static char balance_chars[3] = {'\\', '-', '/'};
+ 
+ static int
+-default_key_printer (char * buffer, void * key)
++default_key_printer (char * buffer, size_t size, void * key)
+ {
+-  return sprintf (buffer, "%p", key);
++  snprintf (buffer, size, "%p", key);
++
++  return strlen(buffer);
+ }  
+ 
+ /*
+@@ -1108,8 +1111,8 @@ print_node (avl_key_printer_fun_type key
+         link_node * link)
+ {
+   char buffer[256];
+-  unsigned int width;
+-  width = key_printer (buffer, node->key);
++  size_t width;
++  width = key_printer (buffer, sizeof(buffer), node->key);
+ 
+   if (node->right) {
+       link_node here;
+$OpenBSD: patch-src_avl_avl_h,v 1.1 2005/04/19 20:07:11 sturm Exp $
+--- src/avl/avl.h.orig	Sun Apr 17 02:44:39 2005
++++ src/avl/avl.h	Sun Apr 17 02:45:06 2005
+@@ -55,7 +55,7 @@ typedef int (*avl_key_compare_fun_type) 
+ typedef int (*avl_iter_fun_type)    (void * key, void * iter_arg);
+ typedef int (*avl_iter_index_fun_type)    (unsigned long index, void * key, void * iter_arg);
+ typedef int (*avl_free_key_fun_type)    (void * key);
+-typedef int (*avl_key_printer_fun_type)    (char *, void *);
++typedef int (*avl_key_printer_fun_type)    (char *, size_t, void *);
+ 
+ /*
+  * <compare_fun> and <compare_arg> let us associate a particular compare
+$OpenBSD: patch-src_shout_c,v 1.1 2005/04/19 20:07:11 sturm Exp $
+--- src/shout.c.orig	Sun Apr 17 12:25:25 2005
++++ src/shout.c	Sun Apr 17 12:51:32 2005
+@@ -489,7 +489,7 @@ int shout_set_mount(shout_t *self, const
+ 	if (!(self->mount = malloc(len)))
+ 		return self->error = SHOUTERR_MALLOC;
+ 
+-	sprintf (self->mount, "%s%s", mount[0] == '/' ? "" : "/", mount);
++	snprintf (self->mount, len, "%s%s", mount[0] == '/' ? "" : "/", mount);
+ 
+ 	return self->error = SHOUTERR_SUCCESS;
+ }
+@@ -1145,6 +1145,7 @@ static char *http_basic_authorization(sh
+ {
+ 	char *out, *in;
+ 	int len;
++	int ret;
+ 
+ 	if (!self || !self->user || !self->password)
+ 		return NULL;
+@@ -1152,7 +1153,11 @@ static char *http_basic_authorization(sh
+ 	len = strlen(self->user) + strlen(self->password) + 2;
+ 	if (!(in = malloc(len)))
+ 		return NULL;
+-	sprintf(in, "%s:%s", self->user, self->password);
++	ret = snprintf(in, len, "%s:%s", self->user, self->password);
++	if (ret == -1 || ret >= len) {
++		free(in);
++		return NULL;
++	}
+ 	out = _shout_util_base64_encode(in);
+ 	free(in);
+ 
+@@ -1161,10 +1166,15 @@ static char *http_basic_authorization(sh
+ 		free(out);
+ 		return NULL;
+ 	}
+-	sprintf(in, "Authorization: Basic %s\r\n", out);
+-	free(out);
+-	
+-	return in;
++	ret = snprintf(in, len, "Authorization: Basic %s\r\n", out);
++	if (ret == -1 || ret >= len) {
++		free(in);
++		free(out);
++		return NULL;
++	} else {
++		free(out);
++		return in;
++	}
+ }
+ 
+ static int parse_response(shout_t *self)
+$OpenBSD: patch-src_util_c,v 1.2 2005/08/22 23:25:39 pvalchev Exp $
+--- src/util.c.orig	Sun Mar 21 05:03:34 2004
++++ src/util.c	Fri Aug 19 21:04:04 2005
+@@ -254,6 +254,7 @@ char *_shout_util_dict_urlencode(util_di
+ 	char *res, *tmp;
+ 	char *enc;
+ 	int start = 1;
++	size_t buflen;
+ 
+ 	for (res = NULL; dict; dict = dict->next) {
+ 		/* encode key */
+@@ -265,21 +266,39 @@ char *_shout_util_dict_urlencode(util_di
+ 			return NULL;
+ 		}
+ 		if (start) {
+-			if (!(res = malloc(strlen(enc) + 1))) {
++			int ret;
++
++			buflen = strlen(enc) + 1;
++			if ((res = malloc(buflen)) == NULL) {
+ 				free(enc);
+ 				return NULL;
+ 			}
+-			sprintf(res, "%s", enc);
++			ret = snprintf(res, buflen, "%s", enc);
++			if (ret == -1 || ret >= buflen) {
++				free(enc);
++				free(res);
++				return NULL;
++			}
+ 			free(enc);
+ 			start = 0;
+ 		} else {
+-			if (!(tmp = realloc(res, strlen(res) + strlen(enc) + 2))) {
++			buflen = strlen(res) + strlen(enc) + 2;
++			if ((tmp = realloc(res, buflen)) == NULL) {
+ 				free(enc);
+ 				free(res);
+ 				return NULL;
+-			} else
++			} else {
++				int ret;
++
+ 				res = tmp;
+-			sprintf(res + strlen(res), "%c%s", delim, enc);
++				ret = snprintf(res + strlen(res), buflen - strlen(res),
++					       "%c%s", delim, enc);
++				if (ret == -1 || ret >= buflen - strlen(res)) {
++					free(enc);
++					free(res);
++					return NULL;
++				}
++			}
+ 			free(enc);
+ 		}
+ 
+@@ -291,14 +310,25 @@ char *_shout_util_dict_urlencode(util_di
+ 			return NULL;
+ 		}
+ 
+-		if (!(tmp = realloc(res, strlen(res) + strlen(enc) + 2))) {
++		buflen = strlen(res) + strlen(enc) + 2;
++		if ((tmp = realloc(res, buflen)) == NULL) {
+ 			free(enc);
+ 			free(res);
+ 			return NULL;
+-		} else
++		} else {
++			int ret;
++			size_t reslen;
+ 			res = tmp;
+-		sprintf(res + strlen(res), "=%s", enc);
+-		free(enc);
++			reslen = strlen(res);
++			ret = snprintf(res + reslen, buflen - reslen, "=%s", enc);
++			if (ret == -1 || ret >= buflen - reslen) {
++				free(enc);
++				free(res);
++				return NULL;
++			}
++			free(enc);
++			enc = NULL;
++		}
+ 	}
+ 
+ 	return res;

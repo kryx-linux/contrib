@@ -1,0 +1,17 @@
+# Description: pythonwrapper for the for the vorbis library
+# URL:         http://dulug.duke.edu/~andrew/pyogg
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libvorbis pyogg
+
+name=pyvorbis
+version=1.3
+release=1
+source="http://www.andrewchatham.com/pyogg/download/$name-$version.tar.gz"
+
+build() {
+    cd $name-$version
+    python config_unix.py
+    python setup.py build
+    python setup.py install --root=$PKG
+}

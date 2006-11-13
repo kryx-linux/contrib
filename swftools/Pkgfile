@@ -1,0 +1,19 @@
+# Description: collection of SWF manipulation and generation
+# URL:         http://www.quiss.org/swftools
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  
+
+name=swftools
+version=0.6.2
+release=1
+source="http://www.quiss.org/swftools/$name-$version.tar.gz"
+
+build() {
+    cd $name-$version
+    ./configure \
+        --prefix='$(DESTDIR)/usr' \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}

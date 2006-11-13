@@ -1,0 +1,26 @@
+# Description: Additional image loaders for Imlib2
+# URL: http://www.enlightenment.org/
+# Maintainer: Han Boetes <han@mijncomputer.nl>
+# Packager: Han Boetes <han@mijncomputer.nl>
+# Depends on: edb imlib2
+
+name=imlib2_loaders
+version=cvs
+release=1
+
+build()
+{
+    cd $PKGMK_SOURCE_DIR
+    if cd e17/libs/$name ; then
+	cvs -q up -dAP
+    else
+	cvs -q -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/enlightenment co e17/libs/$name
+    fi
+
+    cp -r $PKGMK_SOURCE_DIR/e17/libs/$name $SRC
+    cd $SRC/$name
+
+    ./autogen.sh --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

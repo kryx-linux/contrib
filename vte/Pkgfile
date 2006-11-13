@@ -1,0 +1,23 @@
+# Description: terminal library
+# URL:         ftp://ftp.gnome.org/pub/GNOME/sources/vte
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=vte
+version=0.14.1
+release=1
+source="ftp://ftp.gnome.org/pub/GNOME/sources/vte/${version%.?}/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls \
+	--disable-gtk-doc \
+	--libexecdir=/usr/lib
+    make
+    make install DESTDIR=$PKG
+    rm -rf $PKG/usr/share/{locale,gtk-doc}
+}

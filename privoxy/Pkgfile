@@ -1,0 +1,34 @@
+# Description: web proxy with advanced filtering capabilities
+# URL:         http://www.privoxy.org
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libpcre
+
+name=privoxy
+version=3.0.3
+release=2
+source="
+    http://dl.sourceforge.net/sourceforge/ijbswa/$name-$version-stable-src.tar.gz
+    privoxy
+    privoxy.diff
+"
+
+build()
+{
+    cd $name-$version-stable
+    patch < $SRC/privoxy.diff
+    autoheader
+    autoconf
+    ./configure \
+        --prefix=/usr
+    make
+    perl -pi -e 's|%%SYSCONFDIR%%|/etc/|g'              config
+    perl -pi -e 's|^logdir \.|logdir /var/log/privoxy|' config
+    perl -pi -e 's|^confdir \.|confdir /etc/privoxy|'   config
+    install -d $PKG/{etc/{privoxy/templates,rc.d},usr/{sbin,man/man1,share},var/log/privoxy}
+    install -m 755 privoxy $PKG/usr/sbin/
+    install -m 644 *.action config default.filter $PKG/etc/privoxy/
+    install -m 644 templates/* $PKG/etc/privoxy/templates/
+    install -m 444 privoxy.1 $PKG/usr/man/man1/
+    install -m 755 $SRC/privoxy $PKG/etc/rc.d/
+}

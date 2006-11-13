@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# It would really, really be a Good Thing(tm) for you to enable some of
+# the below control variables and the apropriate ulimit.
+# These are only examples.
+# Furthermore, you should think about additional limits you might need.
+# Or, check login.defs(5) for a suitable alternative
+
+# 10 Mb
+#MINSEGMENT=10240
+# 20 Mb
+#MAXSEGMENT=20480
+# 10 Mb
+#MAXFILESIZE=10240
+# 100
+#MAXFD=100
+# 40
+#MAXCHILD=40
+
+# ulimits
+#ulimit -d ${MINSEGMENT}
+#ulimit -f ${MAXFILESIZE}
+#ulimit -m ${MAXSEGMENT}
+#ulimit -n ${MAXFD}
+#ulimit -s ${MINSEGMENT}
+#ulimit -u ${MAXCHILD}
+
+SVDIR=/service
+
+case "$1" in
+    start)
+        exec /usr/bin/svscanboot
+	;;
+
+    stop)
+        /usr/bin/killall svscan
+        /usr/bin/killall readproctitle
+        /usr/bin/svc -dx $SVDIR/* $SVDIR/*/log
+	;;
+
+    *)
+  	echo "Usage: $0 start | stop"
+	;;
+esac

@@ -1,0 +1,19 @@
+# Description: famous ssh-client for windows now also for *nix
+# URL:         http://www.chiark.greenend.org.uk/~sgtatham/putty
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  gtk1
+
+name=putty
+version=0.58
+release=1
+source="http://the.earth.li/~sgtatham/putty/latest/$name-$version.tar.gz"
+
+build() {
+    cd putty-$version/unix
+    ln -s Makefile.gtk Makefile
+    sed -i 's|^prefix=.*|prefix=/usr|' Makefile
+    make
+    install -d $PKG/usr/{bin,man/man1}/
+    make install DESTDIR=$PKG
+}

@@ -1,0 +1,24 @@
+# Description: revision control system favoured by the gnu-project
+# URL:         http://www.gnu.org/software/gnu-arch/
+# Packager:    Robert McMeekin <rrm3@rrm3.org>
+# Depends on:  neon
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+
+name=tla
+version=1.3.4
+release=1
+source="
+    http://ftp.gnu.org/gnu/gnu-arch/$name-$version.tar.gz
+    fix-patch-test.diff
+"
+
+build() {
+    patch -d $name-$version -p0 < fix-patch-test.diff
+    install -d $name-$version/src/build
+    cd $name-$version/src/build
+    ../configure \
+        --prefix=/usr \
+	--destdir=$PKG
+    make
+    make install
+}

@@ -1,0 +1,26 @@
+# Description: curses frontend for libtorrent
+# URL:         http://libtorrent.rakshasa.no/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libtorrent curl
+
+name=rtorrent
+version=0.6.4
+release=1
+source="http://libtorrent.rakshasa.no/downloads/rtorrent-$version.tar.gz"
+
+build()
+{
+    if gcc --version |grep -q '4\.0\.'; then
+	export CXXFLAGS="$CXXFLAGS -fno-strength-reduce -fno-thread-jumps -fno-inline -fforce-addr"
+    fi
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls \
+	--disable-debug
+    make
+    make install DESTDIR=$PKG
+    install -d $PKG/usr/share/$name/
+    install doc/rtorrent.rc $PKG/usr/share/$name/
+}

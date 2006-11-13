@@ -1,0 +1,20 @@
+# $Id$
+# Description: set of Python modules designed for writing games
+# URL: http://pygame.org
+# Maintainer: Han Boetes <han@mijncomputer.nl>
+# Packager: Han Boetes <han@mijncomputer.nl>
+# Depends on: sdl_image sdl_ttf sdl_mixer smpeg
+# Nice to have: numeric
+
+name=pygame
+version=1.7.1
+release=1
+source=(http://www.pygame.org/ftp/pygame-${version}release.tar.gz)
+
+build()
+{
+    cd $name-${version}release
+    yes | python config.py
+    python setup.py build
+    python setup.py install --prefix=/usr --root $PKG
+}

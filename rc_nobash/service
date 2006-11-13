@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# I choose not to document the -a feature.
+usage()
+{
+    echo "Error: Usage: ${0##*/} name start|stop|restart" >&2
+    exit 1
+}
+
+if [ "$1" = -a ]; then
+    # Load configuration
+    . /etc/rc.conf
+
+    # Start services
+    if [ "$SERVICES" ]; then
+        case "$2" in
+            stop)
+                # Reverse the order of the services
+                unset r
+                for i in $SERVICES; do
+                    r="$i $r"
+                done
+                SERVICES="$r"
+                echo -n "Stopping services:"
+                ;;
+            start)
+                echo -n "Starting services:"
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        for service in $SERVICES; do
+            echo -n " $service"
+            output=$(/etc/rc.d/$service $2 2>&1)
+            [ $? -eq 0 ] || echo -n ' [ERROR]'
+            echo $output| logger -t $service
+        done
+	echo
+	echo
+    fi
+    exit 0
+fi
+
+if [ -x /etc/rc.d/"$1" -a -f /etc/rc.d/"$1" ]; then
+    case "$2" in
+        stop)
+            /etc/rc.d/$1 stop
+            ;;
+        start)
+            /etc/rc.d/$1 start
+            ;;
+        restart)
+            /etc/rc.d/$1 stop
+            /etc/rc.d/$1 start
+            ;;
+        *)
+            usage
+            ;;
+    esac
+elif [ -z "$1" ]; then
+    usage
+else
+    echo "${0##*/} Error: service \`$1' unknown"
+    echo -n These services are known:
+    cd /etc/rc.d
+    for i in *; do
+        echo -n " $i"
+    done
+    echo
+fi

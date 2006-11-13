@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# /etc/rc.multi: multi-user startup script
+#
+
+# Start services
+/sbin/service -a start
+
+# Run local startup script
+if [ -r /etc/rc.local ]; then
+    . /etc/rc.local
+fi
+
+# End of file

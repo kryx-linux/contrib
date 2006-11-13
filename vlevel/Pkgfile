@@ -1,0 +1,18 @@
+# Description: VLevel keeps your music from making you jump out of your seat
+# URL:         vlevel.sf.net
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+
+name=vlevel
+version=0.5
+release=1
+source="http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    sed -i 's/.*=.*/#&/' Makefile
+    make CXXFLAGS="$CXXFLAGS -fPIC -DPIC" PREFIX=/usr/bin/ LADSPA_PREFIX=/usr/lib/ladspa/
+    install -d $PKG/usr/{bin,lib/ladspa}
+    make install PREFIX=$PKG/usr/bin/ LADSPA_PREFIX=$PKG/usr/lib/ladspa/
+}

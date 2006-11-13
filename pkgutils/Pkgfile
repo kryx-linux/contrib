@@ -1,0 +1,33 @@
+# Description: Per's famous pkgutils, tweaked for packagers and end-users.
+# URL:         http://crux.nu
+# Packager:    Per Lidén <per@fukt.bth.se>
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Depends on:  fakeroot sudo
+
+name=pkgutils
+version=5.20
+release=11
+source="
+    http://www.fukt.bth.se/~per/pkgutils/$name-$version.tar.gz
+    pkgmk
+    pkgadd.conf
+    pkgmk.conf
+    rejmerge
+    rejmerge.conf
+"
+
+build ()
+{
+    export CFLAGS="${CFLAGS//-fstack-protector/}"
+    export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
+    cd $name-$version
+    cp $SRC/pkgmk .
+    cp $SRC/rejmerge .
+    make install DESTDIR=$PKG
+    install -m 644 \
+	$SRC/pkgadd.conf \
+	$SRC/pkgmk.conf \
+	$SRC/rejmerge.conf \
+	$PKG/etc
+    install -d $PKG/usr/pkgmk/{source,package,work}
+}

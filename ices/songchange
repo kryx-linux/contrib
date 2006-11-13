@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# This is my songchangescript for cplay that sets the right tags
+# for the ices/icecast stream.
+
+case "$1" in
+    stop)
+	shift
+	echo >   /mnt/nfs/nowplaying
+	echo >   /mnt/nfs/nowplayingice
+	pkill -SIGUSR1 -f '/usr/bin/ices'
+	pkill -SIGSTOP -f '/usr/bin/ices'
+	;;
+    pause)
+	shift
+	echo "NP: $@  (paused)" >   /mnt/nfs/nowplaying
+	echo "TITLE=$@  (paused)" > /mnt/nfs/nowplayingice
+	pkill -SIGUSR1 -f '/usr/bin/ices'
+	pkill -SIGSTOP -f '/usr/bin/ices'
+	;;
+    *)
+	echo "NP: $@" >   /mnt/nfs/nowplaying
+	echo "TITLE=$@" > /mnt/nfs/nowplayingice
+	pkill -SIGCONT -f '/usr/bin/ices'
+	pkill -SIGUSR1 -f '/usr/bin/ices'
+	;;
+esac

@@ -1,0 +1,19 @@
+# Description: Hides the mouse cursor when idle
+# URL:         http://www.google.com/search?q=unclutter
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+
+name=unclutter
+version=0.8
+release=1
+source="ftp://ftp.x.org/contrib/utilities/$name-8.tar.Z"
+
+build ()
+{
+    cd $name
+    xmkmf
+    make CDEBUGFLAGS="$CFLAGS"
+    install -d            $PKG/usr/bin/
+    install -s unclutter  $PKG/usr/bin/unclutter
+    install -d            $PKG/usr/man/man6
+    install unclutter.man $PKG/usr/man/man6/unclutter.6
+}

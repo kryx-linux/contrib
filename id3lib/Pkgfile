@@ -1,0 +1,18 @@
+# Packager:    Jean-Philippe Combe <jphcombe@yahoo.fr>
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Description: Library for manipulating ID3v1 and ID3v2 tags
+# URL:         http://id3lib.sourceforge.net/
+# Depends on:  
+
+name=id3lib
+version=3.8.3
+release=1
+source="http://dl.sourceforge.net/$name/$name-$version.tar.gz"
+
+build ()
+{
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

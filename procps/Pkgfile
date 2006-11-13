@@ -1,0 +1,33 @@
+# Packages:    Per Lidén <per@fukt.bth.se>
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# URL:         http://procps.sf.net
+# Description: Utils for /proc filesystem
+# Depends:
+
+
+
+name=procps
+version=3.2.6
+release=1
+source="
+    http://procps.sourceforge.net/$name-$version.tar.gz
+    sysctl.conf
+"
+
+build() {
+    cd $name-$version
+    # pkgadd runs ldconfig
+    sed -i 's|^ldconfig.*||' Makefile
+    make
+    make DESTDIR=$PKG \
+	 man1=$PKG/usr/man/man1/ \
+	 man5=$PKG/usr/man/man5/ \
+	 man8=$PKG/usr/man/man8/ \
+	 install
+    install -D -m644 $SRC/sysctl.conf $PKG/etc/sysctl.conf
+    rm -f $PKG/bin/kill \
+	  $PKG/usr/man/man1/kill.1
+    ln -sf pgrep $PKG/usr/bin/pkill
+    ln -sf skill $PKG/usr/bin/snice
+    chmod +w -R $PKG
+}

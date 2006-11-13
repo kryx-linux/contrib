@@ -1,0 +1,27 @@
+# Description:  library for WWW access in Perl
+# URL:         http://search.cpan.org/~rse/lcwa-1.0.0/lib/lwp/lib/LWP.pm
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  p5-uri p5-html-parser
+# Nice to have: p5-crypt-ssleay p5-http-ghttp
+
+name=p5-libwww
+version=5.803
+release=1
+source="ftp://ftp.demon.co.uk/pub/CPAN/modules/by-module/LWP/libwww-perl-$version.tar.gz"
+
+build()
+{
+    cd libwww-*
+    perl Makefile.PL -n
+    make
+    make install DESTDIR=$PKG
+    # Remove perlcrap
+    find $PKG \
+        -name .packlist -or \
+        -name '*.bs' -or \
+        -name autosplit.ix -or \
+        -name perllocal.pod -delete
+    # Remove empty directories
+    find $PKG -depth -empty -delete
+}

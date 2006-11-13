@@ -1,0 +1,18 @@
+# Description: command line utility to split mp3/ogg without decoding
+# URL:         http://mp3splt.sf.net
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libmad
+
+name=mp3splt
+version=2.1
+release=1
+source="http://dl.sourceforge.net/$name/$name-$version-src.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# This script performs all steps you have to anyway if you want to enter
+# the rescuemode via the bootprompt:
+#
+#     linux init=/bin/sh
+#
+# So now you can use:
+#
+#     linux init=/etc/rc.rescue
+#
+
+. /etc/rc.dev
+
+export PATH="$PATH:/sbin:/usr/bin:/usr/sbin"
+
+echo -n 'Attempting to mount / writable... '
+if mount -o remount,rw /; then
+    echo 'Succes.'
+else
+    echo 'Failed.'
+fi
+echo 'Use "/bin/zsh" to get to your favourite shell.'
+echo 'Use exit or ^D to safely exit and reboot.'
+/bin/sh
+echo 'Unmounting all filesystems and rebooting.'
+umount -a -r
+/sbin/shutdown -n -r now
+
+# End of file

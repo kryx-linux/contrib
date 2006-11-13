@@ -1,0 +1,28 @@
+# Description: HTML/XML/XHTML cleanup tool
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# URL:         http://tidy.sourceforge.net/
+# Depends on:  cvs
+
+name=tidy
+version=cvs
+release=1
+source=
+
+build ()
+{
+
+    cd $PKGMK_SOURCE_DIR
+    if cd tidy ; then
+        cvs -z3 -q up -dAP
+    else
+	cvs -d:pserver:anonymous@tidy.cvs.sourceforge.net:/cvsroot/tidy co tidy
+    fi
+    cp -r $PKGMK_SOURCE_DIR/tidy $SRC
+    cd $SRC/tidy
+    sed -i 's|typedef unsigned long ulong;||' include/platform.h
+    /bin/sh build/gnuauto/setup.sh
+    ./configure --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

@@ -1,0 +1,18 @@
+# Description: pythonwrapper for the for the Ogg library
+# URL:         http://www.andrewchatham.com/pyogg/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libogg python
+
+name=pyogg
+version=1.1
+release=1
+source="http://www.andrewchatham.com/pyogg/download/$name-$version.tar.gz"
+
+build() {
+    cd $name-$version
+    python config_unix.py
+    python setup.py build
+    python setup.py install --root=$PKG
+    find $PKG/usr/include -type f | xargs chmod 644
+}

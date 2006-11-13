@@ -1,0 +1,18 @@
+# Description: SiGnature ROTUMbulator
+# URL:         http://homepages.ihug.co.nz/~trmusson/programs.html#sgrotum
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  glib
+
+name=sgrotum
+version=2.0.0
+release=1
+source="http://homepages.ihug.co.nz/~trmusson/stuff/$name-$version.tar.gz"
+
+build() {
+    cd $name-$version
+    ./configure \
+        --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}

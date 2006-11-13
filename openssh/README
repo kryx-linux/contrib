@@ -1,0 +1,10 @@
+This version of ssh uses the experimental hpn patch:
+http://www.psc.edu/networking/projects/hpn-ssh/
+
+Also you'll need to add a separate user for openssh: _sshd
+
+useradd -d /nonexistant -s /bin/false -u 98 -g 98 _sshd
+
+or even better install the `nologin' port and make it:
+
+useradd -d /nonexistant -s /sbin/nologin -u 98 -g 98 _sshd

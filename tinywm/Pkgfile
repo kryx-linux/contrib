@@ -1,0 +1,17 @@
+# Description: tiniest wm possible
+# URL:         http://incise.org/index.cgi/TinyWM
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=tinywm
+version=1.3
+release=1
+source="http://incise.org/files/dev/tinywm-1.3.tgz"
+
+build()
+{
+    cd $name-$version
+    make
+    install -D $name $PKG/usr/bin/$name
+}

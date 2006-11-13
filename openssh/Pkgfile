@@ -1,0 +1,34 @@
+# Description: FREE version of the SSH protocol suite of network connectivity tools.
+# URL:         http://openssh.org
+# Packager:    Per Lidén <per@fukt.bth.se>
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Depends on:  openssl
+
+name=openssh
+version=4.5p1
+release=1
+source="
+    ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$name-$version.tar.gz
+    sshd
+"
+#     http://www.psc.edu/networking/projects/hpn-ssh/openssh-${version%p?}p1-hpn11-none.diff
+
+build()
+{
+    cd $name-$version
+#     patch -p1 < $SRC/openssh-${version%p?}p1-hpn11-none.diff
+    ./configure \
+	--prefix=/usr \
+	--libexecdir=/usr/lib/ssh \
+	--sysconfdir=/etc/ssh \
+	--mandir=/usr/man \
+	--with-mantype=man \
+	--with-tcp-wrappers \
+	--with-md5-passwords \
+	--with-privsep-user=_sshd \
+	--with-privsep-path=/usr/lib/ssh/empty
+    make
+    make install DESTDIR=$PKG
+    install -D -m 755 $SRC/sshd $PKG/etc/rc.d/sshd
+    rm -rf                      $PKG/usr/share
+}

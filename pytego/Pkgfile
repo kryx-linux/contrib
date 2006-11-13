@@ -1,0 +1,25 @@
+# Description: stratego for pygame
+# URL:         http://members.cox.net/churchillrm/projects.html
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  pygame
+
+name=pytego
+version=0.02
+release=1
+source="http://members.cox.net/churchillrm/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    install -d $PKG/usr/{bin,games/$name}
+    cp -r *.py data $PKG/usr/games/$name
+    # Lets make a wrapper.
+    cat << EOF > $PKG/usr/bin/$name
+#!/bin/sh
+cd /usr/games/$name
+
+python $name.py
+EOF
+    chmod 755 $PKG/usr/bin/$name
+}

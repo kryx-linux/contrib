@@ -1,0 +1,21 @@
+# Description: system for indexing collections of Web pages or other files
+# URL:         http://www.swish-e.org
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libxml2 xpdf catdoc
+
+name=swish-e
+version=2.4.2
+release=2
+source="http://www.swish-e.org/distribution/swish-e-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+    rm -rf $PKG/usr/share/doc/
+}
