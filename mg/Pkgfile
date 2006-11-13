@@ -1,0 +1,21 @@
+# Description: OpenBSD micro Gnu-emacs clone
+# URL:         http://www.xs4all.nl/~hanb/software/mg/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+# Nice to have: arc4random
+
+name=mg
+version=20060919
+release=1
+source="http://www.xs4all.nl/~hanb/software/mg/mg-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure
+    make all install \
+        prefix=/usr \
+        mandir=/usr/man \
+        DESTDIR=$PKG
+}
