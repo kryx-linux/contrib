@@ -6,3 +6,5 @@ for i in $e17_packages; do
 done
 prt-get remove $e17_packages
 prt-get depinst e17  engrave e_modules e_utils
+
+echo "git commit -m 'e17:rebuild all relevant ports' {$(echo $e17_packages|tr " " ",")}/*"
