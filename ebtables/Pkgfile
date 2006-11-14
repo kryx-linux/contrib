@@ -1,0 +1,18 @@
+# Description: A firewalling tool to transparently filter network traffic passing a bridge
+# URL: http://ebtables.sourceforge.net/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on:
+
+name=ebtables
+version=2.0.8-rc2
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-v$version.tar.gz \
+		ebtables-v$version.diff)
+
+build() {
+	cd $name-v$version
+	patch -p1 -i ../ebtables-v$version.diff
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/etc/{rc.d,sysconfig}
+}

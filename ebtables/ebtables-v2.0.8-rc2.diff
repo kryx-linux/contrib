@@ -1,0 +1,38 @@
+diff -Nru ebtables-v2.0.8-rc2-orig/Makefile ebtables-v2.0.8-rc2/Makefile
+--- ebtables-v2.0.8-rc2-orig/Makefile	2006-03-30 20:24:57.000000000 +0300
++++ ebtables-v2.0.8-rc2/Makefile	2006-10-10 22:59:50.000000000 +0300
+@@ -6,15 +6,15 @@
+ 
+ # default paths
+ LIBDIR:=/usr/lib
+-MANDIR:=/usr/local/man
+-BINDIR:=/usr/local/sbin
++MANDIR:=/usr/man
++BINDIR:=/usr/sbin
+ ETCDIR:=/etc
+-INITDIR:=/etc/rc.d/init.d
++INITDIR:=/etc/rc.d
+ SYSCONFIGDIR:=/etc/sysconfig
+ DESTDIR:=
+ 
+ # include DESTDIR param
+-override LIBDIR:=$(DESTDIR)$(LIBDIR)/$(PROGNAME)
++override LIBDIR:=$(DESTDIR)$(LIBDIR)
+ override MANDIR:=$(DESTDIR)$(MANDIR)
+ override BINDIR:=$(DESTDIR)$(BINDIR)
+ override ETCDIR:=$(DESTDIR)$(ETCDIR)
+@@ -160,11 +160,11 @@
+ .PHONY: scripts
+ scripts: ebtables-save ebtables.sysv ebtables-config
+ 	cat ebtables-save | sed 's/__EXEC_PATH__/$(tmp1)/g' > ebtables-save_
+-	install -m 0755 -o root -g root ebtables-save_ $(BINDIR)/ebtables-save
++	install -D -m 0755 -o root -g root ebtables-save_ $(BINDIR)/ebtables-save
+ 	cat ebtables.sysv | sed 's/__EXEC_PATH__/$(tmp1)/g' | sed 's/__SYSCONFIG__/$(tmp2)/g' > ebtables.sysv_
+-	install -m 0755 -o root -g root ebtables.sysv_ $(INITDIR)/ebtables
++	install -D -m 0755 -o root -g root ebtables.sysv_ $(INITDIR)/ebtables
+ 	cat ebtables-config | sed 's/__SYSCONFIG__/$(tmp2)/g' > ebtables-config_
+-	install -m 0600 -o root -g root ebtables-config_ $(SYSCONFIGDIR)/ebtables-config
++	install -D -m 0600 -o root -g root ebtables-config_ $(SYSCONFIGDIR)/ebtables-config
+ 	rm -f ebtables-save_ ebtables.sysv_ ebtables-config_
+ 
+ $(MANDIR)/man8/ebtables.8: ebtables.8
