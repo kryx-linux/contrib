@@ -43,12 +43,12 @@ info()
 
 warning()
 {
-    echo "=======> WARNING: $1" >&2
+    info "WARNING: $1" >&2
 }
 
 error()
 {
-    echo "=======> ERROR: $1" >&2
+    info "ERROR: $1" >&2
 }
 
 keep_work()
@@ -264,7 +264,7 @@ EOF
             > $TMPFILE.md5sum.diff
 	if [ -s $TMPFILE.md5sum.diff ]; then
 	    error "Md5sum mismatch found:"
-	    cat $TMPFILE.md5sum.diff
+	    cat $TMPFILE.md5sum.diff >&2
             echo -n 'Do you want me to update the md5sum? [y/N] '
             port_read answer
             echo
@@ -350,8 +350,8 @@ check_footprint()
                 sed '/^@@/d;/^+++/d;/^---/d;s/^+/NEW       /g;s/^-/MISSING   /g' \
                 > $FILE.footprint.diff
 	    if [ -s $FILE.footprint.diff ]; then
-		info "Footprint mismatch found:"
-		cat $FILE.footprint.diff
+		warning "Footprint mismatch found:"
+		cat $FILE.footprint.diff >&2
 		false
 		until [ $? -eq 0 ]; do
                     echo -n '[u]pdate footprint/[e]rror/[i]gnore footprint mismatch [u/e/i] '
