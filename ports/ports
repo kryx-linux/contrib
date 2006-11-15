@@ -18,23 +18,27 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 #  USA.
-
 export PATH=/bin:/usr/bin
+
+if [ $(id -u) -eq 0 ]; then
+    echo "$COMMAND: root should not update ports"
+    exit 1
+fi
 
 check_ports_dir() {
     if [ ! -d "$PORTS_DIR" ]; then
-	echo "$COMMAND: directory '$PORTS_DIR' not found"
+	echo "$COMMAND: directory \`$PORTS_DIR' not found"
 	exit 1
     fi
 }
 
 update_ports() {
-    if [ $(id -u) -eq 0 ]; then
-	echo "$COMMAND: root should not update ports"
+    export PORTS_DIR
+
+    if ! stat -t /etc/ports/drivers/* >/dev/null 2>&1; then
+	echo "$COMMAND: no driver(s) installed" >&2
 	exit 1
     fi
-
-    export PORTS_DIR
 
     if [ "$OPT_COLLECTIONS" ]; then
 	# Update selected collections
@@ -56,7 +60,7 @@ update_ports() {
 		    fi
 		done
 	    else
-		echo "$COMMAND: collection '$collection' not found"
+		echo "$COMMAND: collection \`$collection' not found"
 	    fi
 	done
     else
@@ -69,10 +73,6 @@ update_ports() {
 		done
 	    fi
 	done
-
-	if [ ! "$driver" ]; then
-	    echo "$COMMAND: no driver(s) installed"
-	fi
     fi
     wait
     echo 'Ports update done.'
@@ -117,7 +117,7 @@ list_differences() {
 }
 
 print_try_help() {
-    echo "Try '$COMMAND --help' for more information."
+    echo "Try \`$COMMAND --help' for more information."
 }
 
 print_help() {
@@ -195,5 +195,3 @@ PORTS_DIR="/usr/ports"
 COMMAND=${0##*/}
 
 main "$@"
-
-# End of file
