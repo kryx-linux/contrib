@@ -1,0 +1,20 @@
+# Description: implementation of the Unicode Bidirectional Algorithm (bidi).
+# URL:         http://fribidi.org/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=fribidi
+version=0.10.7
+release=1
+source="http://fribidi.org/download/fribidi-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}
