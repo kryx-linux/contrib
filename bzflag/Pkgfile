@@ -1,16 +1,16 @@
 # Description: Fast, 3D multiplayer tank battle game
 # URL:         http://bzflag.org/
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
-
+# Depends on:
 
 name=bzflag
-version=2.0.0
+version=2.0.8
 release=1
-extra_bullshit_version=20050117
-source="http://dl.sourceforge.net/sourceforge/$name/$name-$version.$extra_bullshit_version.tar.bz2"
+source="http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2"
 
-build () {
-    cd $name-$version.$extra_bullshit_version
+build ()
+{
+    cd $name-$version
     ./configure \
         --prefix=/usr \
         --disable-nls
