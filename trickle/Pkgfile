@@ -7,15 +7,12 @@
 name=trickle
 version=1.07
 release=1
-source="
-    http://monkey.org/~marius/trickle/$name-$version.tar.gz
-    trickle_1.07-4.diff
-"
+source="http://monkey.org/~marius/trickle/$name-$version.tar.gz"
 
 build()
 {
-    patch -p0 -i trickle_1.07-4.diff
     cd $name-$version
+    sed -i '/#include <netinet\/in.h>/d' *.c
     ./configure \
         --prefix=/usr \
         --disable-nls
