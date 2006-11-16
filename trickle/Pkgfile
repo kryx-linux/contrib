@@ -7,10 +7,14 @@
 name=trickle
 version=1.07
 release=1
-source="http://monkey.org/~marius/trickle/$name-$version.tar.gz"
+source="
+    http://monkey.org/~marius/trickle/$name-$version.tar.gz
+    trickle_1.07-4.diff
+"
 
 build()
 {
+    patch -p0 -i trickle_1.07-4.diff
     cd $name-$version
     ./configure \
         --prefix=/usr \
