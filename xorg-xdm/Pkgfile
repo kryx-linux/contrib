@@ -1,7 +1,7 @@
 # Description: xorg display manager
 # URL:         http://xorg.freedesktop.org
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
-# Depends on:  xorg-server xorg-xconsole xorg-xrdb
+# Depends on:  xorg-server xorg-xrdb
 
 name=xorg-xdm
 version=1.0.5
@@ -20,11 +20,11 @@ build()
 	--prefix=/usr \
         --with-xdmconfigdir=/etc/X11/xdm \
         --with-xdmscriptdir=/etc/X11/xdm
-#	--with-xdmlibdir=/usr/lib/X11/xdm
     make
     make install DESTDIR=$PKG
     gunzip            $SRC/crux_linux.xpm.gz
     install -D -m 644 $SRC/crux_linux.xpm $PKG/etc/X11/xdm/pixmaps/crux_linux.xpm
     install -D -m 644 $SRC/Xresources     $PKG/etc/X11/xdm/Xresources
     install -D -m 755 $SRC/xdm            $PKG/etc/rc.d/xdm
+    sed -i '/xconsole/d'                  $PKG/etc/X11/xdm/Xsetup_0
 }
