@@ -11,11 +11,11 @@ source="ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/memoir.tar.gz"
 
 build()
 {
-   cd memoir
+    cd memoir
     latex memoir.ins
     latex memoir.dtx
     install -d                 $PKG/usr/share/texmf/tex/generic/$name/
-    install -m 644\
+    install -m 644 \
 	memoir.cls \
 	mem*.clo \
 	mem*.sty               $PKG/usr/share/texmf/tex/generic/$name/
