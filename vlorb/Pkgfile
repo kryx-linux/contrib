@@ -3,7 +3,7 @@
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
 # Packager:    Han Boetes <han@mijncomputer.nl>
 # Depends on:  p5-cddb cdparanoia
-# nice to have: flac, oggenc, vorbisgain, easytag
+# Nice to have: flac, oggenc, vorbisgain, easytag
 
 name=vlorb
 version=1.2
@@ -13,10 +13,11 @@ source="
     http://jk.yazzy.org/projects/vlorb/patches/$name-${version}_fix_escape.diff
 "
 
-build() {
+build()
+{
     cd $name-$version
     # bizarre!
     sed -i 's/mkdir -p/install -d/' Makefile
-    patch < $SRC/$name-${version}_fix_escape.diff
+    patch -i $SRC/$name-${version}_fix_escape.diff
     make install prefix=$PKG/usr
 }
