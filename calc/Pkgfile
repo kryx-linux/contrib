@@ -1,0 +1,20 @@
+# Description: C-style arbitrary precision calculator
+# URL:         http://www.isthe.com/chongo/tech/comp/calc/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=calc
+version=2.12.1.5
+release=1
+source="http://www.isthe.com/chongo/src/calc/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    sed -i 's/<malloc.h>/<stdlib.h>/' *.c *.h
+    export SCRIPTDIR=/usr/lib/calc
+    make CCOPT="$CFLAGS"
+    make install T=$PKG MANDIR=/usr/man/man1
+    chmod -R +w $PKG
+}
