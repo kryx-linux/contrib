@@ -1,8 +1,9 @@
-# Description:	Clone of the old BoulderDash and Rockford game.
-# URL:			http://www.artsoft.org/rocksndiamonds/
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Depends on:	sdl_image, sdl_mixer, sdl_net
+# Description: Clone of the old BoulderDash and Rockford game.
+# URL:         http://www.artsoft.org/rocksndiamonds/
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  sdl_image, sdl_mixer, sdl_net
 
 name=rocksndiamonds
 version=3.1.1
@@ -10,25 +11,25 @@ release=2
 source=(http://www.artsoft.org/RELEASES/unix/$name/$name-$version.tar.gz)
 
 build () {
-	cd $name-$version
+   cd $name-$version
 
-	export RO_GAME_DIR=/usr/share/$name
-	export RW_GAME_DIR=/var/lib/games/$name
-	make
+   export RO_GAME_DIR=/usr/share/$name
+   export RW_GAME_DIR=/var/lib/games/$name
+   make
 
-	install -d \
-		$PKG/usr/share/$name/{graphics, levels, music, sounds} \
-		$PKG/var/lib/games/$name
+   install -d \
+      $PKG/usr/share/$name/{graphics, levels, music, sounds} \
+      $PKG/var/lib/games/$name
 
-	cp -r graphics $PKG/usr/share/$name
-	cp -r levels $PKG/usr/share/$name
-	cp -r music $PKG/usr/share/$name
-	cp -r sounds $PKG/usr/share/$name
+   cp -r graphics $PKG/usr/share/$name
+   cp -r levels $PKG/usr/share/$name
+   cp -r music $PKG/usr/share/$name
+   cp -r sounds $PKG/usr/share/$name
 
-	cp -r scores $PKG/var/lib/games/$name
-	install -D -m755 $name $PKG/usr/bin/$name
-	chown -R root:root $PKG
+   cp -r scores $PKG/var/lib/games/$name
+   install -D -m755 $name $PKG/usr/bin/$name
+   chown -R root:root $PKG
 
-	unset RO_GAME_DIR
-	unset RW_GAME_DIR
+   unset RO_GAME_DIR
+   unset RW_GAME_DIR
 }

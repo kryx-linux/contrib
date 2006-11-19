@@ -1,8 +1,9 @@
-# Description:	MPD Window Maker dock-app.
-# URL:			http://www.musicpd.org/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	mpd, windowmaker
+# Description: MPD Window Maker dock-app.
+# URL:         http://www.musicpd.org/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  mpd, windowmaker
 
 name=wmmp
 version=0.10.0
@@ -10,8 +11,8 @@ release=1
 source=(http://mercury.chem.pitt.edu/~shank/WMmp-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   cd $name-$version
+   ./configure --prefix=/usr
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

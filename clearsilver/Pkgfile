@@ -1,30 +1,31 @@
-# Description:	Fast, powerful, and language-neutral HTML template system.
-# URL:			http://www.clearsilver.net/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	python
+# Description: Fast, powerful, and language-neutral HTML template system.
+# URL:         http://www.clearsilver.net/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  python
 
 name=clearsilver
 version=0.10.3
 release=2
 source=(http://www.clearsilver.net/downloads/$name-$version.tar.gz \
-	$name-$version-patch)
+   $name-$version-patch)
 
 build () {
-	cd $name-$version
-	patch -p1 -i $SRC/$name-$version-patch
+   cd $name-$version
+   patch -p1 -i $SRC/$name-$version-patch
 
-	./configure \
-		--prefix=$PKG/usr \
-		--with-python=/usr/bin/python \
-		--disable-perl \
-		--disable-ruby \
-		--disable-java \
-		--disable-csharp
+   ./configure \
+      --prefix=$PKG/usr \
+      --with-python=/usr/bin/python \
+      --disable-perl \
+      --disable-ruby \
+      --disable-java \
+      --disable-csharp
 
-	make && make prefix=$PKG/usr \
-		PYTHON_SITE=$PKG/usr/lib/python$pythonver/site-packages/ \
-		install
+   make && make prefix=$PKG/usr \
+      PYTHON_SITE=$PKG/usr/lib/python$pythonver/site-packages/ \
+      install
 
-	chown root:root $PKG
+   chown root:root $PKG
 }

@@ -1,8 +1,9 @@
-# Description:	A log colorizer written in C with plugin support.
-# URL:			http://bonehunter.rulez.org/software/ccze/
-# Packager:		Vincenzo Colosimo <vico@bicisport.de>
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Depends on:	libpcre
+# Description: A log colorizer written in C with plugin support.
+# URL:         http://bonehunter.rulez.org/software/ccze/
+# Packager:    Vincenzo Colosimo <vico@bicisport.de>
+# Maintainer:  ames Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  libpcre
 
 name=ccze
 version=0.2.1
@@ -10,19 +11,19 @@ release=2
 source=(ftp://bonehunter.rulez.org/pub/$name/stable/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+   cd $name-$version
 
-	# GCC 4.x fixes
-	sed -e 's/-Wswitch -Wmulticharacter/-Wswitch/' \
-		-i src/Makefile.in
-	sed -e '/AC_CHECK_TYPE(error_t, int)/d' \
-		-i configure.ac
-		autoconf
+   # GCC 4.x fixes
+   sed -e 's/-Wswitch -Wmulticharacter/-Wswitch/' \
+      -i src/Makefile.in
+   sed -e '/AC_CHECK_TYPE(error_t, int)/d' \
+      -i configure.ac
+      autoconf
 
-	./configure \
-		--prefix=/usr \
-		--disable-nls
+   ./configure \
+      --prefix=/usr \
+      --disable-nls
 
-	make &&	make prefix=$PKG/usr install
-	chown -R root:root $PKG
+   make &&   make prefix=$PKG/usr install
+   chown -R root:root $PKG
 }

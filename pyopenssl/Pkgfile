@@ -1,8 +1,9 @@
-# Description:	Python interface to the OpenSSL library
-# URL:			http://pyopenssl.sourceforge.net/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		Younes Hafri <ycrux@club-internet.fr>
-# Depends on:	python, openssl
+# Description: Python interface to the OpenSSL library
+# URL:         http://pyopenssl.sourceforge.net/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    Younes Hafri <ycrux@club-internet.fr>
+#
+# Depends on:  python, openssl
 
 name=pyopenssl
 version=0.6
@@ -10,7 +11,7 @@ release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/pyOpenSSL-$version.tar.gz)
 
 build () {
-	cd pyOpenSSL-$version
-	python setup.py install --root=$PKG
-	chown -R root:root $PKG
+   cd pyOpenSSL-$version
+   python setup.py install --root=$PKG
+   chown -R root:root $PKG
 }

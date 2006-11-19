@@ -1,38 +1,39 @@
-# Description:	SpamAssassin(tm) is a mail filter to identify spam.
-# URL:			http://www.spamassassin.org
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		Victor <victord@users.berlios.de>
-# Depends on:	perl, p5-digest-sha1, p5-html-parser
+# Description: SpamAssassin(tm) is a mail filter to identify spam.
+# URL:         http://www.spamassassin.org
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    Victor <victord@users.berlios.de>
+#
+# Depends on:  perl, p5-digest-sha1, p5-html-parser
 
 name=spamassassin
 version=3.1.3
 release=1
 source=(http://www.axint.net/apache/$name/Mail-SpamAssassin-$version.tar.bz2 \
-	$name.rc)
+   $name.rc)
 
 build() {
-	cd Mail-SpamAssassin-$version
-	perl Makefile.PL PREFIX=/usr CONFDIR=/etc/$name DESTDIR=$PKG < /dev/null
-	make
-	make spamc/libspamc.so
+   cd Mail-SpamAssassin-$version
+   perl Makefile.PL PREFIX=/usr CONFDIR=/etc/$name DESTDIR=$PKG < /dev/null
+   make
+   make spamc/libspamc.so
 
-	make install \
-		INSTALLMAN1DIR=/usr/man/man1 \
-		INSTALLMAN3DIR=/usr/man/man3 \
-		INSTALLSITEMAN1DIR=/usr/man/man1 \
-		INSTALLSITEMAN3DIR=/usr/man/man3 \
-		INSTALLVENDORMAN1DIR=/usr/man/man1 \
-		INSTALLVENDORMAN3DIR=/usr/man/man3
+   make install \
+      INSTALLMAN1DIR=/usr/man/man1 \
+      INSTALLMAN3DIR=/usr/man/man3 \
+      INSTALLSITEMAN1DIR=/usr/man/man1 \
+      INSTALLSITEMAN3DIR=/usr/man/man3 \
+      INSTALLVENDORMAN1DIR=/usr/man/man1 \
+      INSTALLVENDORMAN3DIR=/usr/man/man3
 
-	mkdir -p $PKG/{etc/rc.d,usr/include,usr/lib}
-	install -m0755 ../$name.rc $PKG/etc/rc.d/$name
-	install -m0644 spamc/libspamc.so $PKG/usr/lib
-	install -m0644 spamc/libspamc.h $PKG/usr/include/libspamc.h
+   mkdir -p $PKG/{etc/rc.d,usr/include,usr/lib}
+   install -m0755 ../$name.rc $PKG/etc/rc.d/$name
+   install -m0644 spamc/libspamc.so $PKG/usr/lib
+   install -m0644 spamc/libspamc.h $PKG/usr/include/libspamc.h
 
-	chmod 0644 $PKG/usr/lib/perl5/site_perl/5.*.*/Mail/SpamAssassin/*.pm
-	chmod 0644 $PKG/usr/share/$name/*
-	chmod -R u+w $PKG/*
+   chmod 0644 $PKG/usr/lib/perl5/site_perl/5.*.*/Mail/SpamAssassin/*.pm
+   chmod 0644 $PKG/usr/share/$name/*
+   chmod -R u+w $PKG/*
 
-	rm -fr $PKG/usr/lib/perl5/{5.*.*, site_perl/5.*.*/linux}
-	chown -R root:root $PKG
+   rm -fr $PKG/usr/lib/perl5/{5.*.*, site_perl/5.*.*/linux}
+   chown -R root:root $PKG
 }

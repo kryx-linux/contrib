@@ -1,8 +1,9 @@
-# Description:	Python Imaging Library.
-# URL:		http://www.pythonware.com/products/pil/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:	Younès Hafri <ycrux@club-internet.fr>
-# Depends on:	python, libjpeg, libpng, freetype
+# Description: Python Imaging Library.
+# URL:         http://www.pythonware.com/products/pil/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    Younès Hafri <ycrux@club-internet.fr>
+#
+# Depends on:  python, libjpeg, libpng, freetype
 
 name=pil
 version=1.1.5
@@ -10,9 +11,9 @@ release=1
 source=(http://effbot.org/downloads/Imaging-$version.tar.gz)
 
 build () {
-	cd Imaging-$version
-	python setup.py build
-	python setup.py install --root=$PKG
-	chown -R root:root $PKG
+   cd Imaging-$version
+   python setup.py build
+   python setup.py install --root=$PKG
+   chown -R root:root $PKG
 }
 

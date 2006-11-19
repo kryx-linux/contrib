@@ -1,8 +1,9 @@
-# Description:	XML Command Line Tools.
-# URL:			http://robur.slu.se/jensl/xmlclitools/
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Depends on:	libpcre, glib, libxml2
+# Description: XML Command Line Tools.
+# URL:         http://robur.slu.se/jensl/xmlclitools/
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  libpcre, glib, libxml2
 
 name=xmlclitools
 version=1.61
@@ -10,8 +11,8 @@ release=1
 source=(http://robur.slu.se/jensl/xmlclitools/history/$name-$version.tar.gz)
 
 build () {
-	cd $name-$version
-	./configure --prefix=$PKG/usr
-	make && make install
-	chown -R root:root $PKG
+   cd $name-$version
+   ./configure --prefix=$PKG/usr
+   make && make install
+   chown -R root:root $PKG
 }

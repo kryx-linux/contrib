@@ -1,8 +1,9 @@
-# Description:	XML-TV Script for Australia.
-# URL:			http://www.onlinetractorparts.com.au/rohbags/xmltvau/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	xmltv, p5-libwww
+# Description: XML-TV Script for Australia.
+# URL:         http://www.onlinetractorparts.com.au/rohbags/xmltvau/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  xmltv, p5-libwww
 
 name=xmltvau
 version=0.6.2
@@ -10,6 +11,6 @@ release=2
 source=(http://www.onlinetractorparts.com.au/rohbags/$name/tv_grab_au-$version.tar.gz)
 
 build() {
-	install -D -m644 -groot -oroot channel_ids $PKG/usr/share/xmltv/tv_grab_au/channel_ids
-	install -D -m755 -groot -oroot tv_grab_au $PKG/usr/bin/tv_grab_au
+   install -D -m644 -groot -oroot channel_ids $PKG/usr/share/xmltv/tv_grab_au/channel_ids
+   install -D -m755 -groot -oroot tv_grab_au $PKG/usr/bin/tv_grab_au
 }

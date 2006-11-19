@@ -1,9 +1,9 @@
-# Description:	Enhanced wiki and issue tracking system for software projects.
-# URL:			http://trac.edgewall.com/
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
+# Description: Enhanced wiki and issue tracking system for software projects.
+# URL:         http://trac.edgewall.com/
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
 #
-# Depends on:	subversion-python, pysqlite, clearsilver
+# Depends on:  subversion-python, pysqlite, clearsilver
 
 name=trac
 version=0.10.1
@@ -11,9 +11,9 @@ release=1
 source=(http://ftp.edgewall.com/pub/trac/$name-$version.tar.gz)
 
 build () {
-	cd $name-$version
-	python setup.py install --root=$PKG
-	mkdir -p $PKG/usr/man
-	mv $PKG/usr/share/man $PKG/usr/man
-	chown -R root:root $PKG
+   cd $name-$version
+   python setup.py install --root=$PKG
+   mkdir -p $PKG/usr/man
+   mv $PKG/usr/share/man $PKG/usr/man
+   chown -R root:root $PKG
 }

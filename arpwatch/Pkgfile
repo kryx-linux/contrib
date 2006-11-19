@@ -1,8 +1,9 @@
-# Description:	Monitors MAC Adresses on your network.
-# URL:			http://freequaos.host.sk/arpwatch/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	libpcap
+# Description: Monitors MAC Adresses on your network.
+# URL:         http://freequaos.host.sk/arpwatch/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  libpcap
 
 name=arpwatch
 version=1.2
@@ -10,9 +11,9 @@ release=1
 source=(http://freequaos.host.sk/$name/$name-NG$version.tar.bz2)
 
 build() {
-	cd $name-NG$version
-	./configure --prefix=/usr
-	install -d $PKG/usr/{man/man8,sbin}
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   cd $name-NG$version
+   ./configure --prefix=/usr
+   install -d $PKG/usr/{man/man8,sbin}
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

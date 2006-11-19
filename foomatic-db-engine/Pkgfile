@@ -1,7 +1,8 @@
-# Description:	Generates PPD files from foomatic-db's database.
-# URL:			http://linuxprinting.org/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Description: Generates PPD files from foomatic-db's database.
+# URL:         http://linuxprinting.org/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
 # Depends on:
 
 name=foomatic-db-engine
@@ -10,8 +11,8 @@ release=2
 source=(http://linuxprinting.org/download/foomatic/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   cd $name-$version
+   ./configure --prefix=/usr
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

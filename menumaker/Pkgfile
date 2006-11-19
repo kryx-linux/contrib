@@ -1,8 +1,9 @@
-# Description:	Tool for generate menu for many window manager.
-# URL:			http://menumaker.sourceforge.net/
-# Packager:		Coviello Giuseppe <giuseppecoviello@tin.it>
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Depends on:	python
+# Description: Tool for generate menu for many window manager.
+# URL:         http://menumaker.sourceforge.net/
+# Packager:    Coviello Giuseppe <giuseppecoviello@tin.it>
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  python
 
 name=menumaker
 version=0.99.6
@@ -10,8 +11,8 @@ release=1
 source=(http://dl.sourceforge.net/sourceforge/menumaker/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   cd $name-$version
+   ./configure --prefix=/usr
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

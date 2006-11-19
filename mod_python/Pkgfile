@@ -1,23 +1,24 @@
-# Description:	Apache module that embeds the Python interpreter.
-# URL:			http://www.modpython.org
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	apache, python
+# Description: Apache module that embeds the Python interpreter.
+# URL:         http://www.modpython.org
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  apache, python
 
 name=mod_python
 version=3.2.8
 release=2
 source=(http://www.apache.org/dist/httpd/modpython/$name-$version.tgz \
-	configure.patch)
+   configure.patch)
 
 build () {
-	cd $name-$version
-	patch -p1 -i $SRC/configure.patch configure
+   cd $name-$version
+   patch -p1 -i $SRC/configure.patch configure
 
-	./configure \
-		--prefix=/usr \
-		--with-apxs=/usr/sbin/apxs
+   ./configure \
+      --prefix=/usr \
+      --with-apxs=/usr/sbin/apxs
 
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

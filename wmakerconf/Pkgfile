@@ -1,8 +1,9 @@
-# Description:	Window Maker configuration tool
-# URL:			http://www.starplot.org/wmakerconf/
-# Maintainer: 	James Mills prologic at shortcircuit dot net dot au
-# Packager:		Olle Gustafsson <ogg at linux dot se>
-# Depends on:	libproplist, windowmaker
+# Description: Window Maker configuration tool
+# URL:         http://www.starplot.org/wmakerconf/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    Olle Gustafsson <ogg at linux dot se>
+#
+# Depends on:  libproplist, windowmaker
 
 name=wmakerconf
 version=2.11
@@ -10,12 +11,12 @@ release=1
 source=(http://www.starplot.org/$name/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+   cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--disable-nls
+   ./configure \
+      --prefix=/usr \
+      --disable-nls
 
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

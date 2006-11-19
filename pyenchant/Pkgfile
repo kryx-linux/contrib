@@ -1,8 +1,9 @@
-# Description:	Python Bindings to the enchant library.
-# URL:			http://pyenchant.sourceforge.net/
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Depends on:	enchant, setuptools
+# Description: Python Bindings to the enchant library.
+# URL:         http://pyenchant.sourceforge.net/
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  enchant, setuptools
 
 name=pyenchant
 version=1.2.0
@@ -10,7 +11,7 @@ release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
 build () {
-	cd $name-$version
-	python ./setup.py install --root=$PKG
-	chown -R root:root $PKG
+   cd $name-$version
+   python ./setup.py install --root=$PKG
+   chown -R root:root $PKG
 }

@@ -1,7 +1,8 @@
-# Description:	In-depth CPU information tool.
-# URL:			http://sourceforge.net/projects/x86info/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
+# Description: In-depth CPU information tool.
+# URL:         http://sourceforge.net/projects/x86info/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
 # Depends on:
 
 name=x86info
@@ -10,9 +11,9 @@ release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
-	make
-	mkdir -p $PKG/usr/{bin,man/man1}
-	install -D -m755 -oroot -groot $name $PKG/usr/bin/$name
-	install -D -m644 -oroot -groot $name.1 $PKG/usr/man/man1/$name.1
+   cd $name-$version
+   make
+   mkdir -p $PKG/usr/{bin,man/man1}
+   install -D -m755 -oroot -groot $name $PKG/usr/bin/$name
+   install -D -m644 -oroot -groot $name.1 $PKG/usr/man/man1/$name.1
 }

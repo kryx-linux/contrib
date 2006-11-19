@@ -1,8 +1,9 @@
-# Description:	A clone of Atomic Bomberman (SDL/MultiPlayer/Network).
-# URL:			http://www.bomberclone.de/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	sdl_mixer, sdl_image
+# Description: A clone of Atomic Bomberman (SDL/MultiPlayer/Network).
+# URL:         http://www.bomberclone.de/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  sdl_mixer, sdl_image
 
 name=bomberclone
 version=0.11.7
@@ -10,16 +11,16 @@ release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+   cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--disable-sdltest \
-		--disable-debug
+   ./configure \
+      --prefix=/usr \
+      --disable-sdltest \
+      --disable-debug
 
-	make && make DESTDIR=$PKG install
-	find $PKG -type d -name 'CVS' -print | xargs rm -fr
-	rm -fr $PKG/usr/doc
-	chown -R root:root $PKG
+   make && make DESTDIR=$PKG install
+   find $PKG -type d -name 'CVS' -print | xargs rm -fr
+   rm -fr $PKG/usr/doc
+   chown -R root:root $PKG
 }
 

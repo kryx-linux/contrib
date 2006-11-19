@@ -1,8 +1,9 @@
-# Description:	MPD GTK2 Client.
-# URL:			http://www.musicpd.org/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au	
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	mpd, gtk
+# Description: MPD GTK2 Client.
+# URL:         http://www.musicpd.org/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au   
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  mpd, gtk
 
 name=gtk2mp
 version=0.8.0
@@ -10,8 +11,8 @@ release=1
 source=(http://mercury.chem.pitt.edu/~shank/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   cd $name-$version
+   ./configure --prefix=/usr
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

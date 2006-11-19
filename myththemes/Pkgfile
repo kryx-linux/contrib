@@ -1,8 +1,9 @@
-# Description:	Homebrew PVR Project themes.
-# URL:			http://www.mythtv.org/
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Depends on:	qt3
+# Description: Homebrew PVR Project themes.
+# URL:         http://www.mythtv.org/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  qt3
 
 name=myththemes
 version=0.19
@@ -10,13 +11,13 @@ release=1
 source=(http://www.mythtv.org/mc/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+   cd $name-$version
 
-	./configure --prefix=$PKG/usr
-	qmake $name.pro
+   ./configure --prefix=$PKG/usr
+   qmake $name.pro
 
-	mkdir -p $PKG/usr
-	make INSTALL_ROOT=$PKG/usr install
+   mkdir -p $PKG/usr
+   make INSTALL_ROOT=$PKG/usr install
 
-	chown root:root $PKG
+   chown root:root $PKG
 }

@@ -1,22 +1,22 @@
-# Description:	Fixed width font especially for long hacking-sessions
-# URL:			http://www.is-vn.bg/hamster/jimmy-en.html
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Packager:		Han Boetes <han@mijncomputer.nl>
+# Description: Fixed width font especially for long hacking-sessions
+# URL:         http://www.is-vn.bg/hamster/jimmy-en.html
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    Han Boetes <han@mijncomputer.nl>
 #
-# Depends on:	xorg
+# Depends on:  xorg
 
 name=xorg-fonts-terminus
 version=4.20
 release=2
 source=(http://www.is-vn.bg/hamster/terminus-font-$version.tar.gz \
-	http://www.is-vn.bg/hamster/terminus-font-4.20-gq2.diff.gz)
+   http://www.is-vn.bg/hamster/terminus-font-4.20-gq2.diff.gz)
 
 build () {
-	zcat terminus-font-4.20-gq2.diff.gz | patch -d terminus-font-$version
-	cd terminus-font-$version
-	./configure \
-		--prefix=/usr \
-		--x11dir=/usr/lib/X11/fonts/local
-	make && make DESTDIR=$PKG install
-	chown -R root:root $PKG
+   zcat terminus-font-4.20-gq2.diff.gz | patch -d terminus-font-$version
+   cd terminus-font-$version
+   ./configure \
+      --prefix=/usr \
+      --x11dir=/usr/lib/X11/fonts/local
+   make && make DESTDIR=$PKG install
+   chown -R root:root $PKG
 }

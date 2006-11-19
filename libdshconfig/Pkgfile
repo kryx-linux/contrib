@@ -1,8 +1,9 @@
-# Description:	Library for parsing dsh-style configuration files.
-# URL:			http://www.netfort.gr.jp/~dancer/software/dsh.html.en
-# Packager:		James Mills prologic at shortcircuit dot net dot au
-# Maintainer:	James Mills prologic at shortcircuit dot net dot au
-# Depends on:	
+# Description: Library for parsing dsh-style configuration files.
+# URL:         http://www.netfort.gr.jp/~dancer/software/dsh.html.en
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:   
 
 name=libdshconfig
 version=0.20.12
@@ -10,9 +11,9 @@ release=1
 source=(http://www.netfort.gr.jp/~dancer/software/downloads/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=$PKG/usr
-	make && make install
-	chown -R root:root $PKG
+   cd $name-$version
+   ./configure --prefix=$PKG/usr
+   make && make install
+   chown -R root:root $PKG
 }
 
