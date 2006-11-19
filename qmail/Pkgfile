@@ -1,8 +1,7 @@
-# $Id$
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
 # Description: qmail is the proof security-bugfree software can be written.
 # URL:         http://www.qmail.org/
-# Depends on:  
+# Depends on:
 
 name=qmail
 version=1.05
@@ -14,10 +13,14 @@ source="
 
 build ()
 {
+    if ! grep -q qmaild /etc/passwd; then
+	echo "Read the README!" >&2
+	false
+    fi
     cd net$name-$version
     ./collate.sh
     cd net$name-$version
-    patch < $SRC/patch-Makefile
+    patch -i $SRC/patch-Makefile
     echo "${CC:=gcc} $CFLAGS" > conf-cc
     echo "${CC:=gcc -s}" > conf-ld
     make it man
