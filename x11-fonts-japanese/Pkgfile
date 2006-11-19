@@ -2,7 +2,7 @@
 # URL:         http://sourceforge.jp/projects/efont/
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
 # Packager:    Han Boetes <han@mijncomputer.nl>
-# Depends on:  x11
+# Depends on:
 
 name=x11-fonts-japanese
 version=1.0
@@ -17,8 +17,6 @@ build()
     install -d $PKG/usr/share/fonts/ttf/japanese
     install -m 644 */*.ttf $PKG/usr/share/fonts/ttf/japanese
     cd $PKG/usr/share/fonts/ttf/japanese
-#    /usr/sbin/ttmkfdir > fonts.scale
-#    cp fonts.scale fonts.dir
     mkfontscale
     mkfontdir
     fc-cache . || touch fonts.cache-1
