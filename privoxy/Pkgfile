@@ -5,8 +5,8 @@
 # Depends on:  libpcre
 
 name=privoxy
-version=3.0.3
-release=2
+version=3.0.6
+release=1
 source="
     http://dl.sourceforge.net/sourceforge/ijbswa/$name-$version-stable-src.tar.gz
     privoxy
@@ -16,15 +16,15 @@ source="
 build()
 {
     cd $name-$version-stable
-    patch < $SRC/privoxy.diff
+    patch -i $SRC/privoxy.diff
     autoheader
     autoconf
     ./configure \
         --prefix=/usr
     make
-    perl -pi -e 's|%%SYSCONFDIR%%|/etc/|g'              config
-    perl -pi -e 's|^logdir \.|logdir /var/log/privoxy|' config
-    perl -pi -e 's|^confdir \.|confdir /etc/privoxy|'   config
+    sed -i 's|%%SYSCONFDIR%%|/etc/|g'              config
+    sed -i 's|^logdir \.|logdir /var/log/privoxy|' config
+    sed -i 's|^confdir \.|confdir /etc/privoxy|'   config
     install -d $PKG/{etc/{privoxy/templates,rc.d},usr/{sbin,man/man1,share},var/log/privoxy}
     install -m 755 privoxy $PKG/usr/sbin/
     install -m 644 *.action config default.filter $PKG/etc/privoxy/
