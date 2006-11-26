@@ -1,0 +1,22 @@
+# Description: Useful classes for Gnome2/Gtk2 Perl GUI design.
+# URL:         http://www.gtkperl.org
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=p5-gtk2-perl
+version=0.09
+release=1
+source="http://www.cpan.org/modules/by-module/Gtk2/Gtk2-Ex-Utils-$version.tar.gz"
+
+build()
+{
+    cd Gtk2-Ex-Utils-$version
+    perl Makefile.PL
+    make OPTIMIZE="$CFLAGS"
+    make install DESTDIR=$PKG
+    find $PKG \
+        -name perllocal.pod \
+        -o -name "*.bs" \
+        -o -name .packlist | xargs rm
+    find $PKG -empty | xargs rmdir -p || :
+}
