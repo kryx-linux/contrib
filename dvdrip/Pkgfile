@@ -2,16 +2,15 @@
 # URL:         http://www.exit1.org/dvdrip
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
 # Packager:    Han Boetes <han@mijncomputer.nl>
-# Depends on:  transcode gtk-perl p5-libintl
+# Depends on:  transcode gtk-perl p5-libintl p5-event p5-gtk2-ex-formfactory p5-anyevent
 
 name=dvdrip
-version=0.52.5
+version=0.98.2
 release=1
-source="http://www.exit1.org/$name/dist/Video-DVDRip-$version.tar.gz"
-
+source="http://www.exit1.org/dvdrip/dist/dvdrip-$version.tar.gz"
 build()
 {
-    cd Video-DVDRip-$version
+    cd dvdrip-$version
     perl Makefile.PL
     make
     make install DESTDIR=$PKG
@@ -20,5 +19,5 @@ build()
         -o -name "*.bs" \
 	-o -name "*LocaleData*" \
         -o -name .packlist | xargs rm -rf
-    find $PKG -depth -empty -exec rm -rf {} \;
+    find $PKG -empty|xargs rmdir -p||:
 }
