@@ -1,0 +1,32 @@
+# Description: Perl bindings for GTK2
+# URL:         http://www.gtkperl.org
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Depends on:  p5-xml-parser p5-xml-writer p5-cairo p5-glib
+
+name=p5-gtk2
+version=1.141
+release=1
+source="http://www.cpan.org/modules/by-module/Gtk2/Gtk2-$version.tar.gz"
+
+build()
+{
+    cd Gtk2-$version
+    # available modules
+    # gtk gtkglarea gdkimlib gdkpixbuf gtkhtml gtkxmhtml gnome glade applets gnomeprint
+    # Use --without-guessing for a bare bottom package
+    perl Makefile.PL \
+        --without-gdkimlib \
+        --without-gnome \
+        --without-applets \
+        --without-gnomeprint \
+        --without-glade \
+        --with-gdkpixbuf-force
+
+    make OPTIMIZE="$CFLAGS"
+    make install DESTDIR=$PKG
+    find $PKG \
+        -name perllocal.pod \
+        -o -name "*.bs" \
+        -o -name .packlist | xargs rm
+    find $PKG -empty | xargs rmdir -p ||:
+}
