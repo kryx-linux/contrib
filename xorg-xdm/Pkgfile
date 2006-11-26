@@ -5,7 +5,7 @@
 
 name=xorg-xdm
 version=1.1.1
-release=1
+release=2
 source="
     http://xorg.freedesktop.org/releases/individual/app/xdm-$version.tar.gz
     xdm
@@ -26,4 +26,5 @@ build()
     install -D -m 755 $SRC/xdm            $PKG/etc/rc.d/xdm
     sed -i '/xconsole/d'                  $PKG/etc/X11/xdm/Xsetup_0
     sed -i 's|xorg.xpm|crux_linux.xpm|'   $PKG/etc/X11/xdm/Xresources
+    sed -i 's|^:0.*|& vt7|'               $PKG/etc/X11/xdm/Xservers
 }
