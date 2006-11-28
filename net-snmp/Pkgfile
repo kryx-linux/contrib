@@ -6,7 +6,7 @@
 
 name=net-snmp
 version=5.3.1
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz \
 		eval_pv_detection.fix snmpd  snmpd.conf)
 
@@ -21,7 +21,7 @@ build() {
 				--with-openssl \
 				--with-libwrap \
 				--with-zlib \
-				--with-mib-modules="ucd-snmp/lmSensors" \
+				--with-mib-modules="ucd-snmp/lmSensors smux agentx ucd-snmp/diskio mibII/mta_sendmail" \
 				--with-sys-location="Unknown" \
 				--with-sys-contact="root@localhost" \
 				--with-default-snmp-version="3" \
