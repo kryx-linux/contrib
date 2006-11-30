@@ -1,0 +1,26 @@
+# Description: Enlightenment DR17 window manager.
+# URL:         http://www.enlightenment.org/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  ewl
+
+name=elicit
+version=cvs
+release=1
+
+build()
+{
+    cd $PKGMK_SOURCE_DIR
+    if cd e17/apps/$name ; then
+	cvs -z3 -q up -dAP
+    else
+	cvs -z3 -q -d :pserver:anonymous@anoncvs.enlightenment.org:/var/cvs/e co e17/apps/$name
+    fi
+
+    cp -r $PKGMK_SOURCE_DIR/e17/apps/$name $SRC
+    cd $SRC/$name
+
+    ./autogen.sh --prefix=/usr
+    make
+    make install DESTDIR=$PKG
+}
