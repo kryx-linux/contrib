@@ -1,0 +1,20 @@
+# Description: high-quality MPEG audio decoder
+# URL:         http://www.underbit.com/products/mad/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:  libmad libid3tag
+
+name=madplay
+version=0.15.2b
+release=1
+source="ftp://ftp.mars.org/pub/mpeg/madplay-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-nls
+    make
+    make install DESTDIR=$PKG
+}
