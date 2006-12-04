@@ -4,7 +4,7 @@
 # Depends on: cmake, libcap
 
 name=cdrkit
-version=1.0
+version=1.1.0
 release=1
 source=(http://cdrkit.org/releases/cdrkit-$version.tar.gz)
 
@@ -14,7 +14,13 @@ build () {
 	cmake -DCMAKE_INSTALL_PREFIX=$PKG/usr
 	make install
 
-	# Create cdrecord symlinks for compatibility
+	# Create symlinks for cdrtools compatibility
 	ln -s wodim $PKG/usr/bin/cdrecord
 	ln -s wodim.1 $PKG/usr/man/man1/cdrecord.1
+	ln -s icedax $PKG/usr/bin/cdda2wav
+	ln -s icedax.1 $PKG/usr/man/man1/cdda2wav.1
+	ln -s readom $PKG/usr/bin/readcd
+	ln -s readom.1 $PKG/usr/man/man1/readcd.1
+	ln -s genisoimage $PKG/usr/bin/mkisofs
+	ln -s genisoimage.8 $PKG/usr/man/man8/mkisofs.8
 }

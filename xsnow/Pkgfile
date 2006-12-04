@@ -1,0 +1,18 @@
+# Description: Jingle Bells, Jingle Bells!
+# URL:         http://www.euronet.nl/~rja/Xsnow/
+# Maintainer:  Han Boetes <han@mijncomputer.nl>
+# Packager:    Han Boetes <han@mijncomputer.nl>
+# Depends on:
+
+name=xsnow
+version=1.42
+release=1
+source="http://www.euronet.nl/~rja/Xsnow/$name-$version.tar.gz"
+
+build()
+{
+    cd $name-$version
+    gcc -lm -lXpm -Wall toon_root.c xsnow.c -o xsnow
+    install -D xsnow      $PKG/usr/bin/xsnow
+    install -D xsnow.man  $PKG/usr/man/man1/xsnow.1
+}

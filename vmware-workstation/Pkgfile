@@ -7,7 +7,7 @@
 
 name=vmware-workstation
 version=4.5.2-8848
-release=1
+release=2
 source=(http://download3.vmware.com/software/wkst/VMware-workstation-$version.tar.gz \
    vmware.rc)
 
@@ -64,6 +64,5 @@ build() {
       fi
    done
 
-   chown root:root -R $PKG
-   chmod o+w -R $PKG/opt/vmware/lib/ 
+   chown -R root:root $PKG
 }
