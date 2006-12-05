@@ -5,31 +5,45 @@
 # Depends on: ant
 
 name=yacy
-version=v0.48_20061010_2743
-release=2
-source=(http://www.yacy.net/yacy/release/yacy_$version.tar.gz \
+version=0.49_20061202_3040
+release=1
+source=(http://www.yacy.net/yacy/release/yacy_v$version.tar.gz \
+	http://www.yacy.net/superseed.txt \
 	$name-start.sh $name-stop.sh $name.rc)
 
 build() {
-	cd $name
-	
-	# ant wont build with this.
+	cd yacy
+
+	# ant wont build without this directory.
 	mkdir -p $SRC/yacy/libx
-
+	
+	# compile
 	ant
-	# remove cruft
-	find $SRC/yacy -type f \
-		-name '*.bat' -or \
-		-name '*.txt' | xargs rm -rf {} \;
 
-	rm -r source
-	rm build.xml	
+	# remove un-needed files
+	find $SRC/yacy -type f \
+		-name '*.bat' -delete -or \
+		-name '*.txt' -delete -or \
+		-name '*.css.old' -delete -or \
+		-name '*.readme' -delete
+
+	rm -r \
+		source \
+		htroot/locale \
+		locales
+		#classes/de
+		#RELEASE/EXT/{source,classes}/de
+	
+	rm \
+		build.xml \
+		htroot/CacheAdmin_p.java.ThomasBockig \
+		htroot/.nbattrs
 
 	# install
-	install -d $PKG/usr/share/yacy
-
+	install -D $SRC/superseed.txt $PKG/usr/share/yacy/superseed.txt
 	cp -R * $PKG/usr/share/yacy/
-	
+
+	# add some protection by limitng what and who can access the p2p files.
 	chown -R _yacy:daemon $PKG/usr/share/yacy
 	
 	install -D -m755 -oroot -groot $SRC/yacy-start.sh $PKG/usr/sbin/yacy-start
