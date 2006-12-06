@@ -2,16 +2,16 @@
 # URL:         http://www.lzop.org/
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
 # Packager:    Han Boetes <han@mijncomputer.nl>
-# Depends on:  lzo
+# Depends on:  liblzo
 
 name=lzop
-version=1.01
+version=1.02rc1
 release=1
-source="http://www.lzop.org/download/$name-$version.tar.gz"
+source="http://www.lzop.org/download/lzop-$version.tar.gz"
 
-build() {
-	cd $name-$version
-        sed -i 's|<malloc.h>|<stdlib.h>|' src/acc_ince.h
+build()
+{
+	cd lzop-$version
 	./configure \
             --prefix=/usr \
             --enable-shared
