@@ -30,12 +30,13 @@ build() {
 		--with-gnu-as \
 		--enable-threads \
 		--enable-languages=c,c++ \
-		--enable-sjlj-exceptions \
 		--enable-libgcj \
 		--enable-java-gc=boehm \
 		--enable-interpreter \
 		--enable-hash-synchronization \
 		--enable-libstdcxx-debug
+
+		#--enable-sjlj-exceptions only needed for gcc3
 	
 	make CFLAGS="-O2" CXXFLAGS="-O2" GCJFLAGS="-O2" LDFLAGS="-s" DEBUG_FLAGS="-g0"
 	make DESTDIR=$PKG install
