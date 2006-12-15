@@ -5,7 +5,7 @@
 
 name=preload
 version=0.4
-release=2
+release=3
 source=(http://dl.sourceforge.net/sourceforge/preload/preload-$version.tar.gz)
 
 build() {
@@ -21,7 +21,7 @@ build() {
 	rm -rv usr/man
 	rm -r usr/share/doc
 	rmdir usr/share
-	# preload.state is installed 644 but changed to 660 on first exit,
+	# preload.state is installed 644 but changed to 640 on first run,
 	# so we change the mode in the package to avoid rejmerge.
-	chmod -v 660 var/lib/preload/preload.state
+	chmod -v 640 var/lib/preload/preload.state
 }
