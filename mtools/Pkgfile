@@ -1,0 +1,16 @@
+# Description:	Utilities to access MS-DOS disks without mounting them
+# URL:		http://mtools.linux.lu/
+# Maintainer:	Mark Rosenstand, mark at borkware dot net
+
+name=mtools
+version=3.9.10
+release=1
+source=(http://mtools.linux.lu/mtools-$version.tar.bz2)
+
+build() {
+	cd mtools-$version
+	./configure --prefix=/usr --sysconfdir=/etc
+	make
+	make prefix=$PKG/usr install
+	rm -r $PKG/usr/info
+}
