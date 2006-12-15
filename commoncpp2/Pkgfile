@@ -6,11 +6,12 @@
 
 name=commoncpp2
 version=1.5.0
-release=2
+release=3
 source=(http://dl.sourceforge.net/sourceforge/gnutelephony/$name-$version.tar.gz)
 
 build () {
 	cd $name-$version
+	sed -i 's|! grep -q "$(libdir)" /etc/ld.so.conf|false|' Makefile.in
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
