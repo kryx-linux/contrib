@@ -1,20 +1,16 @@
-# Description:
+# Description: Very efficient C++ torrent library
 # URL:         http://libtorrent.rakshasa.no/
 # Maintainer:  Han Boetes <han@mijncomputer.nl>
 # Packager:    Han Boetes <han@mijncomputer.nl>
 # Depends on:  libsigc++
 
 name=libtorrent
-version=0.10.4
+version=0.11.0
 release=1
 source="http://libtorrent.rakshasa.no/downloads/libtorrent-$version.tar.gz"
 
 build()
 {
-    export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
-    if gcc --version |grep -q '4\.0\.'; then
-	export CXXFLAGS="$CXXFLAGS -fno-strength-reduce -fno-thread-jumps -fno-inline -fforce-addr"
-    fi
     cd $name-$version
     ./configure \
         --prefix=/usr \

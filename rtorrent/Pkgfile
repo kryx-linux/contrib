@@ -5,15 +5,12 @@
 # Depends on:  libtorrent curl
 
 name=rtorrent
-version=0.6.4
+version=0.7.0
 release=1
 source="http://libtorrent.rakshasa.no/downloads/rtorrent-$version.tar.gz"
 
 build()
 {
-    if gcc --version |grep -q '4\.0\.'; then
-	export CXXFLAGS="$CXXFLAGS -fno-strength-reduce -fno-thread-jumps -fno-inline -fforce-addr"
-    fi
     cd $name-$version
     ./configure \
         --prefix=/usr \
