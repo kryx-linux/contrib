@@ -51,7 +51,6 @@ drwxr-xr-x	root/root	usr/include/ewl/
 -rw-r--r--	root/root	usr/include/ewl/ewl_icon_theme.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_iconbox.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_image.h
--rw-r--r--	root/root	usr/include/ewl/ewl_imenu.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_io_manager.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_label.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_list.h
@@ -83,6 +82,7 @@ drwxr-xr-x	root/root	usr/include/ewl/
 -rw-r--r--	root/root	usr/include/ewl/ewl_spectrum.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_spinner.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_statusbar.h
+-rw-r--r--	root/root	usr/include/ewl/ewl_stock.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_table.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_text.h
 -rw-r--r--	root/root	usr/include/ewl/ewl_theme.h
@@ -99,19 +99,29 @@ drwxr-xr-x	root/root	usr/lib/ewl/
 drwxr-xr-x	root/root	usr/lib/ewl/engines/
 -rw-r--r--	root/root	usr/lib/ewl/engines/evas.a
 -rwxr-xr-x	root/root	usr/lib/ewl/engines/evas.la
--rwxr-xr-x	root/root	usr/lib/ewl/engines/evas.so
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas.so -> evas.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas.so.1 -> evas.so.1.0.0
+-rwxr-xr-x	root/root	usr/lib/ewl/engines/evas.so.1.0.0
 -rw-r--r--	root/root	usr/lib/ewl/engines/evas_buffer.a
 -rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_buffer.la
--rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_buffer.so
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas_buffer.so -> evas_buffer.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas_buffer.so.1 -> evas_buffer.so.1.0.0
+-rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_buffer.so.1.0.0
 -rw-r--r--	root/root	usr/lib/ewl/engines/evas_software_x11.a
 -rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_software_x11.la
--rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_software_x11.so
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas_software_x11.so -> evas_software_x11.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas_software_x11.so.1 -> evas_software_x11.so.1.0.0
+-rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_software_x11.so.1.0.0
 -rw-r--r--	root/root	usr/lib/ewl/engines/evas_xrender_x11.a
 -rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_xrender_x11.la
--rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_xrender_x11.so
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas_xrender_x11.so -> evas_xrender_x11.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/evas_xrender_x11.so.1 -> evas_xrender_x11.so.1.0.0
+-rwxr-xr-x	root/root	usr/lib/ewl/engines/evas_xrender_x11.so.1.0.0
 -rw-r--r--	root/root	usr/lib/ewl/engines/x11.a
 -rwxr-xr-x	root/root	usr/lib/ewl/engines/x11.la
--rwxr-xr-x	root/root	usr/lib/ewl/engines/x11.so
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/x11.so -> x11.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/ewl/engines/x11.so.1 -> x11.so.1.0.0
+-rwxr-xr-x	root/root	usr/lib/ewl/engines/x11.so.1.0.0
 drwxr-xr-x	root/root	usr/lib/ewl/plugins/
 -rw-r--r--	root/root	usr/lib/ewl/plugins/ewl_io_manager_image_plugin.a
 -rwxr-xr-x	root/root	usr/lib/ewl/plugins/ewl_io_manager_image_plugin.la
@@ -198,9 +208,6 @@ drwxr-xr-x	root/root	usr/lib/ewl/tests/
 -rw-r--r--	root/root	usr/lib/ewl/tests/ewl_image_thumbnail.a
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_image_thumbnail.la
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_image_thumbnail.so
--rw-r--r--	root/root	usr/lib/ewl/tests/ewl_imenu.a
--rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_imenu.la
--rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_imenu.so
 -rw-r--r--	root/root	usr/lib/ewl/tests/ewl_io_manager.a
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_io_manager.la
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_io_manager.so
@@ -252,6 +259,9 @@ drwxr-xr-x	root/root	usr/lib/ewl/tests/
 -rw-r--r--	root/root	usr/lib/ewl/tests/ewl_seeker.a
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_seeker.la
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_seeker.so
+-rw-r--r--	root/root	usr/lib/ewl/tests/ewl_shadow.a
+-rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_shadow.la
+-rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_shadow.so
 -rw-r--r--	root/root	usr/lib/ewl/tests/ewl_spinner.a
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_spinner.la
 -rwxr-xr-x	root/root	usr/lib/ewl/tests/ewl_spinner.so
@@ -320,7 +330,6 @@ drwxr-xr-x	root/root	usr/share/ewl/examples/
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_iconbox.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_image.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_image_thumbnail.c
--rw-r--r--	root/root	usr/share/ewl/examples/ewl_imenu.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_io_manager.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_layer.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_list.c
@@ -338,6 +347,7 @@ drwxr-xr-x	root/root	usr/share/ewl/examples/
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_scrollbar.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_scrollpane.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_seeker.c
+-rw-r--r--	root/root	usr/share/ewl/examples/ewl_shadow.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_spinner.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_statusbar.c
 -rw-r--r--	root/root	usr/share/ewl/examples/ewl_table.c
