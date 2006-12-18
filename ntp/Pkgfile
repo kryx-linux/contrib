@@ -1,0 +1,19 @@
+# Description: Network Time Protocol - Client and Daemon
+# URL:         http://ntp.isc.org/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:
+
+name=ntp
+version=4.2.2p4
+release=1
+source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}
