@@ -1,0 +1,17 @@
+# Description: all-in-one ID3 reader/writer for Python
+# URL:         http://sourceforge.net/projects/pyid3
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  python
+
+name=pyid3
+version=0.0.1
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/PyID3-$version.tar.gz)
+
+build() {
+	cd PyID3-$version
+	python setup.py install --root=$PKG
+	chown -R root:root $PKG
+}
