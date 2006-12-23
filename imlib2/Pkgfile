@@ -1,0 +1,16 @@
+# Description: A fast image manipulation library
+# URL: http://enlightenment.org/Libraries/Imlib2/
+# Maintainer: Matt Housh, jaeger at morpheus dot net
+# Depends on: libjpeg, libpng, libungif, freetype, libid3tag
+
+name=imlib2
+version=1.3.0
+release=1
+source=(http://dl.sourceforge.net/sourceforge/enlightenment/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}
