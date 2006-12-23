@@ -1,0 +1,15 @@
+# Description: An open-source, cross-platform library for reading/writing/manipulating ID3 tags
+# URL: http://id3lib.sourceforge.net/
+# Maintainer: Matt Housh, jaeger at morpheus dot net
+
+name=id3lib
+version=3.8.3
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}
