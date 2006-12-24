@@ -2,7 +2,7 @@
 # URL: http://sourceforge.net/projects/libmms/
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: Danny Rawlins, romster at shortcircuit dot net dot au
-# Depends on:
+# Depends on: glib
 
 name=libmms
 version=0.3
@@ -17,6 +17,5 @@ build() {
 		--disable-static
 
 	make && make DESTDIR=$PKG install	
-	chown -R root:root $PKG
 }
 
