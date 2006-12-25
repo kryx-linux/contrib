@@ -5,17 +5,13 @@
 # Depends on: gstreamer-plugins-base, python
 
 name=gstreamer-plugins-ffmpeg
-version=0.10.1
+version=0.10.2
 release=1
 source=(http://gstreamer.freedesktop.org/src/gst-ffmpeg/gst-ffmpeg-$version.tar.gz)
 
 build() {
 	cd gst-ffmpeg-$version
-
-	./configure \
-		LIBS=-lX11 \
-		--prefix=/usr		
-
-	make && make PREFIX=/usr DESTDIR=$PKG install
+	./configure --prefix=/usr		
+	make && make DESTDIR=$PKG install
 }
 
