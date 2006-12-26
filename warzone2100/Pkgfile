@@ -4,12 +4,13 @@
 # Depends on:	libjpeg, libmad, libpng, libvorbis, mesa3d, openal, physfs, sdl_net
 
 name=warzone2100
-version=2.0.4
+version=2.0.5
 release=1
 source=(http://download.gna.org/warzone/releases/2.0/warzone2100-$version.tar.bz2)
 
 build() {
 	cd warzone2100-$version
+	./autogen.sh
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
