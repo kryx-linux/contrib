@@ -1,0 +1,19 @@
+# Description: Text mode RSS newsreader for Linux and Unix.
+# URL:         http://kiza.kcore.de/software/snownews/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  ncurses, libxml2, gettex, libiconv
+
+name=snownews
+version=1.5.7
+release=1
+source=(http://kiza.kcore.de/software/$name/download/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}
