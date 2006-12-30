@@ -6,10 +6,10 @@
 # Depends on:  pciutils
 
 name=vmware-workstation
-version=4.5.2-8848
-release=2
-source=(http://download3.vmware.com/software/wkst/VMware-workstation-$version.tar.gz \
-   vmware.rc)
+version=4.5.3-19414
+release=1
+source=(http://download3.vmware.com/software/wkst/VMware-workstation-$version.tar.gz
+        vmware.rc)
 
 build() {
    cd vmware-distrib
@@ -64,5 +64,6 @@ build() {
       fi
    done
 
-   chown -R root:root $PKG
+   chown root:root -R $PKG
+   chmod o+w -R $PKG/opt/vmware/lib/ 
 }
