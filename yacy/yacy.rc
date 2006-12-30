@@ -22,8 +22,6 @@ case $1 in
 	stop)
 		echo -n "Shutting down $DAEMON..."
 		su $RUN_AS_USER -c /usr/sbin/$DAEMON-stop > /dev/null 2>&1 /dev/null & RETVAL=$?
-		#killall -q /usr/sbin/$DAEMON
-		RETVAL=$?
 		echo " done."
 		;;
 	restart)
