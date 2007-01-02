@@ -4,7 +4,7 @@
 # Depends on: cmake, libcap
 
 name=cdrkit
-version=1.1.0
+version=1.1.1
 release=1
 source=(http://cdrkit.org/releases/cdrkit-$version.tar.gz)
 
@@ -22,5 +22,5 @@ build () {
 	ln -s readom $PKG/usr/bin/readcd
 	ln -s readom.1 $PKG/usr/man/man1/readcd.1
 	ln -s genisoimage $PKG/usr/bin/mkisofs
-	ln -s genisoimage.8 $PKG/usr/man/man8/mkisofs.8
+	ln -s genisoimage.1 $PKG/usr/man/man1/mkisofs.1
 }

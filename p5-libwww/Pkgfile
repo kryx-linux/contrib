@@ -1,0 +1,30 @@
+# Description: Perl WWW Library
+# URL:         http://search.cpan.org/~rse/lcwa-1.0.0/lib/lwp/lib/LWP.pm
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    Han Boetes han mijncomputer nl
+#
+# Depends on:  p5-uri, p5-html-parser
+
+name=p5-libwww
+version=5.805
+release=1
+source=(ftp://ftp.demon.co.uk/pub/CPAN/modules/by-module/LWP/libwww-perl-$version.tar.gz)
+
+build() {
+   cd libwww-*
+   perl Makefile.PL -n
+   make
+   make install DESTDIR=$PKG
+
+   # Remove perlcrap
+   find $PKG \
+      -name .packlist -or \
+      -name '*.bs' -or \
+      -name autosplit.ix -or \
+      -name perllocal.pod -delete
+
+   # Remove empty directories
+   find $PKG -depth -empty -delete
+
+   chown -R root:root $PKG
+}
