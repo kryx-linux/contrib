@@ -5,7 +5,7 @@
 # Depends on: python
 
 name=denyhosts
-version=2.5
+version=2.6
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/DenyHosts-$version.tar.gz \
 	$name-$version-config.patch)
@@ -15,7 +15,7 @@ build() {
 	patch -p0 -i $SRC/$name-$version-config.patch
 	python setup.py install --root=$PKG
 	
-	rm -fr $PKG/usr/share/denyhosts/*.txt
+	rm $PKG/usr/share/denyhosts/*.txt
 	
 	install -d \
 		$PKG/etc/ \
@@ -30,7 +30,8 @@ build() {
 	
 	chmod 700 $PKG/usr/share/denyhosts/daemon-control
 	
-	ln -sf /usr/share/denyhosts/daemon-control $PKG/etc/rc.d/denyhosts
+	ln -s /usr/share/denyhosts/daemon-control $PKG/etc/rc.d/denyhosts
 	rm $PKG/usr/share/denyhosts/plugins/README.contrib
+	mv $PKG/usr/bin/denyhosts.py $PKG/usr/bin/denyhosts
 }
 
