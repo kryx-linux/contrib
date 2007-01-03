@@ -1,0 +1,18 @@
+# Description: GPL'ed reader of DjVu format
+# URL: http://djvulibre.djvuzone.org/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Packager:	Oleksiy V. Khilkevich, centericq at ukr dot net
+# Depends on: qt3
+
+name=djvulibre
+version=3.5.17
+release=1
+source=(http://dl.sourceforge.net/sourceforge/djvu/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr --disable-i18n
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/djvu
+}
