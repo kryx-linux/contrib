@@ -1,0 +1,15 @@
+# Description: Firefox plugin for DjVu format
+# URL: http://djvulibre.djvuzone.org/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: djvulibre firefox
+
+name=firefox-djvu-plugin
+version=3.5.17
+release=1
+source=()
+
+build() {
+	mkdir -p $PKG/usr/lib/firefox/plugins
+	ln -s /usr/lib/netscape/plugins/nsdejavu.so \
+		$PKG/usr/lib/firefox/plugins
+}
