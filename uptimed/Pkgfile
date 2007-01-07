@@ -3,7 +3,7 @@
 # Maintainer:	Mark Rosenstand, mark at borkware dot net
 
 name=uptimed
-version=0.3.8
+version=0.3.9
 release=1
 source=(http://podgorny.cz/uptimed/releases/uptimed-$version.tar.bz2
 	rc.uptimed)
@@ -14,7 +14,11 @@ build() {
 	sed -i etc/uptimed.conf-dist \
 	    -e /^SENDMAIL=/s:lib:sbin: \
 	    -e s:^PIDFILE=.*:'&.pid':
-	./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/man
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/man \
+		--disable-static
 	make
 	make DESTDIR=$PKG install
 	mv $PKG/etc/uptimed.conf-dist $PKG/etc/uptimed.conf
