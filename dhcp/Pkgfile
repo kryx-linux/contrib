@@ -18,6 +18,8 @@ build() {
    make && make DESTDIR=$PKG INCDIR=/usr/include LIBDIR=/usr/lib install
    install -m644 client/dhclient.conf server/dhcpd.conf -t $PKG/etc
    install -D ../dhcpd $PKG/etc/rc.d/dhcpd
+   mkdir -p $PKG/var/state/dhcp
+   touch $PKG/var/state/dhcp/dhcpd.leases
    find $PKG/usr/man -type f -exec chmod 644 {} \;
    chown -R root:root $PKG
 }
