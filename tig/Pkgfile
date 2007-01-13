@@ -1,18 +1,17 @@
-# Description:	Repository browser for git
-# URL:		http://jonas.nitro.dk/tig/
-# Maintainer:	Mark Rosenstand, mark at borkware dot net
-# Depends on:	git, ncurses
+# Description: text-mode interface for git
+# URL:         http://jonas.nitro.dk/tig/
+# Maintainer:  James Mills prologic at shortcircuit dot net dot au
+# Packager:    James Mills prologic at shortcircuit dot net dot au
+#
+# Depends on:  ncurses, iconv
 
 name=tig
 version=0.5
 release=1
-source=(http://jonas.nitro.dk/tig/releases/tig-$version.tar.gz)
+source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz)
 
 build() {
-	cd tig-$version
-	make CFLAGS="$CFLAGS"
-	make DESTDIR=$PKG prefix=/usr install
-	mkdir -p $PKG/usr/man/man{1,5}
-	cp *.1 $PKG/usr/man/man1
-	cp *.5 $PKG/usr/man/man5
+	cd $name-$version
+	make prefix=/usr DESTDIR=$PKG install
+	chown -R root:root $PKG
 }
