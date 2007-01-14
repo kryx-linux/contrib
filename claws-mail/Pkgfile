@@ -7,7 +7,7 @@
 # Nice to have: gpgme aspell clamav
 
 name=claws-mail
-version=2.6.1
+version=2.7.0
 release=1
 source=(http://dl.sourceforge.net/sylpheed-claws/$name-$version.tar.bz2)
 
@@ -21,4 +21,5 @@ build() {
 				--enable-libetpan
 	make
 	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/doc
 }
