@@ -1,0 +1,17 @@
+# Description: Some themes for claws-mail email client
+# URL: http://www.claws-mail.org/index.php
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: claws-mail
+
+name=claws-mail-themes
+version=20070116
+release=1
+source=(http://dl.sourceforge.net/sourceforge/sylpheed-claws/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	find $PKG -name INSTALL | xargs rm -f
+}
