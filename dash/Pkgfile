@@ -1,0 +1,29 @@
+# Description:	The Almquist shell, a POSIX-compliant /bin/sh implementation
+# URL:         http://gondor.apana.org.au/~herbert/dash/
+# Packager:    Mark Rosenstand, mark at borkware dot net
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:
+
+name=dash
+version=0.5.3
+release=1
+source=(http://gondor.apana.org.au/~herbert/dash/files/dash-$version.tar.gz
+        profile)
+
+build() {
+	cd dash-$version
+
+	./configure \
+		--prefix= \
+		--mandir=/usr/man
+
+	make
+	make DESTDIR=$PKG install
+
+	install -D -m 644 ../profile $PKG/etc/profile
+	ln -s dash $PKG/bin/sh
+	ln -s dash $PKG/bin/ash
+	ln -s dash.1 $PKG/usr/man/man1/ash.1
+	ln -s dash.1 $PKG/usr/man/man1/sh.1
+}
