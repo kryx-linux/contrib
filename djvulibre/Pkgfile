@@ -5,14 +5,16 @@
 # Depends on: qt3
 
 name=djvulibre
-version=3.5.17
+version=3.5.18
 release=1
 source=(http://dl.sourceforge.net/sourceforge/djvu/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	./configure --prefix=/usr --disable-i18n
+	./configure --prefix=/usr \
+				--disable-i18n \
+				--enable-desktopfiles
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/djvu
+	rm -rf $PKG/usr/share/djvu/osi/{de,fr,ja,zh}
 }
