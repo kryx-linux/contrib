@@ -1,0 +1,46 @@
+#
+# /etc/profile: system-wide defaults for bash(1) login shells
+#
+
+if [ "`id -u`" = "0" ]; then
+	export PATH="/sbin:/usr/sbin:/bin:/usr/bin:/usr/X11R6/bin:/opt/bin"
+else
+	export PATH="/bin:/usr/bin:/usr/X11R6/bin:/opt/bin"
+fi
+
+if [ ! -f ~/.inputrc ]; then
+	export INPUTRC="/etc/inputrc"
+fi
+
+export LESSCHARSET="latin1"
+export LESS="-R"
+export CHARSET="ISO-8859-1"
+export PS1="$ "
+export PS2="> "
+
+umask 022
+
+# Added by James Mills
+
+export LC_ALL="en_US.ISO-8859-1"
+
+export PATH="$PATH:~/bin:"
+
+export LS_OPTIONS='--color=auto'
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lA'
+
+# Setup other special aliases
+
+export EDITOR=vim
+export PYTHONPATH=~/lib/python/
+
+if [ "$TERM" = "xterm" ]; then
+	export TERM=xterm-color
+fi
+
+# Set a nice keyboard rate/delay
+kbdrate -r 30 -d 250
+
+# End of file

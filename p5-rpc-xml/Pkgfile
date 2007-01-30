@@ -1,0 +1,20 @@
+# Description: A set of classes for core data, message and XML handling
+# URL:         http://search.cpan.org/~rjray/RPC-XML-0.59/
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    Younes Hafri, ycrux at club-internet dot fr
+#
+# Depends on:  p5-xml-parser
+
+name=p5-rpc-xml
+version=0.59
+release=2
+source=(http://search.cpan.org/CPAN/authors/id/R/RJ/RJRAY/RPC-XML-$version.tar.gz)
+
+build () {
+	cd RPC-XML-$version
+	perl Makefile.PL
+	make OPTIMIZE="${CFLAGS}"
+	make DESTDIR=${PKG} install
+	find ${PKG} -name perllocal.pod -exec rm {} \;
+	chown -R root:root $PKG
+}
