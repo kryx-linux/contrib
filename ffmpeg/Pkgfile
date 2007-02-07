@@ -4,17 +4,16 @@
 # Depends on: imlib2, lame, libsdl, libvorbis, libogg, libxvid, faac
 
 name=ffmpeg
-version=20050806
+version=20070206
 release=1
-source=(http://www1.mplayerhq.hu/MPlayer/old_stuff/snapshots/FFmpeg/2005/FFmpeg-$version.tar.bz2)
+source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version-7865.tar.bz2)
 
 build() {
-	cd FFMpeg-$version
+	cd ffmpeg
 	./configure \
 		--prefix=/usr \
 		--enable-mp3lame \
 		--enable-libogg \
-		--enable-ogg \
 		--enable-vorbis \
 		--enable-a52 \
 		--enable-xvid \
@@ -24,13 +23,13 @@ build() {
 		--enable-gpl \
 		--enable-shared \
 		--enable-pp \
-		--enable-shared-pp \
 		--extra-ldflags="-L/usr/X11R6/lib -L/usr/lib/X11 -lX11"
 	make
-	( cd doc; make ffmpeg.1 ffserver.1 ffplay.1 )
-	make  install installlib \
-		prefix=$PKG/usr \
-		bindir=$PKG/usr/bin \
-		mandir=$PKG/usr/man \
-		libdir=$PKG/usr/lib
+	(cd doc; make ffmpeg.1 ffserver.1 ffplay.1)
+	#make  install installlib \
+		#prefix=$PKG/usr \
+		#bindir=$PKG/usr/bin \
+		#mandir=$PKG/usr/man \
+		#libdir=$PKG/usr/lib
+	make DESTDIR=$PKG install install-man
 }
