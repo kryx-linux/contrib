@@ -1,0 +1,17 @@
+# Description: Python modules providing multiprecision arithmetic functionality
+# URL:         http://gmpy.sourceforge.net/
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    Younes Hafri, ycrux at club-internet dot fr
+#
+# Depends on:  python, libgmp
+
+name=gmpy
+version=1.01
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-sources-101.zip)
+
+build () {
+	cd $name
+	python setup.py install --root=$PKG
+	chown -R root:root $PKG
+}
