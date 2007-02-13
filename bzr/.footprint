@@ -99,6 +99,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/bundle/serializer/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/config.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/conflicts.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/conflicts.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/debug.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/debug.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/decorators.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/decorators.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/delta.py
@@ -128,6 +130,10 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/export/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/externalcommand.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/fetch.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/fetch.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/generate_ids.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/generate_ids.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/globbing.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/globbing.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/gpg.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/gpg.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/graph.py
@@ -136,6 +142,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/export/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/hashcache.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/help.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/help.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/help_topics.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/help_topics.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/identitymap.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/identitymap.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/ignores.py
@@ -248,6 +256,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/EncodingAdapter.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/HTTPTestUtil.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/HTTPTestUtil.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/HttpServer.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/HttpServer.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/TestUtil.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/TestUtil.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/__init__.py
@@ -283,6 +293,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_commit.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_conflicts.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_conflicts.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_debug.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_debug.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_diff.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_diff.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_exceptions.py
@@ -317,6 +329,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_missing.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_mv.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_mv.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_nick.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_nick.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_non_ascii.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_non_ascii.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_outside_wt.py
@@ -333,6 +347,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_remerge.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_remove.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_remove.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_remove_tree.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_remove_tree.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_revert.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_revert.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/blackbox/test_revision_history.py
@@ -434,6 +450,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/revisionstore_
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/stub_sftp.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_ancestry.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_ancestry.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_annotate.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_annotate.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_api.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_api.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_atomicfile.py
@@ -448,8 +466,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/revisionstore_
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_bzrdir.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_cache_utf8.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_cache_utf8.pyc
--rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_command.py
--rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_command.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_commands.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_commands.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_commit.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_commit.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_commit_merge.py
@@ -472,6 +490,12 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/revisionstore_
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_fetch.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_ftp_transport.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_ftp_transport.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_generate_docs.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_generate_docs.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_generate_ids.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_generate_ids.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_globbing.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_globbing.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_gpg.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_gpg.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_graph.py
@@ -518,6 +542,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/revisionstore_
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_options.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_osutils.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_osutils.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_osutils_encodings.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_osutils_encodings.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_patch.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_patch.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_patches.py
@@ -629,6 +655,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_patches_d
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_whitebox.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_workingtree.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_workingtree.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_wsgi.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_wsgi.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_xml.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/test_xml.pyc
 drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/tree_implementations/
@@ -636,6 +664,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/tree_implement
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/tree_implementations/__init__.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/tree_implementations/test_test_trees.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/tree_implementations/test_test_trees.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/tree_implementations/test_tree.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/tree_implementations/test_tree.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/treeshape.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/treeshape.pyc
 drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/
@@ -673,6 +703,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_im
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_put_file.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_read_working_inventory.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_read_working_inventory.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_readonly.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_readonly.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_set_root_id.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_set_root_id.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_implementations/test_unversion.py
@@ -696,6 +728,8 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/tests/workingtree_im
 drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/__init__.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/chroot.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/chroot.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/decorator.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/decorator.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/fakenfs.py
@@ -713,8 +747,12 @@ drwxr-xr-x	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/_pycurl_errors.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/_urllib.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/_urllib.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/_urllib2_wrappers.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/_urllib2_wrappers.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/response.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/response.pyc
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/wsgi.py
+-rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/http/wsgi.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/local.py
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/local.pyc
 -rw-r--r--	root/root	usr/lib/python2.4/site-packages/bzrlib/transport/memory.py
