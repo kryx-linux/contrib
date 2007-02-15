@@ -4,8 +4,8 @@
 # Depends on: squirrelmail
 
 name=squirrelmail-translations
-version=1.4.8-20060811
-release=1
+version=1.4.9-20070106
+release=2
 source=(http://dl.sourceforge.net/sourceforge/squirrelmail/all_locales-$version.tar.bz2)
 
 build() {
@@ -27,4 +27,5 @@ build() {
 			cp -r $dir $PKG/$SQM_HTDOCS_ROOT/squirrelmail
 		done
 	fi
+	rm -rf $PKG/$SQM_HTDOCS_ROOT/squirrelmail/help/en_US
 }
