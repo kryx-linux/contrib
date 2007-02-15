@@ -6,13 +6,13 @@
 
 name=gcc-fortran
 version=4.0.3
-release=2
+release=3
 source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-{core,fortran}-$version.tar.bz2 \
-	$name-$version-version.patch)
+	gcc-fortran-$version-version.patch)
 
 build() {
-	patch -d gcc-$version -p1 -i $SRC/$name-$version-version.patch
-	cd gcc-$version 
+	patch -d gcc-$version -p1 -i $SRC/gcc-fortran-$version-version.patch
+	cd gcc-$version
 	mkdir build
 	cd build
 
@@ -39,15 +39,14 @@ build() {
 
 	rm \
 		$PKG/usr/lib/libiberty.a \
-		$PKG/usr/bin/*-linux-gnu-*
+		$PKG/usr/bin/*-linux-gnu-* \
+		$PKG/usr/man/man1/{cpp,gcc,gcov}.1
 
 	rm -r \
 		$PKG/usr/info \
-		$PKG/usr/lib/gcc/*/$version/install-tools
-
-	rm -fr \
-		$PKG/usr/man/man1/{cpp,gcc,gcov}.1.gz \
-		$PKG/usr/man/man7
+		$PKG/usr/man/man7 \
+		$PKG/usr/lib/gcc/*/$version/install-tools \
+		$PKG/usr/lib/gcc/*/$version/include		
 
 	# remove files already on the system out of the port
 	for i in $(find $PKG | sed -e "s|$PKG|/|"); do
@@ -59,7 +58,7 @@ build() {
 	# Remove empty directories
 	find $PKG -depth -empty -exec rm -r {} \;
 
-	# remove build links from *.la files
+	# remove build paths from *.la files
 	for i in `find $PKG -name '*.la' | sed -e "s|$PKG|/|"`; do
 		sed -i "s|-L$SRC[^ ]* ||g" $PKG/$i
 	done
