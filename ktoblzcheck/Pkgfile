@@ -3,14 +3,16 @@
 # Maintainer: Simon Gloﬂner, viper at hometux dot de
 
 name=ktoblzcheck
-version=1.12
+version=1.13
 release=1
 source=(http://dl.sourceforge.net/${name}/${name}-${version}.tar.gz)
 
 build() {
     cd $name-$version
 
-    ./configure --prefix=/usr
+    ./configure \
+	--prefix=/usr \
+	--mandir=/usr/man
     make
     make DESTDIR=$PKG install
 }
