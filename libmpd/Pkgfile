@@ -1,0 +1,21 @@
+# Description:	Callback based interface to MPD
+# URL:         http://sarine.nl/libmpd
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    Mark Rosenstand, mark at borkware dot net
+#
+# Depends on:
+
+name=libmpd
+version=0.13.0
+release=1
+source=(http://download.sarine.nl/gmpc-0.14.0/$name-$version.tar.gz)
+
+build() {
+	cd libmpd-$version
+	./configure \
+		--prefix=/usr \
+		--disable-static
+	make
+	make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}
