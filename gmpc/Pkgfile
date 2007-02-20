@@ -1,0 +1,20 @@
+# Description:	MPD client for GNOME
+# URL:         http://sarine.nl/gmpc
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    Mark Rosenstand, mark at borkware dot net
+#
+# Depends on:  libglade, libmpd, p5-xml-parser
+
+name=gmpc
+version=0.14.0
+release=1
+source=(http://download.sarine.nl/gmpc-0.14.0/$name-$version.tar.gz)
+
+build() {
+	cd gmpc-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/locale
+	chown -R root:root $PKG
+}
