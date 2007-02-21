@@ -1,0 +1,19 @@
+# Description:	Album/Artist/Cover art pluign for gmpc
+# URL:         http://sarine.nl/gmpc
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:  gmpc
+
+name=gmpc-mdcover
+version=0.14.0
+release=1
+source=(http://download.sarine.nl/gmpc-0.14.0/plugins/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}
