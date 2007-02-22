@@ -3,7 +3,7 @@
 # Maintainer:  James Mills, prologic at shortcircuit dot net dot au
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
 #
-# Depends on:  ncurses, libxml2, gettex, libiconv
+# Depends on:  ncurses, libxml2, gettext
 
 name=snownews
 version=1.5.7
@@ -15,5 +15,9 @@ build() {
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
+	rm -f $PKG/usr/bin/snow2opml
+	ln -sf /usr/bin/opml2snow $PKG/usr/bin/snow2opml
+	rm -rf $PKG/usr/share
+	rm -rf $PKG/usr/man/{de,it,fr,nl,ru*}
 	chown -R root:root $PKG
 }
