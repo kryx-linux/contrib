@@ -6,7 +6,7 @@
 
 name=frozen-bubble
 version=2.1.0
-release=3
+release=4
 source=(http://www.frozen-bubble.org/data/frozen-bubble-$version.tar.bz2 \
 	frozen-bubble.desktop)
 
@@ -20,8 +20,14 @@ build() {
 	make
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/locale
-	install -d $PKG/usr/share/pixmaps
-	install -m644 icons/* $PKG/usr/share/pixmaps
+
+	# install icons
+	install -D -m644 icons/frozen-bubble-icon-16x16.png $PKG/usr/share/icons/hicolor/16x16/apps/frozen-bubble.png
+	install -D -m644 icons/frozen-bubble-icon-32x32.png $PKG/usr/share/icons/hicolor/32x32/apps/frozen-bubble.png
+	install -D -m644 icons/frozen-bubble-icon-48x48.png $PKG/usr/share/icons/hicolor/48x48/apps/frozen-bubble.png
+	install -D -m644 icons/frozen-bubble-icon-64x64.png $PKG/usr/share/icons/hicolor/64x64/apps/frozen-bubble.png
+
+	# install menu entry
 	install -D -m644 $SRC/frozen-bubble.desktop $PKG/usr/share/applications/frozen-bubble.desktop
 
 	# Remove perlcrap
@@ -32,6 +38,6 @@ build() {
 		-name 'perllocal.pod' -delete
 
 	# Remove empty directories
-	find $PKG -depth -empty -exec rm -rf {} \;
+	find $PKG -depth -empty -delete
 }
 
