@@ -6,13 +6,15 @@
 
 name=fftw
 version=3.1.2
-release=1
-source=(http://www.fftw.org/$name-$version.tar.gz)
+release=2
+source=(http://www.fftw.org/fftw-$version.tar.gz)
 
 build() {
-	export CFLAGS="$CFLAGS -O3"
-	export CXXFLAGS="$CXXFLAGS -O3"
-	export FFLAGS="$FFLAGS -O3"
+	cd fftw-$version
+	
+	export CFLAGS="-O3 -mtune=$(uname -p) -pipe -fomit-frame-pointer"
+	export CXXFLAGS="-O3 -mtune=$(uname -p) -pipe -fomit-frame-pointer"
+	export FFLAGS="-O3 -mtune=$(uname -p) -pipe -fomit-frame-pointer"
 
 	local Configure='
 --prefix=/usr
@@ -21,11 +23,9 @@ build() {
 --enable-type-prefix
 --with-gnu-ld
 --disable-nls
---enable-shared'
+--enable-shared'	
 
-	cd $name-$version
-	## compiling double precision library
-
+	## compiling long double precision library
 	./configure \
 		$Configure \
 		--enable-long-double \
@@ -34,9 +34,11 @@ build() {
 #		--enable-sse2
 #		--enable-altivec
 
-    	make && make DESTDIR=$PKG install && make clean
-	## compiling single precision library	
+    	make
+	make DESTDIR=$PKG install
+	make clean
 
+	## compiling single precision library
 	./configure \
 		$Configure \
 		--enable-single \
@@ -45,7 +47,20 @@ build() {
 #		--enable-sse2
 #		--enable-altivec
 
-    	make && make DESTDIR=$PKG install
-    	rm -r $PKG/usr/share/info
+    	make
+	make DESTDIR=$PKG install
+	make clean
+
+	## compiling double precision library
+	./configure \
+		$Configure \
+#		--enable-k7
+#		--enable-sse
+#		--enable-sse2
+#		--enable-altivec
+
+    	make
+	make DESTDIR=$PKG install
+    	rm -r $PKG/usr/share
 }
 
