@@ -6,12 +6,12 @@
 # Depends on:  ffmpeg, p5-dbd-mysql
 
 name=nuvexport
-version=0.4
+version=0.4-0.20070211.svn
 release=1
-source=(http://forevermore.net/files/$name/$name-$version-0.20060927.svn.tar.bz2)
+source=(http://forevermore.net/files/$name/$name-$version.tar.bz2)
 
 build() {
-   cd $name-$version
+   cd $name-0.4
    make prefix=$PKG/usr install
    install -D -m644 nuvexportrc $PKG/etc/nuvexportrc
    chown -R root:root $PKG
