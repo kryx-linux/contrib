@@ -16,9 +16,7 @@ build() {
         sh $name-driver-installer-$version-x86.x86_64.run --extract $SRC/tmp
 	cd $SRC/tmp/common/lib/modules/fglrx/build_mod
 	ln -s $SRC/tmp/arch/$march/lib/modules/fglrx/build_mod/libfglrx_ip.a.GCC* .
-read
 	sh make.sh
-read
         install -d $PKG/lib/modules/`uname -r`/kernel/drivers/char/drm
 	install -m 644 $SRC/tmp/common/lib/modules/fglrx/build_mod/2.6.x/fglrx.ko \
 		$PKG/lib/modules/`uname -r`/kernel/drivers/char/drm
