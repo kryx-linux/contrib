@@ -6,25 +6,28 @@
 # Depends on:  tk
 
 name=amsn
-version=0.95
-release=5
-source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2 \
-   $name-$version-makefile.patch)
+version=0.96
+release=1
+source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2
+        $name-$version.diff)
 
 build() {
    cd $name-$version
 
+	patch -p1 < $SRC/$name-$version.diff
+
    ./configure \
       --prefix=/usr \
-      --disable-nls
+      --disable-nls \
+		--with-tls
 
-   patch -p0 -i $SRC/$name-$version-makefile.patch
    make && make DESTDIR=$PKG install
 
-   rm -fr \
-      $PKG/usr/share/amsn/{icons, lang/LANG-HOWTO} \
-      $PKG/usr/share/amsn/utils/BWidget-1.7.0/{CHANGES.txt, ChangeLog, LICENSE.txt, Makefile.in, README.txt} \
-      $PKG/usr/share/amsn/{skins/default/winicons, utils/snit0.97/license.txt}
+   rm -rf \
+		$PKG/usr/share/icons \
+      $PKG/usr/share/amsn/{icons,docs,lang} \
+		$PKG/usr/share/amsn/{AGREEMENT,CREDITS,FAQ,GNUGPL} \
+		$PKG/usr/share/amsn/{HELP,INSTALL,README,TODO}
 
    chown -R root:root $PKG
 }
