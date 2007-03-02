@@ -7,7 +7,7 @@
 
 name=amsn
 version=0.96
-release=1
+release=3
 source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2
         $name-$version.diff)
 
@@ -27,7 +27,8 @@ build() {
 		$PKG/usr/share/icons \
       $PKG/usr/share/amsn/{icons,docs,lang} \
 		$PKG/usr/share/amsn/{AGREEMENT,CREDITS,FAQ,GNUGPL} \
-		$PKG/usr/share/amsn/{HELP,INSTALL,README,TODO}
+		$PKG/usr/share/amsn/{HELP,INSTALL,README,TODO} \
+		$PKG/usr/share/amsn/utils/BWidget-1.7.0/{ChangeLog,LICENSE.txt,Makefile.in,aclocal.m4,CHANGES.txt,README.txt}
 
    chown -R root:root $PKG
 }

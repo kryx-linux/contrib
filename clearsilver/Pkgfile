@@ -6,14 +6,15 @@
 # Depends on:  python
 
 name=clearsilver
-version=0.10.3
-release=2
+version=0.10.4
+release=1
 source=(http://www.clearsilver.net/downloads/$name-$version.tar.gz \
-   $name-$version-patch)
+   $name-$version.patch)
 
 build () {
    cd $name-$version
-   patch -p1 -i $SRC/$name-$version-patch
+
+   patch -p1 < $SRC/$name-$version.patch
 
    ./configure \
       --prefix=$PKG/usr \

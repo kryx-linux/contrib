@@ -6,7 +6,7 @@
 
 name=ati
 version=8.33.6
-release=1
+release=2
 source=(http://www2.ati.com/drivers/linux/$name-driver-installer-$version-x86.x86_64.run \
 	atieventsd.sh)
 
@@ -22,9 +22,7 @@ build() {
 		$PKG/lib/modules/`uname -r`/kernel/drivers/char/drm
 	install -d $PKG/usr/{X11R6,include,share}
 	cp -r $SRC/tmp/arch/$march/usr $PKG
-	cp -r $SRC/tmp/common/usr/X11R6 $PKG/usr
-	cp -r $SRC/tmp/common/usr/include $PKG/usr
-	cp -r $SRC/tmp/common/usr/share/man $PKG/usr/share
+	cp -r $SRC/tmp/common/usr/{X11R6,include,share/man} $PKG/usr
 	cp -r $SRC/tmp/$xversion/usr/X11R6 $PKG/usr
 	install -d $PKG/etc/{ati,rc.d}
 	cp -r $SRC/tmp/common/etc/ati/* $PKG/etc/ati
