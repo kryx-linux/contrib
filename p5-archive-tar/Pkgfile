@@ -1,0 +1,20 @@
+# Description: Perl Library Archive::Tar
+# URL:         http://search.cpan.org/~kane/Archive-Tar-1.23/
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    Younes Hafri, ycrux at club-internet fr
+#
+# Depends on: p5-io-zlib, p5-io-string
+
+name=p5-archive-tar
+version=1.26
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/K/KA/KANE/Archive-Tar-$version.tar.gz)
+
+build () {
+	cd Archive-Tar-$version
+	perl Makefile.PL
+	make OPTIMIZE="${CFLAGS}"
+	make DESTDIR=${PKG} install
+	find ${PKG} -name perllocal.pod -exec rm {} \;
+	chown -R root:root $PKG
+}
