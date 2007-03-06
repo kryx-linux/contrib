@@ -1,0 +1,28 @@
+# Description: Perl Library Net::IP
+# UR:		  
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:	Han Boetes, han at mijncomputer dot nl
+#
+# Depends on:  perl
+
+name=p5-net-ip
+capsname=Net-IP
+version=1.25
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/M/MA/MANU/Net-IP-$version.tar.gz)
+
+build() {
+	cd $capsname-$version
+	perl Makefile.PL
+	make OPTIMIZE="$CFLAGS"
+	make install DESTDIR=$PKG
+	# Remove perlcrap
+	find $PKG \
+		-name .packlist -or \
+		-name '*.bs' -or \
+		-name autosplit.ix -or \
+		-name perllocal.pod | xargs rm
+	# Remove empty directories
+	find $PKG -depth -empty -exec rm -rf {} \;
+	chown -R root:root $PKG
+}

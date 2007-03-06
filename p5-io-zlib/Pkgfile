@@ -1,0 +1,20 @@
+# Description: Perl Library IO::Zlib
+# URL:         http://search.cpan.org/~tomhughes/IO-Zlib-1.04/
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    Younes Hafri, ycrux at club-internet dot fr
+#
+# Depends on:  zlib
+
+name=p5-io-zlib
+version=1.04
+release=2
+source=(http://search.cpan.org/CPAN/authors/id/T/TO/TOMHUGHES/IO-Zlib-$version.tar.gz)
+
+build () {
+	cd IO-Zlib-$version
+	perl Makefile.PL
+	make OPTIMIZE="${CFLAGS}"
+	make DESTDIR=${PKG} install
+	find ${PKG} -name perllocal.pod -exec rm {} \;
+	chown -R root:root $PKG
+}
