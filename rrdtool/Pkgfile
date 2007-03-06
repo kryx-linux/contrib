@@ -2,15 +2,15 @@
 # URL: http://oss.oetiker.ch/rrdtool/index.en.html
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: Younes Hafri, ycrux at club-internet dot fr
-# Depends on: libart_lgpl, libcgi, libgd, python, tcl
+# Depends on: libart_lgpl libcgi libgd python tcl freetype
 
 name=rrdtool
-version=1.2.15
+version=1.2.18
 release=1
-source=(http://oss.oetiker.ch/$name/pub/$name-$version.tar.gz)
+source=(http://oss.oetiker.ch/rrdtool/pub/rrdtool-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd rrdtool-$version
 
 	./configure \
 		--prefix=/usr \
@@ -18,7 +18,8 @@ build() {
 		--enable-local-libpng \
 		--enable-local-zlib
 
-	make && make prefix=$PKG/usr install
+	make
+	make prefix=$PKG/usr install
 
 	rm -r \
 		$PKG/usr/share/doc \
