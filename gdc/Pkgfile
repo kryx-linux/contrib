@@ -5,7 +5,7 @@
 # Depends on:
 
 name=gdc
-version=0.22
+version=0.23
 gcc_version=4.0.3
 release=1
 source=(http://dl.sourceforge.net/sourceforge/dgcc/gdc-$version-src.tar.bz2 \
@@ -38,8 +38,8 @@ build() {
 		--disable-nls \
 		--with-x=no
 
-	make
-	#make check
+	make bootstrap
+	make check
 	make DESTDIR=$PKG install
 
 	# remove un-needed files
