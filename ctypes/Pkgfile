@@ -6,12 +6,14 @@
 
 name=ctypes
 version=1.0.1
-release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/ctypes/ctypes-$version.tar.gz \
+ctypes-$version-install-egg.patch)
 
 build() {
-	cd $name-$version
+	cd ctypes-$version
+	patch -i $SRC/ctypes-$version-install-egg.patch
 	python setup.py install --root=$PKG
-	rm -fr $PKG/usr/lib/python2.4/site-packages/ctypes/test/
+	rm -rf $PKG/usr/lib/python2.4/site-packages/ctypes/test
 }
 

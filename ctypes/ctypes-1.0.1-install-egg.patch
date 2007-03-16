@@ -1,0 +1,15 @@
+--- setup.py~	2006-10-21 03:59:25.000000000 +1000
++++ setup.py	2007-03-16 21:40:49.000000000 +1100
+@@ -15,8 +15,10 @@
+ 
+ ################################################################
+ 
+-##from ez_setup import use_setuptools
+-##use_setuptools()
++try:
++    from ez_setup import use_setuptools
++    use_setuptools()
++except: pass
+ 
+ import os, sys
+ 
