@@ -6,7 +6,7 @@
 # Depends on:  openssl
 
 name=ntp
-version=4.2.4
+version=4.2.4p0
 release=1
 source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/$name-$version.tar.gz
         ntpd
@@ -40,8 +40,6 @@ build () {
    make DESTDIR=$PKG install
    touch $PKG/var/log/ntp.log
 
-#   install -m 644 $SRC/ntp-doc/*.8 $PKG/usr/man/man8                       
-#   install -m 644 $SRC/ntp-doc/*.5 $PKG/usr/man/man5                       
    install -m 644 $SRC/ntp.conf $PKG/etc/ntp
    install -m 755 $SRC/ntpd $PKG/etc/rc.d
 
