@@ -1,0 +1,21 @@
+# Description: The Open Dynamics Engine physics SDK.
+# URL:         http://www.ode.org/
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    Aaron Marks, nymacro at  gmail dot com
+#
+# Depends on:
+
+name=ode
+version=0.8
+release=1
+source=(http://dl.sourceforge.net/sourceforge/opende/ode-src-$version.zip)
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+
+	chown -R root:root $PKG
+}
