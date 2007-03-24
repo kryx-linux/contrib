@@ -5,7 +5,7 @@
 
 name=dokuwiki
 version=2006-11-06
-release=1
+release=2
 source=(http://www.splitbrain.org/_media/projects/dokuwiki/${name}-${version}.tgz)
 
 build() {
@@ -18,5 +18,5 @@ build() {
     
     rm -f  $PKG/var/www/htdocs/dokuwiki/{COPYING,README,VERSION}
     find $PKG -path '*lang/*' ! -wholename '*/en*' -type d | xargs rm -rf 
-    chown -R nobody.nobody $PKG/var/www/htdocs/dokuwiki/data
+    chown -R www.www $PKG/var/www/htdocs/dokuwiki/data
 }
