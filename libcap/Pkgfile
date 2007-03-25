@@ -5,11 +5,13 @@
 
 name=libcap
 version=1.10
-release=1
-source=(ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.4/libcap-$version.tar.gz)
+release=2
+source=(ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.4/libcap-$version.tar.gz
+	libcap-$version-cap_sys.patch)
 
 build () {
 	cd libcap-$version
+	patch -p0 -i $SRC/libcap-$version-cap_sys.patch
 	make
 	make \
 		INCDIR=$PKG/usr/include \
