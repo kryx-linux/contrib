@@ -1,16 +1,16 @@
-# Description: Parse RSS and Atom feeds in Python.
-# URL:         http://www.feedparser.org/
+# Description: Parse RSS and Atom feeds in Python
+# URL:         http://feedparser.org/
 # Maintainer:  James Mills, prologic at shortcircuit dot net dot au
-# Packager:    Younes Hafri, ycrux at club-internet dot fr
+# Packager:    James Mills, prologic at shortcircuit dot net dot au
 #
-# Depends on: python
+# Depends on:  python
 
 name=feedparser
 version=4.1
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/feedparser-$version.zip)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.zip)
 
-build () {
+build() {
 	python setup.py install --root=$PKG
 	chown -R root:root $PKG
 }
