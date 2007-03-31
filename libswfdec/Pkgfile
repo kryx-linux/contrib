@@ -1,13 +1,13 @@
 # Description: Flash Rendering Library.
-# URL: http://www.schleef.org/swfdec/
+# URL: http://swfdec.freedesktop.org/wiki/
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: Stefan Lohmaier noneus at noneus dor de
-# Depends on: libart_lgpl, gdk-pixbuf, liboil 
+# Depends on: pango liboil zlib ffmpeg libmad
 
 name=libswfdec
-version=0.3.5
+version=0.4.3
 release=1
-source=(http://www.schleef.org/swfdec/download/swfdec-$version.tar.gz)
+source=(http://swfdec.freedesktop.org/download/swfdec/${version%.*}/swfdec-$version.tar.gz)
 
 build() {
 	cd swfdec-$version
@@ -16,8 +16,9 @@ build() {
 		--prefix=/usr \
 		--disable-nls \
 		--disable-static \
-		--enable-pixbuf-loader
+		--with-gnu-ld
 
-	make && make DESTDIR=$PKG install
+	make MAKEFLAGS=-j0
+	make DESTDIR=$PKG install
 }
 
