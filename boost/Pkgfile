@@ -7,10 +7,10 @@
 name=boost
 version=1.33.1
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/${name}_${version//./_}.tar.bz2)
+source=(http://dl.sourceforge.net/sourceforge/boost/boost_${version//./_}.tar.bz2)
 
 build() {
-    cd ${name}_${version//./_}
+    cd boost_${version//./_}
     cd tools/build/jam_src
     ./build.sh gcc
     cd -
