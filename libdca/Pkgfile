@@ -4,18 +4,19 @@
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on:
 
-name=libdts
+name=libdca
 version=0.0.2
 release=1
 source=(http://download.videolan.org/pub/videolan/libdca/$version/libdca-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd libdts-$version
 
 	./configure \
 		--prefix=/usr \
 		--disable-nls
 
-	make && make DESTDIR=$PKG install
+	make
+	make DESTDIR=$PKG install
 }
 
