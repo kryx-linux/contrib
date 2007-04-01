@@ -10,8 +10,9 @@ release=1
 source=(http://www.mavetju.org/download/dnstracer-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd dnstracer-$version
 	./configure --prefix=/usr
-	make && make DESTDIR=$PKG install
+	make
+	make DESTDIR=$PKG install
 }
 
