@@ -7,15 +7,15 @@
 name=egenix-mx-base
 version=2.0.6
 release=1
-source=(http://www.egenix.com/files/python/$name-$version.tar.gz)
+source=(http://www.egenix.com/files/python/egenix-mx-base-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd egenix-mx-base-$version
 	python setup.py install --root=$PKG
 	
 	find $PKG \
-		-name 'README' -or \
-		-name 'LICENSE' -or \
-		-name 'COPYRIGHT' -or | xargs rm
+		-name 'README' -delete -or \
+		-name 'LICENSE' -delete -or \
+		-name 'COPYRIGHT' -delete
 }
 
