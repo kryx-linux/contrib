@@ -19,6 +19,7 @@ build() {
 		--enable-shared \
 		--disable-static
 
-	make && make install prefix=$PKG/usr
+	make
+	make install prefix=$PKG/usr
 }
 
