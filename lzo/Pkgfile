@@ -4,7 +4,7 @@
 # Packager: Younes Hafri, ycrux at club-internet dot fr
 # Depends on:
 
-name=liblzo
+name=lzo
 version=2.02
 release=1
 source=(http://www.oberhumer.com/opensource/lzo/download/lzo-$version.tar.gz)
@@ -16,7 +16,8 @@ build() {
 		--prefix=/usr \
 		--enable-shared
 
-	make && make prefix=$PKG/usr install
+	make
+	make prefix=$PKG/usr install
 	mv $PKG/usr/include/lzo/* $PKG/usr/include
 	rm -r $PKG/usr/include/lzo
 	ln -s liblzo2.so.2.0.0 $PKG/usr/lib/liblzo.so
