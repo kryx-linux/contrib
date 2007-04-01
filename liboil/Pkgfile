@@ -5,14 +5,15 @@
 # Depends on:
 
 name=liboil
-version=0.3.10
+version=0.3.11
 release=1
-source=(http://liboil.freedesktop.org/download/$name-$version.tar.gz)
+source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd liboil-$version
 	./configure --prefix=/usr
-	make && make DESTDIR=$PKG install
+	make
+	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share
 }
 
