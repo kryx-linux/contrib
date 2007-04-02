@@ -4,15 +4,13 @@
 # Depends on:  mod_php
 
 name=pmwiki
-version=2.1.26
-release=2
-source=(http://www.pmwiki.org/pub/$name/$name-$version.tgz \
-        $name-$version.patch)
+version=2.1.27
+release=1
+source=(http://www.pmwiki.org/pub/$name/$name-$version.tgz)
 
 build () {
-    (cd $name-$version; patch -p1 -i $SRC/$name-$version.patch)
     install -d $PKG/var/www/$name
-    install -d -o nobody -m 700 $PKG/var/www/$name/{wiki.d,uploads}
+    install -d -o www -m 700 $PKG/var/www/$name/{wiki.d,uploads}
     cp -R $name-$version/* $PKG/var/www/$name
     mv $PKG/var/www/$name/{docs/sample-config.php,local/config.php.sample}
     rm -r $PKG/var/www/$name/docs
