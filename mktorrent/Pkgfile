@@ -1,0 +1,17 @@
+# Description: BitTorrent metainfo file generator
+# URL: http://mktorrent.sf.net/
+# Maintainer: Antti Nykänen, aon at iki dot fi
+# Depends on:
+
+name=mktorrent
+version=0.2
+release=1
+source=(http://dl.sf.net/mktorrent/mktorrent-$version.tar.gz
+	mktorrent-$version.diff)
+
+build() {
+	cd mktorrent-$version
+	patch -p1 -i $SRC/mktorrent-$version.diff
+	make
+	make DESTDIR=$PKG PREFIX=/usr install
+}
