@@ -5,15 +5,17 @@
 # Depends on:
 
 name=libdca
-version=0.0.2
+version=0.0.4
 release=1
-source=(http://download.videolan.org/pub/videolan/libdca/$version/libdca-$version.tar.gz)
+source=(http://download.videolan.org/pub/videolan/libdca/$version/libdca-$version.tar.bz2)
 
 build() {
-	cd libdts-$version
+	cd libdca-$version
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-static \
 		--disable-nls
 
 	make
