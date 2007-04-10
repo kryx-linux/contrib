@@ -2,13 +2,13 @@
 # URL: http://net-snmp.sourceforge.net/
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
 # Packager: Oleksiy V. Khilkevich, centericq at ukr dot net
-# Depends on: perl zlib openssl lm_sensors
+# Depends on: perl lm_sensors
 
 name=net-snmp
-version=5.3.1
-release=2
+version=5.4
+release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz \
-		eval_pv_detection.fix snmpd  snmpd.conf)
+		snmpd snmpd.conf)
 
 build() {
 	cd $name-$version
@@ -27,11 +27,6 @@ build() {
 				--with-default-snmp-version="3" \
 				--with-logfile=/var/log/snmp/snmpd.log \
 				--with-persistent-directory=/var/lib/snmp
-
-	# Fix wrong ./configure detection about eval_pv()
-	# in include/net-snmp/net-snmp-config.h
-	patch include/net-snmp/net-snmp-config.h $SRC/eval_pv_detection.fix
-	
 	make
 	make install INSTALL_PREFIX=$PKG DESTDIR=$PKG
 
