@@ -12,15 +12,17 @@ source=(http://ftp.gnu.org/gnu/libcdio/libcdio-$version.tar.gz)
 build() {
 	cd libcdio-$version
 
-	./configure --prefix=/usr \
- 	            --with-cd-drive \
-		    --with-cd-info \
-		    --with-cd-paranoia \
-		    --with-cdda-player \
-		    --with-cd-paranoia-name \
-		    --with-cd-read \
-		    --with-iso-info \
-		    --with-iso-read 
+	./configure \
+		--prefix=/usr \
+ 	        --with-cd-drive \
+		--with-cd-info \
+		--with-cd-paranoia \
+		--with-cdda-player \
+		--with-cd-paranoia-name \
+		--with-cd-read \
+		--with-iso-info \
+		--with-iso-read \
+		--disable-static
 
 	make
 	make DESTDIR=$PKG install
