@@ -11,7 +11,10 @@ source=(ftp://gnu.mirror.pacific.net.au/gnu/gnu/vcdimager/vcdimager-$version.tar
 
 build() {
 	cd vcdimager-$version
-	./configure --prefix=/usr  
+
+	./configure \
+		--prefix=/usr \
+		--disable-static  
     	make 
     	make DESTDIR=$PKG install
 	rm -rf $PKG/usr/info/
