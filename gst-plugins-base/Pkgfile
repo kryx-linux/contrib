@@ -4,7 +4,7 @@
 # Packager: Matt Housh, jaeger at morpheus dot net
 # Depends on: gstreamer liboil libtheora cdparanoia pango libvisual
 
-name=gstreamer-plugins-base
+name=gst-plugins-base
 version=0.10.12
 release=1
 source=(http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-$version.tar.gz)
@@ -15,7 +15,8 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-		--disable-nls
+		--disable-nls \
+		--disable-static
 
 	make
 	make DESTDIR=$PKG install
