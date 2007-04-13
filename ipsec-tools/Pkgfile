@@ -4,12 +4,19 @@
 # Depends on:
 
 name=ipsec-tools
-version=0.6.6
+version=0.6.7
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 build() {
 	cd $name-$version
-	./configure --prefix=/usr
+	./configure --prefix=/usr \
+				--localstatedir=/var \
+				--enable-hybrid \
+				--enable-frag \
+				--enable-stats \
+				--enable-dpd \
+				--enable-natt \
+				--enable-adminport
 	make
 	make DESTDIR=$PKG install
 }
