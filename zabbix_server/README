@@ -10,9 +10,9 @@ You might have to change patch.sql to use MyISAM tables before applying
 patches.
 
 POST-INSTALL
-You should decide on tabeles format: InnoDB is used in default sql scripts.
-But MyISAM gives some advantages... Before creating database you can untar
-source somewhere and run:
+You should decide on tabeles format: InnoDB is used in default sql scripts
+and is a better choice for zabbix database tables. However, before creating
+database you can untar source somewhere and run:
   sed -i s/"type\=InnoDB"/"type\=MyISAM"/g zabbix-1.x.x/create/mysql/schema.sql
 
 1. Choose host for the database, edit /etc/zabbix_server.conf:
