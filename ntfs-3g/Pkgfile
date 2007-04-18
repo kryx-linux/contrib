@@ -5,13 +5,17 @@
 # Depends on: fuse
 
 name=ntfs-3g
-version=1.328
+version=1.417
 release=1
 source=(http://www.ntfs-3g.org/ntfs-3g-$version.tgz)
 
 build() {
 	cd ntfs-3g-$version
-	./configure --prefix=/usr
+
+	./configure \
+		--prefix=/usr \
+		--disable-static
+
 	make
 	make DESTDIR=$PKG install
 }
