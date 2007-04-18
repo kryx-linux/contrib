@@ -2,18 +2,19 @@
 # URL: http://xine.sourceforge.net
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: xorg-libxvmc faad2 flac gdk-pixbuf liba52 libmad libmng libsdl speex libtheora wavpack libmpcdec libdvdnav vcdimager
+# Depends on: xorg-libxvmc faad2 flac gdk-pixbuf liba52 libmad libmng libsdl speex libtheora wavpack libmpcdec vcdimager ffmpeg
 
 name=xine-lib
 version=1.1.6
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/xine/xine-lib-$version.tar.bz2)
 
 build() {
-	unset CFLAGS CXXFLAGS
 	cd xine-lib-$version
 	
 	./configure \
+		CFLAGS='' \
+		CXXFLAGS='' \
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-nls \
@@ -23,11 +24,12 @@ build() {
 		--enable-modplug \
 		--with-libflac \
 		--with-wavpack \
-		--with-external-dvdnav \
 		--with-external-libmpcdec \
 		--with-external-a52dec \
-		--with-external-libmad
+		--with-external-libmad \
+		--with-external-ffmpeg
 
+	#--with-external-dvdnav <- not recomended the latest libdvdnav release is not up to the internal version
 
 	make
 	make DESTDIR=$PKG install
