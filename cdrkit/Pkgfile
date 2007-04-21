@@ -13,14 +13,4 @@ build () {
 	find . -name "CMakeLists.txt" -exec sed -i 's:share/\(man\):\1:g' {} \;
 	cmake -DCMAKE_INSTALL_PREFIX=$PKG/usr
 	make install
-
-	# Create symlinks for cdrtools compatibility
-	ln -s wodim $PKG/usr/bin/cdrecord
-	ln -s wodim.1 $PKG/usr/man/man1/cdrecord.1
-	ln -s icedax $PKG/usr/bin/cdda2wav
-	ln -s icedax.1 $PKG/usr/man/man1/cdda2wav.1
-	ln -s readom $PKG/usr/bin/readcd
-	ln -s readom.1 $PKG/usr/man/man1/readcd.1
-	ln -s genisoimage $PKG/usr/bin/mkisofs
-	ln -s genisoimage.1 $PKG/usr/man/man1/mkisofs.1
 }
