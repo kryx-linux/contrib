@@ -17,7 +17,8 @@ build() {
 		--enable-shared \
 		--enable-xft
 
-	make && make DESTDIR=$PKG install
+	make
+	make DESTDIR=$PKG install
 	install -d $PKG/usr/man/{man1,man3}
 	install -m644 $PKG/usr/share/man/man1/* -t $PKG/usr/man/man1/
 	install -m644 $PKG/usr/share/man/man3/* -t $PKG/usr/man/man3/
