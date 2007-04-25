@@ -7,12 +7,13 @@
 
 name=libmcrypt
 version=2.5.8
-release=1
+release=2
 source=(http://ovh.dl.sourceforge.net/sourceforge/mcrypt/$name-$version.tar.gz)
 
 build () {
 	cd $name-$version
-	./configure --prefix=/usr
+	./configure --prefix=/usr \
+		--disable-posix-threads
 	make DESTDIR=$PKG install
 	chown -R root:root $PKG
 }
