@@ -5,7 +5,7 @@
 # Depends on:
 
 name=libidn
-version=0.6.11
+version=0.6.12
 release=1
 source=(ftp://alpha.gnu.org/pub/gnu/libidn/libidn-$version.tar.gz)
 
@@ -15,11 +15,10 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-		--enable-csharp=mono \
 		--disable-nls
 
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/info
+	rm -fr $PKG/usr/share/info
 }
 
