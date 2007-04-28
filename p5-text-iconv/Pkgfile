@@ -1,21 +1,23 @@
-# Description: Perl Interface to Iconv.
-# URL:         http://search.cpan.org/~mpiotr/Text-Iconv-1.4/
-# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
+# Description:	Perl interface to the iconv codeset
+# URL:			http://search.cpan.org/~mpiotr/Text-Iconv-1.4/
+# Maintainer:	James Mills, prologic at shortcircuit dot net dot au
 #
-# Depends on:   
+# Depends on:	perl
 
 name=p5-text-iconv
 version=1.4
-release=2
-source=(http://search.cpan.org/CPAN/authors/id/M/MP/MPIOTR/Text-Iconv-$version.tar.gz)
+release=3
+source=(http://search.cpan.org/CPAN/authors/id/M/MP/MPIOTR/Text-Iconv-${version}.tar.gz)
 
-build() {
-   cd Text-Iconv-$version
-   perl Makefile.PL
-   make
-   make test
-   make PERLPREFIX=$PKG/usr SITEPREFIX=$PKG/usr install
-   find $PKG -name "perllocal.pod" -exec rm {} \;
-   chown -R root:root $PKG
+build () {
+	cd Text-Iconv-$version
+    
+	perl Makefile.PL
+	make OPTIMIZE="$CFLAGS"
+	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/lib/perl5/5.8.?
+	find $PKG -name ".packlist" -or -name "*.bs" | xargs rm
+	chown -R root:root $PKG
 }
+
