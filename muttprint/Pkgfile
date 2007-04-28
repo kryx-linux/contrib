@@ -1,25 +1,26 @@
-# Description: Pretty prints your eMails.
-# URL:         http://muttprint.sourceforge.net/
-# Packager:    Vincenzo Colosimo <vico@bicisport.de>
-# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Description:	Utility to print mails
+# URL:			http://muttprint.sourceforge.net/
+# Maintainer:	James Mills, prologic at shortcircuit dot net dot au
 #
-# Depends on:   
+# Depends on:	perl, tetex, p5-text-iconv
 
 name=muttprint
-version=0.72
-release=2
-source=(http://dl.sourceforge.net/$name/$name-$version.tar.gz)
+version=0.72d
+release=1
+source=(http://dl.sourceforge.net/${name}/${name}-${version}.tar.gz)
 
 build() {
-   cd $name-$version
+	cd $name-$version
 
-   make \
-      prefix=$PKG/usr \
-      mandir=$PKG/usr/man install
+	mkdir -p $PKG/usr/bin \
+		$PKG/usr/man/man1 \
+		$PKG/usr/share/muttprint
 
-   rm -rf \
-      $PKG/usr/man/{cs,de,es,it} \
-      $PKG/usr/share/$name/{Debian*,Gentoo*}
+	install -m 0755 muttprint $PKG/usr/bin/
+	install -m 0644 doc/manpages/en/muttprint.1.gz $PKG/usr/man/man1/ 
 
-   chown -R root:root $PKG
+	install -m 0644 sample-muttprintrc-en $PKG/usr/share/muttprint/muttprintrc
+	install -m 0644 pics/*.eps $PKG/usr/share/muttprint/
+	rm -f $PKG/usr/share/muttprint/{Debian*,Gentoo*}
+	chown -R root:root $PKG
 }
