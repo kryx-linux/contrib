@@ -1,0 +1,16 @@
+# Description: Small password generator
+# URL: http://sourceforge.net/projects/pwgen
+# Maintainer: Rene Lengwinat, rugek at dirtyhack dot net
+
+name=pwgen
+version=2.05
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+
+build()
+{
+  cd $name-$version
+  ./configure --prefix=/usr
+  make 
+  make DESTDIR=$PKG install
+}
