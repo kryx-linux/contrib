@@ -14,8 +14,8 @@ build() {
 	python setup.py install --root=$PKG
 	
 	find $PKG \
-		-name 'README' -delete -or \
-		-name 'LICENSE' -delete -or \
-		-name 'COPYRIGHT' -delete
+		\( -name 'README' -or \
+		-name 'LICENSE' -or \
+		-name 'COPYRIGHT' \) -delete
 }
 
