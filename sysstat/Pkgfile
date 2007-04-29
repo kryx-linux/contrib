@@ -1,0 +1,20 @@
+# Description: A collection of performance monitoring tools
+# URL: http://perso.orange.fr/sebastien.godard/
+# Maintainer: Rene Lengwinat, rugek at dirtyhack dot net
+# Depends on:
+
+name=sysstat
+version=7.1.4
+release=1
+source=(http://perso.orange.fr/sebastien.godard/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr
+
+  make
+  make DESTDIR=$PKG install
+
+  rm -rf $PKG/etc/sysconfig
+  rm -rf $PKG/usr/{doc,share}
+}
