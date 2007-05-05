@@ -6,7 +6,6 @@
 
 name=gcc34
 version=3.4.6
-SUFFIX=-${version%.*}
 release=1
 source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-$version.tar.bz2 \
 	gcc-$version-linkonce.patch \
@@ -14,6 +13,7 @@ source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-$version.tar.
 	gcc-$version-visibility.patch)
 
 build() {
+	local SUFFIX=-${version%.*}
 	patch -d gcc-$version -p1 -i $SRC/gcc-$version-linkonce.patch
 	patch -d gcc-$version -p1 -i $SRC/gcc-$version-unlink-if-ordinary.patch
 	patch -d gcc-$version -p1 -i $SRC/gcc-$version-visibility.patch
