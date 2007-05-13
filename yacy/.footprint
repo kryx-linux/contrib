@@ -47,6 +47,7 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/addon/jsmooth/skeletons/windowed-wrapper/
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/dbTable.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/dbtest$ReadJob.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/dbtest$RemoveJob.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/dbtest$STEntry.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/dbtest$STJob.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/dbtest$WriteJob.class
@@ -57,6 +58,7 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/Diff$1.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/Diff$Part.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/Diff.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/SitemapParser.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/URLFetcherStack.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/blogBoard$1.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/data/blogBoard$entry.class
@@ -151,12 +153,8 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexRAMRI.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexRI.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexRWIEntry.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexRWIEntryNew.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexRWIEntryOld.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexURLEntry$Components.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexURLEntry.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexURLEntryNew.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/index/indexURLEntryOld.class
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroAbstractIOChunks.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroAbstractOrder.class
@@ -170,10 +168,12 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroBitfield.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroBufferedIOChunks.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroBufferedRA.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroByteArray.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroBytesIntMap.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroCache.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroCachedRA.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroCloneableIterator.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroCloneableMapIterator.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroCoding.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroCollectionIndex$keycollectionIterator.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroCollectionIndex.class
@@ -222,6 +222,7 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroProfile.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroRA.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroRAIOChunks.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroRecords$1.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroRecords$Handle.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroRecords$Node.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/kelondro/kelondroRecords$contentNodeIterator.class
@@ -277,7 +278,8 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/crawler/http/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/crawler/plasmaCrawlerPool.class
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/AbstractImporter.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/AssortmentImporter.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/ImporterException.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/SitemapImporter.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/dbImportManager.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/dbImporter.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/dbImport/plasmaCrawlNURLImporter.class
@@ -355,13 +357,6 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/parser/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordConnotation.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndex$Cleaner.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndex.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndexAssortment$containerIterator.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndexAssortment.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndexFile$dbenum.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndexFile.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndexFileCluster$containerIterator.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndexFileCluster$iterateFiles.class
--rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/plasmaWordIndexFileCluster.class
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/urlPattern/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/urlPattern/abstractURLPattern.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/plasma/urlPattern/defaultURLPattern.class
@@ -408,6 +403,7 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/server/portForwarding/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/server/serverSwitchAction.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/server/serverSystem.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/server/serverThread.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/server/serverUpdaterCallback.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/server/servletProperties.class
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/tools/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/tools/PKCS12Tool.class
@@ -457,6 +453,8 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/yacy/seedUpload/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/yacy/yacySeedUploader.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/yacy/yacyVersion.class
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/classes/de/anomic/ymage/
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/ymage/ymage8BitFontGenerator.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/ymage/ymageCaptcha.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/ymage/ymageChart.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/ymage/ymageDemoApplet.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/classes/de/anomic/ymage/ymageFontGenerator.class
@@ -505,6 +503,9 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigLanguage_p.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigLanguage_p.html
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigLanguage_p.java
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigNetwork_p.class
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigNetwork_p.html
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigNetwork_p.java
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigProfile_p.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigProfile_p.html
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ConfigProfile_p.java
@@ -683,6 +684,7 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ViewProfile.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ViewProfile.html
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ViewProfile.java
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ViewProfile.vcf
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/ViewProfile.xml
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/WatchCrawler_p.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/WatchCrawler_p.html
@@ -726,7 +728,11 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/env/grafics/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/SeniorOffline.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/SeniorPassive.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/Virgin.gif
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/YaCyLogo_120ppi.png
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/YaCyLogo_60ppi.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/addlink.png
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/ajax.gif
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/bad.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/blog.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/bookmark.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/bookmarkpriv.png
@@ -738,12 +744,13 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/env/grafics/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/doc.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/down.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/empty.gif
--rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/failed.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/fileIcon.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/fileIconSmall.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/folderIcon.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/folderIconSmall.gif
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/good.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/green-block.png
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/idea.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/indexmonitor.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/kaskelix.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/lock.gif
@@ -758,14 +765,14 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/env/grafics/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/red_bar.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/start.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/stop.gif
--rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/warning.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/wiki.gif
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/yacy.gif
--rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/grafics/yacy.png
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/page.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/page.html
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/page.java
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/env/templates/
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/embeddedfooter.template
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/embeddedheader.template
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/footer.template
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/header.template
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/metas.template
@@ -779,10 +786,6 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/env/templates/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/submenuIndexCreate.template
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/submenuPerformance.template
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/submenuViewLog.template
--rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/xhtml-footer.template
--rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/xhtml-header.template
--rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/templates/xhtml-metas.template
--rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/env/xhtml-style.css
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/favicon.bmp
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/favicon.ico
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/favicon.png
@@ -790,6 +793,7 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/htroot/htdocsdefault/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/htdocsdefault/dir.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/htdocsdefault/dir.html
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/htdocsdefault/dir.java
+-rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/htdocsdefault/dir.rss
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/htdocsdefault/dir.xml
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/imagetest.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/htroot/imagetest.java
@@ -913,6 +917,8 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/lib/svnRevNr/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/lib/svnRevNr/svnRevNrParser.class
 -rw-r--r--	_yacy/daemon	usr/share/yacy/lib/svnRevNr/svnRevNrParser.java
 -rw-r--r--	_yacy/daemon	usr/share/yacy/lib/svnRevNr/svnRevNrParser.properties
+-rw-r--r--	_yacy/daemon	usr/share/yacy/lib/tar.jar
+-rw-r--r--	_yacy/daemon	usr/share/yacy/lib/tar.license
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/libx/
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/ranking/
 drwxr-xr-x	_yacy/daemon	usr/share/yacy/ranking/YBR/
@@ -946,5 +952,5 @@ drwxr-xr-x	_yacy/daemon	usr/share/yacy/skins/
 -rw-r--r--	_yacy/daemon	usr/share/yacy/yacy.badwords.example
 -rw-r--r--	_yacy/daemon	usr/share/yacy/yacy.init
 -rw-r--r--	_yacy/daemon	usr/share/yacy/yacy.logging
--rw-r--r--	_yacy/daemon	usr/share/yacy/yacy.stopwords
+-rw-r--r--	_yacy/daemon	usr/share/yacy/yacy.stopwords (EMPTY)
 -rw-r--r--	_yacy/daemon	usr/share/yacy/yacy.yellow
