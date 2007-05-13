@@ -1,0 +1,17 @@
+# Description: Second generation of the XMMS music player
+# URL: http://xmms2.sourceforge.net
+# Maintainer: Rene Lengwinat, rugek at dirtyhack dot net
+# Depends on: scons, libmad, sqlite3
+# Nice to have: alsa-lib, curl, ecore, pyrex, ruby, samba
+
+name=xmms2
+version=0.2DrHouse
+release=1
+
+source=(http://dl.sourceforge.net/xmms2/$name-$version.tar.bz2)
+
+build () {
+  cd $name-$version
+  scons PREFIX=/usr CCFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+  scons PREFIX=/usr INSTALLDIR=$PKG install
+}

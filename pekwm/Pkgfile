@@ -1,0 +1,20 @@
+# Description: The Pek Window Manager
+# URL: http://pekwm.org
+# Maintainer: Rene Lengwinat, rugek at dirtyhack dot net
+# Depends on: x11,imlib2
+
+name=pekwm
+version=0.1.5
+release=1
+source=( http://pekwm.org/files/$name-$version.tar.bz2 )
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr \
+                --enable-xft \
+                --enable-pcre \
+                --enable-imlib2 \
+                --disable-xinerama
+    make
+    make DESTDIR=$PKG install
+}
