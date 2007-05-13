@@ -1,0 +1,22 @@
+# Description: C++ wrapper for the cairo graphics library.
+# URL: http://cairographics.org/cairomm/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: Danny Rawlins, romster at shortcircuit dot net dot au
+# Depends on: cairo
+
+name=cairomm
+version=1.2.4
+release=1
+source=(http://cairographics.org/releases/cairomm-$version.tar.gz)
+
+build() {
+	cd cairomm-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-docs
+
+	make
+	make DESTDIR=$PKG install
+}
+
