@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# /etc/rc.d/mlnetd: start/stop mldonkey daemon
+#
+
+MLDONKEY_USER="mldonkey"
+
+case $1 in
+	start)
+		su ${MLDONKEY_USER} -c "/usr/bin/mlnet &>/dev/null &"
+		;;
+	stop)
+    		killall -q /usr/bin/mlnet
+	    	;;
+	restart)
+    		$0 stop
+	    	$0 start
+	    	;;
+	*)
+    		echo "Usage: $0 [start|stop|restart]"
+      		;;
+esac
+
+# End of file
