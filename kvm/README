@@ -1,0 +1,17 @@
+README for kvm
+
+REQUIREMENTS
+
+PRE-INSTALL
+Remove old kvm kernel modules:
+  /bin/rm -rf /lib/modules/`/bin/uname -r`/drivers/kvm
+
+POST-INSTALL
+Update modules dependencies:
+  /sbin/depmod
+
+RESOURCES
+
+PRECAUTION
+This port installs kvm binary as /usr/bin/qemu. This would give a file
+conflict with (at least) opt/qemu-bin.
