@@ -41,6 +41,7 @@ build() {
 
 	# build the module
 	cd usr/src/nv
+	sed -i -e 's/config.h/utsrelease.h/' nv-linux.h # fix for later kernels
 	ln -s Makefile{.kbuild,}
 	SYSSRC="/usr/src/linux-$(uname -r)" IGNORE_CC_MISMATCH=1 make module
 
