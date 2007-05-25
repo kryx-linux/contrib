@@ -5,7 +5,7 @@
 # Depends on: xorg tcl
 
 name=tk
-version=8.5a6
+version=8.4.14
 release=1
 source=(http://dl.sourceforge.net/sourceforge/tcl/tk$version-src.tar.gz)
 
@@ -29,7 +29,7 @@ build() {
 	sed -i "s|-L$SRC/tk$version/unix|-L/usr/lib|" $PKG/usr/lib/tkConfig.sh
 
 	rm -rf $PKG/usr/lib/tk8.5/demos
-	ln -sf wish8.5 $PKG/usr/bin/wish
+	ln -sf wish8.4 $PKG/usr/bin/wish
 	chmod -R u+w,go-w $PKG
 	find $PKG/usr/man -type f -print0 | xargs -0 chmod a-x
 }
