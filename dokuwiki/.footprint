@@ -31,6 +31,8 @@ drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/attic/
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/cache/
 -rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/cache/_dummy (EMPTY)
 -rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/changes.log (EMPTY)
+drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/index/
+-rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/index/_dummy (EMPTY)
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/locks/
 -rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/locks/_dummy (EMPTY)
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/media/
@@ -47,12 +49,16 @@ drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/pages/wiki/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/doku.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/feed.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/inc/
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/.htaccess
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/DifferenceEngine.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/FeedParser.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/HTTPClient.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/IXR_Library.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/JSON.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/JpegMeta.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/SimplePie.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/TarLib.class.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/ZipLib.class.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/actions.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/aspell.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/auth.php
@@ -91,6 +97,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/inc/geshi/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/cadlisp.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/cfdg.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/cfm.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/cpp-qt.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/cpp.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/csharp.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/css-gen.cfg (EMPTY)
@@ -130,8 +137,10 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/inc/geshi/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/perl.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/php-brief.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/php.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/plsql.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/python.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/qbasic.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/rails.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/reg.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/robots.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/ruby.php
@@ -151,6 +160,8 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/inc/geshi/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/visualfoxpro.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/winbatch.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/xml.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/xpp.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/geshi/z80.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/html.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/indexer.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/infoutils.php
@@ -189,6 +200,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/inc/lang/en/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/lang/en/stopwords.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/lang/en/subscribermail.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/lang/en/updateprofile.txt
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/lang/en/uploadmail.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/lang/en/wordblock.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/mail.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/media.php
@@ -199,10 +211,10 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/inc/parser/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/parser/metadata.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/parser/parser.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/parser/renderer.php
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/parser/wiki.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/parser/xhtml.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/parser/xhtmlsummary.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/parserutils.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/plugin.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/pluginutils.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/search.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/inc/template.php
@@ -219,7 +231,9 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/exe/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/indexer.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/js.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/mediamanager.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/opensearch.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/spellcheck.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/xmlrpc.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/images/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/arrow_down.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/arrow_up.gif
@@ -253,6 +267,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/png.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/ppt.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/ps.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/rar.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/rpm.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/rtf.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/swf.png
@@ -273,9 +288,9 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/amazon.de.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/amazon.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/amazon.uk.gif
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/bug.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/coral.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/doku.gif
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/dokubug.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/google.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/meatball.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki/phpfn.gif
@@ -362,13 +377,13 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/lang/en/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/style.css
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/action.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/admin.php
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/base.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/admin.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/en/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/en/intro.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/en/lang.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/rtl.css
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/settings/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/settings/config.class.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/settings/config.metadata.php
@@ -376,18 +391,23 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/settings/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/style.css
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/importoldchangelog/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/importoldchangelog/action.php
+drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/importoldindex/
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/importoldindex/action.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/info/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/info/syntax.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/admin.php
-drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/inc/
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/inc/tarlib.class.php
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/inc/zip.lib.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/lang/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/lang/en/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/lang/en/admin_plugin.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/lang/en/lang.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/style.css
+drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/admin.php
+drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/
+drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/en/
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/en/intro.txt
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/en/lang.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/syntax.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/admin.php
@@ -407,10 +427,9 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/lang/en/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/scripts/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/ajax.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/cookie.js
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/domLib.js
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/domTT.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/edit.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/events.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/helpers.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/media.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/pngbehavior.htc
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/script.js
