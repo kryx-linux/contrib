@@ -1,17 +1,20 @@
-# Description: text-mode interface for git
-# URL:         http://jonas.nitro.dk/tig/
-# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
+# Description:	text-mode interface for git
+# URL:			http://jonas.nitro.dk/tig/
+# Maintainer:	James Mills, prologic at shortcircuit dot net dot au
+# Packager:		James Mills, prologic at shortcircuit dot net dot au
 #
-# Depends on:  ncurses, iconv
+# Depends on:	ncurses
 
 name=tig
-version=0.5
+version=0.6
 release=1
 source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
+	make
 	make prefix=/usr DESTDIR=$PKG install
-	chown -R root:root $PKG
+	install -d $PKG/usr/man/man{1,5}
+	install -m 644 tig.1 $PKG/usr/man/man1
+	install -m 644 tigrc.5 $PKG/usr/man/man5
 }
