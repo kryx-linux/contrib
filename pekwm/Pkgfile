@@ -4,7 +4,7 @@
 # Depends on: x11,imlib2
 
 name=pekwm
-version=0.1.5
+version=0.1.6
 release=1
 source=( http://pekwm.org/files/$name-$version.tar.bz2 )
 
@@ -14,6 +14,7 @@ build() {
                 --enable-xft \
                 --enable-pcre \
                 --enable-imlib2 \
+                --mandir=/usr/man \
                 --disable-xinerama
     make
     make DESTDIR=$PKG install
