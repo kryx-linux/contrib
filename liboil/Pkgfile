@@ -5,15 +5,24 @@
 # Depends on:
 
 name=liboil
-version=0.3.11
+version=0.3.12
 release=1
 source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz)
 
 build() {
 	cd liboil-$version
-	./configure --prefix=/usr
+
+	./configure \
+		--prefix=/usr \
+		--disable-static \
+		--disable-gtk-doc
+
+	sed -i -e "/^SUBDIRS = /s/examples //" Makefile
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share
+
+	# --disable-gtk-doc don't work and is ment to be disabled by
+	# default
+	rm -r $PKG/usr/share 
 }
 
