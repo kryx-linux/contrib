@@ -5,10 +5,15 @@
 
 name=ffmpeg
 version=20070206
-release=1
-source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version-7865.tar.bz2)
+release=2
+source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version-7865.tar.bz2 \
+	http://www.3gpp.org/ftp/Specs/archive/26_series/26.204/26204-510.zip \
+	http://www.3gpp.org/ftp/Specs/archive/26_series/26.104/26104-510.zip)
 
 build() {
+	mkdir ffmpeg/libavcodec/{amrwb_float,amr_float}
+	unzip $SRC/26204-510_ANSI-C_source_code.zip -d ffmpeg/libavcodec/amrwb_float
+	unzip $SRC/26104-510_ANSI_C_source_code.zip -d ffmpeg/libavcodec/amr_float
 	cd ffmpeg
 	./configure \
 		--prefix=/usr \
@@ -23,6 +28,8 @@ build() {
 		--enable-gpl \
 		--enable-shared \
 		--enable-pp \
+		--enable-amr_nb \
+		--enable-amr_wb \
 		--extra-ldflags="-L/usr/X11R6/lib -L/usr/lib/X11 -lX11"
 	make
 	(cd doc; make ffmpeg.1 ffserver.1 ffplay.1)
