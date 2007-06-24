@@ -5,7 +5,7 @@
 # Depends on: kdelibs cdparanoia cdrdao taglib flac normalize dvd+rw-tools ffmpeg
 
 name=k3b
-version=1.0.1
+version=1.0.2
 release=1
 source=(http://dl.sourceforge.net/sourceforge/k3b/k3b-$version.tar.bz2)
 
@@ -14,7 +14,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-        	--disable-debug \
+      --disable-debug \
 		--with-k3bsetup=no
 	
 	make
