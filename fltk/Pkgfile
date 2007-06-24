@@ -2,11 +2,11 @@
 # URL: http://www.fltk.org/
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: Ivan Lyanguzov, tzong at tzong dot spb dot ru
-# Depends on: xorg, xorg-libsm, xorg-libice
+# Depends on: xorg xorg-libsm xorg-libice
 
 name=fltk
 version=1.1.7
-release=1
+release=2
 source=(http://ftp.easysw.com/pub/fltk/$version/fltk-$version-source.tar.bz2)
 
 build() {
@@ -14,6 +14,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
+		--enable-threads \
 		--enable-shared \
 		--enable-xft
 
