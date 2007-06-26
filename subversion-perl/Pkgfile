@@ -1,0 +1,31 @@
+# Description:	Perl bindings for subversion.
+# URL:			http://subversion.tigris.org
+# Packager:		Johannes Winkelmann <jw@tks6.net>
+# Maintainer:	James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:	subversion, swig
+
+name=subversion-perl
+version=1.4.4
+release=1
+source=(http://subversion.tigris.org/tarballs/subversion-$version.tar.bz2 subversion_perl.diff)
+
+build() {
+	cd subversion-$version
+
+	patch -p1 < $SRC/subversion_perl.diff
+
+	LDFLAGS="-L$PKG/usr/lib" \
+
+		./configure \
+			--prefix=/usr \
+			--disable-nls \
+			--with-neon=/usr \
+			--disable-mod-activation \
+			--with-apr=/usr \
+			--with-apr-util=/usr
+
+	make && make DESTDIR=$PKG install-swig-pl-lib install-swig-pl
+
+	chown -R root:root $PKG
+}
