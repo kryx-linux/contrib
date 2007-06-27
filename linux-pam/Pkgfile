@@ -1,0 +1,17 @@
+# Description:	Linux-PAM (Pluggable Authentication Modules for Linux)
+# URL:		http://www.us.kernel.org/pub/linux/libs/pam/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+
+name=linux-pam
+version=0.99.7.1
+release=1
+source=(http://www.us.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-$version.tar.bz2 pam.conf)
+
+build() {
+	cd Linux-PAM-$version
+	./configure --sysconfdir=/etc --prefix=/usr --mandir=/usr/man --disable-nls
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share
+	install -D -m 644 $SRC/pam.conf $PKG/etc/pam.conf
+}
