@@ -5,12 +5,12 @@
 # Depends on: libdevmapper
 
 name=truecrypt
-version=4.2a
+version=4.3a
 release=1
 source=(http://www.truecrypt.org/downloads/$name-$version-source-code.tar.gz)
 
 build () {
-	cd $name-$version/Linux
+	cd truecrypt-$version-source-code/Linux
 	./build.sh
 	install -m 755 -D Cli/truecrypt $PKG/usr/bin/truecrypt
 	install -m 644 -D Cli/Man/truecrypt.1 $PKG/usr/man/man1/truecrypt.1
