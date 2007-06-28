@@ -4,7 +4,7 @@
 # Depends on: apache, mod_php
 
 name=dokuwiki
-version=rc2007-05-24
+version=2007-06-26
 release=1
 source=(http://www.splitbrain.org/_media/projects/dokuwiki/${name}-${version}.tgz)
 
@@ -16,7 +16,8 @@ build() {
     mkdir -p $PKG/var/www/htdocs/dokuwiki/
     cp -r ./ $PKG/var/www/htdocs/dokuwiki/
     
+    chown -R www.www $PKG/var/www/htdocs/dokuwiki/data
+    
     rm -f  $PKG/var/www/htdocs/dokuwiki/{COPYING,README,VERSION}
     find $PKG -path '*lang/*' ! -wholename '*/en*' -type d | xargs rm -rf 
-    chown -R www.www $PKG/var/www/htdocs/dokuwiki/data
 }
