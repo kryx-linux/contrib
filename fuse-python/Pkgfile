@@ -1,0 +1,17 @@
+# Description: Python bindings for FUSE
+# URL:         http://fuse.sourceforge.net/wiki/index.php/FusePython
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+# Packager:    James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:  python, fuse
+
+name=fuse-python
+version=0.2
+release=1
+source=(http://dl.sourceforge.net/sourceforge/fuse/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	python setup.py install --root=$PKG
+	chown -R root:root $PKG
+}
