@@ -1,0 +1,19 @@
+# Description:	A sophisticated CLI calendar and alarm program
+# URL:			http://www.roaringpenguin.com/penguin/open_source_remind.php
+# Maintainer:	James Mills, prologic at shortcircuit dot net dot au
+# Packager:		treach, treachster at gmail dot com
+#
+# Depends on:
+
+name=remind
+version=03.00.24
+release=1
+source=(http://www.roaringpenguin.com/files/download/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	chown -R root:root $PKG
+}
