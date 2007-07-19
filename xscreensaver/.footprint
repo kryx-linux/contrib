@@ -53,6 +53,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/cube21
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/cubenetic
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/cubestorm
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/cwaves
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/cynosure
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/dangerball
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/decayscreen
@@ -86,6 +87,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/gears
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/gflux
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/glblur
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/glcells
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/gleidescope
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/glforestfire
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/glhanoi
@@ -128,6 +130,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/ljlatest
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/lmorph
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/loop
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/m6502
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/maze
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/memscroller
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/menger
@@ -203,6 +206,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/vermiculate
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/vidwhacker
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/vines
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/voronoi
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/wander
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/webcollage
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/webcollage-helper
@@ -268,6 +272,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/cube21.6.gz
 -rw-r--r--	root/root	usr/man/man6/cubenetic.6.gz
 -rw-r--r--	root/root	usr/man/man6/cubestorm.6.gz
+-rw-r--r--	root/root	usr/man/man6/cwaves.6.gz
 -rw-r--r--	root/root	usr/man/man6/cynosure.6.gz
 -rw-r--r--	root/root	usr/man/man6/dangerball.6.gz
 -rw-r--r--	root/root	usr/man/man6/decayscreen.6.gz
@@ -302,6 +307,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/gears.6.gz
 -rw-r--r--	root/root	usr/man/man6/gflux.6.gz
 -rw-r--r--	root/root	usr/man/man6/glblur.6.gz
+-rw-r--r--	root/root	usr/man/man6/glcells.6.gz
 -rw-r--r--	root/root	usr/man/man6/gleidescope.6.gz
 -rw-r--r--	root/root	usr/man/man6/glforestfire.6.gz
 -rw-r--r--	root/root	usr/man/man6/glhanoi.6.gz
@@ -418,6 +424,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/vermiculate.6.gz
 -rw-r--r--	root/root	usr/man/man6/vidwhacker.6.gz
 -rw-r--r--	root/root	usr/man/man6/vines.6.gz
+-rw-r--r--	root/root	usr/man/man6/voronoi.6.gz
 -rw-r--r--	root/root	usr/man/man6/wander.6.gz
 -rw-r--r--	root/root	usr/man/man6/webcollage.6.gz
 -rw-r--r--	root/root	usr/man/man6/whirlwindwarp.6.gz
@@ -481,6 +488,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/cube21.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/cubenetic.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/cubestorm.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/cwaves.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/cynosure.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/dangerball.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/decayscreen.xml
@@ -517,6 +525,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/gears.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/gflux.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/glblur.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/glcells.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/gleidescope.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/glforestfire.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/glhanoi.xml
@@ -559,6 +568,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/lissie.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/lmorph.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/loop.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/m6502.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/maze.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/memscroller.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/menger.xml
@@ -635,6 +645,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/vermiculate.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/vidwhacker.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/vines.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/voronoi.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/wander.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/webcollage.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/whirlwindwarp.xml
