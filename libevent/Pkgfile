@@ -5,7 +5,7 @@
 # Depends on:
 
 name=libevent
-version=1.3b
+version=1.3c
 release=1
 source=(http://www.monkey.org/~provos/libevent-$version.tar.gz)
 
@@ -15,9 +15,17 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-		--disable-static
+		--disable-static \
+		--disable-dependency-tracking \
+		--with-gnu-ld
 
 	make
 	make DESTDIR=$PKG install
+
+	# no .py extensions in /usr/bin its declared on the first line of
+	# the file
+	if [ -f $PKG/usr/bin/event_rpcgen.py ]; then
+		mv $PKG/usr/bin/event_rpcgen.py $PKG/usr/bin/event_rpcgen
+	fi
 }
 
