@@ -5,7 +5,7 @@
 # Depends on: flac sqlite3 alsa-lib
 
 name=libsndfile
-version=1.0.18pre11
+version=1.0.18pre14
 release=1
 source=(http://www.mega-nerd.com/tmp/libsndfile-$version.tar.gz)
 
@@ -16,7 +16,7 @@ build() {
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-static \
-		--with-gnu-ld
+		--disable-dependency-tracking
 
 	make
 	make DESTDIR=$PKG install
