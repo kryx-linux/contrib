@@ -15,7 +15,8 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-		--disable-static
+		--disable-static \
+		--disable-ldconfig
 
 	make
 	make DESTDIR=$PKG install
