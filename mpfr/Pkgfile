@@ -5,19 +5,19 @@
 # Depends on: libgmp
 
 name=mpfr
-version=2.2.1
+version=2.3.0
 release=1
 source=(http://www.mpfr.org/mpfr-current/mpfr-$version.tar.bz2)
 build() {
 	cd mpfr-$version
-	autoreconf -i -f
+	#autoreconf -i -f
 
 	./configure \
 		--prefix=/usr \
-		--enable-shared \
 		--disable-nls
 
 	make
+	make check
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share
 }
