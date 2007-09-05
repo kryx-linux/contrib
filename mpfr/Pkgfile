@@ -5,11 +5,14 @@
 # Depends on: libgmp
 
 name=mpfr
-version=2.3.0
+version=2.3.0-p1
 release=1
-source=(http://www.mpfr.org/mpfr-current/mpfr-$version.tar.bz2)
+source=(http://www.mpfr.org/mpfr-current/mpfr-${version%%-*}.tar.bz2 \
+	http://www.mpfr.org/mpfr-current/patches)
+
 build() {
-	cd mpfr-$version
+	cd mpfr-${version%%-*}
+	patch -p1 -i $SRC/patches
 	#autoreconf -i -f
 
 	./configure \
