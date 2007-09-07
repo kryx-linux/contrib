@@ -1,19 +1,21 @@
-# Description:	Command line MPD client
-# URL:		http://www.musicpd.org/mpc.shtml
-# Maintainer:	Mark Rosenstand, mark at borkware dot net
+# Description: Command line MPD client
+# URL: http://www.musicpd.org/mpc.shtml
+# Maintainer: Simon Gloﬂner, viper at hometux dot de
+# Packager: Mark Rosenstand, mark at borkware dot net
 
 name=mpc
 version=0.12.1
 release=1
-source=(http://www.musicpd.org/uploads/files/mpc-$version.tar.gz)
+source=(http://www.musicpd.org/uploads/files/$name-$version.tar.gz)
 
 build() {
-	cd mpc-$version
-	./configure --prefix=/usr --mandir=/usr/man
+	cd $name-$version
+
+	./configure \
+	    --prefix=/usr \
+	    --mandir=/usr/man
 	make
 	make DESTDIR=$PKG install
-	cd $PKG/usr/share
-	rm doc/mpc/{AUTHORS,README}
-	mv doc/mpc/* mpc
-	rm -rv doc
+
+	rm -rf $PKG/usr/share
 }
