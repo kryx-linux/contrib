@@ -1,7 +1,8 @@
-# Description:	Adaptive readahead daemon
-# URL:		http://sourceforge.net/projects/preload/
-# Maintainer:	Mark Rosenstand, mark at borkware dot net
-# Depends on:	glib
+# Description: Adaptive readahead daemon.
+# URL: http://sourceforge.net/projects/preload/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: Mark Rosenstand, mark at borkware dot net
+# Depends on: glib
 
 name=preload
 version=0.4
@@ -25,3 +26,4 @@ build() {
 	# so we change the mode in the package to avoid rejmerge.
 	chmod -v 640 var/lib/preload/preload.state
 }
+
