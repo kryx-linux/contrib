@@ -1,7 +1,8 @@
-# Description:	Tool for updating versions of the Linux kernel source
-# URL:		http://www.selenic.com/ketchup/wiki/
-# Maintainer:	Mark Rosenstand, mark at borkware dot net
-# Depends on:	python
+# Description: Tool for updating versions of the Linux kernel source.
+# URL: http://www.selenic.com/ketchup/wiki/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: Mark Rosenstand, mark at borkware dot net
+# Depends on: python
 
 name=ketchup
 version=0.9.8
@@ -9,7 +10,7 @@ release=1
 source=(http://www.selenic.com/ketchup/ketchup-$version.tar.bz2)
 
 build() {
-	mkdir -p $PKG/usr/{bin,man/man1}
-	cp ketchup	$PKG/usr/bin
-	cp ketchup.1	$PKG/usr/man/man1
+	install -D -m755 ketchup	$PKG/usr/bin/ketchup
+	install -D -m644 ketchup.1	$PKG/usr/man/man1/ketchup.1
 }
+
