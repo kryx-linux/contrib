@@ -11,8 +11,13 @@ source=(http://dl.sourceforge.net/sourceforge/preload/preload-$version.tar.gz)
 
 build() {
 	cd preload-$version
-	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
-	make
+
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var
+
+	make -j1
 	make DESTDIR=$PKG install
 
 	cd $PKG
