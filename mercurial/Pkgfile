@@ -1,14 +1,17 @@
-# Description:	Distributed source code management system
-# URL:		http://www.selenic.com/mercurial/
-# Maintainer:	Mark Rosenstand, mark at borkware dot net
-# Depends on:	python
+# Description:	Mercurial the distributed VCS.
+# URL:			http://www.selenic.com/mercurial/wiki/
+# Maintainer:	James Mills, prologic at shortcircuit dot net dot au
+# Packager:		James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:
 
 name=mercurial
 version=0.9.4
 release=1
-source=(http://www.selenic.com/mercurial/release/mercurial-$version.tar.gz)
+source=(http://www.selenic.com/$name/release/$name-$version.tar.gz)
 
 build() {
-	cd mercurial-$version
+	cd $name-$version
 	python setup.py install --root=$PKG
+	chown -R root:root $PKG
 }
