@@ -12,7 +12,10 @@ build () {
 	mkdir -p $PKG/usr/share/man/man8
 	cd $name-$version
 	./configure --prefix=/usr --disable-nls
-	patch -p1 < $SRC/zaptel-mmx.patch
+        # Check if this processor supports MMX instruction set
+	if [ -n "`grep '^flags.*mmx' /proc/cpuinfo`" ]; then
+		patch -p1 < $SRC/zaptel-mmx.patch
+	fi
 	make
 	make prefix=/usr DESTDIR=$PKG install
 	rm -rf $PKG/dev $PKG/lib/modules/*/modules.*
