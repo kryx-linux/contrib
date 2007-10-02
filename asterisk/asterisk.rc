@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# /etc/rc.d/asterisk: start/stop/restart asterisk
+#
+
+USER=asterisk
+GROUP=asterisk
+
+case $1 in
+start)
+	/usr/sbin/asterisk -G $GROUP -U $USER
+	;;
+stop)
+	kill `cat /var/run/asterisk/asterisk.pid`
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
