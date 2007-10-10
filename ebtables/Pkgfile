@@ -4,14 +4,14 @@
 # Depends on:
 
 name=ebtables
-version=2.0.8-1
+version=2.0.8-2
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-v$version.tar.gz \
 		$name-makefile.diff)
 
 build() {
 	cd $name-v$version
-	patch -p1 -i ../$name-makefile.diff
+	patch -p1 -i $SRC/$name-makefile.diff
 	make
 	make DESTDIR=$PKG install
 	rm -rf $PKG/etc/{rc.d,sysconfig}
