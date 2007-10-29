@@ -9,8 +9,8 @@ release=1
 source=(http://ftp.twaren.net/Unix/Mozilla/calendar/sunbird/releases/${version}/linux-i686/en-US/${name}-${version}.en-US.linux-i686.tar.gz)
 
 build() {
-	install -d ${PKG}/usr/{lib,bin}
+  install -d ${PKG}/usr/{lib,bin}
   rm ${SRC}/${name}/{README.txt,LICENSE}
-	mv ${SRC}/${name} ${PKG}/usr/lib
-	ln -s /usr/lib/${name}/${name} ${PKG}/usr/bin/${name}
+  mv ${SRC}/${name} ${PKG}/usr/lib
+  ln -s /usr/lib/${name}/${name} ${PKG}/usr/bin/${name}
 }
