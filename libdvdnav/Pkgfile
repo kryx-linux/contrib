@@ -2,18 +2,25 @@
 # URL: http://dvd.sourceforge.net/
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: libdvdcss libdvdread
+# Depends on: libdvdcss
 
 name=libdvdnav
-version=20050211
+version=r956
 release=1
-source=(http://downloads.videolan.org/pub/videolan/vlc/0.8.5/contrib/libdvdnav-$version.tar.bz2)
+source=(http://romster.shortcircuit.net.au/crux/source/libdvdnav-snapshot-$version.tar.bz2)
 
 build() {
-	cd libdvdnav-$version
-	rm -r missing
-	./configure --prefix=/usr
-	make
+	cd libdvdnav
+
+	export \
+		CFLAGS="${CFLAGS//-O?/}" \
+		CXXFLAGS="${CXXFLAGS//-O?/}"
+
+	./configure \
+		--prefix=/usr \
+		--disable-static \
+		--disable-debug
+
 	make DESTDIR=$PKG install
 }
 
