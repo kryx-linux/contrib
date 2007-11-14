@@ -1,0 +1,19 @@
+# Description: Perl library and a command-line application for manipulating some media files meta information
+# URL: http://www.sno.phy.queensu.ca/~phil/exiftool/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on:
+
+name=exiftool
+version=7.00
+release=1
+source=(http://www.sno.phy.queensu.ca/~phil/exiftool/Image-ExifTool-$version.tar.gz)
+
+build () {
+	cd Image-ExifTool-$version
+	perl Makefile.PL
+	make OPTIMIZE="${CFLAGS}"
+	make DESTDIR=${PKG} install
+	find $PKG -name "perllocal.pod" -delete
+	find $PKG -name ".packlist" -delete
+	find $PKG -depth -type d -empty -delete
+}
