@@ -6,7 +6,7 @@
 
 name=licq
 version=1.3.5
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build () {
@@ -33,4 +33,5 @@ build () {
 	rm -rf  $PKG/usr/share/licq/qt-gui/locale \
                 $PKG/usr/share/locale \
                 $PKG/usr/share/licq/translations
+	find $PKG/usr/share/licq/qt-gui -name "README*" -exec rm '{}' \;
 }
