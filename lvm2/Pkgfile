@@ -5,7 +5,7 @@
 # Depends on: libdevmapper
 
 name=lvm2
-version=2.02.24
+version=2.02.28
 release=1
 source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz)
 
@@ -15,6 +15,7 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--exec-prefix= \
+		--mandir=/usr/man \
 		--enable-lvm1_fallback
 
 	make
