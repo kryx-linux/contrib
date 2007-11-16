@@ -4,14 +4,12 @@
 # Depends on:
 
 name=mktorrent
-version=0.2
+version=0.3
 release=1
-source=(http://dl.sf.net/mktorrent/mktorrent-$version.tar.gz
-	mktorrent-$version.diff)
+source=(http://dl.sf.net/mktorrent/mktorrent-$version.tar.gz)
 
 build() {
 	cd mktorrent-$version
-	patch -p1 -i $SRC/mktorrent-$version.diff
 	make
 	make DESTDIR=$PKG PREFIX=/usr install
 }
