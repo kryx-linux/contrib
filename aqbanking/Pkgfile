@@ -1,10 +1,10 @@
 # Description: Basic HBCI interface
 # URL: http://www.aquamaniac.de/aqbanking/
 # Maintainer: Simon Gloﬂner, viper at hometux dot de
-# Depends on: ktoblzcheck, gwenhywfar, qt3
+# Depends on: libgmp, ktoblzcheck, gwenhywfar, qt3
 
 name=aqbanking
-version=2.3.3
+version=3.0.0
 release=1
 source=(http://dl.sourceforge.net/${name}/${name}-${version}.tar.gz)
     
@@ -20,8 +20,6 @@ build() {
     make 
     make DESTDIR=$PKG install
 
-    rm -f $PKG/usr/bin/qb-help
-    rm -f $PKG/usr/include/qbanking/qbhelpbrowser.{h,ui.h}
     rm -rf $PKG/usr/share/doc
     rm -rf $PKG/usr/share/locale
     rm -rf $PKG/usr/share/aqbanking/i18n
