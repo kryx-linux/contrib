@@ -6,21 +6,22 @@
 # Depends on:	
 
 name=dhcp
-version=3.0.6rc2
+version=4.0.0b3
 release=1
-source=(http://ftp.isc.org/isc/$name/$name-3.0-history/$name-$version.tar.gz
+source=(http://ftp.isc.org/isc/$name/$name-$version.tar.gz
 			dhcpd
 			default-config.diff)
 
 build() {
 	cd dhcp-$version
 	patch -p1 -i $SRC/default-config.diff
-	./configure
-	make && make DESTDIR=$PKG INCDIR=/usr/include LIBDIR=/usr/lib install
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	mkdir $PKG/etc/
 	install -m644 client/dhclient.conf server/dhcpd.conf -t $PKG/etc
 	install -D ../dhcpd $PKG/etc/rc.d/dhcpd
 	mkdir -p $PKG/var/state/dhcp
 	touch $PKG/var/state/dhcp/dhcpd.leases
-	find $PKG/usr/man -type f -exec chmod 644 {} \;
 	chown -R root:root $PKG
 }
