@@ -5,14 +5,13 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/xmms2-find-avahi
 -rwxr-xr-x	root/root	usr/bin/xmms2-launcher
 -rwxr-xr-x	root/root	usr/bin/xmms2-mdns-avahi
+-rwxr-xr-x	root/root	usr/bin/xmms2-mlib-updater
 -rwxr-xr-x	root/root	usr/bin/xmms2d
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/xmms2/
 drwxr-xr-x	root/root	usr/include/xmms2/xmms/
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_bindata.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_config.h
--rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_effect.h
--rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_effectplugin.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_error.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_ipc.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_log.h
@@ -63,7 +62,6 @@ drwxr-xr-x	root/root	usr/include/xmms2/xmmsclient/xmmsclient++/
 -rw-r--r--	root/root	usr/include/xmms2/xmmsclient/xmmsclient++/typedefs.h
 -rw-r--r--	root/root	usr/include/xmms2/xmmsclient/xmmsclient++/xform.h
 -rw-r--r--	root/root	usr/include/xmms2/xmmsclient/xmmsclient-cf.h
--rw-r--r--	root/root	usr/include/xmms2/xmmsclient/xmmsclient-ecore.h
 -rw-r--r--	root/root	usr/include/xmms2/xmmsclient/xmmsclient-glib.h
 -rw-r--r--	root/root	usr/include/xmms2/xmmsclient/xmmsclient-qt.h
 -rw-r--r--	root/root	usr/include/xmms2/xmmsclient/xmmsclient.h
@@ -74,9 +72,9 @@ lrwxrwxrwx	root/root	usr/lib/libxmmsclient++-glib.so.1 -> libxmmsclient++-glib.s
 lrwxrwxrwx	root/root	usr/lib/libxmmsclient-glib.so -> libxmmsclient-glib.so.1
 lrwxrwxrwx	root/root	usr/lib/libxmmsclient-glib.so.1 -> libxmmsclient-glib.so.1.0.0
 -rw-r--r--	root/root	usr/lib/libxmmsclient-glib.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so -> libxmmsclient.so.2
-lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so.2 -> libxmmsclient.so.2.0.0
--rw-r--r--	root/root	usr/lib/libxmmsclient.so.2.0.0
+lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so -> libxmmsclient.so.3
+lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so.3 -> libxmmsclient.so.3.0.0
+-rw-r--r--	root/root	usr/lib/libxmmsclient.so.3.0.0
 drwxr-xr-x	root/root	usr/lib/perl5/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.8.8/
@@ -108,6 +106,7 @@ drwxr-xr-x	root/root	usr/lib/ruby/site_ruby/1.8/xmmsclient/
 -rw-r--r--	root/root	usr/lib/ruby/site_ruby/1.8/xmmsclient/sync.rb
 drwxr-xr-x	root/root	usr/lib/xmms2/
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_alsa.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_asf.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_asx.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_cue.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_curl.so
@@ -122,12 +121,14 @@ drwxr-xr-x	root/root	usr/lib/xmms2/
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_m3u.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_mad.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_mp4.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_normalize.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_null.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_nulstripper.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_oss.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_pls.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_replaygain.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_rss.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_samba.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_vorbis.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_wave.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_xml.so
@@ -140,9 +141,18 @@ drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/xmms2.1.gz
 -rw-r--r--	root/root	usr/man/man1/xmms2d.1.gz
 drwxr-xr-x	root/root	usr/share/
+drwxr-xr-x	root/root	usr/share/pixmaps/
+-rw-r--r--	root/root	usr/share/pixmaps/xmms2-128.png
+-rw-r--r--	root/root	usr/share/pixmaps/xmms2-16.png
+-rw-r--r--	root/root	usr/share/pixmaps/xmms2-32.png
+-rw-r--r--	root/root	usr/share/pixmaps/xmms2-48.png
+-rw-r--r--	root/root	usr/share/pixmaps/xmms2-black-on-white.svg
+-rw-r--r--	root/root	usr/share/pixmaps/xmms2-white-on-black.svg
+-rw-r--r--	root/root	usr/share/pixmaps/xmms2.svg
 drwxr-xr-x	root/root	usr/share/xmms2/
 -rw-r--r--	root/root	usr/share/xmms2/mind.in.a.box-lament_snipplet.ogg
 drwxr-xr-x	root/root	usr/share/xmms2/scripts/
 drwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/
 -rwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/xmms2-et-launcher.sh
 -rwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/xmms2-mdns-launcher.sh
+-rwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/xmms2-mlib-updater.sh
