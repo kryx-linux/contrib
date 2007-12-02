@@ -3,11 +3,10 @@ drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/sys/
 -rw-r--r--	root/root	usr/include/sys/capability.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libcap.so -> libcap.so.1
-lrwxrwxrwx	root/root	usr/lib/libcap.so.1 -> libcap.so.1.10
--rw-r--r--	root/root	usr/lib/libcap.so.1.10
+lrwxrwxrwx	root/root	usr/lib/libcap.so -> libcap.so.2
+lrwxrwxrwx	root/root	usr/lib/libcap.so.2 -> libcap.so.2.02
+-rw-r--r--	root/root	usr/lib/libcap.so.2.02
 drwxr-xr-x	root/root	usr/man/
-drwxr-xr-x	root/root	usr/man/man2/
 drwxr-xr-x	root/root	usr/man/man3/
 -rw-r--r--	root/root	usr/man/man3/_cap_names.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_clear.3.gz
@@ -16,9 +15,13 @@ drwxr-xr-x	root/root	usr/man/man3/
 -rw-r--r--	root/root	usr/man/man3/cap_dup.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_free.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_from_text.3.gz
+-rw-r--r--	root/root	usr/man/man3/cap_get_fd.3.gz
+-rw-r--r--	root/root	usr/man/man3/cap_get_file.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_get_flag.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_get_proc.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_init.3.gz
+-rw-r--r--	root/root	usr/man/man3/cap_set_fd.3.gz
+-rw-r--r--	root/root	usr/man/man3/cap_set_file.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_set_flag.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_set_proc.3.gz
 -rw-r--r--	root/root	usr/man/man3/cap_size.3.gz
@@ -26,7 +29,6 @@ drwxr-xr-x	root/root	usr/man/man3/
 -rw-r--r--	root/root	usr/man/man3/capgetp.3.gz
 -rw-r--r--	root/root	usr/man/man3/capsetp.3.gz
 drwxr-xr-x	root/root	usr/sbin/
--rwxr-xr-x	root/root	usr/sbin/execcap
+-rwxr-xr-x	root/root	usr/sbin/getcap
 -rwxr-xr-x	root/root	usr/sbin/getpcaps
--rwxr-xr-x	root/root	usr/sbin/setpcaps
--rwxr-xr-x	root/root	usr/sbin/sucap
+-rwxr-xr-x	root/root	usr/sbin/setcap
