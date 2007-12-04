@@ -1,9 +1,11 @@
-# Description:	Small IRC proxy
-# URL:		http://miau.sourceforge.net/
-# Maintainer:	Mark Rosenstand, mark at borkware dot net
+# Description: Small IRC proxy.
+# URL: http://miau.sourceforge.net/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: Mark Rosenstand, mark at borkware dot net
+# Depends on: 
 
 name=miau
-version=0.6.3
+version=0.6.5
 release=1
 source=(http://dl.sourceforge.net/sourceforge/miau/miau-$version.tar.bz2)
 
@@ -28,3 +30,4 @@ build() {
 	mv $PKG/usr/share/doc/miau $PKG/usr/share
 	rm -r $PKG/usr/share/{doc,info}
 }
+
