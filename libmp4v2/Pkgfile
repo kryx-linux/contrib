@@ -4,13 +4,14 @@
 
 name=libmp4v2
 version=1.5.0.1
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/mpeg4ip/mpeg4ip-$version.tar.gz)
 
 build() {
 	cd mpeg4ip-$version
 	libtoolize
 	touch bootstrapped
+	sed -i -e 's/nasm -r/nasm -v/' configure
 	./configure --prefix=/usr \
 		--disable-warns-as-err \
 		--disable-server \
