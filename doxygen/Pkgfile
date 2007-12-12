@@ -1,0 +1,26 @@
+# Description: Source code documentation generator tool
+# URL: http://www.stack.nl/~dimitri/doxygen/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Hannes Mayer, kontakt at ecarux dot de
+# Depends on:
+
+name=doxygen 
+version=1.5.4
+release=1 
+source=(http://ftp.stack.nl/pub/users/dimitri/${name}-${version}.src.tar.gz) 
+
+build() {
+  cd ${name}-${version}
+  ./configure
+  make
+  install -d $PKG/usr/bin
+  install -m 755 bin/doxygen $PKG/usr/bin
+  install -m 755 bin/doxytag $PKG/usr/bin
+  install -d $PKG/usr/man/man1
+  cat doc/doxygen.1 | sed -e "s/DATE/June 2007/g" \
+    -e "s/VERSION/1.5.2/g" > $PKG/usr/man/man1/doxygen.1
+  cat doc/doxytag.1 | sed -e "s/DATE/June 2007/g" \
+    -e "s/VERSION/1.5.2/g" > $PKG/usr/man/man1/doxytag.1
+  cat doc/doxywizard.1 | sed -e "s/DATE/June 2007/g" \
+    -e "s/VERSION/1.5.2/g" > $PKG/usr/man/man1/doxywizard.1
+}
