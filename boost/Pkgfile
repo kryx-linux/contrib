@@ -1,5 +1,5 @@
 # Description: Free peer-reviewed portable C++ source libraries.
-# URL: http://www.boost.org
+# URL: http://www.boost.org/
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: sten, nick dot steeves at shaw dot ca
 # Depends on: python
@@ -13,19 +13,19 @@ build() {
 	cd boost_${version//./_}
 
 	local bindir='bin.linuxx86'
-	local gccversion="$(pkginfo -i |grep '^gcc ' |awk '{print $2}' |sed -e "s/\([.0-9]*\)-[0-9]*/\1/")"
+	local gccversion="$(gcc -dumpversion)"
 	export CFLAGS="$CFLAGS -fno-strict-aliasing"
 
 	(
 		cd tools/jam/src
 		./build.sh gcc
-		install -D -m755 $bindir/bjam $PKG/usr/bin/bjam
+		install -D -m 0755 $bindir/bjam $PKG/usr/bin/bjam
 	)
 
 	(
 		cd tools/bcp
 		../jam/src/$bindir/bjam --toolset=gcc debug-symbols=off
-		install -D -m755 ../../bin.v2/tools/bcp/gcc-$gccversion/release/link-static/bcp $PKG/usr/bin/bcp
+		install -D -m 0755 ../../bin.v2/tools/bcp/gcc-$gccversion/release/link-static/bcp $PKG/usr/bin/bcp
 	)
 
 	./tools/jam/src/$bindir/bjam \
