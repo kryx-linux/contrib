@@ -1,13 +1,20 @@
 #!/bin/sh
 
+MLUSER=mldonkey
+MLGROUP=mlusers
+MLPATH=/var/mlnet
+
+
 # check for mlusers group or add one if not exists
-/usr/bin/getent group mlusers || /usr/sbin/groupadd mlusers
+getent group $MLGROUP || groupadd $MLGROUP
 
 # check for mldonkey user or add one
-/usr/bin/getent passwd mldonkey || \
-  /usr/sbin/useradd -g mlusers -m -d /var/mlnet mldonkey
+getent passwd $MLUSER || useradd -g $MLGROUP -m -d $MLPATH $MLUSER
 
 # lock the account
-/usr/bin/passwd -l mldonkey
+passwd -l $MLUSER
 
-# End of File
+# setup bitperms
+chmod 0775 $MLPATH
+
+# End of file

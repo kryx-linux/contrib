@@ -1,12 +1,12 @@
 # Description: Multi-platform multi-network peer-to-peer client.
 # URL: http://mldonkey.sourceforge.net/
-# Maintainer: Jose V Beneyto, joberui at ei dot upv dot es
-# Packager: Jose V Beneyto, joberui at ei dot upv dot es
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Depends on: ocaml,libgd,bzip2
 
 name=mldonkey
 version=2.9.2
-release=1
+release=4
 source=(http://dl.sourceforge.net/sourceforge/${name}/${name}-${version}.tar.bz2 \
         mlnetd)
 
@@ -16,8 +16,7 @@ build() {
               --disable-gui \
               --disable-debug
   make
-  make utils
+  make DESTDIR=${PKG} install
+  install -d ${PKG}/var/mlnet
   install -D -m 0755 ${SRC}/mlnetd ${PKG}/etc/rc.d/mlnetd
-  install -D -m 0755 mlnet ${PKG}/usr/bin/mlnet
-  ln -sf /usr/bin/mlnet ${PKG}/usr/bin/${name}
 }
