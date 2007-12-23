@@ -3,22 +3,22 @@
 # /etc/rc.d/mlnetd: start/stop mldonkey daemon
 #
 
-MLDONKEY_USER="mldonkey"
-
 case $1 in
-	start)
-		su ${MLDONKEY_USER} -c "/usr/bin/mlnet &>/dev/null &"
-		;;
-	stop)
-    		killall -q /usr/bin/mlnet
-	    	;;
-	restart)
-    		$0 stop
-	    	$0 start
-	    	;;
-	*)
-    		echo "Usage: $0 [start|stop|restart]"
-      		;;
+  start)
+    export MLDONKEY_DIR=/var/mlnet
+    su mldonkey -c "mlnet -run_as_user mldonkey >/dev/null" &
+    ;;
+  stop)
+    pkill mlnet
+    ;;
+  restart)
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
+  *)
+    echo "Usage: $0 [start|stop|restart]"
+    ;;
 esac
 
 # End of file
