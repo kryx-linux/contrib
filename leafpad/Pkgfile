@@ -1,0 +1,19 @@
+# Description: GTK+ based simple text editor.
+# URL: http://tarot.freeshell.org/leafpad
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Victor Martinez, gandhul at ono dot com
+# Depends on: gtk
+
+name=leafpad
+version=0.8.13
+release=2
+source=(http://savannah.nongnu.org/download/$name/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr \
+              --enable-chooser
+  make
+  make DESTDIR=$PKG install
+  rm -dr {$PKG/usr/share/locale,$PKG/usr/share/icons}
+}
