@@ -1,0 +1,19 @@
+# Description: Jnettop is a traffic visualiser.
+# URL: http://jnettop.kubs.info/wiki/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Victor Martinez, gandhul at ono dot com
+# Depends on: ncurses,libpcap
+
+name=jnettop
+version=0.13.0
+release=2
+source=(http://dl.sourceforge.net/$name/$name-$version.tar.gz)
+
+build () {
+  cd $name-$version
+  ./configure --prefix=/usr \
+              --without-syslog \
+              --disable-jnet
+  make
+  make DESTDIR=$PKG install
+}
