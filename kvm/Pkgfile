@@ -5,7 +5,7 @@
 
 name=kvm
 version=59
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
 		$name-depmod.diff)
 
@@ -16,4 +16,5 @@ build () {
 	make
 	make DESTDIR=$PKG install
 	ln -s /usr/bin/qemu-system-x86_64 $PKG/usr/bin/qemu
+	rm $PKG/usr/include/linux/kvm.h
 }
