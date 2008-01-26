@@ -7,7 +7,7 @@
 
 name=fftw
 version=3.1.2
-release=3
+release=4
 source=(http://www.fftw.org/fftw-$version.tar.gz)
 
 build() {
@@ -25,23 +25,8 @@ build() {
 		--enable-threads
 		--enable-type-prefix
 		--with-gnu-ld
-		--disable-nls'
-
-	# processor-specific optimisations that only worked if
-	# not using shared librarys
-	if [ -z $FFTW_SHARED ]; then
-		if grep '^flags' /proc/cpuinfo |grep sse2 > /dev/null; then
-			config="$config --enable-sse2" # intel
-		elif grep '^flags' /proc/cpuinfo |grep sse > /dev/null; then
-			config="$config --enable-sse" # intel
-		elif grep '^flags' /proc/cpuinfo |grep 3dnow > /dev/null; then
-			config="$config --enable-k7" # althon
-		elif grep '^flags' /proc/cpuinfo |grep altivec > /dev/null; then
-			config="$config --enable-altivec" # ppc
-		fi
-	else
-		config="$config --enable-shared"
-	fi
+		--disable-nls
+		--enable-shared'
 
 	# compiling long double precision library
 	./configure \
