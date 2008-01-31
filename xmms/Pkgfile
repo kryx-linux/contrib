@@ -1,21 +1,17 @@
-# Description: X Multimedia System -  a multimedia player 
+# Description: X Multimedia System - a multimedia player 
 # URL: http://www.xmms.org
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Depends on: gtk1 
+# Depends on: gtk1
 
 # Nice to have: libmad, libvorbis
 
 name=xmms
-version=1.2.10
-release=4
-source=(http://www.xmms.org/files/1.2.x/$name-$version.tar.bz2 \
-		$name-$version-gcc4.patch \
-		$name-${version}_alsa_unpause.patch)
+version=1.2.11
+release=1
+source=(http://www.xmms.org/files/1.2.x/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	patch -p1 -i $SRC/$name-$version-gcc4.patch
-	patch -p1 -i $SRC/$name-${version}_alsa_unpause.patch
 	./configure --prefix=/usr \
 				--disable-mikmod \
 				--disable-nls \

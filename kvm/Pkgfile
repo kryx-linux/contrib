@@ -1,11 +1,11 @@
 # Description: Kernel-based Virtual Machine for Linux
 # URL: http://kvm.qumranet.com/kvmwiki
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Depends on: gcc34
+# Depends on: gcc34 libsdl
 
 name=kvm
-version=55
-release=1
+version=59
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
 		$name-depmod.diff)
 
@@ -16,4 +16,5 @@ build () {
 	make
 	make DESTDIR=$PKG install
 	ln -s /usr/bin/qemu-system-x86_64 $PKG/usr/bin/qemu
+	rm $PKG/usr/include/linux/kvm.h
 }
