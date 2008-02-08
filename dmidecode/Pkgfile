@@ -1,7 +1,7 @@
-# Description: Dmidecode reports information about your system's hardware as described in your system BIOS according to the SMBIOS/DMI standard.
+# Description: System's hardware information of your BIOS according to SMBIOS/DMI standard.
 # URL: http://www.nongnu.org/dmidecode/
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Maintainer: Victor Martinez, gandhul at ono dot com
+# Packager: Victor Martinez, gandhul at ono dot com
 # Depends on:
 
 name=dmidecode
@@ -10,9 +10,9 @@ release=2
 source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz)
 
 build() {
-  cd ${name}-${version}
+  cd $name-$version
   sed -e 's|/usr/local|/usr|' -e 's|/share/man|/man|' -i Makefile
   make
-  make DESTDIR=${PKG} install
-  rm -rf ${PKG}/usr/share
+  make DESTDIR=$PKG install
+  rm -rf $PKG/usr/share
 }
