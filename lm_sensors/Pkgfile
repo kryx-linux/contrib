@@ -1,17 +1,15 @@
 # Description: Tools for monitoring system health (temperatures, voltages, fan speed, etc)
 # URL: http://www.lm-sensors.org
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Packager: Attic, unknown at unknown
-# Depends on:
+# Depends on: i2c-tools
 
 name=lm_sensors
-version=2.10.5
+version=3.0.1
 release=1
-source=(http://dl.lm-sensors.org/lm-sensors/releases/$name-$version.tar.gz)
+source=(http://dl.lm-sensors.org/lm-sensors/releases/$name-$version.tar.bz2)
 
-build () {
+build() {
 	cd $name-$version
-	make user PREFIX=/usr
-	make PREFIX=$PKG/usr ETCDIR=$PKG/etc user_install
-	rm $PKG/usr/include/linux/i2c-dev.h
+	make PREFIX=/usr
+	make PREFIX=$PKG/usr ETCDIR=$PKG/etc install
 }
