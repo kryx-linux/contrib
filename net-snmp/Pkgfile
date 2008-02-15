@@ -6,12 +6,13 @@
 
 name=net-snmp
 version=5.4.1
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz \
-		snmpd snmpd.conf)
+		snmpd snmpd.conf net-snmp-5.4.1-sensors3.patch)
 
 build() {
 	cd $name-$version
+	patch -p0 -i $SRC/net-snmp-5.4.1-sensors3.patch
 	./configure --prefix=/usr \
 				--sysconfdir=/etc \
 				--enable-shared \
@@ -21,12 +22,13 @@ build() {
 				--with-openssl \
 				--with-libwrap \
 				--with-zlib \
-				--with-mib-modules="ucd-snmp/lmSensors smux agentx ucd-snmp/diskio mibII/mta_sendmail" \
+				--with-mib-modules="ucd-snmp/lmsensorsMib smux agentx ucd-snmp/diskio" \
 				--with-sys-location="Unknown" \
 				--with-sys-contact="root@localhost" \
 				--with-default-snmp-version="3" \
 				--with-logfile=/var/log/snmp/snmpd.log \
-				--with-persistent-directory=/var/lib/snmp
+				--with-persistent-directory=/var/lib/snmp \
+				--with-ldflags="-lsensors"
 	make
 	make install INSTALL_PREFIX=$PKG DESTDIR=$PKG
 
