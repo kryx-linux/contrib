@@ -5,10 +5,10 @@
 
 case $1 in
 start)
-	su daemon -c /usr/bin/zabbix_server
+	su daemon -c /usr/sbin/zabbix_server
 	;;
 stop)
-	killall -q /usr/bin/zabbix_server
+	killall -q /usr/sbin/zabbix_server
 	;;
 restart)
 	$0 stop
