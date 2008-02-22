@@ -41,8 +41,8 @@ if [ -z `getent passwd | gawk -F: '{ print $1 }' | grep ^$ADD_USER$` ]; then
 fi
 
 # additional
-chown $ADD_USER:$ADD_GROUP /var/log/zabbix_agentd.log
-chown $ADD_USER:$ADD_GROUP /var/run/zabbix_agentd
-sed -i s/"su\ daemon\ \-c\ \/usr\/bin\/zabbix_agentd$"/"su\ $ADD_USER\ \-c\ \/usr\/bin\/zabbix_agentd"/ /etc/rc.d/zabbix_agentd
+chown $ADD_USER:$ADD_GROUP /var/log/zabbix/zabbix_agentd.*
+chown -R $ADD_USER:$ADD_GROUP /var/run/zabbix_agentd
+sed -i "s|su daemon -c /usr/bin/zabbix_agentd|su $ADD_USER -c /usr/bin/zabbix_agentd|" /etc/rc.d/zabbix_agentd
 
 exit $ADD_STATUS

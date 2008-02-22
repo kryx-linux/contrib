@@ -1,10 +1,10 @@
-# Description: zabbix agentd
+# Description: zabbix agent daemon
 # URL: http://www.zabbix.com
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
 # Depends on:
 
 name=zabbix_agentd
-version=1.1.7
+version=1.4.4
 release=1
 source=(http://dl.sourceforge.net/sourceforge/zabbix/zabbix-$version.tar.gz \
 		zabbix_agentd.conf zabbix_agentd)
@@ -14,10 +14,17 @@ build() {
 	./configure --prefix=/usr \
 				--enable-agent
 	make
-	mkdir -p $PKG/{var/log,var/run/zabbix_agentd,usr/bin}
-	chown daemon:daemon $PKG/var/run/zabbix_agentd
-	touch zabbix_agentd.log
-	install -m 600 -o daemon -g daemon zabbix_agentd.log $PKG/var/log
+	
+	mkdir -p $PKG/{var/log/zabbix,var/run/zabbix_agentd,usr/bin}
+	
+	touch $PKG/var/log/zabbix/{zabbix_agentd.log,zabbix_agentd.log.old}
+	chmod 600 $PKG/var/log/zabbix/*
+	chown -R daemon:daemon $PKG/var/log/zabbix/*
+	
+	touch $PKG/var/run/zabbix_agentd/zabbix_agentd.pid
+	chmod 700 $PKG/var/run/zabbix_agentd
+	chown -R daemon:daemon $PKG/var/run/zabbix_agentd
+	
 	install -m 755 src/zabbix_agent/zabbix_agentd $PKG/usr/bin
 	install -D -m 644 $SRC/zabbix_agentd.conf $PKG/etc/zabbix/zabbix_agentd.conf
 	install -D -m 755 $SRC/zabbix_agentd $PKG/etc/rc.d/zabbix_agentd
