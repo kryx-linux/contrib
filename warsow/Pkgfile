@@ -6,9 +6,9 @@
 
 name=warsow
 version=0.41
-release=1
+release=2
 source=(http://www.speltips.org/~web1_mans/files/warsow_${version}_unified.zip
-	http://www.speltips.org/~web1_mans/files/warsow_0.41_sdk.zip \
+	http://www.speltips.org/~web1_mans/files/warsow_${version}_sdk.zip \
 	warsow.sh)
 
 build() {
@@ -35,7 +35,7 @@ build() {
 	install -d $PKG/usr/lib/warsow/libs $PKG/usr/bin/
 	install -m 0755 $SRC/warsow.sh $PKG/usr/bin/warsow
 	install -m 0755 ../warsow.i386 $PKG/usr/lib/warsow/
-	#mv ../basewsw/*.so $PKG/usr/lib/warsow/libs/
+	mv source/release/basewsw/*.so $PKG/usr/lib/warsow/libs/
 	cp -r source/release/* $PKG/usr/lib/warsow/
 	cp -r ../basewsw/*.pk3 $PKG/usr/lib/warsow/basewsw/
 	rm $PKG/usr/lib/warsow/warsow
