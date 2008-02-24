@@ -4,15 +4,12 @@
 # Depends on: libattr
 
 name=libcap
-version=2.04
+version=2.07
 release=1
 source=(ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.6/libcap-$version.tar.gz)
 
 build () {
 	cd libcap-$version
-
-	# don't build pam_cap
-	sed -i '13d' Makefile
 
 	make
 	make \
