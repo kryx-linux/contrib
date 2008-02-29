@@ -1,0 +1,18 @@
+# Description: GTK+2 color selector
+# URL: http://gcolor2.sourceforge.net/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Vincenzo Colosimo, vico at bicisport dot de
+# Depends on: gtk
+
+name=gcolor2
+version=0.4
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr \
+              --disable-nls
+  make
+  make DESTDIR=$PKG install
+}
