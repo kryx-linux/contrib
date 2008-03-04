@@ -1,0 +1,25 @@
+# Description: Perl Digest::SHA1
+# URL: http://search.cpan.org/~gaas/Digest-SHA1-2.11/
+# Maintainer: Jose V Beneyto, sepen at users dot soureforge dot net
+# Packager: Han Boetes, han at mijncomputer dot nl
+# Depends on: perl
+
+name=p5-digest-sha1
+version=2.11
+release=1
+source=(http://www.cpan.org/authors/id/G/GA/GAAS/Digest-SHA1-$version.tar.gz)
+
+build() {
+  cd Digest-SHA1-$version
+  perl Makefile.PL
+  make OPTIMIZE="$CFLAGS"
+  make install DESTDIR=$PKG
+  # Remove perlcrap
+  find $PKG -name .packlist -or \
+            -name '*.bs' -or \
+            -name autosplit.ix -or \
+            -name perllocal.pod \
+            -exec rm -rf {} \;
+  # Remove empty directories
+  find $PKG -depth -empty -exec rm -rf {} \;
+}
