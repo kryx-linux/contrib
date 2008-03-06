@@ -1,14 +1,13 @@
 # Description: A front-end to ssh-agent.
-# URL:         http://www.gentoo.org/proj/en/keychain.xml
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Stoyan Zhekov <zhware@hotpop.com>
-#
-# Depends on:
+# URL: http://www.gentoo.org/proj/en/keychain.xml
+# Maintainer: Brett Goulder, predatorfreak at dcaf-security dot org
+# Packager: Stoyan Zhekov <zhware@hotpop.com>
+# Depends on: openssh
 
 name=keychain
 version=2.6.8
 release=1
-source=(http://agriffis.n01se.net/$name/$name-$version.tar.bz2)
+source=(http://distro.ibiblio.org/pub/linux/distributions/gentoo/distfiles/$name-$version.tar.bz2)
 
 build() {
    install -D -m755 -groot -oroot $name-$version/keychain $PKG/usr/bin/keychain
