@@ -1,9 +1,8 @@
-# Description: Python bindings for SDL
-# URL:         http://pygame.org
-# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
-# Packager:    Han Boetes, han at mijncomputer dot nl
-#
-# Depends on:  sdl_image, sdl_mixer, sdl_ttf
+# Description: Python bindings for SDL.
+# URL: http://pygame.org/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: Han Boetes, han at mijncomputer dot nl
+# Depends on: sdl_image sdl_mixer sdl_ttf
 
 name=pygame
 version=1.7.1
@@ -11,8 +10,8 @@ release=2
 source=(http://www.pygame.org/ftp/pygame-${version}release.tar.gz)
 
 build() {
-	cd $name-${version}release
+	cd pygame-${version}release
 	yes | python config.py
 	python setup.py install --prefix=/usr --root $PKG
-	chown -R root:root $PKG
 }
+
