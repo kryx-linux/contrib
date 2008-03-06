@@ -5,15 +5,12 @@
 # Depends on: swig setuptools
 
 name=pyopengl
-version=3.0.0a6
+version=3.0.0b1
 release=1
 source=(http://dl.sourceforge.net/sourceforge/pyopengl/PyOpenGL-$version.tar.gz)
 
 build() {
-   install -d $PKG/usr
-   cd PyOpenGL-$version
-   
-   python setup.py install --root=$PKG
-   rm -rf $PKG/usr/lib/python/OpenGL/Demo $PKG/usr/lib/python/OpenGL/doc
+	cd PyOpenGL-$version
+	python setup.py install --root=$PKG
 }
 
