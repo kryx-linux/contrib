@@ -5,21 +5,21 @@
 # Depends on: sdl_mixer sdl_image
 
 name=bomberclone
-version=0.11.7
+version=0.11.8
 release=1
 source=(http://dl.sourceforge.net/sourceforge/bomberclone/bomberclone-$version.tar.bz2)
 
 build() {
 	cd bomberclone-$version
 
+	sed -i configure.in -e '/^packagedatadir=/s|share/games/${PACKAGE}|share/${PACKAGE}|'
+
 	./configure \
 		--prefix=/usr \
-		--disable-sdltest \
 		--disable-debug
 
 	make
 	make DESTDIR=$PKG install
-	find $PKG -type d -name 'CVS' -print | xargs rm -fr
-	rm -fr $PKG/usr/doc
+	rm -r $PKG/usr/share/doc
 }
 
