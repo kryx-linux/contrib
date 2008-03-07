@@ -5,12 +5,12 @@
 # Depends on: qt3
 
 name=djvulibre
-version=3.5.20
+version=3.5.20-5
 release=1
 source=(http://dl.sourceforge.net/sourceforge/djvu/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd $name-*
 	./configure --prefix=/usr \
 				--mandir=/usr/man \
 				--disable-i18n \
