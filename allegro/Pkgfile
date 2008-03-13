@@ -1,0 +1,25 @@
+# Description: A multi-platform game programming library for C/C++.
+# URL: http://alleg.sourceforge.net/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: sten, nick dot steeves at shaw dot ca
+# Depends on: alsa-lib xorg-libxcursor xorg-libxpm xorg-libxxf86dga xorg-libxxf86vm
+
+name=allegro
+version=4.2.2
+release=1
+source=(http://dl.sourceforge.net/sourceforge/alleg/allegro-$version.tar.gz)
+
+build() {
+	cd allegro-$version
+	install -d $PKG/usr
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--enable-exclopts=i686 \
+		--enable-artsdigi=no
+
+	make -j 1
+	make DESTDIR=$PKG install install-man
+}
+
