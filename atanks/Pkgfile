@@ -1,0 +1,25 @@
+# Description: Annihilate the other tanks to earn money, then spend it on bigger and better shields and weapons to wipe out the opposition.
+# URL: http://atanks.sourceforge.net/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: Danny Rawlins, romster at shortcircuit dot net dot au
+# Depends on: allegro
+
+name=atanks
+version=2.8
+release=1
+source=(http://dl.sourceforge.net/sourceforge/atanks/atanks-$version.tar.gz)
+
+build() {
+	cd atanks
+	sed -i src/Makefile \
+		-e '/^FLAGS = /s|-DLINUX -DDATA_DIR=\\".\\"|-DLINUX -DDATA_DIR=\\"/usr/share/atanks\\"|' \
+		-e '/^CFLAGS += -g.*$/d'
+
+	make -C src
+	install -D -m 0755 atanks $PKG/usr/bin/atanks
+	install -d $PKG/usr/share/atanks
+	install -m 0644 *.dat *.txt -t $PKG/usr/share/atanks/
+	install -D -m 0644 atanks.desktop $PKG/usr/share/applications/atanks.desktop
+	install -D -m 0644 atanks.png $PKG/usr/share/pixmaps/atanks.png
+}
+
