@@ -5,7 +5,7 @@
 # Depends on:
 
 name=liboil
-version=0.3.13
+version=0.3.14
 release=1
 source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz)
 
@@ -17,7 +17,7 @@ build() {
 		--disable-static \
 		--disable-gtk-doc
 
-	sed -i -e "/^SUBDIRS = /s/examples //" Makefile
+	sed -i Makefile -e '/^SUBDIRS = /s/examples //'
 	make
 	make DESTDIR=$PKG install
 
