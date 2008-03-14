@@ -35,6 +35,7 @@ build() {
 	make DESTDIR=$PKG install
 
 	find $PKG/usr/man -maxdepth 0 -type d ! -regex 'man?' -exec rm -r {} \;
+	find $PKG/usr/share/wesnoth -type f -name 'README' -delete
 
 	rm \
 		$PKG/usr/share/wesnoth/data/COPYING.txt \
