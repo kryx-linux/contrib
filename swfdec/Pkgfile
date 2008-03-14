@@ -2,7 +2,7 @@
 # URL: http://swfdec.freedesktop.org/wiki/
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: Stefan Lohmaier noneus at noneus dor de
-# Depends on: cairo alsa-lib glib gtk pango liboil zlib ffmpeg libmad libdca libsoup
+# Depends on: ffmpeg gtk libdca libmad liboil libsoup
 # Optional: gthread freetype gstreamer libxml2 libpng gnutls
 
 name=swfdec
@@ -14,7 +14,7 @@ build() {
 	cd swfdec-$version
 
 	# yet another program that --disable-gtk-doc dosn't work
-	sed -i -e '/^@WITH_GTK_TRUE@	doc \\/d' Makefile.in
+	sed -i Makefile.in -e '/^@WITH_GTK_TRUE@	doc \\/d'
 	
 	./configure \
 		--prefix=/usr \
