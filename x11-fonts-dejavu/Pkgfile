@@ -4,13 +4,13 @@
 # Depends on: x11
 
 name=x11-fonts-dejavu
-version=2.16
+version=2.24
 release=1
-source=(http://kent.dl.sourceforge.net/sourceforge/dejavu/dejavu-ttf-$version.tar.bz2)
+source=(http://dfn.dl.sourceforge.net/sourceforge/dejavu/dejavu-fonts-ttf-$version.tar.bz2)
 
 build() {
-    cd dejavu-ttf-$version
+    cd dejavu-fonts-ttf-$version
     mkdir -p $PKG/usr/share/fonts/dejavu
-    install -o root -g root -m 0644 *.ttf \
+    install -o root -g root -m 0644 ttf/*.ttf \
         $PKG/usr/share/fonts/dejavu/
 }
