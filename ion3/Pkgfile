@@ -4,14 +4,16 @@
 # Depends on: lua
 
 name=ion3
-version=3rc-20070927
+version=3-20080207
 release=1
-source=(http://iki.fi/tuomov/dl/ion-$version.tar.gz \
-        ion3.patch)
+source=(http://iki.fi/tuomov/dl/ion-$version.tar.gz)
 
 build () {
     cd ion-$version
-    patch -p0 < $SRC/ion3.patch
+
+    # adjust paths
+    sed -ie 's|^LUA_DIR=/usr/local|LUA_DIR=/usr|g' system.mk
+    sed -ie 's|^MANDIR=$(PREFIX)/share/man|MANDIR=$(PREFIX)/man|g' system.mk
 
     make
     make PREFIX=$PKG/usr install
