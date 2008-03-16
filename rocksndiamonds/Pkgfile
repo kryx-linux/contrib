@@ -1,35 +1,43 @@
 # Description: Clone of the old BoulderDash and Rockford game.
-# URL:         http://www.artsoft.org/rocksndiamonds/
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:  sdl_image, sdl_mixer, sdl_net
+# URL: http://www.artsoft.org/rocksndiamonds/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: James Mills, prologic at shortcircuit dot net dot au
+# Depends on: sdl_image sdl_mixer sdl_net smpeg
 
 name=rocksndiamonds
-version=3.1.1
-release=2
-source=(http://www.artsoft.org/RELEASES/unix/$name/$name-$version.tar.gz)
+version=3.2.4
+release=1
+source=(http://www.artsoft.org/RELEASES/unix/rocksndiamonds/rocksndiamonds-$version.tar.gz)
 
-build () {
-   cd $name-$version
+build() {
+	cd rocksndiamonds-$version
 
-   export RO_GAME_DIR=/usr/share/$name
-   export RW_GAME_DIR=/var/lib/games/$name
-   make
+	sed -i src/Makefile \
+		-e '/^OPTIONS = $(DEBUG) -Wall.*$/d' \
+		-e "/^OPTIONS = -O3 -Wall/s/-O3 -Wall/$CFLAGS -Wall -O3/"
 
-   install -d \
-      $PKG/usr/share/$name/{graphics, levels, music, sounds} \
-      $PKG/var/lib/games/$name
+	export BUILD_DIST=1
+	export RO_GAME_DIR='/usr/share/rocksndiamonds'
+	export RW_GAME_DIR='/var/lib/games/rocksndiamonds'
+	make
 
-   cp -r graphics $PKG/usr/share/$name
-   cp -r levels $PKG/usr/share/$name
-   cp -r music $PKG/usr/share/$name
-   cp -r sounds $PKG/usr/share/$name
+	install -d \
+		$PKG/usr/share/rocksndiamonds/graphics \
+		$PKG/usr/share/rocksndiamonds/levels \
+		$PKG/usr/share/rocksndiamonds/music \
+		$PKG/usr/share/rocksndiamonds/sounds \
+		$PKG/var/lib/games/rocksndiamonds
 
-   cp -r scores $PKG/var/lib/games/$name
-   install -D -m755 $name $PKG/usr/bin/$name
-   chown -R root:root $PKG
+	cp -r graphics $PKG/usr/share/rocksndiamonds
+	cp -r levels $PKG/usr/share/rocksndiamonds
+	cp -r music $PKG/usr/share/rocksndiamonds
+	cp -r sounds $PKG/usr/share/rocksndiamonds
 
-   unset RO_GAME_DIR
-   unset RW_GAME_DIR
+	cp -r scores $PKG/var/lib/games/rocksndiamonds
+	install -D -m 0755 rocksndiamonds $PKG/usr/bin/rocksndiamonds
+
+	unset BUILD_DIST
+	unset RO_GAME_DIR
+	unset RW_GAME_DIR
 }
+
