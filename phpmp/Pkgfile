@@ -14,4 +14,5 @@ build() {
    mkdir -p $PKG/usr/share/$name
    cp * $PKG/usr/share/$name
    chown -R root:root $PKG
+   rm $PKG/usr/share/phpmp/{COPYING,ChangeLog,INSTALL,README,TODO}
 }
