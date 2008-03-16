@@ -1,25 +1,25 @@
 # Description: GTK+ Diagramming Creation Software.
-# URL:         http://www.gnome.org/projects/dia/
-# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
-# Packager:    Younès Hafri <ycrux@club-internet.fr>
-#
-# Depends on:  libart_lgpl, popt, gtk, p5-xml-parser
+# URL: http://live.gnome.org/Dia/
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: Younès Hafri, ycrux at club dash internet dot fr
+# Depends on: libart_lgpl popt gtk p5-xml-parser
 
 name=dia
-version=0.96
+version=0.96.1
 release=1
-source=(ftp://ftp.gnome.org/pub/gnome/sources/$name/$version/$name-$version.tar.gz)
+source=(ftp://ftp.gnome.org/pub/gnome/sources/dia/${version%.*}/dia-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+	cd dia-$version
 
 	./configure \
 		--prefix=/usr \
 		--disable-nls \
 		--disable-db2html
 
-	make && make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/locale
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/locale
 	rmdir $PKG/usr/share/oaf
-	chown -R root:root $PKG
 }
+
