@@ -1,0 +1,16 @@
+# Description: display / zoom images in framebuffer
+# URL:         https://www.autistici.org/dezperado/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  libjpeg, libungif, libtiff, libpng
+
+name=fim
+version=0.2
+release=1
+source=(http://download.savannah.nongnu.org/releases/fbi-improved/$name-$version.tar.gz)
+
+build() {
+   cd $name-$version
+   LDFLAGS="-lncurses" LIBGIF="-lungif" ./configure --prefix=/usr
+   make DESTDIR=$PKG install
+   rm -r $PKG/usr/doc
+}
