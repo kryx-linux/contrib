@@ -2,8 +2,7 @@
 # URL:         http://www.murmeldjur.se/btpd/
 # Maintainer:  James Mills, prologic at shortcircuit dot net dot au
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:	libevent, openssl, curl
+# Depends on:  openssl
 
 name=btpd
 version=0.13
@@ -11,9 +10,9 @@ release=1
 source=(http://www.murmeldjur.se/$name/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
-	chown -R root:root $PKG
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
+  chown -R root:root $PKG
 }
