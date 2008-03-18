@@ -2,7 +2,7 @@
 # URL: http://www.artsoft.org/rocksndiamonds/
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: James Mills, prologic at shortcircuit dot net dot au
-# Depends on: sdl_image sdl_mixer sdl_net smpeg
+# Depends on: sdl_image sdl_mixer sdl_net
 
 name=rocksndiamonds
 version=3.2.4
@@ -35,6 +35,8 @@ build() {
 
 	cp -r scores $PKG/var/lib/games/rocksndiamonds
 	install -D -m 0755 rocksndiamonds $PKG/usr/bin/rocksndiamonds
+
+	rm $PKG/usr/share/rocksndiamonds/levels/Tutorials/rnd_tutorial_niko_boehm/README
 
 	unset BUILD_DIST
 	unset RO_GAME_DIR
