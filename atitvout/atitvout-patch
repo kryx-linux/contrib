@@ -15,7 +15,7 @@ diff -pruN atitvout.orig/Makefile atitvout/Makefile
  
  install: strip
 -	install -g root -o root -m 555 $(BINARY) /usr/local/sbin
-+	install -g root -o root -m 555 $(BINARY) ${DESTDIR}${PREFIX}/sbin
++	install -D -m 0555 $(BINARY) ${DESTDIR}${PREFIX}/sbin/$(BINARY)
  
  deinstall:
 -	rm -f /usr/local/sbin/$(BINARY)
