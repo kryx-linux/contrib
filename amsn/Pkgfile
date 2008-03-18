@@ -1,34 +1,28 @@
 # Description: MSN Messenger Client for Linux.
-# URL:         http://amsn.sourceforge.net
-# Maintainer: unmaintained
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:  tk
+# URL: http://amsn.sourceforge.net
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: James Mills, prologic at shortcircuit dot net dot au
+# Depends on: tk
 
 name=amsn
 version=0.96
-release=3
+release=4
 source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2
         $name-$version.diff)
 
 build() {
-   cd $name-$version
-
-	patch -p1 < $SRC/$name-$version.diff
-
-   ./configure \
-      --prefix=/usr \
-      --disable-nls \
-		--with-tls
-
-   make && make DESTDIR=$PKG install
-
-   rm -rf \
-		$PKG/usr/share/icons \
-      $PKG/usr/share/amsn/{icons,docs,lang} \
-		$PKG/usr/share/amsn/{AGREEMENT,CREDITS,FAQ,GNUGPL} \
-		$PKG/usr/share/amsn/{HELP,INSTALL,README,TODO} \
-		$PKG/usr/share/amsn/utils/BWidget-1.7.0/{ChangeLog,LICENSE.txt,Makefile.in,aclocal.m4,CHANGES.txt,README.txt}
-
-   chown -R root:root $PKG
+  cd $name-$version
+  patch -p1 -i $SRC/$name-$version.diff
+  ./configure --prefix=/usr \
+              --disable-nls \
+              --with-tls
+  make
+  make DESTDIR=$PKG install
+  rm -rf \
+    $PKG/usr/share/icons \
+    $PKG/usr/share/$name/{icons,docs,lang} \
+    $PKG/usr/share/$name/{AGREEMENT,CREDITS,FAQ,GNUGPL} \
+    $PKG/usr/share/$name/{HELP,INSTALL,README,TODO} \
+    $PKG/usr/share/$name/utils/BWidget-1.7.0/{ChangeLog,LICENSE.txt,Makefile.in} \
+    $PKG/usr/share/$name/utils/BWidget-1.7.0/{aclocal.m4,CHANGES.txt,README.txt}
 }
