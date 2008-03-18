@@ -11,8 +11,6 @@ source=(http://effbot.org/downloads/Imaging-$version.tar.gz)
 
 build () {
    cd Imaging-$version
-   python setup.py build
    python setup.py install --root=$PKG
-   chown -R root:root $PKG
 }
 
