@@ -6,11 +6,13 @@
 
 name=libdca
 version=0.0.5
-release=1
+release=2
 source=(http://download.videolan.org/pub/videolan/libdca/$version/libdca-$version.tar.bz2)
 
 build() {
 	cd libdca-$version
+
+	sed -i configure -e 's/-mtune=pentiumpro//'
 
 	./configure \
 		--prefix=/usr \
