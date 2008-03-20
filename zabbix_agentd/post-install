@@ -11,7 +11,7 @@ ADD_UID=70
 ADD_USER=zbxagent
 ADD_USER_HOME=/var/empty
 ADD_USER_SHELL=/bin/bash
-ADD_GROUP=zbxagent
+ADD_GROUP=zabbix
 
 ADD_STATUS=0
 if [ -z `getent group | gawk -F: '{ print $1 }' | grep ^$ADD_GROUP$` ]; then
@@ -39,6 +39,9 @@ if [ -z `getent passwd | gawk -F: '{ print $1 }' | grep ^$ADD_USER$` ]; then
 			ADD_STAUS=2
 		fi
 fi
+
+echo "one time fix: modifying $ADD_USER primary group to $ADD_GROUP"
+/usr/sbin/usermod -g $ADD_GROUP $ADD_USER
 
 # additional
 chown $ADD_USER:$ADD_GROUP /var/log/zabbix/zabbix_agentd.*

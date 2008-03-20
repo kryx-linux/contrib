@@ -41,6 +41,7 @@ if [ -z `getent passwd | gawk -F: '{ print $1 }' | grep ^$ADD_USER$` ]; then
 fi
 
 # additional
+chgrp $ADD_GROUP /var/log/zabbix
 chown $ADD_USER:$ADD_GROUP /var/log/zabbix/zabbix_server.log
 chown -R $ADD_USER:$ADD_GROUP /var/run/zabbix_server
 chown $ADD_USER:$ADD_GROUP /etc/zabbix/zabbix_server.conf
