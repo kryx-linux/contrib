@@ -10,6 +10,8 @@ source=(ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.6/libc
 
 build () {
 	cd libcap-$version
+	
+	sed -i 's:gperf:false:' libcap/Makefile
 
 	make
 	make \
