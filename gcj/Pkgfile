@@ -5,18 +5,18 @@
 # Depends On: alsa-lib
 
 name=gcj
-version=4.2.2
-release=2
+version=4.2.3
+release=1
 source=(ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$version/gcc-{core,g++,java}-$version.tar.bz2 \
 	gcj-$version-nocheck-fixincludes.patch \
 	gcj-$version-fixinc.patch)
 
 build() {
-	patch -d gcc-$version -p1 -i $SRC/gcj-$version-nocheck-fixincludes.patch
-	patch -d gcc-$version -p1 -i $SRC/gcj-$version-fixinc.patch
+	patch -d gcc-$version -p 1 -i ../gcj-$version-nocheck-fixincludes.patch
+	patch -d gcc-$version -p 1 -i ../gcj-$version-fixinc.patch
 
-	sed -i -e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|' \
-		gcc-$version/gcc/version.c
+	sed -i gcc-$version/gcc/version.c \
+		-e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|'
 
 	mkdir build
 	cd build
@@ -35,7 +35,7 @@ build() {
 
 	make bootstrap
 	make check
-	make prefix=$PKG/usr install
+	make -j 1 prefix=$PKG/usr install
 
 	ln -sf /usr/libexec/gcc/i686-pc-linux-gnu/$version/jc1 $PKG/usr/bin/jc1
 	
