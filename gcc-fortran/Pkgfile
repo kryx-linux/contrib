@@ -5,18 +5,19 @@
 # Depends on: mpfr
 
 name=gcc-fortran
-version=4.2.2
+version=4.2.3
 release=1
 source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-{core,fortran}-$version.tar.bz2 \
 	gcc-fortran-$version-nocheck-fixincludes.patch \
 	gcc-fortran-$version-fixinc.patch)
 
 build() {
-	patch -d gcc-$version -p1 -i $SRC/gcc-fortran-$version-nocheck-fixincludes.patch
-	patch -d gcc-$version -p1 -i $SRC/gcc-fortran-$version-fixinc.patch
+	patch -d gcc-$version -p 1 -i $SRC/gcc-fortran-$version-nocheck-fixincludes.patch
+	patch -d gcc-$version -p 1 -i $SRC/gcc-fortran-$version-fixinc.patch
 
-	sed -i -e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|' \
-		gcc-$version/gcc/version.c
+	sed -i gcc-$version/gcc/version.c \
+		-e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|'
+		
 
 	mkdir build
 	cd build
@@ -34,7 +35,7 @@ build() {
 
 	make bootstrap
 	make check
-	make DESTDIR=$PKG install
+	make -j 1 DESTDIR=$PKG install
 
 	ln -fs gfortran $PKG/usr/bin/f90
 	ln -fs gfortran $PKG/usr/bin/f95
