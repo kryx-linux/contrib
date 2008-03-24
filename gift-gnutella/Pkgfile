@@ -7,12 +7,18 @@
 name=gift-gnutella
 version=0.0.11
 release=1
-source=(http://dl.sourceforge.net/sourceforge/gift/gift-gnutella-$version.tar.bz2)
+source=(http://dl.sourceforge.net/sourceforge/gift/gift-gnutella-$version.tar.bz2 \
+	http://update.kceasy.com/update/gnutella/nodes.gzip \
+	http://update.kceasy.com/update/gnutella/hostiles.txt.gzip \
+	http://update.kceasy.com/update/gnutella/gwebcaches.gzip)
 
 build() {
 	cd gift-gnutella-$version
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
+	zcat ../nodes.gzip >> $PKG/usr/share/giFT/Gnutella/nodes
+	zcat ../hostiles.txt.gzip >> $PKG/usr/share/giFT/Gnutella/hostiles.txt
+	zcat ../gwebcaches.gzip >> $PKG/usr/share/giFT/Gnutella/gwebcaches
 }
 
