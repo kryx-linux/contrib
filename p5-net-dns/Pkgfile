@@ -1,28 +1,27 @@
 # Description: Perl Library Net::DNS
-# URL:         ...
-# Maintainer: unmaintained
+# URL:         http://www.net-dns.org/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Han Boetes, han at mijncomputer dot nl
-#
 # Depends on:  perl
 
 name=p5-net-dns
 capsname=Net-DNS
-version=0.59
+version=0.63
 release=1
 source=(http://search.cpan.org/CPAN/authors/id/O/OL/OLAF/Net-DNS-$version.tar.gz)
 
 build() {
-	cd $capsname-$version
-	yes n|perl Makefile.PL
-	make OPTIMIZE="$CFLAGS"
-	make install DESTDIR=$PKG
-	# Remove perlcrap
-	find $PKG \
-		-name .packlist -or \
-		-name '*.bs' -or \
-		-name autosplit.ix -or \
-		-name perllocal.pod | xargs rm
-	# Remove empty directories
-	find $PKG -depth -empty -exec rm -rf {} \;
-	chown -R root:root $PKG
+  cd $capsname-$version
+  yes n|perl Makefile.PL
+  make OPTIMIZE="$CFLAGS"
+  make install DESTDIR=$PKG
+  # Remove perlcrap
+  find $PKG \
+    -name .packlist -or \
+    -name '*.bs' -or \
+    -name autosplit.ix -or \
+    -name perllocal.pod | xargs rm
+  # Remove empty directories
+  find $PKG -depth -empty -exec rm -rf {} \;
+  chown -R root:root $PKG
 }
