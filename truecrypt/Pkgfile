@@ -7,10 +7,12 @@
 name=truecrypt
 version=4.3a
 release=1
-source=(http://www.truecrypt.org/downloads/$name-$version-source-code.tar.gz)
+source=(http://www.mizrahi.com.ve/crux/dist/$name-$version.tar.bz2 truecrypt-4.3a-2.6.23.patch truecrypt-4.3a-2.6.24.patch)
 
 build () {
-	cd truecrypt-$version-source-code/Linux
+	cd $name-$version/Linux
+	patch -p2 -i $SRC/truecrypt-4.3a-2.6.23.patch
+	patch -p2 -i $SRC/truecrypt-4.3a-2.6.24.patch
 	./build.sh
 	install -m 755 -D Cli/truecrypt $PKG/usr/bin/truecrypt
 	install -m 644 -D Cli/Man/truecrypt.1 $PKG/usr/man/man1/truecrypt.1
