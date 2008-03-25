@@ -1,12 +1,11 @@
 # Description: SpamAssassin(tm) is a mail filter to identify spam.
 # URL:         http://www.spamassassin.org
-# Maintainer: unmaintained
+# Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Victor <victord@users.berlios.de>
-#
-# Depends on:  p5-digest-sha1, p5-html-parser
+# Depends on:  p5-digest-sha1, p5-html-parser, p5-net-dns
 
 name=spamassassin
-version=3.1.3
+version=3.2.4
 release=2
 source=(http://www.axint.net/apache/$name/Mail-SpamAssassin-$version.tar.bz2 \
    $name.rc)
@@ -34,6 +33,8 @@ build() {
    chmod 0644 $PKG/usr/share/$name/*
    chmod -R u+w $PKG/*
 
-   rm -fr $PKG/usr/lib/perl5/{5.*.*, site_perl/5.*.*/linux}
+   rm -fr $PKG/usr/lib/perl5/{5.*.*,site_perl/5.*.*/linux}
+   #rm -rf $PKG/usr/lib/perl5/5.8.8/linux/
+   #rm -rf $PKG/usr/lib/perl5/site_perl/5.8.8/linux
    chown -R root:root $PKG
 }
