@@ -7,7 +7,7 @@
 name=nvclock
 version=20071205
 release=1
-source=(http://romster.shortcircuit.net.au/crux/source/nvclock-snapshot-$version.tar.lzma)
+source=(ftp://romster.dyndns.org/linux/source/nvclock/nvclock-snapshot-$version.tar.lzma)
 #source=(http://www.linuxhardware.org/nvclock/nvclock$version.tar.gz)
 
 build() {
@@ -24,7 +24,7 @@ build() {
 		--disable-qt \
 		--with-x
 
-	make -j1
+	make -j 1
 	make prefix=$PKG/usr install
 	rm -r $PKG/usr/share
 }
