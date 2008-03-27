@@ -1,16 +1,19 @@
 # Description: Script and XSL stylesheet to convert svn logs to ChangeLog.
-# URL:         None
-# Maintainer: unmaintained
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:  libxslt
+# URL: http://ch.tudelft.nl/~artur/svn2cl/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: James Mills, prologic at shortcircuit dot net dot au
+# Depends on: subversion libxslt
 
 name=svn2cl
-version=1.1
+version=0.9
 release=1
-source=(svn2cl.xsl svn2cl)
+source=(http://ch.tudelft.nl/~arthur/$name/$name-$version.tar.gz \
+        $name)
 
 build() {
-   install -D -m644 -groot -oroot svn2cl.xsl $PKG/usr/share/xml/xsl/$name/svn2cl.xsl
-   install -D -m755 -groot -oroot $name $PKG/usr/bin/$name
+  install -d $PKG/usr/{bin,man/man1,share/$name}
+  install -m 0644 $name-$version/$name.1 $PKG/usr/man/man1
+  install -m 0644 $name-$version/*.{xsl,css} $PKG/usr/share/$name
+  install -m 0755 $name-$version/$name.sh $PKG/usr/share/$name
+  install -m 0755 $SRC/$name $PKG/usr/bin
 }
