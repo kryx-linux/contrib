@@ -7,18 +7,19 @@ drwxr-xr-x	root/root	etc/security/
 -rw-r--r--	root/root	etc/security/limits.conf
 drwxr-xr-x	root/root	etc/security/limits.d/
 -rw-r--r--	root/root	etc/security/namespace.conf
+drwxr-xr-x	root/root	etc/security/namespace.d/
 -rwxr-xr-x	root/root	etc/security/namespace.init
 -rw-r--r--	root/root	etc/security/pam_env.conf
 -rw-r--r--	root/root	etc/security/time.conf
 drwxr-xr-x	root/root	lib/
 -rwxr-xr-x	root/root	lib/libpam.la
-lrwxrwxrwx	root/root	lib/libpam.so -> libpam.so.0.81.8
-lrwxrwxrwx	root/root	lib/libpam.so.0 -> libpam.so.0.81.8
--rwxr-xr-x	root/root	lib/libpam.so.0.81.8
+lrwxrwxrwx	root/root	lib/libpam.so -> libpam.so.0.81.10
+lrwxrwxrwx	root/root	lib/libpam.so.0 -> libpam.so.0.81.10
+-rwxr-xr-x	root/root	lib/libpam.so.0.81.10
 -rwxr-xr-x	root/root	lib/libpam_misc.la
-lrwxrwxrwx	root/root	lib/libpam_misc.so -> libpam_misc.so.0.81.2
-lrwxrwxrwx	root/root	lib/libpam_misc.so.0 -> libpam_misc.so.0.81.2
--rwxr-xr-x	root/root	lib/libpam_misc.so.0.81.2
+lrwxrwxrwx	root/root	lib/libpam_misc.so -> libpam_misc.so.0.81.3
+lrwxrwxrwx	root/root	lib/libpam_misc.so.0 -> libpam_misc.so.0.81.3
+-rwxr-xr-x	root/root	lib/libpam_misc.so.0.81.3
 -rwxr-xr-x	root/root	lib/libpamc.la
 lrwxrwxrwx	root/root	lib/libpamc.so -> libpamc.so.0.81.0
 lrwxrwxrwx	root/root	lib/libpamc.so.0 -> libpamc.so.0.81.0
@@ -74,8 +75,6 @@ drwxr-xr-x	root/root	lib/security/pam_filter/
 -rwxr-xr-x	root/root	lib/security/pam_permit.so
 -rwxr-xr-x	root/root	lib/security/pam_rhosts.la
 -rwxr-xr-x	root/root	lib/security/pam_rhosts.so
--rwxr-xr-x	root/root	lib/security/pam_rhosts_auth.la
--rwxr-xr-x	root/root	lib/security/pam_rhosts_auth.so
 -rwxr-xr-x	root/root	lib/security/pam_rootok.la
 -rwxr-xr-x	root/root	lib/security/pam_rootok.so
 -rwxr-xr-x	root/root	lib/security/pam_securetty.la
@@ -105,6 +104,7 @@ drwxr-xr-x	root/root	lib/security/pam_filter/
 drwxr-xr-x	root/root	sbin/
 -rwxr-xr-x	root/root	sbin/pam_tally
 -rwxr-xr-x	root/root	sbin/unix_chkpwd
+-rwxr-xr-x	root/root	sbin/unix_update
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/security/
@@ -158,6 +158,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -rw-r--r--	root/root	usr/man/man3/pam_vinfo.3.gz
 -rw-r--r--	root/root	usr/man/man3/pam_vprompt.3.gz
 -rw-r--r--	root/root	usr/man/man3/pam_vsyslog.3.gz
+-rw-r--r--	root/root	usr/man/man3/pam_xauth_data.3.gz
 drwxr-xr-x	root/root	usr/man/man5/
 -rw-r--r--	root/root	usr/man/man5/access.conf.5.gz
 -rw-r--r--	root/root	usr/man/man5/group.conf.5.gz
@@ -201,6 +202,7 @@ drwxr-xr-x	root/root	usr/man/man8/
 -rw-r--r--	root/root	usr/man/man8/pam_succeed_if.8.gz
 -rw-r--r--	root/root	usr/man/man8/pam_tally.8.gz
 -rw-r--r--	root/root	usr/man/man8/pam_time.8.gz
+-rw-r--r--	root/root	usr/man/man8/pam_tty_audit.8.gz
 -rw-r--r--	root/root	usr/man/man8/pam_umask.8.gz
 -rw-r--r--	root/root	usr/man/man8/pam_unix.8.gz
 -rw-r--r--	root/root	usr/man/man8/pam_userdb.8.gz
@@ -208,3 +210,7 @@ drwxr-xr-x	root/root	usr/man/man8/
 -rw-r--r--	root/root	usr/man/man8/pam_wheel.8.gz
 -rw-r--r--	root/root	usr/man/man8/pam_xauth.8.gz
 -rw-r--r--	root/root	usr/man/man8/unix_chkpwd.8.gz
+-rw-r--r--	root/root	usr/man/man8/unix_update.8.gz
+drwxr-xr-x	root/root	var/
+drwxr-xr-x	root/root	var/run/
+drwxr-xr-x	root/root	var/run/sepermit/
