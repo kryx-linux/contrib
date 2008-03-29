@@ -5,15 +5,15 @@
 # Depends on: alsa-lib libjpeg libpng mesa3d xorg-libxft xorg-libxinerama
 
 name=fltk
-version=1.1.7
-release=3
+version=1.1.8
+release=1
 source=(http://ftp.easysw.com/pub/fltk/$version/fltk-$version-source.tar.bz2)
 
 build() {
 	cd fltk-$version
 
-	export CFLAGS="$CFLAGS -fno-strict-aliasing"
-	export CXXFLAGS="$CXXFLAGS -fno-strict-aliasing"
+	#export CFLAGS="$CFLAGS -fno-strict-aliasing"
+	#export CXXFLAGS="$CXXFLAGS -fno-strict-aliasing"
 
 	./configure \
 		--prefix=/usr \
@@ -25,7 +25,7 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-
+	chmod a-x $PKG/usr/lib/*.a
 	rm -r $PKG/usr/{share,man/cat?}
 }
 
