@@ -6,7 +6,7 @@
 
 name=net-snmp
 version=5.4.1
-release=2
+release=3
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz \
 		snmpd snmpd.conf net-snmp-5.4.1-sensors3.patch)
 
@@ -38,7 +38,6 @@ build() {
 		-o \( \
 		-name *.bs -a -empty \
 		\) \
-		-o -name *.ix \
 		| xargs rm
 	# ... less common ones and empty directories
 	rm -rf \
