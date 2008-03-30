@@ -5,13 +5,15 @@
 # Depends on: numeric sdl_image sdl_mixer sdl_ttf xorg-libx11
 
 name=pygame
-version=1.7.1
-release=3
+version=1.8.0
+release=1
 source=(http://www.pygame.org/ftp/pygame-${version}release.tar.gz)
 
 build() {
 	cd pygame-${version}release
+	export CFLAGS="$CFLAGS -fno-strict-aliasing"
 	python config.py
 	python setup.py install --prefix=/usr --root $PKG
+	chmod a-x $PKG/usr/lib/python*/site-packages/pygame/*.so
 }
 
