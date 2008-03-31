@@ -40,7 +40,4 @@ if [ -z `getent passwd | gawk -F: '{ print $1 }' | grep ^$ADD_USER$` ]; then
 		fi
 fi
 
-echo "one time fix: modifying $ADD_USER primary group to $ADD_GROUP"
-/usr/sbin/usermod -g $ADD_GROUP $ADD_USER
-
 exit $ADD_STATUS
