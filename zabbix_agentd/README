@@ -6,7 +6,8 @@ PRE-INSTALL
 This port include zabbix_agentd. For other apps see my zabbix_utils port.
 
 POST-INSTALL
-1. Change Hostname, ListenIP and Server in /etc/zabbix_agentd.conf to something useful.
+1. Change Hostname, ListenIP and Server in /etc/zabbix_agentd.conf to
+something useful.
 
 2. On the client (monitored) machines, you may add the following lines to
  /etc/services:
@@ -14,5 +15,11 @@ POST-INSTALL
   zabbix_trap 10051/tcp
 
 3. Run post-install to create dedicated user for the agent instead of 'daemon'.
+
+PRECAUTION                                 
+Before port version 1.4.4-2 'zbxagent' group was used as a pimary group of
+'zbxagent' user. Later it was changed (in post-install) to 'zabbix' to fix log
+files rotation issue in the directory shared with the zabbix server. Now it
+should be safe to remove unused zbxagent group by hand.
 
 RESOURCES
