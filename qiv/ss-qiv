@@ -1,0 +1,16 @@
+#!/bin/sh
+
+msgError() {
+  echo "Error, $@" 2>&1
+  exit 1
+}
+
+[ ! -x /usr/bin/xhost ] && msgError "'xorg-xhost' package not found"
+[ ! -x /usr/bin/xrdb ] && msgError "'xorg-xrdb' package not found"
+[ ! -x /usr/bin/xscreensaver ] && msgError "'xscreensaver' package not found"
+  
+xhost +`hostname` 1> /dev/null
+xrdb < /usr/etc/qivrc
+xscreensaver 1> /dev/null &
+
+# End of file
