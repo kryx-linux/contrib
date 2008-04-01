@@ -6,7 +6,7 @@
 # Optional: yasm
 
 name=x264
-version=r745
+version=0.59.808-ff5059a
 release=1
 source=(ftp://romster.dyndns.org/linux/source/x264/x264-snapshot-$version.tar.lzma)
 
@@ -28,9 +28,10 @@ build() {
 		--prefix=/usr \
 		--enable-pic \
 		--enable-pthread \
-		--enable-shared
+		--enable-shared 
 
 	make
 	make DESTDIR=$PKG install
+	chmod a-x $PKG/usr/lib/*.so
 }
 
