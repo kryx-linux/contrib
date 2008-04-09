@@ -7,13 +7,13 @@
 
 name=flashplayer
 version=9
-release=3
+release=4
 source=(http://download.macromedia.com/pub/flashplayer/updaters/9/flash_player_9_linux_dev.tar.gz)
 
 build() {
-	cd flash_player_9_linux_dev/standalone/release
-	tar zxvf flashplayer.tar.gz
-	mkdir -p $PKG/usr/bin/
-	cp flashplayer $PKG/usr/bin/
-	chown -R root:root $PKG
+  cd flash_player_9_linux_dev/standalone/release
+  tar zxvf flashplayer.tar.gz
+  mkdir -p $PKG/usr/bin/
+  cp flashplayer $PKG/usr/bin/
+  chown -R root:root $PKG
 }
