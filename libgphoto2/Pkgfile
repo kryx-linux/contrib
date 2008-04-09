@@ -5,12 +5,14 @@
 # Depends on: libusb, libexif
 
 name=libgphoto2
-version=2.4.0
+version=2.4.1
 release=1
 source=(http://dl.sourceforge.net/sourceforge/gphoto/$name-$version.tar.gz)
 
 build () {
 	cd $name-$version
+	sed -i "s:lt_dlcaller_register:lt_dlinit:g" configure libgphoto2_port/configure
+	sed -i "s:usb_busses:usb_find_busses:g" libgphoto2_port/configure
 	./configure --prefix=/usr \
 		--disable-nls \
 		--disable-static \
