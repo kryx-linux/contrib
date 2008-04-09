@@ -5,17 +5,16 @@
 # Depends on:
 
 name=doxygen 
-version=1.5.4
+version=1.5.5
 release=1 
-source=(http://ftp.stack.nl/pub/users/dimitri/${name}-${version}.src.tar.gz) 
+source=(http://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz) 
 
 build() {
-  cd ${name}-${version}
+  cd $name-$version
   ./configure
   make
-  install -d $PKG/usr/bin
-  install -m 755 bin/doxygen $PKG/usr/bin
-  install -m 755 bin/doxytag $PKG/usr/bin
+  install -D -m 0755 bin/$name $PKG/usr/bin/$name
+  install -D -m 0755 bin/doxytag $PKG/usr/bin/doxytag
   install -d $PKG/usr/man/man1
   cat doc/doxygen.1 | sed -e "s/DATE/June 2007/g" \
     -e "s/VERSION/1.5.2/g" > $PKG/usr/man/man1/doxygen.1
