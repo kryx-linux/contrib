@@ -1,9 +1,7 @@
 # Description: Text-based addressbook program designed to use with mutt.
 # URL:         http://abook.sourceforge.net/
-# Maintainer: unmaintained
+# Maintainer:  Jürgen Daubert, juergen dot daubert at t-online dot de
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:   
 
 name=abook
 version=0.6.0pre2
@@ -13,7 +11,7 @@ source=(http://$name.sourceforge.net/devel/$name-$version.tar.gz)
 build() {
    cd $name-$version
    ./configure --prefix=/usr
-   make && make DESTDIR=$PKG install
+   make
+   make DESTDIR=$PKG install
    rm -r $PKG/usr/share/
-   chown -R root:root $PKG
 }
