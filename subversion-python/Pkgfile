@@ -1,36 +1,34 @@
-# Description: Python bindings for subversion.
-# URL:         http://subversion.tigris.org
-# Packager:    Johannes Winkelmann <jw@tks6.net>
-# Maintainer: unmaintained
-#
-# Depends on:  subversion, swig
+# Description: Python bindings for subversion
+# URL: http://subversion.tigris.org
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Johannes Winkelmann, jw at tks6 dot net
+# Depends on: subversion swig
 
 name=subversion-python
-version=1.4.3
+version=1.4.6
 release=1
 source=(http://subversion.tigris.org/tarballs/subversion-$version.tar.bz2)
 
 PYTHONVERSION=`python -c "import sys; print \"%s.%s\" % (sys.version_info[0], sys.version_info[1]);"`
 
 build() {
-   cd subversion-$version
-   LDFLAGS="-L$PKG/usr/lib" \
-   
-   ./configure \
-      --prefix=/usr \
-      --disable-nls \
-      --with-neon=/usr \
-      --disable-mod-activation \
-      --with-apr=/usr \
-      --with-apr-util=/usr
+  cd subversion-$version
+  
+  LDFLAGS="-L$PKG/usr/lib" \
+    ./configure --prefix=/usr \
+                --disable-nls \
+                --with-neon=/usr \
+                --disable-mod-activation \
+                --with-apr=/usr \
+                --with-apr-util=/usr
 
-   make &&   make DESTDIR=$PKG install-swig-py-lib install-swig-py
-   install -d $PKG/usr/lib/python$PYTHONVERSION/site-packages/
-   
-   mv \
-      $PKG/usr/lib/svn-python/{svn,libsvn} \
-      $PKG/usr/lib/python$PYTHONVERSION/site-packages/
-
-   rm -r $PKG/usr/lib/svn-python
-   chown -R root:root $PKG
+  make
+  make DESTDIR=$PKG install-swig-py-lib install-swig-py
+  
+  install -d $PKG/usr/lib/python$PYTHONVERSION/site-packages
+  
+  mv $PKG/usr/lib/svn-python/{svn,libsvn} \
+    $PKG/usr/lib/python$PYTHONVERSION/site-packages
+    
+  rm -r $PKG/usr/lib/svn-python
 }
