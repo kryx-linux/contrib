@@ -1,32 +1,26 @@
 # Description: Fast, powerful, and language-neutral HTML template system.
-# URL:         http://www.clearsilver.net/
-# Maintainer: unmaintained
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:  python
+# URL: http://www.clearsilver.net/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: James Mills, prologic at shortcircuit dot net dot au
+# Depends on: python
 
 name=clearsilver
-version=0.10.4
-release=2
-source=(http://www.clearsilver.net/downloads/$name-$version.tar.gz \
-   $name-$version.patch)
+version=0.10.5
+release=1
+source=(http://www.clearsilver.net/downloads/clearsilver-$version.tar.gz)
 
-build () {
-   cd $name-$version
+build() {
+	cd clearsilver-$version
 
-   patch -p1 < $SRC/$name-$version.patch
+	./configure \
+		--prefix=/usr \
+		--disable-perl \
+		--disable-ruby \
+		--disable-java \
+		--disable-csharp \
+		--with-python=/usr/bin/python
 
-   ./configure \
-      --prefix=$PKG/usr \
-      --with-python=/usr/bin/python \
-      --disable-perl \
-      --disable-ruby \
-      --disable-java \
-      --disable-csharp
-
-   make && make prefix=$PKG/usr \
-      PYTHON_SITE=$PKG/usr/lib/python$pythonver/site-packages/ \
-      install
-
-   chown root:root $PKG
+	make
+	make DESTDIR=$PKG install
 }
+
