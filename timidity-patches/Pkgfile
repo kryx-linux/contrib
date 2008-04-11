@@ -1,17 +1,16 @@
-# Description: GUS-compatible MIDI patch files for Timidity
-# URL:         http://packages.debian.org/stable/sound/timidity-patches
-# Maintainer: unmaintained
-# Packager:    Vincenzo Colosimo, vico at bicisport dot de
-#
-# Depends on:  timidity
+# Description: GUS-compatible MIDI patch files for Timidity.
+# URL: http://packages.debian.org/stable/sound/timidity-patches
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Vincenzo Colosimo, vico at bicisport dot de
+# Depends on: timidity
 
 name=timidity-patches
 version=0.1
 release=1
-source=(http://ftp.debian.org/debian/pool/main/t/${name}/${name}_${version}-5.tar.gz)
+source=(http://archive.debian.org/pool/main/t/timidity-patches/timidity-patches_$version-5.tar.gz)
 
 build() {
-    cd ${name}-${version}
+    cd timidity-patches-$version
     install -d $PKG/usr/share/timidity/patches
     cp -p cfg/*.cfg $PKG/usr/share/timidity/patches
     cp -p pat/*.pat $PKG/usr/share/timidity/patches
@@ -26,3 +25,4 @@ build() {
 
     chown -R root:root $PKG
 }
+
