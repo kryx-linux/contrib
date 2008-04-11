@@ -1,18 +1,19 @@
 # Description: A Gameboy and Gameboy Advance emulator.
-# URL:         http://vba.ngemu.com/
-# Packager:    Huynh Ngoc Chau Tran, nthuynh at fastmail dot com
-# Maintainer: unmaintained
-#
-# Depends on:  libsdl, libpng, zlib
+# URL: http://vba.ngemu.com/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Huynh Ngoc Chau Tran, nthuynh at fastmail dot com
+# Depends on: libsdl libpng zlib
 
 name=vba
 version=1.7.2
 release=2
-source=(http://dl.sourceforge.net/sourceforge/$name/VisualBoyAdvance-src-$version.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/vba/VisualBoyAdvance-src-$version.tar.gz)
 
 build() {
 	cd VisualBoyAdvance-$version
-	./configure --prefix=/usr \
+
+	./configure \
+		--prefix=/usr \
 		--disable-dependency-tracking \
 		--disable-profiling \
 		--disable-nls \
@@ -20,5 +21,5 @@ build() {
 	make
 	make prefix=$PKG/usr install
 	ln -s VisualBoyAdvance $PKG/usr/bin/vba
-	chown -R root:root $PKG
 }
+
