@@ -2,20 +2,14 @@
 # URL: http://dvd.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: libdvdcss lzma
+# Depends on: libdvdcss
 
 name=libdvdnav
 version=r1000
 release=1
-source=(ftp://romster.dyndns.org/linux/source/libdvdnav/libdvdnav-snapshot-$version.tar.lzma)
+source=(ftp://romster.dyndns.org/linux/source/libdvdnav/libdvdnav-snapshot-$version.tar.bz2)
 
 build() {
-	# temp fix untill/if pkgutils supports lzma
-	if [ -e $SRC/$name-snapshot-$version.tar.lzma ]; then
-		tar --use-compress-program=lzma -xf $name-snapshot-$version.tar.lzma
-		rm $name-snapshot-$version.tar.lzma
-	fi
-
 	cd libdvdnav
 	# -O3 is used in the Makefile
 	CFLAGS="`echo $CFLAGS | sed -e 's/-O[s0-3] //'`"
