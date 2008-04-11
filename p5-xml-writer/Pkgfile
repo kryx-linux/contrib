@@ -1,32 +1,29 @@
-# Description: Perl XML Parser
-# URL:         http://search.cpan.org/~msergeant/XML-Parser-2.34/
-# Maintainer: unmaintained
-# Packager:    Han Boetes han at mijncomputer dot nl
-#
-# Depends on:  perl
+# Description: Perl XML writer.
+# URL: http://search.cpan.org/~josephw/XML-Writer-0.604/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Han Boetes han at mijncomputer dot nl
+# Depends on: perl
 
 name=p5-xml-writer
-capsname=XML-Writer
-version=0.602
+version=0.604
 release=1
 source=(http://www.cpan.org/modules/by-module/XML/XML-Writer-$version.tar.gz)
 
 build() {
-   cd $capsname-$version
+	cd XML-Writer-$version
 
-   perl Makefile.PL
-   make OPTIMIZE="$CFLAGS"
-   make install DESTDIR=$PKG
+	perl Makefile.PL
+	make OPTIMIZE="$CFLAGS"
+	make install DESTDIR=$PKG
 
-   # Remove perlcrap
-   find $PKG \
-      -name .packlist -or \
-      -name '*.bs' -or \
-      -name autosplit.ix -or \
-      -name perllocal.pod | xargs rm
+	# Remove perlcrap
+	find $PKG -type f \
+		\( -name '.packlist' -or \
+		-name '*.bs' -or \
+		-name 'autosplit.ix' -or \
+		-name 'perllocal.pod' \) -delete
 
-   # Remove empty directories
-   find $PKG -depth -empty -exec rm -rf {} \;
-
-   chown -R root:root $PKG
+	# Remove empty directories
+	find $PKG -depth -empty -exec rm -rf {} \;
 }
+
