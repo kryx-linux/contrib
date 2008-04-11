@@ -5,16 +5,22 @@
 # Depends on: libdvdcss
 
 name=libdvdnav
-version=r997
+version=r1000
 release=1
-source=(ftp://romster.dyndns.org/linux/source/libdvdnav/libdvdnav-snapshot-$version.tar.bz2)
+source=(ftp://romster.dyndns.org/linux/source/libdvdnav/libdvdnav-snapshot-$version.tar.lzma)
 
 build() {
-	cd libdvdnav
+	# temp fix untill/if pkgutils supports lzma
+	if [ -e $SRC/$name-snapshot-$version.tar.lzma ]; then
+		tar --use-compress-program=lzma -xf $name-snapshot-$version.tar.lzma
+		rm $name-snapshot-$version.tar.lzma
+	fi
 
-	export \
-		CFLAGS="${CFLAGS//-O?/}" \
-		CXXFLAGS="${CXXFLAGS//-O?/}"
+	cd libdvdnav
+	# -O3 is used in the Makefile
+	CFLAGS="`echo $CFLAGS | sed -e 's/-O[s0-3] //'`"
+	CXXFLAGS="`echo $CXXFLAGS | sed -e 's/-O[s0-3] //'`"
+	export CFLAGS CXXFLAGS
 
 	./configure \
 		--prefix=/usr \
@@ -22,5 +28,6 @@ build() {
 		--disable-debug
 
 	make DESTDIR=$PKG install
+	chmod a-x $PKG/usr/lib/*.so
 }
 
