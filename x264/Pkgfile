@@ -2,21 +2,15 @@
 # URL: http://www.videolan.org/developers/x264.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Rouven Schuerch, rs at tegonal dot com
-# Depends on: lzma
+# Depends on:
 # Optional: yasm
 
 name=x264
 version=0.59.816-761630d
 release=1
-source=(ftp://romster.dyndns.org/linux/source/x264/x264-snapshot-$version.tar.lzma)
+source=(ftp://romster.dyndns.org/linux/source/x264/x264-snapshot-$version.tar.bz2)
 
 build() {
-	# temp fix untill/if pkgutils supports lzma
-	if [ -e $SRC/$name-snapshot-$version.tar.lzma ]; then
-		tar --use-compress-program=lzma -xf $name-snapshot-$version.tar.lzma
-		rm $name-snapshot-$version.tar.lzma
-	fi
-
 	cd x264
 	export CFLAGS="$(echo $CFLAGS |sed -e 's/-O[s0-3] //')"
 
