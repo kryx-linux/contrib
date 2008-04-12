@@ -1,28 +1,20 @@
-# Description: Perl Library Net::IP
-# UR:		  
-# Maintainer: unmaintained
-# Packager:	Han Boetes, han at mijncomputer dot nl
-#
-# Depends on:  perl
+# Description: Perl extension for manipulating IPv4/IPv6 addresses
+# URL: http://search.cpan.org/~manu/Net-IP/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Packager: Han Boetes, han at mijncomputer dot nl
+# Depends on:
 
 name=p5-net-ip
-capsname=Net-IP
 version=1.25
 release=1
 source=(http://search.cpan.org/CPAN/authors/id/M/MA/MANU/Net-IP-$version.tar.gz)
 
 build() {
-	cd $capsname-$version
+	cd Net-IP-$version
 	perl Makefile.PL
 	make OPTIMIZE="$CFLAGS"
-	make install DESTDIR=$PKG
-	# Remove perlcrap
-	find $PKG \
-		-name .packlist -or \
-		-name '*.bs' -or \
-		-name autosplit.ix -or \
-		-name perllocal.pod | xargs rm
-	# Remove empty directories
-	find $PKG -depth -empty -exec rm -rf {} \;
-	chown -R root:root $PKG
+	make DESTDIR=$PKG install
+	find $PKG -name .packlist -exec rm {} \;
+	find $PKG -name perllocal.pod -exec rm {} \;
+	find $PKG -depth -type d -empty -exec rm -rf {} \;
 }
