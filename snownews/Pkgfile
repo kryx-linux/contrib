@@ -1,23 +1,22 @@
 # Description: Text mode RSS newsreader for Linux and Unix.
-# URL:         http://kiza.kcore.de/software/snownews/
-# Maintainer: unmaintained
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:  ncurses, libxml2, gettext
+# URL: http://kiza.kcore.de/software/snownews/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: James Mills, prologic at shortcircuit dot net dot au
+# Depends on: ncurses libxml2 gettext perl
 
 name=snownews
-version=1.5.7
+version=1.5.9
 release=1
-source=(http://kiza.kcore.de/software/$name/download/$name-$version.tar.gz)
+source=(http://kiza.kcore.de/software/$name/download/$name-$version.tar.gz \
+        Makefile.patch $name.1.in.patch)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
-	rm -f $PKG/usr/bin/snow2opml
-	ln -sf /usr/bin/opml2snow $PKG/usr/bin/snow2opml
-	rm -rf $PKG/usr/share
-	rm -rf $PKG/usr/man/{de,it,fr,nl,ru*}
-	chown -R root:root $PKG
+  cd $name-$version
+  patch -p0 -i $SRC/Makefile.patch
+  patch -p0 -i $SRC/$name.1.in.patch
+  ./configure --prefix=/usr \
+              --disable-nls \
+              --charset=UTF-8
+  make
+  make DESTDIR=$PKG install
 }
