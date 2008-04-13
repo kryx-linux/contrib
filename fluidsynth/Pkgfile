@@ -1,22 +1,20 @@
 # Description: A real-time software synthesizer.
-# URL:         http://www.fluidsynth.org/
-# Maintainer: unmaintained
-# Packager:    Olle Gustafsson <ogg at linux dot se>
-#
+# URL: http://www.fluidsynth.org/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Olle Gustafsson <ogg at linux dot se>
 # Depends on:
 
 name=fluidsynth
-version=1.0.7a
+version=1.0.8
 release=1
 source=(http://savannah.nongnu.org/download/fluid/$name-$version.tar.gz)
 
 build() {
-   cd $name-1.0.7
-
-   ./configure \
-      --prefix=/usr \
-      --disable-nls
-
-   make && make DESTDIR=$PKG install
-   chown -R root:root $PKG
+  cd $name-$version
+  ./configure --prefix=/usr \
+              --mandir=/usr/man \
+              --disable-debug \
+              --disable-nls
+  make
+  make DESTDIR=$PKG install
 }
