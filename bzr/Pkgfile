@@ -1,9 +1,8 @@
 # Description: Next-generation distributed version control.
-# URL:         http://bazaar-ng.org/
-# Maintainer: unmaintained
-# Packager:    Johannes Winkelmann, jw at tks6 dot net 
-#
-# Depends on:  python
+# URL: http://bazaar-ng.org/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Johannes Winkelmann, jw at tks6 dot net 
+# Depends on: python
 
 name=bzr
 version=0.14
@@ -11,7 +10,6 @@ release=2
 source=(http://bazaar-vcs.org/releases/src/$name-$version.tar.gz)
 
 build() {
-   cd $name-$version 
-   python setup.py install --root=$PKG --prefix=/usr
-   chown root:root $PKG
+  cd $name-$version
+  python setup.py install --root=$PKG --prefix=/usr
 }
