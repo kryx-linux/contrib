@@ -3,7 +3,6 @@
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Han Boetes, han at mijncomputer dot nl
 
-
 name=gpm
 version=1.20.1
 release=1
@@ -25,16 +24,16 @@ build() {
 		-e 's/EMACS=.*/EMACS=:/' \
 		-e 's/ELISP=.*/ELISP=/' configure
 
-	patch -p1 -i $SRC/gpm-$version-nodebug.patch
-	patch -p1 -i $SRC/gpm-$version-no-dumb-error-messages.patch
-	patch -p1 -i $SRC/gpm-$version-liblow-segv.patch
+	patch -p 1 -i ../gpm-$version-nodebug.patch
+	patch -p 1 -i ../gpm-$version-no-dumb-error-messages.patch
+	patch -p 1 -i ../gpm-$version-liblow-segv.patch
 
 	./configure --prefix=/usr
 
-	make LDFLAGS='-lm'
+	make -j 1 LDFLAGS='-lm'
 	make ROOT=$PKG install
 
-	install -D -m 0755 $SRC/gpm.rc $PKG/etc/rc.d/gpm
+	install -D -m 0755 ../gpm.rc $PKG/etc/rc.d/gpm
 	chmod 0755 $PKG/usr/lib/libgpm.so.*.*.*
 	rm -r $PKG/usr/etc
 	rm -r $PKG/usr/info
