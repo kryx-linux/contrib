@@ -2,7 +2,6 @@
 # URL: http://gcc.gnu.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Antonio SJ Musumeci
-# Depends on: 
 
 name=gcc34
 version=3.4.6
@@ -14,9 +13,9 @@ source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-$version.tar.
 
 build() {
 	local SUFFIX=-${version%.*}
-	patch -d gcc-$version -p1 -i $SRC/gcc-$version-linkonce.patch
-	patch -d gcc-$version -p1 -i $SRC/gcc-$version-unlink-if-ordinary.patch
-	patch -d gcc-$version -p1 -i $SRC/gcc-$version-visibility.patch
+	patch -d gcc-$version -p 1 -i ../gcc-$version-linkonce.patch
+	patch -d gcc-$version -p 1 -i ../gcc-$version-unlink-if-ordinary.patch
+	patch -d gcc-$version -p 1 -i ../gcc-$version-visibility.patch
 
 	mkdir build
 	cd build
@@ -35,12 +34,12 @@ build() {
 
 	make bootstrap
 	make check
-	make DESTDIR=$PKG install
+	make -j 1 DESTDIR=$PKG install
 
 	install -d $PKG/lib
-	ln -sf ../usr/bin/cpp${SUFFIX} $PKG/lib/cpp${SUFFIX}
-	ln -sf gcc${SUFFIX} $PKG/usr/bin/cc${SUFFIX}
-	ln -sf g++${SUFFIX} $PKG/usr/bin/c++${SUFFIX}
+	ln -sf ../usr/bin/cpp$SUFFIX $PKG/lib/cpp$SUFFIX
+	ln -sf gcc$SUFFIX $PKG/usr/bin/cc$SUFFIX
+	ln -sf g++$SUFFIX $PKG/usr/bin/c++$SUFFIX
 
 	rm -r \
 		$PKG/usr/man \
