@@ -28,5 +28,7 @@ build() {
 	kernel_version="`uname -r`"
 	make -j 1 PREFIX=/usr KERNEL_DIR=/usr/src/linux-$kernel_version KBUILD_OUTPUT=/usr COPT_FLAGS="$CFLAGS"
 	make PREFIX=/usr DESTDIR=$PKG install install-devel
+	install -m 0755 extensions/libipt_IMQ.so $PKG/usr/lib/iptables/
+	install -m 0755 extensions/libip6t_IMQ.so $PKG/usr/lib/iptables/
 }
 
