@@ -1,0 +1,51 @@
+--- lirc-0.8.2/tools/irxevent.c.orig	2008-04-17 11:10:26.113550983 -0430
++++ lirc-0.8.2/tools/irxevent.c	2008-04-17 14:20:15.917788728 -0430
+@@ -133,6 +133,7 @@
+ 
+ 
+ static const char *progname="irxevent";
++static char *lirc_progname = NULL; /* program name to react to, by default irxevent */
+ static Display *dpy;
+ static Window root;
+ static XEvent xev;
+@@ -543,9 +544,10 @@
+ 
+ static struct option long_options[] =
+ {
+-	{"daemon",  no_argument, NULL, 'd'},
+-	{"help",    no_argument, NULL, 'h'},
+-	{"version", no_argument, NULL, 'V'},
++	{"daemon",  no_argument,       NULL, 'd'},
++	{"name",    required_argument, NULL, 'n'},
++	{"help",    no_argument,       NULL, 'h'},
++	{"version", no_argument,       NULL, 'V'},
+ 	{0, 0, 0, 0}
+ };
+ 
+@@ -559,13 +561,16 @@
+   int c;
+   int WindowID;
+ 
+-  while ((c = getopt_long(argc, argv, "dhV", long_options, NULL)) != EOF) {
++  while ((c = getopt_long(argc, argv, "dn:hV", long_options, NULL)) != EOF) {
+     switch (c) {
+     case 'd':
+       bDaemon = 1; continue;
++    case 'n':
++      lirc_progname = optarg; continue;
+     case 'h':
+       printf("Usage: %s [option]... [config file]\n"
+              "       -d --daemon     fork and run in background\n"
++             "       -n --name       use this program name\n"
+              "       -h --help       display usage summary\n"
+              "       -V --version    display version\n", progname);
+       return(EXIT_SUCCESS);
+@@ -597,7 +602,7 @@
+   // windows may get closed at wrong time. Override default error handler...
+   XSetErrorHandler(errorHandler);
+   
+-  if(lirc_init("irxevent",1)==-1) exit(EXIT_FAILURE);
++  if(lirc_init(lirc_progname?lirc_progname:progname,1)==-1) exit(EXIT_FAILURE);
+ 
+   if(lirc_readconfig(config_file,&config,check)==0)
+     {

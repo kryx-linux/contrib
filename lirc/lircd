@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# /etc/rc.d/lircd: start/stop/restart lirc daemon
+#
+
+case "$1" in
+	start)
+		/usr/sbin/lircd -p 666 /etc/lircd.conf
+	;;
+	stop)
+		if [ -f /var/run/lircd.pid ]; then
+			kill `cat /var/run/lircd.pid` && rm -f /var/run/lircd.pid
+		else
+			return 1
+		fi
+	;;
+	restart)
+		$0 stop
+		$0 start
+	;;
+	*)
+		echo "Usage: $0 start|stop|restart"
+		exit 1
+	;;
+esac
