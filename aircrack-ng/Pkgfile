@@ -1,0 +1,19 @@
+# Description: Aircrack next generation
+# URL: http://www.aircrack-ng.org/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Mattias Hedenskog, mattias at hedenskog dot se
+# Depends on:
+
+name=aircrack-ng
+version=1.0-beta2
+release=1
+source=(http://download.aircrack-ng.org/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make \
+      prefix=/usr \
+      SQLITE=false \
+      REVISION=0 \
+      DESTDIR=$PKG install
+}
