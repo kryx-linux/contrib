@@ -6,8 +6,8 @@
 
 name=amsn
 version=0.97
-release=1
-source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
@@ -17,6 +17,6 @@ build() {
   make
   make DESTDIR=$PKG install
   rm -rf $PKG/usr/share/amsn/{AGREEMENT,CREDITS,FAQ,GNUGPL,HELP,INSTALL} \
-         $PKG/usr/share/amsn/{TODO,docs,README,plugins/*/README} \
+         $PKG/usr/share/amsn/{TODO,docs,README,plugins/*/READM{E,E.txt}} \
          $PKG/usr/share/amsn/utils/*/{LICENSE.txt,license.terms}
 }
