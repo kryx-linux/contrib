@@ -6,11 +6,13 @@
 
 name=subversion-perl
 version=1.4.6
-release=1
+release=2
 source=(http://subversion.tigris.org/tarballs/subversion-$version.tar.bz2 \
         subversion_perl.diff)
 
 build() {
+  P5VERSION="$(pkginfo -i | grep '^perl ' | cut -d' ' -f2 | cut -d'-' -f1)"
+  
   cd subversion-$version
   
   patch -p1 -i $SRC/subversion_perl.diff
@@ -25,4 +27,8 @@ build() {
   
   make
   make DESTDIR=$PKG install-swig-pl-lib install-swig-pl
+ 
+  rm -rf $PKG/usr/lib/perl5/$P5VERSION \
+    $PKG/usr/lib/perl5/site_perl/$P5VERSION/linux/auto/SVN/_Core/.packlist \
+    $(find $PKG -type f -size 0)
 }
