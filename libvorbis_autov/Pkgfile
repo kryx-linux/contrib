@@ -5,14 +5,15 @@
 # Depends on: libogg
 
 name=libvorbis_autov
-version=b5
+version=b5.5
 release=1
 source=(http://www.geocities.jp/aoyoume/aotuv/source_code/libvorbis-aotuv_$version.tar.bz2)
 
 build() {
-  cd ${SRC}/aotuv-${version}_20061024
-  chmod +x configure
-  ./configure --prefix=/usr --disable-oggtest
-  make || return 1
-  make DESTDIR=${PKG} install
+	cd ${SRC}/aotuv-${version}_20080330
+	chmod +x configure
+	./configure --prefix=/usr --disable-oggtest
+	make
+	make DESTDIR=${PKG} install
+	rm -rf $PKG/usr/share/doc
 }
