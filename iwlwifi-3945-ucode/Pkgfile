@@ -2,14 +2,16 @@
 # URL: http://intellinuxwireless.org/?p=iwlwifi
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Rouven Schuerch, rs at tegonal dot com
-# Depends on:    
+# Depends on:
 
 name=iwlwifi-3945-ucode
 version=2.14.1.5
-release=1
+release=2
 source=(http://intellinuxwireless.org/iwlwifi/downloads/$name-$version.tgz)
 
 build () {
   install -D -m 0644 $name-$version/iwlwifi-3945-1.ucode \
     $PKG/lib/firmware/iwlwifi-3945-1.ucode
+  ln -sf /lib/firmware/iwlwifi-3945-1.ucode \
+    $PKG/lib/firmware/iwlwifi-3945.ucode
 }
