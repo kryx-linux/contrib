@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+DIRECTORY='/usr/lib/distcc'
+if [ ! -d "$DIRECTORY" ]; then
+	if [ -w '/usr/lib' ]; then
+		install -d "$DIRECTORY"
+		if [ $? -gt 0 ]; then
+			echo "post-install: error creating '$DIRECTORY'."
+		else
+			echo "post-install: '$DIRECTORY' created."
+		fi
+		pushd "$DIRECTORY"
+		for c in cc c++ gcc g++; do
+			if [ ! -e $c ]; then
+				ln -s ../../bin/distcc $c
+				if [ $? -gt 0 ]; then
+					echo "post-install: error creating symlink '../../bin/distcc $c'."
+					exit 1
+				else
+					echo "post-install: create symlink '../../bin/distcc $c'."
+				fi
+			fi
+		done
+		popd
+	else
+		echo "Error: no permission to write to '/usr/lib'."
+	fi
+fi
+# End of file
