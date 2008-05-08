@@ -20,14 +20,14 @@ symlink() {
 					NOT_INSTALLED='yes'
 				fi
 			done
-			if [ $NOT_INSTALLED ]; then
+			if [ "$NOT_INSTALLED" ]; then
 				echo "post-install: in directory '$DIRECTORY'."
 			fi
 			for c in $SYMLINKS; do
 				if [ ! -e "$DIRECTORY/$c" ]; then
 					ln -s "../../bin/$BASENAME" "$c"
 					if [ $? -gt 0 ]; then
-						echo "post-install: error creating symlink '../../bin/$BASENAME $c'."
+						echo "post-install: error creating symlink '../../bin/$BASENAME -> $c'."
 						exit 1
 					else
 						echo "post-install: create symlink '../../bin/$BASENAME -> $c'."
