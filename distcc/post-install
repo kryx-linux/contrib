@@ -32,7 +32,8 @@ if [ ! -d "$DIRECTORY" ]; then
 		done
 		cd - > /dev/null
 	else
-		echo "post-install: error no permission to create symlinks in '$DIRECTORY'."
+		echo "post-install: error no permission to create directory '$DIRECTORY'."
+		exit 1
 	fi
 fi
 unset NOT_INSTALLED SYMLINKS DIRECTORY
