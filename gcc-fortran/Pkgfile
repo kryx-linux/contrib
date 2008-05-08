@@ -6,7 +6,7 @@
 
 name=gcc-fortran
 version=4.2.3
-release=1
+release=2
 source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-{core,fortran}-$version.tar.bz2 \
 	gcc-fortran-$version-nocheck-fixincludes.patch \
 	gcc-fortran-$version-fixinc.patch)
@@ -17,7 +17,6 @@ build() {
 
 	sed -i gcc-$version/gcc/version.c \
 		-e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|'
-		
 
 	mkdir build
 	cd build
@@ -70,21 +69,5 @@ build() {
 	for i in `find $PKG -name '*.la' | sed -e "s|$PKG|/|"`; do
 		sed -i "s|-L$SRC[^ ]* ||g" $PKG/$i
 	done
-
-	# install distcc symlinks if distcc is installed
-	if pkginfo -i |grep '^distcc '; then
-		install -d $PKG/usr/lib/distcc
-		for c in f90 f95 gfortran; do
-			cd $PKG/usr/lib/distcc && ln -s ../../bin/distcc $c
-		done
-	fi
-
-	# install ccache symlinks if ccache is installed
-	if pkginfo -i |grep '^ccache '; then
-		install -d $PKG/usr/lib/ccache
-		for c in f90 f95 gfortran; do
-			cd $PKG/usr/lib/ccache && ln -s ../../bin/ccache $c
-		done
-	fi
 }
 
