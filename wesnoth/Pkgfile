@@ -5,24 +5,25 @@
 # Depends on: xorg-libx11 sdl_image sdl_mixer sdl_net freetype boost
 
 name=wesnoth
-version=1.4.1
+version=1.4.2
 release=1
 source=(http://dl.sourceforge.net/sourceforge/wesnoth/wesnoth-$version.tar.bz2)
 
 build() {
 	cd wesnoth-$version
+	rm po/*/*.po
 
-		if pkginfo -i |grep '^kdebase ' > /dev/null; then
-			local configure='--with-kde'
-		fi
+	sed -i \
+		-e 's/USE_NLS=yes/USE_NLS=no/' \
+		-e 's/ENABLE_NLS 1/ENABLE_NLS 0/' configure
 
-		if pkginfo -i |grep '^kdebase3 ' > /dev/null; then
-			local configure='--with-kde'
-		fi
+	if pkginfo -i |grep '^kdebase ' > /dev/null; then
+		local configure='--with-kde'
+	fi
 
-		if pkginfo -i |grep '^gnome ' > /dev/null; then
-			local configure='--with-gnome'
-		fi
+	if pkginfo -i |grep '^gnome ' > /dev/null; then
+		local configure='--with-gnome'
+	fi
 
 	./configure \
 		--prefix=/usr \
