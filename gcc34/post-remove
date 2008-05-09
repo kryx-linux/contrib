@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
-if [ -e Pkgfile ]; then
-	. Pkgfile
+if [ -e '/usr/ports/contrib/gcc34/Pkgfile' ]; then
+	. /usr/ports/contrib/gcc34/Pkgfile
 else
-	echo 'post-remove: error Pkgfile is missing.'
+	echo 'post-install: error Pkgfile is missing.'
 	exit 1
 fi
 SUFFIX="-${version%.*}"
