@@ -1,0 +1,24 @@
+# Description: A fun 2D physics sandbox
+# URL:         http://phun.at/
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  libsdl
+
+name=phun
+version=3.5
+release=1
+source=(http://www.acc.umu.se/~emilk/files/Phun_beta_3_5_linux32.tar.bz2 $name.desktop)
+
+build() {
+  cd Phun
+  mkdir -p $PKG/usr/share/$name
+  mkdir $PKG/usr/bin
+  cp -a ./* $PKG/usr/share/$name
+  cd $PKG/usr/bin
+  mv $PKG/usr/share/$name/$name .
+  sed -i 'i#!/bin/bash\ncd /usr/share/phun' $name
+  # optional .desktop file
+  #  install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
+  chmod 1777 $PKG/usr/share/phun/{Scenes,Screenshots}
+  find $PKG -name "*.txt" -exec rm -f {} \;
+  chmod -R a+Xr $PKG/usr/share/$name/Data/
+}
