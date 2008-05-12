@@ -1,0 +1,16 @@
+# Description: highly configurable text format for writing documentation
+# URL:         http://www.methods.co.nz/asciidoc/index.html
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  python
+
+name=asciidoc
+version=8.2.6
+release=1
+source=(http://www.methods.co.nz/$name/$name-$version.tar.gz crux_install.diff)
+
+build() {
+    cd $name-$version
+    patch -p0 -i ../crux_install.diff
+    sed -i '/^CONF_DIR/s|/etc/asciidoc|/usr/etc/asciidoc|' a2x asciidoc.py
+    ./install.sh
+}
