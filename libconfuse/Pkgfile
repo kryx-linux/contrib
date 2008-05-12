@@ -1,0 +1,18 @@
+# Description:  A configuration file parser library, LGPL licensed, written in C
+# URL:          http://www.nongnu.org/confuse/
+# Packager:     Matt Housh, jaeger at morpheus dot net
+# Maintainer:   Bartlomiej Palmowski, maks1k at wp dot pl
+
+name=libconfuse
+version=2.6
+release=1
+source=(http://bzero.se/${name/#lib/}/${name/#lib/}-$version.tar.gz)
+
+build() {
+        cd ${name/#lib/}-$version
+        ./configure --prefix=/usr \
+                    --enable-shared \
+                    --disable-nls
+        make
+        make DESTDIR=$PKG install
+}
