@@ -1,0 +1,55 @@
+Only in nao-0.4.1/: nao-0.4.1.old
+diff -urp nao-0.4.1.old/src/commands/CmdExternal.cpp nao-0.4.1/src/commands/CmdExternal.cpp
+--- nao-0.4.1.old/src/commands/CmdExternal.cpp	2007-05-01 17:13:15.000000000 +0200
++++ nao-0.4.1/src/commands/CmdExternal.cpp	2008-05-11 01:25:06.000000000 +0200
+@@ -157,7 +157,7 @@ void CmdExternal::runExec(string cmd)
+ 		cout<<"command="<<cmd<<endl;
+ 	#endif
+ 	
+-	if(system(cmd.c_str())!=0)
++	if(::system(cmd.c_str())!=0)
+ 	{
+ 		//cout<<"EXCEPTION"<<endl;
+ 		throw ExceptionExecutingCommand(cmd);
+diff -urp nao-0.4.1.old/src/commands/StandardCommands.cpp nao-0.4.1/src/commands/StandardCommands.cpp
+--- nao-0.4.1.old/src/commands/StandardCommands.cpp	2007-05-12 13:08:18.000000000 +0200
++++ nao-0.4.1/src/commands/StandardCommands.cpp	2008-05-11 01:26:35.000000000 +0200
+@@ -1027,7 +1027,7 @@ void CmdRunCommand::execute()
+ 	if(state=="execute")
+ 	{
+ 		string data=fileList->getTextFieldData()+" &";
+-		system(data.c_str());
++		::system(data.c_str());
+ 		
+ 	}
+ 	else if(state=="switch")
+@@ -1209,7 +1209,7 @@ void CmdAddDirToShortcuts::execute()
+ 
+ void CmdUmount::execute()
+ {
+-	if(system(string("umount " +fileList->getCurrentFileIcon().getFile().getPath().string()).c_str())!=0)
++	if(::system(string("umount " +fileList->getCurrentFileIcon().getFile().getPath().string()).c_str())!=0)
+ 	throw ExceptionFileSystem();
+ }
+ 
+@@ -1231,7 +1231,7 @@ void CmdCreateEmptyFile::execute()
+ 	
+ 	
+ 	string cmd="cd "+fileList->getCurrentDirectory().string()+" && touch "+fileName;
+-	if(system(cmd.c_str())==0)
++	if(::system(cmd.c_str())==0)
+ 	{
+ 		path newPath=fileList->getCurrentDirectory()/path(fileName);
+ 		fileList->addFile(newPath.string());
+diff -urp nao-0.4.1.old/src/FilesEngine.cpp nao-0.4.1/src/FilesEngine.cpp
+--- nao-0.4.1.old/src/FilesEngine.cpp	2007-05-09 14:00:23.000000000 +0200
++++ nao-0.4.1/src/FilesEngine.cpp	2008-05-11 01:27:17.000000000 +0200
+@@ -121,7 +121,7 @@ return groups;	
+ void FilesEngine::runFile( path file )
+ {
+ 	string cmd=string("\"")+file.string()+string("\"")+"&";
+-	system(cmd.c_str());
++	::system(cmd.c_str());
+ }
+ 
+ 
