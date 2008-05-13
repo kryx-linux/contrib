@@ -14,7 +14,7 @@ build() {
 	yes | perl Makefile.PL PREFIX=$PKG/usr
 	make
 	make install
-	find $PKG -name "perllocal.pod" -exec rm {} \;
-	chown -R root:root $PKG
+	find $PKG \( -name 'perllocal.pod' -o \
+		-name '.packlist' \) -delete
 }
 
