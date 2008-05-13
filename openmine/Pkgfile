@@ -1,0 +1,32 @@
+# Description: 3D Minesweeper
+# URL:         http://openmine.sourceforge.net/
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  libsdl
+
+name=openmine
+version=0.2.0b
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    # patch the source, so openmine executable can "see" it's files (kudos to brebs) (and yes i like fences (in sed) :)
+    sed -i -e '/#define RC_FILE/s|mines.conf|/usr/share/openmine/mines.conf|' \
+           -e'/#define THEME_IMAGE/s|./images|/usr/share/openmine/images|' main.c
+    chmod 0755 images
+    ./configure
+    make
+    mkdir -p $PKG/usr/share/$name/images/{caco,classic}
+    install -D -m 0755 $name $PKG/usr/bin/$name
+    install -m 0644 mines.conf $PKG/usr/share/$name/mines.conf
+    cd images/caco
+    for i in *.bmp ; do
+        install -m 0444 "$i" $PKG/usr/share/$name/images/caco/"$i"
+    done
+    install theme.conf $PKG/usr/share/$name/images/caco/theme.conf
+    cd ../classic
+    for i in *.bmp ; do
+        install -m 0444 "$i" $PKG/usr/share/$name/images/classic/"$i"
+    done
+    install theme.conf $PKG/usr/share/$name/images/classic/theme.conf
+}
