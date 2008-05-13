@@ -1,0 +1,16 @@
+# Description:  a modern configuration of the Vim text editor
+# URL:          http://cream.sourceforge.net/
+# Maintainer:   Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:   gvim
+
+name=cream
+version=0.41
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz crux_install_cream.diff)
+
+build() {
+    cd $name-$version
+    patch -p0 -i ../crux_install_cream.diff
+    chmod +x INSTALL.sh
+    ./INSTALL.sh
+ }

@@ -1,0 +1,329 @@
+--- INSTALL.sh	2006-11-02 07:20:30.000000000 +0100
++++ INSTALL.sh.new	2008-04-30 21:42:32.000000000 +0200
+@@ -1,85 +1,19 @@
+ #!/bin/sh
+ 
+ # we assume this runs at the top of a Cream file structure
++# I assume that have vim installed in the same place
++	VRT=/usr/share/vim
+ 
+-echo
+-
+-# argument (optional) must be single and a directory
+-if [[ -n $1 && ! -d $1 ]]; then
+-	echo "Single (optional) argument '$1' must be a directory"
+-	echo "for the installation of Cream. (Default '/usr'.)"
+-	exit 1
+-fi
+-
+-# find $VIMRUNTIME if doesn't exist (no trailing slash)
+-if [ "$VIMRUNTIME" = "" ] || [ -d $VIMRUNTIME ] ; then
+-    # warn only if not directory
+-	if [ -d $VIMRUNTIME ] ; then
+-		echo "  Existing \$VIMRUNTIME not a directory."
+-	fi
+-	echo "Finding \$VIMRUNTIME..."
+-	# try with perl
+-	if [ `which perl` ] ; then
+-		echo "  Trying perl method..."
+-		# 1. by Luc St-Louis
+-		vim --cmd 'echo $VIMRUNTIME' --cmd 'quit' 2> /tmp/creamVRT
+-		VRT=`perl -pe 's/\r\n//g' /tmp/creamVRT`
+-		rm -f /tmp/creamVRT
+-	fi
+-	# try with bash
+-	if [ ! -n "$VRT" -o "$VRT" = "" ] ; then
+-		echo "  Trying bash method..."
+-		# 2. by Jacob Lerner
+-		VRT=`vim -e -T dumb --cmd 'exe "set t_cm=\<C-M>"|echo $VIMRUNTIME|quit' | tr -d '\015' `
+-	fi
+-else
+-	VRT=$VIMRUNTIME
+-fi
+-
+-# validate
+-if [ "$VRT" = "" ] ; then
+-	echo "  No \$VIMRUNTIME value found, quitting."
+-	exit 1
+-elif [ ! -d $VRT ] ; then
+-	echo "  \$VIMRUNTIME ($VRT) not a directory, quitting."
+-	exit 1
+-else
+-	# value found
+-	echo "  Found:"
+-	echo "  $VRT"
+-fi
+-
+-# set $PREFIX (distros that put sys files in own subdirectory --Felix Breuer)
+-if [[ -n $1 && -d $1 ]]; then
+-	# first argument (is directory validated above)
+-	PREFIX=$1
+-else
+-	PREFIX=/usr/local
+-fi
++	PREFIX=/usr
+ 
+ # follow $DESTDIR root if distro requests it (Jeff Woods)
+-if [ "$DESTDIR" != "" ] ; then
+-	# test is directory
+-	if [ -d $DESTDIR ] ; then
+-		echo "  \$DESTDIR found, prepending to install locations."
++    DESTDIR=$PKG
+ 		VRT=$DESTDIR/$VRT
+ 		PREFIX=$DESTDIR/$PREFIX
+-	else
+-		echo "  \$DESTDIR ($DESTDIR) not a directory, quitting."
+-		exit 1
+-	fi
+-fi
+-
+ 
+ # set $HERE (from where we're copying)
+ HERE=`dirname $0`
+ 
+-
+-# installation
+-echo
+-echo "Installing to..."
+-echo "  $VRT/cream"
+-
+ # verify directories exist
+ echo "Verifying directories exist..."
+ echo "  $VRT/cream"
+@@ -88,16 +22,8 @@
+ mkdir -p $VRT/cream/addons
+ echo "  $VRT/cream/bitmaps"
+ mkdir -p $VRT/cream/bitmaps
+-echo "  $VRT/cream/docs"
+-mkdir -p $VRT/cream/docs
+-echo "  $VRT/cream/docs-html"
+-mkdir -p $VRT/cream/docs-html
+ echo "  $VRT/cream/filetypes"
+ mkdir -p $VRT/cream/filetypes
+-echo "  $VRT/cream/help"
+-mkdir -p $VRT/cream/help
+-echo "  $VRT/cream/lang"
+-mkdir -p $VRT/cream/lang
+ #echo "  $VRT/cream/spelldicts"
+ #mkdir -p $VRT/cream/spelldicts
+ 
+@@ -123,31 +49,9 @@
+ install -p -m 644 $HERE/bitmaps/*.xpm $VRT/cream/bitmaps/
+ ###echo "  $VRT/cream/bitmaps/*.bmp"
+ ###cp -uvf $HERE/bitmaps/*.bmp $VRT/cream/bitmaps/
+-echo "  $VRT/cream/docs/*.txt"
+-#cp -uvf $HERE/docs/*.txt $VRT/cream/docs/
+-install -p -m 644 $HERE/docs/*.txt $VRT/cream/docs/
+-echo "  $VRT/cream/docs-html/*.html"
+-#cp -uvf $HERE/docs-html/*.html $VRT/cream/docs-html/
+-install -p -m 644 $HERE/docs-html/*.html $VRT/cream/docs-html/
+-echo "  $VRT/cream/docs-html/css.php"
+-#cp -uvf $HERE/docs-html/css.php $VRT/cream/docs-html/
+-install -p -m 644 $HERE/docs-html/css.php $VRT/cream/docs-html/
+-echo "  $VRT/cream/docs-html/favicon.ico"
+-#cp -uvf $HERE/docs-html/favicon.ico $VRT/cream/docs-html/
+-install -p -m 644 $HERE/docs-html/favicon.ico $VRT/cream/docs-html/
+-echo "  $VRT/cream/docs-html/*.png"
+-#cp -uvf $HERE/docs-html/*.png $VRT/cream/docs-html/
+-install -p -m 644 $HERE/docs-html/*.png $VRT/cream/docs-html/
+-echo "  $VRT/cream/docs-html/*.gif"
+-#cp -uvf $HERE/docs-html/*.gif $VRT/cream/docs-html/
+-install -p -m 644 $HERE/docs-html/*.gif $VRT/cream/docs-html/
+ echo "  $VRT/cream/filetypes/*.vim"
+ #cp -uvf $HERE/filetypes/*.vim $VRT/cream/filetypes/
+ install -p -m 644 $HERE/filetypes/*.vim $VRT/cream/filetypes/
+-echo "  $VRT/cream/help/*.txt"
+-#cp -uvf $HERE/help/*.txt $VRT/cream/help/
+-install -p -m 644 $HERE/help/*.txt $VRT/cream/help/
+-echo "  $VRT/cream/lang/*.vim"
+ #cp -uvf $HERE/lang/*.vim $VRT/cream/lang/
+ ###install -p -m 644 $HERE/lang/*.vim $VRT/cream/lang/
+ ###echo "  $VRT/cream/spelldicts/cream-spell-dict-eng-s*.vim"
+@@ -183,187 +87,6 @@
+ #cp -uvf $HERE/cream.png $PREFIX/share/icons/
+ install -p -m 644 $HERE/cream.png $PREFIX/share/icons/
+ 
+-# cleanup old installations
+-echo "Cleaning up previous versions..."
+-
+-# 0.38
+-if [ -d "$VRT/cream/spelldicts" ]; then
+-	rm -f $VRT/cream/spelldicts/*
+-	rmdir $VRT/cream/spelldicts
+-fi
+-if [ -e "$VRT/cream/help/opsplorer.txt" ]; then
+-	rm -f $VRT/cream/help/opsplorer.txt
+-fi
+-# 0.37
+-if [ -e "$VRT/cream/cream-explorer.vim" ]; then
+-	rm -f $VRT/cream/cream-explorer.vim
+-fi
+-if [ -e "$VRT/cream/opsplorer.vim" ]; then
+-	rm -f $VRT/cream/opsplorer.vim
+-fi
+-# 0.36
+-if [ -e "$VRT/cream/cream-window-buffer.vim" ]; then
+-	rm -f $VRT/cream/cream-window-buffer.vim
+-fi
+-if [ -e "$VRT/cream/docs-html/contribute.html" ]; then
+-	rm -f $VRT/cream/docs-html/contribute.html
+-fi
+-if [ -e "$VRT/cream/docs-html/favicon.png" ]; then
+-	rm -f $VRT/cream/docs-html/favicon.png
+-fi
+-if [ -e "$VRT/cream/docs-html/license.html" ]; then
+-	rm -f $VRT/cream/docs-html/license.html
+-fi
+-if [ -e "$VRT/cream/docs-html/links.html" ]; then
+-	rm -f $VRT/cream/docs-html/links.html
+-fi
+-if [ -e "$VRT/cream/docs-html/maillists.html" ]; then
+-	rm -f $VRT/cream/docs-html/maillists.html
+-fi
+-if [ -e "$VRT/cream/docs-html/main.css" ]; then
+-	rm -f $VRT/cream/docs-html/main.css
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot4.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot4.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot4-thumb.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot4-thumb.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot-popup.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot-popup.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots1-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots1-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots2-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots2-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots3-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots3-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots4-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots4-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots.html
+-fi
+-if [ -e "$VRT/cream/docs-html/spellcheck.html" ]; then
+-	rm -f $VRT/cream/docs-html/spellcheck.html
+-fi
+-if [ -e "$VRT/cream/docs-html/statusline-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/statusline-closeup.html
+-fi
+-
+-# 0.34
+-if [ -e "$VRT/cream/docs-html/screenshots5-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots5-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots6-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots6-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots7-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots7-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshots8-closeup.html" ]; then
+-	rm -f $VRT/cream/docs-html/screenshots8-closeup.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot5.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot5.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot6.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot6.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot7.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot7.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot8.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot8.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot5-thumb.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot5-thumb.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot6-thumb.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot6-thumb.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot7-thumb.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot7-thumb.png
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot8-thumb.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot8-thumb.png
+-fi
+-if [ -e "$VRT/cream/docs-html/maillist.html" ]; then
+-	rm -f $VRT/cream/docs-html/maillist.html
+-fi
+-if [ -e "$VRT/cream/docs-html/otherfiles.html" ]; then
+-	rm -f $VRT/cream/docs-html/otherfiles.html
+-fi
+-# 0.33
+-if [ -e "/usr/bin/cream" ]; then
+-	rm -f /usr/bin/cream
+-fi
+-# 0.31
+-if [ -e "$VRT/cream/docs-html/love.html" ]; then
+-	rm -f $VRT/cream/docs-html/love.html
+-fi
+-if [ -e "$VRT/cream/docs-html/hate.html" ]; then
+-	rm -f $VRT/cream/docs-html/hate.html
+-fi
+-if [ -e "$VRT/cream/docs-html/background.html" ]; then
+-	rm -f $VRT/cream/docs-html/background.html
+-fi
+-if [ -e "$VRT/cream/docs-html/goals.html" ]; then
+-	rm -f $VRT/cream/docs-html/goals.html
+-fi
+-if [ -e "$VRT/cream/docs-html/screenshot-arabic1.png" ]; then
+-	rm -f $VRT/cream/docs-html/screenshot-arabic1.png
+-fi
+-if [ -e "$VRT/cream/docs-html/devel.html" ]; then
+-	rm -f $VRT/cream/docs-html/devel.html
+-fi
+-if [ -e "$VRT/cream/docs-html/creamlogo.png" ]; then
+-	rm -f $VRT/cream/docs-html/creamlogo.png
+-fi
+-# 0.30
+-if [ -e "$VRT/cream/cream-filetype-c.vim" ]; then
+-	rm -f $VRT/cream/cream-filetype-c.vim
+-fi
+-if [ -e "$VRT/cream/cream-filetype-html.vim" ]; then
+-	rm -f $VRT/cream/cream-filetype-html.vim
+-fi
+-if [ -e "$VRT/cream/cream-filetype-txt.vim" ]; then
+-	rm -f $VRT/cream/cream-filetype-txt.vim
+-fi
+-if [ -e "$VRT/cream/cream-filetype-vim.vim" ]; then
+-	rm -f $VRT/cream/cream-filetype-vim.vim
+-fi
+-# earlier (maybe not, but we can't remember :)
+-if [ -e "$VRT/cream/docs-html/todo.html" ]; then
+-	rm -f $VRT/cream/docs-html/todo.html
+-fi
+-if [ -e "$VRT/cream/docs-html/changelog.html" ]; then
+-	rm -f $VRT/cream/docs-html/changelog.html
+-fi
+-if [ -e "$VRT/cream/docs-html/bugs.html" ]; then
+-	rm -f $VRT/cream/docs-html/bugs.html
+-fi
+-if [ -e "$VRT/cream/docs/SPELLDICTS.txt" ]; then
+-	rm -f $VRT/cream/docs/SPELLDICTS.txt
+-fi
+-if [ -e "$VRT/cream/docs/SPELLTEST-ENG.txt" ]; then
+-	rm -f $VRT/cream/docs/SPELLTEST-ENG.txt
+-fi
+-if [ -e "$VRT/cream/docs/FILELIST.txt" ]; then
+-	rm -f $VRT/cream/docs/FILELIST.txt
+-fi
+-if [ -e "$VRT/cream/docs/BUGS.txt" ]; then
+-	rm -f $VRT/cream/docs/BUGS.txt
+-fi
+-# Note: This is one char different from 0.36 file!
+-if [ -e "$VRT/cream/docs-html/downloads.html" ]; then
+-	rm -f $VRT/cream/docs-html/downloads.html
+-fi
+-
+-
+ # finish
+ echo "Finished."
+ echo
