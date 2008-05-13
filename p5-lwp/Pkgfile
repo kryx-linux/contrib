@@ -14,6 +14,7 @@ build() {
 	yes | perl Makefile.PL -n
 	make
 	make DESTDIR=$PKG install
-	find $PKG -name "perllocal.pod" -exec rm {} \;
+	find $PKG \( -name 'perllocal.pod' -o \
+		-name '.packlist' \) -delete
 }
 
