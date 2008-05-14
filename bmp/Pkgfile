@@ -20,13 +20,9 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-
-	pushd $PKG/usr/bin
-		ln -s beep-media-player beep
-	popd
-
-	install -m 0755 $SRC/beep-config $PKG/usr/bin
-	install -D -m 0644 beep/beep_logo.xpm $PKG/usr/share/pixmaps/beep.xpm
+	ln -s beep-media-player $PKG/usr/bin/beep
+	install -m 0755 ../beep-config $PKG/usr/bin
+	install -m 0644 -D beep/beep_logo.xpm $PKG/usr/share/pixmaps/beep.xpm
 	rm $PKG/usr/share/bmp/Skins/Default/README
 }
 
