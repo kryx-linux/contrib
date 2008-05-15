@@ -6,7 +6,7 @@
 
 name=lirc
 version=0.8.2
-release=1
+release=2
 source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2 irxevent_name.diff lircd)
 
 # Possible drivers:	
@@ -22,10 +22,8 @@ source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2 irxevent_name.dif
 # sasem, serial, silitek, sir, slinke, tekram, tekram_bt829, tira, tvbox,
 # udp, uirt2, uirt2_raw
 
-# To select the driver, you can uncomment this:
-# LIRC_DRIVER=userspace
-# or you can set it up as an environment variable before running pkgmk
-# or you will be asked interactively
+# To select the driver, you can change this:
+LIRC_DRIVER=serial
 
 build() {
 	cd lirc-$version
@@ -33,12 +31,7 @@ build() {
 	# Patch to let irxevent use different program names
 	patch -p1 -i $SRC/irxevent_name.diff
 
-	if [ -z "$LIRC_DRIVER" ]; then
-		./setup.sh
-		./configure.sh --prefix=/usr --disable-static
-	else
-		./configure --prefix=/usr --disable-static --with-driver="$LIRC_DRIVER"
-	fi
+	./configure --prefix=/usr --disable-static --with-driver=$LIRC_DRIVER
 	make
 	make DESTDIR=$PKG install
 	install -D -m 755 $SRC/lircd $PKG/etc/rc.d/lircd
