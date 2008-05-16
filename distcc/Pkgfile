@@ -6,13 +6,13 @@
 
 name=distcc
 version=2.18.3
-release=4
+release=5
 source=(http://distcc.samba.org/ftp/distcc/distcc-$version.tar.bz2 \
 	distcc-$version-install.patch distccd) 
 
 build() {
 	cd distcc-$version
-	patch -p 1 -i ../distcc-$version-install.patch
+	patch -p 1 -i $SRC/distcc-$version-install.patch
 
 	./configure \
 		--prefix=/usr \
@@ -23,5 +23,10 @@ build() {
 	make
 	make DESTDIR=$PKG install-man install-programs
 	install -m 0755 -D ../distccd $PKG/etc/rc.d/distccd
+
+	install -d $PKG/usr/lib/distcc
+	for c in cc c++ gcc g++; do
+		cd $PKG/usr/lib/distcc && ln -s ../../bin/distcc $c
+	done
 }
 

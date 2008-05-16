@@ -4,14 +4,14 @@
 # Maintainer: Brett Goulder, predatorfreak at dcaf-security dot org.
 
 name=md5deep
-version=2.0.1
+version=3.0
 release=1
-source=(http://dl.sourceforge.net/${name}/${name}-${version}-001.tar.gz)
+source=(http://dl.sourceforge.net/${name}/${name}-${version}.tar.gz)
 
 build() {
-  cd ${SRC}/$name-$version-001
-	./configure --prefix=/usr
-  make || return 1
-#  make BIN=${PKG}/usr/bin MAN=${PKG}/usr/man/man/man1 install
+  cd ${SRC}/$name-$version
+	./configure --prefix=/usr \
+		--mandir=/usr/man
+  make
 	make DESTDIR=$PKG install
 }
