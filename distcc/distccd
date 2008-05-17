@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #
 # /etc/rc.d/distccd: start/stop distcc daemon
 #
@@ -7,17 +7,19 @@
 if [ -z "$DISTCC_ALLOW" ]; then 
     echo "Please define a range of IPs allowed to connect to this distccd"
     echo "host in DISTCC_ALLOW in /etc/rc.conf. More detailed information"
-    echo "can be found in distccd's man page."
-    exit -1
+    echo "can be found in the distcc's README package."
+    exit 1
 fi
-DISTCC_USER=${DISTCC_USER:=nobody}
+
+DISTCC_USER="${DISTCC_USER:=nobody}"
+DISTCC_LOG_LEVEL="${DISTCC_LOG_LEVEL:=notice}"
 
 case $1 in
 start)
-	/usr/bin/distccd --daemon --user $DISTCC_USER --allow $DISTCC_ALLOW
+	/usr/sbin/distccd --daemon --user "$DISTCC_USER" --allow "$DISTCC_ALLOW" --log-level "$DISTCC_LOG_LEVEL"
 	;;
 stop)
-	killall -q /usr/bin/distccd
+	killall -q /usr/sbin/distccd
 	;;
 restart)
 	$0 stop
