@@ -53,7 +53,7 @@ diff -pruN distcc-2.18.3.orig/Makefile.in distcc-2.18.3/Makefile.in
  	if test x$(PYTHON) != x; then \
  	$(PYTHON) -c 'import sys; print sys.version'; \
 -	PATH=`pwd`:/usr/local/bin:/bin:/usr/bin $(PYTHON) $(srcdir)/test/testdistcc.py; \
-+	PATH=`pwd`:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/bin:/usr/sbin $(PYTHON) $(srcdir)/test/testdistcc.py; \
++	PATH=`pwd`:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/sbin:/usr/sbin $(PYTHON) $(srcdir)/test/testdistcc.py; \
  	else echo "WARNING: python not found; tests skipped"; \
  	fi
  
