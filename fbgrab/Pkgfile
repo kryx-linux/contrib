@@ -11,7 +11,6 @@ source=(http://hem.bredband.net/gmogmo/$name/$name-$version.tar.gz)
 build() {
     cd $name-$version
     gcc $CFLAGS fbgrab.c -lpng -lz -o fbgrab
-    make
     install -D -m 0755 $name $PKG/usr/bin/$name
     install -D -m 0644 $name.1.man $PKG/usr/man/man1/$name.1
 }
