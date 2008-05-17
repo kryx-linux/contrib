@@ -1,0 +1,28 @@
+# Description:	ekg2 is a multiprotocol, plugin based instant messenger
+# URL:		    http://www.ekg2.org
+# Packager:	    Bartosz Sobel, dwanasciegroszy at o2 dot com
+# Maintainer:   Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:   libgadu
+
+name=ekg2
+version=0.1.1
+release=2
+source=(http://pl.$name.org/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	# for enabling unicode in ekg2, recompile ncurses with --enable-unicode flag first
+	./configure \
+		--prefix=/usr \
+		--libexecdir=/usr/lib \
+		--disable-nls \
+		--without-aspell
+
+	make
+	make DESTDIR=$PKG install
+	find $PKG \( -name *.txt -o \
+	             -name .packlist -o \
+	             -name perllocal.pod -o \
+	             -name *.bs -o \
+	             -type d -empty \) -exec rm -rf '{}' \;
+}
