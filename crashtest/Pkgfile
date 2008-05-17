@@ -1,0 +1,18 @@
+# Description: simulates car crashes
+# URL:         http://bram.creative4vision.nl/crashtest/
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  fltk alsa-lib ode plib
+
+name=crashtest
+version=1.0
+release=1
+source=(http://bram.creative4vision.nl/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version/src-$name
+    sed -i -e "s/-O2 -g -Wall/$CXXFLAGS/" \
+           -e 's|/usr/games|/usr/bin|' Makefile
+    sed -i 's|/usr/share/games|/usr/share|' Makefile crashtest.cxx
+    make
+    make DESTDIR=$PKG install
+}
