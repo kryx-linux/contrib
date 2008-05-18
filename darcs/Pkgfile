@@ -1,11 +1,12 @@
 # Description: Distributed version control system  
 # URL:         http://www.darcs.net/
 # Maintainer:  Jürgen Daubert, juergen dot daubert at t-online dot de
+# Depends on:  curl ncurses openssl zlib
 
 name=darcs
-version=1.0.9
+version=2.0.0
 release=1
-source=(http://jue.li/crux/files/$name-$version-linux-i586.tar.bz2) 
+source=(http://jue.li/crux/files/$name-$version-$release-linux-i386.tar.bz2) 
 
 build() {
     cd $name-$version
