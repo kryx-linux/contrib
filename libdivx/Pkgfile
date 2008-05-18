@@ -2,7 +2,6 @@
 # URL: http://labs.divx.com/DivXLinuxCodec
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Martin Opel, mo at obbl-net dot de
-# Depends on: unzip
 
 name=libdivx
 version=6.1.1
@@ -14,10 +13,10 @@ build() {
 	install -d tmp
 	unzip -d tmp -P h08pzt4 contents.dat
 	install -d $PKG/usr/include/divx/{common,decoder,encoder}
-	install -D -m 0755 tmp/lib/libdivx.so $PKG/usr/lib/libdivx.so
-	install -m 0644 tmp/include/common/* $PKG/usr/include/divx/common/
-	install -m 0644 tmp/include/decoder/* $PKG/usr/include/divx/decoder/
-	install -m 0644 tmp/include/encoder/* $PKG/usr/include/divx/encoder/
-	ln -fs /usr/lib/libdivx.so $PKG/usr/lib/libdivx.so.0
+	install -m 0644 -D tmp/lib/libdivx.so $PKG/usr/lib/libdivx.so.0
+	install -m 0644 -t $PKG/usr/include/divx/common/ tmp/include/common/* 
+	install -m 0644 -t $PKG/usr/include/divx/decoder/ tmp/include/decoder/* 
+	install -m 0644 -t $PKG/usr/include/divx/encoder/ tmp/include/encoder/* 
+	ln -s /usr/lib/libdivx.so.0 $PKG/usr/lib/libdivx.so
 }
 
