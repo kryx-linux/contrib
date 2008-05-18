@@ -1,0 +1,24 @@
+# Description: quick launch bar
+# URL:         http://freshmeat.net/projects/wbar/
+# Packager:    Younes Hafri <ycrux@club-internet.fr>
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  imlib2
+
+name=wbar
+version=1.3.3
+release=1
+source=(http://freshmeat.net/redir/$name/66660/url_mirror/$name-$version.tbz2
+$name-$version-dot.wbar.patch)
+
+build() {
+  tar --use-compress-program=bzip2 -xf $name-$version.tbz2
+  cd $name-$version
+  patch -p1 -i ../$name-$version-dot.wbar.patch
+  sed -i "/CXXFLAGS/s/-O2/$CXXFLAGS/" Makefile
+  make
+  mkdir -p $PKG/usr/share/wbar
+  cp -a ./iconpack $PKG/usr/share/wbar/iconpack
+  install -D dot.wbar $PKG/usr/etc/dot.wbar
+  install -D -m 0755 ./wbar $PKG/usr/bin/wbar
+}
+
