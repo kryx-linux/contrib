@@ -6,11 +6,17 @@
 name=cream
 version=0.41
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz crux_install_cream.diff)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    patch -p0 -i ../crux_install_cream.diff
-    chmod +x INSTALL.sh
-    ./INSTALL.sh
- }
+    mkdir -p $PKG/usr/share/vim/cream/{addons,bitmaps,filetypes}
+    install -m 0644 {creamrc,*.vim} $PKG/usr/share/vim/cream/
+    install -m 0644 addons/*.vim $PKG/usr/share/vim/cream/addons/
+    install -m 0644 bitmaps/*.xpm $PKG/usr/share/vim/cream/bitmaps/
+    install -m 0644 filetypes/*.vim $PKG/usr/share/vim/cream/filetypes/
+    install -m 0755 -D cream $PKG/usr/bin/cream
+    install -m 0755 -D cream.desktop $PKG/usr/share/applications/cream.desktop
+    install -m 0644 -D cream.svg $PKG/usr/share/icons/cream.svg
+    install -m 0644 cream.png $PKG/usr/share/icons/
+}
