@@ -11,9 +11,8 @@ release=1
 source=(http://download.sarine.nl/gmpc-0.14.0/plugins/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
-	chown -R root:root $PKG
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
 }

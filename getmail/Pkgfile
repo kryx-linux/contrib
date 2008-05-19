@@ -14,5 +14,4 @@ build() {
   cd $name-$version
   patch -p1 < $SRC/$name-$version.diff
   python setup.py install --prefix=/usr --root=$PKG
-  chown -R root:root $PKG
 }

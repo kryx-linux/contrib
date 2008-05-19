@@ -13,7 +13,6 @@ source=(http://dl.sourceforge.net/$name/$name-$version.tar.gz)
 build() {
    cd $name-$version
    python setup.py install --root=$PKG
-   chown -R root:root $PKG
    rm $PKG/usr/lib/python2.5/site-packages/docutils/writers/s5_html/themes/README.txt
    rm $PKG/usr/lib/python2.5/site-packages/docutils/parsers/rst/include/README.txt
 }

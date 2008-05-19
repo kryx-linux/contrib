@@ -24,7 +24,6 @@ build() {
     --mandir=/usr/man
 
   make && make DESTDIR=$PKG install
-  chown -R root:root $PKG
 
   install -d $PKG/var/{named,run/named}
 

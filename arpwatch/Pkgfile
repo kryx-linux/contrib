@@ -16,5 +16,4 @@ build() {
    install -d -m 0755 $PKG/usr/{man/man8,sbin}
    make && make DESTDIR=$PKG install
    install -d -m 0755 $PKG/usr/sbin
-   chown -R root:root $PKG
 }

@@ -1,8 +1,8 @@
 # Description: Ncurse-based MPD console client 
-# URL:			   http://www.musicpd.org/
+# URL:         http://www.musicpd.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:	   James Mills, prologic at shortcircuit dot net dot au
-# Depends on:	 ncurses
+# Packager:    James Mills, prologic at shortcircuit dot net dot au
+# Depends on:  ncurses
 
 name=ncmpc
 version=0.11.1
@@ -10,20 +10,19 @@ release=2
 source=(http://hem.bredband.net/kaw/${name}/files/${name}-${version}.tar.gz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
     
-	./configure \
-		--sysconfdir=/usr/etc \
-		--prefix=/usr \
-		--disable-nls
-	make
-	make install DESTDIR=$PKG
+  ./configure \
+    --sysconfdir=/usr/etc \
+    --prefix=/usr \
+    --disable-nls
+  make
+  make install DESTDIR=$PKG
 
-	mkdir -p $PKG/usr/etc/ncmpc
+  mkdir -p $PKG/usr/etc/ncmpc
 
-	install -m 0644 doc/config.sample $PKG/usr/etc/ncmpc/config
-	install -m 0644 doc/keys.sample $PKG/usr/etc/ncmpc/keys
+  install -m 0644 doc/config.sample $PKG/usr/etc/ncmpc/config
+  install -m 0644 doc/keys.sample $PKG/usr/etc/ncmpc/keys
 
-	rm -rf $PKG/usr/share
-	chown -R root:root $PKG
+  rm -rf $PKG/usr/share
 }
