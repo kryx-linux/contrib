@@ -1,0 +1,21 @@
+# Description: renders an ascii linux logo
+# URL:         http://www.deater.net/weave/vmwprod/linux_logo/
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Packager:    Olle Gustafsson <ogg att linux dot se>
+
+name=linux_logo
+version=5.03
+release=1
+source=(http://www.deater.net/weave/vmwprod/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure
+	sed -i "s/-O2/$CFLAGS/" Makefile.default libsysinfo-0.2.1/Makefile.default
+	sed -i '/USE_I18N/s/1/0/2' Makefile.default
+	sed -i 's/\$(TRANSLATIONS)//' Makefile
+	make
+    install -D -m 0775 linux_logo $PKG/usr/bin/linux_logo
+    install -D -m 0644 linux_logo.1.gz $PKG/usr/man/man1/linux_logo.1.gz
+}
+
