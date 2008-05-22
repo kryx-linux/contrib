@@ -27,6 +27,7 @@ build() {
 	make DESTDIR=$PKG install
 	make DESTDIR=$PKG/etc/nut/ install-conf
 	rm -r $PKG/etc/nut/etc/
+	rmdir $PKG/usr/{lib/pkgconfig,include}	
 	#if you dont want config templates uncomment the next line
 	#rm $PKG/etc/nut/*
 	mkdir -p $PKG/etc/udev/rules.d/
