@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# /etc/rc.d/upsd: start/stop ups daemons
+#
+
+case "$1" in
+  start)
+	/usr/bin/upsdrvctl start
+	/usr/sbin/upsd 
+	;;
+  stop)
+  	/usr/sbin/upsd -c stop
+	;;
+  *)
+        echo "Usage: $0 [start|stop]"
+        exit 1
+esac
+
+# End of file

@@ -1,0 +1,38 @@
+# Description: Network UPS Tools. Monitor of UPS hardware.
+# URL: http://www.networkupstools.org/
+# Maintainer: Victor Martinez, pitillo at ono dot com
+# Depends on:
+
+name=nut
+version=2.2.2
+release=1
+source=(http://www.networkupstools.org/source/2.2/$name-$version.tar.gz \
+	upsd)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr \
+		--disable-nls \
+		--with-user=nut \
+		--with-group=nut \
+		--with-usb \
+		--with-lib \
+		--mandir=/usr/man \
+		--sysconfdir=/etc/$name \
+		--sbindir=/usr/sbin/ \
+		--datadir=/usr/share/$name \
+		--localstatedir=/var/$name 
+	make
+	make usb
+	make DESTDIR=$PKG install
+	make DESTDIR=$PKG/etc/nut/ install-conf
+	rm -r $PKG/etc/nut/etc/
+	#if you dont want config templates uncomment the next line
+	#rm $PKG/etc/nut/*
+	mkdir -p $PKG/etc/udev/rules.d/
+	install -D -m 755 $SRC/upsd $PKG/etc/rc.d/upsd
+	rmdir $PKG/usr/cgi-bin $PKG/usr/html 
+	mkdir -p $PKG/var/state/ups
+	chmod 0770 $PKG/var/state/ups
+	chown root:nut $PKG/var/state/ups
+}

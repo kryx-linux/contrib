@@ -1,0 +1,5 @@
+#!/bin/bash
+
+getent group nut || groupadd nut
+getent passwd nut || useradd -m -g nut -d /var/empty -s /bin/false nut
+passwd -l nut
