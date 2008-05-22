@@ -6,7 +6,7 @@
 # Depends on: 
 
 name=dhcp
-version=4.0.0
+version=3.1.1
 release=1
 source=(http://ftp.isc.org/isc/$name/$name-$version.tar.gz
       dhcpd
@@ -15,10 +15,13 @@ source=(http://ftp.isc.org/isc/$name/$name-$version.tar.gz
 build() {
   cd dhcp-$version
   patch -p1 -i $SRC/default-config.diff
-  ./configure --prefix=/usr --mandir=/usr/man
+
+  sed -i -e 's|usr/share/man|/usr/man|g' Makefile.conf
+  sed -i -e 's|usr/local/include|usr/include|g' Makefile.conf
+  sed -i -e 's|usr/local/lib|usr/lib|g' Makefile.conf
+  ./configure 
   make
   make DESTDIR=$PKG install
-  mkdir $PKG/etc/
   install -m644 client/dhclient.conf server/dhcpd.conf -t $PKG/etc
   install -D ../dhcpd $PKG/etc/rc.d/dhcpd
   mkdir -p $PKG/var/state/dhcp

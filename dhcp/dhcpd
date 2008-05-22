@@ -5,19 +5,19 @@
 
 case $1 in
 start)
-	/usr/sbin/dhcpd -q
-	;;
+  /usr/sbin/dhcpd -q
+  ;;
 stop)
-	killall -q /usr/sbin/dhcpd
-	;;
+  killall -q /usr/sbin/dhcpd
+  ;;
 restart)
-	$0 stop
-	sleep 1
-	$0 start
-	;;
+  $0 stop
+  sleep 1
+  $0 start
+  ;;
 *)
-	echo "usage: $0 [start|stop|restart]"
-	;;
+  echo "usage: $0 [start|stop|restart]"
+  ;;
 esac
 
 # End of file
