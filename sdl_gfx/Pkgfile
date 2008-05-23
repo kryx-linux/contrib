@@ -6,11 +6,13 @@
 
 name=sdl_gfx
 version=2.0.13
-release=1
-source=(http://www.ferzkopp.net/Software/SDL_gfx-${version%.*}/SDL_gfx-$version.tar.gz)
+release=2
+source=(http://www.ferzkopp.net/Software/SDL_gfx-${version%.*}/SDL_gfx-$version.tar.gz
+	sdl_gfx-$version-imageFilter-asm.fix.patch)
 
 build() {
 	cd SDL_gfx-$version
+	patch -p 1 -i $SRC/sdl_gfx-$version-imageFilter-asm.fix.patch
 	./configure	--prefix=/usr
 	make
 	make DESTDIR=$PKG install
