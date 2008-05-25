@@ -2,7 +2,7 @@
 # URL: http://www.blender.org/
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Depends on: libjpeg libpng ode fmod smpeg ftgl scons openexr freealut
+# Depends on: xorg-libxi libtiff libjpeg libpng ode fmod smpeg ftgl scons openexr freealut
 
 name=blender
 version=2.46
@@ -11,7 +11,9 @@ source=(http://download.blender.org/source/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  sed -i -e "s/-O2/${CFLAGS// /\' ,\'}/g" SConstruct
+  sed -e "s/-O2/${CFLAGS// /\' ,\'}/g" -i SConstruct
+  sed -e '/C_WARN/ s/-Wdeclaration-after-statement//' \
+      -i config/linux2-config.py
   scons \
     WITH_BF_OPENAL=yes \
     WITH_BF_FMOD=yes \
