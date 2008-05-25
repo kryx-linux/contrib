@@ -1,16 +1,31 @@
 # Description: highly configurable text format for writing documentation
-# URL:         http://www.methods.co.nz/asciidoc/index.html
+# URL:         http://www.methods.co.nz/asciidoc
 # Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
 # Depends on:  python
+# Nice to have: source-highlight
 
 name=asciidoc
 version=8.2.6
 release=1
-source=(http://www.methods.co.nz/$name/$name-$version.tar.gz crux_install.diff)
+source=(http://www.methods.co.nz/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    patch -p0 -i ../crux_install.diff
     sed -i '/^CONF_DIR/s|/etc/asciidoc|/usr/etc/asciidoc|' a2x asciidoc.py
-    ./install.sh
+    install -d $PKG/usr/man/man1
+    install -d $PKG/usr/share/vim/{syntax,ftdetect}
+    install -d $PKG/usr/etc/asciidoc/{filters,docbook-xsl,stylesheets,javascripts,images/icons/callouts}
+    install -m 0755 asciidoc.py -D $PKG/usr/bin/asciidoc
+    install -m 0755 a2x $PKG/usr/bin
+    install doc/*.1 $PKG/usr/man/man1
+    install -m 644 *.conf $PKG/usr/etc/asciidoc
+    install filters/*.py $PKG/usr/etc/asciidoc/filters
+    install -m 644 filters/*.conf $PKG/usr/etc/asciidoc/filters
+    install -m 644 docbook-xsl/*.xsl $PKG/usr/etc/asciidoc/docbook-xsl
+    install -m 644 stylesheets/*.css $PKG/usr/etc/asciidoc/stylesheets
+    install -m 644 javascripts/*.js $PKG/usr/etc/asciidoc/javascripts
+    install -m 644 images/icons/callouts/* $PKG/usr/etc/asciidoc/images/icons/callouts
+    install -m 644 images/icons/*.png $PKG/usr/etc/asciidoc/images/icons
+    install -m 644 vim/syntax/asciidoc.vim $PKG/usr/share/vim/syntax/asciidoc.vim
+    install -m 644 vim/ftdetect/asciidoc_filetype.vim $PKG/usr/share/vim/ftdetect/asciidoc_filetype.vim
 }
