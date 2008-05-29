@@ -2,18 +2,18 @@
 # URL: http://ndiswrapper.sourceforge.net/joomla/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Antonio SJ Musumeci, bile at landofbile dot com
-# Depends on: 
 
 name=ndiswrapper
-version=1.52
+version=1.53
 release=1
 source=(http://dl.sourceforge.net/sourceforge/ndiswrapper/ndiswrapper-$version.tar.gz)
 
 build() {
+	local kernel_path
 	cd ndiswrapper-$version
 	sed -i -e "s|CFLAGS = -g -Wall -I\$(DRIVER_DIR)|CFLAGS = $CFLAGS -Wall -I\$(DRIVER_DIR)|" utils/Makefile
-	local kernel="`uname -r`"
-	make KBUILD=/usr/src/linux-$kernel EXTRA_CFLAGS="$CFLAGS"
-	make KBUILD=/usr/src/linux-$kernel DESTDIR=$PKG install
+	kernel_path="/usr/src/linux-`uname -r`"
+	make KBUILD="$kernel_path" EXTRA_CFLAGS="$CFLAGS"
+	make KBUILD="$kernel_path" DESTDIR=$PKG install
 }
 
