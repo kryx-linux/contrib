@@ -5,21 +5,17 @@
 # Depends on: allegro
 
 name=atanks
-version=2.9
+version=3.0
 release=1
-source=(http://dl.sourceforge.net/sourceforge/atanks/atanks-$version.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/atanks/atanks-$version.tar.gz
+	atanks-$version-install.patch
+	atanks-$version-version-fix.patch)
 
 build() {
 	cd atanks
-	sed -i src/Makefile \
-		-e '/^FLAGS = /s|-DLINUX -DDATA_DIR=\\".\\"|-DLINUX -DDATA_DIR=\\"/usr/share/atanks\\"|' \
-		-e '/^CFLAGS += -g.*$/d'
-
-	make -C src
-	install -D -m 0755 atanks $PKG/usr/bin/atanks
-	install -d $PKG/usr/share/atanks
-	install -m 0644 *.dat *.txt -t $PKG/usr/share/atanks/
-	install -D -m 0644 atanks.desktop $PKG/usr/share/applications/atanks.desktop
-	install -D -m 0644 atanks.png $PKG/usr/share/pixmaps/atanks.png
+	patch -p 1 -i $SRC/atanks-$version-install.patch
+	patch -p 1 -i $SRC/atanks-$version-version-fix.patch
+	make
+	make DESTDIR=$PKG install
 }
 
