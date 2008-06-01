@@ -1,0 +1,22 @@
+# Description: text editor
+# URL:         http://mooedit.sourceforge.net/
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  gtk
+
+name=medit
+version=0.9.3
+release=1
+source=(http://dl.sourceforge.net/sourceforge/mooedit/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+    ./configure \
+        --disable-nls \
+        --prefix=/usr \
+        --mandir=/usr/man \
+        --disable-generated-files
+    make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/share/doc
+    rm -rf $PKG/usr/include
+}
