@@ -12,7 +12,8 @@ source=(http://pessimization.com/software/$name/$name-$version.tar.gz)
 build() {
   cd $name-$version
   ./configure --prefix=/usr \
-              --mandir=/usr/man
+              --mandir=/usr/man \
+              --sysconfdir=/etc
   make
   make DESTDIR=$PKG install
 }
