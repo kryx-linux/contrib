@@ -6,12 +6,13 @@
 
 name=wyrd
 version=1.4.4
-release=1
+release=2
 source=(http://pessimization.com/software/$name/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr \
+              --mandir=/usr/man
   make
   make DESTDIR=$PKG install
 }
