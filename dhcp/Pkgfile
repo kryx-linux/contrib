@@ -1,12 +1,12 @@
 # Description: DHCP server, client and relay agent.
-# URL:         http://www.isc.org/sw/dhcp/
+# URL:         http://www.isc.org/dhcp
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Mark Rosenstand, mark at borkware dot net
 #
 # Depends on: 
 
 name=dhcp
-version=3.1.1
+version=4.0.0
 release=1
 source=(http://ftp.isc.org/isc/$name/$name-$version.tar.gz
       dhcpd
@@ -16,13 +16,12 @@ build() {
   cd dhcp-$version
   patch -p1 -i $SRC/default-config.diff
 
-  sed -i -e 's|usr/share/man|/usr/man|g' Makefile.conf
-  sed -i -e 's|usr/local/include|usr/include|g' Makefile.conf
-  sed -i -e 's|usr/local/lib|usr/lib|g' Makefile.conf
-  ./configure 
+  ./configure --prefix=/usr \
+              --mandir=/usr/man \
+              --disable-dhcpv6 \
+              --sysconfdir=/etc
   make
   make DESTDIR=$PKG install
-  install -m644 client/dhclient.conf server/dhcpd.conf -t $PKG/etc
   install -D ../dhcpd $PKG/etc/rc.d/dhcpd
   mkdir -p $PKG/var/state/dhcp
   touch $PKG/var/state/dhcp/dhcpd.leases
