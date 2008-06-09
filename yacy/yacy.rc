@@ -12,12 +12,12 @@ RETVAL=0
 case $1 in
 	start)
 		echo -n "Starting $DAEMON..."
-		su $RUN_AS_USER -c /usr/sbin/$DAEMON-start > /dev/null 2>&1 /dev/null & RETVAL=$?
+		su $RUN_AS_USER -c /usr/sbin/$DAEMON-start &> /dev/null & RETVAL=$?
 		echo " done."
 		;;
 	stop)
 		echo -n "Shutting down $DAEMON..."
-		su $RUN_AS_USER -c /usr/sbin/$DAEMON-stop > /dev/null 2>&1 /dev/null & RETVAL=$?
+		su $RUN_AS_USER -c /usr/sbin/$DAEMON-stop &> /dev/null & RETVAL=$?
 		echo " done."
 		;;
 	restart)
