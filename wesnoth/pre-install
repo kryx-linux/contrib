@@ -2,13 +2,13 @@
 
 . /etc/pkgmk.conf
 . Pkgfile
-OLD_VERSION='1.4.1'
+OLD_VERSION='1.4.2'
 
 [ -z "$PKGMK_WORK_DIR" ] && PKGMK_WORK_DIR="$PWD/work"
 [ -z "$PKGMK_SOURCE_DIR" ] && PKGMK_SOURCE_DIR="$PWD"
 
 if [ -e "$PKGMK_SOURCE_DIR/wesnoth-$version.tar.bz2" ]; then
-	echo 'you have the lateist source file'
+	echo 'You have the lateist source file.'
 	exit 0
 fi
 
@@ -26,20 +26,24 @@ if [ -n "`pkginfo -i | egrep '^xdelta '`" ]; then
 
 		cp $PKGMK_SOURCE_DIR/wesnoth-$OLD_VERSION.tar.bz2 .
 		cp $PKGMK_SOURCE_DIR/wesnoth-$OLD_VERSION.tar-wesnoth-$version.tar.xdelta .
+		echo -n '[ 33%] Decompressing source, '
 		bzip2 -d wesnoth-$OLD_VERSION.tar.bz2
-		echo 'patching, this may take some time'
+		echo 'done.'
+		echo -n '[ 66%] Patching source, '
 		xdelta patch wesnoth-$OLD_VERSION.tar-wesnoth-$version.tar.xdelta
 		rm wesnoth-$OLD_VERSION.tar
 		mv wesnoth-$OLD_VERSION.tar-wesnoth-$version.tar.xdelta $PKGMK_SOURCE_DIR/
-		echo 'recompressing patched source'
+		echo 'done.'
+		echo -n '[100%] Compressing patched source, '
 		bzip2 -9 wesnoth-$version.tar
+		echo 'done.'
 		mv wesnoth-$version.tar.bz2 $PKGMK_SOURCE_DIR/
 	else
-		echo "wesnoth-$OLD_VERSION.tar.bz2 not found proceed to run Pkgfile."
-		exit 0
+		echo "'wesnoth-$OLD_VERSION.tar.bz2' not found proceed to run Pkgfile."
+		exit
 	fi
 else
-	echo 'No xdelta installed can not do a incremental update'
+	echo "Warning: 'xdelta' is not installed can not do a incremental update."
 fi
 
 # End of file
