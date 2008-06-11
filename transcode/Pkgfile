@@ -2,8 +2,7 @@
 # URL: http://www.transcoding.org/cgi-bin/transcode
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Martin Opel, mo at obbl-net dot de
-# Depends on: ffmpeg mpeg2dec libdvdnav liba52 xorg-libxv
-# Optional: avifile libtheora libdv libquicktime lzo mjpegtools libfame imagemagick
+# Depends on: libdvdnav mpeg2dec
 
 name=transcode
 version=1.0.5
@@ -13,64 +12,33 @@ source=(http://transcode.kabewm.com/transcode-$version.tar.bz2 \
 	ImageMagick-library-rename-fix.patch)
 
 build() {
-	local config
-	
 	cd transcode-$version
+	patch -p 1 -i $SRC/ImageMagick-library-rename-fix.patch
+	export CFLAGS="`echo $CFLAGS | sed -e 's/-O[s0-3]/-O3/'`"
 
-	patch -p 1 -i ../ImageMagick-library-rename-fix.patch
-
-	if pkginfo -i |grep '^avifile ' > /dev/null; then
-		config="--enable-avifile"
-	fi
-
-	if pkginfo -i |grep '^libtheora ' > /dev/null; then
-		config="$config --enable-theora"
-	fi
-
-	if pkginfo -i |grep '^libdv ' > /dev/null; then
-		config="$config --enable-libdv"
-	fi
-
-	if pkginfo -i |grep '^libquicktime ' > /dev/null; then
-		config="$config --enable-libquicktime"
-	fi
-
-	if pkginfo -i |grep '^lzo ' > /dev/null; then
-		config="$config --enable-lzo"
-		#config="$config  --with-lzo-includes='/usr/include/lzo'" # doesn't work? have to use the line below.
-		export CPPFLAGS="-I/usr/include/lzo"
-	fi
-
-	if pkginfo -i |grep '^mjpegtools ' > /dev/null; then
-		config="$config --enable-mjpegtools"
-	fi
-
-	if pkginfo -i |grep '^libfame ' > /dev/null; then
-		config="$config --enable-fame"
-	fi
-
-	if pkginfo -i |grep '^imagemagick ' > /dev/null; then
-		config="$config --enable-imagemagick"
-		#config="$config --with-imagemagick-includes='/usr/include/ImageMagick'" # doesn't work? have to use the line below.
-		export CPPFLAGS="$CPPFLAGS `pkg-config ImageMagick --cflags-only-I`"
-	fi
-
-	CFLAGS="`echo $CFLAGS | sed -e 's/-O[s0-3]/-O3/'`" \
-		./configure \
-			--prefix=/usr \
-			--enable-libpostproc \
-			--enable-freetype2 \
-			--enable-a52 \
-			--enable-a52-default-decoder \
-			--enable-ogg \
-			--enable-vorbis \
-			--enable-libxml2 \
-			--enable-sdl \
-			$config
+	./configure \
+		--prefix=/usr \
+		--with-lzo-includes='/usr/include/lzo' \
+		--with-imagemagick-includes='/usr/include/ImageMagick' \
+		--enable-libpostproc \
+		--enable-freetype2 \
+		--enable-a52 \
+		--enable-a52-default-decoder \
+		--enable-ogg \
+		--enable-vorbis \
+		--enable-libxml2 \
+		--enable-sdl \
+		--enable-avifile \
+		--enable-theora \
+		--enable-libdv \
+		--enable-libquicktime \
+		--enable-lzo \
+		--enable-mjpegtools \
+		--enable-fame \
+		--enable-imagemagick
 
 	make
 	make DESTDIR=$PKG install
-	if [ -n "$CPPFLAGS" ]; then unset CPPFLAGS; fi
 	rm -r $PKG/usr/share
 
 	# Subtitle support (Han Boetes)
