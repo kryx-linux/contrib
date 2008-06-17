@@ -5,13 +5,17 @@
 # Depends on: 
 
 name=wavpack
-version=4.41.0
+version=4.50.0
 release=1
 source=(http://www.wavpack.com/wavpack-$version.tar.bz2)
 
 build() {
 	cd wavpack-$version
-	./configure --prefix=/usr
+
+	./configure \
+		--prefix=/usr \
+		--disable-static
+
 	make
 	make DESTDIR=$PKG install
 }
