@@ -2,14 +2,18 @@
 # URL: http://liboil.freedesktop.org/wiki/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
+# Depends on: glib
 
 name=liboil
-version=0.3.8
+version=0.3.14
 release=1
-source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz)
+source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz
+	liboil-$version-disable-sse.patch)
 
 build() {
 	cd liboil-$version
+	patch -p 1 -i $SRC/liboil-$version-disable-sse.patch
+	autoreconf -f -i
 
 	./configure \
 		--prefix=/usr \
@@ -18,10 +22,9 @@ build() {
 
 	sed -i -e '/^SUBDIRS = /s/examples //' Makefile
 
-	make
-	make check
+	make -j 1
+	make -j 1 check
 	make DESTDIR=$PKG install
-
 	rm -r $PKG/usr/share 
 }
 
