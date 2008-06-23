@@ -1,18 +1,17 @@
 # Description: Python serial port API.
-# URL: http://pyserial.sourceforge.net/
+# URL: http://pyserial.wiki.sourceforge.net/pySerial
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Younes Hafri, ycrux at club-internet dot fr
 # Depends on: python
 
 name=pyserial
-version=2.2
+version=2.3
 release=1
-source=(http://dl.sourceforge.net/sourceforge/pyserial/pyserial-$version.zip)
+source=(http://dl.sourceforge.net/sourceforge/pyserial/pyserial-$version.tar.gz)
 
 build() {
 	install -d $PKG/usr
 	cd pyserial-$version
-
     	python setup.py build
 	python setup.py install --home=$PKG/usr
 }
