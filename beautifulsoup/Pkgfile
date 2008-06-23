@@ -5,12 +5,13 @@
 # Depends on: python
 
 name=beautifulsoup
-version=3.0.5
+version=3.0.7
 release=1
 source=(http://www.crummy.com/software/BeautifulSoup/download/BeautifulSoup.tar.gz)
 
 build() {
-	cd BeautifulSoup-$version
+	cd BeautifulSoup-3.0.5
+	sed -i -e "s/^__version__ = \"3.0.5\"$/__version__ = \"$version\"/" BeautifulSoup.py
 	python setup.py install --root=$PKG
 }
 
