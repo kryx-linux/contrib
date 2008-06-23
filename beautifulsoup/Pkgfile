@@ -7,11 +7,10 @@
 name=beautifulsoup
 version=3.0.7
 release=1
-source=(http://www.crummy.com/software/BeautifulSoup/download/BeautifulSoup.tar.gz)
+source=(http://www.crummy.com/software/BeautifulSoup/download/BeautifulSoup-$version.tar.gz)
 
 build() {
-	cd BeautifulSoup-3.0.5
-	sed -i -e "s/^__version__ = \"3.0.5\"$/__version__ = \"$version\"/" BeautifulSoup.py
+	cd BeautifulSoup-$version
 	python setup.py install --root=$PKG
 }
 
