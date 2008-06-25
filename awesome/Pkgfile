@@ -10,20 +10,14 @@ source=(http://awesome.naquadah.org/download/$name-$version.tar.bz2
 http://maxiq.ovh.org/CRUX/$name-mans-$version.tar.gz)
 
 build() {
-    prt-get listinst gtk >/dev/null 2>&1 && GTKFLAG="--with-gtk"
     cd $name-$version
     ./configure \
         --prefix=/usr \
         --mandir=/usr/man \
-        --docdir=/usr/share/awesome \
-        $GTKFLAG
-  	make AWESOME_CFLAGS="$CFLAGS"
-  	make DESTDIR=$PKG install
+        --docdir=/usr/share/awesome
+    make AWESOME_CFLAGS="$CFLAGS"
+    make DESTDIR=$PKG install
     rm -f $PKG/usr/share/awesome/{README,STYLE,UPGRADE}
-    # ugly 'if' :{
-    if grep -A1 "checking whether xmlto can create a man page" \
-     config.log | grep no >/dev/null 2>&1 ; then
-        cp $SRC/awesome{,-{client,menu,message}}.1 $PKG/usr/man/man1
-        cp $SRC/awesomerc.5 $PKG/usr/man/man5
-    fi
+    cp $SRC/awesome{,-{client,menu,message}}.1 $PKG/usr/man/man1
+    cp $SRC/awesomerc.5 $PKG/usr/man/man5
 }
