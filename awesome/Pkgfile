@@ -21,7 +21,7 @@ build() {
   	make DESTDIR=$PKG install
     rm -f $PKG/usr/share/awesome/{README,STYLE,UPGRADE}
     # ugly 'if' :{
-    if ! grep -A1 "checking whether xmlto can create a man page" \
+    if grep -A1 "checking whether xmlto can create a man page" \
      config.log | grep no >/dev/null 2>&1 ; then
         cp $SRC/awesome{,-{client,menu,message}}.1 $PKG/usr/man/man1
         cp $SRC/awesomerc.5 $PKG/usr/man/man5
