@@ -4,7 +4,7 @@
 # Depends on:  libconfuse cairo xorg-libxinerama pango imlib2 xorg-libxrandr
 
 name=awesome
-version=2.3.1
+version=2.3.2
 release=1
 source=(http://awesome.naquadah.org/download/$name-$version.tar.bz2
 http://maxiq.ovh.org/CRUX/$name-mans-$version.tar.gz)
@@ -21,7 +21,7 @@ build() {
   	make DESTDIR=$PKG install
     rm -f $PKG/usr/share/awesome/{README,STYLE,UPGRADE}
     # ugly 'if' :{
-    if grep -A1 "checking whether xmlto can create a man page" \
+    if ! grep -A1 "checking whether xmlto can create a man page" \
      config.log | grep no >/dev/null 2>&1 ; then
         cp $SRC/awesome{,-{client,menu,message}}.1 $PKG/usr/man/man1
         cp $SRC/awesomerc.5 $PKG/usr/man/man5
