@@ -5,9 +5,10 @@
 # Depends on: swig setuptools
 
 name=pyopengl
-version=3.0.0b1
+version=3.0.0b3
 release=1
-source=(http://dl.sourceforge.net/sourceforge/pyopengl/PyOpenGL-$version.tar.gz)
+up2date="lynx -dump 'http://sourceforge.net/project/showfiles.php?group_id=5988' |grep 'tar.gz$' |sed -ne 's/.*-\(.*\)\.t.*/\1/' -e '$ p'"
+source=(http://dl.sourceforge.net/sourceforge/$name/PyOpenGL-$version.tar.gz)
 
 build() {
 	cd PyOpenGL-$version
