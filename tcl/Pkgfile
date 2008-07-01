@@ -4,12 +4,12 @@
 # Packager: Sven Dahl, dahl at c64 dot org
 
 name=tcl
-version=8.5.2
+version=8.5.3
 release=1
-source=(http://dl.sourceforge.net/sourceforge/tcl/tcl$version-src.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name$version-src.tar.gz)
 
 build() {
-	cd tcl$version/unix
+	cd $name$version/unix
 
 	./configure --prefix=/usr
 	make
