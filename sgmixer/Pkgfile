@@ -10,9 +10,8 @@ release=2
 source=(http://openfmi.net/frs/download.php/1/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-        ./configure --prefix=/usr
-	make
-	install -d $PKG/usr/bin
-	install -m 755 src/$name $PKG/usr/bin
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  install -D -m 0755 src/$name $PKG/usr/bin/$name
 }
