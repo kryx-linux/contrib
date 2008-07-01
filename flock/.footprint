@@ -32,6 +32,7 @@ drwxr-xr-x	root/root	usr/lib/flock/components/
 -rw-r--r--	root/root	usr/lib/flock/components/FeedWriter.js
 -rw-r--r--	root/root	usr/lib/flock/components/WebContentConverter.js
 -rw-r--r--	root/root	usr/lib/flock/components/browser.xpt
+-rw-r--r--	root/root	usr/lib/flock/components/flockAOLMailService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockAccountService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockAccountUtils.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockAuthManager.js
@@ -43,6 +44,7 @@ drwxr-xr-x	root/root	usr/lib/flock/components/
 -rw-r--r--	root/root	usr/lib/flock/components/flockBlogsomeService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockDateFormatter.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockDeliciousService.js
+-rw-r--r--	root/root	usr/lib/flock/components/flockDiggService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockError.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockFacebookAPI.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockFacebookService.js
@@ -62,6 +64,7 @@ drwxr-xr-x	root/root	usr/lib/flock/components/
 -rw-r--r--	root/root	usr/lib/flock/components/flockMediaChannel.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockMetricsService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockMigrateRDF.js
+-rw-r--r--	root/root	usr/lib/flock/components/flockMigrateToolbars.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockMigrationManager.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockMyworldService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockOpmlService.js
@@ -77,6 +80,7 @@ drwxr-xr-x	root/root	usr/lib/flock/components/
 -rw-r--r--	root/root	usr/lib/flock/components/flockPicasaService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockPiczoService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockPollerService.js
+-rw-r--r--	root/root	usr/lib/flock/components/flockPownceService.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockProfiler.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockRemoteConsoleLogger.js
 -rw-r--r--	root/root	usr/lib/flock/components/flockRichDNDService.js
@@ -216,9 +220,11 @@ drwxr-xr-x	root/root	usr/lib/flock/res/
 -rw-r--r--	root/root	usr/lib/flock/res/charsetalias.properties
 -rw-r--r--	root/root	usr/lib/flock/res/cmessage.txt
 drwxr-xr-x	root/root	usr/lib/flock/res/detect/
+-rw-r--r--	root/root	usr/lib/flock/res/detect/aolmail.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/blogger.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/blogsome.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/delicious.xml
+-rw-r--r--	root/root	usr/lib/flock/res/detect/digg.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/facebook.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/flickr.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/gmail.xml
@@ -227,6 +233,7 @@ drwxr-xr-x	root/root	usr/lib/flock/res/detect/
 -rw-r--r--	root/root	usr/lib/flock/res/detect/photobucket.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/picasa.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/piczo.xml
+-rw-r--r--	root/root	usr/lib/flock/res/detect/pownce.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/searchvideo.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/twitter.xml
 -rw-r--r--	root/root	usr/lib/flock/res/detect/typepad.xml
@@ -302,6 +309,7 @@ drwxr-xr-x	root/root	usr/lib/flock/res/html/
 drwxr-xr-x	root/root	usr/lib/flock/searchplugins/
 -rw-r--r--	root/root	usr/lib/flock/searchplugins/amazondotcom.xml
 -rw-r--r--	root/root	usr/lib/flock/searchplugins/askcom.xml
+-rw-r--r--	root/root	usr/lib/flock/searchplugins/digg.xml
 -rw-r--r--	root/root	usr/lib/flock/searchplugins/eBay.xml
 -rw-r--r--	root/root	usr/lib/flock/searchplugins/google.xml
 -rw-r--r--	root/root	usr/lib/flock/searchplugins/technorati.xml
