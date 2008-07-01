@@ -1,16 +1,16 @@
 # Description: Perl bindings for GTK2
-# URL: http://www.gtkperl.org
+# URL: http://www.cpan.org/
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on: p5-cairo
 
 name=p5-gtk2
-version=1.141
+version=1.183
 release=1
-source=(http://www.cpan.org/modules/by-module/Gtk2/Gtk2-${version}.tar.gz)
+source=(http://www.cpan.org/modules/by-module/Gtk2/Gtk2-$version.tar.gz)
 
 build() {
-  cd Gtk2-${version}
+  cd Gtk2-$version
   perl Makefile.PL \
     --without-gdkimlib \
     --without-gnome \
