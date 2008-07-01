@@ -6,7 +6,7 @@
 
 name=lvm2
 version=2.02.39
-release=1
+release=2
 source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz)
 
 build() {
@@ -16,7 +16,8 @@ build() {
 		--prefix=/usr \
 		--exec-prefix= \
 		--mandir=/usr/man \
-		--enable-lvm1_fallback
+		--enable-lvm1_fallback \
+		--disable-readline
 
 	make
 	make DESTDIR=$PKG install
