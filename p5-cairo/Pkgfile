@@ -1,19 +1,19 @@
 # Description: Perl bindings for cairo
-# URL: http://www.gtkperl.org
+# URL: http://www.cpan.org/
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on: p5-glib
 
 name=p5-cairo
-version=1.021
+version=1.060
 release=1
-source=(http://search.cpan.org/CPAN/authors/id/T/TS/TSCH/Cairo-${version}.tar.gz)
+source=(http://search.cpan.org/CPAN/authors/id/T/TS/TSCH/Cairo-$version.tar.gz)
 
 build() {
-  cd Cairo-${version}
+  cd Cairo-$version
   perl Makefile.PL
   make OPTIMIZE="$CFLAGS"
-  make install DESTDIR=${PKG}
+  make install DESTDIR=$PKG
   find $PKG \
     -name perllocal.pod \
     -o -name "*.bs" \
