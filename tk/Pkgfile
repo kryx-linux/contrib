@@ -5,12 +5,12 @@
 # Depends on: xorg-libxft tcl
 
 name=tk
-version=8.5.2
+version=8.5.3
 release=1
-source=(http://dl.sourceforge.net/sourceforge/tcl/tk$version-src.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/tcl/$name$version-src.tar.gz)
 
 build() {
-	cd tk$version/unix
+	cd $name$version/unix
 
 	./configure \
 		--prefix=/usr \
