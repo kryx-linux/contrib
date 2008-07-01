@@ -1,16 +1,16 @@
 # Description: Perl bindings for pkgconfig
-# URL: http://www.gtkperl.org
+# URL: http://www.cpan.org/
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on: p5-xml-parser
 
 name=p5-extutils-pkgconfig
-version=1.07
-release=2
-source=(http://www.cpan.org/modules/by-module/ExtUtils/ExtUtils-PkgConfig-${version}.tar.gz)
+version=1.11
+release=1
+source=(http://www.cpan.org/modules/by-module/ExtUtils/ExtUtils-PkgConfig-$version.tar.gz)
 
 build() {
-  cd ExtUtils-PkgConfig-${version}
+  cd ExtUtils-PkgConfig-$version
   perl Makefile.PL
   make OPTIMIZE="$CFLAGS"
   make install DESTDIR=$PKG
