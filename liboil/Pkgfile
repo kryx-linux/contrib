@@ -5,14 +5,12 @@
 # Depends on: glib
 
 name=liboil
-version=0.3.14
+version=0.3.15
 release=1
-source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz
-	liboil-$version-disable-sse.patch)
+source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz)
 
 build() {
 	cd liboil-$version
-	patch -p 1 -i $SRC/liboil-$version-disable-sse.patch
 	autoreconf -f -i
 
 	./configure \
@@ -20,10 +18,8 @@ build() {
 		--disable-static \
 		--disable-gtk-doc
 
-	sed -i -e '/^SUBDIRS = /s/examples //' Makefile
-
-	make -j 1
-	make -j 1 check
+	make
+	make check
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share 
 }
