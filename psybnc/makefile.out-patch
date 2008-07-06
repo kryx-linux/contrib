@@ -1,5 +1,5 @@
---- psybnc/makefile.out	2005-04-14 02:37:04.000000000 +1000
-+++ makefile.out	2005-04-14 02:39:50.000000000 +1000
+--- makefile.out.old	2008-07-06 21:45:39.562573400 +0200
++++ makefile.out	2008-07-06 21:45:47.258552001 +0200
 @@ -10,21 +10,5 @@
  all:	$(OBJS)
  	$(CC) -o $(TARGET) $(CFLAGS) $(OBJS) $(LIBS)
@@ -19,6 +19,6 @@
 -	@echo "Generating fingerprint .."
 -	@/usr/bin/openssl x509 -subject -dates -fingerprint -noout \
 -		-in key/psybnc.cert.pem
--	@echo psyBNC2.3.1-Linux ready. Please read the README before you run psybnc.
+-	@echo psyBNC2.3.2-7-Linux ready. Please read the README before you run psybnc.
  
  include ./targets.mak
