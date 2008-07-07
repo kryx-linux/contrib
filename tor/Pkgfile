@@ -6,7 +6,7 @@
 
 name=tor
 version=0.2.0.28-rc
-release=1
+release=2
 source=(http://tor.eff.org/dist/tor-$version.tar.gz \
 	tor.rc)
 
@@ -29,18 +29,18 @@ build() {
 	touch $PKG/var/log/tor/notices.log
 	chown -R root:root $PKG
 
-	chown _tor:daemon \
+	chown root:tor \
 		$PKG/var/log/tor \
 		$PKG/usr/etc/tor \
 		$PKG/usr/var/lib/tor
 
-	find $PKG/usr/bin -type f -exec chown _tor:daemon {} \;
-	find $PKG/usr/etc -type f -exec chown _tor:daemon {} \;
-	find $PKG/var/log/tor -type f -exec chown _tor:daemon {} \;
-	find $PKG/usr/bin -type f -exec chmod 0744 {} \;
-	find $PKG/usr/etc/tor -type f -exec chmod 0600 {} \;
+	find $PKG/usr/bin -type f -exec chown tor:tor {} \;
+	find $PKG/usr/etc -type f -exec chown root:tor {} \;
+	find $PKG/var/log/tor -type f -exec chown root:tor {} \;
+	find $PKG/usr/bin -type f -exec chmod 0544 {} \;
+	find $PKG/usr/etc/tor -type f -exec chmod 0660 {} \;
 
-	chmod 0640 $PKG/var/log/tor/notices.log
+	chmod 0660 $PKG/var/log/tor/notices.log
 	install -m 0755 $SRC/tor.rc $PKG/etc/rc.d/tor
 	mv $PKG/usr/etc/tor/torrc.sample $PKG/usr/etc/tor/torrc
 	
