@@ -4,19 +4,18 @@
 # Depends on:  libsdl
 
 name=phun
-version=3.5
+version=4.11
 release=1
-source=(http://www.acc.umu.se/~emilk/files/Phun_beta_3_5_linux32.tar.bz2 $name.desktop)
+source=(http://ftp.acc.umu.se/mirror/phun/Phun_beta_4_11_linux32.tar.bz2 $name.desktop)
 
 build() {
   cd Phun
   mkdir -p $PKG/usr/share/$name
   mkdir -p $PKG/usr/bin
-  cp -a ./* $PKG/usr/share/$name
+  cp -r ./* $PKG/usr/share/$name
   mv $PKG/usr/share/$name/$name $PKG/usr/bin/
   sed -i 'i#!/bin/bash\ncd /usr/share/phun' $PKG/usr/bin/$name
   install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
-  chmod 1777 $PKG/usr/share/phun/{Scenes,Screenshots}
+  chmod 1777 $PKG/usr/share/phun/{scenes,screenshots}
   find $PKG -name "*.txt" -delete
-  chmod -R a+Xr $PKG/usr/share/$name/Data/
 }
