@@ -7,8 +7,8 @@
 name=yacy
 version=0.59
 date=20080605_4890
-release=1
-source=(http://www.yacy.net/release/yacy_v${version}_$date.tar.gz \
+release=2
+source=(http://www.yacy.net/release/yacy_v${version}_$date.tar.gz
 	yacy-start.sh yacy-stop.sh yacy.rc)
 
 build() {
@@ -21,8 +21,8 @@ build() {
 	ant
 
 	# remove un-needed files
-	find $SRC/yacy -type f \
-	\( -name '*.bat' -o \
+	find $SRC/yacy -type f \( \
+		-name '*.bat' -o \
 		-name '*.txt' -o \
 		-name '*.css.old' -o \
 		-name '*.readme' -o \
@@ -47,6 +47,7 @@ build() {
 
 	# move cache directory
 	mv $PKG/usr/lib/yacy/DATA $PKG/var/cache/yacy/
+	chmod 0560 $PKG/var/cache/yacy/DATA
 	ln -sf /var/cache/yacy/DATA $PKG/usr/lib/yacy/DATA
 
 	local files='yacy.logging yacy.stopwords yacy.yellow'
@@ -57,14 +58,14 @@ build() {
 	done
 
 	# add some protection by limitng what and who can access the p2p files.
-	chown -R _yacy:daemon $PKG/usr/lib/yacy
-	chown -R _yacy:daemon $PKG/var/cache/yacy
-	chown -R _yacy:daemon $PKG/etc/yacy
-	chmod -R o-rx $PKG/etc/yacy
-	chmod -R o-rx $PKG/var/cache/yacy
+	chown -R root:yacy $PKG/usr/lib/yacy
+	chown -R root:yacy $PKG/var/cache/yacy
+	chown -R root:yacy $PKG/etc/yacy
+	chmod 0665 $PKG/etc/yacy
+	chmod -R 0575 $PKG/var/cache/yacy
 	
-	install -D -m 0754 -o _yacy -g daemon ../yacy-start.sh $PKG/usr/sbin/yacy-start
-	install -D -m 0754 -o _yacy -g daemon ../yacy-stop.sh $PKG/usr/sbin/yacy-stop
-	install -D -m 0754 ../yacy.rc $PKG/etc/rc.d/yacy
+	install -m 0554 -D -o yacy -g yacy $SRC/yacy-start.sh $PKG/usr/sbin/yacy-start
+	install -m 0554 -D -o yacy -g yacy $SRC/yacy-stop.sh $PKG/usr/sbin/yacy-stop
+	install -m 0554 -D $SRC/yacy.rc $PKG/etc/rc.d/yacy
 }
 
