@@ -5,14 +5,13 @@
 # Depends on: python
 
 name=pyserial
-version=2.3
+version=2.4
 release=1
 source=(http://dl.sourceforge.net/sourceforge/pyserial/pyserial-$version.tar.gz)
 
 build() {
-	install -d $PKG/usr
 	cd pyserial-$version
-    	python setup.py build
-	python setup.py install --home=$PKG/usr
+	python setup.py build
+	python setup.py install --prefix=/usr --root $PKG
 }
 
