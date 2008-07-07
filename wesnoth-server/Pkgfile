@@ -6,7 +6,7 @@
 
 name=wesnoth-server
 version=1.4.3
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/wesnoth/wesnoth-$version.tar.bz2 \
 	wesnothd.rc)
 
@@ -27,13 +27,11 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	install -m 0755 -D ../wesnothd.rc $PKG/etc/rc.d/wesnoth
-
-	chown _wesnoth:daemon \
-		$PKG/usr/bin/wesnothd \
-		$PKG/usr/var/run/wesnothd
-	
-	chmod g-x,o-x $PKG/usr/bin/wesnothd
+	install -m 0755 -D $SRC/wesnothd.rc $PKG/etc/rc.d/wesnoth
+	chown wesnoth:wesnoth $PKG/usr/bin/wesnothd
+	chown root:wesnoth $PKG/usr/var/run/wesnothd
+	chmod 0744 $PKG/usr/bin/wesnothd
+	chmod 0770 $PKG/usr/var/run/wesnothd
 	find $PKG/usr/man -maxdepth 0 -type d ! -regex 'man?' -exec rm -r {} \;
 }
 
