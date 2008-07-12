@@ -1,0 +1,17 @@
+# Description: Library for constructing and injecting network packets
+# URL:         http://www.packetfactory.net/libnet/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:
+
+name=libnet
+version=1.1.2.1
+release=1
+source="http://www.packetfactory.net/libnet/dist/$name-$version.tar.gz"
+
+build() {
+    cd  $name
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+    install -D -m 755 libnet-config $PKG/usr/bin/libnet-config
+}
