@@ -17,13 +17,13 @@ build() {
 	make install DESTDIR=$PKG
 
 	# Remove perlcrap
-	find $PKG -type f \
-		\( -name '.packlist' -or \
-		-name '*.bs' -or \
-		-name 'autosplit.ix' -or \
+	find $PKG -type f \( \
+		-name '.packlist' -o \
+		-name '*.bs' -o \
+		-name 'autosplit.ix' -o \
 		-name 'perllocal.pod' \) -delete
 
 	# Remove empty directories
-	find $PKG -depth -empty -exec rm -rf {} \;
+	find $PKG -depth -empty -delete
 }
 
