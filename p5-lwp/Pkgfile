@@ -1,11 +1,11 @@
 # Description: Perl World Wide Web Library.
-# URL: http://search.cpan.org/~gaas/libwww-perl-5.805/
+# URL: http://search.cpan.org/~gaas/libwww-perl-5.813/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: James Mills, prologic at shortcircuit dot net dot au
 # Depends on: p5-html-parser p5-uri
 
 name=p5-lwp
-version=5.810
+version=5.813
 release=1
 source=(http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/libwww-perl-$version.tar.gz)
 
@@ -14,7 +14,15 @@ build() {
 	yes | perl Makefile.PL -n
 	make
 	make DESTDIR=$PKG install
-	find $PKG \( -name 'perllocal.pod' -o \
-		-name '.packlist' \) -delete
+
+	# Remove perlcrap
+	find $PKG -type f \( \
+		-name '.packlist' -or \
+		-name '*.bs' -or \
+		-name 'autosplit.ix' -or \
+		-name 'perllocal.pod' \) -delete
+
+	# Remove empty directories
+	find $PKG -depth -empty -exec rm -rf {} \;
 }
 
