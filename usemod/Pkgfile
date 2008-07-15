@@ -4,17 +4,17 @@
 # Depends on:  perl, apache
 
 name=usemod
-version=1.0
-release=2
-source=(http://www.usemod.com/wikicode/$name${version/./}.tar.gz)
+version=1.0.4
+release=1
+source=(http://www.usemod.com/wikicode/$name-$version.tar.gz)
 
 build () {
-    cd $name${version/./}
+    cd $name-$version
     install -d $PKG/var/www/{cgi-bin,$name/pub}
-    install -d -o nobody $PKG/var/www/$name
+    install -d -o www $PKG/var/www/$name
     chmod 0700 $PKG/var/www/$name
     install -m 755 wiki.pl $PKG/var/www/cgi-bin
-    install -g nobody -m 640 config $PKG/var/www/$name
+    install -g www -m 640 config $PKG/var/www/$name
     cp wiki.{gif,css} $PKG/var/www/$name/pub
     sed -i '/^\$LogoUrl/s|\"[^;]*\"|\"/pub/wiki.gif\"|' \
            $PKG/var/www/$name/config
