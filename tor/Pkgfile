@@ -5,49 +5,41 @@
 # Depends on: libevent openssl zlib
 
 name=tor
-version=0.2.0.29-rc
+version=0.2.0.30
 release=1
-source=(http://tor.eff.org/dist/tor-$version.tar.gz \
-	tor.rc)
+source=(http://tor.eff.org/dist/tor-$version.tar.gz
+	tor.rc tor-config.patch)
 
 build() {
-	cd tor-$version
+	cd $name-$version
+	patch -p 1 -i $SRC/tor-config.patch
 
 	./configure \
 		--prefix=/usr \
-		--sysconfdir=/usr/etc \
-		--mandir=/usr/man
+		--mandir=/usr/man \
+		--sysconfdir=/etc
 
 	make
 	make DESTDIR=$PKG install
 	
-	install -d \
-		$PKG/etc/rc.d \
-		$PKG/usr/var/lib/tor \
-		$PKG/var/log/tor
+	# data
+	install -d $PKG/usr/var/lib/tor
+	chown tor:tor $PKG/usr/var/lib/tor
 
+	# configuration
+	mv $PKG/etc/tor/torrc.sample $PKG/etc/tor/torrc
+	find $PKG/etc/tor/ -type f -exec chown root:tor {} \; -execdir chmod 0640 {} \;
+
+	# programs
+	find $PKG/usr/bin -type f -execdir chmod 0754 {} \;
+
+	# logs
+	install -d $PKG/var/log/tor
+	chown tor:tor $PKG/var/log/tor
 	touch $PKG/var/log/tor/notices.log
-	chown -R root:root $PKG
+	find $PKG/var/log/tor/ -type f -exec chown tor:tor {} \; -execdir chmod 0640 {} \;
 
-	chown root:tor \
-		$PKG/var/log/tor \
-		$PKG/usr/etc/tor \
-		$PKG/usr/var/lib/tor
-
-	find $PKG/usr/bin -type f -exec chown tor:tor {} \;
-	find $PKG/usr/etc -type f -exec chown root:tor {} \;
-	find $PKG/var/log/tor -type f -exec chown root:tor {} \;
-	find $PKG/usr/bin -type f -exec chmod 0544 {} \;
-	find $PKG/usr/etc/tor -type f -exec chmod 0660 {} \;
-
-	chmod 0660 $PKG/var/log/tor/notices.log
-	install -m 0755 $SRC/tor.rc $PKG/etc/rc.d/tor
-	mv $PKG/usr/etc/tor/torrc.sample $PKG/usr/etc/tor/torrc
-	
-	# edit the config file
-	sed -i $PKG/usr/etc/tor/torrc \
-		-e's/#RunAsDaemon 1/RunAsDaemon 1/' \
-		-e 's:#Log notice file /usr/var/log/tor/notices.log:Log notice file /var/log/tor/notices.log:' \
-		-e 's:#DataDirectory /usr/var/lib/tor:DataDirectory /usr/var/lib/tor:'
+	# service
+	install -m 0754 -D $SRC/tor.rc $PKG/etc/rc.d/tor
 }
 
