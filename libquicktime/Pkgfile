@@ -5,21 +5,22 @@
 # Depends on: ffmpeg gtk libdivx libdv x264 xorg-libxaw
 
 name=libquicktime
-version=1.0.2
+version=1.0.3
 release=1
-source=(http://dl.sourceforge.net/sourceforge/libquicktime/libquicktime-$version.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
-	cd libquicktime-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--enable-gpl \
-		--disable-nls
+		--disable-nls \
+		--with-libdv \
+		--without-doxygen
 
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share/doc
 }
 
