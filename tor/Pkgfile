@@ -44,7 +44,7 @@ build() {
 	find $PKG/etc/tor/ -type f -exec chown root:tor {} \; -execdir chmod 0640 {} \;
 
 	# programs
-	find $PKG/usr/bin -type f -execdir chown root:tor {} \; -execdir chmod 0754 {} \;
+	find $PKG/usr/bin -type f -execdir chown root:tor {} \; -execdir chmod 0750 {} \;
 
 	# logs
 	install -d $PKG/var/log/tor
@@ -53,6 +53,6 @@ build() {
 	find $PKG/var/log/tor/ -type f -exec chown tor:tor {} \; -execdir chmod 0640 {} \;
 
 	# service
-	install -m 0754 -D $SRC/tor.rc $PKG/etc/rc.d/tor
+	install -m 0750 -D $SRC/tor.rc $PKG/etc/rc.d/tor
 }
 
