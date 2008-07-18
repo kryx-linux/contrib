@@ -14,6 +14,11 @@ build() {
 	cd $name-$version
 	patch -p 1 -i $SRC/tor-config.patch
 
+	# fix for find: The relative path `~/bin' is included in the PATH
+	# environment variable, which is insecure in combination with the
+	# -execdir action of find. Please remove that entry from $PATH
+	export PATH='/sbin:/usr/sbin:/bin:/usr/bin'
+
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
