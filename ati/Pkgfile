@@ -5,14 +5,21 @@
 # Depends on: mesa3d,gl-select
 
 name=ati
-version=8-6
+version=8-7
 release=1
-source=(http://www2.ati.com/drivers/linux/$name-driver-installer-$version-x86.x86_64.run atieventsd)
+source=(http://www2.ati.com/drivers/linux/$name-driver-installer-$version-x86.x86_64.run \
+        atieventsd 2.6.26.x-kernel.patch)
 
 build() {
   chmod +x ${name}-driver-installer-$version-x86.x86_64.run
   ./$name-driver-installer-$version-x86.x86_64.run --extract $SRC/tmp
   
+  # kernel 2.6.26.x patch
+  if [ "$(uname -r | cut -d'.' -f1,2,3)" == "2.6.26" ]; then
+    cd tmp/common
+    patch -p1 -i $SRC/2.6.26.x-kernel.patch
+  fi
+
   # make
   cd $SRC/tmp/common/lib/modules/fglrx/build_mod
   ln -s $SRC/tmp/arch/x86/lib/modules/fglrx/build_mod/libfglrx_ip.a.GCC4 .
