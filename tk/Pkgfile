@@ -6,11 +6,13 @@
 
 name=tk
 version=8.5.3
-release=1
-source=(http://dl.sourceforge.net/sourceforge/tcl/$name$version-src.tar.gz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/tcl/$name$version-src.tar.gz
+	$name-$version-lastevent.patch)
 
 build() {
 	cd $name$version/unix
+	patch -d ../ -p 1 -i $SRC/$name-$version-lastevent.patch
 
 	./configure \
 		--prefix=/usr \
@@ -26,12 +28,17 @@ build() {
 	cp tkUnixDefault.h $PKG/usr/include/tkDefault.h
 	cp tkUnixInt.h $PKG/usr/include/tkInt.h
 
-	sed -i -e "s|-L$SRC/tk$version/unix|-L/usr/lib|" $PKG/usr/lib/tkConfig.sh
+	sed -i \
+		-e "s|TK_BUILD_STUB_LIB_PATH='.*'|TK_BUILD_STUB_LIB_PATH='/usr/lib/libtkstub8.5.a'|" \
+		-e "s|TK_SRC_DIR='.*'|TK_SRC_DIR='/usr/lib'|" \
+		-e "s|-L$SRC/tk$version/unix|-L/usr/lib|" \
+		$PKG/usr/lib/tkConfig.sh
 
 	rm -r $PKG/usr/lib/tk${version%.*}/demos
 	rm $PKG/usr/lib/tk${version%.*}/images/README
 
 	ln -s wish${version%.*} $PKG/usr/bin/wish
+	ln -s /usr/lib/libtk${version%.*}.so $PKG/usr/lib/libtk.so
 	chmod -R u+w $PKG/usr/man
 }
 
