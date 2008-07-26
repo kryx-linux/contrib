@@ -5,17 +5,17 @@
 # Depends on: qt4
 
 name=arora
-version=20080627
+version=0.2
 release=1
-source=(http://mikeux.dyndns.org/crux/distfiles/$name-$version.tar.bz2 \
-        $name.xpm)
+source=(http://arora.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd $name-$version.orig
   qmake-qt4 PREFIX=/usr
   make
-  install -D -m 0755 $name $PKG/usr/bin/$name
-  install -D -m 0644 $SRC/$name.xpm $PKG/usr/share/pixmaps/$name.xpm
-  sed -e '/en_US/d' -e 's/Icon=arora/Icon=arora.xpm/' -i src/$name.desktop
-  install -D -m 0644 src/$name.desktop $PKG/usr/share/applications/$name.desktop
+  make INSTALL_ROOT=$PKG install
+  mv $PKG/usr/share/man $PKG/usr
+  rm -rf $PKG/usr/share/$name
+  sed -e '/en_US/d' -e 's/Icon=arora/Icon=arora.xpm/' \
+      -i $PKG/usr/share/applications/$name.desktop
 }
