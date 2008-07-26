@@ -4,16 +4,21 @@
 # Depends on:	openssl, ncurses
 
 name=asterisk
-version=1.4.19.1
+version=1.4.21.2
 release=1
-source=(http://ftp.digium.com/pub/$name/releases/$name-$version.tar.gz asterisk.rc asterisk-mmx.patch)
+source=(http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz asterisk.rc asterisk-mmx.patch 1.4-gsm-gcc4.2.patch)
 
 build () {
 	cd $name-$version
+
+	# Fixes choppy gsm transcoding when using gcc 4.2
+	patch -p1 < $SRC/1.4-gsm-gcc4.2.patch
+
 	# Check if this processor supports MMX instruction set
 	if [ -n "`grep '^flags.*mmx' /proc/cpuinfo`" ]; then
 		patch -p1 < $SRC/asterisk-mmx.patch
 	fi
+
 	./configure --prefix=/usr --with-ncurses --with-ssl
 	make
 	make DESTDIR=$PKG install
@@ -21,6 +26,11 @@ build () {
 	mv $PKG/usr/share/man $PKG/usr
 	install -m 755 -D $SRC/asterisk.rc $PKG/etc/rc.d/asterisk
 	rmdir  $PKG/usr/{share,bin}
+	rm -rf $PKG/var/spool/asterisk/voicemail/default/1234
+
+	# Remove default sounds, they are in asterisk-sounds-core-en-*
+	rm -rf $PKG/var/lib/asterisk/sounds/{.asterisk*,*}
+
 	mkdir -p $PKG/var/run/asterisk
 	chown -R root:root $PKG
 	chown -R asterisk:asterisk $PKG/var/{lib,log,run,spool}/asterisk
