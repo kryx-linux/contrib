@@ -1,12 +1,12 @@
 # Description: A fun 2D physics sandbox
-# URL:         http://phun.at/
+# URL:         http://www.phunland.com
 # Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
 # Depends on:  libsdl
 
 name=phun
-version=4.11
+version=4.13
 release=1
-source=(http://ftp.acc.umu.se/mirror/phun/Phun_beta_4_11_linux32.tar.bz2 $name.desktop)
+source=(http://www.phunland.com/download/Phun_beta_${version/./_}_linux32.tar.bz2 $name.desktop)
 
 build() {
   cd Phun
@@ -16,6 +16,8 @@ build() {
   mv $PKG/usr/share/$name/$name $PKG/usr/bin/
   sed -i 'i#!/bin/bash\ncd /usr/share/phun' $PKG/usr/bin/$name
   install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
+  # damn permissions
   chmod 1777 $PKG/usr/share/phun/{scenes,screenshots}
-  find $PKG -name "*.txt" -delete
+  chmod a+Xr -R $PKG/usr/share/phun
+  find $PKG -name '*.txt' -delete
 }
