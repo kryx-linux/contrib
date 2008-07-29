@@ -5,7 +5,7 @@
 # Depends on: numeric sdl_image sdl_mixer sdl_ttf
 
 name=pygame
-version=1.8.0
+version=1.8.1
 release=1
 source=(http://www.pygame.org/ftp/pygame-${version}release.tar.gz)
 
@@ -15,5 +15,11 @@ build() {
 	python config.py
 	python setup.py install --prefix=/usr --root $PKG
 	chmod a-x $PKG/usr/lib/python*/site-packages/pygame/*.so
+	find $PKG -name '*.h' -exec chmod 0644 {} \;
+
+	find $PKG \( \
+		-name 'pygame.ico' -o \
+		-name 'pygame_icon.*' -o \
+		-name 'freesansbold.ttf' \) -exec chmod 0644 {} \;
 }
 
