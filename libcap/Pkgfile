@@ -6,12 +6,13 @@
 name=libcap
 version=2.11
 release=1
-source=(ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.6/libcap-$version.tar.gz)
+source=(ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.6/libcap-$version.tar.gz
+	$name-$version-makefile.patch)
 
 build () {
 	cd libcap-$version
 	
-	sed -i 's:gperf:false:' libcap/Makefile
+	patch -p1 -i $SRC/$name-$version-makefile.patch
 
 	make
 	make \
