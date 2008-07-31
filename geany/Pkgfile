@@ -3,10 +3,11 @@
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Hannes Mayer, kontakt at ecarux dot de
 # Depends on: gtk
+# Nice to have: vte
 
 name=geany
 version=0.14
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2 \
         configure.patch-noxml)
 
@@ -15,7 +16,6 @@ build () {
   patch -p0 -i $SRC/configure.patch-noxml
   ./configure --prefix=/usr \
               --mandir=/usr/man \
-              --disable-vte \
               --enable-plugins
   make
   make DESTDIR=$PKG install
