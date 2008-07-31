@@ -1,0 +1,19 @@
+# Description: dynamic menu, originally designed for dwm
+# URL:            http://www.suckless.org/programs/dmenu.html
+# Packager:     Richard Poettler, richard dot poettler at gmail dot com
+# Maintainer:   Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on: xorg-libxinerama
+
+name=dmenu
+version=3.8
+release=1
+source=(http://code.suckless.org/dl/tools/$name-$version.tar.gz)
+
+build () {
+    cd "$name-$version"
+    make
+    make DESTDIR=$PKG \
+        PREFIX=/usr \
+        MANPREFIX=/usr/man \
+        install
+}
