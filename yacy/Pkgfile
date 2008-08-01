@@ -7,65 +7,73 @@
 name=yacy
 version=0.59
 date=20080605_4890
-release=2
-source=(http://www.yacy.net/release/yacy_v${version}_$date.tar.gz
+release=3
+source=(http://www.yacy.net/release/${name}_v${version}_$date.tar.gz
 	yacy-start.sh yacy-stop.sh yacy.rc)
 
 build() {
-	cd yacy
-
-	# ant wont build without this directory.
-	install -d $SRC/yacy/libx
-	
-	# compile
+	cd $name
 	ant
 
-	# remove un-needed files
-	find $SRC/yacy -type f \( \
-		-name '*.bat' -o \
-		-name '*.txt' -o \
-		-name '*.css.old' -o \
-		-name '*.readme' -o \
-		-name '*.License' -o \
-		-name '*.java'	\) -delete
-
-	rm -r \
-		source \
-		locales \
-		RELEASE
-	
-	rm \
-		build.xml \
-		build.properties \
-		lib/tar.license \
-		addon/jsmooth/skeletons/console-wrapper/consolewrapper.exe \
-		addon/jsmooth/skeletons/windowed-wrapper/jwrap.exe
+	# remove source files
+	find $SRC/$name -type f -name '*.java' -delete
+	rm $SRC/$name/build.xml \
+		$SRC/$name/build.properties
+	rm -r $SRC/$name/source \
+		$SRC/$name/RELEASE
 
 	# install
-	install -d $PKG/usr/lib/yacy $PKG/etc/yacy $PKG/var/cache/yacy
+	install -d $PKG/usr/lib/yacy
 	cp -R * $PKG/usr/lib/yacy/
 
-	# move cache directory
-	mv $PKG/usr/lib/yacy/DATA $PKG/var/cache/yacy/
-	chmod 0560 $PKG/var/cache/yacy/DATA
-	ln -sf /var/cache/yacy/DATA $PKG/usr/lib/yacy/DATA
+	# remove junk files
+	find $PKG -type f -name '*.License' -delete
 
+	rm $PKG/usr/lib/yacy/addon/Notepad++/Readme.txt \
+		$PKG/usr/lib/yacy/defaults/yacy.network.readme \
+		$PKG/usr/lib/yacy/gpl.txt \
+		$PKG/usr/lib/yacy/htroot/yacy/user/license.txt \
+		$PKG/usr/lib/yacy/htroot/yacysearch/license.txt \
+		$PKG/usr/lib/yacy/lib/Apache\ License\ V2.txt \
+		$PKG/usr/lib/yacy/readme.txt \
+		$PKG/usr/lib/yacy/addon/yacyInit.readme \
+		$PKG/usr/lib/yacy/lib/tar.license
+
+	# remove ms windows files
+	rm -r $SRC/$name/addon/jsmooth/skeletons/console-wrapper \
+			$SRC/$name/addon/jsmooth/skeletons/windowed-wrapper
+
+	rm $PKG/usr/lib/yacy/startYACY.bat \
+		$PKG/usr/lib/yacy/startYACY_noconsole.bat \
+		$PKG/usr/lib/yacy/stopYACY.bat
+
+	rmdir $SRC/$name/addon/jsmooth/skeletons
+
+	# move cache directory
+	install -d $PKG/var/cache/yacy
+	mv $PKG/usr/lib/yacy/DATA $PKG/var/cache/yacy/DATA
+	chmod 0660 $PKG/var/cache/yacy/DATA
+	ln -s /var/cache/yacy/DATA $PKG/usr/lib/yacy/DATA
+	chown -R yacy:yacy $PKG/var/cache/yacy
+	chmod -R 0770 $PKG/var/cache/yacy
+
+	# move configuration files
+	install -d $PKG/etc/yacy
 	local files='yacy.logging yacy.stopwords yacy.yellow'
 
 	for file in $files; do
-		mv $PKG/usr/lib/yacy/$file $PKG/etc/yacy/
-		ln -sf /etc/yacy/$file $PKG/usr/lib/yacy/$file
+		mv $PKG/usr/lib/yacy/$file $PKG/etc/yacy/$file
+		chown root:yacy $PKG/etc/yacy/$file
+		chmod 0640 $PKG/etc/yacy/$file
+		ln -s /etc/yacy/$file $PKG/usr/lib/yacy/$file
 	done
 
-	# add some protection by limitng what and who can access the p2p files.
-	chown -R root:yacy $PKG/usr/lib/yacy
-	chown -R root:yacy $PKG/var/cache/yacy
-	chown -R root:yacy $PKG/etc/yacy
-	chmod 0665 $PKG/etc/yacy
-	chmod -R 0575 $PKG/var/cache/yacy
-	
-	install -m 0554 -D -o yacy -g yacy $SRC/yacy-start.sh $PKG/usr/sbin/yacy-start
-	install -m 0554 -D -o yacy -g yacy $SRC/yacy-stop.sh $PKG/usr/sbin/yacy-stop
-	install -m 0554 -D $SRC/yacy.rc $PKG/etc/rc.d/yacy
+	# install service
+	chown root:yacy $PKG/usr/lib/yacy/startYACY.sh $PKG/usr/lib/yacy/stopYACY.sh
+	chmod 0750 $PKG/usr/lib/yacy/startYACY.sh $PKG/usr/lib/yacy/stopYACY.sh
+	install -d $PKG/usr/sbin
+	install -m 0750 -g yacy $SRC/yacy-start.sh $PKG/usr/sbin/yacy-start
+	install -m 0750 -g yacy $SRC/yacy-stop.sh $PKG/usr/sbin/yacy-stop
+	install -m 0750 -D $SRC/yacy.rc $PKG/etc/rc.d/yacy
 }
 

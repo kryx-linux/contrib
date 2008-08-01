@@ -5,7 +5,8 @@
 
 # User settings here
 DAEMON=yacy
-RUN_AS_USER=_yacy
+RUN_AS_USER=yacy
+# end of user settings
 
 RETVAL=0
 
@@ -28,7 +29,6 @@ case $1 in
 		;;
 	*)
 		echo "usage: $0 [start|stop|restart]"
-		exit 1
 		;;
 esac
 
