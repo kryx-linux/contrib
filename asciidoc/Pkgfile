@@ -5,27 +5,44 @@
 # Nice to have: source-highlight
 
 name=asciidoc
-version=8.2.6
+version=8.2.7
 release=1
 source=(http://www.methods.co.nz/$name/$name-$version.tar.gz)
 
 build() {
+    # f#$king install script >:|
     cd $name-$version
     sed -i '/^CONF_DIR/s|/etc/asciidoc|/usr/etc/asciidoc|' a2x asciidoc.py
-    install -d $PKG/usr/man/man1
-    install -d $PKG/usr/share/vim/{syntax,ftdetect}
-    install -d $PKG/usr/etc/asciidoc/{filters,docbook-xsl,stylesheets,javascripts,images/icons/callouts}
-    install -m 0755 asciidoc.py -D $PKG/usr/bin/asciidoc
-    install -m 0755 a2x $PKG/usr/bin
-    install doc/*.1 $PKG/usr/man/man1
-    install -m 644 *.conf $PKG/usr/etc/asciidoc
-    install filters/*.py $PKG/usr/etc/asciidoc/filters
-    install -m 644 filters/*.conf $PKG/usr/etc/asciidoc/filters
-    install -m 644 docbook-xsl/*.xsl $PKG/usr/etc/asciidoc/docbook-xsl
-    install -m 644 stylesheets/*.css $PKG/usr/etc/asciidoc/stylesheets
-    install -m 644 javascripts/*.js $PKG/usr/etc/asciidoc/javascripts
-    install -m 644 images/icons/callouts/* $PKG/usr/etc/asciidoc/images/icons/callouts
-    install -m 644 images/icons/*.png $PKG/usr/etc/asciidoc/images/icons
-    install -m 644 vim/syntax/asciidoc.vim $PKG/usr/share/vim/syntax/asciidoc.vim
-    install -m 644 vim/ftdetect/asciidoc_filetype.vim $PKG/usr/share/vim/ftdetect/asciidoc_filetype.vim
+    CONFDIR=$PKG/usr/etc/asciidoc
+    BINDIR=$PKG/usr/bin
+    MANDIR=$PKG/usr/man
+    VIM_CONFDIR=$PKG/usr/share/vim
+
+    install -d $CONFDIR/filters \
+        $CONFDIR/docbook-xsl \
+        $CONFDIR/dblatex \
+        $CONFDIR/stylesheets \
+        $CONFDIR/javascripts \
+        $CONFDIR/images/icons/callouts
+    install -d $MANDIR/man1
+    install -D asciidoc.py $BINDIR/asciidoc
+    install a2x $BINDIR/a2x
+    install doc/*.1 $MANDIR/man1
+
+    install -m 644 *.conf $CONFDIR
+    install filters/*.py $CONFDIR/filters
+    install -m 644 filters/*.conf $CONFDIR/filters
+    install -m 644 docbook-xsl/*.xsl $CONFDIR/docbook-xsl
+    install -m 644 dblatex/*.xsl $CONFDIR/dblatex
+    install -m 644 dblatex/*.sty $CONFDIR/dblatex
+    install -m 644 stylesheets/*.css $CONFDIR/stylesheets
+    install -m 644 javascripts/*.js $CONFDIR/javascripts
+    install -m 644 images/icons/callouts/* $CONFDIR/images/icons/callouts
+    install -m 644 images/icons/*.png $CONFDIR/images/icons
+    install -d $VIM_CONFDIR/syntax
+    install -m 644 vim/syntax/asciidoc.vim \
+        $VIM_CONFDIR/syntax/asciidoc.vim
+    install -d $VIM_CONFDIR/ftdetect
+    install -m 644 vim/ftdetect/asciidoc_filetype.vim \
+        $VIM_CONFDIR/ftdetect/asciidoc_filetype.vim
 }
