@@ -6,12 +6,12 @@
 # Optional: libdv
 
 name=gst-plugins-good
-version=0.10.8
+version=0.10.9
 release=1
-source=(http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-$version.tar.gz)
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2)
 
 build() {
-	cd gst-plugins-good-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
