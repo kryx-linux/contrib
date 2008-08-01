@@ -6,7 +6,7 @@
 # Optional: mtools
 
 name=syslinux
-version=3.70
+version=3.71
 release=1
 source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2 \
         Makefile.patch)
@@ -15,5 +15,5 @@ build() {
   cd $name-$version
   patch -p0 -i $SRC/Makefile.patch
   make
-  make INSTALLROOT=$PKG install
+  make INSTALLROOT=$PKG install-all
 }
