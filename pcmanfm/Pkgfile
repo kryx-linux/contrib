@@ -1,0 +1,23 @@
+# Description: An extremly fast and lightweight file manager
+# URL:         http://pcmanfm.sourceforge.net/
+# Packager:    Ricardo Oliveira, crux at roliveira dot eu
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  gtk hal startup-notification gamin shared-mime-info desktop-file-utils
+
+name=pcmanfm
+version=0.5
+release=1
+source=(http://sourceforge.net/$name/$name-$version.tar.gz $name-${version}_nointltool.patch)
+
+build() {
+    cd $name-$version
+    # fugly and hacky patch
+    patch -p1 -i ../pcmanfm-0.5_nointltool.patch
+    ./configure \
+        --prefix=/usr \
+        --enable-hal
+    sed -i '/ENABLE_NLS/s/1/0/' config.h
+    sed -i '/SUBDIRS/s/po//' Makefile
+    make
+    make DESTDIR=$PKG install
+}
