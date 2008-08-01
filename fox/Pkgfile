@@ -5,25 +5,25 @@
 # Depends on:  mesa3d libpng libtiff xorg-libxft xorg-libxcursor
 
 name=fox
-version=1.6.33
+version=1.6.34
 release=1
 source=(http://www.$name-toolkit.org/ftp/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure \
-	    --prefix=/usr \
-		--with-shape \
-		--with-xshm \
-		--enable-threadsafe \
-		--enable-release \
-		--with-opengl \
-		--with-xcursor \
-		--with-xft \
-		--disable-nls
-	make
-	make prefix=$PKG/usr install
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --with-shape \
+        --with-xshm \
+        --enable-threadsafe \
+        --enable-release \
+        --with-opengl \
+        --with-xcursor \
+        --with-xft \
+        --disable-nls
+    make
+    make prefix=$PKG/usr install
 
-	rm -rf $PKG/usr/share
+    rm -rf $PKG/usr/share
 }
 
