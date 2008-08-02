@@ -7,17 +7,16 @@
 name=pcmanfm
 version=0.5
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz $name-${version}_nointltool.patch)
+source=(http://sourceforge.net/$name/$name-$version.tar.gz $name-${version}_nointltoolv2.patch)
 
 build() {
     cd $name-$version
-    # fugly and hacky patch
-    patch -p1 -i ../pcmanfm-0.5_nointltool.patch
+    patch -p1 -i ../pcmanfm-0.5_nointltoolv2.patch
+    autoreconf --force --install --verbose
     ./configure \
         --prefix=/usr \
         --enable-hal
     sed -i '/ENABLE_NLS/s/1/0/' config.h
-    sed -i '/SUBDIRS/s/po//' Makefile
     make
     make DESTDIR=$PKG install
 }

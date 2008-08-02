@@ -1,0 +1,36 @@
+diff -pruN pcmanfm-0.5.old/configure.in pcmanfm-0.5/configure.in
+--- pcmanfm-0.5.old/configure.in	2008-08-02 21:40:40.000000000 +0200
++++ pcmanfm-0.5/configure.in	2008-08-02 21:41:55.000000000 +0200
+@@ -11,7 +11,6 @@ AC_ISC_POSIX
+ AC_PROG_CC
+ AM_PROG_LIBTOOL
+ AM_PROG_CC_STDC
+-AC_PROG_INTLTOOL
+ AC_HEADER_STDC
+ 
+ # libtool option to control which symbols are exported
+@@ -195,7 +194,6 @@ AM_GLIB_GNU_GETTEXT
+ AC_OUTPUT([
+ Makefile
+ src/Makefile
+-po/Makefile.in
+ pcmanfm.desktop
+ pcmanfm-find.desktop
+ pcmanfm-folder-handler.desktop
+diff -pruN pcmanfm-0.5.old/Makefile.am pcmanfm-0.5/Makefile.am
+--- pcmanfm-0.5.old/Makefile.am	2008-08-02 21:40:40.000000000 +0200
++++ pcmanfm-0.5/Makefile.am	2008-08-02 21:42:20.000000000 +0200
+@@ -1,12 +1,11 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-SUBDIRS = src po
++SUBDIRS = src
+ 
+ desktopdir = $(datadir)/applications
+ desktop_DATA = pcmanfm.desktop \
+ 	       pcmanfm-find.desktop \
+ 	       pcmanfm-folder-handler.desktop
+-@INTLTOOL_DESKTOP_RULE@
+ DISTCLEANFILES = pcmanfm.desktop \
+ 		 pcmanfm-find.desktop \
+ 		 pcmanfm-folder-handler.desktop
