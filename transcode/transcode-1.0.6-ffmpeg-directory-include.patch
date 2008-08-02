@@ -1,0 +1,13 @@
+diff -pruN transcode-1.0.6.orig/configure.in transcode-1.0.6/configure.in
+--- transcode-1.0.6.orig/configure.in	2008-08-02 14:28:07.908141711 +0000
++++ transcode-1.0.6/configure.in	2008-08-02 14:48:25.502143264 +0000
+@@ -834,6 +834,9 @@ LIBPOSTPROC_EXTRA_LIBS="$LIBPOSTPROC_EXT
+ TC_PKG_CHECK(libpostproc, no, LIBPOSTPROC, no, [libpostproc/postprocess.h],
+   postproc, pp_postprocess, libpostproc, [http://www.ffmpeg.org/])
+ TC_PKG_HAVE(libpostproc, LIBPOSTPROC)
++if test x"$have_libpostproc" = x"yes" ; then
++  CPPFLAGS="$CPPFLAGS -I/usr/include/libpostproc"
++fi
+ 
+ dnl
+ dnl freetype2
