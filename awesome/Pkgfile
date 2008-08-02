@@ -4,20 +4,21 @@
 # Depends on:  libconfuse cairo xorg-libxinerama pango imlib2 xorg-libxrandr
 
 name=awesome
-version=2.3.2
+version=2.3.3
 release=1
 source=(http://awesome.naquadah.org/download/$name-$version.tar.bz2
-http://maxiq.ovh.org/CRUX/$name-mans-$version.tar.gz)
+    $name-mans-$version.tar.gz)
 
 build() {
     cd $name-$version
+    autoreconf --force --install --verbose
     ./configure \
         --prefix=/usr \
         --mandir=/usr/man \
-        --docdir=/usr/share/awesome
+        --docdir=/usr/share/$name
     make AWESOME_CFLAGS="$CFLAGS"
     make DESTDIR=$PKG install
-    rm -f $PKG/usr/share/awesome/{README,STYLE,UPGRADE}
-    cp $SRC/awesome{,-{client,menu,message}}.1 $PKG/usr/man/man1
-    cp $SRC/awesomerc.5 $PKG/usr/man/man5
+    rm -f $PKG/usr/share/$name/{README,STYLE,UPGRADE}
+    cp $SRC/$name{,-{client,menu,message}}.1 $PKG/usr/man/man1
+    cp $SRC/${name}rc.5 $PKG/usr/man/man5
 }
