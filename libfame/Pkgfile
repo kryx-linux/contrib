@@ -6,13 +6,25 @@
 
 name=libfame
 version=0.9.1
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/fame/libfame-$version.tar.gz
-	$name-$version-m4.patch)
+	$name-$version-m4.patch
+	$name-$version-gcc-version-check.patch
+	$name-$version-mmx.patch
+	$name-$version-mmx-pic.patch
+	$name-$version-fame_motion_pmvfast.c.patch
+	$name-$version-missing-includes.patch
+	$name-$version-ptr-null-check.patch)
 
 build() {
 	cd libfame-$version
 	patch -p 1 -i $SRC/$name-$version-m4.patch
+	patch -p 1 -i $SRC/$name-$version-gcc-version-check.patch
+	patch -p 1 -i $SRC/$name-$version-mmx.patch
+	patch -p 1 -i $SRC/$name-$version-mmx-pic.patch
+	patch -p 1 -i $SRC/$name-$version-fame_motion_pmvfast.c.patch
+	patch -p 1 -i $SRC/$name-$version-missing-includes.patch
+	patch -p 1 -i $SRC/$name-$version-ptr-null-check.patch
 
 	./configure \
 		--prefix=/usr \
