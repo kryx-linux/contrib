@@ -1,0 +1,29 @@
+# Description: Multi-tabbed rxvt based terminal
+# URL: http://materm.sourceforge.net/ 
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Depends on: xorg-libxft
+
+name=materm
+version=0.5.4
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/mrxvt-$version.tar.gz )
+
+build() {
+  cd mrxvt-$version
+  ./configure --prefix=/usr \
+              --disable-debug \
+              --enable-menubar \
+              --enable-xft \
+              --with-save-lines=200 \
+              --with-x
+  make
+  make DESTDIR=$PKG install
+  rm -rf $PKG/usr/share/doc
+  mv $PKG/usr/etc/{mrxvt/mrxvtrc,mrxvtrc}
+  mv $PKG/usr/etc/mrxvt/default.{menu,menu.sample}
+  mv $PKG/usr/etc/mrxvt/submenus.{menu,menu.sample}
+  mv $PKG/usr/share/man $PKG/usr
+  rm -f $PKG/usr/share/pixmaps/*.png
+  ln -sf /usr/bin/mrxvt $PKG/usr/bin/$name
+}
