@@ -5,12 +5,14 @@
 # Depends on: bin86,dev86,xorg-libxcursor,hal,libsdl,libidl,qt3,xalan-c,iasl
 
 name=virtualbox
-version=1.6.2
+version=1.6.4
 release=1
-source=(file:///VirtualBox-$version-OSE.tar.bz2 $name 60-vboxdrv.rules $name.desktop)
+source=(file:///VirtualBox-$version-OSE.tar.bz2 $name 60-vboxdrv.rules $name.desktop \
+        $name-missing-makefiles.diff)
 
 build() {
   cd VirtualBox-$version
+  patch -p0 -i $SRC/$name-missing-makefiles.diff
   # compile
   ./configure --with-qt-dir=/usr/share/qt \
               --disable-pulse
