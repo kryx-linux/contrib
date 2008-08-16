@@ -5,16 +5,16 @@
 # Depends on: allegro
 
 name=atanks
-version=3.0
+version=3.1
 release=1
-source=(http://dl.sourceforge.net/sourceforge/atanks/atanks-$version.tar.gz
-	atanks-$version-install.patch
-	atanks-$version-version-fix.patch)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
+	$name-3.1-install.patch
+	$name-3.1-version-fix.patch)
 
 build() {
-	cd atanks
-	patch -p 1 -i $SRC/atanks-$version-install.patch
-	patch -p 1 -i $SRC/atanks-$version-version-fix.patch
+	cd $name
+	patch -p 1 -i $SRC/$name-3.1-install.patch
+	patch -p 1 -i $SRC/$name-3.1-version-fix.patch
 	make
 	make DESTDIR=$PKG install
 }
