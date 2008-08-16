@@ -1,27 +1,24 @@
 # Description: Cross-platform 3D audio.
-# URL: http://www.openal.org/
+# URL: http://connect.creativelabs.com/openal
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at crux dot nu
-# Depends on: libvorbis libsdl
+# Depends on: alsa-lib cmake
 
 name=openal
-version=0.0.8
-release=2
-source=(http://www.openal.org/openal_webstf/downloads/openal-$version.tar.gz \
-	openal-$version-alcvoid.patch)
+version=1.5.304
+release=1
+source=(http://connect.creativelabs.com/openal/Downloads/openal-soft-$version.tar.bz2)
 
 build() {
-	cd openal-$version
-	patch -i $SRC/openal-$version-alcvoid.patch common/include/AL/alc.h
+	cd openal-soft-$version
+	mkdir build
+	cd build
 
-	./configure \
-		--prefix=/usr \
-		--exec-prefix=/usr \
-		--disable-static \
-		--enable-optimization \
-		--enable-alsa \
-		--enable-vorbis \
-		--enable-sdl
+	cmake ../ \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DOSS=OFF \
+		-DEXAMPLES=OFF \
+		-DCMAKE_BUILD_TYPE=Release #-DCMAKE_VERBOSE_MAKEFILE=true
 
 	make
 	make DESTDIR=$PKG install
