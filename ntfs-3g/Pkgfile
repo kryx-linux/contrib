@@ -4,12 +4,12 @@
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 
 name=ntfs-3g
-version=1.2712
+version=1.2812
 release=1
-source=(http://www.ntfs-3g.org/ntfs-3g-$version.tgz)
+source=(http://www.ntfs-3g.org/$name-$version.tgz)
 
 build() {
-	cd ntfs-3g-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
