@@ -5,12 +5,12 @@
 # Depends on: cairo
 
 name=cairomm
-version=1.6.0
+version=1.6.2
 release=1
-source=(http://cairographics.org/releases/cairomm-$version.tar.gz)
+source=(http://cairographics.org/releases/$name-$version.tar.gz)
 
 build() {
-	cd cairomm-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
