@@ -2,7 +2,7 @@
 # URL:         http://www.netfort.gr.jp/~dancer/software/dsh.html.en
 # Maintainer:  Thomas Penteker, tek at serverop dot de 
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Depends on:  libdshconfig, netkit-rsh
+# Depends on:  libdshconfig
 
 name=dsh
 version=0.25.9
@@ -22,9 +22,12 @@ build () {
 
    rm -rf $PKG/usr/man/ja
 
+   sed -i -e 's|rsh|ssh|g' $name.conf
+
    mkdir -p $PKG/etc/$name/group
    install -m644 $SRC/machines.list $PKG/etc/$name/
    install -m644 $name.conf $PKG/etc/$name/
    ln -sf /etc/$name/machines.list $PKG/etc/$name/group/all
+   rm -r $PKG/usr/etc
 
 }
