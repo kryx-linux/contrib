@@ -6,20 +6,20 @@
 # Optional: libgd
 
 name=mldonkey
-version=2.9.3
-release=2
-source=(http://dl.sourceforge.net/sourceforge/${name}/${name}-${version}.tar.bz2 \
+version=2.9.6
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2 \
         mlnetd)
 
 build() {
   local OCAML_VER=$(ocaml -version | awk '{print $6}')
-  cd ${name}-${version}
+  cd $name-$version
   ./configure --prefix=/usr \
               --disable-gui \
-              --enable-ocamlver=${OCAML_VER} \
+              --enable-ocamlver="$OCAML_VER" \
               --disable-debug
   make
-  make DESTDIR=${PKG} install
-  install -d ${PKG}/var/mlnet
-  install -D -m 0755 ${SRC}/mlnetd ${PKG}/etc/rc.d/mlnetd
+  make DESTDIR=$PKG install
+  install -d $PKG/var/mlnet
+  install -D -m 0755 $SRC/mlnetd $PKG/etc/rc.d/mlnetd
 }
