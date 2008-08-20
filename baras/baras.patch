@@ -1,0 +1,43 @@
+diff -Nru baras/baras.pl baras-new/baras.pl
+--- baras/baras.pl	2007-08-13 03:36:01.000000000 +0200
++++ baras-new/baras.pl	2008-08-20 23:30:19.000000000 +0200
+@@ -1,7 +1,7 @@
+ #!/usr/bin/perl -w
+ 
+ BEGIN {
+-   push @INC, "/var/adm/baras/";
++   push @INC, "/usr/lib/baras/";
+ }
+ use strict;
+ use warnings;
+diff -Nru baras/etc/baras/baras.conf baras-new/etc/baras/baras.conf
+--- baras/etc/baras/baras.conf	2007-08-13 03:37:10.000000000 +0200
++++ baras-new/etc/baras/baras.conf	2008-08-20 23:32:16.000000000 +0200
+@@ -50,8 +50,8 @@
+ REMOVE_FIRST="no"
+ 
+ # PAR2 usage
+-PAR_ARCHIVE="two"
+-PAR2=/usr/bin/par2
++#PAR_ARCHIVE="two"
++#PAR2=/usr/bin/par2
+ #PAR2_PERCENTAGE=5
+ 
+ # Pre-processing
+@@ -88,13 +88,13 @@
+ #BASENAME="$(date +'%m-%d-%Y_%H%M')"
+ 
+ # The location of the DAR executable file
+-DAR_BINARY="/usr/local/bin/dar"
++DAR_BINARY="/usr/bin/dar"
+ 
+ # The location of the DAR MANAGER executable file
+-DAR_MGR_BINARY="/usr/local/bin/dar_manager"
++DAR_MGR_BINARY="/usr/bin/dar_manager"
+ 
+ # The location of the statically-compiled DAR executable file
+-DAR_STATIC="/usr/local/bin/dar_static"
++DAR_STATIC="/usr/bin/dar_static"
+ 
+ # The temporary directory name that backups will be created in. This will be created underneath $DESTINATION.
+ WORK_DIR=".baras_temp_workdir"
