@@ -21,7 +21,6 @@ build() {
 	libtoolize --force --copy
 	autoheader
 	automake --gnu --add-missing --copy
-	export CFLAGS="`echo $CFLAGS | sed -e 's/-O[s0-3]/-O3/'`"
 
 	./configure \
 		--prefix=/usr \
