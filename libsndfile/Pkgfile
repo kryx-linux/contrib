@@ -8,10 +8,12 @@
 name=libsndfile
 version=1.0.18pre22
 release=1
-source=(http://www.mega-nerd.com/tmp/libsndfile-$version.tar.gz)
+source=(http://www.mega-nerd.com/tmp/$name-$version.tar.gz
+	$name-1.0.18pre22-missing-headers-gcc43.patch)
 
 build() {
-	cd libsndfile-$version
+	cd $name-$version
+	patch -p 1 -i $SRC/$name-1.0.18pre22-missing-headers-gcc43.patch
 
 	./configure \
 		--prefix=/usr \
@@ -20,7 +22,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	
 	rm -r $PKG/usr/share
 }
 
