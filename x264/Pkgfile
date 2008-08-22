@@ -12,7 +12,6 @@ source=(http://www.dcaf-security.org/distfiles/x264-snapshot-$version.tar.bz2)
 
 build() {
 	cd x264
-	export CFLAGS="$(echo $CFLAGS |sed -e 's/-O[s0-3] //')"
 
 	sed -i \
 		-e 's/-O4/-O3/' \
