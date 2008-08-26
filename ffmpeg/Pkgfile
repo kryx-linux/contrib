@@ -6,11 +6,13 @@
 
 name=ffmpeg
 version=20080826
-release=1
-source=(http://www.dcaf-security.org/distfiles/$name-$version-14974.tar.bz2)
+release=2
+source=(http://www.dcaf-security.org/distfiles/$name-$version-14974.tar.bz2
+	ffmpeg-20080826-14974-missing-header.patch)
 
 build() {
 	cd $name
+	patch -p 1 -i $SRC/ffmpeg-20080826-14974-missing-header.patch
 
 	./configure \
 		--prefix=/usr \
