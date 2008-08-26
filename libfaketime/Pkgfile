@@ -5,14 +5,18 @@
 # Depends on: 
 
 name=libfaketime
-version=0.7
+version=0.8
 release=1
 source=(http://www.code-wizards.com/projects/libfaketime/libfaketime-$version.tar.gz)
 
 build() {
 	cd libfaketime-$version
 	make
-	install -D libfaketime.so.1 $PKG/usr/lib/libfaketime.so.1
+	install -d $PKG/usr/lib
+	install -m 0755 -D timetest $PKG/usr/bin/timetest
+	install -m 0644 -D faketime.1 $PKG/usr/man/man1/faketime.1
+	install -m 0755 -t $PKG/usr/lib/ libfaketime.so.1 libfaketimeMT.so.1
 	ln -s libfaketime.so.1 $PKG/usr/lib/libfaketime.so
+	ln -s libfaketimeMT.so.1 $PKG/usr/lib/libfaketimeMT.so
 }
 
