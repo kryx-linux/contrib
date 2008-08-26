@@ -7,16 +7,17 @@
 name=avifile
 version=0.7-0.7.45
 release=1
-source=(http://dl.sourceforge.net/sourceforge/avifile/avifile-$version.tar.bz2 \
+source=(http://dl.sourceforge.net/sourceforge/avifile/avifile-$version.tar.bz2
 	avifile-$version-gcc4.patch)
 
 build() {
 	cd avifile-$version
+	patch -p 1 -i $SRC/avifile-$version-gcc4.patch
+	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd`/lib"
 
-	patch -p 1 -i ../avifile-$version-gcc4.patch
-
-	# remove samples dosn't build on current gcc
-	sed -i Makefile.in  -e 's/^ doc include debian libavqt player samples$/ doc include debian libavqt player/'
+	# remove samples does not build on current gcc
+	sed -i -e 's/^ doc include debian libavqt player samples$/ doc include debian libavqt player/' \
+		 Makefile.in
 
 	./configure \
 		--prefix=/usr \
@@ -26,8 +27,6 @@ build() {
 		--disable-xvid \
 		--disable-ffmpeg-risky \
 		--with-linux-prefix='/usr/include/linux'
-
-	sed -i Makefile -e 's/-O4/-O3/'
 
 	make
 	make DESTDIR=$PKG install
