@@ -4,17 +4,15 @@
 # Depends on: sysfsutils
 
 name=pcmciautils
-version=014
-release=2
+version=015
+release=1
 source=(http://www.kernel.org/pub/linux/utils/kernel/pcmcia/$name-$version.tar.bz2 \
-		$name-$version-makefile.patch)
+		$name-makefile.patch)
 
 build() {
 	cd $name-$version
-	patch -p1 -i $SRC/$name-$version-makefile.patch
+	patch -p1 -i $SRC/$name-makefile.patch
 	make
 	make DESTDIR=$PKG install
-	sed -i s/"MODALIAS\=\="/"ENV\{MODALIAS\}\=\="/g $PKG/etc/udev/rules.d/60-pcmcia.rules
-	sed -i s/"\$modalias"/"\$env\{MODALIAS\}"/g $PKG/etc/udev/rules.d/60-pcmcia.rules
 	mv $PKG/etc/udev/rules.d/60-pcmcia.rules $PKG/etc/udev/rules.d/65-pcmcia.rules
 }
