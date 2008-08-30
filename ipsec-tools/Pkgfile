@@ -4,14 +4,12 @@
 # Depends on:
 
 name=ipsec-tools
-version=0.7
+version=0.7.1
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2
-		$name-selinux-check.diff)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+
 build() {
 	cd $name-$version
-	patch -p1 -i $SRC/$name-selinux-check.diff
-	autoconf
 	./configure --prefix=/usr \
 				--mandir=/usr/man \
 				--localstatedir=/var \
@@ -20,7 +18,8 @@ build() {
 				--enable-stats \
 				--enable-dpd \
 				--enable-natt \
-				--enable-adminport
+				--enable-adminport \
+				--enable-security-context=no
 	make
 	make DESTDIR=$PKG install
 }
