@@ -4,13 +4,14 @@
 # Depends on:
 
 name=zabbix_agentd
-version=1.4.5
+version=1.4.6
 release=1
 source=(http://dl.sourceforge.net/sourceforge/zabbix/zabbix-$version.tar.gz \
-		zabbix_agentd.conf zabbix_agentd)
+		zabbix_agentd.conf zabbix_agentd zabbix-cpustats.patch)
 
 build() {
 	cd zabbix-$version
+	patch -p1 -i $SRC/zabbix-cpustats.patch
 	./configure --prefix=/usr \
 				--enable-agent
 	make
