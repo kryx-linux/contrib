@@ -1,0 +1,22 @@
+# Description: Rotates, compresses, removes and mails system log files
+# URL: https://fedorahosted.org/releases/l/o/logrotate/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: popt
+
+name=logrotate
+version=3.7.7
+release=1
+#source=(https://fedorahosted.org/releases/l/o/$name/$name-$version.tar.gz \
+#		$name.conf)
+source=(http://www.sfr-fresh.com/unix/privat/$name-$version.tar.gz \
+		$name.conf)
+
+build() {
+	cd $name-$version
+	make
+	make PREFIX=$PKG install
+
+	mkdir -p $PKG/etc/$name.d
+	install -D -m 750 examples/$name.cron $PKG/etc/cron/hourly/$name
+	install -D -m 640 $SRC/$name.conf $PKG/etc/$name.conf
+}
