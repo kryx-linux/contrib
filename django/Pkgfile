@@ -1,0 +1,16 @@
+# Description: Web framework written in python
+# URL: http://djangoproject.com
+# Maintainer: Lucas Hazel, lucas at die dot net dot au
+# Depends on: setuptools
+
+name=django
+version=r8740
+release=1
+source=(http://crux.nu/~lucas/files/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	python setup.py install --root=$PKG
+	# Don't lay eggs
+	find $PKG -name '*egg-info' | xargs rm
+}
