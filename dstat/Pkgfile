@@ -1,0 +1,16 @@
+# Description: Versatile resource statistics tool
+# URL: http://dag.wieers.com/home-made/dstat/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: python
+
+name=dstat
+version=0.6.7
+release=1
+source=(http://dag.wieers.com/home-made/$name/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	sed -i s'|mandir = $(datadir)/man|mandir = $(prefix)/man|' Makefile
+	make
+	make DESTDIR=$PKG install
+}
