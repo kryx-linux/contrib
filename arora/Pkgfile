@@ -5,12 +5,12 @@
 # Depends on: qt4
 
 name=arora
-version=0.2
+version=0.3
 release=1
 source=(http://arora.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version.orig
+  cd $name-$version
   qmake-qt4 PREFIX=/usr
   make
   make INSTALL_ROOT=$PKG install
