@@ -3,7 +3,6 @@
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
 # Depends on: ncurses openssl zlib
-# Optional: upx
 
 name=lynx
 version=2.8.6
@@ -22,14 +21,6 @@ build() {
 		--with-zlib
 
 	make
-	make DESTDIR=$PKG install
-
-	# compress binary files if upx is installed to save disk space
-	if pkginfo -i |grep '^upx ' > /dev/null; then
-		(
-			cd $PKG/usr/bin
-			upx -9 lynx
-		)
-	fi
+	make -j 1 DESTDIR=$PKG install
 }
 
