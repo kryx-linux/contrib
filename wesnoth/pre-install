@@ -1,15 +1,15 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 . /etc/pkgmk.conf
 . Pkgfile
-OLD_VERSION='1.4.3'
+OLD_VERSION='1.4.4'
 
 [ -z "$PKGMK_WORK_DIR" ] && PKGMK_WORK_DIR="$PWD/work"
 [ -z "$PKGMK_SOURCE_DIR" ] && PKGMK_SOURCE_DIR="$PWD"
 
 if [ -e "$PKGMK_SOURCE_DIR/wesnoth-$version.tar.bz2" ]; then
-	echo 'You have the lateist source file.'
-	exit 0
+	echo 'You have the latest source file.'
+	exit
 fi
 
 if [ -n "`pkginfo -i | egrep '^xdelta '`" ]; then
