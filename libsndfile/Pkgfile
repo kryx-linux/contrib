@@ -6,14 +6,12 @@
 # Optional: sqlite3
 
 name=libsndfile
-version=1.0.18pre22
+version=1.0.18pre23b
 release=1
-source=(http://www.mega-nerd.com/tmp/$name-$version.tar.gz
-	$name-1.0.18pre22-missing-headers-gcc43.patch)
+source=(http://www.mega-nerd.com/tmp/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	patch -p 1 -i $SRC/$name-1.0.18pre22-missing-headers-gcc43.patch
+	cd $name-${version/b/}
 
 	./configure \
 		--prefix=/usr \
