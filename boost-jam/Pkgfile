@@ -1,4 +1,4 @@
-# Description: Build tool for boost.
+# Description: An alternative to make based on Jam.
 # URL: http://www.boost.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
@@ -6,13 +6,18 @@
 
 name=boost-jam
 version=3.1.16
-release=1
-source=(http://dl.sourceforge.net/sourceforge/boost/boost-jam-$version.tgz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/boost/boost-jam-$version.tgz
+	boost-jam-misc.patch
+	cflags.patch)
 
 build() {
 	cd boost-jam-$version
+	patch -p 1 -i $SRC/boost-jam-misc.patch
+	patch -p 1 -i $SRC/cflags.patch
+	export CFLAGS="$CFLAGS -fno-strict-aliasing"
 	local bindir='bin.linuxx86'
 	./build.sh gcc
-	install -D -m 0755 $bindir/bjam $PKG/usr/bin/bjam
+	install -m 0755 -D $bindir/bjam $PKG/usr/bin/bjam
 }
 
