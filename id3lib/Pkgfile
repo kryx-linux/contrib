@@ -6,15 +6,32 @@
 
 name=id3lib
 version=3.8.3
-release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
+	$name-3.8.3-zlib.patch
+	$name-3.8.3-test_io.patch
+	$name-3.8.3-autoconf259.patch
+	$name-3.8.3-unicode16.patch
+	$name-3.8.3-gcc-4.3.patch
+	CVE-2007-4460.diff)
 
 build() {
 	cd $name-$version
 
+	patch -p 1 -i $SRC/$name-3.8.3-zlib.patch
+	patch -p 1 -i $SRC/$name-3.8.3-test_io.patch
+	patch -p 1 -i $SRC/$name-3.8.3-autoconf259.patch
+	patch -p 1 -i $SRC/$name-3.8.3-unicode16.patch
+	patch -p 1 -i $SRC/$name-3.8.3-gcc-4.3.patch
+	patch -p 1 -i $SRC/CVE-2007-4460.diff
+	autoreconf -ivfs # buggy configure
+
+	CC='g++' \
 	./configure \
 		--prefix=/usr \
-		--disable-static
+		--disable-static \
+		--disable-assert \
+		--enable-debug=no
 
 	make
 	make DESTDIR=$PKG install
