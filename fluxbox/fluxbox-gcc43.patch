@@ -1,0 +1,18 @@
+diff --git a/src/main.cc b/src/main.cc
+index e4e16ac..ab18f6c 100644
+--- a/src/main.cc
++++ b/src/main.cc
+@@ -45,6 +45,12 @@
+   #include <stdlib.h>
+ #endif
+ 
++#ifdef HAVE_CSTRING
++  #include <cstring>
++#else
++  #include <string.h>
++#endif
++
+ #include <iostream>
+ #include <fstream>
+ #include <stdexcept>
+

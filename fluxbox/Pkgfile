@@ -6,11 +6,12 @@
 name=fluxbox
 version=1.0.0
 release=1
-source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2)
+source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2 $name-gcc43.patch)
 
 build() {
    cd $name-$version
 
+   patch -p1 -i ../fluxbox-gcc43.patch
    ./configure \
       --prefix=/usr \
       --disable-nls \
