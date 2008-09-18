@@ -5,9 +5,9 @@
 # Depends on: ant
 
 name=yacy
-version=0.59
-date=20080605_4890
-release=3
+version=0.60
+date=20080917_5175
+release=1
 source=(http://www.yacy.net/release/${name}_v${version}_$date.tar.gz
 	yacy-start.sh yacy-stop.sh yacy.rc)
 
@@ -44,8 +44,14 @@ build() {
 			$SRC/$name/addon/jsmooth/skeletons/windowed-wrapper
 
 	rm $PKG/usr/lib/yacy/startYACY.bat \
-		$PKG/usr/lib/yacy/startYACY_noconsole.bat \
-		$PKG/usr/lib/yacy/stopYACY.bat
+		$PKG/usr/lib/yacy/startYACY_debug.bat \
+		$PKG/usr/lib/yacy/stopYACY.bat \
+		$PKG/usr/lib/yacy/addon/YaCy-Search.bat \
+		$PKG/usr/lib/yacy/{AUTHORS,COPYRIGHT,ChangeLog,NOTICE}
+
+	# remove sunos windows librarys
+	rm -r $PKG/usr/lib/yacy/lib/windows \
+			$PKG/usr/lib/yacy/lib/sunos
 
 	rmdir $SRC/$name/addon/jsmooth/skeletons
 
