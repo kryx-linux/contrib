@@ -1,0 +1,18 @@
+# Description: Linux net driver diagnostic and tuning tool
+# URL: http://sourceforge.net/projects/gkernel/
+# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Packager: Manuel Ruiz, manuel dot tienza at gmail dot com
+# Depends on:
+
+name=ethtool
+version=6
+release=1
+source=(http://dl.sourceforge.net/sourceforge/gkernel/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
+}
+
