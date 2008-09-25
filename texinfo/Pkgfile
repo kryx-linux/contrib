@@ -5,12 +5,12 @@
 # Depends on: ncurses lzma help2man
 
 name=texinfo
-version=4.13
+version=4.13a
 release=1
 source=(ftp://ftp.gnu.org/gnu/texinfo/texinfo-$version.tar.gz)
 
 build() {
-	cd texinfo-$version
+	cd texinfo-${version/a/}
 
 	./configure \
 		--prefix=/usr \
