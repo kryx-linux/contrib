@@ -6,11 +6,14 @@
 
 name=mjpegtools
 version=1.9.0rc3
-release=1
-source=(http://dl.sourceforge.net/sourceforge/mjpeg/mjpegtools-$version.tar.gz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/mjpeg/mjpegtools-$version.tar.gz
+	mjpegtools-1.9.0_rc3-gcc43.patch)
 
 build() {
 	cd mjpegtools-$version
+
+	patch -p 1 -i $SRC/mjpegtools-1.9.0_rc3-gcc43.patch
 
 	./configure \
 		--prefix=/usr \
