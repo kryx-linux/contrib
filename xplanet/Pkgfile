@@ -6,11 +6,13 @@
 
 name=xplanet
 version=1.2.0
-release=1
-source=(http://dl.sourceforge.net/sourceforge/xplanet/xplanet-$version.tar.gz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/xplanet/xplanet-$version.tar.gz
+	xplanet-1.2.0-gcc43.patch)
 
 build() {
 	cd xplanet-$version
+	patch -p 1 -i $SRC/xplanet-1.2.0-gcc43.patch
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
