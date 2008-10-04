@@ -16,6 +16,7 @@ drwxr-xr-x	root/root	usr/lib/yacy/addon/Notepad++/
 -rw-r--r--	root/root	usr/lib/yacy/addon/YaCy.icns
 -rw-r--r--	root/root	usr/lib/yacy/addon/YaCy.ico
 -rw-r--r--	root/root	usr/lib/yacy/addon/YaCy_TrayIcon.gif
+-rw-r--r--	root/root	usr/lib/yacy/addon/YaCy_TrayIcon.png
 drwxr-xr-x	root/root	usr/lib/yacy/addon/jsmooth/
 drwxr-xr-x	root/root	usr/lib/yacy/addon/jsmooth/lib/
 -rw-r--r--	root/root	usr/lib/yacy/addon/jsmooth/lib/jsmoothgen-ant.jar
@@ -50,8 +51,8 @@ drwxr-xr-x	root/root	usr/lib/yacy/classes/de/anomic/
 drwxr-xr-x	root/root	usr/lib/yacy/classes/de/anomic/crawler/
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/AbstractImporter.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/Balancer$EntryIterator.class
--rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/Balancer$domaccess.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/Balancer.class
+-rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/CrawlEntry$domaccess.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/CrawlEntry.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/CrawlProfile$DomProfile.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/crawler/CrawlProfile$entry.class
@@ -493,6 +494,7 @@ drwxr-xr-x	root/root	usr/lib/yacy/classes/de/anomic/tools/
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/tools/disorderSet.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/tools/enumerateFiles.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/tools/gzip.class
+-rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/tools/iso639.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/tools/loaderCore.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/tools/loaderProcess.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/tools/loaderThreads$loaderThread.class
@@ -515,6 +517,7 @@ drwxr-xr-x	root/root	usr/lib/yacy/classes/de/anomic/xml/
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/xml/opensearchdescriptionReader$Item.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/xml/opensearchdescriptionReader.class
 drwxr-xr-x	root/root	usr/lib/yacy/classes/de/anomic/yacy/
+-rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/nativeTrayIcon.class
 drwxr-xr-x	root/root	usr/lib/yacy/classes/de/anomic/yacy/seedUpload/
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/seedUpload/SchUserInfo.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/seedUpload/sshc.class
@@ -545,7 +548,10 @@ drwxr-xr-x	root/root	usr/lib/yacy/classes/de/anomic/yacy/seedUpload/
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacySeedDB.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacySeedUploader.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyTray$1.class
+-rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyTray$2.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyTray$3.class
+-rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyTray$4.class
+-rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyTray$5.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyTray.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyURL.class
 -rw-r--r--	root/root	usr/lib/yacy/classes/de/anomic/yacy/yacyVersion$DevMain.class
@@ -1000,6 +1006,7 @@ drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/css/
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/css/jquery.flexigrid.css
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/css/jquery.pagination.css
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/css/jquery.tabs.css
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/css/jquery.treeview.css
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/css/ywidget.css
 drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/img-1/
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img-1/Add Appointment.png
@@ -1168,6 +1175,8 @@ drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/img/
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/add.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/asc.gif
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/bg.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/blacklist.png
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/bookmark.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/box200.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/box250.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/box250f.png
@@ -1175,6 +1184,7 @@ drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/img/
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/box800.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/cancel.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/close.png
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/crawl.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/desc.gif
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/first.png
 drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/img/flexigrid/
@@ -1201,6 +1211,22 @@ drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/img/flexigrid/
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/next.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/prev.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/tab.png
+drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/file.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/folder-closed.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/folder.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/minus.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/plus.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-black-line.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-black.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-default-line.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-default.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-famfamfam-line.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-famfamfam.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-gray-line.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-gray.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-red-line.gif
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/treeview/treeview-red.gif
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/img/yacy-logo.png
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/index.html
 drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/js/
@@ -1217,13 +1243,19 @@ drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/js/
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/jquery.pagination.js
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/jquery.scrollTo-min.js
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/jquery.serialScroll-min.js
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/jquery.treeview.min.js
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/jquery.ui.all.min.js
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/jquery.xslTransform.js
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/sarissa.js
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/js/sarissa_ieemu_xpath.js
 drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/sidebar/
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/sidebar/sidebar_1.html
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/sidebar/sidebar_2.html
+drwxr-xr-x	root/root	usr/lib/yacy/htroot/yacy/ui/xsl/
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/xsl/xbel2folder-ul.xsl
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/yacyui-admin.html
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/yacyui-bookmarks.html
--rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/yacyui-classic.html
+-rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/yacyui-compare.html
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/yacyui-ranking.html
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/yacyui-search.html
 -rw-r--r--	root/root	usr/lib/yacy/htroot/yacy/ui/yacyui-welcome.html
@@ -1286,12 +1318,6 @@ drwxr-xr-x	root/root	usr/lib/yacy/lib/
 -rw-r--r--	root/root	usr/lib/yacy/lib/commons-httpclient-3.1.jar
 -rw-r--r--	root/root	usr/lib/yacy/lib/commons-io-1.4.jar
 -rw-r--r--	root/root	usr/lib/yacy/lib/commons-logging-1.1.1.jar
--rw-r--r--	root/root	usr/lib/yacy/lib/jdic.jar
-drwxr-xr-x	root/root	usr/lib/yacy/lib/linux/
--rw-r--r--	root/root	usr/lib/yacy/lib/linux/jdic_stub.jar
-drwxr-xr-x	root/root	usr/lib/yacy/lib/linux/x86/
--rw-r--r--	root/root	usr/lib/yacy/lib/linux/x86/libjdic.so
--rw-r--r--	root/root	usr/lib/yacy/lib/linux/x86/libtray.so
 -rw-r--r--	root/root	usr/lib/yacy/lib/servlet-api.jar
 -rw-r--r--	root/root	usr/lib/yacy/lib/svnRevNr.jar
 drwxr-xr-x	root/root	usr/lib/yacy/lib/svnRevNr/
