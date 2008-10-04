@@ -15,5 +15,5 @@ build() {
 
         make
         make DESTDIR=$PKG install
-        rm -dr {$PKG/usr/share/locale,$PKG/usr/share/icons}
+        rm -r {$PKG/usr/share/locale,$PKG/usr/share/icons}
 }
