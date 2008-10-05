@@ -5,12 +5,16 @@
 # Depends on: libxml2 glib python
 
 name=gstreamer
-version=0.10.20
+version=0.10.21
 release=1
-source=(http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-$version.tar.gz)
+source=(http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-$version.tar.bz2
+	gstreamer-0.10.21-disable-gtkdoc.patch)
 
 build() {
 	cd gstreamer-$version
+
+	patch -p 1 -i $SRC/gstreamer-0.10.21-disable-gtkdoc.patch
+	automake
 
 	./configure \
 		--prefix=/usr \
@@ -20,10 +24,11 @@ build() {
 		--disable-gst-debug \
 		--disable-debug \
 		--disable-examples \
-		--disable-valgrind
+		--disable-valgrind \
+		--disable-gtk-doc \
+		--disable-docbook
 
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share/gtk-doc
 }
 
