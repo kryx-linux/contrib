@@ -5,7 +5,7 @@
 
 name=mtools
 version=3.9.11
-release=3
+release=4
 source=(http://mtools.linux.lu/$name-$version.tar.bz2)
 
 build() {
@@ -13,6 +13,6 @@ build() {
   ./configure --prefix=/usr \
               --sysconfdir=/etc
   make
-  make prefix=$PKG/usr install
+  make -j1 prefix=$PKG/usr install
   rm -rf $PKG/usr/info
 }
