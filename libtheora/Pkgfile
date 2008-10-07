@@ -6,11 +6,15 @@
 
 name=libtheora
 version=1.0RC1
-release=1
-source=(http://downloads.xiph.org/releases/theora/libtheora-$version.tar.bz2)
+release=2
+source=(http://downloads.xiph.org/releases/theora/libtheora-$version.tar.bz2
+	libtheora-1.0RC1-x86_64-missing-file.patch)
 
 build() {
 	cd libtheora-$version
+
+	patch -p 1 -i $SRC/libtheora-1.0RC1-x86_64-missing-file.patch
+	automake
 
 	./configure \
 		--prefix=/usr \
