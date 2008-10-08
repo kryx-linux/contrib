@@ -2,19 +2,23 @@
 # URL: http://lmms.sourceforge.net/
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Depends on: qt3 jack-audio-connection-kit
+# Depends on: qt4 jack-audio-connection-kit
+# Nice to have: libsamplerate fluidsynth
 
 name=lmms
-version=0.3.2
+version=0.4.0-rc2
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
-  export QTDIR=/usr/share/qt
+  export QTDIR=/usr/share/qt4
   cd $name-$version
-  ./configure --prefix=/usr \
-              --mandir=/usr/man
+  mkdir build
+  cd build
+  cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
   make
   make DESTDIR=$PKG install
-  rm -rf $PKG/usr/{info,share/lmms/locale}
+  mv $PKG/usr/share/man $PKG/usr
+  rm -rf $PKG/usr/share/{locale,mime}
 }
+
