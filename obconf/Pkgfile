@@ -1,0 +1,17 @@
+# Description: openbox preferences manager
+# URL:         http://openbox.org/obconf/
+# Packager:    Marcin Karpezo <sirmacik@happylinux.pl>
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  openbox libglade startup-notification
+
+name=obconf
+version=2.0.3
+release=1
+source=(http://icculus.org/openbox/$name/$name-$version.tar.gz)
+
+build () {
+	cd $name-$version
+	./configure --prefix=/usr --disable-nls
+	make
+	make DESTDIR=$PKG install
+}
