@@ -1,0 +1,16 @@
+# Description: small, efficient C++ GUI library designed for games
+# URL:         http://guichan.sourceforge.net/
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  sdl_image
+
+name=guichan
+version=0.8.1
+release=1
+source=(http://$name.googlecode.com/files/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+}

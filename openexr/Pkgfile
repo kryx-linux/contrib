@@ -7,10 +7,13 @@
 name=openexr
 version=1.6.1
 release=1
-source=(http://download.savannah.nongnu.org/releases/openexr/openexr-$version.tar.gz)
+source=(http://download.savannah.nongnu.org/releases/openexr/openexr-$version.tar.gz
+	openexr-1.6.1-gcc43.patch)
 
 build() {
 	cd openexr-$version
+
+	patch -p 1 -i $SRC/openexr-1.6.1-gcc43.patch
 
 	./configure \
 		--prefix=/usr \
