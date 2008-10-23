@@ -6,11 +6,14 @@
 
 name=lvm2
 version=2.02.41
-release=1
-source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz)
+release=2
+source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz
+	lvm-2.02.41_lv-mirror.patch)
 
 build() {
 	cd LVM2.$version
+
+	patch -p 1 -i $SRC/lvm-2.02.41_lv-mirror.patch
 
 	./configure \
 		--prefix=/usr \
