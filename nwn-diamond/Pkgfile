@@ -4,11 +4,11 @@
 # Depends on: x11, libsdl
 
 name=nwn-diamond
-version=1.68
+version=1.69
 release=1
 source=(http://nwdownloads.bioware.com/neverwinternights/linux/gold/nwclientgold.tar.gz \
 	http://nwdownloads.bioware.com/neverwinternights/linux/161/nwclienthotu.tar.gz \
-	http://files.bioware.com/neverwinternights/updates/linux/168/English_linuxclient168_xp2.tar.gz \
+	http://files.bioware.com/neverwinternights/updates/linux/169/English_linuxclient169_xp2.tar.gz \
 	http://jaeger.morpheus.net/linux/crux/files/nwn.png \
 	run-nwn.sh)
 
@@ -18,7 +18,7 @@ source=(http://nwdownloads.bioware.com/neverwinternights/linux/gold/nwclientgold
 unpack_source() {
 
 	# first, get the files we need from the diamond edition disc
-	[ -z "$CDROM_LOCATION" ] && CDROM_LOCATION=/mnt/cdrom
+	[ -z "$CDROM_LOCATION" ] && CDROM_LOCATION=/mnt/dvd
 	DISCFILES="Data_Shared Data_linux data/XP1 data/XP2"
 	for FILE in $DISCFILES
 	do
@@ -61,4 +61,5 @@ build() {
 		$PKG/usr/games/nwn/movies*.txt \
 		$PKG/usr/games/nwn/SDL-1.2.5 \
 		$PKG/usr/games/nwn/NWN*.txt
+	sed -i -e 's|=./lib:|=|' $PKG/usr/games/nwn/nwn
 }
