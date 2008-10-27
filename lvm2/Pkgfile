@@ -5,17 +5,11 @@
 # Depends on: libdevmapper
 
 name=lvm2
-version=2.02.41
-release=3
-source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz
-	lvm2-2.02.41_lv-mirror.patch
-	lvm2-2.02.41_global-locking-conf.patch)
-
+version=2.02.42
+release=1
+source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz)
 build() {
 	cd LVM2.$version
-
-	patch -p 1 -i $SRC/lvm2-2.02.41_lv-mirror.patch
-	patch -p 1 -i $SRC/lvm2-2.02.41_global-locking-conf.patch
 
 	./configure \
 		--prefix=/usr \
