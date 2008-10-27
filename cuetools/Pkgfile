@@ -3,10 +3,11 @@
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on:
+# Nice to have: flac, vorbis-tools
 
 name=cuetools
 version=1.3.1
-release=1
+release=2
 source=(http://download.berlios.de/$name/$name-$version.tar.gz)
 
 build() {
@@ -15,4 +16,5 @@ build() {
               --disable-nls
   make
   make DESTDIR=$PKG install
+  install -D -m 0755 extras/cuetag.sh $PKG/usr/bin/cuetag
 }
