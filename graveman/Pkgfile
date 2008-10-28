@@ -8,17 +8,13 @@ name=graveman
 version=0.3.12-5
 release=1
 source=(http://$name.tuxfamily.org/sources/$name-$version.tar.bz2
-    $name.desktop.in
-    ${name}48.png
-    $name-${version}_nointltool.patch)
+    $name-${version}_nointltoolv2.patch)
 
 build(){
     cd $name-$version
-    patch -p1 -i ../$name-${version}_nointltool.patch
+    patch -p1 -i ../$name-${version}_nointltoolv2.patch
     autoreconf --force --install --verbose
     ./configure --mandir=/usr/man --prefix=/usr
     make
     make DESTDIR=$PKG install
-    install -D -m 0644 $SRC/graveman.desktop.in $PKG/usr/share/applications/graveman.desktop
-    install -D -m 0644 $SRC/graveman48.png $PKG/usr/share/pixmaps/graveman48.png
 }
