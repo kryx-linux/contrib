@@ -8,12 +8,13 @@ name=wbar
 version=1.3.3
 release=1
 source=(http://freshmeat.net/redir/$name/66660/url_mirror/$name-$version.tbz2
-$name-$version-dot.wbar.patch)
+$name-$version-dot.wbar.patch $name-${version}_gcc43.patch)
 
 build() {
   tar --use-compress-program=bzip2 -xf $name-$version.tbz2
   cd $name-$version
   patch -p1 -i ../$name-$version-dot.wbar.patch
+  patch -p1 -i ../$name-${version}_gcc43.patch
   sed -i "/CXXFLAGS/s/-O2/$CXXFLAGS/" Makefile
   make
   mkdir -p $PKG/usr/share/wbar
