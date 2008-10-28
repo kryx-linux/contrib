@@ -7,10 +7,11 @@
 name=gamin
 version=0.1.9
 release=1
-source=(http://www.gnome.org/~veillard/$name/sources/$name-$version.tar.gz)
+source=(http://www.gnome.org/~veillard/$name/sources/$name-$version.tar.gz $name-$version-ucred-headers.patch)
 
 build() {
         cd $name-$version
+	patch -p1 -i ../$name-$version-ucred-headers.patch
         ./configure \
             --prefix=/usr \
             --libexecdir=/usr/sbin \
