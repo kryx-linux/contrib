@@ -6,11 +6,17 @@
 
 name=libdv
 version=1.0.0
-release=1
-source=(http://dl.sourceforge.net/sourceforge/libdv/libdv-$version.tar.gz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
+	http://www.dcaf-security.org/distfiles/$name-1.0.0-pic.patch.bz2
+	$name-0.99-2.6.patch)
 
 build() {
-	cd libdv-$version
+	cd $name-$version
+
+	bzcat $SRC/$name-1.0.0-pic.patch.bz2 |patch -p 1
+	patch -p 1 -i $SRC/$name-0.99-2.6.patch
+
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
