@@ -6,16 +6,20 @@
 
 name=nvidia-legacy-71xx
 version=71.86.06
-release=2
-source=(http://us.download.nvidia.com/XFree86/Linux-x86/$version/NVIDIA-Linux-x86-$version-pkg0.run \
-	nvidia-makefile.patch)
+release=3
+source=(http://us.download.nvidia.com/XFree86/Linux-x86/$version/NVIDIA-Linux-x86-$version-pkg0.run
+	nvidia-makefile.patch
+	kernel-2.6.27.patch)
 
 build() {
 	sh NVIDIA-Linux-x86-$version-pkg0.run --extract-only
 	cd NVIDIA-Linux-x86-$version-pkg0
 
 	# patch Makefile.kbuild for normal users and no load during build
-	patch -p0 -i $SRC/nvidia-makefile.patch usr/src/nv/Makefile.kbuild
+	patch -p 0 -i $SRC/nvidia-makefile.patch usr/src/nv/Makefile.kbuild
+
+	# kernel patch
+	patch -p 1 -i $SRC/kernel-2.6.27.patch
 
 	# create directories the Makefile expects
 	mkdir -p $PKG/usr/lib \
