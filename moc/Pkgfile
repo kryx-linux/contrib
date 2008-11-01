@@ -7,11 +7,14 @@
 
 name=moc
 version=2.4.3
-release=2
-source=(ftp://ftp.daper.net/pub/soft/moc/stable/moc-$version.tar.bz2)
+release=3
+source=(ftp://ftp.daper.net/pub/soft/$name/stable/$name-$version.tar.bz2
+	$name-2.4.3-ffmpeg_headers.patch)
 
 build() {
-	cd moc-$version
+	cd $name-$version
+
+	patch -p 1 -i $SRC/$name-2.4.3-ffmpeg_headers.patch
 	
 	./configure \
 		--prefix=/usr \

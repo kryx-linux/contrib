@@ -5,16 +5,12 @@
 # Depends on: libvorbis
 
 name=libtheora
-version=1.0RC1
+version=1.0RC2
 release=2
-source=(http://downloads.xiph.org/releases/theora/libtheora-$version.tar.bz2
-	libtheora-1.0RC1-x86_64-missing-file.patch)
+source=(http://downloads.xiph.org/releases/theora/libtheora-$version.tar.bz2)
 
 build() {
-	cd libtheora-$version
-
-	patch -p 1 -i $SRC/libtheora-1.0RC1-x86_64-missing-file.patch
-	automake
+	cd $name-1.0
 
 	./configure \
 		--prefix=/usr \

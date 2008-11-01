@@ -2,16 +2,16 @@
 # URL: http://swfdec.freedesktop.org/wiki/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Stefan Lohmaier, noneus at noneus dot de
-# Depends on: ffmpeg gtk libdca libmad libsoup gst-plugins-base
+# Depends on: gtk libdca libmad libsoup gst-plugins-base gst-ffmpeg
 # Optional: gthread freetype libxml2 libpng gnutls
 
 name=swfdec
-version=0.6.8
+version=0.8.2
 release=1
-source=(http://swfdec.freedesktop.org/download/swfdec/${version%.*}/swfdec-$version.tar.gz)
+source=(http://swfdec.freedesktop.org/download/$name/${version%.*}/$name-$version.tar.gz)
 
 build() {
-	cd swfdec-$version
+	cd $name-$version
 
 	# yet another program that --disable-gtk-doc dosn't work
 	sed -i Makefile.in -e '/^@WITH_GTK_TRUE@	doc \\/d'
