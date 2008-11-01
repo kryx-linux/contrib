@@ -1,0 +1,12 @@
+# Description:  tool like grep, aimed at programmers with large trees of heterogeneous source code
+# URL:          http://petdance.com/ack/
+# Maintainer:   Bartlomiej Palmowski, maks1k at wp dot pl
+
+name=ack
+version=1.86
+release=1
+source=(http://$name.googlecode.com/svn/tags/latest/$name-standalone)
+
+build() {
+    install -D -m 0755 $name-standalone $PKG/usr/bin/$name
+}
