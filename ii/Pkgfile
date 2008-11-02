@@ -1,0 +1,15 @@
+# Description: minimalist FIFO and filesystem-based IRC client
+# URL:         http://www.suckless.org/programs/ii.html
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+
+name=ii
+version=1.4
+release=1
+source=(http://code.suckless.org/dl/tools/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make
+    make DESTDIR=$PKG PREFIX=/usr MANDIR=/usr/man install
+    rm -rf $PKG/usr/share
+}
