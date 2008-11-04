@@ -5,12 +5,12 @@
 # Depends on: libvorbis
 
 name=libtheora
-version=1.0RC2
-release=2
-source=(http://downloads.xiph.org/releases/theora/libtheora-$version.tar.bz2)
+version=1.0
+release=1
+source=(http://downloads.xiph.org/releases/theora/$name-$version.tar.bz2)
 
 build() {
-	cd $name-1.0
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
