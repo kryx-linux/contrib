@@ -5,15 +5,14 @@
 # Depends on: qt3
 
 name=licq
-version=1.3.5
-release=4
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2
-		$name-$version-logonfix.patch)
+version=1.3.6
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build () {
 	cd $name-$version
-	patch -p0 -i $SRC/$name-$version-logonfix.patch
 	./configure --prefix=/usr \
+		--disable-nls \
 		--disable-debug \
 		--disable-gpgme 
 	make 
