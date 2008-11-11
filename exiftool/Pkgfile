@@ -4,11 +4,11 @@
 # Depends on:
 
 name=exiftool
-version=7.41
+version=7.52
 release=1
 source=(http://www.sno.phy.queensu.ca/~phil/exiftool/Image-ExifTool-$version.tar.gz)
 
-build () {
+build() {
 	cd Image-ExifTool-$version
 	perl Makefile.PL
 	make OPTIMIZE="${CFLAGS}"
