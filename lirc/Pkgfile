@@ -5,7 +5,7 @@
 # Depends on:	
 
 name=lirc
-version=0.8.4
+version=0.8.4a
 release=1
 source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2 irxevent_name.diff lircd)
 
@@ -31,7 +31,7 @@ build() {
 	# Patch to let irxevent use different program names
 	patch -p1 -i $SRC/irxevent_name.diff
 
-	./configure --prefix=/usr --disable-static --with-driver=$LIRC_DRIVER
+	./configure --prefix=/usr --mandir=/usr/man --disable-static --with-driver=$LIRC_DRIVER
 	make
 	make DESTDIR=$PKG install
 	install -D -m 755 $SRC/lircd $PKG/etc/rc.d/lircd
