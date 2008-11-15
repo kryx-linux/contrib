@@ -102,7 +102,6 @@ drwxr-xr-x	root/root	usr/lib/sunbird/components/
 -rwxr-xr-x	root/root	usr/lib/sunbird/components/libimgicon.so
 -rwxr-xr-x	root/root	usr/lib/sunbird/components/libjsd.so
 -rwxr-xr-x	root/root	usr/lib/sunbird/components/libmozgnome.so
--rwxr-xr-x	root/root	usr/lib/sunbird/components/libwebdav.so
 -rwxr-xr-x	root/root	usr/lib/sunbird/components/libxpinstall.so
 -rw-r--r--	root/root	usr/lib/sunbird/components/locale.xpt
 -rw-r--r--	root/root	usr/lib/sunbird/components/lwbrk.xpt
@@ -158,7 +157,6 @@ drwxr-xr-x	root/root	usr/lib/sunbird/components/
 -rw-r--r--	root/root	usr/lib/sunbird/components/wcap.xpt
 -rw-r--r--	root/root	usr/lib/sunbird/components/webBrowser_core.xpt
 -rw-r--r--	root/root	usr/lib/sunbird/components/webbrowserpersist.xpt
--rw-r--r--	root/root	usr/lib/sunbird/components/webdav.xpt
 -rw-r--r--	root/root	usr/lib/sunbird/components/webshell_idls.xpt
 -rw-r--r--	root/root	usr/lib/sunbird/components/widget.xpt
 -rw-r--r--	root/root	usr/lib/sunbird/components/windowds.xpt
@@ -185,6 +183,16 @@ drwxr-xr-x	root/root	usr/lib/sunbird/defaults/profile/
 -rwxr-xr-x	root/root	usr/lib/sunbird/defaults/profile/prefs.js
 -rw-r--r--	root/root	usr/lib/sunbird/dependentlibs.list
 drwxr-xr-x	root/root	usr/lib/sunbird/extensions/
+drwxr-xr-x	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/
+-rw-r--r--	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/chrome.manifest
+drwxr-xr-x	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/chrome/
+-rw-r--r--	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/chrome/calendar-timezones-en-US.jar
+-rw-r--r--	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/chrome/chromelist.txt
+drwxr-xr-x	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/defaults/
+drwxr-xr-x	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/defaults/preferences/
+-rw-r--r--	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/defaults/preferences/preferences.js
+-rw-r--r--	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/install.rdf
+-rwxr-xr-x	root/root	usr/lib/sunbird/extensions/calendar-timezones@mozilla.org/timezones.sqlite
 drwxr-xr-x	root/root	usr/lib/sunbird/extensions/talkback@mozilla.org/
 -rw-r--r--	root/root	usr/lib/sunbird/extensions/talkback@mozilla.org/chrome.manifest (EMPTY)
 drwxr-xr-x	root/root	usr/lib/sunbird/extensions/talkback@mozilla.org/components/
@@ -209,10 +217,12 @@ drwxr-xr-x	root/root	usr/lib/sunbird/icons/
 -rwxr-xr-x	root/root	usr/lib/sunbird/icons/mozicon16.xpm
 -rwxr-xr-x	root/root	usr/lib/sunbird/icons/mozicon50.xpm
 drwxr-xr-x	root/root	usr/lib/sunbird/js/
+-rw-r--r--	root/root	usr/lib/sunbird/js/calAlarm.js
 -rwxr-xr-x	root/root	usr/lib/sunbird/js/calAlarmMonitor.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calAlarmService.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calAttachment.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calAttendee.js
+-rw-r--r--	root/root	usr/lib/sunbird/js/calAuthUtils.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calCachedCalendar.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calCalendarManager.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calCalendarSearchService.js
@@ -234,8 +244,11 @@ drwxr-xr-x	root/root	usr/lib/sunbird/js/
 -rw-r--r--	root/root	usr/lib/sunbird/js/calOutlookCSVImportExport.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calProtocolHandler.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calProviderBase.js
+-rw-r--r--	root/root	usr/lib/sunbird/js/calProviderUtils.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calRecurrenceInfo.js
+-rw-r--r--	root/root	usr/lib/sunbird/js/calRelation.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calStorageCalendar.js
+-rw-r--r--	root/root	usr/lib/sunbird/js/calTimezoneService.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calTodo.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calTransactionManager.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calUtils.js
@@ -245,8 +258,8 @@ drwxr-xr-x	root/root	usr/lib/sunbird/js/
 -rw-r--r--	root/root	usr/lib/sunbird/js/calWcapRequest.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calWcapSession.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calWcapUtils.js
+-rw-r--r--	root/root	usr/lib/sunbird/js/calWeekInfoService.js
 -rw-r--r--	root/root	usr/lib/sunbird/js/calWeekPrinter.js
--rw-r--r--	root/root	usr/lib/sunbird/js/calWeekTitleService.js
 -rw-r--r--	root/root	usr/lib/sunbird/libfreebl3.chk
 -rwxr-xr-x	root/root	usr/lib/sunbird/libfreebl3.so
 -rwxr-xr-x	root/root	usr/lib/sunbird/libmozjs.so

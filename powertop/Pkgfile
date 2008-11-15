@@ -1,0 +1,19 @@
+# Description: Finds the software component(s) that make your laptop use more power than necessary
+# URL: http://www.lesswatts.org/projects/powertop/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Packager: Torsten Henschel, thenschel at henschelsoft dot de
+# Depends on: ncurses
+
+name=powertop
+version=1.10
+release=1
+source=(http://www.lesswatts.org/projects/$name/download/$name-$version.tar.gz)
+
+build() { 
+    cd $name-$version  
+    make 
+    make DESTDIR=$PKG install 
+    mv $PKG/usr/share/man $PKG/usr/man
+    # remove nls
+    rm -r $PKG/usr/share
+}

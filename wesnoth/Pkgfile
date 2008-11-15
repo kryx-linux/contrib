@@ -5,32 +5,23 @@
 # Depends on: sdl_image sdl_mixer sdl_net freetype boost
 
 name=wesnoth
-version=1.4.5
+version=1.4.6
 release=1
-source=(http://dl.sourceforge.net/sourceforge/wesnoth/wesnoth-$version.tar.bz2)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
-	cd wesnoth-$version
+	cd $name-$version
 	rm po/*/*.po
 
 	sed -i \
 		-e 's/USE_NLS=yes/USE_NLS=no/' \
 		-e 's/ENABLE_NLS 1/ENABLE_NLS 0/' configure
 
-	if pkginfo -i |grep '^kdebase ' > /dev/null; then
-		local configure='--with-kde'
-	fi
-
-	if pkginfo -i |grep '^gnome ' > /dev/null; then
-		local configure='--with-gnome'
-	fi
-
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-nls \
-		--enable-python \
-		$configure
+		--enable-python
 
 	make
 	make DESTDIR=$PKG install

@@ -5,18 +5,20 @@
 
 name=logrotate
 version=3.7.7
-release=1
+release=2
 #source=(https://fedorahosted.org/releases/l/o/$name/$name-$version.tar.gz \
 #		$name.conf)
 source=(http://www.sfr-fresh.com/unix/privat/$name-$version.tar.gz \
-		$name.conf)
+		$name.conf logrotate-config.h.diff)
 
 build() {
 	cd $name-$version
+	patch -p1 -i $SRC/logrotate-config.h.diff
 	make
 	make PREFIX=$PKG install
 
 	mkdir -p $PKG/etc/$name.d
+	mkdir -p $PKG/var/state/logrotate
 	install -D -m 750 examples/$name.cron $PKG/etc/cron/hourly/$name
 	install -D -m 640 $SRC/$name.conf $PKG/etc/$name.conf
 }

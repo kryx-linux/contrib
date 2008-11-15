@@ -18,6 +18,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/APP12.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/ASF.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/BMP.pm
+-r-xr-xr-x	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/BZZ.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/BigTIFF.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/BuildTagLookup.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Canon.pm
@@ -27,6 +28,8 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Casio.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/DICOM.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/DNG.pm
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/DjVu.pm
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/EXE.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Exif.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/FLAC.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Fixup.pm
@@ -74,6 +77,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/PrintIM.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/QuickTime.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/RIFF.pm
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Rawzor.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Real.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Ricoh.pm
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Sanyo.pm
@@ -96,6 +100,8 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/WriteXMP.pl
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/Writer.pl
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/XMP.pm
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/XMP2.pm
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.8.8/Image/ExifTool/ZIP.pm
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -r--r--r--	root/root	usr/man/man1/exiftool.1pm.gz
@@ -108,6 +114,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::APP12.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::ASF.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::BMP.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Image::ExifTool::BZZ.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::BigTIFF.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::BuildTagLookup.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Canon.3pm.gz
@@ -117,6 +124,8 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Casio.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::DICOM.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::DNG.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Image::ExifTool::DjVu.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Image::ExifTool::EXE.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Exif.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::FLAC.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Fixup.3pm.gz
@@ -164,6 +173,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::PrintIM.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::QuickTime.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::RIFF.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Image::ExifTool::Rawzor.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Real.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Ricoh.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Sanyo.3pm.gz
@@ -186,3 +196,5 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::WriteXMP.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::Writer.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Image::ExifTool::XMP.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Image::ExifTool::XMP2.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Image::ExifTool::ZIP.3pm.gz
