@@ -5,14 +5,17 @@
 # Depends on: 
 
 name=memtest86+
-version=2.01
+version=2.10
 release=1
-source=(http://www.memtest.org/download/$version/memtest86+-$version.tar.gz)
+source=(http://www.memtest.org/download/$version/$name-$version.tar.gz
+	$name-2.10-gnu_hash.patch
+	$name-2.10-makefile.patch)
 
 build() {
-	cd memtest86+-$version
-	sed -i Makefile -e "/^CFLAGS=/s/-Wall -march=i486 -m32 -Os -fomit-frame-pointer -fno-builtin -ffreestanding -fPIC/-Wall $CFLAGS -fno-builtin -ffreestanding -fPIC/"
+	cd $name-$version
+	patch -p 1 -i $SRC/$name-2.10-gnu_hash.patch
+	patch -p 1 -i $SRC/$name-2.10-makefile.patch
 	make memtest.bin
-	install -D -m 0644 memtest.bin $PKG/boot/memtest.bin
+	make DESTDIR=$PKG install-memtest.bin
 }
 
