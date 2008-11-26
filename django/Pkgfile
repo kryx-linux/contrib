@@ -4,12 +4,12 @@
 # Depends on: setuptools
 
 name=django
-version=1.0
+version=1.0.2
 release=1
-source=(http://media.djangoproject.com/releases/$version/Django-$version.tar.gz)
+source=(http://media.djangoproject.com/releases/$version/Django-$version-final.tar.gz)
 
 build() {
-	cd Django-$version
+	cd Django-$version-final
 	python setup.py install --root=$PKG
 	# Don't lay eggs
 	find $PKG -name '*egg-info' | xargs rm
