@@ -5,12 +5,12 @@
 # Depends on: gst-plugins-base
 
 name=gst-ffmpeg
-version=0.10.5
+version=0.10.6
 release=1
-source=(http://gstreamer.freedesktop.org/src/gst-ffmpeg/gst-ffmpeg-$version.tar.gz)
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.gz)
 
 build() {
-	cd gst-ffmpeg-$version
+	cd $name-$version
 	unset CFLAGS CXXFLAGS
 
 	./configure \
