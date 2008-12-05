@@ -2,18 +2,16 @@
 # Description: Fortran (f95) add-on for GNU GCC compiler.
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: acrux, acrux at linuxmail dot org
-# Depends on: mpfr
+# Depends on: libmpfr
 
 name=gcc-fortran
-version=4.2.4
+version=4.3.2
 release=1
-source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-{core,fortran}-$version.tar.bz2 \
-	gcc-fortran-$version-nocheck-fixincludes.patch \
-	gcc-fortran-$version-fixinc.patch)
+source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-{core,fortran}-$version.tar.bz2
+	$name-4.2.4-nocheck-fixincludes.patch)
 
 build() {
-	patch -d gcc-$version -p 1 -i $SRC/gcc-fortran-$version-nocheck-fixincludes.patch
-	patch -d gcc-$version -p 1 -i $SRC/gcc-fortran-$version-fixinc.patch
+	patch -d gcc-$version -p 1 -i $SRC/$name-4.2.4-nocheck-fixincludes.patch
 
 	sed -i gcc-$version/gcc/version.c \
 		-e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|'
@@ -70,4 +68,3 @@ build() {
 		sed -i "s|-L$SRC[^ ]* ||g" $PKG/$i
 	done
 }
-
