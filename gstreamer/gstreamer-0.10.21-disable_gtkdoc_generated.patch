@@ -1,0 +1,70 @@
+diff -pruN /usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.am /home/romster/.safe-build/usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.am
+--- /usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.am	2008-01-10 00:48:03.000000000 +1100
++++ /home/romster/.safe-build/usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.am	2008-12-08 00:28:43.954541600 +1100
+@@ -12,17 +12,23 @@ aclocal_DATA = gst-element-check-@GST_MA
+ 
+ SUBDIRS = \
+ 	gst libs plugins tools tests \
+-	docs \
+ 	pkgconfig po \
+ 	common
+ 
++if ENABLE_GTK_DOC
++	SUBDIRS += docs
++endif
++
+ # These are all the possible subdirs
+ DIST_SUBDIRS = \
+ 	gst libs plugins tools tests \
+-	docs \
+ 	pkgconfig po \
+ 	common
+ 
++if ENABLE_GTK_DOC
++        DIST_SUBDIRS += docs
++endif
++
+ # include before EXTRA_DIST for win32 assignment
+ include $(top_srcdir)/common/win32.mak
+ 
+diff -pruN /usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.in /home/romster/.safe-build/usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.in
+--- /usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.in	2008-10-03 07:54:23.000000000 +1000
++++ /home/romster/.safe-build/usr/ports/work/gstreamer/src/gstreamer-0.10.21/Makefile.in	2008-12-08 00:28:52.503419831 +1100
+@@ -37,6 +37,7 @@ PRE_UNINSTALL = :
+ POST_UNINSTALL = :
+ build_triplet = @build@
+ host_triplet = @host@
++@ENABLE_GTK_DOC_TRUE@am__append_1 = docs
+ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
+ 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
+ 	$(srcdir)/gst-element-check.m4.in $(srcdir)/gstreamer.spec.in \
+@@ -359,18 +360,13 @@ aclocaldir = $(datadir)/aclocal
+ aclocal_DATA = gst-element-check-@GST_MAJORMINOR@.m4
+ SUBDIRS = \
+ 	gst libs plugins tools tests \
+-	docs \
+ 	pkgconfig po \
+ 	common
+ 
+ 
+ # These are all the possible subdirs
+-DIST_SUBDIRS = \
+-	gst libs plugins tools tests \
+-	docs \
+-	pkgconfig po \
+-	common
+-
++DIST_SUBDIRS = gst libs plugins tools tests pkgconfig po common \
++	$(am__append_1)
+ 
+ # the MANIFEST contains all win32 related files that should be disted
+ win32 = $(shell cat $(top_srcdir)/win32/MANIFEST)
+@@ -884,6 +880,8 @@ all-local: gst-element-check-@GST_MAJORM
+ gst-element-check-@GST_MAJORMINOR@.m4: gst-element-check.m4
+ 	cp gst-element-check.m4 gst-element-check-@GST_MAJORMINOR@.m4
+ 
++@ENABLE_GTK_DOC_TRUE@	SUBDIRS += docs
++
+ win32-debug:
+ 	@echo; \
+ 	echo win32     = $(win32); \

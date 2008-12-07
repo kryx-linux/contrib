@@ -7,14 +7,18 @@
 name=gstreamer
 version=0.10.21
 release=1
-source=(http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-$version.tar.bz2
-	gstreamer-0.10.21-disable-gtkdoc.patch)
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2
+	$name-0.10.21-disable_gtkdoc_generated.patch)
 
 build() {
-	cd gstreamer-$version
+	cd $name-$version
 
-	patch -p 1 -i $SRC/gstreamer-0.10.21-disable-gtkdoc.patch
-	automake
+	# this patch created with autoconf-2.61 automake-1.10.1 in chroot
+	patch -p 7 -i $SRC/$name-0.10.21-disable_gtkdoc_generated.patch
+
+	# origional patch wont work on recent autoconf and automake versions.
+	#patch -p 1 -i $SRC/$name-0.10.21-disable-gtkdoc.patch
+	#automake
 
 	./configure \
 		--prefix=/usr \
@@ -31,4 +35,3 @@ build() {
 	make
 	make DESTDIR=$PKG install
 }
-
