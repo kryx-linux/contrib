@@ -15,9 +15,7 @@ build() {
 	cd $name-$version
 	patch -p 1 -i $SRC/$name-3.1.17-misc.patch
 	patch -p 1 -i $SRC/$name-3.1.17-cflags.patch
-	export CFLAGS+="-fno-strict-aliasing"
 	local bindir='bin.linuxx86'
 	./build.sh gcc
 	install -m 0755 -D $bindir/bjam $PKG/usr/bin/bjam
 }
-
