@@ -5,39 +5,38 @@
 # Depends on: p5-sdl1-perl sdl_pango p5-locale-gettext
 
 name=frozen-bubble
-version=2.1.0
-release=4
-source=(http://www.frozen-bubble.org/data/frozen-bubble-$version.tar.bz2 \
-	frozen-bubble.desktop)
+version=2.2.0
+release=1
+source=(http://www.frozen-bubble.org/data/$name-$version.tar.bz2
+	$name.desktop)
 
 build() {
-	cd frozen-bubble-$version
+	cd $name-$version
 	
-	sed -i \
+	sed -i settings.mk \
 		-e "s|PREFIX = .*|PREFIX = /usr|" \
-		-e 's|MANDIR = .*|MANDIR = $(PREFIX)/man|' settings.mk
+		-e 's|MANDIR = .*|MANDIR = $(PREFIX)/man|'
 
 	make
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/locale
 
 	# install icons
-	install -D -m644 icons/frozen-bubble-icon-16x16.png $PKG/usr/share/icons/hicolor/16x16/apps/frozen-bubble.png
-	install -D -m644 icons/frozen-bubble-icon-32x32.png $PKG/usr/share/icons/hicolor/32x32/apps/frozen-bubble.png
-	install -D -m644 icons/frozen-bubble-icon-48x48.png $PKG/usr/share/icons/hicolor/48x48/apps/frozen-bubble.png
-	install -D -m644 icons/frozen-bubble-icon-64x64.png $PKG/usr/share/icons/hicolor/64x64/apps/frozen-bubble.png
+	install -D -m 0644 icons/frozen-bubble-icon-16x16.png $PKG/usr/share/icons/hicolor/16x16/apps/frozen-bubble.png
+	install -D -m 0644 icons/frozen-bubble-icon-32x32.png $PKG/usr/share/icons/hicolor/32x32/apps/frozen-bubble.png
+	install -D -m 0644 icons/frozen-bubble-icon-48x48.png $PKG/usr/share/icons/hicolor/48x48/apps/frozen-bubble.png
+	install -D -m 0644 icons/frozen-bubble-icon-64x64.png $PKG/usr/share/icons/hicolor/64x64/apps/frozen-bubble.png
 
 	# install menu entry
-	install -D -m644 $SRC/frozen-bubble.desktop $PKG/usr/share/applications/frozen-bubble.desktop
+	install -D -m 0644 $SRC/frozen-bubble.desktop $PKG/usr/share/applications/frozen-bubble.desktop
 
 	# Remove perlcrap
-	find $PKG \
-		-name '.packlist' -delete -or \
-		-name '*.bs' -delete -or \
-		-name 'autosplit.ix' -delete -or \
-		-name 'perllocal.pod' -delete
+	find $PKG \( \
+		-name '.packlist' -o \
+		-name '*.bs' -o \
+		-name 'autosplit.ix' -o \
+		-name 'perllocal.pod' \) -delete
 
 	# Remove empty directories
 	find $PKG -depth -empty -delete
 }
-
