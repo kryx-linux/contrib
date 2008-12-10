@@ -7,17 +7,20 @@
 name=gst-plugins-base
 version=0.10.21
 release=1
-source=(http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-$version.tar.bz2
-	gst-plugins-base-0.10.21-libtheora-version-check.patch
-	gst-plugins-base-0.10.21-gtkdoc-rebase.patch)
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2	
+	$name-0.10.21-gtkdoc_libtheora_generated.patch)
 
 build() {
-	cd gst-plugins-base-$version
+	cd $name-$version
 
-	patch -p 1 -i $SRC/gst-plugins-base-0.10.21-gtkdoc-rebase.patch
-	patch -p 1 -i $SRC/gst-plugins-base-0.10.21-libtheora-version-check.patch
-	automake
-	autoconf
+	# this patch created with autoconf-2.61 automake-1.10.1 in chroot
+	patch -p 1 -i $SRC/$name-0.10.21-gtkdoc_libtheora_generated.patch
+
+	# origional patch wont work on recent autoconf and automake versions.
+	#patch -p 1 -i $SRC/$name-0.10.21-gtkdoc-rebase.patch
+	#patch -p 1 -i $SRC/$name-0.10.21-libtheora-version-check.patch
+	#automake
+	#autoconf
 
 	./configure \
 		--prefix=/usr \
@@ -31,4 +34,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/gtk-doc
 }
-

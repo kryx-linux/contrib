@@ -1,0 +1,108 @@
+diff -pruN gst-plugins-base-0.10.21.orig/common/gtk-doc-plugins.mak gst-plugins-base-0.10.21/common/gtk-doc-plugins.mak
+--- gst-plugins-base-0.10.21.orig/common/gtk-doc-plugins.mak	2008-12-10 17:51:40.452108050 +0000
++++ gst-plugins-base-0.10.21/common/gtk-doc-plugins.mak	2008-12-10 17:53:02.259733489 +0000
+@@ -298,8 +298,7 @@ install-data-local:
+         	    $(INSTALL_DATA) $(srcdir)/html/$(DOC_MODULE).devhelp2 \
+ 	           $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
+ 	  fi; \
+-	  (which gtkdoc-rebase >/dev/null && \
+-	    gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR)) || true ; \
++	  gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) || true ; \
+ 	fi) 
+ uninstall-local:
+ 	(installfiles=`echo ./html/*.html`; \
+diff -pruN gst-plugins-base-0.10.21.orig/common/gtk-doc.mak gst-plugins-base-0.10.21/common/gtk-doc.mak
+--- gst-plugins-base-0.10.21.orig/common/gtk-doc.mak	2008-12-10 17:51:40.452108050 +0000
++++ gst-plugins-base-0.10.21/common/gtk-doc.mak	2008-12-10 17:53:02.260733070 +0000
+@@ -200,8 +200,7 @@ install-data-local:
+         	    $(INSTALL_DATA) $(srcdir)/html/$(DOC_MODULE).devhelp2 \
+ 	           $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
+ 	  fi; \
+-	  which gtkdoc-rebase >/dev/null && \
+-	    gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) ; \
++	  gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) || true ; \
+ 	fi) 
+ uninstall-local:
+ 	(installfiles=`echo ./html/*.html`; \
+diff -pruN gst-plugins-base-0.10.21.orig/configure gst-plugins-base-0.10.21/configure
+--- gst-plugins-base-0.10.21.orig/configure	2008-12-10 17:51:40.449108025 +0000
++++ gst-plugins-base-0.10.21/configure	2008-12-10 17:53:54.661858143 +0000
+@@ -29724,13 +29724,11 @@ _ACEOF
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <sys/types.h> /* for off_t */
+-     #include <stdio.h>
++#include <stdio.h>
+ int
+ main ()
+ {
+-int (*fp) (FILE *, off_t, int) = fseeko;
+-     return fseeko (stdin, 0, 0) && fp (stdin, 0, 0);
++return fseeko (stdin, 0, 0) && (fseeko) (stdin, 0, 0);
+   ;
+   return 0;
+ }
+@@ -29770,13 +29768,11 @@ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #define _LARGEFILE_SOURCE 1
+-#include <sys/types.h> /* for off_t */
+-     #include <stdio.h>
++#include <stdio.h>
+ int
+ main ()
+ {
+-int (*fp) (FILE *, off_t, int) = fseeko;
+-     return fseeko (stdin, 0, 0) && fp (stdin, 0, 0);
++return fseeko (stdin, 0, 0) && (fseeko) (stdin, 0, 0);
+   ;
+   return 0;
+ }
+@@ -36958,7 +36954,7 @@ if test x$USE_THEORA = xyes; then
+   HAVE_THEORA=no
+ 
+ 
+-  which="theora >= 1.0alpha5"
++  which="theora >= 1.0RC1"
+     required="no"
+ 
+ 
+diff -pruN gst-plugins-base-0.10.21.orig/configure.ac gst-plugins-base-0.10.21/configure.ac
+--- gst-plugins-base-0.10.21.orig/configure.ac	2008-12-10 17:51:40.457108714 +0000
++++ gst-plugins-base-0.10.21/configure.ac	2008-12-10 17:53:26.557733432 +0000
+@@ -509,7 +509,7 @@ translit(dnm, m, l) AM_CONDITIONAL(USE_T
+ AG_GST_CHECK_FEATURE(THEORA, [Xiph Theora video codec], theora, [
+   dnl this check will work as long as theora uses 1.0.x or similar for the
+   dnl first post-alpha release and not just 1.0
+-  AG_GST_PKG_CHECK_MODULES(THEORA, theora >= 1.0alpha5)
++  AG_GST_PKG_CHECK_MODULES(THEORA, theora >= 1.0RC1)
+ ])
+ 
+ dnl *** vorbis ***
+diff -pruN gst-plugins-base-0.10.21.orig/docs/libs/Makefile.in gst-plugins-base-0.10.21/docs/libs/Makefile.in
+--- gst-plugins-base-0.10.21.orig/docs/libs/Makefile.in	2008-12-10 17:51:40.484108126 +0000
++++ gst-plugins-base-0.10.21/docs/libs/Makefile.in	2008-12-10 17:53:43.153983117 +0000
+@@ -821,8 +821,7 @@ install-data-local:
+         	    $(INSTALL_DATA) $(srcdir)/html/$(DOC_MODULE).devhelp2 \
+ 	           $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
+ 	  fi; \
+-	  which gtkdoc-rebase >/dev/null && \
+-	    gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) ; \
++	  gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) || true ; \
+ 	fi) 
+ uninstall-local:
+ 	(installfiles=`echo ./html/*.html`; \
+diff -pruN gst-plugins-base-0.10.21.orig/docs/plugins/Makefile.in gst-plugins-base-0.10.21/docs/plugins/Makefile.in
+--- gst-plugins-base-0.10.21.orig/docs/plugins/Makefile.in	2008-12-10 17:51:40.478108248 +0000
++++ gst-plugins-base-0.10.21/docs/plugins/Makefile.in	2008-12-10 17:53:43.283983273 +0000
+@@ -961,8 +961,7 @@ install-data-local:
+         	    $(INSTALL_DATA) $(srcdir)/html/$(DOC_MODULE).devhelp2 \
+ 	           $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
+ 	  fi; \
+-	  (which gtkdoc-rebase >/dev/null && \
+-	    gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR)) || true ; \
++	  gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) || true ; \
+ 	fi) 
+ uninstall-local:
+ 	(installfiles=`echo ./html/*.html`; \
