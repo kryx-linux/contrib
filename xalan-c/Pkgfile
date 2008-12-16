@@ -6,10 +6,12 @@
 
 name=xalan-c
 version=1.10.0
-release=1
-source=(http://www.apache.org/dist/xml/${name}/Xalan-C_1_10_0-src.tar.gz)
+release=2
+source=(http://www.apache.org/dist/xml/${name}/Xalan-C_1_10_0-src.tar.gz \
+        xalandomstring.hpp.patch)
 
 build() {
+  patch -p0 -i $SRC/xalandomstring.hpp.patch
   export XALANCROOT=$SRC/xml-xalan/c
   cd ${XALANCROOT}
   autoconf
