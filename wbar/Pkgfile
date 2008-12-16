@@ -18,8 +18,8 @@ build() {
   sed -i "/CXXFLAGS/s/-O2/$CXXFLAGS/" Makefile
   make
   mkdir -p $PKG/usr/share/wbar
-  cp -a ./iconpack $PKG/usr/share/wbar/iconpack
-  install -D dot.wbar $PKG/usr/etc/dot.wbar
+  cp -r ./iconpack $PKG/usr/share/wbar/iconpack
+  install -D -m 0644 dot.wbar $PKG/usr/etc/dot.wbar
   install -D -m 0755 ./wbar $PKG/usr/bin/wbar
 }
 
