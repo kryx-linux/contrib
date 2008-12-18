@@ -5,20 +5,15 @@
 # Depends on: 
 
 name=uptimed
-version=0.3.12
+version=0.3.13
 release=1
-source=(http://podgorny.cz/uptimed/releases/uptimed-$version.tar.bz2
-	rc.uptimed)
+source=(http://podgorny.cz/uptimed/releases/$name-$version.tar.bz2
+	$name-0.3.13.patch rc.uptimed)
 
 build() {
-	cd uptimed-$version
-
-	sed -i -e "s|/var/spool/uptimed|'\$(DESTDIR)&'|" Makefile.in
-
-	sed -i \
-	    -e '/^SENDMAIL=/s|lib|sbin|' \
-	    -e "s|^PIDFILE=.*|'&.pid'|" \
-		 etc/uptimed.conf-dist
+	cd $name-$version
+	patch -p 1 -i $SRC/$name-0.3.13.patch
+	chmod u+x configure
 
 	./configure \
 		--prefix=/usr \
@@ -30,6 +25,5 @@ build() {
 	make DESTDIR=$PKG install
 
 	mv $PKG/etc/uptimed.conf-dist $PKG/etc/uptimed.conf
-	install -D -m 0755 $SRC/rc.uptimed $PKG/etc/rc.d/uptimed
+	install -m 0755 -D $SRC/rc.uptimed $PKG/etc/rc.d/uptimed
 }
-
