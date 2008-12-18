@@ -2,10 +2,10 @@
 # URL: http://www.virtualbox.org/
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Depends on: bin86,dev86,hal,libsdl,libidl,qt4,xalan-c,iasl,xorg-libxmu
+# Depends on: bin86,dev86,hal,libsdl,libidl,qt4,xalan-c,iasl,xorg-libxmu,gcc34,libcap
 
 name=virtualbox
-version=2.0.6
+version=2.1.0
 release=1
 source=(http://download.virtualbox.org/$name/$version/VirtualBox-$version-OSE.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
@@ -26,6 +26,7 @@ build() {
   cd VirtualBox-$version
   # compile
   ./configure $QT3GUI $QT4GUI \
+              --with-gcc-compat=gcc-3.4 \
               --disable-hardening \
               --ose \
               --disable-pulse
