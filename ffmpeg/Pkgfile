@@ -8,11 +8,13 @@ name=ffmpeg
 version=20080826
 release=2
 source=(http://www.dcaf-security.org/distfiles/$name-$version-14974.tar.bz2
-	ffmpeg-20080826-14974-missing-header.patch)
+	ffmpeg-20080826-14974-missing-header.patch
+	ffmpeg-x264_fix.patch)
 
 build() {
 	cd $name
 	patch -p 1 -i $SRC/ffmpeg-20080826-14974-missing-header.patch
+	patch -p 1 -i $SRC/ffmpeg-x264_fix.patch
 
 	./configure \
 		--prefix=/usr \
@@ -42,4 +44,3 @@ build() {
 	make SHARED_PP='yes'
 	make DESTDIR=$PKG install install-man
 }
-
