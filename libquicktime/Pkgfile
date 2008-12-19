@@ -5,16 +5,12 @@
 # Depends on: ffmpeg gtk libdivx libdv x264 xorg-libxaw
 
 name=libquicktime
-version=1.0.3
+version=1.1.1
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
-	libquicktime-1.0.3-x264lavc.patch
-	libquicktime-1.0.3-x264-65.patch)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	patch -p 0 -i $SRC/libquicktime-1.0.3-x264lavc.patch
-	patch -p 0 -i $SRC/libquicktime-1.0.3-x264-65.patch
 
 	./configure \
 		--prefix=/usr \
