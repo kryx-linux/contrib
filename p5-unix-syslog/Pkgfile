@@ -5,15 +5,15 @@
 
 name=p5-unix-syslog
 version=1.1
-release=1
+release=2
 source=(http://search.cpan.org/CPAN/authors/id/M/MH/MHARNISCH/Unix-Syslog-$version.tar.gz)
 
-build () {
+build() {
 	cd Unix-Syslog-$version
 	perl Makefile.PL
 	make OPTIMIZE="${CFLAGS}"
 	make DESTDIR=${PKG} install
-	rm ${PKG}/usr/lib/perl5/site_perl/5.8.8/linux/auto/Unix/Syslog/{.packlist,Syslog.bs}
+	rm ${PKG}/usr/lib/perl5/site_perl/5.10.?/linux/auto/Unix/Syslog/{.packlist,Syslog.bs}
 	find ${PKG} -name perllocal.pod -exec rm {} \;
 	find $PKG -type d -depth -empty -exec rm -rf {} \;
 }
