@@ -1,16 +1,16 @@
-# Description: Jack Audio Connection Kit.
+# Description: A real-time, low latency audio daemon.
 # URL: http://jackaudio.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Jay Dolan, jdolan at jdolan dot dyndns dot org
 # Depends on: libsndfile
 
 name=jack-audio-connection-kit
-version=0.109.2
+version=0.116.1
 release=1
-source=(http://dl.sourceforge.net/sourceforge/jackit/jack-audio-connection-kit-$version.tar.gz)
+source=(http://jackaudio.org/downloads/$name-$version.tar.gz)
 
 build() {
-	cd jack-audio-connection-kit-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -19,8 +19,7 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	if pkginfo -i |grep '^doxygen ' > /dev/null; then
-		rm -r $PKG/usr/share
-	fi
+	rm -rf $PKG/usr/share/jack-audio-connection-kit/reference
+	rmdir $PKG/usr/share/jack-audio-connection-kit
+	rmdir $PKG/usr/share
 }
-
