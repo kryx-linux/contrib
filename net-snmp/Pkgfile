@@ -6,7 +6,7 @@
 
 name=net-snmp
 version=5.4.2.1
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz \
 		snmpd snmpd.conf net-snmp-5.4.1-sensors3.patch)
 
@@ -42,9 +42,9 @@ build() {
 		| xargs rm
 	# ... less common ones and empty directories
 	rm -rf \
-		$PKG/usr/lib/perl5/site_perl/5.8.?/linux/Bundle \
-		$PKG/usr/lib/perl5/5.8.? \
-		$PKG/usr/lib/perl5/site_perl/5.8.?/linux/auto/Bundle
+		$PKG/usr/lib/perl5/site_perl/5.10.?/linux/Bundle \
+		$PKG/usr/lib/perl5/5.10.? \
+		$PKG/usr/lib/perl5/site_perl/5.10.?/linux/auto/Bundle
 	rm $PKG/usr/include/net-snmp/library/README
 
 	mkdir -p $PKG/var/{lib,run,log}/snmp
