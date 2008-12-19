@@ -4,7 +4,7 @@
 # Packager: Sven Dahl, dahl at c64 dot org
 
 name=tcl
-version=8.5.4
+version=8.5.5
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name$version-src.tar.gz)
 
@@ -29,4 +29,3 @@ build() {
 	ln -s usr/lib/libtcl${version%.*}.so $PKG/usr/lib/libtcl.so
 	chmod -R u+w $PKG/usr/man 
 }
-
