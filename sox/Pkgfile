@@ -6,12 +6,12 @@
 # Optional ffmpeg
 
 name=sox
-version=14.0.1
+version=14.2.0
 release=1
-source=(http://dl.sourceforge.net/sourceforge/sox/sox-$version.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
-	cd sox-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -25,4 +25,3 @@ build() {
 	ln -s sox $PKG/usr/bin/soxmix
 	popd
 }
-
