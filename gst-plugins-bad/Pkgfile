@@ -7,10 +7,12 @@
 name=gst-plugins-bad
 version=0.10.8
 release=1
-source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2)
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2
+	gst-plugins-bad-0.10.8-x264_fix.patch)
 
 build() {
-	cd gst-plugins-bad-$version
+	cd $name-$version
+	patch -p 1 -i $SRC/gst-plugins-bad-0.10.8-x264_fix.patch
 
 	./configure \
 		--prefix=/usr \
@@ -25,4 +27,3 @@ build() {
 	make
 	make DESTDIR=$PKG install
 }
-
