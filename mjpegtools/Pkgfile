@@ -5,18 +5,16 @@
 # Depends on: libquicktime xorg-libxxf86dga
 
 name=mjpegtools
-version=1.9.0rc3
-release=2
-source=(http://dl.sourceforge.net/sourceforge/mjpeg/mjpegtools-$version.tar.gz
-	mjpegtools-1.9.0_rc3-gcc43.patch)
+version=1.9.0rc4
+release=1
+source=(http://dl.sourceforge.net/sourceforge/mjpeg/$name-$version.tar.gz)
 
 build() {
-	cd mjpegtools-$version
-
-	patch -p 1 -i $SRC/mjpegtools-1.9.0_rc3-gcc43.patch
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
 		--disable-static \
 		--enable-compile-warnings \
 		--enable-simd-accel \
@@ -24,6 +22,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/info
+	rm -rf $PKG/usr/share/info
+	rmdir $PKG/usr/share
 }
-
