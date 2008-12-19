@@ -1,4 +1,4 @@
-# Description: A library for reading and writing quicktime files.
+# Description: A library based on quicktime4linux with extensions.
 # URL: http://libquicktime.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Younes Hafri, ycrux at club-internet dot fr
@@ -7,10 +7,14 @@
 name=libquicktime
 version=1.0.3
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
+	libquicktime-1.0.3-x264lavc.patch
+	libquicktime-1.0.3-x264-65.patch)
 
 build() {
 	cd $name-$version
+	patch -p 0 -i $SRC/libquicktime-1.0.3-x264lavc.patch
+	patch -p 0 -i $SRC/libquicktime-1.0.3-x264-65.patch
 
 	./configure \
 		--prefix=/usr \
@@ -23,4 +27,3 @@ build() {
 	make
 	make DESTDIR=$PKG install
 }
-
