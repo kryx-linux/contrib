@@ -2,7 +2,7 @@
 # URL: http://jackaudio.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Jay Dolan, jdolan at jdolan dot dyndns dot org
-# Depends on: libsndfile
+# Depends on: libsndfile libsamplerate
 
 name=jack-audio-connection-kit
 version=0.116.1
@@ -19,7 +19,5 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/jack-audio-connection-kit/reference
-	rmdir $PKG/usr/share/jack-audio-connection-kit
-	rmdir $PKG/usr/share
+	rm -rf $PKG/usr/share
 }
