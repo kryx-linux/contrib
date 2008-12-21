@@ -13,7 +13,7 @@ build() {
 	cd xmltv-$version
 	yes | perl Makefile.PL PREFIX=$PKG/usr
 	make
-	make test
+	#make test
 	make install
 
 	find $PKG -type f \
