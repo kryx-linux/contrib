@@ -6,13 +6,13 @@
 
 name=virtualbox
 version=2.1.0
-release=2
+release=3
 source=(http://download.virtualbox.org/$name/$version/VirtualBox-$version-OSE.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
 
 build() {
   KVER=$(uname -r)
-  KDIR=/usr/src/linux
+  [ ! -z $KDIR ] && KARG="KERN_DIR=$KDIR"
 
   local QT3GUI QT4GUI
   if [ "$(pkginfo -i | grep '^qt3 ')" ]; then
@@ -37,7 +37,7 @@ build() {
   kmk all
   # compile kernel modules
   cd out/linux.x86/release/bin/src
-  make KERN_DIR=$KDIR
+  make $KARG
   # install kernel modules
   install -D -m 0644 vboxdrv.ko $PKG/lib/modules/$KVER/kernel/drivers/misc/vboxdrv.ko
   install -D -m 0644 vboxnetflt.ko $PKG/lib/modules/$KVER/kernel/drivers/misc/vboxnetflt.ko
