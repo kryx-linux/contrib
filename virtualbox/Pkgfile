@@ -6,11 +6,14 @@
 
 name=virtualbox
 version=2.1.0
-release=1
+release=2
 source=(http://download.virtualbox.org/$name/$version/VirtualBox-$version-OSE.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
 
 build() {
+  KVER=$(uname -r)
+  KDIR=/usr/src/linux
+
   local QT3GUI QT4GUI
   if [ "$(pkginfo -i | grep '^qt3 ')" ]; then
     QT3GUI="--with-qt-dir=/usr/share/qt"
@@ -32,14 +35,15 @@ build() {
               --disable-pulse
   source ./env.sh
   kmk all
-  # compile kernel module
+  # compile kernel modules
   cd out/linux.x86/release/bin/src
-  make
-  # install kernel module
-  install -D -m 0644 vboxdrv.ko $PKG/lib/modules/`uname -r`/kernel/drivers/misc/vboxdrv.ko
+  make KERN_DIR=$KDIR
+  # install kernel modules
+  install -D -m 0644 vboxdrv.ko $PKG/lib/modules/$KVER/kernel/drivers/misc/vboxdrv.ko
+  install -D -m 0644 vboxnetflt.ko $PKG/lib/modules/$KVER/kernel/drivers/misc/vboxnetflt.ko
   # remove superfluous files
   rm -rf $SRC/VirtualBox-$version/out/linux.x86/release/bin/{src,sdk/samples,testcase} \
-    $SRC/VirtualBox-$version/out/linux.x86/release/bin/{vboxdrv.ko,additions/src,nls}
+    $SRC/VirtualBox-$version/out/linux.x86/release/bin/{additions/src,nls,nls3}
   find $SRC/VirtualBox-$version/out/linux.x86/release/bin -type f -name 'tst*' -exec rm -rf {} \;
   # do the rest
   install -D -m 0644 $SRC/60-vboxdrv.rules $PKG/etc/udev/rules.d/60-vboxdrv.rules
