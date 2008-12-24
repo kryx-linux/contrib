@@ -5,12 +5,12 @@
 # Depends on: gtk libsigc++
 
 name=glibmm
-version=2.16.4
+version=2.18.1
 release=1
-source=(http://ftp.gnome.org/pub/GNOME/sources/glibmm/${version%.*}/glibmm-$version.tar.bz2)
+source=(http://ftp.gnome.org/pub/GNOME/sources/$name/${version%.*}/$name-$version.tar.bz2)
 
 build() {
-	cd glibmm-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -22,4 +22,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/doc
 }
-
