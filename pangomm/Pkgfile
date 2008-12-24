@@ -1,0 +1,24 @@
+# Description: C++ interface to pango.
+# URL: http://gtkmm.sourceforge.net/ 
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: cairomm glibmm
+
+name=pangomm
+version=2.14.1
+release=1
+source=(http://ftp.gnome.org/pub/GNOME/sources/$name/${version%.*}/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--disable-examples \
+		--disable-demos \
+		--disable-docs
+
+	make
+	make DESTDIR=$PKG install
+}
