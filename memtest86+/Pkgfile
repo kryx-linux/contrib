@@ -5,17 +5,16 @@
 # Depends on: 
 
 name=memtest86+
-version=2.10
+version=2.11
 release=1
 source=(http://www.memtest.org/download/$version/$name-$version.tar.gz
-	$name-2.10-gnu_hash.patch
-	$name-2.10-makefile.patch)
+	memtest86+-2.11-makefile_cflags_asflags.patch
+	memtest86+-2.11-makefile_install_remove.patch)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/$name-2.10-gnu_hash.patch
-	patch -p 1 -i $SRC/$name-2.10-makefile.patch
+	patch -p 1 -i $SRC/memtest86+-2.11-makefile_cflags_asflags.patch
+	patch -p 1 -i $SRC/memtest86+-2.11-makefile_install_remove.patch
 	make memtest.bin
 	make DESTDIR=$PKG install-memtest.bin
 }
-
