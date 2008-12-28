@@ -6,14 +6,18 @@
 name=ndiswrapper
 version=1.53
 release=1
-source=(http://dl.sourceforge.net/sourceforge/ndiswrapper/ndiswrapper-$version.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
+	ndiswrapper-1.53-linux_2.6.27.patch)
 
 build() {
-	local kernel_path
-	cd ndiswrapper-$version
-	sed -i -e "s|CFLAGS = -g -Wall -I\$(DRIVER_DIR)|CFLAGS = $CFLAGS -Wall -I\$(DRIVER_DIR)|" utils/Makefile
-	kernel_path="/usr/src/linux-`uname -r`"
+	cd $name-$version
+
+	patch -p 1 -i $SRC/ndiswrapper-1.53-linux_2.6.27.patch
+
+	sed -i -e "s|CFLAGS = -g -Wall -I\$(DRIVER_DIR)|CFLAGS = $CFLAGS -Wall -I\$(DRIVER_DIR)|" \
+		utils/Makefile
+
+	local kernel_path="/usr/src/linux-$(uname -r)"
 	make KBUILD="$kernel_path" EXTRA_CFLAGS="$CFLAGS"
 	make KBUILD="$kernel_path" DESTDIR=$PKG install
 }
-
