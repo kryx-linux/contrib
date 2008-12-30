@@ -5,44 +5,14 @@
 # Nice to have: source-highlight
 
 name=asciidoc
-version=8.2.7
+version=8.3.1
 release=1
-source=(http://ftp.gva.es/mirror/debian/pool/main/a/$name/${name}_$version.orig.tar.gz)
+source=(http://www.methods.co.nz/$name/$name-$version.tar.gz)
 
 build() {
-    # f#$king install script >:|
     cd $name-$version
-    sed -i '/^CONF_DIR/s|/etc/asciidoc|/usr/etc/asciidoc|' a2x asciidoc.py
-    CONFDIR=$PKG/usr/etc/asciidoc
-    BINDIR=$PKG/usr/bin
-    MANDIR=$PKG/usr/man
-    VIM_CONFDIR=$PKG/usr/share/vim
-
-    install -d $CONFDIR/filters \
-        $CONFDIR/docbook-xsl \
-        $CONFDIR/dblatex \
-        $CONFDIR/stylesheets \
-        $CONFDIR/javascripts \
-        $CONFDIR/images/icons/callouts
-    install -d $MANDIR/man1
-    install -D asciidoc.py $BINDIR/asciidoc
-    install a2x $BINDIR/a2x
-    install doc/*.1 $MANDIR/man1
-
-    install -m 644 *.conf $CONFDIR
-    install filters/*.py $CONFDIR/filters
-    install -m 644 filters/*.conf $CONFDIR/filters
-    install -m 644 docbook-xsl/*.xsl $CONFDIR/docbook-xsl
-    install -m 644 dblatex/*.xsl $CONFDIR/dblatex
-    install -m 644 dblatex/*.sty $CONFDIR/dblatex
-    install -m 644 stylesheets/*.css $CONFDIR/stylesheets
-    install -m 644 javascripts/*.js $CONFDIR/javascripts
-    install -m 644 images/icons/callouts/* $CONFDIR/images/icons/callouts
-    install -m 644 images/icons/*.png $CONFDIR/images/icons
-    install -d $VIM_CONFDIR/syntax
-    install -m 644 vim/syntax/asciidoc.vim \
-        $VIM_CONFDIR/syntax/asciidoc.vim
-    install -d $VIM_CONFDIR/ftdetect
-    install -m 644 vim/ftdetect/asciidoc_filetype.vim \
-        $VIM_CONFDIR/ftdetect/asciidoc_filetype.vim
+    ./configure --prefix=/usr --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+    find $PKG -name '*README*' -delete
 }
