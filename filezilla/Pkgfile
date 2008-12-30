@@ -4,13 +4,13 @@
 # Depends on:  wxgtk libidn gnutls
 
 name=filezilla
-version=3.1.5
+version=3.1.6
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/FileZilla_${version}_src.tar.bz2)
 
 build() {
     cd $name-$version
-    ./configure --disable-manualupdatecheck --disable-static --prefix=/usr
+    ./configure --mandir=/usr/man --disable-manualupdatecheck --disable-static --prefix=/usr
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
