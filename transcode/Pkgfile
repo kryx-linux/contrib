@@ -5,17 +5,17 @@
 # Depends on: imagemagick liba52 libdvdnav libfame libtheora lzo mjpegtools mpeg2dec
 
 name=transcode
-version=1.0.6
+version=1.0.7
 release=1
 source=(http://fromani.exit1.org/$name-$version.tar.bz2
 	http://dl.sourceforge.net/subtitleripper/subtitleripper-0.3-4.tgz
-	$name-$version-imagemagick-detection.patch
-	$name-$version-ffmpeg-directory-include.patch)
+	$name-1.0.6-imagemagick-detection.patch
+	$name-1.0.6-ffmpeg-directory-include.patch)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/$name-$version-imagemagick-detection.patch
-	patch -p 1 -i $SRC/$name-$version-ffmpeg-directory-include.patch
+	patch -p 1 -i $SRC/$name-1.0.6-imagemagick-detection.patch
+	patch -p 1 -i $SRC/$name-1.0.6-ffmpeg-directory-include.patch
 	aclocal
 	autoconf
 	libtoolize --force --copy
@@ -59,4 +59,3 @@ build() {
 	install -m 0755 -D srttool subtitle2pgm subtitle2vobsub $PKG/usr/bin
 	chmod a-x $PKG/usr/lib/transcode/*.so
 }
-
