@@ -27,6 +27,7 @@ drwxr-xr-x	root/root	usr/include/dns/
 -rw-r--r--	root/root	usr/include/dns/dbtable.h
 -rw-r--r--	root/root	usr/include/dns/diff.h
 -rw-r--r--	root/root	usr/include/dns/dispatch.h
+-rw-r--r--	root/root	usr/include/dns/dlz.h
 -rw-r--r--	root/root	usr/include/dns/dnssec.h
 -rw-r--r--	root/root	usr/include/dns/ds.h
 -rw-r--r--	root/root	usr/include/dns/enumclass.h
@@ -63,6 +64,7 @@ drwxr-xr-x	root/root	usr/include/dns/
 -rw-r--r--	root/root	usr/include/dns/result.h
 -rw-r--r--	root/root	usr/include/dns/rootns.h
 -rw-r--r--	root/root	usr/include/dns/sdb.h
+-rw-r--r--	root/root	usr/include/dns/sdlz.h
 -rw-r--r--	root/root	usr/include/dns/secalg.h
 -rw-r--r--	root/root	usr/include/dns/secproto.h
 -rw-r--r--	root/root	usr/include/dns/soa.h
@@ -135,6 +137,7 @@ drwxr-xr-x	root/root	usr/include/isc/
 -rw-r--r--	root/root	usr/include/isc/platform.h
 -rw-r--r--	root/root	usr/include/isc/print.h
 -rw-r--r--	root/root	usr/include/isc/quota.h
+-rw-r--r--	root/root	usr/include/isc/radix.h
 -rw-r--r--	root/root	usr/include/isc/random.h
 -rw-r--r--	root/root	usr/include/isc/ratelimiter.h
 -rw-r--r--	root/root	usr/include/isc/refcount.h
@@ -296,6 +299,8 @@ drwxr-xr-x	root/root	usr/man/man5/
 -rw-r--r--	root/root	usr/man/man5/named.conf.5.gz
 -rw-r--r--	root/root	usr/man/man5/rndc.conf.5.gz
 drwxr-xr-x	root/root	usr/man/man8/
+-rw-r--r--	root/root	usr/man/man8/dnssec-dsfromkey.8.gz
+-rw-r--r--	root/root	usr/man/man8/dnssec-keyfromlabel.8.gz
 -rw-r--r--	root/root	usr/man/man8/dnssec-keygen.8.gz
 -rw-r--r--	root/root	usr/man/man8/dnssec-signzone.8.gz
 -rw-r--r--	root/root	usr/man/man8/lwresd.8.gz
@@ -303,10 +308,11 @@ drwxr-xr-x	root/root	usr/man/man8/
 -rw-r--r--	root/root	usr/man/man8/named-checkzone.8.gz
 lrwxrwxrwx	root/root	usr/man/man8/named-compilezone.8.gz -> named-checkzone.8.gz
 -rw-r--r--	root/root	usr/man/man8/named.8.gz
--rw-r--r--	root/root	usr/man/man8/nsupdate.8.gz
 -rw-r--r--	root/root	usr/man/man8/rndc-confgen.8.gz
 -rw-r--r--	root/root	usr/man/man8/rndc.8.gz
 drwxr-xr-x	root/root	usr/sbin/
+-rwxr-xr-x	root/root	usr/sbin/dnssec-dsfromkey
+-rwxr-xr-x	root/root	usr/sbin/dnssec-keyfromlabel
 -rwxr-xr-x	root/root	usr/sbin/dnssec-keygen
 -rwxr-xr-x	root/root	usr/sbin/dnssec-signzone
 -rwxr-xr-x	root/root	usr/sbin/lwresd
