@@ -1,18 +1,17 @@
 # Description: A tool to distribute compilations.
-# URL: http://distcc.samba.org/
+# URL: http://distcc.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Johannes Winkelmann, jw at tks6 dot net
 # Depends on: popt
 
 name=distcc
-version=2.18.3
-release=6
-source=(http://distcc.samba.org/ftp/distcc/distcc-$version.tar.bz2 \
-	distcc-$version-install.patch distccd) 
+version=3.1
+release=1
+source=(http://distcc.googlecode.com/files/$name-$version.tar.bz2
+	distccd) 
 
 build() {
-	cd distcc-$version
-	patch -p 1 -i $SRC/distcc-$version-install.patch
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -22,7 +21,12 @@ build() {
 
 	make
 	make DESTDIR=$PKG install-man install-programs
-	install -m 0755 -D ../distccd $PKG/etc/rc.d/distccd
+
+	# distccd should be in sbin
+	install -d $PKG/usr/sbin
+	mv $PKG/usr/bin/distccd $PKG/usr/sbin/distccd
+
+	install -m 0755 -D $SRC/distccd $PKG/etc/rc.d/distccd
 
 	install -d $PKG/usr/lib/distcc
 	cd $PKG/usr/lib/distcc
@@ -31,4 +35,3 @@ build() {
 	done
 	cd -
 }
-
