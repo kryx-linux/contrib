@@ -4,18 +4,19 @@
 # Depends on: claws-mail
 
 name=claws-mail-themes
-version=20080822
-release=2
+version=20090102
+release=1
 source=(http://www.claws-mail.org/themes/$name-$version.tar.gz)
 
 build() {
 	mkdir -p $PKG/usr/share/claws-mail/themes
 	cp -r $name-$version/* $PKG/usr/share/claws-mail/themes
-	find $PKG -name INSTALL | xargs rm -f
-	find $PKG -name COPYING | xargs rm -f
-	find $PKG -name LICENSE | xargs rm -f
-	find $PKG -name README* | xargs rm -f
-	find $PKG -name ChangeLog* | xargs rm -f
+	find $PKG -iname INSTALL  | xargs rm -f
+	find $PKG -iname COPYING  | xargs rm -f
+	find $PKG -iname LICENSE* | xargs rm -f
+	find $PKG -iname README*  | xargs rm -f
+	find $PKG -iname ChangeLog*  | xargs rm -f
+	find $PKG -iname DISCLAIMER* | xargs rm -f	
 	find $PKG -type f -print0 | xargs -0 chmod 644 
 	find $PKG -type d -print0 | xargs -0 chmod 755
 }
