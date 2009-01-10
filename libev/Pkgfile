@@ -1,0 +1,18 @@
+# Description: high-performance event loop/event model with lots of features
+# URL: http://software.schmorp.de/pkg/libev
+# Maintainer: Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Packager: Younes Hafri <ycrux@club-internet.fr>
+
+name=libev
+version=3.52
+release=1
+source=(http://dist.schmorp.de/$name/$name-$version.tar.gz)
+
+build () {
+    cd $name-$version
+    ./configure --prefix=/usr \
+        --disable-nls --disable-static
+    make
+    make prefix=$PKG/usr install
+
+}
