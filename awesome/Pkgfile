@@ -1,24 +1,29 @@
-# Description: tiling window manager initialy based on a dwm code rewriting
+# Description: extremely fast, small, and dynamic window manager for X
 # URL:         http://awesome.naquadah.org/
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  libconfuse cairo xorg-libxinerama pango imlib2 xorg-libxrandr
+# Depends on:  cmake gperf glib lua cairo pango imlib2 libev dbus
 
 name=awesome
-version=2.3.4
+version=3.1.1
 release=1
-source=(http://awesome.naquadah.org/download/$name-$version.tar.bz2
-    http://maxiq.ovh.org/CRUX/$name-mans-$version.tar.bz2)
+source=(http://$name.naquadah.org/download/$name-$version.tar.bz2
+    $name-client.1 $name.1 awsetbg.1 ${name}rc.5)
 
 build() {
+    mkdir -p $PKG/usr/man/man{1,5}
+    cp $name{,-client}.1 awsetbg.1 $PKG/usr/man/man1
+    cp ${name}rc.5 $PKG/usr/man/man5
+    
     cd $name-$version
-    autoreconf --force --install --verbose
-    ./configure \
-        --prefix=/usr \
-        --mandir=/usr/man \
-        --docdir=/usr/share/$name
-    make AWESOME_CFLAGS="$CFLAGS"
+
+    cmake . -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DXDG_CONFIG_DIR=/usr/etc/xdg \
+        -DAWESOME_MAN_PATH=/usr/man \
+	-DCMAKE_C_FLAGS_RELEASE="-DNDEBUG" \
+	-DGENERATE_MANPAGES=OFF
+    make
     make DESTDIR=$PKG install
-    rm -f $PKG/usr/share/$name/{README,STYLE,UPGRADE}
-    cp $SRC/$name{,-{client,menu,message}}.1 $PKG/usr/man/man1
-    cp $SRC/${name}rc.5 $PKG/usr/man/man5
+
+    rm -rf $PKG/usr/share/doc/
 }
