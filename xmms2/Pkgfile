@@ -1,17 +1,20 @@
 # Description: Second generation of the XMMS music player
 # URL: http://xmms2.sourceforge.net
 # Maintainer: Rene Lengwinat, rugek at dirtyhack dot net
-# Depends on: libmad, sqlite3, python
+# Depends on: libmad, sqlite3, python, ffmpeg, faad2
 # Nice to have: alsa-lib, curl, ecore, pyrex, ruby, samba
 
 name=xmms2
 version=0.5DrLecter
 release=1
 
-source=(http://heanet.dl.sourceforge.net/sourceforge/xmms2/$name-$version.tar.bz2)
+source=(http://heanet.dl.sourceforge.net/sourceforge/xmms2/$name-$version.tar.bz2 \
+avcodec.patch)
 
 build () {
   cd $name-$version
+  patch -p1 < $SRC/avcodec.patch
+
   ./waf --prefix=/usr --with-mandir=/usr/man configure
   ./waf build
   ./waf --destdir=$PKG install
