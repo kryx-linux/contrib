@@ -177,9 +177,9 @@ lrwxrwxrwx	root/root	usr/lib/libgnt.so -> libgnt.so.0.0.0
 lrwxrwxrwx	root/root	usr/lib/libgnt.so.0 -> libgnt.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libgnt.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libpurple.la
-lrwxrwxrwx	root/root	usr/lib/libpurple.so -> libpurple.so.0.5.2
-lrwxrwxrwx	root/root	usr/lib/libpurple.so.0 -> libpurple.so.0.5.2
--rwxr-xr-x	root/root	usr/lib/libpurple.so.0.5.2
+lrwxrwxrwx	root/root	usr/lib/libpurple.so -> libpurple.so.0.5.3
+lrwxrwxrwx	root/root	usr/lib/libpurple.so.0 -> libpurple.so.0.5.3
+-rwxr-xr-x	root/root	usr/lib/libpurple.so.0.5.3
 drwxr-xr-x	root/root	usr/lib/pidgin/
 -rwxr-xr-x	root/root	usr/lib/pidgin/convcolors.la
 -rwxr-xr-x	root/root	usr/lib/pidgin/convcolors.so
@@ -241,6 +241,8 @@ lrwxrwxrwx	root/root	usr/lib/purple-2/libjabber.so.0 -> libjabber.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/purple-2/libjabber.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/purple-2/libmsn.la
 -rwxr-xr-x	root/root	usr/lib/purple-2/libmsn.so
+-rwxr-xr-x	root/root	usr/lib/purple-2/libmyspace.la
+-rwxr-xr-x	root/root	usr/lib/purple-2/libmyspace.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/libnovell.la
 -rwxr-xr-x	root/root	usr/lib/purple-2/libnovell.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/liboscar.la
@@ -265,8 +267,6 @@ lrwxrwxrwx	root/root	usr/lib/purple-2/liboscar.so.0 -> liboscar.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/purple-2/offlinemsg.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/psychic.la
 -rwxr-xr-x	root/root	usr/lib/purple-2/psychic.so
--rwxr-xr-x	root/root	usr/lib/purple-2/ssl-gnutls.la
--rwxr-xr-x	root/root	usr/lib/purple-2/ssl-gnutls.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/ssl-nss.la
 -rwxr-xr-x	root/root	usr/lib/purple-2/ssl-nss.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/ssl.la
@@ -592,6 +592,48 @@ drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/emotes/default/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/default/yin-yang.png
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/emotes/none/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/none/theme
+drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/emotes/small/
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/angel.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/angry.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/beer.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/camera.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/cigarette.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/coffee.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/confused.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/console.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/cool.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/cross.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/crying.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/devil.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/dont-know.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/grin.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/hug-left.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/hug-right.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/kiss.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/love.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/meeting.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/musical-note.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/nerdy.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/neutral.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/party.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/phone.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/plate.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/question.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/sad.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/shame.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/shock.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/sick.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/silent.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/sleepy.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/smile-big.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/smile.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/theme
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/thinking.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/tongue.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/tv.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/uhm-yeah.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/wink.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/emotes/small/yawn.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/logo.png
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/protocols/
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/protocols/16/
@@ -658,6 +700,8 @@ drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/status/11/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/11/person.png
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/status/11/rtl/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/11/rtl/extended-away.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/11/rtl/log-in.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/11/rtl/log-out.png
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/status/16/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/16/available.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/16/away.png
@@ -709,14 +753,15 @@ drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/status/48/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/busy.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/chat.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/extended-away.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/invisible.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/log-in.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/log-out.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/offline.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/person.png
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/status/48/rtl/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/rtl/extended-away.png
--rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/rtl/login.png
--rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/rtl/logout.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/rtl/log-in.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/status/48/rtl/log-out.png
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/toolbar/
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/toolbar/16/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/toolbar/16/change-bgcolor.png
@@ -788,6 +833,7 @@ drwxr-xr-x	root/root	usr/share/purple/ca-certs/
 -rw-r--r--	root/root	usr/share/purple/ca-certs/CAcert_Root.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/Equifax_Secure_CA.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/GTE_CyberTrust_Global_Root.pem
+-rw-r--r--	root/root	usr/share/purple/ca-certs/Microsoft_Internet_Authority.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/Microsoft_Secure_Server_Authority.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/StartCom_Free_SSL_CA.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/VeriSign_Class_3_Public_Primary_Certification_Authority_-_G5.pem
