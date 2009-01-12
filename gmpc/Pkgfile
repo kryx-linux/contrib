@@ -2,16 +2,16 @@
 # URL:         http://sarine.nl/gmpc
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Mark Rosenstand, mark at borkware dot net
-# Depends on:  libglade, libmpd, p5-xml-parser
+# Depends on:  libglade, libmpd, p5-xml-parser, gob2
 
 name=gmpc
-version=0.14.0
+version=0.17.0
 release=1
-source=(http://download.sarine.nl/gmpc-0.14.0/$name-$version.tar.gz)
+source=(http://download.sarine.nl/$name-$version/$name-$version.tar.gz)
 
 build() {
   cd gmpc-$version
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr --mandir=/usr/man
   make
   make DESTDIR=$PKG install
   rm -r $PKG/usr/share/locale
