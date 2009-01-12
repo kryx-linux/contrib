@@ -1,35 +1,33 @@
-# Description: Thunderbird EMail client from the Mozilla project
-# Maintainer: Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Packager: Simone Rota, sip at crux dot nu
-# URL: http://www.mozilla.org/projects/thunderbird/
-# Depends on: libidl, gtk, libjpeg, libpng, zlib, expat
+# Description: email client from the Mozilla project
+# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Packager:    Simone Rota, sip at crux dot nu
+# URL:         http://www.mozilla.org/projects/thunderbird/
+# Depends on:  nss gtk libidl
 
 name=thunderbird
-version=2.0.0.18
+version=2.0.0.19
 release=1
-source=(ftp://ftp.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version-source.tar.bz2 \
-	mozconfig)
+source=(ftp://ftp.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version-source.tar.bz2
+    $name.desktop)
 
 build() {
-        #414
-        unset MAKEFLAGS
-	cd mozilla
-
-	# configure
-	sed -e "s/#CFLAGS#/$CFLAGS/" $SRC/mozconfig > .mozconfig
-
-	# build it
-	make -f client.mk build_all
-
-	# put everything in the right place
-	mkdir -p $PKG/usr/lib/thunderbird $PKG/usr/bin
-	cp -rL --no-preserve=links dist/bin/* $PKG/usr/lib/thunderbird/
-	(cd $PKG/usr/bin && ln -s ../lib/thunderbird/thunderbird thunderbird)
-
-	# register components
-	cd $PKG/usr/lib/thunderbird
-	MOZILLA_FIVE_HOME=$PWD LD_LIBRARY_PATH=$PWD ./regxpcom
-
-	# fix ownership
-	chown -R root:root $PKG
+    cd mozilla
+    ./configure --prefix=/usr \
+        --enable-application=mail \
+	--with-system-{nspr,nss} \
+	--with-system-jpeg \
+	--with-system-zlib \
+	--with-system-png \
+	--enable-official-branding \
+        --enable-extensions \
+	--enable-svg \
+	--enable-svg-renderer=cairo \
+	--disable-installer \
+	--disable-updater \
+        --enable-optimize="$CFLAGS" \
+	--enable-system-cairo
+    make
+    make DESTDIR=$PKG install
+    install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
+    find $PKG -iname '*README*' -delete
 }
