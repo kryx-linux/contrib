@@ -11,6 +11,8 @@ source=(ftp://ftp.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$na
 	mozconfig)
 
 build() {
+        #414
+        unset MAKEFLAFS
 	cd mozilla
 
 	# configure
