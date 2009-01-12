@@ -2,15 +2,15 @@
 # URL:         http://sarine.nl/gmpc
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Depends on:  gmpc
+# Depends on:  gmpc, xosd
 
 name=gmpc-qosd
-version=0.14.0
+version=0.17.0
 release=1
-source=(http://download.sarine.nl/gmpc-0.14.0/plugins/$name-$version.tar.gz)
+source=(http://download.sarine.nl/Programs/gmpc/$version/gmpc-osd-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd gmpc-osd-$version
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
