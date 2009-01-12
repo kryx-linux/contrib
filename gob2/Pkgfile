@@ -10,7 +10,7 @@ source=(http://ftp.5z.com/pub/gob/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr --mandir=/usr/man
   make
   make DESTDIR=$PKG install
 }
