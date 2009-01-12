@@ -6,7 +6,7 @@
 # Optional: sqlite3
 
 name=libsndfile
-version=1.0.18pre24e
+version=1.0.18pre25
 release=1
 source=(http://www.mega-nerd.com/tmp/$name-$version.tar.gz)
 
@@ -22,4 +22,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share
 }
-
