@@ -2,7 +2,7 @@
 README for ati
 
 
-*** NOTE for kernel 2.6 ***
+*** NOTE for kernels 2.6.x ***
 
 Check that you enabled the following config options:
 
@@ -20,7 +20,8 @@ Device Drivers --->
   < > Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)
 
 Kernel hacking --->
-  <*> Enable unused/obsolete exported symbols 
+  [*] Magic SysRq key
+  [*] Enable unused/obsolete exported symbols 
 
 
 *** NOTE for ati with udev ***
@@ -33,7 +34,7 @@ POST-INSTALL
 Use opt/gl-select from ports to select the correct gl/glx
 libraries and extensions like so:
 
-        # gl-select ati
+        # gl-select use ati
 
 Also to configure your X server you can execute ati configurator like so:
 
@@ -42,14 +43,15 @@ Also to configure your X server you can execute ati configurator like so:
 And if you want, you can start the ati external events daemon at
 /etc/rc.d/atieventsd, like so:
 
-  # service atieventsd start
+  	# service atieventsd start
+
 
 POST-REMOVE
 
 Use opt/gl-select from ports to revert to the xorg gl/glx libraries
 and extensions like so:
 
-        # gl-select xorg 
+        # gl-select use xorg 
 
 
 When UPGRADING/DOWNGRADING the ati-driver port (where the version changes),
@@ -57,4 +59,4 @@ use gl-select to revert to xorg and then re-select ati in order to
 refresh the libGLcore and libGL symlinks, like so:
 
         # prt-get update ati
-        # gl-select xorg; gl-select ati
+        # gl-select use xorg; gl-select use ati
