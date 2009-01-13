@@ -6,7 +6,7 @@
 
 name=virtualbox
 version=2.1.0
-release=3
+release=4
 source=(http://download.virtualbox.org/$name/$version/VirtualBox-$version-OSE.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
 
@@ -42,8 +42,7 @@ build() {
   install -D -m 0644 vboxdrv.ko $PKG/lib/modules/$KVER/kernel/drivers/misc/vboxdrv.ko
   install -D -m 0644 vboxnetflt.ko $PKG/lib/modules/$KVER/kernel/drivers/misc/vboxnetflt.ko
   # remove superfluous files
-  rm -rf $SRC/VirtualBox-$version/out/linux.x86/release/bin/{src,sdk/samples,testcase} \
-    $SRC/VirtualBox-$version/out/linux.x86/release/bin/{additions/src,nls,nls3}
+  rm -rf $SRC/VirtualBox-$version/out/linux.x86/release/bin/{sdk/samples,testcase,nls*}
   find $SRC/VirtualBox-$version/out/linux.x86/release/bin -type f -name 'tst*' -exec rm -rf {} \;
   # do the rest
   install -D -m 0644 $SRC/60-vboxdrv.rules $PKG/etc/udev/rules.d/60-vboxdrv.rules
