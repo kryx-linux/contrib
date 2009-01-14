@@ -6,20 +6,20 @@
 # Depends on:
 
 name=dash
-version=0.5.4
+version=0.5.5.1
 release=1
 source=(http://gondor.apana.org.au/~herbert/dash/files/dash-$version.tar.gz)
 
 build() {
-	cd dash-$version
+  cd dash-$version
 
-	./configure \
-		--prefix= \
-		--mandir=/usr/man
+  ./configure \
+    --prefix= \
+    --mandir=/usr/man
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	ln -s dash $PKG/bin/ash
-	ln -s dash.1 $PKG/usr/man/man1/ash.1
+  ln -s dash $PKG/bin/ash
+  ln -s dash.1 $PKG/usr/man/man1/ash.1
 }
