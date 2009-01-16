@@ -2,21 +2,15 @@
 # Description: Image manipulation wizard.
 # Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
 # Packager: danm, maol, jaeger
-# Depends on: lzma ghostscript jasper lcms librsvg libungif openexr libwmf
+# Depends on: ghostscript jasper lcms librsvg libungif openexr libwmf
 
 name=imagemagick
 sname=ImageMagick
 version=6.4.8-5
 release=1
-source=(ftp://ftp.imagemagick.net/pub/$sname/$sname-$version.tar.lzma)
+source=(ftp://ftp.imagemagick.net/pub/$sname/$sname-$version.tar.bz2)
 
 build() {
-	# temp fix untill/if pkgutils supports lzma
-	if [ -e $SRC/$sname-$version.tar.lzma ]; then
-		tar --use-compress-program=lzma -xf $sname-$version.tar.lzma
-		rm $sname-$version.tar.lzma
-	fi
-
 	cd $sname-$version
 
 	./configure \
