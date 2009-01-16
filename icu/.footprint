@@ -23,8 +23,12 @@ drwxr-xr-x	root/root	usr/include/layout/
 -rw-r--r--	root/root	usr/include/layout/ParagraphLayout.h
 -rw-r--r--	root/root	usr/include/layout/RunArrays.h
 -rw-r--r--	root/root	usr/include/layout/loengine.h
+-rw-r--r--	root/root	usr/include/layout/playout.h
+-rw-r--r--	root/root	usr/include/layout/plruns.h
 drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/basictz.h
+-rw-r--r--	root/root	usr/include/unicode/bms.h
+-rw-r--r--	root/root	usr/include/unicode/bmsearch.h
 -rw-r--r--	root/root	usr/include/unicode/brkiter.h
 -rw-r--r--	root/root	usr/include/unicode/calendar.h
 -rw-r--r--	root/root	usr/include/unicode/caniter.h
@@ -32,6 +36,7 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/choicfmt.h
 -rw-r--r--	root/root	usr/include/unicode/coleitr.h
 -rw-r--r--	root/root	usr/include/unicode/coll.h
+-rw-r--r--	root/root	usr/include/unicode/colldata.h
 -rw-r--r--	root/root	usr/include/unicode/curramt.h
 -rw-r--r--	root/root	usr/include/unicode/currunit.h
 -rw-r--r--	root/root	usr/include/unicode/datefmt.h
@@ -40,6 +45,9 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/decimfmt.h
 -rw-r--r--	root/root	usr/include/unicode/docmain.h
 -rw-r--r--	root/root	usr/include/unicode/dtfmtsym.h
+-rw-r--r--	root/root	usr/include/unicode/dtintrv.h
+-rw-r--r--	root/root	usr/include/unicode/dtitvfmt.h
+-rw-r--r--	root/root	usr/include/unicode/dtitvinf.h
 -rw-r--r--	root/root	usr/include/unicode/dtptngen.h
 -rw-r--r--	root/root	usr/include/unicode/dtrule.h
 -rw-r--r--	root/root	usr/include/unicode/fieldpos.h
@@ -56,6 +64,8 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/parseerr.h
 -rw-r--r--	root/root	usr/include/unicode/parsepos.h
 -rw-r--r--	root/root	usr/include/unicode/platform.h
+-rw-r--r--	root/root	usr/include/unicode/plurfmt.h
+-rw-r--r--	root/root	usr/include/unicode/plurrule.h
 -rw-r--r--	root/root	usr/include/unicode/ppalmos.h
 -rw-r--r--	root/root	usr/include/unicode/putil.h
 -rw-r--r--	root/root	usr/include/unicode/pwin32.h
@@ -146,31 +156,31 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/vtzone.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/icu/
-drwxr-xr-x	root/root	usr/lib/icu/3.8.1/
--rw-r--r--	root/root	usr/lib/icu/3.8.1/Makefile.inc
+drwxr-xr-x	root/root	usr/lib/icu/4.0.1/
+-rw-r--r--	root/root	usr/lib/icu/4.0.1/Makefile.inc
 lrwxrwxrwx	root/root	usr/lib/icu/Makefile.inc -> current/Makefile.inc
-lrwxrwxrwx	root/root	usr/lib/icu/current -> 3.8.1
-lrwxrwxrwx	root/root	usr/lib/libicudata.so -> libicudata.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicudata.so.38 -> libicudata.so.38.1
--rw-r--r--	root/root	usr/lib/libicudata.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicui18n.so -> libicui18n.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicui18n.so.38 -> libicui18n.so.38.1
--rw-r--r--	root/root	usr/lib/libicui18n.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicuio.so -> libicuio.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicuio.so.38 -> libicuio.so.38.1
--rw-r--r--	root/root	usr/lib/libicuio.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicule.so -> libicule.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicule.so.38 -> libicule.so.38.1
--rw-r--r--	root/root	usr/lib/libicule.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libiculx.so -> libiculx.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libiculx.so.38 -> libiculx.so.38.1
--rw-r--r--	root/root	usr/lib/libiculx.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicutu.so -> libicutu.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicutu.so.38 -> libicutu.so.38.1
--rw-r--r--	root/root	usr/lib/libicutu.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicuuc.so -> libicuuc.so.38.1
-lrwxrwxrwx	root/root	usr/lib/libicuuc.so.38 -> libicuuc.so.38.1
--rw-r--r--	root/root	usr/lib/libicuuc.so.38.1
+lrwxrwxrwx	root/root	usr/lib/icu/current -> 4.0.1
+lrwxrwxrwx	root/root	usr/lib/libicudata.so -> libicudata.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicudata.so.40 -> libicudata.so.40.1
+-rwxr-xr-x	root/root	usr/lib/libicudata.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicui18n.so -> libicui18n.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicui18n.so.40 -> libicui18n.so.40.1
+-rwxr-xr-x	root/root	usr/lib/libicui18n.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicuio.so -> libicuio.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicuio.so.40 -> libicuio.so.40.1
+-rwxr-xr-x	root/root	usr/lib/libicuio.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicule.so -> libicule.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicule.so.40 -> libicule.so.40.1
+-rwxr-xr-x	root/root	usr/lib/libicule.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libiculx.so -> libiculx.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libiculx.so.40 -> libiculx.so.40.1
+-rwxr-xr-x	root/root	usr/lib/libiculx.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicutu.so -> libicutu.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicutu.so.40 -> libicutu.so.40.1
+-rwxr-xr-x	root/root	usr/lib/libicutu.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicuuc.so -> libicuuc.so.40.1
+lrwxrwxrwx	root/root	usr/lib/libicuuc.so.40 -> libicuuc.so.40.1
+-rwxr-xr-x	root/root	usr/lib/libicuuc.so.40.1
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/derb.1.gz
@@ -197,8 +207,8 @@ drwxr-xr-x	root/root	usr/sbin/
 -rwxr-xr-x	root/root	usr/sbin/icuswap
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/icu/
-drwxr-xr-x	root/root	usr/share/icu/3.8.1/
-drwxr-xr-x	root/root	usr/share/icu/3.8.1/config/
--rw-r--r--	root/root	usr/share/icu/3.8.1/config/mh-linux
--rwxr-xr-x	root/root	usr/share/icu/3.8.1/install-sh
--rwxr-xr-x	root/root	usr/share/icu/3.8.1/mkinstalldirs
+drwxr-xr-x	root/root	usr/share/icu/4.0.1/
+drwxr-xr-x	root/root	usr/share/icu/4.0.1/config/
+-rw-r--r--	root/root	usr/share/icu/4.0.1/config/mh-linux
+-rwxr-xr-x	root/root	usr/share/icu/4.0.1/install-sh
+-rwxr-xr-x	root/root	usr/share/icu/4.0.1/mkinstalldirs
