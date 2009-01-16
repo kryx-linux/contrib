@@ -5,10 +5,9 @@
 # Depends on: ant
 
 name=yacy
-version=0.61
-date=20081003_5246
+version=0.7
 release=1
-source=(http://www.yacy.net/release/${name}_v${version}_$date.tar.gz
+source=(http://www.yacy.net/release/${name}_v${version}_20090114_5494.tar.gz
 	yacy-start.sh yacy-stop.sh yacy.rc)
 
 build() {
@@ -32,8 +31,6 @@ build() {
 	rm $PKG/usr/lib/yacy/addon/Notepad++/Readme.txt \
 		$PKG/usr/lib/yacy/defaults/yacy.network.readme \
 		$PKG/usr/lib/yacy/gpl.txt \
-		$PKG/usr/lib/yacy/htroot/yacy/user/license.txt \
-		$PKG/usr/lib/yacy/htroot/yacysearch/license.txt \
 		$PKG/usr/lib/yacy/lib/Apache\ License\ V2.txt \
 		$PKG/usr/lib/yacy/readme.txt \
 		$PKG/usr/lib/yacy/addon/yacyInit.readme \
