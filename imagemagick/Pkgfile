@@ -1,0 +1,39 @@
+# URL: http://imagemagick.sourceforge.net/
+# Description: Image manipulation wizard.
+# Maintainer: Danny Rawlins, romster at shortcircuit dot net dot au
+# Packager: danm, maol, jaeger
+# Depends on: lzma ghostscript jasper lcms librsvg libungif openexr libwmf
+
+name=imagemagick
+sname=ImageMagick
+version=6.4.8-5
+release=1
+source=(ftp://ftp.imagemagick.net/pub/$sname/$sname-$version.tar.lzma)
+
+build() {
+	# temp fix untill/if pkgutils supports lzma
+	if [ -e $SRC/$sname-$version.tar.lzma ]; then
+		tar --use-compress-program=lzma -xf $sname-$version.tar.lzma
+		rm $sname-$version.tar.lzma
+	fi
+
+	cd $sname-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-static \
+		--with-perl
+
+	make
+	install -d $PKG/usr/
+	make DESTDIR=$PKG PREFIX=$PKG/usr install
+
+	rm -r $PKG/usr/lib/perl5/?.??.? # empty directory
+	rm -r $PKG/usr/share/doc
+	rm $PKG/usr/share/ImageMagick-${version/-*}/{ChangeLog,LICENSE,NEWS.txt}
+	
+	find $PKG -type f \( \
+		-name perllocal.pod -o \
+		-name .packlist \) -delete
+}
