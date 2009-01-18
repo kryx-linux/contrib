@@ -4,29 +4,29 @@
 # Depends on:  mesa3d alsa-lib xorg-libx11 python
 
 name=teeworlds
-version=0.4.3
+version=0.5.0
+_bamver=0.2.0
 release=1
 source=(http://www.$name.com/files/$name-$version-src.tar.gz
-http://www.$name.com/files/bam.zip
-gui_tee.png
-$name.desktop)
+    http://maxiq.ovh.org/CRUX/bam-$_bamver.tar.gz
+    gui_tee.png $name.desktop $name.bash ${name}_srv.bash)
 
 build() {
     mkdir -p $PKG/usr/share/$name
-    cd bam
-    ./make_unix.sh $LDFLAGS $CFLAGS
-    
+    # build bam
+    cd bam-$_bamver
+    ./make_unix.sh $CFLAGS
+    # build teeworlds
     cd $SRC/$name-$version-src
-    sed -i 's|data/|/usr/share/teeworlds/data/|g' $(fgrep -Rl '"data/' *)
-    sed -i -e "/cc.flags/s/=.*/= \"$CFLAGS\"/" \
-           -e "/linker.flags/s|\"\"|\"$LDFLAGS\"|" \
-           -e '/release_settings.cc.optimize/s/1/0/' default.bam
-    ../bam/src/bam -v server_release client_release
-
-    install -D -m 0755 $name $PKG/usr/bin/$name
-    install -m 0755 ${name}_srv $PKG/usr/bin
+    # everytime developer chooses bam for his project, god kills a kitten
+    sed -i "/settings\.cc\.flags:Add(\"-Wall\", \"-fno-exceptions\")/s|)|, \"$CFLAGS\" )|" default.bam
+    ../bam-$_bamver/src/bam release
+    install -m 0755 $name ${name}_srv $PKG/usr/share/$name
     cp -r data $PKG/usr/share/$name
-    cd ..
+
+    cd $SRC
     install -D -m 0644 $name.desktop $PKG/usr/share/applications/$name.desktop
-    install -m 0644 gui_tee.png $PKG/usr/share/$name/data/gui_tee.png
+    install -D -m 0644 gui_tee.png $PKG/usr/share/pixmaps/gui_tee.png
+    install -D -m 0755 $name.bash $PKG/usr/bin/$name
+    install -m 0755 ${name}_srv.bash $PKG/usr/bin/${name}_srv
 }
