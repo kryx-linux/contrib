@@ -6,20 +6,23 @@
 
 name=allegro
 version=4.2.2
-release=1
-source=(http://dl.sourceforge.net/sourceforge/alleg/allegro-$version.tar.gz)
+release=2
+source=(http://dl.sourceforge.net/sourceforge/alleg/$name-$version.tar.gz
+	allegro-4.2.2-exec-stack.patch)
 
 build() {
-	cd allegro-$version
+	cd $name-$version
 	install -d $PKG/usr
+	patch -p 0 -i $SRC/allegro-4.2.2-exec-stack.patch
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-		--enable-exclopts=i686 \
-		--enable-artsdigi=no
+		--enable-linux \
+		--disable-asm \
+		--disable-mmx \
+		--disable-sse
 
 	make -j 1
 	make DESTDIR=$PKG install install-man
 }
-
