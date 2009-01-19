@@ -5,21 +5,23 @@
 # Depends on: sdl_mixer sdl_net wxgtk freealut fftw
 
 name=scorched3d
-version=41.1
+version=41.3
 release=1
-source=(http://dl.sourceforge.net/scorched3d/Scorched3D-$version-src.tar.gz \
-	scorched3d-$version-gljpg.patch)
+source=(http://dl.sourceforge.net/scorched3d/Scorched3D-$version-src.tar.gz
+	scorched3d-41.3-gcc43.patch)
 
 build() {
 	cd scorched
-	patch -i $SRC/scorched3d-$version-gljpg.patch src/GLEXT/GLJpg.cpp
+	patch -p 1 -i $SRC/scorched3d-41.3-gcc43.patch
+	chmod +x $SRC/scorched/scripts/openal-config
 
-	./configure	\
+	OPENAL_CONFIG=$SRC/scorched/scripts/openal-config \
+	./configure \
 		--prefix=/usr \
-		--datadir=/usr/share/scorched3d
+		--datadir=/usr/share/scorched3d \
+		--disable-dependency-tracking
 
 	make
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/scorched3d/documentation
 }
-
