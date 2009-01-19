@@ -2,17 +2,20 @@
 # URL: http://wormsofprey.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: James Mills, prologic at shortcircuit dot net dot au
-# Depends on: sdl_net sdl_mixer sdl_image sdl_ttf
+# Depends on: sdl_net sdl_mixer sdl_image sdl_ttf gcc34
 
 name=wop
 version=0.4.3
 release=1
-source=(http://wormsofprey.org/download/wop-$version-src.tar.bz2 \
-	http://wormsofprey.org/download/wopdata-2005-12-21.tar.bz2 \
+source=(http://wormsofprey.org/download/wop-$version-src.tar.bz2
+	http://wormsofprey.org/download/wopdata-2005-12-21.tar.bz2
+	wop-0.4.3-Makefile.patch
 	wop-client wop-server)
 
 build() {
-	cd wop-$version
+	cd $name-$version
+	find $SRC -name Makefile -exec sed -i -e 's/CXX =.*/CXX = g++-3.4/' {} \;
+	patch -p 0 -i $SRC/wop-0.4.3-Makefile.patch
 	make clean
 	make
 	install -d $PKG/usr/share/$name
@@ -21,4 +24,3 @@ build() {
 	install -D -m 0755 $SRC/wop-client $PKG/usr/bin/wop-client
 	install -D -m 0755 $SRC/wop-server $PKG/usr/bin/wop-server
 }
-
