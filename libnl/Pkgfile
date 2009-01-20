@@ -1,0 +1,19 @@
+# Description: library for applications dealing with netlink sockets
+# URL:         http://people.suug.ch/~tgr/libnl
+# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Packager:    Hannes Mayer, kontakt at ecarux dot de
+
+name=libnl
+version=1.1
+release=1
+source=(http://people.suug.ch/~tgr/$name/files/$name-$version.tar.gz
+    libnl-1.1_ulong_max.diff)
+
+build()
+{
+    cd $name-$version
+    patch -p1 -i ../libnl-1.1_ulong_max.diff
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+}
