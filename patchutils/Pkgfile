@@ -5,12 +5,12 @@
 # Depends on:
 
 name=patchutils
-version=0.3.0
+version=0.3.1
 release=1
-source=(http://cyberelk.net/tim/data/patchutils/stable/patchutils-$version.tar.bz2)
+source=(http://cyberelk.net/tim/data/patchutils/stable/$name-$version.tar.bz2)
 
 build() {
-	cd patchutils-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -19,4 +19,3 @@ build() {
 	make CFLAGS="$CFLAGS"
 	make DESTDIR=$PKG install
 }
-
