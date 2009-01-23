@@ -5,19 +5,16 @@
 # Depends on:  glib python
 
 name=gamin
-version=0.1.9
+version=0.1.10
 release=2
-source=(http://www.gnome.org/~veillard/$name/sources/$name-$version.tar.gz $name-$version-ucred-headers.patch)
+source=(http://www.gnome.org/~veillard/$name/sources/$name-$version.tar.gz)
 
 build() {
-        cd $name-$version
-	patch -p1 -i ../$name-$version-ucred-headers.patch
-        ./configure \
-            --prefix=/usr \
-            --libexecdir=/usr/sbin \
-            --disable-gtk-doc \
-            --disable-dnotify \
-            --enable-inotify
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-static \
+        --libexecdir=/usr/sbin
         make
         make DESTDIR=$PKG install
 }
