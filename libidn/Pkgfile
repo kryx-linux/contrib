@@ -4,12 +4,12 @@
 # Packager: Daniel Mueller, daniel at danm dot de
 
 name=libidn
-version=1.11
+version=1.12
 release=1
-source=(ftp://alpha.gnu.org/pub/gnu/libidn/libidn-$version.tar.gz)
+source=(ftp://alpha.gnu.org/pub/gnu/$name/$name-$version.tar.gz)
 
 build() {
-	cd libidn-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -21,4 +21,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/info
 }
-
