@@ -1,0 +1,11 @@
+diff -pruN transcode-1.1.0.orig/configure.in transcode-1.1.0/configure.in
+--- transcode-1.1.0.orig/configure.in	2009-01-24 07:22:19.517894851 +0000
++++ transcode-1.1.0/configure.in	2009-01-24 07:28:16.378895053 +0000
+@@ -872,6 +872,7 @@ if test x"$have_xvid" = x"yes" ; then
+   AC_MSG_CHECKING([xvid version >= 1.0])
+   AC_RUN_IFELSE([AC_LANG_SOURCE([[
+ #include <stdio.h>
++#include <pthread.h>
+ #include <xvid.h>
+ 
+ int main() {
