@@ -2,27 +2,25 @@
 # URL: http://gstreamer.freedesktop.org/modules/gst-plugins-bad.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: faac ladspa libdivx-legacy libexif libmms libmpcdec libmusicbrainz libsdl libshout libxvid mpeg2dec swfdec wavpack x264
+# Depends on: ladspa libexif libmms libmpcdec libmusicbrainz swfdec timidity wavpack
 
 name=gst-plugins-bad
-version=0.10.8
+version=0.10.10
 release=1
-source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2
-	gst-plugins-bad-0.10.8-x264_fix.patch)
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/gst-plugins-bad-0.10.8-x264_fix.patch
 
 	./configure \
 		--prefix=/usr \
-		--disable-nls \
+		--mandir=/usr/man \
 		--disable-static \
-		--disable-valgrind \
 		--disable-debug \
-		--disable-examples \
-		--disable-neon \
-		--with-x
+		--disable-nls \
+		--disable-dependency-tracking \
+		--disable-valgrind \
+		--disable-examples
 
 	make
 	make DESTDIR=$PKG install
