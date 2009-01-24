@@ -2,10 +2,10 @@
 # URL: http://gstreamer.freedesktop.org/modules/gst-plugins-good.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: gst-plugins-base ladspa libcdio libshout mjpegtools speex taglib wavpack libsoup
+# Depends on: flac gst-plugins-base gtk hal libdv libshout libsoup speex taglib wavpack xorg-libxcomposite
 
 name=gst-plugins-good
-version=0.10.10
+version=0.10.13
 release=1
 source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2)
 
@@ -14,11 +14,15 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--disable-nls \
+		--mandir=/usr/man \
 		--disable-static \
+		--disable-debug \
+		--disable-nls \
+		--disable-dependency-tracking \
+		--disable-valgrind \
+		--disable-examples \
 		--disable-oss
 
 	make
 	make DESTDIR=$PKG install
 }
-
