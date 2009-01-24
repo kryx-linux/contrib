@@ -2,25 +2,15 @@
 # URL: http://gstreamer.freedesktop.org/modules/gst-plugins-base.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: gstreamer alsa-lib liboil libtheora cdparanoia pango libvisual xorg-libxv gtk
+# Depends on: alsa-lib cdparanoia e2fsprogs glibc gstreamer liboil libtheora libvisual pango xorg-libxv
 
 name=gst-plugins-base
-version=0.10.21
+version=0.10.22
 release=1
-source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2	
-	$name-0.10.21-gtkdoc_libtheora_generated.patch)
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-
-	# this patch created with autoconf-2.61 automake-1.10.1 in chroot
-	patch -p 1 -i $SRC/$name-0.10.21-gtkdoc_libtheora_generated.patch
-
-	# origional patch wont work on recent autoconf and automake versions.
-	#patch -p 1 -i $SRC/$name-0.10.21-gtkdoc-rebase.patch
-	#patch -p 1 -i $SRC/$name-0.10.21-libtheora-version-check.patch
-	#automake
-	#autoconf
 
 	./configure \
 		--prefix=/usr \
@@ -28,6 +18,8 @@ build() {
 		--disable-static \
 		--disable-debug \
 		--disable-nls \
+		--disable-dependency-tracking \
+		--disable-valgrind \
 		--disable-examples
 
 	make
