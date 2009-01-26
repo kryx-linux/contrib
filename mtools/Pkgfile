@@ -4,13 +4,14 @@
 # Depends on: texinfo
 
 name=mtools
-version=3.9.11
-release=4
+version=4.0.1
+release=1
 source=(http://mtools.linux.lu/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
   ./configure --prefix=/usr \
+              --datarootdir=$PKG/usr \
               --sysconfdir=/etc
   make
   make -j1 prefix=$PKG/usr install
