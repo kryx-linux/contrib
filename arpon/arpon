@@ -1,0 +1,26 @@
+#! /bin/sh
+#
+# /etc/rc.d/arpon: start/stop/restart/reload the arpon daemon
+#
+
+
+case $1 in
+start)
+  /usr/sbin/arpon -ysdg -f /var/log/arpon.log 1>>/var/log/arpon.log
+  ;;
+stop)
+  TEST=`pidof /usr/sbin/arpon`
+  if [ "$TEST" != "" ] ; then
+    kill -TERM $TEST
+  fi
+  ;;
+restart)
+  $0 stop
+  $0 start
+  ;;
+*)
+  echo "Usage: $0 [start|stop|restart]"
+  exit 1
+  ;;
+esac
+

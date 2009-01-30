@@ -1,0 +1,20 @@
+# Description: daemon and tools to handle all ARP aspects
+# URL:         http://arpon.sf.net
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  libpcap, libnet, libdnet
+
+name=arpon
+version=1.90
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/ArpON-$version.tar.gz \
+        arpon)
+
+build() {
+    install arpon -D $PKG/etc/rc.d/arpon
+    cd  ArpON-$version
+    gcc -g -Wall -Werror  -lpthread -lpcap -ldnet -lnet -L/usr/lib\
+        -I/usr/include -DLINUX -o arpon arpon.c /usr/lib/libpcap.a\
+        /usr/lib/libnet.a /usr/lib/libdnet.a
+    install -D arpon $PKG/usr/sbin/arpon
+    install -D man8/arpon.8 $PKG/usr/man/man8/arpon.8
+}
