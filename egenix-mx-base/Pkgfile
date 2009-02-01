@@ -5,7 +5,7 @@
 # Depends on: python
 
 name=egenix-mx-base
-version=3.1.1
+version=3.1.2
 release=1
 source=(http://downloads.egenix.com/python/egenix-mx-base-$version.tar.gz)
 
@@ -13,7 +13,6 @@ build() {
 	cd egenix-mx-base-$version
 	python setup.py install --root=$PKG
 	
-	find $PKG -type d -name 'Doc' |xargs rm -rf '{}' \;
-	find $PKG \( -name 'README' -or -name 'LICENSE' -or -name 'COPYRIGHT' \) -delete
+	find $PKG -type d -name 'Doc' | xargs rm -rf '{}' \;
+	find $PKG \( -name 'README' -o -name 'LICENSE' -o -name 'COPYRIGHT' \) -delete
 }
-
