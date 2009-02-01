@@ -5,20 +5,23 @@
 # Depends on: jam physfs sdl_gfx sdl_image sdl_mixer sdl_ttf
 
 name=lincity-ng
-version=1.1.2
+version=2.0
 release=1
-source=(http://download.berlios.de/lincity-ng/lincity-ng-$version.tar.bz2)
+source=(http://download.berlios.de/$name/$name-$version.tar.bz2)
 
 build() {
-	cd lincity-ng-$version
+	cd $name-$version
+	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) .*/\1/' <<< $MAKEFLAGS)"
 
-	./configure --prefix=/usr
+	./configure \
+		--prefix=/usr \
+		--disable-nls
 
-	jam
+	jam $JOBS
 	jam -sprefix=$PKG/usr install
 
 	rm -r \
 		$PKG/usr/share/doc \
-		$PKG/usr/share/lincity-ng/help/{cs,pt_BR,ru,de,es,fr,nl,sv}
+		$PKG/usr/share/lincity-ng/locale \
+		$PKG/usr/share/lincity-ng/help/{ca,cs,de,es,fr,gl,nl,pt_BR,ru,sv,tr}
 }
-
