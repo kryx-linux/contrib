@@ -5,9 +5,9 @@
 # Depends on: p5-io-socket-ssl
 
 name=ddclient
-version=3.7.3
-release=2
-source=(http://dl.sourceforge.net/sourceforge/ddclient/ddclient-$version.tar.bz2 \
+version=3.8.0
+release=1
+source=(http://dl.sourceforge.net/sourceforge/ddclient/ddclient-$version.tar.bz2
 	ddclient.rc)
 
 build() {
@@ -18,4 +18,3 @@ build() {
 	install -D -m 0755 ../ddclient.rc $PKG/etc/rc.d/ddclient
 	install -D -m 0600 sample-etc_ddclient.conf $PKG/etc/ddclient.conf
 }
-
