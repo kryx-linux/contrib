@@ -2,26 +2,22 @@
 # URL: http://dvd.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: libdvdcss
+# Depends on: libdvdread
 
 name=libdvdnav
-version=r1000
+version=20090202
 release=1
-source=(http://www.dcaf-security.org/distfiles/libdvdnav-snapshot-$version.tar.bz2)
+source=(http://www.dcaf-security.org/distfiles/$name-$version-r1166.tar.bz2)
 
 build() {
-	cd libdvdnav
-	# -O3 is used in the Makefile
-	CFLAGS="`echo $CFLAGS | sed -e 's/-O[s0-3] //'`"
-	CXXFLAGS="`echo $CXXFLAGS | sed -e 's/-O[s0-3] //'`"
-	export CFLAGS CXXFLAGS
+	cd $name
+	autoreconf -i
+	rm -r missing
 
 	./configure \
 		--prefix=/usr \
-		--disable-static \
-		--disable-debug
+		--mandir=/usr/man \
+		--disable-dependency-tracking
 
 	make DESTDIR=$PKG install
-	chmod a-x $PKG/usr/lib/*.so
 }
-
