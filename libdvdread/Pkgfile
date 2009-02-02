@@ -1,0 +1,23 @@
+# Description: DVD reading library.
+# URL: http://dvd.sourceforge.net/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: libdvdcss
+
+name=libdvdread
+version=20090202
+release=1
+source=(http://www.dcaf-security.org/distfiles/$name-$version-r1166.tar.bz2)
+
+build() {
+	cd $name
+	autoreconf -i
+	rm -r missing
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-dependency-tracking
+
+	make DESTDIR=$PKG install
+}
