@@ -1,16 +1,16 @@
-# Description: 2D MMORPG (like tibia but w/out freaks throwing chairs at their mothers)
+# Description: 2D MMORPG (like tibia but w/o freaks throwing chairs at their mothers)
 # URL:         http://themanaworld.org/
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
 # Depends on:  guichan physfs libxml2 libpng sdl_mixer sdl_net
 
 name=tmw
-version=0.0.27
+version=0.0.28
 release=1
 source=(http://downloads.sourceforge.net/themanaworld/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    ./configure --prefix=/usr --mandir=/usr/man
+    ./configure --prefix=/usr --mandir=/usr/man --disable-nls
     make
     make DESTDIR=$PKG install
 }
