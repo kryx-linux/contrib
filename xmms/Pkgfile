@@ -7,11 +7,13 @@
 
 name=xmms
 version=1.2.11
-release=1
-source=(http://www.xmms.org/files/1.2.x/$name-$version.tar.bz2)
+release=2
+source=(http://www.xmms.org/files/1.2.x/$name-$version.tar.bz2 \
+		${name}_doublesize.patch)
 
 build() {
 	cd $name-$version
+	patch -p1 -i $SRC/${name}_doublesize.patch
 	./configure --prefix=/usr \
 				--disable-mikmod \
 				--disable-nls \
