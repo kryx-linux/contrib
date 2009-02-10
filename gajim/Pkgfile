@@ -8,17 +8,16 @@
 
 name=gajim
 version=0.12.1
-release=1
-source=(http://www.gajim.org/downloads/$name-$version.tar.bz2 \
-		http://jabber.org/servers.xml)
+release=2
+source=(http://www.gajim.org/downloads/$name-$version.tar.bz2)
 		
 build() {
 	cd $name-$version
+	wget http://jabber.org/servers.xml -O data/other/servers.xml
 	./configure --prefix=/usr \
 				--disable-nls \
 				--mandir=/usr/man
 	make
 	make DESTDIR=$PKG install
-	install -m 0644 $SRC/servers.xml $PKG/usr/share/gajim/data/other/servers.xml
 	rm -rf $PKG/usr/share/doc
 }
