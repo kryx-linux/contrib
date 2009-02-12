@@ -5,13 +5,13 @@
 # Depends on: pekwm
 
 name=pekwm-themes
-version=1.0.3
+version=1.0.4
 release=1
 source=(http://aur.archlinux.org/packages/$name/$name/$name-$version.tar.gz)
 
 build() {
-  install -d $PKG/usr/share/pekwm/themes
-  mv $name-$version/* $PKG/usr/share/pekwm/themes
+  install -d $PKG/usr/share/pekwm
+  mv themes $PKG/usr/share/pekwm
   find $PKG -type d -exec chmod 0755 {} \;
   find $PKG -type f -exec chmod 0644 {} \;
 }
