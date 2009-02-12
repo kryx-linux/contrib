@@ -5,19 +5,11 @@
 # Depends on: rrdtool mod_php mysql net-snmp php-mysql php
 
 name=cacti
-version=0.8.7b
+version=0.8.7d
 release=1
-source=(http://www.$name.net/downloads/$name-$version.tar.gz \
-    http://www.cacti.net/downloads/patches/0.8.7b/reset_each_patch.patch \
-    http://www.cacti.net/downloads/patches/0.8.7b/snmp_auth_none_notice.patch \
-    http://www.cacti.net/downloads/patches/0.8.7b/upgrade_from_086k_fix.patch)    
+source=(http://www.$name.net/downloads/$name-$version.tar.gz)
 
 build () {
-  cd $name-$version
-  patch -p1 -N < ../reset_each_patch.patch
-  patch -p1 -N < ../snmp_auth_none_notice.patch
-  patch -p1 -N < ../upgrade_from_086k_fix.patch
-  cd ..
   mkdir -p $PKG/var/www/htdocs    
   mv $name-$version $PKG/var/www/htdocs/$name
   chown -R cactiuser  $PKG/var/www/htdocs/$name/{rra,log}

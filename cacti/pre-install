@@ -1,4 +1,4 @@
 #!/bin/bash
 
-getent passwd cacti || useradd -m  -d /var/empty -s /bin/false cactiuser
+getent passwd cactiuser || useradd -m  -d /var/empty -s /bin/false cactiuser
 passwd -l cactiuser
