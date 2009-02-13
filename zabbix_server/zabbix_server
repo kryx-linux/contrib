@@ -8,7 +8,7 @@ start)
 	su daemon -c /usr/sbin/zabbix_server
 	;;
 stop)
-	killall -q /usr/sbin/zabbix_server
+	kill `cat /var/run/zabbix_server/zabbix_server.pid`
 	;;
 restart)
 	$0 stop
