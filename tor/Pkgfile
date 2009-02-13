@@ -5,7 +5,7 @@
 # Depends on: libevent openssl zlib
 
 name=tor
-version=0.2.0.33
+version=0.2.0.34
 release=1
 source=(http://www.torproject.org/dist/tor-$version.tar.gz
 	tor.rc tor-config.patch)
@@ -55,4 +55,3 @@ build() {
 	# service
 	install -m 0750 -D $SRC/tor.rc $PKG/etc/rc.d/tor
 }
-
