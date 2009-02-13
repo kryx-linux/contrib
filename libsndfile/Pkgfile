@@ -6,12 +6,12 @@
 # Optional: sqlite3
 
 name=libsndfile
-version=1.0.18pre25
+version=1.0.19pre1
 release=1
 source=(http://www.mega-nerd.com/tmp/$name-$version.tar.gz)
 
 build() {
-	cd $name-${version/b/}
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
