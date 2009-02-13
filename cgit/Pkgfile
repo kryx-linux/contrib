@@ -3,16 +3,18 @@
 # Maintainer: Lucas Hazel, lucas at die dot net dot au
 # Depends on: git
 
+gitversion="`prt-get printf %v --filter=git`"
+
 name=cgit
-version=0.8.1.1
+version=0.8.2
 release=1
-source=(http://hjemli.net/git/cgit/snapshot/cgit-0.8.1.1.tar.bz2
-    http://www.kernel.org/pub/software/scm/git/git-1.6.1.tar.bz2)
+source=(http://hjemli.net/git/cgit/snapshot/$name-$version.tar.bz2
+    http://www.kernel.org/pub/software/scm/git/git-$gitversion.tar.bz2)
 
 build() {
     cd $name-$version
     rm -rf git
-    ln -s $SRC/git-1.6.1 git
-    sed 's/GIT_VER = 1.6.0.3/GIT_VER = 1.6.1/' -i Makefile
+    ln -s $SRC/git-$gitversion git
+    sed "s/GIT_VER = 1.6.0.3/GIT_VER = $gitversion/" -i Makefile
     make DESTDIR=$PKG install
 }
