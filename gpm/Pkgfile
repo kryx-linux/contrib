@@ -4,20 +4,20 @@
 # Packager: Han Boetes, han at mijncomputer dot nl
 
 name=gpm
-version=1.20.5
+version=1.20.6
 release=1
 source=(http://unix.schottelius.org/gpm/archives/gpm-$version.tar.bz2
-	gpm-$version-nodebug.patch
-	gpm-$version-no-dumb-error-messages.patch
-	gpm-$version-make-install-fixes.patch
+	gpm-1.20.5-nodebug.patch
+	gpm-1.20.5-no-dumb-error-messages.patch
+	gpm-1.20.5-make-install-fixes.patch
 	gpm.rc)
 
 build() {
 	cd gpm-$version
 
-	patch -p 1 -i $SRC/gpm-$version-nodebug.patch
-	patch -p 1 -i $SRC/gpm-$version-no-dumb-error-messages.patch
-	patch -p 1 -i $SRC/gpm-$version-make-install-fixes.patch
+	patch -p 1 -i $SRC/gpm-1.20.5-nodebug.patch
+	patch -p 1 -i $SRC/gpm-1.20.5-no-dumb-error-messages.patch
+	patch -p 1 -i $SRC/gpm-1.20.5-make-install-fixes.patch
 
 	./configure \
 		--prefix=/usr \
