@@ -8,7 +8,7 @@ start)
 	su daemon -c /usr/bin/zabbix_agentd
 	;;
 stop)
-	killall -q /usr/bin/zabbix_agentd
+	kill `cat /var/run/zabbix_agentd/zabbix_agentd.pid`
 	;;
 restart)
 	$0 stop

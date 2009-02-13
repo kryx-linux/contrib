@@ -16,10 +16,9 @@ something useful.
 
 3. Run post-install to create dedicated user for the agent instead of 'daemon'.
 
-PRECAUTION                                 
-Before port version 1.4.4-2 'zbxagent' group was used as a pimary group of
-'zbxagent' user. Later it was changed (in post-install) to 'zabbix' to fix log
-files rotation issue in the directory shared with the zabbix server. Now it
-should be safe to remove unused zbxagent group by hand.
+PRECAUTION
+Be aware that 1.6.x branch of the agent does not have extended cpustats patch.
+You can use an old version of this port (with a patched 1.4.x agent) along with
+1.6.x server without ineroperability problems.
 
 RESOURCES
