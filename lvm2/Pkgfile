@@ -2,10 +2,10 @@
 # URL: http://sourceware.org/lvm2/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: libdevmapper
+# Depends on:
 
 name=lvm2
-version=2.02.42
+version=2.02.44
 release=1
 source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz)
 build() {
@@ -18,11 +18,10 @@ build() {
 		--enable-lvm1_fallback \
 		--disable-readline
 
-	make
+	make -j 1
 	make DESTDIR=$PKG install
 
 	install -d -m 0700 $PKG/etc/lvm/{archive,backup}
 	install -d -m 1777 $PKG/var/lock
 	install -d -m 0700 $PKG/var/lock/lvm
 }
-
