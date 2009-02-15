@@ -6,21 +6,21 @@
 # Optional: gcc-fortran
 
 name=fftw
-version=3.2
+version=3.2.1
 release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	local config='
-		--prefix=/usr
-		--mandir=/usr/man
-		--enable-threads
-		--enable-type-prefix
-		--with-gnu-ld
-		--disable-nls
-		--enable-shared'
+	local config="\
+--prefix=/usr \
+--mandir=/usr/man \
+--enable-threads \
+--enable-type-prefix \
+--with-gnu-ld \
+--disable-nls \
+--enable-shared"
 
 	# compiling long double precision library
 	./configure \
@@ -48,4 +48,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share
 }
-
