@@ -5,12 +5,12 @@
 # Depends on: libogg
 
 name=speex
-version=1.2beta3
-release=2
-source=(http://downloads.us.xiph.org/releases/speex/speex-$version.tar.gz)
+version=1.2rc1
+release=1
+source=(http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz)
 
 build() {
-	cd speex-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -22,4 +22,3 @@ build() {
 	make
 	make prefix=$PKG/usr install
 }
-
