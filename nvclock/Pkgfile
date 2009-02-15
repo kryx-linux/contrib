@@ -2,22 +2,15 @@
 # URL: http://www.linuxhardware.org/nvclock/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Nathan Pardoe, lithium at poolofrandomness dot com
-# Depends on: gtk lzma
+# Depends on: gtk
 
 name=nvclock
-version=20071205
+version=0.8b4
 release=1
-source=(ftp://romster.dyndns.org/linux/source/nvclock/nvclock-snapshot-$version.tar.lzma)
-#source=(http://www.linuxhardware.org/nvclock/nvclock$version.tar.gz)
+source=(http://www.linuxhardware.org/nvclock/nvclock$version.tar.gz)
 
 build() {
-	# temp fix untill/if pkgutils supports lzma
-	if [ -e $SRC/$name-snapshot-$version.tar.lzma ]; then
-		tar --use-compress-program=lzma -xf $name-snapshot-$version.tar.lzma
-		rm $name-snapshot-$version.tar.lzma
-	fi
-
-	cd nvclock
+	cd $name$version
 
 	./configure \
 		--prefix=/usr \
@@ -25,7 +18,8 @@ build() {
 		--with-x
 
 	make -j 1
-	make prefix=$PKG/usr install
-	rm -r $PKG/usr/share
-}
 
+	# DESTDIR is currently broken
+	make prefix=$PKG/usr install
+	rm -r $PKG/usr/share/doc
+}
