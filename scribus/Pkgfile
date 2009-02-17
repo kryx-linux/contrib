@@ -17,7 +17,7 @@ build() {
       --disable-nls \
       --mandir=/usr/man
 
-   make -j 60 && make DESTDIR=$PKG install
+   make && make DESTDIR=$PKG install
    rm -rf $PKG/usr/doc
    rm -rf $PKG/usr/man/pl
    rm -rf $PKG/usr/share/doc/$name-$version/{AUTHORS,COPYING,ChangeLog,ChangeLogSVN,INSTALL,NEWS,README,README.MacOSX,TODO}
