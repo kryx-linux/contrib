@@ -5,7 +5,7 @@
 # Depends on: libmpfr
 
 name=gcc-fortran
-version=4.3.2
+version=4.3.3
 release=1
 source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-{core,fortran}-$version.tar.bz2
 	$name-4.2.4-nocheck-fixincludes.patch)
@@ -31,7 +31,7 @@ build() {
 		--with-x=no
 
 	make bootstrap
-	make check
+	make -j 1 check
 	make -j 1 DESTDIR=$PKG install
 
 	ln -fs gfortran $PKG/usr/bin/f90
@@ -49,6 +49,7 @@ build() {
 		$PKG/usr/info \
 		$PKG/usr/man/man7 \
 		$PKG/usr/lib/gcc/*/$version/install-tools \
+		$PKG/usr/lib/gcc/*/$version/include-fixed \
 		$PKG/usr/lib/gcc/*/$version/include		
 
 	# remove files already on the system out of the port
