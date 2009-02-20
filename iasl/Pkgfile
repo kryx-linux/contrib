@@ -5,13 +5,11 @@
 # Depends on: 
 
 name=iasl
-version=20081204
-release=2
-source=(http://www.acpica.org/download/acpica-unix-$version.tar.gz \
-        aslcompiler.patch-bison24)
+version=20090123
+release=1
+source=(http://www.acpica.org/download/acpica-unix-$version.tar.gz)
 
 build() {
-  patch -p0 -i $SRC/aslcompiler.patch-bison24
   cd acpica-unix-$version/compiler
   make -j1 aslcompilerlex.c
   sed 's/\#undef\ yytext_ptr//' -i aslcompilerlex.c
