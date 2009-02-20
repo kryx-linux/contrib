@@ -5,17 +5,16 @@
 # Depends on:
 
 name=fmod
-version=4.16.06
+version=4.22.04
 release=1
 
 source=(http://www.fmod.org/index.php/release/version/${name}api${version[@]//./}linux.tar.gz)
 
 build() {
   install -d $PKG/usr/{lib/$name/plugins,include/$name}
-  install -m 0755 ${name}api${version[@]//./}linux/api/{lib/*.so.*,plugins/*} $PKG/usr/lib/$name
+  install -m 0755 ${name}api${version[@]//./}linux/api/{lib/*,plugins/*} $PKG/usr/lib/$name
   install -m 0644 ${name}api${version[@]//./}linux/api/inc/* $PKG/usr/include/$name
   install -m 0755 ${name}api${version[@]//./}linux/fmoddesignerapi/api/lib/* $PKG/usr/lib/$name
   install -m 0644 ${name}api${version[@]//./}linux/fmoddesignerapi/api/inc/* $PKG/usr/include/$name
-  ln -s libfmodex.so.$version $PKG/usr/lib/$name/libfmodex.so
-  ln -s libfmodexp.so.$version $PKG/usr/lib/$name/libfmodexp.so
 }
+
