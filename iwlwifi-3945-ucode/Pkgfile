@@ -5,13 +5,13 @@
 # Depends on:
 
 name=iwlwifi-3945-ucode
-version=15.28.1.6
+version=15.28.2.8
 release=1
 source=(http://intellinuxwireless.org/iwlwifi/downloads/$name-$version.tgz)
 
 build () {
-  install -D -m 0644 $name-$version/iwlwifi-3945-1.ucode \
-    $PKG/lib/firmware/iwlwifi-3945-1.ucode
-  ln -sf /lib/firmware/iwlwifi-3945-1.ucode \
+  install -D -m 0644 $name-$version/iwlwifi-3945-2.ucode \
+    $PKG/lib/firmware/iwlwifi-3945-2.ucode
+  ln -sf /lib/firmware/iwlwifi-3945-2.ucode \
     $PKG/lib/firmware/iwlwifi-3945.ucode
 }
