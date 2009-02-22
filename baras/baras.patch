@@ -1,6 +1,6 @@
 diff -Nru baras/baras.pl baras-new/baras.pl
 --- baras/baras.pl	2007-08-13 03:36:01.000000000 +0200
-+++ baras-new/baras.pl	2008-08-20 23:30:19.000000000 +0200
++++ baras-new/baras.pl	2009-02-22 21:40:08.000000000 +0100
 @@ -1,7 +1,7 @@
  #!/usr/bin/perl -w
  
@@ -10,9 +10,89 @@ diff -Nru baras/baras.pl baras-new/baras.pl
  }
  use strict;
  use warnings;
+@@ -21,17 +21,19 @@
+    'BARAS_DCF' => 'baras.dcf',
+    'BARAS_ETC' => '/etc/baras/',
+    'BARAS_VERBOSE' => 'no',
+-   'BASENAME' => $tempdate,
++   'BASENAME' => "$tempdate",
+    'COPY_DAR' => 'yes',
+    'DAR_MGR' => 'no',
+    'DAR_STATIC' => '',
+    'DESTINATION' => '/mnt/backup',
+    'EMAIL' => 'no',
+-   'HOSTNAME' => $hostname,
++   'HOSTNAME' => "$hostname",
+    'LOG_FILE' => '/var/log/baras.log',
++   'LS_BINARY' => '/bin/ls',
+    'OUTPUT' => '',
+    'REMOVE_FIRST' => 'no',
+    'ROTATION_SCHEDULE' => 'rotation.schedule',
++   'TEMP_LOG' => "/tmp/tmp.$$",
+    'TEST_ARCHIVE' => 'yes'
+ };
+ 
+@@ -155,7 +157,7 @@
+          open NOTICE, ">".$config->{'DESTINATION'}."/".$config->{'WORK_DIR'}."/reference_archive.txt" or
+             die "Could not write out reference_archive.txt!\n";
+          print NOTICE "The reference archive for this backup was:\n";
+-         print NOTICE `/bin/ls -ltv $config->{'DESTINATION'}/$reference_archive/*.dar`;
++         print NOTICE `$config->{'LS_BINARY'} -ltv $config->{'DESTINATION'}/$reference_archive/*.dar`;
+          close NOTICE;
+       } # nonblank
+    } else {
+@@ -184,12 +186,14 @@
+ }
+ 
+ # Wipe out old stuff
+-wipe_dir($config->{'DESTINATION'}."/$current_archive") if $config->{'REMOVE_FIRST'};
++if (lc $config->{'REMOVE_FIRST'} eq 'yes') {
++   wipe_dir($config->{'DESTINATION'}."/$current_archive");
++}
+ 
+ # Launch DAR
+ my_print($config, "Creating backup with DAR... ");
+ 
+-my $command = $config->{'DAR_COMMAND'}." ".$reference_basename." > /tmp/tmp.$$";
++my $command = $config->{'DAR_COMMAND'}." ".$reference_basename." > $config->{'TEMP_LOG'}";
+ $command =~ s|//|/|g; # Remove double //
+ my_print($config, "'$command'\n") if $verbose;
+ my $dar_result = system $command;
+@@ -197,17 +201,17 @@
+ if ($dar_result != 0) {
+    die "Fatal error: dar failed with error code $dar_result\n";
+ } else {
+-	open LOGF, "</tmp/tmp.$$";
++	open LOGF, "< $config->{'TEMP_LOG'}";
+ 	while (<LOGF>) {
+ 		my_print($config, $_);
+ 	};
+ 	close LOGF;
+-	unlink "/tmp/tmp.$$";
++	unlink "$config->{'TEMP_LOG'}";
+ } # DAR results
+ 
+ if (lc $config->{'TEST_ARCHIVE'} eq 'yes') {
+    my_print($config, "\nTesting the archive for errors...\n");
+-   my $testcmd = $config->{'DAR_BINARY'}." -t ".$config->{'DESTINATION'}."/".$config->{'WORK_DIR'}."/".$config->{'BASENAME'}." --noconf";
++   my $testcmd = $config->{'DAR_BINARY'}." -Q -t ".$config->{'DESTINATION'}."/".$config->{'WORK_DIR'}."/".$config->{'BASENAME'}." --noconf";
+    $testcmd =~ s|//|/|g; # Remove double //
+    my_print($config, "$testcmd\n") if $verbose;
+    my $pid = fork;
+@@ -223,7 +227,9 @@
+ } # TEST_ARCHIVE
+ 
+ # Wipe out old stuff (unless already done before)
+-wipe_dir($config->{'DESTINATION'}."/$current_archive") unless $config->{'REMOVE_FIRST'};
++if (lc $config->{'REMOVE_FIRST'} ne 'yes') {
++   wipe_dir($config->{'DESTINATION'}."/$current_archive");
++}
+ 
+ # Move into the work directory
+ chdir "$config->{'DESTINATION'}/$config->{'WORK_DIR'}" or die "A valid dar backup may be present, but couldn't chdir to test it?!\n";
 diff -Nru baras/etc/baras/baras.conf baras-new/etc/baras/baras.conf
 --- baras/etc/baras/baras.conf	2007-08-13 03:37:10.000000000 +0200
-+++ baras-new/etc/baras/baras.conf	2008-08-20 23:32:16.000000000 +0200
++++ baras-new/etc/baras/baras.conf	2009-02-22 21:41:00.000000000 +0100
 @@ -50,8 +50,8 @@
  REMOVE_FIRST="no"
  
@@ -41,3 +121,10 @@ diff -Nru baras/etc/baras/baras.conf baras-new/etc/baras/baras.conf
  
  # The temporary directory name that backups will be created in. This will be created underneath $DESTINATION.
  WORK_DIR=".baras_temp_workdir"
+@@ -107,5 +107,5 @@
+ DAR_COMMAND="$DAR_BINARY -Q --batch $BARAS_ETC/$BARAS_DCF -c $DAR_CREATE --noconf"
+ 
+ # Location and name of temporary log file
+-TEMP_LOG="$BARAS_ETC/baras_temp.log"
++TEMP_LOG="/tmp/baras_temp.log"
+ 
