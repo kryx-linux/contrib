@@ -2,15 +2,15 @@
 # URL: http://www.gnu.org/software/libcdio/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Tim Biermann, tim_biermann at web dot de
-# Depends on: cdparanoia libcddb
+# Depends on: cdparanoia
 
 name=libcdio
 version=0.81
 release=1
-source=(http://ftp.gnu.org/gnu/libcdio/libcdio-$version.tar.gz)
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 
 build() {
-	cd libcdio-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -23,4 +23,3 @@ build() {
 	rm -rf $PKG/usr/share
 	rm -r $PKG/usr/man/jp
 }
-
