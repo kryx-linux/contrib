@@ -6,9 +6,9 @@
 # Optional: sqlite3
 
 name=libsndfile
-version=1.0.19pre3
-release=2
-source=(http://www.mega-nerd.com/tmp/$name-$version.tar.gz)
+version=1.0.19
+release=1
+source=(http://www.mega-nerd.com/$name/$name-1.0.19.tar.gz)
 
 build() {
 	cd $name-$version
@@ -20,5 +20,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share
+	rm -r $PKG/usr/share/doc
+	rmdir $PKG/usr/share
 }
