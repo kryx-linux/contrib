@@ -5,15 +5,15 @@
 # Depends on: python
 
 name=setuptools
-version=0.6c8
+version=0.6c9
 release=1
-source=(http://cheeseshop.python.org/packages/source/s/setuptools/setuptools-$version.tar.gz)
-
-PYTHONVERSION=`python -c "import sys; print \"%s.%s\" % (sys.version_info[0], sys.version_info[1]);"`
+source=(http://cheeseshop.python.org/packages/source/s/$name/$name-$version.tar.gz)
 
 build() {
-	cd setuptools-$version
+	local PYTHONVERSION=`python -c "import sys; print \"%s.%s\" % (sys.version_info[0], sys.version_info[1]);"`
+	cd $name-$version
 	python setup.py install --root=$PKG
-	echo "/usr/lib/python$PYTHONVERSION/site-packages/setuptools-$version-py$PYTHONVERSION.egg" > $PKG/usr/lib/python$PYTHONVERSION/site-packages/setuptools.pth
-}
 
+	echo "/usr/lib/python$PYTHONVERSION/site-packages/setuptools-$version-py$PYTHONVERSION.egg" > \
+		$PKG/usr/lib/python$PYTHONVERSION/site-packages/setuptools.pth
+}
