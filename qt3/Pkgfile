@@ -5,19 +5,19 @@
 # Depends on: freeglut, xorg-libxcursor, xorg-xrandr, xorg-libxft, xorg-libxinerama, xorg-libxi, xorg-libice, libpng, libmng
 
 name=qt3
-version=3.3.7
+version=3.3.8
 release=1
 source=(ftp://ftp.trolltech.com/qt/source/qt-x11-free-$version.tar.bz2 \
-    http://crux.nu/files/patches/$name-$version-1-patches.tar.bz2
+    http://crux64.die.net.au/files/$name-$version-1-patches.tar.bz2
     $name-$version-gcc4.patch 
     qt-x11-free-3.3.5-no-rpath.patch)
 
 build() {
     cd qt-x11-free-$version
 
-    # KDE patches (http://websvn.kde.org/branches/qt/3.3/qt-copy/patches/?rev=507267)
+    # KDE patches (http://websvn.kde.org/branches/qt/3.3/qt-copy/patches/?rev=784432)
     for i in $(ls $SRC/$name-patches/* | sort); do
-        patch -p2 -i $i
+        patch -p0 -i $i
     done
 
     # gcc4 + 64bit issue
@@ -42,12 +42,16 @@ build() {
     sed -i "s|sub-tutorial sub-examples| |" Makefile
     sed -i "s|-O2|$CXXFLAGS|" mkspecs/linux-g++/qmake.conf
     sed -i "s|-I. |$CXXFLAGS -I. |" qmake/Makefile.unix
+    sed -i "s|read acceptance|acceptance=yes|" configure
+    sed -i 's|X11R6/||g' mkspecs/*/*.conf
+    [ "$CC" ] && sed -i "s|gcc|$CC|" mkspecs/*/*.conf
+    [ "$CXX" ] && sed -i "s|g++|$CXX|" mkspecs/*/*.conf
 
-    ./configure -prefix /usr/share/qt \
-        -bindir /usr/bin \
-        -headerdir /usr/include/qt \
+    ./configure -prefix /usr/share/qt3 \
+        -bindir /usr/share/qt3/bin \
+        -headerdir /usr/include/qt3 \
         -libdir /usr/lib \
-        -plugindir /usr/lib/qt \
+        -plugindir /usr/lib/qt3 \
         -platform linux-g++ -release -shared -thread -sm \
         -tablet -nis -verbose -qt-gif -system-zlib \
         -{system-lib,plugin-imgfmt-}{png,jpeg,mng} \
@@ -63,23 +67,29 @@ build() {
     make INSTALL_ROOT=$PKG install
 
     for i in mergetr msg2qm qconfig qembed qvfb; do
-        (cd tools/$i/;make SUBLIBS="-lpng -lmng";mv $i $PKG/usr/bin/)
+        (cd tools/$i/;make SUBLIBS="-lpng -lmng";mv $i $PKG/usr/share/qt3/bin/)
     done
-    mv bin/{findtr,qtrename140} $PKG/usr/bin/
+    mv bin/{findtr,qtrename140} $PKG/usr/share/qt3/bin/
+
+    mkdir -p $PKG/usr/bin
+    for i in $PKG/usr/share/qt3/bin/*
+    do
+	f="`basename $i`"
+	ln -s ../share/qt3/bin/$f $PKG/usr/bin/$f-qt3
+    done
 
     mkdir $PKG/usr/man
     mv doc/man/man1 $PKG/usr/man
 
     rm -rf `find $PKG/usr/share/qt/mkspecs/* | grep -v linux-g++` \
-        $PKG/usr/share/qt/{phrasebooks,templates,translations} \
-        $PKG/usr/include/qt/{j,n}*
-    rm -f $PKG/usr/share/qt/mkspecs/linux-g++/linux-g++
+        $PKG/usr/share/qt3/{phrasebooks,templates,translations} \
+        $PKG/usr/include/qt3/{j,n}*
+    rm -f $PKG/usr/share/qt3/mkspecs/linux-g++/linux-g++
 
-    ln -s ../../bin        $PKG/usr/share/qt/bin
-    ln -s ../../include/qt $PKG/usr/share/qt/include
-    ln -s ../../lib        $PKG/usr/share/qt/lib
-    ln -s ../../lib/qt     $PKG/usr/share/qt/plugins
-    ln -s linux-g++        $PKG/usr/share/qt/mkspecs/default
+    ln -s ../../include/qt3 $PKG/usr/share/qt3/include
+    ln -s ../../lib        $PKG/usr/share/qt3/lib
+    ln -s ../../lib/qt3     $PKG/usr/share/qt3/plugins
+    ln -s linux-g++        $PKG/usr/share/qt3/mkspecs/default
 
     # correct qmake's PRL files (the libraries were placed into /usr/lib*/ and
     # not in our temporary build directory ./work/src/..)
