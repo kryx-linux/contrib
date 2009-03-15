@@ -2,26 +2,20 @@
 # URL: http://ffmpeg.mplayerhq.hu/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at crux dot nu
-# Depends on: amrnb amrwb liba52 faac imlib2 lame libsdl libtheora libxvid x264
+# Depends on: amrnb amrwb faac imlib2 lame libsdl libtheora libxvid x264
 
 name=ffmpeg
-version=20080826
-release=2
-source=(http://www.dcaf-security.org/distfiles/$name-$version-14974.tar.bz2
-	ffmpeg-20080826-14974-missing-header.patch
-	ffmpeg-x264_fix.patch)
+version=0.5
+release=1
+source=(http://ffmpeg.org/releases/$name-$version.tar.bz2)
 
 build() {
-	cd $name
-	patch -p 1 -i $SRC/ffmpeg-20080826-14974-missing-header.patch
-	patch -p 1 -i $SRC/ffmpeg-x264_fix.patch
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--enable-gpl \
-		--enable-liba52 \
-		--enable-liba52bin \
 		--enable-libfaac \
 		--enable-libfaad \
 		--enable-libfaadbin \
