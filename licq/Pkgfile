@@ -6,7 +6,7 @@
 
 name=licq
 version=1.3.6
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build () {
@@ -21,7 +21,10 @@ build () {
 	cd plugins/qt-gui
 #	If you want KDE support, use this configure line instead
 #	./configure --prefix=/usr --with-kde --disable-nls --disable-debug
-	./configure --prefix=/usr --disable-nls --disable-debug
+	./configure --prefix=/usr \
+				--disable-nls \
+				--disable-debug \
+				--with-qt-moc=/usr/bin/moc-qt3
 	make
 	sed -i -e 's|SUBDIRS = src share po|SUBDIRS = src share|' Makefile
 	make DESTDIR=$PKG install
