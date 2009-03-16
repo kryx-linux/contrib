@@ -6,15 +6,18 @@
 
 name=djvulibre
 version=3.5.21
-release=1
+release=2
 source=(http://dl.sourceforge.net/sourceforge/djvu/$name-$version.tar.gz)
 
 build() {
 	cd $name-*
+	export UIC=/usr/bin/uic-qt3
+	export MOC=/usr/bin/moc-qt3
 	./configure --prefix=/usr \
 				--mandir=/usr/man \
 				--disable-i18n \
 				--enable-desktopfiles
+
 	make
 	make DESTDIR=$PKG install
 	rm -rf $PKG/usr/share/djvu/osi/{de,fr,ja,zh}
