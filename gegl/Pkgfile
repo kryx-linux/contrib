@@ -5,14 +5,13 @@
 # Depends on: babl, gtk
 
 name=gegl
-version=0.0.20
+version=0.0.22
 release=1
-source=(ftp://ftp.gimp.org/pub/$name/0.0/$name-$version.tar.bz2 \
-  $name-ffmpeg.patch)
+source=(ftp://ftp.gimp.org/pub/$name/0.0/$name-$version.tar.bz2)
+  
 
 build() {
   cd $name-$version
-  patch -p1 < ../$name-ffmpeg.patch
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
