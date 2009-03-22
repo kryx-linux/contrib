@@ -5,13 +5,12 @@
 # Depends on: glib
 
 name=liboil
-version=0.3.15
+version=0.3.16
 release=1
-source=(http://liboil.freedesktop.org/download/liboil-$version.tar.gz)
+source=(http://liboil.freedesktop.org/download/$name-$version.tar.gz)
 
 build() {
-	cd liboil-$version
-	autoreconf -f -i
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -23,4 +22,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share 
 }
-
