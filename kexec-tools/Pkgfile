@@ -1,0 +1,16 @@
+# Description: kexec-tools for the linux kernel
+# URL:         http://www.selenic.com/mercurial/wiki/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on: 
+
+name=kexec-tools
+version=2.0.0
+release=1
+source=(http://kernel.org/pub/linux/kernel/people/horms/$name/$name-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
+}
