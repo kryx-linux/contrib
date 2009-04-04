@@ -5,14 +5,14 @@
 # Depends on: allegro
 
 name=atanks
-version=3.5
+version=3.5-r1
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
-	$name-3.5-install.patch)
+	$name-3.5-r1-install.patch)
 
 build() {
-	cd sed/PrydeWorX/$name-$version
-	patch -p 1 -i $SRC/$name-3.5-install.patch
+	cd $name-$version
+	patch -p 1 -i $SRC/$name-3.5-r1-install.patch
 	make
 	make DESTDIR=$PKG install
 }
