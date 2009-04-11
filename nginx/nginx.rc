@@ -12,16 +12,10 @@ case $1 in
 	/usr/sbin/nginx
 	;;
     stop)
-	kill -QUIT `cat /var/run/nginx.pid`
-	;;
-    reload)
-	kill -HUP `cat /var/run/nginx.pid`
-	;;
-    upgrade)
-	kill -USR2 `cat /var/run/nginx.pid`
+	kill -9 `cat /var/run/nginx.pid`
 	;;
     *)
-	echo "usage: nginx [start|stop|reload|upgrade]"
+	echo "usage: nginx [start|stop]"
 	;;
 esac
 
