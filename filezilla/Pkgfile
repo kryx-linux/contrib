@@ -4,7 +4,7 @@
 # Depends on:  wxgtk libidn gnutls
 
 name=filezilla
-version=3.2.1
+version=3.2.3.1
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/FileZilla_${version}_src.tar.bz2)
 
@@ -14,7 +14,7 @@ build() {
         --mandir=/usr/man \
         --disable-manualupdatecheck \
         --disable-static \
-        --without-dbus \
+        --disable-locales \
         --prefix=/usr
     make
     make DESTDIR=$PKG install
