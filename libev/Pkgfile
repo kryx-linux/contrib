@@ -4,13 +4,14 @@
 # Packager: Younes Hafri <ycrux@club-internet.fr>
 
 name=libev
-version=3.52
+version=3.53
 release=1
 source=(http://dist.schmorp.de/$name/$name-$version.tar.gz)
 
 build () {
     cd $name-$version
-    ./configure --prefix=/usr \
+# --mandir fsckin b0rken
+    ./configure --prefix=/usr --mandir=$PKG/usr/man \
         --disable-nls --disable-static
     make
     make prefix=$PKG/usr install
