@@ -1,11 +1,11 @@
 .\"     Title: awesomerc
 .\"    Author: 
 .\" Generator: DocBook XSL Stylesheets v1.73.2 <http://docbook.sf.net/>
-.\"      Date: 01/10/2009
+.\"      Date: 04/20/2009
 .\"    Manual: 
 .\"    Source: 
 .\"
-.TH "AWESOMERC" "5" "01/10/2009" "" ""
+.TH "AWESOMERC" "5" "04/20/2009" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -37,77 +37,9 @@ Documentation for the Lua API can be found in the luadoc directory\.
 Colors format in \fBawesome\fR are either standard X color names (blue, darkblue, lightred, etc) or hexadecimal formatted colors (#rrggbb or #rrggbbaa)\. By using hexadecimal format, you can also specifies an alpha channel: that means that #00ff00 will draw pure green, but #00ff00aa will set the alpha channel to \(oqaa\(cq and will blend the green with the color under it\.
 .sp
 .SH "TEXT FORMAT"
-You can use and mix Pango markup and awesome markup in text string\. This allows to format the text rendered in widgets\. Pango markup documentation can be found in the Pango documentation at \fIhttp://library\.gnome\.org/devel/pango/stable/PangoMarkupFormat\.html\fR\.
+You can use Pango markup in text string\. This allows to format the text rendered in widgets\. Pango markup documentation can be found in the Pango documentation at \fIhttp://library\.gnome\.org/devel/pango/stable/PangoMarkupFormat\.html\fR\.
 .sp
-List of \fBawesome\fR markup elements and their attributes:
-.sp
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'bg
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'color: background color
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'image: path to a background image
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'align: background image alignment
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'resize: resize background image to text size
-.RE
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'border
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'color: border color
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'width: border width
-.RE
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'margin
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'left: left margin in pixel
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'right: right margin in pixel
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'top: top margin in pixel
-.RE
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'text
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'align: text alignment
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'shadow: shadow color
-.RE
-.sp
-.RS 4
-\h'-04'\(bu\h'+03'shadow_offset: shadow color offset in pixel
-.RE
-.RE
 A Pango markup example: <span weight="bold" foreground="#336699">\&...</span>\.
-.sp
-An \fBawesome\fR markup example: <text align="right"/>\.
 .sp
 .SH "SEE ALSO"
 awesome(1) awesome\-client(1)
