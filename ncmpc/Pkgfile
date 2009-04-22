@@ -5,24 +5,25 @@
 # Depends on:  ncurses
 
 name=ncmpc
-version=0.11.1
-release=2
-source=(http://hem.bredband.net/kaw/${name}/files/${name}-${version}.tar.gz)
+version=0.14
+release=1
+source=(http://downloads.sourceforge.net/musicpd/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
     
   ./configure \
-    --sysconfdir=/usr/etc \
+    --sysconfdir=/etc \
     --prefix=/usr \
+    --mandir=/usr/man \
     --disable-nls
   make
   make install DESTDIR=$PKG
 
-  mkdir -p $PKG/usr/etc/ncmpc
+  mkdir -p $PKG/etc/ncmpc
 
-  install -m 0644 doc/config.sample $PKG/usr/etc/ncmpc/config
-  install -m 0644 doc/keys.sample $PKG/usr/etc/ncmpc/keys
+  install -m 0644 doc/config.sample $PKG/etc/ncmpc/config
+  install -m 0644 doc/keys.sample $PKG/etc/ncmpc/keys
 
   rm -rf $PKG/usr/share
 }
