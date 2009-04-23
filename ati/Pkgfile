@@ -5,15 +5,15 @@
 # Depends on: mesa3d, gl-select
 
 name=ati
-version=9.2
+version=9.3
 release=1
-source=(http://www2.ati.com/drivers/linux/$name-driver-installer-$version-x86.x86_64.run \
+source=(http://www2.ati.com/drivers/linux/$name-driver-installer-${version/./-}-x86.x86_64.run \
         atieventsd)
 
 build() {
 
-  chmod +x ${name}-driver-installer-$version-x86.x86_64.run
-  ./$name-driver-installer-$version-x86.x86_64.run --extract $SRC/tmp
+  chmod +x ${name}-driver-installer-${version/./-}-x86.x86_64.run
+  ./$name-driver-installer-${version/./-}-x86.x86_64.run --extract $SRC/tmp
 
   # force to build kernel 
   [ ! -z $KVER ] && sed -e "s|^uname_r=.*|uname_r=$KVER|g" \
