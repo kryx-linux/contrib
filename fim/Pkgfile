@@ -4,7 +4,7 @@
 # Depends on:  libungif, libtiff, libpng
 
 name=fim
-version=0.3-alpha
+version=0.3-beta-prerelease
 release=2
 source=(http://download.savannah.nongnu.org/releases/fbi-improved/$name-$version.tar.gz)
 
@@ -14,5 +14,5 @@ build() {
     ./configure --prefix=/usr \
                 --mandir=/usr/man
    make DESTDIR=$PKG install
-   rm -r $PKG/usr/doc
+   rm -r $PKG/usr/share
 }
