@@ -6,13 +6,15 @@
 # Nice to have: libsamplerate fluidsynth
 
 name=lmms
-version=0.4.3
+version=0.4.4
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2 \
+        $name-midi_import.diff)
 
 build() {
   export QTDIR=/usr/share/qt4
   cd $name-$version
+  patch -p1 -i $SRC/$name-midi_import.diff
   mkdir build
   cd build
   cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
