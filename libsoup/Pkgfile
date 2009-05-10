@@ -5,12 +5,12 @@
 # Depends on: glib gnutls libxml2
 
 name=libsoup
-version=2.4.1
+version=2.27.1
 release=1
-source=(http://ftp.gnome.org/pub/GNOME/sources/libsoup/${version%.*}/libsoup-$version.tar.bz2)
+source=(http://ftp.gnome.org/pub/GNOME/sources/$name/${version%.*}/$name-$version.tar.bz2)
 
 build() {
-	cd libsoup-$version
+	cd $name-$version
 
 	# remove gtk-doc
 	sed -i -e "/^SUBDIRS = /s/docs//" Makefile.in
@@ -18,9 +18,9 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--enable-debug=no \
-		--disable-static
+		--disable-static \
+		--without-gnome
 
 	make
 	make DESTDIR=$PKG install
 }
-
