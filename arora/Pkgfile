@@ -1,11 +1,11 @@
 # Description: Cross platform web browser
 # URL: http://arora.googlecode.com
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
+# Packager: Jose V Beneyto, sepen at crux dot nu
 # Depends on: qt4
 
 name=arora
-version=0.6.1
+version=0.7.0
 release=1
 source=(http://arora.googlecode.com/files/$name-$version.tar.gz)
 
@@ -16,6 +16,5 @@ build() {
   make INSTALL_ROOT=$PKG install
   mv $PKG/usr/share/man $PKG/usr
   rm -rf $PKG/usr/share/$name
-  sed -e '/en_US/d' -e 's/Icon=arora/Icon=arora.xpm/' \
-      -i $PKG/usr/share/applications/$name.desktop
+  sed -r '/\[.+\]=/d' -i $PKG/usr/share/applications/$name.desktop
 }
