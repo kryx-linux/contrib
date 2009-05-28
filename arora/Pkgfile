@@ -6,15 +6,18 @@
 
 name=arora
 version=0.7.0
-release=1
+release=2
 source=(http://arora.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  qmake-qt4 PREFIX=/usr
-  make
+  sed -e '/include(locale/d' \
+      -e '/man.*/ s/$$DATADIR/$$PREFIX/' \
+      -i src/src.pro
+
+  qmake-qt4 PREFIX=/usr QMAKE_CXXFLAGS="$CXXFLAGS"
+  make -j1
+
   make INSTALL_ROOT=$PKG install
-  mv $PKG/usr/share/man $PKG/usr
-  rm -rf $PKG/usr/share/$name
   sed -r '/\[.+\]=/d' -i $PKG/usr/share/applications/$name.desktop
 }
