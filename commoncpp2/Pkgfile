@@ -5,18 +5,18 @@
 # Nice to have:	hoard
 
 name=commoncpp2
-version=1.6.1
+version=1.7.3
 release=1
 source=(http://ftp.gnu.org/pub/gnu/commoncpp/$name-$version.tar.gz)
 
 build () {
 	cd $name-$version
-	sed -i 's|! grep -q "$(libdir)" /etc/ld.so.conf|false|' Makefile.in
-	export CFLAGS="${CFLAGS//-fstack-protector/}"
-	export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
+#	sed -i 's|! grep -q "$(libdir)" /etc/ld.so.conf|false|' Makefile.in
+#	export CFLAGS="${CFLAGS//-fstack-protector/}"
+#	export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 	rm -rf $PKG/usr/share/info
-	sed -i s/^Libs:\ /Libs:\ -lz\ / $PKG/usr/lib/pkgconfig/libccext2.pc
+#	sed -i s/^Libs:\ /Libs:\ -lz\ / $PKG/usr/lib/pkgconfig/libccext2.pc
 }
