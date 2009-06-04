@@ -10,7 +10,8 @@ release=2
 source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/$name-$version.tar.gz
         ntpd
         ntpdate
-        ntp.conf)
+        ntp.conf
+        ntp-64bit.diff)
 
 build () {
    mkdir -p $PKG/etc/{rc.d,ntp} \
@@ -20,6 +21,8 @@ build () {
       $PKG/usr/man/{man8,man5}
 
    cd $name-$version
+
+   patch -p1 -i ../ntp-64bit.diff
 
    ./configure \
       --prefix=/usr \
