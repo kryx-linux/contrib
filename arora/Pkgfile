@@ -6,7 +6,7 @@
 
 name=arora
 version=0.7.1
-release=1
+release=2
 source=(http://arora.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
@@ -16,7 +16,7 @@ build() {
       -i src/src.pro
 
   qmake PREFIX=/usr QMAKE_CXXFLAGS="$CXXFLAGS"
-  make -j1
+  make
 
   make INSTALL_ROOT=$PKG install
   sed -r '/\[.+\]=/d' -i $PKG/usr/share/applications/$name.desktop
