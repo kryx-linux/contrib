@@ -5,8 +5,8 @@
 # Depends on: qt4
 
 name=arora
-version=0.7.0
-release=2
+version=0.7.1
+release=1
 source=(http://arora.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
@@ -15,7 +15,7 @@ build() {
       -e '/man.*/ s/$$DATADIR/$$PREFIX/' \
       -i src/src.pro
 
-  qmake-qt4 PREFIX=/usr QMAKE_CXXFLAGS="$CXXFLAGS"
+  qmake PREFIX=/usr QMAKE_CXXFLAGS="$CXXFLAGS"
   make -j1
 
   make INSTALL_ROOT=$PKG install
