@@ -5,10 +5,9 @@
 # Depends on: gtk
 
 name=flock
-version=2.0.3
+version=2.5
 release=1
-source=(http://mirror2.flock.com/releases/$version/$name-$version.en-US.linux-i686.tar.bz2 \
-        $name.desktop $name.png)
+source=(http://mirror2.flock.com/releases/$version/$name-$version.en-US.linux-i686.tar.bz2)
 
 build() {
   install -d $PKG/usr/{bin,lib}
@@ -16,5 +15,5 @@ build() {
   mv $name $PKG/usr/lib
   ln -sf /usr/lib/$name/$name $PKG/usr/bin/$name-browser
   install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
-  install -D -m 0644 $SRC/$name.png $PKG/usr/share/pixmaps/$name.png
+  install -D -m 0644 $PKG/usr/lib/flock/chrome/icons/default/default48.png $PKG/usr/share/pixmaps/$name.png
 }
