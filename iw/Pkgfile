@@ -4,13 +4,14 @@
 # Depends on:  libnl
 
 name=iw
-version=0.9.12
+version=0.9.14
 release=1
 source=(http://wireless.kernel.org/download/$name/$name-$version.tar.bz2
     version.sh)
 
 build() { 
     cd $name-$version
+    sed -i "s/#VER#/$version/" ../version.sh
     cp ../version.sh .
     make
     MANDIR=/usr/man make DESTDIR=$PKG install

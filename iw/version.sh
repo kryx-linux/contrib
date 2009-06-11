@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="0.9.9"
-OUT="version.h"
+VERSION="#VER#"
+OUT="$1"
 
-echo "#define IW_VERSION \"$VERSION-nogit\"" > "$OUT"
+echo "const char iw_version[] = \"$VERSION\";" > "$OUT"
