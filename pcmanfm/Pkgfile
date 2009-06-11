@@ -2,21 +2,19 @@
 # URL:         http://pcmanfm.sourceforge.net/
 # Packager:    Ricardo Oliveira, crux at roliveira dot eu
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  gtk hal startup-notification gamin shared-mime-info desktop-file-utils xorg-libxcomposite
+# Depends on:  gtk hal startup-notification gamin shared-mime-info desktop-file-utils xorg-libxcomposite intltool
 
 name=pcmanfm
-version=0.5
+version=0.5.1
 release=1
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz $name-${version}_nointltoolv2.patch)
+source=(http://dfn.dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
     cd $name-$version
-    patch -p1 -i ../pcmanfm-0.5_nointltoolv2.patch
-    autoreconf --force --install --verbose
     ./configure \
         --prefix=/usr \
         --enable-hal
-    sed -i '/ENABLE_NLS/s/1/0/' config.h
     make
     make DESTDIR=$PKG install
+    rm -rf $PKG/usr/share/locale
 }
