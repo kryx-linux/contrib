@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd /usr/share/teeworlds
-exec ./teeworlds $*
+MALLOC_CHECK_=0 exec ./teeworlds $*
 
