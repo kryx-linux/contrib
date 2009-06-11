@@ -4,7 +4,7 @@
 
 case $1 in
     start)
-	if [ -s /var/run/nginx.pid ]
+	if [ -s /var/run/nginx.pid -a ! -z "`pgrep nginx`" ]
 	then
 	    echo "nginx is already running"
 	    exit 1
@@ -12,7 +12,8 @@ case $1 in
 	/usr/sbin/nginx
 	;;
     stop)
-	kill -9 `cat /var/run/nginx.pid`
+	killall -9 nginx;
+	rm /var/run/nginx.pid
 	;;
     *)
 	echo "usage: nginx [start|stop]"
