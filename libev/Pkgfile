@@ -4,7 +4,7 @@
 # Packager: Younes Hafri <ycrux@club-internet.fr>
 
 name=libev
-version=3.53
+version=3.6
 release=1
 source=(http://dist.schmorp.de/$name/$name-$version.tar.gz)
 
@@ -15,5 +15,4 @@ build () {
         --disable-nls --disable-static
     make
     make prefix=$PKG/usr install
-
 }
