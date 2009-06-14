@@ -4,12 +4,12 @@
 # Packager: Robert McMeekin, rrm3 at rrm3 dot org
 
 name=libevent
-version=1.4.9
+version=1.4.11
 release=1
-source=(http://www.monkey.org/~provos/libevent-$version-stable.tar.gz)
+source=(http://www.monkey.org/~provos/$name-$version-stable.tar.gz)
 
 build() {
-	cd libevent-$version-stable
+	cd $name-$version-stable
 
 	./configure \
 		--prefix=/usr \
