@@ -10,18 +10,18 @@ release=1
 source=(http://openoffice-atl.osuosl.org/stable/$version/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
 
 build() {
-	cd OO*/RPMS
+    cd OO*/RPMS
     for i in *.rpm; do
         rpm2targz $i
         tar xzf ${i%.*}.tar.gz
     done
-	
-	mkdir -p $PKG/usr/lib/openoffice
-	mv opt/openoffice*/* $PKG/usr/lib/openoffice
-	cd $PKG/usr/lib/openoffice
-	ln -sf basis3.1 basis-link
 
-	mkdir -p $PKG/usr/bin
-	ln -sf /usr/lib/openoffice/program/soffice $PKG/usr/bin/soffice
-	ln -sf /usr/lib/openoffice/program/spadmin $PKG/usr/bin/spadmin
+    mkdir -p $PKG/usr/lib/openoffice
+    mv opt/openoffice*/* $PKG/usr/lib/openoffice
+    cd $PKG/usr/lib/openoffice
+    ln -sf basis3.1 basis-link
+
+    mkdir -p $PKG/usr/bin
+    ln -sf /usr/lib/openoffice/program/soffice $PKG/usr/bin/soffice
+    ln -sf /usr/lib/openoffice/program/spadmin $PKG/usr/bin/spadmin
 }
