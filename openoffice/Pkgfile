@@ -5,28 +5,23 @@
 # Depends on: mesa3d, xorg-libxaw, xorg-libxcursor, xorg-libxft, xorg-libxinerama, xorg-libxi, xorg-libxrandr, rpm2targz
 
 name=openoffice
-version=3.0.0
+version=3.1.0
 release=1
 source=(http://openoffice-atl.osuosl.org/stable/$version/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
 
 build() {
-	mkdir $SRC/tmp
-	export TMPDIR=$SRC/tmp
 	cd OO*/RPMS
-	for f in *.rpm; do rpm2targz $f; done
-	for f in *.tar.gz; do tar xvfz $f -C $PKG; done
+    for i in *.rpm; do
+        rpm2targz $i
+        tar xzf ${i%.*}.tar.gz
+    done
 	
-	rm -rf $PKG/usr/*
 	mkdir -p $PKG/usr/lib/openoffice
-	mv $PKG/opt/openoffice*/* $PKG/usr/lib/openoffice
+	mv opt/openoffice*/* $PKG/usr/lib/openoffice
 	cd $PKG/usr/lib/openoffice
-	ln -sf basis3.0 basis-link
+	ln -sf basis3.1 basis-link
 
 	mkdir -p $PKG/usr/bin
 	ln -sf /usr/lib/openoffice/program/soffice $PKG/usr/bin/soffice
 	ln -sf /usr/lib/openoffice/program/spadmin $PKG/usr/bin/spadmin
-
-	rm -r $PKG/opt
-	chown root.root $PKG -R
-
 }
