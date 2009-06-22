@@ -1,16 +1,16 @@
-# Description: A full featured cross platform office suite (binary)
+# Description: full featured cross platform office suite (binary)
 # URL: http://www.openoffice.org
 # Maintainer: Bartlomiej Palmowski, rotwang at crux dot org dot pl
 # Packager: Simone Rota, sip at crux dot nu
-# Depends on: mesa3d, xorg-libxaw, xorg-libxcursor, xorg-libxft, xorg-libxinerama, xorg-libxi, xorg-libxrandr, rpm2targz
+# Depends on: mesa3d xorg-libxaw xorg-libxcursor xorg-libxft xorg-libxinerama xorg-libxi xorg-libxrandr
 
 name=openoffice
 version=3.1.0
-release=1
+release=2
 source=(http://openoffice-atl.osuosl.org/stable/$version/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
 
 build() {
-    cd OO*/RPMS
+    cd OOO*/RPMS
     for i in *.rpm; do
         rpm2targz $i
         tar xzf ${i%.*}.tar.gz
@@ -24,4 +24,34 @@ build() {
     mkdir -p $PKG/usr/bin
     ln -sf /usr/lib/openoffice/program/soffice $PKG/usr/bin/soffice
     ln -sf /usr/lib/openoffice/program/spadmin $PKG/usr/bin/spadmin
+
+    # install fancy desktop files
+    mkdir -p $PKG/usr/share/applications
+    cd share/xdg/
+    for i in *.desktop; do
+        sed '/Exec/s/openoffice\.org3/soffice/' $i > $PKG/usr/share/applications/$i
+    done
+    sed '/Exec/s/openoffice\.org3-printeradmin/spadmin/' printeradmin.desktop > $PKG/usr/share/applications/printeradmin.desktop
+
+    # icons
+    cd $SRC/OOO*/RPMS/desktop-integration
+    rpm2targz openoffice.org3.1-freedesktop-menus-3.1-9393.noarch.rpm
+    tar xzf openoffice.org3.1-freedesktop-menus-3.1-9393.noarch.tar.gz
+    mkdir -p $PKG/usr/share/mime
+    cp -r usr/share/mime/* $PKG/usr/share/mime
+    mkdir -p $PKG/usr/share/icons
+    cp -r usr/share/icons/hicolor $PKG/usr/share/icons
+
+    # remove junk files and dont care about return values
+    {
+        find $PKG \(\
+            -iname '*readme*' -o \
+            -iname '*changelog*' -o \
+            -name '*TODO*' -o \
+            -iname '*news*' -o \
+            -iname '*license*' -o \
+            -iname '*credits*' \
+         \) -exec rm -rf '{}' \;
+        rm -rf $PKG/usr/lib/openoffice/share/xdg
+    } || true
 }
