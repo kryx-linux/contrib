@@ -5,9 +5,9 @@
 # Depends on: ant
 
 name=yacy
-version=0.7
-release=2
-source=(http://www.yacy.net/release/${name}_v${version}_20090121_5494.tar.gz
+version=0.90
+release=1
+source=(http://www.yacy.net/release/${name}_v${version}_20090623_6128.tar.gz
 	yacy-start.sh yacy-stop.sh yacy.rc)
 
 build() {
@@ -75,4 +75,3 @@ build() {
 	install -m 0750 -g yacy $SRC/yacy-stop.sh $PKG/usr/sbin/yacy-stop
 	install -m 0750 -D $SRC/yacy.rc $PKG/etc/rc.d/yacy
 }
-
