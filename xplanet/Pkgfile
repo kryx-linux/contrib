@@ -5,17 +5,18 @@
 # Depends on: xorg libtiff libpng libungif
 
 name=xplanet
-version=1.2.0
-release=2
-source=(http://dl.sourceforge.net/sourceforge/xplanet/xplanet-$version.tar.gz
-	xplanet-1.2.0-gcc43.patch)
+version=1.2.1
+release=1
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
-	cd xplanet-$version
-	patch -p 1 -i $SRC/xplanet-1.2.0-gcc43.patch
-	./configure --prefix=/usr
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man
+
 	make
 	make DESTDIR=$PKG install
 	find $PKG -name "README" -type f -delete
 }
-
