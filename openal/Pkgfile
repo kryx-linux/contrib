@@ -5,9 +5,10 @@
 # Depends on: alsa-lib cmake
 
 name=openal
-version=1.6.372
+version=1.7.411
 release=1
-source=(http://connect.creativelabs.com/openal/Downloads/openal-soft-$version.tar.bz2)
+source=(http://dcaf-security.org/distfiles/openal-soft-$version.tar.bz2)
+#source=(http://connect.creativelabs.com/openal/Downloads/openal-soft-$version.tar.bz2)
 
 build() {
 	cd openal-soft-$version
@@ -23,4 +24,3 @@ build() {
 	make
 	make DESTDIR=$PKG install
 }
-
