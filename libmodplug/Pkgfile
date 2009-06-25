@@ -5,14 +5,13 @@
 # Depends on:
 
 name=libmodplug
-version=0.8.4
+version=0.8.7
 release=1
-source=(http://dl.sourceforge.net/sourceforge/modplug-xmms/libmodplug-$version.tar.gz)
+source=(http://dl.sourceforge.net/sourceforge/modplug-xmms/$name-$version.tar.gz)
 
 build() {
-	cd libmodplug-$version
+	cd $name-$version
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install 
 }
-
