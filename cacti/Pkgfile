@@ -5,7 +5,7 @@
 # Depends on: rrdtool mod_php mysql net-snmp php-mysql php
 
 name=cacti
-version=0.8.7d
+version=0.8.7e
 release=1
 source=(http://www.$name.net/downloads/$name-$version.tar.gz)
 
@@ -16,5 +16,5 @@ build () {
   sed -i -e "s|\$config\['url_path'] = '/'|\$config\['url_path'] = '/cacti/'|g" \
     $PKG/var/www/htdocs/$name/include/global.php
   rm $PKG/var/www/htdocs/cacti/{README,LICENSE}
-  rm $PKG/var/www/htdocs/cacti/docs/{CHANGELOG,CONTRIB,INSTALL,README,REQUIREMENTS,UPGRADE}
+  rm $PKG/var/www/htdocs/cacti/docs/{CHANGELOG,CONTRIB,README}
 }
