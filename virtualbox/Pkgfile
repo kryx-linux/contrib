@@ -5,9 +5,9 @@
 # Depends on: bin86,dev86,hal,libsdl,libidl,qt4,xalan-c,iasl,xorg-libxmu,libcap
 
 name=virtualbox
-version=2.2.4
+version=3.0.0
 release=1
-source=(http://download.virtualbox.org/$name/${version%-*}/VirtualBox-$version-OSE.tar.bz2 \
+source=(http://download.virtualbox.org/$name/${version%-*}/VirtualBox-${version}-OSE.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
 
 build() {
@@ -26,8 +26,8 @@ build() {
   cd out/linux.x86/release/bin/src
   make $KARG
   # install kernel modules
-  install -D -m 0644 vboxdrv.ko $PKG/lib/modules/$(uname -r)/kernel/drivers/misc/vboxdrv.ko
-  install -D -m 0644 vboxnetflt.ko $PKG/lib/modules/$(uname -r)/kernel/drivers/misc/vboxnetflt.ko
+  install -d $PKG/lib/modules/$(uname -r)/kernel/drivers/misc
+  install -m 0644 *.ko $PKG/lib/modules/$(uname -r)/kernel/drivers/misc
   # remove superfluous files
   rm -rf $SRC/VirtualBox-${version%-*}_OSE/out/linux.x86/release/bin/{sdk/samples,testcase,nls*}
   find $SRC/VirtualBox-${version%-*}_OSE/out/linux.x86/release/bin -type f -name 'tst*' -exec rm -rf {} \;
