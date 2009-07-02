@@ -5,17 +5,17 @@
 # Depends on:
 
 name=postgresql
-version=8.3.7
+version=8.4.0
 release=1
 source=(ftp://ftp9.de.postgresql.org/unix/databases/postgresql/source/v$version/$name-$version.tar.bz2 postgresql)
 
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr --disable-nls
+  ./configure --prefix=/usr --disable-nls --mandir=/usr/man
   make
   make DESTDIR=$PKG install
-  rm -rf $PKG/usr/doc
+  rm -rf $PKG/usr/share/doc
 
   mkdir -p $PKG/etc/rc.d/
   install -D -m 755 ../postgresql $PKG/etc/rc.d/postgresql
