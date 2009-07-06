@@ -5,19 +5,19 @@
 # Depends on: glib help2man
 
 name=preload
-version=0.6.3
+version=0.6.4
 release=1
-source=(http://dl.sourceforge.net/sourceforge/preload/preload-$version.tar.gz
+source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz
 	rc.preload
-	$name-$version-memcached-default.patch
-	$name-$version-statedir-fix.patch
-	$name-$version-check-help2man.patch)
+	$name-0.6.3-memcached-default.patch
+	$name-0.6.3-statedir-fix.patch
+	$name-0.6.3-check-help2man.patch)
 
 build() {
 	cd preload-$version
-	patch -p 1 -i $SRC/$name-$version-memcached-default.patch
-	patch -p 1 -i $SRC/$name-$version-statedir-fix.patch
-	patch -p 1 -i $SRC/$name-$version-check-help2man.patch
+	patch -p 1 -i $SRC/$name-0.6.3-memcached-default.patch
+	patch -p 1 -i $SRC/$name-0.6.3-statedir-fix.patch
+	patch -p 1 -i $SRC/$name-0.6.3-check-help2man.patch
 	autoreconf
 
 	./configure \
