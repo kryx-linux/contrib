@@ -5,13 +5,12 @@
 # Depends on:  intltool gtk xorg-libxscrnsaver startup-notification nss
 
 name=pidgin
-version=2.5.6
+version=2.5.8
 release=1
-source=(http://master.dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
+source=(http://sourceforge.net/projects/$name/files/Pidgin/$name-$version.tar.bz2)
 
 build () {
-    cd pidgin-$version
-    sed -i 's/x$GCONFTOOL/xno/' configure
+    cd $name-$version
     ./configure --prefix=/usr \
         --mandir=/usr/man \
         --disable-schemas-install \
@@ -29,4 +28,4 @@ build () {
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
-} 
+}
