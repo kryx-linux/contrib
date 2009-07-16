@@ -11,7 +11,7 @@ source=(http://wireless.kernel.org/download/$name/$name-$version.tar.bz2
 
 build() { 
     cd $name-$version
-    sed -i "s/#VER#/$version/" ../version.sh > version.sh
+    sed "s/#VER#/$version/" ../version.sh > version.sh
     make
     MANDIR=/usr/man make DESTDIR=$PKG install
 }
