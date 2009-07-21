@@ -5,15 +5,16 @@
 # Depends on: qt4
 
 name=arora
-version=0.7.1
-release=2
+version=0.8.0
+release=1
 source=(http://arora.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  sed -e '/include(locale/d' \
-      -e '/man.*/ s/$$DATADIR/$$PREFIX/' \
-      -i src/src.pro
+  find . -type f -name '*.pro' -exec \
+    sed -e '/include(locale/d' \
+        -e '/man.*/ s/$$DATADIR/$$PREFIX/' \
+        -i {} \;
 
   qmake PREFIX=/usr QMAKE_CXXFLAGS="$CXXFLAGS"
   make
