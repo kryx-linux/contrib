@@ -7,13 +7,13 @@
 # you'll want nslookup (from bind) OR libasyncns-python
 
 name=gajim
-version=0.12.1
-release=2
+version=0.12.3
+release=1
 source=(http://www.gajim.org/downloads/$name-$version.tar.bz2)
 		
 build() {
 	cd $name-$version
-	wget http://jabber.org/servers.xml -O data/other/servers.xml
+	wget http://xmpp.org/services/services.xml -O data/other/servers.xml
 	./configure --prefix=/usr \
 				--disable-nls \
 				--mandir=/usr/man
