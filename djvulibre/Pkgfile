@@ -1,23 +1,21 @@
 # Description: GPL'ed reader of DjVu format
-# URL: http://djvulibre.djvuzone.org/
+# URL: http://djvu.sourceforge.net/
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
 # Packager: Oleksiy V. Khilkevich, centericq at ukr dot net
-# Depends on: qt3
+# Depends on: libjpeg
 
 name=djvulibre
-version=3.5.21
-release=2
+version=3.5.22
+release=1
 source=(http://dl.sourceforge.net/sourceforge/djvu/$name-$version.tar.gz)
 
 build() {
 	cd $name-*
-	export UIC=/usr/bin/uic-qt3
-	export MOC=/usr/bin/moc-qt3
 	./configure --prefix=/usr \
 				--mandir=/usr/man \
 				--disable-i18n \
+				--disable-djview \
 				--enable-desktopfiles
-
 	make
 	make DESTDIR=$PKG install
 	rm -rf $PKG/usr/share/djvu/osi/{de,fr,ja,zh}
