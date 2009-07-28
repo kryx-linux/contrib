@@ -50,6 +50,7 @@ drwxr-xr-x	root/root	usr/lib/jedit/macros/Files/
 -rw-r--r--	root/root	usr/lib/jedit/macros/Files/Next_Dirty_Buffer.bsh
 -rw-r--r--	root/root	usr/lib/jedit/macros/Files/Open_Path.bsh
 -rw-r--r--	root/root	usr/lib/jedit/macros/Files/Open_Selection.bsh
+-rw-r--r--	root/root	usr/lib/jedit/macros/Files/Send_Buffer_To_Next_Split.bsh
 -rw-r--r--	root/root	usr/lib/jedit/macros/Files/Toggle_ReadOnly.bsh
 drwxr-xr-x	root/root	usr/lib/jedit/macros/Interface/
 -rw-r--r--	root/root	usr/lib/jedit/macros/Interface/Decrease_Font_Size.bsh
@@ -99,6 +100,7 @@ drwxr-xr-x	root/root	usr/lib/jedit/macros/Text/
 -rw-r--r--	root/root	usr/lib/jedit/macros/Text/Single_Space_Buffer.bsh
 drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/actionscript.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/ada.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/ada95.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/antlr.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/apacheconf.xml
@@ -123,6 +125,7 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/chill.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/cil.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/clips.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/clojure.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/cmake.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/cobol.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/coldfusion.xml
@@ -133,6 +136,7 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/cvs-commit.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/d.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/django.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/dot.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/doxygen.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/dsssl.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/eiffel.xml
@@ -144,6 +148,7 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/fortran.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/foxpro.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/freemarker.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/gcbasic.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/gettext.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/gnuplot.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/groovy.xml
@@ -153,6 +158,7 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/htaccess.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/html.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/i4gl.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/ical.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/icon.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/idl.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/inform.xml
@@ -162,8 +168,10 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/io.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/java.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/javacc.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/javafx.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/javascript.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/jcl.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/jedit-actions.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/jhtml.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/jmk.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/jsp.xml
@@ -182,6 +190,7 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/mqsc.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/myghty.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/mysql.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/n3.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/netrexx.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/nqc.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/nsis2.xml
@@ -200,11 +209,13 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/postscript.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/povray.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/powerdynamo.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/powershell.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/progress.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/prolog.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/props.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/psp.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/ptl.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/pure.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/pvwave.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/pyrex.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/python.xml
@@ -236,6 +247,8 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/sqr.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/squidconf.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/ssharp.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/stataado.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/statado.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/svn-commit.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/swig.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/tcl.xml
@@ -243,8 +256,10 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/texinfo.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/text.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/tpl.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/tsp.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/tsql.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/tthtml.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/turbobasic.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/twiki.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/typoscript.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/uscript.xml
@@ -252,9 +267,12 @@ drwxr-xr-x	root/root	usr/lib/jedit/modes/
 -rw-r--r--	root/root	usr/lib/jedit/modes/velocity.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/verilog.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/vhdl.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/vrml2.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/xml.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/xq.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/xsl.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/yab.xml
+-rw-r--r--	root/root	usr/lib/jedit/modes/yaml.xml
 -rw-r--r--	root/root	usr/lib/jedit/modes/zpt.xml
 drwxr-xr-x	root/root	usr/lib/jedit/properties/
 drwxr-xr-x	root/root	usr/lib/jedit/startup/
