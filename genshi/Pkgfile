@@ -12,5 +12,4 @@ source=(http://ftp.edgewall.com/pub/genshi/Genshi-$version.tar.bz2)
 build() {
   cd Genshi-$version
   python setup.py install --prefix=/usr --root=$PKG
-  rm -r $PKG/usr/lib/python2.6/site-packages/Genshi-0.5.1-py2.6.egg-info
 }
