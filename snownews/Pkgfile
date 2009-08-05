@@ -5,15 +5,14 @@
 # Depends on: ncurses libxml2 gettext perl
 
 name=snownews
-version=1.5.10
+version=1.5.11
 release=1
 source=(http://kiza.kcore.de/software/$name/download/$name-$version.tar.gz \
-        Makefile.patch $name.1.in.patch)
+        Makefile.patch)
 
 build() {
   cd $name-$version
   patch -p0 -i $SRC/Makefile.patch
-  patch -p0 -i $SRC/$name.1.in.patch
   ./configure --prefix=/usr \
               --disable-nls
   make
