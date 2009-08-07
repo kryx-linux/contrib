@@ -1,0 +1,46 @@
+diff -Nru getmail-4.8.0.orig/setup.py getmail-4.8.0/setup.py
+--- getmail-4.8.0.orig/setup.py	2008-03-05 21:32:57.000000000 +1000
++++ getmail-4.8.0/setup.py	2008-03-05 21:35:24.000000000 +1000
+@@ -35,16 +35,8 @@
+         # hack hack hack hack hack hack hack
+         datadir = args[pos + 1]
+ 
+-GETMAILDOCDIR = os.path.join(
+-    datadir or prefix,
+-    'share',
+-    'doc',
+-    'getmail-%s' % __version__
+-)
+-
+ GETMAILMANDIR = os.path.join(
+     datadir or prefix,
+-    'share',
+     'man',
+     'man1'
+ )
+@@ -98,25 +90,6 @@
+     'getmail_mbox'
+     ],
+     data_files=[
+-        (GETMAILDOCDIR, [
+-            './README',
+-            './getmail.spec',
+-            'docs/BUGS',
+-            'docs/COPYING',
+-            'docs/CHANGELOG',
+-            'docs/TODO',
+-            'docs/THANKS',
+-            'docs/configuration.html',
+-            'docs/configuration.txt',
+-            'docs/documentation.html',
+-            'docs/documentation.txt',
+-            'docs/faq.html',
+-            'docs/faq.txt',
+-            'docs/getmaildocs.css',
+-            'docs/getmailrc-examples',
+-            'docs/troubleshooting.html',
+-            'docs/troubleshooting.txt',
+-        ]),
+         (GETMAILMANDIR, [
+             'docs/getmail.1',
+             'docs/getmail_fetch.1',
