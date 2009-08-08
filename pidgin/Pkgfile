@@ -7,7 +7,7 @@
 
 name=pidgin
 version=2.5.8
-release=2
+release=3
 source=(http://sourceforge.net/projects/$name/files/Pidgin/$name-$version.tar.bz2)
 
 build () {
@@ -24,7 +24,9 @@ build () {
 	--disable-perl \
         --disable-gtkspell \
 	--disable-avahi \
-	--disable-dbus
+	--disable-dbus \
+        --disable-gstreamer
+
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
