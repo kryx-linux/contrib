@@ -10,5 +10,5 @@ source=(http://dl.sourceforge.net/nmon/lmon${version}.c)
 
 build() {
   install -d -m 755 $PKG/usr/bin
-  cc -lncurses -DLARGEMEM -o $PKG/usr/bin/nmon lmon${version}.c
+  cc -lncurses -DJFS -DLARGEMEM -o $PKG/usr/bin/nmon lmon${version}.c
 }
