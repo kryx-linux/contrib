@@ -15,6 +15,12 @@ build() {
    cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_MAN_DIR=/usr/man
 
    make && make DESTDIR=$PKG install
+   
+   #CMAKE_MAN_DIR seems to be ignored..
+   rm -rf $PKG/usr/share/man/de
+   mv $PKG/usr/share/man $PKG/usr
+
+   rm -rf $PKG/usr/share/man
    rm -rf $PKG/usr/man/pl
    rm -rf $PKG/usr/share/doc
    rm -rf $PKG/usr/share/$name/scripts/{ChangeLog,NEWS,TODO}
