@@ -3,6 +3,15 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/lmms
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/lmms/
+-rw-r--r--	root/root	usr/include/lmms/Controller.h
+-rw-r--r--	root/root	usr/include/lmms/ControllerConnection.h
+-rw-r--r--	root/root	usr/include/lmms/ControllerConnectionDialog.h
+-rw-r--r--	root/root	usr/include/lmms/ControllerDialog.h
+-rw-r--r--	root/root	usr/include/lmms/ControllerRackView.h
+-rw-r--r--	root/root	usr/include/lmms/ControllerView.h
+-rw-r--r--	root/root	usr/include/lmms/LfoController.h
+-rw-r--r--	root/root	usr/include/lmms/MidiController.h
+-rw-r--r--	root/root	usr/include/lmms/PeakController.h
 -rw-r--r--	root/root	usr/include/lmms/about_dialog.h
 -rw-r--r--	root/root	usr/include/lmms/aeffectx.h
 -rw-r--r--	root/root	usr/include/lmms/atomic_int.h
@@ -37,12 +46,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/combobox.h
 -rw-r--r--	root/root	usr/include/lmms/combobox_model.h
 -rw-r--r--	root/root	usr/include/lmms/config_mgr.h
--rw-r--r--	root/root	usr/include/lmms/controller.h
--rw-r--r--	root/root	usr/include/lmms/controller_connection.h
--rw-r--r--	root/root	usr/include/lmms/controller_connection_dialog.h
--rw-r--r--	root/root	usr/include/lmms/controller_dialog.h
--rw-r--r--	root/root	usr/include/lmms/controller_rack_view.h
--rw-r--r--	root/root	usr/include/lmms/controller_view.h
 -rw-r--r--	root/root	usr/include/lmms/cpuload_widget.h
 -rw-r--r--	root/root	usr/include/lmms/custom_events.h
 -rw-r--r--	root/root	usr/include/lmms/debug.h
@@ -100,7 +103,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/ladspa_manager.h
 -rw-r--r--	root/root	usr/include/lmms/lcd_spinbox.h
 -rw-r--r--	root/root	usr/include/lmms/led_checkbox.h
--rw-r--r--	root/root	usr/include/lmms/lfo_controller.h
 -rw-r--r--	root/root	usr/include/lmms/lmms_basics.h
 -rw-r--r--	root/root	usr/include/lmms/lmms_constants.h
 -rw-r--r--	root/root	usr/include/lmms/lmms_math.h
@@ -114,7 +116,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/midi_alsa_raw.h
 -rw-r--r--	root/root	usr/include/lmms/midi_alsa_seq.h
 -rw-r--r--	root/root	usr/include/lmms/midi_client.h
--rw-r--r--	root/root	usr/include/lmms/midi_controller.h
 -rw-r--r--	root/root	usr/include/lmms/midi_dummy.h
 -rw-r--r--	root/root	usr/include/lmms/midi_event_processor.h
 -rw-r--r--	root/root	usr/include/lmms/midi_oss.h
@@ -133,7 +134,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/panning_constants.h
 -rw-r--r--	root/root	usr/include/lmms/pattern.h
 -rw-r--r--	root/root	usr/include/lmms/pch.h
--rw-r--r--	root/root	usr/include/lmms/peak_controller.h
 -rw-r--r--	root/root	usr/include/lmms/piano.h
 -rw-r--r--	root/root	usr/include/lmms/piano_roll.h
 -rw-r--r--	root/root	usr/include/lmms/pixmap_button.h
@@ -184,6 +184,7 @@ drwxr-xr-x	root/root	usr/include/lmms/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/lmms/
 drwxr-xr-x	root/root	usr/lib/lmms/ladspa/
+-rwxr-xr-x	root/root	usr/lib/lmms/ladspa/calf.so
 -rwxr-xr-x	root/root	usr/lib/lmms/ladspa/caps.so
 -rwxr-xr-x	root/root	usr/lib/lmms/ladspa/cmt.so
 -rwxr-xr-x	root/root	usr/lib/lmms/ladspa/comb_1190.so
@@ -1988,8 +1989,11 @@ drwxr-xr-x	root/root	usr/share/lmms/themes/default/
 -rw-r--r--	root/root	usr/share/lmms/themes/default/plugins.png
 -rw-r--r--	root/root	usr/share/lmms/themes/default/ports.png
 -rw-r--r--	root/root	usr/share/lmms/themes/default/pr_black_key.png
+-rw-r--r--	root/root	usr/share/lmms/themes/default/pr_black_key_pressed.png
 -rw-r--r--	root/root	usr/share/lmms/themes/default/pr_white_key_big.png
+-rw-r--r--	root/root	usr/share/lmms/themes/default/pr_white_key_big_pressed.png
 -rw-r--r--	root/root	usr/share/lmms/themes/default/pr_white_key_small.png
+-rw-r--r--	root/root	usr/share/lmms/themes/default/pr_white_key_small_pressed.png
 -rw-r--r--	root/root	usr/share/lmms/themes/default/preset_file.png
 -rw-r--r--	root/root	usr/share/lmms/themes/default/project_export.png
 -rw-r--r--	root/root	usr/share/lmms/themes/default/project_file.png
