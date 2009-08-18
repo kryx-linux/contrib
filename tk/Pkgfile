@@ -5,7 +5,7 @@
 # Depends on: xorg-libxft tcl
 
 name=tk
-version=8.5.6
+version=8.5.7
 release=1
 source=(http://downloads.sourceforge.net/sourceforge/tcl/$name$version-src.tar.gz)
 
@@ -36,6 +36,6 @@ build() {
 	rm $PKG/usr/lib/tk${version%.*}/images/README
 
 	ln -s wish${version%.*} $PKG/usr/bin/wish
-	ln -s /usr/lib/libtk${version%.*}.so $PKG/usr/lib/libtk.so
+	ln -s libtk${version%.*}.so $PKG/usr/lib/libtk.so
 	chmod -c -R u+w $PKG/usr/man
 }
