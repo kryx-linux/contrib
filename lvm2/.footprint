@@ -4,10 +4,13 @@ drwx------	root/root	etc/lvm/archive/
 drwx------	root/root	etc/lvm/backup/
 -rw-r--r--	root/root	etc/lvm/lvm.conf
 drwxr-xr-x	root/root	lib/
+lrwxrwxrwx	root/root	lib/libdevmapper.a -> libdevmapper.a.1.02
+-r-xr-xr-x	root/root	lib/libdevmapper.a.1.02
 lrwxrwxrwx	root/root	lib/libdevmapper.so -> libdevmapper.so.1.02
 -r-xr-xr-x	root/root	lib/libdevmapper.so.1.02
 drwxr-xr-x	root/root	sbin/
 -r-xr-xr-x	root/root	sbin/dmsetup
+-r-xr-xr-x	root/root	sbin/dmsetup.static
 -r-xr-xr-x	root/root	sbin/fsadm
 lrwxrwxrwx	root/root	sbin/lvchange -> lvm
 lrwxrwxrwx	root/root	sbin/lvconvert -> lvm
@@ -15,6 +18,7 @@ lrwxrwxrwx	root/root	sbin/lvcreate -> lvm
 lrwxrwxrwx	root/root	sbin/lvdisplay -> lvm
 lrwxrwxrwx	root/root	sbin/lvextend -> lvm
 -r-xr-xr-x	root/root	sbin/lvm
+-r-xr-xr-x	root/root	sbin/lvm.static
 lrwxrwxrwx	root/root	sbin/lvmchange -> lvm
 lrwxrwxrwx	root/root	sbin/lvmdiskscan -> lvm
 -r-xr-xr-x	root/root	sbin/lvmdump
@@ -57,6 +61,9 @@ lrwxrwxrwx	root/root	sbin/vgsplit -> lvm
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/include/
 -r--r--r--	root/root	usr/include/libdevmapper.h
+drwxr-xr-x	root/root	usr/lib/
+drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-r--r--r--	root/root	usr/lib/pkgconfig/devmapper.pc
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man5/
 -r--r--r--	root/root	usr/man/man5/lvm.conf.5.gz
