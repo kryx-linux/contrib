@@ -5,7 +5,7 @@
 # Depends on:
 
 name=doxygen 
-version=1.5.9
+version=1.6.0
 release=1 
 source=(http://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz) 
 
@@ -16,10 +16,10 @@ build() {
   install -D -m 0755 bin/$name $PKG/usr/bin/$name
   install -D -m 0755 bin/doxytag $PKG/usr/bin/doxytag
   install -d $PKG/usr/man/man1
-  cat doc/$name.1 | sed -e "s/DATE/May 2008/g" \
+  cat doc/$name.1 | sed -e "s/DATE/Aug 2009/g" \
     -e "s/VERSION/$version/g" > $PKG/usr/man/man1/$name.1
-  cat doc/doxytag.1 | sed -e "s/DATE/May 2008/g" \
+  cat doc/doxytag.1 | sed -e "s/DATE/Aug 2009/g" \
     -e "s/VERSION/$version/g" > $PKG/usr/man/man1/doxytag.1
-  cat doc/doxywizard.1 | sed -e "s/DATE/May 2008/g" \
+  cat doc/doxywizard.1 | sed -e "s/DATE/Aug 2009/g" \
     -e "s/VERSION/$version/g" > $PKG/usr/man/man1/doxywizard.1
 }
