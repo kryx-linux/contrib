@@ -1,20 +1,22 @@
-# Description: passive OS fingerprinting tool
-# URL:         http://lcamtuf.coredump.cx/p0f.shtml
+# Description: Passive OS fingerprinting tool
+# URL: http://lcamtuf.coredump.cx/p0f.shtml
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  libpcap
+# Packager: Mattias Hedenskog mattias at hedenskog dot se
+# Depends on: libpcap
 
 name=p0f
 version=2.0.8
 release=1
-source=(http://lcamtuf.coredump.cx/p0f.tgz)
+source=(http://lcamtuf.coredump.cx/$name/$name-$version.tgz)
+
 build() {
-    cd  $name
-    sed -i -e "s|/etc|$PKG/etc|g" -e "s|/usr|$PKG/usr|g" mk/Linux
-    install -d $PKG/etc
-    install -d $PKG/usr/sbin
-    install -d $PKG/usr/man/man1
-    make install
+    cd $name
+    make
+    install -d $PKG/usr/sbin $PKG/usr/man/man1
+    install -d $PKG/etc/p0f
+    install -m 755 {p0f,p0frep} $PKG/usr/sbin
+    install -m 644 p0f.1 $PKG/usr/man/man1
+    install -m 644 {p0f.fp,p0fa.fp,p0fr.fp} $PKG/etc/p0f
     cd test
-    for i in *.c;do gcc "$i" -o $(basename "$i" .c);done
-    find . -type f ! -name \*.c -exec install '{}' $PKG/usr/sbin \;
+    for i in *.c;do gcc "$i" -o $(basename "$i" .c);install $(basename "$i" .c) $PKG/usr/sbin;done
 }
