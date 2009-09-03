@@ -1,19 +1,20 @@
 # Description: Lightweight, free and opensource dynamic dns client.
 # URL: http://inadyn-mt.sourceforge.net/
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
+# Packager: Jose V Beneyto, sepen at crux dot nu
 # Depends on:
 
 name=inadyn-mt
-version=02.12.24
+version=02.12.26
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name.v.$version.tar.gz)
 
 build() {
-  cd $name
+  cd $name.v.$version
   make -f makefile
   install -D -m 0755 bin/linux/$name $PKG/usr/bin/$name
   install -D -m 0644 man/$name.8 $PKG/usr/man/man8/$name.8
   install -D -m 0644 man/inadyn.8 $PKG/usr/man/man8/inadyn.8
+  install -D -m 0644 man/$name.conf.5 $PKG/usr/man/man5/$name.conf.5
   install -D -m 0644 man/inadyn.conf.5 $PKG/usr/man/man5/inadyn.conf.5
 }
