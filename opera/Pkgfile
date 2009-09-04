@@ -5,20 +5,20 @@
 # Depends on: qt4
 
 name=opera
-version=9.64
+version=10.00
 release=1
 source=(http://ftp.heanet.ie/pub/opera/linux/${version//./}/final/en/i386/$name-$version.gcc4-qt4.i386.tar.bz2)
 
 build() {
 	cd $name-$version-*
-
 	sed -i -e 's|share/man|man|' install.sh
 	yes n | ./install.sh --prefix=$PKG/usr
-	install -m 0644 -D etc/opera6rc $PKG/etc/opera6rc
-	install -m 0644 -D etc/opera6rc.fixed $PKG/etc/opera6rc.fixed
-
+	install -m 0644 -D etc/operaprefs_default.ini $PKG/etc/operaprefs_default.ini
+	install -m 0644 -D etc/operaprefs_fixed.ini $PKG/etc/operaprefs_fixed.ini
 	sed -i -e "s|$PKG||g" $PKG/usr/bin/opera
 	rm -r $PKG/usr/share/doc
-	find  "$PKG/usr/share/opera/locale/" -mindepth 1 -maxdepth 1 -type d \
-		-not -name en -exec rm -r {} \;
+
+	find  "$PKG/usr/share/opera/locale/" \
+		-mindepth 1 -maxdepth 1 -type d \
+		-not -name en -exec rm -r {} +
 }
