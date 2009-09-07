@@ -15,6 +15,7 @@ build () {
     --with-libpcre=included --with-liblua=included \
     --with-libpcap=included --without-zenmap \
     --without-ndiff
+    #install -d $PKG/usr/share/nmap
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/man/man1/zenmap.*
