@@ -4,14 +4,13 @@
 # Depends on:  xorg, imlib2
 
 name=fluxbox
-version=1.0.0
+version=1.1.1
 release=1
-source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2 $name-gcc43.patch)
+source=(http://dl.sourceforge.net/$name/$name-$version.tar.bz2)
 
 build() {
    cd $name-$version
 
-   patch -p1 -i ../fluxbox-gcc43.patch
    ./configure \
       --prefix=/usr \
       --disable-nls \
