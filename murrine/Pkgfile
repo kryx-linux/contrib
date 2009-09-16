@@ -1,0 +1,16 @@
+# Description: gtk+ engine
+# URL:         http://www.cimitan.com/murrine/engine
+# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Depends on:  gtk
+
+name=murrine
+version=0.90.3
+release=1
+source=(http://ftp.acc.umu.se/pub/GNOME/sources/$name/${version%.*}/$name-$version.tar.bz2)
+
+build() {
+     cd $name-$version
+    ./configure --prefix=/usr --enable-animation --disable-nls
+    make
+    make DESTDIR=$PKG install
+}
