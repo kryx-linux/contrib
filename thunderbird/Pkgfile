@@ -8,10 +8,11 @@ name=thunderbird
 version=2.0.0.22
 release=1
 source=(ftp://ftp.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version-source.tar.bz2
-    $name.desktop)
+    $name.desktop elif_fix.patch)
 
 build() {
     cd mozilla
+    patch -p1 -i ../elif_fix.patch
     ./configure --prefix=/usr \
         --enable-application=mail \
 	--with-system-{nspr,nss} \
