@@ -10,6 +10,11 @@ source=(http://sourceforge.net/projects/mooedit/files/$name/$name-$version.tar.b
 
 build() {
     cd $name-$version
+    # credits to medit archlinux maintainer
+    # Sergej Pupykin <pupykin.s+arch@gmail.com>
+    # for this one:
+    sed -i 's#getline(#xgetline(#' moo/moolua/ldebug.c \
+        moo/moolua/ldebug.h moo/moolua/lvm.c
     ./configure \
         --disable-nls \
         --prefix=/usr \
