@@ -1,21 +1,22 @@
 # Description: Second generation of the XMMS music player
-# URL: http://xmms2.sourceforge.net
-# Maintainer: Rene Lengwinat, rugek at dirtyhack dot net
-# Depends on: libmad, sqlite3, python, ffmpeg, faad2
-# Nice to have: alsa-lib, curl, ecore, pyrex, ruby, samba
+# URL:         http://xmms2.sourceforge.net
+# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Packager:    Rene Lengwinat, rugek at dirtyhack dot net
+# Depends on:  libmad sqlite3 python 
+# Nice2have:   ecore pyrex ruby samba ffmpeg faad2
+# Comment:     ffmpeg and faad2 are broken at the moment because of libmp4v2
 
 name=xmms2
-version=0.5DrLecter
+version=0.6
 release=1
+_codename=DrMattDestruction
 
-source=(http://heanet.dl.sourceforge.net/sourceforge/xmms2/$name-$version.tar.bz2 \
-avcodec.patch)
+source=(http://dfn.dl.sourceforge.net/project/$name/$name/${version}%20$_codename/$name-$version$_codename.tar.bz2)
 
 build () {
-  cd $name-$version
-  patch -p1 < $SRC/avcodec.patch
+    cd $name-$version$_codename
 
-  ./waf --prefix=/usr --with-mandir=/usr/man configure
-  ./waf build
-  ./waf --destdir=$PKG install
+    ./waf --prefix=/usr --with-mandir=/usr/man -p configure
+    ./waf build
+    ./waf --destdir=$PKG install
 }
