@@ -1,20 +1,22 @@
 # Description: return the canonicalized absolute pathname
-# URL: http://packages.debian.org/sid/realpath
-# Maintainer: Simon Gloﬂner, viper at hometux dot de
+# URL:         http://packages.debian.org/sid/realpath
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Packager:    Simon Gloﬂner, viper at hometux dot de
 
 name=realpath
-version=1.12
+version=1.15
 release=1
 source=(http://ftp.debian.org/debian/pool/main/r/${name}/${name}_${version}.tar.gz)
 
 build() {
-    cd $name-$version
-
-    make VERSION=$version realpath
+    cd $name-$version/src
+    
+    sed -i -e 's/setlocale.*//g' -e 's/bindtextdomain.*//g' -e 's/textdomain.*//g' realpath.c
+    gcc -DVERSION="${version}" -o realpath realpath.c
 
     mkdir -p $PKG/usr/bin
     mkdir -p $PKG/usr/man/man1
 
     install -m 755 realpath $PKG/usr/bin/realpath
-    install -m 644 man/realpath.1 $PKG/usr/man/man1
+    install -m 644 ../man/realpath.1 $PKG/usr/man/man1
 }
