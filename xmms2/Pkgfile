@@ -15,7 +15,11 @@ source=(http://dfn.dl.sourceforge.net/project/$name/$name/${version}%20$_codenam
 
 build () {
     cd $name-$version$_codename
-
+    # fool waf so it does not run ldconfig during installation
+    # we does not want any directories nor it's contents 
+    # to be touched/modified etc. during build,
+    # except those in PKGMK_WORK_DIR or /tmp
+    sed -i 's|/sbin/ldconfig|/bin/true|' wscript
     ./waf --prefix=/usr --with-mandir=/usr/man -p configure
     ./waf build
     ./waf --destdir=$PKG install
