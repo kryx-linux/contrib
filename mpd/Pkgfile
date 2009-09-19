@@ -1,26 +1,26 @@
-# Description: Music playback daemon
-# URL: http://www.musicpd.org/
-# Maintainer: Simon Gloﬂner, viper at hometux dot de
-# Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: libmad, libvorbis, libid3tag
+# Description:  Music playback daemon
+# URL:          http://www.musicpd.org/
+# Maintainer:   Thomas Penteker, tek at serverop dot de
+# Packager:     Mark Rosenstand, mark at borkware dot net
+# Depends on:   libmad, libvorbis, libid3tag
 # Nice to have: glib, faad2, flac, audiofile
 
 name=mpd
-version=0.14
+version=0.15.3
 release=1
 source=(http://dl.sourceforge.net/musicpd/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./configure \
-	    --prefix=/usr \
-	    --mandir=/usr/man
-	make
-	make DESTDIR=$PKG install
+  ./configure \
+      --prefix=/usr \
+      --mandir=/usr/man
+  make
+  make DESTDIR=$PKG install
 
-	mkdir -p $PKG/etc
-	install -m 0644 doc/mpdconf.example $PKG/etc/mpd.conf	
+  mkdir -p $PKG/etc
+  install -m 0644 doc/mpdconf.example $PKG/etc/mpd.conf 
 
-	rm -rf $PKG/usr/share
+  rm -rf $PKG/usr/share
 }
