@@ -5,7 +5,7 @@
 # Depends on:  gmpc
 
 name=gmpc-mdcover
-version=0.18.0
+version=0.19.0
 release=1
 source=(http://download.sarine.nl/Programs/gmpc/$version/$name-$version.tar.gz)
 
@@ -14,4 +14,5 @@ build() {
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
+  rm -r $PKG/usr/share
 }
