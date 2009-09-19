@@ -4,18 +4,18 @@
 # Packager: Mark Rosenstand, mark at borkware dot net
 
 name=mpc
-version=0.12.1
+version=0.17
 release=1
-source=(http://www.musicpd.org/uploads/files/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/musicpd/mpc/0.17/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./configure \
-	    --prefix=/usr \
-	    --mandir=/usr/man
-	make
-	make DESTDIR=$PKG install
+  ./configure \
+      --prefix=/usr \
+      --mandir=/usr/man
+  make
+  make DESTDIR=$PKG install
 
-	rm -rf $PKG/usr/share
+  rm -rf $PKG/usr/share
 }
