@@ -1,52 +1,23 @@
-# Description: libmp4v2 extracted from mpeg4ip.
-# URL: http://mpeg4ip.sourceforge.net/
+# Description: A library to provide an API to MPEG-4 files.
+# URL: http://code.google.com/p/mp4v2/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
 # Depends on:
 
 name=libmp4v2
-version=1.5.0.1
-release=4
-source=(http://downloads.sourceforge.net/sourceforge/mpeg4ip/mpeg4ip-$version.tar.gz)
+version=1.9.1
+release=1
+source=(http://mp4v2.googlecode.com/files/mp4v2-$version.tar.bz2)
 
 build() {
-	cd mpeg4ip-$version
-	touch bootstrapped
-	sed -i -e 's/nasm -r/nasm -v/' configure
+	cd mp4v2-$version
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
 		--disable-static \
-		--disable-warns-as-err \
-		--disable-server \
-		--disable-player \
-		--disable-mp4live \
-		--disable-id3tags \
-		--disable-xvid \
-		--disable-a52dec \
-		--disable-mad \
-		--disable-mpeg2dec \
-		--disable-srtp \
-		--disable-mp3lame \
-		--disable-faac \
-		--disable-ffmpeg \
-		--disable-x264 \
-		--disable-sdl
+		--disable-gch
 
-	sed -i -e 's/^SUBDIRS = . test util/SUBDIRS = ./' lib/mp4v2/Makefile
-	make -C lib/mp4v2
-	make -C lib/mp4v2 DESTDIR=$PKG install
-	install -d $PKG/usr/include/libmp4v2
-	install -m 0755 -D mpeg4ip-config $PKG/usr/bin/mpeg4ip-config
-
-	install -m 0644 -t $PKG/usr/include/libmp4v2/ \
-		include/mpeg4ip.h include/mpeg4ip_version.h mpeg4ip_config.h
-
-	sed -i -e 's|"mpeg4ip.h"|<libmp4v2/mpeg4ip.h>|' $PKG/usr/include/mp4.h
-
-	sed -i \
-		-e 's|mpeg4ip_config.h|libmp4v2/mpeg4ip_config.h|' \
-		-e 's|"mpeg4ip_version.h"|<libmp4v2/mpeg4ip_version.h>|' \
-		$PKG/usr/include/libmp4v2/mpeg4ip.h
+	make
+	make DESTDIR=$PKG install
 }
-
