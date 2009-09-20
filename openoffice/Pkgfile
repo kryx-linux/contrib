@@ -5,9 +5,9 @@
 # Depends on: mesa3d xorg-libxaw xorg-libxcursor xorg-libxft xorg-libxinerama xorg-libxi xorg-libxrandr
 
 name=openoffice
-version=3.1.0
-release=2
-source=(http://openoffice-atl.osuosl.org/stable/$version/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
+version=3.1.1
+release=1
+source=(http://spout.ussg.indiana.edu/openoffice/stable/3.1.1/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
 
 build() {
     cd OOO*/RPMS
@@ -35,8 +35,8 @@ build() {
 
     # icons
     cd $SRC/OOO*/RPMS/desktop-integration
-    rpm2targz openoffice.org3.1-freedesktop-menus-3.1-9393.noarch.rpm
-    tar xzf openoffice.org3.1-freedesktop-menus-3.1-9393.noarch.tar.gz
+    rpm2targz openoffice.org3.1-freedesktop-menus-*.noarch.rpm
+    tar xzf openoffice.org3.1-freedesktop-menus-*.noarch.tar.gz
     mkdir -p $PKG/usr/share/mime
     cp -r usr/share/mime/* $PKG/usr/share/mime
     mkdir -p $PKG/usr/share/icons
