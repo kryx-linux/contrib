@@ -1,15 +1,16 @@
 # Description: shell script library used by grml tools
-# URL: http://www.grml.org
-# Maintainer: Simon Gloﬂner, viper at hometux dot de
+# URL:         http://www.grml.org
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Packager:    Simon Gloﬂner, viper at hometux dot de
 
 name=grml-shlib
-version=1.02.13
+version=1.03.1
 release=1
 source=(http://deb.grml.org/pool/main/g/$name/${name}_${version}.tar.gz \
-	grml-shlib.3)
+  grml-shlib.3)
 
 build() {
-    cd $name-$version
+    cd $name
 
     mkdir -p $PKG/usr/lib/grml
     mkdir -p $PKG/usr/man/man3
