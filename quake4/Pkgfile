@@ -1,20 +1,18 @@
 # Description: Linux client for ID Software's Quake 4
 # URL: http://www.quake4game.com/
 # Maintainer: Matt Housh, jaeger at morpheus dot net
-# Depends on: x11, libsdl
-
-# amd64 depends on x11-32, libsdl32
+# Depends on: xorg-libx11, xorg-libxau, xorg-libxcb, xorg-libxdmcp, xorg-libxext, libsdl
 
 name=quake4
-version=1.3
+version=1.4.2
 release=1
-source=(ftp://ftp.idsoftware.com/idstuff/$name/linux/$name-linux-$version-2.x86.run \
+source=(ftp://ftp.idsoftware.com/idstuff/$name/linux/$name-linux-$version.x86.run \
 	$name \
 	http://jaeger.morpheus.net/linux/files/q4icon.png)
 
 build() {
-	chmod +x $name-linux-$version-2.x86.run
-	./$name-linux-$version-2.x86.run --noexec --target tmp
+	chmod +x $name-linux-$version.x86.run
+	./$name-linux-$version.x86.run --noexec --target tmp
 	mkdir -p $PKG/usr/share/$name \
 		$PKG/usr/share/$name/q4base \
 		$PKG/usr/share/$name/pb/htm \
