@@ -1,7 +1,7 @@
 # Description: Neverwinter Nights linux client (Diamond Edition)
 # URL: http://nwn.bioware.com/downloads/linuxclient.html
 # Maintainer: Matt Housh, jaeger at morpheus dot net
-# Depends on: x11, libsdl
+# Depends on: xorg-libx11, xorg-libxau, xorg-libxcb, xorg-libxdmcp, xorg-libxext, libsdl
 
 name=nwn-diamond
 version=1.69
@@ -24,7 +24,7 @@ unpack_source() {
 	do
 		if [ ! -f $CDROM_LOCATION/$FILE.zip ]
 		then
-			echo -e "\nCould not find Data_Shared.zip in $CDROM_LOCATION! Please make sure your diamond edition disc is mounted. If the mount location is not $CDROM_LOCATION, please set the CDROM_LOCATION environment variable to the correct mountpoint.\n"
+			echo -e "\nCould not find $FILE.zip in $CDROM_LOCATION! Please make sure your diamond edition disc is mounted. If the mount location is not $CDROM_LOCATION, please set the CDROM_LOCATION environment variable to the correct mountpoint.\n"
 			exit 1
 		fi
 		COMMAND="unzip -q -o $CDROM_LOCATION/$FILE.zip -d $SRC"
