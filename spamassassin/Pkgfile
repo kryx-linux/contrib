@@ -13,16 +13,16 @@ source=(http://apache.mirror.clusters.cc/$name/source/Mail-SpamAssassin-$version
 build() {
    cd Mail-SpamAssassin-$version
    perl Makefile.PL PREFIX=/usr CONFDIR=/etc/$name DESTDIR=$PKG < /dev/null
+   sed -i -e 's/^INSTALLDATA = /INSTALLDATA = $(DESTDIR)\//g' Makefile
+   sed -i -e 's/^INSTALLSITEDATA = /INSTALLSITEDATA = $(DESTDIR)\//g' Makefile
+   sed -i -e 's/^INSTALLVENDORDATA = /INSTALLVENDORDATA = $(DESTDIR)\//g' Makefile
+   sed -i -e 's/^INSTALLCONF = /INSTALLCONF = $(DESTDIR)/g' Makefile
+   sed -i -e 's/^INSTALLSITECONF = /INSTALLSITECONF = $(DESTDIR)/g' Makefile
+   sed -i -e 's/^INSTALLVENDORCONF = /INSTALLVENDORCONF = $(DESTDIR)/g' Makefile
+
    make
    make spamc/libspamc.so
-
-   make install \
-      INSTALLMAN1DIR=/usr/man/man1 \
-      INSTALLMAN3DIR=/usr/man/man3 \
-      INSTALLSITEMAN1DIR=/usr/man/man1 \
-      INSTALLSITEMAN3DIR=/usr/man/man3 \
-      INSTALLVENDORMAN1DIR=/usr/man/man1 \
-      INSTALLVENDORMAN3DIR=/usr/man/man3
+   make install 
 
    mkdir -p $PKG/{etc/rc.d,usr/include,usr/lib}
    install -m0755 ../$name.rc $PKG/etc/rc.d/$name
@@ -34,4 +34,5 @@ build() {
    chmod -R u+w $PKG/*
 
    rm -fr $PKG/usr/lib/perl5/{5.*.*,site_perl/5.*.*/linux}
+
 }
