@@ -102,8 +102,6 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/halo
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/helix
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/hopalong
--rwxr-xr-x	root/root	usr/lib/xscreensaver/hyperball
--rwxr-xr-x	root/root	usr/lib/xscreensaver/hypercube
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/hypertorus
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/hypnowheel
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/ifs
@@ -113,7 +111,6 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/intermomentary
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/jigglypuff
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/jigsaw
--rwxr-xr-x	root/root	usr/lib/xscreensaver/juggle
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/juggler3d
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/julia
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/kaleidescope
@@ -168,6 +165,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/rorschach
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/rotzoomer
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/rubik
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/rubikblocks
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/sballs
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/shadebobs
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/sierpinski
@@ -188,6 +186,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/strange
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/substrate
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/superquadrics
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/surfaces
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/swirl
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/tangram
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/thornbird
@@ -311,8 +310,6 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/halo.6.gz
 -rw-r--r--	root/root	usr/man/man6/helix.6.gz
 -rw-r--r--	root/root	usr/man/man6/hopalong.6.gz
--rw-r--r--	root/root	usr/man/man6/hyperball.6.gz
--rw-r--r--	root/root	usr/man/man6/hypercube.6.gz
 -rw-r--r--	root/root	usr/man/man6/hypertorus.6.gz
 -rw-r--r--	root/root	usr/man/man6/hypnowheel.6.gz
 -rw-r--r--	root/root	usr/man/man6/ifs.6.gz
@@ -322,7 +319,6 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/intermomentary.6.gz
 -rw-r--r--	root/root	usr/man/man6/jigglypuff.6.gz
 -rw-r--r--	root/root	usr/man/man6/jigsaw.6.gz
--rw-r--r--	root/root	usr/man/man6/juggle.6.gz
 -rw-r--r--	root/root	usr/man/man6/juggler3d.6.gz
 -rw-r--r--	root/root	usr/man/man6/julia.6.gz
 -rw-r--r--	root/root	usr/man/man6/kaleidescope.6.gz
@@ -375,6 +371,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/rorschach.6.gz
 -rw-r--r--	root/root	usr/man/man6/rotzoomer.6.gz
 -rw-r--r--	root/root	usr/man/man6/rubik.6.gz
+-rw-r--r--	root/root	usr/man/man6/rubikblocks.6.gz
 -rw-r--r--	root/root	usr/man/man6/sballs.6.gz
 -rw-r--r--	root/root	usr/man/man6/shadebobs.6.gz
 -rw-r--r--	root/root	usr/man/man6/sierpinski.6.gz
@@ -395,6 +392,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/strange.6.gz
 -rw-r--r--	root/root	usr/man/man6/substrate.6.gz
 -rw-r--r--	root/root	usr/man/man6/superquadrics.6.gz
+-rw-r--r--	root/root	usr/man/man6/surfaces.6.gz
 -rw-r--r--	root/root	usr/man/man6/swirl.6.gz
 -rw-r--r--	root/root	usr/man/man6/tangram.6.gz
 -rw-r--r--	root/root	usr/man/man6/thornbird.6.gz
@@ -516,8 +514,6 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/halo.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/helix.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/hopalong.xml
--rw-r--r--	root/root	usr/share/xscreensaver/config/hyperball.xml
--rw-r--r--	root/root	usr/share/xscreensaver/config/hypercube.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/hypertorus.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/hypnowheel.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/ifs.xml
@@ -527,7 +523,6 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/intermomentary.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/jigglypuff.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/jigsaw.xml
--rw-r--r--	root/root	usr/share/xscreensaver/config/juggle.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/juggler3d.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/julia.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/kaleidescope.xml
@@ -581,6 +576,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/rorschach.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/rotzoomer.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/rubik.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/rubikblocks.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/sballs.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/shadebobs.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/sierpinski.xml
@@ -601,6 +597,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/strange.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/substrate.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/superquadrics.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/surfaces.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/swirl.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/tangram.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/thornbird.xml
