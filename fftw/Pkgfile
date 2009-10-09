@@ -6,7 +6,7 @@
 # Optional: gcc-fortran
 
 name=fftw
-version=3.2.1
+version=3.2.2
 release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
@@ -17,9 +17,7 @@ build() {
 --prefix=/usr \
 --mandir=/usr/man \
 --enable-threads \
---enable-type-prefix \
 --with-gnu-ld \
---disable-nls \
 --enable-shared"
 
 	# compiling long double precision library
