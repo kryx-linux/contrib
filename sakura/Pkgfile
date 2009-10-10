@@ -5,9 +5,8 @@
 # Depends on: vte cmake
 
 name=sakura
-version=2.3.2
+version=2.3.4
 release=1
-url="http://pleyades.net/david/sakura.php"
 source=(http://pleyades.net/david/projects/$name/$name-$version.tar.bz2)
 
 build() {
@@ -17,5 +16,6 @@ build() {
 	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RELEASE .
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share/locale
+	rm -r $PKG/usr/share/{locale,doc}
+
 }
