@@ -1,0 +1,19 @@
+# Description: VPN Client
+# URL:         http://www.openvpn.net
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  lzo
+
+name=openvpn
+version=2.1_rc20
+release=1
+source=(http://www.openvpn.net/release/openvpn-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  ./configure --prefix=/usr \
+              --mandir=/usr/man
+  make
+  make DESTDIR=$PKG install
+  rm -r $PKG/usr/share
+}
