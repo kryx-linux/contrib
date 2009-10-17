@@ -5,30 +5,28 @@
 # Depends on: xscreensaver imagemagick
 
 name=rss-glx
-version=0.8.1
+version=0.9.0
 release=1
-source=(http://downloads.sourceforge.net/sourceforge/rss-glx/rss-glx_$version.tar.bz2)
+source=(http://downloads.sourceforge.net/sourceforge/$name/${name}_$version.tar.bz2)
 
 build() {
-	cd rss-glx_$version
+	cd ${name}_$version
 	
-	CPPFLAGS='-I/usr/include/ImageMagick' \
-		./configure \
-			--prefix=/usr \
-			--with-configdir=/usr/share/xscreensaver/config \
-			--disable-sound
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--with-configdir=/usr/share/xscreensaver/config \
+		--disable-sound
 
 	make
 	make DESTDIR=$PKG install
 	install -d $PKG/usr/lib/xscreensaver $PKG/usr/sbin
 	mv $PKG/usr/bin/rss-glx_install.pl $PKG/usr/sbin/rss-glx_install
-	rm -f $PKG/*.desktop
 
 	(
 		cd $PKG/usr/lib/xscreensaver
 		for i in $PKG/usr/bin/*; do
-			ln -s /usr/bin/`basename $i`
+			ln -s /usr/bin/$(basename $i)
 		done
 	)
 }
-
