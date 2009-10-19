@@ -13,6 +13,8 @@ source=(http://icculus.org/$name/downloads/$name-$version.tar.gz)
 build() {
 	cd $name-$version
 
+	sed -i -e 's|-Werror||' CMakeLists.txt
+
 	cmake \
 		-DPHYSFS_BUILD_STATIC=FALSE \
 		-DCMAKE_INSTALL_PREFIX=/usr .
