@@ -5,7 +5,7 @@
 # Depends on:  intltool gtk xorg-libxscrnsaver startup-notification nss libidn
 
 name=pidgin
-version=2.6.2
+version=2.6.3
 release=1
 source=(http://sourceforge.net/projects/$name/files/Pidgin/$name-$version.tar.bz2)
 
@@ -24,7 +24,8 @@ build () {
         --disable-gtkspell \
 	--disable-avahi \
 	--disable-dbus \
-        --disable-gstreamer --disable-vv
+        --disable-gstreamer \
+        --disable-vv
 
     make
     make DESTDIR=$PKG install
