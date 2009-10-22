@@ -2,36 +2,33 @@
 # URL: http://www.wesnoth.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: sdl_image sdl_mixer sdl_net freetype boost
+# Depends on: sdl_image sdl_mixer sdl_net freetype boost cmake
 
 name=wesnoth
-version=1.4.7
+version=1.6.5
 release=1
 source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	rm po/*/*.po
 
-	sed -i \
-		-e 's/USE_NLS=yes/USE_NLS=no/' \
-		-e 's/ENABLE_NLS 1/ENABLE_NLS 0/' configure
-
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man \
-		--disable-nls \
-		--enable-python
+	mkdir build
+	cd build
+	cmake ../ \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DENABLE_NLS=FALSE \
+		-DENABLE_DESKTOP_ENTRY=TRUE \
+		-DENABLE_CAMPAIGN_SERVER=FALSE \
+		-DENABLE_SERVER=FALSE
 
 	make
 	make DESTDIR=$PKG install
 
-	find $PKG/usr/man -maxdepth 0 -type d ! -regex 'man?' -exec rm -r {} \;
-	find $PKG/usr/share/wesnoth -type f -name 'README' -delete
-
-	rm \
-		$PKG/usr/share/wesnoth/data/COPYING.txt \
-		$PKG/usr/share/wesnoth/fonts/COPYING
+	find $PKG/usr/share/wesnoth -type f \( \
+		-name 'README' -o \
+		-name 'COPYING.txt' -o \
+		-name 'COPYING' \
+	\) -exec rm {} +
 
 	rm -r $PKG/usr/share/doc
 }
