@@ -5,13 +5,12 @@
 # Depends on: sysfsutils
 
 name=cpufrequtils
-version=0.4
+version=005
 release=1
 source=(http://www.kernel.org/pub/linux/utils/kernel/cpufreq/$name-$version.tar.bz2)
 
 build() {
         cd $name-$version
-        ./configure --prefix=/usr --disable-nls
-        make
-        make DESTDIR=$PKG install
+        make NLS=false V=true
+        make NLS=false V=true DESTDIR=$PKG install
 }
