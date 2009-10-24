@@ -10,8 +10,11 @@ case $1 in
 start)
 	/usr/sbin/asterisk -G $GROUP -U $USER
 	;;
+startdebug)
+	/usr/sbin/asterisk -G $GROUP -U $USER -vvv
+	;;
 stop)
-	kill `cat /var/run/asterisk/asterisk.pid`
+	[ -f /var/run/asterisk/asterisk.pid ] && kill `cat /var/run/asterisk/asterisk.pid`
 	;;
 restart)
 	$0 stop

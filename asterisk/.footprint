@@ -14,6 +14,7 @@ drwxr-xr-x	root/root	etc/asterisk/
 -rw-r--r--	root/root	etc/asterisk/cdr_odbc.conf
 -rw-r--r--	root/root	etc/asterisk/cdr_pgsql.conf
 -rw-r--r--	root/root	etc/asterisk/cdr_tds.conf
+-rw-r--r--	root/root	etc/asterisk/chan_dahdi.conf
 -rw-r--r--	root/root	etc/asterisk/codecs.conf
 -rw-r--r--	root/root	etc/asterisk/dnsmgr.conf
 -rw-r--r--	root/root	etc/asterisk/dundi.conf
@@ -61,7 +62,6 @@ drwxr-xr-x	root/root	etc/asterisk/
 -rw-r--r--	root/root	etc/asterisk/users.conf
 -rw-r--r--	root/root	etc/asterisk/voicemail.conf
 -rw-r--r--	root/root	etc/asterisk/vpb.conf
--rw-r--r--	root/root	etc/asterisk/zapata.conf
 drwxr-xr-x	root/root	etc/rc.d/
 -rwxr-xr-x	root/root	etc/rc.d/asterisk
 drwxr-xr-x	root/root	usr/
@@ -96,9 +96,9 @@ drwxr-xr-x	root/root	usr/include/asterisk/
 -rw-r--r--	root/root	usr/include/asterisk/compiler.h
 -rw-r--r--	root/root	usr/include/asterisk/config.h
 -rw-r--r--	root/root	usr/include/asterisk/crypto.h
+-rw-r--r--	root/root	usr/include/asterisk/dahdi_compat.h
 -rw-r--r--	root/root	usr/include/asterisk/devicestate.h
 -rw-r--r--	root/root	usr/include/asterisk/dial.h
--rw-r--r--	root/root	usr/include/asterisk/dlfcn-compat.h
 -rw-r--r--	root/root	usr/include/asterisk/dns.h
 -rw-r--r--	root/root	usr/include/asterisk/dnsmgr.h
 -rw-r--r--	root/root	usr/include/asterisk/doxyref.h
@@ -149,6 +149,7 @@ drwxr-xr-x	root/root	usr/include/asterisk/
 -rw-r--r--	root/root	usr/include/asterisk/term.h
 -rw-r--r--	root/root	usr/include/asterisk/threadstorage.h
 -rw-r--r--	root/root	usr/include/asterisk/time.h
+-rw-r--r--	root/root	usr/include/asterisk/tonezone_compat.h
 -rw-r--r--	root/root	usr/include/asterisk/transcap.h
 -rw-r--r--	root/root	usr/include/asterisk/translate.h
 -rw-r--r--	root/root	usr/include/asterisk/udptl.h
@@ -168,6 +169,9 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_channelredirect.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_chanspy.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_controlplayback.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_dahdibarge.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_dahdiras.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_dahdiscan.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_db.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_dial.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_dictate.so
@@ -227,15 +231,13 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_waitforsilence.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_while.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_zapateller.so
--rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_zapbarge.so
--rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_zapras.so
--rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_zapscan.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/cdr_csv.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/cdr_custom.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/cdr_manager.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/cdr_sqlite.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_agent.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_alsa.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_dahdi.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_iax2.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_local.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_mgcp.so
@@ -243,16 +245,15 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_phone.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_sip.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_skinny.so
--rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_zap.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_a_mu.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_adpcm.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_alaw.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_dahdi.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_g726.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_gsm.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_lpc10.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_speex.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_ulaw.so
--rwxr-xr-x	root/root	usr/lib/asterisk/modules/codec_zap.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/format_g723.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/format_g726.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/format_g729.so
@@ -267,6 +268,7 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/format_vox.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/format_wav.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/format_wav_gsm.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/func_audiohookinherit.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/func_base64.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/func_callerid.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/func_cdr.so
@@ -342,10 +344,14 @@ drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/keys/
 -rw-r--r--	asterisk/asterisk	var/lib/asterisk/keys/iaxtel.pub
 drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/moh/
 -rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/.asterisk-moh-freeplay-wav (EMPTY)
--rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/LICENSE-asterisk-moh-freeplay-wav
--rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/fpm-calm-river.wav
--rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/fpm-sunshine.wav
--rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/fpm-world-mix.wav
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/CHANGES-asterisk-moh-opsound-2.01 (EMPTY)
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/CREDITS-asterisk-moh-opsound-2.01
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/LICENSE-asterisk-moh-opsound-2.01
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/macroform-cold_day.wav
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/macroform-robot_dity.wav
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/macroform-the_simplicity.wav
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/manolo_camp-morning_coffee.wav
+-rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/reno_project-system.wav
 drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/sounds/
 drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/static-http/
 -rw-r--r--	asterisk/asterisk	var/lib/asterisk/static-http/ajamdemo.html

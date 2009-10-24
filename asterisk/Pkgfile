@@ -4,15 +4,17 @@
 # Depends on:	openssl, ncurses
 
 name=asterisk
-version=1.4.21.2
+version=1.4.26.2
 release=1
-source=(http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz asterisk.rc asterisk-mmx.patch 1.4-gsm-gcc4.2.patch)
+source=(http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz asterisk.rc asterisk-mmx.patch 1.4-gsm-gcc4.2.patch voicemail.patch)
 
 build () {
 	cd $name-$version
 
 	# Fixes choppy gsm transcoding when using gcc 4.2
 	patch -p1 < $SRC/1.4-gsm-gcc4.2.patch
+
+	patch -p0 < $SRC/voicemail.patch
 
 	# Check if this processor supports MMX instruction set
 	if [ -n "`grep '^flags.*mmx' /proc/cpuinfo`" ]; then
