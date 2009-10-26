@@ -1,12 +1,12 @@
 # Description: XSLT processor for transforming XML documents into HTML, text, or other XML document types.
 # URL: http://xml.apache.org/xalan-c/
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
+# Packager: Jose V Beneyto, sepen at crux dot nu
 # Depends on: xerces-c 
 
 name=xalan-c
 version=1.10.0
-release=2
+release=3
 source=(http://www.apache.org/dist/xml/${name}/Xalan-C_1_10_0-src.tar.gz \
         xalandomstring.hpp.patch)
 
@@ -17,7 +17,7 @@ build() {
   autoconf
   ./runConfigure -P/usr \
     -plinux -cgcc -xg++ -minmem -rpthread
-  make
+  make -j1 CXXFLAGS="$CXXFLAGS"
   make DESTDIR=${PKG} install
   unset XALANCROOT
 }
