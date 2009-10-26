@@ -1,0 +1,89 @@
+diff -purN dev86-0.16.17.orig/bootblocks/Makefile dev86-0.16.17/bootblocks/Makefile
+--- dev86-0.16.17.orig/bootblocks/Makefile	2009-10-26 08:51:58.502794823 +0100
++++ dev86-0.16.17/bootblocks/Makefile	2009-10-26 08:55:41.134794770 +0100
+@@ -1,6 +1,6 @@
+ 
+ HOSTCC=cc
+-HOSTCCFLAGS=-O
++HOSTCCFLAGS=
+ BCC=bcc
+ AS86=as86
+ 
+diff -purN dev86-0.16.17.orig/elksemu/elks.c dev86-0.16.17/elksemu/elks.c
+--- dev86-0.16.17.orig/elksemu/elks.c	2009-10-26 08:51:58.518794797 +0100
++++ dev86-0.16.17/elksemu/elks.c	2009-10-26 08:58:26.186795371 +0100
+@@ -15,7 +15,7 @@
+ #include <signal.h>
+ #include <errno.h>
+ #include <sys/stat.h>
+-#include <sys/vm86.h>
++#include <asm/vm86.h>
+ #include <sys/mman.h>
+ #include "elks.h" 
+ 
+@@ -129,8 +129,17 @@ static int load_elks(int fd)
+ static inline int vm86_mine(struct vm86_struct* v86)
+ {
+ 	int __res;
++#ifndef __PIC__
+ 	__asm__ __volatile__("int $0x80\n"
+ 	:"=a" (__res):"a" ((int)OLD_SYS_vm86), "b" ((int)v86));
++#else
++	__asm__ __volatile__(
++		"movl	%%ebx,%%ecx\n\t"
++		"movl	%2,%%ebx\n\t"
++		"int	$0x80\n\t"
++		"movl	%%ecx,%%ebx\n\t"
++		:"=a" (__res):"a" ((int)OLD_SYS_vm86), "r" ((int)v86) : "ecx");
++#endif
+ 	return __res;
+ } 
+ #endif
+diff -purN dev86-0.16.17.orig/elksemu/elks_signal.c dev86-0.16.17/elksemu/elks_signal.c
+--- dev86-0.16.17.orig/elksemu/elks_signal.c	2009-10-26 08:51:58.518794797 +0100
++++ dev86-0.16.17/elksemu/elks_signal.c	2009-10-26 08:58:26.182795456 +0100
+@@ -7,7 +7,7 @@
+ #include <signal.h>
+ #include <errno.h>
+ #include <sys/stat.h>
+-#include <sys/vm86.h>
++#include <asm/vm86.h>
+ #include "elks.h" 
+ 
+ static int elks_sigtrap= -1;
+diff -purN dev86-0.16.17.orig/elksemu/elks_sys.c dev86-0.16.17/elksemu/elks_sys.c
+--- dev86-0.16.17.orig/elksemu/elks_sys.c	2009-10-26 08:51:58.518794797 +0100
++++ dev86-0.16.17/elksemu/elks_sys.c	2009-10-26 08:58:26.182795456 +0100
+@@ -9,7 +9,7 @@
+ #include <unistd.h>
+ #include <fcntl.h>
+ #include <sys/stat.h>
+-#include <sys/vm86.h>
++#include <asm/vm86.h>
+ #include <sys/times.h>
+ #include <utime.h>
+ #include <termios.h>
+diff -purN dev86-0.16.17.orig/elksemu/minix.c dev86-0.16.17/elksemu/minix.c
+--- dev86-0.16.17.orig/elksemu/minix.c	2009-10-26 08:51:58.518794797 +0100
++++ dev86-0.16.17/elksemu/minix.c	2009-10-26 08:58:26.186795371 +0100
+@@ -4,7 +4,7 @@
+ #include <unistd.h>
+ #include <fcntl.h>
+ #include <sys/stat.h>
+-#include <sys/vm86.h>
++#include <asm/vm86.h>
+ #include <sys/times.h>
+ #include <utime.h>
+ #include <termios.h>
+diff -purN dev86-0.16.17.orig/makefile.in dev86-0.16.17/makefile.in
+--- dev86-0.16.17.orig/makefile.in	2009-10-26 08:51:58.598795590 +0100
++++ dev86-0.16.17/makefile.in	2009-10-26 08:55:41.134794770 +0100
+@@ -42,7 +42,7 @@ WALL  =-Wall -Wtraditional -Wshadow -Wid
+ WALL  =-Wall -Wstrict-prototypes
+ 
+ CC	=%CC%
+-CFLAGS	=$(GCCFLAG) $(WALL) -O2 -g
++CFLAGS	=$(GCCFLAG) $(WALL) -fno-strict-aliasing
+ #endif
+ 
+ #ifndef GNUMAKE
