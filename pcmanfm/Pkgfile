@@ -5,12 +5,14 @@
 # Depends on:  gtk hal startup-notification gamin shared-mime-info desktop-file-utils xorg-libxcomposite intltool
 
 name=pcmanfm
-version=0.5.1
+version=0.5.2
 release=1
 source=(http://sourceforge.net/projects/$name/files/$name/$name-$version.tar.bz2)
 
 build() {
     cd $name-$version
+    # ca translation is fscked up
+    sed -i 's/ca/ /' po/LINGUAS
     ./configure \
         --prefix=/usr \
         --enable-hal
