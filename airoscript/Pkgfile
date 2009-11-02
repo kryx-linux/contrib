@@ -5,16 +5,17 @@
 # Depends on: aircrack-ng
 
 name=airoscript
-version=2.1.1
+version=2.2
 release=1
-source=(http://airoscript.googlecode.com/files/$name-$version-2.tar.gz)
+source=(http://airoscript.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
-  install -d $PKG/{etc,usr/{bin,man/man1,share/$name/themes}}
-  install -m 0644 $name/src/$name.conf $PKG/etc/airoscript.conf
-  install -m 0755 $name/src/$name.sh $PKG/usr/bin/$name
-  install -m 0755 $name/src/airopdate.sh $PKG/usr/share/$name/airopdate
-  install -m 0755 $name/src/{airoscfunc*.sh,screenrc} $PKG/usr/share/$name
-  install -m 0755 $name/src/themes/* $PKG/usr/share/$name/themes
-  install -m 0644 $name/src/$name.1 $PKG/usr/man/man1
+  sed -i Makefile-Linux \
+      -e 's|bindir=.*|bindir=$(prefix)/bin|' \
+      -e 's|mandir=.*|mandir=$(prefix)/man|' \
+      -e 's|install-docs: .*|install-docs: install-manpages|'
+  sed '/install-locale \\/d' -i Makefile-Linux
+  make prefix="$PKG\/usr" aircrack_prefix="\/usr" install
+  rm -rf $PKG/usr/share/{doc,locale,$name/airosperl}
+  sed -e 's|usr/local/etc|usr/etc|g' -i $PKG/usr/bin/$name
 }
