@@ -9,11 +9,10 @@ release=1
 source=(http://savannah.nongnu.org/download/$name/$name-$version.tar.gz)
 
 build() {
-        cd $name-$version
-        ./configure --prefix=/usr \
-        --enable-chooser 
-
-        make
-        make DESTDIR=$PKG install
-        rm -dr {$PKG/usr/share/locale,$PKG/usr/share/icons}
+  cd $name-$version
+  ./configure --prefix=/usr \
+              --enable-chooser 
+  make
+  make DESTDIR=$PKG install
+  rm -dr {$PKG/usr/share/locale,$PKG/usr/share/icons}
 }
