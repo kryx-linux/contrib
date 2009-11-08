@@ -2,17 +2,23 @@
 # URL: http://ktown.kde.org/~wheeler/taglib.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: 
+# Depends on:
 
 name=taglib
-version=1.5
+version=1.6
 release=1
-source=(http://ktown.kde.org/~wheeler/files/src/taglib-$version.tar.gz)
+source=(http://ktown.kde.org/~wheeler/files/src/$name-$version.tar.gz)
 
 build() {
-	cd taglib-$version
-	./configure --prefix=/usr
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-dependency-tracking \
+		--enable-new-ldflags \
+		--enable-mp4 \
+		--enable-asf
+
 	make
 	make DESTDIR=$PKG install
 }
-
