@@ -5,15 +5,21 @@
 # Depends on: libdvdnav
 
 name=vobcopy
-version=1.1.1
+version=1.2.0
 release=1
-source=(http://vobcopy.org/download/vobcopy-$version.tar.bz2)
+source=(http://vobcopy.org/download/vobcopy-$version.tar.bz2
+	vobcopy-1.2.0_hardcode-tries-to-1.patch)
 
 build() {
-	cd vobcopy-$version
+	cd $name-$version
+	patch -p 1 -i $SRC/vobcopy-1.2.0_hardcode-tries-to-1.patch
 	sh ./configure.sh --prefix=$PKG/usr
 	make
 	make install
-	rm -r $PKG/usr/man/de
-}
 
+	rm -r \
+		$PKG/usr/man/de \
+		$PKG/usr/share/doc
+
+	rmdir $PKG/usr/share
+}
