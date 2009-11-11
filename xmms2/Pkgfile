@@ -7,18 +7,17 @@
 
 name=xmms2
 version=0.6
-release=1
+release=2
 _codename=DrMattDestruction
 
 source=(http://dfn.dl.sourceforge.net/project/$name/$name/${version}%20$_codename/$name-$version$_codename.tar.bz2)
 
 build () {
+    
     cd $name-$version$_codename
-    # fool waf so it does not run ldconfig during installation
-    # we does not want any directories nor it's contents 
-    # to be touched/modified etc. during build,
-    # except those in PKGMK_WORK_DIR or /tmp
+    # no ldconfig and debugging stuff (force user specified cflags)
     sed -i 's|/sbin/ldconfig|/bin/true|' wscript
+    sed -i -r 's/\+[[:space:]]+\[.-g.,[[:space:]]+.-O0.\]/ /' wscript
     ./waf --prefix=/usr --with-mandir=/usr/man -p configure
     ./waf build
     ./waf --destdir=$PKG install
