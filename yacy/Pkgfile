@@ -5,9 +5,9 @@
 # Depends on: ant
 
 name=yacy
-version=0.90
+version=0.91
 release=1
-source=(http://www.yacy.net/release/${name}_v${version}_20090623_6128.tar.gz
+source=(http://www.yacy.net/release/${name}_v${version}_20091008_6388.tar.gz
 	yacy-start.sh yacy-stop.sh yacy.rc)
 
 build() {
@@ -34,19 +34,11 @@ build() {
 		$PKG/usr/lib/yacy/lib/Apache\ License\ V2.txt \
 		$PKG/usr/lib/yacy/readme.txt \
 		$PKG/usr/lib/yacy/addon/yacyInit.readme \
-		$PKG/usr/lib/yacy/lib/tar.license
-
-	# remove ms windows files
-	rm -r $SRC/$name/addon/jsmooth/skeletons/console-wrapper \
-			$SRC/$name/addon/jsmooth/skeletons/windowed-wrapper
-
-	rm $PKG/usr/lib/yacy/startYACY.bat \
+		$PKG/usr/lib/yacy/startYACY.bat \
 		$PKG/usr/lib/yacy/startYACY_debug.bat \
 		$PKG/usr/lib/yacy/stopYACY.bat \
 		$PKG/usr/lib/yacy/addon/YaCy-Search.bat \
 		$PKG/usr/lib/yacy/{AUTHORS,COPYRIGHT,ChangeLog,NOTICE}
-
-	rmdir $SRC/$name/addon/jsmooth/skeletons
 
 	# move cache directory
 	install -d $PKG/var/cache/yacy
@@ -66,6 +58,9 @@ build() {
 		chmod 0640 $PKG/etc/yacy/$file
 		ln -s /etc/yacy/$file $PKG/usr/lib/yacy/$file
 	done
+
+	# symlink generated configuration file
+	ln -s /var/cache/yacy/DATA/SETTINGS/yacy.conf $PKG/etc/yacy/yacy.conf
 
 	# install service
 	chown root:yacy $PKG/usr/lib/yacy/startYACY.sh $PKG/usr/lib/yacy/stopYACY.sh
