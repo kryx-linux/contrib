@@ -1,0 +1,26 @@
+# Description: Small, efficient and fast rendering engine for Web Browsers.
+# URL: http://www.webkit.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Brett Goulder, predatorfreak at dcaf-security dot org
+# Depends on: enchant gperf gst-plugins-base gtk icu libsoup
+
+name=webkit
+version=1.1.16
+release=1
+source=(http://webkitgtk.org/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--enable-video \
+		--with-font-backend=freetype \
+		--disable-gtk-doc \
+		--enable-jit \
+		--with-unicode-backend=icu
+
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/locale
+}
