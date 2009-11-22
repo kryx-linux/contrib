@@ -1,0 +1,18 @@
+# Description: Midori is a lightweight web browser.
+# URL: http://www.twotoasts.de/index.php?/categories/2-Midori
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Brett Goulder, predatorfreak at dcaf-security dot org
+# Depends on: webkit libsexy intltool
+
+name=midori
+version=20091123
+release=1
+source=(http://beegees.mtveurope.org/~romster/distfiles/$name/$name-$version-0.2.1-58-g21f7bd7.tar.bz2)
+
+build() {
+	cd $name
+	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) .*/\1/' <<< $MAKEFLAGS)"
+	./configure --prefix=/usr $JOBS
+	make
+	make DESTDIR=$PKG install
+}
