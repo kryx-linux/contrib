@@ -5,24 +5,23 @@
 # Depends on: libmpfr
 
 name=gcc-fortran
-version=4.3.3
+version=4.4.2
 release=1
 source=(ftp://sources.redhat.com/pub/gcc/releases/gcc-$version/gcc-{core,fortran}-$version.tar.bz2
-	$name-4.2.4-nocheck-fixincludes.patch)
+	gcc-nocheck-fixincludes.patch test-demangle.c.diff)
 
 build() {
-	patch -d gcc-$version -p 1 -i $SRC/$name-4.2.4-nocheck-fixincludes.patch
-
-	sed -i gcc-$version/gcc/version.c \
-		-e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|'
+	patch -d gcc-$version -p 1 -i $SRC/gcc-nocheck-fixincludes.patch
+	patch -d gcc-$version -p 0 -i $SRC/test-demangle.c.diff
 
 	mkdir build
 	cd build
 
 	../gcc-$version/configure \
+		--with-pkgversion="(CRUX)" \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
-		--enable-languages=f95 \
+		--enable-languages=fortran \
 		--enable-threads=posix \
 		--enable-__cxa_atexit \
 		--enable-clocale=gnu \
@@ -30,7 +29,14 @@ build() {
 		--disable-nls \
 		--with-x=no
 
-	make bootstrap
+	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
+		make STAGE_CC_WRAPPER='/usr/bin/ccache' BOOT_CFLAGS="$CFLAGS" bootstrap
+	elif [ -n "$(pkginfo -i | grep '^distcc ')" ]; then
+		make STAGE_CC_WRAPPER='/usr/bin/distcc' BOOT_CFLAGS="$CFLAGS" bootstrap
+	else
+		make BOOT_CFLAGS="$CFLAGS" bootstrap
+	fi
+
 	make -j 1 check
 	make -j 1 DESTDIR=$PKG install
 
@@ -53,7 +59,7 @@ build() {
 		$PKG/usr/lib/gcc/*/$version/include		
 
 	# remove files already on the system out of the port
-	for i in $(pkginfo -l gcc |sed -e "s|^|/|"); do
+	for i in $(pkginfo -l gcc | sed -e "s|^|/|"); do
 		if [ -e "$i" ] && [ ! -d "$i" ]; then
 			if [ -e "$PKG$i" ]; then
 				rm "$PKG$i"
@@ -65,7 +71,7 @@ build() {
 	find $PKG -depth -empty -exec rm -r {} \;
 
 	# remove build paths from *.la files
-	for i in `find $PKG -name '*.la' | sed -e "s|$PKG|/|"`; do
+	for i in $(find $PKG -name '*.la' | sed -e "s|$PKG|/|"); do
 		sed -i "s|-L$SRC[^ ]* ||g" $PKG/$i
 	done
 }
