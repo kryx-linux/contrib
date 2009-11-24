@@ -4,7 +4,7 @@
 # Depends on:  cmake gperf glib lua cairo pango imlib2 libev dbus imagemagick libxdg-basedir xorg-xcb-util startup-notification
 
 name=awesome
-version=3.3.2
+version=3.4.1
 release=1
 source=(http://$name.naquadah.org/download/$name-$version.tar.bz2
     $name-client.1 $name.1 awsetbg.1 ${name}rc.5)
@@ -26,7 +26,7 @@ build() {
     cmake . -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DAWESOME_MAN_PATH=/usr/man \
-	-DGENERATE_MANPAGES=OFF \
+        -DGENERATE_MANPAGES=OFF \
         -DLIBEV_INCLUDE_DIRS=/usr/include/libev
     make
     make DESTDIR=$PKG install
