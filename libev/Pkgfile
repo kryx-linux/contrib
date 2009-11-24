@@ -4,13 +4,13 @@
 # Packager: Younes Hafri <ycrux@club-internet.fr>
 
 name=libev
-version=3.7
+version=3.8
 release=1
 source=(http://dist.schmorp.de/$name/Attic/$name-$version.tar.gz)
 
 build () {
     cd $name-$version
-    ./configure  --prefix=/usr \
+    ./configure --prefix=/usr \
         --includedir=$PKG/usr/include/libev \
         --mandir=$PKG/usr/man \
         --disable-nls \
