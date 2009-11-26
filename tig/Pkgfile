@@ -11,9 +11,9 @@ source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
+  ./configure --prefix=/usr --mandir=/usr/man --sysconfdir=/etc
+
   make
-  make prefix=/usr DESTDIR=$PKG install
-  install -d $PKG/usr/man/man{1,5}
-  install -m 644 tig.1 $PKG/usr/man/man1
-  install -m 644 tigrc.5 $PKG/usr/man/man5
+  make prefix=/usr DESTDIR=$PKG install install-doc-man
 }
