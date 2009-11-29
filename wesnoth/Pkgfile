@@ -2,11 +2,11 @@
 # URL: http://www.wesnoth.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: sdl_image sdl_mixer sdl_net freetype boost cmake
+# Depends on: boost cmake pango sdl_image sdl_mixer sdl_net sdl_ttf
 
 name=wesnoth
 version=1.6.5
-release=1
+release=2
 source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
@@ -30,5 +30,6 @@ build() {
 		-name 'COPYING' \
 	\) -exec rm {} +
 
+	find $PKG -type d -exec chmod -c go-w {} +
 	rm -r $PKG/usr/share/doc
 }
