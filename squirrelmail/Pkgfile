@@ -4,7 +4,7 @@
 # Depends on: php
 
 name=squirrelmail
-version=1.4.17
+version=1.4.19
 release=1
 source=(http://prdownloads.sf.net/$name/$name-$version.tar.gz)
 
@@ -18,4 +18,5 @@ build() {
 	-o -name 'ChangeLog' \
 	-o -name AUTHORS -o -name COPYING -o -name INSTALL \
 	| xargs rm
+    rm -rf $PKG/var/www/htdocs/$name/doc
 }
