@@ -12,8 +12,7 @@ case $1 in
 	/usr/sbin/nginx
 	;;
     stop)
-	killall -9 nginx;
-	rm /var/run/nginx.pid
+	/usr/sbin/nginx -s quit
 	;;
     *)
 	echo "usage: nginx [start|stop]"
