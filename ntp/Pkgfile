@@ -5,7 +5,7 @@
 # Depends on:  openssl
 
 name=ntp
-version=4.2.4p7
+version=4.2.6
 release=2
 source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/$name-$version.tar.gz
         ntpd
@@ -26,8 +26,10 @@ build () {
 
    ./configure \
       --prefix=/usr \
+      --mandir=/usr/man \
       --with-sntp \
       --with-crypto \
+      --without-ntpsnmpd \
       --enable-debugging=no \
       --enable-ntpdate-step \
       --enable-parse-clocks \
@@ -46,6 +48,9 @@ build () {
    install -m 644 $SRC/ntp.conf $PKG/etc/ntp
    install -m 755 $SRC/ntpd $PKG/etc/rc.d
    install -m 755 $SRC/ntpdate $PKG/etc/rc.d
+
+   # fix remove unnecessary directory
+   rm -r $PKG/usr/sbin
 
    # initialize ntp.drift file
    echo "0.0" > $PKG/var/lib/ntp/ntp.drift
