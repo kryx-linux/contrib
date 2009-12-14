@@ -2,32 +2,36 @@
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
 # Packager:    Simone Rota, sip at crux dot nu
 # URL:         http://www.mozillamessaging.com/en-US/thunderbird/
-# Depends on:  nss gtk libidl
+# Depends on:  python gtk dbus-glib alsa-lib libidl nss
 
 name=thunderbird
-version=2.0.0.22
+version=3.0
 release=1
-source=(ftp://ftp.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version-source.tar.bz2
-    $name.desktop elif_fix.patch)
+source=(http://mozilla.snt.utwente.nl/$name/releases/$version/source/$name-$version.source.tar.bz2
+    $name.desktop)
 
 build() {
-    cd mozilla
-    patch -p1 -i ../elif_fix.patch
+    cd comm-1.9.1
     ./configure --prefix=/usr \
         --enable-application=mail \
 	--with-system-{nspr,nss} \
 	--with-system-jpeg \
 	--with-system-zlib \
-	--with-system-png \
 	--enable-official-branding \
-        --enable-extensions \
-	--enable-svg \
-	--enable-svg-renderer=cairo \
-	--disable-installer \
-	--disable-updater \
-        --enable-optimize="$CFLAGS" \
-	--enable-system-cairo
+        --with-distribution-id=CRUX \
+        --disable-gnomevfs \
+        --disable-installer \
+        --disable-updater \
+        --enable-optimize="$(grep -o .O. <<< "${CFLAGS}")" \
+        --enable-xterm-updates \
+        --enable-system-cairo \
+        --enable-system-sqlite \
+        --disable-tests \
+        --with-default-mozilla-five-home
+        # crux libpng doesn't support apng
+        # --with-system-png
     make
+    sed -i '98d' mail/installer/Makefile
     make DESTDIR=$PKG install
     install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
     find $PKG -iname '*README*' -delete
