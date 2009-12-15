@@ -11,12 +11,16 @@ source=(http://mozilla.snt.utwente.nl/$name/releases/$version/source/$name-$vers
     $name.desktop)
 
 build() {
-    cd comm-1.9.1
+    #cd comm-1.9.1/mozilla
+    #patch -p 1 -i $SRC/breakpad.patch
+    cd $SRC/comm-1.9.1
     ./configure --prefix=/usr \
         --enable-application=mail \
 	--with-system-{nspr,nss} \
 	--with-system-jpeg \
 	--with-system-zlib \
+        --with-system-bz2 \
+        --with-pthreads \
 	--enable-official-branding \
         --with-distribution-id=CRUX \
         --disable-gnomevfs \
@@ -27,7 +31,8 @@ build() {
         --enable-system-cairo \
         --enable-system-sqlite \
         --disable-tests \
-        --with-default-mozilla-five-home
+        --with-default-mozilla-five-home \
+        --disable-crashreporter
         # crux libpng doesn't support apng
         # --with-system-png
     make
