@@ -5,14 +5,16 @@
 # Depends on: mtools perl
 
 name=syslinux
-version=3.83
-release=2
-source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2 \
-        Makefile.patch)
+version=3.84
+release=1
+source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
-  patch -p0 -i $SRC/Makefile.patch
+  cp win32/syslinux.exe .
   make OPTFLAGS="$CFLAGS"
-  make INSTALLROOT=$PKG install-all
+  mv syslinux.exe win32
+  make INSTALLROOT=$PKG install
+  mv $PKG/sbin/* $PKG/usr/bin
+  rm -r $PKG/sbin
 }

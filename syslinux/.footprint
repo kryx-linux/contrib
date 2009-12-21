@@ -45,6 +45,7 @@ drwxr-sr-x	root/root	usr/share/syslinux/com32/include/bitsize/
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/ctype.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/dev.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/dirent.h
+-rw-r--r--	root/root	usr/share/syslinux/com32/include/dprintf.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/elf.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/endian.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/errno.h
@@ -53,10 +54,12 @@ drwxr-sr-x	root/root	usr/share/syslinux/com32/include/gplinclude/
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/README
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/cpuid.h
 drwxr-sr-x	root/root	usr/share/syslinux/com32/include/gplinclude/disk/
+-rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/bootloaders.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/common.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/errno_disk.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/error.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/geom.h
+-rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/mbrs.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/msdos.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/partition.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/gplinclude/disk/read.h
@@ -85,6 +88,7 @@ drwxr-sr-x	root/root	usr/share/syslinux/com32/include/klibc/
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/klibc/endian.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/klibc/extern.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/klibc/sysconfig.h
+-rw-r--r--	root/root	usr/share/syslinux/com32/include/libansi.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/limits.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/math.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/minmax.h
@@ -106,6 +110,7 @@ drwxr-sr-x	root/root	usr/share/syslinux/com32/include/sys/
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/sys/elf64.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/sys/elfcommon.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/sys/fpu.h
+-rw-r--r--	root/root	usr/share/syslinux/com32/include/sys/gpxe.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/sys/io.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/sys/pci.h
 -rw-r--r--	root/root	usr/share/syslinux/com32/include/sys/stat.h
@@ -148,8 +153,12 @@ drwxr-sr-x	root/root	usr/share/syslinux/com32/include/syslinux/
 -rw-r--r--	root/root	usr/share/syslinux/cpuidtest.c32
 -rw-r--r--	root/root	usr/share/syslinux/disk.c32
 -rw-r--r--	root/root	usr/share/syslinux/dmitest.c32
+drwxr-xr-x	root/root	usr/share/syslinux/dosutil/
+-rw-r--r--	root/root	usr/share/syslinux/dosutil/eltorito.sys
+-rw-r--r--	root/root	usr/share/syslinux/dosutil/mdiskchk.com
 -rw-r--r--	root/root	usr/share/syslinux/elf.c32
 -rw-r--r--	root/root	usr/share/syslinux/ethersel.c32
+-rw-r--r--	root/root	usr/share/syslinux/gfxboot.c32
 -rw-r--r--	root/root	usr/share/syslinux/gfxboot.com
 -rw-r--r--	root/root	usr/share/syslinux/gptmbr.bin
 -rw-r--r--	root/root	usr/share/syslinux/gptmbr_c.bin
@@ -157,6 +166,7 @@ drwxr-sr-x	root/root	usr/share/syslinux/com32/include/syslinux/
 -rw-r--r--	root/root	usr/share/syslinux/gpxecmd.c32
 -rw-r--r--	root/root	usr/share/syslinux/gpxelinux.0
 -rw-r--r--	root/root	usr/share/syslinux/hdt.c32
+-rw-r--r--	root/root	usr/share/syslinux/ifcpu.c32
 -rw-r--r--	root/root	usr/share/syslinux/ifcpu64.c32
 -rw-r--r--	root/root	usr/share/syslinux/int18.com
 -rw-r--r--	root/root	usr/share/syslinux/isohdpfx.bin
@@ -187,6 +197,7 @@ drwxr-sr-x	root/root	usr/share/syslinux/com32/include/syslinux/
 -rw-r--r--	root/root	usr/share/syslinux/sanboot.c32
 -rw-r--r--	root/root	usr/share/syslinux/sdi.c32
 -rw-r--r--	root/root	usr/share/syslinux/syslinux.com
+-rw-r--r--	root/root	usr/share/syslinux/syslinux.exe
 -rw-r--r--	root/root	usr/share/syslinux/vesainfo.c32
 -rw-r--r--	root/root	usr/share/syslinux/vesamenu.c32
 -rw-r--r--	root/root	usr/share/syslinux/vpdtest.c32
