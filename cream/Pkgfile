@@ -13,5 +13,5 @@ build() {
     mkdir $PKG/usr
     chmod +x INSTALL.sh
     DESTDIR=$PKG ./INSTALL.sh /usr
-    rm -rf $PKG/usr/share/vim/cream/docs{,-html}
+    rm -rf $PKG/usr/share/vim/cream/{docs{,-html},help,lang}
 }
