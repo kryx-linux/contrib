@@ -9,14 +9,14 @@ release=2
 source=(http://www.deater.net/weave/vmwprod/$name/$name-$version.tar.gz crux.logo logo_config.crux)
 
 build() {
-	cd $name-$version
-        cp ../logo_config.crux logo_config
-        cp ../crux.logo logos/distributions
-	./configure
-	sed -i "s/-O2/$CFLAGS/" Makefile.default libsysinfo-0.2.1/Makefile.default
-	sed -i '/USE_I18N/s/1/0/2' Makefile.default
-	sed -i 's/\$(TRANSLATIONS)//' Makefile
-	make
+    cd $name-$version
+    cp ../logo_config.crux logo_config
+    cp ../crux.logo logos/distributions
+    ./configure
+    sed -i "s/-O2/$CFLAGS/" Makefile.default libsysinfo-0.2.1/Makefile.default
+    sed -i '/USE_I18N/s/1/0/2' Makefile.default
+    sed -i 's/\$(TRANSLATIONS)//' Makefile
+    make
     install -D -m 0775 linux_logo $PKG/usr/bin/linux_logo
     install -D -m 0644 linux_logo.1.gz $PKG/usr/man/man1/linux_logo.1.gz
 }
