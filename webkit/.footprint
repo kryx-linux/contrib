@@ -40,9 +40,9 @@ drwxr-xr-x	root/root	usr/include/webkit-1.0/webkit/
 -rw-r--r--	root/root	usr/include/webkit-1.0/webkit/webkitwebwindowfeatures.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libwebkit-1.0.la
-lrwxrwxrwx	root/root	usr/lib/libwebkit-1.0.so -> libwebkit-1.0.so.2.12.0
-lrwxrwxrwx	root/root	usr/lib/libwebkit-1.0.so.2 -> libwebkit-1.0.so.2.12.0
--rwxr-xr-x	root/root	usr/lib/libwebkit-1.0.so.2.12.0
+lrwxrwxrwx	root/root	usr/lib/libwebkit-1.0.so -> libwebkit-1.0.so.2.13.0
+lrwxrwxrwx	root/root	usr/lib/libwebkit-1.0.so.2 -> libwebkit-1.0.so.2.13.0
+-rwxr-xr-x	root/root	usr/lib/libwebkit-1.0.so.2.13.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/webkit-1.0.pc
 drwxr-xr-x	root/root	usr/share/
@@ -57,6 +57,7 @@ drwxr-xr-x	root/root	usr/share/webkit-1.0/images/
 drwxr-xr-x	root/root	usr/share/webkit-1.0/resources/
 -rw-r--r--	root/root	usr/share/webkit-1.0/resources/error.html
 drwxr-xr-x	root/root	usr/share/webkit-1.0/webinspector/
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/AbstractTimelinePanel.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/BottomUpProfileDataGridTree.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Breakpoint.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/BreakpointsSidebarPane.js
@@ -64,11 +65,11 @@ drwxr-xr-x	root/root	usr/share/webkit-1.0/webinspector/
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Callback.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/ChangesView.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Color.js
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/ConsolePanel.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/ConsoleView.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/CookieItemsView.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/DOMAgent.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/DOMStorage.js
--rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/DOMStorageDataGrid.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/DOMStorageItemsView.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/DataGrid.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Database.js
@@ -86,6 +87,7 @@ drwxr-xr-x	root/root	usr/share/webkit-1.0/webinspector/Images/
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/clearConsoleButtonGlyph.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/closeButtons.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/consoleButtonGlyph.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/consoleIcon.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/cookie.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/database.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/databaseTable.png
@@ -173,6 +175,15 @@ drwxr-xr-x	root/root	usr/share/webkit-1.0/webinspector/Images/
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/statusbarResizerVertical.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/storageIcon.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/successGreenDot.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineBarBlue.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineBarGray.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineBarGreen.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineBarOrange.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineBarPurple.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineBarRed.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineBarYellow.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineCheckmarks.png
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineDots.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineHollowPillBlue.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineHollowPillGray.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/timelineHollowPillGreen.png
@@ -210,6 +221,7 @@ drwxr-xr-x	root/root	usr/share/webkit-1.0/webinspector/Images/
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Images/whiteConnectorPoint.png
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/InjectedScript.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/InjectedScriptAccess.js
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/InspectorControllerStub.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/KeyboardShortcut.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/MetricsSidebarPane.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/Object.js
@@ -243,6 +255,8 @@ drwxr-xr-x	root/root	usr/share/webkit-1.0/webinspector/Images/
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/TestController.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/TextPrompt.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/TimelineAgent.js
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/TimelineGrid.js
+-rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/TimelineOverviewPane.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/TimelinePanel.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/TopDownProfileDataGridTree.js
 -rw-r--r--	root/root	usr/share/webkit-1.0/webinspector/View.js
