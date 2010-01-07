@@ -4,10 +4,10 @@
 # Depends on: net-snmp fping mysql
 
 name=zabbix_server
-version=1.6.4
+version=1.6.8
 release=1
-source=(http://dl.sourceforge.net/sourceforge/zabbix/zabbix-$version.tar.gz \
-		zabbix_server.conf zabbix_server)
+source=(http://dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$version/zabbix-$version.tar.gz \
+		$name.conf $name)
 
 build() {
 	cd zabbix-$version
@@ -21,17 +21,18 @@ build() {
 	make
 	make DESTDIR=$PKG install
 	
-	mkdir -p $PKG/{var/log/zabbix,var/run/zabbix_server}
-	chmod 775 $PKG/var/log/zabbix
+	mkdir -p $PKG/{var/log/$name,var/run/$name}
 	
-	touch $PKG/var/log/zabbix/zabbix_server.log
-	chmod 600 $PKG/var/log/zabbix/zabbix_server.log
-	chgrp -R daemon $PKG/var/log/zabbix
+	touch $PKG/var/log/$name/$name.log
+	chown -R daemon:daemon $PKG/var/log/$name
+	find $PKG/var/log/$name -type f | xargs chmod 600
+	find $PKG/var/log/$name -type d | xargs chmod 700
 	
-	touch $PKG/var/run/zabbix_server/zabbix_server.pid
-	chmod 700 $PKG/var/run/zabbix_server
-	chown -R daemon:daemon $PKG/var/run/zabbix_server
+	touch $PKG/var/run/$name/$name.pid
+	chown -R daemon:daemon $PKG/var/run/$name
+	find $PKG/var/run/$name -type f | xargs chmod 600
+	find $PKG/var/run/$name -type d | xargs chmod 700
 	
-	install -D -m 640 -o daemon -g daemon $SRC/zabbix_server.conf $PKG/etc/zabbix/zabbix_server.conf
-	install -D -m 755 $SRC/zabbix_server $PKG/etc/rc.d/zabbix_server
+	install -D -m 640 -o daemon -g daemon $SRC/$name.conf $PKG/etc/zabbix/$name.conf
+	install -D -m 755 $SRC/$name $PKG/etc/rc.d/$name
 }
