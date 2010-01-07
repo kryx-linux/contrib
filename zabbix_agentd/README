@@ -18,6 +18,12 @@ something useful.
 
 PRECAUTION
 Starting from version 1.6.3 linux agent suppports 'iowait', 'interrupt',
-'softirq' and 'steal' for 'system.cpu.util' out of the box.
+'softirq' and 'steal' for 'system.cpu.util' out of the box. The patch is no
+longer provided.
+
+After upgrading from version 1.6.4 log default file location was change,
+adjust /etc/zabbix/zabbix_agentd.conf file:
+ LogFile=/var/log/zabbix_agentd/zabbix_agentd.log
+and change it's permissions, and possibly delete old log dir.
 
 RESOURCES
