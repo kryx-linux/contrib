@@ -1,0 +1,17 @@
+# Description: A fancy interface to the Python interpreter for Unix-like OS
+# URL: http://www.bpython-interpreter.org/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: pygments
+
+name=bpython
+version=0.9.5.2
+release=1
+source=(http://www.bpython-interpreter.org/releases/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	python setup.py install --root=$PKG
+	mv $PKG/usr/share/man $PKG/usr/man
+	# raises DistributionNotFound otherwise
+	#find $PKG -name '*egg-info' | xargs rm -rf
+}
