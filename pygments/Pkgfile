@@ -1,0 +1,16 @@
+# Description: A generic syntax highlighter
+# URL: http://pygments.org/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: python
+
+name=pygments
+version=1.2.2
+release=1
+source=(http://pypi.python.org/packages/source/P/Pygments/Pygments-$version.tar.gz)
+
+build() {
+	cd Pygments-$version
+	python setup.py install --root=$PKG
+	# at least Trac complains if these files are removed
+	#find $PKG -name '*egg-info' | xargs rm -rf
+}
