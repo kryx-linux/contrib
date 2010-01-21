@@ -10,5 +10,5 @@ source=(http://betterthangrep.com/$name-standalone)
 build() {
     install -D -m 0755 $name-standalone $PKG/usr/bin/$name
     mkdir -p $PKG/usr/man/man1
-    pod2man /usr/bin/$name > $PKG/usr/man/man1/$name.1
+    pod2man $PKG/usr/bin/$name > $PKG/usr/man/man1/$name.1
 }
