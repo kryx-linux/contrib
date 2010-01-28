@@ -1,10 +1,7 @@
-drwxr-xr-x	root/root	etc/
--rw-r--r--	root/root	etc/diet.ld.conf
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/dietlibc/
 drwxr-xr-x	root/root	usr/dietlibc/bin/
 -rwxr-xr-x	root/root	usr/dietlibc/bin/diet
--rwxr-xr-x	root/root	usr/dietlibc/bin/diet-dyn
 -rwxr-xr-x	root/root	usr/dietlibc/bin/dnsd
 -rwxr-xr-x	root/root	usr/dietlibc/bin/elftrunc
 drwxr-xr-x	root/root	usr/dietlibc/include/
@@ -179,11 +176,13 @@ drwxr-xr-x	root/root	usr/dietlibc/include/sys/
 -rw-r--r--	root/root	usr/dietlibc/include/sys/sendfile.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/shm.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/signal.h
+-rw-r--r--	root/root	usr/dietlibc/include/sys/signalfd.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/socket.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/soundcard.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/sparc-ioctl.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/stat.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/statfs.h
+-rw-r--r--	root/root	usr/dietlibc/include/sys/statvfs.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/swap.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/syscall.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/sysctl.h
@@ -192,6 +191,7 @@ drwxr-xr-x	root/root	usr/dietlibc/include/sys/
 -rw-r--r--	root/root	usr/dietlibc/include/sys/sysmacros.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/time.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/timeb.h
+-rw-r--r--	root/root	usr/dietlibc/include/sys/timerfd.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/times.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/timex.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/tls.h
@@ -213,29 +213,21 @@ drwxr-xr-x	root/root	usr/dietlibc/include/sys/
 -rw-r--r--	root/root	usr/dietlibc/include/ustat.h
 -rw-r--r--	root/root	usr/dietlibc/include/utime.h
 -rw-r--r--	root/root	usr/dietlibc/include/utmp.h
+-rw-r--r--	root/root	usr/dietlibc/include/utmpx.h
 -rw-r--r--	root/root	usr/dietlibc/include/wchar.h
 -rw-r--r--	root/root	usr/dietlibc/include/wctype.h
 -rw-r--r--	root/root	usr/dietlibc/include/write12.h
 lrwxrwxrwx	root/root	usr/dietlibc/lib -> lib-i386
 drwxr-xr-x	root/root	usr/dietlibc/lib-i386/
 lrwxrwxrwx	root/root	usr/dietlibc/lib-i386/dietlibc.a -> libc.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dstart.o
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dyn_dstart.o
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dyn_dstop.o
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dyn_so_start.o
 -rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dyn_start.o
 -rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dyn_stop.o
 -rw-r--r--	root/root	usr/dietlibc/lib-i386/libc.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/libc.so
 -rw-r--r--	root/root	usr/dietlibc/lib-i386/libcompat.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/libcompat.so
 -rw-r--r--	root/root	usr/dietlibc/lib-i386/libcrypt.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/libdl.so
 -rw-r--r--	root/root	usr/dietlibc/lib-i386/liblatin1.a
 -rw-r--r--	root/root	usr/dietlibc/lib-i386/libm.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/libm.so
 -rw-r--r--	root/root	usr/dietlibc/lib-i386/libpthread.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/libpthread.so
 -rw-r--r--	root/root	usr/dietlibc/lib-i386/librpc.a
 -rwxr-xr-x	root/root	usr/dietlibc/lib-i386/start.o
 drwxr-xr-x	root/root	usr/man/

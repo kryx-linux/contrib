@@ -4,7 +4,7 @@
 # Depends on: 
 
 name=dietlibc
-version=0.31
+version=0.32
 release=1
 
 source=(http://www.kernel.org/pub/linux/libs/$name/$name-$version.tar.bz2)
@@ -13,9 +13,11 @@ build() {
 	cd $name-$version
 	mkdir -p $PKG/{etc,usr} 
 	make prefix=/usr/dietlibc
-	make prefix=/usr/dietlibc dyn
+	# shared libraries don't build anymore with gcc 4.4, why?
+	# make prefix=/usr/dietlibc dyn
 	make prefix=/usr/dietlibc DESTDIR=$PKG install
 	mv $PKG/usr/dietlibc/man $PKG/usr
 	ln -s libc.a $PKG/usr/dietlibc/lib-i386/dietlibc.a
 	ln -s lib-i386 $PKG/usr/dietlibc/lib
+	rmdir $PKG/etc
 }
