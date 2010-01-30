@@ -4,7 +4,7 @@
 # Packager: sten, nick dot steeves at shaw dot ca
 
 name=nmap
-version=5.20
+version=5.21
 release=1
 source=(http://ftp.uni-erlangen.de/mirrors/gentoo/distfiles/$name-$version.tar.bz2)
 
@@ -19,6 +19,7 @@ build () {
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/man/man1/zenmap.*
+    rm -f $PKG/usr/share/nmap/nselib/data/psexec/README
     
     
 }
