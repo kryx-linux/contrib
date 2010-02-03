@@ -5,12 +5,14 @@
 # Depends on:
 
 name=inadyn-mt
-version=02.15.04
+version=02.15.06
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name.v.$version.tar.gz)
 
 build() {
   cd $name.v.$version
+  sed 's|/usr/local|/usr|g' -i makefile
+
   make -f makefile
   install -D -m 0755 bin/linux/$name $PKG/usr/bin/$name
   install -D -m 0644 man/$name.8 $PKG/usr/man/man8/$name.8
