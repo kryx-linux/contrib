@@ -8,10 +8,8 @@ start)
   /usr/sbin/lighttpd -f /etc/lighttpd.conf
   ;;
 stop)
-  if [ -f /var/run/lighttpd.pid ]; then
-    kill `cat /var/run/lighttpd.pid`
-    rm -f /var/run/lighttpd.pid
-  fi
+  rm -f /var/run/lighttpd.pid
+  killall -q /usr/sbin/lighttpd
   ;;
 restart)
   $0 stop
