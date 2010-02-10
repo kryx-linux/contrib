@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# /etc/rc.d/syslog-ng: start/stop syslog-ng logging daemon
+#
+
+case $1 in
+start)
+  /usr/sbin/syslog-ng -f /etc/syslog-ng.conf
+  ;;
+stop)
+  rm -f /var/run/syslog-ng.pid
+  /usr/bin/killall -q /usr/sbin/syslog-ng
+  ;;
+restart)
+  $0 stop
+  sleep 2
+  $0 start
+  ;;
+*)
+  echo "usage: $0 [start|stop|restart]"
+  ;;
+esac

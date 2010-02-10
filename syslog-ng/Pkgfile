@@ -5,19 +5,24 @@
 # Depends on:  eventlog
 
 name=syslog-ng
-version=2.0.9
+version=3.0.5
 release=1
-source=(http://ftp.uni-erlangen.de/pub/mirrors/gentoo/distfiles/$name-$version.tar.gz)
+source=(http://ftp.uni-erlangen.de/pub/mirrors/gentoo/distfiles/${name}_${version}.tar.gz
+syslog-ng.rc syslog-ng.conf)
 
 build() {
    cd $name-$version
 
    ./configure \
       --prefix=/usr \
-      --disable-nls \
+      --sysconfdir=/etc \
+      --libexecdir=/var/libexec \
+      --localstatedir=/var \
       --mandir=/usr/man \
       --enable-dynamic-linking
 
    make && make DESTDIR=$PKG install
    rm -rf $PKG/usr/doc
+   install -D -m 644 ../syslog-ng.conf $PKG/etc/syslog-ng.conf
+   install -D -m 755 ../syslog-ng.rc $PKG/etc/rc.d/syslog-ng
 }
