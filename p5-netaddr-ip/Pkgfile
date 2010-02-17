@@ -1,0 +1,23 @@
+# Description: Perl Library NetAddr::IP
+# URL:         http://search.cpan.org/dist/NetAddr-IP/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  perl
+
+name=p5-netaddr-ip
+version=4.027
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/M/MI/MIKER/NetAddr-IP-$version.tar.gz)
+
+build() {
+  cd NetAddr-IP-$version
+  yes n|perl Makefile.PL
+  make OPTIMIZE="$CFLAGS"
+  make install DESTDIR=$PKG
+  # Remove perlcrap
+  find $PKG \
+    -name .packlist -or \
+    -name '*.bs' -or \
+    -name perllocal.pod | xargs rm
+  # Remove empty directories
+  find $PKG -depth -empty -exec rm -rf {} \;
+}
