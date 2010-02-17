@@ -2,24 +2,18 @@
 # URL:         http://www.spamassassin.org
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Victor victord at users dot berlios dot de
-# Depends on:  p5-digest-sha1, p5-net-dns, p5-lwp
+# Depends on:  p5-digest-sha1, p5-net-dns, p5-lwp, p5-netaddr-ip
 
 name=spamassassin
-version=3.2.5
+version=3.3.0
 release=1
 source=(http://apache.mirror.clusters.cc/$name/source/Mail-SpamAssassin-$version.tar.bz2 \
    $name.rc)
 
 build() {
    cd Mail-SpamAssassin-$version
-   perl Makefile.PL PREFIX=/usr CONFDIR=/etc/$name DESTDIR=$PKG < /dev/null
-   sed -i -e 's/^INSTALLDATA = /INSTALLDATA = $(DESTDIR)\//g' Makefile
-   sed -i -e 's/^INSTALLSITEDATA = /INSTALLSITEDATA = $(DESTDIR)\//g' Makefile
-   sed -i -e 's/^INSTALLVENDORDATA = /INSTALLVENDORDATA = $(DESTDIR)\//g' Makefile
-   sed -i -e 's/^INSTALLCONF = /INSTALLCONF = $(DESTDIR)/g' Makefile
-   sed -i -e 's/^INSTALLSITECONF = /INSTALLSITECONF = $(DESTDIR)/g' Makefile
-   sed -i -e 's/^INSTALLVENDORCONF = /INSTALLVENDORCONF = $(DESTDIR)/g' Makefile
-
+   perl Makefile.PL PREFIX=/usr CONFDIR=/etc/$name DESTDIR=$PKG \
+   LOCALSTATEDIR=/usr/share/$name < /dev/null
    make
    make spamc/libspamc.so
    make install 
