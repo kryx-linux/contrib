@@ -1,0 +1,90 @@
+diff -pruN atanks-4.3.orig/Makefile atanks-4.3/Makefile
+--- atanks-4.3.orig/Makefile	2010-02-19 07:53:24.611627660 +0000
++++ atanks-4.3/Makefile	2010-02-19 08:01:11.830537898 +0000
+@@ -1,46 +1,47 @@
+-VERSION=3.9
++VERSION=4.3
+ PREFIX = /usr/
+ 
+ BINPREFIX = $(PREFIX)
+ 
+-BINDIR = ${BINPREFIX}bin/
+-INSTALLDIR = ${PREFIX}share/games/atanks
++BINDIR = ${DESTDIR}${BINPREFIX}bin/
++INSTALLDIR = ${DESTDIR}${PREFIX}share/atanks
+ 
+ export VERSION
+ export PREFIX
+ export INSTALLDIR
+ 
+ FILENAME=atanks-${VERSION}
+-INSTALL=$(PREFIX)bin/install -c
++INSTALL=$(PREFIX)bin/install
+ DISTCOMMON=atanks/*.dat atanks/COPYING atanks/README atanks/TODO atanks/Changelog atanks/BUGS atanks/*.txt
+-INCOMMON=COPYING README TODO Changelog *.txt unicode.dat
++INCOMMON=*.txt unicode.dat
+ 
+ all:
+ 	FLAGS=-DLINUX $(MAKE) -C src
+ 
+ install: 
+-	mkdir -p ${BINDIR}
+-	$(INSTALL) -g 0 -m 755 -o 0 atanks ${BINDIR}
+-	mkdir -p ${INSTALLDIR}
+-	mkdir -p ${INSTALLDIR}/button
+-	mkdir -p ${INSTALLDIR}/misc
+-	mkdir -p ${INSTALLDIR}/missile
+-	mkdir -p ${INSTALLDIR}/sound
+-	mkdir -p ${INSTALLDIR}/stock
+-	mkdir -p ${INSTALLDIR}/tank
+-	mkdir -p ${INSTALLDIR}/tankgun
+-	mkdir -p ${INSTALLDIR}/title
+-	mkdir -p ${INSTALLDIR}/text
+-	$(INSTALL) -g 0 -m 644 -o 0 $(INCOMMON) ${INSTALLDIR}
+-	$(INSTALL) -g 0 -m 644 -o 0 button/* ${INSTALLDIR}/button
+-	$(INSTALL) -g 0 -m 644 -o 0 misc/* ${INSTALLDIR}/misc
+-	$(INSTALL) -g 0 -m 644 -o 0 missile/* ${INSTALLDIR}/missile
+-	$(INSTALL) -g 0 -m 644 -o 0 sound/* ${INSTALLDIR}/sound
+-	$(INSTALL) -g 0 -m 644 -o 0 stock/* ${INSTALLDIR}/stock
+-	$(INSTALL) -g 0 -m 644 -o 0 tank/* ${INSTALLDIR}/tank
+-	$(INSTALL) -g 0 -m 644 -o 0 tankgun/* ${INSTALLDIR}/tankgun
+-	$(INSTALL) -g 0 -m 644 -o 0 title/* ${INSTALLDIR}/title
+-	$(INSTALL) -g 0 -m 644 -o 0 text/* ${INSTALLDIR}/text
++	$(INSTALL) -m 0755 -D atanks ${BINDIR}/atanks
++	$(INSTALL) -d ${INSTALLDIR}
++	$(INSTALL) -d ${INSTALLDIR}/button
++	$(INSTALL) -d ${INSTALLDIR}/misc
++	$(INSTALL) -d ${INSTALLDIR}/missile
++	$(INSTALL) -d ${INSTALLDIR}/sound
++	$(INSTALL) -d ${INSTALLDIR}/stock
++	$(INSTALL) -d ${INSTALLDIR}/tank
++	$(INSTALL) -d ${INSTALLDIR}/tankgun
++	$(INSTALL) -d ${INSTALLDIR}/title
++	$(INSTALL) -d ${INSTALLDIR}/text
++	$(INSTALL) -m 0644 $(INCOMMON) ${INSTALLDIR}
++	$(INSTALL) -m 0644 button/* ${INSTALLDIR}/button
++	$(INSTALL) -m 0644 misc/* ${INSTALLDIR}/misc
++	$(INSTALL) -m 0644 missile/* ${INSTALLDIR}/missile
++	$(INSTALL) -m 0644 sound/* ${INSTALLDIR}/sound
++	$(INSTALL) -m 0644 stock/* ${INSTALLDIR}/stock
++	$(INSTALL) -m 0644 tank/* ${INSTALLDIR}/tank
++	$(INSTALL) -m 0644 tankgun/* ${INSTALLDIR}/tankgun
++	$(INSTALL) -m 0644 title/* ${INSTALLDIR}/title
++	$(INSTALL) -m 0644 text/* ${INSTALLDIR}/text
++	$(INSTALL) -m 0644 -D atanks.desktop $(DESTDIR)/usr/share/applications/atanks.desktop
++	$(INSTALL) -m 0644 -D atanks.png $(DESTDIR)/usr/share/pixmaps/atanks.png
+ 
+ user:
+ 	INSTALLDIR=./ FLAGS=-DLINUX $(MAKE) -C src
+diff -pruN atanks-4.3.orig/src/Makefile atanks-4.3/src/Makefile
+--- atanks-4.3.orig/src/Makefile	2010-02-19 07:53:24.605960865 +0000
++++ atanks-4.3/src/Makefile	2010-02-19 07:53:40.915742490 +0000
+@@ -17,7 +17,7 @@ OFLAGS = 
+ LFLAGS +=
+ LDFLAGS =  `allegro-config --libs`
+ 
+-CFLAGS += -g -Wall -Iinclude # -fprofile-arcs -ftest-coverage 
++CFLAGS += -Wall -Iinclude # -fprofile-arcs -ftest-coverage 
+ 
+ SRCS  = $(MODULES:.o=.cpp)
+ GLOBALS	= main.h imagedefs.h externs.h
