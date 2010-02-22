@@ -5,18 +5,18 @@
 # Depends on:
 
 name=inadyn-mt
-version=02.15.06
+version=02.18.14
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name.v.$version.tar.gz)
 
 build() {
   cd $name.v.$version
-  sed 's|/usr/local|/usr|g' -i makefile
+  ./configure --prefix=/usr \
+              --mandir=/usr/man \
+              --disable-sound \
+              --disable-debug
 
-  make -f makefile
-  install -D -m 0755 bin/linux/$name $PKG/usr/bin/$name
-  install -D -m 0644 man/$name.8 $PKG/usr/man/man8/$name.8
-  install -D -m 0644 man/inadyn.8 $PKG/usr/man/man8/inadyn.8
-  install -D -m 0644 man/$name.conf.5 $PKG/usr/man/man5/$name.conf.5
-  install -D -m 0644 man/inadyn.conf.5 $PKG/usr/man/man5/inadyn.conf.5
+  make
+  install -d $PKG/etc
+  make INSTALL_PREFIX=$PKG DESTDIR=$PKG install
 }
