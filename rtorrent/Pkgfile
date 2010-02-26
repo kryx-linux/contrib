@@ -10,7 +10,7 @@ source=(http://libtorrent.rakshasa.no/downloads/rtorrent-$version.tar.gz)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr --mandir=/usr/man
   make
   make install DESTDIR=$PKG
 }
