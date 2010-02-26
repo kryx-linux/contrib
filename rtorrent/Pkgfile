@@ -1,0 +1,16 @@
+# Description: bitorrent console client
+# URL:         http://libtorrent.rakshasa.no
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  libtorrent
+
+name=rtorrent
+version=0.8.6
+release=1
+source=(http://libtorrent.rakshasa.no/downloads/rtorrent-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  make install DESTDIR=$PKG
+}
