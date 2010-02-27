@@ -6,19 +6,16 @@
 # Nice2have:   ecore pyrex ruby samba ffmpeg faad2
 
 name=xmms2
-version=0.6
-release=2
-_codename=DrMattDestruction
+version=0.7
+release=1
+_codename=DrNo
 
 source=(http://dl.sourceforge.net/project/$name/$name/${version}%20$_codename/$name-$version$_codename.tar.bz2)
 
 build () {
-    
     cd $name-$version$_codename
-    # no ldconfig and debugging stuff (force user specified cflags)
-    sed -i 's|/sbin/ldconfig|/bin/true|' wscript
-    sed -i -r 's/\+[[:space:]]+\[.-g.,[[:space:]]+.-O0.\]/ /' wscript
-    ./waf --prefix=/usr --with-mandir=/usr/man -p configure
-    ./waf build
-    ./waf --destdir=$PKG install
+    ./waf --prefix=/usr --mandir=/usr/man configure
+    ./waf ${MAKEFLAGS:-\-j1} build
+    ./waf --without-ldconfig --destdir=$PKG install
 }
+# ${MAKEFLAGS:-\-j1}

@@ -5,7 +5,9 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/vistest-fft
 -rwxr-xr-x	root/root	usr/bin/xmms2
 -rwxr-xr-x	root/root	usr/bin/xmms2-et
+-rwxr-xr-x	root/root	usr/bin/xmms2-find-avahi
 -rwxr-xr-x	root/root	usr/bin/xmms2-launcher
+-rwxr-xr-x	root/root	usr/bin/xmms2-mdns-avahi
 -rwxr-xr-x	root/root	usr/bin/xmms2-mlib-updater
 -rwxr-xr-x	root/root	usr/bin/xmms2-ripper
 -rwxr-xr-x	root/root	usr/bin/xmms2d
@@ -23,7 +25,6 @@ drwxr-xr-x	root/root	usr/include/xmms2/xmms/
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_plugin.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_sample.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_streamtype.h
--rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_strfunc.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_util.h
 -rw-r--r--	root/root	usr/include/xmms2/xmms/xmms_xformplugin.h
 drwxr-xr-x	root/root	usr/include/xmms2/xmmsc/
@@ -74,45 +75,62 @@ drwxr-xr-x	root/root	usr/lib/
 lrwxrwxrwx	root/root	usr/lib/libxmmsclient++-glib.so -> libxmmsclient++-glib.so.1.0.0
 lrwxrwxrwx	root/root	usr/lib/libxmmsclient++-glib.so.1 -> libxmmsclient++-glib.so.1.0.0
 -rw-r--r--	root/root	usr/lib/libxmmsclient++-glib.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/libxmmsclient++.so -> libxmmsclient++.so.4.0.0
+lrwxrwxrwx	root/root	usr/lib/libxmmsclient++.so.4 -> libxmmsclient++.so.4.0.0
+-rw-r--r--	root/root	usr/lib/libxmmsclient++.so.4.0.0
 lrwxrwxrwx	root/root	usr/lib/libxmmsclient-glib.so -> libxmmsclient-glib.so.1.0.0
 lrwxrwxrwx	root/root	usr/lib/libxmmsclient-glib.so.1 -> libxmmsclient-glib.so.1.0.0
 -rw-r--r--	root/root	usr/lib/libxmmsclient-glib.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so -> libxmmsclient.so.5.0.0
-lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so.5 -> libxmmsclient.so.5.0.0
--rw-r--r--	root/root	usr/lib/libxmmsclient.so.5.0.0
+lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so -> libxmmsclient.so.6.0.0
+lrwxrwxrwx	root/root	usr/lib/libxmmsclient.so.6 -> libxmmsclient.so.6.0.0
+-rw-r--r--	root/root	usr/lib/libxmmsclient.so.6.0.0
 drwxr-xr-x	root/root	usr/lib/perl5/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.10.1/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/
--rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/Collection.pm
--rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/Glib.pm
--rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/Sync.pm
 -rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/XMMSClient.pm
+drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/XMMSClient/
+-rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/XMMSClient/Collection.pm
+-rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/XMMSClient/Glib.pm
+-rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/Audio/XMMSClient/Sync.pm
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/auto/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/auto/Audio/
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/auto/Audio/XMMSClient/
 -rw-r--r--	root/root	usr/lib/perl5/site_perl/5.10.1/linux-thread-multi/auto/Audio/XMMSClient/XMMSClient.so
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/xmms2-client-cpp-glib.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/xmms2-client-cpp.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/xmms2-client-glib.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/xmms2-client.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/xmms2-plugin.pc
+drwxr-xr-x	root/root	usr/lib/python2.6/
+drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/
+drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/xmmsclient/
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/__init__.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/collections.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/consts.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/glib.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/propdict.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/qt3.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/sync.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/xmmsclient/xmmsapi.so
 drwxr-xr-x	root/root	usr/lib/xmms2/
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_airplay.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_alsa.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_apefile.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_asf.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_asx.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_avcodec.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_cue.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_curl.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_daap.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_diskwrite.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_equalizer.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_faad.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_file.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_flac.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_flv.so
--rw-r--r--	root/root	usr/lib/xmms2/libxmms_gme.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_gvfs.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_html.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_icymetaint.so
@@ -121,6 +139,7 @@ drwxr-xr-x	root/root	usr/lib/xmms2/
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_m3u.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_mad.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_mp4.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_musepack.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_normalize.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_null.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_nulstripper.so
@@ -128,9 +147,11 @@ drwxr-xr-x	root/root	usr/lib/xmms2/
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_pls.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_replaygain.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_rss.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_speex.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_tta.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_vorbis.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_wave.so
+-rw-r--r--	root/root	usr/lib/xmms2/libxmms_wavpack.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_xml.so
 -rw-r--r--	root/root	usr/lib/xmms2/libxmms_xspf.so
 drwxr-xr-x	root/root	usr/man/
@@ -138,6 +159,7 @@ drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/nyxmms2.1.gz
 -rw-r--r--	root/root	usr/man/man1/xmms2-et.1.gz
 -rw-r--r--	root/root	usr/man/man1/xmms2-launcher.1.gz
+-rw-r--r--	root/root	usr/man/man1/xmms2-mdns-avahi.1.gz
 -rw-r--r--	root/root	usr/man/man1/xmms2.1.gz
 -rw-r--r--	root/root	usr/man/man1/xmms2d.1.gz
 drwxr-xr-x	root/root	usr/share/
@@ -154,4 +176,5 @@ drwxr-xr-x	root/root	usr/share/xmms2/
 drwxr-xr-x	root/root	usr/share/xmms2/scripts/
 drwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/
 -rwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/xmms2-et-launcher.sh
+-rwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/xmms2-mdns-launcher.sh
 -rwxr-xr-x	root/root	usr/share/xmms2/scripts/startup.d/xmms2-mlib-updater.sh
