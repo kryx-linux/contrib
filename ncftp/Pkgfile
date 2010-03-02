@@ -1,0 +1,18 @@
+# Description: command ftp client with completion
+# URL:         http://www.ncftp.com/ncftp/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:
+
+name=ncftp
+version=3.2.3
+release=1
+source=(http://ftp.uni-erlangen.de/mirrors/gentoo/distfiles/ncftp-$version-src.tar.bz2)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr \
+              --mandir=/usr/man
+
+  make
+  make install DESTDIR=$PKG
+}
