@@ -80,6 +80,8 @@ drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/hgext/inotify/linux/
 -rwxr-xr-x	root/root	usr/lib/python2.6/site-packages/hgext/inotify/linux/_inotify.so
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/inotify/linux/watcher.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/inotify/linux/watcher.pyc
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/inotify/linuxserver.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/inotify/linuxserver.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/inotify/server.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/inotify/server.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/interhg.py
@@ -96,6 +98,8 @@ drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/hgext/inotify/linux/
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/parentrevspec.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/patchbomb.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/patchbomb.pyc
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/progress.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/progress.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/purge.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/purge.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/rebase.py
@@ -119,7 +123,7 @@ drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/hgext/zeroconf/
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/zeroconf/Zeroconf.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/zeroconf/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/hgext/zeroconf/__init__.pyc
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial-1.4.3-py2.6.egg-info
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial-1.5-py2.6.egg-info
 drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/__init__.py (EMPTY)
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/__init__.pyc
@@ -214,18 +218,6 @@ drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/hgweb/
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/httprepo.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n.pyc
-drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/da.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/de.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/el.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/fr.po
--rwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/hggettext
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/it.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/ja.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/pt_BR.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/sv.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/zh_CN.po
--rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/i18n/zh_TW.po
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/ignore.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/ignore.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/keepalive.py
@@ -316,6 +308,8 @@ drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/locale/zh_TW/LC_M
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/tags.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templatefilters.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templatefilters.pyc
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templatekw.py
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templatekw.pyc
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templater.py
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templater.pyc
 drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/templates/
@@ -355,6 +349,7 @@ drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/templates/gitweb/
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templates/map-cmdline.changelog
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templates/map-cmdline.compact
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templates/map-cmdline.default
+-rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templates/map-cmdline.xml
 drwxr-xr-x	root/root	usr/lib/python2.6/site-packages/mercurial/templates/monoblue/
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templates/monoblue/branches.tmpl
 -rw-r--r--	root/root	usr/lib/python2.6/site-packages/mercurial/templates/monoblue/changelog.tmpl
