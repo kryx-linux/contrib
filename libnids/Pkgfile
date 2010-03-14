@@ -4,13 +4,12 @@
 # Depends on:  glib, libnet, libpcap
 
 name=libnids
-version=1.23
+version=1.24
 release=1
-source=(http://dl.sourceforge.net/sourceforge/libnids/$name-$version.tar.gz killtcp.diff)
+source=(http://dl.sourceforge.net/sourceforge/libnids/$name-$version.tar.gz)
 
 build() {
     cd  $name-$version
-    patch -p1 -i ../killtcp.diff        
     ./configure --prefix=/usr
     make
     install -m 644 -D src/libnids.a $PKG/usr/lib/libnids.a
