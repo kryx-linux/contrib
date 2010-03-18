@@ -1,4 +1,5 @@
 drwxr-xr-x	root/root	etc/
+-rw-r--r--	root/root	etc/bind.keys
 -rw-r-----	root/named	etc/named.conf
 drwxr-xr-x	root/root	etc/rc.d/
 -rwxr-xr-x	root/root	etc/rc.d/named
@@ -49,6 +50,7 @@ drwxr-xr-x	root/root	usr/include/dns/
 -rw-r--r--	root/root	usr/include/dns/nsec.h
 -rw-r--r--	root/root	usr/include/dns/peer.h
 -rw-r--r--	root/root	usr/include/dns/portlist.h
+-rw-r--r--	root/root	usr/include/dns/private.h
 -rw-r--r--	root/root	usr/include/dns/rbt.h
 -rw-r--r--	root/root	usr/include/dns/rcode.h
 -rw-r--r--	root/root	usr/include/dns/rdata.h
@@ -92,6 +94,7 @@ drwxr-xr-x	root/root	usr/include/isc/
 -rw-r--r--	root/root	usr/include/isc/assertions.h
 -rw-r--r--	root/root	usr/include/isc/atomic.h
 -rw-r--r--	root/root	usr/include/isc/base64.h
+-rw-r--r--	root/root	usr/include/isc/bind9.h
 -rw-r--r--	root/root	usr/include/isc/bitstring.h
 -rw-r--r--	root/root	usr/include/isc/boolean.h
 -rw-r--r--	root/root	usr/include/isc/buffer.h
@@ -127,6 +130,7 @@ drwxr-xr-x	root/root	usr/include/isc/
 -rw-r--r--	root/root	usr/include/isc/msgs.h
 -rw-r--r--	root/root	usr/include/isc/mutex.h
 -rw-r--r--	root/root	usr/include/isc/mutexblock.h
+-rw-r--r--	root/root	usr/include/isc/namespace.h
 -rw-r--r--	root/root	usr/include/isc/net.h
 -rw-r--r--	root/root	usr/include/isc/netaddr.h
 -rw-r--r--	root/root	usr/include/isc/netdb.h
@@ -300,27 +304,42 @@ drwxr-xr-x	root/root	usr/man/man5/
 -rw-r--r--	root/root	usr/man/man5/named.conf.5.gz
 -rw-r--r--	root/root	usr/man/man5/rndc.conf.5.gz
 drwxr-xr-x	root/root	usr/man/man8/
+-rw-r--r--	root/root	usr/man/man8/ddns-confgen.8.gz
 -rw-r--r--	root/root	usr/man/man8/dnssec-dsfromkey.8.gz
 -rw-r--r--	root/root	usr/man/man8/dnssec-keyfromlabel.8.gz
 -rw-r--r--	root/root	usr/man/man8/dnssec-keygen.8.gz
+-rw-r--r--	root/root	usr/man/man8/dnssec-revoke.8.gz
+-rw-r--r--	root/root	usr/man/man8/dnssec-settime.8.gz
 -rw-r--r--	root/root	usr/man/man8/dnssec-signzone.8.gz
+-rw-r--r--	root/root	usr/man/man8/genrandom.8.gz
+-rw-r--r--	root/root	usr/man/man8/isc-hmac-fixup.8.gz
 -rw-r--r--	root/root	usr/man/man8/lwresd.8.gz
 -rw-r--r--	root/root	usr/man/man8/named-checkconf.8.gz
 -rw-r--r--	root/root	usr/man/man8/named-checkzone.8.gz
 lrwxrwxrwx	root/root	usr/man/man8/named-compilezone.8.gz -> named-checkzone.8.gz
+-rw-r--r--	root/root	usr/man/man8/named-journalprint.8.gz
 -rw-r--r--	root/root	usr/man/man8/named.8.gz
+-rw-r--r--	root/root	usr/man/man8/nsec3hash.8.gz
 -rw-r--r--	root/root	usr/man/man8/rndc-confgen.8.gz
 -rw-r--r--	root/root	usr/man/man8/rndc.8.gz
 drwxr-xr-x	root/root	usr/sbin/
+-rwxr-xr-x	root/root	usr/sbin/arpaname
+-rwxr-xr-x	root/root	usr/sbin/ddns-confgen
 -rwxr-xr-x	root/root	usr/sbin/dnssec-dsfromkey
 -rwxr-xr-x	root/root	usr/sbin/dnssec-keyfromlabel
 -rwxr-xr-x	root/root	usr/sbin/dnssec-keygen
+-rwxr-xr-x	root/root	usr/sbin/dnssec-revoke
+-rwxr-xr-x	root/root	usr/sbin/dnssec-settime
 -rwxr-xr-x	root/root	usr/sbin/dnssec-signzone
+-rwxr-xr-x	root/root	usr/sbin/genrandom
+-rwxr-xr-x	root/root	usr/sbin/isc-hmac-fixup
 -rwxr-xr-x	root/root	usr/sbin/lwresd
 -rwxr-xr-x	root/root	usr/sbin/named
 -rwxr-xr-x	root/root	usr/sbin/named-checkconf
 -rwxr-xr-x	root/root	usr/sbin/named-checkzone
 lrwxrwxrwx	root/root	usr/sbin/named-compilezone -> named-checkzone
+-rwxr-xr-x	root/root	usr/sbin/named-journalprint
+-rwxr-xr-x	root/root	usr/sbin/nsec3hash
 -rwxr-xr-x	root/root	usr/sbin/rndc
 -rwxr-xr-x	root/root	usr/sbin/rndc-confgen
 drwxr-xr-x	root/root	usr/var/
