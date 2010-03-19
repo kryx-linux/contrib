@@ -4,7 +4,7 @@
 # Depends on:	asterisk
 
 name=asterisk-core-sounds-en-ulaw
-version=1.4.15
+version=1.4.17
 release=1
 source=(http://downloads.digium.com/pub/telephony/sounds/releases/$name-$version.tar.gz)
 
@@ -12,5 +12,5 @@ build () {
 	mkdir -p $PKG/var/lib/asterisk/sounds
 	rm {CHANGES,CREDITS}-asterisk-core-en-$version
 	mv $SRC/* $PKG/var/lib/asterisk/sounds
-	rm $PKG/var/lib/asterisk/sounds/core-sounds-en.txt
+	rm $PKG/var/lib/asterisk/sounds/{LICENSE-asterisk-core-en-$version,core-sounds-en.txt}
 }
