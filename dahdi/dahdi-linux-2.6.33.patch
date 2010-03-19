@@ -1,0 +1,48 @@
+--- dahdi-linux-2.2.1/include/dahdi/dahdi_config.h.orig	2009-07-22 03:11:53.000000000 +0900
++++ dahdi-linux-2.2.1/include/dahdi/dahdi_config.h	2010-03-18 11:01:36.881380169 +0900
+@@ -24,7 +24,11 @@
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,18)
+ #include <linux/config.h>
+ #else
++#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,33)
+ #include <linux/autoconf.h>
++#else
++#include <generated/autoconf.h>
++#endif
+ #endif
+ #endif
+ 
+--- dahdi-linux-2.2.1/drivers/dahdi/wcb4xxp/base.c.orig	2009-11-10 04:32:45.000000000 +0900
++++ dahdi-linux-2.2.1/drivers/dahdi/wcb4xxp/base.c	2010-03-18 11:05:53.013854479 +0900
+@@ -20,7 +20,17 @@
+  * this program for more details.
+  */
+ 
++#include <linux/version.h>
++#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,18)
++#include <linux/config.h>
++#else
++#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,33)
+ #include <linux/autoconf.h>
++#else
++#include <generated/autoconf.h>
++#endif
++#endif
++
+ #include <linux/init.h>
+ 
+ #include <linux/kernel.h>	/* printk() */
+--- dahdi-linux-2.2.1/drivers/dahdi/wct4xxp/vpm450m.c.orig	2008-08-07 06:07:48.000000000 +0900
++++ dahdi-linux-2.2.1/drivers/dahdi/wct4xxp/vpm450m.c	2010-03-18 11:01:36.881380169 +0900
+@@ -31,7 +31,11 @@
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,18)
+ #include <linux/config.h>
+ #else
++#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,33)
+ #include <linux/autoconf.h>
++#else
++#include <generated/autoconf.h>
++#endif
+ #endif
+ 
+ /* API for Octasic access */

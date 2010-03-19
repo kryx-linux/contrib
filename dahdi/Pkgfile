@@ -1,0 +1,51 @@
+# Description:	Digium Asterisk Hardware Device Interface
+# URL:		http://www.voip-info.org/wiki/view/DAHDI
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:
+
+name=dahdi
+version=2.2.1
+release=2
+source=(
+http://downloads.asterisk.org/pub/telephony/dahdi-linux/releases/dahdi-linux-$version.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-oct6114-064-1.05.01.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-oct6114-128-1.05.01.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-tc400m-MR6.12.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fwload-vpmadt032-1.20.0.tar.gz
+dahdi-linux-2.6.33.patch
+)
+
+build () {
+	cd $name-linux-$version
+
+	# this fixes includes in kernel 2.6.33
+	patch -p1 -i $SRC/dahdi-linux-2.6.33.patch
+
+	# prevent downloading sources for second time
+	# why, oh why did the developer do this?
+	for s in ${source[@]}; do
+		f=$(basename $s)
+		[ -n "`echo $f |grep ^dahdi-fw`" ] && ln -s $PKGMK_SOURCE_DIR/$f drivers/dahdi/firmware/$f
+	done
+	mv ../*.bin drivers/dahdi/firmware
+
+	# prevent depmod
+	sed -i -e '/depmod/d' Makefile
+
+	make
+	make DESTDIR=$PKG HOTPLUG_FIRMWARE=yes DYNFS=yes UDEVRULES=yes install
+
+	# firmware is installed in both /lib/firmware and /usr/lib/hotplug/firmware
+	# get rid of the second one
+	rm -rf $PKG/usr/lib
+
+	# remove some crap
+	rm -rf $PKG/lib/firmware/.dahdi* $PKG/lib/modules/*/modules.*
+
+	# move udev rules to /lib/udev/rules.d
+	mv $PKG/etc/udev $PKG/lib
+	rmdir $PKG/etc
+
+	# change rules to fix udev changes
+	sed -i -e 's|SYSFS|ATTRS|g' -e 's|BUS|SUBSYSTEM|g' $PKG/lib/udev/rules.d/*
+}
