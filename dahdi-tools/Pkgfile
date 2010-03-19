@@ -1,0 +1,21 @@
+# Description:	Digium Asterisk Hardware Device Interface Tools
+# URL:		http://www.voip-info.org/wiki/view/DAHDI
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	dahdi
+# Optional:	newt
+
+name=dahdi-tools
+version=2.2.1
+release=1
+source=(http://downloads.asterisk.org/pub/telephony/$name/releases/$name-$version.tar.gz)
+
+build () {
+	cd $name-$version
+	./configure --prefix=/usr --mandir=/usr/man
+	make -j 1
+	make -j 1 config install DESTDIR=$PKG install
+	
+	# fix modprobe configuration file names
+	mv $PKG/etc/modprobe.d/dahdi $PKG/etc/modprobe.d/dahdi.conf
+	mv $PKG/etc/modprobe.d/dahdi.blacklist $PKG/etc/modprobe.d/dahdi.blacklist.conf
+}
