@@ -1,0 +1,22 @@
+# Description: web application security scanner
+# URL:         http://code.google.com/p/skipfish/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:   
+
+name=skipfish
+version=1.05b
+release=1
+source=(http://skipfish.googlecode.com/files/$name-$version.tgz)
+
+build() {
+  cd $name
+  sed -i -e 's|assets/|/usr/share/skipfish/assets/|g' *.c
+  make
+  install -m 755 -d $PKG/usr/share/skipfish/assets
+  rm assets/COPYING
+  install -m 644 assets/* $PKG/usr/share/skipfish/assets
+  install -m 755 -d $PKG/usr/share/skipfish/dictionaries
+  rm dictionaries/README-FIRST
+  install -m 644 dictionaries/* $PKG/usr/share/skipfish/dictionaries
+  install -m 755 -D skipfish $PKG/usr/bin/skipfish
+}
