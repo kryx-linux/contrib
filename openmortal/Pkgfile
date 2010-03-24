@@ -1,0 +1,17 @@
+# Description: mortal combar clone
+# URL:         http://openmortal.sourceforge.net/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  sdl_net, sdl_image
+
+name=openmortal
+version=0.7
+release=1
+source=(http://downloads.sourceforge.net/sourceforge/openmortal/$name-$version.tar.bz2 fixcmenu.diff)
+
+build() {
+  cd $name-$version
+  patch -p1 -i ../fixcmenu.diff
+  ./configure --prefix=/usr
+  make
+  make install DESTDIR=$PKG
+}
