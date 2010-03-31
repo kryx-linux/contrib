@@ -16,6 +16,6 @@ build() {
       --disable-gnome
 
    make && make DESTDIR=$PKG install
-   ln -sf /usr/bin/glade-2 $PKG/usr/bin/glade
+   ln -sf /usr/bin/glade-3 $PKG/usr/bin/glade
    rm -rf $PKG/usr/share/{locale,gnome,omf,gtk-doc}
 }
