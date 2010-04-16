@@ -2,24 +2,26 @@
 # URL: http://www.openoffice.org
 # Maintainer: Bartlomiej Palmowski, rotwang at crux dot org dot pl
 # Packager: Simone Rota, sip at crux dot nu
-# Depends on: mesa3d xorg-libxaw xorg-libxcursor xorg-libxft xorg-libxinerama xorg-libxi xorg-libxrandr rpm2targz
+# Depends on: mesa3d xorg-libxaw xorg-libxcursor xorg-libxft xorg-libxinerama xorg-libxi xorg-libxrandr
 
 name=openoffice
-version=3.1.1
+version=3.2.0
 release=1
-source=(http://spout.ussg.indiana.edu/openoffice/stable/3.1.1/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
+source=(http://spout.ussg.indiana.edu/openoffice/stable/$version/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
 
 build() {
+    mkdir OOo_work
     cd OOO*/RPMS
+
     for i in *.rpm; do
-        rpm2targz $i
-        tar xzf ${i%.*}.tar.gz
+        bsdtar -p -o -C $SRC/OOo_work -xf $i
     done
 
+    cd $SRC/OOo_work
     mkdir -p $PKG/usr/lib/openoffice
     mv opt/openoffice*/* $PKG/usr/lib/openoffice
     cd $PKG/usr/lib/openoffice
-    ln -sf basis3.1 basis-link
+    ln -sf basis${version%.*} basis-link
 
     mkdir -p $PKG/usr/bin
     ln -sf /usr/lib/openoffice/program/soffice $PKG/usr/bin/soffice
@@ -29,18 +31,19 @@ build() {
     mkdir -p $PKG/usr/share/applications
     cd share/xdg/
     for i in *.desktop; do
-        sed '/Exec/s/openoffice\.org3/soffice/' $i > $PKG/usr/share/applications/$i
+        sed -i '/Exec/s/openoffice\.org3/soffice /' $i 
+        cp $i $PKG/usr/share/applications/
     done
     sed '/Exec/s/openoffice\.org3-printeradmin/spadmin/' printeradmin.desktop > $PKG/usr/share/applications/printeradmin.desktop
 
     # icons
     cd $SRC/OOO*/RPMS/desktop-integration
-    rpm2targz openoffice.org3.1-freedesktop-menus-*.noarch.rpm
-    tar xzf openoffice.org3.1-freedesktop-menus-*.noarch.tar.gz
+    bsdtar -p -o -xf openoffice.org3.?-freedesktop-menus-*.noarch.rpm
     mkdir -p $PKG/usr/share/mime
     cp -r usr/share/mime/* $PKG/usr/share/mime
     mkdir -p $PKG/usr/share/icons
     cp -r usr/share/icons/hicolor $PKG/usr/share/icons
+    cp -r usr/share/icons/locolor $PKG/usr/share/icons
 
     # remove junk files and dont care about return values
     {
@@ -52,6 +55,5 @@ build() {
             -iname '*license*' -o \
             -iname '*credits*' \
          \) -exec rm -rf '{}' \;
-        rm -rf $PKG/usr/lib/openoffice/share/xdg
     } || true
 }
