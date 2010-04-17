@@ -5,17 +5,15 @@
 # Depends on: vte cmake
 
 name=sakura
-version=2.3.4
+version=2.3.7
 release=1
 source=(http://pleyades.net/david/projects/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	sed -i -e 's/Bitstream Vera Sans Mono 14/Bitstream Vera Sans 10/' \
-  		src/sakura.c
 	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RELEASE .
 	make
 	make DESTDIR=$PKG install
+	mv $PKG/usr/share/man $PKG/usr/man
 	rm -r $PKG/usr/share/{locale,doc}
-
 }
