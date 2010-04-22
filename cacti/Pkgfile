@@ -6,10 +6,20 @@
 
 name=cacti
 version=0.8.7e
-release=1
-source=(http://www.$name.net/downloads/$name-$version.tar.gz)
+release=2
+source=(http://www.$name.net/downloads/$name-$version.tar.gz
+ http://www.cacti.net/downloads/patches/0.8.7e/cli_add_graph.patch
+ http://www.cacti.net/downloads/patches/0.8.7e/snmp_invalid_response.patch
+ http://www.cacti.net/downloads/patches/0.8.7e/template_duplication.patch
+ http://www.cacti.net/downloads/patches/0.8.7e/fix_icmp_on_windows_iis_servers.patch
+ http://www.cacti.net/downloads/patches/0.8.7e/cross_site_fix.patch
+ http://www.cacti.net/downloads/patches/0.8.7e/sql_injection_template_export.patch
+ )
 
 build () {
+  cd $name-$version
+  for i in ../*.patch;do patch -p1 -i "$i";done
+  cd ..
   mkdir -p $PKG/var/www/htdocs    
   mv $name-$version $PKG/var/www/htdocs/$name
   chown -R cactiuser  $PKG/var/www/htdocs/$name/{rra,log}
