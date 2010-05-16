@@ -31,7 +31,10 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/filterinputstream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/filteroutputstream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/icon.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/inetaddress.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/inetsocketaddress.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/init.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/initable.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/inputstream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/iostream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/loadableicon.h
@@ -39,6 +42,8 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/memoryoutputstream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/mount.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/mountoperation.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/networkaddress.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/networkservice.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/outputstream.h
 drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/appinfo_p.h
@@ -68,6 +73,9 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/filterinputstream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/filteroutputstream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/icon_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/inetaddress_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/inetsocketaddress_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/initable_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/inputstream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/iostream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/loadableicon_p.h
@@ -75,15 +83,43 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/memoryoutputstream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/mount_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/mountoperation_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/networkaddress_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/networkservice_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/outputstream_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/resolver_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/seekable_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socket_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketaddress_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketaddressenumerator_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketclient_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketconnectable_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketconnection_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketlistener_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketservice_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/srvtarget_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/tcpconnection_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/themedicon_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/threadedsocketservice_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/unixconnection_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/unixinputstream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/unixoutputstream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/volume_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/volumemonitor_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/resolver.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/seekable.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socket.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketaddress.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketaddressenumerator.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketclient.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketconnectable.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketconnection.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketlistener.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketservice.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/srvtarget.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/tcpconnection.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/themedicon.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/threadedsocketservice.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/unixconnection.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/unixinputstream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/unixoutputstream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/volume.h
@@ -93,6 +129,7 @@ drwxr-xr-x	root/root	usr/include/glibmm-2.4/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm.h
 drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/arrayhandle.h
+-rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/balancedtree.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/checksum.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/class.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/containerhandle_shared.h
@@ -126,6 +163,7 @@ drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/pattern.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/priorities.h
 drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/private/
+-rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/balancedtree_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/checksum_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/convert_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/date_p.h
@@ -231,17 +269,17 @@ drwxr-xr-x	root/root	usr/lib/glibmm-2.4/proc/pm/
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/pm/Util.pm
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/pm/WrapParser.pm
 -rwxr-xr-x	root/root	usr/lib/libgiomm-2.4.la
-lrwxrwxrwx	root/root	usr/lib/libgiomm-2.4.so -> libgiomm-2.4.so.1.2.0
-lrwxrwxrwx	root/root	usr/lib/libgiomm-2.4.so.1 -> libgiomm-2.4.so.1.2.0
--rwxr-xr-x	root/root	usr/lib/libgiomm-2.4.so.1.2.0
+lrwxrwxrwx	root/root	usr/lib/libgiomm-2.4.so -> libgiomm-2.4.so.1.3.0
+lrwxrwxrwx	root/root	usr/lib/libgiomm-2.4.so.1 -> libgiomm-2.4.so.1.3.0
+-rwxr-xr-x	root/root	usr/lib/libgiomm-2.4.so.1.3.0
 -rwxr-xr-x	root/root	usr/lib/libglibmm-2.4.la
-lrwxrwxrwx	root/root	usr/lib/libglibmm-2.4.so -> libglibmm-2.4.so.1.2.0
-lrwxrwxrwx	root/root	usr/lib/libglibmm-2.4.so.1 -> libglibmm-2.4.so.1.2.0
--rwxr-xr-x	root/root	usr/lib/libglibmm-2.4.so.1.2.0
+lrwxrwxrwx	root/root	usr/lib/libglibmm-2.4.so -> libglibmm-2.4.so.1.3.0
+lrwxrwxrwx	root/root	usr/lib/libglibmm-2.4.so.1 -> libglibmm-2.4.so.1.3.0
+-rwxr-xr-x	root/root	usr/lib/libglibmm-2.4.so.1.3.0
 -rwxr-xr-x	root/root	usr/lib/libglibmm_generate_extra_defs-2.4.la
-lrwxrwxrwx	root/root	usr/lib/libglibmm_generate_extra_defs-2.4.so -> libglibmm_generate_extra_defs-2.4.so.1.2.0
-lrwxrwxrwx	root/root	usr/lib/libglibmm_generate_extra_defs-2.4.so.1 -> libglibmm_generate_extra_defs-2.4.so.1.2.0
--rwxr-xr-x	root/root	usr/lib/libglibmm_generate_extra_defs-2.4.so.1.2.0
+lrwxrwxrwx	root/root	usr/lib/libglibmm_generate_extra_defs-2.4.so -> libglibmm_generate_extra_defs-2.4.so.1.3.0
+lrwxrwxrwx	root/root	usr/lib/libglibmm_generate_extra_defs-2.4.so.1 -> libglibmm_generate_extra_defs-2.4.so.1.3.0
+-rwxr-xr-x	root/root	usr/lib/libglibmm_generate_extra_defs-2.4.so.1.3.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/giomm-2.4.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/glibmm-2.4.pc
