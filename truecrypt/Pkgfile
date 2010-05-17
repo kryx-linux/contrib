@@ -6,14 +6,20 @@
 
 name=truecrypt
 version=4.3a
-release=2
-source=(http://www.mizrahi.com.ve/crux/dist/$name-$version.tar.bz2 truecrypt-4.3a-2.6.23.patch truecrypt-4.3a-2.6.24.patch truecrypt-4.3a-2.6.29.patch)
+release=3
+source=(http://www.mizrahi.com.ve/crux/dist/$name-$version.tar.bz2 truecrypt-4.3a-2.6.23.patch truecrypt-4.3a-2.6.24.patch truecrypt-kernel-2.6.29.patch truecrypt-kernel-2.6.34.patch truecrypt-nochecks.patch)
+
+# Note: Currently doesn't build as non-root
 
 build () {
-	cd $name-$version/Linux
+	cd $name-$version
+	patch -p1 -i $SRC/truecrypt-kernel-2.6.34.patch
+
+	cd Linux
 	patch -p2 -i $SRC/truecrypt-4.3a-2.6.23.patch
 	patch -p2 -i $SRC/truecrypt-4.3a-2.6.24.patch
-	patch -p2 -i $SRC/truecrypt-4.3a-2.6.29.patch
+	patch -p2 -i $SRC/truecrypt-kernel-2.6.29.patch
+	patch -p2 -i $SRC/truecrypt-nochecks.patch
 
 	./build.sh
 	install -m 755 -D Cli/truecrypt $PKG/usr/bin/truecrypt
