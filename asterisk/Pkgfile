@@ -5,20 +5,23 @@
 
 name=asterisk
 version=1.4.29.1
-release=2
-source=(http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz asterisk.rc asterisk-mmx.patch 1.4-gsm-gcc4.2.patch voicemail.patch)
+release=4
+source=(http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz asterisk.rc asterisk-mmx.patch 1.4-gsm-gcc4.2.patch voicemail.patch asterisk-config.patch)
 
 build () {
 	cd $name-$version
 
-	# Fixes choppy gsm transcoding when using gcc 4.2
-	patch -p1 < $SRC/1.4-gsm-gcc4.2.patch
+	# Menuselect configuration patch to remove default sounds and moh
+	patch -p1 -i $SRC/asterisk-config.patch
 
-	# patch -p0 < $SRC/voicemail.patch
+	# Fixes choppy gsm transcoding when using gcc 4.2
+	patch -p1 -i $SRC/1.4-gsm-gcc4.2.patch
+
+	# patch -p0 -i $SRC/voicemail.patch
 
 	# Check if this processor supports MMX instruction set
 #	if [ -n "`grep '^flags.*mmx' /proc/cpuinfo`" ]; then
-#		 patch -p1 < $SRC/asterisk-mmx.patch
+#		 patch -p1 -i $SRC/asterisk-mmx.patch
 #	fi
 
 	./configure --prefix=/usr --with-ncurses --with-ssl
@@ -26,17 +29,22 @@ build () {
 	make DESTDIR=$PKG install
 	make DESTDIR=$PKG samples
 
-	sed -i -e 's|^astrundir => .*|astrundir => /var/run/asterisk|' $PKG/etc/asterisk/asterisk.conf
-	
 	mv $PKG/usr/share/man $PKG/usr
 	install -m 755 -D $SRC/asterisk.rc $PKG/etc/rc.d/asterisk
 	rmdir  $PKG/usr/{share,bin}
 	rm -rf $PKG/var/spool/asterisk/voicemail/default/1234
 
-	# Remove default sounds, they are in asterisk-sounds-core-en-*
-	rm -rf $PKG/var/lib/asterisk/sounds/{.asterisk*,*}
+	# Remove empty directory holders
+	rmdir $PKG/var/lib/asterisk/sounds/*
 
+	# change runtime dir
+	sed -i -e 's|^astrundir => .*|astrundir => /var/run/asterisk|' $PKG/etc/asterisk/asterisk.conf
 	mkdir -p $PKG/var/run/asterisk
+
+	# create empty astdb database
+	touch $PKG/var/lib/asterisk/astdb
+
+	# fix permissions
 	chown -R root:root $PKG
 	chown -R asterisk:asterisk $PKG/var/{lib,log,run,spool}/asterisk
 }
