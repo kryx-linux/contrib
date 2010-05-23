@@ -1,0 +1,18 @@
+# Description: Downhill racing game starring Tux.
+# URL: http://tuxracer.sourceforge.net/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: freetype libpng libsdl mesa3d sdl_mixer tcl xorg-libxi xorg-libxmu
+
+name=extremetuxracer
+version=0.5beta
+release=1
+source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
+
+build() {
+	cd extreme-tuxracer-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/locale
+}
