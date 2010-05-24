@@ -8,7 +8,7 @@ GROUP=asterisk
 
 case $1 in
 start)
-	/usr/sbin/asterisk -G $GROUP -U $USER
+	(cd /; /usr/sbin/asterisk -G $GROUP -U $USER)
 	;;
 startdebug)
 	/usr/sbin/asterisk -G $GROUP -U $USER -vvv
