@@ -6,15 +6,16 @@
 
 name=virtualbox
 version=3.1.8
-release=1
+release=2
 source=(http://download.virtualbox.org/$name/${version%-*}/VirtualBox-${version}-OSE.tar.bz2 \
-        $name 60-vboxdrv.rules $name.desktop)
+        $name 60-vboxdrv.rules $name.desktop iasl-length-calculation-fix.patch)
 
 build() {
   # environment value
   [ ! -z $KERN_DIR ] && KARG="KERN_DIR=$KERN_DIR"
 
   cd VirtualBox-${version%-*}_OSE
+  patch -p1 -i $SRC/iasl-length-calculation-fix.patch
   # compile
   ./configure --with-qt4-dir=/usr/share/qt4 \
               --disable-hardening \
