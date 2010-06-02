@@ -5,15 +5,17 @@
 
 name=codeblocks
 version=8.02
-release=1
-source=(http://downloads.sourceforge.net/codeblocks/$name-$version-src.tar.bz2)
+release=2
+source=(http://downloads.sourceforge.net/codeblocks/$name-$version-src.tar.bz2 \
+        $name-$version-gcc44.patch)
 
 build() {
   cd $name-$version
+  patch -p1 < $SRC/$name-$version-gcc44.patch
   ./configure --prefix=/usr \
               --disable-nls \
               --enable-contrib \
-              --mandir=$PKG/usr/man
+              --mandir=$PKG/usr/man	
   make
   make prefix=$PKG/usr install
 }
