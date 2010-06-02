@@ -5,13 +5,13 @@
 # Depends on:  realpath, grml-shlib
 
 name=grml-crypt
-version=0.17
+version=0.18
 release=1
 source=(http://deb.grml.org/pool/main/g/$name/${name}_${version}.tar.gz \
   $name-$version.patch)
 
 build() {
-    cd $name-$version
+    cd $name
 
     patch -p1 < $SRC/$name-$version.patch
 
@@ -19,5 +19,4 @@ build() {
     mkdir -p $PKG/usr/man/man8
 
     install -m 755 grml-crypt $PKG/usr/sbin
-    install -m 644 grml-crypt.8.gz $PKG/usr/man/man8
 }
