@@ -4,15 +4,13 @@
 # Depends on:  libsdl
 
 name=qemu-kvm
-version=0.12.3
+version=0.12.4
 release=1
-source=(http://downloads.sourceforge.net/project/kvm/qemu-kvm/$version/qemu-kvm-$version.tar.gz ksm.diff)
+source=(http://downloads.sourceforge.net/project/kvm/qemu-kvm/$version/qemu-kvm-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  # make KSM work with current glibc
-  patch -i ../ksm.diff -p1
   ./configure --prefix=/usr
   make 
   make install DESTDIR=$PKG
