@@ -16,13 +16,14 @@ build() {
     patch -i ../dsniff-2.4_beta1-debian-r1.patch
     patch -i ../dsniff-httppostfix.patch
     sed -i -e 's/CLK_TCK/CLOCKS_PER_SEC/g' sshow.c
-    export LDFLAGS="`pkg-config --libs gthread-2.0`" 
+    export LDFLAGS="`pkg-config --libs gthread-2.0` -lresolv" 
     export CFLAGS="`pkg-config --cflags gthread-2.0`" 
     ./configure --prefix=/usr
+    #echo 'LDFLAGS += -lresolv' >> Makefile
     make
     install -d -m 755 $PKG/usr/sbin
     for prog in arpspoof dnsspoof dsniff filesnarf macof mailsnarf msgsnarf \
-    sshmitm sshow tcpkill tcpnice  urlsnarf webmitm webspy; do \
+    sshmitm sshow tcpkill tcpnice  urlsnarf webmitm; do \
       install -m 755 $prog $PKG/usr/sbin/; done
     install -d -m 755 $PKG/usr/man/man8
     for man in *.8; do install -D -m 644 $man $PKG/usr/man/man8; done
