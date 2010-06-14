@@ -5,7 +5,7 @@
 # Depends on:
 
 name=inadyn-mt
-version=02.18.24
+version=02.18.26
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name.v.$version.tar.gz)
 
@@ -19,4 +19,5 @@ build() {
   make
   install -d $PKG/etc
   make INSTALL_PREFIX=$PKG DESTDIR=$PKG install
+  rm -rf $PKG/inadyn-mt $PKG/etc
 }
