@@ -34,7 +34,6 @@ build() {
         sed -i '/Exec/s/openoffice\.org3/soffice /' $i 
         cp $i $PKG/usr/share/applications/
     done
-chmod +r printeradmin.desktop
     # sed '/Exec/s/openoffice\.org3-printeradmin/spadmin/' printeradmin.desktop > $PKG/usr/share/applications/printeradmin.desktop
 
     # icons
