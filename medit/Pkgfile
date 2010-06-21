@@ -4,25 +4,22 @@
 # Depends on:  gtk
 
 name=medit
-version=0.9.4
+version=0.10.4
 release=1
 source=(http://sourceforge.net/projects/mooedit/files/$name/$name-$version.tar.bz2)
 
 build() {
-    cd $name-$version
-    # credits to medit archlinux maintainer
-    # Sergej Pupykin <pupykin.s+arch@gmail.com>
-    # for this one:
-    sed -i 's#getline(#xgetline(#' moo/moolua/ldebug.c \
-        moo/moolua/ldebug.h moo/moolua/lvm.c
-    ./configure \
-        --disable-nls \
-        --prefix=/usr \
-        --mandir=/usr/man \
-        --disable-generated-files
+mkdir $name-$version/build
+    cd $name-$version/build
+    cmake .. \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DENABLE_NLS=OFF \
+        -DMANDIR=/usr/man \
+        -DDESKTOPFILEDIR=/usr/share/applications \
+        -DMOO_ENABLE_GENERATED_FILES=OFF \
+        -DMOO_ENABLE_PROJECT=ON
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/doc
-    rm -rf $PKG/usr/include
-    find $PKG -empty -delete
 }
