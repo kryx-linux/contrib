@@ -5,9 +5,9 @@
 # Depends on: mesa3d xorg-libxaw xorg-libxcursor xorg-libxft xorg-libxinerama xorg-libxi xorg-libxrandr
 
 name=openoffice
-version=3.2.0
+version=3.2.1
 release=1
-source=(http://spout.ussg.indiana.edu/openoffice/stable/$version/OOo_${version}_LinuxIntel_install_en-US.tar.gz)
+source=(http://spout.ussg.indiana.edu/openoffice/stable/3.2.1/OOo_3.2.1_Linux_x86_install-rpm_en-US.tar.gz)
 
 build() {
     mkdir OOo_work
@@ -34,7 +34,8 @@ build() {
         sed -i '/Exec/s/openoffice\.org3/soffice /' $i 
         cp $i $PKG/usr/share/applications/
     done
-    sed '/Exec/s/openoffice\.org3-printeradmin/spadmin/' printeradmin.desktop > $PKG/usr/share/applications/printeradmin.desktop
+chmod +r printeradmin.desktop
+    # sed '/Exec/s/openoffice\.org3-printeradmin/spadmin/' printeradmin.desktop > $PKG/usr/share/applications/printeradmin.desktop
 
     # icons
     cd $SRC/OOO*/RPMS/desktop-integration
