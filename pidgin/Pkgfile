@@ -5,7 +5,7 @@
 # Depends on:  intltool gtk xorg-libxscrnsaver startup-notification nss libidn
 
 name=pidgin
-version=2.6.6
+version=2.7.1
 release=1
 source=(http://sourceforge.net/projects/$name/files/Pidgin/$name-$version.tar.bz2)
 
@@ -30,6 +30,6 @@ build () {
 
     make
     make DESTDIR=$PKG install
-    rm -rf $PKG/usr/share/locale
+    #rm -rf $PKG/usr/share/locale
     rm -rf $PKG/usr/etc/gconf || :
 }
