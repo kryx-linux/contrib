@@ -1,0 +1,20 @@
+# Description: feature-rich yet user-friendly desktop panel
+# URL:         http://lxde.org/about.html
+# Maintainer:  Bartlomiej Palmowski, maks1k at wp dot pl
+# Depends on:  gtk intltool lxmenu-data menu-cache
+
+name=lxpanel
+version=0.5.5
+release=1
+source=(http://dl.sourceforge.net/sourceforge/lxde/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --mandir=/usr/man \
+        --disable-nls
+    make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/share/locale
+}
