@@ -6,15 +6,16 @@
 
 name=tint2
 version=0.10
-release=1
+release=2
 source=(http://$name.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --sysconfdir=/etc \
-              --mandir=/usr/man 
+              --sysconfdir=/usr/etc \
+              --mandir=/usr/man \
+              --disable-tint2conf
 
   make
   make DESTDIR=$PKG install
