@@ -2,20 +2,16 @@
 # URL:         http://pcmanfm.sourceforge.net/
 # Packager:    Ricardo Oliveira, crux at roliveira dot eu
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  gtk hal startup-notification gamin shared-mime-info desktop-file-utils xorg-libxcomposite intltool
+# Depends on:  libfm
 
 name=pcmanfm
-version=0.5.2
+version=0.9.7
 release=1
-source=(http://sourceforge.net/projects/$name/files/$name/$name-$version.tar.bz2)
+source=(http://dl.sourceforge.net/project/$name/PCManFM2%20+%20Libfm%20%28experimental%29/PCManFM/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    # ca translation is fscked up
-    sed -i 's/ca/ /' po/LINGUAS
-    ./configure \
-        --prefix=/usr \
-        --enable-hal
+    ./configure --prefix=/usr --sysconfdir=/etc
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
