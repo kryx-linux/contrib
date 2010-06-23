@@ -1,0 +1,19 @@
+# Description: replacement for libgnome-menu
+# URL:         http://lxde.org/
+# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Depends on:  glib
+# Comment:     library creating and utilizing caches to speed up the manipulation for freedesktop.org defined application menus
+
+name=menu-cache
+version=0.3.2
+release=1
+source=(http://dl.sourceforge.net/project/lxde/$name/$name%20$version/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr \
+        --disable-static \
+        --libexecdir=/usr/lib/$name
+    make
+    make DESTDIR=$PKG install
+}
