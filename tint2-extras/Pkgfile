@@ -1,0 +1,27 @@
+# Description: Lightweight panel/taskbar
+# URL: http://tint2.googlecode.com
+# Packager: Jose V Beneyto, sepen at crux dot nu
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
+# Depends on: tint2 pygtk
+
+name=tint2-extras
+version=0.10
+release=1
+source=(http://tint2.googlecode.com/files/tint2-$version.tar.gz)
+
+build() {
+  cd tint2-$version
+
+  ./configure --prefix=/usr \
+              --sysconfdir=/usr/etc \
+              --mandir=/usr/man \
+              --enable-tint2conf \
+              --enable-samples
+
+  make -C src/tint2conf
+  make -C src/tint2conf DESTDIR=$PKG install
+
+  install -d $PKG/usr/share/tint2/sample
+  install -m 0644 sample/*rc $PKG/usr/share/tint2/sample
+  rm -rf $PKG/usr/{bin/tint2,etc,man,share/doc}
+}
