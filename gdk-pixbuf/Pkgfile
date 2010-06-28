@@ -5,22 +5,21 @@
 # Depends on: libart_lgpl gtk1 libtiff libpng
 
 name=gdk-pixbuf
-version=0.22.0
+version=2.21.4
 release=1
 source=(http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/${version%.*}/gdk-pixbuf-$version.tar.bz2)
 
 build() {
-        cd gdk-pixbuf-$version
-        export CFLAGS="$CFLAGS -L$PKG/usr/lib"
+	cd $name-$version
+	#export CFLAGS="$CFLAGS -L$PKG/usr/lib"
 
-        ./configure \
-                --prefix=/usr \
-                --disable-gnome
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-gnome
 
-        make
+	make
 	make DESTDIR=$PKG install
-        rm -r $PKG/usr/share/gnome
-        sed -i -e "s|-L$PKG/usr/lib||g" $PKG/usr/lib/*.la
+	sed -i -e "s|-L$PKG/usr/lib||g" $PKG/usr/lib/*.la
+	rm -r $PKG/usr/share/locale $PKG/usr/share/gtk-doc
 }
-
-
