@@ -7,10 +7,10 @@
 name=ffmpeg-0.5
 version=0.5
 release=1
-source=(http://ffmpeg.org/releases/$name-$version.tar.bz2)
+source=(http://ffmpeg.org/releases/ffmpeg-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+	cd ffmpeg-$version
 
 	./configure \
 		--prefix=/usr \
