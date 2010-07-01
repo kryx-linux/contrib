@@ -1,6 +1,7 @@
 # Description: GTK+ based simple text editor.
 # URL: http://tarot.freeshell.org/leafpad
-# Maintainer: Victor Martinez, pitillo at ono dot com
+# Maintainer: Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Packager: Victor Martinez, pitillo at ono dot com
 # Depends on: gtk
 
 name=leafpad
@@ -14,5 +15,5 @@ build() {
               --enable-chooser 
   make
   make DESTDIR=$PKG install
-  rm -dr {$PKG/usr/share/locale,$PKG/usr/share/icons}
+  rm -r $PKG/usr/share/locale
 }
