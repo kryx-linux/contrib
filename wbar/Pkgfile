@@ -1,7 +1,7 @@
-# Description: quick launch bar
+# Description: Quick launch bar
 # URL:         http://code.google.com/p/wbar/
-# Packager:    Younes Hafri <ycrux@club-internet.fr>
-# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Packager:    Younes Hafri, ycrux at club-internet dot fr
+# Maintainer:  Jose V Beneyto, sepen at crux dot nu
 # Depends on:  imlib2
 
 name=wbar
@@ -13,13 +13,13 @@ $name-$version-dot.wbar.patch $name-${version}_gcc43.patch)
 build() {
   tar --use-compress-program=bzip2 -xf $name-$version.tbz2
   cd $name-$version
-  patch -p1 -i ../$name-$version-dot.wbar.patch
-  patch -p1 -i ../$name-${version}_gcc43.patch
+  patch -p1 -i $SRC/$name-$version-dot.wbar.patch
+  patch -p1 -i $SRC/$name-${version}_gcc43.patch
   sed -i "/CXXFLAGS/s/-O2/$CXXFLAGS/" Makefile
   make
-  mkdir -p $PKG/usr/share/wbar
-  cp -r ./iconpack $PKG/usr/share/wbar/iconpack
-  install -D -m 0644 dot.wbar $PKG/usr/etc/dot.wbar
-  install -D -m 0755 ./wbar $PKG/usr/bin/wbar
+  mkdir -p $PKG/usr/share/$name
+  mv iconpack $PKG/usr/share/$name
+  install -D -m 0644 dot.$name $PKG/usr/etc/dot.$name
+  install -D -m 0755 $name $PKG/usr/bin/$name
 }
 
