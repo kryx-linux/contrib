@@ -5,9 +5,9 @@
 # Depends on: libvorbis
 
 name=libtheora
-version=1.0
+version=1.1.1
 release=1
-source=(http://downloads.xiph.org/releases/theora/$name-$version.tar.bz2)
+source=(http://downloads.xiph.org/releases/theora/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
@@ -16,11 +16,10 @@ build() {
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-static \
-		--disable-sdl \
 		--disable-examples
 
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share
+	rm -r $PKG/usr/share/doc
+	rmdir $PKG/usr/share
 }
-
