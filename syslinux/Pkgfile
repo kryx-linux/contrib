@@ -6,15 +6,20 @@
 
 name=syslinux
 version=4.01
-release=1
-source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2)
+release=2
+source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2 \
+        dos_out.patch)
 
 build() {
   cd $name-$version
-  cp win32/syslinux.exe .
+  patch -Np1 -i $SRC/dos_out.patch
+
   make OPTFLAGS="$CFLAGS"
-  mv syslinux.exe win32
   make INSTALLROOT=$PKG install
+
   mv $PKG/sbin/* $PKG/usr/bin
   rm -r $PKG/sbin
+  install -d $PKG/usr/share/syslinux/dosutil
+  cp dosutil/{copybs.com,eltorito.sys,mdiskchk.com} $PKG/usr/share/syslinux/dosutil
+  install -m 0644 dos/syslinux.com win32/syslinux.exe $PKG/usr/share/syslinux
 }
