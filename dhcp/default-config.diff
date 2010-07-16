@@ -6,7 +6,7 @@ diff -ur dhcp-4.0.0.orig/client/dhclient.conf dhcp-4.0.0/client/dhclient.conf
 +# /etc/dhclient.conf: DHCP client configuration file, see dhclient.conf(5)
 +#
 +
- send host-name "andare.fugue.com";
+ send host-name = pick-first-value(gethostname(), "ISC-dhclient");
  send dhcp-client-identifier 1:0:a0:24:ab:fb:9c;
  send dhcp-lease-time 3600;
 @@ -11,7 +15,7 @@
