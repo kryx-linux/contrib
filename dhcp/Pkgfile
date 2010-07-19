@@ -14,7 +14,6 @@ source=(http://ftp.isc.org/isc/$name/$name-$version.tar.gz
 
 build() {
   cd dhcp-$version
-  cat server/dhcpd.conf
   patch -p1 -i $SRC/default-config.diff
 
   ./configure --prefix=/usr \
