@@ -2,20 +2,23 @@
 # URL: http://tint2.googlecode.com
 # Packager: Vitaly Sinilin, vs at kp4 dot ru
 # Maintainer: Jose V Beneyto, sepen at crux dot nu
-# Depends on: imlib2 pango
+# Depends on: cmake imlib2 pango
 
 name=tint2
-version=0.10
-release=2
-source=(http://$name.googlecode.com/files/$name-$version.tar.gz)
+version=0.11
+release=1
+source=(http://$name.googlecode.com/files/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr \
-              --sysconfdir=/usr/etc \
-              --mandir=/usr/man \
-              --disable-tint2conf
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DENABLE_BATTERY=ON \
+    -DENABLE_EXAMPLES=OFF \
+    -DENABLE_TINT2CONF=OFF \
+    -DMANDIR=/usr/man \
+    -DSYSCONFDIR=/usr/etc
 
   make
   make DESTDIR=$PKG install
