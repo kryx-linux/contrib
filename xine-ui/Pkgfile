@@ -5,16 +5,19 @@
 # Depends on: xine-lib
 
 name=xine-ui
-version=0.99.5
-release=2
-source=(http://downloads.sourceforge.net/sourceforge/xine/$name-$version.tar.gz)
+version=0.99.6
+release=1
+source=(http://downloads.sourceforge.net/sourceforge/xine/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
-		--disable-nls
+		--mandir=/usr/man \
+		--disable-nls \
+		--disable-dependency-tracking \
+		--disable-lirc
 
 	make
 	make DESTDIR=$PKG install
