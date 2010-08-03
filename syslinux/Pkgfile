@@ -5,14 +5,19 @@
 # Depends on: mtools perl
 
 name=syslinux
-version=4.01
-release=2
+version=4.02
+release=1
 source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2 \
         dos_out.patch)
 
 build() {
   cd $name-$version
+
+  # do not build win/dos installers
   patch -Np1 -i $SRC/dos_out.patch
+
+  # compilation will fail with LDFLAGS
+  unset LDFLAGS
 
   make OPTFLAGS="$CFLAGS"
   make INSTALLROOT=$PKG install
