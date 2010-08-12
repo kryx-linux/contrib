@@ -6,25 +6,20 @@
 
 name=syslinux
 version=4.02
-release=1
-source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2 \
-        dos_out.patch)
+release=2
+source=(http://www.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
 
-  # do not build win/dos installers
-  patch -Np1 -i $SRC/dos_out.patch
-
   # compilation will fail with LDFLAGS
   unset LDFLAGS
 
-  make OPTFLAGS="$CFLAGS"
-  make INSTALLROOT=$PKG install
+  # fix to install extlinux in /usr/bin
+  sed -i Makefile -e 's|SBINDIR|BINDIR|g'
 
-  mv $PKG/sbin/* $PKG/usr/bin
-  rm -r $PKG/sbin
-  install -d $PKG/usr/share/syslinux/dosutil
-  cp dosutil/{copybs.com,eltorito.sys,mdiskchk.com} $PKG/usr/share/syslinux/dosutil
-  install -m 0644 dos/syslinux.com win32/syslinux.exe $PKG/usr/share/syslinux
+  make clean
+  make OPTFLAGS="$CFLAGS" installer
+  make OPTFLAGS="$CFLAGS" INSTALLROOT=$PKG install
+
 }
