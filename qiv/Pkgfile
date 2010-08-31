@@ -1,20 +1,18 @@
-# Description: Very small and pretty fast gdk/Imlib image viewer
-# URL: http://www.klografx.net/qiv/index2.html
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Description: Very small and pretty fast gdk/Imlib2 image viewer
+# URL: http://www.spiegel.de/qiv
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
 # Packager: Juergen Daubert, juergen dot daubert at t-online dot de
-# Depends on: imlib
+# Depends on: imlib2
 
 name=qiv
-version=2.1-pre12
-release=2
-source=(http://www.klografx.net/qiv/download/$name-$version.tgz \
-        Makefile.patch ${name}rc ss-$name)
+version=2.2.3
+release=1
+source=(http://spiegl.de/qiv/download/$name-$version.tgz \
+        Makefile.patch)
 
 build () {
   cd $name-$version
   patch -p0 -i $SRC/Makefile.patch
   make
   make DESTDIR=$PKG install
-  install -D -m 0644 $SRC/${name}rc $PKG/usr/etc/${name}rc
-  install -D -m 0755 $SRC/ss-$name $PKG/usr/bin/ss-$name
 }
