@@ -1,0 +1,25 @@
+# Description: The cross-platform media player and streaming server
+# URL: http://www.videolan.org/vlc/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Packager: Matt Housh, jaeger at morpheus dot net
+# Depends on: libmad, ffmpeg, qt4, libdvdnav, alsa-lib, liba52
+
+name=vlc
+version=1.1.4
+release=1
+source=(http://download.videolan.org/pub/videolan/$name/$version/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr \
+		--disable-nls \
+		--disable-fribidi \
+		--disable-httpd \
+		--disable-hal \
+		--disable-dbus \
+		--enable-alsa \
+		--disable-remoteosd \
+		--enable-debug
+	make
+	make DESTDIR=$PKG install
+}
