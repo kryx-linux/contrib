@@ -4,12 +4,12 @@
 # Depends on:   
 
 name=skipfish
-version=1.46b
+version=1.65b
 release=1
 source=(http://skipfish.googlecode.com/files/$name-$version.tgz)
 
 build() {
-  cd $name
+  cd $name-$version
   sed -i -e 's|assets/|/usr/share/skipfish/assets/|g' *.c
   make
   install -m 755 -d $PKG/usr/share/skipfish/assets
