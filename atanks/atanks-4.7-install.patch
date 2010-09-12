@@ -1,10 +1,7 @@
-diff -pruN atanks-4.3.orig/Makefile atanks-4.3/Makefile
---- atanks-4.3.orig/Makefile	2010-02-19 07:53:24.611627660 +0000
-+++ atanks-4.3/Makefile	2010-02-19 08:01:11.830537898 +0000
-@@ -1,46 +1,47 @@
--VERSION=3.9
-+VERSION=4.3
- PREFIX = /usr/
+diff -pruN atanks-4.7.orig/Makefile atanks-4.7/Makefile
+--- atanks-4.7.orig/Makefile	2010-09-12 00:51:28.543309846 +0000
++++ atanks-4.7/Makefile	2010-09-12 00:54:54.422586845 +0000
+@@ -3,44 +3,45 @@ PREFIX = /usr/
  
  BINPREFIX = $(PREFIX)
  
@@ -76,10 +73,10 @@ diff -pruN atanks-4.3.orig/Makefile atanks-4.3/Makefile
  
  user:
  	INSTALLDIR=./ FLAGS=-DLINUX $(MAKE) -C src
-diff -pruN atanks-4.3.orig/src/Makefile atanks-4.3/src/Makefile
---- atanks-4.3.orig/src/Makefile	2010-02-19 07:53:24.605960865 +0000
-+++ atanks-4.3/src/Makefile	2010-02-19 07:53:40.915742490 +0000
-@@ -17,7 +17,7 @@ OFLAGS = 
+diff -pruN atanks-4.7.orig/src/Makefile atanks-4.7/src/Makefile
+--- atanks-4.7.orig/src/Makefile	2010-09-12 00:51:28.536309843 +0000
++++ atanks-4.7/src/Makefile	2010-09-12 00:55:37.789651847 +0000
+@@ -17,7 +17,7 @@ OFLAGS =
  LFLAGS +=
  LDFLAGS =  `allegro-config --libs`
  
