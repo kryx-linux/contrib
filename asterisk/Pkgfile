@@ -4,25 +4,19 @@
 # Depends on:	openssl, ncurses
 
 name=asterisk
-version=1.4.29.1
-release=5
-source=(http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz asterisk.rc asterisk-mmx.patch 1.4-gsm-gcc4.2.patch voicemail.patch asterisk-config.patch)
+version=1.4.35
+release=1
+source=(
+http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz
+asterisk.rc
+asterisk-config.patch
+)
 
 build () {
 	cd $name-$version
 
 	# Menuselect configuration patch to remove default sounds and moh
 	patch -p1 -i $SRC/asterisk-config.patch
-
-	# Fixes choppy gsm transcoding when using gcc 4.2
-	patch -p1 -i $SRC/1.4-gsm-gcc4.2.patch
-
-	# patch -p0 -i $SRC/voicemail.patch
-
-	# Check if this processor supports MMX instruction set
-#	if [ -n "`grep '^flags.*mmx' /proc/cpuinfo`" ]; then
-#		 patch -p1 -i $SRC/asterisk-mmx.patch
-#	fi
 
 	./configure --prefix=/usr --with-ncurses --with-ssl
 	make
