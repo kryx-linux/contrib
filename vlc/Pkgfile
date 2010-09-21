@@ -19,7 +19,7 @@ build() {
 		--disable-dbus \
 		--enable-alsa \
 		--disable-remoteosd \
-		--enable-debug
+		--disable-lua
 	make
 	make DESTDIR=$PKG install
 }
