@@ -5,14 +5,17 @@
 # Depends on: xorg-libxaw
 
 name=xmessage
-version=1.0.1
+version=1.0.3
 release=1
-source=(http://xorg.freedesktop.org/releases/individual/app/xmessage-$version.tar.bz2)
+source=(http://xorg.freedesktop.org/releases/individual/app/$name-$version.tar.bz2)
 
 build() {
-	cd xmessage-$version
-	./configure --prefix=/usr
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man
+
 	make
 	make DESTDIR=$PKG install
 }
-
