@@ -2,10 +2,10 @@
 # URL: http://www.jwz.org/xscreensaver/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Jay Dolan, jdolan at jdolan dot dyndns dot org
-# Depends on: bc fortune libglade libungif netpbm xorg-libxmu
+# Depends on: bc fortune libglade libungif netpbm xorg-libxmu mesa3d
 
 name=xscreensaver
-version=5.10
+version=5.12
 release=1
 source=(http://www.jwz.org/$name/$name-$version.tar.gz)
 
@@ -31,7 +31,6 @@ build() {
 		--with-pixbuf \
 		--with-jpeg \
 		--without-motif \
-		--without-gnome \
 		--without-gle \
 		--without-setuid-hacks
 
