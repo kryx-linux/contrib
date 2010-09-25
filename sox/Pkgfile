@@ -2,11 +2,10 @@
 # URL: http://sox.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Martin Opel, mo at obbl-net dot de
-# Depends on: lame libmad libsamplerate libvorbis ladspa libid3tag
-# Optional ffmpeg
+# Depends on: ffmpeg ladspa libmad libsamplerate wavpack
 
 name=sox
-version=14.2.0
+version=14.3.1
 release=1
 source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
@@ -16,7 +15,27 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=$PKG/usr/man \
-		--disable-static
+		--disable-static \
+		--disable-oss \
+		--disable-dependency-tracking \
+		--enable-dl-mad \
+		--enable-dl-lame \
+		--enable-dl-amrwb \
+		--enable-dl-amrnb \
+		--enable-dl-sndfile \
+		--with-dyn-default \
+		--with-distro=CRUX \
+		--with-oggvorbis=dyn \
+		--with-flac=dyn \
+		--with-amrwb=dyn \
+		--with-amrnb=dyn \
+		--with-wavpack=dyn \
+		--with-alsa=dyn \
+		--with-sndfile=dyn \
+		--with-ffmpeg=dyn \
+		--with-mp3=dyn \
+		--with-gsm=dyn \
+		--with-lpc10=dyn
 		
 	make
 	make prefix=$PKG/usr install
