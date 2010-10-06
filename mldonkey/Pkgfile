@@ -6,7 +6,7 @@
 # Nice to have: libgd
 
 name=mldonkey
-version=3.0.3
+version=3.0.5
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2 \
         mlnetd)
@@ -16,6 +16,7 @@ build() {
   cd $name-$version
   ./configure --prefix=/usr \
               --disable-gui \
+              --disable-bittorrent \
               --enable-ocamlver="$OCAML_VER" \
               --disable-debug
   make
