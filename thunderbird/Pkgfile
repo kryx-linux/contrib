@@ -2,42 +2,56 @@
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
 # Packager:    Simone Rota, sip at crux dot nu
 # URL:         http://www.mozillamessaging.com/en-US/thunderbird/
-# Depends on:  python gtk dbus-glib alsa-lib libidl nss
+# Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib
 
 name=thunderbird
-version=3.0.4
+version=3.1.4
+comm_ver=1.9.2
 release=1
-source=(http://mozilla.snt.utwente.nl/$name/releases/$version/source/$name-$version.source.tar.bz2
-    $name.desktop)
-
+source=(
+    http://releases.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
+    $name.desktop           
+    ${name}_default48.png
+)
+ 
 build() {
-    #cd comm-1.9.1/mozilla
-    #patch -p 1 -i $SRC/breakpad.patch
-    cd $SRC/comm-1.9.1
-    ./configure --prefix=/usr \
-        --enable-application=mail \
-	--with-system-{nspr,nss} \
-	--with-system-jpeg \
-	--with-system-zlib \
-        --with-system-bz2 \
-        --with-pthreads \
-	--enable-official-branding \
-        --with-distribution-id=CRUX \
-        --disable-gnomevfs \
-        --disable-installer \
-        --disable-updater \
-        --enable-optimize="$(grep -o .O. <<< "${CFLAGS}")" \
-        --enable-xterm-updates \
-        --enable-system-cairo \
-        --enable-system-sqlite \
-        --disable-tests \
-        --with-default-mozilla-five-home \
-        --disable-crashreporter
+    cd $SRC/comm-$comm_ver
+    cat <<- EOF > .mozconfig
+        mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/objdir-tb-release
+        ac_add_options --prefix=/usr
+        ac_add_options --enable-application=mail
+        ac_add_options --with-system-nspr 
+        ac_add_options --with-system-nss  
+        ac_add_options --with-system-jpeg 
+        ac_add_options --with-system-zlib
+        ac_add_options --with-system-bz2  
+        ac_add_options --with-pthreads
+        ac_add_options --enable-official-branding
+        ac_add_options --with-distribution-id=CRUX  
+        ac_add_options --disable-gnomevfs
+        ac_add_options --disable-installer       
+        ac_add_options --disable-updater  
+        ac_add_options --enable-optimize="$(grep -o '[-]O.' <<< "${CFLAGS}")"
+        ac_add_options --disable-xterm-updates
+        ac_add_options --enable-system-cairo
+        #ac_add_options --enable-system-sqlite
+        ac_add_options --with-default-mozilla-five-home
+        ac_add_options --disable-crashreporter
+        #ac_add_options --enable-calendar
+        #ac_add_options --enable-native-uconv
+        #ac_add_options --enable-startup-notification
+        ac_add_options --enable-static               
+        ac_add_options --disable-necko-wifi
+        ac_add_options --disable-tests
+        ac_add_options --disable-debug
         # crux libpng doesn't support apng
-        # --with-system-png
-    make
-    sed -i '98d' mail/installer/Makefile
-    make DESTDIR=$PKG install
-    install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
+        # ac_add_options --with-system-png
+EOF
+    make -f client.mk
+    make -f client.mk DESTDIR=$PKG install
+    install -D -m 0644 $SRC/${name}_default48.png \
+        $PKG/usr/share/pixmaps/${name}_default48.png
+    install -D -m 0644 $SRC/$name.desktop \
+        $PKG/usr/share/applications/$name.desktop
     find $PKG -iname '*README*' -delete
 }
