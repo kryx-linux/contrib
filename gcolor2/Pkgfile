@@ -6,13 +6,17 @@
 
 name=gcolor2
 version=0.4
-release=2
+release=3
 source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
+
+  sed -i configure \
+      -e 's|gentoo_ltmain_version=.*|gentoo_ltmain_version="1.5.18"|'
   ./configure --prefix=/usr \
               --disable-nls
+
   make
   make DESTDIR=$PKG install
 }
