@@ -4,14 +4,15 @@
 # Depends on:  libsdl
 
 name=qemu-kvm
-version=0.12.5
+version=0.13.0
 release=1
 source=(http://downloads.sourceforge.net/project/kvm/qemu-kvm/$version/qemu-kvm-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr \
+              --sysconfdir=/etc
   make 
   make install DESTDIR=$PKG
 }
