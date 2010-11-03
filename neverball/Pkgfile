@@ -2,21 +2,24 @@
 # URL: http://icculus.org/neverball/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: sdl_image sdl_mixer sdl_ttf
+# Depends on: sdl_image sdl_mixer sdl_ttf physfs
 
 name=neverball
-version=1.4.0
+version=1.5.4
 release=1
 source=(http://icculus.org/neverball/neverball-$version.tar.gz)
 
 build() {
-	cd neverball-$version
-	sed -i '/CONFIG_DATA/s|\./data|/usr/share/neverball|g' share/config.h
+	cd $name-$version
+
+	sed -i -e '/CONFIG_DATA/s|\./data|/usr/share/neverball|g' \
+		share/base_config.h
+
 	make
+
 	install -d $PKG/usr/{bin,share/icons}
 	cp neverball neverputt $PKG/usr/bin
-	find data icon -type f -exec chmod -v 644 {} \;
-	cp -r icon $PKG/usr/share/icons/neverball
+	find data -type f -exec chmod -v 0644 {} \;
 	cp -r data $PKG/usr/share/neverball
+	cp -r data/icon $PKG/usr/share/icons/neverball
 }
-
