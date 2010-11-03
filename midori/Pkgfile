@@ -2,15 +2,15 @@
 # URL: http://www.twotoasts.de/index.php?/categories/2-Midori
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: webkit libsexy intltool vala
+# Depends on: webkit intltool vala
 
 name=midori
-version=20100710
+version=0.2.9
 release=1
-source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version-0.2.6-196-ge794fe7.tar.bz2)
+source=(http://archive.xfce.org/src/apps/$name/${version%.*}/$name-$version.tar.bz2)
 
 build() {
-	cd $name
+	cd $name-$version
 	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) .*/\1/' <<< $MAKEFLAGS)"
 	./configure --prefix=/usr $JOBS
 	make
