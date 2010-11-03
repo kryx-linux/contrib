@@ -6,7 +6,7 @@
 
 name=rss-glx
 version=0.9.1
-release=1
+release=2
 source=(http://downloads.sourceforge.net/sourceforge/$name/${name}_$version.tar.bz2)
 
 build() {
@@ -16,7 +16,9 @@ build() {
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--with-configdir=/usr/share/xscreensaver/config \
-		--disable-sound
+		--disable-sound \
+		--disable-static \
+		--enable-shared
 
 	make
 	make DESTDIR=$PKG install
