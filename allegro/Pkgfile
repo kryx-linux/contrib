@@ -14,7 +14,7 @@ build() {
 
 	cmake \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		CMAKE_BUILD_TYPE=Release .
+		-DCMAKE_BUILD_TYPE=Release .
 
 	make
 	make DESTDIR=$PKG install
