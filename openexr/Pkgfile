@@ -5,22 +5,22 @@
 # Depends on: ilmbase
 
 name=openexr
-version=1.6.1
+version=1.7.0
 release=1
-source=(http://download.savannah.nongnu.org/releases/openexr/openexr-$version.tar.gz
-	openexr-1.6.1-gcc43.patch)
+source=(http://download.savannah.nongnu.org/releases/$name/$name-$version.tar.gz	openexr-1.7.0-gcc43.patch)
+
 
 build() {
-	cd openexr-$version
+	cd $name-$version
 
-	patch -p 1 -i $SRC/openexr-1.6.1-gcc43.patch
+	patch -p 0 -i $SRC/openexr-1.7.0-gcc43.patch
 
 	./configure \
 		--prefix=/usr \
-		--disable-static
+		--disable-static \
+		--disable-dependency-tracking
 
 	make
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/doc
 }
-
