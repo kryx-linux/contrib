@@ -2,21 +2,23 @@
 # URL: http://www.openexr.com/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on:
 
 name=ilmbase
-version=1.0.1
+version=1.0.2
 release=1
-source=(http://download.savannah.nongnu.org/releases/openexr/ilmbase-$version.tar.gz)
+source=(http://download.savannah.nongnu.org/releases/openexr/$name-$version.tar.gz
+	ilmbase-1.0.2-gcc43.patch)
 
 build() {
-	cd ilmbase-$version
+	cd $name-$version
+
+	patch -p 0 -i $SRC/ilmbase-1.0.2-gcc43.patch
 
 	./configure \
 		--prefix=/usr \
-		--disable-static
+		--disable-static \
+		--disable-dependency-tracking
 
 	make
 	make DESTDIR=$PKG install
 }
-
