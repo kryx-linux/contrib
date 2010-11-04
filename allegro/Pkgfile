@@ -2,27 +2,21 @@
 # URL: http://alleg.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: alsa-lib xorg-libxcursor xorg-libxpm xorg-libxxf86dga xorg-libxxf86vm
+# Depends on: alsa-lib cmake libpng libvorbis
 
 name=allegro
-version=4.2.2
-release=2
-source=(http://downloads.sourceforge.net/sourceforge/alleg/$name-$version.tar.gz
-	allegro-4.2.2-exec-stack.patch)
+version=4.4.1.1
+release=1
+source=(http://downloads.sourceforge.net/project/alleg/$name/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	install -d $PKG/usr
-	patch -p 0 -i $SRC/allegro-4.2.2-exec-stack.patch
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man \
-		--enable-linux \
-		--disable-asm \
-		--disable-mmx \
-		--disable-sse
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		CMAKE_BUILD_TYPE=Release .
 
-	make -j 1
-	make DESTDIR=$PKG install install-man
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/doc
 }
