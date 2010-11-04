@@ -5,18 +5,56 @@
 # Depends on: qt4
 
 name=opera
-version=10.11
+version=10.63
 release=1
-source=(http://ftp.heanet.ie/pub/opera/linux/${version//./}/final/en/i386/$name-$version.gcc4-qt4.i386.tar.bz2)
+source=(http://ftp.heanet.ie/pub/opera/linux/${version//./}/$name-$version-6450.i386.linux.tar.bz2)
 
 build() {
 	cd $name-$version-*
-	sed -i -e 's|share/man|man|' install.sh
-	yes n | ./install.sh --prefix=$PKG/usr
-	install -m 0644 -D etc/operaprefs_default.ini $PKG/etc/operaprefs_default.ini
-	install -m 0644 -D etc/operaprefs_fixed.ini $PKG/etc/operaprefs_fixed.ini
-	sed -i -e "s|$PKG||g" $PKG/usr/bin/opera
-	rm -r $PKG/usr/share/doc
+
+	# Remove "license directory"
+	rm -rf share/doc/opera
+	# Remove package directory
+	rm -rf share/opera/package
+	# Replace PREFIX and SUFFIX in various files
+	sed -i \
+		-e "s:@@{PREFIX}:/usr:g" \
+		-e "s:@@{SUFFIX}::g" \
+		-e "s:@@{_SUFFIX}::g" \
+		-e "s:@@{USUFFIX}::g" \
+		share/mime/packages/opera-widget.xml \
+		share/man/man1/* \
+		share/applications/opera-browser.desktop \
+		share/applications/opera-widget-manager.desktop
+
+	# Recreate wrappers
+	rm opera
+	echo '#!/bin/bash' > opera
+	echo 'export OPERA_DIR=/usr/share/opera' >> opera
+	echo 'export OPERA_PERSONALDIR="${HOME}/.opera"' >> opera
+	echo 'exec /usr/lib/opera/opera "$@"' >> opera
+
+	install -m 0755 -D opera $PKG/usr/bin/opera
+
+	rm opera-widget-manager
+	echo '#!/bin/bash' > opera-widget-manager
+	echo 'exec /usr/bin/opera --widgetmanager "$@"' >> opera-widget-manager
+
+	install -m 0755 -D opera-widget-manager $PKG/usr/bin/opera-widget-manager
+
+	# Install data
+	install -d $PKG/usr/{lib,share}
+	cp -r lib/opera $PKG/usr/lib/
+	cp -r share/applications $PKG/usr/share/
+	cp -r share/icons $PKG/usr/share/
+	cp -r share/man $PKG/usr/man/
+	cp -r share/mime $PKG/usr/share/
+	cp -r share/opera $PKG/usr/share/
+
+	rm \
+		$PKG/usr/lib/opera/gstreamer/LGPL.txt \
+		$PKG/usr/lib/opera/gstreamer/README.txt \
+		$PKG/usr/lib/opera/plugins/README
 
 	find  "$PKG/usr/share/opera/locale/" \
 		-mindepth 1 -maxdepth 1 -type d \
