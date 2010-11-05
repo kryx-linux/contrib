@@ -7,13 +7,15 @@
 name=commoncpp2
 version=1.7.3
 release=1
-source=(http://ftp.gnu.org/pub/gnu/commoncpp/$name-$version.tar.gz)
+source=(http://ftp.gnu.org/pub/gnu/commoncpp/$name-$version.tar.gz cidr-fix.patch)
 
 build () {
 	cd $name-$version
 #	sed -i 's|! grep -q "$(libdir)" /etc/ld.so.conf|false|' Makefile.in
 #	export CFLAGS="${CFLAGS//-fstack-protector/}"
 #	export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
+
+	patch -p1 -i $SRC/cidr-fix.patch
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
