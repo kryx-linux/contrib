@@ -5,18 +5,20 @@
 # Depends on:
 
 name=inadyn-mt
-version=02.18.36
+version=02.20.20
 release=1
 source=(http://dl.sourceforge.net/sourceforge/$name/$name.v.$version.tar.gz)
 
 build() {
   cd $name.v.$version
+
   ./configure --prefix=/usr \
               --mandir=/usr/man \
               --disable-sound \
               --disable-debug
 
   make
+
   install -d $PKG/etc
   make INSTALL_PREFIX=$PKG DESTDIR=$PKG install
   rm -rf $PKG/inadyn-mt $PKG/etc
