@@ -4,9 +4,9 @@
 # Depends on:  glib
 
 name=vala
-version=0.10.1
+version=0.11.2
 release=1
-source=(http://download.gnome.org/sources/vala/0.10/vala-$version.tar.bz2)
+source=(http://download.gnome.org/sources/vala/0.11/vala-$version.tar.bz2)
 
 build() {
   cd $name-$version
@@ -14,4 +14,5 @@ build() {
               --mandir=/usr/man
   make
   make install DESTDIR=$PKG
+  rm -r $PKG/usr/share/devhelp
 }
