@@ -7,7 +7,7 @@
 name=giftoxic
 version=0.0.10
 release=1
-source=(http://download.sourceforge.net/giftoxic/giFToxic-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/$name/giFToxic-$version.tar.gz)
 
 build() {
 	cd giFToxic-$version
@@ -19,4 +19,3 @@ build() {
 	make
 	make DESTDIR=$PKG install
 }
-

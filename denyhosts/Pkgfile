@@ -7,7 +7,7 @@
 name=denyhosts
 version=2.6
 release=1
-source=(http://download.sourceforge.net/denyhosts/DenyHosts-$version.tar.gz \
+source=(http://downloads.sourceforge.net/project/$name/DenyHosts-$version.tar.gz
 	denyhosts-$version-config.patch)
 
 build() {
@@ -34,4 +34,3 @@ build() {
 	rm $PKG/usr/share/denyhosts/plugins/README.contrib
 	mv $PKG/usr/bin/denyhosts.py $PKG/usr/bin/denyhosts
 }
-

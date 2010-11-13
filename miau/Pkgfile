@@ -2,15 +2,14 @@
 # URL: http://miau.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: 
 
 name=miau
 version=0.6.5
 release=1
-source=(http://download.sourceforge.net/miau/miau-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.bz2)
 
 build() {
-	cd miau-$version
+	cd $name-$version
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
@@ -30,4 +29,3 @@ build() {
 	mv $PKG/usr/share/doc/miau $PKG/usr/share
 	rm -r $PKG/usr/share/{doc,info}
 }
-

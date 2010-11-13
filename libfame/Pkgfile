@@ -7,7 +7,7 @@
 name=libfame
 version=0.9.1
 release=2
-source=(http://download.sourceforge.net/fame/libfame-$version.tar.gz
+source=(http://downloads.sourceforge.net/project/fame/$name-$version.tar.gz
 	$name-$version-m4.patch
 	$name-$version-gcc-version-check.patch
 	$name-$version-mmx.patch
@@ -17,7 +17,7 @@ source=(http://download.sourceforge.net/fame/libfame-$version.tar.gz
 	$name-$version-ptr-null-check.patch)
 
 build() {
-	cd libfame-$version
+	cd $name-$version
 	patch -p 1 -i $SRC/$name-$version-m4.patch
 	patch -p 1 -i $SRC/$name-$version-gcc-version-check.patch
 	patch -p 1 -i $SRC/$name-$version-mmx.patch
@@ -33,4 +33,3 @@ build() {
 	make
 	make DESTDIR=$PKG install
 }
-

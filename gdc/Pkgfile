@@ -2,16 +2,14 @@
 # URL: http://dgcc.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on:
-# Nice To Have: distcc ccache
 
 name=gdc
 version=0.24
 gcc_version=4.1.2
 release=2
-source=(http://download.sourceforge.net/dgcc/gdc-$version-src.tar.bz2 \
-	ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$gcc_version/gcc-{core,g++}-$gcc_version.tar.bz2 \
-	gdc-$gcc_version-nocheck-fixincludes.patch \
+source=(http://downloads.sourceforge.net/project/dgcc/$name-$version-src.tar.bz2
+	ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$gcc_version/gcc-{core,g++}-$gcc_version.tar.bz2
+	gdc-$gcc_version-nocheck-fixincludes.patch
 	gdc-$gcc_version-fixinc.patch)
 
 build() {
@@ -73,4 +71,3 @@ build() {
 		sed -i "s|-L$SRC[^ ]* ||g" $PKG/$i
 	done
 }
-

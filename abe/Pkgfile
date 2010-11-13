@@ -7,10 +7,10 @@
 name=abe
 version=1.1
 release=2
-source=(http://download.sourceforge.net/abe/abe-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.gz)
 
 build() {
-   cd abe-$version
+   cd $abe-$version
 
    ./configure \
       --prefix=$PKG/usr \
@@ -29,4 +29,3 @@ build() {
    install -m 0644 -t $PKG/usr/share/abe/sounds/ sounds/*
    install -m 0644 -t $PKG/usr/share/abe/maps/ maps/*
 }
-

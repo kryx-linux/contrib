@@ -2,15 +2,14 @@
 # URL: http://libcgi.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Ivan Lyangouzov, tzong at crux dot spb dot ru
-# Depends on:
 
 name=libcgi
 version=1.0
 release=1
-source=(http://download.sourceforge.net/libcgi/libcgi-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.gz)
 
 build() {
-	cd libcgi-$version
+	cd $name-$version
 	install -d $PKG/usr/lib $PKG/usr/include
 
 	./configure \
@@ -20,4 +19,3 @@ build() {
 	make
 	make prefix=$PKG/usr install
 }
-

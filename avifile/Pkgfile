@@ -7,7 +7,7 @@
 name=avifile
 version=0.7-0.7.45
 release=1
-source=(http://download.sourceforge.net/avifile/avifile-$version.tar.bz2
+source=(http://downloads.sourceforge.net/project/avifile/avifile-$version.tar.bz2
 	avifile-$version-gcc4.patch)
 
 build() {
@@ -32,4 +32,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/avifile-${version%-*}/doc
 }
-

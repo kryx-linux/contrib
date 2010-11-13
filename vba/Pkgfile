@@ -7,7 +7,7 @@
 name=vba
 version=1.7.2
 release=2
-source=(http://download.sourceforge.net/vba/VisualBoyAdvance-src-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/vba/VisualBoyAdvance-src-$version.tar.gz)
 
 build() {
 	cd VisualBoyAdvance-$version
@@ -22,4 +22,3 @@ build() {
 	make prefix=$PKG/usr install
 	ln -s VisualBoyAdvance $PKG/usr/bin/vba
 }
-

@@ -7,14 +7,14 @@
 name=gift-openft
 version=0.2.1.6
 release=1
-source=(http://download.sourceforge.net/gift/gift-openft-$version.tar.bz2
+source=(http://downloads.sourceforge.net/project/gift/$name-$version.tar.bz2
+
 	http://update.kceasy.com/update/openft/nodes.gzip)
 
 build() {
-	cd gift-openft-$version
+	cd $name-$version
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 	zcat $SRC/nodes.gzip |tr -d '\r' > $PKG/usr/share/giFT/OpenFT/nodes
 }
-

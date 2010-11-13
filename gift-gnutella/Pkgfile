@@ -7,13 +7,13 @@
 name=gift-gnutella
 version=0.0.11
 release=1
-source=(http://download.sourceforge.net/gift/gift-gnutella-$version.tar.bz2
+source=(http://downloads.sourceforge.net/project/gift/$name-$version.tar.bz2
 	http://update.kceasy.com/update/gnutella/nodes.gzip
 	http://update.kceasy.com/update/gnutella/hostiles.txt.gzip
 	http://update.kceasy.com/update/gnutella/gwebcaches.gzip)
 
 build() {
-	cd gift-gnutella-$version
+	cd $name-$version
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install

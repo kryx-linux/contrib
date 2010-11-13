@@ -2,15 +2,14 @@
 # URL: http://mcrypt.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Younes Hafri, ycrux at club-internet dot fr
-# Depends on:
 
 name=libmcrypt
 version=2.5.8
 release=2
-source=(http://download.sourceforge.net/mcrypt/libmcrypt-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/mcrypt/$name-$version.tar.gz)
 
 build() {
-	cd libmcrypt-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -18,4 +17,3 @@ build() {
 
 	make DESTDIR=$PKG install
 }
-

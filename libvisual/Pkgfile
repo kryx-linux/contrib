@@ -7,10 +7,10 @@
 name=libvisual
 version=0.4.0
 release=1
-source=(http://download.sourceforge.net/libvisual/libvisual-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.bz2)
 
 build() {
-	cd libvisual-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -20,4 +20,3 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share
 }
-

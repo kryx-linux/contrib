@@ -7,10 +7,9 @@
 name=numeric
 version=24.2
 release=1
-source=(http://download.sourceforge.net/numpy/Numeric-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/numpy/Numeric-$version.tar.gz)
 
 build() {
 	cd Numeric-$version
 	python setup.py install --root=$PKG
 }
-

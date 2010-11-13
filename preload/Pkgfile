@@ -7,14 +7,14 @@
 name=preload
 version=0.6.4
 release=1
-source=(http://download.sourceforge.net/$name/$name-$version.tar.gz
+source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.gz
 	rc.preload
 	$name-0.6.3-memcached-default.patch
 	$name-0.6.3-statedir-fix.patch
 	$name-0.6.3-check-help2man.patch)
 
 build() {
-	cd preload-$version
+	cd $name-$version
 	patch -p 1 -i $SRC/$name-0.6.3-memcached-default.patch
 	patch -p 1 -i $SRC/$name-0.6.3-statedir-fix.patch
 	patch -p 1 -i $SRC/$name-0.6.3-check-help2man.patch
@@ -40,4 +40,3 @@ build() {
 	# install services rc script
 	install -m 0755 -D $SRC/rc.preload $PKG/etc/rc.d/preload
 }
-
