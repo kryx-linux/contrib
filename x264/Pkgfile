@@ -5,9 +5,9 @@
 # Depends on: yasm
 
 name=x264
-version=20091225
+version=20101114
 release=1
-source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version-3feaec2.tar.xz)
+source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version-f9f0035.tar.xz)
 
 build() {
 	cd $name
@@ -15,7 +15,6 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--enable-pic \
-		--enable-pthread \
 		--enable-shared
 
 	make
