@@ -7,10 +7,10 @@
 name=boost
 version=1.44.0
 release=1
-source=(http://downloads.sourceforge.net/project/boost/boost_${version//./_}.tar.bz2)
+source=(http://downloads.sourceforge.net/project/$name/${name}_${version//./_}.tar.bz2)
 
 build() {
-	cd boost_${version//./_}
+	cd ${name}_${version//./_}
 
 	sed -i -e "s|-O3|$CXXFLAGS -Wno-deprecated|" tools/build/v2/tools/gcc.jam
 	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) .*/\1/' <<< $MAKEFLAGS)"
