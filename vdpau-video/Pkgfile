@@ -1,0 +1,25 @@
+# Description: VDPAU back-end for NVIDIA and VIA chipsets.
+# URL: http://www.splitted-desktop.com/~gbeauchesne/vdpau-video/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: libvdpau libvs mesa3d
+
+name=vdpau-video
+version=0.7.2
+release=1
+source=(http://www.splitted-desktop.com/~gbeauchesne/$name/$name-$version.tar.gz
+	enable-glx.patch)
+
+build() {
+	cd $name-$version
+
+	patch -p 1 -i $SRC/enable-glx.patch
+	autoreconf -fi
+
+	./configure \
+		--prefix=/usr \
+		--enable-glx
+
+	make
+	make DESTDIR=$PKG install
+}
