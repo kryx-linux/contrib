@@ -1,15 +1,16 @@
 # Description:	PBX Software implementation
 # URL:		http://www.asterisk.org
 # Maintainer:   Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	openssl, ncurses
+# Depends on:	openssl, ncurses, ilbc
 
 name=asterisk
-version=1.4.35
+version=1.4.37
 release=1
 source=(
 http://downloads.digium.com/pub/$name/releases/$name-$version.tar.gz
 asterisk.rc
 asterisk-config.patch
+asterisk-ilbc.patch
 )
 
 build () {
@@ -17,6 +18,9 @@ build () {
 
 	# Menuselect configuration patch to remove default sounds and moh
 	patch -p1 -i $SRC/asterisk-config.patch
+
+	# Add ilbc codec
+	patch -p1 -i $SRC/asterisk-ilbc.patch
 
 	./configure --prefix=/usr --with-ncurses --with-ssl
 	make
