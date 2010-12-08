@@ -11,6 +11,5 @@ source=(http://www.selenic.com/$name/release/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  python setup.py --help install
   python setup.py install --root=$PKG
 }
