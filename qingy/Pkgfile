@@ -5,8 +5,8 @@
 # Depends on:  directfb, xorg-libxscrnsaver
 
 name=qingy
-version=0.9.1
-release=2
+version=1.0.0
+release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2)
 
 build() {
@@ -17,7 +17,8 @@ build() {
       --prefix=/usr \
       --disable-nls \
       --enable-static-build \
-      --disable-pam
+      --disable-pam \
+      --sysconfdir=/etc
 
    make && make DESTDIR=$PKG install
 
