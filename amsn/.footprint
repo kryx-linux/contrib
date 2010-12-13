@@ -21,6 +21,18 @@ drwxr-xr-x	root/root	usr/share/amsn/
 -rw-r--r--	root/root	usr/share/amsn/autoupdate.tcl
 -rw-r--r--	root/root	usr/share/amsn/balloon.tcl
 -rw-r--r--	root/root	usr/share/amsn/bugs.tcl
+drwxr-xr-x	root/root	usr/share/amsn/ca-certs/
+lrwxrwxrwx	root/root	usr/share/amsn/ca-certs/37621ded.0 -> VeriSign_International_Server_Class_3_CA.pem
+lrwxrwxrwx	root/root	usr/share/amsn/ca-certs/6e7f22c1.0 -> VeriSign_Class3_Extended_Validation_CA.pem
+lrwxrwxrwx	root/root	usr/share/amsn/ca-certs/75ced341.0 -> Microsoft_Internet_Authority.pem
+lrwxrwxrwx	root/root	usr/share/amsn/ca-certs/874806e2.0 -> Microsoft_Secure_Server_Authority.pem
+-rw-r--r--	root/root	usr/share/amsn/ca-certs/GTE_CyberTrust_Global_Root.pem
+-rw-r--r--	root/root	usr/share/amsn/ca-certs/Microsoft_Internet_Authority.pem
+-rw-r--r--	root/root	usr/share/amsn/ca-certs/Microsoft_Secure_Server_Authority.pem
+-rw-r--r--	root/root	usr/share/amsn/ca-certs/README
+-rw-r--r--	root/root	usr/share/amsn/ca-certs/VeriSign_Class3_Extended_Validation_CA.pem
+-rw-r--r--	root/root	usr/share/amsn/ca-certs/VeriSign_International_Server_Class_3_CA.pem
+lrwxrwxrwx	root/root	usr/share/amsn/ca-certs/c692a373.0 -> GTE_CyberTrust_Global_Root.pem
 -rw-r--r--	root/root	usr/share/amsn/chatwindow.tcl
 -rw-r--r--	root/root	usr/share/amsn/config.tcl
 -rw-r--r--	root/root	usr/share/amsn/console.tcl
@@ -63,8 +75,10 @@ drwxr-xr-x	root/root	usr/share/amsn/lang/
 -rw-r--r--	root/root	usr/share/amsn/lang/LANG-HOWTO
 -rwxr-xr-x	root/root	usr/share/amsn/lang/convert.tcl
 -rw-r--r--	root/root	usr/share/amsn/lang/langal
+-rw-r--r--	root/root	usr/share/amsn/lang/langar
 -rw-r--r--	root/root	usr/share/amsn/lang/langast
 -rw-r--r--	root/root	usr/share/amsn/lang/langbg
+-rw-r--r--	root/root	usr/share/amsn/lang/langbs
 -rw-r--r--	root/root	usr/share/amsn/lang/langca
 -rw-r--r--	root/root	usr/share/amsn/lang/langca_VC
 -rw-r--r--	root/root	usr/share/amsn/lang/langcs
@@ -104,6 +118,7 @@ drwxr-xr-x	root/root	usr/share/amsn/lang/
 -rw-r--r--	root/root	usr/share/amsn/lang/langsl
 -rw-r--r--	root/root	usr/share/amsn/lang/langsr
 -rw-r--r--	root/root	usr/share/amsn/lang/langsv
+-rw-r--r--	root/root	usr/share/amsn/lang/langth
 -rw-r--r--	root/root	usr/share/amsn/lang/langtr
 -rw-r--r--	root/root	usr/share/amsn/lang/langvn
 -rw-r--r--	root/root	usr/share/amsn/lang/langzh-CN
@@ -730,6 +745,9 @@ drwxr-xr-x	root/root	usr/share/amsn/plugins/desktop_integration/
 drwxr-xr-x	root/root	usr/share/amsn/plugins/devel/
 -rw-r--r--	root/root	usr/share/amsn/plugins/devel/devel.tcl
 -rw-r--r--	root/root	usr/share/amsn/plugins/devel/plugininfo.xml
+drwxr-xr-x	root/root	usr/share/amsn/plugins/ebuddykiller/
+-rwxr-xr-x	root/root	usr/share/amsn/plugins/ebuddykiller/ebuddykiller.tcl
+-rwxr-xr-x	root/root	usr/share/amsn/plugins/ebuddykiller/plugininfo.xml
 drwxr-xr-x	root/root	usr/share/amsn/plugins/emotes/
 -rw-r--r--	root/root	usr/share/amsn/plugins/emotes/emotes.tcl
 -rw-r--r--	root/root	usr/share/amsn/plugins/emotes/plugininfo.xml
@@ -1529,7 +1547,6 @@ drwxr-xr-x	root/root	usr/share/amsn/skins/Oxygen/pixmaps/
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/pixmaps/box_upleft.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/pixmaps/box_upright.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/pixmaps/busy.png
--rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/pixmaps/busy2.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/pixmaps/busy_emblem.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/pixmaps/busy_emblem_detailedview.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/pixmaps/butblock.png
@@ -1882,7 +1899,6 @@ drwxr-xr-x	root/root	usr/share/amsn/skins/Oxygen/smileys/
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/smileys/XD.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/smileys/Xbox.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/smileys/YIM.png
--rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/smileys/angry.png
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/smileys/im_xbox.gif
 -rw-r--r--	root/root	usr/share/amsn/skins/Oxygen/smileys/null
 drwxr-xr-x	root/root	usr/share/amsn/skins/Oxygen/sounds/
