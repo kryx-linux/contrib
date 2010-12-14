@@ -1,38 +1,59 @@
-# Description: HTTP server and mail proxy
-# URL: http://nginx.net
-# Maintainer: Lucas Hazel, lucas at die dot net dot au
-# Depends on: zlib, libpcre, openssl
+# Description: Ultra fast HTTP and mail proxy server
+# URL: http://nginx.net/
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: perl libpcre openssl
 
 name=nginx
-version=0.8.36
+version=0.8.54
 release=1
-source=(http://sysoev.ru/nginx/$name-$version.tar.gz $name.rc)
+source=(http://sysoev.ru/$name/$name-$version.tar.gz \
+		$name.conf \
+		$name)
 
 build() {
-    cd $name-$version
-    ./configure --prefix=/etc/$name \
-	--conf-path=/etc/$name/$name.conf \
-	--pid-path=/var/run/$name.pid \
-	--lock-path=/var/lock/$name.lock \
-	--error-log-path=/var/log/$name/error.log \
-	--http-log-path=/var/log/$name/access.log \
-	--user=www \
-	--group=www \
-	--http-client-body-temp-path=/var/tmp/client_body_temp \
-	--http-proxy-temp-path=/var/tmp/proxy_temp \
-	--http-fastcgi-temp-path=/var/tmp/fastcgi_temp \
-	--with-http_ssl_module \
-	--with-mail \
-	--with-mail_ssl_module \
-	--with-pcre
-    
-    
-    make
-    make DESTDIR=$PKG install
-    
-    mkdir $PKG/usr
-    mv $PKG/etc/nginx/sbin $PKG/usr
-    rm -rf $PKG/var/run
-    
-    install -D -m 0755 $SRC/$name.rc $PKG/etc/rc.d/$name
+	cd $name-$version
+	./configure --prefix=/etc/$name \
+				--sbin-path=/usr/bin/$name \
+				--conf-path=/etc/$name/$name.conf \
+				--pid-path=/var/run/$name.pid \
+				--lock-path=/var/lock/$name.lock \
+				--http-client-body-temp-path=/var/spool/$name/client_body_temp \
+				--http-proxy-temp-path=/var/spool/$name/proxy_temp \
+				--http-fastcgi-temp-path=/var/spool/$name/fastcgi_temp \
+				--http-uwsgi-temp-path=/var/spool/$name/uwscgi_temp \
+				--http-scgi-temp-path=/var/spool/$name/scgi_temp \
+				--error-log-path=/var/log/$name \
+				--http-log-path=/var/log/$name/access.log \
+				--error-log-path=/var/log/$name/error.log \
+				--user=$name \
+				--group=$name \
+				--with-pcre \
+				--with-zlib-asm=pentiumpro \
+				--with-http_gzip_static_module \
+				--with-http_ssl_module \
+				--with-http_realip_module \
+				--with-http_addition_module \
+				--with-http_sub_module \
+				--with-http_flv_module \
+				--with-http_stub_status_module \
+				--with-http_perl_module
+	make
+	make DESTDIR=$PKG install
+	
+	mkdir -p $PKG/var/spool/$name/{client_body_temp,fastcgi_temp,uwscgi_temp,scgi_temp,proxy_temp}
+	chown $name:0 $PKG/var/spool/$name/{client_body_temp,fastcgi_temp,uwscgi_temp,scgi_temp,proxy_temp}
+	chmod 700 $PKG/var/spool/$name/{client_body_temp,fastcgi_temp,uwscgi_temp,scgi_temp,proxy_temp}
+	
+	touch $PKG/var/log/$name/access.log
+	touch $PKG/var/log/$name/error.log
+	
+	install -m 644 $SRC/$name.conf $PKG/etc/$name/$name.conf
+	install -D -m 755 $SRC/$name $PKG/etc/rc.d/$name
+	
+	rm -f $PKG/etc/$name/*.default
+	
+	find $PKG/usr/lib/perl5 -name .packlist -exec rm {} \;
+	find $PKG/usr/lib/perl5 -name perllocal.pod -exec rm {} \;
+	find $PKG/usr/lib/perl5 -depth -type d -empty -exec rm -rf {} \;
+	find $PKG/usr/lib/perl5 -name "*.bs" -exec rm {} \;
 }
