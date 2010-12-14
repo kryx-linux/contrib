@@ -12,6 +12,6 @@ source=(http://download.sourceforge.net/$name/$name-$version.tar.gz)
 build() {
    cd $name-$version
    python setup.py install --root=$PKG
-   rm $PKG/usr/lib/python2.6/site-packages/docutils/writers/s5_html/themes/README.txt
-   rm $PKG/usr/lib/python2.6/site-packages/docutils/parsers/rst/include/README.txt
+   rm $PKG/usr/lib/python2.7/site-packages/docutils/writers/s5_html/themes/README.txt
+   rm $PKG/usr/lib/python2.7/site-packages/docutils/parsers/rst/include/README.txt
 }
