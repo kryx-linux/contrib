@@ -2,20 +2,31 @@
 # URL: http://www.bunkus.org/videotools/mkvtoolnix
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Han Boetes, han at mijncomputer dot nl
-# Depends on: libmatroska libvorbis boost
+# Depends on: boost file flac libmatroska libvorbis ruby
 
 name=mkvtoolnix
-version=3.0.0
+version=4.4.0
 release=1
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
 
+	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) .*/\1/' <<< $MAKEFLAGS)"
+
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man
 
-	make
-	make install-programs install-mans DESTDIR=$PKG
+	./drake $JOBS
+	./drake $JOBS DESTDIR=$PKG install
+
+	rm -r \
+		$PKG/usr/man/{ja,nl,zh_CN} \
+		$PKG/usr/share/locale \
+		$PKG/usr/share/mkvtoolnix/guide
+
+	rmdir \
+		$PKG/usr/share/mkvtoolnix \
+		$PKG/usr/share
 }
