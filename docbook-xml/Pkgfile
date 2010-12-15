@@ -1,0 +1,20 @@
+# Description: An document type definitions for verification of XML data files against the DocBook rule set.
+# URL: http://www.docbook.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: libxml2
+
+## http://www.linuxfromscratch.org/blfs/view/svn/pst/DocBook.html
+
+name=docbook-xml
+version=4.5
+release=1
+source="http://www.docbook.org/xml/$version/$name-$version.zip"
+
+build() {
+	install -d $PKG/usr/share/xml/docbook/xml-dtd-$version $PKG/etc/xml
+	install -v -d -m 0755 $PKG/usr/share/xml/docbook/xml-dtd-$version
+	install -v -d -m 0755 $PKG/etc/xml
+
+	cp -a docbook.cat *.dtd ent/ *.mod \
+		$PKG/usr/share/xml/docbook/xml-dtd-$version
+}
