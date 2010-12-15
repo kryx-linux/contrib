@@ -2,20 +2,33 @@
 # URL: http://hjemli.net/git/cgit/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Lucas Hazel, lucas at die dot net dot au
-# Depends on: git
+# Depends on: git asciidoc
 
-gitversion="1.6.6"
+gitversion=1.7.3.1
 
 name=cgit
-version=0.8.3.1
+version=0.8.3.4
 release=1
 source=(http://hjemli.net/git/cgit/snapshot/$name-$version.tar.bz2
-    http://www.kernel.org/pub/software/scm/git/git-$gitversion.tar.bz2)
+	http://www.kernel.org/pub/software/scm/git/git-$gitversion.tar.bz2
+	cgit.conf)
 
 build() {
 	cd $name-$version
+
+	if [ $gitversion != "$(/usr/bin/git --version | cut -d ' ' -f 3)" ]; then
+		echo 'Did you forget to update gitversion?'
+		exit 1
+	fi
+
 	rm -rf git
 	ln -s $SRC/git-$gitversion git
 	sed "s/GIT_VER = .*/GIT_VER = $gitversion/" -i Makefile
+
+	make cgit man-doc
 	make DESTDIR=$PKG install
+
+	install -D -m 0640 $SRC/cgit.conf $PKG/etc/apache/extra/cgit.conf
+	install -D -m 0644 cgitrc.5 $PKG/usr/man/man5/cgitrc.5
+	install -d -m 0750 $PKG/var/cache/cgit
 }
