@@ -1,17 +1,16 @@
-# Description: library for mkvtoolnix.
+# Description: An extensible open standard Audio/Video container format library.
 # URL: http://www.bunkus.org/videotools/mkvtoolnix/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
 # Depends on: libebml
 
 name=libmatroska
-version=0.8.1
+version=1.0.0
 release=1
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
-	cd make/linux
+	cd $name-$version/make/linux
 	make
 	make -e prefix=$PKG/usr install
 }
