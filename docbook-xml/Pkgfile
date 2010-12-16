@@ -17,4 +17,6 @@ build() {
 
 	cp -a docbook.cat *.dtd ent/ *.mod \
 		$PKG/usr/share/xml/docbook/xml-dtd-$version
+
+	find $PKG/usr/share/xml/docbook/xml-dtd-$version -type f -exec chmod go-w,-x {} +
 }
