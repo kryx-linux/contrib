@@ -4,9 +4,9 @@
 # Depends on:
 
 name=ipsec-tools
-version=0.7.2
+version=0.7.3
 release=1
-source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2)
+source=(http://sourceforge.net/projects/ipsec-tools/files/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
@@ -19,7 +19,8 @@ build() {
 				--enable-dpd \
 				--enable-natt \
 				--enable-adminport \
-				--enable-security-context=no
+				--enable-security-context=no \
+				--with-kernel-headers=/usr/include
 	make
 	make DESTDIR=$PKG install
 }
