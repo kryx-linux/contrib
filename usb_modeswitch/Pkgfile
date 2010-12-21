@@ -1,11 +1,12 @@
-# Description: Activating switchable USB devices on Linux.
-# Maintainer:  Moritz Wilhelmy <moritz plus crux at wzff dot de>
-# Depends on:  libusb
-# URL:         http://www.draisberghof.de/usb_modeswitch/
+# Description:  Activating switchable USB devices on Linux
+# URL:          http://www.draisberghof.de/usb_modeswitch/
+# Maintainer:   Moritz Wilhelmy, moritz plus crux at wzff dot de
+# Depends on:   libusb
+# Nice to have: tclsh
 
 name=usb_modeswitch
 version=1.1.5
-release=1
+release=2
 source=("http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-$version.tar.bz2"
       "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-data-20101202.tar.bz2")
 
@@ -15,6 +16,7 @@ build () {
   make DESTDIR=$PKG MANDIR=$PKG/usr/man/man1 all install
 
   cd ../usb-modeswitch-data-*
+  sed -i 's:RUN+="usb_modeswitch:RUN+="/usr/sbin/usb_modeswitch:g' \
+    40-usb_modeswitch.rules 
   make DESTDIR=$PKG MANDIR=$PKG/usr/man/man1 install
 }
-# vim:ft=sh:
