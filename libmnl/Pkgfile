@@ -1,0 +1,21 @@
+# Description: A minimalistic user-space library oriented to Netlink developers.
+# URL: http://netfilter.org/projects/libmnl/index.html
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: libnfnetlink
+
+name=libmnl
+version=1.0.1
+release=1
+source=(http://www.netfilter.org/projects/$name/files/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+
+    ./configure \
+	 	--prefix=/usr \
+		--disable-static
+
+    make
+    make DESTDIR=$PKG install
+}
