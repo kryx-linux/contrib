@@ -1,0 +1,20 @@
+# Description: Netfilter kernel/userspace communication library.
+# URL: http://www.netfilter.org/projects/libnfnetlink/index.html
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Nathan Pardoe, lithium at poolofrandomness dot com
+
+name=libnfnetlink
+version=1.0.0
+release=1
+source=(http://www.netfilter.org/projects/$name/files/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-static
+
+	make
+	make DESTDIR=$PKG install
+}
