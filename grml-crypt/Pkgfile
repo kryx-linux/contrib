@@ -8,12 +8,12 @@ name=grml-crypt
 version=0.20
 release=1
 source=(http://deb.grml.org/pool/main/g/$name/${name}_${version}.tar.gz \
-  $name-$version.patch)
+  path_fstype.patch)
 
 build() {
     cd $name
 
-    patch -p1 < $SRC/$name-$version.patch
+    patch -p1 < $SRC/path_fstype.patch
 
     mkdir -p $PKG/usr/sbin
     mkdir -p $PKG/usr/man/man8
