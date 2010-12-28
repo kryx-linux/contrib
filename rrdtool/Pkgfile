@@ -5,12 +5,12 @@
 # Depends on: libart_lgpl libcgi libgd pango python tcl intltool
 
 name=rrdtool
-version=1.4.4
+version=1.4.5
 release=1
-source=(http://oss.oetiker.ch/rrdtool/pub/rrdtool-$version.tar.gz)
+source=(http://oss.oetiker.ch/rrdtool/pub/$name-$version.tar.gz)
 
 build() {
-	cd rrdtool-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
