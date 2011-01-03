@@ -14,7 +14,8 @@ build() {
 
 	sed -i \
 		-e 's|/usr/local|/usr|' \
-		-e 's|/share/man|/man|' Makefile
+		-e 's|/share/man|/man|' \
+		-e '42d' Makefile
 
 	make
 	make DESTDIR=$PKG install
