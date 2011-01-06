@@ -1,16 +1,19 @@
 # Description: Qt Free Edition
-# URL: http://www.trolltech.com
-# Maintainer: Lucas Hazel, lucas at die dot net dot au
-# Packager: Daniel Mueller, daniel at danm dot de
-# Depends on: freeglut, xorg-libxcursor, xorg-xrandr, xorg-libxft, xorg-libxinerama, xorg-libxi, xorg-libice, libpng, libmng
+# URL:         http://www.trolltech.com
+# Packager:    Daniel Mueller, daniel at danm dot de
+# Maintainer:  Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:  freeglut, xorg-libxcursor, xorg-xrandr, xorg-libxft, xorg-libxinerama, xorg-libxi, xorg-libice, libpng, libmng
 
 name=qt3
 version=3.3.8
 release=1
-source=(ftp://ftp.trolltech.com/qt/source/qt-x11-free-$version.tar.bz2 \
-    http://crux64.die.net.au/files/$name-$version-1-patches.tar.bz2
-    $name-$version-gcc4.patch 
-    qt-x11-free-3.3.5-no-rpath.patch)
+source=(
+	ftp://ftp.trolltech.com/qt/source/qt-x11-free-$version.tar.bz2
+	http://crux64.die.net.au/files/$name-$version-1-patches.tar.bz2
+	$name-$version-gcc4.patch 
+	qt-x11-free-3.3.5-no-rpath.patch
+	qt3-libpng14.patch
+)
 
 build() {
     cd qt-x11-free-$version
@@ -23,6 +26,9 @@ build() {
     # gcc4 + 64bit issue
     patch -p1 -i $SRC/$name-$version-gcc4.patch
     patch -p0 -i $SRC/qt-x11-free-3.3.5-no-rpath.patch
+
+    # libpng-1.4 structure changes
+    patch -p1 -i $SRC/qt3-libpng14.patch
 
     local SQL
     if [ "`pkginfo -i | grep mysql`" ];then
