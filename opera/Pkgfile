@@ -5,17 +5,17 @@
 # Depends on: qt4
 
 name=opera
-version=10.63
+version=11.00
 release=1
-source=(http://ftp.heanet.ie/pub/opera/linux/${version//./}/$name-$version-6450.i386.linux.tar.bz2)
+source=(http://ftp.heanet.ie/pub/opera/linux/${version//./}/$name-$version-1156.i386.linux.tar.bz2)
 
 build() {
 	cd $name-$version-*
 
-	# Remove "license directory"
+	mv share/doc/opera/LICENSE $SRC/
 	rm -rf share/doc/opera
-	# Remove package directory
 	rm -rf share/opera/package
+
 	# Replace PREFIX and SUFFIX in various files
 	sed -i \
 		-e "s:@@{PREFIX}:/usr:g" \
@@ -51,10 +51,18 @@ build() {
 	cp -r share/mime $PKG/usr/share/
 	cp -r share/opera $PKG/usr/share/
 
+	# remove license.txt symlinks to doc directory
+	# which we remove
 	rm \
-		$PKG/usr/lib/opera/gstreamer/LGPL.txt \
-		$PKG/usr/lib/opera/gstreamer/README.txt \
-		$PKG/usr/lib/opera/plugins/README
+		$PKG/usr/lib/opera/plugins/README \
+		$PKG/usr/share/opera/locale/en/license.txt \
+		$PKG/usr/share/opera/defaults/license.txt
+
+	cp $SRC/LICENSE \
+                $PKG/usr/share/opera/defaults/license.txt
+
+	ln $PKG/usr/share/opera/defaults/license.txt \
+		$PKG/usr/share/opera/locale/en/license.txt
 
 	find  "$PKG/usr/share/opera/locale/" \
 		-mindepth 1 -maxdepth 1 -type d \
