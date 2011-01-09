@@ -5,7 +5,7 @@
 # Depends on:
 
 name=help2man
-version=1.38.2
+version=1.38.4
 release=1
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 
@@ -18,9 +18,12 @@ build() {
 		--disable-nls
 
 	make
-	install -d $PKG/usr/lib
 	make DESTDIR=$PKG install
 
 	rm -rf $PKG/usr/share/info
-	rmdir $PKG/usr/share
+
+	rmdir \
+		$PKG/usr/share \
+		$PKG/usr/lib/help2man \
+		$PKG/usr/lib
 }
