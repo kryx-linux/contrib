@@ -5,17 +5,17 @@
 # Depends on: perl lm_sensors
 
 name=net-snmp
-version=5.4.3
+version=5.6.1
 release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz \
-		snmpd snmpd.conf net-snmp-5.4.1-sensors3.patch)
+		snmpd snmpd.conf)
 
 build() {
 	cd $name-$version
-	patch -p0 -i $SRC/net-snmp-5.4.1-sensors3.patch
 	export NETSNMP_DONT_CHECK_VERSION=1
 	./configure --prefix=/usr \
 				--sysconfdir=/etc \
+				--mandir=/usr/man \
 				--enable-shared \
 				--enable-embedded-perl \
 				--with-perl-modules \
@@ -42,9 +42,9 @@ build() {
 		| xargs rm
 	# ... less common ones and empty directories
 	rm -rf \
-		$PKG/usr/lib/perl5/site_perl/5.10.?/linux/Bundle \
-		$PKG/usr/lib/perl5/5.10.? \
-		$PKG/usr/lib/perl5/site_perl/5.10.?/linux/auto/Bundle
+		$PKG/usr/lib/perl5/site_perl/5.1?/linux/Bundle \
+		$PKG/usr/lib/perl5/5.1? \
+		$PKG/usr/lib/perl5/site_perl/5.1?/linux/auto/Bundle
 	rm $PKG/usr/include/net-snmp/library/README
 
 	mkdir -p $PKG/var/{lib,run,log}/snmp
