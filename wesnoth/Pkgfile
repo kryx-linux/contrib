@@ -5,9 +5,9 @@
 # Depends on: boost cmake pango sdl_image sdl_mixer sdl_net sdl_ttf lua
 
 name=wesnoth
-version=1.8.4
+version=1.8.5
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/$name/$name-${version%.*}/$name-$version/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
