@@ -1,0 +1,23 @@
+# Description:  Library supporting additional image formats for Tcl/Tk
+# URL:          http://tkimg.sourceforge.net/
+# Maintainer:   Moritz Wilhelmy, moritz plus crux at wzff dot de
+# Depends On:   tk
+# Nice to have: libpng libtiff libjpeg
+
+name=tkimg
+version=1.3
+release=1
+source=(http://downloads.sourceforge.net/tkimg/$name$version.tar.gz)
+
+build() {
+    cd $name$version
+
+    # --exec-prefix determines the location of the *config.sh
+    # don't worry: they'll end up in /usr/lib. TkImg's use of autoconf is
+    # just plain weird, that's all
+    ./configure --prefix=/usr --exec-prefix=/usr
+
+    make
+    make install INSTALL_ROOT=$PKG
+}
+
