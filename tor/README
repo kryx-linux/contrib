@@ -2,14 +2,14 @@ REQUIREMENTS:
 
 PRECAUTION:
 
-	Make sue you edit /etc/pkgmk.conf annd add the following line.
+	Make sure you edit /etc/pkgadd.conf and add the following line.
 
 	UPGRADE         ^usr/var/lib/tor/.*$    NO
 
-	Falure todo so will result in the loss of your tor data!
+	Failure to do so will result in the loss of your tor data upon update!
 
 	If you edit the torrc file for extra logging, make sure you:
-	chmod 640 /var/log/tor/* files, for security reasons.
+	chmod 0640 /var/log/tor/* files, for security reasons.
 
 PRE-INSTALL:
 
