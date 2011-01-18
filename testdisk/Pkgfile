@@ -6,11 +6,14 @@
 
 name=testdisk
 version=6.11
-release=1
-source=(http://www.cgsecurity.org/$name-$version.tar.bz2)
+release=2
+source=(http://www.cgsecurity.org/$name-$version.tar.bz2
+	http://www.cgsecurity.org/photorec_611_exif_bound_checking_v2.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p 1 -i $SRC/photorec_611_exif_bound_checking_v2.patch
 
 	./configure \
 		--prefix=/usr \
