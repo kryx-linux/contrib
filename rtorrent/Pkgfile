@@ -4,7 +4,7 @@
 # Depends on:  libtorrent
 
 name=rtorrent
-version=0.8.6
+version=0.8.7
 release=1
 source=(http://libtorrent.rakshasa.no/downloads/rtorrent-$version.tar.gz)
 
@@ -13,4 +13,5 @@ build() {
   ./configure --prefix=/usr --mandir=/usr/man
   make
   make install DESTDIR=$PKG
+  install -m 644 -D doc/rtorrent.1 $PKG/usr/man/man1/rtorrent.1
 }
