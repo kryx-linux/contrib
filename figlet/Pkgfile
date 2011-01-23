@@ -4,12 +4,12 @@
 # Depends on:  
 
 name=figlet
-version=2.2.2
+version=2.2.3
 release=1
-source=(ftp://ftp.figlet.org/pub/figlet/program/unix/figlet222.tar.gz)
+source=(ftp://ftp.figlet.org/pub/figlet/program/unix/$name-$version.tar.gz)
 
 build () {
-  cd ${name}222
+  cd $name-$version
   sed -i -e 's|DEFAULTFONTDIR.*|DEFAULTFONTDIR = "/usr/share/figlet/"|' Makefile
   echo '#include <stdlib.h>' 
   gcc -DDEFAULTFONTDIR=\"/usr/share/figlet\" \
