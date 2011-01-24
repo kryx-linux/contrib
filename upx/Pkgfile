@@ -5,12 +5,12 @@
 # Depends on: ucl lzo zlib
 
 name=upx
-version=3.03
+version=3.07
 release=1
-source=(http://upx.sourceforge.net/download/upx-$version-src.tar.bz2)
+source=(http://upx.sourceforge.net/download/$name-$version-src.tar.bz2)
 
 build() {
-	cd upx-$version-src
+	cd $name-$version-src
 	make -C doc
 	make -C src
 	install -m 0644 -D doc/upx.1 $PKG/usr/man/man1/upx.1
