@@ -4,12 +4,15 @@
 # Depends on:  libpcap
 
 name=dnstop
-version=20090128
+version=20110113b
 release=1
 source=(http://dns.measurement-factory.com/tools/dnstop/src/$name-$version.tar.gz)
 build() {
-    cd  $name-$version
+    cd  $name-${version%b}
     ./configure --prefix=/usr
+
+    sed -i -e 's/ !=/!=/1' Makefile
+
     make
     install -D dnstop $PKG/usr/bin/dnstop
     install -D dnstop.8 $PKG/usr/man/man8/dnstop.8
