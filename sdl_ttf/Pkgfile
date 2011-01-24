@@ -5,16 +5,17 @@
 # Depends on: freetype libsdl
 
 name=sdl_ttf
-version=2.0.8
+version=2.0.10
 release=1
-source=(http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-$version.tar.gz \
-	sdl_ttf-noftinternals.patch)
+source=(http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-$version.tar.gz)
 
 build() {
 	cd SDL_ttf-$version
-	patch  -i $SRC/sdl_ttf-noftinternals.patch
-	./configure	--prefix=/usr
+
+	./configure \
+		--prefix=/usr \
+		--disable-dependency-tracking
+
 	make 
 	make DESTDIR=$PKG install
 }
-
