@@ -4,15 +4,13 @@
 # Packager:    Hannes Mayer, kontakt at ecarux dot de
 
 name=libnl
-version=1.1
+version=2.0
 release=1
-source=(http://mirror.slitaz.org/sources/packages/l/$name-$version.tar.gz
-    $name-1.1_ulong_max.diff)
+source=(http://www.infradead.org/~tgr/$name/files/$name-$version.tar.gz)
 
 build()
 {
     cd $name-$version
-    patch -p1 -i ../libnl-1.1_ulong_max.diff
     ./configure --prefix=/usr
     make
     make DESTDIR=$PKG install

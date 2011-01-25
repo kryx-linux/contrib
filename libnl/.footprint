@@ -1,4 +1,7 @@
 drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/etc/
+drwxr-xr-x	root/root	usr/etc/libnl/
+-rw-r--r--	root/root	usr/etc/libnl/pktloc
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/netlink/
 -rw-r--r--	root/root	usr/include/netlink/addr.h
@@ -6,6 +9,7 @@ drwxr-xr-x	root/root	usr/include/netlink/
 -rw-r--r--	root/root	usr/include/netlink/cache-api.h
 -rw-r--r--	root/root	usr/include/netlink/cache.h
 -rw-r--r--	root/root	usr/include/netlink/data.h
+-rw-r--r--	root/root	usr/include/netlink/errno.h
 drwxr-xr-x	root/root	usr/include/netlink/fib_lookup/
 -rw-r--r--	root/root	usr/include/netlink/fib_lookup/lookup.h
 -rw-r--r--	root/root	usr/include/netlink/fib_lookup/request.h
@@ -17,6 +21,14 @@ drwxr-xr-x	root/root	usr/include/netlink/genl/
 -rw-r--r--	root/root	usr/include/netlink/handlers.h
 -rw-r--r--	root/root	usr/include/netlink/list.h
 -rw-r--r--	root/root	usr/include/netlink/msg.h
+drwxr-xr-x	root/root	usr/include/netlink/netfilter/
+-rw-r--r--	root/root	usr/include/netlink/netfilter/ct.h
+-rw-r--r--	root/root	usr/include/netlink/netfilter/log.h
+-rw-r--r--	root/root	usr/include/netlink/netfilter/log_msg.h
+-rw-r--r--	root/root	usr/include/netlink/netfilter/netfilter.h
+-rw-r--r--	root/root	usr/include/netlink/netfilter/nfnl.h
+-rw-r--r--	root/root	usr/include/netlink/netfilter/queue.h
+-rw-r--r--	root/root	usr/include/netlink/netfilter/queue_msg.h
 -rw-r--r--	root/root	usr/include/netlink/netlink-compat.h
 -rw-r--r--	root/root	usr/include/netlink/netlink-kernel.h
 -rw-r--r--	root/root	usr/include/netlink/netlink.h
@@ -33,6 +45,9 @@ drwxr-xr-x	root/root	usr/include/netlink/route/cls/
 -rw-r--r--	root/root	usr/include/netlink/route/cls/police.h
 -rw-r--r--	root/root	usr/include/netlink/route/cls/u32.h
 -rw-r--r--	root/root	usr/include/netlink/route/link.h
+drwxr-xr-x	root/root	usr/include/netlink/route/link/
+-rw-r--r--	root/root	usr/include/netlink/route/link/info-api.h
+-rw-r--r--	root/root	usr/include/netlink/route/link/vlan.h
 -rw-r--r--	root/root	usr/include/netlink/route/neighbour.h
 -rw-r--r--	root/root	usr/include/netlink/route/neightbl.h
 -rw-r--r--	root/root	usr/include/netlink/route/nexthop.h
@@ -55,9 +70,32 @@ drwxr-xr-x	root/root	usr/include/netlink/route/sch/
 -rw-r--r--	root/root	usr/include/netlink/socket.h
 -rw-r--r--	root/root	usr/include/netlink/types.h
 -rw-r--r--	root/root	usr/include/netlink/utils.h
+-rw-r--r--	root/root	usr/include/netlink/version.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libnl.so -> libnl.so.1
-lrwxrwxrwx	root/root	usr/lib/libnl.so.1 -> libnl.so.1.1
--rw-r--r--	root/root	usr/lib/libnl.so.1.1
+-rw-r--r--	root/root	usr/lib/libnl-cli.a
+-rwxr-xr-x	root/root	usr/lib/libnl-cli.la
+lrwxrwxrwx	root/root	usr/lib/libnl-cli.so -> libnl-cli.so.2.0.0
+lrwxrwxrwx	root/root	usr/lib/libnl-cli.so.2 -> libnl-cli.so.2.0.0
+-rwxr-xr-x	root/root	usr/lib/libnl-cli.so.2.0.0
+-rw-r--r--	root/root	usr/lib/libnl-genl.a
+-rwxr-xr-x	root/root	usr/lib/libnl-genl.la
+lrwxrwxrwx	root/root	usr/lib/libnl-genl.so -> libnl-genl.so.2.0.0
+lrwxrwxrwx	root/root	usr/lib/libnl-genl.so.2 -> libnl-genl.so.2.0.0
+-rwxr-xr-x	root/root	usr/lib/libnl-genl.so.2.0.0
+-rw-r--r--	root/root	usr/lib/libnl-nf.a
+-rwxr-xr-x	root/root	usr/lib/libnl-nf.la
+lrwxrwxrwx	root/root	usr/lib/libnl-nf.so -> libnl-nf.so.2.0.0
+lrwxrwxrwx	root/root	usr/lib/libnl-nf.so.2 -> libnl-nf.so.2.0.0
+-rwxr-xr-x	root/root	usr/lib/libnl-nf.so.2.0.0
+-rw-r--r--	root/root	usr/lib/libnl-route.a
+-rwxr-xr-x	root/root	usr/lib/libnl-route.la
+lrwxrwxrwx	root/root	usr/lib/libnl-route.so -> libnl-route.so.2.0.0
+lrwxrwxrwx	root/root	usr/lib/libnl-route.so.2 -> libnl-route.so.2.0.0
+-rwxr-xr-x	root/root	usr/lib/libnl-route.so.2.0.0
+-rw-r--r--	root/root	usr/lib/libnl.a
+-rwxr-xr-x	root/root	usr/lib/libnl.la
+lrwxrwxrwx	root/root	usr/lib/libnl.so -> libnl.so.2.0.0
+lrwxrwxrwx	root/root	usr/lib/libnl.so.2 -> libnl.so.2.0.0
+-rwxr-xr-x	root/root	usr/lib/libnl.so.2.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
--rw-r--r--	root/root	usr/lib/pkgconfig/libnl-1.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/libnl-2.0.pc
