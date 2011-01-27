@@ -5,10 +5,11 @@
 # Depends on: python
 
 name=feedparser
-version=4.1
+version=5.0
 release=1
-source=(http://download.sourceforge.net/$name/$name-$version.zip)
+source=(http://feedparser.googlecode.com/files/$name-$version.tar.bz2)
 
 build() {
+  cd $name-$version
   python setup.py install --root=$PKG
 }
