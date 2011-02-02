@@ -13,6 +13,7 @@ build() {
 	cd $name-$version
 
 	./configure --prefix=/usr \
+    --mandir=/usr/man \
 		--disable-nls \
 		--disable-fribidi \
 		--disable-httpd \
@@ -22,4 +23,5 @@ build() {
 		--disable-lua
 	make
 	make DESTDIR=$PKG install
+  rm -rf $PKG/usr/share/doc
 }
