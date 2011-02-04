@@ -5,7 +5,7 @@
 # Depends on: boost file flac libmatroska libvorbis ruby
 
 name=mkvtoolnix
-version=4.4.0
+version=4.5.0
 release=1
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.bz2)
 
@@ -24,9 +24,7 @@ build() {
 	rm -r \
 		$PKG/usr/man/{ja,nl,zh_CN} \
 		$PKG/usr/share/locale \
-		$PKG/usr/share/mkvtoolnix/guide
+		$PKG/usr/share/doc
 
-	rmdir \
-		$PKG/usr/share/mkvtoolnix \
-		$PKG/usr/share
+	rmdir $PKG/usr/share
 }
