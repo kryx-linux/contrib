@@ -5,9 +5,9 @@
 # Depends on: faac imlib2 lame libsdl libtheora libxvid x264 opencore-amr speex libva
 
 name=ffmpeg
-version=20101114
-release=2
-source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version-r25748.tar.xz)
+version=20110206
+release=1
+source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version-r26402.tar.xz)
 
 build() {
 	cd $name
@@ -19,12 +19,9 @@ build() {
 		--enable-gpl \
 		--enable-version3 \
 		--enable-avfilter \
-		--enable-avfilter-lavf \
 		--enable-libopencore-amrnb \
 		--enable-libopencore-amrwb \
 		--enable-libfaac \
-		--enable-libfaad \
-		--enable-libfaadbin \
 		--enable-libmp3lame \
 		--enable-libspeex \
 		--enable-libtheora \
