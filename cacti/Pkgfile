@@ -6,12 +6,13 @@
 
 name=cacti
 version=0.8.7g
-release=2
-source=(http://www.$name.net/downloads/$name-$version.tar.gz)
+release=3
+source=(http://www.$name.net/downloads/$name-$version.tar.gz
+        http://crux.nu/~tek/cacti_official_patches.diff)
 
 build () {
   cd $name-$version
-  #for i in ../*.patch;do patch -p1 -i "$i";done
+  patch -p1 -i ../cacti_official_patches.diff
   cd ..
   mkdir -p $PKG/var/www/htdocs    
   mv $name-$version $PKG/var/www/htdocs/$name
@@ -19,5 +20,5 @@ build () {
   sed -i -e "s|\$config\['url_path'] = '/'|\$config\['url_path'] = '/cacti/'|g" \
     $PKG/var/www/htdocs/$name/include/global.php
   rm $PKG/var/www/htdocs/cacti/{README,LICENSE}
-  rm $PKG/var/www/htdocs/cacti/docs/{CHANGELOG,CONTRIB,README}
+  rm -r $PKG/var/www/htdocs/cacti/docs
 }
