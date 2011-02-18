@@ -12,4 +12,5 @@ source=(http://ftp.edgewall.com/pub/trac/Trac-$version.tar.gz)
 build () {
    cd Trac-$version
    python setup.py install --root=$PKG
+   find $PKG -name README -delete
 }
