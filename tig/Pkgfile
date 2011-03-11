@@ -5,15 +5,14 @@
 # Depends on:  git
 
 name=tig
-version=0.16.2
-release=2
-source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz)
+version=0.17
+release=1
+source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz) 
 
 build() {
   cd $name-$version
 
   ./configure --prefix=/usr --mandir=/usr/man --sysconfdir=/etc
-
 
   make LDLIBS=-lncursesw
   make prefix=/usr DESTDIR=$PKG install install-doc-man
