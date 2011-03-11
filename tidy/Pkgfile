@@ -2,15 +2,14 @@
 # URL: http://tidy.sourceforge.net/ 
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Han Boetes, han mijncomputer dot nl
-# Depends on: 
 
 name=tidy
-version=20070217
+version=20110307
 release=1
-source=(ftp://romster.dyndns.org/linux/source/tidy/tidy-snapshot-$version.tar.bz2)
+source=(http://www.hvlinux.net/crux/distfiles/$name/$name-snapshot-$version.tar.bz2)
 
 build() {
-	cd tidy
+	cd $name
 
 	./configure \
 		--prefix=/usr \
@@ -19,4 +18,3 @@ build() {
 	make
 	make DESTDIR=$PKG install
 }
-
