@@ -10,13 +10,15 @@ release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$name-$version.tar.gz)
 
 build() {
-	cd bomberclone-$version
+	cd $name-$version
 
-	sed -i configure.in -e '/^packagedatadir=/s|share/games/${PACKAGE}|share/${PACKAGE}|'
+	sed -i -e '/^packagedatadir=/s|share/games/${PACKAGE}|share/${PACKAGE}|' configure
 
 	./configure \
 		--prefix=/usr \
-		--disable-debug
+		--disable-debug \
+		--disable-werror \
+		--disable-dependency-tracking
 
 	make
 	make DESTDIR=$PKG install
