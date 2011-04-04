@@ -2,21 +2,25 @@
 # URL: http://www.boost.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: boost-jam icu python expat
+# Depends on: expat icu python
 
 name=boost
-version=1.45.0
+version=1.46.1
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.tar.bz2)
 
 build() {
 	cd ${name}_${version//./_}
 
-	sed -i -e "s|-O3|$CXXFLAGS -Wno-deprecated|" tools/build/v2/tools/gcc.jam
-	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) .*/\1/' <<< $MAKEFLAGS)"
+	./bootstrap.sh
+
+	sed -i -e "s|-O3|$CXXFLAGS -O3 -Wno-deprecated -fno-strict-aliasing|" \
+		tools/build/v2/tools/gcc.jam
+
+	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) \{0,1\}.*/\1/' <<< $MAKEFLAGS)"
 
 	pushd tools/bcp
-	bjam \
+	../../bjam \
 		$JOBS -q -d 2 \
 		debug-symbols=off \
 		--toolset=gcc \
@@ -24,10 +28,12 @@ build() {
 		-sEXPAT_LIBPATH=/usr/lib \
 		-sHAVE_ICU=1
 
-	install -m 0755 -D ../../bin.v2/tools/bcp/gcc-$(gcc -dumpversion)/release/link-static/bcp $PKG/usr/bin/bcp
+	install -m 0755 -D ../../bin.v2/tools/bcp/gcc-$(gcc -dumpversion)/release/link-static/bcp \
+		$PKG/usr/bin/bcp
+
 	popd
 
-	bjam \
+	./bjam \
 		$JOBS -q -d 2 \
 		release \
 		threading=single,multi \
