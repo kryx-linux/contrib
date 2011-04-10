@@ -51,4 +51,5 @@ build() {
 	cd libs/python/pyste/install
 	python setup.py install --root=$PKG
 	mv $PKG/usr/bin/pyste.py $PKG/usr/bin/pyste
+	find $PKG -name '*.egg-info' | xargs rm -rf
 }
