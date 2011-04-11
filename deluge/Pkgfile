@@ -13,5 +13,7 @@ build() {
 	cd $name-$version
 	ARCH='x86' OS='linux' python setup.py build
 	python setup.py install --root=$PKG install
-	find $PKG -name '*.egg-info' | xargs rm -rf
+
+	# deluge wont run without this
+	#find $PKG -name '*.egg-info' | xargs rm -rf
 }
