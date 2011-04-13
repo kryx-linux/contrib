@@ -1,17 +1,24 @@
-# Description: Pipe commands to paste to a site.
+# Description: Pipe commands to a pastebin site.
 # URL: http://wgetpaste.zlin.dk/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 
 name=wgetpaste
 version=2.18
-release=1
-source=(http://wgetpaste.zlin.dk/$name-$version.tar.bz2)
+release=2
+source=(http://wgetpaste.zlin.dk/$name-$version.tar.bz2
+	http://wgetpaste.zlin.dk/zlin.conf)
 
 build() {
 	# adjust including files as per http://wgetpaste.zlin.dk/inst.bash
 	cd $name-$version
-	install -d $PKG/usr/bin
-	cat wgetpaste _wgetpaste > $PKG/usr/bin/wgetpaste
+	install -d $PKG/usr/bin $PKG/usr/etc/wgetpaste.d
+
+	cat wgetpaste _wgetpaste \
+	| sed 's|for f in {/etc/|for f in {/usr/etc/|' \
+	| sed 's|/etc/wgetpaste.d|/usr/etc/wgetpaste.d|' \
+	> $PKG/usr/bin/wgetpaste
+
+	install -m 0644 $SRC/zlin.conf $PKG/usr/etc/wgetpaste.d
 	chmod +x $PKG/usr/bin/wgetpaste
 }
