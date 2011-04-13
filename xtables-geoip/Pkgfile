@@ -10,12 +10,12 @@ name=xtables-geoip
 version=20110404
 
 release=1
-source=(http://downloads.sourceforge.net/project/xtables-addons/Xtables-addons/1.33/xtables-addons-1.33.tar.xz
+source=(http://downloads.sourceforge.net/project/xtables-addons/Xtables-addons/1.35/xtables-addons-1.35.tar.xz
 	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip)
 
 build() {
 	install -d $PKG/usr/share/xt_geoip
 
-	$SRC/xtables-addons-1.33/geoip/xt_geoip_build \
+	$SRC/xtables-addons-1.35/geoip/xt_geoip_build \
 		-D $PKG/usr/share/xt_geoip/ $SRC/GeoIPCountryWhois.csv
 }
