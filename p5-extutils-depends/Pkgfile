@@ -5,15 +5,17 @@
 # Depends on: p5-xml-parser
 
 name=p5-extutils-depends
-version=0.302
-release=2
-source=(http://search.cpan.org/CPAN/authors/id/T/TS/TSCH/ExtUtils-Depends-$version.tar.gz)
+version=0.304
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/F/FL/FLORA/ExtUtils-Depends-$version.tar.gz)
 
 build() {
   cd ExtUtils-Depends-$version
   perl Makefile.PL
+
   make OPTIMIZE="$CFLAGS"
   make install DESTDIR=$PKG
+
   find $PKG \
     -name perllocal.pod \
     -o -name "*.bs" \
