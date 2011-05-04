@@ -1,6 +1,6 @@
 # Description: Perl bindings for pkgconfig
 # URL: http://www.cpan.org/
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on: p5-xml-parser
 
@@ -12,8 +12,10 @@ source=(http://www.cpan.org/modules/by-module/ExtUtils/ExtUtils-PkgConfig-$versi
 build() {
   cd ExtUtils-PkgConfig-$version
   perl Makefile.PL
+
   make OPTIMIZE="$CFLAGS"
   make install DESTDIR=$PKG
+
   find $PKG \
     -name perllocal.pod \
     -o -name "*.bs" \
