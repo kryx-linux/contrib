@@ -5,15 +5,12 @@
 # Depends on: enchant gst-plugins-base gtk icu libsoup xorg-libxdamage xorg-libxt
 
 name=webkit
-version=1.2.7
+version=1.4.0
 release=1
-source=(http://webkitgtk.org/$name-$version.tar.gz
-	webkit-1.2.6-parallel_build.patch)
+source=(http://webkitgtk.org/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	patch -p 1 -i $SRC/webkit-1.2.6-parallel_build.patch
 
 	# Don't force to -O2 but use CXXFLAGS
 	sed -i -e 's/-O2//g' configure
