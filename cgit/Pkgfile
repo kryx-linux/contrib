@@ -5,10 +5,10 @@
 # Depends on: git asciidoc
 
 ## prt-get info git | awk '/Version:/ {print $2}'
-gitversion=1.7.3.5
+gitversion=1.7.4.1
 
 name=cgit
-version=0.8.3.4
+version=0.9
 release=1
 source=(http://hjemli.net/git/cgit/snapshot/$name-$version.tar.bz2
 	http://www.kernel.org/pub/software/scm/git/git-$gitversion.tar.bz2
@@ -24,12 +24,14 @@ build() {
 
 	rm -rf git
 	ln -s $SRC/git-$gitversion git
-	sed "s/GIT_VER = .*/GIT_VER = $gitversion/" -i Makefile
 
-	make cgit man-doc
-	make DESTDIR=$PKG install
+	sed -i \
+		-e "s/GIT_VER = .*/GIT_VER = $gitversion/" \
+		-e '/^mandir = $(prefix)/s|/share/man|/man|' Makefile
+
+	make
+	make DESTDIR=$PKG install install-man
 
 	install -D -m 0640 $SRC/cgit.conf $PKG/etc/apache/extra/cgit.conf
-	install -D -m 0644 cgitrc.5 $PKG/usr/man/man5/cgitrc.5
 	install -d -m 0750 $PKG/var/cache/cgit
 }
