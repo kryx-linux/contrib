@@ -6,11 +6,13 @@
 
 name=extremetuxracer
 version=0.5beta
-release=1
-source=(http://downloads.sourceforge.net/project/$name/extreme-tuxracer/$version/$name-$version.tar.gz)
+release=2
+source=(http://downloads.sourceforge.net/project/$name/extreme-tuxracer/$version/$name-$version.tar.gz
+	extreme-tuxracer-0.5beta-png.patch)
 
 build() {
 	cd extreme-tuxracer-$version
+	patch -p 1 -i $SRC/extreme-tuxracer-0.5beta-png.patch
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
