@@ -5,13 +5,13 @@
 # Depends on:  realpath, grml-shlib
 
 name=grml-crypt
-version=0.21
+version=0.22
 release=1
 source=(http://deb.grml.org/pool/main/g/$name/${name}_${version}.tar.gz \
   path_fstype.patch)
 
 build() {
-    cd $name
+    cd $name-$version
 
     patch -p1 < $SRC/path_fstype.patch
 
