@@ -1,18 +1,19 @@
-# Description: Video Editor
+# Description: Video editor designed for simple cutting, filtering and encoding tasks.
 # URL: http://fixounet.free.fr/avidemux/
-# Maintainer: Lucas Hazel, lucas at die dot net dot au
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: cmake
+# Depends on: cmake yasm libxml2
 
 name=avidemux
-version=2.4.4
+version=2.5.4
 release=1
 source=(http://download.berlios.de/avidemux/avidemux_$version.tar.gz)
 
-build()
-{
+build() {
 	cd ${name}_${version}
-	cmake -DCMAKE_INSTALL_PREFIX=$PKG/usr -DMANSUBDIR=man
+	install -d build
+	cd build
+	cmake .. -DCMAKE_INSTALL_PREFIX=$PKG/usr -DMANSUBDIR=man
 	make install
 	rm -rf $PKG/usr/share/locale
 }
