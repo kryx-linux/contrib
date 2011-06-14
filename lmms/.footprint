@@ -18,6 +18,10 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/AudioSdl.h
 -rw-r--r--	root/root	usr/include/lmms/AutomatableModel.h
 -rw-r--r--	root/root	usr/include/lmms/AutomatableModelView.h
+-rw-r--r--	root/root	usr/include/lmms/AutomationEditor.h
+-rw-r--r--	root/root	usr/include/lmms/AutomationPattern.h
+-rw-r--r--	root/root	usr/include/lmms/AutomationPatternView.h
+-rw-r--r--	root/root	usr/include/lmms/AutomationTrack.h
 -rw-r--r--	root/root	usr/include/lmms/Clipboard.h
 -rw-r--r--	root/root	usr/include/lmms/ComboBoxModel.h
 -rw-r--r--	root/root	usr/include/lmms/Controller.h
@@ -26,6 +30,7 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/ControllerDialog.h
 -rw-r--r--	root/root	usr/include/lmms/ControllerRackView.h
 -rw-r--r--	root/root	usr/include/lmms/ControllerView.h
+-rw-r--r--	root/root	usr/include/lmms/DetuningHelper.h
 -rw-r--r--	root/root	usr/include/lmms/DummyEffect.h
 -rw-r--r--	root/root	usr/include/lmms/DummyInstrument.h
 -rw-r--r--	root/root	usr/include/lmms/DummyPlugin.h
@@ -41,6 +46,7 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/FxMixer.h
 -rw-r--r--	root/root	usr/include/lmms/FxMixerView.h
 -rw-r--r--	root/root	usr/include/lmms/ImportFilter.h
+-rw-r--r--	root/root	usr/include/lmms/InlineAutomation.h
 -rw-r--r--	root/root	usr/include/lmms/Instrument.h
 -rw-r--r--	root/root	usr/include/lmms/InstrumentFunctionViews.h
 -rw-r--r--	root/root	usr/include/lmms/InstrumentFunctions.h
@@ -93,10 +99,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/atomic_int.h
 -rw-r--r--	root/root	usr/include/lmms/automatable_button.h
 -rw-r--r--	root/root	usr/include/lmms/automatable_slider.h
--rw-r--r--	root/root	usr/include/lmms/automation_editor.h
--rw-r--r--	root/root	usr/include/lmms/automation_pattern.h
--rw-r--r--	root/root	usr/include/lmms/automation_pattern_view.h
--rw-r--r--	root/root	usr/include/lmms/automation_track.h
 -rw-r--r--	root/root	usr/include/lmms/base64.h
 -rw-r--r--	root/root	usr/include/lmms/basic_filters.h
 -rw-r--r--	root/root	usr/include/lmms/bb_editor.h
@@ -108,7 +110,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/cpuload_widget.h
 -rw-r--r--	root/root	usr/include/lmms/custom_events.h
 -rw-r--r--	root/root	usr/include/lmms/debug.h
--rw-r--r--	root/root	usr/include/lmms/detuning_helper.h
 -rw-r--r--	root/root	usr/include/lmms/drumsynth.h
 -rw-r--r--	root/root	usr/include/lmms/effect_lib.h
 -rw-r--r--	root/root	usr/include/lmms/embed.cpp
@@ -125,7 +126,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/graph.h
 -rw-r--r--	root/root	usr/include/lmms/group_box.h
 -rw-r--r--	root/root	usr/include/lmms/gui_templates.h
--rw-r--r--	root/root	usr/include/lmms/inline_automation.h
 -rw-r--r--	root/root	usr/include/lmms/interpolation.h
 -rw-r--r--	root/root	usr/include/lmms/knob.h
 -rw-r--r--	root/root	usr/include/lmms/ladspa.h
@@ -163,7 +163,6 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/sample_play_handle.h
 -rw-r--r--	root/root	usr/include/lmms/sample_record_handle.h
 -rw-r--r--	root/root	usr/include/lmms/sample_track.h
--rw-r--r--	root/root	usr/include/lmms/samplerate.h
 -rw-r--r--	root/root	usr/include/lmms/setup_dialog.h
 -rw-r--r--	root/root	usr/include/lmms/shared_object.h
 -rw-r--r--	root/root	usr/include/lmms/song.h
@@ -188,6 +187,8 @@ drwxr-xr-x	root/root	usr/include/lmms/
 -rw-r--r--	root/root	usr/include/lmms/volume.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/lmms/
+-rwxr-xr-x	root/root	usr/lib/lmms/RemoteVstPlugin
+-rwxr-xr-x	root/root	usr/lib/lmms/RemoteVstPlugin.exe.so
 drwxr-xr-x	root/root	usr/lib/lmms/ladspa/
 -rwxr-xr-x	root/root	usr/lib/lmms/ladspa/calf.so
 -rwxr-xr-x	root/root	usr/lib/lmms/ladspa/caps.so
@@ -231,11 +232,15 @@ drwxr-xr-x	root/root	usr/lib/lmms/ladspa/
 -rwxr-xr-x	root/root	usr/lib/lmms/libpapu.so
 -rwxr-xr-x	root/root	usr/lib/lmms/libpatman.so
 -rwxr-xr-x	root/root	usr/lib/lmms/libpeakcontrollereffect.so
+-rwxr-xr-x	root/root	usr/lib/lmms/libsf2player.so
 -rwxr-xr-x	root/root	usr/lib/lmms/libsid.so
 -rwxr-xr-x	root/root	usr/lib/lmms/libstereoenhancer.so
 -rwxr-xr-x	root/root	usr/lib/lmms/libstereomatrix.so
 -rwxr-xr-x	root/root	usr/lib/lmms/libtripleoscillator.so
+-rwxr-xr-x	root/root	usr/lib/lmms/libvestige.so
 -rwxr-xr-x	root/root	usr/lib/lmms/libvibedstrings.so
+-rwxr-xr-x	root/root	usr/lib/lmms/libvstbase.so
+-rwxr-xr-x	root/root	usr/lib/lmms/libvsteffect.so
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -r--r--r--	root/root	usr/man/man1/lmms.1.gz
