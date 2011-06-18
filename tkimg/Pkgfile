@@ -6,13 +6,13 @@
 
 name=tkimg
 version=1.4
-release=1
+release=2
 source=(http://downloads.sourceforge.net/tkimg/$name$version.tar.gz
     Makefile.diff)
 
 build() {
     cd $name$version
-    patch -p1 < $SRC/Makefile.diff
+    patch < $SRC/Makefile.diff
 
     # --exec-prefix determines the location of the *config.sh
     # don't worry: they'll end up in /usr/lib. TkImg's use of autoconf is
