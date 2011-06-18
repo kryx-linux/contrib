@@ -1,0 +1,18 @@
+--- tkimg1.4/Makefile.in.orig	2010-05-03 17:32:03.000000000 +0200
++++ tkimg1.4/Makefile.in	2011-06-18 21:59:11.000000000 +0200
+@@ -113,11 +113,12 @@
+ 		cd $$here ; \
+ 	done
+ 
++.ONESHELL: install-man
+ install-man:
+ 	mkdir -p $(MAN_INSTALL_DIR)/mann
+-	for i in $(srcdir)/doc/*.man ; \
+-	do	\
+-		dtplite -ext n -o $(MAN_INSTALL_DIR)/mann nroff $$i ; \
++	for i in $(srcdir)/doc/*.man
++	do
++		cp $$i $(MAN_INSTALL_DIR)/mann/`basename "$$i" | sed 's/man$$/n/'`
+ 	done
+ 
+ collate: all
