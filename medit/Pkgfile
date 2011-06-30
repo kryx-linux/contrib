@@ -4,21 +4,18 @@
 # Depends on:  gtk
 
 name=medit
-version=0.10.5
+version=1.0.3
 release=1
-source=(http://dl.sourceforge.net/project/mooedit/$name/$version/$name-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/mooedit/$name/$version/$name-$version.tar.bz2)
 
 build() {
-mkdir $name-$version/build
-    cd $name-$version/build
-    cmake .. \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DENABLE_NLS=OFF \
-        -DMANDIR=/usr/man \
-        -DDESKTOPFILEDIR=/usr/share/applications \
-        -DMOO_ENABLE_GENERATED_FILES=OFF \
-        -DMOO_ENABLE_PROJECT=ON
+    cd $name-$version
+    ./configure \
+        --prefix=/usr \
+        --mandir=/usr/man \
+        --disable-install-hooks \
+        --disable-coverage \
+        --disable-nls
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/doc
