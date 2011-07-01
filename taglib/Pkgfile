@@ -1,22 +1,22 @@
 # Description: Library to read and edit the meta-data of popular audio formats.
-# URL: http://ktown.kde.org/~wheeler/taglib.html
+# URL: http://developer.kde.org/~wheeler/taglib.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
+# Depends on: cmake
 
 name=taglib
-version=1.6.3
+version=1.7
 release=1
-source=(http://ktown.kde.org/~wheeler/files/src/$name-$version.tar.gz)
+source=(http://developer.kde.org/~wheeler/files/src/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--disable-dependency-tracking \
-		--enable-new-ldflags \
-		--enable-mp4 \
-		--enable-asf
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_RELEASE_TYPE=Release \
+		-DWITH_MP4=ON \
+		-DWITH_ASF=ON .
 
 	make
 	make DESTDIR=$PKG install
