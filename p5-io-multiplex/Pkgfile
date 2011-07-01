@@ -1,18 +1,22 @@
-# Description: BerkeleyDB PERL module
-# URL: http://search.cpan.org/dist/BerkeleyDB/
-# Maintainer: Lucas Hazel, lucas at die dot net dot au
-# Depends on: perl
+# Description: Perl module to manage IO on many file handles
+# URL:         http://search.cpan.org/dist/IO-Multiplex/
+# Packager:    Lucas Hazel, lucas at die dot net dot au
+# Maintainer:  Moritz Wilhelmy, moritz plus crux at wzff dot de
+# Depends on:  perl
 
 name=p5-io-multiplex
 distname=IO-Multiplex
-version=1.10
+version=1.13
 release=1
-source=(http://search.cpan.org/CPAN/authors/id/B/BB/BBB/$distname-$version.tar.gz)
+source=(http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/$distname-$version.tar.gz)
 
 build() {
 	cd $distname-$version
 	perl Makefile.PL
-        make OPTIMIZE="$CFLAGS"
-        make DESTDIR=$PKG install
-        find $PKG -name .packlist -o -name perllocal.pod | xargs rm -rf
+	make OPTIMIZE="$CFLAGS"
+	make DESTDIR=$PKG install
+
+	# prune some bogus perl files and empty directories
+	find $PKG -type f \( -name .packlist -o -name perllocal.pod \) -delete
+	find $PKG -depth -type d -empty -delete
 }
