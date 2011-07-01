@@ -5,8 +5,8 @@
 # Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib
 
 name=thunderbird
-version=3.1.7
-comm_ver=1.9.2
+version=5.0
+comm_ver=miramar
 release=1
 source=(
     http://releases.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
@@ -18,6 +18,7 @@ build() {
     cd $SRC/comm-$comm_ver
     cat <<- EOF > .mozconfig
         mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/objdir-tb-release
+        mk_add_options MOZ_MAKE_FLAGS="$MAKEFLAGS"
         ac_add_options --prefix=/usr
         ac_add_options --enable-application=mail
         ac_add_options --with-system-nspr 
@@ -37,10 +38,10 @@ build() {
         #ac_add_options --enable-system-sqlite
         ac_add_options --with-default-mozilla-five-home
         ac_add_options --disable-crashreporter
-        #ac_add_options --enable-calendar
+        ac_add_options --enable-calendar
         #ac_add_options --enable-native-uconv
         #ac_add_options --enable-startup-notification
-        ac_add_options --enable-static               
+        #ac_add_options --enable-static
         ac_add_options --disable-necko-wifi
         ac_add_options --disable-tests
         ac_add_options --disable-debug
