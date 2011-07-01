@@ -1,16 +1,16 @@
-# Description: Perl library Class::Std
-# URL: http://search.cpan.org/~dconway/
-# Maintainer: Simon Glossner, viper at hometux dot de
-# Packager: Simon Glossner, viper at hometux dot de
-# Depends on: p5-version
+# Description: Perl library Class::Std for creating standard "inside-out" classes
+# URL:         http://search.cpan.org/dist/Class-Std
+# Maintainer:  Simon Glossner, viper at hometux dot de
+# Packager:    Moritz Wilhelmy, moritz plus crux at wzff dot de
+# Depends on:  perl
 
 name=p5-class-std
-version=0.0.8
+version=0.011
 release=1
-source=(http://search.cpan.org/CPAN/authors/id/D/DC/DCONWAY/Class-Std-v$version.tar.gz)
+source=(http://search.cpan.org/CPAN/authors/id/D/DC/DCONWAY/Class-Std-$version.tar.gz)
 
 build() {
-    cd Class-Std-v$version
+    cd Class-Std-$version
 
     perl Makefile.PL
     make OPTIMIZE="$CFLAGS"
