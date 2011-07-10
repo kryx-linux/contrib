@@ -1,19 +1,26 @@
 # Description: gtk library for writing file managers
 # URL:         http://pcmanfm.sourceforge.net/
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  intltool gtk menu-cache
+# Depends on:  gtk menu-cache
 
 name=libfm
 version=0.1.14
 release=1
 source=(
     http://crux.org.pl/distfiles/$name-$version.tar.gz
-    libfm_la.patch
+    libfm-0.1.14_crux_glib_ge_2_27.patch
 )
 
 build() {
     cd $name-$version
-    patch -p1 -i ../libfm_la.patch
+    patch -p1 -i ../libfm-0.1.14_crux_glib_ge_2_27.patch
+    rm -rf po/* docs/*
+    aclocal
+    autoheader --force
+    libtoolize -c --automake --force
+    automake --add-missing --copy --include-deps
+    autoconf
+    rm -rf autom4te.cache
     ./configure \
         --prefix=/usr \
         --disable-nls \
