@@ -4,7 +4,7 @@
 # Depends on: 
 
 name=sslh
-version=1.7a
+version=1.8
 release=1
 source=(http://www.rutschle.net/tech/$name-${version}.tar.gz sslh.rc)
 
@@ -13,5 +13,5 @@ build () {
   cd $name-${version}
   make
   install -D -m 0644 $name.8.gz $PKG/usr/man/man8/$name.8.gz
-  install -D -m 0755 $name $PKG/usr/sbin/$name
+  install -D -m 0755 $name-select $PKG/usr/sbin/$name
 }
