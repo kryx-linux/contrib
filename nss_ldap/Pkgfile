@@ -4,15 +4,20 @@
 # Depends on:	openldap
 
 name=nss_ldap
-version=264
+version=265
 release=1
 source=(http://www.padl.com/download/$name-$version.tar.gz)
 
 build() {
         cd $name-$version
 	./configure --mandir=/usr/man --with-ldap-lib=openldap --with-ldap-conf-file=/etc/openldap/ldap.conf
-	make
+
+	# padl developers have . in their PATH
+	PATH="$PATH:$PWD" make
+
 	mkdir -p $PKG/lib $PKG/usr/man
 	make DESTDIR=$PKG install
-	rm -f $PKG/etc/ldap.conf
+
+	# Config file comes from openldap
+	rm -rf $PKG/etc/openldap
 }
