@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# /etc/rc.d/asterisk: start/stop/restart asterisk
+#
+
+USER=asterisk
+GROUP=asterisk
+
+case $1 in
+start)
+	cd /; /usr/sbin/asterisk -G $GROUP -U $USER
+	;;
+startdebug)
+	/usr/sbin/asterisk -G $GROUP -U $USER -vvv
+	;;
+stop)
+	[ -f /var/run/asterisk/asterisk.pid ] && kill `cat /var/run/asterisk/asterisk.pid`
+	;;
+stopnice)
+	/usr/sbin/asterisk -r -x 'core stop gracefully'
+	if [ -f /var/run/asterisk/asterisk.pid ]; then
+		echo "not stopped"
+		exit 1
+	else
+		echo "stopped"
+		exit 0
+	fi
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+restartnice)
+	$0 stopnice && sleep 2 && $0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac

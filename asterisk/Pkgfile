@@ -1,0 +1,67 @@
+# Description:	PBX Software implementation
+# URL:		http://www.asterisk.org
+# Maintainer:   Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	openssl ncurses ilbc
+
+name=asterisk
+version=1.8.5.0
+release=1
+source=(
+http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
+asterisk.rc
+menuselect-tree
+system-ilbc.patch
+build-enable-ilbc.patch
+build-enable-cdr-mysql.patch
+build-disable-sounds-en-gsm.patch
+build-disable-sounds-moh.patch
+)
+
+build () {
+	cd asterisk-$version
+
+	./configure --prefix=/usr --with-ncurses --with-ssl --disable-xmldoc --with-sounds-cache=/tmp
+
+	# Normally this file is created by running the interactive menuselect program
+	cp $SRC/menuselect-tree .
+
+	# Use system's ilbc library
+	patch -p1 -i $SRC/system-ilbc.patch
+
+	# Add support for ILBC
+	patch -p1 -i $SRC/build-enable-ilbc.patch
+
+	# Add support for MySQL CDRs
+	patch -p1 -i $SRC/build-enable-cdr-mysql.patch
+
+	# Remove english gsm core sounds (sounds are in separate ports)
+	patch -p1 -i $SRC/build-disable-sounds-en-gsm.patch
+
+	# Remove music on hold files
+	patch -p1 -i $SRC/build-disable-sounds-moh.patch
+
+	make
+	make DESTDIR=$PKG install
+	make DESTDIR=$PKG samples
+
+	mv $PKG/usr/share/man $PKG/usr
+	install -m 755 -D $SRC/asterisk.rc $PKG/etc/rc.d/asterisk
+	rmdir  $PKG/usr/share
+	rm -rf $PKG/var/spool/asterisk/voicemail/default/1234
+
+	# Remove empty directory holders
+	rm -rf $PKG/var/lib/asterisk/sounds/*
+
+	# change runtime dir
+	sed -i -e 's|^astrundir => .*|astrundir => /var/run/asterisk|' $PKG/etc/asterisk/asterisk.conf
+	mkdir -p $PKG/var/run/asterisk
+
+	# create empty astdb database
+	touch $PKG/var/lib/asterisk/astdb
+
+	# fix permissions
+	chown -R root:root $PKG
+	chown -R asterisk:asterisk $PKG/var/{lib,log,run,spool}/asterisk
+	chown -R root:asterisk $PKG/etc/asterisk
+	chmod -R 640 $PKG/etc/asterisk
+}
