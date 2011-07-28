@@ -1,17 +1,17 @@
 # Description: Perl extension for using OpenSSL.
-# URL: http://search.cpan.org/~sampo/Net_SSLeay.pm-1.30/
+# URL: http://search.cpan.org/~flora/Net-SSLeay/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Younes Hafri, ycrux at club dash internet dot fr
 # Depends on: openssl
 
 name=p5-net-ssleay
-version=1.30
-release=3
-source=(http://search.cpan.org/CPAN/authors/id/F/FL/FLORA/Net_SSLeay.pm-$version.tar.gz)
+version=1.36
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/F/FL/FLORA/Net-SSLeay-$version.tar.gz)
 
 build() {
-	cd Net_SSLeay.pm-$version
-	perl Makefile.PL
+	cd Net-SSLeay-$version
+	echo y | perl Makefile.PL
 	make OPTIMIZE="$CFLAGS"
 	make DESTDIR=$PKG install
 
