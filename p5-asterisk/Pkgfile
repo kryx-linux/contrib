@@ -1,0 +1,18 @@
+# Description:	Perl module for interfacing Asterisk
+# URL:		http://search.cpan.org/~jamesgol/asterisk-perl-1.01/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	perl
+
+name=p5-asterisk
+version=1.01
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/J/JA/JAMESGOL/asterisk-perl-$version.tar.gz)
+
+build () {
+	cd asterisk-perl-$version
+	perl Makefile.PL
+	make OPTIMIZE="$CFLAGS"
+	make DESTDIR="$PKG" install
+	find "$PKG" \( -name .packlist -o -name '*.bs' -o -name autosplit.ix -o -name perllocal.pod \) -exec rm -rf {} \;
+	find "$PKG" -depth -type d -empty -exec rm -rf {} \;
+}
