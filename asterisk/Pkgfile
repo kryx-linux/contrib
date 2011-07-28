@@ -5,7 +5,7 @@
 
 name=asterisk
 version=1.8.5.0
-release=1
+release=2
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
 asterisk.rc
@@ -55,9 +55,6 @@ build () {
 	# change runtime dir
 	sed -i -e 's|^astrundir => .*|astrundir => /var/run/asterisk|' $PKG/etc/asterisk/asterisk.conf
 	mkdir -p $PKG/var/run/asterisk
-
-	# create empty astdb database
-	touch $PKG/var/lib/asterisk/astdb
 
 	# fix permissions
 	chown -R root:root $PKG
