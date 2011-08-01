@@ -2,15 +2,12 @@
 # URL:         http://www.isc.org/dhcp
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Mark Rosenstand, mark at borkware dot net
-#
-# Depends on: 
 
 name=dhcp
 version=4.2.1
 release=1
-source=(http://ftp.isc.org/isc/$name/$name-$version.tar.gz
-      dhcpd
-      default-config.diff)
+source=(http://ftp.isc.org/isc/$name/$name-$version.tar.gz dhcpd \
+        dhcpcd default-config.diff)
 
 build() {
   cd dhcp-$version
@@ -23,6 +20,9 @@ build() {
   make
   make DESTDIR=$PKG install
   install -D ../dhcpd $PKG/etc/rc.d/dhcpd
-  mkdir -p $PKG/var/state/dhcp
+  install -D ../dhcpcd $PKG/etc/rc.d/dhcpcd
+  install -d -m 0755 $PKG/var/state/dhcp
+  install -d -m 0755 $PKG/var/db
   touch $PKG/var/state/dhcp/dhcpd.leases
+  install -D -m 755 $SRC/dhcp-$version/client/scripts/linux $PKG/sbin/dhclient-script
 }
