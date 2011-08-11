@@ -4,7 +4,7 @@
 # Depends on:  libsdl
 
 name=qemu-kvm
-version=0.14.0
+version=0.15.0
 release=1
 source=(http://download.sourceforge.net/kvm/qemu-kvm/$version/qemu-kvm-$version.tar.gz)
 
@@ -13,6 +13,8 @@ build() {
 
   ./configure --prefix=/usr \
               --sysconfdir=/etc
+  # fix include issues with nspr
+  echo 'QEMU_CFLAGS+=-I/usr/include/nspr' >> libcacard/Makefile
   make 
   make install DESTDIR=$PKG
 }
