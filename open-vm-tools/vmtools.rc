@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# /etc/rc.d/vmtools: start/stop VMware Tools
+#
+
+PIDFILE=/var/run/vmware-tools.pid
+VMTOOLSD_BIN=/usr/bin/vmtoolsd
+
+case $1 in
+start)
+	$VMTOOLSD_BIN --background=$PIDFILE
+	;;
+stop)
+	if [ -f $PIDFILE ]; then
+		kill $(< $PIDFILE) && rm -f $PIDFILE
+	else
+		killall -q $VMTOOLSD_BIN
+	fi
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
+
+# End of file
