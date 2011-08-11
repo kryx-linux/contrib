@@ -1,0 +1,43 @@
+# Description:	VMWare Tools
+# URL:		http://open-vm-tools.sf.net/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends:	libdnet
+
+name=open-vm-tools
+version=2011.04.25-402641
+release=1
+source=( \
+http://downloads.sourceforge.net/project/$name/$name/${version%-*}/$name-$version.tar.gz \
+vmtools.rc
+tools.conf
+hostinfo.patch
+)
+
+build(){
+	cd $name-$version
+	patch -p1 -i $SRC/hostinfo.patch
+
+	./configure \
+		--prefix=/usr \
+		--disable-static \
+		--without-root-privileges \
+		--without-x \
+		--without-gtk2 \
+		--without-gtkmm \
+		--without-icu \
+		--without-pam
+		# --without-procps \
+		# --without-dnet \
+	make
+	make DESTDIR=$PKG install
+	mv $PKG/usr/sbin/mount.vmhgfs $PKG/sbin/mount.vmhgfs
+	install -D $SRC/vmtools.rc $PKG/etc/rc.d/vmtools
+
+	rm -rf $PKG/usr/{etc,sbin,share} $PKG/etc/vmware-tools/scripts/vmware/network
+	# rm -f $PKG/usr/lib/lib{vmtools,hgfs}.{,l}a $PKG/usr/lib/libguestlib.a
+
+	# This is included in the linux kernel, enable CONFIG_VMXNET3
+	rm -f $PKG/lib/modules/`uname -r`/kernel/drivers/net/vmxnet.ko && rmdir $PKG/lib/modules/`uname -r`/kernel/drivers/net
+
+	install $SRC/tools.conf $PKG/etc/vmware-tools/tools.conf
+}
