@@ -1,18 +1,16 @@
 # Description:	Spanish dictionary for aspell
-# URL:	http://aspell.net
+# URL:		http://aspell.net
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:	aspell
 
 name=aspell-es
-version=0.50-2
-release=2
-source=(ftp://ftp.ibiblio.org/pub/gnu/ftp/gnu/aspell/dict/es/$name-$version.tar.bz2)
+version=1.11-2
+release=1
+source=(ftp://ftp.gnu.org/gnu/aspell/dict/es/aspell6-es-$version.tar.bz2)
 
 build () {
-	cd $name-$version
+	cd aspell6-es-$version
 	./configure
 	make
 	make DESTDIR=$PKG install
-	dictdir="`find $PKG -name esponol.alias -exec dirname {} \;`"
-	mv "$dictdir/esponol.alias" "$dictdir/espanol.alias"
 }
