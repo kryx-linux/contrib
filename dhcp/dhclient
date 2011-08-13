@@ -8,7 +8,7 @@ start)
   /usr/sbin/dhclient -q
   ;;
 stop)
-  test -f /var/run/dhcpcd.pid && kill $(cat /var/run/dhcpcd.pid)
+  test -f /var/run/dhclient.pid && kill $(cat /var/run/dhclient.pid)
   ;;
 restart)
   $0 stop
