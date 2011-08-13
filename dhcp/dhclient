@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# /etc/rc.d/dhcpcd: start/stop dhcp client
+#
+
+case $1 in
+start)
+  /usr/sbin/dhcpcd -q
+  ;;
+stop)
+  test -f /var/run/dhcpcd.pid && kill $(cat /var/run/dhcpcd.pid)
+  ;;
+restart)
+  $0 stop
+  sleep 1
+  $0 start
+  ;;
+*)
+  echo "usage: $0 [start|stop|restart]"
+  ;;
+esac
+
+# End of file
