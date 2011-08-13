@@ -5,7 +5,7 @@
 
 case $1 in
 start)
-  /usr/sbin/dhcpcd -q
+  /usr/sbin/dhclient -q
   ;;
 stop)
   test -f /var/run/dhcpcd.pid && kill $(cat /var/run/dhcpcd.pid)
