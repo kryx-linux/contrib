@@ -14,6 +14,7 @@ build() {
    cd $name-$version
    ./configure --prefix=/usr
    patch -i $SRC/config.h.patch
+   sed -i '1i#define _POSIX_C_SOURCE 1' extras/htpasswd.c
    make
 
    install -d $PKG/{var/log,var/www/{cgi-bin,users}}
