@@ -6,18 +6,18 @@
 name=wicd 
 version=1.7.0
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.bz2
+source=(http://download.sourceforge.net/project/wicd/wicd-stable/$name-$version/$name-$version.tar.bz2
 	wicd.rc)
 
-build() { 
+build() {
 	cd $name-$version
 
 	python setup.py configure  \
-			--dbus=/usr/etc/dbus-1/system.d\
+			--dbus=/usr/etc/dbus-1/system.d \
 			--mandir=/usr/share/man \
 			--etc=/etc/wicd
 
-	python setup.py install --root=$PKG	
+	python setup.py install --root=$PKG
 	rm -rf $PKG/etc/xdg
 	install -m 0744 -D $SRC/wicd.rc $PKG/etc/rc.d/wicd
 }
