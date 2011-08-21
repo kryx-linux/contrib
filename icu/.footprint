@@ -7,6 +7,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/genctd
 -rwxr-xr-x	root/root	usr/bin/genrb
 -rwxr-xr-x	root/root	usr/bin/icu-config
+-rwxr-xr-x	root/root	usr/bin/icuinfo
 -rwxr-xr-x	root/root	usr/bin/makeconv
 -rwxr-xr-x	root/root	usr/bin/pkgdata
 -rwxr-xr-x	root/root	usr/bin/uconv
@@ -27,11 +28,15 @@ drwxr-xr-x	root/root	usr/include/layout/
 -rw-r--r--	root/root	usr/include/layout/playout.h
 -rw-r--r--	root/root	usr/include/layout/plruns.h
 drwxr-xr-x	root/root	usr/include/unicode/
+-rw-r--r--	root/root	usr/include/unicode/alphaindex.h
+-rw-r--r--	root/root	usr/include/unicode/appendable.h
 -rw-r--r--	root/root	usr/include/unicode/basictz.h
 -rw-r--r--	root/root	usr/include/unicode/bms.h
 -rw-r--r--	root/root	usr/include/unicode/bmsearch.h
 -rw-r--r--	root/root	usr/include/unicode/brkiter.h
 -rw-r--r--	root/root	usr/include/unicode/bytestream.h
+-rw-r--r--	root/root	usr/include/unicode/bytestrie.h
+-rw-r--r--	root/root	usr/include/unicode/bytestriebuilder.h
 -rw-r--r--	root/root	usr/include/unicode/calendar.h
 -rw-r--r--	root/root	usr/include/unicode/caniter.h
 -rw-r--r--	root/root	usr/include/unicode/chariter.h
@@ -57,12 +62,20 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/fieldpos.h
 -rw-r--r--	root/root	usr/include/unicode/fmtable.h
 -rw-r--r--	root/root	usr/include/unicode/format.h
+-rw-r--r--	root/root	usr/include/unicode/fpositer.h
 -rw-r--r--	root/root	usr/include/unicode/gregocal.h
+-rw-r--r--	root/root	usr/include/unicode/icudataver.h
+-rw-r--r--	root/root	usr/include/unicode/icuplug.h
+-rw-r--r--	root/root	usr/include/unicode/idna.h
+-rw-r--r--	root/root	usr/include/unicode/localpointer.h
+-rw-r--r--	root/root	usr/include/unicode/locdspnm.h
 -rw-r--r--	root/root	usr/include/unicode/locid.h
 -rw-r--r--	root/root	usr/include/unicode/measfmt.h
 -rw-r--r--	root/root	usr/include/unicode/measunit.h
 -rw-r--r--	root/root	usr/include/unicode/measure.h
+-rw-r--r--	root/root	usr/include/unicode/messagepattern.h
 -rw-r--r--	root/root	usr/include/unicode/msgfmt.h
+-rw-r--r--	root/root	usr/include/unicode/normalizer2.h
 -rw-r--r--	root/root	usr/include/unicode/normlzr.h
 -rw-r--r--	root/root	usr/include/unicode/numfmt.h
 -rw-r--r--	root/root	usr/include/unicode/numsys.h
@@ -72,6 +85,7 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/plurfmt.h
 -rw-r--r--	root/root	usr/include/unicode/plurrule.h
 -rw-r--r--	root/root	usr/include/unicode/ppalmos.h
+-rw-r--r--	root/root	usr/include/unicode/ptypes.h
 -rw-r--r--	root/root	usr/include/unicode/putil.h
 -rw-r--r--	root/root	usr/include/unicode/pwin32.h
 -rw-r--r--	root/root	usr/include/unicode/rbbi.h
@@ -82,12 +96,14 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/resbund.h
 -rw-r--r--	root/root	usr/include/unicode/schriter.h
 -rw-r--r--	root/root	usr/include/unicode/search.h
+-rw-r--r--	root/root	usr/include/unicode/selfmt.h
 -rw-r--r--	root/root	usr/include/unicode/simpletz.h
 -rw-r--r--	root/root	usr/include/unicode/smpdtfmt.h
 -rw-r--r--	root/root	usr/include/unicode/sortkey.h
 -rw-r--r--	root/root	usr/include/unicode/std_string.h
 -rw-r--r--	root/root	usr/include/unicode/strenum.h
 -rw-r--r--	root/root	usr/include/unicode/stringpiece.h
+-rw-r--r--	root/root	usr/include/unicode/stringtriebuilder.h
 -rw-r--r--	root/root	usr/include/unicode/stsearch.h
 -rw-r--r--	root/root	usr/include/unicode/symtable.h
 -rw-r--r--	root/root	usr/include/unicode/tblcoll.h
@@ -104,6 +120,8 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/ucasemap.h
 -rw-r--r--	root/root	usr/include/unicode/ucat.h
 -rw-r--r--	root/root	usr/include/unicode/uchar.h
+-rw-r--r--	root/root	usr/include/unicode/ucharstrie.h
+-rw-r--r--	root/root	usr/include/unicode/ucharstriebuilder.h
 -rw-r--r--	root/root	usr/include/unicode/uchriter.h
 -rw-r--r--	root/root	usr/include/unicode/uclean.h
 -rw-r--r--	root/root	usr/include/unicode/ucnv.h
@@ -117,6 +135,7 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/ucurr.h
 -rw-r--r--	root/root	usr/include/unicode/udat.h
 -rw-r--r--	root/root	usr/include/unicode/udata.h
+-rw-r--r--	root/root	usr/include/unicode/udateintervalformat.h
 -rw-r--r--	root/root	usr/include/unicode/udatpg.h
 -rw-r--r--	root/root	usr/include/unicode/udeprctd.h
 -rw-r--r--	root/root	usr/include/unicode/udraft.h
@@ -124,6 +143,7 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/uidna.h
 -rw-r--r--	root/root	usr/include/unicode/uintrnal.h
 -rw-r--r--	root/root	usr/include/unicode/uiter.h
+-rw-r--r--	root/root	usr/include/unicode/uldnames.h
 -rw-r--r--	root/root	usr/include/unicode/uloc.h
 -rw-r--r--	root/root	usr/include/unicode/ulocdata.h
 -rw-r--r--	root/root	usr/include/unicode/umachine.h
@@ -136,9 +156,11 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/uniset.h
 -rw-r--r--	root/root	usr/include/unicode/unistr.h
 -rw-r--r--	root/root	usr/include/unicode/unorm.h
+-rw-r--r--	root/root	usr/include/unicode/unorm2.h
 -rw-r--r--	root/root	usr/include/unicode/unum.h
 -rw-r--r--	root/root	usr/include/unicode/uobject.h
 -rw-r--r--	root/root	usr/include/unicode/uobslete.h
+-rw-r--r--	root/root	usr/include/unicode/upluralrules.h
 -rw-r--r--	root/root	usr/include/unicode/uregex.h
 -rw-r--r--	root/root	usr/include/unicode/urename.h
 -rw-r--r--	root/root	usr/include/unicode/urep.h
@@ -153,6 +175,7 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/ustdio.h
 -rw-r--r--	root/root	usr/include/unicode/ustream.h
 -rw-r--r--	root/root	usr/include/unicode/ustring.h
+-rw-r--r--	root/root	usr/include/unicode/ustringtrie.h
 -rw-r--r--	root/root	usr/include/unicode/usystem.h
 -rw-r--r--	root/root	usr/include/unicode/utext.h
 -rw-r--r--	root/root	usr/include/unicode/utf.h
@@ -164,37 +187,47 @@ drwxr-xr-x	root/root	usr/include/unicode/
 -rw-r--r--	root/root	usr/include/unicode/utrace.h
 -rw-r--r--	root/root	usr/include/unicode/utrans.h
 -rw-r--r--	root/root	usr/include/unicode/utypes.h
+-rw-r--r--	root/root	usr/include/unicode/uvernum.h
 -rw-r--r--	root/root	usr/include/unicode/uversion.h
 -rw-r--r--	root/root	usr/include/unicode/vtzone.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/icu/
-drwxr-xr-x	root/root	usr/lib/icu/4.2.1/
--rw-r--r--	root/root	usr/lib/icu/4.2.1/Makefile.inc
--rw-r--r--	root/root	usr/lib/icu/4.2.1/pkgdata.inc
+drwxr-xr-x	root/root	usr/lib/icu/4.8.1/
+-rw-r--r--	root/root	usr/lib/icu/4.8.1/Makefile.inc
+-rw-r--r--	root/root	usr/lib/icu/4.8.1/pkgdata.inc
 lrwxrwxrwx	root/root	usr/lib/icu/Makefile.inc -> current/Makefile.inc
-lrwxrwxrwx	root/root	usr/lib/icu/current -> 4.2.1
+lrwxrwxrwx	root/root	usr/lib/icu/current -> 4.8.1
 lrwxrwxrwx	root/root	usr/lib/icu/pkgdata.inc -> current/pkgdata.inc
-lrwxrwxrwx	root/root	usr/lib/libicudata.so -> libicudata.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicudata.so.42 -> libicudata.so.42.1
--rw-r--r--	root/root	usr/lib/libicudata.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicui18n.so -> libicui18n.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicui18n.so.42 -> libicui18n.so.42.1
--rwxr-xr-x	root/root	usr/lib/libicui18n.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicuio.so -> libicuio.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicuio.so.42 -> libicuio.so.42.1
--rwxr-xr-x	root/root	usr/lib/libicuio.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicule.so -> libicule.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicule.so.42 -> libicule.so.42.1
--rwxr-xr-x	root/root	usr/lib/libicule.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libiculx.so -> libiculx.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libiculx.so.42 -> libiculx.so.42.1
--rwxr-xr-x	root/root	usr/lib/libiculx.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicutu.so -> libicutu.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicutu.so.42 -> libicutu.so.42.1
--rwxr-xr-x	root/root	usr/lib/libicutu.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicuuc.so -> libicuuc.so.42.1
-lrwxrwxrwx	root/root	usr/lib/libicuuc.so.42 -> libicuuc.so.42.1
--rwxr-xr-x	root/root	usr/lib/libicuuc.so.42.1
+lrwxrwxrwx	root/root	usr/lib/libicudata.so -> libicudata.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicudata.so.48 -> libicudata.so.48.1
+-rw-r--r--	root/root	usr/lib/libicudata.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicui18n.so -> libicui18n.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicui18n.so.48 -> libicui18n.so.48.1
+-rwxr-xr-x	root/root	usr/lib/libicui18n.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicuio.so -> libicuio.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicuio.so.48 -> libicuio.so.48.1
+-rwxr-xr-x	root/root	usr/lib/libicuio.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicule.so -> libicule.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicule.so.48 -> libicule.so.48.1
+-rwxr-xr-x	root/root	usr/lib/libicule.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libiculx.so -> libiculx.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libiculx.so.48 -> libiculx.so.48.1
+-rwxr-xr-x	root/root	usr/lib/libiculx.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicutest.so -> libicutest.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicutest.so.48 -> libicutest.so.48.1
+-rwxr-xr-x	root/root	usr/lib/libicutest.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicutu.so -> libicutu.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicutu.so.48 -> libicutu.so.48.1
+-rwxr-xr-x	root/root	usr/lib/libicutu.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicuuc.so -> libicuuc.so.48.1
+lrwxrwxrwx	root/root	usr/lib/libicuuc.so.48 -> libicuuc.so.48.1
+-rwxr-xr-x	root/root	usr/lib/libicuuc.so.48.1
+drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-rw-r--r--	root/root	usr/lib/pkgconfig/icu-i18n.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/icu-io.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/icu-le.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/icu-lx.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/icu-uc.pc
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/derb.1.gz
@@ -210,18 +243,17 @@ drwxr-xr-x	root/root	usr/man/man8/
 -rw-r--r--	root/root	usr/man/man8/genccode.8.gz
 -rw-r--r--	root/root	usr/man/man8/gencmn.8.gz
 -rw-r--r--	root/root	usr/man/man8/gensprep.8.gz
--rw-r--r--	root/root	usr/man/man8/genuca.8.gz
 -rw-r--r--	root/root	usr/man/man8/icupkg.8.gz
 drwxr-xr-x	root/root	usr/sbin/
 -rwxr-xr-x	root/root	usr/sbin/genccode
 -rwxr-xr-x	root/root	usr/sbin/gencmn
+-rwxr-xr-x	root/root	usr/sbin/gennorm2
 -rwxr-xr-x	root/root	usr/sbin/gensprep
--rwxr-xr-x	root/root	usr/sbin/genuca
 -rwxr-xr-x	root/root	usr/sbin/icupkg
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/icu/
-drwxr-xr-x	root/root	usr/share/icu/4.2.1/
-drwxr-xr-x	root/root	usr/share/icu/4.2.1/config/
--rw-r--r--	root/root	usr/share/icu/4.2.1/config/mh-linux
--rwxr-xr-x	root/root	usr/share/icu/4.2.1/install-sh
--rwxr-xr-x	root/root	usr/share/icu/4.2.1/mkinstalldirs
+drwxr-xr-x	root/root	usr/share/icu/4.8.1/
+drwxr-xr-x	root/root	usr/share/icu/4.8.1/config/
+-rw-r--r--	root/root	usr/share/icu/4.8.1/config/mh-linux
+-rwxr-xr-x	root/root	usr/share/icu/4.8.1/install-sh
+-rwxr-xr-x	root/root	usr/share/icu/4.8.1/mkinstalldirs
