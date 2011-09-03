@@ -23,7 +23,7 @@ build() {
     make
     install -d -m 755 $PKG/usr/sbin
     for prog in arpspoof dnsspoof dsniff filesnarf macof mailsnarf msgsnarf \
-    sshmitm sshow tcpkill tcpnice  urlsnarf webmitm; do \
+    sshmitm sshow tcpkill tcpnice  urlsnarf webmitm webspy; do \
       install -m 755 $prog $PKG/usr/sbin/; done
     install -d -m 755 $PKG/usr/man/man8
     for man in *.8; do install -D -m 644 $man $PKG/usr/man/man8; done
