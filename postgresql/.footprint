@@ -12,6 +12,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/dropuser
 -rwxr-xr-x	root/root	usr/bin/ecpg
 -rwxr-xr-x	root/root	usr/bin/initdb
+-rwxr-xr-x	root/root	usr/bin/pg_basebackup
 -rwxr-xr-x	root/root	usr/bin/pg_config
 -rwxr-xr-x	root/root	usr/bin/pg_controldata
 -rwxr-xr-x	root/root	usr/bin/pg_ctl
@@ -63,6 +64,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/access/
 -rw-r--r--	root/root	usr/include/postgresql/server/access/clog.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/genam.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/gin.h
+-rw-r--r--	root/root	usr/include/postgresql/server/access/gin_private.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/gist.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/gist_private.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/gistscan.h
@@ -109,6 +111,8 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/catalog/
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/index.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/indexing.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/namespace.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/objectaccess.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/objectaddress.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_aggregate.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_am.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_amop.h
@@ -119,6 +123,8 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/catalog/
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_authid.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_cast.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_class.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_collation.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_collation_fn.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_constraint.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_control.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_conversion.h
@@ -129,8 +135,10 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/catalog/
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_depend.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_description.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_enum.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_extension.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_foreign_data_wrapper.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_foreign_server.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_foreign_table.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_index.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_inherits.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_inherits_fn.h
@@ -145,6 +153,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/catalog/
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_proc.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_proc_fn.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_rewrite.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_seclabel.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_shdepend.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_shdescription.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_statistic.h
@@ -165,6 +174,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/commands/
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/alter.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/async.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/cluster.h
+-rw-r--r--	root/root	usr/include/postgresql/server/commands/collationcmds.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/comment.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/conversioncmds.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/copy.h
@@ -172,11 +182,13 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/commands/
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/defrem.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/discard.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/explain.h
+-rw-r--r--	root/root	usr/include/postgresql/server/commands/extension.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/lockcmds.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/portalcmds.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/prepare.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/proclang.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/schemacmds.h
+-rw-r--r--	root/root	usr/include/postgresql/server/commands/seclabel.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/sequence.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/tablecmds.h
 -rw-r--r--	root/root	usr/include/postgresql/server/commands/tablespace.h
@@ -189,7 +201,6 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/commands/
 -rw-r--r--	root/root	usr/include/postgresql/server/dynloader.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/executor/
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/execdebug.h
--rw-r--r--	root/root	usr/include/postgresql/server/executor/execdefs.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/execdesc.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/executor.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/functions.h
@@ -202,6 +213,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/executor/
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeBitmapIndexscan.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeBitmapOr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeCtescan.h
+-rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeForeignscan.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeFunctionscan.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeGroup.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeHash.h
@@ -210,6 +222,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/executor/
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeLimit.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeLockRows.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeMaterial.h
+-rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeMergeAppend.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeMergejoin.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeModifyTable.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/nodeNestloop.h
@@ -231,6 +244,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/executor/
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/tuptable.h
 -rw-r--r--	root/root	usr/include/postgresql/server/fmgr.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/foreign/
+-rw-r--r--	root/root	usr/include/postgresql/server/foreign/fdwapi.h
 -rw-r--r--	root/root	usr/include/postgresql/server/foreign/foreign.h
 -rw-r--r--	root/root	usr/include/postgresql/server/funcapi.h
 -rw-r--r--	root/root	usr/include/postgresql/server/getaddrinfo.h
@@ -269,6 +283,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/nodes/
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/print.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/readfuncs.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/relation.h
+-rw-r--r--	root/root	usr/include/postgresql/server/nodes/replnodes.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/tidbitmap.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/value.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/optimizer/
@@ -305,6 +320,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/parser/
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_agg.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_clause.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_coerce.h
+-rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_collate.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_cte.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_expr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_func.h
@@ -387,6 +403,8 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/regex/
 -rw-r--r--	root/root	usr/include/postgresql/server/regex/regex.h
 -rw-r--r--	root/root	usr/include/postgresql/server/regex/regguts.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/replication/
+-rw-r--r--	root/root	usr/include/postgresql/server/replication/basebackup.h
+-rw-r--r--	root/root	usr/include/postgresql/server/replication/syncrep.h
 -rw-r--r--	root/root	usr/include/postgresql/server/replication/walprotocol.h
 -rw-r--r--	root/root	usr/include/postgresql/server/replication/walreceiver.h
 -rw-r--r--	root/root	usr/include/postgresql/server/replication/walsender.h
@@ -442,6 +460,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/storage/
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/buffile.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/bufmgr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/bufpage.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/copydir.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/fd.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/freespace.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/fsm_internals.h
@@ -451,6 +470,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/storage/
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/itemid.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/itemptr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/large_object.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/latch.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/lmgr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/lock.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/lwlock.h
@@ -459,9 +479,12 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/storage/
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/pg_shmem.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/pmsignal.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/pos.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/predicate.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/predicate_internals.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/proc.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/procarray.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/procsignal.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/reinit.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/relfilenode.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/s_lock.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/shmem.h
@@ -555,22 +578,22 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/sqlda.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libecpg.a
-lrwxrwxrwx	root/root	usr/lib/libecpg.so -> libecpg.so.6.2
-lrwxrwxrwx	root/root	usr/lib/libecpg.so.6 -> libecpg.so.6.2
--rwxr-xr-x	root/root	usr/lib/libecpg.so.6.2
+lrwxrwxrwx	root/root	usr/lib/libecpg.so -> libecpg.so.6.3
+lrwxrwxrwx	root/root	usr/lib/libecpg.so.6 -> libecpg.so.6.3
+-rwxr-xr-x	root/root	usr/lib/libecpg.so.6.3
 -rw-r--r--	root/root	usr/lib/libecpg_compat.a
-lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so -> libecpg_compat.so.3.2
-lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so.3 -> libecpg_compat.so.3.2
--rwxr-xr-x	root/root	usr/lib/libecpg_compat.so.3.2
+lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so -> libecpg_compat.so.3.3
+lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so.3 -> libecpg_compat.so.3.3
+-rwxr-xr-x	root/root	usr/lib/libecpg_compat.so.3.3
 -rw-r--r--	root/root	usr/lib/libpgport.a
 -rw-r--r--	root/root	usr/lib/libpgtypes.a
-lrwxrwxrwx	root/root	usr/lib/libpgtypes.so -> libpgtypes.so.3.1
-lrwxrwxrwx	root/root	usr/lib/libpgtypes.so.3 -> libpgtypes.so.3.1
--rwxr-xr-x	root/root	usr/lib/libpgtypes.so.3.1
+lrwxrwxrwx	root/root	usr/lib/libpgtypes.so -> libpgtypes.so.3.2
+lrwxrwxrwx	root/root	usr/lib/libpgtypes.so.3 -> libpgtypes.so.3.2
+-rwxr-xr-x	root/root	usr/lib/libpgtypes.so.3.2
 -rw-r--r--	root/root	usr/lib/libpq.a
-lrwxrwxrwx	root/root	usr/lib/libpq.so -> libpq.so.5.3
-lrwxrwxrwx	root/root	usr/lib/libpq.so.5 -> libpq.so.5.3
--rwxr-xr-x	root/root	usr/lib/libpq.so.5.3
+lrwxrwxrwx	root/root	usr/lib/libpq.so -> libpq.so.5.4
+lrwxrwxrwx	root/root	usr/lib/libpq.so.5 -> libpq.so.5.4
+-rwxr-xr-x	root/root	usr/lib/libpq.so.5.4
 drwxr-xr-x	root/root	usr/lib/postgresql/
 -rwxr-xr-x	root/root	usr/lib/postgresql/ascii_and_mic.so
 -rwxr-xr-x	root/root	usr/lib/postgresql/cyrillic_and_mic.so
@@ -625,6 +648,7 @@ drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/dropuser.1.gz
 -rw-r--r--	root/root	usr/man/man1/ecpg.1.gz
 -rw-r--r--	root/root	usr/man/man1/initdb.1.gz
+-rw-r--r--	root/root	usr/man/man1/pg_basebackup.1.gz
 -rw-r--r--	root/root	usr/man/man1/pg_config.1.gz
 -rw-r--r--	root/root	usr/man/man1/pg_controldata.1.gz
 -rw-r--r--	root/root	usr/man/man1/pg_ctl.1.gz
@@ -703,11 +727,14 @@ drwxr-xr-x	root/root	usr/man/man3/
 drwxr-xr-x	root/root	usr/man/man7/
 -rw-r--r--	root/root	usr/man/man7/ABORT.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_AGGREGATE.7.gz
+-rw-r--r--	root/root	usr/man/man7/ALTER_COLLATION.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_CONVERSION.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_DATABASE.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_DEFAULT_PRIVILEGES.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_DOMAIN.7.gz
+-rw-r--r--	root/root	usr/man/man7/ALTER_EXTENSION.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_FOREIGN_DATA_WRAPPER.7.gz
+-rw-r--r--	root/root	usr/man/man7/ALTER_FOREIGN_TABLE.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_FUNCTION.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_GROUP.7.gz
 -rw-r--r--	root/root	usr/man/man7/ALTER_INDEX.7.gz
@@ -742,11 +769,13 @@ drwxr-xr-x	root/root	usr/man/man7/
 -rw-r--r--	root/root	usr/man/man7/COPY.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_AGGREGATE.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_CAST.7.gz
--rw-r--r--	root/root	usr/man/man7/CREATE_CONSTRAINT_TRIGGER.7.gz
+-rw-r--r--	root/root	usr/man/man7/CREATE_COLLATION.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_CONVERSION.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_DATABASE.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_DOMAIN.7.gz
+-rw-r--r--	root/root	usr/man/man7/CREATE_EXTENSION.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_FOREIGN_DATA_WRAPPER.7.gz
+-rw-r--r--	root/root	usr/man/man7/CREATE_FOREIGN_TABLE.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_FUNCTION.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_GROUP.7.gz
 -rw-r--r--	root/root	usr/man/man7/CREATE_INDEX.7.gz
@@ -778,10 +807,13 @@ drwxr-xr-x	root/root	usr/man/man7/
 -rw-r--r--	root/root	usr/man/man7/DO.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_AGGREGATE.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_CAST.7.gz
+-rw-r--r--	root/root	usr/man/man7/DROP_COLLATION.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_CONVERSION.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_DATABASE.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_DOMAIN.7.gz
+-rw-r--r--	root/root	usr/man/man7/DROP_EXTENSION.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_FOREIGN_DATA_WRAPPER.7.gz
+-rw-r--r--	root/root	usr/man/man7/DROP_FOREIGN_TABLE.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_FUNCTION.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_GROUP.7.gz
 -rw-r--r--	root/root	usr/man/man7/DROP_INDEX.7.gz
@@ -828,6 +860,7 @@ drwxr-xr-x	root/root	usr/man/man7/
 -rw-r--r--	root/root	usr/man/man7/ROLLBACK_PREPARED.7.gz
 -rw-r--r--	root/root	usr/man/man7/ROLLBACK_TO_SAVEPOINT.7.gz
 -rw-r--r--	root/root	usr/man/man7/SAVEPOINT.7.gz
+-rw-r--r--	root/root	usr/man/man7/SECURITY_LABEL.7.gz
 -rw-r--r--	root/root	usr/man/man7/SELECT.7.gz
 -rw-r--r--	root/root	usr/man/man7/SELECT_INTO.7.gz
 -rw-r--r--	root/root	usr/man/man7/SET.7.gz
@@ -847,6 +880,10 @@ drwxr-xr-x	root/root	usr/man/man7/
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/postgresql/
 -rw-r--r--	root/root	usr/share/postgresql/conversion_create.sql
+drwxr-xr-x	root/root	usr/share/postgresql/extension/
+-rw-r--r--	root/root	usr/share/postgresql/extension/plpgsql--1.0.sql
+-rw-r--r--	root/root	usr/share/postgresql/extension/plpgsql--unpackaged--1.0.sql
+-rw-r--r--	root/root	usr/share/postgresql/extension/plpgsql.control
 -rw-r--r--	root/root	usr/share/postgresql/information_schema.sql
 -rw-r--r--	root/root	usr/share/postgresql/pg_hba.conf.sample
 -rw-r--r--	root/root	usr/share/postgresql/pg_ident.conf.sample
@@ -888,6 +925,7 @@ drwxr-xr-x	root/root	usr/share/postgresql/timezone/Africa/
 -rw-r--r--	root/root	usr/share/postgresql/timezone/Africa/Gaborone
 -rw-r--r--	root/root	usr/share/postgresql/timezone/Africa/Harare
 -rw-r--r--	root/root	usr/share/postgresql/timezone/Africa/Johannesburg
+-rw-r--r--	root/root	usr/share/postgresql/timezone/Africa/Juba
 -rw-r--r--	root/root	usr/share/postgresql/timezone/Africa/Kampala
 -rw-r--r--	root/root	usr/share/postgresql/timezone/Africa/Khartoum
 -rw-r--r--	root/root	usr/share/postgresql/timezone/Africa/Kigali
@@ -1006,10 +1044,12 @@ drwxr-xr-x	root/root	usr/share/postgresql/timezone/America/Kentucky/
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Kentucky/Louisville
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Kentucky/Monticello
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Knox_IN
+-rw-r--r--	root/root	usr/share/postgresql/timezone/America/Kralendijk
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/La_Paz
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Lima
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Los_Angeles
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Louisville
+-rw-r--r--	root/root	usr/share/postgresql/timezone/America/Lower_Princes
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Maceio
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Managua
 -rw-r--r--	root/root	usr/share/postgresql/timezone/America/Manaus
