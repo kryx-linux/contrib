@@ -5,15 +5,15 @@
 # Depends on: rrdtool mod_php net-snmp php-mysql php php-sockets
 
 name=cacti
-version=0.8.7g
+version=0.8.7h
 release=3
-source=(http://www.$name.net/downloads/$name-$version.tar.gz
-        http://crux.nu/~tek/cacti_official_patches.diff)
+source=(http://www.$name.net/downloads/$name-$version.tar.gz) 
 
 build () {
-  cd $name-$version
-  patch -p1 -i ../cacti_official_patches.diff
-  cd ..
+  #cd $name-$version
+  #patch -p1 -i ../cacti_official_patches.diff
+  #cd ..
+
   mkdir -p $PKG/var/www/htdocs    
   mv $name-$version $PKG/var/www/htdocs/$name
   chown -R cactiuser  $PKG/var/www/htdocs/$name/{rra,log}
