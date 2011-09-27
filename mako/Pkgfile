@@ -1,0 +1,17 @@
+# Description: A template library written in Python.
+# URL: http://www.makotemplates.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: setuptools
+
+name=mako
+version=0.4.2
+release=1
+source=(http://www.makotemplates.org/downloads/Mako-$version.tar.gz)
+
+build() {
+	cd Mako-$version
+	python setup.py build
+	python setup.py install --prefix=/usr --root=$PKG
+	find $PKG -name '*.egg-info' | xargs rm -rf
+}
