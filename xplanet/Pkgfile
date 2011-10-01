@@ -5,14 +5,12 @@
 # Depends on: xorg libtiff libpng libungif
 
 name=xplanet
-version=1.2.1
-release=2
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
-	xplanet-1.2.1.patch)
+version=1.2.2
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/xplanet-1.2.1.patch
 
 	./configure \
 		--prefix=/usr \
