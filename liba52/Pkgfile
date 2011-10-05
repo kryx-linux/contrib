@@ -5,14 +5,14 @@
 
 name=liba52
 version=0.7.4
-release=3
+release=4
 source=(http://liba52.sourceforge.net/files/a52dec-$version.tar.gz
-	a52dec-0.7.4-host.patch)
+	a52dec-0.7.4-build.patch)
 
 build() {
 	cd a52dec-$version
 
-	patch -p 1 -i $SRC/a52dec-0.7.4-host.patch
+	patch -p 1 -i $SRC/a52dec-0.7.4-build.patch
 	./bootstrap
 
 	./configure \
@@ -22,7 +22,8 @@ build() {
 		--disable-win \
 		--disable-static \
 		--enable-shared \
-		--enable-double
+		--enable-double \
+		--with-pic
 
 	make
 	make install prefix=$PKG/usr
