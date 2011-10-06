@@ -1,23 +1,30 @@
 # Description: A wired and wireless network manager.
 # URL: http://wicd.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: dbus-python notification-daemon pygtk
+# Depends on: dbus-python pygtk
 
 name=wicd 
 version=1.7.0
-release=1
+release=2
 source=(http://download.sourceforge.net/project/wicd/wicd-stable/$name-$version/$name-$version.tar.bz2
 	wicd.rc)
 
 build() {
 	cd $name-$version
 
-	python setup.py configure  \
-			--dbus=/usr/etc/dbus-1/system.d \
-			--mandir=/usr/share/man \
-			--etc=/etc/wicd
+	python setup.py configure \
+		--dbus=/usr/etc/dbus-1/system.d \
+		--mandir=/usr/man \
+		--etc=/etc/wicd
 
 	python setup.py install --root=$PKG
-	rm -rf $PKG/etc/xdg
+	python -mcompileall $PKG
 	install -m 0744 -D $SRC/wicd.rc $PKG/etc/rc.d/wicd
+	rm -r \
+		$PKG/etc/xdg \
+		$PKG/usr/man/nl \
+		$PKG/usr/share/locale \
+		$PKG/usr/share/doc
+
+
 }
