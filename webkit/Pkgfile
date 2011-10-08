@@ -5,7 +5,7 @@
 # Depends on: enchant gst-plugins-base gtk icu libsoup xorg-libxdamage xorg-libxt
 
 name=webkit
-version=1.4.3
+version=1.6.1
 release=1
 source=(http://webkitgtk.org/$name-$version.tar.gz)
 
@@ -21,7 +21,8 @@ build() {
 		--with-font-backend=freetype \
 		--disable-gtk-doc \
 		--enable-jit \
-		--with-unicode-backend=icu
+		--with-unicode-backend=icu \
+		--with-gtk=2.0
 
 	make
 	make DESTDIR=$PKG install
