@@ -1,0 +1,37 @@
+From bd5a85fb9f21d74d0808d66f6af07e5f9f7cf615 Mon Sep 17 00:00:00 2001
+From: Guido Berhoerster <gber@opensuse.org>
+Date: Wed, 05 Oct 2011 08:01:05 +0000
+Subject: Link explicitly against libjavascriptcoregtk
+
+Fixes: https://bugs.launchpad.net/midori/+bug/855978
+---
+diff --git a/midori/wscript_build b/midori/wscript_build
+index a69e08d..45b3486 100644
+--- a/midori/wscript_build
++++ b/midori/wscript_build
+@@ -7,7 +7,8 @@ import platform
+ 
+ progressive = True
+ libs = 'M UNIQUE LIBSOUP GMODULE GTHREAD LIBIDN GIO GTK SQLITE ' \
+-       'LIBNOTIFY WEBKIT LIBXML X11 XSS WS2_32 OPENSSL HILDON HILDON_FM'
++       'LIBNOTIFY WEBKIT JAVASCRIPTCOREGTK LIBXML X11 XSS WS2_32 OPENSSL HILDON' \
++       'HILDON_FM'
+ 
+ if progressive or Options.commands['check']:
+     obj = bld.new_task_gen ('cc', 'staticlib')
+diff --git a/wscript b/wscript
+index 840c390..736ddfc 100644
+--- a/wscript
++++ b/wscript
+@@ -197,6 +197,9 @@ def configure (conf):
+         conf.check (lib='Xss', libpath='/usr/X11R6/lib', mandatory=False)
+     check_pkg ('gtk+-2.0', '2.10.0', var='GTK', args=args)
+     check_pkg ('webkit-1.0', '1.1.17', args=args)
++    webkit_version = conf.check_cfg (modversion='webkit-1.0').split ('.')
++    if int(webkit_version[0]) >= 1 and int(webkit_version[1]) >= 5 and int(webkit_version[2]) >= 1:
++        check_pkg ('javascriptcoregtk-1.0', '1.1.17', args=args)
+     check_pkg ('libsoup-2.4', '2.25.2')
+     conf.define ('HAVE_LIBSOUP_2_25_2', 1)
+     check_pkg ('libsoup-2.4', '2.27.90', False, var='LIBSOUP_2_27_90')
+--
+cgit 
