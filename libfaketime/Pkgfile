@@ -2,21 +2,24 @@
 # URL: http://www.code-wizards.com/projects/libfaketime/index.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: 
 
 name=libfaketime
-version=0.8
+version=0.8.1
 release=1
 source=(http://www.code-wizards.com/projects/libfaketime/libfaketime-$version.tar.gz)
 
 build() {
 	cd libfaketime-$version
-	make
-	install -d $PKG/usr/lib
-	install -m 0755 -D timetest $PKG/usr/bin/timetest
-	install -m 0644 -D faketime.1 $PKG/usr/man/man1/faketime.1
-	install -m 0755 -t $PKG/usr/lib/ libfaketime.so.1 libfaketimeMT.so.1
-	ln -s libfaketime.so.1 $PKG/usr/lib/libfaketime.so
-	ln -s libfaketimeMT.so.1 $PKG/usr/lib/libfaketimeMT.so
-}
 
+	sed -i -e 's|/share/man/|/man/|g' man/Makefile
+	sed -i -e 's|/lib/faketime/|/lib/|g' src/Makefile
+
+	make PREFIX=/usr
+	make PREFIX=/usr DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/doc
+	rmdir $PKG/usr/share
+
+	ln -sf libfaketime.so.1 $PKG/usr/lib/libfaketime.so
+	ln -sf libfaketimeMT.so.1 $PKG/usr/lib/libfaketimeMT.so
+}
