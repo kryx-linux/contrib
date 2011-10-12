@@ -1,5 +1,5 @@
 # Description: Polished and improved version of the classic LinCity game.
-# URL: http://lincity-ng.berlios.de/
+# URL: http://www.libregamewiki.org/LinCity-NG
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
 # Depends on: jam physfs sdl_gfx sdl_image sdl_mixer sdl_ttf
@@ -7,11 +7,11 @@
 name=lincity-ng
 version=2.0
 release=1
-source=(http://download.berlios.de/$name/$name-$version.tar.bz2)
+source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) .*/\1/' <<< $MAKEFLAGS)"
+	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) \{0,1\}.*/\1/' <<< $MAKEFLAGS)"
 
 	./configure \
 		--prefix=/usr \
