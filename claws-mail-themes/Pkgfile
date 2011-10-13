@@ -4,7 +4,7 @@
 # Depends on: claws-mail
 
 name=claws-mail-themes
-version=20100514
+version=20110216
 release=1
 source=(http://www.claws-mail.org/themes/$name-$version.tar.gz)
 
@@ -16,7 +16,7 @@ build() {
 	find $PKG -iname LICENSE* | xargs rm -f
 	find $PKG -iname README*  | xargs rm -f
 	find $PKG -iname ChangeLog*  | xargs rm -f
-	find $PKG -iname DISCLAIMER* | xargs rm -f	
-	find $PKG -type f -print0 | xargs -0 chmod 644 
+	find $PKG -iname DISCLAIMER* | xargs rm -f
+	find $PKG -type f -print0 | xargs -0 chmod 644
 	find $PKG -type d -print0 | xargs -0 chmod 755
 }
