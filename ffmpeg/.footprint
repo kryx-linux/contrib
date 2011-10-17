@@ -20,6 +20,8 @@ drwxr-xr-x	root/root	usr/include/libavfilter/
 -rw-r--r--	root/root	usr/include/libavfilter/avcodec.h
 -rw-r--r--	root/root	usr/include/libavfilter/avfilter.h
 -rw-r--r--	root/root	usr/include/libavfilter/avfiltergraph.h
+-rw-r--r--	root/root	usr/include/libavfilter/vsink_buffer.h
+-rw-r--r--	root/root	usr/include/libavfilter/vsrc_buffer.h
 drwxr-xr-x	root/root	usr/include/libavformat/
 -rw-r--r--	root/root	usr/include/libavformat/avformat.h
 -rw-r--r--	root/root	usr/include/libavformat/avio.h
@@ -38,6 +40,7 @@ drwxr-xr-x	root/root	usr/include/libavutil/
 -rw-r--r--	root/root	usr/include/libavutil/common.h
 -rw-r--r--	root/root	usr/include/libavutil/cpu.h
 -rw-r--r--	root/root	usr/include/libavutil/crc.h
+-rw-r--r--	root/root	usr/include/libavutil/dict.h
 -rw-r--r--	root/root	usr/include/libavutil/error.h
 -rw-r--r--	root/root	usr/include/libavutil/eval.h
 -rw-r--r--	root/root	usr/include/libavutil/fifo.h
@@ -65,27 +68,27 @@ drwxr-xr-x	root/root	usr/include/libpostproc/
 drwxr-xr-x	root/root	usr/include/libswscale/
 -rw-r--r--	root/root	usr/include/libswscale/swscale.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libavcodec.so -> libavcodec.so.52.121.0
-lrwxrwxrwx	root/root	usr/lib/libavcodec.so.52 -> libavcodec.so.52.121.0
--rwxr-xr-x	root/root	usr/lib/libavcodec.so.52.121.0
-lrwxrwxrwx	root/root	usr/lib/libavdevice.so -> libavdevice.so.52.4.0
-lrwxrwxrwx	root/root	usr/lib/libavdevice.so.52 -> libavdevice.so.52.4.0
--rwxr-xr-x	root/root	usr/lib/libavdevice.so.52.4.0
-lrwxrwxrwx	root/root	usr/lib/libavfilter.so -> libavfilter.so.1.78.0
-lrwxrwxrwx	root/root	usr/lib/libavfilter.so.1 -> libavfilter.so.1.78.0
--rwxr-xr-x	root/root	usr/lib/libavfilter.so.1.78.0
-lrwxrwxrwx	root/root	usr/lib/libavformat.so -> libavformat.so.52.108.0
-lrwxrwxrwx	root/root	usr/lib/libavformat.so.52 -> libavformat.so.52.108.0
--rwxr-xr-x	root/root	usr/lib/libavformat.so.52.108.0
-lrwxrwxrwx	root/root	usr/lib/libavutil.so -> libavutil.so.50.41.0
-lrwxrwxrwx	root/root	usr/lib/libavutil.so.50 -> libavutil.so.50.41.0
--rwxr-xr-x	root/root	usr/lib/libavutil.so.50.41.0
+lrwxrwxrwx	root/root	usr/lib/libavcodec.so -> libavcodec.so.52.122.0
+lrwxrwxrwx	root/root	usr/lib/libavcodec.so.52 -> libavcodec.so.52.122.0
+-rwxr-xr-x	root/root	usr/lib/libavcodec.so.52.122.0
+lrwxrwxrwx	root/root	usr/lib/libavdevice.so -> libavdevice.so.52.5.0
+lrwxrwxrwx	root/root	usr/lib/libavdevice.so.52 -> libavdevice.so.52.5.0
+-rwxr-xr-x	root/root	usr/lib/libavdevice.so.52.5.0
+lrwxrwxrwx	root/root	usr/lib/libavfilter.so -> libavfilter.so.1.80.0
+lrwxrwxrwx	root/root	usr/lib/libavfilter.so.1 -> libavfilter.so.1.80.0
+-rwxr-xr-x	root/root	usr/lib/libavfilter.so.1.80.0
+lrwxrwxrwx	root/root	usr/lib/libavformat.so -> libavformat.so.52.110.0
+lrwxrwxrwx	root/root	usr/lib/libavformat.so.52 -> libavformat.so.52.110.0
+-rwxr-xr-x	root/root	usr/lib/libavformat.so.52.110.0
+lrwxrwxrwx	root/root	usr/lib/libavutil.so -> libavutil.so.50.43.0
+lrwxrwxrwx	root/root	usr/lib/libavutil.so.50 -> libavutil.so.50.43.0
+-rwxr-xr-x	root/root	usr/lib/libavutil.so.50.43.0
 lrwxrwxrwx	root/root	usr/lib/libpostproc.so -> libpostproc.so.51.2.0
 lrwxrwxrwx	root/root	usr/lib/libpostproc.so.51 -> libpostproc.so.51.2.0
 -rwxr-xr-x	root/root	usr/lib/libpostproc.so.51.2.0
-lrwxrwxrwx	root/root	usr/lib/libswscale.so -> libswscale.so.0.14.0
-lrwxrwxrwx	root/root	usr/lib/libswscale.so.0 -> libswscale.so.0.14.0
--rwxr-xr-x	root/root	usr/lib/libswscale.so.0.14.0
+lrwxrwxrwx	root/root	usr/lib/libswscale.so -> libswscale.so.0.14.1
+lrwxrwxrwx	root/root	usr/lib/libswscale.so.0 -> libswscale.so.0.14.1
+-rwxr-xr-x	root/root	usr/lib/libswscale.so.0.14.1
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libavcodec.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libavdevice.pc
@@ -102,6 +105,11 @@ drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/ffserver.1.gz
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/ffmpeg/
+-rw-r--r--	root/root	usr/share/ffmpeg/libvpx-1080p.ffpreset
+-rw-r--r--	root/root	usr/share/ffmpeg/libvpx-1080p50_60.ffpreset
+-rw-r--r--	root/root	usr/share/ffmpeg/libvpx-360p.ffpreset
+-rw-r--r--	root/root	usr/share/ffmpeg/libvpx-720p.ffpreset
+-rw-r--r--	root/root	usr/share/ffmpeg/libvpx-720p50_60.ffpreset
 -rw-r--r--	root/root	usr/share/ffmpeg/libx264-baseline.ffpreset
 -rw-r--r--	root/root	usr/share/ffmpeg/libx264-ipod320.ffpreset
 -rw-r--r--	root/root	usr/share/ffmpeg/libx264-ipod640.ffpreset
