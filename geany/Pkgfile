@@ -6,15 +6,17 @@
 # Nice to have: vte
 
 name=geany
-version=0.20
+version=0.21
 release=1
 source=(http://download.geany.org/$name-$version.tar.bz2)
 
 build () {
   cd $name-$version
+
   ./configure --prefix=/usr \
               --mandir=/usr/man \
               --enable-plugins
+
   make
   make DESTDIR=$PKG install
   rm -rf $PKG/usr/share/{doc,locale}
