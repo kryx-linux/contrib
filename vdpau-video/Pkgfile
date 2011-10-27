@@ -5,16 +5,12 @@
 # Depends on: libva libvdpau
 
 name=vdpau-video
-version=0.7.2
+version=0.7.3
 release=1
-source=(http://www.splitted-desktop.com/~gbeauchesne/$name/$name-$version.tar.gz
-	enable-glx.patch)
+source=(http://www.splitted-desktop.com/~gbeauchesne/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	patch -p 1 -i $SRC/enable-glx.patch
-	autoreconf -fi
 
 	./configure \
 		--prefix=/usr \
