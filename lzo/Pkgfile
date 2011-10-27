@@ -4,21 +4,22 @@
 # Packager: Younes Hafri, ycrux at club-internet dot fr
 
 name=lzo
-version=2.04
+version=2.06
 release=1
-source=(http://www.oberhumer.com/opensource/lzo/download/lzo-$version.tar.gz)
+source=(http://www.oberhumer.com/opensource/lzo/download/$name-$version.tar.gz)
 
 build() {
-	cd lzo-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
-		--disable-static \
 		--enable-shared
 
 	make
-	make prefix=$PKG/usr install
-	ln -s liblzo2.so.2.0.0 $PKG/usr/lib/liblzo.so
-	chmod a-x $PKG/usr/lib/*.so
-}
+	make DESTDIR=$PKG install
 
+	ln -s liblzo2.so.2.0.0 $PKG/usr/lib/liblzo.so
+
+	rm -r $PKG/usr/share/doc
+	rmdir $PKG/usr/share
+}
