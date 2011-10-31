@@ -2,23 +2,19 @@
 # URL: http://gcc.gnu.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Aaron Marks, nymacro at gmail dot com
-# Depends On: alsa-lib
+# Depends on: alsa-lib gtk
 
 name=gcj
-version=4.3.2
+version=4.5.3
 release=1
 source=(ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$version/gcc-{core,g++,java}-$version.tar.bz2
-	$name-4.2.3-nocheck-fixincludes.patch)
+	gcc-nocheck-fixincludes.patch)
 
 build() {
-	patch -d gcc-$version -p 1 -i $SRC/$name-4.2.3-nocheck-fixincludes.patch
-
-	sed -i gcc-$version/gcc/version.c \
-		-e 's|VERSUFFIX ""|VERSUFFIX " (CRUX)"|'
+	patch -d gcc-$version -p 1 -i $SRC/gcc-nocheck-fixincludes.patch
 
 	mkdir build
 	cd build
-
 	../gcc-$version/configure \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
@@ -29,26 +25,34 @@ build() {
 		--enable-shared \
 		--disable-nls \
 		--with-x=no \
-		--enable-version-specific-runtime-libs
+		--with-system-zlib \
+		--with-pkgversion="CRUX"
 
-	make bootstrap
-	make check
+	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
+		CC="/usr/bin/ccache"
+	elif [ -n "$(pkginfo -i | grep '^distcc ')" ]; then
+		CC="/usr/bin/distcc"
+	fi
+
+	make \
+		LD_LIBRARY_PATH="/usr/lib" \
+		STAGE_CC_WRAPPER="$CC" \
+		STAGE1_CFLAGS="-g -O2"
+		BOOT_CFLAGS="$CFLAGS" \
+		GCJFLAGS="$CFLAGS" \
+		STAGE1_MAKEFLAGS="$MAKEFLAGS" \
+		STAGE2_MAKEFLAGS="$MAKEFLAGS"
+
 	make -j 1 DESTDIR=$PKG install
 
-	ln -sf /usr/libexec/gcc/i686-pc-linux-gnu/$version/jc1 $PKG/usr/bin/jc1
-	
-	# remove un-needed files
-	find $PKG -name 'README' -delete
-
-	rm \
-		$PKG/usr/lib/libiberty.a \
+	rm -rf \
+		$PKG/usr/{share,info} $PKG/usr/lib*/{libiberty.a,*-gdb.py} \
+		$PKG/usr/lib/nof/*-gdb.py \
 		$PKG/usr/bin/*-linux-gnu-* \
-		$PKG/usr/man/man1/{cpp,g++,gcc,gcov}.1
-
-	rm -r \
-		$PKG/usr/info \
-		$PKG/usr/man/man7 \
-		$PKG/usr/lib/gcc/*/$version/install-tools
+		$PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed} \
+		$PKG/usr/lib/gcc/*/$version/include/README \
+		$PKG/usr/man/man1/{cpp,gcc,gcov,g++}.1 \
+59 		$PKG/usr/man/man7
 
 	# remove files already on the system out of the port
 	for i in $(pkginfo -l gcc |sed -e "s|^|/|"); do
@@ -59,7 +63,7 @@ build() {
 		fi
 	done
 
-	# Remove empty directories
+	# remove empty directories
 	find $PKG -depth -empty -delete
 
 	# remove build links from *.la files
@@ -67,4 +71,3 @@ build() {
 		sed -i "s|-L$SRC[^ ]* ||g" $PKG/$i
 	done
 }
-
