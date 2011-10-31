@@ -28,10 +28,10 @@ build() {
 		--with-system-zlib \
 		--with-pkgversion="CRUX"
 
-	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
-		CC="/usr/bin/ccache"
-	elif [ -n "$(pkginfo -i | grep '^distcc ')" ]; then
+	if [ -n "$(pkginfo -i | grep '^distcc ')" ]; then
 		CC="/usr/bin/distcc"
+	elif [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
+		CC="/usr/bin/ccache"
 	fi
 
 	make \
