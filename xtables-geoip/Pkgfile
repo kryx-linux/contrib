@@ -1,21 +1,20 @@
-# Description: GeoIP database files for xt_geoip
+# Description: GeoIP database files for xt_geoip in xtables-addons.
 # URL: http://maxmind.com/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: p5-text-csv-xs
+# Depends on: p5-text-csv-xs xtables-addons
 
 name=xtables-geoip
-
-## date -d "$(curl -sI http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip | grep '^Last-Modified:' | cut -d' ' -f2-)" +%Y%m%d
-version=20111007
-
+version=20111101
 release=1
-source=(http://downloads.sourceforge.net/project/xtables-addons/Xtables-addons/1.36/xtables-addons-1.36.tar.xz
-	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip)
+source=(http://www.hvlinux.net/crux/distfiles/$name/GeoIPCountryCSV.zip
+	http://www.hvlinux.net/crux/distfiles/$name/GeoIPv6.csv.gz)
 
 build() {
+	gunzip $SRC/GeoIPv6.csv.gz
+
 	install -d $PKG/usr/share/xt_geoip
 
-	$SRC/xtables-addons-1.36/geoip/xt_geoip_build \
-		-D $PKG/usr/share/xt_geoip/ $SRC/GeoIPCountryWhois.csv
+	/usr/lib/xtables-addons/xt_geoip_build \
+		-D $PKG/usr/share/xt_geoip/ $SRC/*.csv
 }
