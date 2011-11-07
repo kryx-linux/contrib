@@ -2,18 +2,15 @@
 # URL: http://www.memtest.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: 
 
 name=memtest86+
-version=2.11
+version=4.20
 release=1
 source=(http://www.memtest.org/download/$version/$name-$version.tar.gz
-	memtest86+-2.11-makefile_cflags_asflags.patch
 	memtest86+-2.11-makefile_install_remove.patch)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/memtest86+-2.11-makefile_cflags_asflags.patch
 	patch -p 1 -i $SRC/memtest86+-2.11-makefile_install_remove.patch
 	make memtest.bin
 	make DESTDIR=$PKG install-memtest.bin
