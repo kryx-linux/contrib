@@ -1,0 +1,21 @@
+# Description: A numerical library for C and C++ programmers.
+# URL: http://www.gnu.org/software/gsl/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager:  Vincenzo Colosimo, vico at bicisport dot de
+
+name=gsl
+version=1.15
+release=1
+source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/info
+}
