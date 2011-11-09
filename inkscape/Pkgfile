@@ -1,0 +1,29 @@
+# Description: An open source SVG editor.
+# URL: http://www.inkscape.org
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Huynh Ngoc Chau Tran, tran dot huynh at laposte dot net
+# Depends on: boehm-gc boost gcc glibc gsl gtkmm intltool lcms libart_lgpl popt pyxml
+
+name=inkscape
+version=0.48.2
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-nls
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -r \
+		$PKG/usr/share/locale \
+		$PKG/usr/man/??
+
+	find $PKG/usr/share/inkscape -name README -exec rm -f {} +
+	python -mcompileall $PKG/usr/share/inkscape/extensions
+}
