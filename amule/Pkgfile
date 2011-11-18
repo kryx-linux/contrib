@@ -2,12 +2,12 @@
 # URL: http://www.amule.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Antti Nykanen, aon at iki dot fi
-# Depends on: wxgtk crypto++
+# Depends on: crypto++ util-linux-ng wxgtk
 
 name=amule
-version=2.2.6
+version=2.3.1
 release=1
-source=(http://downloads.sourceforge.net/project/amule/aMule/$version/aMule-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/amule/aMule/$version/aMule-$version.tar.xz)
 
 build() {
 	cd aMule-$version
@@ -22,5 +22,5 @@ build() {
 
 	make
 	make install DESTDIR=$PKG
-	rm -r $PKG/usr/{share/{doc,amule},man,lib,bin/autostart-xas}
+	rm -r $PKG/usr/share/doc
 }
