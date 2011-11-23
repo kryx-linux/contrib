@@ -13,6 +13,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Accelerator.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Action.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ActionGroup.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Activatable.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Adjustment.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Alignment.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Arrow.pod
@@ -30,14 +31,13 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Builda
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Calendar.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellEditable.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellLayout.pod
-drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellLayout/
--r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellLayout/DataFunc.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRenderer.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererAccel.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererCombo.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererPixbuf.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererProgress.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererSpin.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererSpinner.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererText.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellRendererToggle.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellView.pod
@@ -58,6 +58,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/CellLa
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/DrawingArea.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Editable.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Entry.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/EntryBuffer.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/EntryCompletion.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/EventBox.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Expander.pod
@@ -111,6 +112,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Ev
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Event/WindowState.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/GC.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Geometry.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Image.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Input.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Keymap.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Keysyms.pm
@@ -139,6 +141,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Pa
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/HButtonBox.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/HPaned.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/HRuler.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/HSV.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/HScale.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/HScrollbar.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/HSeparator.pod
@@ -156,6 +159,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Gdk/Pa
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/IconView.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Image.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ImageMenuItem.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/InfoBar.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/InputDialog.pod
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Install/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Install/Files.pm
@@ -184,6 +188,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Instal
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Misc.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Notebook.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Object.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/OffscreenWindow.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/OptionMenu.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Orientable.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/PageSetup.pod
@@ -281,6 +286,7 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Pango/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/SizeGroup.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Socket.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/SpinButton.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Spinner.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/StatusIcon.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Statusbar.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Stock.pod
@@ -303,6 +309,8 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Pango/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ToggleToolButton.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ToolButton.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ToolItem.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ToolItemGroup.pod
+-r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ToolPalette.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/ToolShell.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Toolbar.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Tooltip.pod
@@ -317,8 +325,6 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/Pango/
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeRowReference.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeSelection.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeSortable.pod
-drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeSortable/
--r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeSortable/IterCompareFunc.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeStore.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeView.pod
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.12/linux-thread-multi/Gtk2/TreeViewColumn.pod
@@ -354,6 +360,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::Accelerator.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Action.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::ActionGroup.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::Activatable.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Adjustment.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Alignment.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Arrow.3pm.gz
@@ -370,13 +377,13 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::Calendar.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellEditable.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellLayout.3pm.gz
--r--r--r--	root/root	usr/man/man3/Gtk2::CellLayout::DataFunc.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRenderer.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererAccel.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererCombo.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererPixbuf.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererProgress.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererSpin.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererSpinner.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererText.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellRendererToggle.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::CellView.3pm.gz
@@ -397,6 +404,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::DrawingArea.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Editable.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Entry.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::EntryBuffer.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::EntryCompletion.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::EventBox.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Expander.3pm.gz
@@ -447,6 +455,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::Gdk::Event::WindowState.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Gdk::GC.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Gdk::Geometry.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::Gdk::Image.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Gdk::Input.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Gdk::Keymap.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Gdk::Keysyms.3pm.gz
@@ -474,6 +483,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::HButtonBox.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::HPaned.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::HRuler.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::HSV.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::HScale.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::HScrollbar.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::HSeparator.3pm.gz
@@ -491,6 +501,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::IconView.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Image.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::ImageMenuItem.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::InfoBar.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::InputDialog.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Invisible.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Item.3pm.gz
@@ -510,6 +521,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::Misc.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Notebook.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Object.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::OffscreenWindow.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::OptionMenu.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Orientable.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::PageSetup.3pm.gz
@@ -605,6 +617,7 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::SizeGroup.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Socket.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::SpinButton.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::Spinner.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::StatusIcon.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Statusbar.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Stock.3pm.gz
@@ -626,6 +639,8 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::ToggleToolButton.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::ToolButton.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::ToolItem.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::ToolItemGroup.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Gtk2::ToolPalette.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::ToolShell.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Toolbar.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::Tooltip.3pm.gz
@@ -640,7 +655,6 @@ drwxr-xr-x	root/root	usr/man/man3/
 -r--r--r--	root/root	usr/man/man3/Gtk2::TreeRowReference.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::TreeSelection.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::TreeSortable.3pm.gz
--r--r--r--	root/root	usr/man/man3/Gtk2::TreeSortable::IterCompareFunc.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::TreeStore.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::TreeView.3pm.gz
 -r--r--r--	root/root	usr/man/man3/Gtk2::TreeViewColumn.3pm.gz
