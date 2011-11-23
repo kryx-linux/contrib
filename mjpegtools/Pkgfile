@@ -5,12 +5,14 @@
 # Depends on: libquicktime xorg-libxxf86dga
 
 name=mjpegtools
-version=2.0.0
-release=1
-source=(http://downloads.sourceforge.net/project/mjpeg/$name/$version/$name-$version.tar.gz)
+version=1.9.0
+release=2
+source=(http://downloads.sourceforge.net/project/mjpeg/$name/$version/$name-$version.tar.gz
+	mjpegtools-1.9.0-glibc-2.10.patch)
 
 build() {
 	cd $name-$version
+	patch -p 1 -i $SRC/mjpegtools-1.9.0-glibc-2.10.patch
 
 	./configure \
 		--prefix=/usr \
