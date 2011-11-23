@@ -5,15 +5,17 @@
 # Depends on: glib p5-extutils-depends p5-extutils-pkgconfig
 
 name=p5-glib
-version=1.224
+version=1.241
 release=1
-source=(http://search.cpan.org/CPAN/authors/id/T/TS/TSCH/Glib-$version.tar.gz)
+source=(http://www.cpan.org/modules/by-module/Glib/Glib-$version.tar.gz)
 
 build() {
   cd Glib-$version
   perl Makefile.PL
+
   make OPTIMIZE="$CFLAGS"
   make install DESTDIR=$PKG
+
   find $PKG \
     -name perllocal.pod \
     -o -name "*.bs" \
