@@ -4,7 +4,7 @@
 # Depends on: mesa3d xorg-libxaw xorg-libxcursor xorg-libxft xorg-libxinerama xorg-libxi xorg-libxrandr
 
 name=libreoffice
-version=3.4.3
+version=3.4.4
 release=1
 source=(http://ftp.tu-chemnitz.de/pub/tdf/$name/stable/$version/rpm/x86/LibO_${version}_Linux_x86_install-rpm_en-US.tar.gz)
 
@@ -37,7 +37,7 @@ build() {
     cd $PKG/usr/lib/$name/share/xdg/
     sed -i '/^Exec=/s/libreoffice-printeradmin/spadmin/' printeradmin.desktop
     for desktop in *.desktop; do
-       sed -i '/^Exec=/s/libreoffice/soffice/' $desktop
+       sed -i '/^Exec=/s/libreoffice[^ ]*/soffice/' $desktop
        ln -sf /usr/lib/$name/share/xdg/$desktop $PKG/usr/share/applications/$desktop 
     done
     mv $workd/usr/share/{mime,icons} $PKG/usr/share
