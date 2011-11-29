@@ -4,12 +4,15 @@
 # Depends on:  wxgtk libidn gnutls xdg-utils tinyxml
 
 name=filezilla
-version=3.5.0
+version=3.5.2
 release=1
-source=(http://downloads.sourceforge.net/project/$name/FileZilla_Client/$version/FileZilla_${version}_src.tar.bz2)
+source=(http://downloads.sourceforge.net/project/$name/FileZilla_Client/$version/FileZilla_${version}_src.tar.bz2
+    gnutls-3.patch)
 
 build() {
     cd $name-$version
+    # quickly stolen from arch people
+    patch -p1 -i ../gnutls-3.patch
     ./configure \
         --mandir=/usr/man \
         --disable-manualupdatecheck \
