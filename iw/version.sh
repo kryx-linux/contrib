@@ -3,4 +3,6 @@
 VERSION="#VER#"
 OUT="$1"
 
-echo "const char iw_version[] = \"$VERSION\";" > "$OUT"
+echo '#include "iw.h"' > "$OUT"
+echo "const char iw_version[] = \"$VERSION\";" >> "$OUT"
+
