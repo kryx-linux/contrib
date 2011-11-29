@@ -4,7 +4,7 @@
 # Depends on:  
 
 name=tinyxml
-version=2.6.1
+version=2.6.2
 release=1
 source=(
     http://download.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.zip 
@@ -15,7 +15,6 @@ shopt -s extglob
 build() {
     soname=lib$name.$version.so
     cd $name
-    # http://tinyurl.com/2v66ja4
     patch -p0 -i ../entity.patch
     mkdir -p $PKG/usr/include
     install -m 0644 *.h $_
