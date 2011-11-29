@@ -4,14 +4,12 @@
 # Depends on:  gtk intltool menu-cache
 
 name=lxpanel
-version=0.5.6
+version=0.5.8
 release=1
-source=(http://download.sourceforge.net/sourceforge/lxde/$name-$version.tar.gz
-        alarm_typedef_conflict.patch)
+source=(http://download.sourceforge.net/sourceforge/lxde/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    patch -p0 -i ../alarm_typedef_conflict.patch
     ./configure \
         --prefix=/usr \
         --mandir=/usr/man \
