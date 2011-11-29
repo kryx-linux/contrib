@@ -4,23 +4,12 @@
 # Depends on:  gtk menu-cache
 
 name=libfm
-version=0.1.14
+version=0.1.17
 release=2
-source=(
-    http://crux.org.pl/distfiles/$name-$version.tar.gz
-    libfm-0.1.14_crux_glib_ge_2_27.patch
-)
+source=("http://ftp.jaist.ac.jp/pub/sourceforge/p/project/pc/pcmanfm/PCManFM%20+%20Libfm%20(tarball%20release)/libfm%20(required%20by%20PCManFM)/$name-$version.tar.gz")
 
 build() {
     cd $name-$version
-    patch -p1 -i ../libfm-0.1.14_crux_glib_ge_2_27.patch
-    rm -rf po/* docs/*
-    aclocal
-    autoheader --force
-    libtoolize -c --automake --force
-    automake --add-missing --copy --include-deps
-    autoconf
-    rm -rf autom4te.cache
     ./configure \
         --prefix=/usr \
         --disable-nls \
