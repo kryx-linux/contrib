@@ -5,8 +5,8 @@
 # Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib
 
 name=thunderbird
-version=5.0
-comm_ver=miramar
+version=8.0
+comm_ver=release
 release=1
 source=(
     http://releases.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
@@ -45,8 +45,9 @@ build() {
         ac_add_options --disable-necko-wifi
         ac_add_options --disable-tests
         ac_add_options --disable-debug
+        ac_add_options --disable-auto-deps
         # crux libpng doesn't support apng
-        # ac_add_options --with-system-png
+        #ac_add_options --with-system-png
 EOF
     make -f client.mk
     make -f client.mk DESTDIR=$PKG install
