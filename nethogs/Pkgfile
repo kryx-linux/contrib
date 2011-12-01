@@ -10,7 +10,7 @@ source=(http://downloads.sourceforge.net/project/nethogs/nethogs/0.8/nethogs-0.8
 
 build() {
 	cd $name
-  sed -i -e 's|/share/man|/man|' Makefile
+  sed -i -e 's|share/man|/usr/man|' Makefile
   make
   make DESTDIR=$PKG install
 }
