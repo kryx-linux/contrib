@@ -5,18 +5,19 @@
 # Depends on: libcdio libxml2 popt
 
 name=vcdimager
-version=0.7.23
+version=0.7.24
 release=1
-source=(ftp://gnu.mirror.pacific.net.au/gnu/gnu/vcdimager/vcdimager-$version.tar.gz)
+source=(http://mirror.aarnet.edu.au/pub/gnu/$name/$name-$version.tar.gz)
 
 build() {
-	cd vcdimager-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
-		--disable-static  
-    	make 
-    	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/info/
-}
+		--mandir=/usr/man  
 
+	make 
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/info
+	rmdir $PKG/usr/share
+}
