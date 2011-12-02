@@ -1,20 +1,23 @@
-# Description: Advanced Configuration and Power Interface event management daemon
-# URL: http://acpid.sf.net
+# Description: Advanced Configuration and Power Interface event management daemon with netlink suppport
+# URL: http://tedfelix.com/linux/acpid-netlink.html
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Packager: Attic, unknown at unknown
 
 name=acpid
-version=1.0.10
+version=2.0.13
 release=1
-source=(http://download.sourceforge.net/acpid/acpid-$version.tar.gz \
+source=(http://www.tedfelix.com/linux/$name-$version.tar.gz \
 		acpid.rc default default.sh)
 
 build() {
-    cd $name-$version
-    mkdir -p $PKG/usr/{bin,sbin,man/man8}
-    make INSTPREFIX=/usr
-    make INSTPREFIX=$PKG MAN8DIR=$PKG/usr/man/man8 install
-    install -D -m 755 ../acpid.rc   $PKG/etc/rc.d/acpid
-    install -D -m 644 ../default    $PKG/etc/acpi/events/default
-    install -D -m 755 ../default.sh $PKG/etc/acpi/default.sh
+	cd $name-$version
+	make
+	make DESTDIR=$PKG MANDIR=/usr/man install
+	install -D -m 755 $SRC/acpid.rc   $PKG/etc/rc.d/acpid
+	install -D -m 755 $SRC/default.sh $PKG/etc/acpi/default.sh
+	install -D -m 644 $SRC/default    $PKG/etc/acpi/events/default
+	rm -rf $PKG/usr/share
+	cd kacpimon
+	make -f makefile
+	make SBIN=$PKG/usr/sbin install
+	install -D -m 644 kacpimon.8 $PKG/usr/man/man8/kacpimon.8
 }
