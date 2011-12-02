@@ -6,10 +6,12 @@
 name=devilspie
 version=0.22
 release=1
-source=(http://www.burtonini.com/computing/$name-$version.tar.gz)
+source=(http://www.burtonini.com/computing/$name-$version.tar.gz\
+		$name-$version-gtk-2.22.1.patch)
 
 build() {
 	cd $name-$version
+	patch -p0 -i $SRC/$name-$version-gtk-2.22.1.patch
 	./configure --prefix=/usr --disable-nls \
 				--mandir=/usr/man
 	make
