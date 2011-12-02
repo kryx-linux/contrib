@@ -2,10 +2,9 @@
 # URL: http://www.wavpack.com/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Jukka Heino, jukka dot heino at gmail dot com
-# Depends on: 
 
 name=wavpack
-version=4.60.0
+version=4.60.1
 release=1
 source=(http://www.wavpack.com/wavpack-$version.tar.bz2)
 
@@ -14,7 +13,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--disable-static
+		--mandir=/usr/man
 
 	make
 	make DESTDIR=$PKG install
