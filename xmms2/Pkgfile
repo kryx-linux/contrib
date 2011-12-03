@@ -6,15 +6,15 @@
 # Nice2have:   ecore pyrex ruby samba ffmpeg faad2
 
 name=xmms2
-version=0.7
+version=0.8
 release=1
-_codename=DrNo
+_codename=DrO_o
 
 source=(http://download.sourceforge.net/project/$name/$name/${version}%20$_codename/$name-$version$_codename.tar.bz2)
 
 build () {
     cd $name-$version$_codename
     ./waf --prefix=/usr --mandir=/usr/man configure
-    ./waf ${MAKEFLAGS:-\-j1} build
+    ./waf $(egrep -o '[-]j[[:space:]]*[[:digit:]]+' <<< "${MAKEFLAGS}") build
     ./waf --without-ldconfig --destdir=$PKG install
 }
