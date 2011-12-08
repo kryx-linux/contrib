@@ -4,7 +4,7 @@
 # Depends on:  fltk
 
 name=dillo
-version=3.0.1
+version=3.0.2
 release=1
 source=(http://www.dillo.org/download/$name-$version.tar.bz2)
 
@@ -12,7 +12,8 @@ build () {
     cd $name-$version
     ./configure --prefix=/usr \
                 --mandir=/usr/man \
-                --enable-ipv6
+                --enable-ipv6 \
+                --enable-ssl
     make
     make DESTDIR=$PKG install
     rm -r $PKG/usr/share
