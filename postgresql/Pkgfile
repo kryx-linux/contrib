@@ -12,14 +12,13 @@ source=(ftp://ftp9.de.postgresql.org/unix/databases/postgresql/source/v$version/
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr --disable-nls --mandir=$PKG/usr/man
+  ./configure --prefix=/usr --disable-nls --mandir=/usr/man
   make
   make DESTDIR=$PKG install
 
   cd doc/src/sgml
-  make install-man
+  make DESTDIR=$PKG install-man
   rm -rf $PKG/usr/share/doc
 
-  mkdir -p $PKG/etc/rc.d/
   install -D -m 755 $SRC/postgresql $PKG/etc/rc.d/postgresql
 }
