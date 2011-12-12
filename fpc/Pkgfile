@@ -5,20 +5,20 @@
 
 name=fpc
 version=2.4.4
-release=1
+release=2
 source=(ftp://ftp.freepascal.org/pub/fpc/dist/$version/source/fpcbuild-$version.tar.gz
-	ftp://ftp.freepascal.org/pub/fpc/dist/$version/bootstrap/ppc386-i386-linux.bz2
+	ftp://ftp.freepascal.org/pub/fpc/dist/$version/bootstrap/i386-linux-ppc386.bz2
 	ftp://ftp.freepascal.org/pub/fpc/contrib/libgdb/v7.0.1/libgdb_mingw701.zip)
 
 build() {
-	bunzip2 ppc386-i386-linux.bz2
-	chmod 0755 ppc386-i386-linux
+	bunzip2 i386-linux-ppc386.bz2
+	chmod 0755 i386-linux-ppc386
 
 	export LIBGDBDIR=$SRC/libgdb/win32/i386/
 
 	cd fpcbuild-$version/fpcsrc/
 	
-	make -j 1 PP=$SRC/ppc386-i386-linux build
+	make -j 1 PP=$SRC/i386-linux-ppc386 build
 
 	cp $SRC/fpcbuild-$version/fpcsrc/compiler/ppc386 \
 		$SRC/fpcbuild-$version/fpcsrc/compiler/ppc386.new
