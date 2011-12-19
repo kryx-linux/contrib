@@ -1,0 +1,16 @@
+# Description: GNU EFI library
+# URL:         http://gnu-efi.sf.net/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+
+name=gnu-efi
+version=3.0p.orig
+release=1
+source=(http://download.sourceforge.net/${name}/${name}_${version}.tar.gz)
+
+build() {
+  ls
+  cd $name-3.0
+  sed -i "s|/usr/local|$PKG/usr|g" Make.defaults
+  make
+  make install
+}
