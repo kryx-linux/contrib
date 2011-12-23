@@ -4,7 +4,7 @@
 # Depends on: 
 
 name=dcraw-utils
-version=3
+version=4
 release=1
 source=(http://www.cybercom.net/~dcoffin/dcraw/clean_crw.c \
 		http://www.cybercom.net/~dcoffin/dcraw/fujiturn.c \
@@ -12,10 +12,10 @@ source=(http://www.cybercom.net/~dcoffin/dcraw/clean_crw.c \
 		http://www.cybercom.net/~dcoffin/dcraw/parse.c)
 
 build() {
-	gcc -o fuji_green fuji_green.c $CFLAGS -lm
-	gcc -o clean_crw clean_crw.c $CFLAGS
-	gcc -o fujiturn fujiturn.c $CFLAGS
-	gcc -o dcparse parse.c $CFLAGS
+	gcc $CFLAGS -o fuji_green fuji_green.c -lm
+	gcc $CFLAGS -o clean_crw clean_crw.c
+	gcc $CFLAGS -o fujiturn fujiturn.c
+	gcc $CFLAGS -o dcparse parse.c
 	
 	install -m 755 -d $PKG/usr/bin
 	install -m 755 fuji_green $PKG/usr/bin
