@@ -7,12 +7,10 @@
 name=sdl_gfx
 version=2.0.23
 release=1
-source=(http://downloads.sourceforge.net/project/sdlgfx/SDL_gfx-$version.tar.gz
-	sdl_gfx-2.0.13-imageFilter-asm.fix.patch)
+source=(http://downloads.sourceforge.net/project/sdlgfx/SDL_gfx-$version.tar.gz)
 
 build() {
 	cd SDL_gfx-$version
-	#patch -p 1 -i $SRC/sdl_gfx-2.0.13-imageFilter-asm.fix.patch
 	./configure	--prefix=/usr
 	make
 	make DESTDIR=$PKG install
