@@ -1,18 +1,18 @@
 # Description: SDL graphics drawing primitives and other support functions.
-# URL: http://www.ferzkopp.net/Software/SDL_gfx-2.0/index.html
+# URL: http://www.ferzkopp.net/joomla/software-mainmenu-14/4-ferzkopps-linux-software/19-sdlgfx
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Simone Rota, sip at crux dot nu
 # Depends on: libsdl
 
 name=sdl_gfx
-version=2.0.13
+version=2.0.23
 release=1
-source=(http://www.ferzkopp.net/Software/SDL_gfx-${version%.*}/SDL_gfx-$version.tar.gz
-	sdl_gfx-$version-imageFilter-asm.fix.patch)
+source=(http://downloads.sourceforge.net/project/sdlgfx/SDL_gfx-$version.tar.gz
+	sdl_gfx-2.0.13-imageFilter-asm.fix.patch)
 
 build() {
 	cd SDL_gfx-$version
-	patch -p 1 -i $SRC/sdl_gfx-$version-imageFilter-asm.fix.patch
+	#patch -p 1 -i $SRC/sdl_gfx-2.0.13-imageFilter-asm.fix.patch
 	./configure	--prefix=/usr
 	make
 	make DESTDIR=$PKG install
