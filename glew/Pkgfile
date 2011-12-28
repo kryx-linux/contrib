@@ -11,6 +11,6 @@ source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$ver
 
 build() {
     cd $name-$version
-    make CFLAGS.EXTRA="$CFLAGS"
+    make CC="${CC:-gcc}" CFLAGS.EXTRA="$CFLAGS"
     make LIBDIR="$PKG/usr/lib" GLEW_DEST=$PKG/usr install
 }
