@@ -6,11 +6,11 @@
 
 name=glew
 version=1.7.0
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tgz)
 
 build() {
     cd $name-$version
     make CFLAGS.EXTRA="$CFLAGS"
-    make GLEW_DEST=$PKG/usr install
+    make LIBDIR="$PKG/usr/lib" GLEW_DEST=$PKG/usr install
 }
