@@ -5,30 +5,20 @@
 
 name=libfame
 version=0.9.1
-release=2
+release=3
 source=(http://downloads.sourceforge.net/project/fame/$name/$version/$name-$version.tar.gz
-	$name-$version-m4.patch
-	$name-$version-gcc-version-check.patch
-	$name-$version-mmx.patch
-	$name-$version-mmx-pic.patch
-	$name-$version-fame_motion_pmvfast.c.patch
-	$name-$version-missing-includes.patch
-	$name-$version-ptr-null-check.patch)
+	$name-$version-gcc34-1.patch
+	$name-$version-config_update-1.patch)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/$name-$version-m4.patch
-	patch -p 1 -i $SRC/$name-$version-gcc-version-check.patch
-	patch -p 1 -i $SRC/$name-$version-mmx.patch
-	patch -p 1 -i $SRC/$name-$version-mmx-pic.patch
-	patch -p 1 -i $SRC/$name-$version-fame_motion_pmvfast.c.patch
-	patch -p 1 -i $SRC/$name-$version-missing-includes.patch
-	patch -p 1 -i $SRC/$name-$version-ptr-null-check.patch
+	patch -p 1 -i $SRC/$name-$version-gcc34-1.patch
+	patch -p 1 -i $SRC/$name-$version-config_update-1.patch
 
-	./configure \
-		--prefix=/usr \
-		--disable-static
+	sed -i 's/$CC --version/$CC -dumpversion/' configure
+	unset CC # ccache brakes at library linking stage
 
+	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 }
