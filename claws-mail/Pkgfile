@@ -7,14 +7,12 @@
 # Nice to have: enchant clamav dillo libgnomeprintui openldap
 
 name=claws-mail
-version=3.7.10
+version=3.8.0
 release=1
-source=(http://sourceforge.net/projects/sylpheed-claws/files/$name-$version.tar.bz2 \
-		$name-gnutls_v3.diff)
+source=(http://dl.sourceforge.net/project/sylpheed-claws/Claws%20Mail/$version/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	patch -p1 -i $SRC/$name-gnutls_v3.diff
 	./configure --prefix=/usr \
 				--disable-nls \
 				--disable-manual \
