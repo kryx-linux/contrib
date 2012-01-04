@@ -11,6 +11,7 @@ source=(http://downloads.sourceforge.net/project/tcl/Tcl/$version/$name$version-
 
 build() {
 	cd $name$version/unix
+	CFLAGS+=' -fPIC' LDFLAGS+=' -fPIC'
 
 	./configure \
 		--prefix=/usr \
