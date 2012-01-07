@@ -1,0 +1,23 @@
+# Description: Administration tool for IP or port sets.
+# URL: http://ipset.netfilter.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: iptables libmnl
+
+name=ipset
+version=6.10
+release=1
+source=(http://$name.netfilter.org/$name-$version.tar.bz2)
+
+build() {
+	cd $name-${version%%-*}
+
+	./autogen.sh
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man
+
+	make
+	make DESTDIR=$PKG install
+}
