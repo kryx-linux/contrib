@@ -6,7 +6,7 @@
 
 name=twisted
 version=11.1.0
-release=1
+release=2
 source=(http://pypi.python.org/packages/source/T/Twisted/Twisted-$version.tar.bz2)
 
 build() {
@@ -17,4 +17,6 @@ build() {
 		-name '*.egg-info' -o \
 		-name topfiles \
 		| xargs rm -rf
+
+	rm $PKG/usr/lib/python2.7/site-packages/twisted/python/zsh/README.txt
 }
