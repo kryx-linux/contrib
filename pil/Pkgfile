@@ -6,11 +6,11 @@
 
 name=pil
 version=1.1.7
-release=1
-source=(http://effbot.org/downloads/Imaging-$version.tar.gz)
+release=2
+source=(http://effbot.org/media/downloads/PIL-$version.tar.gz)
 
 build() {
-	cd Imaging-$version
+	cd PIL-$version
 	python setup.py install --root=$PKG
 	find $PKG -name '*egg-info' -delete
 }
