@@ -6,7 +6,7 @@
 
 name=streamtuner2
 version=2.0.8
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name-$version.src.tgz)
 
 build() {
@@ -24,4 +24,5 @@ build() {
 
 	mv $PKG/usr/share/$name/st2.py $PKG/usr/bin/st2
 	mv $PKG/usr/share/$name/streamtuner2.desktop $PKG/usr/share/applications/
+	rm $PKG/usr/share/streamtuner2/README
 }
