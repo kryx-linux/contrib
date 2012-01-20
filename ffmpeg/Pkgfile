@@ -5,7 +5,7 @@
 # Depends on: faac imlib2 lame libsdl libtheora libxvid x264 opencore-amr speex libva
 
 name=ffmpeg
-version=0.7.9
+version=0.7.11
 release=1
 source=(http://ffmpeg.org/releases/$name-$version.tar.bz2)
 
@@ -34,7 +34,6 @@ build() {
 		--enable-x11grab \
 		--enable-nonfree \
 		--disable-debug \
-		--disable-static \
 		--disable-doc
 
 	make SHARED_PP='yes'
