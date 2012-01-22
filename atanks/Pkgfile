@@ -2,17 +2,17 @@
 # URL: http://atanks.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: allegro
+# Depends on: allegro4
 
 name=atanks
-version=4.7
+version=5.2
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz
-	$name-4.7-install.patch)
+	$name-5.2-install.patch)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/$name-4.7-install.patch
+	patch -p 1 -i $SRC/$name-5.2-install.patch
 	make
 	make DESTDIR=$PKG install
 }

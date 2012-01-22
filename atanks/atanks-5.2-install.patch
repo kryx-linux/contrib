@@ -1,0 +1,23 @@
+diff -pruN atanks-5.2.orig/Makefile atanks-5.2/Makefile
+--- atanks-5.2.orig/Makefile	2012-01-22 00:49:19.738203417 +0000
++++ atanks-5.2/Makefile	2012-01-22 00:49:40.482203427 +0000
+@@ -4,16 +4,16 @@ DESTDIR ?=
+ BINPREFIX = $(PREFIX)
+ 
+ BINDIR = ${BINPREFIX}bin/
+-INSTALLDIR = ${PREFIX}share/games/atanks
++INSTALLDIR = ${PREFIX}share/atanks
+ 
+ export VERSION
+ export PREFIX
+ export INSTALLDIR
+ 
+ FILENAME=atanks-${VERSION}
+-INSTALL=$(PREFIX)bin/install -c
++INSTALL=$(PREFIX)bin/install
+ DISTCOMMON=atanks/*.dat atanks/COPYING atanks/README atanks/TODO atanks/Changelog atanks/BUGS atanks/*.txt
+-INCOMMON=COPYING README TODO Changelog *.txt unicode.dat
++INCOMMON=*.txt unicode.dat
+ 
+ all:
+ 	FLAGS=-DLINUX $(MAKE) -C src
