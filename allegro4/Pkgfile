@@ -4,13 +4,13 @@
 # Packager: sten, nick dot steeves at shaw dot ca
 # Depends on: alsa-lib cmake libpng libvorbis xorg-libxcursor xorg-libxpm xorg-libxxf86dga xorg-libxxf86vm
 
-name=allegro
-version=4.4.1.1
+name=allegro4
+version=4.4.2
 release=1
-source=(http://download.sourceforge.net/alleg/$name/$version/$name-$version.tar.gz)
+source=(http://download.sourceforge.net/alleg/allegro/$version/allegro-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd allegro-$version
 
 	cmake \
 		-DCMAKE_INSTALL_PREFIX=/usr \
