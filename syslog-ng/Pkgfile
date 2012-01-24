@@ -5,7 +5,7 @@
 # Depends on:  eventlog
 
 name=syslog-ng
-version=3.1.4
+version=3.3.4
 release=1
 source=(http://balabit.com/downloads/files/syslog-ng/sources/$version/source/${name}_${version}.tar.gz
 syslog-ng.rc syslog-ng.conf)
@@ -21,8 +21,10 @@ build() {
       --mandir=/usr/man \
       --enable-dynamic-linking
 
+
    make && make DESTDIR=$PKG install
    rm -rf $PKG/usr/doc
+   rm -rf $PKG/usr/share/include/scl/syslogconf/README
    install -D -m 644 ../syslog-ng.conf $PKG/etc/syslog-ng.conf
    install -D -m 755 ../syslog-ng.rc $PKG/etc/rc.d/syslog-ng
 }

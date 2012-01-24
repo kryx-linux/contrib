@@ -8,7 +8,7 @@ start)
   /usr/sbin/syslog-ng -f /etc/syslog-ng.conf -p /var/run/syslog-ng.pid
   ;;
 stop)
-  kill `cat /var/run/syslog-ng.pid`
+  killall -q /usr/sbin/syslog-ng
   rm -f /var/run/syslog-ng.pid
   ;;
 restart)
