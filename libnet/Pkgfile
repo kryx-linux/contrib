@@ -5,12 +5,15 @@
 
 name=libnet
 version=1.1.2.1
-release=1
+release=2
 source=(ftp://ftp.eenet.ee/pub/FreeBSD/distfiles/$name-$version.tar.gz)
 
 build() {
-    cd  $name
+    cd $name
+    export CFLAGS=$CFLAGS" -fPIC" 
+
     ./configure --prefix=/usr
+    sed -i 's/ sample//g' Makefile
     make
     make DESTDIR=$PKG install
     install -D -m 755 libnet-config $PKG/usr/bin/libnet-config
