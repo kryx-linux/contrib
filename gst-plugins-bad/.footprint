@@ -7,6 +7,19 @@ drwxr-xr-x	root/root	usr/include/gstreamer-0.10/gst/interfaces/
 -rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/interfaces/photography.h
 drwxr-xr-x	root/root	usr/include/gstreamer-0.10/gst/signalprocessor/
 -rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/signalprocessor/gstsignalprocessor.h
+drwxr-xr-x	root/root	usr/include/gstreamer-0.10/gst/vdpau/
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdp.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpbuffer.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpbufferpool.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpdecoder.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpdevice.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpoutputbuffer.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpoutputbufferpool.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpoutputsrcpad.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdputils.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpvideobuffer.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpvideobufferpool.h
+-rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/vdpau/gstvdpvideosrcpad.h
 drwxr-xr-x	root/root	usr/include/gstreamer-0.10/gst/video/
 -rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/video/gstbasevideocodec.h
 -rw-r--r--	root/root	usr/include/gstreamer-0.10/gst/video/gstbasevideodecoder.h
@@ -151,12 +164,16 @@ drwxr-xr-x	root/root	usr/lib/gstreamer-0.10/
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstreal.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrfbsrc.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrfbsrc.so
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrsvg.la
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrsvg.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrtpmux.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrtpmux.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrtpvp8.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstrtpvp8.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstscaletempoplugin.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstscaletempoplugin.so
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstschro.la
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstschro.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstsdi.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstsdi.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstsdl.la
@@ -177,10 +194,14 @@ drwxr-xr-x	root/root	usr/lib/gstreamer-0.10/
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgststereo.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstsubenc.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstsubenc.so
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgsttrm.la
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgsttrm.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgsttta.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgsttta.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstvcdsrc.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstvcdsrc.so
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstvdpau.la
+-rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstvdpau.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstvideofiltersbad.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstvideofiltersbad.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-0.10/libgstvideomaxrate.la
@@ -211,6 +232,10 @@ lrwxrwxrwx	root/root	usr/lib/libgstphotography-0.10.so.0 -> libgstphotography-0.
 lrwxrwxrwx	root/root	usr/lib/libgstsignalprocessor-0.10.so -> libgstsignalprocessor-0.10.so.0.0.0
 lrwxrwxrwx	root/root	usr/lib/libgstsignalprocessor-0.10.so.0 -> libgstsignalprocessor-0.10.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libgstsignalprocessor-0.10.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgstvdp-0.10.la
+lrwxrwxrwx	root/root	usr/lib/libgstvdp-0.10.so -> libgstvdp-0.10.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libgstvdp-0.10.so.0 -> libgstvdp-0.10.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgstvdp-0.10.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/gstreamer-plugins-bad-0.10.pc
 drwxr-xr-x	root/root	usr/share/
