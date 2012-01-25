@@ -17,10 +17,13 @@ lrwxrwxrwx	root/root	usr/bin/jack_disconnect -> jack_connect
 -rwxr-xr-x	root/root	usr/bin/jack_lsp
 -rwxr-xr-x	root/root	usr/bin/jack_metro
 -rwxr-xr-x	root/root	usr/bin/jack_midi_dump
+-rwxr-xr-x	root/root	usr/bin/jack_midi_latency_test
 -rwxr-xr-x	root/root	usr/bin/jack_midiseq
 -rwxr-xr-x	root/root	usr/bin/jack_midisine
 -rwxr-xr-x	root/root	usr/bin/jack_monitor_client
 -rwxr-xr-x	root/root	usr/bin/jack_multiple_metro
+-rwxr-xr-x	root/root	usr/bin/jack_net_master
+-rwxr-xr-x	root/root	usr/bin/jack_net_slave
 -rwxr-xr-x	root/root	usr/bin/jack_netsource
 -rwxr-xr-x	root/root	usr/bin/jack_rec
 -rwxr-xr-x	root/root	usr/bin/jack_samplerate
@@ -43,6 +46,7 @@ drwxr-xr-x	root/root	usr/include/jack/
 -rw-r--r--	root/root	usr/include/jack/jack.h
 -rw-r--r--	root/root	usr/include/jack/jslist.h
 -rw-r--r--	root/root	usr/include/jack/midiport.h
+-rw-r--r--	root/root	usr/include/jack/net.h
 -rw-r--r--	root/root	usr/include/jack/ringbuffer.h
 -rw-r--r--	root/root	usr/include/jack/session.h
 -rw-r--r--	root/root	usr/include/jack/statistics.h
@@ -57,6 +61,7 @@ drwxr-xr-x	root/root	usr/lib/jack/
 -rw-r--r--	root/root	usr/lib/jack/audioadapter.so
 -rw-r--r--	root/root	usr/lib/jack/inprocess.so
 -rw-r--r--	root/root	usr/lib/jack/jack_alsa.so
+-rw-r--r--	root/root	usr/lib/jack/jack_alsarawmidi.so
 -rw-r--r--	root/root	usr/lib/jack/jack_dummy.so
 -rw-r--r--	root/root	usr/lib/jack/jack_loopback.so
 -rw-r--r--	root/root	usr/lib/jack/jack_net.so
@@ -67,6 +72,9 @@ drwxr-xr-x	root/root	usr/lib/jack/
 lrwxrwxrwx	root/root	usr/lib/libjack.so -> libjack.so.0.1.0
 lrwxrwxrwx	root/root	usr/lib/libjack.so.0 -> libjack.so.0.1.0
 -rw-r--r--	root/root	usr/lib/libjack.so.0.1.0
+lrwxrwxrwx	root/root	usr/lib/libjacknet.so -> libjacknet.so.0.1.0
+lrwxrwxrwx	root/root	usr/lib/libjacknet.so.0 -> libjacknet.so.0.1.0
+-rw-r--r--	root/root	usr/lib/libjacknet.so.0.1.0
 lrwxrwxrwx	root/root	usr/lib/libjackserver.so -> libjackserver.so.0.1.0
 lrwxrwxrwx	root/root	usr/lib/libjackserver.so.0 -> libjackserver.so.0.1.0
 -rw-r--r--	root/root	usr/lib/libjackserver.so.0.1.0

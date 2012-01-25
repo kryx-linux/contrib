@@ -5,12 +5,12 @@
 # Depends on: libsamplerate
 
 name=jack
-version=1.9.7
+version=1.9.8
 release=1
-source=(http://www.grame.fr/~letz/$name-$version.tar.bz2)
+source=(http://www.grame.fr/~letz/$name-$version.tgz)
 
 build() {
-	cd $name-$version
+	cd $name-$version/$name-$version
 	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) \{0,1\}.*/\1/' <<< $MAKEFLAGS)"
 	./waf configure \
 		--prefix=/usr \
