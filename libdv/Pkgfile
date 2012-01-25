@@ -2,7 +2,8 @@
 # URL: http://libdv.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Hannes Mayer, kontakt at ecarux dot de
-# Depends on: xorg-libxv gtk1 libsdl popt
+# Depends on: xorg-libxv libsdl popt
+# Optional: gtk1
 
 name=libdv
 version=1.0.0
@@ -20,7 +21,6 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-		--disable-static \
 		--enable-sdl
 
 	make
