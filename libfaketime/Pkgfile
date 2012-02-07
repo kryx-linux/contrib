@@ -4,7 +4,7 @@
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 
 name=libfaketime
-version=0.8.1
+version=0.9.1
 release=1
 source=(http://www.code-wizards.com/projects/libfaketime/libfaketime-$version.tar.gz)
 
@@ -16,9 +16,6 @@ build() {
 
 	make PREFIX=/usr
 	make PREFIX=/usr DESTDIR=$PKG install
-
-	rm -r $PKG/usr/share/doc
-	rmdir $PKG/usr/share
 
 	ln -sf libfaketime.so.1 $PKG/usr/lib/libfaketime.so
 	ln -sf libfaketimeMT.so.1 $PKG/usr/lib/libfaketimeMT.so
