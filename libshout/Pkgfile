@@ -5,12 +5,12 @@
 # Depends on: libvorbis
 
 name=libshout
-version=2.2.2
+version=2.3.0
 release=1
-source=(http://downloads.us.xiph.org/releases/libshout/libshout-$version.tar.gz)
+source=(http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz)
 
 build() {
-	cd libshout-$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
