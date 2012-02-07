@@ -11,7 +11,11 @@ source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$ver
 
 build() {
 	cd $name-$version
-	./configure --prefix=/usr
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man
+
 	make
 	make DESTDIR=$PKG install
 }
