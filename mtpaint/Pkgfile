@@ -6,13 +6,12 @@
 # Nice to have: libungif
 
 name=mtpaint
-version=3.31
+version=3.40
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2 png_c.diff)
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
 
 build() {
     cd $name-$version
-    patch -p1 -i ../png_c.diff
     ./configure --prefix=/usr gtk2 cflags man
 
     make
