@@ -22,13 +22,14 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/conf/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/mediameta.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/mime.conf
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/mysql.conf.php.example
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/plugins.required.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/scheme.conf
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/smileys.conf
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/users.auth.php.dist
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/conf/wordblock.conf
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/
 -rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/.htaccess
--rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/_dummy
+-rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/_dummy (EMPTY)
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/attic/
 -rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/attic/_dummy (EMPTY)
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/cache/
@@ -42,6 +43,10 @@ drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/locks/
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/media/
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/media/wiki/
 -rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/media/wiki/dokuwiki-128.png
+drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/media_attic/
+-rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/media_attic/_dummy (EMPTY)
+drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/media_meta/
+-rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/media_meta/_dummy (EMPTY)
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/meta/
 -rw-r--r--	www/www	var/www/htdocs/dokuwiki/data/meta/_dummy (EMPTY)
 drwxr-xr-x	www/www	var/www/htdocs/dokuwiki/data/pages/
@@ -341,11 +346,6 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/inc/parser/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/index.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/install.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/
-drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/_fla/
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/_fla/.htaccess
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/_fla/MultipleUpload.as
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/_fla/index.html
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/_fla/multipleUpload.fla
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/exe/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/ajax.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/css.php
@@ -355,7 +355,6 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/exe/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/indexer.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/js.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/mediamanager.php
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/multipleUpload.swf
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/opensearch.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/exe/xmlrpc.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/images/
@@ -435,6 +434,10 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/xml.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/fileicons/zip.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/history.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/icon-file.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/icon-list.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/icon-sort.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/icon-thumb.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/index.html
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/info.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/interwiki.png
@@ -500,8 +503,8 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/images/license/button/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/media_size_medium.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/media_size_original.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/media_size_small.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/mediamanager.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/minus.gif
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/multiupload.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/notify.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/ns.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/images/page.png
@@ -583,6 +586,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/pix/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/pix/ns.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/pix/page.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/pix/user.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/plugin.info.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/rtl.css
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/script.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/acl/style.css
@@ -598,6 +602,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/en/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/en/intro.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/lang/en/lang.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/plugin.info.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/rtl.css
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/settings/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/settings/config.class.php
@@ -607,6 +612,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/config/settings/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/index.html
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/info/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/info/lang/
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/info/plugin.info.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/info/syntax.php
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/plugin/admin.php
@@ -639,6 +645,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/en/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/en/intro.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/lang/en/lang.php
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/revert/plugin.info.txt
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/safefnrecode/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/safefnrecode/action.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/safefnrecode/plugin.info.txt
@@ -655,26 +662,55 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/lang/en/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/lang/en/intro.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/lang/en/lang.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/lang/en/list.txt
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/plugin.info.txt
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/script.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/plugins/usermanager/style.css
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/scripts/
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/ajax.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/behaviour.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/compatibility.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/cookie.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/delay.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/drag.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/edit.js
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/events.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/editor.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/fileuploader.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/fileuploaderextended.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/helpers.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/hotkeys.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/index.html
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/index.js
+drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/
+drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/
+drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_flat_0_aaaaaa_40x100.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_flat_75_ffffff_40x100.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_glass_55_fbf9ee_1x400.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_glass_65_ffffff_1x400.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_glass_75_dadada_1x400.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_glass_75_e6e6e6_1x400.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_glass_95_fef1ec_1x400.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-bg_highlight-soft_75_cccccc_1x100.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-icons_222222_256x240.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-icons_2e83ff_256x240.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-icons_454545_256x240.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-icons_888888_256x240.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/images/ui-icons_cd0a0a_256x240.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui-theme/smoothness.css
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery-ui.min.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery.cookie.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/jquery.min.js
+-rwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/scripts/jquery/update.sh
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/linkwiz.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/locktimer.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/media.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/page.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/qsearch.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/script.js
--rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/subscriptions.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/textselection.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/toolbar.js
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/tree.js
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/scripts/tw-sack.js
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/styles/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/styles/all.css
@@ -685,15 +721,19 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/styles/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/tpl/
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/_admin.css
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/_fileuploader.css
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/_linkwiz.css
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/_mediamanager.css
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/_mediaoptions.css
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/_subscription.css
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/_tabs.css
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/design.css
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/detail.php
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/footer.html
 drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/UWEB.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/UWEBshadow.png
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/apple-touch-icon.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/bullet.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/button-cc.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/button-css.png
@@ -709,6 +749,7 @@ drwxr-xr-x	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/link_icon.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/mail_icon.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/open.gif
+-rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/resizecol.png
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/tocdot2.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/images/windows.gif
 -rw-r--r--	root/root	var/www/htdocs/dokuwiki/lib/tpl/default/layout.css
