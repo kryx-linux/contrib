@@ -5,19 +5,12 @@
 # Depends on: sdl_mixer sdl_net wxgtk freealut fftw
 
 name=scorched3d
-version=43.2a
+version=43.3
 release=1
-source=(http://download.sourceforge.net/scorched3d/Scorched3D-$version-src.tar.gz
-	scorched3d-43.2-openal.patch
-	scorched3d-43.2-misc.patch)
+source=(http://download.sourceforge.net/scorched3d/Scorched3D-$version-src.tar.gz)
 
 build() {
 	cd scorched
-
-	touch INSTALL NEWS AUTHORS ChangeLog
-	patch -p 1 -i $SRC/scorched3d-43.2-openal.patch
-	patch -p 1 -i $SRC/scorched3d-43.2-misc.patch
-	autoreconf
 
 	./configure \
 		--prefix=/usr \
