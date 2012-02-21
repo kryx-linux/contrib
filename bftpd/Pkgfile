@@ -4,7 +4,7 @@
 # Packager: Simone Rota, sip at crux dot nu
 
 name=bftpd
-version=3.6
+version=3.7
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz
 	ftpd)
@@ -14,11 +14,20 @@ build () {
 
 	./configure \
 		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
 		--enable-libz
 
 	make
 	install -d $PKG/usr/sbin $PKG/usr/man/man8 $PKG/etc $PKG/etc/rc.d
 	make DESTDIR=$PKG install
+
+	# bftpd version 3.7 moved these directories and --sysconfdir
+	# --localstatedir does not work currently
+	mv $PKG/usr/etc/bftpd.conf $PKG/etc/
+	mv $PKG/usr/var $PKG/var/
+	rmdir $PKG/usr/etc
+
 	install -D -m 0755 $SRC/ftpd $PKG/etc/rc.d/ftpd
 	chmod 0600 $PKG/etc/bftpd.conf
 	ln -sf bftpd $PKG/usr/sbin/in.ftpd
