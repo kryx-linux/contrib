@@ -1,10 +1,10 @@
 # Description:	Perl interface to GD graphics library 
-# URL:	http://search.cpan.org/~lds/GD-2.39/
+# URL:	http://search.cpan.org/~lds/GD-2.46/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:	perl, libgd
 
 name=p5-gd
-version=2.39
+version=2.46
 release=1
 source=(http://search.cpan.org/CPAN/authors/id/L/LD/LDS/GD-$version.tar.gz )
 
@@ -15,5 +15,4 @@ build () {
 	make OPTIMIZE="${CFLAGS}"
 	make DESTDIR=${PKG} install
 	find $PKG \( \( -depth -empty \) -o \( -name .packlist -o -name '*.bs' -o -name autosplit.ix -o -name perllocal.pod \) \) -exec rm -rf {} \;
-	chown -R root:root $PKG
 }
