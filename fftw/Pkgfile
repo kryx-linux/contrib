@@ -6,7 +6,7 @@
 # Optional: gcc-fortran
 
 name=fftw
-version=3.3
+version=3.3.1
 release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
@@ -39,8 +39,7 @@ build() {
 	make clean
 
 	# compiling double precision library
-	./configure \
-		$config
+	./configure $config
 
 	make
 	make DESTDIR=$PKG install
