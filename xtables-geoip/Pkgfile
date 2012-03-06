@@ -5,13 +5,13 @@
 # Depends on: p5-text-csv-xs xtables-addons
 
 name=xtables-geoip
-version=20120107
+version=20120210
 release=1
-source=(http://www.hvlinux.net/crux/distfiles/$name/GeoIPCountryCSV-20120105.zip
-	http://www.hvlinux.net/crux/distfiles/$name/GeoIPv6-20120106.csv.gz)
+source=(http://www.hvlinux.net/crux/distfiles/$name/GeoIPCountryCSV-20120209.zip
+	http://www.hvlinux.net/crux/distfiles/$name/GeoIPv6-20120210.csv.gz)
 
 build() {
-	gunzip $SRC/GeoIPv6-20120106.csv.gz
+	gunzip $SRC/GeoIPv6-*.csv.gz
 
 	install -d $PKG/usr/share/xt_geoip
 
