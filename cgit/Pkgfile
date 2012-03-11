@@ -4,23 +4,16 @@
 # Packager: Lucas Hazel, lucas at die dot net dot au
 # Depends on: git asciidoc
 
-## prt-get info git | awk '/Version:/ {print $2}'
-gitversion=1.7.4.1
-
 name=cgit
 version=0.9.0.2
+gitversion=1.7.4.1
 release=1
 source=(http://hjemli.net/git/cgit/snapshot/$name-$version.tar.bz2
-	http://www.kernel.org/pub/software/scm/git/git-$gitversion.tar.bz2
+	http://hjemli.net/git/git/snapshot/git-$gitversion.tar.bz2
 	cgit.conf)
 
 build() {
 	cd $name-$version
-
-	if [ $gitversion != "$(/usr/bin/git --version | cut -d ' ' -f 3)" ]; then
-		echo 'Did you forget to update gitversion?'
-		exit 1
-	fi
 
 	rm -rf git
 	ln -s $SRC/git-$gitversion git
