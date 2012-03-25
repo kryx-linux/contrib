@@ -5,7 +5,7 @@
 # Depends on:  intltool gtk xorg-libxscrnsaver startup-notification nss libidn
 
 name=pidgin
-version=2.10.1
+version=2.10.2
 release=1
 source=(http://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$version.tar.bz2)
 
@@ -15,16 +15,16 @@ build () {
         --mandir=/usr/man \
         --disable-nls \
         --disable-schemas-install \
-	--disable-meanwhile \
+        --disable-meanwhile \
         --with-nspr-includes=/usr/include/nspr \
         --with-nss-includes=/usr/include/nss \
         --with-nspr-libs=/usr/lib \
         --with-nss-libs=/usr/lib \
-	--disable-tcl \
-	--disable-perl \
+        --disable-tcl \
+        --disable-perl \
         --disable-gtkspell \
-	--disable-avahi \
-	--disable-dbus \
+        --disable-avahi \
+        --disable-dbus \
         --disable-gstreamer \
         --disable-vv
 
