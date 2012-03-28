@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# /etc/rc.d/bluetooth: start/stop bluetooth daemon
+#
+
+# Note:
+# To connect to an input device at boot time, add:
+# hidd --connect XX:XX:XX:XX:XX:XX
+
+case $1 in
+start)
+	/usr/sbin/bluetoothd
+	;;
+stop)
+	killall -e -q bluetoothd
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
+
+# End of file

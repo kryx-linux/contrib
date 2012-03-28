@@ -1,0 +1,46 @@
+# Description:	Bluetooth libraries and utilities
+# URL:		http://www.bluez.org
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	dbus
+
+name=bluez
+version=4.99
+release=1
+source=(http://www.kernel.org/pub/linux/bluetooth/$name-$version.tar.gz bluetooth.rc)
+
+build() {
+	# note: sysconfdir is /usr/etc instead of /etc on purpose
+	# in CRUX some people use /usr/etc for config files, I know its stupid
+
+	cd $name-$version
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/usr/etc \
+		--mandir=/usr/man \
+		--localstatedir=/var \
+		--enable-usb \
+		--enable-tools \
+		--enable-hid2hci \
+		--enable-hidd \
+		--enable-pand \
+		--enable-dund \
+		--enable-alsa \
+		--enable-bccmd \
+		--enable-dfutool \
+		--enable-cups \
+		--enable-gstreamer \
+		--disable-test
+	make
+	make DESTDIR=$PKG install
+
+	for i in network input audio serial; do
+		cp $i/$i.conf $PKG/usr/etc/bluetooth
+	done
+
+	install -m 755 -o root -g root -D test/simple-agent $PKG/usr/bin/bluez-simple-agent
+	install -m 755 -o root -g root -D test/test-device $PKG/usr/bin/bluez-test-device
+	install -m 755 -o root -g root -D test/test-input $PKG/usr/bin/bluez-test-input
+	install -m 755 -o root -g root -D $SRC/bluetooth.rc $PKG/etc/rc.d/bluetooth
+
+	rm $PKG/lib/udev/rules.d/97-bluetooth.rules
+}
