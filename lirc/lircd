@@ -9,7 +9,7 @@ case "$1" in
 	;;
 	stop)
 		if [ -f /var/run/lircd.pid ]; then
-			kill `cat /var/run/lircd.pid` && rm -f /var/run/lircd.pid
+			kill $(< /var/run/lircd.pid) && rm -f /var/run/lircd.pid
 		else
 			return 1
 		fi

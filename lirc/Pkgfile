@@ -1,11 +1,11 @@
 # Description:	Linux Infrared Remote Control
-# URL:	http://www.lirc.org/
+# URL:		http://www.lirc.org/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 #
 # Depends on:	
 
 name=lirc
-version=0.8.4a
+version=0.9.0
 release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2 irxevent_name.diff lircd)
 
@@ -35,5 +35,5 @@ build() {
 	make
 	make DESTDIR=$PKG install
 	install -D -m 755 $SRC/lircd $PKG/etc/rc.d/lircd
-	rm -rf $PKG/dev
+	rm -rf $PKG/dev $PKG/var
 }
