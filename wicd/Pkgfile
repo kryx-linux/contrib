@@ -4,8 +4,8 @@
 # Depends on: dbus-python pygtk
 
 name=wicd 
-version=1.7.0
-release=2
+version=1.7.1
+release=1
 source=(http://download.sourceforge.net/project/wicd/wicd-stable/$name-$version/$name-$version.tar.bz2
 	wicd.rc)
 
@@ -20,11 +20,9 @@ build() {
 	python setup.py install --root=$PKG
 	python -mcompileall $PKG
 	install -m 0744 -D $SRC/wicd.rc $PKG/etc/rc.d/wicd
+
 	rm -r \
 		$PKG/etc/xdg \
 		$PKG/usr/man/nl \
-		$PKG/usr/share/locale \
 		$PKG/usr/share/doc
-
-
 }
