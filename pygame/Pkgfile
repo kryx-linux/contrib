@@ -5,15 +5,20 @@
 # Depends on: numeric sdl_image sdl_mixer sdl_ttf
 
 name=pygame
-version=1.8.1
+version=1.9.1
 release=1
-source=(http://www.pygame.org/ftp/pygame-${version}release.tar.gz)
+source=(http://www.pygame.org/ftp/$name-${version}release.tar.gz
+	pygame-1.9.1-config.patch)
 
 build() {
-	cd pygame-${version}release
+	cd $name-${version}release
+
 	export CFLAGS="$CFLAGS -fno-strict-aliasing"
-	python config.py
+	patch -p1 -i $SRC/pygame-1.9.1-config.patch
+
+	python config.py -auto
 	python setup.py install --prefix=/usr --root $PKG
+
 	chmod a-x $PKG/usr/lib/python*/site-packages/pygame/*.so
 	find $PKG -name '*.h' -exec chmod 0644 {} \;
 
@@ -22,4 +27,3 @@ build() {
 		-name 'pygame_icon.*' -o \
 		-name 'freesansbold.ttf' \) -exec chmod 0644 {} \;
 }
-
