@@ -6,9 +6,11 @@
 name=openvpn
 version=2.2.2
 release=1
-source=(http://swupdate.openvpn.net/community/releases/$name-$version.tar.gz)
+source=(http://swupdate.openvpn.net/community/releases/$name-$version.tar.gz \
+        openvpn)
 
 build() {
+  install -D -m 755 openvpn $PKG/etc/rc.d/openvpn
   cd $name-$version
 
   ./configure --prefix=/usr \
