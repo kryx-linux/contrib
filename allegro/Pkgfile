@@ -2,7 +2,7 @@
 # URL: http://alleg.sourceforge.net/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: flac gtk libvorbis mesa3d openal physfs xorg-libxpm xorg-libxxf86dga
+# Depends on: flac gtk libidn libvorbis mesa3d openal physfs xorg-libxpm xorg-libxxf86dga
 
 name=allegro
 version=5.0.6
@@ -18,5 +18,4 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-#	rm -r $PKG/usr/doc
 }
