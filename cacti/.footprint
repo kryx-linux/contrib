@@ -26,6 +26,7 @@ drwxr-xr-x	root/root	var/www/htdocs/cacti/cli/
 -rw-r--r--	root/root	var/www/htdocs/cacti/cli/poller_output_empty.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/cli/poller_reindex_hosts.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/cli/rebuild_poller_cache.php
+-rw-r--r--	root/root	var/www/htdocs/cacti/cli/reorder_data_query.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/cli/repair_database.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/cli/repair_templates.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/cli/structure_rra_paths.php
@@ -81,12 +82,17 @@ drwxr-xr-x	root/root	var/www/htdocs/cacti/images/
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/calendar.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/delete_icon.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/delete_icon_large.gif
+-rw-r--r--	root/root	var/www/htdocs/cacti/images/disable_icon.png
+-rw-r--r--	root/root	var/www/htdocs/cacti/images/enable_icon.png
+-rw-r--r--	root/root	var/www/htdocs/cacti/images/enable_icon_disabled.png
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/favicon.ico
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/graph_page_top.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/graph_properties.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/graph_query.png
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/graph_zoom.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/hide.gif
+-rw-r--r--	root/root	var/www/htdocs/cacti/images/install_icon.png
+-rw-r--r--	root/root	var/www/htdocs/cacti/images/install_icon_disabled.png
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/left_border.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/menu_line.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/menuarrow.gif
@@ -112,6 +118,8 @@ drwxr-xr-x	root/root	var/www/htdocs/cacti/images/
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/tab_settings.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/tab_settings_down.gif
 -rw-r--r--	root/root	var/www/htdocs/cacti/images/transparent_line.gif
+-rw-r--r--	root/root	var/www/htdocs/cacti/images/uninstall_icon.gif
+-rw-r--r--	root/root	var/www/htdocs/cacti/images/view_none.gif
 drwxr-xr-x	root/root	var/www/htdocs/cacti/include/
 -rw-r--r--	root/root	var/www/htdocs/cacti/include/auth.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/include/bottom_footer.php
@@ -170,6 +178,7 @@ drwxr-xr-x	root/root	var/www/htdocs/cacti/include/jscalendar/lang/
 -rw-r--r--	root/root	var/www/htdocs/cacti/include/jscalendar/lang/cn_utf8.js
 -rw-r--r--	root/root	var/www/htdocs/cacti/include/layout.js
 -rw-r--r--	root/root	var/www/htdocs/cacti/include/main.css
+-rw-r--r--	root/root	var/www/htdocs/cacti/include/plugins.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/include/top_graph_header.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/include/top_header.php
 drwxr-xr-x	root/root	var/www/htdocs/cacti/include/treeview/
@@ -209,6 +218,8 @@ drwxr-xr-x	root/root	var/www/htdocs/cacti/install/
 -rw-r--r--	root/root	var/www/htdocs/cacti/install/0_8_7f_to_0_8_7g.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/install/0_8_7g_to_0_8_7h.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/install/0_8_7h_to_0_8_7i.php
+-rw-r--r--	root/root	var/www/htdocs/cacti/install/0_8_7i_to_0_8_8.php
+-rw-r--r--	root/root	var/www/htdocs/cacti/install/0_8_8_to_0_8_8a.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/install/0_8_to_0_8_1.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/install/index.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/install/install_finish.gif
@@ -328,6 +339,7 @@ drwxr-xr-x	root/root	var/www/htdocs/cacti/lib/adodb/lang/
 -rw-r--r--	root/root	var/www/htdocs/cacti/lib/import.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/lib/ldap.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/lib/ping.php
+-rw-r--r--	root/root	var/www/htdocs/cacti/lib/plugins.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/lib/poller.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/lib/rrd.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/lib/snmp.php
@@ -343,6 +355,9 @@ drwxr-xr-x	cactiuser/root	var/www/htdocs/cacti/log/
 -rw-r--r--	cactiuser/root	var/www/htdocs/cacti/log/.htaccess
 -rw-r--r--	cactiuser/root	var/www/htdocs/cacti/log/cacti.log (EMPTY)
 -rw-r--r--	root/root	var/www/htdocs/cacti/logout.php
+-rw-r--r--	root/root	var/www/htdocs/cacti/plugins.php
+drwxr-xr-x	root/root	var/www/htdocs/cacti/plugins/
+-rw-r--r--	root/root	var/www/htdocs/cacti/plugins/index.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/poller.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/poller_commands.php
 -rw-r--r--	root/root	var/www/htdocs/cacti/poller_export.php
