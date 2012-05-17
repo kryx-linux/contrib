@@ -5,16 +5,24 @@
 
 name=qemu-kvm
 version=1.0.1
-release=1
+release=2
 source=(http://download.sourceforge.net/kvm/qemu-kvm/$version/qemu-kvm-$version.tar.gz)
 
 build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --sysconfdir=/etc
+              --sysconfdir=/etc \
+              --mandir=/usr/man
+
   # fix include issues with nspr
   echo 'QEMU_CFLAGS+=-I/usr/include/nspr' >> libcacard/Makefile
-  make 
-  make install DESTDIR=$PKG
+  
+  # no html docs
+  sed -i -e 's/\t$(INSTALL_DATA) qemu-doc.html/#&/g' \
+         -e 's/\t$(INSTALL_DIR) "$(DESTDIR)$(docdir)"/#&/g' Makefile
+
+  make all qemu.1 qemu-img.1 qemu-nbd.8
+  make install install-doc DESTDIR=$PKG
+
 }
