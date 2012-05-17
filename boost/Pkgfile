@@ -6,7 +6,7 @@
 
 name=boost
 version=1.49.0
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.tar.bz2)
 
 build() {
@@ -47,6 +47,8 @@ build() {
 		-sEXPAT_INCLUDE=/usr/include \
 		-sEXPAT_LIBPATH=/usr/lib \
 		install
+
+	install -m 0755 bjam $PKG/usr/bin/bjam
 
 	cd libs/python/pyste/install
 	python setup.py install --root=$PKG
