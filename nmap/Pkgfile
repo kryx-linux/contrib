@@ -4,7 +4,7 @@
 # Packager: sten, nick dot steeves at shaw dot ca
 
 name=nmap
-version=5.51
+version=6.00
 release=1
 source=(http://nmap.org/dist/$name-$version.tar.bz2)
 
@@ -13,8 +13,8 @@ build () {
     cd $name-$version
     ./configure --prefix=/usr --libexecdir=/usr/lib --mandir=/usr/man \
     --with-libpcre=included --with-liblua=included \
-    --with-libpcap=included --without-zenmap \
-    --without-ndiff --disable-nls
+    --without-zenmap --without-ndiff --disable-nls
+
     #install -d $PKG/usr/share/nmap
     make
     make DESTDIR=$PKG install
