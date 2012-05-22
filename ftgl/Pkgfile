@@ -6,18 +6,22 @@
 
 name=ftgl
 version=2.1.3-rc5
-release=1
+release=2
 source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-2.1.3~rc5
+
   ./configure --prefix=/usr \
               --with-x \
               --disable-nls \
               --disable-docs \
               --disable-static \
               --disable-freetypetest
+
   make
   make DESTDIR=$PKG install
+
+  install -m 06444 src/FT{Face,Library,Size}.h $PKG/usr/include/FTGL
   rm -rf $PKG/usr/share
 }
