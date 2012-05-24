@@ -1,0 +1,23 @@
+diff -purN doxygen-1.8.1.orig/configure doxygen-1.8.1/configure
+--- doxygen-1.8.1.orig/configure	2012-05-22 16:27:04.000000000 +0200
++++ doxygen-1.8.1/configure	2012-05-22 16:53:44.000000000 +0200
+@@ -565,6 +565,19 @@ if test "$f_platform" = "hpux-g++" -o "$
+     TMAKE_CXXFLAGS += -D_LARGEFILE_SOURCE
+ EOF
+ fi
++
++if test -n $CFLAGS; then
++  cat >> .tmakeconfig <<EOF
++    TMAKE_CFLAGS += $CFLAGS
++EOF
++fi
++
++if test -n $CXXFLAGS; then
++  cat >> .tmakeconfig <<EOF
++    TMAKE_CXXFLAGS += $CXXFLAGS
++EOF
++fi
++
+ if test "$f_platform" = "macosx-uni-c++"; then
+   if test -n "`ls /Developer/SDKs/MacOSX10.*.sdk 2>/dev/null`"; then
+     mac_sdk=MacOSX10.4u.sdk
