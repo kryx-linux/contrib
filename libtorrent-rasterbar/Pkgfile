@@ -6,11 +6,14 @@
 
 name=libtorrent-rasterbar
 version=0.16.0
-release=1
-source=(http://libtorrent.googlecode.com/files/$name-$version.tar.gz)
+release=2
+source=(http://libtorrent.googlecode.com/files/$name-$version.tar.gz
+	libtorrent.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p 0 -i $SRC/libtorrent.patch
 
 	./configure \
 		--prefix=/usr \
