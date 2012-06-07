@@ -5,7 +5,7 @@
 # Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib
 
 name=thunderbird
-version=10.0.2
+version=13.0
 comm_ver=release
 release=1
 source=(
@@ -35,7 +35,7 @@ build() {
         #ac_add_options --enable-optimize="$(grep -o '[-]O.' <<< "${CFLAGS}")"
         ac_add_options --enable-optimize="$CFLAGS"
         ac_add_options --disable-xterm-updates
-        ac_add_options --enable-system-cairo
+        #ac_add_options --enable-system-cairo
         #ac_add_options --enable-system-sqlite
         ac_add_options --with-default-mozilla-five-home
         ac_add_options --disable-crashreporter
