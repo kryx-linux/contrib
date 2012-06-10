@@ -6,7 +6,7 @@
 
 name=ntp
 version=4.2.6p5
-release=1
+release=2
 source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/$name-$version.tar.gz
         ntpd
         ntpdate
@@ -53,4 +53,7 @@ build () {
 
    # initialize ntp.drift file
    echo "0.0" > $PKG/var/lib/ntp/ntp.drift
+
+   # assign ownership to ntp:ntp
+   chown -R ntp:ntp $PKG/var/lib/ntp $PKG/var/run/ntp $PKG/var/log/ntp.log
 }
