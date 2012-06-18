@@ -21,9 +21,7 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/locale
 
-	rmdir \
-		$PKG/usr/share \
-		$PKG/usr
+	rm -rf $PKG/usr/share/locale
+	rmdir $PKG/usr/share
 }
