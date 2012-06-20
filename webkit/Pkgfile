@@ -2,17 +2,25 @@
 # URL: http://www.webkitgtk.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: enchant geoclue gst-plugins-base icu libsoup mesa3d
+# Depends on: enchant gst-plugins-base icu libsoup mesa3d libjpeg gtk
+# Nice to have: geoclue
 
 name=webkit
 version=1.8.1
 release=1
-source=(http://webkitgtk.org/releases/$name-$version.tar.xz)
+source=(http://webkitgtk.org/releases/$name-$version.tar.xz
+	gtkdoc-rebase-remove.patch)
 
 build() {
 	cd $name-$version
 
-	./configure \
+	patch -p1 -i $SRC/gtkdoc-rebase-remove.patch
+
+	if [ -z "$(pkginfo -i | grep '^geoclue ')" ]; then
+		local config='--disable-geolocation'
+	fi
+
+	./configure $config \
 		--prefix=/usr \
 		--enable-video \
 		--with-font-backend=freetype \
@@ -23,6 +31,8 @@ build() {
 
 	make -j 1
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share/locale
-	rm -r $PKG/usr/share/gtk-doc
+
+	rm -r \
+		$PKG/usr/share/locale \
+		$PKG/usr/share/gtk-doc
 }
