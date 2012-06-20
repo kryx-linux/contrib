@@ -5,18 +5,18 @@
 # Depends on: libpcap
 
 name=p0f
-version=2.0.8
+version=3.05b
 release=1
-source=(http://ftp.freebsd.org/pub/FreeBSD/distfiles/$name-$version.tgz)
+source=(http://lcamtuf.coredump.cx/p0f3/releases/p0f-$version.tgz)
 
 build() {
-    cd $name
+    cd $name-$version
+    sed -i 's|p0f.fp|/etc/p0f.fp|1' config.h
     make
-    install -d $PKG/usr/sbin $PKG/usr/man/man1
-    install -d $PKG/etc/p0f
-    install -m 755 {p0f,p0frep} $PKG/usr/sbin
-    install -m 644 p0f.1 $PKG/usr/man/man1
-    install -m 644 {p0f.fp,p0fa.fp,p0fr.fp} $PKG/etc/p0f
-    cd test
-    for i in *.c;do gcc "$i" -o $(basename "$i" .c);install $(basename "$i" .c) $PKG/usr/sbin;done
+    install -d $PKG/usr/sbin $PKG/etc
+    install -m 755 p0f $PKG/usr/sbin
+    install -m 644 p0f.fp $PKG/etc
+    cd tools
+    make
+    for i in *.c;do install $(basename "$i" .c) $PKG/usr/sbin;done
 }
