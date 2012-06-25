@@ -5,15 +5,12 @@
 # Depends on: boost
 
 name=libtorrent-rasterbar
-version=0.16.0
-release=2
-source=(http://libtorrent.googlecode.com/files/$name-$version.tar.gz
-	libtorrent.patch)
+version=0.16.1
+release=1
+source=(http://libtorrent.googlecode.com/files/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	patch -p 0 -i $SRC/libtorrent.patch
 
 	./configure \
 		--prefix=/usr \
