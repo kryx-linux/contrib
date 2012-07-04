@@ -4,8 +4,8 @@
 # Depends on:  libsdl
 
 name=qemu-kvm
-version=1.0.1
-release=2
+version=1.1.0
+release=1
 source=(http://download.sourceforge.net/kvm/qemu-kvm/$version/qemu-kvm-$version.tar.gz)
 
 build() {
@@ -13,7 +13,7 @@ build() {
 
   ./configure --prefix=/usr \
               --sysconfdir=/etc \
-              --mandir=/usr/man
+              --mandir=/usr/man  --enable-guest-agent # --cc=clang --host-cc=clang
 
   # fix include issues with nspr
   echo 'QEMU_CFLAGS+=-I/usr/include/nspr' >> libcacard/Makefile
@@ -22,7 +22,7 @@ build() {
   sed -i -e 's/\t$(INSTALL_DATA) qemu-doc.html/#&/g' \
          -e 's/\t$(INSTALL_DIR) "$(DESTDIR)$(docdir)"/#&/g' Makefile
 
-  make all qemu.1 qemu-img.1 qemu-nbd.8
+  make all qemu.1 qemu-img.1 qemu-nbd.8 fsdev/virtfs-proxy-helper.1
   make install install-doc DESTDIR=$PKG
 
 }
