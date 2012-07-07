@@ -12,12 +12,17 @@ source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${
 build() {
 	cd ${name}_${version//./_}
 
+	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
+		echo "using gcc : : ccache g++ ;" >> \
+			tools/build/v2/user-config.jam
+	fi
+
 	./bootstrap.sh
 
 	sed -i -e "s|-O3|$CXXFLAGS -O3 -Wno-deprecated -fno-strict-aliasing|" \
 		tools/build/v2/tools/gcc.jam
 
-	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) \{0,1\}.*/\1/' <<< $MAKEFLAGS)"
+	local JOBS="$(sed -e 's/.*\(-j *[0-9]\+\).*/\1/' <<< $MAKEFLAGS)"
 
 	pushd tools/bcp
 	../../bjam \
