@@ -7,7 +7,7 @@ export COLUMNS=9999
 
 case "$1" in
 	start)
-		/usr/sbin/ddclient -syslog -daemon 0
+		/usr/sbin/ddclient -syslog
 	;;
 	stop)
 		killall -q ddclient
