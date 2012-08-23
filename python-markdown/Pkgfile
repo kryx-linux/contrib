@@ -5,16 +5,13 @@
 # Depends on: setuptools
 
 name=python-markdown
-version=2.0
+version=2.2.0
 release=1
 source=(http://pypi.python.org/packages/source/M/Markdown/Markdown-$version.tar.gz)
 
 build() {
 	cd Markdown-$version
 	python setup.py install --root=$PKG
-	# having markdown.py in /usr/bin results in a cycled markdown loading
-	# in some cases
-	mv $PKG/usr/bin/markdown.py $PKG/usr/bin/markdown-cli.py
-	ln -s /usr/bin/markdown-cli.py  $PKG/usr/bin/markdown
+	ln -s /usr/bin/markdown_py  $PKG/usr/bin/markdown
 	find $PKG -name '*egg-info' | xargs rm -rf
 }
