@@ -6,15 +6,17 @@
 # Nice to have: geoclue
 
 name=webkit
-version=1.8.1
+version=1.8.3
 release=1
 source=(http://webkitgtk.org/releases/$name-$version.tar.xz
-	gtkdoc-rebase-remove.patch)
+	gtkdoc-rebase-remove.patch
+	webkit-bison26.patch)
 
 build() {
 	cd $name-$version
 
 	patch -p1 -i $SRC/gtkdoc-rebase-remove.patch
+	patch -p1 -i $SRC/webkit-bison26.patch
 
 	if [ -z "$(pkginfo -i | grep '^geoclue ')" ]; then
 		local config='--disable-geolocation'
