@@ -2,6 +2,7 @@
 # URL: http://nmap.org
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager: sten, nick dot steeves at shaw dot ca
+# Depends on: libpcap
 
 name=nmap
 version=6.01
@@ -20,6 +21,5 @@ build () {
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/man/man1/zenmap.*
     rm -f $PKG/usr/share/nmap/nselib/data/psexec/README
-    
     
 }
