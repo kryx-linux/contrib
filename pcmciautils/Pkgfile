@@ -4,9 +4,11 @@
 # Depends on: sysfsutils
 
 name=pcmciautils
-version=017
+version=018
 release=1
-source=(http://www.kernel.org/pub/linux/utils/kernel/pcmcia/$name-$version.tar.bz2 \
+# missing upstream source
+#http://www.kernel.org/pub/linux/utils/kernel/pcmcia/$name-$version.tar.bz2
+source=(ftp://ftp.archlinux.org/other/$name/$name-$version.tar.xz \
 		$name-makefile.patch)
 
 build() {
