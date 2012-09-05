@@ -5,16 +5,12 @@
 # Depends on: xorg-libxext
 
 name=libvdpau
-version=20120521
+version=0.5
 release=1
-source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version-$name-0.4.1-1-g4262513.tar.xz
-	flash_hack.patch)
+source=(http://people.freedesktop.org/~aplattner/vdpau/$name-$version.tar.gz)
 
 build() {
-	cd $name
-
-	patch -p 1 -i $SRC/flash_hack.patch
-	autoreconf -v --install
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
