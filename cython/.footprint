@@ -5,7 +5,7 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python2.7/
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython-0.16-py2.7.egg-info
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython-0.17-py2.7.egg-info
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Build/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Build/BuildExecutable.py
@@ -56,6 +56,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/FlowControl.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/FlowControl.pyc
 -rwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/FlowControl.so
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/FusedNode.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/FusedNode.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Future.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Future.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Interpreter.py
@@ -103,6 +105,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestMemView.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestParseTreeTransforms.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestParseTreeTransforms.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestSignatureMatching.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestSignatureMatching.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestTreeFragment.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestTreeFragment.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Compiler/Tests/TestTreePath.py
@@ -203,6 +207,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Includes/Deprecated/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Includes/Deprecated/stl.pxd
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Includes/cpython/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Includes/cpython/__init__.pxd
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Includes/cpython/array.pxd
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Includes/cpython/bool.pxd
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Includes/cpython/buffer.pxd
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Includes/cpython/bytes.pxd
@@ -326,15 +331,22 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Tests/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Tests/xmlrunner.pyc
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Utility/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/Buffer.c
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/Builtins.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/Capsule.c
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/CppConvert.pyx
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/CppSupport.cpp
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/CythonFunction.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/Exceptions.c
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/ExtensionTypes.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/FunctionArguments.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/Generator.c
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/ImportExport.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/MemoryView.pyx
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/MemoryView_C.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/ModuleSetupCode.c
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/ObjectHandling.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/Optimize.c
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/Printing.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/StringTools.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/TestCyUtilityLoader.pyx
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/TestCythonScope.pyx
@@ -342,6 +354,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/Cython/Utility/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/TypeConversion.c
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/__init__.py (EMPTY)
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/__init__.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utility/arrayarray.h
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utils.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/Utils.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/Cython/__init__.py
