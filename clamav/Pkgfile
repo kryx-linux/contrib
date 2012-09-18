@@ -4,7 +4,7 @@
 # Depends on: zlib, bzip2, libgmp, curl
 
 name=clamav
-version=0.97.3
+version=0.97.6
 release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz \
 	clamd.conf freshclam.conf clamd freshclam)
@@ -26,4 +26,5 @@ build() {
 	install -d $PKG/etc/rc.d
 	install -o root -g root -m 0755 $SRC/{clamd,freshclam} \
 		$PKG/etc/rc.d/
+	install -o clamav -g clamav -m 0775 -d $PKG/usr/share/clamav
 }
