@@ -2,16 +2,14 @@
 # URL: http://pypi.python.org/pypi/zope.interface/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Lucas Hazel, lucas at die dot net dot au
-# Depends on: setuptools
+# Depends on: distribute
 	
 name=zope.interface
-version=3.8.0
+version=4.0.1
 release=1
 source=(http://pypi.python.org/packages/source/z/$name/$name-$version.tar.gz)
 	
 build() {
 	cd $name-$version
 	python setup.py install --root=$PKG --prefix=/usr
-	rm $PKG/usr/lib/python*/site-packages/zope/interface/README{,.ru}.txt
-	find $PKG -name '*egg-info' | xargs rm -rf
 }
