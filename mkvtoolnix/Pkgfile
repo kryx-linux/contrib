@@ -6,7 +6,7 @@
 # Nice to have: wxgtk
 
 name=mkvtoolnix
-version=5.0.1 # later versions require gcc 4.6.x to compile, which may be in crux 2.8
+version=5.8.0
 release=1
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.bz2)
 
@@ -19,6 +19,9 @@ build() {
 	sed -i -e '/curl/d' configure.in
 	export CURL_CFLAGS="" CURL_LIBS=""
 
+	export CFLAGS="${CFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
+	export CXXFLAGS="${CXXFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
+
 	autoreconf
 
 	./configure \
@@ -30,7 +33,8 @@ build() {
 	./drake $JOBS DESTDIR=$PKG install
 
 	rm -r \
-		$PKG/usr/man/{ja,nl,zh_CN} \
-		$PKG/usr/share/locale \
-		$PKG/usr/share/doc
+		$PKG/usr/man/{uk,ja,nl,zh_CN} \
+		$PKG/usr/share/locale
+
+	rmdir $PKG/usr/share
 }
