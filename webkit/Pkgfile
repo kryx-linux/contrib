@@ -2,21 +2,19 @@
 # URL: http://www.webkitgtk.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: enchant gst-plugins-base gtk icu libsoup mesa3d
+# Depends on: enchant gst-plugins-base gtk3 icu libsoup glu ruby gperf
 # Nice to have: geoclue
 
 name=webkit
-version=1.8.3
+version=1.10.1
 release=1
-source=(http://webkitgtk.org/releases/$name-$version.tar.xz
-	gtkdoc-rebase-remove.patch
-	webkit-bison26.patch)
+source=(http://webkitgtk.org/releases/webkitgtk-$version.tar.xz
+	gtkdoc-rebase-remove.patch)
 
 build() {
-	cd $name-$version
+	cd webkitgtk-$version
 
 	patch -p1 -i $SRC/gtkdoc-rebase-remove.patch
-	patch -p1 -i $SRC/webkit-bison26.patch
 
 	if [ -z "$(pkginfo -i | grep '^geoclue ')" ]; then
 		local config='--disable-geolocation'
@@ -27,12 +25,12 @@ build() {
 		--enable-video \
 		--with-font-backend=freetype \
 		--disable-gtk-doc \
+		--disable-silent-rules \
 		--enable-jit \
-		--with-unicode-backend=icu \
-		--with-gtk=2.0
+		--with-unicode-backend=icu
 
-	make -j 1
-	make DESTDIR=$PKG install
+	make -j1
+	make -j1 DESTDIR=$PKG install
 
 	rm -r \
 		$PKG/usr/share/locale \
