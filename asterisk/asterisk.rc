@@ -3,38 +3,72 @@
 # /etc/rc.d/asterisk: start/stop/restart asterisk
 #
 
+NAME=asterisk
 USER=asterisk
 GROUP=asterisk
+RUNDIR=/var/run/$NAME
+PIDFILE=$RUNDIR/$NAME.pid
+KILLINTCHECKS=30
+KILLINT=1
 
 case $1 in
-start)
-	cd /; /usr/sbin/asterisk -G $GROUP -U $USER
-	;;
-startdebug)
-	/usr/sbin/asterisk -G $GROUP -U $USER -vvv
-	;;
-stop)
-	[ -f /var/run/asterisk/asterisk.pid ] && kill `cat /var/run/asterisk/asterisk.pid`
-	;;
-stopnice)
-	/usr/sbin/asterisk -r -x 'core stop gracefully'
-	if [ -f /var/run/asterisk/asterisk.pid ]; then
-		echo "not stopped"
+start|startnice|startdebug)
+	[ -d $RUNDIR ] || install -d -m 750 -o $USER -g $GROUP $RUNDIR || exit 1
+	if [ -f $PIDFILE ]; then
+		pid=$(< $PIDFILE)
+		if [ ! -d /proc/$pid -o -z "$pid" ]; then
+			echo "$NAME: removing stale pidfile $PIDFILE" >&2
+			rm -f $PIDFILE
+		fi
+	fi
+	if [ -f $PIDFILE ]; then
+		echo "$NAME already running with pid $pid" >&2
 		exit 1
+	fi
+	[ $1 = "startnice" ] && echo "$NAME: starting" >&2
+	cd /
+	if [ $1 = "startdebug" ]; then
+		/usr/sbin/asterisk -G $GROUP -U $USER -vvv
 	else
-		echo "stopped"
-		exit 0
+		/usr/sbin/asterisk -G $GROUP -U $USER
+	fi
+	;;
+stop|stopnice)
+	if [ -f $PIDFILE ]; then
+		pid=$(< $PIDFILE)
+		if [ ! -d /proc/$pid -o -z "$pid" ]; then
+			echo "$NAME: removing stale pidfile $PIDFILE" >&2
+			rm -f $PIDFILE
+		else
+			if [ $1 = "stop" ]; then
+				/usr/sbin/asterisk -r -x 'core stop now'
+			else
+				/usr/sbin/asterisk -r -x 'core stop gracefully'
+			fi
+			t=0
+			while [ -d /proc/$pid -a $t -lt $KILLINTCHECKS ]; do
+				echo -n .
+				sleep $KILLINT
+				let t++
+			done
+			if [ -d /proc/$pid ]; then
+				echo "$NAME still running with pid $pid" >&2
+			else
+				rm -f $PIDFILE
+			fi
+		fi
+	else
+		echo "$NAME is not running" >&2
 	fi
 	;;
 restart)
 	$0 stop
-	sleep 2
 	$0 start
 	;;
 restartnice)
-	$0 stopnice && sleep 2 && $0 start
+	$0 stopnice && $0 startnice
 	;;
 *)
-	echo "usage: $0 [start|stop|restart]"
+	echo "usage: $0 [start|startnice|stop|stopnice|restart|restartnice]"
 	;;
 esac

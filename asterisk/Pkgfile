@@ -1,16 +1,15 @@
 # Description:	PBX Software implementation
 # URL:		http://www.asterisk.org
 # Maintainer:   Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	openssl ncurses ilbc
+# Depends on:	openssl ncurses
 
 name=asterisk
-version=1.8.5.0
-release=2
+version=1.8.18.0
+release=1
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
 asterisk.rc
 menuselect-tree
-system-ilbc.patch
 build-enable-ilbc.patch
 build-enable-cdr-mysql.patch
 build-disable-sounds-en-gsm.patch
@@ -24,9 +23,6 @@ build () {
 
 	# Normally this file is created by running the interactive menuselect program
 	cp $SRC/menuselect-tree .
-
-	# Use system's ilbc library
-	patch -p1 -i $SRC/system-ilbc.patch
 
 	# Add support for ILBC
 	patch -p1 -i $SRC/build-enable-ilbc.patch
@@ -61,4 +57,5 @@ build () {
 	chown -R asterisk:asterisk $PKG/var/{lib,log,run,spool}/asterisk
 	chown -R root:asterisk $PKG/etc/asterisk
 	chmod -R 640 $PKG/etc/asterisk
+	chmod 750 $PKG/etc/asterisk
 }
