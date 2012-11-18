@@ -6,7 +6,7 @@
 
 name=wxgtk
 version=2.8.12.1
-release=1
+release=2
 #source=(http://downloads.sourceforge.net/project/wxwindows/$version/wxGTK-$version.tar.bz2)
 source=(http://downloads.sourceforge.net/project/wxpython/wxPython/$version/wxPython-src-$version.tar.bz2)
 
@@ -29,7 +29,7 @@ build() {
 	make
 	make DESTDIR=$PKG install
 	
-	ln -sf /usr/lib/wx/config/gtk2-unicode-release-${version%.*} \
+	ln -sf /usr/lib/wx/config/gtk2-unicode-release-${version:0:3} \
 		$PKG/usr/bin/wx-config
 	
 	rm -r \
