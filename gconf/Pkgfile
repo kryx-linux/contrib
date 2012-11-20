@@ -2,10 +2,10 @@
 # URL: http://www.gnome.org/projects/gconf/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: dbus-glib gtk intltool xorg-libxdamage
+# Depends on: dbus-glib gtk3 intltool xorg-libxdamage
 
 name=gconf
-version=3.2.3
+version=3.2.5
 release=1
 source=(http://ftp.gnome.org/pub/gnome/sources/GConf/${version%.*}/GConf-$version.tar.xz)
 
@@ -28,7 +28,7 @@ build() {
 		--sysconfdir=/etc \
 		--localstatedir=/var \
 		--libexecdir=/usr/lib/GConf \
-		--with-gtk=2.0 \
+		--with-gtk=3.0 \
 		--disable-gtk-doc-html \
 		--disable-orbit \
 		--disable-nls \
