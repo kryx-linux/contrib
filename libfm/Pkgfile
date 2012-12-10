@@ -20,5 +20,10 @@ build() {
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
     rm -rf $PKG/usr/share/gtk-doc
+    if [[ -h $PKG/usr/include/libfm/libfm-1.0 ]]; then
+        rm $PKG/usr/include/libfm/libfm-1.0
+        cd $PKG/usr/include/
+        ln -s libfm-1.0 libfm
+    fi
 }
 
