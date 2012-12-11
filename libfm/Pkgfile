@@ -21,7 +21,7 @@ build() {
     rm -rf $PKG/usr/share/locale
     rm -rf $PKG/usr/share/gtk-doc
     if [[ -h $PKG/usr/include/libfm/libfm-1.0 ]]; then
-        rm $PKG/usr/include/libfm/libfm-1.0
+        rm -rf $PKG/usr/include/libfm
         cd $PKG/usr/include/
         ln -s libfm-1.0 libfm
     fi
