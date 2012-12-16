@@ -4,9 +4,9 @@
 # Depends on: djvulibre qt4
 
 name=djview4
-version=4.6
+version=4.9
 release=1
-source=(http://download.sourceforge.net/djvu/$name-$version.tar.gz)
+source=(http://download.sourceforge.net/project/djvu/DjView/$version/djview-$version.tar.gz)
 
 build() {
 	cd $name-*
@@ -15,5 +15,5 @@ build() {
 				--disable-i18n
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/djvu/djview4/djview_??.qm
+	rm -rf $PKG/usr/share/djvu/djview4/djview_*.qm
 }

@@ -2,10 +2,10 @@
 # URL: http://www.freewisdom.org/projects/python-markdown/
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
 # Packager: Lucas Hazel, lucas at die dot net dot au
-# Depends on: setuptools
+# Depends on: distribute
 
 name=python-markdown
-version=2.2.0
+version=2.2.1
 release=1
 source=(http://pypi.python.org/packages/source/M/Markdown/Markdown-$version.tar.gz)
 
@@ -13,5 +13,4 @@ build() {
 	cd Markdown-$version
 	python setup.py install --root=$PKG
 	ln -s /usr/bin/markdown_py  $PKG/usr/bin/markdown
-	find $PKG -name '*egg-info' | xargs rm -rf
 }

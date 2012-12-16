@@ -1,15 +1,15 @@
 # Description: Library for constructing and injecting network packets
-# URL:         http://www.packetfactory.net/libnet/
+# URL:         http://libnet-dev.sf.net
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Depends on:
 
 name=libnet
-version=1.1.2.1
-release=2
-source=(ftp://ftp.eenet.ee/pub/FreeBSD/distfiles/$name-$version.tar.gz)
+version=1.1.6
+release=1
+source=(http://downloads.sourceforge.net/project/libnet-dev/libnet-$version.tar.gz)
 
 build() {
-    cd $name
+    cd $name-$version
     export CFLAGS=$CFLAGS" -fPIC" 
 
     ./configure --prefix=/usr
