@@ -4,14 +4,12 @@
 # Depends on: sdl_ttf libpng
 
 name=mupen64plus
-version=1.99.4
+version=1.99.5
 release=1
-source=(http://mupen64plus.googlecode.com/files/$name-bundle-src-$version.tar.gz
-		$name.diff)
+source=(http://mupen64plus.googlecode.com/files/$name-bundle-src-$version.tar.gz)
 
 build() {
 	cd $name-bundle-src-$version
-	patch -p1 -i $SRC/$name.diff
 	./m64p_build.sh
-	./m64p_install.sh DESTDIR=$PKG PREFIX=/usr
+	./m64p_install.sh DESTDIR=$PKG PREFIX=/usr MANDIR=/usr/man
 }
