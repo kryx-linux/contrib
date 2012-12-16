@@ -1,0 +1,14 @@
+# Description: A script to clone virtualenvs
+# URL: http://pypi.python.org/pypi/virtualenv-clone
+# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: distribute
+
+name=virtualenv-clone
+version=0.2.4
+release=1
+source=(http://pypi.python.org/packages/source/v/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    python setup.py install --root=$PKG
+}
