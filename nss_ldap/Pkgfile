@@ -5,19 +5,18 @@
 
 name=nss_ldap
 version=265
-release=1
-source=(http://www.padl.com/download/$name-$version.tar.gz)
+release=2
+source=(http://www.padl.com/download/$name-$version.tar.gz nss_ldap-265-glibc-2.16.patch)
 
 build() {
         cd $name-$version
+
+	patch -p1 -i $SRC/nss_ldap-265-glibc-2.16.patch
+
+	sed -i -e 's|CVSVERSIONDIR=\$(top_srcdir) vers_string|CVSVERSIONDIR=\$(top_srcdir) ./vers_string|g' Makefile.am Makefile.in
 	./configure --mandir=/usr/man --with-ldap-lib=openldap --with-ldap-conf-file=/etc/openldap/ldap.conf
-
-	# padl developers have . in their PATH
-	PATH="$PATH:$PWD" make
-
+	make
 	mkdir -p $PKG/lib $PKG/usr/man
 	make DESTDIR=$PKG install
-
-	# Config file comes from openldap
-	rm -rf $PKG/etc/openldap
+	rm -f $PKG/etc/ldap.conf
 }
