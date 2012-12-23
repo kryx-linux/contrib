@@ -6,11 +6,13 @@
 
 name=dia
 version=0.97.2
-release=1
-source=(ftp://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$version.tar.xz)
+release=2
+source=(ftp://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$version.tar.xz
+	dia-glib-2.32.diff)
 
 build() {
 	cd $name-$version
+	patch -p 0 -i $SRC/dia-glib-2.32.diff
 
 	./configure \
 		--prefix=/usr \
