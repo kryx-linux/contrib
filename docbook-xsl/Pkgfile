@@ -7,7 +7,7 @@
 
 name=docbook-xsl
 version=1.77.1
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/docbook/$name/$version/$name-$version.tar.bz2)
 
 build() {
@@ -16,9 +16,10 @@ build() {
 	install -v -m 0755 -d $PKG/usr/share/xml/docbook/xsl-stylesheets-$version
 
 	cp -R \
-		VERSION common eclipse extensions fo highlighting html \
-		htmlhelp images javahelp lib manpages params profiling \
-		roundtrip slides template tools website xhtml xhtml-1_1 \
+		VERSION VERSION.xsl common eclipse extensions fo \
+		highlighting html htmlhelp images javahelp lib manpages \
+		params profiling roundtrip slides template tools website \
+		xhtml xhtml-1_1 \
 		$PKG/usr/share/xml/docbook/xsl-stylesheets-$version
 
 	install -v -m 0644 -D README \
