@@ -6,12 +6,14 @@
 
 name=nvclock
 version=0.8b4
-release=1
-source=(http://www.linuxhardware.org/nvclock/nvclock$version.tar.gz)
+release=2
+source=(http://www.linuxhardware.org/nvclock/nvclock$version.tar.gz
+	$name-linkeropts.diff)
 
 build() {
 	cd $name$version
 
+	patch -p 1 -i $SRC/$name-linkeropts.diff
 	./configure \
 		--prefix=/usr \
 		--disable-qt \
