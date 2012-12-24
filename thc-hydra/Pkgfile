@@ -1,0 +1,21 @@
+# Description: fast network logon cracker
+# URL:         http://thc.org/thc-hydra
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:
+# Nice to have: mysql, libssh, libidn, libssh, gtk
+
+name=thc-hydra
+version=7.4
+release=1
+source=(http://thc.org/releases/hydra-$version.tar.gz)
+
+build() {
+	cd hydra-$version
+
+  sed -i 's/dummy_ssh/dummy_sshkey/' hydra-sshkey.c
+
+  ./configure --prefix=$PKG/usr
+  make
+  make install
+  
+}
