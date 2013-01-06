@@ -6,7 +6,7 @@
 
 name=id3lib
 version=3.8.3
-release=2
+release=3
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
 	$name-3.8.3-zlib.patch
 	$name-3.8.3-test_io.patch
@@ -24,6 +24,10 @@ build() {
 	patch -p 1 -i $SRC/$name-3.8.3-unicode16.patch
 	patch -p 1 -i $SRC/$name-3.8.3-gcc-4.3.patch
 	patch -p 1 -i $SRC/CVE-2007-4460.diff
+
+	sed -i -e 's/^AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' \
+		configure.in zlib/configure.in
+
 	autoreconf -ivfs # buggy configure
 
 	CC='g++' \
