@@ -5,12 +5,13 @@
 
 name=libdvdcss
 version=20110603
-release=1
+release=2
 source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version-r240.tar.xz)
 
 build() {
 	cd $name
 
+	sed -i -e 's/^AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' configure.ac
 	autoreconf -i
 
 	./configure \
