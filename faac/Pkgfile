@@ -5,12 +5,13 @@
 
 name=faac
 version=1.28
-release=2
+release=3
 source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2 \
 	$name-$version-external-libmp4v2.patch)
 
 build () {
 	cd $name-$version
+	sed -i -e 's/^AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' configure.in
 	patch -p1 -i $SRC/$name-$version-external-libmp4v2.patch
 	chmod +x bootstrap
 	./bootstrap
