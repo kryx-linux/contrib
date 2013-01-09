@@ -4,8 +4,8 @@
 # Depends on:  lzo
 
 name=openvpn
-version=2.2.2
-release=2
+version=2.3.0
+release=1
 source=(http://swupdate.openvpn.net/community/releases/$name-$version.tar.gz \
         openvpn)
 
@@ -14,7 +14,8 @@ build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --mandir=/usr/man
+              --mandir=/usr/man \
+              --disable-plugin-auth-pam
   make
   make DESTDIR=$PKG install
   rm -r $PKG/usr/share
