@@ -6,7 +6,7 @@
 
 name=pidgin
 version=2.10.6
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$version.tar.bz2)
 
 build () {
@@ -30,7 +30,9 @@ build () {
 
     make
     make DESTDIR=$PKG install
+    install -D -m 0644 $name.desktop.in $PKG/usr/share/applications/$name.desktop
     find $PKG/usr/lib/ -name '*.la' -delete
     #rm -rf $PKG/usr/share/locale
     rm -rf $PKG/usr/etc/gconf || :
 }
+
