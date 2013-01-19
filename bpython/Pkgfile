@@ -5,14 +5,13 @@
 # Nice to have: pygtk
 
 name=bpython
-version=0.11
+version=0.12
 release=1
 source=(http://www.bpython-interpreter.org/releases/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 	python setup.py install --root=$PKG
-	mv $PKG/usr/share/man $PKG/usr/man
 	# raises DistributionNotFound otherwise
 	#find $PKG -name '*egg-info' | xargs rm -rf
 }
