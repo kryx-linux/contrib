@@ -3,21 +3,18 @@
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
 
 name=acpid
-version=2.0.13
+version=2.0.17
 release=1
-source=(http://www.tedfelix.com/linux/$name-$version.tar.gz \
+source=(http://www.tedfelix.com/linux/$name-$version.tar.xz \
 		acpid.rc default default.sh)
 
 build() {
 	cd $name-$version
+	./configure --prefix=/usr --mandir=/usr/man
 	make
 	make DESTDIR=$PKG MANDIR=/usr/man install
 	install -D -m 755 $SRC/acpid.rc   $PKG/etc/rc.d/acpid
 	install -D -m 755 $SRC/default.sh $PKG/etc/acpi/default.sh
 	install -D -m 644 $SRC/default    $PKG/etc/acpi/events/default
 	rm -rf $PKG/usr/share
-	cd kacpimon
-	make -f makefile
-	make SBIN=$PKG/usr/sbin install
-	install -D -m 644 kacpimon.8 $PKG/usr/man/man8/kacpimon.8
 }
