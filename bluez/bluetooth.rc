@@ -1,27 +1,43 @@
 #!/bin/sh
 #
-# /etc/rc.d/bluetooth: start/stop bluetooth daemon
+# bluetooth startup script
 #
 
-# Note:
-# To connect to an input device at boot time, add:
-# hidd --connect XX:XX:XX:XX:XX:XX
+NAME=bluetoothd
+DAEMON=/usr/sbin/bluetoothd
 
 case $1 in
 start)
-	/usr/sbin/bluetoothd
+	pid=$(pgrep -f -x $DAEMON)
+	if [ -n "$pid" ]; then
+		echo "$NAME is already running with pid $pid" >&2
+		exit 1
+	fi
+	$DAEMON
 	;;
 stop)
-	killall -e -q bluetoothd
+	pid=$(pgrep -f -x $DAEMON)
+	if [ -z "$pid" ]; then
+		echo "$NAME is not running" >&2
+		exit 1
+	fi
+	kill $pid
+	t=0
+	while [ -d /proc/$pid -a $t -lt 10 ]; do
+		sleep 0.5
+		let t++
+	done
+	if [ -d /proc/$pid ]; then
+		echo "$NAME still running with pid $pid" >&2
+		exit 1
+	fi
 	;;
 restart)
 	$0 stop
-	sleep 2
 	$0 start
 	;;
 *)
-	echo "usage: $0 [start|stop|restart]"
+	echo "Usage: $0 [start|stop|restart]" >&2
+	exit 1
 	;;
 esac
-
-# End of file

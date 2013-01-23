@@ -1,46 +1,60 @@
 # Description:	Bluetooth libraries and utilities
-# URL:		http://www.bluez.org
+# URL:		http://www.bluez.org/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	dbus
+# Depends on:	dbus alsa-lib gstreamer libusb-compat
+# Optional:	pygobject dbus-python
 
 name=bluez
-version=4.99
+version=4.101
 release=1
-source=(http://www.kernel.org/pub/linux/bluetooth/$name-$version.tar.gz bluetooth.rc)
+source=(http://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz bluetooth.rc)
 
 build() {
-	# note: sysconfdir is /usr/etc instead of /etc on purpose
-	# in CRUX some people use /usr/etc for config files, I know its stupid
-
 	cd $name-$version
+
 	./configure \
 		--prefix=/usr \
-		--sysconfdir=/usr/etc \
-		--mandir=/usr/man \
+		--sysconfdir=/etc \
 		--localstatedir=/var \
+		--libexecdir=/lib \
+		--mandir=/usr/man \
+		--enable-audio \
+		--enable-gstreamer \
 		--enable-usb \
 		--enable-tools \
-		--enable-hid2hci \
+		--disable-test \
 		--enable-hidd \
+		--enable-hid2hci \
 		--enable-pand \
-		--enable-dund \
+		--enable-cups \
 		--enable-alsa \
 		--enable-bccmd \
 		--enable-dfutool \
-		--enable-cups \
-		--enable-gstreamer \
-		--disable-test
+		--enable-dund
+
 	make
 	make DESTDIR=$PKG install
 
-	for i in network input audio serial; do
-		cp $i/$i.conf $PKG/usr/etc/bluetooth
+	# install all available tools and test programs with man pages
+	shopt -s nullglob
+	for i in test/* tools/*; do
+		if [ -x $i ]; then
+			install -D -m 755 $i $PKG/usr/bin/bluez-${i#*/}
+			for j in $i.[1-8]; do
+				install -D -m 644 $j $PKG/usr/man/man${j##*.}/bluez-${j##*/}
+			done
+		fi
 	done
 
-	install -m 755 -o root -g root -D test/simple-agent $PKG/usr/bin/bluez-simple-agent
-	install -m 755 -o root -g root -D test/test-device $PKG/usr/bin/bluez-test-device
-	install -m 755 -o root -g root -D test/test-input $PKG/usr/bin/bluez-test-input
-	install -m 755 -o root -g root -D $SRC/bluetooth.rc $PKG/etc/rc.d/bluetooth
+	# install init script
+	install -D -m 755 $SRC/bluetooth.rc $PKG/etc/rc.d/bluetooth
 
-	rm $PKG/lib/udev/rules.d/97-bluetooth.rules
+	# install config files
+	for i in audio input network serial; do
+		install -D -m 644 $i/$i.conf $PKG/etc/bluetooth/$i.conf
+	done
+
+	# this is because of the /usr/etc CRUX oddity
+	mkdir $PKG/usr/etc
+	mv $PKG/etc/dbus-1 $PKG/usr/etc
 }
