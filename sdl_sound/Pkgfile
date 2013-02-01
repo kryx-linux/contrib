@@ -1,0 +1,17 @@
+# Description: A library for decoding various sound formats.
+# URL: http://icculus.org/SDL_sound/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Aaron Marks, nymacro at gmail dot com
+# Depends on: flac libmikmod libmodplug libvorbis physfs smpeg speex
+
+name=sdl_sound
+version=1.0.3
+release=1
+source=(http://icculus.org/SDL_sound/downloads/SDL_sound-$version.tar.gz)
+
+build() {
+	cd SDL_sound-$version
+	./configure --prefix=/usr
+	make 
+	make DESTDIR=$PKG install
+}
