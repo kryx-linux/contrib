@@ -6,7 +6,7 @@
 
 name=preload
 version=0.6.4
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
 	rc.preload
 	$name-0.6.3-memcached-default.patch
@@ -18,7 +18,7 @@ build() {
 	patch -p 1 -i $SRC/$name-0.6.3-memcached-default.patch
 	patch -p 1 -i $SRC/$name-0.6.3-statedir-fix.patch
 	patch -p 1 -i $SRC/$name-0.6.3-check-help2man.patch
-	autoreconf
+	autoreconf -i
 
 	./configure \
 		--prefix=/usr \
