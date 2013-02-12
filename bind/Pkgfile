@@ -6,10 +6,9 @@
 
 name=bind
 version=9.9.2-P1
-release=1
+release=2
 source=(ftp://ftp.isc.org/isc/bind9/$version/$name-$version.tar.gz \
-  http://internic.net/domain/named.root \
-  db.0.0.127 db.localhost db.ip6.arpa named named.conf)
+  named.root db.0.0.127 db.localhost db.ip6.arpa named named.conf)
 
 build() {
   cd $name-$version
