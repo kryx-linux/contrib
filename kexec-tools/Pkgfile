@@ -4,13 +4,14 @@
 # Depends on: 
 
 name=kexec-tools
-version=2.0.2
+version=2.0.3
 release=1
-source=(http://kernel.org/pub/linux/utils/kernel/kexec/$name-$version.tar.bz2)
+source=(http://crux.nu/~tek/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr
-  make
+  ./configure --prefix=/usr \
+              --mandir=/usr/man
+  make -j1
   make DESTDIR=$PKG install
 }
