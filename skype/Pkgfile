@@ -1,22 +1,26 @@
 # Description: P2P VoIP software which supports end-to-end encryption.
-# URL: http://www.skype.com/products/skype/linux/
+# URL: http://www.skype.com/intl/en/get-skype/on-your-computer/linux/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: qt4 alsa-lib libsigc++ xorg-libxscrnsaver
+# Depends on: qt4-32 alsa-lib-32 xorg-libxscrnsaver-32 xorg-libxv-32
 
 name=skype
-version=2.1.0.81
+version=4.1.0.20
 release=1
-source=(http://download.skype.com/linux/skype-$version.tar.bz2)
+source=(http://download.skype.com/linux/$name-$version.tar.bz2)
 
 build() {
-	cd skype-$version
-	install -d $PKG/usr/share/skype
+	cd $name-$version
+	install -d $PKG/usr/share/skype/{avatars,lang,sounds}
 	install -D -m 0755 skype $PKG/usr/bin/skype
-	cp -R sounds $PKG/usr/share/skype
+	install -m 0644 avatars/* $PKG/usr/share/skype/avatars
+	install -m 0644 lang/*    $PKG/usr/share/skype/lang
+	install -m 0644 sounds/*  $PKG/usr/share/skype/sounds
+
 	install -D -m 0644 icons/SkypeBlue_16x16.png $PKG/usr/share/icons/hicolor/16x16/apps/skype.png
 	install -D -m 0644 icons/SkypeBlue_32x32.png $PKG/usr/share/icons/hicolor/32x32/apps/skype.png
 	install -D -m 0644 icons/SkypeBlue_48x48.png $PKG/usr/share/icons/hicolor/48x48/apps/skype.png
 	install -D -m 0644 skype.desktop $PKG/usr/share/applications/skype.desktop
+	#install -D -m 0644 skype.conf $PKG/etc/dbus-1/system.d/skype.conf
 }
 

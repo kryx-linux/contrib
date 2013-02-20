@@ -5,12 +5,15 @@
 # Depends on: ffmpeg ladspa libmad libsamplerate wavpack
 
 name=sox
-version=14.4.0
+version=14.4.1
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2
+	sox-ffmpeg.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p 1 -i $SRC/sox-ffmpeg.patch
 
 	./configure \
 		--prefix=/usr \
