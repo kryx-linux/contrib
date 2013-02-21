@@ -5,29 +5,22 @@
 # Depends on: xaw3d xorg-libfs xorg-libxaw xorg-libxft libxvid libdv libjpeg
 
 name=xawtv
-version=3.95
-release=7
-source=(http://dl.bytesex.org/releases/$name/$name-$version.tar.gz)
+version=3.102
+release=1
+source=(http://linuxtv.org/downloads/$name/$name-$version.tar.bz2) # \
+        #$name-$version-jpeg-7.patch)
 
 build() {
   cd $name-$version
 
-  sed 's|/usr/X11R6/include/X11|/usr/include/X11|g' -i Makefile.in
-
+  autoconf
+  autoheader
   ./configure --prefix=/usr \
-              --enable-xfree-ex \
-              --enable-xvideo \
-              --enable-alsa \
-              --enable-dv \
-              --enable-mmx \
-              --enable-xft \
-              --with-x \
-              --x-includes=/usr/include/X11 \
-              --x-libraries=/usr/lib/X11
+              --mandir=/usr/man \
+              --disable-motif \
+              --disable-quicktime
 
   make
   make DESTDIR=$PKG install
-  
-  rm -rf $PKG/etc/X11/{de*,fr,it} $PKG/usr/man/{es,fr}
+  rm -r $PKG/usr/man/??
 }
-
