@@ -6,11 +6,13 @@
 
 name=ftgl
 version=2.1.3-rc5
-release=2
+release=3
 source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-2.1.3~rc5
+
+  sed -e 's|SUBDIRS = .*|SUBDIRS = src|' -i Makefile.in
 
   ./configure --prefix=/usr \
               --with-x \
