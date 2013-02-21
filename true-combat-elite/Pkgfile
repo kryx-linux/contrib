@@ -1,23 +1,29 @@
 # Description: TrueCombat:Elite is a team-based realism modification based on Enemy Territory.
-# URL: http://www.truecombatelite.net/
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
+# URL: http://www.truecombatelite.com/
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
+# Packager: Jose V Beneyto, sepen at crux dot nu
 # Depends on: enemy-territory
 
 name=true-combat-elite
 version=0.49b
-release=3
-source=(http://darkstar.ist.utl.pt/pub/games/true.combat.elite_${version}-english-4.run \
-        tce ${name}.desktop)
+release=4
+source=(http://www.truecombatelite.com/files/TrueCombatElite_v049_Linux.run.gz \
+	http://www.truecombatelite.com/files/tce049b_all_os_fixed.zip \
+        tce $name.desktop)
 
 build() {
-  chmod +x true.combat.elite_${version}-english-4.run
-  ./true.combat.elite_${version}-english-4.run --noexec --target tmp
-  install -d ${PKG}/usr/share/enemy-territory
-  tar -C ${PKG}/usr/share/enemy-territory -xf tmp/tce_0.49b.tar
-  rm -f ${PKG}/usr/share/enemy-territory/*.{rtf.txt}
-  install -D -m 0755 ${SRC}/tce ${PKG}/usr/bin/tce
-  ln -sf /usr/bin/tce ${PKG}/usr/bin/${name}
-  install -D -m 0644 tmp/tce.xpm ${PKG}/usr/share/pixmaps/tce.xpm
-  install -D -m 0644 ${SRC}/${name}.desktop ${PKG}/usr/share/applications/${name}.desktop
+  chmod +x TrueCombatElite_v049_Linux.run.gz
+
+  ./TrueCombatElite_v049_Linux.run.gz --noexec --target tmp
+  install -d $PKG/usr/share/enemy-territory
+  tar -C $PKG/usr/share/enemy-territory -xf tmp/tce_0.49.tar.bz2
+  rm -f $PKG/usr/share/enemy-territory/*.{rtf.txt}
+
+  # 0.49b
+  cp $SRC/*.{pk3,so,dat} $PKG/usr/share/enemy-territory/tcetest
+
+  install -D -m 0755 $SRC/tce $PKG/usr/bin/tce
+  ln -sf /usr/bin/tce $PKG/usr/bin/$name
+  install -D -m 0644 tmp/tce.xpm $PKG/usr/share/pixmaps/tce.xpm
+  install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
 }
