@@ -5,7 +5,7 @@
 # Depends on: 
 
 name=iasl
-version=20121114
+version=20130214
 release=1
 source=(http://www.acpica.org/download/acpica-unix-$version.tar.gz)
 
@@ -13,7 +13,7 @@ build() {
   cd acpica-unix-$version
 
   make clean
-  make BITS=32 HOST=_LINUX
+  make BITS=64 HOST=_LINUX
 
-  install -D -m 0755 generate/unix/bin32/$name $PKG/usr/bin/$name
+  install -D -m 0755 generate/unix/bin64/$name $PKG/usr/bin/$name
 }
