@@ -6,7 +6,7 @@
 
 name=distcc
 version=3.1
-release=1
+release=2
 source=(http://distcc.googlecode.com/files/$name-$version.tar.bz2
 	distccd) 
 
@@ -17,7 +17,8 @@ build() {
 		--prefix=/usr \
 		--disable-nls \
 		--without-gnome \
-		--without-gtk
+		--without-gtk \
+		--disable-Werror
 
 	make
 	make DESTDIR=$PKG install-man install-programs
