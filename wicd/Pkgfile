@@ -1,28 +1,30 @@
 # Description: A wired and wireless network manager.
-# URL: http://wicd.sourceforge.net/
+# URL: http://launchpad.net/wicd
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Depends on: dbus-python pygtk
 
 name=wicd 
-version=1.7.1
+version=1.7.2.4
 release=1
-source=(http://download.sourceforge.net/project/wicd/wicd-stable/$name-$version/$name-$version.tar.bz2
+source=(http://launchpad.net/wicd/1.7/$version/+download/$name-$version.tar.gz
 	wicd.rc)
 
 build() {
 	cd $name-$version
 
+	# really don't use NLS
+	rm -r po
+
 	python setup.py configure \
 		--dbus=/usr/etc/dbus-1/system.d \
 		--mandir=/usr/man \
-		--etc=/etc/wicd
+		--etc=/etc/wicd \
+		--no-install-i18n-man \
+		--no-install-docs
 
 	python setup.py install --root=$PKG
 	python -mcompileall $PKG
 	install -m 0744 -D $SRC/wicd.rc $PKG/etc/rc.d/wicd
 
-	rm -r \
-		$PKG/etc/xdg \
-		$PKG/usr/man/nl \
-		$PKG/usr/share/doc
+	rm -r $PKG/etc/xdg
 }
