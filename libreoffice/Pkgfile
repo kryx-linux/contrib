@@ -6,9 +6,9 @@
 name=libreoffice
 version=3.4.6
 release=1
-#http://download.documentfoundation.org/libreoffice/stable/3.5.0/rpm/
-#source=(http://ftp.tu-chemnitz.de/pub/tdf/$name/stable/$version/rpm/x86/LibO_${version}_Linux_x86_install-rpm_en-US.tar.gz)
-source=(ftp://ftp.vinelinux.org/pub/mirrors/libreoffice/stable/$version/rpm/x86/LibO_${version}_Linux_x86_install-rpm_en-US.tar.gz)
+source=(ftp://ftp.vinelinux.org/pub/mirrors/libreoffice/stable/$version/rpm/x86_64/LibO_${version}_Linux_x86-64_install-rpm_en-US.tar.gz)
+#source=(http://jupiter.ssu.samara.ru/archive/unix/bsd/office/LibreOffice/$version/rpm/x86_64/LibO_${version}_Linux_x86-64_install-rpm_en-US.tar.gz)
+#source=(http://virror.hanoilug.org/$name/$version/rpm/x86_64/LibO_${version}_Linux_x86-64_install-rpm_en-US.tar.gz)
 
 build() {
     local workd="$SRC/tmp_work"
@@ -20,7 +20,7 @@ build() {
     done
     cd desktop-integration
     bsdtar -p -o -C $workd -xf \
-        $name${version%.*}-freedesktop-menus-${version%.*}-*.noarch.rpm
+        $name${version%.*}-freedesktop-menus-${version%.*}*.noarch.rpm
 
     cd $workd
     mkdir -p $PKG/usr/lib/$name
