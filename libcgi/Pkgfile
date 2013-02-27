@@ -5,11 +5,13 @@
 
 name=libcgi
 version=1.0
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
+
+	export CFLAGS="$CFLAGS -fPIC"
 	install -d $PKG/usr/lib $PKG/usr/include
 
 	./configure \
