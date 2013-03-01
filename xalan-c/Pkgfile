@@ -5,19 +5,21 @@
 # Depends on: xerces-c 
 
 name=xalan-c
-version=1.10.0
-release=3
-source=(http://www.apache.org/dist/xml/${name}/Xalan-C_1_10_0-src.tar.gz \
-        xalandomstring.hpp.patch)
+version=1.11
+release=1
+
+source=(http://www.apache.org/dist/xalan/$name/sources/xalan_c-$version-src.tar.gz)
 
 build() {
-  patch -p0 -i $SRC/xalandomstring.hpp.patch
-  export XALANCROOT=$SRC/xml-xalan/c
-  cd ${XALANCROOT}
+  cd $name-$version/c
+
+  export XALANCROOT="$(pwd)"
   autoconf
   ./runConfigure -P/usr \
     -plinux -cgcc -xg++ -minmem -rpthread
+
   make -j1 CXXFLAGS="$CXXFLAGS"
-  make DESTDIR=${PKG} install
+  make DESTDIR=$PKG install
+
   unset XALANCROOT
 }

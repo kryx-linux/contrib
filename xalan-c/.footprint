@@ -35,8 +35,6 @@ drwxr-xr-x	root/root	usr/include/xalanc/Include/
 -rw-r--r--	root/root	usr/include/xalanc/Include/XalanList.hpp
 -rw-r--r--	root/root	usr/include/xalanc/Include/XalanMap.hpp
 -rw-r--r--	root/root	usr/include/xalanc/Include/XalanMemMgrAutoPtr.hpp
--rw-r--r--	root/root	usr/include/xalanc/Include/XalanMemMgrHelper.hpp
--rw-r--r--	root/root	usr/include/xalanc/Include/XalanMemMngArrayAllocate.hpp
 -rw-r--r--	root/root	usr/include/xalanc/Include/XalanMemoryManagement.hpp
 -rw-r--r--	root/root	usr/include/xalanc/Include/XalanObjectCache.hpp
 -rw-r--r--	root/root	usr/include/xalanc/Include/XalanObjectStackCache.hpp
@@ -64,7 +62,7 @@ drwxr-xr-x	root/root	usr/include/xalanc/PlatformSupport/
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/PlatformSupportInit.hpp
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/PrefixResolver.hpp
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/PrintWriter.hpp
--rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/Resettable.hpp
+-rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/ProblemListenerBase.hpp
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/ReusableArenaAllocator.hpp
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/ReusableArenaBlock.hpp
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/StdBinInputStream.hpp
@@ -106,7 +104,6 @@ drwxr-xr-x	root/root	usr/include/xalanc/PlatformSupport/
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/XalanUnicode.hpp
 -rw-r--r--	root/root	usr/include/xalanc/PlatformSupport/XalanXMLChar.hpp
 drwxr-xr-x	root/root	usr/include/xalanc/XMLSupport/
--rw-r--r--	root/root	usr/include/xalanc/XMLSupport/FormatterToDOM.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XMLSupport/FormatterToHTML.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XMLSupport/FormatterToNull.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XMLSupport/FormatterToText.hpp
@@ -153,7 +150,6 @@ drwxr-xr-x	root/root	usr/include/xalanc/XPath/
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XNodeSetNodeProxy.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XNodeSetNodeProxyAllocator.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XNodeSetResultTreeFragProxy.hpp
--rw-r--r--	root/root	usr/include/xalanc/XPath/XNull.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XNumber.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XNumberAllocator.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XNumberBase.hpp
@@ -183,7 +179,6 @@ drwxr-xr-x	root/root	usr/include/xalanc/XPath/
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XPathParserException.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XPathProcessor.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XPathProcessorImpl.hpp
--rw-r--r--	root/root	usr/include/xalanc/XPath/XSpan.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XString.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XStringAdapter.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XPath/XStringAdapterAllocator.hpp
@@ -311,6 +306,7 @@ drwxr-xr-x	root/root	usr/include/xalanc/XSLT/
 -rw-r--r--	root/root	usr/include/xalanc/XSLT/XalanMatchPatternData.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XSLT/XalanMatchPatternDataAllocator.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XSLT/XalanNumberingResourceBundle.hpp
+-rw-r--r--	root/root	usr/include/xalanc/XSLT/XalanParamHolder.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XSLT/XalanSourceTreeDocumentAllocator.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XSLT/XalanSourceTreeDocumentFragmentAllocator.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XSLT/XalanSpaceNodeTester.hpp
@@ -468,9 +464,9 @@ drwxr-xr-x	root/root	usr/include/xalanc/XercesParserLiaison/Deprecated/
 -rw-r--r--	root/root	usr/include/xalanc/XercesParserLiaison/XercesWrapperToXalanNodeMap.hpp
 -rw-r--r--	root/root	usr/include/xalanc/XercesParserLiaison/XercesWrapperTypes.hpp
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libxalan-c.so -> libxalan-c.so.110.0
-lrwxrwxrwx	root/root	usr/lib/libxalan-c.so.110 -> libxalan-c.so.110.0
--rwxr-xr-x	root/root	usr/lib/libxalan-c.so.110.0
-lrwxrwxrwx	root/root	usr/lib/libxalanMsg.so -> libxalanMsg.so.110.0
-lrwxrwxrwx	root/root	usr/lib/libxalanMsg.so.110 -> libxalanMsg.so.110.0
--rwxr-xr-x	root/root	usr/lib/libxalanMsg.so.110.0
+lrwxrwxrwx	root/root	usr/lib/libxalan-c.so -> libxalan-c.so.111.0
+lrwxrwxrwx	root/root	usr/lib/libxalan-c.so.111 -> libxalan-c.so.111.0
+-rwxr-xr-x	root/root	usr/lib/libxalan-c.so.111.0
+lrwxrwxrwx	root/root	usr/lib/libxalanMsg.so -> libxalanMsg.so.111.0
+lrwxrwxrwx	root/root	usr/lib/libxalanMsg.so.111 -> libxalanMsg.so.111.0
+-rwxr-xr-x	root/root	usr/lib/libxalanMsg.so.111.0
