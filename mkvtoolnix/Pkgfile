@@ -7,7 +7,7 @@
 
 name=mkvtoolnix
 version=6.0.0
-release=1
+release=2
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.xz)
 
 build() {
@@ -36,5 +36,9 @@ build() {
 		$PKG/usr/man/{uk,ja,nl,zh_CN} \
 		$PKG/usr/share/locale
 
-	rmdir $PKG/usr/share
+	# remove doc's if wxgtk is installed
+	rm -rf $PKG/usr/share/doc
+
+	# remove if empty
+	find $PKG/usr/share -depth -empty -delete
 }
