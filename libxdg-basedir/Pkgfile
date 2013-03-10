@@ -5,11 +5,11 @@
 name=libxdg-basedir
 version=1.2.0
 release=1
-source=(http://n.ethz.ch/~nevillm/download/$name/$name-$version.tar.gz)
+source=(http://repo.or.cz/w/$name.git/snapshot/refs/tags/$name-$version.tar.gz)
 
 build() {
-    cd $name-$version
-    ./configure --prefix=/usr --disable-static
+    cd $name
+    ./autogen.sh --prefix=/usr --disable-static
     make
     make DESTDIR=$PKG install
 }
