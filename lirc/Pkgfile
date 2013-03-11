@@ -1,13 +1,21 @@
 # Description:	Linux Infrared Remote Control
 # URL:		http://www.lirc.org/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-#
 # Depends on:	
 
 name=lirc
 version=0.9.0
-release=1
-source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2 irxevent_name.diff lircd)
+release=2
+source=(
+http://download.sourceforge.net/$name/$name-$version.tar.bz2
+kernel-2.6.39.patch
+linux-3.8.patch
+lirc_atiusb-kfifo.patch
+lirc_wpc8769l.patch
+lirc_serial.patch
+lircd-handle-large-config.patch
+lircd
+)
 
 # Possible drivers:	
 #
@@ -28,12 +36,25 @@ LIRC_DRIVER=serial
 build() {
 	cd lirc-$version
 
-	# Patch to let irxevent use different program names
-	patch -p1 -i $SRC/irxevent_name.diff
+	patch -p1 -i $SRC/lirc_serial.patch
+	patch -p1 -i $SRC/lirc_wpc8769l.patch
+	patch -p1 -i $SRC/lircd-handle-large-config.patch
+	patch -p1 -i $SRC/lirc_atiusb-kfifo.patch
+	patch -p1 -i $SRC/kernel-2.6.39.patch
+	patch -p1 -i $SRC/linux-3.8.patch
 
-	./configure --prefix=/usr --mandir=/usr/man --disable-static --with-driver=$LIRC_DRIVER
-	make
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-static \
+		--with-transmitter \
+		--enable-sandboxed \
+		--with-syslog=LOG_DAEMON \
+		--with-driver=$LIRC_DRIVER
+	make -j 1
 	make DESTDIR=$PKG install
 	install -D -m 755 $SRC/lircd $PKG/etc/rc.d/lircd
-	rm -rf $PKG/dev $PKG/var
+
+	# Uncomment this line if you want to use the kernel module(s) provided by lirc
+	rm -rf $PKG/lib
 }

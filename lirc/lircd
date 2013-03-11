@@ -3,15 +3,54 @@
 # /etc/rc.d/lircd: start/stop/restart lirc daemon
 #
 
+NAME=lirc
+USER=lirc
+GROUP=lirc
+RUNDIR=/var/run/lirc
+PIDFILE=$RUNDIR/lircd.pid
+CONFIG=/etc/lircd.conf
+DEVICE=/dev/usbirboy
+PARAMS="--device=$DEVICE --output=$RUNDIR/lircd --pidfile=$PIDFILE --permission=660 --allow-simulate $CONFIG"
+
 case "$1" in
 	start)
-		/usr/sbin/lircd -p 666 /etc/lircd.conf
+		[ -d $RUNDIR ] || install -d -m 750 -o $USER -g $GROUP $RUNDIR || exit 1
+		if [ -f $PIDFILE ]; then
+			pid=$(< $PIDFILE)
+			if [ ! -d /proc/$pid -o -z "$pid" ]; then
+				echo "$NAME: removing stale pidfile $PIDFILE" >&2
+				rm -f $PIDFILE
+			fi
+		fi
+		if [ -f $PIDFILE ]; then
+			echo "$NAME already running with pid $pid" >&2
+			exit 1
+		fi
+
+		chown $USER:$GROUP $DEVICE
+		/usr/bin/sudo -b -H -u $USER /usr/sbin/lircd $PARAMS
 	;;
 	stop)
-		if [ -f /var/run/lircd.pid ]; then
-			kill $(< /var/run/lircd.pid) && rm -f /var/run/lircd.pid
+		if [ -f $PIDFILE ]; then
+			pid=$(< $PIDFILE)
+			if [ ! -d /proc/$pid -o -z "$pid" ]; then
+				echo "$NAME: removing stale pidfile $PIDFILE" >&2
+				rm -f $PIDFILE
+			else
+				kill $pid
+				t=0
+				while [ -d /proc/$pid -a $t -lt 10 ]; do
+					sleep 0.5
+					let t++
+				done
+				if [ -d /proc/$pid ]; then
+					echo "$NAME still running with pid $pid" >&2
+				else
+					rm -f $PIDFILE
+				fi
+			fi
 		else
-			return 1
+			echo "$NAME is not running" >&2
 		fi
 	;;
 	restart)
