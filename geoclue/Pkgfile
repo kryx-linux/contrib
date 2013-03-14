@@ -5,19 +5,20 @@
 # Depends on: gconf gtk-doc
 
 name=geoclue
-version=0.12
+version=0.12.99
 release=1
-source=(http://www.hvlinux.net/crux/distfiles/$name/$name-$version.tar.gz)
+source=(http://freedesktop.org/~hadess/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	./autogen.sh
-
 	./configure \
 		--prefix=/usr \
+		--libexecdir=/usr/lib \
 		--mandir=/usr/man
 
 	make
 	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/gtk-doc
 }
