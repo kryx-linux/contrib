@@ -6,11 +6,17 @@
 
 name=mercurial
 version=2.5.2
-release=1
+release=2
 source=(http://www.selenic.com/$name/release/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+ 
   python setup.py install --root=$PKG
+  
+  install -d $PKG/usr/man/man{1,5}
+  install -m 0644 doc/*.1 $PKG/usr/man/man1
+  install -m 0644 doc/*.5 $PKG/usr/man/man5
+  
   rm -r $PKG/usr/lib/python*/site-packages/mercurial/locale
 }
