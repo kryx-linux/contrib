@@ -2,9 +2,10 @@
 # URL:		http://smplayer.sf.net/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:	mplayer qt4
+# Optional:	kdelibs
 
 name=smplayer
-version=0.8.3
+version=0.8.4
 release=1
 source=(http://prdownloads.sf.net/$name/$name-$version.tar.bz2)
 
@@ -18,6 +19,9 @@ build() {
 	# Change man path
 	sed -i -e 's|/share/man/|/man/|g' Makefile
 
-	make DESTDIR=$PKG PREFIX=/usr KDE_SUPPORT=1 install
+	# Check if kdelibs is installed, since its not detected automatically
+	[ -x /usr/bin/kde4-config ] && kde=KDE_SUPPORT=1
+
+	make DESTDIR=$PKG PREFIX=/usr $kde install
 	rm -rf $PKG/usr/share/doc
 }
