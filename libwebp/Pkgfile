@@ -1,0 +1,21 @@
+# Description: A library for a new image format comparable to JPEG.
+# URL: https://code.google.com/p/webp/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: libpng libjpeg
+
+name=libwebp
+version=0.3.0
+release=1
+source=(https://webp.googlecode.com/files/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man
+
+	make
+	make DESTDIR=$PKG install
+}
