@@ -4,7 +4,7 @@
 # Packager:    Mark Rosenstand, mark at borkware dot net
 
 name=dhcp
-version=4.2.4-P2
+version=4.2.5-P1
 release=1
 source=(http://ftp.isc.org/isc/$name/$version/$name-$version.tar.gz dhcpd \
         dhclient default-config.diff)
@@ -25,4 +25,6 @@ build() {
   install -d -m 0755 $PKG/var/db
   touch $PKG/var/state/dhcp/dhcpd.leases
   install -D -m 755 $SRC/dhcp-$version/client/scripts/linux $PKG/sbin/dhclient-script
+  mv $PKG/etc/dhclient.conf.example $PKG/etc/dhclient.conf
+  mv $PKG/etc/dhcpd.conf.example $PKG/etc/dhcpd.conf
 }
