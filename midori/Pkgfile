@@ -5,14 +5,14 @@
 # Depends on: libnotify librsvg vala webkit xorg-libxscrnsaver libunique
 
 name=midori
-version=0.4.7
+version=0.4.9
 release=1
 source=(http://archive.xfce.org/src/apps/$name/${version%.*}/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
 	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) \{0,1\}.*/\1/' <<< $MAKEFLAGS)"
-	./configure --prefix=/usr $JOBS
+	./configure --prefix=/usr --disable-zeitgeist $JOBS
 	make
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/{doc,locale}
