@@ -1,0 +1,21 @@
+# Description: library for Linux' syscall filtering mechanism seccomp
+# URL:		     http://sourceforge.net/projects/libseccomp
+# Maintainer:  Thomas Penteker, tek at serverop dot de 
+
+name=libiscsi
+version=1.9.0
+release=1
+source=(https://github.com/sahlberg/libiscsi/archive/$version.tar.gz)
+
+build() {
+
+	cd $name-$version
+
+  ./autogen.sh
+  ./configure --prefix=/usr #\
+#              --mandir=/usr/man
+
+  make
+	make DESTDIR=$PKG install
+
+}
