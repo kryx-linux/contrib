@@ -2,17 +2,17 @@
 # URL:         http://www.postgresql.org
 # Packager:    Markus Heinz, su1690 at studserver.uni-dortmund dot de
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:
+# Depends on:  openssl
 
 name=postgresql
 version=9.2.4
-release=1
+release=2
 source=(ftp://ftp9.de.postgresql.org/unix/databases/postgresql/source/v$version/$name-$version.tar.bz2 postgresql)
 
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr --disable-nls --mandir=/usr/man
+  ./configure --prefix=/usr --disable-nls --mandir=/usr/man --with-openssl
   make
   make DESTDIR=$PKG install
 
