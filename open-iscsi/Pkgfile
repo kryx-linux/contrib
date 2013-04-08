@@ -1,0 +1,17 @@
+# Description: initiator and target implementation of iscsi
+# URL:		     http://www.open-iscsi.org     
+# Maintainer:  Thomas Penteker, tek at serverop dot de 
+
+name=open-iscsi
+version=2.0-873
+release=1
+source=(http://www.open-iscsi.org/bits/open-iscsi-$version.tar.gz)
+
+build() {
+
+  cd $name-$version
+
+  make
+  make DESTDIR=$PKG mandir=/usr/man sbindir=/usr/sbin install
+
+}
