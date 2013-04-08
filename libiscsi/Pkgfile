@@ -1,5 +1,5 @@
-# Description: library for Linux' syscall filtering mechanism seccomp
-# URL:		     http://sourceforge.net/projects/libseccomp
+# Description: library for iscsi clients
+# URL:		     https://github.com/sahlberg/libiscsi
 # Maintainer:  Thomas Penteker, tek at serverop dot de 
 
 name=libiscsi
@@ -12,8 +12,7 @@ build() {
 	cd $name-$version
 
   ./autogen.sh
-  ./configure --prefix=/usr #\
-#              --mandir=/usr/man
+  ./configure --prefix=/usr
 
   make
 	make DESTDIR=$PKG install
