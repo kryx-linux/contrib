@@ -1,0 +1,22 @@
+# Description: toolset for interaction with virtualized desktop devices
+# URL:         http://spice-space.org
+# Maintainer:  Thomas Penteker, tek at serverop dot de 
+# Depends on:  glib celt xorg-libpixman openssl libjpeg zlib pyparsing cyrus-sasl
+
+name=spice
+version=0.12.2
+release=1
+source=(http://spice-space.org/download/releases/spice-$version.tar.bz2)
+
+build() {
+
+  cd $name-$version
+
+  ./configure --prefix=/usr \
+              --datarootdir=/usr/lib \
+              --disable-smartcard
+
+  make
+  make DESTDIR=$PKG install
+
+}
