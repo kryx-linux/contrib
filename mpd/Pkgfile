@@ -6,7 +6,7 @@
 # Nice to have: faad2 flac audiofile
 
 name=mpd
-version=0.16.7
+version=0.16.8
 release=1
 source=(http://download.sourceforge.net/musicpd/$name-$version.tar.bz2)
 
@@ -15,7 +15,9 @@ build() {
 
   ./configure \
       --prefix=/usr \
-      --mandir=/usr/man
+      --mandir=/usr/man \
+      --sysconfdir=/etc
+
   make
   make DESTDIR=$PKG install
 
