@@ -5,6 +5,7 @@ drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/scribus/
 drwxr-xr-x	root/root	usr/include/scribus/CMakeFiles/
 drwxr-xr-x	root/root	usr/include/scribus/CMakeFiles/scribus.dir/
+drwxr-xr-x	root/root	usr/include/scribus/CMakeFiles/scribus.dir/downloadmanager/
 drwxr-xr-x	root/root	usr/include/scribus/CMakeFiles/scribus.dir/tt/
 drwxr-xr-x	root/root	usr/include/scribus/CMakeFiles/scribus.dir/tt/simpletreemodel/
 drwxr-xr-x	root/root	usr/include/scribus/CMakeFiles/scribus.dir/ui/
@@ -133,6 +134,9 @@ drwxr-xr-x	root/root	usr/include/scribus/designer/smwidgets/
 -rw-r--r--	root/root	usr/include/scribus/docsections.h
 -rw-r--r--	root/root	usr/include/scribus/documentchecker.h
 -rw-r--r--	root/root	usr/include/scribus/documentinformation.h
+drwxr-xr-x	root/root	usr/include/scribus/downloadmanager/
+-rw-r--r--	root/root	usr/include/scribus/downloadmanager/scdlmgr.h
+-rw-r--r--	root/root	usr/include/scribus/downloadmanager/scdlthread.h
 -rw-r--r--	root/root	usr/include/scribus/editor.h
 -rw-r--r--	root/root	usr/include/scribus/effectsdialog.h
 -rw-r--r--	root/root	usr/include/scribus/exif.h
@@ -521,6 +525,7 @@ drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/2geomtools/pathalongpath/
 drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/CMakeFiles/
 drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/hunspellcheck/
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/hunspellcheck/hunspelldialog.h
+-rw-r--r--	root/root	usr/include/scribus/plugins/tools/hunspellcheck/hunspelldict.h
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/hunspellcheck/hunspellplugin.h
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/hunspellcheck/hunspellpluginimpl.h
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/hunspellcheck/hunspellpluginstructs.h
@@ -746,6 +751,7 @@ drwxr-xr-x	root/root	usr/include/scribus/tt/simpletreemodel/
 drwxr-xr-x	root/root	usr/include/scribus/ui/
 -rw-r--r--	root/root	usr/include/scribus/ui/copypagetomasterpagedialog.h
 -rw-r--r--	root/root	usr/include/scribus/ui/createrange.h
+-rw-r--r--	root/root	usr/include/scribus/ui/downloaddictionaries.h
 -rw-r--r--	root/root	usr/include/scribus/ui/edittoolbar.h
 -rw-r--r--	root/root	usr/include/scribus/ui/filetoolbar.h
 -rw-r--r--	root/root	usr/include/scribus/ui/modetoolbar.h
@@ -759,6 +765,7 @@ drwxr-xr-x	root/root	usr/include/scribus/ui/
 -rw-r--r--	root/root	usr/include/scribus/ui_createrange.h
 -rw-r--r--	root/root	usr/include/scribus/ui_docitemattrprefs.h
 -rw-r--r--	root/root	usr/include/scribus/ui_docsections.h
+-rw-r--r--	root/root	usr/include/scribus/ui_downloaddictionaries.h
 -rw-r--r--	root/root	usr/include/scribus/ui_gtfiledialog.h
 -rw-r--r--	root/root	usr/include/scribus/ui_guidemanager.h
 -rw-r--r--	root/root	usr/include/scribus/ui_helpbrowser.h
@@ -880,7 +887,6 @@ drwxr-xr-x	root/root	usr/share/mimelnk/application/
 -rw-r--r--	root/root	usr/share/mimelnk/application/vnd.scribus.desktop
 drwxr-xr-x	root/root	usr/share/scribus/
 drwxr-xr-x	root/root	usr/share/scribus/dicts/
--rw-r--r--	root/root	usr/share/scribus/dicts/CMakeLists.txt
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_af.dic
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_bg.dic
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_ca.dic
@@ -1571,8 +1577,16 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_KidzColour_2008.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_Multi-Finish.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_Summit_Roof_2010.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_Summit_Roof_systems_2011.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_TCS_-_Colorwood_2011.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_TCS_-_Decks_Paths_Driveways_Recreational_Areas_2011.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_TCS_-_Karen_Walker_2012.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_TCS_-_KidzColour_2012.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_TCS_-_The_Range_Whites_and_neutrals_2012.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_TCS_-_Whites_and_Neutrals_2012.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_The_Range_2011-12.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_The_Range_WandN_2010.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Resene_Woodsman_2008.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/SVG.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Scribus_Basic.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Scribus_Splash.xml
