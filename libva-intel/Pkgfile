@@ -9,10 +9,10 @@ release=1
 source=(http://freedesktop.org/software/vaapi/releases/$name-driver/$name-driver-${version}.tar.bz2)
 
 build() {
-	cd $name-driver-$version
+  cd $name-driver-$version
 
-	./configure --prefix=/usr
+  ./configure --prefix=/usr
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 }
