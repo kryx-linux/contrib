@@ -1,0 +1,18 @@
+# Description: libva video acceleration for newer intel based setups
+# URL:         http://freedesktop.org/wiki/Software/vaapi
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  libva
+
+name=libva-intel
+version=1.0.20
+release=1
+source=(http://freedesktop.org/software/vaapi/releases/$name-driver/$name-driver-${version}.tar.bz2)
+
+build() {
+	cd $name-driver-$version
+
+	./configure --prefix=/usr
+
+	make
+	make DESTDIR=$PKG install
+}
