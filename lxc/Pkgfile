@@ -11,7 +11,8 @@ source=(http://lxc.sourceforge.net/download/lxc/lxc-$version.tar.gz
 build() {
 	cd $name-$version
   ./configure --prefix=/usr \
-              --mandir=/usr/man
+              --mandir=/usr/man \
+              --libexecdir=/usr/lib
 
   make
   make DESTDIR=$PKG install
