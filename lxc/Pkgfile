@@ -1,0 +1,21 @@
+# Description: container namespace cgroup virtualisation for linux guests
+# URL:         http://lxc.sf.net
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+
+name=lxc
+version=0.9.0
+release=1
+source=(http://lxc.sourceforge.net/download/lxc/lxc-$version.tar.gz
+        man-pages.tar.xz)
+
+build() {
+	cd $name-$version
+  ./configure --prefix=/usr \
+              --mandir=/usr/man
+
+  make
+  make DESTDIR=$PKG install
+  
+  mv $SRC/man* $PKG/usr/man
+  rm $PKG/usr/lib/lxc/rootfs/README
+}
