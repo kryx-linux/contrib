@@ -6,13 +6,27 @@
 
 name=skype
 version=4.1.0.20
-release=1
-source=(http://download.skype.com/linux/$name-$version.tar.bz2)
+release=2
+source=(http://download.skype.com/linux/$name-$version.tar.bz2
+	http://ftp.gnome.org/pub/GNOME/sources/glib/2.34/glib-2.34.3.tar.xz)
 
 build() {
-	cd $name-$version
+	# https://jira.skype.com/browse/SCL-977
+	cd glib-2.34.3
+
+	./configure --prefix=/usr \
+		--libdir=/usr/lib32 \
+		--mandir=/usr/man \
+		--with-pcre=system \
+		--with-runtime-libdir=../../lib32 \
+		--with-gio-module-dir=/lib32/gio/modules
+
+	make
+	install -D -m 0644 gobject/.libs/libgobject-2.0.so.0.3400.3 $PKG/usr/lib/libgobject-2.0.so.0.3400.3
+	
+	cd ../$name-$version
 	install -d $PKG/usr/share/skype/{avatars,lang,sounds}
-	install -D -m 0755 skype $PKG/usr/bin/skype
+	install -D -m 0755 skype $PKG/usr/bin/skype-bin
 	install -m 0644 avatars/* $PKG/usr/share/skype/avatars
 	install -m 0644 lang/*    $PKG/usr/share/skype/lang
 	install -m 0644 sounds/*  $PKG/usr/share/skype/sounds
@@ -22,5 +36,9 @@ build() {
 	install -D -m 0644 icons/SkypeBlue_48x48.png $PKG/usr/share/icons/hicolor/48x48/apps/skype.png
 	install -D -m 0644 skype.desktop $PKG/usr/share/applications/skype.desktop
 	#install -D -m 0644 skype.conf $PKG/etc/dbus-1/system.d/skype.conf
+	cat << "__EOF__" > $PKG/usr/bin/skype
+#!/bin/sh
+LD_PRELOAD=/usr/lib/libgobject-2.0.so.0.3400.3 skype-bin
+__EOF__
+	chmod 0755 $PKG/usr/bin/skype
 }
-
