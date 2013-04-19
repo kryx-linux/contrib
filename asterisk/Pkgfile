@@ -4,7 +4,7 @@
 # Depends on:	openssl ncurses
 
 name=asterisk
-version=1.8.18.0
+version=1.8.21.0
 release=1
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
@@ -36,7 +36,7 @@ build () {
 	# Remove music on hold files
 	patch -p1 -i $SRC/build-disable-sounds-moh.patch
 
-	make
+	make # NOISY_BUILD=yes
 	make DESTDIR=$PKG install
 	make DESTDIR=$PKG samples
 
