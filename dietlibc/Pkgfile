@@ -1,23 +1,25 @@
-# Description: DietC is a libc that is optimized for size.
-# URL: http://www.fefe.de/dietlibc/
-# Maintainer: Alan Mizrahi, alan at mizrahi dot com dot ve
+# Description:	DietC is a libc that is optimized for size
+# URL:		http://www.fefe.de/dietlibc/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on: 
 
 name=dietlibc
-version=0.32
+version=0.33
 release=1
 
-source=(http://www.mizrahi.com.ve/crux/dist/$name-$version.tar.bz2)
+source=(http://www.fefe.de/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
 	mkdir -p $PKG/{etc,usr} 
+
 	make prefix=/usr/dietlibc
+
 	# shared libraries don't build anymore with gcc 4.4, why?
 	# make prefix=/usr/dietlibc dyn
+
 	make prefix=/usr/dietlibc DESTDIR=$PKG install
+
 	mv $PKG/usr/dietlibc/man $PKG/usr
-	ln -s libc.a $PKG/usr/dietlibc/lib-i386/dietlibc.a
-	ln -s lib-i386 $PKG/usr/dietlibc/lib
 	rmdir $PKG/etc
 }

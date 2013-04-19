@@ -42,6 +42,7 @@ drwxr-xr-x	root/root	usr/dietlibc/include/attr/
 -rw-r--r--	root/root	usr/dietlibc/include/errno.h
 -rw-r--r--	root/root	usr/dietlibc/include/fcntl.h
 -rw-r--r--	root/root	usr/dietlibc/include/features.h
+-rw-r--r--	root/root	usr/dietlibc/include/fenv.h
 -rw-r--r--	root/root	usr/dietlibc/include/float.h
 -rw-r--r--	root/root	usr/dietlibc/include/fnmatch.h
 -rw-r--r--	root/root	usr/dietlibc/include/ftw.h
@@ -64,10 +65,13 @@ drwxr-xr-x	root/root	usr/dietlibc/include/linux/
 -rw-r--r--	root/root	usr/dietlibc/include/linux/if_ether.h
 -rw-r--r--	root/root	usr/dietlibc/include/linux/if_tun.h
 -rw-r--r--	root/root	usr/dietlibc/include/linux/kd.h
+-rw-r--r--	root/root	usr/dietlibc/include/linux/keyboard.h
 -rw-r--r--	root/root	usr/dietlibc/include/linux/loop.h
+-rw-r--r--	root/root	usr/dietlibc/include/linux/netlink.h
 -rw-r--r--	root/root	usr/dietlibc/include/linux/nfs.h
 -rw-r--r--	root/root	usr/dietlibc/include/linux/soundcard.h
 -rw-r--r--	root/root	usr/dietlibc/include/linux/types.h
+-rw-r--r--	root/root	usr/dietlibc/include/linux/vt.h
 -rw-r--r--	root/root	usr/dietlibc/include/locale.h
 -rw-r--r--	root/root	usr/dietlibc/include/malloc.h
 -rw-r--r--	root/root	usr/dietlibc/include/math.h
@@ -134,12 +138,14 @@ drwxr-xr-x	root/root	usr/dietlibc/include/scsi/
 -rw-r--r--	root/root	usr/dietlibc/include/stddef.h
 -rw-r--r--	root/root	usr/dietlibc/include/stdint.h
 -rw-r--r--	root/root	usr/dietlibc/include/stdio.h
+-rw-r--r--	root/root	usr/dietlibc/include/stdio_ext.h
 -rw-r--r--	root/root	usr/dietlibc/include/stdlib.h
 -rw-r--r--	root/root	usr/dietlibc/include/string.h
 -rw-r--r--	root/root	usr/dietlibc/include/strings.h
 drwxr-xr-x	root/root	usr/dietlibc/include/sys/
 -rw-r--r--	root/root	usr/dietlibc/include/sys/alpha-ioctl.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/arm-ioctl.h
+-rw-r--r--	root/root	usr/dietlibc/include/sys/atomic.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/cdefs.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/epoll.h
 -rw-r--r--	root/root	usr/dietlibc/include/sys/file.h
@@ -217,19 +223,17 @@ drwxr-xr-x	root/root	usr/dietlibc/include/sys/
 -rw-r--r--	root/root	usr/dietlibc/include/wchar.h
 -rw-r--r--	root/root	usr/dietlibc/include/wctype.h
 -rw-r--r--	root/root	usr/dietlibc/include/write12.h
-lrwxrwxrwx	root/root	usr/dietlibc/lib -> lib-i386
-drwxr-xr-x	root/root	usr/dietlibc/lib-i386/
-lrwxrwxrwx	root/root	usr/dietlibc/lib-i386/dietlibc.a -> libc.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dyn_start.o
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/dyn_stop.o
--rw-r--r--	root/root	usr/dietlibc/lib-i386/libc.a
--rw-r--r--	root/root	usr/dietlibc/lib-i386/libcompat.a
--rw-r--r--	root/root	usr/dietlibc/lib-i386/libcrypt.a
--rw-r--r--	root/root	usr/dietlibc/lib-i386/liblatin1.a
--rw-r--r--	root/root	usr/dietlibc/lib-i386/libm.a
--rw-r--r--	root/root	usr/dietlibc/lib-i386/libpthread.a
--rw-r--r--	root/root	usr/dietlibc/lib-i386/librpc.a
--rwxr-xr-x	root/root	usr/dietlibc/lib-i386/start.o
+drwxr-xr-x	root/root	usr/dietlibc/lib-x86_64/
+-rwxr-xr-x	root/root	usr/dietlibc/lib-x86_64/dyn_start.o
+-rwxr-xr-x	root/root	usr/dietlibc/lib-x86_64/dyn_stop.o
+-rw-r--r--	root/root	usr/dietlibc/lib-x86_64/libc.a
+-rw-r--r--	root/root	usr/dietlibc/lib-x86_64/libcompat.a
+-rw-r--r--	root/root	usr/dietlibc/lib-x86_64/libcrypt.a
+-rw-r--r--	root/root	usr/dietlibc/lib-x86_64/liblatin1.a
+-rw-r--r--	root/root	usr/dietlibc/lib-x86_64/libm.a
+-rw-r--r--	root/root	usr/dietlibc/lib-x86_64/libpthread.a
+-rw-r--r--	root/root	usr/dietlibc/lib-x86_64/librpc.a
+-rwxr-xr-x	root/root	usr/dietlibc/lib-x86_64/start.o
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/diet.1.gz
