@@ -20,7 +20,7 @@ build() {
 		--disable-werror \
 		--disable-dependency-tracking
 
-	make
+	make LDFLAGS+="-lm"
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/doc
 }
