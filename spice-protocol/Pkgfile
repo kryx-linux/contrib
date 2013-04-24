@@ -3,17 +3,13 @@
 # Maintainer:  Thomas Penteker, tek at serverop dot de 
 
 name=spice-protocol
-version=0.12.2
+version=0.12.5
 release=1
-source=(http://spice-space.org/download/releases/spice-protocol-$version.tar.bz2
-        Add-port-channel-enum-values.patch)
+source=(http://spice-space.org/download/releases/spice-protocol-$version.tar.bz2)
 
 build() {
 
   cd $name-$version
-
-  # make it work with qemu-1.4.0
-  patch -i ../Add-port-channel-enum-values.patch -p1
 
   ./configure --prefix=/usr \
               --datarootdir=/usr/lib
