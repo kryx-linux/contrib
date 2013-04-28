@@ -1,0 +1,20 @@
+# Description: automate the process of exploiting SQL injection flaws
+# URL:         http://sqlmap.org
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  ptyhon
+
+name=sqlmap
+version=0.9
+release=1
+source=(http://downloads.sourceforge.net/project/sqlmap/sqlmap/$version/sqlmap-$version.tar.gz)
+
+build() {
+  rm -r sqlmap/doc
+  find sqlmap -name .svn -print0 | xargs -0 rm -r
+  find sqlmap -name README\* -print0 | xargs -0 rm -r
+  
+  install -d $PKG/usr/share/sqlmap $PKG/usr/bin
+  cp -r sqlmap $PKG/usr/share
+  ln -s /usr/share/sqlmap/sqlmap.py $PKG/usr/bin/sqlmap
+  
+}
