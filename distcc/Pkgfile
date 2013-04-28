@@ -2,11 +2,11 @@
 # URL: http://distcc.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Johannes Winkelmann, jw at tks6 dot net
-# Depends on: popt
+# Depends on: popt python
 
 name=distcc
 version=3.1
-release=2
+release=3
 source=(http://distcc.googlecode.com/files/$name-$version.tar.bz2
 	distccd) 
 
@@ -15,24 +15,30 @@ build() {
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
 		--disable-nls \
 		--without-gnome \
 		--without-gtk \
 		--disable-Werror
 
 	make
-	make DESTDIR=$PKG install-man install-programs
+	make DESTDIR=$PKG install
 
 	# distccd should be in sbin
 	install -d $PKG/usr/sbin
 	mv $PKG/usr/bin/distccd $PKG/usr/sbin/distccd
 
+	# install service
 	install -m 0755 -D $SRC/distccd $PKG/etc/rc.d/distccd
 
+	# create the masquerade directory
 	install -d $PKG/usr/lib/distcc
 	cd $PKG/usr/lib/distcc
-	for c in cc c++ gcc g++; do
+	for c in cc c++ gcc g++ cpp; do
 		ln -s ../../bin/distcc $c
 	done
 	cd -
+
+	rm -rf $PKG/usr/share/doc $PKG/usr/etc/default $PKG/usr/etc/distcc
+	rmdir $PKG/usr/etc $PKG/usr/share
 }
