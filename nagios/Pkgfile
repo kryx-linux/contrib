@@ -4,7 +4,7 @@
 # Depends on: libgd fontconfig apache
 
 name=nagios
-version=3.4.4
+version=3.5.0
 release=1
 source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
 
@@ -37,6 +37,7 @@ build () {
   make DESTDIR=$PKG \
     install install-init install-config install-commandmode install-webconf
 
+  chown -R root:root $PKG/usr/bin
   chown -R nagios:nagios $PKG/usr/share/$name
   chmod 2755 $PKG/var/spool/$name/rw
   chown nagios:nagcmd $PKG/var/spool/$name/rw
