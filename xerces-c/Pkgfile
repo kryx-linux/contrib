@@ -6,14 +6,15 @@
 
 name=xerces-c
 version=3.1.1
-release=1
+release=2
 source=(http://www.apache.org/dist/xerces/c/${version%%.*}/sources/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --enable-netaccessor-curl
+              --enable-netaccessor-curl \
+              --enable-transcoder-iconv
 
   make -j1
   make DESTDIR=$PKG install
