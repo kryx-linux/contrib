@@ -6,7 +6,7 @@
 
 name=skype
 version=4.1.0.20
-release=2
+release=3
 source=(http://download.skype.com/linux/$name-$version.tar.bz2
 	http://ftp.gnome.org/pub/GNOME/sources/glib/2.34/glib-2.34.3.tar.xz)
 
@@ -22,7 +22,7 @@ build() {
 		--with-gio-module-dir=/lib32/gio/modules
 
 	make
-	install -D -m 0644 gobject/.libs/libgobject-2.0.so.0.3400.3 $PKG/usr/lib/libgobject-2.0.so.0.3400.3
+	install -D -m 0644 gobject/.libs/libgobject-2.0.so.0.3400.3 $PKG/usr/lib32/libgobject-2.0.so.0.3400.3
 	
 	cd ../$name-$version
 	install -d $PKG/usr/share/skype/{avatars,lang,sounds}
@@ -38,7 +38,7 @@ build() {
 	#install -D -m 0644 skype.conf $PKG/etc/dbus-1/system.d/skype.conf
 	cat << "__EOF__" > $PKG/usr/bin/skype
 #!/bin/sh
-LD_PRELOAD=/usr/lib/libgobject-2.0.so.0.3400.3 skype-bin
+LD_PRELOAD=/usr/lib32/libgobject-2.0.so.0.3400.3 skype-bin
 __EOF__
 	chmod 0755 $PKG/usr/bin/skype
 }
