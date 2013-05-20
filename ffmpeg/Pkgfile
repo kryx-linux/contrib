@@ -5,7 +5,7 @@
 # Depends on: faac imlib2 lame libsdl libtheora libxvid x264 opencore-amr speex libva
 
 name=ffmpeg
-version=1.2
+version=1.2.1
 release=1
 source=(http://ffmpeg.org/releases/$name-$version.tar.bz2)
 
@@ -36,6 +36,7 @@ build() {
 		--disable-debug \
 		--disable-doc
 
-	make SHARED_PP='yes'
+	[ "$CC" ] || CC=gcc
+	make CC="$CC" SHARED_PP='yes' $MAKEFLAGS
 	make DESTDIR=$PKG install install-man
 }
