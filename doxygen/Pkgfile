@@ -5,16 +5,15 @@
 # Depends on:
 
 name=doxygen 
-version=1.8.3.1
+version=1.8.4
 release=1 
-source=(http://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz \
-        configure-flags.patch)
+source=(http://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz)
 
 build() {
   cd $name-$version
-  patch -p1 -i $SRC/configure-flags.patch
 
   ./configure --prefix /usr \
+              --platform 'linux-64' \
               --english-only
 
   make
