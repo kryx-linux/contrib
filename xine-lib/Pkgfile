@@ -2,18 +2,18 @@
 # URL: http://xine.sourceforge.net
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: ffmpeg gtk libmad libmng libmpcdec vcdimager wavpack xorg-libxi xorg-libxvmc xorg-xvinfo libdvdnav libmodplug libvdpau liba52 libbluray libfame libdca
+# Depends on: ffmpeg gtk libmad libmng libmpcdec vcdimager wavpack xorg-libxi xorg-libxvmc xorg-xvinfo libdvdnav libmodplug libvdpau liba52 libbluray libfame libdca glu
 
 name=xine-lib
-version=1.2.2
+version=1.2.3
 release=1
 source=(http://downloads.sourceforge.net/project/xine/$name/$version/$name-$version.tar.xz
-	greedy2framesse2_4regs.diff)
+	accel_vaapi.h)
 
 build() {
 	cd $name-$version
 
-	patch -p 1 -i $SRC/greedy2framesse2_4regs.diff
+	cp $SRC/accel_vaapi.h src/xine-engine/
 
 	./configure \
 		CFLAGS='' \
@@ -26,6 +26,7 @@ build() {
 		--enable-antialiasing \
 		--enable-ipv6 \
 		--enable-modplug \
+		--enable-vdpau \
 		--with-wavpack \
 		--with-external-dvdnav \
 		--disable-dependency-tracking
