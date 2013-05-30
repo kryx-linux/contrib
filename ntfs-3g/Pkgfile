@@ -5,7 +5,7 @@
 
 name=ntfs-3g
 version=2013.1.13
-release=1
+release=2
 source=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
 
 build() {
@@ -19,6 +19,8 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+	ln -s /usr/bin/ntfsfix $PKG/usr/sbin/fsck.ntfs
+	ln -s /usr/bin/ntfsfix $PKG/usr/sbin/fsck.ntfs-3g
 	chmod a-x $PKG/lib/*.so
 
 	rm $PKG/usr/share/doc/ntfs-3g/README
