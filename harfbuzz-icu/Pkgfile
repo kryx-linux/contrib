@@ -1,0 +1,47 @@
+# Description: An OpenType text shaping engine ICU library
+# URL: http://www.freedesktop.org/wiki/Software/HarfBuzz
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on:  harfbuzz icu
+
+name=harfbuzz-icu
+version=0.9.18
+release=1
+source=(http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-$version.tar.bz2)
+
+build() {
+	cd harfbuzz-$version
+	
+	./configure \
+		--prefix=/usr \
+		--with-icu=yes
+
+	make
+	make DESTDIR=$PKG install
+
+	rm \
+		$PKG/usr/bin/hb-ot-shape-closure \
+		$PKG/usr/bin/hb-shape \
+		$PKG/usr/bin/hb-view \
+		$PKG/usr/include/harfbuzz/hb-blob.h \
+		$PKG/usr/include/harfbuzz/hb-buffer.h \
+		$PKG/usr/include/harfbuzz/hb-common.h \
+		$PKG/usr/include/harfbuzz/hb-font.h \
+		$PKG/usr/include/harfbuzz/hb-ft.h \
+		$PKG/usr/include/harfbuzz/hb-glib.h \
+		$PKG/usr/include/harfbuzz/hb-gobject.h \
+		$PKG/usr/include/harfbuzz/hb-ot-layout.h \
+		$PKG/usr/include/harfbuzz/hb-ot-tag.h \
+		$PKG/usr/include/harfbuzz/hb-ot.h \
+		$PKG/usr/include/harfbuzz/hb-set.h \
+		$PKG/usr/include/harfbuzz/hb-shape-plan.h \
+		$PKG/usr/include/harfbuzz/hb-shape.h \
+		$PKG/usr/include/harfbuzz/hb-unicode.h \
+		$PKG/usr/include/harfbuzz/hb-version.h \
+		$PKG/usr/include/harfbuzz/hb.h \
+		$PKG/usr/lib/libharfbuzz.la \
+		$PKG/usr/lib/libharfbuzz.so \
+		$PKG/usr/lib/libharfbuzz.so.0 \
+		$PKG/usr/lib/libharfbuzz.so.0.918.0 \
+		$PKG/usr/lib/pkgconfig/harfbuzz.pc
+}
