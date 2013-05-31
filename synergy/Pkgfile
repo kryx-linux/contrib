@@ -1,0 +1,27 @@
+# Description: Share mouse and keyboard between multiple computers
+# URL:         http://synergy-foss.org/
+# Maintainer:  Thomas Penteker, tek at serverop dot de 
+# Depends on:  xorg-libxrender xorg-libxdmcp xorg-libxcb
+
+name=synergy
+version=1.4.12
+release=1
+source=(http://synergy.googlecode.com/files/synergy-$version-Source.tar.gz)
+
+build() {
+  cd $name-$version-Source
+
+  mkdir tools/cryptopp562
+  bsdtar -C tools/cryptopp562 -xf tools/cryptopp562.zip
+
+  sed -i '30i ${cpp_dir}/test.cpp' tools/CMakeLists.txt
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr .
+  make synergyc synergys
+
+  install -D -m 755 doc/synergyc.man $PKG/usr/man/man1/synergyc.man  
+  install -D -m 755 doc/synergys.man $PKG/usr/man/man1/synergys.man  
+  install -d -m 755 $PKG/usr/bin
+  install -D -m 755 bin/* $PKG/usr/bin
+
+}
