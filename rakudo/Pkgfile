@@ -4,7 +4,7 @@
 # Depends on:  icu parrot nqp
 
 name=rakudo
-version=2012.12
+version=2013.05
 release=1
 #source=(https://github.com/downloads/$name/star/$name-star-$version.tar.gz)
 source=(http://$name.org/downloads/star/$name-star-$version.tar.gz)
@@ -26,3 +26,4 @@ build() {
     find "$PKG" \( -iname '*.pir' -o -name 'panda' -o -name 'ufo' -o -name 'p6doc' \) \
         -exec env strip="$PKG" perl -pe 's/\Q$ENV{strip}//g' -i {} +
 }
+
