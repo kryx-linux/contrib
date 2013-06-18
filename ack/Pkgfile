@@ -3,12 +3,12 @@
 # Maintainer:   Bartlomiej Palmowski, rotwang at crux dot org dot pl
 
 name=ack
-version=1.96
+version=2.04
 release=1
-source=(http://betterthangrep.com/$name-standalone)
+source=(http://beyondgrep.com/$name-$version-single-file)
 
 build() {
-    install -D -m 0755 $name-standalone $PKG/usr/bin/$name
+    install -D -m 0755 $name-$version-single-file $PKG/usr/bin/$name
     mkdir -p $PKG/usr/man/man1
     pod2man $PKG/usr/bin/$name > $PKG/usr/man/man1/$name.1
 }
