@@ -12,10 +12,12 @@ PRE-INSTALL
 
 POST-INSTALL
 
+  -- IMPORTANT --
   Run the post-install script in order to add a vboxusers group to your system.
   After that, add your user to the vboxusers group:
   # usermod -a -G vboxusers <your_user> 
-  
+  ---------------
+
   During installation 'vboxdrv.ko' has been installed to your modules directory
   and you can load it using modprobe vboxdrv (needed before run VirtualBox).
   Also make sure you give yourself read and write access to /dev/vboxdrv.

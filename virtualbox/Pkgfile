@@ -5,7 +5,7 @@
 # Depends on: bin86 dev86 libsdl libidl qt4 xerces-c iasl xorg-libxmu libcap makeself
 
 name=virtualbox
-version=4.2.12
+version=4.2.14
 release=1
 source=(http://download.virtualbox.org/$name/${version%-*}/VirtualBox-${version}.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
@@ -54,6 +54,7 @@ build() {
   install -m 0755 $SRC/$name $PKG/usr/bin/$name
   mv $SRC/VirtualBox-$version/out/linux.amd64/release/{bin,lib} $PKG/usr/share/$name
   chmod +s $PKG/usr/share/$name/bin/VirtualBox
+  chown root:vboxusers $PKG/usr/share/$name/bin/VirtualBox
   install -D -m 0644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
   mv $PKG/usr/share/$name/bin/VBox.png $PKG/usr/share/pixmaps/$name.png
   rm $PKG/usr/share/$name/bin/{VBox.sh,SUP*nstall}
