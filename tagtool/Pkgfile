@@ -6,11 +6,14 @@
 
 name=tagtool
 version=0.12.3
-release=1
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
+release=2
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2
+	tagtool-DSOLink.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/tagtool-DSOLink.patch
 
 	./configure \
 		--prefix=/usr \
