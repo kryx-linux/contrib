@@ -1,0 +1,17 @@
+# Description: A console user interface library for python.
+# URL: http://excess.org/urwid/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Daryl Fonseca-Holt, wyatt at prairieturtle dot ca
+# Depends on: distribute
+
+name=urwid
+version=1.1.1
+release=1
+
+source=(http://excess.org/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	python setup.py build
+	python setup.py install --prefix=/usr --root=$PKG --optimize=1
+}
