@@ -1,16 +1,31 @@
 # Description: A wired and wireless network manager.
 # URL: http://launchpad.net/wicd
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: dbus-python pygtk
+# Depends on: dbus-python pygtk urwid
 
 name=wicd 
 version=1.7.2.4
-release=1
+release=2
 source=(http://launchpad.net/wicd/1.7/$version/+download/$name-$version.tar.gz
-	wicd.rc)
+	wicd.rc
+	http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/diff/770
+	http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/diff/831
+	http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/diff/835)
 
 build() {
 	cd $name-$version
+
+	# https://launchpad.net/bugs/993912
+	# http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/revision/770
+	patch -p0 -i $SRC/770
+
+	# https://launchpad.net/bugs/1075399
+	# http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/revision/831
+	patch -p0 -i $SRC/831
+
+	# https://launchpad.net/bugs/1075399
+	# http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/revision/835
+	patch -p0 -i $SRC/835
 
 	# really don't use NLS
 	rm -r po
