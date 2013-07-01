@@ -5,12 +5,13 @@
 # Depends on: libebml
 
 name=libmatroska
-version=1.3.0
+version=1.4.0
 release=1
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version/make/linux
-	make
+	[ "$CXX" ] || CXX=g++
+	make CXX="$CXX"
 	make -e prefix=$PKG/usr install
 }
