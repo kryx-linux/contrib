@@ -5,7 +5,7 @@
 # Depends on: zope.interface pycrypto
 
 name=twisted
-version=12.0.0
+version=13.1.0
 release=1
 source=(http://pypi.python.org/packages/source/T/Twisted/Twisted-$version.tar.bz2)
 
@@ -14,9 +14,8 @@ build() {
 	python setup.py install --root=$PKG
 
 	find $PKG \
-		-name '*.egg-info' -o \
-		-name topfiles \
-		| xargs rm -rf
-
-	rm $PKG/usr/lib/python2.7/site-packages/twisted/python/zsh/README.txt
+		-name README -o \
+		-name README.txt -o \
+		-name NEWS -o \
+		-name CREDITS | xargs rm
 }
