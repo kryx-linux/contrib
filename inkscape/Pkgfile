@@ -5,16 +5,15 @@
 # Depends on: boehm-gc boost gsl gtkmm intltool lcms libart_lgpl popt
 
 name=inkscape
-version=0.48.3.1
-release=2
+version=0.48.4
+release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2
-	poppler20.patch libpng15.patch)
+	spuriouscomma.patch)
 
 build() {
 	cd $name-$version
 
-	patch -p 1 -i $SRC/poppler20.patch
-	patch -p 1 -i $SRC/libpng15.patch
+	patch -p0 -i $SRC/spuriouscomma.patch
 
 	./configure \
 		--prefix=/usr \
