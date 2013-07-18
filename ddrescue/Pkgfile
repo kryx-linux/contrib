@@ -4,20 +4,22 @@
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 
 name=ddrescue
-version=1.16
+version=1.17
 release=1
-source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.lz)
 
 build() {
+	bsdtar -xf $name-$version.tar.lz
 	cd $name-$version
-
-	sed -i -e '/^install : /s/all install-info install-man/all install-man/' \
-		Makefile.in
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man
 
-	make
+	[ "$CXX" ] || CXX=g++
+	make CXXFLAGS="$CXXFLAGS" CXX="$CXX" $MAKEFLAGS
 	make DESTDIR=$PKG install
+
+	rm -rf $PKG/usr/share/info
+	find $PKG/usr/share -depth -empty -delete
 }
