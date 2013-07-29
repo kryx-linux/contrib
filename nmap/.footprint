@@ -46,17 +46,20 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/http-folders.txt
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/http-sql-errors.lst
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/http-web-files-extensions.lst
+-rw-r--r--	root/root	usr/share/nmap/nselib/data/ike-fingerprints.lua
 drwxr-xr-x	root/root	usr/share/nmap/nselib/data/jdwp-class/
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/jdwp-class/JDWPExecCmd.class
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/jdwp-class/JDWPExecCmd.java
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/jdwp-class/JDWPSystemInfo.class
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/jdwp-class/JDWPSystemInfo.java
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/jdwp-class/README.txt
+-rw-r--r--	root/root	usr/share/nmap/nselib/data/mgroupnames.db
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/mysql-cis.audit
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/oracle-default-accounts.lst
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/oracle-sids
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/packetdecoders.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/passwords.lst
+-rw-r--r--	root/root	usr/share/nmap/nselib/data/pixel.gif
 drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/psexec/backdoor.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/psexec/default.lua
@@ -91,6 +94,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/http.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/httpspider.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/iax2.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/ike.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/imap.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/informix.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/ipOps.lua
@@ -290,7 +294,9 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/hbase-region-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/hddtemp-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/hostmap-bfk.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/hostmap-ip2hosts.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/hostmap-robtex.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-adobe-coldfusion-apsa1301.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-affiliate-id.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-apache-negotiation.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-auth-finder.nse
@@ -302,6 +308,8 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-cakephp-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-chrono.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-coldfusion-subzero.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-comments-displayer.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-config-backup.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-cors.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-date.nse
@@ -313,6 +321,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-exif-spider.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-favicon.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-fileupload-exploiter.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-form-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-form-fuzzer.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-frontpage-login.nse
@@ -336,6 +345,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-open-redirect.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-passwd.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-php-version.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-phpmyadmin-dir-traversal.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-phpself-xss.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-proxy-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-put.nse
@@ -348,6 +358,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-slowloris-check.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-slowloris.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-sql-injection.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-stored-xss.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-title.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-tplink-dir-traversal.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-trace.nse
@@ -364,6 +375,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2011-3192.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2011-3368.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2012-1823.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2013-0156.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-waf-detect.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-waf-fingerprint.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-wordpress-brute.nse
@@ -372,6 +384,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/iax2-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/iax2-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/icap-info.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ike-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/imap-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/imap-capabilities.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/informix-brute.nse
@@ -432,11 +445,13 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-xp-cmdshell.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/msrpc-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mtrace.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/murmur-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-audit.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-databases.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-dump-hashes.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-empty-password.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/mysql-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-query.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mysql-users.nse
@@ -574,6 +589,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/targets-ipv6-multicast-slaac.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/targets-sniffer.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/targets-traceroute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/teamspeak2-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/telnet-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/telnet-encryption.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/tftp-enum.nse
@@ -582,6 +598,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/unusual-port.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/upnp-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/url-snarf.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ventrilo-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/versant-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/vmauthd-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/vnc-brute.nse
