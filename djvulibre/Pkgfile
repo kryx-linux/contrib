@@ -2,21 +2,19 @@
 # URL: http://djvu.sourceforge.net/
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
 # Packager: Oleksiy V. Khilkevich, centericq at ukr dot net
-# Depends on: libjpeg
+# Depends on: libjpeg librsvg
 
 name=djvulibre
 version=3.5.25.3
-release=1
+release=2
 source=(http://download.sourceforge.net/djvu/$name-$version.tar.gz)
 
 build() {
 	cd $name-*
 	./configure --prefix=/usr \
 				--mandir=/usr/man \
-				--disable-i18n \
-				--disable-djview \
 				--enable-desktopfiles
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/djvu/osi/{de,fr,ja,zh}
+	rm -rf $PKG/usr/share/djvu/osi/{cs,de,fr,ja,zh}
 }
