@@ -1,23 +1,24 @@
 # Description: DVD reading library.
-# URL: http://dvd.sourceforge.net/
+# URL: http://dvdnav.mplayerhq.hu
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 # Depends on: libdvdcss
 
 name=libdvdread
-version=20110603
+version=4.2.0
 release=1
-source=(http://crux.ster.so/distfiles/$name/$name-$version-r1226.tar.xz)
+source=(http://dvdnav.mplayerhq.hu/releases/$name-$version.tar.bz2)
 
 build() {
-	cd $name
-	autoreconf -i
-	rm -r missing
+	cd $name-$version
+
+	autoreconf -f -i
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-dependency-tracking
 
+	make CFLAGS="$CFLAGS"
 	make DESTDIR=$PKG install
 }
