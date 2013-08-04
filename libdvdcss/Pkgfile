@@ -1,18 +1,15 @@
-# Description: a library which provides functions for reading DVD video disks.
+# Description: A library which provides functions for reading DVD video disks.
 # URL: http://www.videolan.org/developers/libdvdcss.html
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at crux dot nu
 
 name=libdvdcss
-version=20110603
-release=2
-source=(http://crux.ster.so/distfiles/$name/$name-$version-r240.tar.xz)
+version=1.2.13
+release=1
+source=(http://download.videolan.org/pub/$name/$version/$name-$version.tar.bz2)
 
 build() {
-	cd $name
-
-	sed -i -e 's/^AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' configure.ac
-	autoreconf -i
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
@@ -20,4 +17,7 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+
+	rm -rf $PKG/usr/share/doc
+	rmdir $PKG/usr/share
 }
