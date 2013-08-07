@@ -6,11 +6,14 @@
 
 name=tint2
 version=0.11
-release=1
-source=(http://$name.googlecode.com/files/$name-$version.tar.bz2)
+release=2
+source=(http://$name.googlecode.com/files/$name-$version.tar.bz2 \
+        add-power-now-support.patch)
 
 build() {
   cd $name-$version
+
+  patch -p0 -i $SRC/add-power-now-support.patch
 
   cmake \
     -DCMAKE_INSTALL_PREFIX=/usr \
