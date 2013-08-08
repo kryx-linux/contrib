@@ -1,0 +1,33 @@
+diff -pruN fbgrab.orig/Makefile fbgrab/Makefile
+--- fbgrab.orig/Makefile	2013-05-23 22:14:45.000000000 +0200
++++ fbgrab/Makefile	2013-08-08 12:24:47.000000000 +0200
+@@ -3,12 +3,24 @@
+ ### modular. So this is a simple gnu Makefile...
+ ###
+ 
++.DELETE_ON_ERROR:
++.PHONY: install clean all
++
++CC := gcc
++GZIP := gzip
++GZIPFLAGS := -k --best --to-stdout
++
++all: fbgrab fbgrab.1.gz
++
+ fbgrab: fbgrab.c
+-	gcc -g -Wall fbgrab.c -lpng -lz -o fbgrab
++	$(CC) -g -Wall $(CFLAGS) $(LDFLAGS) $< -lpng -lz -o $@
++
++fbgrab.1.gz: fbgrab.1.man
++	$(GZIP) $(GZIPFLAGS) $< > $@
+ 
+-install:
+-	install fbgrab /usr/bin/fbgrab
+-	install fbgrab.1.man /usr/man/man1/fbgrab.1
++install: fbgrab fbgrab.1.gz
++	install -D -m 0755 fbgrab $(DESTDIR)/usr/bin/fbgrab
++	install -D -m 0644 fbgrab.1.gz $(DESTDIR)/usr/man/man1/fbgrab.1.gz
+ 
+ clean:
+-	rm -f fbgrab *~ \#*\#
++	-$(RM) fbgrab fbgrab.1.gz *~ \#*\#
