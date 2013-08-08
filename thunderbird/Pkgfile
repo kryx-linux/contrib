@@ -5,7 +5,7 @@
 # Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib xorg-libxdamage yasm mesa3d
 
 name=thunderbird
-version=17.0.7
+version=17.0.8
 comm_ver=esr17
 release=1
 source=(
@@ -48,8 +48,7 @@ build() {
         ac_add_options --disable-debug
         ac_add_options --disable-auto-deps
         ac_add_options --disable-debug-symbols
-        # crux libpng doesn't support apng
-        #ac_add_options --with-system-png
+        ac_add_options --with-system-png
 EOF
     make -f client.mk
     make -f client.mk DESTDIR=$PKG install
