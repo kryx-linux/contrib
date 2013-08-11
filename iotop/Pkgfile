@@ -5,14 +5,14 @@
 # Depends on:  python
 
 name=iotop
-version=0.4.4
+version=0.6
 release=1
-#source=(http://guichaz.free.fr/$name/files/$name-$version.tar.bz2)
-source=(http://pkgs.fedoraproject.org/repo/pkgs/$name/$name-$version.tar.bz2/cdd38b276cbf238676f5d2bcf098ba9c/$name-$version.tar.bz2)
+source=(http://guichaz.free.fr/$name/files/$name-$version.tar.bz2)
+#source=(http://pkgs.fedoraproject.org/repo/pkgs/$name/$name-$version.tar.bz2/cdd38b276cbf238676f5d2bcf098ba9c/$name-$version.tar.bz2)
 
 build() {
     cd $name-$version
-    sed -i 's|share/man/man1|man/man1|' setup.py
+    sed -i 's|share/man/man8|man/man8|' setup.py
     python setup.py install --root=$PKG --prefix=/usr
     rm -r $PKG/usr/lib/python*/site-packages/iotop-*.egg-info
 }
