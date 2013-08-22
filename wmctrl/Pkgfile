@@ -5,11 +5,13 @@
 
 name=wmctrl
 version=1.07
-release=1
-source=(http://tomas.styblo.name/wmctrl/dist/$name-$version.tar.gz)
+release=2
+source=(http://tomas.styblo.name/wmctrl/dist/$name-$version.tar.gz \
+		$name.diff)
 
 build() {
 	cd $name-$version
+	patch -p1 -i $SRC/$name.diff
 	./configure --prefix=/usr --disable-nls
 	make
 	make DESTDIR=$PKG install
