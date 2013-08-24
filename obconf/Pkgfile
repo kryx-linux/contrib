@@ -5,17 +5,15 @@
 # Depends on:  openbox libglade startup-notification
 
 name=obconf
-version=git
+version=2.0.4
 release=1
-source=(http://ci.crux.org.pl/userContent/$name-git_master_cc7a18807663313.tar.xz
-    preview_c.patch)
+source=(http://openbox.org/dist/$name/$name-$version.tar.gz preview_c.patch)
 
 build () {
-	cd $name
-	patch -p2 -i$SRC/preview_c.patch
-	./bootstrap
-	./configure --prefix=/usr --disable-nls
-	make
-	make DESTDIR=$PKG install
+    cd $name-$version
+    patch -p2 -i../preview_c.patch 
+    ./configure --prefix=/usr --disable-nls --disable-dependency-tracking
+    make
+    make DESTDIR=$PKG install
 }
 
