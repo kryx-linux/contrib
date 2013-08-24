@@ -11,7 +11,7 @@ source=(http://openbox.org/dist/$name/$name-$version.tar.gz preview_c.patch)
 
 build () {
     cd $name-$version
-    patch -p2 -i../preview_c.patch 
+#    patch -p2 -i../preview_c.patch 
     ./configure --prefix=/usr --disable-nls --disable-dependency-tracking
     make
     make DESTDIR=$PKG install
