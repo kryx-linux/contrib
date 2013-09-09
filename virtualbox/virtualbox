@@ -6,7 +6,7 @@ if [ ! -z "`/usr/bin/pgrep VBoxSVC`" ]; then
 fi
 
 if [ -z "`/sbin/lsmod | /usr/bin/grep vboxdrv`" ]; then
-  echo "Error, vboxdrv kernel modules isn't loaded."
+  echo "Error, vboxdrv kernel module isn't loaded."
   exit 1
 fi
 
