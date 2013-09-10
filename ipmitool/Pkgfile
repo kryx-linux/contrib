@@ -5,14 +5,18 @@
 # Depends on: 
 
 name=ipmitool
-version=1.8.11
+version=1.8.13
 release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr
+
+  ./configure --prefix=/usr \
+              --mandir=/usr/man
+
   make
   make DESTDIR=$PKG install
+
   rm -rf $PKG/usr/share/doc
 }
