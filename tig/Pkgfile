@@ -5,7 +5,7 @@
 # Depends on:  git
 
 name=tig
-version=1.2
+version=1.2.1
 release=1
 source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz) 
 
@@ -15,5 +15,10 @@ build() {
   ./configure --prefix=/usr --mandir=/usr/man --sysconfdir=/etc
 
   make LDLIBS=-lncursesw
-  make prefix=/usr DESTDIR=$PKG install install-doc-man
+  make prefix=/usr DESTDIR=$PKG install #install-doc-man
+  # work around possibly missing asciidoc
+  for i in 1 5 7; do 
+    install -m 755 -d $PKG/usr/man/man${i}
+    install -m 644 *.${i} $PKG/usr/man/man${i}
+  done
 }
