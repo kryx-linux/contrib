@@ -556,12 +556,9 @@ drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/pathstroker/CMakeFiles/
 drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/pathstroker/CMakeFiles/pathstroker.dir/
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/pathstroker/pathstroker.h
 drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/spellcheck/
-drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/spellcheck/CMakeFiles/
-drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/spellcheck/CMakeFiles/x_aspellplugin.dir/
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/spellcheck/aspellplugin.h
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/spellcheck/aspellpluginimpl.h
 -rw-r--r--	root/root	usr/include/scribus/plugins/tools/spellcheck/suggest.h
--rw-r--r--	root/root	usr/include/scribus/plugins/tools/spellcheck/ui_aspellpluginbase.h
 drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/subdivide/
 drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/subdivide/CMakeFiles/
 drwxr-xr-x	root/root	usr/include/scribus/plugins/tools/subdivide/CMakeFiles/subdivide.dir/
@@ -606,6 +603,7 @@ drwxr-xr-x	root/root	usr/include/scribus/profiles/CMakeFiles/
 -rw-r--r--	root/root	usr/include/scribus/scconfig.h
 -rw-r--r--	root/root	usr/include/scribus/scdocoutput.h
 -rw-r--r--	root/root	usr/include/scribus/scdocoutput_ps2.h
+-rw-r--r--	root/root	usr/include/scribus/scescapecatcher.h
 -rw-r--r--	root/root	usr/include/scribus/scfilewidget.h
 -rw-r--r--	root/root	usr/include/scribus/scfonts.h
 -rw-r--r--	root/root	usr/include/scribus/scgtplugin.h
@@ -874,7 +872,6 @@ drwxr-xr-x	root/root	usr/lib/scribus/plugins/gettext/
 -rwxr-xr-x	root/root	usr/lib/scribus/plugins/libsvgimplugin.so
 -rwxr-xr-x	root/root	usr/lib/scribus/plugins/libtransformeffect.so
 -rwxr-xr-x	root/root	usr/lib/scribus/plugins/libwmfimplugin.so
--rwxr-xr-x	root/root	usr/lib/scribus/plugins/libx_aspellplugin.so
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/scribus.1.gz
@@ -900,7 +897,7 @@ drwxr-xr-x	root/root	usr/share/scribus/dicts/
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_es.dic
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_fi.dic
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_fr.dic
--rw-r--r--	root/root	usr/share/scribus/dicts/hyph_ga.dic
+-rw-r--r--	root/root	usr/share/scribus/dicts/hyph_gl.dic
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_hr.dic
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_hu.dic
 -rw-r--r--	root/root	usr/share/scribus/dicts/hyph_ia.dic
@@ -1467,6 +1464,7 @@ drwxr-xr-x	root/root	usr/share/scribus/scripts/
 drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/AFNOR_X_08-002.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/AS_2007S-1996.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/All_Color_Kit.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Alligator Collection 3000_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Alligator Collection 3000_bs01_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Alligator Collection 3000_kd01_4.eps
@@ -1477,6 +1475,7 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/Alligator Collection 4000_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Alligator Collection 4000_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Alligator Collection 4000_zd01_4.eps
+-rw-r--r--	root/root	usr/share/scribus/swatches/Android_TM.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/BS_381C.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/BS_4800.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/BannerRite_bs00_3.eps
@@ -1489,13 +1488,18 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/Baumann System Prase_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Baumann System Prase_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Baumann System Prase_zd01_4.eps
+-rw-r--r--	root/root	usr/share/scribus/swatches/Bundesregierung_CMYK.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Bundesregierung_CMYK_TZ.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Bundesregierung_HKS.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/COPYING_RESENE.txt
+-rw-r--r--	root/root	usr/share/scribus/swatches/Classic_Kit.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Colortrend Wood Stains_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Colortrend Wood Stains_bs01_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Colortrend Wood Stains_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Colortrend Wood Stains_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Colortrend Wood Stains_zd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/CrayonTM.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Creative_Commons_2013.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/DEUTSCHEpapier_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/DEUTSCHEpapier_bs01_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/DEUTSCHEpapier_kd01_4.eps
@@ -1506,6 +1510,7 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/DRAKA POLYA_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/DRAKA POLYA_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/DRAKA POLYA_zd01_4.eps
+-rw-r--r--	root/root	usr/share/scribus/swatches/Federal_Identity_Program.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/GCMI_Colors.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/GS Palette 141 Kunstdruck_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/GS Palette 141 Kunstdruck_bs01_3.eps
@@ -1517,14 +1522,25 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/GS Palette 141 Naturpapier_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/GS Palette 141 Naturpapier_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/GS Palette 141 Naturpapier_zd01_4.eps
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Blackbody_Spectrum.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Color_Directory.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Color_Emotions.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Color_Harmonizer.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Color_Pro.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Color_Zil.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Neutrals_and_Rich_Blacks.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Pocket_Map.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Galaxy_Visible_Spectrum.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/GiveLife_Color_System_CMYK.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/GiveLife_Color_System_RGB.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Gnome.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Government_UK.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Heidelberger ip Oberputze_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Heidelberger ip Oberputze_bs01_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Heidelberger ip Oberputze_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Heidelberger ip Oberputze_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Heidelberger ip Oberputze_zd01_4.eps
+-rw-r--r--	root/root	usr/share/scribus/swatches/Inkscape.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/J&S K_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/J&S K_bs01_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/J&S K_kd01_4.eps
@@ -1543,6 +1559,7 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/Koessinger Keramik-Druck_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Koessinger Keramik-Druck_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Koessinger Keramik-Druck_zd01_4.eps
+-rw-r--r--	root/root	usr/share/scribus/swatches/LaTeX_Beamer.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/LibreOffice.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Munsell_Soil_Colors.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/NBS-ISCC_Colors.xml
@@ -1552,6 +1569,7 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/OSMO Einmallasur_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/OSMO Einmallasur_zd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/OpenOffice_dot_org_CMYK.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/OpenOffice_dot_org_Galaxy.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/OpenSUSE.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Oracal 451_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Oracal 451_bs01_3.eps
@@ -1587,6 +1605,8 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_The_Range_2011-12.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_The_Range_WandN_2010.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Resene_Woodsman_2008.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Rijksoverheid_Gestreken.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Rijksoverheid_Ongestreken.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/SVG.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Scribus_Basic.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Scribus_Splash.xml
@@ -1600,6 +1620,7 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/Sericol_UCG_MatchingSystem_kd01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Sericol_UCG_MatchingSystem_np01_4.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/Sericol_UCG_MatchingSystem_zd01_4.eps
+-rw-r--r--	root/root	usr/share/scribus/swatches/Shades_of_K.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Standardised_Rock_Colours.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/TAG Farbe erleben_bs00_3.eps
 -rw-r--r--	root/root	usr/share/scribus/swatches/TAG Farbe erleben_bs01_3.eps
@@ -1610,6 +1631,7 @@ drwxr-xr-x	root/root	usr/share/scribus/swatches/
 -rw-r--r--	root/root	usr/share/scribus/swatches/US_FS_595.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Ubuntu_CMYK.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Ubuntu_RGB.xml
+-rw-r--r--	root/root	usr/share/scribus/swatches/Wikipedia_RAL_Classic.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/X11.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/X11Grey.xml
 -rw-r--r--	root/root	usr/share/scribus/swatches/Xfig.xml
