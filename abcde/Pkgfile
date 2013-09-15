@@ -5,12 +5,11 @@
 
 name=abcde
 version=2.5.4
-release=1
+release=2
 source=(http://$name.googlecode.com/files/$name-$version.tar.gz)
 
 build () {
     cd "$name-$version"
-    make
     make DESTDIR=$PKG \
         PREFIX=/usr \
 	mandir=$PKG/usr/man/man1 \
