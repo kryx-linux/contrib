@@ -1,0 +1,59 @@
+# Description:	Network configuration tool
+# URL:		http://www.gnome.org/projects/NetworkManager/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	dbus libnl p5-xml-parser openresolv dhcpcd polkit upower libsoup iptables nss
+
+name=networkmanager
+version=0.9.8.4
+release=1
+source=(
+http://ftp.gnome.org/pub/GNOME/sources/NetworkManager/0.9/NetworkManager-$version.tar.xz
+networkmanager.rc
+NetworkManager.conf
+)
+
+build() {
+	cd NetworkManager-$version
+	CPPFLAGS="-I/usr/include/nspr $CPPFLAGS" \
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--libexecdir=/usr/lib/networkmanager \
+		--localstatedir=/var \
+		--mandir=/usr/man \
+		--disable-nls \
+		--disable-static \
+		--enable-polkit \
+		--disable-wimax \
+		--enable-ppp \
+		--enable-tests=no \
+		--enable-gtk-doc=no \
+		--enable-gtk-doc-html=no \
+		--with-suspend-resume=upower \
+		--with-dhcpcd=/sbin/dhcpcd \
+		--with-resolvconf=/usr/sbin/resolvconf \
+		--with-iptables=/usr/bin/iptables \
+		--with-crypto=nss \
+		--enable-more-warnings=no \
+		--enable-modify-system \
+		--with-session-tracking=consolekit \
+		--with-suspend-resume=upower
+	make
+	make DESTDIR=$PKG install
+
+	# Remove unneeded files
+	rm -rf $PKG/usr/share/bash-completion $PKG/usr/share/gtk-doc
+
+	# Fix the CRUX oddity
+	mkdir $PKG/usr/etc
+	mv $PKG/etc/dbus-1 $PKG/usr/etc
+
+	# Install config file
+	install -D -m 644 -o root -g root $SRC/NetworkManager.conf $PKG/etc/NetworkManager/NetworkManager.conf
+
+	# Install startup script
+	install -D -m 755 -o root -g root $SRC/$name.rc $PKG/etc/rc.d/$name
+
+	# Remove rundir
+	rm -rf $PKG/var/run
+}

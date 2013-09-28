@@ -1,0 +1,62 @@
+#!/bin/bash
+
+NAME=NetworkManager
+USER=root
+RUNDIR=/var/run/$NAME
+PIDFILE=$RUNDIR/$NAME.pid
+STARTCMD="/usr/sbin/NetworkManager"
+STOPCMD=""
+STOPTIMEOUT=300
+
+case $1 in
+start)
+	install -d -m 755 -o $USER $RUNDIR || exit 1
+	if [ -f $PIDFILE ]; then
+		pid=$(< $PIDFILE)
+		if [ ! -d /proc/$pid ]; then
+			echo "$NAME: removing stale pidfile $PIDFILE" >&2
+			rm -f $PIDFILE
+		fi
+	fi
+	if [ -f $PIDFILE ]; then
+		echo "$NAME already running with pid $pid" >&2
+		exit 1
+	fi
+	eval "$STARTCMD"
+	;;
+stop)
+	if [ -f $PIDFILE ]; then
+		pid=$(< $PIDFILE)
+		if [ ! -d /proc/$pid ]; then
+			echo "$NAME: removing stale pidfile $PIDFILE" >&2
+			rm -f $PIDFILE
+		else
+			if [ -n "$STOPCMD" ]; then
+				eval "$STOPCMD"
+			else
+				kill $pid
+			fi
+			t=$(printf '%(%s)T' -1)
+			tend=$((t+STOPTIMEOUT))
+			while [ -d /proc/$pid -a $t -lt $tend ]; do
+				sleep 0.5
+				t=$(printf '%(%s)T' -1)
+			done
+			if [ -d /proc/$pid ]; then
+				echo "$NAME still running with pid $pid" >&2
+			else
+				rm -f $PIDFILE
+			fi
+		fi
+	else
+		echo "$NAME is not running" >&2
+	fi
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
