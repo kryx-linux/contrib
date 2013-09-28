@@ -1,0 +1,26 @@
+# Description:	Library to handle zip files
+# URL:		http://nih.at/libzip/
+# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: 
+
+name=libzip
+version=0.11.1
+release=1
+source=(
+http://nih.at/$name/$name-$version.tar.xz
+libzip-includes.patch
+)
+
+build() {
+	cd $name-$version
+
+	# Fixes the installation of zipconf.h
+	patch -p1 -i $SRC/libzip-includes.patch
+	autoreconf -i
+
+	./configure \
+		--prefix=/usr \
+		--man=/usr/man \
+		--disable-static
+	make DESTDIR=$PKG install
+}
