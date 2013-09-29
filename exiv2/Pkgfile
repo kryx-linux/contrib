@@ -5,7 +5,7 @@
 
 name=exiv2
 version=0.23
-release=1
+release=2
 source=(http://www.exiv2.org/exiv2-$version.tar.gz)
 
 build() {
@@ -13,8 +13,7 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-		--disable-nls \
-		--disable-static
+		--disable-nls
 	make
 	make DESTDIR=$PKG install
 }
