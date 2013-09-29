@@ -5,7 +5,7 @@
 
 name=libzip
 version=0.11.1
-release=1
+release=2
 source=(
 http://nih.at/$name/$name-$version.tar.xz
 libzip-includes.patch
@@ -20,7 +20,6 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--man=/usr/man \
-		--disable-static
+		--man=/usr/man
 	make DESTDIR=$PKG install
 }
