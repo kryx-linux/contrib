@@ -5,16 +5,16 @@
 # Optional:	newt
 
 name=dahdi-tools
-version=2.6.2
+version=2.7.0.1
 release=1
-source=(http://downloads.asterisk.org/pub/telephony/$name/releases/$name-$version.tar.gz dahdi-2.6.2.patch)
+source=(http://downloads.asterisk.org/pub/telephony/$name/releases/$name-$version.tar.gz)
 
 build () {
 	cd $name-$version
 
-	patch -p1 -i $SRC/dahdi-2.6.2.patch
-
-	./configure --prefix=/usr --mandir=/usr/man
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man
 	make -j 1
 	make -j 1 config install DESTDIR=$PKG install
 }
