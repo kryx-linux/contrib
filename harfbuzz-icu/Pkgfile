@@ -2,10 +2,10 @@
 # URL: http://www.freedesktop.org/wiki/Software/HarfBuzz
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on:  harfbuzz icu
+# Depends on: harfbuzz icu
 
 name=harfbuzz-icu
-version=0.9.19
+version=0.9.21
 release=1
 source=(http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-$version.tar.bz2)
 
@@ -26,10 +26,11 @@ build() {
 		$PKG/usr/include/harfbuzz/hb-blob.h \
 		$PKG/usr/include/harfbuzz/hb-buffer.h \
 		$PKG/usr/include/harfbuzz/hb-common.h \
+		$PKG/usr/include/harfbuzz/hb-deprecated.h \
+		$PKG/usr/include/harfbuzz/hb-face.h \
 		$PKG/usr/include/harfbuzz/hb-font.h \
 		$PKG/usr/include/harfbuzz/hb-ft.h \
 		$PKG/usr/include/harfbuzz/hb-glib.h \
-		$PKG/usr/include/harfbuzz/hb-gobject.h \
 		$PKG/usr/include/harfbuzz/hb-ot-layout.h \
 		$PKG/usr/include/harfbuzz/hb-ot-tag.h \
 		$PKG/usr/include/harfbuzz/hb-ot.h \
@@ -44,4 +45,6 @@ build() {
 		$PKG/usr/lib/libharfbuzz.so.0 \
 		$PKG/usr/lib/libharfbuzz.so.0.*.0 \
 		$PKG/usr/lib/pkgconfig/harfbuzz.pc
+
+	rm -r $PKG/usr/share/gtk-doc
 }
