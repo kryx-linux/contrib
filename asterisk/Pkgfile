@@ -4,7 +4,7 @@
 # Depends on:	openssl ncurses
 
 name=asterisk
-version=1.8.21.0
+version=1.8.23.1
 release=1
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
@@ -19,7 +19,12 @@ build-disable-sounds-moh.patch
 build () {
 	cd asterisk-$version
 
-	./configure --prefix=/usr --with-ncurses --with-ssl --disable-xmldoc --with-sounds-cache=/tmp
+	./configure \
+		--prefix=/usr \
+		--with-ncurses \
+		--with-ssl \
+		--disable-xmldoc \
+		--with-sounds-cache=/tmp
 
 	# Normally this file is created by running the interactive menuselect program
 	cp $SRC/menuselect-tree .

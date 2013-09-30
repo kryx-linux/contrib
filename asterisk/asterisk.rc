@@ -1,22 +1,21 @@
-#!/bin/sh
-#
-# /etc/rc.d/asterisk: start/stop/restart asterisk
-#
+#!/bin/bash
 
 NAME=asterisk
 USER=asterisk
 GROUP=asterisk
 RUNDIR=/var/run/$NAME
 PIDFILE=$RUNDIR/$NAME.pid
-KILLINTCHECKS=30
-KILLINT=1
+STARTCMD="/usr/sbin/asterisk -G $GROUP -U $USER"
+STOPCMD="/usr/sbin/asterisk -r -x 'core stop now'"
+STOPGRACECMD="/usr/sbin/asterisk -r -x 'core stop gracefully'"
+STOPTIMEOUT=300
 
 case $1 in
-start|startnice|startdebug)
-	[ -d $RUNDIR ] || install -d -m 750 -o $USER -g $GROUP $RUNDIR || exit 1
+start)
+	install -d -m 755 -o $USER $RUNDIR || exit 1
 	if [ -f $PIDFILE ]; then
 		pid=$(< $PIDFILE)
-		if [ ! -d /proc/$pid -o -z "$pid" ]; then
+		if [ ! -d /proc/$pid ]; then
 			echo "$NAME: removing stale pidfile $PIDFILE" >&2
 			rm -f $PIDFILE
 		fi
@@ -25,34 +24,29 @@ start|startnice|startdebug)
 		echo "$NAME already running with pid $pid" >&2
 		exit 1
 	fi
-	[ $1 = "startnice" ] && echo "$NAME: starting" >&2
-	cd /
-	if [ $1 = "startdebug" ]; then
-		/usr/sbin/asterisk -G $GROUP -U $USER -vvv
-	else
-		/usr/sbin/asterisk -G $GROUP -U $USER
-	fi
+	eval "$STARTCMD"
 	;;
 stop|stopnice)
 	if [ -f $PIDFILE ]; then
 		pid=$(< $PIDFILE)
-		if [ ! -d /proc/$pid -o -z "$pid" ]; then
+		if [ ! -d /proc/$pid ]; then
 			echo "$NAME: removing stale pidfile $PIDFILE" >&2
 			rm -f $PIDFILE
 		else
-			if [ $1 = "stop" ]; then
-				/usr/sbin/asterisk -r -x 'core stop now'
+			if [ "$1" == "stop" ]; then
+				eval "$STOPCMD"
 			else
-				/usr/sbin/asterisk -r -x 'core stop gracefully'
+				eval "$STOPGRACECMD"
 			fi
-			t=0
-			while [ -d /proc/$pid -a $t -lt $KILLINTCHECKS ]; do
-				echo -n .
-				sleep $KILLINT
-				let t++
+			t=$(printf '%(%s)T' -1)
+			tend=$((t+STOPTIMEOUT))
+			while [ -d /proc/$pid -a $t -lt $tend ]; do
+				sleep 0.5
+				t=$(printf '%(%s)T' -1)
 			done
 			if [ -d /proc/$pid ]; then
 				echo "$NAME still running with pid $pid" >&2
+				exit 1
 			else
 				rm -f $PIDFILE
 			fi
@@ -60,15 +54,16 @@ stop|stopnice)
 	else
 		echo "$NAME is not running" >&2
 	fi
+	exit 0
 	;;
 restart)
-	$0 stop
+	$0 stop && \
 	$0 start
 	;;
 restartnice)
-	$0 stopnice && $0 startnice
-	;;
+	$0 stopnice && \
+	$0 start
 *)
-	echo "usage: $0 [start|startnice|stop|stopnice|restart|restartnice]"
+	echo "usage: $0 [start|stop|stopnice|restart|restartnice]"
 	;;
 esac
