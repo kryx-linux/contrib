@@ -12,7 +12,7 @@ build() {
     cd $name-$version
     export CFLAGS=$CFLAGS" -fPIC" 
 
-    ./configure --prefix=/usr
+    ./configure --prefix=/usr --mandir=/usr/man
     sed -i 's/ sample//g' Makefile
     make
     make DESTDIR=$PKG install
