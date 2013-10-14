@@ -6,11 +6,14 @@
 name=spice-gtk
 version=0.21
 release=1
-source=(http://spice-space.org/download/gtk/spice-gtk-$version.tar.bz2)
+source=(http://spice-space.org/download/gtk/spice-gtk-$version.tar.bz2 \
+        palette_remove.patch)
 
 build() {
 
   cd $name-$version
+
+  #patch -i ../palette_remove.patch -p1
 
   ./configure --prefix=/usr \
               --datarootdir=/usr/lib \
