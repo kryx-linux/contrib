@@ -7,16 +7,17 @@
 name=dev86
 version=0.16.19
 release=1
-source=(http://www.debath.co.uk/$name/Dev86src-$version.tar.gz)
-
-# \       $name-$version.patch)
+source=(http://www.debath.co.uk/$name/Dev86src-$version.tar.gz \
+	$name-copt.patch)
 
 build() {
   cd $name-$version
-  
+
+  patch -p0 -i $SRC/$name-copt.patch
+
   echo quit | make -j1 PREFIX=/usr GCCFLAG="$CFLAGS"
   make -j1 install-all DIST=$PKG
-  
+
   rm -f $PKG/usr/bin/{as,ld,nm,objdump,size}86
   rm -f $PKG/usr/man/man1/{as,ld}86.1
 }
