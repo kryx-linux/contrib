@@ -4,9 +4,9 @@
 # Depends on:  glib
 # Comment:     
 name=menu-cache
-version=0.4.1
+version=0.5.1
 release=1
-source=(http://downloads.sourceforge.net/project/lxde/$name/$name%20$version/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/lxde/$name/$name%20${version%.*}.x/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
