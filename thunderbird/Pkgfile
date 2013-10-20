@@ -46,6 +46,7 @@ build() {
         ac_add_options --disable-auto-deps
         ac_add_options --disable-debug-symbols
         ac_add_options --with-system-png
+        ac_add_options --disable-gstreamer
 EOF
     make -f client.mk
     make -f client.mk DESTDIR=$PKG install
