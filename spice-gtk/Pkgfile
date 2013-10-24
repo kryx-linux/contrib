@@ -13,7 +13,7 @@ build() {
 
   cd $name-$version
 
-  #patch -i ../palette_remove.patch -p1
+  patch -i ../palette_remove.patch -p1
 
   ./configure --prefix=/usr \
               --datarootdir=/usr/lib \
@@ -23,5 +23,7 @@ build() {
 
   make
   make DESTDIR=$PKG install
+
+  rm -rf $PKG/usr/{lib/gtk-doc/,share}
 
 }
