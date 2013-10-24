@@ -6,9 +6,9 @@
 # Nice to have: faad2 flac audiofile
 
 name=mpd
-version=0.16.8
+version=0.17.6
 release=1
-source=(http://download.sourceforge.net/musicpd/$name-$version.tar.bz2)
+source=(http://www.musicpd.org/download/mpd/0.17/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
@@ -16,7 +16,10 @@ build() {
   ./configure \
       --prefix=/usr \
       --mandir=/usr/man \
-      --sysconfdir=/etc
+      --sysconfdir=/etc \
+      --disable-soundcloud
+
+  sed 's:AVCODEC_MAX_AUDIO_FRAME_SIZE:192000:g' -i src/decoder/ffmpeg_decoder_plugin.c
 
   make
   make DESTDIR=$PKG install
