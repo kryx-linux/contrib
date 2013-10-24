@@ -4,7 +4,7 @@
 # Depends on:  xorg-libxrender xorg-libxdmcp xorg-libxcb
 
 name=synergy
-version=1.4.12
+version=1.4.14
 release=1
 source=(http://synergy.googlecode.com/files/synergy-$version-Source.tar.gz)
 
@@ -13,8 +13,6 @@ build() {
 
   mkdir tools/cryptopp562
   bsdtar -C tools/cryptopp562 -xf tools/cryptopp562.zip
-
-  sed -i '30i ${cpp_dir}/test.cpp' tools/CMakeLists.txt
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make synergyc synergys
