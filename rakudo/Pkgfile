@@ -14,12 +14,6 @@ build() {
     perl ./Configure.pl --prefix=/usr
     make
 
-# thanks to: https://aur.archlinux.org/packages/ra/rakudo/PKGBUILD and http://hoelz.ro/blog/building-rakudo-perl-6-for-arch-linux
-
-    export PERL6LIB="$PKG$(parrot_config libdir)$(parrot_config versiondir)/languages/perl6/lib"
-    ln -s "$PKG$(parrot_config libdir)$(parrot_config versiondir)/languages/nqp/lib/Perl6" .
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$PKG$(parrot_config libdir)$(parrot_config versiondir)/dynext"
-
     make DESTDIR="$PKG" install
 
     # remove references to $PKG
