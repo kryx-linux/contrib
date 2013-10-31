@@ -5,14 +5,14 @@ USER=asterisk
 GROUP=asterisk
 RUNDIR=/var/run/$NAME
 PIDFILE=$RUNDIR/$NAME.pid
-STARTCMD="/usr/sbin/asterisk -G $GROUP -U $USER"
+STARTCMD="(cd /; /usr/sbin/asterisk -G $GROUP -U $USER)"
 STOPCMD="/usr/sbin/asterisk -r -x 'core stop now'"
 STOPGRACECMD="/usr/sbin/asterisk -r -x 'core stop gracefully'"
 STOPTIMEOUT=300
 
 case $1 in
 start)
-	install -d -m 755 -o $USER $RUNDIR || exit 1
+	[ -n "$RUNDIR" ] && (install -d -m 755 -o $USER $RUNDIR || exit 1)
 	if [ -f $PIDFILE ]; then
 		pid=$(< $PIDFILE)
 		if [ ! -d /proc/$pid ]; then
