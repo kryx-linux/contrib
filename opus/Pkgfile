@@ -16,5 +16,7 @@ build() {
 		--enable-custom-modes
 
 	make
-	make DESTDIR=$PKG install 
+	make DESTDIR=$PKG install
+
+	rm -rf $PKG/usr/share/doc
 }
