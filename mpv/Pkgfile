@@ -6,7 +6,7 @@
 
 name=mpv
 version=0.2.2
-release=1
+release=2
 source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 
 build () {
@@ -32,4 +32,6 @@ build () {
 	make
 	make DESTDIR=$PKG \
 	install
+
+	rm -rf $PKG/usr/share/doc
 }
