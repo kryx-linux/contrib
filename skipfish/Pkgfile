@@ -10,13 +10,18 @@ source=(http://skipfish.googlecode.com/files/$name-$version.tgz)
 
 build() {
   cd $name-$version
-  sed -i -e 's|assets/|/usr/share/skipfish/assets/|g' src/*.c
+
+  sed -i -e 's|"assets"|"/usr/share/skipfish/assets"|g' src/config.h
+  sed -i -e 's|"signatures/|"/usr/share/skipfish/signatures/|g' src/config.h
+  sed -i -e 's|include signatures/|include /usr/share/skipfish/signatures/|g' signatures/signatures.conf
+
   make
-  install -m 755 -d $PKG/usr/share/skipfish/assets
   rm assets/COPYING
-  install -m 644 assets/* $PKG/usr/share/skipfish/assets
-  install -m 755 -d $PKG/usr/share/skipfish/dictionaries
-  #rm dictionaries/README-FIRST
-  install -m 644 dictionaries/* $PKG/usr/share/skipfish/dictionaries
+
+  for i in assets dictionaries signatures; do
+    install -m 755 -d $PKG/usr/share/skipfish/"$i"
+    install -m 644 "$i"/* $PKG/usr/share/skipfish/"$i"
+  done
+
   install -m 755 -D skipfish $PKG/usr/bin/skipfish
 }
