@@ -18,7 +18,7 @@ build () {
 
     #install -d $PKG/usr/share/nmap
     make
-    make DESTDIR=$PKG install
+    make -j1 DESTDIR=$PKG install
     rm -rf $PKG/usr/man/man1/zenmap.*
     rm -f $PKG/usr/share/nmap/nselib/data/psexec/README
     
