@@ -17,9 +17,7 @@ Example: (for your convenience, there could be better ways to
 # mkdir /var/pgsql/data
 # chown postgres /var/pgsql/data
 
-# su - postgres
-# initdb -D /var/pgsql/data
-# exit
+# sudo -u postgres initdb -D /var/pgsql/data
 
 # /etc/rc.d/postgresql start
 # psql -U postgres -f pg.dump postgres
@@ -33,21 +31,18 @@ NEW INSTALL
 To complete the installation and create a test database you need to do
 some additional steps:
 
-# useradd -m -d /home/postgres postgres
+# useradd -m -d /home/postgres -s /bin/false postgres
 # passwd -l postgres
 
 # mkdir -p /var/pgsql/data
 # touch /var/log/postgresql
 # chown postgres /var/pgsql/data /var/log/postgresql
 
-# su - postgres
-# initdb -D /var/pgsql/data
-# exit
+# sudo -u postgres initdb -D /var/pgsql/data
 
 # /etc/rc.d/postgresql start
-# su - postgres
-# createdb test
-# psql test
+# sudo -u postgres createdb test
+# psql -U postgres test
 
 Edit /etc/cron/weekly/syslog as root and add
 a line "/usr/sbin/rotatelog postgresql"
