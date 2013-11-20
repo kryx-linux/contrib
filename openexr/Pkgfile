@@ -1,26 +1,19 @@
-# Description: High dynamic-range (HDR) image file format library.
+# Description: A high dynamic-range (HDR) image file format developed by Industrial Light & Magic for use in computer imaging applications.
 # URL: http://www.openexr.com/
-# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Maintainer: Matt Housh, jaeger at morpheus dot net
 # Packager: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Depends on: ilmbase
 
 name=openexr
-version=1.7.0
+version=2.0.1
 release=1
-source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz	openexr-1.7.0-gcc43.patch)
-
+source=(http://download.savannah.nongnu.org/releases/$name/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-
-	patch -p 0 -i $SRC/openexr-1.7.0-gcc43.patch
-
-	./configure \
-		--prefix=/usr \
-		--disable-static \
-		--disable-dependency-tracking
-
-	make
-	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share/doc
+    cd $name-$version
+    ./configure --prefix=/usr \
+        --disable-static
+    make
+    make DESTDIR=$PKG install
+    rm -r $PKG/usr/share/doc
 }

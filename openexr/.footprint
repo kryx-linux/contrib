@@ -1,10 +1,10 @@
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
--rwxr-xr-x	root/root	usr/bin/exr2aces
 -rwxr-xr-x	root/root	usr/bin/exrenvmap
 -rwxr-xr-x	root/root	usr/bin/exrheader
 -rwxr-xr-x	root/root	usr/bin/exrmakepreview
 -rwxr-xr-x	root/root	usr/bin/exrmaketiled
+-rwxr-xr-x	root/root	usr/bin/exrmultipart
 -rwxr-xr-x	root/root	usr/bin/exrmultiview
 -rwxr-xr-x	root/root	usr/bin/exrstdattr
 drwxr-xr-x	root/root	usr/include/
@@ -19,19 +19,35 @@ drwxr-xr-x	root/root	usr/include/OpenEXR/
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfChannelListAttribute.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfChromaticities.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfChromaticitiesAttribute.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfCompositeDeepScanLine.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfCompression.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfCompressionAttribute.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfConvert.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepCompositing.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepFrameBuffer.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepScanLineInputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepScanLineInputPart.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepScanLineOutputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepScanLineOutputPart.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepTiledInputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepTiledInputPart.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepTiledOutputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfDeepTiledOutputPart.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfDoubleAttribute.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfEnvmap.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfEnvmapAttribute.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfExport.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfFloatAttribute.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfForward.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfFrameBuffer.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfFramesPerSecond.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfGenericInputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfGenericOutputFile.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfHeader.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfHuf.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfIO.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfInputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfInputPart.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfInt64.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfIntAttribute.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfKeyCode.h
@@ -40,10 +56,17 @@ drwxr-xr-x	root/root	usr/include/OpenEXR/
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfLineOrderAttribute.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfLut.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfMatrixAttribute.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfMisc.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfMultiPartInputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfMultiPartOutputFile.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfMultiView.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfName.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfNamespace.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfOpaqueAttribute.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfOutputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfOutputPart.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfPartHelper.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfPartType.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfPixelType.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfPreviewImage.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfPreviewImageAttribute.h
@@ -60,7 +83,9 @@ drwxr-xr-x	root/root	usr/include/OpenEXR/
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfTileDescription.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfTileDescriptionAttribute.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfTiledInputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfTiledInputPart.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfTiledOutputFile.h
+-rw-r--r--	root/root	usr/include/OpenEXR/ImfTiledOutputPart.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfTiledRgbaFile.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfTimeCode.h
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfTimeCodeAttribute.h
@@ -70,10 +95,10 @@ drwxr-xr-x	root/root	usr/include/OpenEXR/
 -rw-r--r--	root/root	usr/include/OpenEXR/ImfXdr.h
 -rw-r--r--	root/root	usr/include/OpenEXR/OpenEXRConfig.h
 drwxr-xr-x	root/root	usr/lib/
+lrwxrwxrwx	root/root	usr/lib/libIlmImf-Imf_2_0.so.20 -> libIlmImf-Imf_2_0.so.20.0.1
+-rwxr-xr-x	root/root	usr/lib/libIlmImf-Imf_2_0.so.20.0.1
 -rwxr-xr-x	root/root	usr/lib/libIlmImf.la
-lrwxrwxrwx	root/root	usr/lib/libIlmImf.so -> libIlmImf.so.6.0.0
-lrwxrwxrwx	root/root	usr/lib/libIlmImf.so.6 -> libIlmImf.so.6.0.0
--rwxr-xr-x	root/root	usr/lib/libIlmImf.so.6.0.0
+lrwxrwxrwx	root/root	usr/lib/libIlmImf.so -> libIlmImf-Imf_2_0.so.20.0.1
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/OpenEXR.pc
 drwxr-xr-x	root/root	usr/share/
