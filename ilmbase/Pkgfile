@@ -1,24 +1,17 @@
-# Description: Base math and exception library.
+# Description: Support libraries used by OpenEXR
 # URL: http://www.openexr.com/
-# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Maintainer: Matt Housh, jaeger at morpheus dot net
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 
 name=ilmbase
-version=1.0.2
+version=2.0.1
 release=1
-source=(http://download.savannah.gnu.org/releases/openexr/$name-$version.tar.gz
-	ilmbase-1.0.2-gcc43.patch)
+source=(http://download.savannah.nongnu.org/releases/openexr/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-
-	patch -p 0 -i $SRC/ilmbase-1.0.2-gcc43.patch
-
-	./configure \
-		--prefix=/usr \
-		--disable-static \
-		--disable-dependency-tracking
-
-	make
-	make DESTDIR=$PKG install
+    cd $name-$version
+    ./configure --prefix=/usr \
+        --disable-static
+    make
+    make DESTDIR=$PKG install
 }
