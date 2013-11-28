@@ -5,26 +5,24 @@
 # Depends on: libquicktime xorg-libxxf86dga
 
 name=mjpegtools
-version=2.0.0
+version=2.1.0
 release=1
-source=(http://downloads.sourceforge.net/project/mjpeg/$name/$version/$name-$version.tar.gz
-	mjpegtools-v4l-2.6.38.patch
-	mjpegtools_gcc470.patch)
+source=(http://downloads.sourceforge.net/project/mjpeg/$name/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	patch -p 0 -i $SRC/mjpegtools-v4l-2.6.38.patch
-	patch -p 1 -i $SRC/mjpegtools_gcc470.patch
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
+		--enable-compile-warnings \
 		--enable-simd-accel \
-		--disable-assert \
-		--disable-dependency-tracking
+		--disable-dependency-tracking \
+		--disable-assert
 
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share/info
-	rmdir $PKG/usr/share
+
+	rm -r $PKG/usr/share/info
+	find $PKG -type d -empty -delete
 }
