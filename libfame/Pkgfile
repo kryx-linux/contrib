@@ -16,7 +16,6 @@ build() {
 	patch -p 1 -i $SRC/$name-$version-config_update-1.patch
 
 	sed -i 's/$CC --version/$CC -dumpversion/' configure
-	unset CC # ccache brakes at library linking stage
 
 	./configure --prefix=/usr
 	make
