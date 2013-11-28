@@ -6,16 +6,29 @@
 
 name=transcode
 version=1.1.7
-release=1
+release=2
 source=(https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.tar.bz2
 	http://downloads.sourceforge.net/project/subtitleripper/subtitleripper/subtitleripper-0.3-4/subtitleripper-0.3-4.tgz
-	ffmpeg.patch)
+	transcode-1.1.7-ffmpeg.patch
+	transcode-1.1.7-ffmpeg-0.10.patch
+	transcode-1.1.7-ffmpeg-0.11.patch
+	transcode-1.1.7-preset-free.patch
+	transcode-1.1.7-libav-9.patch
+	transcode-1.1.7-preset-force.patch
+	transcode-1.1.7-ffmpeg2.patch)
 
 build() {
 	cd $name-$version
 	CFLAGS+=' -pthread'
 
-	patch -p 1 -i $SRC/ffmpeg.patch
+	patch -p 0 -i $SRC/transcode-1.1.7-ffmpeg.patch
+	patch -p 0 -i $SRC/transcode-1.1.7-ffmpeg-0.10.patch
+	patch -p 1 -i $SRC/transcode-1.1.7-ffmpeg-0.11.patch
+	patch -p 1 -i $SRC/transcode-1.1.7-preset-free.patch
+	patch -p 0 -i $SRC/transcode-1.1.7-libav-9.patch
+	patch -p 1 -i $SRC/transcode-1.1.7-preset-force.patch
+	patch -p 1 -i $SRC/transcode-1.1.7-ffmpeg2.patch
+	libtoolize
 
 	./configure \
 		--prefix=/usr \
@@ -40,8 +53,7 @@ build() {
 		--enable-xvid \
 		--enable-x264 \
 		--enable-faac \
-		--enable-libxml2 \
-		--enable-netstream
+		--enable-libxml2
 
 	make
 	make DESTDIR=$PKG install
