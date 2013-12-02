@@ -2,18 +2,15 @@
 # URL: http://xine.sourceforge.net
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: ffmpeg gtk libmad libmng libmpcdec vcdimager wavpack xorg-libxi xorg-libxvmc xorg-xvinfo libdvdnav libmodplug libvdpau liba52 libbluray libfame libdca glu flac
+# Depends on: ffmpeg gtk libmad libmng libmpcdec vcdimager wavpack xorg-libxi xorg-libxvmc xorg-xvinfo libdvdnav libmodplug libvdpau liba52 libbluray libdca glu flac
 
 name=xine-lib
-version=1.2.3
+version=1.2.4
 release=1
-source=(http://downloads.sourceforge.net/project/xine/$name/$version/$name-$version.tar.xz
-	accel_vaapi.h)
+source=(http://downloads.sourceforge.net/project/xine/$name/$version/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
-
-	cp $SRC/accel_vaapi.h src/xine-engine/
 
 	./configure \
 		CFLAGS='' \
