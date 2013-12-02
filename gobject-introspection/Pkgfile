@@ -5,7 +5,7 @@
 # Depends on: python glib
 
 name=gobject-introspection
-version=1.34.2
+version=1.38.0
 release=1
 source=(http://ftp.gnome.org/pub/GNOME/sources/$name/${version::4}/$name-$version.tar.xz)
 
@@ -21,5 +21,5 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/gtk-doc
+	rm -rf $PKG/usr/share/gtk-doc
 }
