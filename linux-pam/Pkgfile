@@ -4,7 +4,7 @@
 
 name=linux-pam
 version=1.1.8
-release=1
+release=2
 source=(
 http://www.linux-pam.org/library/Linux-PAM-$version.tar.bz2
 other
@@ -30,7 +30,7 @@ build() {
 	make DESTDIR=$PKG install
 
 	rm -rf $PKG/usr/share $PKG/lib/security/*.la
-	mkdir -m 700 $PKG/etc/pam.d
+	mkdir -m 755 $PKG/etc/pam.d
 	install -D -m 644 -o root -g root $SRC/other $PKG/etc/pam.d/other
 	install -D -m 644 -o root -g root $SRC/system-auth $PKG/etc/pam.d/system-auth
 
