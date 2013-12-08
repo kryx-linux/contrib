@@ -2,18 +2,25 @@
 # URL: http://www.midori-browser.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: libnotify librsvg vala webkit xorg-libxscrnsaver libunique
+# Depends on: cmake libnotify librsvg vala webkit xorg-libxscrnsaver libunique libzeitgeist
 
 name=midori
-version=0.5.5
+version=0.5.6
 release=1
 source=(http://www.midori-browser.org/downloads/${name}_${version}_all_.tar.bz2)
 
 build() {
 	cd $name-$version
-	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) \{0,1\}.*/\1/' <<< $MAKEFLAGS)"
-	./configure --prefix=/usr --disable-zeitgeist $JOBS
+
+	install -d build
+	cd build
+
+	cmake .. \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+
 	make
 	make DESTDIR=$PKG install
+
 	rm -r $PKG/usr/share/{doc,locale}
 }
