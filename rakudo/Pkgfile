@@ -4,14 +4,12 @@
 # Depends on:  icu parrot nqp
 
 name=rakudo
-version=2013.11
+version=2013.12
 release=1
-#source=(https://github.com/downloads/$name/star/$name-star-$version.tar.gz)
-source=(http://$name.org/downloads/star/$name-star-$version.tar.gz rakudo-2013.11_buildsystem.patch)
+source=(http://$name.org/downloads/star/$name-star-$version.tar.gz)
 
 build() {
     cd $name-star-$version
-    patch -p1 -i ../rakudo-2013.11_buildsystem.patch
     perl ./Configure.pl --prefix=/usr
     make
 
