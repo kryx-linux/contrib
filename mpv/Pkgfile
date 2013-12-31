@@ -2,10 +2,10 @@
 # URL:         http://mpv.io
 # Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
 # Depends on:  libass ffmpeg docutils
-# Nice to have: libquvi libdvdread
+# Nice to have: libquvi libdvdread libdvdnav
 
 name=mpv
-version=0.2.4
+version=0.3.0
 release=1
 source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 
@@ -14,10 +14,9 @@ build () {
 
 	# custom CFLAGS LDFLAGS might break the build
 	unset CFLAGS LDFLAGS
-	./configure \
+	./old-configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-      		--disable-lircc \
       		--disable-joystick \
       		--disable-radio \
       		--disable-radio-capture \
