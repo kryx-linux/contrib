@@ -4,32 +4,32 @@
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 
 name=fpc
-version=2.6.0
+version=2.6.2
 release=1
 source=(ftp://ftp.freepascal.org/pub/fpc/dist/$version/source/fpcbuild-$version.tar.gz
-	ftp://ftp.freepascal.org/pub/fpc/dist/$version/bootstrap/i386-linux-ppc386.bz2
+	ftp://ftp.freepascal.org/pub/fpc/dist/$version/bootstrap/x86_64-linux-ppcx64.bz2
 	ftp://ftp.freepascal.org/pub/fpc/contrib/libgdb/v7.2/libgdb_mingw702.zip)
 
 build() {
-	bunzip2 i386-linux-ppc386.bz2
-	chmod 0755 i386-linux-ppc386
+	bunzip2 x86_64-linux-ppcx64.bz2
+	chmod 0755 x86_64-linux-ppcx64
 
-	export LIBGDBDIR=$SRC/libgdb/win32/i386/
+	export LIBGDBDIR=$SRC/libgdb/win64/x86_64/
 
 	cd fpcbuild-$version/fpcsrc/
 	
-	make -j 1 PP=$SRC/i386-linux-ppc386 build
+	make -j 1 PP=$SRC/x86_64-linux-ppcx64 build
 
-	cp $SRC/fpcbuild-$version/fpcsrc/compiler/ppc386 \
-		$SRC/fpcbuild-$version/fpcsrc/compiler/ppc386.new
+	cp $SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 \
+		$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64.new
 
-	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppc386.new build
-	rm $SRC/fpcbuild-$version/fpcsrc/compiler/ppc386.new
+	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64.new build
+	rm $SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64.new
 
-	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppc386 rtl_clean
-	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppc386 rtl packages_all utils
+	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 rtl_clean
+	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 rtl packages_all utils
 
-	set -- PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppc386 \
+	set -- PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 \
 		FPCMAKE=$SRC/fpcbuild-$version/fpcsrc/utils/fpcm/fpcmake \
 		INSTALL_PREFIX=$PKG/usr \
 		INSTALL_DOCDIR=$PKG/usr/share/doc/fpcbuild \
@@ -37,5 +37,5 @@ build() {
 		INSTALL_SOURCEDIR=$PKG/usr/lib/fpc/fpcbuild-$version/source
 
 	make -j 1 "$@" compiler_install rtl_install packages_install utils_install
-	ln -sf /usr/lib/fpc/$version/ppc386 $PKG/usr/bin/ppc386
+	ln -sf /usr/lib/fpc/$version/ppcx64 $PKG/usr/bin/ppcx64
 }
