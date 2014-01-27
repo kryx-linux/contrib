@@ -21,6 +21,6 @@ build() {
 	make DESTDIR=$PKG install
 
 	cd python
-	python setup.py test
-	python setup.py install --root=$PKG
+	/usr/bin/python setup.py test
+	/usr/bin/python setup.py install --root=$PKG
 }
