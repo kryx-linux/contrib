@@ -11,6 +11,6 @@ source=(http://effbot.org/media/downloads/PIL-$version.tar.gz)
 
 build() {
 	cd PIL-$version
-	python setup.py install --root=$PKG
+	/usr/bin/python setup.py install --root=$PKG
 	find $PKG -name '*egg-info' -delete
 }
