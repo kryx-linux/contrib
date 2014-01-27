@@ -11,5 +11,5 @@ source=(http://pypi.python.org/packages/source/z/$name/$name-$version.zip)
 	
 build() {
 	cd $name-$version
-	python setup.py install --root=$PKG --prefix=/usr
+	/usr/bin/python setup.py install --root=$PKG --prefix=/usr
 }
