@@ -13,7 +13,7 @@ source=(http://downloads.sourceforge.net/project/$name/$name/$version/DenyHosts-
 build() {
 	cd DenyHosts-$version
 	patch -p0 -i $SRC/$name-$version-config.patch
-	python setup.py install --root=$PKG
+	/usr/bin/python setup.py install --root=$PKG
 	
 	rm $PKG/usr/share/denyhosts/*.txt
 	
