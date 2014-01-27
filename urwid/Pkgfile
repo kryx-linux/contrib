@@ -12,6 +12,6 @@ source=(http://excess.org/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	python setup.py build
-	python setup.py install --prefix=/usr --root=$PKG --optimize=1
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --prefix=/usr --root=$PKG --optimize=1
 }
