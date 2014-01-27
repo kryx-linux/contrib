@@ -16,8 +16,8 @@ build() {
 	export CFLAGS="$CFLAGS -fno-strict-aliasing"
 	patch -p1 -i $SRC/pygame-1.9.1-config.patch
 
-	python config.py -auto
-	python setup.py install --prefix=/usr --root $PKG
+	/usr/bin/python config.py -auto
+	/usr/bin/python setup.py install --prefix=/usr --root $PKG
 
 	chmod a-x $PKG/usr/lib/python*/site-packages/pygame/*.so
 	find $PKG -name '*.h' -exec chmod 0644 {} \;
