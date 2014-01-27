@@ -11,6 +11,6 @@ source=(http://www.makotemplates.org/downloads/Mako-$version.tar.gz)
 
 build() {
 	cd Mako-$version
-	python setup.py build
-	python setup.py install --prefix=/usr --root=$PKG
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --prefix=/usr --root=$PKG
 }
