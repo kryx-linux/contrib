@@ -12,8 +12,8 @@ source=(http://download.deluge-torrent.org/source/$name-$version.tar.lzma)
 build() {
 	cd $name-$version
 
-	OS='linux' python setup.py build
-	python setup.py install --root=$PKG install
+	OS='linux' /usr/bin/python setup.py build
+	/usr/bin/python setup.py install --root=$PKG install
 
 	install -d $PKG/usr/man
 	mv $PKG/usr/share/man $PKG/usr/
