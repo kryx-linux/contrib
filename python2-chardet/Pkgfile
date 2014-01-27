@@ -11,6 +11,6 @@ source=(https://pypi.python.org/packages/source/c/chardet/chardet-$version.tar.g
 
 build() {
 	cd chardet-$version
-	python setup.py install --root=$PKG
+	/usr/bin/python setup.py install --root=$PKG
 	find $PKG -name '*.egg-info' | xargs rm -rf
 }
