@@ -30,15 +30,15 @@ build() {
 	# really don't use NLS
 	rm -r po
 
-	python setup.py configure \
+	/usr/bin/python setup.py configure \
 		--dbus=/usr/etc/dbus-1/system.d \
 		--mandir=/usr/man \
 		--etc=/etc/wicd \
 		--no-install-i18n-man \
 		--no-install-docs
 
-	python setup.py install --root=$PKG
-	python -mcompileall $PKG
+	/usr/bin/python setup.py install --root=$PKG
+	/usr/bin/python -mcompileall $PKG
 	install -m 0744 -D $SRC/wicd.rc $PKG/etc/rc.d/wicd
 
 	rm -r $PKG/etc/xdg
