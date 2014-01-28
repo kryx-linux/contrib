@@ -1,19 +1,31 @@
-# Description: An HE, LC, MAIN and LTP profile MPEG2 and MPEG-4 AAC decoder
+# Description: AAC audio decoding library.
 # URL: http://www.audiocoding.com/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at morpheus dot net
-# Depends on: libsndfile id3lib libmp4v2
 
 name=faad2
 version=2.7
-release=1
-source=(http://download.sourceforge.net/faac/$name-$version.tar.bz2)
+release=2
+source=(http://downloads.sourceforge.net/project/faac/faad2-src/$name-$version/$name-$version.tar.bz2
+	faad2-2.7-libmp4ff-shared-lib.patch
+	faad2-2.7-libmp4ff-install-mp4ff_int_types_h.patch
+	faad2-2.7-man1_MANS.patch)
 
 build() {
 	cd $name-$version
-	./configure --prefix=/usr \
-		--enable-mp4v2
-	(cd libfaad && make DESTDIR=$PKG install)
-	(cd common && make DESTDIR=$PKG install)
-	install -m 0644 common/mp4ff/mp4ff_int_types.h $PKG/usr/include
+
+	patch -p1 -i $SRC/faad2-2.7-libmp4ff-shared-lib.patch
+	patch -p0 -i $SRC/faad2-2.7-libmp4ff-install-mp4ff_int_types_h.patch
+	patch -p1 -i $SRC/faad2-2.7-man1_MANS.patch
+	sed -i -e 's|iquote |I|' libfaad/Makefile.am
+	sed -i 's|AM_CONFIG_HEADER|AC_CONFIG_HEADERS|' configure.in
+	autoreconf -fi
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-dependency-tracking
+
+	make
+	make DESTDIR=$PKG install
 }
