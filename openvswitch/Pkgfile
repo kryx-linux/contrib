@@ -1,0 +1,21 @@
+# Description: multilayer virtual software switch 
+# URL:         http://openvswitch.org/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:
+
+name=openvswitch
+version=2.0.0
+release=1
+source=(http://openvswitch.org/releases/openvswitch-$version.tar.gz ovsd)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr \
+              --mandir=/usr/man \
+              --sysconfdir=/etc \
+              --localstatedir=/var
+  make
+  make install DESTDIR=$PKG
+
+  install -D $SRC/ovsd $PKG/etc/ovsd
+}
