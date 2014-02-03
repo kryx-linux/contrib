@@ -4,14 +4,14 @@
 # Depends on: ncurses libnl
 
 name=powertop
-version=2.0
+version=2.5
 release=1
-source=(https://01.org/powertop/sites/default/files/downloads/$name-$version.tar.bz2)
+source=(https://01.org/powertop/sites/default/files/downloads/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	export LIBS="-lresolv"
-	./configure --prefix=/usr --disable-nls
+	./configure --prefix=/usr --disable-nls \
+				--mandir=/usr/man
 	make
 	make DESTDIR=$PKG install
 }
