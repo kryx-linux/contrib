@@ -4,18 +4,16 @@
 # Depends:	libdnet
 
 name=open-vm-tools
-version=2011.04.25-402641
+version=9.4.0-1280544
 release=1
-source=( \
-http://downloads.sourceforge.net/project/$name/$name/${version%-*}/$name-$version.tar.gz \
+source=(
+http://downloads.sourceforge.net/project/$name/$name/stable-9.4.x/$name-$version.tar.gz
 vmtools.rc
 tools.conf
-hostinfo.patch
 )
 
 build(){
 	cd $name-$version
-	patch -p1 -i $SRC/hostinfo.patch
 
 	./configure \
 		--prefix=/usr \
@@ -26,8 +24,6 @@ build(){
 		--without-gtkmm \
 		--without-icu \
 		--without-pam
-		# --without-procps \
-		# --without-dnet \
 	make
 	make DESTDIR=$PKG install
 	mv $PKG/usr/sbin/mount.vmhgfs $PKG/sbin/mount.vmhgfs
