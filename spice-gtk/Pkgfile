@@ -4,16 +4,13 @@
 # Depends on:  gtk3 openssl celt51 cyrus-sasl
 
 name=spice-gtk
-version=0.21
+version=0.23
 release=1
-source=(http://spice-space.org/download/gtk/spice-gtk-$version.tar.bz2 \
-        palette_remove.patch)
+source=(http://spice-space.org/download/gtk/spice-gtk-$version.tar.bz2)
 
 build() {
 
   cd $name-$version
-
-  patch -i ../palette_remove.patch -p1
 
   ./configure --prefix=/usr \
               --datarootdir=/usr/lib \
