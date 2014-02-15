@@ -4,12 +4,9 @@
 # Depends on: mesa3d xorg-libxaw xorg-libxcursor xorg-libxft xorg-libxinerama xorg-libxi xorg-libxrandr dbus-glib
 
 name=libreoffice
-version=4.0.6
+version=4.2.0
 release=1
 source=(http://download.documentfoundation.org/$name/stable/$version/rpm/x86_64/LibreOffice_${version}_Linux_x86-64_rpm.tar.gz)
-#source=(ftp://ftp.vinelinux.org/pub/mirrors/libreoffice/stable/$version/rpm/x86_64/LibO_${version}_Linux_x86-64_install-rpm_en-US.tar.gz)
-#source=(http://jupiter.ssu.samara.ru/archive/unix/bsd/office/LibreOffice/$version/rpm/x86_64/LibO_${version}_Linux_x86-64_install-rpm_en-US.tar.gz)
-#source=(http://virror.hanoilug.org/$name/$version/rpm/x86_64/LibO_${version}_Linux_x86-64_install-rpm_en-US.tar.gz)
 
 build() {
     local workd="$SRC/tmp_work"
@@ -19,7 +16,7 @@ build() {
     for rpm in *.rpm; do
         bsdtar -p -o -C $workd -xf $rpm
     done
-    cd desktop-integration
+
     bsdtar -p -o -C $workd -xf \
         $name${version%.*}-freedesktop-menus-${version%.*}*.noarch.rpm
 
@@ -38,11 +35,12 @@ build() {
 
     mkdir -p $PKG/usr/share/applications
     cd $PKG/usr/lib/$name/share/xdg/
-    sed -i '/^Exec=/s/libreoffice-printeradmin/spadmin/' printeradmin.desktop
+
     for desktop in *.desktop; do
        sed -i '/^Exec=/s/libreoffice[^ ]*/soffice/' $desktop
        ln -sf /usr/lib/$name/share/xdg/$desktop $PKG/usr/share/applications/$desktop 
     done
+
     mv $workd/usr/share/{mime,icons} $PKG/usr/share
 
     find $PKG \(\
