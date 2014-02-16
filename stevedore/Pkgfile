@@ -1,14 +1,15 @@
-# Description: A set of enhancements to virtualenv
-# URL: https://github.com/dreamhost/stevedore
-# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Depends on: distribute
+# Description:  A set of enhancements to virtualenv
+# URL:          https://github.com/dreamhost/stevedore
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:   pbr
 
 name=stevedore
-version=0.10
+version=0.14.1
 release=1
 source=(http://pypi.python.org/packages/source/s/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    python setup.py install --root=$PKG
+    /usr/bin/python setup.py install --root=$PKG
 }
