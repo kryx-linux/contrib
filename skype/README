@@ -1,0 +1,16 @@
+Note that skype is a 32bit binary and as such requires compat-32
+ports tree to be enabled to work.
+
+You enable compat-32 by.
+
+mv /etc/ports/compat-32.rsync.inactive /etc/ports/compat-32.rsync
+
+$EDITOR /etc/prt-get.conf
+
+And add:
+
+prtdir /usr/ports/compat-32
+
+Also be sure to enable:
+
+runscripts yes
