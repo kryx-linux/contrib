@@ -5,7 +5,7 @@
 # Depends on: libusb openssl tcp_wrappers
 
 name=nut
-version=2.6.5
+version=2.7.1
 release=1
 source=(http://www.networkupstools.org/source/${version%.*}/$name-$version.tar.gz
 	upsd)
@@ -24,12 +24,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-
-	rmdir \
-		$PKG/usr/lib/pkgconfig \
-		$PKG/usr/include \
-		$PKG/usr/cgi-bin \
-		$PKG/usr/html
 
 	#if you dont want config templates uncomment the next line
 	#rm $PKG/etc/nut/*
