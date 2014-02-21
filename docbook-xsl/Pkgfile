@@ -6,8 +6,8 @@
 ## http://www.linuxfromscratch.org/blfs/view/svn/pst/docbook-xsl.html
 
 name=docbook-xsl
-version=1.77.1
-release=2
+version=1.78.1
+release=1
 source=(http://downloads.sourceforge.net/project/docbook/$name/$version/$name-$version.tar.bz2)
 
 build() {
@@ -15,19 +15,23 @@ build() {
 
 	install -v -m 0755 -d $PKG/usr/share/xml/docbook/xsl-stylesheets-$version
 
-	cp -R \
-		VERSION VERSION.xsl common eclipse extensions fo \
+	cp -v -R \
+		VERSION common eclipse epub extensions fo \
 		highlighting html htmlhelp images javahelp lib manpages \
-		params profiling roundtrip slides template tools website \
+		params profiling roundtrip slides template tests tools website \
 		xhtml xhtml-1_1 \
 		$PKG/usr/share/xml/docbook/xsl-stylesheets-$version
 
+	ln -s VERSION $PKG/usr/share/xml/docbook/xsl-stylesheets-1.78.1/VERSION.xsl
+
+	ln -sf xsl-stylesheets-$version $PKG/usr/share/xml/docbook/xsl-stylesheets
+
 	install -v -m 0644 -D README \
-		$PKG/usr/share/doc/docbook-xsl-$version/README.XSL
+		$PKG/usr/share/doc/docbook-xsl-$version/README.txt
 
 	install -v -m 0755 RELEASE-NOTES* NEWS* \
 		$PKG/usr/share/doc/docbook-xsl-$version
 
 	# documentation
-	#cp -v -R doc/* /usr/share/doc/docbook-xsl-$version
+	#cp -v -R doc/* $PKG/usr/share/doc/docbook-xsl-$version
 }
