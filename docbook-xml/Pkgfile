@@ -7,10 +7,41 @@
 
 name=docbook-xml
 version=4.5
-release=2
+release=3
 source=(http://www.docbook.org/xml/$version/$name-$version.zip)
 
 build() {
+	local _version
+
+	for _version in 4.2 4.3 4.4; do
+
+		wget -O $SRC/$name-$_version.zip \
+			http://www.docbook.org/xml/$_version/$name-$_version.zip
+
+		install -d $name-$_version
+		pushd $name-$_version
+		bsdtar xf $SRC/$name-$_version.zip
+		install -d $PKG/usr/share/xml/docbook/xml-dtd-$_version
+
+		cp -a docbook.cat *.dtd ent/ *.mod \
+			$PKG/usr/share/xml/docbook/xml-dtd-$_version/
+
+		popd
+	done
+
+	install -d $SRC/$name-4.1.2
+
+	wget -O $SRC/docbkx412.zip \
+			http://www.docbook.org/xml/4.1.2/docbkx412.zip
+
+	pushd $name-4.1.2
+	bsdtar xf $SRC/docbkx412.zip
+	install -d $PKG/usr/share/xml/docbook/xml-dtd-4.1.2
+
+	cp -a docbook.cat *.dtd ent/ *.mod \
+		$PKG/usr/share/xml/docbook/xml-dtd-4.1.2/
+	popd
+
 	install -d $PKG/usr/share/xml/docbook/xml-dtd-$version $PKG/etc/xml
 	install -v -d -m 0755 $PKG/usr/share/xml/docbook/xml-dtd-$version
 	install -v -d -m 0755 $PKG/etc/xml
@@ -18,5 +49,5 @@ build() {
 	cp -a docbook.cat *.dtd ent/ *.mod \
 		$PKG/usr/share/xml/docbook/xml-dtd-$version
 
-	find $PKG/usr/share/xml/docbook/xml-dtd-$version -type f -exec chmod go-w,-x {} +
+	find $PKG/usr/share/xml/docbook/xml-dtd-* -type f -exec chmod go-w,-x {} +
 }
