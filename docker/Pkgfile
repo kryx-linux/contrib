@@ -6,33 +6,27 @@
 # Depends on:   go bridge-utils lxc sqlite3
 
 name=docker
-version=0.8.0
-revision=cc3a8c8d8e
-release=2
+version=0.8.1
+revision=a1598d1e1c
+release=1
 source=(
     https://github.com/dotcloud/$name/archive/v$version.tar.gz
     $name.rc
     $name.conf
 )
 
-_magic=src/github.com/dotcloud
-
 build() {
-    # symlink vendor packages
-    mkdir -p "$SRC/$_magic"
-    ln -sfn "../../../$name-$version" "$_magic/docker"
-
     cd $name-$version
 
     # Build
-    export GOPATH="$SRC:$SRC/$_magic/docker/vendor"
+    export AUTO_GOPATH=1
     export DOCKER_GITCOMMIT=$revision
     ./hack/make.sh dynbinary
 
     # Package
-    install -Dm755 "bundles/$version/dynbinary/docker-$version" "$PKG/usr/bin/docker"
-    install -Dm755 "bundles/$version/dynbinary/dockerinit-$version" "$PKG/usr/lib/docker/dockerinit"
-    install -Dm644 "contrib/udev/80-docker.rules" "$PKG/etc/udev/rules.d/80-docker.rules"
+    install -D -m 755 "bundles/$version/dynbinary/docker-$version" "$PKG/usr/bin/docker"
+    install -D -m 755 "bundles/$version/dynbinary/dockerinit-$version" "$PKG/usr/lib/docker/dockerinit"
+    install -D -m 644 "contrib/udev/80-docker.rules" "$PKG/etc/udev/rules.d/80-docker.rules"
     install -D -m 755 $SRC/$name.rc $PKG/etc/rc.d/$name
     install -D -m 644 $SRC/$name.conf $PKG/etc/$name.conf
 
