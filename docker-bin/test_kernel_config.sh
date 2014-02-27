@@ -5,6 +5,60 @@
 #
 # USAGE: ./testconfig.sh [ /path/to/kernel/config ]
 
+
+NETWORKING_MODULES=(
+    ^CONFIG_BRIDGE\=[ym]$
+    ^CONFIG_NETFILTER_XT_MATCH_ADDRTYPE\=[ym]$
+    ^CONFIG_NF_NAT\=[ym]$
+    ^CONFIG_NF_NAT_IPV4\=[ym]$
+    ^CONFIG_NF_NAT_NEEDED\=[ym]$
+)
+
+LVM_MODULES=(
+    ^CONFIG_BLK_DEV_DM\=[ym]$
+    ^CONFIG_DM_THIN_PROVISIONING\=[ym]$
+    ^CONFIG_EXT4_FS\=[ym]$
+)
+
+NAMESPACE_MODULES=(
+    ^CONFIG_NAMESPACES\=[ym]$
+    ^CONFIG_UTS_NS\=[ym]$
+    ^CONFIG_IPC_NS\=[ym]$
+    ^CONFIG_PID_NS\=[ym]$
+    ^CONFIG_NET_NS\=[ym]$
+)
+
+CGROUPS_MODULES=(
+    ^CONFIG_CGROUPS\=[ym]$
+)
+
+CGROUPS_CONTROLLERS_MODULES=(
+    ^CONFIG_CGROUP_CPUACCT\=[ym]$
+    ^CONFIG_BLK_CGROUP\=[ym]$
+    ^CONFIG_MEMCG\=[ym]$
+    ^CONFIG_MEMCG_SWAP\=[ym]$
+)
+
+
+function test_config() {
+    local desc=${1}
+    local -a modules=("${@:2}")
+
+    echo "Checking $desc:"
+
+    for module in ${modules[@]}; do
+        echo -n " $module "
+        if [[ $(egrep $module $CONFIG) ]]; then
+            echo "OK"
+        else
+            echo "ERR"
+            exit 1
+        fi
+    done
+    echo
+}
+
+
 if [[ $# -lt 1 ]]; then
     if [[ -e /proc/config.gz ]]; then
         CONFIG=$(mktemp)
@@ -17,39 +71,11 @@ else
     CONFIG=${1}
 fi
 
-echo "Checking Networking:"
-egrep "CONFIG_BRIDGE=.$" $CONFIG
-egrep "CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=.$" $CONFIG
-egrep "CONFIG_NF_NAT=.$" $CONFIG
-egrep "CONFIG_NF_NAT_IPV4=.$" $CONFIG
-egrep "CONFIG_NF_NAT_NEEDED=.$" $CONFIG
-echo
 
-echo "Checking LVM:"
-egrep CONFIG_BLK_DEV_DM $CONFIG
-egrep CONFIG_DM_THIN_PROVISIONING $CONFIG
-egrep CONFIG_EXT4_FS $CONFIG
-echo
+test_config "Networking" "${NETWORKING_MODULES[@]}"
+test_config "LVM" "${LVM_MODULES[@]}"
+test_config "Namespaces" "${NAMESPACE_MODULES[@]}"
+test_config "CGroups" "${CGROUPS_MODULES[@]}"
+test_config "CGroups Controllers" "${CGROUPS_CONTROLLERS_MODULES[@]}"
 
-echo "Checking Namespaces:"
-egrep CONFIG_NAMESPACES $CONFIG
-egrep CONFIG_UTS_NS $CONFIG
-egrep CONFIG_IPC_NS $CONFIG
-egrep CONFIG_UID_NS $CONFIG
-egrep CONFIG_PID_NS $CONFIG
-egrep CONFIG_NET_NS $CONFIG
-echo
-
-echo "Checking Cgroups:"
-egrep CONFIG_CGROUPS $CONFIG
-echo
-
-echo "Checkin gCgroup controllers (optional but highly recommended):"
-egrep CONFIG_CGROUP_CPUACCT $CONFIG
-egrep CONFIG_BLK_CGROUP $CONFIG
-egrep CONFIG_MEMCG $CONFIG
-egrep CONFIG_MEMCG_SWAP $CONFIG
-echo 
-
-echo "Running lxc-checkconfig:"
-CONFIG=$CONFIG /usr/bin/lxc-checkconfig
+echo "You are ready to Docker rock 'n roll!"

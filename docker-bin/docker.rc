@@ -10,6 +10,7 @@ start)
     nohup /usr/bin/docker $DOCKER_OPTS &> /var/log/docker.log &
     touch /var/run/docker.sock
     chgrp docker /var/run/docker.sock
+    chmod 660 /var/run/docker.sock
     ;;
 stop)
     if [ -f /var/run/docker.pid ]; then
