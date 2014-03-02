@@ -5,17 +5,29 @@
 # Depends on: zlib openssl
 
 name=rtmpdump
-version=20121230
+version=2.4
 release=1
-source=(http://crux.ster.so/distfiles/$name/$name-git-$version.tar.xz)
+source=(http://crux.ster.so/distfiles/$name/$name-${version}_p20131018.tar.gz)
 
 build() {
-	cd $name-$version
+	sed -i 's/\$(MAKEFLAGS)//g' Makefile
+
+	sed -i \
+		-e 's|OPT=|&-fPIC |' \
+		-e 's|OPT|OPTS|' \
+		-e 's|CFLAGS=.*|& $(OPT)|' \
+		librtmp/Makefile
+
 
 	install -d $PKG/usr/lib
 
-	[ "$CC" ] || CC=gcc
-	make CC="$CC" $MAKEFLAGS
-	make prefix=/usr sbindir=/usr/bin mandir=/usr/man \
-	DESTDIR=$PKG install
+	make CRYPTO=OPENSSL SYS=posix
+
+	make \
+		CRYPTO=OPENSSL \
+		prefix=/usr \
+		sbindir=/usr/bin \
+		mandir=/usr/man \
+		DESTDIR=$PKG \
+		install
 }
