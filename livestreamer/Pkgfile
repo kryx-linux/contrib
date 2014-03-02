@@ -1,0 +1,16 @@
+# Description: CLI program that launches streams from various streaming services in a custom video player.
+# URL: https://github.com/chrippa/livestreamer
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: requests rtmpdump
+
+name=livestreamer
+version=1.7.4
+release=1
+source=(http://pypi.python.org/packages/source/l/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	/usr/bin/python setup.py install --root=$PKG --optimize=1
+}
