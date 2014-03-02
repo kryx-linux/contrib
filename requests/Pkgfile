@@ -1,0 +1,17 @@
+# Description: Python HTTP for Humans.
+# URL: http://python-requests.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: setuptools
+
+name=requests
+version=2.2.1
+release=1
+source=(http://pypi.python.org/packages/source/${name:0:1}/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --prefix=/usr --root=$PKG
+}
