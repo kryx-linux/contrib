@@ -1,59 +1,26 @@
 Kernel Requirements
 ===================
 
+If you want to have a full working CRUX+Docker system you will need to rebuild your kernel various networking, cgroups and optional lvm options
 
-If you want to have a full working CRUX+Docker system you will need to rebuild your kernel with the following options enabled:
+Please review the provided ``test_kernel_config.sh`` shell script carefully and use this to test your kernel configuration. This README does not document
+what these specific options are to vaoid duplication. They are listed instead in ``test_kernel_config.sh``.
 
-Networking:
-
-- CONFIG_BRIDGE
-- CONFIG_NETFILTER_XT_MATCH_ADDRTYPE
-- CONFIG_NF_NAT
-- CONFIG_NF_NAT_IPV4
-- CONFIG_NF_NAT_NEEDED
-
-LVM:
-
-- CONFIG_BLK_DEV_DM
-- CONFIG_DM_THIN_PROVISIONING
-- CONFIG_EXT4_FS
-
-Namespaces:
-- CONFIG_NAMESPACES
-- CONFIG_UTS_NS
-- CONFIG_IPC_NS
-- CONFIG_UID_NS
-- CONFIG_PID_NS
-- CONFIG_NET_NS
-
-Cgroups:
-
-- CONFIG_CGROUPS
-
-Cgroups Controllers (*optional but highly recommended*):
-
-- CONFIG_CGROUP_CPUACCT
-- CONFIG_BLK_CGROUP
-- CONFIG_MEMCG
-- CONFIG_MEMCG_SWAP
-
-You may check your kernel configuration by running the provided ``test_kernel_config.sh`` script against your kernel configuration:
+You may check your kernel configuration by running:
 
 ::
     
     ./test_kernel_config.sh /usr/src/linux/.config
          
 
-Other Requirements
-==================
+Execution Engines
+=================
 
+As of Docker 0.9+ execution engines are pluggable and as such Docker no longer depends on lxc.
+The new default execution driver is now an internal ``libcontainer`` driver that replaces the need for lxc.
 
-You **must** have the following ``cgroup`` mount point mounted:
+Please see the `Docker Documentation <http://docs.docker.io>`_ if you want to use a different execution engine other then the default.
 
-::
-    
-    none               /cgroup       cgroup    defaults               0      0
-    
 
 Storage Backends
 ================
@@ -76,6 +43,4 @@ To use the ``btrfs`` backend edit ``/etc/docker.conf`` and modify the ``DOCKER_O
 Docker Client
 =============
 
-The provided Docker rc script changes the group ownership of the ``/var/run/socker.sock`` UNIX Socket to ``docker``.
-
-Add yourself to this group if you wish to access the Docker daemon on localhost via UNIX Socker.
+Add yourself to the ``docker`` group if you wish to access the Docker daemon on localhost via UNIX Socker.
