@@ -1,0 +1,30 @@
+# Description:  Scripts to mount the cgroupfs hierarchy
+# URL:          https://github.com/tianon/cgroupfs-mount
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:   git
+
+name=cgroupfs-mount
+version=06bcb5e9d5
+release=1
+source=()
+
+build() {
+    cd $PKGMK_SOURCE_DIR
+    if [ ! -d $name ]; then
+        git clone git://github.com/tianon/cgroupfs-mount.git $name
+    else
+        cd $name
+        git pull --rebase
+    fi
+    cp -r $PKGMK_SOURCE_DIR/$name $SRC
+
+    cd $SRC/$name
+    git checkout $version
+
+    # Package
+    install -D -m 755 cgroupfs-mount $PKG/usr/bin/cgroupfs-mount
+    install -D -m 755 cgroupfs-umount $PKG/usr/bin/cgroupfs-umount
+
+    chown -R root:root $PKG
+}
