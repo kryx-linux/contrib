@@ -5,7 +5,7 @@
 # Depends on:  giblib xorg-libxinerama xorg-libxt
 
 name=feh
-version=2.9.3
+version=2.10
 release=1
 source=(https://derf.homelinux.org/projects/feh/feh-$version.tar.bz2)
 
@@ -13,6 +13,7 @@ build() {
    cd $name-$version
 
    sed -i 's|share/man|man|g' config.mk
-   make PREFIX=/usr && make PREFIX=/usr DESTDIR=$PKG install
+   make PREFIX=/usr
+   make PREFIX=/usr DESTDIR=$PKG install
    rm -rf $PKG/usr/share/doc
 }
