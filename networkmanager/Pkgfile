@@ -4,7 +4,7 @@
 # Depends on:	dbus libnl p5-xml-parser openresolv dhcpcd polkit upower libsoup iptables nss
 
 name=networkmanager
-version=0.9.8.4
+version=0.9.8.8
 release=1
 source=(
 http://ftp.gnome.org/pub/GNOME/sources/NetworkManager/0.9/NetworkManager-$version.tar.xz
@@ -32,7 +32,7 @@ build() {
 		--with-suspend-resume=upower \
 		--with-dhcpcd=/sbin/dhcpcd \
 		--with-resolvconf=/usr/sbin/resolvconf \
-		--with-iptables=/usr/bin/iptables \
+		--with-iptables=/usr/sbin/iptables \
 		--with-crypto=nss \
 		--enable-more-warnings=no \
 		--enable-modify-system \
