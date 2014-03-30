@@ -7,7 +7,7 @@
 name=docker
 version=0.9.1
 revision=3600720a36
-release=1
+release=2
 source=(
     https://github.com/dotcloud/$name/archive/v$version.tar.gz
     $name.rc
@@ -20,6 +20,8 @@ build() {
     # Build
     export AUTO_GOPATH=1
     export DOCKER_GITCOMMIT=$revision
+    unset CC   # The build fails with a customer C compiler (e.g: ccache)
+    unset CXX  # The build fails with a customer C++ compiler (e.g: ccache)
     ./hack/make.sh dynbinary
 
     # Package
