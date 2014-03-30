@@ -6,11 +6,16 @@
 
 name=gst-plugins-good
 version=0.10.31
-release=2
-source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+release=3
+source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz
+	gst-plugins-v4l2-0.10.31-linux-headers-3.6.patch
+	gst-plugins-v4l2-0.10.31-linux-headers-3.9.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/gst-plugins-v4l2-0.10.31-linux-headers-3.6.patch
+	patch -p1 -i $SRC/gst-plugins-v4l2-0.10.31-linux-headers-3.9.patch
 
 	./configure \
 		--prefix=/usr \
