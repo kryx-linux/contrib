@@ -1,5 +1,9 @@
 drwxr-xr-x	root/root	lib/
 drwxr-xr-x	root/root	lib/firmware/
+-rw-r--r--	root/root	lib/firmware/dahdi-fw-a4a.bin
+-rw-r--r--	root/root	lib/firmware/dahdi-fw-a4b.bin
+-rw-r--r--	root/root	lib/firmware/dahdi-fw-a8a.bin
+-rw-r--r--	root/root	lib/firmware/dahdi-fw-a8b.bin
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-hx8.bin
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-oct6114-032.bin
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-oct6114-064.bin
@@ -8,6 +12,7 @@ drwxr-xr-x	root/root	lib/firmware/
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-tc400m.bin
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-te133.bin
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-te134.bin
+-rw-r--r--	root/root	lib/firmware/dahdi-fw-te435.bin
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-te820.bin
 -rw-r--r--	root/root	lib/firmware/dahdi-fw-vpmoct032.bin
 drwxr-xr-x	root/root	lib/modules/
@@ -25,10 +30,13 @@ drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/dahdi_echocan_sec2.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/dahdi_transcode.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/dahdi_vpmadt032_loader.ko
+drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/oct612x/
+-rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/oct612x/oct612x.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/pciradio.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/tor2.ko
 drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/voicebus/
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/voicebus/dahdi_voicebus.ko
+-rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/wcaxx.ko
 drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/wcb4xxp/
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/wcb4xxp/wcb4xxp.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/wcfxo.ko
@@ -44,6 +52,7 @@ drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/wctdm24xxp/
 drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/wcte12xp/
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/wcte12xp/wcte12xp.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/wcte13xp.ko
+-rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/wcte43x.ko
 drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/xpp/
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/xpp/xpd_bri.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/xpp/xpd_echo.ko
@@ -52,10 +61,6 @@ drwxr-xr-x	root/root	lib/modules/<kernel-version>/dahdi/xpp/
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/xpp/xpd_pri.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/xpp/xpp.ko
 -rw-r--r--	root/root	lib/modules/<kernel-version>/dahdi/xpp/xpp_usb.ko
-drwxr-xr-x	root/root	lib/udev/
-drwxr-xr-x	root/root	lib/udev/rules.d/
--rw-r--r--	root/root	lib/udev/rules.d/dahdi.rules
--rw-r--r--	root/root	lib/udev/rules.d/xpp.rules
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/dahdi/
@@ -69,6 +74,7 @@ drwxr-xr-x	root/root	usr/share/dahdi/
 -rw-r--r--	root/root	usr/share/dahdi/FPGA_1141.hex
 -rw-r--r--	root/root	usr/share/dahdi/FPGA_1151.hex
 -rw-r--r--	root/root	usr/share/dahdi/FPGA_1161.201.hex
+-rw-r--r--	root/root	usr/share/dahdi/FPGA_1161.202.hex
 -rw-r--r--	root/root	usr/share/dahdi/FPGA_1161.hex
 -rw-r--r--	root/root	usr/share/dahdi/FPGA_FXS.hex
 -rw-r--r--	root/root	usr/share/dahdi/PIC_TYPE_1.hex
@@ -76,6 +82,7 @@ drwxr-xr-x	root/root	usr/share/dahdi/
 -rw-r--r--	root/root	usr/share/dahdi/PIC_TYPE_3.hex
 -rw-r--r--	root/root	usr/share/dahdi/PIC_TYPE_4.hex
 -rw-r--r--	root/root	usr/share/dahdi/USB_FW.201.hex
+lrwxrwxrwx	root/root	usr/share/dahdi/USB_FW.202.hex -> USB_FW.201.hex
 -rw-r--r--	root/root	usr/share/dahdi/USB_FW.hex
 -rw-r--r--	root/root	usr/share/dahdi/USB_RECOV.hex
 -rw-r--r--	root/root	usr/share/dahdi/XppConfig.pm
