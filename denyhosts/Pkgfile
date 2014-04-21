@@ -6,13 +6,23 @@
 
 name=denyhosts
 version=2.6
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/DenyHosts-$version.tar.gz
-	denyhosts-$version-config.patch)
+	denyhosts-$version-config.patch
+	denyhosts-2.6-cve-2013-6890.patch
+	denyhosts-2.6-log-injection-regex.patch
+	denyhosts-2.6-single_config_switch.patch
+	denyhosts-2.6-plugin_deny.patch)
 
 build() {
 	cd DenyHosts-$version
+
 	patch -p0 -i $SRC/$name-$version-config.patch
+	patch -p1 -i $SRC/denyhosts-2.6-log-injection-regex.patch
+	patch -p1 -i $SRC/denyhosts-2.6-single_config_switch.patch
+	patch -p1 -i $SRC/denyhosts-2.6-plugin_deny.patch
+	patch -p1 -i $SRC/denyhosts-2.6-cve-2013-6890.patch
+
 	/usr/bin/python setup.py install --root=$PKG
 	
 	rm $PKG/usr/share/denyhosts/*.txt
