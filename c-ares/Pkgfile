@@ -6,14 +6,16 @@
 
 name=c-ares
 version=1.10.0
-release=1
+release=2
 source=(http://c-ares.haxx.se/download/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
 
     # Configure
-    ./configure --prefix=/usr --enable-shared
+    ./configure --prefix=/usr \
+        --enable-shared \
+        --mandir=/usr/man
 
     # Build
     make
