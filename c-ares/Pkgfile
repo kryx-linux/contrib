@@ -1,0 +1,26 @@
+# Description:  Asynchronous C DNS library
+# URL:          http://c-ares.haxx.se/
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:
+
+name=c-ares
+version=1.10.0
+release=1
+source=(http://c-ares.haxx.se/download/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+
+    # Configure
+    ./configure --prefix=/usr --enable-shared
+
+    # Build
+    make
+
+    # Package
+    make DESTDIR=$PKG install
+
+    # Cleanup
+    chown -R root:root $PKG
+}
