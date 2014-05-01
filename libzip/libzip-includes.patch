@@ -1,12 +1,12 @@
-diff -u -r libzip-0.11.1.orig/lib/Makefile.am libzip-0.11.1/lib/Makefile.am
---- libzip-0.11.1.orig/lib/Makefile.am	2013-03-19 19:09:51.000000000 +0900
-+++ libzip-0.11.1/lib/Makefile.am	2013-09-23 22:47:37.617947034 +0900
-@@ -2,8 +2,7 @@
+diff -u -r libzip-0.11.2.orig/lib/Makefile.am libzip-0.11.2/lib/Makefile.am
+--- libzip-0.11.2.orig/lib/Makefile.am	2014-04-07 15:52:25.245818333 +0900
++++ libzip-0.11.2/lib/Makefile.am	2014-04-07 15:55:10.967817856 +0900
+@@ -3,8 +3,7 @@
  
  lib_LTLIBRARIES = libzip.la
  noinst_HEADERS = zipint.h
 -include_HEADERS = zip.h
--libinclude_HEADERS = zipconf.h
+-nodist_libinclude_HEADERS = zipconf.h
 +include_HEADERS = zip.h zipconf.h
  
  # also update CMakeLists.txt when changing version

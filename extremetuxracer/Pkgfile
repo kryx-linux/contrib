@@ -2,19 +2,17 @@
 # URL: http://extremetuxracer.com/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: freetype libpng sdl_mixer tcl xorg-libxi xorg-libxmu
+# Depends on: freetype glu libpng sdl_image sdl_mixer tcl xorg-libxi xorg-libxmu
 
 name=extremetuxracer
-version=0.5beta
-release=2
-source=(http://downloads.sourceforge.net/project/$name/extreme-tuxracer/$version/$name-$version.tar.gz
-	extreme-tuxracer-0.5beta-png.patch)
+version=0.6.0
+release=1
+source=(http://downloads.sourceforge.net/project/$name/releases/$version/etr-$version.tar.xz)
 
 build() {
-	cd extreme-tuxracer-$version
-	patch -p 1 -i $SRC/extreme-tuxracer-0.5beta-png.patch
+	cd etr-$version
+
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share/locale
 }

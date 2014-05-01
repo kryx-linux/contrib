@@ -4,7 +4,7 @@
 # Depends on: 
 
 name=libzip
-version=0.11.1
+version=0.11.2
 release=2
 source=(
 http://nih.at/$name/$name-$version.tar.xz
@@ -17,7 +17,7 @@ build() {
 	# Fixes the installation of zipconf.h
 	patch -p1 -i $SRC/libzip-includes.patch
 	autoreconf -i
-
+ 
 	./configure \
 		--prefix=/usr \
 		--man=/usr/man

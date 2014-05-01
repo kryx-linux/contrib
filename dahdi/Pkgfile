@@ -1,10 +1,10 @@
-# Description:	Digium Asterisk Hardware Device Interface
+# Description:	Digium Asterisk Hardware Device Interface: kernel modules and firmware
 # URL:		http://www.voip-info.org/wiki/view/DAHDI
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:
 
 name=dahdi
-version=2.7.0.1
+version=2.9.1.1
 release=1
 source=(
 http://downloads.asterisk.org/pub/telephony/dahdi-linux/releases/dahdi-linux-$version.tar.gz
@@ -19,6 +19,12 @@ http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-te133-6f001
 http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-te134-6f0017.tar.gz
 http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-te820-1.76.tar.gz
 http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-vpmoct032-1.12.0.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-te134-780017.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-te133-780019.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-a8a-1d0017.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-a4b-b0019.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-a4a-a0017.tar.gz
+http://downloads.digium.com/pub/telephony/firmware/releases/dahdi-fw-te435-e0019.tar.gz
 dahdi-linux-2.6.34.patch
 )
 
@@ -49,10 +55,4 @@ build () {
 	# remove some crap
 	rm -rf $PKG/lib/firmware/.dahdi* $PKG/lib/modules/*/modules.*
 
-	# move udev rules to /lib/udev/rules.d
-	mv $PKG/etc/udev $PKG/lib
-	rmdir $PKG/etc
-
-	# change rules to fix udev changes
-	sed -i -e 's|SYSFS|ATTRS|g' -e 's|BUS|SUBSYSTEM|g' $PKG/lib/udev/rules.d/*
 }

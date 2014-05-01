@@ -1,10 +1,13 @@
 Kernel Requirements
 ===================
 
-If you want to have a full working CRUX+Docker system you will need to rebuild your kernel various networking, cgroups and optional lvm options
+If you want to have a full working CRUX+Docker system you will need to
+rebuild your kernel various networking, cgroups and optional lvm options
 
-Please review the provided ``test_kernel_config.sh`` shell script carefully and use this to test your kernel configuration. This README does not document
-what these specific options are to vaoid duplication. They are listed instead in ``test_kernel_config.sh``.
+Please review the provided ``test_kernel_config.sh`` shell script carefully
+and use this to test your kernel configuration. This README does not document
+what these specific options are to avoid duplication.
+They are listed instead in ``test_kernel_config.sh``.
 
 You may check your kernel configuration by running:
 
@@ -16,10 +19,14 @@ You may check your kernel configuration by running:
 Execution Engines
 =================
 
-As of Docker 0.9+ execution engines are pluggable and as such Docker no longer depends on lxc.
-The new default execution driver is now an internal ``libcontainer`` driver that replaces the need for lxc.
+As of Docker 0.9+ execution engines are pluggable and as such Docker
+no longer depends on lxc.
 
-Please see the `Docker Documentation <http://docs.docker.io>`_ if you want to use a different execution engine other then the default.
+The new default execution driver is now an internal ``libcontainer``
+driver that replaces the need for lxc.
+
+Please see the `Docker Documentation <http://docs.docker.io>`_
+if you want to use a different execution engine other then the default.
 
 
 Storage Backends
@@ -33,14 +40,20 @@ Docker comes with three main Storage Backends:
 
 It is recommended you use the devmapper or btrfs backend (Default: devmapper).
 
-To use the ``btrfs`` backend edit ``/etc/docker.conf`` and modify the ``DOCKER_OPTS`` with:
+To use the ``btrfs`` backend edit ``/etc/docker.conf``
+and modify the ``DOCKER_OPTS`` with:
 
 ::
     
     DOCKER_OPTS="-s btrfs"
     
+.. note:: As of Docker 0.10.x the ``btrfs`` storage backend is now
+          considered stable and has been promoted to an officially
+          supported storage backend.
+
 
 Docker Client
 =============
 
-Add yourself to the ``docker`` group if you wish to access the Docker daemon on localhost via UNIX Socker.
+Add yourself to the ``docker`` group if you wish to access
+the Docker daemon on localhost via UNIX Socket.
