@@ -5,7 +5,7 @@
 # Depends on:  git
 
 name=tig
-version=1.2.1
+version=2.0.1
 release=1
 source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz) 
 
@@ -14,7 +14,7 @@ build() {
 
   ./configure --prefix=/usr --mandir=/usr/man --sysconfdir=/etc
 
-  make LDLIBS=-lncursesw
+  make LDLIBS="-lncursesw -lreadline"
   make prefix=/usr DESTDIR=$PKG install
   # tig requires asciidoc for building man pages...
   #for i in 1 5 7; do 
