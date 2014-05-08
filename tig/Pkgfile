@@ -6,7 +6,7 @@
 
 name=tig
 version=2.0.1
-release=1
+release=2
 source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz) 
 
 build() {
@@ -15,10 +15,5 @@ build() {
   ./configure --prefix=/usr --mandir=/usr/man --sysconfdir=/etc
 
   make LDLIBS="-lncursesw -lreadline"
-  make prefix=/usr DESTDIR=$PKG install
-  # tig requires asciidoc for building man pages...
-  #for i in 1 5 7; do 
-  #  install -m 755 -d $PKG/usr/man/man${i}
-  #  install -m 644 *.${i} $PKG/usr/man/man${i}
-  #done
+  make prefix=/usr DESTDIR=$PKG install-doc-man install
 }
