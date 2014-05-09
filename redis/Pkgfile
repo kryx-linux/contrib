@@ -1,0 +1,26 @@
+# Description:  An open source, advanced key-value store
+# URL:          http://redis.io
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:   
+
+name=redis
+version=2.8.9
+release=1
+source=(
+    http://download.redis.io/releases/$name-$version.tar.gz
+    redis.conf
+    redis.rc
+)
+
+build() {
+    cd $name-$version/src
+
+    make
+    make PREFIX=$PKG/usr/ install
+    install -D -m 755 $SRC/redis.rc $PKG/etc/rc.d/redis
+    install -D -m 644 $SRC/redis.conf $PKG/etc/redis.conf
+    install -d -m 755 $PKG/var/lib/redis
+
+    chown -R root:root $PKG
+}
