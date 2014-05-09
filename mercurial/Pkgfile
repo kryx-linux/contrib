@@ -2,7 +2,7 @@
 # URL:         http://www.selenic.com/mercurial/wiki/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Depends on: python
+# Depends on:  python
 
 name=mercurial
 version=2.8
@@ -12,7 +12,7 @@ source=(http://www.selenic.com/$name/release/$name-$version.tar.gz)
 build() {
   cd $name-$version
  
-  python setup.py install --root=$PKG
+  /usr/bin/python setup.py install --root=$PKG
   
   install -d $PKG/usr/man/man{1,5}
   install -m 0644 doc/*.1 $PKG/usr/man/man1
