@@ -11,6 +11,6 @@ source=(https://pypi.python.org/packages/source/t/tornado/tornado-${version}.tar
 
 build () {
    cd tornado-$version
-   python setup.py install --root=$PKG
+   /usr/bin/python setup.py install --root=$PKG
    rm $PKG/usr/lib/python2.7/site-packages/tornado/test/README
 }
