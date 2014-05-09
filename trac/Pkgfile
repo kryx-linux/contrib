@@ -2,15 +2,15 @@
 # URL:         http://trac.edgewall.com/
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  subversion-python, clearsilver, setuptools
-
+# Depends on:  setuptools, genshi
+# Nice to have: subversion-python
 name=trac
-version=0.12.3
+version=1.0.1
 release=1
 source=(http://ftp.edgewall.com/pub/trac/Trac-$version.tar.gz)
 
 build () {
    cd Trac-$version
-   python setup.py install --root=$PKG
+   /usr/bin/python setup.py install --root=$PKG
    find $PKG -name README -delete
 }
