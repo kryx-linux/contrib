@@ -1,0 +1,18 @@
+# Description: makes the color of your display adapt to the time of day
+# URL:         https://justgetflux.com
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:  python
+
+name=f.lux
+version=2014-05-03
+release=1
+source=(http://crux.nu/~tek/$name-$version.tar.xz)
+
+build() {
+  cd f.lux
+  /usr/bin/python setup.py install --prefix=$PKG/usr
+
+  # fix possible umask issues
+  find $PKG/usr -type f -exec chmod a+r '{}' \;
+  find $PKG/usr/bin $PKG/usr/share/applications -type f -exec chmod a+rx '{}' \;
+}
