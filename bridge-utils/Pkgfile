@@ -10,14 +10,19 @@ source=(http://download.sourceforge.net/bridge/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
+  # make compilation fail instead of producing footprint mismatches
+  sed -i 's/ ; done/ || exit 1 &/g' Makefile.in
   autoconf
+
   ./configure --prefix=/usr \
     --mandir=/usr/man
 
+  # fix includes...
   sed -i 's|\(#include <sys/socket.h>\)|\1\n#include <netinet/in.h>|1' \
   libbridge/libbridge.h
-
-  grep include   libbridge/libbridge.h
+  sed -i -e 's|linux/if.h|net/if.h|1' -e '/if_bridge.h/d' libbridge/libbridge.h
+  sed -i '/KERNEL_HEADERS=/d' libbridge/Makefile
 
   make
   make DESTDIR=$PKG install
