@@ -4,12 +4,13 @@
 # Depends on: ncurses libnl
 
 name=powertop
-version=2.5
+version=2.6
 release=1
-source=(https://01.org/powertop/sites/default/files/downloads/$name-$version.tar.gz)
+source=(https://01.org/sites/default/files/downloads/$name/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd $name
+	./autogen.sh
 	./configure --prefix=/usr --disable-nls \
 				--mandir=/usr/man
 	make
