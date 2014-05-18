@@ -1,39 +1,41 @@
-# Description: multi-protocol instant messaging client
-# URL:         http://pidgin.im/
-# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Packager:    Simone Rota, sip at crux dot nu
-# Depends on:  intltool gtk xorg-libxscrnsaver startup-notification nss libidn xorg-libxdamage
+# Description: multi-protocol instant messaging client.
+# URL: http://pidgin.im/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Simone Rota, sip at crux dot nu
+# Depends on: intltool gtk xorg-libxscrnsaver startup-notification nss libidn xorg-libxdamage
 
 name=pidgin
 version=2.10.9
 release=1
 source=(http://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$version.tar.bz2)
 
-build () {
-    cd $name-$version
-    ./configure --prefix=/usr \
-        --mandir=/usr/man \
-        --disable-nls \
-        --disable-schemas-install \
-        --disable-meanwhile \
-        --disable-dependency-tracking \
-        --with-nspr-includes=/usr/include/nspr \
-        --with-nss-includes=/usr/include/nss \
-        --with-nspr-libs=/usr/lib \
-        --with-nss-libs=/usr/lib \
-        --disable-tcl \
-        --disable-perl \
-        --disable-gtkspell \
-        --disable-avahi \
-        --disable-dbus \
-        --disable-gstreamer \
-        --disable-vv
+build() {
+	cd $name-$version
 
-    make
-    make DESTDIR="$PKG" install
-    install -D -m 0644 $name.desktop.in "$PKG/usr/share/applications/$name.desktop"
-    find $PKG/usr/lib/ -name '*.la' -delete
-    #rm -rf $PKG/usr/share/locale
-    rm -rf $PKG/usr/etc/gconf || :
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--disable-nls \
+		--disable-schemas-install \
+		--disable-meanwhile \
+		--disable-dependency-tracking \
+		--with-nspr-includes=/usr/include/nspr \
+		--with-nss-includes=/usr/include/nss \
+		--with-nspr-libs=/usr/lib \
+		--with-nss-libs=/usr/lib \
+		--disable-tcl \
+		--disable-perl \
+		--disable-gtkspell \
+		--disable-avahi \
+		--disable-dbus \
+		--disable-gstreamer \
+		--disable-vv
+
+	make
+	make DESTDIR=$PKG install
+	install -D -m 0644 $name.desktop.in $PKG/usr/share/applications/$name.desktop
+
+	find $PKG/usr/lib/ -name '*.la' -delete
+	#rm -rf $PKG/usr/share/locale
+	rm -rf $PKG/usr/etc/gconf
 }
-
