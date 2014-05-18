@@ -5,7 +5,7 @@
 # Depends on: subversion swig
 
 name=subversion-perl
-version=1.8.8
+version=1.8.9
 release=1
 source=(http://www.apache.org/dist/subversion/subversion-$version.tar.bz2)
 
@@ -20,7 +20,6 @@ build() {
   LDFLAGS="-L$PKG/usr/lib" \
   ./configure --prefix=/usr \
               --disable-nls \
-              --with-neon=/usr \
               --disable-mod-activation \
               --with-apr=/usr \
               --with-apr-util=/usr
