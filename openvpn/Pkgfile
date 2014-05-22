@@ -15,6 +15,7 @@ build() {
 
   ./configure --prefix=/usr \
               --mandir=/usr/man \
+              --enable-iproute2 \
               --disable-plugin-auth-pam
   make
   make DESTDIR=$PKG install
