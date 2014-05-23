@@ -5,11 +5,12 @@
 # Depends on:   pbr
 
 name=stevedore
-version=0.14.1
+version=0.15
 release=1
 source=(http://pypi.python.org/packages/source/s/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
     /usr/bin/python setup.py install --root=$PKG
+    chown -R root:root $PKG
 }
