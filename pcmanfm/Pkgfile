@@ -1,8 +1,8 @@
-# Description: fast and lightweight file manager
-# URL:         http://pcmanfm.sourceforge.net/
-# Packager:    Ricardo Oliveira, crux at roliveira dot eu
-# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  libfm
+# Description:  fast and lightweight file manager
+# URL:          http://pcmanfm.sourceforge.net/
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:   libfm
 
 name=pcmanfm
 version=1.1.2
@@ -15,4 +15,5 @@ build() {
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
+    chown -R root:root $PKG
 }
