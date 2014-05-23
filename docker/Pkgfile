@@ -2,13 +2,14 @@
 # URL:          http://www.docker.io/
 # Maintainer:   James Mills, prologic at shortcircuit dot net dot au
 #
-# Depends on:   go bridge-utils sqlite3 cgroupfs-mount
+# Depends on:   go sqlite3 cgroupfs-mount
 
 name=docker
-version=0.10.0
-revision=dc9c28f51d
+version=0.11.1
+revision=fb99f992c0
 release=1
 source=(
+    https://raw.githubusercontent.com/dotcloud/docker/master/contrib/check-config.sh
     https://github.com/dotcloud/$name/archive/v$version.tar.gz
     $name.rc
     $name.conf
@@ -25,6 +26,8 @@ build() {
     ./hack/make.sh dynbinary
 
     # Package
+    install -D -m 755 $SRC/check-config.sh $PKG/usr/share/docker/check-config.sh
+
     install -D -m 755 "bundles/$version/dynbinary/docker-$version" \
         "$PKG/usr/bin/docker"
     install -D -m 755 "bundles/$version/dynbinary/dockerinit-$version" \
