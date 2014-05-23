@@ -1,6 +1,7 @@
 # Description:  gui frontend for xmms2
 # URL:          http://lxde.org/
-# Maintainer:   Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+
 # Depends on:   xmms2 gtk intltool xorg-libxdamage
 
 name=lxmusic
@@ -14,4 +15,5 @@ build() {
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
+    chown -R root:root $PKG
 }
