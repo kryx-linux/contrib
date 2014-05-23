@@ -5,12 +5,12 @@
 # Depends on: boost glew gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qca-ossl qjson glu
 
 name=clementine
-version=1.2.1
+version=1.2.3
 release=1
-source=(http://clementine-player.googlecode.com/files/$name-$version.tar.gz)
+source=(https://github.com/clementine-player/Clementine/archive/$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd Clementine-$version
 	cmake -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_WERROR=OFF
 	make
 	make DESTDIR=$PKG install
