@@ -1,25 +1,23 @@
-# Description: desktop panel from lxde project
-# URL:         http://lxde.org/
-# Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  gtk menu-cache xorg-libxdamage libwnck
+# Description:  desktop panel from lxde project
+# URL:          http://lxde.org/
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:  gtk menu-cache xorg-libxdamage libwnck lxmenu-data
 
 name=lxpanel
-version=0.5.10
+version=0.6.1
 release=1
-source=(http://download.sourceforge.net/sourceforge/lxde/$name-$version.tar.gz gmodule_link.patch)
+source=(http://download.sourceforge.net/sourceforge/lxde/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    patch -p1 -i ../gmodule_link.patch
-    rm -rf po/*
-    ./autogen.sh
-    ./configure \
+
+    CFLAGS+=' -lgmodule-2.0' ./configure \
         --prefix=/usr \
         --mandir=/usr/man \
-        --disable-nls \
-        --with-plugins=netstatus,volume,volumealsa,cpu,deskno,batt,kbled,xkb,thermal,cpufreq,monitors,wnckpager
+        --disable-nls
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
+    chorn -R root:root $PKG
 }
-
