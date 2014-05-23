@@ -1,0 +1,23 @@
+# Description:  VTE-based terminal emulator (part of LXDE)
+# URL:          http://lxde.org
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:   gtk vte
+
+name=lxterminal
+version=0.1.11
+release=1
+source=(http://downloads.sourceforge.net/lxde/$name-$version.tar.gz
+        shift-keybinds.patch)
+
+build() {
+  cd $name-$version
+  patch -Np1 -i $SRC/shift-keybinds.patch
+
+  ./configure --sysconfdir=/etc --prefix=/usr
+  make
+
+  make DESTDIR=$PKG install
+
+  chown -R root:root $PKG
+}
