@@ -10,7 +10,7 @@ release=1
 source=(http://crux.ster.so/distfiles/$name/$name-${version}_p20131018.tar.gz)
 
 build() {
-	sed -i 's/\$(MAKEFLAGS)//g' Makefile
+	#sed -i 's/\$(MAKEFLAGS)//g' Makefile
 
 	sed -i \
 		-e 's|OPT=|&-fPIC |' \
@@ -21,7 +21,15 @@ build() {
 
 	install -d $PKG/usr/lib
 
-	make CRYPTO=OPENSSL SYS=posix
+	[ "$CC" ] || CC=gcc
+
+	make \
+		CC="$CC" \
+		$MAKEFLAGS \
+		OPT="$CFLAGS" \
+		XLDFLAGS="$LDFLAGS" \
+		CRYPTO=OPENSSL \
+		SYS=posix
 
 	make \
 		CRYPTO=OPENSSL \
