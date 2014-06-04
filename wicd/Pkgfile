@@ -5,7 +5,7 @@
 
 name=wicd 
 version=1.7.2.4
-release=3
+release=4
 source=(http://launchpad.net/wicd/1.7/$version/+download/$name-$version.tar.gz
 	wicd.rc
 	http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/diff/770
@@ -34,6 +34,7 @@ build() {
 		--dbus=/usr/etc/dbus-1/system.d \
 		--mandir=/usr/man \
 		--etc=/etc/wicd \
+		--no-install-acpi \
 		--no-install-i18n-man \
 		--no-install-docs
 
