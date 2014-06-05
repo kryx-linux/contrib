@@ -2,11 +2,11 @@
 # URL: http://ffmpeg.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Matt Housh, jaeger at crux dot nu
-# Depends on: gnutls imlib2 lame libass libbluray libmodplug libsdl libtheora libva libvdpau libxvid opencore-amr opus rtmpdump schroedinger speex x264 openjpeg
+# Depends on: gnutls imlib2 lame libass libbluray libmodplug libsdl libtheora libva libvdpau libxvid opencore-amr opus rtmpdump schroedinger speex x264 openjpeg libvpx
 
 name=ffmpeg
 version=2.2.2
-release=1
+release=2
 source=(http://ffmpeg.org/releases/$name-$version.tar.bz2)
 
 build() {
@@ -38,6 +38,7 @@ build() {
 		--enable-libtheora \
 		--enable-libvorbis \
 		--enable-libx264 \
+		--enable-libvpx \
 		--enable-libxvid \
 		--enable-pic \
 		--enable-postproc \
