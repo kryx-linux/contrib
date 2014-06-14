@@ -5,11 +5,11 @@
 # Depends on:   sqlite3 cgroupfs-mount
 
 name=docker-bin
-version=0.11.1
-release=2
+version=1.0.0
+release=1
 source=(
     https://get.docker.io/builds/Linux/x86_64/docker-$version
-    https://raw.githubusercontent.com/dotcloud/docker/master/contrib/check-config.sh
+    https://raw.githubusercontent.com/dotcloud/docker/v${version}/contrib/check-config.sh
     docker.rc
     docker.conf
 )
