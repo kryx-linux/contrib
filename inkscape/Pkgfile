@@ -6,14 +6,28 @@
 
 name=inkscape
 version=0.48.4
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2
-	spuriouscomma.patch)
+	$name-0.48.0-spell.patch
+	$name-0.48.3.1-desktop.patch
+	$name-0.48.4-fix-member-decl.patch
+	$name-0.48.4-automake-1.13.patch
+	$name-$version-gc74-configure.patch
+	$name-$version-gc74.patch
+	$name-$version-freetype251.patch
+	$name-$version-poppler26.patch)
 
 build() {
 	cd $name-$version
 
-	patch -p0 -i $SRC/spuriouscomma.patch
+	patch -p1 -i $SRC/$name-0.48.0-spell.patch
+	patch -p1 -i $SRC/$name-0.48.3.1-desktop.patch
+	patch -p1 -i $SRC/$name-0.48.4-fix-member-decl.patch
+	patch -p1 -i $SRC/$name-0.48.4-automake-1.13.patch
+	patch -p1 -i $SRC/$name-$version-gc74-configure.patch
+	patch -p1 -i $SRC/$name-$version-gc74.patch
+	patch -p0 -i $SRC/$name-$version-freetype251.patch
+	patch -p1 -i $SRC/$name-$version-poppler26.patch
 
 	./configure \
 		--prefix=/usr \
