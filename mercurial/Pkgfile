@@ -5,12 +5,13 @@
 # Depends on:  python
 
 name=mercurial
-version=3.0
+version=3.0.1
 release=1
 source=(http://www.selenic.com/$name/release/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+  rm -r i18n
  
   /usr/bin/python setup.py install --root=$PKG
   
@@ -18,5 +19,4 @@ build() {
   install -m 0644 doc/*.1 $PKG/usr/man/man1
   install -m 0644 doc/*.5 $PKG/usr/man/man5
   
-  rm -r $PKG/usr/lib/python*/site-packages/mercurial/locale
 }
