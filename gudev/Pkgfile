@@ -5,14 +5,12 @@
 # Depends on: gobject-introspection gperf eudev
 
 name=gudev
-version=1.6
+version=182
 release=1
-source=(http://dev.gentoo.org/~blueness/eudev/eudev-$version.tar.gz)
+source=(ftp://ftp.kernel.org/pub/linux/utils/kernel/hotplug/udev-$version.tar.xz)
 
 build() {
-	cd eudev-$version
-
-	sed -i '/^Libs:/s/-ludev/-ludev -lrt/' src/libudev/libudev.pc.in
+	cd udev-$version
 
 	./configure \
 		--prefix=/usr \
