@@ -1,0 +1,26 @@
+# Description: Library for ICE and STUN.
+# URL: http://nice.freedesktop.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: gstreamer
+
+name=libnice
+version=0.1.7
+release=1
+source=(http://nice.freedesktop.org/releases/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--enable-gtk-doc=no \
+		--enable-gtk-doc-html=no
+
+	make
+	make DESTDIR=$PKG install
+
+	# gtk-doc is still generated!
+	rm -r $PKG/usr/share/gtk-doc
+	rmdir $PKG/usr/share
+}
