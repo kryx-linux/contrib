@@ -2,6 +2,11 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/finch
 -rwxr-xr-x	root/root	usr/bin/pidgin
+-rwxr-xr-x	root/root	usr/bin/purple-client-example
+-rwxr-xr-x	root/root	usr/bin/purple-remote
+-rwxr-xr-x	root/root	usr/bin/purple-send
+-rwxr-xr-x	root/root	usr/bin/purple-send-async
+-rwxr-xr-x	root/root	usr/bin/purple-url-handler
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/finch/
 -rw-r--r--	root/root	usr/include/finch/finch.h
@@ -64,7 +69,13 @@ drwxr-xr-x	root/root	usr/include/libpurple/
 -rw-r--r--	root/root	usr/include/libpurple/connection.h
 -rw-r--r--	root/root	usr/include/libpurple/conversation.h
 -rw-r--r--	root/root	usr/include/libpurple/core.h
+-rw-r--r--	root/root	usr/include/libpurple/dbus-bindings.h
+-rw-r--r--	root/root	usr/include/libpurple/dbus-define-api.h
 -rw-r--r--	root/root	usr/include/libpurple/dbus-maybe.h
+-rw-r--r--	root/root	usr/include/libpurple/dbus-purple.h
+-rw-r--r--	root/root	usr/include/libpurple/dbus-server.h
+-rw-r--r--	root/root	usr/include/libpurple/dbus-types.h
+-rw-r--r--	root/root	usr/include/libpurple/dbus-useful.h
 -rw-r--r--	root/root	usr/include/libpurple/debug.h
 -rw-r--r--	root/root	usr/include/libpurple/desktopitem.h
 -rw-r--r--	root/root	usr/include/libpurple/dnsquery.h
@@ -184,9 +195,15 @@ drwxr-xr-x	root/root	usr/lib/gnt/
 lrwxrwxrwx	root/root	usr/lib/libgnt.so -> libgnt.so.0.8.10
 lrwxrwxrwx	root/root	usr/lib/libgnt.so.0 -> libgnt.so.0.8.10
 -rwxr-xr-x	root/root	usr/lib/libgnt.so.0.8.10
+lrwxrwxrwx	root/root	usr/lib/libpurple-client.so -> libpurple-client.so.0.10.9
+lrwxrwxrwx	root/root	usr/lib/libpurple-client.so.0 -> libpurple-client.so.0.10.9
+-rwxr-xr-x	root/root	usr/lib/libpurple-client.so.0.10.9
 lrwxrwxrwx	root/root	usr/lib/libpurple.so -> libpurple.so.0.10.9
 lrwxrwxrwx	root/root	usr/lib/libpurple.so.0 -> libpurple.so.0.10.9
 -rwxr-xr-x	root/root	usr/lib/libpurple.so.0.10.9
+drwxr-xr-x	root/root	usr/lib/perl5/
+drwxr-xr-x	root/root	usr/lib/perl5/linux-thread-multi/
+-rw-r--r--	root/root	usr/lib/perl5/linux-thread-multi/perllocal.pod
 drwxr-xr-x	root/root	usr/lib/pidgin/
 -rwxr-xr-x	root/root	usr/lib/pidgin/convcolors.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/extplacement.so
@@ -195,7 +212,15 @@ drwxr-xr-x	root/root	usr/lib/pidgin/
 -rwxr-xr-x	root/root	usr/lib/pidgin/history.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/iconaway.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/markerline.so
+-rwxr-xr-x	root/root	usr/lib/pidgin/musicmessaging.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/notify.so
+drwxr-xr-x	root/root	usr/lib/pidgin/perl/
+-r--r--r--	root/root	usr/lib/pidgin/perl/Pidgin.pm
+drwxr-xr-x	root/root	usr/lib/pidgin/perl/auto/
+drwxr-xr-x	root/root	usr/lib/pidgin/perl/auto/Pidgin/
+-rw-r--r--	root/root	usr/lib/pidgin/perl/auto/Pidgin/.packlist
+-r--r--r--	root/root	usr/lib/pidgin/perl/auto/Pidgin/Pidgin.bs (EMPTY)
+-r-xr-xr-x	root/root	usr/lib/pidgin/perl/auto/Pidgin/Pidgin.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/pidginrc.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/relnot.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/sendbutton.so
@@ -204,6 +229,7 @@ drwxr-xr-x	root/root	usr/lib/pidgin/
 -rwxr-xr-x	root/root	usr/lib/pidgin/ticker.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/timestamp.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/timestamp_format.so
+-rwxr-xr-x	root/root	usr/lib/pidgin/vvconfig.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/xmppconsole.so
 -rwxr-xr-x	root/root	usr/lib/pidgin/xmppdisco.so
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
@@ -214,6 +240,7 @@ drwxr-xr-x	root/root	usr/lib/pkgconfig/
 drwxr-xr-x	root/root	usr/lib/purple-2/
 -rwxr-xr-x	root/root	usr/lib/purple-2/autoaccept.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/buddynote.so
+-rwxr-xr-x	root/root	usr/lib/purple-2/dbus-example.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/idle.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/joinpart.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/libaim.so
@@ -241,15 +268,26 @@ lrwxrwxrwx	root/root	usr/lib/purple-2/libymsg.so.0 -> libymsg.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/purple-2/log_reader.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/newline.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/offlinemsg.so
+-rwxr-xr-x	root/root	usr/lib/purple-2/perl.so
+drwxr-xr-x	root/root	usr/lib/purple-2/perl/
+-r--r--r--	root/root	usr/lib/purple-2/perl/Purple.pm
+drwxr-xr-x	root/root	usr/lib/purple-2/perl/auto/
+drwxr-xr-x	root/root	usr/lib/purple-2/perl/auto/Purple/
+-rw-r--r--	root/root	usr/lib/purple-2/perl/auto/Purple/.packlist
+-r--r--r--	root/root	usr/lib/purple-2/perl/auto/Purple/Purple.bs (EMPTY)
+-r-xr-xr-x	root/root	usr/lib/purple-2/perl/auto/Purple/Purple.so
+-r--r--r--	root/root	usr/lib/purple-2/perl/auto/Purple/autosplit.ix
 -rwxr-xr-x	root/root	usr/lib/purple-2/psychic.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/ssl-gnutls.so
--rwxr-xr-x	root/root	usr/lib/purple-2/ssl-nss.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/ssl.so
 -rwxr-xr-x	root/root	usr/lib/purple-2/statenotify.so
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/finch.1.gz
 -rw-r--r--	root/root	usr/man/man1/pidgin.1.gz
+drwxr-xr-x	root/root	usr/man/man3/
+-r--r--r--	root/root	usr/man/man3/Pidgin.3pm.gz
+-r--r--r--	root/root	usr/man/man3/Purple.3pm.gz
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/aclocal/
 -rw-r--r--	root/root	usr/share/aclocal/purple.m4
@@ -332,6 +370,7 @@ drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/animations/16/
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/buttons/
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/buttons/edit.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/buttons/info.png
+-rw-r--r--	root/root	usr/share/pixmaps/pidgin/buttons/music.png
 -rw-r--r--	root/root	usr/share/pixmaps/pidgin/buttons/pause.png
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/dialogs/
 drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/dialogs/16/
@@ -908,32 +947,11 @@ drwxr-xr-x	root/root	usr/share/pixmaps/pidgin/tray/hicolor/48x48/status/
 drwxr-xr-x	root/root	usr/share/purple/
 drwxr-xr-x	root/root	usr/share/purple/ca-certs/
 -rw-r--r--	root/root	usr/share/purple/ca-certs/AOL_Member_CA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/AddTrust_External_Root.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/America_Online_Root_Certification_Authority_1.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Baltimore_CyberTrust_Root.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/CAcert_Class3.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/CAcert_Root.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Deutsche_Telekom_Root_CA_2.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/DigiCertHighAssuranceCA-3.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/DigiCertHighAssuranceEVRootCA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Entrust.net_2048.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Entrust.net_Secure_Server_CA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Equifax_Secure_CA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Equifax_Secure_Global_eBusiness_CA-1.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/GTE_CyberTrust_Global_Root.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Go_Daddy_Class_2_CA.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/Microsoft_Internet_Authority_2010.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/Microsoft_Secure_Server_Authority_2010.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/StartCom_Certification_Authority.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Thawte_Premium_Server_CA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Thawte_Primary_Root_CA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/ValiCert_Class_2_VA.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/VeriSign_Class3_Extended_Validation_CA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/VeriSign_Class_3_Public_Primary_Certification_Authority_-_G2.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/VeriSign_Class_3_Public_Primary_Certification_Authority_-_G5.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/VeriSign_Class_3_Public_Primary_Certification_Authority_-_G5_2.pem
 -rw-r--r--	root/root	usr/share/purple/ca-certs/VeriSign_International_Server_Class_3_CA.pem
--rw-r--r--	root/root	usr/share/purple/ca-certs/Verisign_Class3_Primary_CA.pem
 drwxr-xr-x	root/root	usr/share/sounds/
 drwxr-xr-x	root/root	usr/share/sounds/purple/
 -rw-r--r--	root/root	usr/share/sounds/purple/alert.wav

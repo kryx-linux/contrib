@@ -2,11 +2,11 @@
 # URL: http://pidgin.im/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Simone Rota, sip at crux dot nu
-# Depends on: intltool gtk xorg-libxscrnsaver startup-notification nss libidn xorg-libxdamage
+# Depends on: dbus-glib farstream gtkspell startup-notification xorg-libxscrnsaver
 
 name=pidgin
 version=2.10.9
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$version.tar.bz2)
 
 build() {
@@ -15,27 +15,22 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
+		--enable-cyrus-sasl \
 		--disable-nls \
 		--disable-schemas-install \
 		--disable-meanwhile \
-		--disable-dependency-tracking \
-		--with-nspr-includes=/usr/include/nspr \
-		--with-nss-includes=/usr/include/nss \
-		--with-nspr-libs=/usr/lib \
-		--with-nss-libs=/usr/lib \
-		--disable-tcl \
-		--disable-perl \
-		--disable-gtkspell \
 		--disable-avahi \
-		--disable-dbus \
-		--disable-gstreamer \
-		--disable-vv
+		--disable-nm \
+		--disable-tcl \
+		--disable-nss \
+		--disable-dependency-tracking \
+		--with-system-ssl-certs=/etc/ssl/certs
 
 	make
 	make DESTDIR=$PKG install
+
 	install -D -m 0644 $name.desktop.in $PKG/usr/share/applications/$name.desktop
 
 	find $PKG/usr/lib/ -name '*.la' -delete
-	#rm -rf $PKG/usr/share/locale
 	rm -rf $PKG/usr/etc/gconf
 }

@@ -1,0 +1,25 @@
+# Description: Audio/video conferencing framework.
+# URL: http://www.freedesktop.org/wiki/Software/Farstream
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: gst-ffmpeg gst-plugins-bad gst-plugins-good gst-python libnice
+
+name=farstream
+version=0.1.2
+release=1
+source=(http://freedesktop.org/software/$name/releases/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--enable-gtk-doc=no
+
+	make
+	make DESTDIR=$PKG install
+
+	# gtk-doc is still generated!
+	rm -rf $PKG/usr/share/gtk-doc
+	rmdir $PKG/usr/share || :
+}
