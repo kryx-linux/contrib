@@ -2,10 +2,10 @@
 # URL: http://xine.sourceforge.net
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: ffmpeg gtk libmad libmng libmpcdec vcdimager wavpack xorg-libxi xorg-libxvmc xorg-xvinfo libdvdnav libmodplug libvdpau liba52 libbluray libdca glu flac
+# Depends on: ffmpeg flac gdk-pixbuf glu liba52 libdca libdvdnav libgmp libmad libmng libmpcdec util-linux vcdimager
 
 name=xine-lib
-version=1.2.5
+version=1.2.6
 release=1
 source=(http://downloads.sourceforge.net/project/xine/$name/$version/$name-$version.tar.xz)
 
@@ -13,24 +13,17 @@ build() {
 	cd $name-$version
 
 	./configure \
-		CFLAGS='' \
-		CXXFLAGS='' \
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-nls \
-		--disable-oss \
-		--enable-bluray \
-		--enable-antialiasing \
-		--enable-ipv6 \
-		--enable-modplug \
-		--enable-vdpau \
-		--with-wavpack \
+		--enable-a52dec \
+		--enable-faad \
+		--enable-musepack \
 		--with-external-dvdnav \
 		--disable-dependency-tracking
 
 	make
 	make DESTDIR=$PKG install
-	chmod a-x $PKG/usr/lib/*.so
-	find $PKG/usr/lib/xine/plugins/ -type f -name '*.so' -exec chmod a-x {} \;
+
 	rm -r $PKG/usr/share/doc
 }
