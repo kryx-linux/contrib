@@ -1,11 +1,11 @@
 # Description: email client from the Mozilla project
 # URL:         http://www.mozillamessaging.com/en-US/thunderbird/
 # Maintainer:  Fredrik Rinnestam, fredrik at crux dot nu
-# Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib xorg-libxdamage yasm mesa3d
+# Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib xorg-libxdamage yasm mesa3d libjpeg-turbo
 
 name=thunderbird
 version=24.6.0
-release=1
+release=2
 source=(ftp://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.bz2
     	$name.desktop ${name}_default48.png thunderbird-install-dir.patch)
  
@@ -21,8 +21,7 @@ build() {
         ac_add_options --enable-application=mail
         ac_add_options --with-system-nspr 
         ac_add_options --with-system-nss  
-        # libjpeg-turbo (http://libjpeg-turbo.virtualgl.org/) is required
-        #ac_add_options --with-system-jpeg 
+        ac_add_options --with-system-jpeg 
         ac_add_options --with-system-zlib
         ac_add_options --with-system-bz2  
         ac_add_options --with-pthreads
