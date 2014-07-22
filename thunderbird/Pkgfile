@@ -4,18 +4,18 @@
 # Depends on:  python gtk alsa-lib xorg-libxt libnotify libidl nss dbus-glib xorg-libxdamage yasm mesa3d libjpeg-turbo
 
 name=thunderbird
-version=24.6.0
-release=2
+version=31.0
+release=1
 source=(ftp://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.bz2
     	$name.desktop ${name}_default48.png thunderbird-install-dir.patch)
  
 build() {
-    cd $SRC/comm-esr24
+    cd $SRC/comm-esr31
 
     patch -p1 -i $SRC/thunderbird-install-dir.patch
 
     cat <<- EOF > .mozconfig
-        mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/objdir-tb-release
+        #mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/objdir-tb-release
         mk_add_options MOZ_MAKE_FLAGS="$MAKEFLAGS -s"
         ac_add_options --prefix=/usr
         ac_add_options --enable-application=mail
@@ -44,6 +44,7 @@ build() {
         ac_add_options --disable-debug-symbols
         ac_add_options --with-system-png
         ac_add_options --disable-gstreamer
+	ac_add_options --disable-pulseaudio
 EOF
     make -f client.mk build
     make -f client.mk DESTDIR=$PKG install
