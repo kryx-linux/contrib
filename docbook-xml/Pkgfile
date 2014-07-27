@@ -7,7 +7,7 @@
 
 name=docbook-xml
 version=4.5
-release=3
+release=4
 source=(http://www.docbook.org/xml/$version/$name-$version.zip)
 
 build() {
@@ -50,4 +50,5 @@ build() {
 		$PKG/usr/share/xml/docbook/xml-dtd-$version
 
 	find $PKG/usr/share/xml/docbook/xml-dtd-* -type f -exec chmod go-w,-x {} +
+	chown -R root:root $PKG
 }
