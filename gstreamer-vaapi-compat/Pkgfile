@@ -2,15 +2,15 @@
 # URL: http://freedesktop.org/wiki/Software/vaapi/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: gst-plugins-base gst-plugins-bad libva xorg-libxrandr
+# Depends on: gst-plugins-base-compat gst-plugins-bad-compat libva xorg-libxrandr
 
-name=gstreamer-vaapi
+name=gstreamer-vaapi-compat
 version=0.5.6
 release=1
-source=(http://www.freedesktop.org/software/vaapi/releases/$name/$name-$version.tar.bz2)
+source=(http://www.freedesktop.org/software/vaapi/releases/gstreamer-vaapi/gstreamer-vaapi-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+	cd gstreamer-vaapi-$version
 
 	./configure \
 		--prefix=/usr \
