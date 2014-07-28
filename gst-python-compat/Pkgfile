@@ -4,13 +4,13 @@
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 # Depends on: gst-plugins-base-compat pygtk
 
-name=gst-python
+name=gst-python-compat
 version=0.10.22
 release=1
-source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.bz2)
+source=(http://gstreamer.freedesktop.org/src/gst-python/gst-python-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+	cd gst-python-$version
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
