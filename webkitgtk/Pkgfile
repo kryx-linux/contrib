@@ -1,0 +1,27 @@
+# Description: Small, efficient and fast rendering engine for Web Browsers.
+# URL: http://www.webkitgtk.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Brett Goulder, predatorfreak at dcaf-security dot org
+# Depends on: cmake enchant gst-plugins-base gtk3 harfbuzz-icu libsoup glu ruby gperf libwebp libsecret
+
+name=webkitgtk
+version=2.5.1
+release=1
+source=(http://webkitgtk.org/releases/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	install -d build
+	cd build
+
+	cmake .. \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_INSTALL_PREFIX=/usr \
+                -DPORT=GTK
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/locale
+}
