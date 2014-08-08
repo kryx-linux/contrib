@@ -5,15 +5,12 @@
 # Depends on:
 
 name=dev86
-version=0.16.19
+version=0.16.21
 release=1
-source=(http://www.debath.co.uk/$name/Dev86src-$version.tar.gz \
-	$name-copt.patch)
+source=(http://v3.sk/~lkundrak/dev86/Dev86src-$version.tar.gz)
 
 build() {
   cd $name-$version
-
-  patch -p0 -i $SRC/$name-copt.patch
 
   echo quit | make -j1 PREFIX=/usr GCCFLAG="$CFLAGS"
   make -j1 install-all DIST=$PKG
