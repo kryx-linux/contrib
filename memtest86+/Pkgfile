@@ -4,14 +4,12 @@
 # Packager: Mark Rosenstand, mark at borkware dot net
 
 name=memtest86+
-version=4.20
+version=5.01
 release=1
-source=(http://www.memtest.org/download/$version/$name-$version.tar.gz
-	memtest86+-2.11-makefile_install_remove.patch)
+source=(http://www.memtest.org/download/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/memtest86+-2.11-makefile_install_remove.patch
 	make memtest.bin
-	make DESTDIR=$PKG install-memtest.bin
+	install -m 0644 -D memtest.bin $PKG/boot/memtest.bin
 }
