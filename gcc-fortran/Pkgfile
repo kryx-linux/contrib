@@ -5,8 +5,8 @@
 # Depends on: libmpfr
 
 name=gcc-fortran
-version=4.7.3
-release=2
+version=4.8.3
+release=1
 source=(ftp://gcc.gnu.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.bz2
 	gcc-nocheck-fixincludes.patch)
 
@@ -29,7 +29,7 @@ build() {
 		--with-system-zlib \
 		--disable-multilib \
 		--disable-sjlj-exceptions \
-		--with-pkgversion="CRUX-x86_64"
+		--with-pkgversion="CRUX"
 
 	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
 		make STAGE_CC_WRAPPER='/usr/bin/ccache' BOOT_CFLAGS="$CFLAGS" bootstrap
@@ -64,13 +64,13 @@ build() {
 	done
 
 	rm \
-		$PKG/usr/lib/libstdc++.so.6.0.17-gdb.py \
+		$PKG/usr/lib/libstdc++.so.6.0.19-gdb.py \
 		$PKG/usr/bin/*-linux-gnu-*
 
 	rm -r \
 		$PKG/usr/man/man7 \
 		$PKG/usr/share/info \
-		$PKG/usr/share/gcc-4.7.3/python \
+		$PKG/usr/share/gcc-4.8.3/python \
 		$PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed}
 
 	# Remove empty directories
