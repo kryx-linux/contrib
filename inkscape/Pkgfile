@@ -2,32 +2,18 @@
 # URL: http://www.inkscape.org
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: Huynh Ngoc Chau Tran, tran dot huynh at laposte dot net
-# Depends on: boehm-gc boost gsl gtkmm intltool lcms libart_lgpl popt
+# Depends on: boehm-gc boost gsl gtkmm intltool lcms2 libart_lgpl popt
 
 name=inkscape
-version=0.48.4
-release=2
+version=0.48.5
+release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2
-	$name-0.48.0-spell.patch
-	$name-0.48.3.1-desktop.patch
-	$name-0.48.4-fix-member-decl.patch
-	$name-0.48.4-automake-1.13.patch
-	$name-$version-gc74-configure.patch
-	$name-$version-gc74.patch
-	$name-$version-freetype251.patch
-	$name-$version-poppler26.patch)
+	ime-placement.patch)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/$name-0.48.0-spell.patch
-	patch -p1 -i $SRC/$name-0.48.3.1-desktop.patch
-	patch -p1 -i $SRC/$name-0.48.4-fix-member-decl.patch
-	patch -p1 -i $SRC/$name-0.48.4-automake-1.13.patch
-	patch -p1 -i $SRC/$name-$version-gc74-configure.patch
-	patch -p1 -i $SRC/$name-$version-gc74.patch
-	patch -p0 -i $SRC/$name-$version-freetype251.patch
-	patch -p1 -i $SRC/$name-$version-poppler26.patch
+	patch -p1 -i $SRC/ime-placement.patch
 
 	./configure \
 		--prefix=/usr \
