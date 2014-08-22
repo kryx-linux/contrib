@@ -5,9 +5,9 @@
 # Depends on:
 
 name=doxygen 
-version=1.8.4
+version=1.8.8
 release=1 
-source=(http://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz)
+source=(ftp://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz)
 
 build() {
   cd $name-$version
@@ -16,6 +16,6 @@ build() {
               --platform 'linux-64' \
               --english-only
 
-  make
+  make CXXFLAGS="$CXXFLAGS"
   make DESTDIR=$PKG install
 }
