@@ -5,20 +5,29 @@
 # Depends on: cmake enchant gst-plugins-base gtk3 harfbuzz-icu libsoup glu ruby gperf libwebp libsecret
 
 name=webkitgtk
-version=2.5.1
+version=2.5.3
 release=1
 source=(http://webkitgtk.org/releases/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
+	# setting CC and CXX breaks compilation
+	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
+		unset CC CXX
+		export PATH="/usr/lib/ccache/:$PATH"
+	fi
+
 	install -d build
 	cd build
 
 	cmake .. \
-                -DCMAKE_BUILD_TYPE=Release \
-                -DCMAKE_INSTALL_PREFIX=/usr \
-                -DPORT=GTK
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX:PATH=/usr \
+		-DCMAKE_INSTALL_LIBDIR:PATH=/usr/lib \
+		-DCMAKE_INSTALL_LIBEXECDIR:PATH=/usr/lib \
+		-DCMAKE_SKIP_RPATH:BOOL=ON \
+		-DPORT=GTK
 
 	make
 	make DESTDIR=$PKG install
