@@ -6,7 +6,7 @@
 
 name=transcode
 version=1.1.7
-release=2
+release=3
 source=(https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.tar.bz2
 	http://downloads.sourceforge.net/project/subtitleripper/subtitleripper/subtitleripper-0.3-4/subtitleripper-0.3-4.tgz
 	transcode-1.1.7-ffmpeg.patch
@@ -15,7 +15,9 @@ source=(https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.
 	transcode-1.1.7-preset-free.patch
 	transcode-1.1.7-libav-9.patch
 	transcode-1.1.7-preset-force.patch
-	transcode-1.1.7-ffmpeg2.patch)
+	transcode-1.1.7-ffmpeg2.patch
+	subtitleripper-0.3.4-linkingorder.patch
+	subtitleripper-0.3.4-respect-ldflags.patch)
 
 build() {
 	cd $name-$version
@@ -28,6 +30,7 @@ build() {
 	patch -p 0 -i $SRC/transcode-1.1.7-libav-9.patch
 	patch -p 1 -i $SRC/transcode-1.1.7-preset-force.patch
 	patch -p 1 -i $SRC/transcode-1.1.7-ffmpeg2.patch
+	sed -i -e 's|freetype/ftglyph.h|freetype2/ftglyph.h|' filter/subtitler/load_font.c
 	libtoolize
 
 	./configure \
@@ -59,11 +62,17 @@ build() {
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share
 
-	# Subtitle support (Han Boetes)
-	mkdir -p contrib/subrip
-	cd contrib/subrip
-	cp ../../../subtitleripper/* .
-	sed -i -e 's|.*ppm.*||i' Makefile
-	make clean all CFLAGS="$CFLAGS -DHAVE_GETLINE"
-	install -m 0755 -D srttool subtitle2pgm subtitle2vobsub $PKG/usr/bin
+	# Subtitle support
+	cd ../subtitleripper
+	patch -p1 -i $SRC/subtitleripper-0.3.4-linkingorder.patch
+	patch -p1 -i $SRC/subtitleripper-0.3.4-respect-ldflags.patch
+
+	sed \
+		-e 's|^\(.*lppm.*\)$|#\1|' \
+		-e 's|^\(.*D_HAVE_LIB_PPM.*\)$|#\1|' \
+		-e 's/DEFINES :=/DEFINES = -DHAVE_GETLINE/' \
+		-i Makefile
+	
+	make
+	install -m 0755 -D pgm2txt srttool subtitle2pgm subtitle2vobsub vobsub2pgm $PKG/usr/bin
 }
