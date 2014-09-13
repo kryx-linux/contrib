@@ -27,6 +27,7 @@ drwxr-xr-x	root/root	usr/share/crawl/dat/database/el/
 -rw-r--r--	root/root	usr/share/crawl/dat/database/monname.txt
 -rw-r--r--	root/root	usr/share/crawl/dat/database/monspeak.txt
 -rw-r--r--	root/root	usr/share/crawl/dat/database/monspell.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/database/montitle.txt
 drwxr-xr-x	root/root	usr/share/crawl/dat/database/pl/
 -rw-r--r--	root/root	usr/share/crawl/dat/database/pl/godspeak.txt
 -rw-r--r--	root/root	usr/share/crawl/dat/database/pl/miscname.txt
@@ -58,6 +59,7 @@ drwxr-xr-x	root/root	usr/share/crawl/dat/des/altar/
 -rw-r--r--	root/root	usr/share/crawl/dat/des/altar/trog_wizard.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/altar/vehumet_trees.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/altar/xom_monty_hall.des
+-rw-r--r--	root/root	usr/share/crawl/dat/des/altar/xom_sheep.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/altar/yredelemnul_ordeal.des
 drwxr-xr-x	root/root	usr/share/crawl/dat/des/arrival/
 -rw-r--r--	root/root	usr/share/crawl/dat/des/arrival/arrival_guide.txt
@@ -102,9 +104,12 @@ drwxr-xr-x	root/root	usr/share/crawl/dat/des/builder/
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_cellular.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_city.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_forest.des
+-rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_geoelf.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_grids.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_halls.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_loops.des
+-rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_overlapping_boxes.des
+-rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_pan_divisions.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_pools.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/layout_vaults.des
 -rw-r--r--	root/root	usr/share/crawl/dat/des/builder/rooms.des
@@ -218,6 +223,15 @@ drwxr-xr-x	root/root	usr/share/crawl/dat/descript/nl/
 -rw-r--r--	root/root	usr/share/crawl/dat/descript/skills.txt
 -rw-r--r--	root/root	usr/share/crawl/dat/descript/species.txt
 -rw-r--r--	root/root	usr/share/crawl/dat/descript/spells.txt
+drwxr-xr-x	root/root	usr/share/crawl/dat/descript/sv/
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/ability.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/cards.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/commands.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/features.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/items.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/monsters.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/species.txt
+-rw-r--r--	root/root	usr/share/crawl/dat/descript/sv/unrand.txt
 drwxr-xr-x	root/root	usr/share/crawl/dat/descript/tr/
 -rw-r--r--	root/root	usr/share/crawl/dat/descript/tr/ability.txt
 -rw-r--r--	root/root	usr/share/crawl/dat/descript/tr/cards.txt
@@ -239,6 +253,11 @@ drwxr-xr-x	root/root	usr/share/crawl/dat/dlua/
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/init.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/iter.lua
 drwxr-xr-x	root/root	usr/share/crawl/dat/dlua/layout/
+-rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/geoelf.lua
+-rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/geoelf_corridors.lua
+-rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/geoelf_directions.lua
+-rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/geoelf_glyphs.lua
+-rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/geoelf_rooms.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/hyper.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/hyper_caves.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/hyper_city.lua
@@ -252,6 +271,7 @@ drwxr-xr-x	root/root	usr/share/crawl/dat/dlua/layout/
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/hyper_strategy.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/hyper_usage.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/layout.lua
+-rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/minimum_map_area.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/omnigrid.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/procedural.lua
 -rw-r--r--	root/root	usr/share/crawl/dat/dlua/layout/procedural_complex.lua
@@ -339,6 +359,7 @@ drwxr-xr-x	root/root	usr/share/crawl/docs/license/
 drwxr-xr-x	root/root	usr/share/crawl/settings/
 -rw-r--r--	root/root	usr/share/crawl/settings/0.12_monster_glyphs.txt
 -rw-r--r--	root/root	usr/share/crawl/settings/0.13_monster_glyphs.txt
+-rw-r--r--	root/root	usr/share/crawl/settings/0.14_monster_glyphs.txt
 -rw-r--r--	root/root	usr/share/crawl/settings/0.9_monster_glyphs.txt
 -rw-r--r--	root/root	usr/share/crawl/settings/034_command_keys.txt
 -rw-r--r--	root/root	usr/share/crawl/settings/034_monster_glyphs.txt
