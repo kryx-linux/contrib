@@ -5,12 +5,13 @@
 
 name=sxiv
 version=1.2
-release=2
+release=3
 source=(https://github.com/muennich/$name/archive/v$version.tar.gz config.h)
 
 build () {
     cd "$name-$version"
     cp $SRC/config.h .
+    sed -i 's|DGifCloseFile(gif)|DGifCloseFile(gif, NULL)|g' image.c
     make
     make DESTDIR=$PKG \
         PREFIX=/usr \
