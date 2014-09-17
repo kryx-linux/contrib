@@ -5,10 +5,10 @@
 
 case $1 in
 start)
-  /usr/sbin/syslog-ng -f /etc/syslog-ng.conf -p /var/run/syslog-ng.pid
+  /sbin/syslog-ng -f /etc/syslog-ng.conf -p /var/run/syslog-ng.pid
   ;;
 stop)
-  killall -q /usr/sbin/syslog-ng
+  killall -q /sbin/syslog-ng
   rm -f /var/run/syslog-ng.pid
   ;;
 restart)

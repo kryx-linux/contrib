@@ -18,7 +18,8 @@ build() {
       --libexecdir=/var/libexec \
       --localstatedir=/var \
       --mandir=/usr/man \
-      --enable-dynamic-linking
+      --enable-dynamic-linking \
+      --sbindir=/sbin
 
 
    make && make DESTDIR=$PKG install
