@@ -2,26 +2,43 @@
 # URL: http://www.wxpython.org/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: pyopengl pycairo wxgtk
+# Depends on: python wxgtk
 
 name=wxpython
-version=2.8.12.1
+version=3.0.1.1
 release=1
-source=(http://downloads.sourceforge.net/project/$name/wxPython/$version/wxPython-src-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/wxpython/wxPython-src-$version.tar.bz2)
 
 build() {
-	cd wxPython-src-$version/wxPython
-	install -d $PKG/usr
+	cd wxPython-src-$version
 
-	export \
-		CFLAGS="$CFLAGS -fno-strict-aliasing" \
-		CXXFLAGS="$CXXFLAGS -fno-strict-aliasing"
+	./configure \
+		--prefix=/usr \
+		--libdir=/usr/lib \
+		--with-gtk=2 \
+		--with-opengl \
+		--enable-unicode \
+		--enable-graphics_ctx \
+		--enable-mediactrl \
+		--disable-precomp-headers \
+		--with-regex=sys \
+		--with-libpng=sys \
+		--with-libxpm=sys \
+		--with-libjpeg=sys \
+		--with-libtiff=sys
+
+	cd wxPython
 
 	/usr/bin/python setup.py \
 		WXPORT=gtk2 \
 		UNICODE=1 \
-		BUILD_GLCANVAS=1 \
-		install --root=$PKG
+		build
+
+	/usr/bin/python setup.py \
+		WXPORT=gtk2 \
+		UNICODE=1 \
+		install \
+		--root="$PKG"
 
 	find $PKG -type f \
 	\( \
