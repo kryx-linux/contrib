@@ -4,22 +4,20 @@
 # Depends on:  xorg-libxrender xorg-libxdmcp xorg-libxcb
 
 name=synergy
-version=1.4.14
+version=1.5.0
 release=1
-source=(http://synergy.googlecode.com/files/synergy-$version-Source.tar.gz)
+source=(http://ftp.uni-erlangen.de/pub/mirrors/gentoo/distfiles/synergy-$version-r2278-Source.tar.gz)
 
 build() {
   cd $name-$version-Source
 
-  mkdir tools/cryptopp562
-  bsdtar -C tools/cryptopp562 -xf tools/cryptopp562.zip
-
-  cmake -DCMAKE_INSTALL_PREFIX=/usr .
-  make synergyc synergys
+  ./hm.sh conf -g1
+  ./hm.sh build
 
   install -D -m 755 doc/synergyc.man $PKG/usr/man/man1/synergyc.man  
   install -D -m 755 doc/synergys.man $PKG/usr/man/man1/synergys.man  
   install -d -m 755 $PKG/usr/bin
   install -D -m 755 bin/* $PKG/usr/bin
+  rm $PKG/usr/bin/*tests
 
 }
