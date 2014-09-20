@@ -5,15 +5,17 @@
 
 name=grub2-efi
 version=2.00
-release=2
-source=(http://ftp.gnu.org/gnu/grub/grub-$version.tar.xz \
-    http://unifoundry.com/unifont-5.1.20080820.pcf.gz)
+release=3
+source=(http://ftp.gnu.org/gnu/grub/grub-$version.tar.xz)
 
 build() {
     export CFLAGS="${CFLAGS} -Wno-error"
 
     # fix for glibc 'gets' removal
     sed -i -e '/gets is a/d' grub-$version/grub-core/gnulib/stdio.in.h
+
+    # fix for ftsynth.h path
+    sed -i -e 's|freetype/ftsynth.h|freetype2/ftsynth.h|' grub-$version/util/grub-mkfont.c
 
     MODLIST="boot chain configfile fat ext2 linux normal ntfs part_gpt part_msdos"
 
@@ -31,11 +33,6 @@ build() {
         cp grub2-$ARCH.efi $PKG/usr/lib/grub/
         cd ../..
     done
-
-    gzip -d $SRC/unifont-5.1.20080820.pcf.gz
-    mkdir -p $PKG/usr/lib/grub/fonts
-    x86_64/grub-mkfont -o ${PKG}/usr/lib/grub/fonts/unifont.pf2 \
-        $SRC/unifont-5.1.20080820.pcf
 
     rm -r $PKG/usr/{bin,etc,sbin,share}
 }
