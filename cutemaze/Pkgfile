@@ -1,0 +1,17 @@
+# Description: Top-down maze game.
+# URL: http://gottcode.org/cutemaze
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Danny Rawlins, monster dot romster at gmail dot com
+# Depends on: qt5
+
+name=cutemaze
+version=1.1.1
+release=1
+source=(http://gottcode.org/$name/$name-$version-src.tar.bz2)
+
+build() {
+	cd $name-$version
+	qmake-qt5 PREFIX=/usr
+	make
+	make INSTALL_ROOT=$PKG install
+}
