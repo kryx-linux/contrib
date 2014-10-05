@@ -1,14 +1,13 @@
 # Description: A C++ bittorrent library designed to run on anything from embedded systems to large scale seed servers.
-# URL: http://code.google.com/p/libtorrent/
+# URL: https://sourceforge.net/projects/libtorrent/
 # Packager: Danny Rawlins, monster dot romster at gmail dot com
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
 # Depends on: boost
 
 name=libtorrent-rasterbar
-version=0.16.11
+version=0.16.16
 release=1
-source=(http://libtorrent.googlecode.com/files/$name-$version.tar.gz)
-
+source=(https://downloads.sourceforge.net/project/libtorrent/libtorrent/$name-$version.tar.gz)
 build() {
 	cd $name-$version
 
@@ -18,5 +17,4 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	find $PKG -name '*.egg-info' | xargs rm -rf
 }
