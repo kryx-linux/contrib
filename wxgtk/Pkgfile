@@ -5,16 +5,13 @@
 # Depends on: gtk glu gst-plugins-base-compat
 
 name=wxgtk
-version=3.0.1
+version=3.0.2
 release=1
-source=(http://downloads.sourceforge.net/wxwindows/wxWidgets-$version.tar.bz2
-	wxgtk-freeze.patch)
+source=(http://downloads.sourceforge.net/wxwindows/wxWidgets-$version.tar.bz2)
 
 build() {
 	cd wxWidgets-$version
 
-	patch -p3 -i $SRC/wxgtk-freeze.patch
-	
 	./configure \
 		--prefix=/usr \
 		--libdir=/usr/lib \
