@@ -1,16 +1,28 @@
-Note that skype is a 32bit binary and as such requires compat-32
-ports tree to be enabled to work.
+INSTALL:
 
-You enable compat-32 by.
+	Note that skype is a 32bit binary and as such requires compat-32
+	ports tree to be enabled to work.
 
-mv /etc/ports/compat-32.rsync.inactive /etc/ports/compat-32.rsync
+	You enable compat-32 by.
 
-$EDITOR /etc/prt-get.conf
+	mv /etc/ports/compat-32.rsync.inactive /etc/ports/compat-32.rsync
 
-And add:
+	$EDITOR /etc/prt-get.conf
 
-prtdir /usr/ports/compat-32
+	And add:
 
-Also be sure to enable:
+	prtdir /usr/ports/compat-32
 
-runscripts yes
+	Also be sure to enable:
+
+	runscripts yes
+
+	In /etc/prt-get.conf or use prt-get --install-scripts
+
+NOTES:
+
+	/usr/bin/skype is now a wrapper script to run 
+
+	apulse-32 skype-bin
+
+	As this allows us to avoid packaging pulseaudio-32
