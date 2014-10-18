@@ -6,7 +6,7 @@
 
 name=skype
 version=4.3.0.37
-release=1
+release=2
 source=(http://download.skype.com/linux/$name-$version.tar.bz2)
 
 build() {
@@ -31,7 +31,12 @@ build() {
 
 cat <<- EOF > $PKG/usr/bin/skype
 	#!/bin/bash
-	exec apulse-32 skype-bin "$@"
+	if [ -e '/usr/lib32/libpulse.so' ]; then
+		export PULSE_LATENCY_MSEC=60
+		exec /usr/bin/skype-bin "\$@"
+	else
+		exec apulse-32 /usr/bin/skype-bin "\$@"
+	fi
 EOF
 		chmod 0775 $PKG/usr/bin/skype
 }
