@@ -5,15 +5,12 @@
 # Depends on: crypto++ util-linux wxgtk
 
 name=amule
-version=2.3.1
+version=10845
 release=1
-source=(http://downloads.sourceforge.net/project/amule/aMule/$version/aMule-$version.tar.xz)
+source=(http://amule.sourceforge.net/tarballs/aMule-SVN-r$version.tar.bz2)
 
 build() {
-	cd aMule-$version
-
-	export CFLAGS="${CFLAGS//-fstack-protector/}"
-	export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
+	cd aMule-SVN-r$version
 
 	./configure \
 		--prefix=/usr \
