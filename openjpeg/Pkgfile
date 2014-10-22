@@ -5,12 +5,14 @@
 # Depends on: lcms2 libpng xz
 
 name=openjpeg
-version=1.5.1
+version=1.5.2
 release=1
-source=(http://openjpeg.googlecode.com/files/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/openjpeg.mirror/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
+
+	autoreconf -fi
 
 	./configure \
 		--prefix=/usr \
