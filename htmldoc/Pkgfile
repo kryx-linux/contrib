@@ -5,14 +5,23 @@
 # Depends on:
 
 name=htmldoc
-version=1.8.27
-release=2
-source=(http://ftp.easysw.com/pub/$name/$version/$name-$version-source.tar.bz2)
+version=1.8.28
+release=1
+source=(http://msweet.org/files/project1/$name-$version-source.tar.bz2
+        fix_random.diff)
 
 build() {
-   cd $name-$version
-   ./configure --prefix=/usr
-   make
-   make  prefix=$PKG/usr bindir=$PKG/usr/bin install
-   rm -rf $PKG/usr/share/doc
+  cd $name-$version
+
+  patch -i $SRC/fix_random.diff -p1
+
+  ./configure --prefix=/usr --disable-gnutls
+
+  make
+  make  prefix=$PKG/usr \
+    datadir=$PKG/usr/share \
+    bindir=$PKG/usr/bin \
+    mandir=$PKG/usr/man install
+
+  rm -rf $PKG/usr/share/doc
 }
