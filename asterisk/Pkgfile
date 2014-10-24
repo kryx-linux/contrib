@@ -4,16 +4,17 @@
 # Depends on:	openssl ncurses
 
 name=asterisk
-version=1.8.26.1
-release=3
+version=1.8.31.0
+release=4
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
 asterisk.rc
-menuselect-tree
-build-enable-ilbc.patch
-build-enable-cdr-mysql.patch
+build-disable-astcannary.patch
 build-disable-sounds-en-gsm.patch
 build-disable-sounds-moh.patch
+build-enable-aelparse.patch
+build-enable-cdr-mysql.patch
+build-enable-ilbc.patch
 )
 
 build () {
@@ -21,19 +22,17 @@ build () {
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
 		--with-ncurses \
 		--with-ssl \
 		--disable-xmldoc \
 		--with-sounds-cache=/tmp
 
-	# Normally this file is created by running the interactive menuselect program
-	cp $SRC/menuselect-tree .
+	# Generate a menuselect-tree file
+	make menuselect-tree
 
-	# Add support for ILBC
-	patch -p1 -i $SRC/build-enable-ilbc.patch
-
-	# Add support for MySQL CDRs
-	patch -p1 -i $SRC/build-enable-cdr-mysql.patch
+	# Remove astcannary
+	patch -p1 -i $SRC/build-disable-astcannary.patch
 
 	# Remove english gsm core sounds (sounds are in separate ports)
 	patch -p1 -i $SRC/build-disable-sounds-en-gsm.patch
@@ -41,26 +40,37 @@ build () {
 	# Remove music on hold files
 	patch -p1 -i $SRC/build-disable-sounds-moh.patch
 
+	# Add aelparse utility
+	patch -p1 -i $SRC/build-enable-aelparse.patch
+
+	# Add support for ILBC
+	patch -p1 -i $SRC/build-enable-ilbc.patch
+
+	# Add support for MySQL CDRs
+	patch -p1 -i $SRC/build-enable-cdr-mysql.patch
+
 	make # NOISY_BUILD=yes
 	make DESTDIR=$PKG install
-	make DESTDIR=$PKG samples
 
-	mv $PKG/usr/share/man $PKG/usr
+	# Init script
 	install -m 755 -D $SRC/asterisk.rc $PKG/etc/rc.d/asterisk
-	rmdir  $PKG/usr/share
-	rm -rf $PKG/var/spool/asterisk/voicemail/default/1234
+
+	# This man page is missing
+	install -m 644 -D doc/aelparse.8 $PKG/usr/man/man8/aelparse.8
+
+	# Install default config files
+	install -d -m 750 -o root -g asterisk $PKG/etc/asterisk $PKG/etc/asterisk/default
+	for i in configs/*.sample; do
+		install -m 640 -o root -g asterisk $i $PKG/etc/asterisk/default/$(basename $i .sample)
+	done
 
 	# Remove empty directory holders
 	rm -rf $PKG/var/lib/asterisk/sounds/*
 
-	# change runtime dir
-	sed -i -e 's|^astrundir => .*|astrundir => /var/run/asterisk|' $PKG/etc/asterisk/asterisk.conf
-	mkdir -p $PKG/var/run/asterisk
+	# Remove documentation dir
+	rm -rf $PKG/var/lib/asterisk/documentation
 
-	# fix permissions
-	chown -R root:root $PKG
+	# Fix permissions
 	chown -R asterisk:asterisk $PKG/var/{lib,log,run,spool}/asterisk
-	chown -R root:asterisk $PKG/etc/asterisk
-	chmod -R 640 $PKG/etc/asterisk
-	chmod 750 $PKG/etc/asterisk
+
 }
