@@ -18,7 +18,7 @@ build() {
     patch -p0 -i ../entity.patch
     mkdir -p $PKG/usr/include
     install -m 0644 *.h $_
-    g++ $CXXFLAGS -fPIC -shared -o $soname !(xmltest).cpp
+    g++ $CXXFLAGS -DTIXML_USE_STL -fPIC -shared -o $soname !(xmltest).cpp
     install -D -m 0644 $soname $PKG/usr/lib/$soname
     cd $PKG/usr/lib
     ln -s $soname ${soname%%.*}.so
