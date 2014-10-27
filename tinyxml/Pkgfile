@@ -1,27 +1,30 @@
-# Description: simple, small, C++ XML parser
+# Description: A simple, small, minimal, C++ XML parser
 # URL:         http://www.grinninglizard.com/tinyxml/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Packager:    Matt Housh, jaeger at morpheus dot net
 
 name=tinyxml
 version=2.6.2
 release=1
-source=(
-    http://download.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.zip 
-    entity.patch
-)
+source=(http://download.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.zip \
+        entity.patch $name-use-stl.patch)
 
-shopt -s extglob
 build() {
-    soname=lib$name.$version.so
-    cd $name
-    patch -p0 -i ../entity.patch
-    mkdir -p $PKG/usr/include
-    install -m 0644 *.h $_
-    g++ $CXXFLAGS -DTIXML_USE_STL -fPIC -shared -o $soname !(xmltest).cpp
-    install -D -m 0644 $soname $PKG/usr/lib/$soname
-    cd $PKG/usr/lib
-    ln -s $soname ${soname%%.*}.so
-    ln -s $soname ${soname%.*.*.so}.so
-    ln -s $soname ${soname%.*.so}.so
+  export CXXFLAGS="${CXXFLAGS} -fPIC"
+  cd $name
+
+  patch -p0 -i $SRC/entity.patch 
+  patch -p0 -i $SRC/$name-use-stl.patch
+  sed -i -e "/^TINYXML_USE_STL/ s/=.*/= YES/" \
+         -e "/^RELEASE_CFLAGS/ s/-O3/${CXXFLAGS}/" Makefile
+
+  make
+  g++ ${CXXFLAGS} -DTIXML_USE_STL -shared -o lib$name.so.$version \
+    -Wl,-soname,lib$name.so.${version:0:1} *.o
+
+  mkdir -p $PKG/usr/{include,lib}
+  install -m 0755 lib$name.so.$version $PKG/usr/lib/
+  install -m 0644 *.h $PKG/usr/include/
+  ln -s lib$name.so.$version $PKG/usr/lib/lib$name.so.${version:0:1}
+  ln -s lib$name.so.$version $PKG/usr/lib/lib$name.so
 }
