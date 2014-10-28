@@ -6,11 +6,15 @@
 
 name=clementine
 version=1.2.3
-release=1
-source=(https://github.com/clementine-player/Clementine/archive/$version.tar.gz)
+release=2
+source=(https://github.com/clementine-player/Clementine/archive/$version.tar.gz
+	udisks-namespace.patch)
 
 build() {
 	cd Clementine-$version
+
+	patch -p1 -i $SRC/udisks-namespace.patch
+
 	cmake -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_WERROR=OFF
 	make
 	make DESTDIR=$PKG install
