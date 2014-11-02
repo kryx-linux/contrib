@@ -5,19 +5,27 @@
 # Depends on:   gtk vte
 
 name=lxterminal
-version=0.1.11
+version=0.2.0
 release=1
-source=(http://downloads.sourceforge.net/lxde/$name-$version.tar.gz
-        shift-keybinds.patch)
+source=(http://downloads.sourceforge.net/lxde/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  patch -Np1 -i $SRC/shift-keybinds.patch
+    cd $name-$version
 
-  ./configure --sysconfdir=/etc --prefix=/usr
-  make
+    # Configure
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --mandir=/usr/man
 
-  make DESTDIR=$PKG install
+    # Build
+    make
 
-  chown -R root:root $PKG
+    # Package
+    make DESTDIR=$PKG install
+
+    # Cleanup
+    rm -rf $PKG/usr/share/locale
+
+    chown -R root:root $PKG
 }
