@@ -1,21 +1,31 @@
-# Description: fping - send ICMP ECHO_REQUEST packets to network hosts.
+# Description: A utility to ping multiple hosts at once
 # URL:         http://www.fping.com/
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Maintainer:  James Mills, prologic at shortcircuit dot net dot au
+#
 # Depends on:
 
 name=fping
-version=2.4b2_to
+version=3.10
 release=1
-source=(http://www.mirrorservice.org/sites/ftp.wiretapped.net/pub/security/network-mapping/fping/$name-$version.tar.gz)
+source=(http://www.fping.org/dist/${name}-${version}.tar.gz)
 
 build () {
    cd $name-$version
-   ./configure --prefix=/usr
-   sed -i "/^CFLAGS/s/-O2 -pipe/$CFLAGS/" Makefile
-   install -d $PKG/usr/bin
-   make && make prefix=$PKG/usr install
-   sed "s|$PKG||g" $SRC/$name-$version/$name.8 > $PKG/usr/man/man8/$name.8
-   chmod u+s $PKG/usr/sbin/$name
-   ln -sf /usr/sbin/$name $PKG/usr/bin/$name
+
+   # Configure
+   ./configure --prefix=/usr \
+               --sbindir=/usr/bin \
+               --mandir=/usr/man \
+               --enable-ipv4 \
+               --enable-ipv6
+
+   # Build
+   make
+
+   # Package
+   make DESTDIR=$PKG install
+   chmod 4555 ${PKG}/usr/bin/fping
+   chmod 4555 ${PKG}/usr/bin/fping6
+
+   chown -R root:root $PKG
 }
