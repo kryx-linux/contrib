@@ -2,14 +2,22 @@ Kernel Requirements
 ===================
 
 If you want to have a full working CRUX+Docker system you will need to
-rebuild your kernel various networking, cgroups and optional lvm options
+rebuild your kernel and enable various networking, cgroups
+and optional lvm options
 
 You may check your kernel configuration by running:
 
 ::
     
-    ./check-config.sh /usr/src/linux/.config
+    /usr/share/docker/check-config.sh
          
+.. note:: If you receive an error such as "cgroup hierarchy: nonexistent??"
+          then you should run ``cgroupfs-mount`` and re-run
+          ``/usr/share/docker/check-config.sh``.
+          
+          Please follow the guideance of the output of
+          ``/usr/share/docker/check-config.sh`` carefully.
+
 
 Execution Engines
 =================
