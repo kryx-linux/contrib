@@ -4,13 +4,14 @@
 #
 # Depends on:
 
-name=node
+name=nodejs
+_name=node
 version=0.10.33
-release=1
-source=(http://nodejs.org/dist/v${version}/$name-v${version}.tar.gz)
+release=2
+source=(http://nodejs.org/dist/v${version}/$_name-v${version}.tar.gz)
 
 build() {
-    cd $name-v${version}
+    cd $_name-v${version}
 
     ./configure --prefix=/usr
     make
