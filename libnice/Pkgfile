@@ -5,7 +5,7 @@
 # Depends on: gstreamer gstreamer-compat xz
 
 name=libnice
-version=0.1.7
+version=0.1.8
 release=1
 source=(http://nice.freedesktop.org/releases/$name-$version.tar.gz)
 
@@ -14,6 +14,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
 		--enable-gtk-doc=no \
 		--enable-gtk-doc-html=no
 
@@ -22,5 +23,4 @@ build() {
 
 	# gtk-doc is still generated!
 	rm -r $PKG/usr/share/gtk-doc
-	rmdir $PKG/usr/share
 }
