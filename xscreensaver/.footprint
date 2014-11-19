@@ -26,6 +26,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/attraction
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/atunnel
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/barcode
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/binaryring
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/blaster
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/blinkbox
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/blitspin
@@ -44,6 +45,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/ccurve
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/celtic
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/circuit
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/cityflow
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/cloudlife
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/companioncube
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/compass
@@ -85,6 +87,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/galaxy
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/gears
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/geodesic
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/geodesicgears
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/gflux
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/glblur
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/glcells
@@ -212,6 +215,7 @@ drwxr-xr-x	root/root	usr/lib/xscreensaver/
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/webcollage
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/webcollage-helper
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/whirlwindwarp
+-rwxr-xr-x	root/root	usr/lib/xscreensaver/winduprobot
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/wormhole
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/xanalogtv
 -rwxr-xr-x	root/root	usr/lib/xscreensaver/xflame
@@ -243,6 +247,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/attraction.6.gz
 -rw-r--r--	root/root	usr/man/man6/atunnel.6.gz
 -rw-r--r--	root/root	usr/man/man6/barcode.6.gz
+-rw-r--r--	root/root	usr/man/man6/binaryring.6.gz
 -rw-r--r--	root/root	usr/man/man6/blaster.6.gz
 -rw-r--r--	root/root	usr/man/man6/blinkbox.6.gz
 -rw-r--r--	root/root	usr/man/man6/blitspin.6.gz
@@ -261,6 +266,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/ccurve.6.gz
 -rw-r--r--	root/root	usr/man/man6/celtic.6.gz
 -rw-r--r--	root/root	usr/man/man6/circuit.6.gz
+-rw-r--r--	root/root	usr/man/man6/cityflow.6.gz
 -rw-r--r--	root/root	usr/man/man6/cloudlife.6.gz
 -rw-r--r--	root/root	usr/man/man6/companioncube.6.gz
 -rw-r--r--	root/root	usr/man/man6/compass.6.gz
@@ -303,6 +309,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/galaxy.6.gz
 -rw-r--r--	root/root	usr/man/man6/gears.6.gz
 -rw-r--r--	root/root	usr/man/man6/geodesic.6.gz
+-rw-r--r--	root/root	usr/man/man6/geodesicgears.6.gz
 -rw-r--r--	root/root	usr/man/man6/gflux.6.gz
 -rw-r--r--	root/root	usr/man/man6/glblur.6.gz
 -rw-r--r--	root/root	usr/man/man6/glcells.6.gz
@@ -427,6 +434,7 @@ drwxr-xr-x	root/root	usr/man/man6/
 -rw-r--r--	root/root	usr/man/man6/wander.6.gz
 -rw-r--r--	root/root	usr/man/man6/webcollage.6.gz
 -rw-r--r--	root/root	usr/man/man6/whirlwindwarp.6.gz
+-rw-r--r--	root/root	usr/man/man6/winduprobot.6.gz
 -rw-r--r--	root/root	usr/man/man6/wormhole.6.gz
 -rw-r--r--	root/root	usr/man/man6/xanalogtv.6.gz
 -rw-r--r--	root/root	usr/man/man6/xflame.6.gz
@@ -457,6 +465,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/attraction.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/atunnel.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/barcode.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/binaryring.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/blaster.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/blinkbox.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/blitspin.xml
@@ -475,6 +484,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/ccurve.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/celtic.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/circuit.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/cityflow.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/cloudlife.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/companioncube.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/compass.xml
@@ -516,6 +526,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/galaxy.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/gears.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/geodesic.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/geodesicgears.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/gflux.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/glblur.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/glcells.xml
@@ -641,6 +652,7 @@ drwxr-xr-x	root/root	usr/share/xscreensaver/config/
 -rw-r--r--	root/root	usr/share/xscreensaver/config/wander.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/webcollage.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/whirlwindwarp.xml
+-rw-r--r--	root/root	usr/share/xscreensaver/config/winduprobot.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/wormhole.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/xanalogtv.xml
 -rw-r--r--	root/root	usr/share/xscreensaver/config/xflame.xml
