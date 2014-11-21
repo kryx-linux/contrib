@@ -1,46 +1,34 @@
 # Description: DenyHosts is a script intended to be run by Linux system administrators to help thwart ssh server attacks.
-# URL: http://denyhosts.sourceforge.net/
+# URL: http://denyhost.sourceforge.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
 # Depends on: python
 
 name=denyhosts
-version=2.6
-release=2
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/DenyHosts-$version.tar.gz
-	denyhosts-$version-config.patch
-	denyhosts-2.6-cve-2013-6890.patch
-	denyhosts-2.6-log-injection-regex.patch
-	denyhosts-2.6-single_config_switch.patch
-	denyhosts-2.6-plugin_deny.patch)
+version=2.9
+release=1
+source=(http://downloads.sourceforge.net/project/denyhost/denyhost-$version/$name-$version.tar.gz)
 
 build() {
 	cd DenyHosts-$version
 
-	patch -p0 -i $SRC/$name-$version-config.patch
-	patch -p1 -i $SRC/denyhosts-2.6-log-injection-regex.patch
-	patch -p1 -i $SRC/denyhosts-2.6-single_config_switch.patch
-	patch -p1 -i $SRC/denyhosts-2.6-plugin_deny.patch
-	patch -p1 -i $SRC/denyhosts-2.6-cve-2013-6890.patch
-
 	/usr/bin/python setup.py install --root=$PKG
 	
-	rm $PKG/usr/share/denyhosts/*.txt
+	install -d $PKG/etc/{denyhosts,rc.d} $PKG/usr/sbin
 	
-	install -d \
-		$PKG/etc/ \
-		$PKG/etc/{denyhosts,rc.d} \
-		$PKG/var/log
-	
-	mv $PKG/usr/share/denyhosts/denyhosts.cfg-dist \
+	mv $PKG/etc/denyhosts.conf \
 		$PKG/etc/denyhosts/denyhosts.conf
 	
-	mv $PKG/usr/share/denyhosts/daemon-control-dist \
-		$PKG/usr/share/denyhosts/daemon-control
+	mv $PKG/usr/bin/daemon-control-dist \
+		$PKG/etc/rc.d/denyhosts
 	
-	chmod 700 $PKG/usr/share/denyhosts/daemon-control
-	
-	ln -s /usr/share/denyhosts/daemon-control $PKG/etc/rc.d/denyhosts
-	rm $PKG/usr/share/denyhosts/plugins/README.contrib
-	mv $PKG/usr/bin/denyhosts.py $PKG/usr/bin/denyhosts
+	mv $PKG/usr/bin/denyhosts.py $PKG/usr/sbin/denyhosts
+	mv $PKG/usr/share/man $PKG/usr/man
+
+	rmdir $PKG/usr/share $PKG/usr/bin
+
+	sed -i \
+		-e 's|^DENYHOSTS_LOCK  = .*|DENYHOSTS_LOCK  = "/var/run/denyhosts.pid"|' \
+		-e 's|^DENYHOSTS_CFG   = .*|DENYHOSTS_CFG   = "/etc/denyhosts/denyhosts.conf"|' \
+		$PKG/etc/rc.d/denyhosts
 }
