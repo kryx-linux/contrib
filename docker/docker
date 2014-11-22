@@ -3,6 +3,8 @@
 # /etc/rc.d/docker: start/stop docker daemon
 #
 
+export PATH="/sbin:/usr/sbin:$PATH"
+
 source /etc/docker.conf
 
 case $1 in

@@ -1,5 +1,5 @@
 # Description:  Pack, ship and run any application as a lightweight container
-# URL:          http://www.docker.io/
+# URL:          http://www.docker.com/
 # Maintainer:   James Mills, prologic at shortcircuit dot net dot au
 #
 # Depends on:   go sqlite3 cgroupfs-mount
@@ -7,11 +7,11 @@
 name=docker
 version=1.3.1
 revision=4e9bbfa900
-release=1
+release=2
 source=(
     https://raw.githubusercontent.com/dotcloud/docker/v${version}/contrib/check-config.sh
     https://github.com/dotcloud/$name/archive/v$version.tar.gz
-    $name.rc
+    $name
     $name.conf
 )
 
@@ -35,7 +35,7 @@ build() {
     install -D -m 644 "contrib/udev/80-docker.rules" \
         "$PKG/etc/udev/rules.d/80-docker.rules"
 
-    install -D -m 755 $SRC/$name.rc $PKG/etc/rc.d/$name
+    install -D -m 755 $SRC/$name $PKG/etc/rc.d/$name
     install -D -m 644 $SRC/$name.conf $PKG/etc/$name.conf
 
     chown -R root:root $PKG
