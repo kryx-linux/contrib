@@ -5,16 +5,13 @@
 # Depends on: bc fortune libglade giflib intltool netpbm xorg-libxmu glu
 
 name=xscreensaver
-version=5.31
+version=5.32
 release=1
-source=(http://www.jwz.org/$name/$name-$version.tar.gz
-	xscreensaver-5.31-1001-binaryring.c-include-stdint.patch)
+source=(http://www.jwz.org/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/xscreensaver-5.31-1001-binaryring.c-include-stdint.patch
-	
 	sed -i configure \
 	-e 's/USE_NLS=yes/USE_NLS=no/' \
 	-e 's/ENABLE_NLS 1/ENABLE_NLS 0/'
