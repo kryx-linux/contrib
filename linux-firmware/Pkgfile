@@ -1,0 +1,22 @@
+# Description:  Firmware blobs for use with the Linux kernel.
+# URL:          https://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=summary
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:
+
+name=linux-firmware
+version=20141009
+release=1
+source=(http://shortcircuit.net.au/~prologic/distfiles/$name-$version.tar.xz)
+
+build() {
+    cd $name-$version
+
+    # Build/Package
+    make DESTDIR=$PKG FIRMWAREDIR=/lib/firmware install
+
+    # Cleanup
+    rm $PKG/lib/firmware/{Makefile,README,configure,GPL-3}
+ 
+    chown -R root:root $PKG
+}
