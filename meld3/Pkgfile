@@ -6,14 +6,12 @@
 
 name=meld3
 version=1.0.0
-release=1
+release=2
 source=(https://pypi.python.org/packages/source/m/$name/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+    cd $name-$version
 
     # Build/Package
     /usr/bin/python setup.py install -O1 --prefix=/usr --root=$PKG
-
-    chown -R root:root $PKG
 }
