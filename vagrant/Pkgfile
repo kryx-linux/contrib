@@ -4,10 +4,10 @@
 # Depends on:   ruby curl lzo libidn rtmpdump virtualbox
 
 name=vagrant
-version=1.6.5
+version=1.7.0
 release=1
-source=(https://dl.bintray.com/mitchellh/${name}/${name}_${version}_x86_64.rpm)
+source=(http://shortcircuit.net.au/~prologic/distfiles/${name}_${version}_x86_64.rpm)
 
-build(){
-    cp -R ${SRC}/* ${PKG}/
+build() {
+    cp -r ${SRC}/* ${PKG}
 }
