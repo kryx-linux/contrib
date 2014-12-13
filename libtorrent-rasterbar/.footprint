@@ -6,6 +6,8 @@ drwxr-xr-x	root/root	usr/include/libtorrent/
 -rw-r--r--	root/root	usr/include/libtorrent/add_torrent_params.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/address.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/alert.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/alert_dispatcher.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/alert_manager.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/alert_types.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/alloca.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/allocator.hpp
@@ -33,11 +35,13 @@ drwxr-xr-x	root/root	usr/include/libtorrent/aux_/
 -rw-r--r--	root/root	usr/include/libtorrent/disk_buffer_holder.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/disk_buffer_pool.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/disk_io_thread.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/ed25519.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/entry.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/enum_net.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/error.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/error_code.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/escape_string.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/export.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/extensions.hpp
 drwxr-xr-x	root/root	usr/include/libtorrent/extensions/
 -rw-r--r--	root/root	usr/include/libtorrent/extensions/logger.hpp
@@ -66,9 +70,14 @@ drwxr-xr-x	root/root	usr/include/libtorrent/extensions/
 -rw-r--r--	root/root	usr/include/libtorrent/io_service.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/io_service_fwd.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/ip_filter.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/ip_voter.hpp
 drwxr-xr-x	root/root	usr/include/libtorrent/kademlia/
+-rw-r--r--	root/root	usr/include/libtorrent/kademlia/dht_observer.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/kademlia/dht_tracker.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/kademlia/find_data.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/kademlia/get_item.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/kademlia/get_peers.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/kademlia/item.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/kademlia/logging.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/kademlia/msg.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/kademlia/node.hpp
@@ -86,7 +95,6 @@ drwxr-xr-x	root/root	usr/include/libtorrent/kademlia/
 -rw-r--r--	root/root	usr/include/libtorrent/natpmp.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/packet_buffer.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/parse_url.hpp
--rw-r--r--	root/root	usr/include/libtorrent/pch.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/pe_crypto.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/peer.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/peer_connection.hpp
@@ -100,12 +108,12 @@ drwxr-xr-x	root/root	usr/include/libtorrent/kademlia/
 -rw-r--r--	root/root	usr/include/libtorrent/ptime.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/puff.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/random.hpp
--rw-r--r--	root/root	usr/include/libtorrent/rsa.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/rss.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/session.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/session_settings.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/session_status.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/settings.hpp
+-rw-r--r--	root/root	usr/include/libtorrent/sha1_hash.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/size_type.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/sliding_average.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/socket.hpp
@@ -118,7 +126,6 @@ drwxr-xr-x	root/root	usr/include/libtorrent/kademlia/
 -rw-r--r--	root/root	usr/include/libtorrent/storage.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/storage_defs.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/string_util.hpp
--rw-r--r--	root/root	usr/include/libtorrent/struct_debug.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/thread.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/time.hpp
 -rw-r--r--	root/root	usr/include/libtorrent/timestamp_history.hpp
@@ -143,12 +150,12 @@ drwxr-xr-x	root/root	usr/include/libtorrent/kademlia/
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libtorrent-rasterbar.a
 -rwxr-xr-x	root/root	usr/lib/libtorrent-rasterbar.la
-lrwxrwxrwx	root/root	usr/lib/libtorrent-rasterbar.so -> libtorrent-rasterbar.so.7.0.0
-lrwxrwxrwx	root/root	usr/lib/libtorrent-rasterbar.so.7 -> libtorrent-rasterbar.so.7.0.0
--rwxr-xr-x	root/root	usr/lib/libtorrent-rasterbar.so.7.0.0
+lrwxrwxrwx	root/root	usr/lib/libtorrent-rasterbar.so -> libtorrent-rasterbar.so.8.0.0
+lrwxrwxrwx	root/root	usr/lib/libtorrent-rasterbar.so.8 -> libtorrent-rasterbar.so.8.0.0
+-rwxr-xr-x	root/root	usr/lib/libtorrent-rasterbar.so.8.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libtorrent-rasterbar.pc
 drwxr-xr-x	root/root	usr/lib/python2.7/
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/
 -rwxr-xr-x	root/root	usr/lib/python2.7/site-packages/libtorrent.so
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/python_libtorrent-0.16.16-py2.7.egg-info
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/python_libtorrent-1.0.3-py2.7.egg-info
