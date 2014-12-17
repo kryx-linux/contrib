@@ -2,7 +2,23 @@
 README for iwlwifi-3945-ucode
 
 
-*** Note for kernel >= 2.6.24 ***
+
+REQUERIMENTS
+
+   Download source manually from
+   - http://wireless.kernel.org/en/users/Drivers/iwlegacy
+
+   and put the file
+   - iwlwifi-3945-ucode-*.tgz
+
+   into the directory defined by PKGMK_SOURCE_DIR. See pkgmk.conf(5).
+
+
+
+NOTES
+
+
+*** Note for kernel >= 2.6.29 ***
 
   Check that you enabled the following config options in the kernel:
   
@@ -20,4 +36,3 @@ README for iwlwifi-3945-ucode
   Device Drivers ->
   	Generic Driver Options ->
         	Hotplug firmware loading support
-
