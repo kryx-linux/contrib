@@ -2,10 +2,10 @@
 # URL:          http://golang.org/
 # Maintainer:   James Mills, prologic at shortcircuit dot net dot au
 #
-# Depends on:   mercurial
+# Depends on:   git mercurial
 
 name=go
-version=1.3.2
+version=1.3.3
 release=1
 source=(
     https://storage.googleapis.com/golang/${name}${version}.linux-amd64.tar.gz
@@ -40,13 +40,11 @@ build() {
     export GOROOT=$PKG/usr/lib/go
     export GOPATH=/tmp/go
 
-    $PKG/usr/bin/go get -u code.google.com/p/go.tools/cmd/godoc
-    $PKG/usr/bin/go install code.google.com/p/go.tools/cmd/godoc
+    $PKG/usr/bin/go get -u golang.org/x/tools/cmd/godoc
+    $PKG/usr/bin/go install golang.org/x/tools/cmd/godoc
 
-    $PKG/usr/bin/go get -u code.google.com/p/go.tools/cmd/vet
-    $PKG/usr/bin/go install code.google.com/p/go.tools/cmd/vet
-
-    cp -r $PKG/usr/lib/go/bin $PKG/usr/
+    $PKG/usr/bin/go get -u golang.org/x/tools/cmd/vet
+    $PKG/usr/bin/go install golang.org/x/tools/cmd/godoc
 
     # cleanup
     rm -rf $PKG/usr/lib/go/bin
