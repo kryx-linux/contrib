@@ -5,13 +5,10 @@
 # Depends on:  openssl
 
 name=ntp
-version=4.2.6p5
-release=5
+version=4.2.8
+release=1
 source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/$name-$version.tar.gz
-        ntpd
-        ntpdate
-        ntp.conf
-        ntp-64bit.diff)
+        ntpd ntpdate ntp.conf ntp-64bit.diff)
 
 build () {
    mkdir -p $PKG/etc/{rc.d,ntp} \
@@ -38,7 +35,7 @@ build () {
 
    # substitute the default configuration path
    sed -i -e 's;\(CONFIG_FILE[^"]*"\)/etc/ntp.conf;\1/etc/ntp/ntp.conf;' \
-        include/ntp_config.h ntpdate/ntptime_config.c
+        include/ntp_config.h
 
    make
    make DESTDIR=$PKG install
@@ -56,4 +53,7 @@ build () {
 
    # assign ownership to ntp:ntp
    chown -R ntp:ntp $PKG/var/lib/ntp $PKG/var/run/ntp $PKG/var/log/ntp.log
+
+   # clean up the mess..
+   rm -rf $PKG/usr/share
 }
