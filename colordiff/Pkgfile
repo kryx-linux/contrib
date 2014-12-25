@@ -1,0 +1,24 @@
+# Description:	Colorizes diff output
+# URL: 		http://www.colordiff.org/
+# Maintainer: 	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	perl
+
+name=colordiff
+version=1.0.13
+release=1
+source=(http://www.colordiff.org/$name-$version.tar.gz)
+
+build () {
+	cd $name-$version
+
+	# etc
+	install -D -m 644 colordiffrc $PKG/etc/colordiffrc
+
+	# man
+	install -D -m 644 colordiff.1 $PKG/usr/man/man1/colordiff.1
+	install -D -m 644 cdiff.1 $PKG/usr/man/man1/cdiff.1
+
+	# bin
+	install -D -m 755 colordiff.pl $PKG/usr/bin/colordiff
+	install -D -m 755 cdiff.sh $PKG/usr/bin/cdiff
+}
