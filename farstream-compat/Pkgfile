@@ -4,13 +4,13 @@
 # Packager: Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on: gst-ffmpeg gst-plugins-bad-compat gst-plugins-good-compat gst-python-compat libnice
 
-name=farstream
+name=farstream-compat
 version=0.1.2
 release=1
-source=(http://freedesktop.org/software/$name/releases/$name/$name-$version.tar.gz)
+source=(http://freedesktop.org/software/farstream/releases/farstream/farstream-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd farstream-$version
 
 	./configure \
 		--prefix=/usr \
@@ -21,5 +21,4 @@ build() {
 
 	# gtk-doc is still generated!
 	rm -rf $PKG/usr/share/gtk-doc
-	rmdir $PKG/usr/share || :
 }
