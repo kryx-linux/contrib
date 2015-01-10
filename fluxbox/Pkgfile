@@ -16,6 +16,9 @@ build() {
       --disable-nls \
       --mandir=/usr/man
 
+   # skip NLS stuff
+   sed -i '/nls\/[a-z][a-z]_[A-Z][A-Z]/d' Makefile
+
    make && make DESTDIR=$PKG install
    rm -rf $PKG/usr/doc
 }
