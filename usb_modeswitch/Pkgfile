@@ -5,18 +5,31 @@
 # Nice to have: tclsh
 
 name=usb_modeswitch
-version=1.1.5
-release=2
-source=("http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-$version.tar.bz2"
-      "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-data-20101202.tar.bz2")
+version=2.2.0
+release=1
+source=(http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-$version.tar.bz2
+	http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-data-20140529.tar.bz2)
 
-build () {
-  mkdir -p $PKG/lib/udev/usb_modeswitch 
-  cd usb-modeswitch-$version
-  make DESTDIR=$PKG MANDIR=$PKG/usr/man/man1 all install
+build() {
+	cd usb-modeswitch-$version
 
-  cd ../usb-modeswitch-data-*
-  sed -i 's:RUN+="usb_modeswitch:RUN+="/usr/sbin/usb_modeswitch:g' \
-    40-usb_modeswitch.rules 
-  make DESTDIR=$PKG MANDIR=$PKG/usr/man/man1 install
+	sed -i 's|/usr/sbin/usb_mode|/usr/bin/usb_mode|g' \
+		usb_modeswitch.{conf,tcl,sh}
+
+	make clean
+	make SBINDIR=/usr/bin
+
+	make \
+		DESTDIR=$PKG \
+		UDEVDIR=$PKG/lib/udev \
+		MANDIR=$PKG/usr/man/man1 \
+		install
+
+	cd $SRC/usb-modeswitch-data-*
+
+	make \
+		DESTDIR=$PKG \
+		RULESDIR=$PKG/lib/udev/rules.d \
+		MANDIR=$PKG/usr/man/man1 \
+		install
 }
