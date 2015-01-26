@@ -4,56 +4,38 @@
 # Depends on:	
 
 name=lirc
-version=0.9.0
+version=0.9.2
 release=3
 source=(
 http://download.sourceforge.net/$name/$name-$version.tar.bz2
-kernel-2.6.39.patch
-linux-3.8.patch
-lirc_atiusb-kfifo.patch
-lirc_wpc8769l.patch
-lirc_serial.patch
-lircd-handle-large-config.patch
-lircd
+lircd.rc
+20141211102847-eb44af1-add-euid-to-template.patch
+20141229144508-034dcf8-lirc.pc-variable-order.patch
+20150109124636-35d9b9a-lirc-lsplugins-bugfixes.patch
+20150110013032-39d7085-log-priority-labels.patch
+20150115020157-b7758ca-user-config.patch
+20150123231142-97282f2-help-message.patch
 )
-
-# Possible drivers:	
-#
-# none, any, act200l, animax, atiusb, audio, avermedia, avermedia_vdomate,
-# avermedia98, bestbuy, bestbuy2, breakoutbox, bte, caraca, chronos, comX,
-# creative_infracd, dsp, cph03x, cph06x, creative, devinput, flyvideo,
-# gvbctv5pci, hauppauge, hauppauge_dvb, hercules_smarttv_stereo, irdeo,
-# irdeo_remote, irman, irreal, it87, knc_one, kworld, leadtek_0007,
-# leadtek_0010, livedrive_midi, livedrive_seq, logitech, lptX, mceusb,
-# mediafocusI, mp3anywhere, packard_bell, parallel, pctv, pixelview_bt878,
-# pixelview_pak, pixelview_pro, provideo, realmagic, remotemaster, sa1100,
-# sasem, serial, silitek, sir, slinke, tekram, tekram_bt829, tira, tvbox,
-# udp, uirt2, uirt2_raw
-
-# To select the driver, you can change this:
-LIRC_DRIVER=serial
 
 build() {
 	cd lirc-$version
 
-	patch -p1 -i $SRC/lirc_serial.patch
-	patch -p1 -i $SRC/lirc_wpc8769l.patch
-	patch -p1 -i $SRC/lircd-handle-large-config.patch
-	patch -p1 -i $SRC/lirc_atiusb-kfifo.patch
-	patch -p1 -i $SRC/kernel-2.6.39.patch
-	patch -p1 -i $SRC/linux-3.8.patch
+	# Apply bugfixes waiting for next release
+	for i in $SRC/*.patch; do
+		patch -i $i -p1
+	done
 
 	./configure \
 		--prefix=/usr \
+		--sysconfdir=/etc \
 		--mandir=/usr/man \
-		--with-transmitter \
-		--enable-sandboxed \
-		--with-syslog=LOG_DAEMON \
-		--with-driver=$LIRC_DRIVER
-	make -j 1
+		--localstatedir=/var
+	make
 	make DESTDIR=$PKG install
-	install -D -m 755 $SRC/lircd $PKG/etc/rc.d/lircd
 
-	# Uncomment this line if you want to use the kernel module(s) provided by lirc
-	rm -rf $PKG/lib
+	# init script
+	install -D -m 755 $SRC/lircd.rc $PKG/etc/rc.d/lircd
+
+	# remove cruft
+	rm -rf $PKG/configs $PKG/usr/share $PKG/var $PKG/etc/lirc/lircd.conf.d/README.conf.d $PKG/usr/lib/lirc/plugins/*.la
 }
