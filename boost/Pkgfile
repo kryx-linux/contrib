@@ -2,61 +2,27 @@
 # URL: http://www.boost.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: sten, nick dot steeves at shaw dot ca
-# Depends on: expat icu python
+# Depends on: icu python
 
 name=boost
-version=1.55.0
+version=1.57.0
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.tar.bz2)
 
 build() {
 	cd ${name}_${version//./_}
 
-	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
-		echo "using gcc : : ccache g++ ;" >> \
-			tools/build/v2/user-config.jam
-	fi
+	local JOBS=$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
+	test -n "$JOBS" && export JOBS="-j $JOBS"
 
-	./bootstrap.sh
+	# This command fixes a header to overcome a problem with Qt's moc command.
+	# It is necessary for building some KDE packages
+	sed \
+		-e '1 i#ifndef Q_MOC_RUN' \
+		-e '$ a#endif' \
+		-i boost/type_traits/detail/has_binary_operator.hpp
 
-	sed -i -e "s|-O3|$CXXFLAGS -O3 -Wno-deprecated -fno-strict-aliasing|" \
-		tools/build/v2/tools/gcc.jam
-
-	local JOBS="$(sed -e 's/.*\(-j *[0-9]\+\).*/\1/' <<< $MAKEFLAGS)"
-
-	pushd tools/bcp
-	../../bjam \
-		$JOBS -q -d 2 \
-		debug-symbols=off \
-		--toolset=gcc \
-		-sEXPAT_INCLUDE=/usr/include \
-		-sEXPAT_LIBPATH=/usr/lib \
-		-sHAVE_ICU=1
-
-	install -m 0755 -D ../../bin.v2/tools/bcp/gcc-$(gcc -dumpversion)/release/link-static/bcp \
-		$PKG/usr/bin/bcp
-
-	popd
-
-	./bjam \
-		$JOBS -q -d 2 \
-		release \
-		threading=single,multi \
-		runtime-link=shared \
-		link=shared,static \
-		debug-symbols=off \
-		--toolset=gcc \
-		--layout=tagged \
-		--prefix=$PKG/usr \
-		-sHAVE_ICU=1 \
-		-sEXPAT_INCLUDE=/usr/include \
-		-sEXPAT_LIBPATH=/usr/lib \
-		install
-
-	install -m 0755 bjam $PKG/usr/bin/bjam
-
-	cd libs/python/pyste/install
-	/usr/bin/python setup.py install --root=$PKG
-	mv $PKG/usr/bin/pyste.py $PKG/usr/bin/pyste
-	find $PKG -name '*.egg-info' | xargs rm -rf
+	./bootstrap.sh --prefix=$PKG/usr --with-toolset=gcc --with-icu
+	./b2 stage threading=multi link=shared debug-symbols=off $JOBS
+	./b2 install threading=multi link=shared
 }
