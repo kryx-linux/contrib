@@ -5,13 +5,11 @@
 # Depends on: libxslt cython
 
 name=lxml
-version=2.3.5
+version=3.4.1
 release=1
 source=(http://lxml.de/files/$name-$version.tgz)
 
 build() {
 	cd $name-$version
 	/usr/bin/python setup.py install --root $PKG
-	rm $PKG/usr/lib/python*/site-packages/lxml-*-py2.7.egg-info/*
-	rmdir $PKG/usr/lib/python*/site-packages/*.egg-info
 }
