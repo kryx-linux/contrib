@@ -5,7 +5,7 @@
 
 name=lirc
 version=0.9.2
-release=3
+release=4
 source=(
 http://download.sourceforge.net/$name/$name-$version.tar.bz2
 lircd.rc
@@ -15,6 +15,7 @@ lircd.rc
 20150110013032-39d7085-log-priority-labels.patch
 20150115020157-b7758ca-user-config.patch
 20150123231142-97282f2-help-message.patch
+lirc-0.9.2-noextras.diff
 )
 
 build() {
@@ -24,6 +25,9 @@ build() {
 	for i in $SRC/*.patch; do
 		patch -i $i -p1
 	done
+
+	patch -p1 -i $SRC/lirc-0.9.2-noextras.diff
+	./autogen.sh
 
 	./configure \
 		--prefix=/usr \
