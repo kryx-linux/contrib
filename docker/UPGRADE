@@ -1,0 +1,19 @@
+Upgrade Notes for Docker 1.5.0
+==============================
+
+Docker 1.5.0 introduced several new features.
+
+.. see:: http://docs.docker.com/release-notes/#version-150
+
+As such several new Kernel configuration options
+are **required**:
+
+- ``CONFIG_CGROUP_FREEZER=y``
+- ``CONFIG_CPUSETS=y``
+- ``CONFIG_CGROUP_PERF=y``
+
+Please make sure when you're upgrading your Docker engine
+that you ensure these new Kernel configuration options
+are enabled.
+
+.. seealso:: https://gist.github.com/therealprologic/3aa83f811576933cd214
