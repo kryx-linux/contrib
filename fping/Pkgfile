@@ -6,7 +6,7 @@
 
 name=fping
 version=3.10
-release=3
+release=4
 source=(http://www.fping.org/dist/${name}-${version}.tar.gz)
 
 build () {
@@ -24,6 +24,4 @@ build () {
 
    # Package
    make DESTDIR=$PKG install
-
-   chown -R root:root $PKG
 }

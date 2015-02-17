@@ -6,7 +6,7 @@
 
 name=c-ares
 version=1.10.0
-release=2
+release=3
 source=(http://c-ares.haxx.se/download/$name-$version.tar.gz)
 
 build() {
@@ -22,7 +22,4 @@ build() {
 
     # Package
     make DESTDIR=$PKG install
-
-    # Cleanup
-    chown -R root:root $PKG
 }

@@ -6,7 +6,7 @@
 
 name=lxmenu-data
 version=0.1.2
-release=1
+release=2
 source=(http://downloads.sourceforge.net/lxde/$name-$version.tar.gz)
 
 build() {
@@ -14,5 +14,4 @@ build() {
     ./configure --prefix=/usr --sysconfdir=/etc
     make
     make DESTDIR=$PKG install
-    chown -R root:root $PKG
 }

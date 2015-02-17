@@ -6,7 +6,7 @@
 
 name=cadaver
 version=0.23.3
-release=1
+release=2
 source=(http://www.webdav.org/cadaver/cadaver-$version.tar.gz)
 
 build() {
@@ -20,7 +20,4 @@ build() {
 
     # Package
     make prefix=$PKG/usr install
-
-    # Cleanup
-    chown -R root:root $PKG
 }

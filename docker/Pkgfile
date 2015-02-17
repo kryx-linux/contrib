@@ -7,7 +7,7 @@
 name=docker
 version=1.5.0
 revision=a8a31eff10
-release=3
+release=4
 source=(
     https://raw.githubusercontent.com/docker/docker/v${version}/contrib/check-config.sh
     https://github.com/docker/docker/archive/v$version.tar.gz
@@ -37,6 +37,4 @@ build() {
 
     install -D -m 755 $SRC/$name $PKG/etc/rc.d/$name
     install -D -m 644 $SRC/$name.conf $PKG/etc/$name.conf
-
-    chown -R root:root $PKG
 }

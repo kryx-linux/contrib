@@ -6,7 +6,7 @@
 
 name=pcmanfm
 version=1.1.2
-release=1
+release=2
 source=("http://downloads.sourceforge.net/project/pcmanfm/PCManFM%20%2B%20Libfm%20(tarball%20release)/PCManFM/pcmanfm-$version.tar.gz")
 
 build() {
@@ -15,5 +15,4 @@ build() {
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/share/locale
-    chown -R root:root $PKG
 }

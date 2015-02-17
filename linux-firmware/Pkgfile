@@ -6,7 +6,7 @@
 
 name=linux-firmware
 version=20141009
-release=1
+release=2
 source=(http://shortcircuit.net.au/~prologic/distfiles/$name-$version.tar.xz)
 
 build() {
@@ -17,6 +17,4 @@ build() {
 
     # Cleanup
     rm $PKG/lib/firmware/{Makefile,README,configure,GPL-3}
- 
-    chown -R root:root $PKG
 }

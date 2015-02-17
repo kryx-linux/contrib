@@ -6,11 +6,10 @@
 
 name=virtualenv
 version=1.11.6
-release=1
+release=2
 source=(http://pypi.python.org/packages/source/v/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
     /usr/bin/python setup.py install --root=$PKG
-    chown -R root:root $PKG
 }

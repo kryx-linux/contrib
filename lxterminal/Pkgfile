@@ -6,7 +6,7 @@
 
 name=lxterminal
 version=0.2.0
-release=1
+release=2
 source=(http://downloads.sourceforge.net/lxde/$name-$version.tar.gz)
 
 build() {
@@ -26,6 +26,4 @@ build() {
 
     # Cleanup
     rm -rf $PKG/usr/share/locale
-
-    chown -R root:root $PKG
 }
