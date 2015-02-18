@@ -1,0 +1,26 @@
+# Description: Wrapper to safely torify applications
+# URL: https://gitweb.torproject.org/torsocks.git
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: tor
+
+name=torsocks
+version=2.0.0
+release=1
+source=(http://crux.ster.zone/distfiles/$name/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	./autogen.sh
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--sysconfdir=/etc
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/doc
+}
