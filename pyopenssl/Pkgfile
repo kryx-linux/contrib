@@ -1,16 +1,16 @@
 # Description: Python interface to the OpenSSL library
-# URL: https://launchpad.net/pyopenssl
+# URL: http://pypi.python.org/pypi/pyOpenSSL
 # Maintainer: Mikhail Kolesnik, mike at openbunker dot org
 # Packager: Lucas Hazel, lucas at die dot net dot au
-# Depends on: python
+# Depends on: cryptography
 
 name=pyopenssl
-version=0.11
+version=0.14
 release=1
-source=(http://launchpadlibrarian.net/58498441/pyOpenSSL-$version.tar.gz)
+source=(http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-$version.tar.gz)
 
 build() {
 	cd pyOpenSSL-$version
-	python setup.py install --root=$PKG
-	find $PKG -name '*egg-info' | xargs rm -rf
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --root=$PKG --optimize=1
 }
