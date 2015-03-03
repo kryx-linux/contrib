@@ -2,31 +2,30 @@
 # URL: http://live.gnome.org/Dia/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Younes Hafri, ycrux at club dash internet dot fr
-# Depends on: docbook-xsl gtk intltool libart_lgpl libgcrypt popt xorg-libxdamage
+# Depends on: docbook-xsl gtk intltool libart_lgpl xorg-libxdamage xz
 
 name=dia
-version=0.97.2
-release=2
-source=(ftp://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$version.tar.xz
-	dia-glib-2.32.diff)
+version=0.97.3
+release=1
+source=(ftp://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
-	patch -p 0 -i $SRC/dia-glib-2.32.diff
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-nls \
-		--disable-db2html
+		--with-python \
+		--with-cairo
 
 	make
 	make DESTDIR=$PKG install
+
+	/usr/bin/python -mcompileall $PKG
 
 	rm -r \
 		$PKG/usr/share/locale \
 		$PKG/usr/share/doc \
 		$PKG/usr/share/man
-
-	rmdir $PKG/usr/share/oaf
 }
