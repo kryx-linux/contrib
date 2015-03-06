@@ -1,21 +1,21 @@
 # Description: Perl comma-separated values manipulation routines.
-# URL: http://search.cpan.org/~hmbrand/Text-CSV_XS-0.94/CSV_XS.pm
+# URL: http://search.cpan.org/dist/Text-CSV_XS/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
 
 name=p5-text-csv-xs
-version=1.00
+version=1.16
 release=1
 source=(http://search.cpan.org/CPAN/authors/id/H/HM/HMBRAND/Text-CSV_XS-$version.tgz)
 
 build() {
-   cd Text-CSV_XS-$version
+	cd Text-CSV_XS-$version
 
-   perl Makefile.PL
-   make OPTIMIZE="$CFLAGS"
-   make DESTDIR=$PKG install
+	perl Makefile.PL
+	make OPTIMIZE="$CFLAGS"
+	make DESTDIR=$PKG install
 
-   # Remove perlcrap
+	# Remove perlcrap
 	find $PKG -type f \( \
 		-name '.packlist' -o \
 		-name '*.bs' -o \
