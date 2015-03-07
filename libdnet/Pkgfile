@@ -10,7 +10,12 @@ source=(http://download.sourceforge.net/$name/$name-$version.tar.gz)
 
 build() {
     cd  $name-$version
-    ./configure --prefix=/usr
+
+    # fix FS#1144
+    autoreconf -i -Iconfig
+
+    ./configure --prefix=/usr \
+                --mandir=/usr/man
     make
     make install DESTDIR=$PKG
 }
