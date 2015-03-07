@@ -40,6 +40,11 @@ build() {
   touch $PKG/var/run/named/named.pid
 
   rm -f $PKG/usr/bin/{dig,host}
+
+  # fix FS#1153
+  rm -f $PKG/usr/sbin/dnssec-{checkds,coverage}
+  rm -rf $PKG/usr/man/man8/dnssec-{checkds,coverage}.8
+
   rm -rf $PKG/usr/man/man1
 
   chown named:named $PKG/var/run/named/named.pid 
