@@ -4,7 +4,7 @@
 # Depends on: faac imlib2 lame libsdl libtheora libxvid x264 opencore-amr speex libva
 
 name=ffmpeg-compat
-version=0.10.14
+version=0.10.15
 release=1
 source=(http://ffmpeg.org/releases/ffmpeg-$version.tar.bz2)
 
@@ -43,4 +43,9 @@ build() {
 	make DESTDIR=$PKG install
 
 	rm -r $PKG/usr/{bin,share}
+
+	# jdk /usr/lib/jdk/jre/lib/amd64/libavplugin.so needs these
+	ln -s ffmpeg-compat/libavcodec.so.53 $PKG/usr/lib/libavcodec.so.53
+	ln -s ffmpeg-compat/libavformat.so.53 $PKG/usr/lib/libavformat.so.53
+	ln -s ffmpeg-compat/libavutil.so.51 $PKG/usr/lib/libavutil.so.51
 }
