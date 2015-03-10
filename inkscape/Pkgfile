@@ -2,18 +2,25 @@
 # URL: http://www.inkscape.org
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Huynh Ngoc Chau Tran, tran dot huynh at laposte dot net
-# Depends on: boehm-gc boost gsl gtkmm intltool lcms2 libart_lgpl popt
+# Depends on: boehm-gc boost gsl gtkmm intltool libart_lgpl poppler-glib popt
 
 name=inkscape
 version=0.48.5
-release=1
+release=2
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2
-	ime-placement.patch)
+	ime-placement.patch
+	http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.48.5-gc-1.patch
+	http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.48.5-poppler-1.patch)
 
 build() {
 	cd $name-$version
 
 	patch -p1 -i $SRC/ime-placement.patch
+	patch -p1 -i $SRC/inkscape-0.48.5-gc-1.patch
+	patch -p1 -i $SRC/inkscape-0.48.5-poppler-1.patch
+
+	aclocal
+	automake
 
 	./configure \
 		--prefix=/usr \
