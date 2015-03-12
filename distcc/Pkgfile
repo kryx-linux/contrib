@@ -2,11 +2,11 @@
 # URL: http://distcc.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Johannes Winkelmann, jw at tks6 dot net
-# Depends on: popt python
+# Optional: python
 
 name=distcc
 version=3.1
-release=3
+release=4
 source=(http://distcc.googlecode.com/files/$name-$version.tar.bz2
 	distccd) 
 
@@ -19,7 +19,8 @@ build() {
 		--disable-nls \
 		--without-gnome \
 		--without-gtk \
-		--disable-Werror
+		--disable-Werror \
+		--with-included-popt
 
 	make
 	make DESTDIR=$PKG install
@@ -41,4 +42,9 @@ build() {
 
 	rm -rf $PKG/usr/share/doc $PKG/usr/etc/default $PKG/usr/etc/distcc
 	rmdir $PKG/usr/etc $PKG/usr/share
+
+	# python is required for pump mode
+	if [ "$(prt-get isinst python)" = 'package python is not installed' ]; then
+		rm $PKG/usr/man/man1/{pump,include_server}.1
+	fi
 }
