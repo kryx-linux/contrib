@@ -1,7 +1,7 @@
 # Description: General Purpose video player based on MPlayer and mplayer2
 # URL:         http://mpv.io
 # Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
-# Depends on:  libass ffmpeg docutils python
+# Depends on:  libass ffmpeg docutils waf
 # Nice to have: libquvi libdvdread libdvdnav
 
 name=mpv
@@ -12,8 +12,7 @@ source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 build () {
 	cd $name-$version
 
-	./bootstrap.py
-	./waf configure \
+	waf configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
       		--disable-joystick \
@@ -21,7 +20,7 @@ build () {
       		--disable-cocoa \
       		--disable-coreaudio
 	
-	./waf build
-	./waf install --destdir=$PKG
+	waf build
+	waf install --destdir=$PKG
 	rm -rf $PKG/usr/share/doc
 }
