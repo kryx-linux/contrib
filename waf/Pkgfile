@@ -1,0 +1,16 @@
+# Description: A Python-based framework for configuring, compiling and installing applications.
+# URL: https://ftp.waf.io/pub/release/index.html
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: python
+
+name=waf
+version=1.8.7
+release=1
+source=(https://ftp.waf.io/pub/release/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	./waf-light configure build
+	install -m 0755 -D waf $PKG/usr/bin/waf
+}
