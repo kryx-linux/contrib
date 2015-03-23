@@ -6,13 +6,14 @@
 
 name=mpv
 version=0.8.3
-release=1
+release=2
 source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 
 build () {
 	cd $name-$version
 
-	waf configure \
+	./bootstrap.py
+	./waf configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
       		--disable-joystick \
@@ -20,7 +21,7 @@ build () {
       		--disable-cocoa \
       		--disable-coreaudio
 	
-	waf build
-	waf install --destdir=$PKG
+	./waf build
+	./waf install --destdir=$PKG
 	rm -rf $PKG/usr/share/doc
 }
