@@ -6,7 +6,7 @@
 
 name=zfs
 version=0.6.3
-release=1
+release=2
 source=(http://archive.zfsonlinux.org/downloads/zfsonlinux/$name/$name-$version.tar.gz)
 
 build() {
@@ -26,4 +26,6 @@ build() {
 
     # Package
     make DESTDIR=$PKG install
+
+    mkdir -p $PKG/etc/zfs
 }
