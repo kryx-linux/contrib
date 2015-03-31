@@ -1,0 +1,38 @@
+# Description:  Combined filesystem and logical volume manager from Sun Microsystems/Oracle
+# URL:          http://zfsonlinux.org/
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+
+# Depends on:   spl
+
+name=zfs
+version=HEAD
+release=1
+source=()
+
+build() {
+    if [ ! -d $PKGMK_SOURCE_DIR/${name}.git ]; then
+        git clone https://github.com/zfsonlinux/${name}.git $PKGMK_SOURCE_DIR/${name}.git
+        cp -a $PKGMK_SOURCE_DIR/${name}.git $SRC/$name-$version
+    else
+        cp -a $PKGMK_SOURCE_DIR/${name}.git $SRC/$name-$version
+    fi
+
+    cd $name-$version
+
+    ./autogen.sh
+
+    # Configure
+    ./configure --prefix=/usr \
+        --libexecdir=/usr/lib/$name \
+        --mandir=/usr/man \
+        --with-spl=/usr/include/spl
+
+    # ugly hacks ahoy!
+    find . -name "Makefile" -exec sed -i -e 's,/usr/src/zfs-$(VERSION),/usr/include/zfs,g' '{}' \;
+
+    # Build
+    make
+
+    # Package
+    make DESTDIR=$PKG install
+}
