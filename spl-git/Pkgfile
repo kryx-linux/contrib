@@ -4,18 +4,12 @@
 #
 # Depends on:
 
-name=spl
-version=HEAD
+name=spl-git
+version=fade6b00b6
 release=1
-source=()
+source=(http://shortcircuit.net.au/~prologic/distfiles/${name}-${version}.tar.gz)
 
 build() {
-    if [ ! -d $PKGMK_SOURCE_DIR/${name}.git ]; then
-        git clone https://github.com/zfsonlinux/${name}.git  $PKGMK_SOURCE_DIR/${name}.git
-    else
-        cp -a $PKGMK_SOURCE_DIR/${name}.git $SRC/$name-$version
-    fi
-
     cd $name-$version
 
     ./autogen.sh
