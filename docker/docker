@@ -3,31 +3,27 @@
 # /etc/rc.d/docker: start/stop docker daemon
 #
 
-export PATH="/sbin:/usr/sbin:$PATH"
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/docker
+PIDFILE=/var/run/docker.pid
+LOGFILE=/var/log/docker.log
 
-source /etc/docker.conf
+. /etc/docker.conf
 
 case $1 in
 start)
     # Ensure ownership and permissiong of log file.
-    touch /var/log/docker.log
-    chgrp docker /var/log/docker.log
-    chown 640 /var/log/docker.log
+    touch $LOGFILE
+    chgrp docker $LOGFILE
+    chown 640 $LOGFILE
 
     # Ensure cgroups is properly mounted.
     cgroupfs-mount
 
-    nohup /usr/bin/docker $DOCKER_OPTS > /var/log/docker.log 2>&1 &
+    $SSD --start --background --make-pidfile --pidfile $PIDFILE --exec $PROG -- $OPTS >> $LOGFILE 2>&1
     ;;
 stop)
-    if [ -f /var/run/docker.pid ]; then
-        kill $(< /var/run/docker.pid)
-        rm -f /var/run/docker.pid
-        rm -f /var/run/docker.sock
-    else
-        killall -q /usr/bin/docker
-        rm -f /var/run/docker.sock
-    fi
+    $SSD --stop --retry 10 --pidfile $PIDFILE
 
     # Unmount cgroups is
     cgroupfs-umount
@@ -37,8 +33,20 @@ restart)
     sleep 2
     $0 start
     ;;
+reload)
+    $SSD --stop --pidfile $PIDFILE --signal HUP
+    ;;
+status)
+    $SSD --status --pidfile $PIDFILE
+    case $? in
+	0) echo "$(basename $PROG) is running with pid $(cat $PID)" ;;
+	1) echo "$(basename $PROG) is not running but the pid file $PID exists" ;;
+	3) echo "$(basename $PROG) is not running" ;;
+        4) echo "Unable to determine the program status" ;;
+    esac
+    ;;
 *)
-    echo "usage: $0 [start|stop|restart]"
+    echo "usage: $0 [start|stop|restart|reload|status]"
     ;;
 esac
 
