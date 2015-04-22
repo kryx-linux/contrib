@@ -4,13 +4,17 @@
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org.
 
 name=libebml
-version=1.3.0
+version=1.3.1
 release=1
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version/make/linux
-	[ "$CXX" ] || CXX=g++
-	make CXX="$CXX"
-	make -e prefix=$PKG/usr install
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man
+
+	make
+	make prefix=$PKG/usr install
 }
