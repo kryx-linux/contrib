@@ -6,7 +6,7 @@
 # Nice to have: wxgtk
 
 name=mkvtoolnix
-version=7.5.0
+version=7.8.0
 release=1
 source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.xz)
 
@@ -14,7 +14,7 @@ build() {
 	cd $name-$version
 
 	local JOBS=$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
-	test -n "$JOBS" && export JOBS="-j $JOBS"
+	test -n "$JOBS" && export DRAKETHREADS="$JOBS"
 
 	# Disable automagic curl dep used for online update checking
 	sed -i -e '/curl/d' configure.in
@@ -23,7 +23,7 @@ build() {
 	export CFLAGS="${CFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
 	export CXXFLAGS="${CXXFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
 
-	autoreconf
+	autoreconf -vfi
 
 	./configure \
 		--prefix=/usr \
@@ -31,8 +31,8 @@ build() {
 		--disable-precompiled-headers
 
 	[ "$CXX" ] || CXX=g++
-	./drake $JOBS CXX="$CXX"
-	./drake $JOBS DESTDIR=$PKG install
+	./drake CXX="$CXX"
+	./drake DESTDIR=$PKG install
 
 	rm -r \
 		$PKG/usr/man/{de,uk,ja,nl,zh_CN} \
