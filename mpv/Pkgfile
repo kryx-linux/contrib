@@ -5,8 +5,8 @@
 # Nice to have: libquvi libdvdread libdvdnav
 
 name=mpv
-version=0.8.3
-release=4
+version=0.9.0
+release=1
 source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 
 build () {
@@ -16,10 +16,6 @@ build () {
 	./waf configure \
 		--prefix=/usr \
 		--mandir=/usr/man \
-      		--disable-joystick \
-      		--disable-direct3d \
-      		--disable-cocoa \
-      		--disable-coreaudio
 	
 	./waf build
 	./waf install --destdir=$PKG
