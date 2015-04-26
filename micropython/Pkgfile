@@ -1,0 +1,18 @@
+# Description:  Python3 for microcontrollers, unix version
+# URL:          http://micropython.org/
+# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
+#
+# Depends on:   readline libffi
+
+name=micropython
+version=1.4.2
+release=1
+source=(http://shortcircuit.net.au/~prologic/distfiles/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version/unix
+
+  make
+
+  install -Dm755 micropython "$PKG/usr/bin/micropython"
+}
