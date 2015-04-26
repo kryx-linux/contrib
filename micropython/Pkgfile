@@ -6,7 +6,7 @@
 
 name=micropython
 version=1.4.2
-release=1
+release=2
 source=(http://shortcircuit.net.au/~prologic/distfiles/$name-$version.tar.gz)
 
 build() {
@@ -14,5 +14,6 @@ build() {
 
   make
 
-  install -Dm755 micropython "$PKG/usr/bin/micropython"
+  install -D -m 755 micropython $PKG/usr/bin/micropython
+  install -D -m 755 ../tools/pip-micropython $PKG/usr/bin/pip-micropython
 }
