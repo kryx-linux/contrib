@@ -1,43 +1,44 @@
 # Description: A GUI toolkit for TCL.
-# URL: http://tcl.sourceforge.net/
+# URL: http://www.tcl.tk/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Sven Dahl, dahl at c64 dot org
 # Depends on: xorg-libxft tcl
 
 name=tk
-version=8.5.11
+version=8.6.4
 release=1
 source=(http://downloads.sourceforge.net/project/tcl/Tcl/$version/$name$version-src.tar.gz)
 
 build() {
 	cd $name$version/unix
-	CFLAGS+=' -fPIC' LDFLAGS+=' -fPIC'
-	PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
 		--enable-gcc \
 		--enable-shared \
 		--enable-xft
 
 	make
-	make install MKLINKS_FLAGS="-s" INSTALL_ROOT=$PKG
+	make MKLINKS_FLAGS="-s" INSTALL_ROOT=$PKG install install-private-headers
 
 	cp ../generic/*.h $PKG/usr/include/
 	cp tkUnixPort.h $PKG/usr/include/tkPort.h
 	cp tkUnixDefault.h $PKG/usr/include/tkDefault.h
 	cp tkUnixInt.h $PKG/usr/include/tkInt.h
 
-	sed -i \
-		-e "s|TK_BUILD_STUB_LIB_PATH='.*'|TK_BUILD_STUB_LIB_PATH='/usr/lib/libtkstub8.5.a'|" \
-		-e "s|TK_SRC_DIR='.*'|TK_SRC_DIR='/usr/lib'|" \
-		-e "s|-L$SRC/tk$version/unix|-L/usr/lib|" \
-		$PKG/usr/lib/tkConfig.sh
+	# remove $SRC traces
+	sed \
+		-e "s|$SRC/tk$version/unix|/usr/lib|g" \
+		-e "s|$SRC/tk$version|/usr/include|g" \
+		-i $PKG/usr/lib/tkConfig.sh
 
 	rm -r $PKG/usr/lib/tk${version%.*}/demos
 	rm $PKG/usr/lib/tk${version%.*}/images/README
 
 	ln -s wish${version%.*} $PKG/usr/bin/wish
 	ln -s libtk${version%.*}.so $PKG/usr/lib/libtk.so
-	chmod -c -R u+w $PKG/usr/man
+	ln -s libtkstub${version%.*}.a $PKG/usr/lib/libtkstub.a
+
+	chmod -R u+w $PKG/usr/man
 }
