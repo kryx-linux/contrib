@@ -4,12 +4,14 @@
 # Packager: Danny Rawlins, crux at romster dot me
 
 name=ntfs-3g
-version=2014.2.15
+version=2015.3.14
 release=1
 source=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
 
 build() {
 	cd ntfs-3g_ntfsprogs-$version
+
+	install -d $PKG/lib
 
 	./configure \
 		--prefix=/usr \
