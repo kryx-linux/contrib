@@ -2,10 +2,11 @@
 # URL: http://www.tuxera.com/community/ntfs-3g-download/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
+# Depends on: fuse
 
 name=ntfs-3g
 version=2015.3.14
-release=1
+release=2
 source=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
 
 build() {
@@ -17,7 +18,8 @@ build() {
 		--prefix=/usr \
 		--mandir=/usr/man \
 		--disable-static \
-		--disable-ldconfig
+		--disable-ldconfig \
+		--with-fuse=external
 
 	make
 	make DESTDIR=$PKG install
