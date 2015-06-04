@@ -1,0 +1,16 @@
+# Description: A Python HTML parser/tokenizer based on the WHATWG HTML5 spec.
+# URL: https://github.com/html5lib/html5lib-python
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: six
+
+name=html5lib-python
+version=0.99999
+release=1
+source=(https://github.com/html5lib/html5lib-python/archive/$version.tar.gz)
+
+build() {
+	cd $name-$version
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --prefix=/usr --root=$PKG --optimize=1
+}
