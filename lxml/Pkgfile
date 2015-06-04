@@ -2,14 +2,15 @@
 # URL: http://lxml.de/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: libxslt cython
+# Depends on: beautifulsoup4 cssselect cython html5lib-python libxslt
 
 name=lxml
-version=3.4.1
+version=3.4.4
 release=1
 source=(http://lxml.de/files/$name-$version.tgz)
 
 build() {
 	cd $name-$version
+	/usr/bin/python setup.py build
 	/usr/bin/python setup.py install --root $PKG
 }
