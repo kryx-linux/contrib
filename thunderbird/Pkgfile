@@ -5,7 +5,7 @@
 
 name=thunderbird
 version=31.7.0
-release=1
+release=2
 source=(ftp://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.bz2
     	$name.desktop ${name}_default48.png thunderbird-install-dir.patch)
  
@@ -45,6 +45,7 @@ build() {
         ac_add_options --with-system-png
         ac_add_options --disable-gstreamer
 	ac_add_options --disable-pulseaudio
+	ac_add_options --enable-tree-freetype
 EOF
     make -f client.mk build
     make -f client.mk DESTDIR=$PKG install
