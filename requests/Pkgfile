@@ -5,13 +5,12 @@
 # Depends on: setuptools
 
 name=requests
-version=2.2.1
+version=2.7.0
 release=1
 source=(http://pypi.python.org/packages/source/${name:0:1}/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
 	/usr/bin/python setup.py build
 	/usr/bin/python setup.py install --prefix=/usr --root=$PKG
 }
