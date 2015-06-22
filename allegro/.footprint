@@ -20,47 +20,33 @@ drwxr-xr-x	root/root	usr/include/allegro5/
 -rw-r--r--	root/root	usr/include/allegro5/altime.h
 -rw-r--r--	root/root	usr/include/allegro5/base.h
 -rw-r--r--	root/root	usr/include/allegro5/bitmap.h
+-rw-r--r--	root/root	usr/include/allegro5/bitmap_draw.h
 -rw-r--r--	root/root	usr/include/allegro5/bitmap_io.h
+-rw-r--r--	root/root	usr/include/allegro5/bitmap_lock.h
+-rw-r--r--	root/root	usr/include/allegro5/blender.h
 -rw-r--r--	root/root	usr/include/allegro5/color.h
 -rw-r--r--	root/root	usr/include/allegro5/config.h
 -rw-r--r--	root/root	usr/include/allegro5/debug.h
 -rw-r--r--	root/root	usr/include/allegro5/display.h
+-rw-r--r--	root/root	usr/include/allegro5/drawing.h
 -rw-r--r--	root/root	usr/include/allegro5/error.h
 -rw-r--r--	root/root	usr/include/allegro5/events.h
 -rw-r--r--	root/root	usr/include/allegro5/file.h
 -rw-r--r--	root/root	usr/include/allegro5/fixed.h
 -rw-r--r--	root/root	usr/include/allegro5/fmaths.h
 -rw-r--r--	root/root	usr/include/allegro5/fshook.h
+-rw-r--r--	root/root	usr/include/allegro5/fullscreen_mode.h
 drwxr-xr-x	root/root	usr/include/allegro5/inline/
 -rw-r--r--	root/root	usr/include/allegro5/inline/fmaths.inl
 drwxr-xr-x	root/root	usr/include/allegro5/internal/
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_atomicops.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_bitmap.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_blend.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_convert.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_display.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_dtor.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_events.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_float.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_fshook.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_joystick.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_keyboard.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_list.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_mouse.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_opengl.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_pixels.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_system.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_thread.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_timer.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_tls.h
--rw-r--r--	root/root	usr/include/allegro5/internal/aintern_vector.h
 -rw-r--r--	root/root	usr/include/allegro5/internal/alconfig.h
 -rw-r--r--	root/root	usr/include/allegro5/joystick.h
 -rw-r--r--	root/root	usr/include/allegro5/keyboard.h
 -rw-r--r--	root/root	usr/include/allegro5/keycodes.h
 -rw-r--r--	root/root	usr/include/allegro5/memory.h
+-rw-r--r--	root/root	usr/include/allegro5/monitor.h
 -rw-r--r--	root/root	usr/include/allegro5/mouse.h
+-rw-r--r--	root/root	usr/include/allegro5/mouse_cursor.h
 drwxr-xr-x	root/root	usr/include/allegro5/opengl/
 drwxr-xr-x	root/root	usr/include/allegro5/opengl/GLext/
 -rw-r--r--	root/root	usr/include/allegro5/opengl/GLext/gl_ext_alias.h
@@ -78,16 +64,9 @@ drwxr-xr-x	root/root	usr/include/allegro5/opengl/GLext/
 -rw-r--r--	root/root	usr/include/allegro5/opengl/gl_ext.h
 -rw-r--r--	root/root	usr/include/allegro5/path.h
 drwxr-xr-x	root/root	usr/include/allegro5/platform/
--rw-r--r--	root/root	usr/include/allegro5/platform/aintlnx.h
--rw-r--r--	root/root	usr/include/allegro5/platform/aintosx.h
--rw-r--r--	root/root	usr/include/allegro5/platform/aintunix.h
--rw-r--r--	root/root	usr/include/allegro5/platform/aintuthr.h
--rw-r--r--	root/root	usr/include/allegro5/platform/aintwin.h
--rw-r--r--	root/root	usr/include/allegro5/platform/aintwthr.h
--rw-r--r--	root/root	usr/include/allegro5/platform/al386gcc.h
--rw-r--r--	root/root	usr/include/allegro5/platform/al386vc.h
--rw-r--r--	root/root	usr/include/allegro5/platform/al386wat.h
 -rw-r--r--	root/root	usr/include/allegro5/platform/albcc32.h
+-rw-r--r--	root/root	usr/include/allegro5/platform/aliphone.h
+-rw-r--r--	root/root	usr/include/allegro5/platform/aliphonecfg.h
 -rw-r--r--	root/root	usr/include/allegro5/platform/almngw32.h
 -rw-r--r--	root/root	usr/include/allegro5/platform/almsvc.h
 -rw-r--r--	root/root	usr/include/allegro5/platform/alosx.h
@@ -107,51 +86,63 @@ drwxr-xr-x	root/root	usr/include/allegro5/platform/
 -rw-r--r--	root/root	usr/include/allegro5/utf8.h
 drwxr-xr-x	root/root	usr/lib/
 lrwxrwxrwx	root/root	usr/lib/liballegro.so -> liballegro.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro.so.5.0 -> liballegro.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro.so.5.0 -> liballegro.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_acodec.so -> liballegro_acodec.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_acodec.so.5.0 -> liballegro_acodec.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_acodec.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_acodec.so.5.0 -> liballegro_acodec.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_acodec.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_audio.so -> liballegro_audio.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_audio.so.5.0 -> liballegro_audio.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_audio.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_audio.so.5.0 -> liballegro_audio.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_audio.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_color.so -> liballegro_color.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_color.so.5.0 -> liballegro_color.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_color.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_color.so.5.0 -> liballegro_color.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_color.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_dialog.so -> liballegro_dialog.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_dialog.so.5.0 -> liballegro_dialog.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_dialog.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_dialog.so.5.0 -> liballegro_dialog.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_dialog.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_font.so -> liballegro_font.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_font.so.5.0 -> liballegro_font.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_font.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_font.so.5.0 -> liballegro_font.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_font.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_image.so -> liballegro_image.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_image.so.5.0 -> liballegro_image.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_image.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_image.so.5.0 -> liballegro_image.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_image.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_main.so -> liballegro_main.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_main.so.5.0 -> liballegro_main.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_main.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_main.so.5.0 -> liballegro_main.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_main.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_memfile.so -> liballegro_memfile.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_memfile.so.5.0 -> liballegro_memfile.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_memfile.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_memfile.so.5.0 -> liballegro_memfile.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_memfile.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_physfs.so -> liballegro_physfs.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_physfs.so.5.0 -> liballegro_physfs.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_physfs.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_physfs.so.5.0 -> liballegro_physfs.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_physfs.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_primitives.so -> liballegro_primitives.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_primitives.so.5.0 -> liballegro_primitives.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_primitives.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_primitives.so.5.0 -> liballegro_primitives.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_primitives.so.5.0.11
 lrwxrwxrwx	root/root	usr/lib/liballegro_ttf.so -> liballegro_ttf.so.5.0
-lrwxrwxrwx	root/root	usr/lib/liballegro_ttf.so.5.0 -> liballegro_ttf.so.5.0.8
--rwxr-xr-x	root/root	usr/lib/liballegro_ttf.so.5.0.8
+lrwxrwxrwx	root/root	usr/lib/liballegro_ttf.so.5.0 -> liballegro_ttf.so.5.0.11
+-rwxr-xr-x	root/root	usr/lib/liballegro_ttf.so.5.0.11
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_acodec-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_acodec-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_audio-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_audio-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_color-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_color-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_dialog-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_dialog-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_font-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_font-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_image-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_image-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_main-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_main-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_memfile-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_memfile-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_physfs-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_physfs-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_primitives-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_primitives-5.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/allegro_ttf-5.0.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/allegro_ttf-5.pc
