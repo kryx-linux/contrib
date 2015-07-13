@@ -3,7 +3,9 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/geany
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/geany/
+-rw-r--r--	root/root	usr/include/geany/app.h
 -rw-r--r--	root/root	usr/include/geany/build.h
+-rw-r--r--	root/root	usr/include/geany/dialogs.h
 -rw-r--r--	root/root	usr/include/geany/document.h
 -rw-r--r--	root/root	usr/include/geany/editor.h
 -rw-r--r--	root/root	usr/include/geany/encodings.h
@@ -14,8 +16,11 @@ drwxr-xr-x	root/root	usr/include/geany/
 -rw-r--r--	root/root	usr/include/geany/gtkcompat.h
 -rw-r--r--	root/root	usr/include/geany/highlighting.h
 -rw-r--r--	root/root	usr/include/geany/keybindings.h
+-rw-r--r--	root/root	usr/include/geany/main.h
 -rw-r--r--	root/root	usr/include/geany/msgwindow.h
+-rw-r--r--	root/root	usr/include/geany/navqueue.h
 -rw-r--r--	root/root	usr/include/geany/plugindata.h
+-rw-r--r--	root/root	usr/include/geany/pluginutils.h
 -rw-r--r--	root/root	usr/include/geany/prefs.h
 -rw-r--r--	root/root	usr/include/geany/project.h
 drwxr-xr-x	root/root	usr/include/geany/scintilla/
@@ -23,18 +28,16 @@ drwxr-xr-x	root/root	usr/include/geany/scintilla/
 -rw-r--r--	root/root	usr/include/geany/scintilla/Scintilla.h
 -rw-r--r--	root/root	usr/include/geany/scintilla/Scintilla.iface
 -rw-r--r--	root/root	usr/include/geany/scintilla/ScintillaWidget.h
+-rw-r--r--	root/root	usr/include/geany/sciwrappers.h
 -rw-r--r--	root/root	usr/include/geany/search.h
+-rw-r--r--	root/root	usr/include/geany/spawn.h
 -rw-r--r--	root/root	usr/include/geany/stash.h
 -rw-r--r--	root/root	usr/include/geany/support.h
+-rw-r--r--	root/root	usr/include/geany/symbols.h
 drwxr-xr-x	root/root	usr/include/geany/tagmanager/
--rw-r--r--	root/root	usr/include/geany/tagmanager/tm_file_entry.h
--rw-r--r--	root/root	usr/include/geany/tagmanager/tm_parser.h
--rw-r--r--	root/root	usr/include/geany/tagmanager/tm_project.h
 -rw-r--r--	root/root	usr/include/geany/tagmanager/tm_source_file.h
--rw-r--r--	root/root	usr/include/geany/tagmanager/tm_symbol.h
 -rw-r--r--	root/root	usr/include/geany/tagmanager/tm_tag.h
 -rw-r--r--	root/root	usr/include/geany/tagmanager/tm_tagmanager.h
--rw-r--r--	root/root	usr/include/geany/tagmanager/tm_work_object.h
 -rw-r--r--	root/root	usr/include/geany/tagmanager/tm_workspace.h
 -rw-r--r--	root/root	usr/include/geany/templates.h
 -rw-r--r--	root/root	usr/include/geany/toolbar.h
@@ -54,6 +57,10 @@ drwxr-xr-x	root/root	usr/lib/geany/
 -rwxr-xr-x	root/root	usr/lib/geany/saveactions.so
 -rwxr-xr-x	root/root	usr/lib/geany/splitwindow.la
 -rwxr-xr-x	root/root	usr/lib/geany/splitwindow.so
+-rwxr-xr-x	root/root	usr/lib/libgeany.la
+lrwxrwxrwx	root/root	usr/lib/libgeany.so -> libgeany.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libgeany.so.0 -> libgeany.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgeany.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/geany.pc
 drwxr-xr-x	root/root	usr/man/
@@ -72,8 +79,8 @@ drwxr-xr-x	root/root	usr/share/geany/colorschemes/
 -rw-r--r--	root/root	usr/share/geany/filetypes.Clojure.conf
 -rw-r--r--	root/root	usr/share/geany/filetypes.Cython.conf
 -rw-r--r--	root/root	usr/share/geany/filetypes.Genie.conf
--rw-r--r--	root/root	usr/share/geany/filetypes.Go.conf
 -rw-r--r--	root/root	usr/share/geany/filetypes.Graphviz.conf
+-rw-r--r--	root/root	usr/share/geany/filetypes.JSON.conf
 -rw-r--r--	root/root	usr/share/geany/filetypes.Scala.conf
 -rw-r--r--	root/root	usr/share/geany/filetypes.abaqus
 -rw-r--r--	root/root	usr/share/geany/filetypes.abc
@@ -86,6 +93,7 @@ drwxr-xr-x	root/root	usr/share/geany/colorschemes/
 -rw-r--r--	root/root	usr/share/geany/filetypes.caml
 -rw-r--r--	root/root	usr/share/geany/filetypes.cmake
 -rw-r--r--	root/root	usr/share/geany/filetypes.cobol
+-rw-r--r--	root/root	usr/share/geany/filetypes.coffeescript
 -rw-r--r--	root/root	usr/share/geany/filetypes.common
 -rw-r--r--	root/root	usr/share/geany/filetypes.conf
 -rw-r--r--	root/root	usr/share/geany/filetypes.cpp
@@ -101,6 +109,7 @@ drwxr-xr-x	root/root	usr/share/geany/colorschemes/
 -rw-r--r--	root/root	usr/share/geany/filetypes.fortran
 -rw-r--r--	root/root	usr/share/geany/filetypes.freebasic
 -rw-r--r--	root/root	usr/share/geany/filetypes.glsl
+-rw-r--r--	root/root	usr/share/geany/filetypes.go
 -rw-r--r--	root/root	usr/share/geany/filetypes.haskell
 -rw-r--r--	root/root	usr/share/geany/filetypes.haxe
 -rw-r--r--	root/root	usr/share/geany/filetypes.html
@@ -133,7 +142,7 @@ drwxr-xr-x	root/root	usr/share/geany/colorschemes/
 -rw-r--r--	root/root	usr/share/geany/filetypes.vhdl
 -rw-r--r--	root/root	usr/share/geany/filetypes.xml
 -rw-r--r--	root/root	usr/share/geany/filetypes.yaml
--rw-r--r--	root/root	usr/share/geany/geany.css
+-rw-r--r--	root/root	usr/share/geany/filetypes.zephir
 -rw-r--r--	root/root	usr/share/geany/geany.glade
 -rw-r--r--	root/root	usr/share/geany/geany.gtkrc
 -rw-r--r--	root/root	usr/share/geany/html_entities.tags
@@ -150,6 +159,7 @@ drwxr-xr-x	root/root	usr/share/geany/templates/files/
 -rw-r--r--	root/root	usr/share/geany/templates/files/file.php
 -rw-r--r--	root/root	usr/share/geany/templates/files/file.rb
 -rw-r--r--	root/root	usr/share/geany/templates/files/file.tex
+-rw-r--r--	root/root	usr/share/geany/templates/files/file_html5.html
 -rw-r--r--	root/root	usr/share/geany/templates/files/main.c
 -rw-r--r--	root/root	usr/share/geany/templates/files/main.cxx
 -rw-r--r--	root/root	usr/share/geany/templates/files/main.d
@@ -204,6 +214,8 @@ drwxr-xr-x	root/root	usr/share/icons/hicolor/32x32/actions/
 -rw-r--r--	root/root	usr/share/icons/hicolor/32x32/actions/geany-build.png
 -rw-r--r--	root/root	usr/share/icons/hicolor/32x32/actions/geany-close-all.png
 -rw-r--r--	root/root	usr/share/icons/hicolor/32x32/actions/geany-save-all.png
+drwxr-xr-x	root/root	usr/share/icons/hicolor/32x32/apps/
+-rw-r--r--	root/root	usr/share/icons/hicolor/32x32/apps/geany.png
 drwxr-xr-x	root/root	usr/share/icons/hicolor/48x48/
 drwxr-xr-x	root/root	usr/share/icons/hicolor/48x48/actions/
 -rw-r--r--	root/root	usr/share/icons/hicolor/48x48/actions/geany-build.png
