@@ -10,7 +10,7 @@ drwxr-xr-x	root/root	etc/rc.d/
 drwxr-xr-x	root/root	lib/
 drwxr-xr-x	root/root	lib/udev/
 drwxr-xr-x	root/root	lib/udev/rules.d/
--rw-r--r--	root/root	lib/udev/rules.d/77-nm-olpc-mesh.rules
+-rw-r--r--	root/root	lib/udev/rules.d/85-nm-unmanaged.rules
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/nm-online
@@ -91,19 +91,83 @@ drwxr-xr-x	root/root	usr/include/libnm-glib/
 -rw-r--r--	root/root	usr/include/libnm-glib/nm-vpn-plugin-utils.h
 -rw-r--r--	root/root	usr/include/libnm-glib/nm-vpn-plugin.h
 -rw-r--r--	root/root	usr/include/libnm-glib/nm-wimax-nsp.h
+drwxr-xr-x	root/root	usr/include/libnm/
+-rw-r--r--	root/root	usr/include/libnm/NetworkManager.h
+-rw-r--r--	root/root	usr/include/libnm/nm-access-point.h
+-rw-r--r--	root/root	usr/include/libnm/nm-active-connection.h
+-rw-r--r--	root/root	usr/include/libnm/nm-client.h
+-rw-r--r--	root/root	usr/include/libnm/nm-connection.h
+-rw-r--r--	root/root	usr/include/libnm/nm-core-enum-types.h
+-rw-r--r--	root/root	usr/include/libnm/nm-core-types.h
+-rw-r--r--	root/root	usr/include/libnm/nm-dbus-interface.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-adsl.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-bond.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-bridge.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-bt.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-ethernet.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-generic.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-infiniband.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-modem.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-olpc-mesh.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-team.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-vlan.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-wifi.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device-wimax.h
+-rw-r--r--	root/root	usr/include/libnm/nm-device.h
+-rw-r--r--	root/root	usr/include/libnm/nm-dhcp-config.h
+-rw-r--r--	root/root	usr/include/libnm/nm-enum-types.h
+-rw-r--r--	root/root	usr/include/libnm/nm-errors.h
+-rw-r--r--	root/root	usr/include/libnm/nm-ip-config.h
+-rw-r--r--	root/root	usr/include/libnm/nm-object.h
+-rw-r--r--	root/root	usr/include/libnm/nm-remote-connection.h
+-rw-r--r--	root/root	usr/include/libnm/nm-secret-agent-old.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-8021x.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-adsl.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-bluetooth.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-bond.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-bridge-port.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-bridge.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-cdma.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-connection.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-dcb.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-generic.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-gsm.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-infiniband.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-ip-config.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-ip4-config.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-ip6-config.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-olpc-mesh.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-ppp.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-pppoe.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-serial.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-team-port.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-team.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-vlan.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-vpn.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-wimax.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-wired.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-wireless-security.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting-wireless.h
+-rw-r--r--	root/root	usr/include/libnm/nm-setting.h
+-rw-r--r--	root/root	usr/include/libnm/nm-simple-connection.h
+-rw-r--r--	root/root	usr/include/libnm/nm-types.h
+-rw-r--r--	root/root	usr/include/libnm/nm-utils.h
+-rw-r--r--	root/root	usr/include/libnm/nm-version.h
+-rw-r--r--	root/root	usr/include/libnm/nm-vpn-connection.h
+-rw-r--r--	root/root	usr/include/libnm/nm-vpn-dbus-interface.h
+-rw-r--r--	root/root	usr/include/libnm/nm-vpn-editor-plugin.h
+-rw-r--r--	root/root	usr/include/libnm/nm-vpn-plugin-old.h
+-rw-r--r--	root/root	usr/include/libnm/nm-wimax-nsp.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/NetworkManager/
 -rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-adsl.la
 -rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-adsl.so
--rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-bluetooth.la
--rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-bluetooth.so
 -rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-wifi.la
 -rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-wifi.so
--rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-wwan.la
--rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-device-plugin-wwan.so
--rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-wwan.la
--rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-wwan.so
+-rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-settings-plugin-ibft.la
+-rwxr-xr-x	root/root	usr/lib/NetworkManager/libnm-settings-plugin-ibft.so
 drwxr-xr-x	root/root	usr/lib/girepository-1.0/
+-rw-r--r--	root/root	usr/lib/girepository-1.0/NM-1.0.typelib
 -rw-r--r--	root/root	usr/lib/girepository-1.0/NMClient-1.0.typelib
 -rw-r--r--	root/root	usr/lib/girepository-1.0/NetworkManager-1.0.typelib
 -rwxr-xr-x	root/root	usr/lib/libnm-glib-vpn.la
@@ -111,22 +175,28 @@ lrwxrwxrwx	root/root	usr/lib/libnm-glib-vpn.so -> libnm-glib-vpn.so.1.2.0
 lrwxrwxrwx	root/root	usr/lib/libnm-glib-vpn.so.1 -> libnm-glib-vpn.so.1.2.0
 -rwxr-xr-x	root/root	usr/lib/libnm-glib-vpn.so.1.2.0
 -rwxr-xr-x	root/root	usr/lib/libnm-glib.la
-lrwxrwxrwx	root/root	usr/lib/libnm-glib.so -> libnm-glib.so.4.8.0
-lrwxrwxrwx	root/root	usr/lib/libnm-glib.so.4 -> libnm-glib.so.4.8.0
--rwxr-xr-x	root/root	usr/lib/libnm-glib.so.4.8.0
+lrwxrwxrwx	root/root	usr/lib/libnm-glib.so -> libnm-glib.so.4.9.0
+lrwxrwxrwx	root/root	usr/lib/libnm-glib.so.4 -> libnm-glib.so.4.9.0
+-rwxr-xr-x	root/root	usr/lib/libnm-glib.so.4.9.0
 -rwxr-xr-x	root/root	usr/lib/libnm-util.la
-lrwxrwxrwx	root/root	usr/lib/libnm-util.so -> libnm-util.so.2.6.0
-lrwxrwxrwx	root/root	usr/lib/libnm-util.so.2 -> libnm-util.so.2.6.0
--rwxr-xr-x	root/root	usr/lib/libnm-util.so.2.6.0
+lrwxrwxrwx	root/root	usr/lib/libnm-util.so -> libnm-util.so.2.7.0
+lrwxrwxrwx	root/root	usr/lib/libnm-util.so.2 -> libnm-util.so.2.7.0
+-rwxr-xr-x	root/root	usr/lib/libnm-util.so.2.7.0
+-rwxr-xr-x	root/root	usr/lib/libnm.la
+lrwxrwxrwx	root/root	usr/lib/libnm.so -> libnm.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libnm.so.0 -> libnm.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libnm.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/networkmanager/
 -rwxr-xr-x	root/root	usr/lib/networkmanager/nm-avahi-autoipd.action
 -rwxr-xr-x	root/root	usr/lib/networkmanager/nm-dhcp-helper
 -rwxr-xr-x	root/root	usr/lib/networkmanager/nm-dispatcher
+-rwxr-xr-x	root/root	usr/lib/networkmanager/nm-iface-helper
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/NetworkManager.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libnm-glib-vpn.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libnm-glib.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libnm-util.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/libnm.pc
 drwxr-xr-x	root/root	usr/lib/pppd/
 drwxr-xr-x	root/root	usr/lib/pppd/2.4.5/
 -rwxr-xr-x	root/root	usr/lib/pppd/2.4.5/nm-pppd-plugin.la
@@ -135,8 +205,14 @@ drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/nm-online.1.gz
 -rw-r--r--	root/root	usr/man/man1/nmcli.1.gz
+-rw-r--r--	root/root	usr/man/man1/nmtui-connect.1
+-rw-r--r--	root/root	usr/man/man1/nmtui-edit.1
+-rw-r--r--	root/root	usr/man/man1/nmtui-hostname.1
+-rw-r--r--	root/root	usr/man/man1/nmtui.1
 drwxr-xr-x	root/root	usr/man/man5/
 -rw-r--r--	root/root	usr/man/man5/NetworkManager.conf.5.gz
+-rw-r--r--	root/root	usr/man/man5/nm-settings-ifcfg-rh.5.gz
+-rw-r--r--	root/root	usr/man/man5/nm-settings-keyfile.5.gz
 -rw-r--r--	root/root	usr/man/man5/nm-settings.5.gz
 -rw-r--r--	root/root	usr/man/man5/nm-system-settings.conf.5.gz
 drwxr-xr-x	root/root	usr/man/man8/
@@ -148,6 +224,7 @@ drwxr-xr-x	root/root	usr/share/dbus-1/
 drwxr-xr-x	root/root	usr/share/dbus-1/system-services/
 -rw-r--r--	root/root	usr/share/dbus-1/system-services/org.freedesktop.nm_dispatcher.service
 drwxr-xr-x	root/root	usr/share/gir-1.0/
+-rw-r--r--	root/root	usr/share/gir-1.0/NM-1.0.gir
 -rw-r--r--	root/root	usr/share/gir-1.0/NMClient-1.0.gir
 -rw-r--r--	root/root	usr/share/gir-1.0/NetworkManager-1.0.gir
 drwxr-xr-x	root/root	usr/share/polkit-1/

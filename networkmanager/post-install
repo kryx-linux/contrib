@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This script creates sample default system-connections files
 # in /etc/NetworkManager/system-connections/ based on your current
@@ -18,8 +18,10 @@ name="${name:-Wireless connection for $ssid}"
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 umask 077
 
+shopt -s nullglob
+
 # Generate config for each device
-for sysdir in /sys/class/net/eth* /sys/class/net/wlan*; do
+for sysdir in /sys/class/net/enp* /sys/class/net/eth* /sys/class/net/wlp* /sys/class/net/wlan*; do
 	iface=${sysdir##*/}
 	cfg=/etc/NetworkManager/system-connections/$iface
 	if [ -f $cfg ]; then
@@ -31,7 +33,7 @@ for sysdir in /sys/class/net/eth* /sys/class/net/wlan*; do
 	uuid=$(uuidgen)
 	timestamp=$(date +%s)
 	case $iface in
-	eth*)
+	eth*|enp*)
 		cat > $cfg << EOF
 [connection]
 name=Wired connection $iface
@@ -48,7 +50,7 @@ mac-address=$macaddr
 method=auto
 EOF
 		;;
-	wlan*)
+	wlan*|wlp*)
 		# Convert ssid to an array of bytes
 		ssid_bytes=$(perl -e 'print "$_;" foreach unpack("C*", $ARGV[0])' $ssid)
 		cat > $cfg << EOF
