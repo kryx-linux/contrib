@@ -5,12 +5,11 @@
 # Nice to have: python-pycurl, python-simplejson
 
 name=tornadoweb
-version=4.0.2
+version=4.2.1
 release=1
 source=(https://pypi.python.org/packages/source/t/tornado/tornado-${version}.tar.gz)
 
 build () {
    cd tornado-$version
    /usr/bin/python setup.py install --root=$PKG
-   rm $PKG/usr/lib/python2.7/site-packages/tornado/test/README
 }
