@@ -48,15 +48,8 @@ build() {
 	mkdir -p $PKG/var/{lib,run,log}/snmp
 	touch $PKG/var/log/snmp/snmpd.log
 
-	# Can not decide whether to install this dummy files to allow correct
-	# cleanup on package removal or not. (snmpd creates them)
-	#touch $PKG/var/lib/snmpd.conf
-	#touch $PKG/usr/share/snmp/mibs/.index
-
 	chown -R daemon:daemon $PKG/var/{lib,run,log}/snmp
 
-	# Seems to be an overkill, install a very basic config instead
-	#install -D -m 644 EXAMPLE.conf $PKG/etc/snmp/snmpd.conf.sample
 	install -D -m 644 $SRC/snmpd.conf $PKG/etc/snmp/snmpd.conf
 	install -D -m 755 $SRC/snmpd $PKG/etc/rc.d/snmpd
 }
