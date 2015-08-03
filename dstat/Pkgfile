@@ -5,12 +5,11 @@
 
 name=dstat
 version=0.7.2
-release=1
+release=2
 source=(http://dag.wieers.com/home-made/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	sed -i s'|mandir = $(datadir)/man|mandir = $(prefix)/man|' Makefile
 	make
 	make DESTDIR=$PKG install
 }
