@@ -1,11 +1,10 @@
 # Description: SNMP daemon and client tools
 # URL: http://net-snmp.sourceforge.net/
-# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Packager: Oleksiy V. Khilkevich, centericq at ukr dot net
+# Maintainer: Fredrik Rinnestam, fredrik at rinnestam dot se
 # Depends on: perl lm_sensors
 
 name=net-snmp
-version=5.7.2
+version=5.7.3
 release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz \
 		snmpd snmpd.conf)
@@ -21,7 +20,6 @@ build() {
 				--with-perl-modules \
 				--without-rpm \
 				--with-openssl \
-				--with-libwrap \
 				--with-zlib \
 				--with-mib-modules="ucd-snmp/lmsensorsMib smux agentx ucd-snmp/diskio" \
 				--with-sys-location="Unknown" \
