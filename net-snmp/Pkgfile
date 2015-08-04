@@ -5,7 +5,7 @@
 
 name=net-snmp
 version=5.7.3
-release=1
+release=2
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz \
 		snmpd snmpd.conf)
 
@@ -48,7 +48,7 @@ build() {
 	mkdir -p $PKG/var/{lib,run,log}/snmp
 	touch $PKG/var/log/snmp/snmpd.log
 
-	chown -R daemon:daemon $PKG/var/{lib,run,log}/snmp
+	chown -R snmp:snmp $PKG/var/{lib,run,log}/snmp
 
 	install -D -m 644 $SRC/snmpd.conf $PKG/etc/snmp/snmpd.conf
 	install -D -m 755 $SRC/snmpd $PKG/etc/rc.d/snmpd
