@@ -1,24 +1,35 @@
 # Description:	PBX Software implementation
 # URL:		http://www.asterisk.org
 # Maintainer:   Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	openssl ncurses
+# Depends on:	openssl ncurses jansson
+# Optional:	dahdi pjsip opus
 
 name=asterisk
-version=1.8.31.0
-release=4
+version=13.4.0
+release=3
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
+https://github.com/seanbright/asterisk-opus/archive/bb2925fc4eaad5b30b93eece851297de5c12e06c.tar.gz
 asterisk.rc
-build-disable-astcannary.patch
-build-disable-sounds-en-gsm.patch
-build-disable-sounds-moh.patch
 build-enable-aelparse.patch
+build-disable-astcanary.patch
 build-enable-cdr-mysql.patch
 build-enable-ilbc.patch
+build-disable-moh-wav.patch
+build-enable-opus-vp8.patch
+build-disable-sounds-en-gsm.patch
 )
 
 build () {
 	cd asterisk-$version
+
+	# patch to add Opus transcoding and VP8 passthrough
+	# https://github.com/seanbright/asterisk-opus
+	if [ -f /usr/include/opus/opus.h ]; then
+		cp $SRC/asterisk-opus-*/codecs/* codecs/
+		cp $SRC/asterisk-opus-*/formats/* formats/
+		./bootstrap.sh
+	fi
 
 	./configure \
 		--prefix=/usr \
@@ -31,23 +42,29 @@ build () {
 	# Generate a menuselect-tree file
 	make menuselect-tree
 
-	# Remove astcannary
-	patch -p1 -i $SRC/build-disable-astcannary.patch
-
-	# Remove english gsm core sounds (sounds are in separate ports)
-	patch -p1 -i $SRC/build-disable-sounds-en-gsm.patch
-
-	# Remove music on hold files
-	patch -p1 -i $SRC/build-disable-sounds-moh.patch
+	# Enable Opus and VP8
+	if [ -f /usr/include/opus/opus.h ]; then
+		patch -p1 -i $SRC/asterisk-opus-*/asterisk.patch
+		patch -p1 -i $SRC/build-enable-opus-vp8.patch
+	fi
 
 	# Add aelparse utility
 	patch -p1 -i $SRC/build-enable-aelparse.patch
 
-	# Add support for ILBC
+	# Remove astcanary
+	patch -p1 -i $SRC/build-disable-astcanary.patch
+
+	# Add cdr_mysql
+	patch -p1 -i $SRC/build-enable-cdr-mysql.patch
+
+	# Add iLBC
 	patch -p1 -i $SRC/build-enable-ilbc.patch
 
-	# Add support for MySQL CDRs
-	patch -p1 -i $SRC/build-enable-cdr-mysql.patch
+	# Remove music on hold files
+	patch -p1 -i $SRC/build-disable-moh-wav.patch
+
+	# Remove english gsm core sounds (sounds are available in separate port)
+	patch -p1 -i $SRC/build-disable-sounds-en-gsm.patch
 
 	make # NOISY_BUILD=yes
 	make DESTDIR=$PKG install
@@ -60,7 +77,7 @@ build () {
 
 	# Install default config files
 	install -d -m 750 -o root -g asterisk $PKG/etc/asterisk $PKG/etc/asterisk/default
-	for i in configs/*.sample; do
+	for i in configs/samples/*.sample; do
 		install -m 640 -o root -g asterisk $i $PKG/etc/asterisk/default/$(basename $i .sample)
 	done
 
@@ -68,9 +85,22 @@ build () {
 	rm -rf $PKG/var/lib/asterisk/sounds/*
 
 	# Remove documentation dir
-	rm -rf $PKG/var/lib/asterisk/documentation
+	# rm -rf $PKG/var/lib/asterisk/documentation
 
 	# Fix permissions
 	chown -R asterisk:asterisk $PKG/var/{lib,log,run,spool}/asterisk
+
+        # Add syslog-ng configuration file if /etc/syslog-ng.d exists
+	if [ -d /etc/syslog-ng.d ]; then
+		mkdir -p -m 755 $PKG/etc/syslog-ng.d
+		sed 's|\\t|\t|g' <<-EOF >$PKG/etc/syslog-ng.d/$name.conf
+		destination dst_$name { dst_default(prefix("$name")); };
+		log {
+		\tsource(src_default);
+		\tfilter { program('$name' type(string)); };
+		\tdestination(dst_$name);
+		};
+		EOF
+	fi
 
 }
