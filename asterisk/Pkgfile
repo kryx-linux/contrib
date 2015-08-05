@@ -6,7 +6,7 @@
 
 name=asterisk
 version=13.4.0
-release=3
+release=4
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
 https://github.com/seanbright/asterisk-opus/archive/bb2925fc4eaad5b30b93eece851297de5c12e06c.tar.gz
@@ -89,18 +89,5 @@ build () {
 
 	# Fix permissions
 	chown -R asterisk:asterisk $PKG/var/{lib,log,run,spool}/asterisk
-
-        # Add syslog-ng configuration file if /etc/syslog-ng.d exists
-	if [ -d /etc/syslog-ng.d ]; then
-		mkdir -p -m 755 $PKG/etc/syslog-ng.d
-		sed 's|\\t|\t|g' <<-EOF >$PKG/etc/syslog-ng.d/$name.conf
-		destination dst_$name { dst_default(prefix("$name")); };
-		log {
-		\tsource(src_default);
-		\tfilter { program('$name' type(string)); };
-		\tdestination(dst_$name);
-		};
-		EOF
-	fi
 
 }
