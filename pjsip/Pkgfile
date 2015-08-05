@@ -1,0 +1,42 @@
+# Description:	Multimedia communication library
+# URL:		http://www.pjsip.org/
+# Packager:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	libsrtp
+
+name=pjsip
+version=2.4
+release=1
+source=(http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2)
+
+# Related ports:
+# pjsua: just the user-agent
+# pjsip: just what asterisk needs for res_pjsip.so and friends
+# pjproject: libraries and user-agents with everything
+
+build() {
+	cd pjproject-$version
+
+	export CFLAGS="$CFLAGS -DNDEBUG"
+
+	./configure \
+		--enable-shared \
+		--prefix=/usr \
+		--disable-gsm-codec \
+		--with-external-srtp \
+		--disable-g7221-codec \
+		--disable-ilbc-codec \
+		--disable-libyuv \
+		--disable-opencore-amr \
+		--disable-resample \
+		--disable-sound \
+		--disable-speex-codec \
+		--disable-speex-aec \
+		--disable-video
+
+	make dep
+	make
+	make DESTDIR=$PKG install
+
+	# remove static libs
+	rm -f $PKG/usr/lib/*.a
+}
