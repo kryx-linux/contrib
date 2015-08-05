@@ -5,7 +5,7 @@
 
 name=pjsua
 version=2.4
-release=2
+release=3
 
 source=(
 http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2
@@ -26,6 +26,7 @@ build() {
 	# pjsua will be dynamically linked as long as pjproject is installed beforehand.
 	# otherwise it will be statically linked.
 	./configure \
+		--enable-shared"$([ -f /usr/lib/libpjsua.so ] || echo =no)" \
 		--prefix=/usr \
 		--with-external-pa \
 		--with-external-gsm \
