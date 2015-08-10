@@ -1,0 +1,54 @@
+# Description:	Multimedia communication library
+# URL:		http://www.pjsip.org/
+# Packager:	Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on:	portaudio speex libsrtp gsm ffmpeg libsdl2 libsamplerate
+
+name=pjproject
+version=2.4
+release=2
+
+source=(
+http://www.pjsip.org/release/$version/$name-$version.tar.bz2
+pjmedia-libsamplerate.patch
+config_site.h
+)
+
+# Related ports:
+# pjsua: Standalone user-agent.
+# pjsip: The minimum that asterisk needs for res_pjsip.so and friends. Dynamic libraries.
+# pjproject: Libraries with most things enabled. Static and dynamic libraries.
+
+build() {
+	cd pjproject-$version
+
+	export CFLAGS="$CFLAGS -DNDEBUG"
+
+	# dynamically linked against libpj*
+	./configure \
+		--enable-shared \
+		--prefix=/usr \
+		--with-external-pa \
+		--with-external-gsm \
+		--with-external-speex \
+		--with-external-srtp \
+		--with-sdl=/usr \
+		--disable-openh264 \
+		--enable-libsamplerate \
+		--disable-resample_dll
+
+	cp $SRC/config_site.h pjlib/include/pj/config_site.h
+
+	# use system's libsamplerate
+	patch -p1 -i $SRC/pjmedia-libsamplerate.patch
+
+	make dep
+	make
+	make DESTDIR=$PKG install
+
+	# install pjsua too (this is now in a separate port)
+	# mkdir -p $PKG/usr/bin
+	# cp pjsip-apps/bin/pjsua-* $PKG/usr/bin/pjsua
+
+	# remove static libs
+	# rm -f $PKG/usr/lib/*.a
+}

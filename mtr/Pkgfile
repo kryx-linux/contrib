@@ -1,19 +1,23 @@
-# Description: Matt's traceroute - network diagnostic tool
+# Description: Matt's traceroute - network diagnostic tool.
 # URL: http://www.bitwizard.nl/mtr/
-# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Depends on:
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Mikhail Kolesnik, mike at openbunker dot org
+# Depends on: ncurses
 
 name=mtr
-version=0.82
+version=0.86
 release=1
 source=(ftp://ftp.bitwizard.nl/mtr/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	./configure --prefix=/usr \
-				--mandir=/usr/man \
-				--sbindir=/usr/bin \
-				--without-gtk
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/man \
+		--sbindir=/usr/bin \
+		--without-gtk
+
 	make
 	make DESTDIR=$PKG install
 }

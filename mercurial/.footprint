@@ -13,6 +13,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/hgext/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/blackbox.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/bugzilla.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/bugzilla.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/censor.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/censor.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/children.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/children.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/churn.py
@@ -135,7 +137,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/Zeroconf.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/__init__.pyc
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial-3.3.2-py2.7.egg-info
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial-3.5-py2.7.egg-info
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/__init__.py (EMPTY)
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/__init__.pyc
@@ -173,6 +175,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/context.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/copies.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/copies.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/crecord.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/crecord.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/dagparser.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/dagparser.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/dagutil.py
@@ -233,6 +237,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/help/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/phases.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/revisions.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/revsets.txt
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/scripting.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/subrepos.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/templates.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/urls.txt
@@ -274,8 +279,6 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/httpclient/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/httppeer.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/i18n.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/i18n.pyc
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/ignore.py
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/ignore.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/keepalive.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/keepalive.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/localrepo.py
@@ -319,6 +322,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/httpclient/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/phases.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/posix.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/posix.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/progress.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/progress.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pushkey.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pushkey.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pvec.py
@@ -411,11 +416,15 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/templates/gitweb/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/gitweb/shortlog.tmpl
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/gitweb/summary.tmpl
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/gitweb/tags.tmpl
+drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/templates/json/
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/json/changelist.tmpl
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/json/map
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/map-cmdline.bisect
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/map-cmdline.changelog
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/map-cmdline.compact
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/map-cmdline.default
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/map-cmdline.phases
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/map-cmdline.status
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/map-cmdline.xml
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/templates/monoblue/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/templates/monoblue/bookmarks.tmpl
