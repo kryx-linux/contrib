@@ -4,11 +4,11 @@
 # Depends on: 
 
 name=nmon
-version=15b
+version=15g
 release=1
 source=(http://download.sourceforge.net/nmon/lmon${version}.c)
 
 build() {
   install -d -m 755 $PKG/usr/bin
-  cc -lncurses -DJFS -DLARGEMEM -DX86 -o $PKG/usr/bin/nmon lmon${version}.c
+  cc -lncurses -lm -DJFS -DLARGEMEM -DX86 -o $PKG/usr/bin/nmon lmon${version}.c
 }
