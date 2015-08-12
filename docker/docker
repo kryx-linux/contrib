@@ -20,7 +20,7 @@ start)
     # Ensure cgroups is properly mounted.
     cgroupfs-mount
 
-    $SSD --start --background --make-pidfile --pidfile $PIDFILE --exec $PROG -- $OPTS >> $LOGFILE 2>&1
+    $SSD --start --background --make-pidfile --pidfile $PIDFILE --exec $PROG -- daemon $OPTS >> $LOGFILE 2>&1
     ;;
 stop)
     $SSD --stop --retry 10 --pidfile $PIDFILE
