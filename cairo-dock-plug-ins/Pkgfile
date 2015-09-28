@@ -1,0 +1,22 @@
+# Description: Plugins for Cairo-Dock
+# URL: http://glx-dock.org/
+# Maintainer: Jose V Beneyto, sepen at crux dot nu
+# Packager: Jose V Beneyto, sepen at crux dot nu
+# Depends on: cairo-dock libxklavier libexif lm_sensors pulseaudio python upower
+# Nice to have: webkitgtk vte-gtk3 
+
+name=cairo-dock-plug-ins
+version=3.4.1
+release=1
+source=(https://github.com/Cairo-Dock/$name/archive/$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr
+
+  make
+  make DESTDIR=$PKG install
+
+  rm -rf $PKG/usr/share/locale
+}
