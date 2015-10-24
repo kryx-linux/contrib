@@ -1,6 +1,6 @@
 # Description: GNU GRUB2 (EFI version)
 # URL: http://www.gnu.org/software/grub/
-# Maintainer: Matt Housh, jaeger at morpheus dot net
+# Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: grub2
 
 name=grub2-efi
@@ -13,9 +13,6 @@ build() {
 
     # fix for glibc 'gets' removal
     sed -i -e '/gets is a/d' grub-$version/grub-core/gnulib/stdio.in.h
-
-    # fix for ftsynth.h path
-    sed -i -e 's|freetype/ftsynth.h|freetype2/ftsynth.h|' grub-$version/util/grub-mkfont.c
 
     MODLIST="boot chain configfile fat ext2 linux normal ntfs part_gpt part_msdos"
 
