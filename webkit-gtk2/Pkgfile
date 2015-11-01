@@ -5,15 +5,12 @@
 # Depends on: enchant gst-plugins-base gtk harfbuzz-icu libsoup glu ruby gperf libwebp libsecret shared-mime-info xorg-libxt
 
 name=webkit-gtk2
-version=2.4.8
-release=2
-source=(http://webkitgtk.org/releases/webkitgtk-$version.tar.xz
-	webkitgtk-2.4.8-gmutexlocker.patch)
+version=2.4.9
+release=1
+source=(http://webkitgtk.org/releases/webkitgtk-$version.tar.xz)
 
 build() {
 	cd webkitgtk-$version
-
-	patch -p1 -i $SRC/webkitgtk-2.4.8-gmutexlocker.patch
 
 	install -d build
 	cd build
