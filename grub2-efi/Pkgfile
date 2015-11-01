@@ -5,7 +5,7 @@
 
 name=grub2-efi
 version=2.00
-release=3
+release=4
 source=(http://ftp.gnu.org/gnu/grub/grub-$version.tar.xz)
 
 build() {
@@ -13,9 +13,6 @@ build() {
 
     # fix for glibc 'gets' removal
     sed -i -e '/gets is a/d' grub-$version/grub-core/gnulib/stdio.in.h
-
-    # fix for ftsynth.h path
-    sed -i -e 's|freetype/ftsynth.h|freetype2/ftsynth.h|' grub-$version/util/grub-mkfont.c
 
     MODLIST="boot chain configfile fat ext2 linux normal ntfs part_gpt part_msdos"
 
