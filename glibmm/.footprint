@@ -80,6 +80,7 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/mount.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/mountoperation.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/networkaddress.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/networkmonitor.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/networkservice.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/notification.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/outputstream.h
@@ -162,6 +163,7 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/mount_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/mountoperation_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/networkaddress_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/networkmonitor_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/networkservice_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/notification_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/outputstream_p.h
@@ -176,8 +178,12 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/resource_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/seekable_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/settings_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/settingsschema_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/settingsschemakey_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/settingsschemasource_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/simpleaction_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/simpleactiongroup_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/simpleiostream_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/simplepermission_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socket_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketaddress_p.h
@@ -190,6 +196,7 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/socketservice_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/srvtarget_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/tcpconnection_p.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/tcpwrapperconnection_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/themedicon_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/threadedsocketservice_p.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/private/tlscertificate_p.h
@@ -218,8 +225,12 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/resource.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/seekable.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/settings.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/settingsschema.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/settingsschemakey.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/settingsschemasource.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/simpleaction.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/simpleactiongroup.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/simpleiostream.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/simplepermission.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socket.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketaddress.h
@@ -233,6 +244,7 @@ drwxr-xr-x	root/root	usr/include/giomm-2.4/giomm/private/
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/socketsource.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/srvtarget.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/tcpconnection.h
+-rw-r--r--	root/root	usr/include/giomm-2.4/giomm/tcpwrapperconnection.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/themedicon.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/threadedsocketservice.h
 -rw-r--r--	root/root	usr/include/giomm-2.4/giomm/tlscertificate.h
@@ -260,6 +272,7 @@ drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/arrayhandle.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/balancedtree.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/base64.h
+-rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/binding.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/bytearray.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/bytes.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/checksum.h
@@ -297,6 +310,7 @@ drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/priorities.h
 drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/private/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/balancedtree_p.h
+-rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/binding_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/bytearray_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/bytes_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/checksum_p.h
@@ -308,6 +322,7 @@ drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/private/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/iochannel_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/keyfile_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/markup_p.h
+-rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/miscutils_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/module_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/nodetree_p.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/private/object_p.h
@@ -362,6 +377,7 @@ drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm/private/
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/variantiter.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/varianttype.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/vectorutils.h
+-rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/weakref.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/wrap.h
 -rw-r--r--	root/root	usr/include/glibmm-2.4/glibmm/wrap_init.h
 drwxr-xr-x	root/root	usr/include/glibmm-2.4/glibmm_generate_extra_defs/
@@ -401,7 +417,6 @@ drwxr-xr-x	root/root	usr/lib/glibmm-2.4/proc/m4/
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/m4/initialize_gio.m4
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/m4/initialize_glib.m4
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/m4/initialize_glibmm.m4
--rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/m4/list.m4
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/m4/member.m4
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/m4/method.m4
 -rw-r--r--	root/root	usr/lib/glibmm-2.4/proc/m4/property.m4
