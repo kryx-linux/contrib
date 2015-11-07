@@ -1,20 +1,21 @@
 # Description: Implements the XSL standard, performing XSLT transformations using the libxslt library
-# URL: http://www.php.net
-# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Depends on: libxslt
+# URL:         http://www.php.net
+# Maintainer:  Juergen Daubert, jue at crux dot nu
+# Packager:    Mikhail Kolesnik, mike at openbunker dot org
+# Depends on:  libxslt
 
 name=php-xsl
-version=5.5.6
+version=5.6.15
 release=1
-source=(http://www.php.net/distributions/php-$version.tar.bz2)
+source=(http://www.php.net/distributions/php-$version.tar.xz)
 
 build() {
 	cd php-$version
 
 	./configure --disable-all \
-				--enable-libxml \
-				--enable-dom \
-				--with-xsl=shared,/usr
+		--enable-libxml \
+		--enable-dom \
+		--with-xsl=shared,/usr
 	make build-modules
 
 	install -d $PKG/{etc/php/conf.d,usr/lib/php/extensions}
