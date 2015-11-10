@@ -13,6 +13,6 @@ build () {
     sed -i '19d' config.mk
     make DESTDIR=$PKG \
         PREFIX=/usr \
-        MANPREFIX=/usr/man \
+        MANPREFIX=/usr/share/man \
         install
 }
