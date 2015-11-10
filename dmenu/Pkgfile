@@ -4,17 +4,13 @@
 # Depends on:  xorg-libxinerama xorg-libxft xorg-libxrender freetype fontconfig
 
 name=dmenu
-version=4.5
-release=2
-source=(
-    http://dl.suckless.org/tools/$name-$version.tar.gz
-    http://tools.suckless.org/dmenu/patches/dmenu-4.5-xft.diff
-)
+version=4.6
+release=1
+source=(http://dl.suckless.org/tools/$name-$version.tar.gz)
 
 build () {
     cd "$name-$version"
-    patch -p1 -i../dmenu-4.5-xft.diff
-    make XFTINC=-I/usr/include/freetype2
+    sed -i '19d' config.mk
     make DESTDIR=$PKG \
         PREFIX=/usr \
         MANPREFIX=/usr/man \
