@@ -1,65 +1,38 @@
-# Description: Ultra fast HTTP and mail proxy server
-# URL: http://nginx.net/
-# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Depends on: perl libpcre openssl
+# Description: An HTTP and reverse proxy server
+# URL: http://nginx.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: libpcre zlib openssl
 
 name=nginx
-version=1.8.0
+version=1.9.7
 release=1
-source=(http://nginx.org/download/$name-$version.tar.gz
-	$name.conf
-	$name)
+source=(http://nginx.org/download/$name-$version.tar.gz \
+    $name.conf $name.rc)
 
 build() {
-	cd $name-$version
+    cd $name-$version
+    ./configure --prefix=/etc/$name \
+        --sbin-path=/usr/sbin/$name \
+        --conf-path=/etc/$name/$name.conf \
+        --error-log-path=/var/log/$name/error.log \
+        --http-log-path=/var/log/$name/access.log \
+        --pid-path=/var/run/$name.pid \
+        --lock-path=/var/lock/$name.pid \
+        --with-http_ssl_module \
+        --with-pcre \
+        --user=$name \
+        --group=$name
+    make
+    make DESTDIR=$PKG install
 
-	./configure \
-		--prefix=/etc/$name \
-		--sbin-path=/usr/bin/$name \
-		--conf-path=/etc/$name/$name.conf \
-		--pid-path=/var/run/$name.pid \
-		--lock-path=/var/lock/$name.lock \
-		--http-client-body-temp-path=/var/spool/$name/client_body_temp \
-		--http-proxy-temp-path=/var/spool/$name/proxy_temp \
-		--http-fastcgi-temp-path=/var/spool/$name/fastcgi_temp \
-		--http-uwsgi-temp-path=/var/spool/$name/uwscgi_temp \
-		--http-scgi-temp-path=/var/spool/$name/scgi_temp \
-		--error-log-path=/var/log/$name \
-		--http-log-path=/var/log/$name/access.log \
-		--error-log-path=/var/log/$name/error.log \
-		--user=$name \
-		--group=$name \
-		--with-pcre \
-		--with-zlib-asm=pentiumpro \
-		--with-http_gzip_static_module \
-		--with-http_ssl_module \
-		--with-http_realip_module \
-		--with-http_addition_module \
-		--with-http_sub_module \
-		--with-http_flv_module \
-		--with-http_stub_status_module \
-		--with-http_perl_module
+    install -d -m 0755 $PKG/var/log/$name
+    install -D -m 0644 -o root -g root $SRC/$name.conf \
+        $PKG/etc/$name/$name.conf
 
-	make
-	make DESTDIR=$PKG install
-	
-	install -d -m 0700 -o $name \
-		$PKG/var/spool/$name/{client_body_temp,fastcgi_temp} \
-		$PKG/var/spool/$name/{uwscgi_temp,scgi_temp,proxy_temp}
-	
-	touch $PKG/var/log/$name/access.log
-	touch $PKG/var/log/$name/error.log
-	
-	install -m 0644 $SRC/$name.conf $PKG/etc/$name/$name.conf
-	install -m 0755 -D $SRC/$name $PKG/etc/rc.d/$name
-	
-	rm -f $PKG/etc/$name/*.default
+    install -D -m 0755 -o root -g root $SRC/$name.rc \
+        $PKG/etc/rc.d/$name
 
-	find $PKG -type f \( \
-		-name '.packlist' -o \
-		-name '*.bs' -o \
-		-name 'autosplit.ix' -o \
-		-name 'perllocal.pod' \) -delete
-	
-	find $PKG/usr/lib/perl5 -depth -type d -empty -delete
+    find $PKG/etc/$name -name "*.default" -delete
+
+    chown $name:$name $PKG/var/log/$name
 }

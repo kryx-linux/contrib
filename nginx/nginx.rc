@@ -1,22 +1,31 @@
 #
-# /etc/rc.d/nginx: start, stop or retart nginx server
+# /etc/rc.d/nginx: start, stop or restart nginx server
 #
 
 case $1 in
     start)
-	if [ -s /var/run/nginx.pid -a ! -z "`pgrep nginx`" ]
-	then
-	    echo "nginx is already running"
-	    exit 1
-	fi
-	/usr/sbin/nginx
-	;;
+		PID="`pidof nginx`"
+        if [ -s /var/run/nginx.pid -a -n "$PID" ]; then
+            echo "nginx is already running"
+            exit 1
+        fi
+        /usr/sbin/nginx
+        ;;
     stop)
-	/usr/sbin/nginx -s quit
-	;;
+        /usr/sbin/nginx -s quit
+        ;;
+    restart)
+        $0 stop; sleep 1; $0 start
+		;;
+	status)
+		PID="`pidof nginx`"
+		if [ -s /var/run/nginx.pid -a -n "$PID" ]; then
+			echo "nginx is running. PID(s) = $PID"
+		else
+			echo "nginx is not running."
+		fi
+		;;
     *)
-	echo "usage: nginx [start|stop]"
-	;;
+        echo "usage: nginx [start|stop|restart]"
+        ;;
 esac
-
-# End of file

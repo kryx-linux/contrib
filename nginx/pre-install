@@ -1,11 +1,10 @@
 #!/bin/sh
 
-ADD_USER=nginx
-ADD_USER_HOME=/etc/nginx
-ADD_USER_SHELL=/bin/false
-ADD_GROUP=nginx
+if [ -z `getent group nginx` ]; then
+	groupadd --system nginx
+fi
 
-set -x -u -e
-
-/usr/sbin/groupadd --system --force $ADD_GROUP
-/usr/sbin/useradd --system --home $ADD_USER_HOME --shell $ADD_USER_SHELL --gid $ADD_GROUP $ADD_USER
+if [ -z `getent passwd nginx` ]; then
+	useradd -r -g nginx -d /etc/nginx -s /bin/false -c "nginx server" nginx
+	passwd -l nginx
+fi
