@@ -2,15 +2,15 @@
 # URL: http://www.midori-browser.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: aria2 desktop-file-utils gst-libav gst-plugins-good libnotify librsvg libzeitgeist ninja webkit-gtk2 xorg-libxscrnsaver gcr
+# Depends on: aria2 cmake desktop-file-utils gcr libnotify librsvg ninja webkit-gtk2 xorg-libxscrnsaver
 
 name=midori
-version=0.5.10
+version=0.5.11
 release=1
 source=(http://midori-browser.org/downloads/${name}_${version}_all_.tar.bz2)
 
 build() {
-	#cd $name-$version
+	cd $name-$version
 
 	install -d build
 	cd build
@@ -18,6 +18,8 @@ build() {
 	cmake .. \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DUSE_ZEITGEIST=OFF \
 		-G Ninja
 
 	ninja
