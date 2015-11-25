@@ -1,11 +1,11 @@
 # Description: A GPL virus scanner
 # URL: http://www.clamav.net/
-# Maintainer: Matt Housh, jaeger at morpheus dot net
+# Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: zlib, bzip2, libgmp, curl
 
 name=clamav
 version=0.98.7
-release=1
+release=2
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz \
 	clamd.conf freshclam.conf clamd freshclam)
 
@@ -13,7 +13,6 @@ build() {
 	cd $name-$version
 	./configure --prefix=/usr \
 		--sysconfdir=/etc \
-		--mandir=/usr/man \
 		--enable-id-check \
 		--with-libcurl \
 		--with-tcpwrappers
