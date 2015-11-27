@@ -5,15 +5,16 @@
 # Depends on: ncurses openssl zlib
 
 name=lynx
-version=2.8.7
-release=5
-source=(http://lynx.isc.org/lynx$version/lynx$version.tar.bz2)
+version=2.8.8-p2
+release=1
+source=(http://invisible-mirror.net/archives/lynx/tarballs/lynx2.8.8rel.2.tar.bz2)
 
 build() {
-	cd lynx${version//./-}
+	cd lynx2-8-8
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/man \
 		--disable-nls \
 		--enable-color-style \
 		--enable-ipv6 \
