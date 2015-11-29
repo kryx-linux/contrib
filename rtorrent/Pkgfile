@@ -4,14 +4,19 @@
 # Depends on:  libtorrent libsigc++
 
 name=rtorrent
-version=0.9.4
+version=0.9.6
 release=1
-source=(http://libtorrent.rakshasa.no/downloads/rtorrent-$version.tar.gz)
+source=(https://github.com/rakshasa/rtorrent/archive/${version}.tar.gz)
 
 build() {
   cd $name-$version
+
+  # remove cppunit dependency
+  sed -i '/AM_PATH_CPPUNIT(.*)/d' configure.ac
+  ./autogen.sh
+
   ./configure --prefix=/usr --mandir=/usr/man --enable-debug=no
   make
   make install DESTDIR=$PKG
-  #install -m 644 -D doc/rtorrent.1 $PKG/usr/man/man1/rtorrent.1
+  install -m 644 -D doc/old/rtorrent.1 $PKG/usr/share/man/man1/rtorrent.1
 }
