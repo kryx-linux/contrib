@@ -1,26 +1,38 @@
-#! /bin/sh
+#!/bin/sh
 #
-# /etc/rc.d/arpon: start/stop/restart/reload the arpon daemon
+# /etc/rc.d/arpon: start/stop arpon daemon
 #
-
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/arpon
+PID=/var/run/arpon.pid
+OPTS="-gqD 1>>/var/log/arpon.log"
 
 case $1 in
 start)
-  /usr/sbin/arpon -ysdg -f /var/log/arpon.log 1>>/var/log/arpon.log
-  ;;
+        $SSD --start --pidfile $PID --exec $PROG -- $OPTS
+        ;;
 stop)
-  TEST=`pidof /usr/sbin/arpon`
-  if [ "$TEST" != "" ] ; then
-    kill -TERM $TEST
-  fi
-  ;;
+        $SSD --stop --remove-pidfile --retry 10 --pidfile $PID
+        ;;
 restart)
-  $0 stop
-  $0 start
-  ;;
+        $0 stop
+        $0 start
+        ;;
+reload)
+        $SSD --stop --signal HUP --pidfile $PID
+        ;;
+status)
+        $SSD --status --pidfile $PID
+        case $? in
+        0) echo "$PROG is running" ;;
+        1) echo "$PROG is not running but the pid file $PID exists" ;;
+        3) echo "$PROG is not running" ;;
+        4) echo "Unable to determine the program status" ;;
+        esac
+        ;;
 *)
-  echo "Usage: $0 [start|stop|restart]"
-  exit 1
-  ;;
+        echo "usage: $0 [start|stop|restart|reload|status]"
+        ;;
 esac
 
+# End of file

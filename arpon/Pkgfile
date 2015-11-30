@@ -4,7 +4,7 @@
 # Depends on:  libdnet
 
 name=arpon
-version=2.7
+version=2.7.2
 release=1
 source=(http://download.sourceforge.net/$name/ArpON-$version.tar.gz \
         arpon)
@@ -12,9 +12,11 @@ source=(http://download.sourceforge.net/$name/ArpON-$version.tar.gz \
 build() {
     install arpon -D $PKG/etc/rc.d/arpon
     cd  ArpON-$version
-    gcc -g -Wall -Werror  -lpthread -lpcap -ldnet -lnet -L/usr/lib\
-        -I/usr/include -DLINUX -o arpon src/arpon.c /usr/lib/libpcap.a\
-        /usr/lib/libnet.a /usr/lib/libdnet.a
-    install -D arpon $PKG/usr/sbin/arpon
-    install -D man8/arpon.8 $PKG/usr/man/man8/arpon.8
+
+    mkdir build
+    cd build
+    cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+    make
+    make DESTDIR=$PKG install
+
 }
