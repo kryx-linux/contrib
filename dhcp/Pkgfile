@@ -17,7 +17,7 @@ build() {
               --mandir=/usr/man \
               --disable-dhcpv6 \
               --sysconfdir=/etc
-  make
+  make -j1
   make DESTDIR=$PKG install
   install -D ../dhcpd $PKG/etc/rc.d/dhcpd
   install -D ../dhclient $PKG/etc/rc.d/dhclient
