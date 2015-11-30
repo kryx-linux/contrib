@@ -16,8 +16,7 @@ build() {
   ./configure \
       --prefix=/usr \
       --mandir=/usr/man \
-      --sysconfdir=/etc \
-      --enable-upnp
+      --sysconfdir=/etc
 
   make
   make DESTDIR=$PKG install
