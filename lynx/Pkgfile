@@ -14,13 +14,11 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-nls \
 		--enable-color-style \
 		--enable-ipv6 \
 		--with-ssl=/usr/lib \
-		--with-zlib \
-		--with-screen=ncursesw
+		--with-zlib
 
 	make
 	make -j 1 DESTDIR=$PKG install
