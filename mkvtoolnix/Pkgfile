@@ -6,39 +6,32 @@
 # Nice to have: wxgtk
 
 name=mkvtoolnix
-version=7.8.0
-release=2
-source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.xz
-	boost-1.58.patch)
+version=8.6.1
+release=1
+source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/boost-1.58.patch
-
 	local JOBS=$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
 	test -n "$JOBS" && export DRAKETHREADS="$JOBS"
 
-	# Disable automagic curl dep used for online update checking
-	sed -i -e '/curl/d' configure.in
-	export CURL_CFLAGS="" CURL_LIBS=""
+#	export CFLAGS="${CFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
+#	export CXXFLAGS="${CXXFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
 
-	export CFLAGS="${CFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
-	export CXXFLAGS="${CXXFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
-
-	autoreconf -vfi
+#	autoreconf -vfi
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
-		--disable-precompiled-headers
+		--disable-precompiled-headers \
+		--without-curl
 
 	[ "$CXX" ] || CXX=g++
 	./drake CXX="$CXX"
 	./drake DESTDIR=$PKG install
 
 	rm -r \
-		$PKG/usr/man/{de,uk,ja,nl,zh_CN} \
+		$PKG/usr/share/man/{ca,de,es,uk,ja,nl,zh_CN} \
 		$PKG/usr/share/locale
 
 	# remove doc's if wxgtk is installed
