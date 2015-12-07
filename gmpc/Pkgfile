@@ -2,16 +2,16 @@
 # URL:         http://sarine.nl/gmpc
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Mark Rosenstand, mark at borkware dot net
-# Depends on:  libglade, libmpd, gob, libsoup, vala, intltool
+# Depends on:  libglade, libmpd, gob, libsoup, vala, intltool, libunique
 
 name=gmpc
-version=0.20.0
+version=11.8.16
 release=1
 source=(http://download.sarine.nl/Programs/$name/$version/$name-$version.tar.gz)
 
 build() {
   cd gmpc-$version
-  ./configure --prefix=/usr --mandir=/usr/man
+  ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
   rm -r $PKG/usr/share/locale
