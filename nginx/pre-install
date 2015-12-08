@@ -1,10 +1,10 @@
 #!/bin/sh
 
 if [ -z `getent group nginx` ]; then
-	groupadd --system nginx
+	/usr/sbin/groupadd --system nginx
 fi
 
 if [ -z `getent passwd nginx` ]; then
-	useradd -r -g nginx -d /etc/nginx -s /bin/false -c "nginx server" nginx
-	passwd -l nginx
+	/usr/sbin/useradd -r -g nginx -d /etc/nginx -s /bin/false -c "nginx server" nginx
+	/usr/bin/passwd -l nginx
 fi
