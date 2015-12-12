@@ -2,20 +2,22 @@
 # URL: http://www.stack.nl/~dimitri/doxygen/
 # Maintainer: Jose V Beneyto, sepen at crux dot nu
 # Packager: Hannes Mayer, kontakt at ecarux dot de
-# Depends on:
+# Depends on: cmake python
 
 name=doxygen 
-version=1.8.8
-release=1 
-source=(ftp://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz)
+version=1.8.10
+release=1
+source=(ftp://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz \
+	flex-2.6.0-compat.patch)
 
 build() {
   cd $name-$version
 
-  ./configure --prefix /usr \
-              --platform 'linux-64' \
-              --english-only
+  patch -p1 -i $SRC/flex-2.6.0-compat.patch
+  cmake . -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr
 
   make CXXFLAGS="$CXXFLAGS"
   make DESTDIR=$PKG install
+
+  install -D -m 0755 doc/$name.1 $PKG/usr/share/man/man1/$name.1
 }
