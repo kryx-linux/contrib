@@ -5,7 +5,7 @@
 
 name=st
 version=0.5
-release=2
+release=3
 source=(http://dl.suckless.org/st/$name-$version.tar.gz config.h)
 
 build () {
@@ -15,7 +15,8 @@ build () {
     mkdir -p $PKG/usr/share/terminfo
     make DESTDIR=$PKG \
 	PREFIX=/usr \
-        MANPREFIX=/usr/man \
+        MANPREFIX=/usr/share/man \
 	TERMINFO=$PKG/usr/share/terminfo \
         install
+	rm $PKG/usr/share/terminfo/s/{st,st-256color}
 }
