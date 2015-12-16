@@ -5,7 +5,7 @@
 # Optional:	kdelibs
 
 name=smplayer
-version=15.9.0
+version=15.11.0
 release=1
 source=(http://prdownloads.sf.net/$name/$name-$version.tar.bz2)
 
@@ -15,9 +15,6 @@ build() {
 
 	# Remove most debug messages
 	find src -type f -name '*.cpp' -print0 | xargs -0 sed -i -e 's|qDebug(.*);|{}|g'
-
-	# Change man path
-	sed -i -e 's|/share/man/|/man/|g' Makefile
 
 	# Check if kdelibs is installed, since its not detected automatically
 	[ -x /usr/bin/kde4-config ] && kde=KDE_SUPPORT=1
