@@ -5,17 +5,13 @@
 # Depends on: xz
 
 name=xdelta3
-version=3.0.7
+version=3.0.10
 release=1
-source=(http://xdelta.googlecode.com/files/$name-$version.tar.gz)
+source=(https://github.com/jmacd/xdelta-devel/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
-
+	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 }
