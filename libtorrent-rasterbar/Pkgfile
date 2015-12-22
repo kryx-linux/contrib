@@ -1,16 +1,18 @@
-# Description: A C++ bittorrent library designed to run on anything from embedded systems to large scale seed servers.
+# Description: A C++ bittorrent library.
 # URL: https://sourceforge.net/projects/libtorrent/
 # Packager: Danny Rawlins, crux at romster dot me
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: boost
 
 name=libtorrent-rasterbar
-version=1.0.5
+version=1.0.7
 release=1
-source=(https://downloads.sourceforge.net/project/libtorrent/libtorrent/$name-$version.tar.gz)
+source=(https://github.com/arvidn/libtorrent/releases/download/libtorrent-${version//./_}/$name-$version.tar.gz)
+
 build() {
 	cd $name-$version
 
+	CONFIG_SHELL=/bin/bash \
 	./configure \
 		--prefix=/usr \
 		--enable-python-binding
