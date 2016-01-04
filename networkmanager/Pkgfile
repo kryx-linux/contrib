@@ -5,7 +5,7 @@
 # Optional:	ppp
 
 name=networkmanager
-version=1.0.4
+version=1.0.10
 release=1
 source=(
 http://ftp.gnome.org/pub/gnome/sources/NetworkManager/${version%.*}/NetworkManager-${version}.tar.xz
@@ -21,7 +21,6 @@ build() {
 		--sysconfdir=/etc \
 		--libexecdir=/usr/lib/networkmanager \
 		--localstatedir=/var \
-		--mandir=/usr/man \
 		--disable-nls \
 		--disable-static \
 		--enable-polkit \
@@ -57,5 +56,5 @@ build() {
 	install -D -m 755 -o root -g root $SRC/$name.rc $PKG/etc/rc.d/$name
 
 	# Remove rundir
-	rm -rf $PKG/var/run $PKG/usr/share/doc $PKG/usr/man/man5/nmcli-examples.5
+	rm -rf $PKG/var/run $PKG/usr/share/doc $PKG/usr/share/man/man5/nmcli-examples.5
 }
