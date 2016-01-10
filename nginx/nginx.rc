@@ -1,31 +1,41 @@
+#!/bin/sh
 #
-# /etc/rc.d/nginx: start, stop or restart nginx server
+# /etc/rc.d/nginx: start/stop the nginx daemon
 #
 
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/nginx
+PID=/var/run/nginx.pid
+
 case $1 in
-    start)
-		PID="`pidof nginx`"
-        if [ -s /var/run/nginx.pid -a -n "$PID" ]; then
-            echo "nginx is already running"
-            exit 1
-        fi
-        /usr/sbin/nginx
+    "start")
+        $SSD --start --pidfile $PID --exec $PROG
         ;;
-    stop)
-        /usr/sbin/nginx -s quit
+    "stop")
+        $SSD --stop --retry 10 --pidfile $PID
         ;;
-    restart)
-        $0 stop; sleep 1; $0 start
-		;;
-	status)
-		PID="`pidof nginx`"
-		if [ -s /var/run/nginx.pid -a -n "$PID" ]; then
-			echo "nginx is running. PID(s) = $PID"
-		else
-			echo "nginx is not running."
-		fi
-		;;
+    "restart")
+        $0 stop
+        $0 start
+        ;;
+    "status")
+        $SSD --status --pidfile $PID
+        case $? in
+            0)
+                echo "$PROG is running with pid $(cat $PID)"
+                ;;
+            1)
+                echo "$PROG is not running but pid file $PID exists"
+                ;;
+            3)
+                echo "$PROG is not running"
+                ;;
+            4)
+                echo "Unable to determine program status"
+                ;;
+        esac
+        ;;
     *)
-        echo "usage: nginx [start|stop|restart]"
+        echo "Usage: $0 [start|stop|restart|status]"
         ;;
 esac
