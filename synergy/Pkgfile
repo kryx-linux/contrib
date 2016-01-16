@@ -4,19 +4,21 @@
 # Depends on:  xorg-libxrender xorg-libxdmcp xorg-libxcb
 
 name=synergy
-version=1.5.1
+version=1.7.5
 release=1
-source=(http://ftp.uni-erlangen.de/pub/mirrors/gentoo/distfiles/synergy-$version-r2398-Source.tar.gz)
+source=(http://ftp.uni-erlangen.de/pub/mirrors/gentoo/distfiles/synergy-${version}.tar.gz)
 
 build() {
-  cd $name-$version-Source
+  cd $name-${version}-stable
 
   ./hm.sh conf -g1
   ./hm.sh build
 
-  install -D -m 755 doc/synergyc.man $PKG/usr/man/man1/synergyc.man  
-  install -D -m 755 doc/synergys.man $PKG/usr/man/man1/synergys.man  
+  install -D -m 755 doc/synergyc.man $PKG/usr/share/man/man1/synergyc.man  
+  install -D -m 755 doc/synergys.man $PKG/usr/share/man/man1/synergys.man  
   install -d -m 755 $PKG/usr/bin
+
+  rm -r bin/plugins
   install -D -m 755 bin/* $PKG/usr/bin
   rm $PKG/usr/bin/*tests
 
