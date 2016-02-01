@@ -3,26 +3,37 @@
 # /etc/rc.d/monitd: start/stop monit daemon
 #
 
-CONFIG=/etc/monitrc
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/monit
+PID=/var/run/monit.pid
+OPTS="-c /etc/monitrc -p $PID"
 
 case $1 in
-  start)
-    /usr/bin/monit -c $CONFIG
-    ;;
-  stop)
-    /usr/bin/killall -q /usr/bin/monit
-    ;;
-  reload)
-    /usr/bin/monit -c $CONFIG reload
-    ;;
-  restart)
-    $0 stop
-    sleep 1
-    $0 start
-    ;;
-  *)
-    echo "usage: $0 [start|stop|reload|restart]"
-    ;;
+start)
+	$SSD --start --pidfile $PID --exec $PROG -- $OPTS
+	;;
+stop)
+	$SSD --stop --retry 10 --pidfile $PID
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+reload)
+	$PROG $OPTS reload
+	;;
+status)
+	$SSD --status --pidfile $PID
+	case $? in
+	0) echo "$PROG is running with pid $(cat $PID)" ;;
+	1) echo "$PROG is not running but the pid file $PID exists" ;;
+	3) echo "$PROG is not running" ;;
+	4) echo "Unable to determine the program status" ;;
+	esac
+	;;
+*)
+	echo "usage: $0 [start|stop|restart|reload|status]"
+	;;
 esac
 
-# End of File
+# End of file

@@ -5,7 +5,7 @@
 # Depends on: openssl 
 
 name=monit
-version=5.13
+version=5.15
 release=1
 source=(http://mmonit.com/$name/dist/$name-$version.tar.gz \
         monitd)
@@ -14,7 +14,6 @@ build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --mandir=/usr/man \
               --sysconfdir=/etc \
               --without-pam
 
