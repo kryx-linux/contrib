@@ -5,7 +5,7 @@
 # Depends on: cmake python
 
 name=doxygen 
-version=1.8.10
+version=1.8.11
 release=1
 source=(ftp://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz \
 	flex-2.6.0-compat.patch)
@@ -13,7 +13,6 @@ source=(ftp://ftp.stack.nl/pub/users/dimitri/$name-$version.src.tar.gz \
 build() {
   cd $name-$version
 
-  patch -p1 -i $SRC/flex-2.6.0-compat.patch
   cmake . -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr
 
   make CXXFLAGS="$CXXFLAGS"
