@@ -1,12 +1,10 @@
 # Description: A collection of XSL stylesheets that are useful for performing transformations on XML DocBook files. 
 # URL: http://docbook.sourceforge.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: libxslt
-
-## http://www.linuxfromscratch.org/blfs/view/svn/pst/docbook-xsl.html
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: libxslt docbook-xml
 
 name=docbook-xsl
-version=1.78.1
+version=1.79.1
 release=1
 source=(http://downloads.sourceforge.net/project/docbook/$name/$version/$name-$version.tar.bz2)
 
@@ -22,7 +20,7 @@ build() {
 		xhtml xhtml-1_1 \
 		$PKG/usr/share/xml/docbook/xsl-stylesheets-$version
 
-	ln -s VERSION $PKG/usr/share/xml/docbook/xsl-stylesheets-1.78.1/VERSION.xsl
+	ln -s VERSION $PKG/usr/share/xml/docbook/xsl-stylesheets-${version}/VERSION.xsl
 
 	ln -sf xsl-stylesheets-$version $PKG/usr/share/xml/docbook/xsl-stylesheets
 
@@ -31,7 +29,4 @@ build() {
 
 	install -v -m 0755 RELEASE-NOTES* NEWS* \
 		$PKG/usr/share/doc/docbook-xsl-$version
-
-	# documentation
-	#cp -v -R doc/* $PKG/usr/share/doc/docbook-xsl-$version
 }
