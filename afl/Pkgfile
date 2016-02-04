@@ -1,0 +1,20 @@
+# Description: security-oriented fuzzer with compile-time instrumentation
+# URL:         http://lcamtuf.coredump.cx/afl/releases/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Depends on:   
+
+name=afl
+version=1.96b
+release=1
+source=(http://lcamtuf.coredump.cx/afl/releases/$name-$version.tgz)
+
+build() {
+  cd $name-$version
+
+  make
+  make PREFIX=/usr DESTDIR=$PKG install
+
+  rm -r $PKG/usr/share/doc
+  rm $PKG/usr/share/afl/testcases/README.testcases
+
+}
