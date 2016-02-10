@@ -15,6 +15,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/hgext/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/bugzilla.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/censor.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/censor.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/chgserver.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/chgserver.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/children.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/children.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/churn.py
@@ -110,8 +112,6 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/hgext/largefiles/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/pager.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/patchbomb.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/patchbomb.pyc
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/progress.py
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/progress.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/purge.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/purge.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/rebase.py
@@ -139,9 +139,9 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/Zeroconf.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/hgext/zeroconf/__init__.pyc
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial-3.6-py2.7.egg-info
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial-3.7.1-py2.7.egg-info
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/__init__.py (EMPTY)
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/__init__.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/__version__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/__version__.pyc
@@ -235,6 +235,10 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/help/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/hgignore.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/hgrc.5.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/hgweb.txt
+drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/help/internals/
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/internals/bundles.txt
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/internals/changegroups.txt
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/internals/revlogs.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/merge-tools.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/multirevs.txt
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/help/patterns.txt
@@ -328,12 +332,29 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/httpclient/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/posix.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/progress.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/progress.pyc
+drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/mercurial/pure/
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/__init__.py (EMPTY)
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/__init__.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/base85.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/base85.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/bdiff.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/bdiff.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/diffhelpers.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/diffhelpers.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/mpatch.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/mpatch.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/osutil.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/osutil.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/parsers.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pure/parsers.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pushkey.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pushkey.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pvec.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/pvec.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/py3kcompat.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/py3kcompat.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/registrar.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/registrar.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/repair.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/repair.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/mercurial/repoview.py
