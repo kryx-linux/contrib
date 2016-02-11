@@ -3,12 +3,12 @@
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 
 name=sslscan
-version=1.8.2
+version=1.11.0
 release=1
-source=(http://downloads.sourceforge.net/project/sslscan/sslscan/sslscan-$version.tgz)
+source=(https://github.com/rbsec/sslscan/archive/$version-rbsec.tar.gz)
 
 build() {
-	cd $name-$version
+	cd $name-$version-rbsec
   make LDFLAGS=-lcrypto
 
   install -m 755 -d $PKG/usr/bin $PKG/usr/man/man1
