@@ -2,10 +2,10 @@
 # URL: http://pidgin.im/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Simone Rota, sip at crux dot nu
-# Depends on: dbus-glib farstream-compat gtkspell startup-notification xorg-libxscrnsaver nss
+# Depends on: dbus-glib farstream gtkspell nss startup-notification xorg-libxscrnsaver
 
 name=pidgin
-version=2.10.11
+version=2.10.12
 release=1
 source=(http://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$version.tar.bz2
 	$name.desktop)
@@ -13,9 +13,9 @@ source=(http://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$ve
 build() {
 	cd $name-$version
 
+	CONFIG_SHELL=/bin/bash \
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--enable-cyrus-sasl \
 		--disable-nls \
 		--disable-schemas-install \
