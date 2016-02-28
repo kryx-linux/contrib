@@ -5,17 +5,14 @@
 # Depends on: gst-plugins-base yasm
 
 name=gst-libav
-version=1.6.2
+version=1.6.3
 release=1
 source=(http://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
-
+	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 
