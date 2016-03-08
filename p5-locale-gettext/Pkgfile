@@ -2,19 +2,14 @@
 # URL: http://search.cpan.org/dist/gettext/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: bashy, ronny kornexl at online de
-# Depends on: 
-
 
 name=p5-locale-gettext
-version=1.05
-release=3
-source=(http://search.cpan.org/CPAN/authors/id/P/PV/PVANDRY/gettext-$version.tar.gz
-	compatibility-with-POSIX-module.patch)
+version=1.07
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/P/PV/PVANDRY/gettext-$version.tar.gz)
 
 build() {
-	cd gettext-$version
-
-	patch -p1 -i $SRC/compatibility-with-POSIX-module.patch
+	cd Locale-gettext-$version
 
 	perl Makefile.PL
 	make OPTIMIZE="$CFLAGS"
