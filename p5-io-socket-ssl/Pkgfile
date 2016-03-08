@@ -5,13 +5,13 @@
 # Depends on: p5-net-ssleay p5-uri
 
 name=p5-io-socket-ssl
-version=1.94
+version=2.024
 release=1
 source=(http://www.cpan.org/modules/by-module/IO/IO-Socket-SSL-$version.tar.gz)
 
 build() {
 	cd IO-Socket-SSL-$version
-	perl Makefile.PL
+	yes | perl Makefile.PL
 	make OPTIMIZE="$CFLAGS"
 	make DESTDIR=$PKG install
 
