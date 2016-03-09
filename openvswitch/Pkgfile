@@ -4,14 +4,13 @@
 # Depends on:  python
 
 name=openvswitch
-version=2.4.0
+version=2.5.0
 release=1
 source=(http://openvswitch.org/releases/openvswitch-$version.tar.gz ovsd)
 
 build() {
   cd $name-$version
   ./configure --prefix=/usr \
-              --mandir=/usr/man \
               --sysconfdir=/etc \
               --localstatedir=/var
   make
