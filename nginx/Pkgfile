@@ -5,7 +5,7 @@
 
 name=nginx
 version=1.9.12
-release=1
+release=2
 source=(http://nginx.org/download/$name-$version.tar.gz \
     $name.conf $name.rc)
 
@@ -21,7 +21,8 @@ build() {
         --with-http_ssl_module \
         --with-pcre \
         --user=$name \
-        --group=$name
+        --group=$name \
+        --with-ipv6
     make
     make DESTDIR=$PKG install
 
