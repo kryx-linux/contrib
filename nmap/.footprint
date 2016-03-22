@@ -116,6 +116,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/lfs.luadoc
 -rw-r--r--	root/root	usr/share/nmap/nselib/listop.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/lpeg-utility.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/lpeg.luadoc
 -rw-r--r--	root/root	usr/share/nmap/nselib/ls.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/match.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/membase.lua
@@ -125,6 +126,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/msrpcperformance.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/msrpctypes.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/mssql.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/multicast.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/mysql.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/natpmp.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/ncp.lua
@@ -326,6 +328,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-adobe-coldfusion-apsa1301.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-affiliate-id.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-apache-negotiation.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-apache-server-status.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-auth-finder.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-auth.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-avaya-ipoffice-users.nse
@@ -423,11 +426,13 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2011-3368.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2012-1823.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2013-0156.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2013-6786.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2013-7091.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2014-2126.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2014-2127.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2014-2128.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2014-2129.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2014-3704.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2014-8877.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2015-1427.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-vuln-cve2015-1635.nse
@@ -446,6 +451,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/ike-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/imap-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/imap-capabilities.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/imap-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/informix-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/informix-query.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/informix-tables.nse
@@ -456,6 +462,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-maxmind.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-https-discover.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipidseq.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ipv6-multicast-mld-list.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipv6-node-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipv6-ra-flood.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/irc-botnet-channels.nse
@@ -503,6 +510,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-empty-password.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-hasdbaccess.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-info.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-query.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-tables.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-xp-cmdshell.nse
@@ -538,6 +546,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/nfs-showmount.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nfs-statfs.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nje-node-brute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/nntp-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nping-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nrpe-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ntp-info.nse
@@ -559,6 +568,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/pjl-ready-message.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/pop3-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/pop3-capabilities.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/pop3-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/pptp-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/qconn-exec.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/qscan.nse
@@ -586,10 +596,12 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/rsync-list-modules.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/rtsp-methods.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/rtsp-url-brute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/rusers.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/s7-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/samba-vuln-cve-2012-1182.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/script.db
 -rw-r--r--	root/root	usr/share/nmap/scripts/servicetags.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/shodan-api.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/sip-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/sip-call-spoof.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/sip-enum-users.nse
@@ -623,6 +635,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/smtp-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/smtp-commands.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/smtp-enum-users.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/smtp-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/smtp-open-relay.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/smtp-strangeport.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/smtp-vuln-cve2010-4344.nse
@@ -676,6 +689,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/teamspeak2-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/telnet-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/telnet-encryption.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/telnet-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/tftp-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/tls-nextprotoneg.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/tor-consensus-checker.nse
