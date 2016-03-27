@@ -6,7 +6,7 @@
 
 name=distcc
 version=3.1
-release=4
+release=5
 source=(http://distcc.googlecode.com/files/$name-$version.tar.bz2
 	distccd) 
 
@@ -15,7 +15,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
+		--mandir=/usr/share/man \
 		--disable-nls \
 		--without-gnome \
 		--without-gtk \
@@ -41,10 +41,10 @@ build() {
 	cd -
 
 	rm -rf $PKG/usr/share/doc $PKG/usr/etc/default $PKG/usr/etc/distcc
-	rmdir $PKG/usr/etc $PKG/usr/share
+	rmdir $PKG/usr/etc
 
 	# python is required for pump mode
 	if [ "$(prt-get isinst python)" = 'package python is not installed' ]; then
-		rm $PKG/usr/man/man1/{pump,include_server}.1
+		rm $PKG/usr/share/man/man1/{pump,include_server}.1
 	fi
 }
