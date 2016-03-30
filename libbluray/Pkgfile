@@ -7,7 +7,8 @@
 name=libbluray
 version=0.9.2
 release=1
-source=(ftp://ftp.videolan.org/pub/videolan/$name/$version/$name-$version.tar.bz2)
+source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.bz2)
+#source=(ftp://ftp.videolan.org/pub/videolan/$name/$version/$name-$version.tar.bz2) # PASV ... couldn't connect to 127.0.1.1. something is wrong with this ftp /dns, works with curl but not wget
 
 build() {
 	cd $name-$version
