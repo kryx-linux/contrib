@@ -1,29 +1,28 @@
-# Description: Lightweight panel/taskbar
-# URL: http://tint2.googlecode.com
+# Description: Lightweight panel/taskbar.
+# URL: https://gitlab.com/o9000/tint2
 # Packager: Vitaly Sinilin, vs at kp4 dot ru
-# Maintainer: Jose V Beneyto, sepen at crux dot nu
-# Depends on: cmake imlib2 pango
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: cmake imlib2 librsvg ninja startup-notification xorg-libxdamage
 
 name=tint2
-version=0.11
-release=2
-source=(http://$name.googlecode.com/files/$name-$version.tar.bz2 \
-        add-power-now-support.patch)
+version=0.12.8
+release=1
+source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.gz)
+#source=(https://gitlab.com/o9000/tint2/repository/archive.tar.gz?ref=$version)
 
 build() {
-  cd $name-$version
+	cd tint2-0.12.8-*
 
-  patch -p0 -i $SRC/add-power-now-support.patch
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DENABLE_BATTERY=ON \
+		-DENABLE_EXAMPLES=OFF \
+		-DENABLE_TINT2CONF=OFF \
+		-DSYSCONFDIR=/usr/etc \
+		-G Ninja
 
-  cmake \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DENABLE_BATTERY=ON \
-    -DENABLE_EXAMPLES=OFF \
-    -DENABLE_TINT2CONF=OFF \
-    -DMANDIR=/usr/man \
-    -DSYSCONFDIR=/usr/etc
+	ninja
+	DESTDIR=$PKG ninja install
 
-  make
-  make DESTDIR=$PKG install
-  rm -rf $PKG/usr/share
+	rm -rf $PKG/usr/share/{doc,locale}
 }
