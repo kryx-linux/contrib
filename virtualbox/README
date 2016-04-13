@@ -25,18 +25,18 @@ POST-INSTALL
 
   Also is a good idea to fine tune your udev rules as you want.
   For getting some info from your system run udevinfo:
-  # udevinfo -a -p /sys/class/misc/vboxdrv
+  # udevadm info -a -p /sys/class/misc/vboxdrv
 
-  Udevinfo starts with the device specified by the devpath and then
+  Udevadm info starts with the device specified by the devpath and then
   walks up the chain of parent devices. It prints for every device
   found, all possible attributes in the udev rules key format.
   A rule to match, can be composed by the attributes of the device
   and the attributes from one single parent device.
 
-    looking at device '/class/misc/vboxdrv':
+    looking at device '/devices/virtual/misc/vboxdrv':
     KERNEL=="vboxdrv"
     SUBSYSTEM=="misc"
-    SYSFS{dev}=="10:62"
+    DRIVER==""
 
 
 PRECAUTION
@@ -44,8 +44,3 @@ PRECAUTION
  Virtualbox by default uses /usr/src/linux as the source directory of your Linux kernel.
  To use an alternative kernel directory you should type something like:
  # env KERN_DIR=/not-default-path/src/linux pkgmk
-
- If you have problems trying to update virtualbox (xalan-c not found...) use
- this command to solve it:
- # prt-get update -fr xerces-c xalan-c
- and then rebuild virtualbox
