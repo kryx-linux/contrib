@@ -6,7 +6,7 @@
 # Optional: gcc-fortran
 
 name=fftw
-version=3.3.3
+version=3.3.4
 release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
@@ -15,19 +15,9 @@ build() {
 
 	local config="\
 --prefix=/usr \
---mandir=/usr/man \
 --enable-threads \
 --with-gnu-ld \
 --enable-shared"
-
-	# compiling long double precision library
-	./configure \
-		$config \
-		--enable-long-double
-
-	make
-	make DESTDIR=$PKG install
-	make clean
 
 	# compiling single precision library
 	./configure \
@@ -43,5 +33,25 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share
+	make clean
+
+       # compiling long double precision library
+	./configure \
+		$config \
+		--enable-long-double
+
+	make
+	make DESTDIR=$PKG install
+	make clean
+
+	# compiling quad precision library
+	./configure \
+		$config \
+		--enable-quad-precision
+
+	make
+	make DESTDIR=$PKG install
+
+	# clean up
+	rm -r $PKG/usr/share/info
 }
