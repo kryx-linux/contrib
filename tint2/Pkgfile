@@ -5,13 +5,13 @@
 # Depends on: cmake imlib2 librsvg ninja startup-notification xorg-libxdamage
 
 name=tint2
-version=0.12.8
+version=0.12.10
 release=1
 source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.gz)
 #source=(https://gitlab.com/o9000/tint2/repository/archive.tar.gz?ref=$version)
 
 build() {
-	cd tint2-0.12.8-*
+	cd $name-$version-*
 
 	cmake \
 		-DCMAKE_INSTALL_PREFIX=/usr \
