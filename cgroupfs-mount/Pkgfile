@@ -1,8 +1,7 @@
-# Description:  Scripts to mount the cgroupfs hierarchy
-# URL:          https://github.com/tianon/cgroupfs-mount
-# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:   bash
+# Description: Scripts to mount the cgroupfs hierarchy
+# URL:         https://github.com/tianon/cgroupfs-mount
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Packager:    James Mills, prologic at shortcircuit dot net dot au
 
 name=cgroupfs-mount
 version=1.1
@@ -12,7 +11,6 @@ source=(https://github.com/tianon/${name}/archive/${version}.tar.gz)
 build() {
     cd $name-$version
 
-    # Package
     install -D -m 755 cgroupfs-mount $PKG/usr/bin/cgroupfs-mount
     install -D -m 755 cgroupfs-umount $PKG/usr/bin/cgroupfs-umount
 }
