@@ -4,7 +4,7 @@
 # Packager:    Mark Rosenstand, mark at borkware dot net
 
 name=dhcp
-version=4.3.3
+version=4.3.4
 release=1
 source=(http://ftp.isc.org/isc/$name/$version/$name-$version.tar.gz dhcpd \
         dhclient default-config.diff)
@@ -14,8 +14,8 @@ build() {
   patch -p1 -i $SRC/default-config.diff
 
   ./configure --prefix=/usr \
-              --disable-dhcpv6 \
               --sysconfdir=/etc
+
   make -j1
   make DESTDIR=$PKG install
   install -D ../dhcpd $PKG/etc/rc.d/dhcpd
