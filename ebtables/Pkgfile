@@ -1,19 +1,24 @@
 # Description: A firewalling tool to transparently filter network traffic passing a bridge
-# URL: http://ebtables.sourceforge.net/
-# Maintainer: Mikhail Kolesnik, mike at openbunker dot org
-# Depends on:
+# URL:         http://ebtables.sourceforge.net/
+# Maintainer:  Thomas Penteker, tek at serverop dot de
+# Packager:    Mikhail Kolesnik, mike at openbunker dot org
 
 name=ebtables
 version=2.0.10-4
 release=1
-source=(http://download.sourceforge.net/$name/$name-v$version.tar.gz \
-		$name-makefile.diff)
+source=(http://download.sourceforge.net/$name/$name-v$version.tar.gz)
 
 build() {
 	cd $name-v$version
-	patch -p1 -i $SRC/$name-makefile.diff
-	make
+
+  sed -i -e 's|BINDIR:=.*|BINDIR:=/usr/sbin|g' \
+         -e 's|MANDIR:=.*|MANDIR:=/usr/share/man|g' \
+         -e 's|rc.d/init.d|rc.d|g' -e 's|-Werror||g' Makefile
+
 	mkdir -p $PKG/usr/sbin
+
+	make
 	make DESTDIR=$PKG install
+
 	rm -rf $PKG/etc/{rc.d,sysconfig}
 }
