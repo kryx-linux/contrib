@@ -4,14 +4,17 @@
 # Packager: Han Boetes, han mijncomputer dot nl
 
 name=libsigc++
-version=2.6.2
+version=2.8.0
 release=1
 source=(https://download.gnome.org/sources/libsigc++/${version%.*}/$name-$version.tar.xz)
 
 build() {
 	cd libsigc++-$version
+
 	./configure --prefix=/usr
+
 	make
 	make install DESTDIR=$PKG
-	rm -r $PKG/usr/share
+
+	rm -r $PKG/usr/share/{doc,devhelp}
 }
