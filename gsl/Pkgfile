@@ -4,18 +4,17 @@
 # Packager:  Vincenzo Colosimo, vico at bicisport dot de
 
 name=gsl
-version=1.15
+version=2.1
 release=1
 source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man \
+	./configure --prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
+
 	rm -r $PKG/usr/share/info
 }
