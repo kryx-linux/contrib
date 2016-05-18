@@ -1,14 +1,14 @@
 # Description: Tools to create, alter and inspect Matroska files.
-# URL: http://www.bunkus.org/videotools/mkvtoolnix
+# URL: https://mkvtoolnix.download/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on: boost file flac libmatroska libvorbis ruby
 # Nice to have: wxgtk
 
 name=mkvtoolnix
-version=8.6.1
+version=9.1.0
 release=1
-source=(http://www.bunkus.org/videotools/mkvtoolnix/sources/$name-$version.tar.xz)
+source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
@@ -31,7 +31,7 @@ build() {
 	./drake DESTDIR=$PKG install
 
 	rm -r \
-		$PKG/usr/share/man/{ca,de,es,uk,ja,nl,zh_CN} \
+		$PKG/usr/share/man/{ca,de,es,ja,ko,nl,pl,uk,zh_CN} \
 		$PKG/usr/share/locale
 
 	# remove doc's if wxgtk is installed
