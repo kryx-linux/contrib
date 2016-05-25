@@ -1,0 +1,23 @@
+# Description: a lightweight universal runtime container
+# URL: https://runc.io/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: go libseccomp
+
+name=runc
+version=0.1.1
+release=2
+source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
+    http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz)
+
+build() {
+    mkdir -pv src/github.com/opencontainers
+    cd src/github.com/opencontainers
+    ln -sf $SRC/$name-$version
+    cd $name-$version
+    export GOPATH=$SRC
+    make
+
+    install -D -m 0755 $name $PKG/usr/bin/$name
+    install -d -m 0755 $PKG/usr/share/man/man8
+    install -m 0644 $SRC/man8/* $PKG/usr/share/man/man8/
+}
