@@ -1,56 +1,38 @@
-# Description:  The GO programming language
-# URL:          http://golang.org/
-# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
-#
-# Depends on:   git mercurial
+# Description: The Go Programming Language
+# URL: https://golang.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
 
 name=go
-version=1.4.2
+version=1.6.2
 release=1
-source=(
-    https://storage.googleapis.com/golang/${name}${version}.linux-amd64.tar.gz
-    golang.sh
-)
+source=(https://storage.googleapis.com/golang/${name}${version}.linux-amd64.tar.gz \
+    https://storage.googleapis.com/golang/${name}${version}.src.tar.gz \
+    $name-certpath.diff)
+
+unpack_source() {
+    install -d $SRC/go${version:0:3}
+    bsdtar -xf $PKGMK_SOURCE_DIR/${name}${version}.linux-amd64.tar.gz \
+        -C $SRC/go${version:0:3} --strip-components 1
+    bsdtar -xf $PKGMK_SOURCE_DIR/${name}${version}.src.tar.gz \
+        -C $SRC
+    cp $name-certpath.diff $SRC
+}
 
 build() {
-    cd $SRC/$name/src
-
-    # build
+    export GOROOT_BOOTSTRAP=${SRC}/go${version:0:3}
     export GOROOT_FINAL=/usr/lib/go
-    export GOROOT=/tmp/go/
+    export GOOS=linux
+    export GOARCH=amd64
 
-    # compile all
-    unset CC   # The build fails with a customer C compiler (e.g: ccache)
-    unset CXX  # The build fails with a customer C++ compiler (e.g: ccache)
-    ./make.bash
+    patch -p0 -i $SRC/$name-certpath.diff
 
-    # install
-    install -d -m 755 $PKG/usr/lib
-    install -d -m 755 $PKG/usr
+    cd go/src
+    bash make.bash --no-clean
 
-    # package
-    mv $SRC/go $PKG/usr/lib/
-    mv $PKG/usr/lib/go/bin $PKG/usr/
-    install -D -m 644 $SRC/golang.sh $PKG/etc/profile.d/golang.sh
- 
-    # 
-    # package godoc and vet (XXX: Temporary)
-    #
+    install -d $PKG/usr/lib
+    cp -r $SRC/go $PKG/usr/lib/
 
-    export GOROOT=$PKG/usr/lib/go
-    export GOPATH=/tmp/go
-
-    $PKG/usr/bin/go get -u golang.org/x/tools/cmd/godoc
-    $PKG/usr/bin/go install golang.org/x/tools/cmd/godoc
-
-    $PKG/usr/bin/go get -u golang.org/x/tools/cmd/vet
-    $PKG/usr/bin/go install golang.org/x/tools/cmd/godoc
-
-    # cleanup
-    rm -rf $PKG/usr/lib/go/bin
-    rm -rf $PKG/usr/lib/go/test
-    find "$PKG/usr/lib/go/" -type f -name "*.o" -delete
-    find "$PKG/usr/lib/go/" -type f -name "Makefile" -delete
-    rm $PKG/usr/lib/go/{AUTHORS,README,LICENSE,CONTRIBUTORS,PATENTS,robots.txt}
-    rm $PKG/usr/lib/go/src/{make.*,all.*,run.*,race.*,clean.*,Make.*,sudo.*}
+    install -d $PKG/usr/bin
+    ln -s /usr/lib/go/bin/go $PKG/usr/bin/
+    ln -s /usr/lib/go/bin/gofmt $PKG/usr/bin/
 }
