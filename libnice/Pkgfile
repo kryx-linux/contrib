@@ -2,10 +2,10 @@
 # URL: http://nice.freedesktop.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on: gstreamer gstreamer-compat xz
+# Depends on: gstreamer xz
 
 name=libnice
-version=0.1.8
+version=0.1.13
 release=1
 source=(http://nice.freedesktop.org/releases/$name-$version.tar.gz)
 
@@ -14,7 +14,6 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--enable-gtk-doc=no \
 		--enable-gtk-doc-html=no
 
