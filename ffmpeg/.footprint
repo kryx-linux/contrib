@@ -7,11 +7,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/libavcodec/
 -rw-r--r--	root/root	usr/include/libavcodec/avcodec.h
+-rw-r--r--	root/root	usr/include/libavcodec/avdct.h
 -rw-r--r--	root/root	usr/include/libavcodec/avfft.h
 -rw-r--r--	root/root	usr/include/libavcodec/d3d11va.h
+-rw-r--r--	root/root	usr/include/libavcodec/dirac.h
 -rw-r--r--	root/root	usr/include/libavcodec/dv_profile.h
 -rw-r--r--	root/root	usr/include/libavcodec/dxva2.h
--rw-r--r--	root/root	usr/include/libavcodec/old_codec_ids.h
 -rw-r--r--	root/root	usr/include/libavcodec/qsv.h
 -rw-r--r--	root/root	usr/include/libavcodec/vaapi.h
 -rw-r--r--	root/root	usr/include/libavcodec/vda.h
@@ -24,8 +25,6 @@ drwxr-xr-x	root/root	usr/include/libavdevice/
 -rw-r--r--	root/root	usr/include/libavdevice/avdevice.h
 -rw-r--r--	root/root	usr/include/libavdevice/version.h
 drwxr-xr-x	root/root	usr/include/libavfilter/
--rw-r--r--	root/root	usr/include/libavfilter/asrc_abuffer.h
--rw-r--r--	root/root	usr/include/libavfilter/avcodec.h
 -rw-r--r--	root/root	usr/include/libavfilter/avfilter.h
 -rw-r--r--	root/root	usr/include/libavfilter/avfiltergraph.h
 -rw-r--r--	root/root	usr/include/libavfilter/buffersink.h
@@ -41,9 +40,9 @@ drwxr-xr-x	root/root	usr/include/libavresample/
 drwxr-xr-x	root/root	usr/include/libavutil/
 -rw-r--r--	root/root	usr/include/libavutil/adler32.h
 -rw-r--r--	root/root	usr/include/libavutil/aes.h
+-rw-r--r--	root/root	usr/include/libavutil/aes_ctr.h
 -rw-r--r--	root/root	usr/include/libavutil/attributes.h
 -rw-r--r--	root/root	usr/include/libavutil/audio_fifo.h
--rw-r--r--	root/root	usr/include/libavutil/audioconvert.h
 -rw-r--r--	root/root	usr/include/libavutil/avassert.h
 -rw-r--r--	root/root	usr/include/libavutil/avconfig.h
 -rw-r--r--	root/root	usr/include/libavutil/avstring.h
@@ -59,6 +58,7 @@ drwxr-xr-x	root/root	usr/include/libavutil/
 -rw-r--r--	root/root	usr/include/libavutil/common.h
 -rw-r--r--	root/root	usr/include/libavutil/cpu.h
 -rw-r--r--	root/root	usr/include/libavutil/crc.h
+-rw-r--r--	root/root	usr/include/libavutil/des.h
 -rw-r--r--	root/root	usr/include/libavutil/dict.h
 -rw-r--r--	root/root	usr/include/libavutil/display.h
 -rw-r--r--	root/root	usr/include/libavutil/downmix_info.h
@@ -77,12 +77,12 @@ drwxr-xr-x	root/root	usr/include/libavutil/
 -rw-r--r--	root/root	usr/include/libavutil/log.h
 -rw-r--r--	root/root	usr/include/libavutil/lzo.h
 -rw-r--r--	root/root	usr/include/libavutil/macros.h
+-rw-r--r--	root/root	usr/include/libavutil/mastering_display_metadata.h
 -rw-r--r--	root/root	usr/include/libavutil/mathematics.h
 -rw-r--r--	root/root	usr/include/libavutil/md5.h
 -rw-r--r--	root/root	usr/include/libavutil/mem.h
 -rw-r--r--	root/root	usr/include/libavutil/motion_vector.h
 -rw-r--r--	root/root	usr/include/libavutil/murmur3.h
--rw-r--r--	root/root	usr/include/libavutil/old_pix_fmts.h
 -rw-r--r--	root/root	usr/include/libavutil/opt.h
 -rw-r--r--	root/root	usr/include/libavutil/parseutils.h
 -rw-r--r--	root/root	usr/include/libavutil/pixdesc.h
@@ -90,6 +90,7 @@ drwxr-xr-x	root/root	usr/include/libavutil/
 -rw-r--r--	root/root	usr/include/libavutil/pixfmt.h
 -rw-r--r--	root/root	usr/include/libavutil/random_seed.h
 -rw-r--r--	root/root	usr/include/libavutil/rational.h
+-rw-r--r--	root/root	usr/include/libavutil/rc4.h
 -rw-r--r--	root/root	usr/include/libavutil/replaygain.h
 -rw-r--r--	root/root	usr/include/libavutil/ripemd.h
 -rw-r--r--	root/root	usr/include/libavutil/samplefmt.h
@@ -101,6 +102,7 @@ drwxr-xr-x	root/root	usr/include/libavutil/
 -rw-r--r--	root/root	usr/include/libavutil/time.h
 -rw-r--r--	root/root	usr/include/libavutil/timecode.h
 -rw-r--r--	root/root	usr/include/libavutil/timestamp.h
+-rw-r--r--	root/root	usr/include/libavutil/tree.h
 -rw-r--r--	root/root	usr/include/libavutil/twofish.h
 -rw-r--r--	root/root	usr/include/libavutil/version.h
 -rw-r--r--	root/root	usr/include/libavutil/xtea.h
@@ -115,41 +117,41 @@ drwxr-xr-x	root/root	usr/include/libswscale/
 -rw-r--r--	root/root	usr/include/libswscale/version.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libavcodec.a
-lrwxrwxrwx	root/root	usr/lib/libavcodec.so -> libavcodec.so.56.60.100
-lrwxrwxrwx	root/root	usr/lib/libavcodec.so.56 -> libavcodec.so.56.60.100
--rwxr-xr-x	root/root	usr/lib/libavcodec.so.56.60.100
+lrwxrwxrwx	root/root	usr/lib/libavcodec.so -> libavcodec.so.57.24.102
+lrwxrwxrwx	root/root	usr/lib/libavcodec.so.57 -> libavcodec.so.57.24.102
+-rwxr-xr-x	root/root	usr/lib/libavcodec.so.57.24.102
 -rw-r--r--	root/root	usr/lib/libavdevice.a
-lrwxrwxrwx	root/root	usr/lib/libavdevice.so -> libavdevice.so.56.4.100
-lrwxrwxrwx	root/root	usr/lib/libavdevice.so.56 -> libavdevice.so.56.4.100
--rwxr-xr-x	root/root	usr/lib/libavdevice.so.56.4.100
+lrwxrwxrwx	root/root	usr/lib/libavdevice.so -> libavdevice.so.57.0.101
+lrwxrwxrwx	root/root	usr/lib/libavdevice.so.57 -> libavdevice.so.57.0.101
+-rwxr-xr-x	root/root	usr/lib/libavdevice.so.57.0.101
 -rw-r--r--	root/root	usr/lib/libavfilter.a
-lrwxrwxrwx	root/root	usr/lib/libavfilter.so -> libavfilter.so.5.40.101
-lrwxrwxrwx	root/root	usr/lib/libavfilter.so.5 -> libavfilter.so.5.40.101
--rwxr-xr-x	root/root	usr/lib/libavfilter.so.5.40.101
+lrwxrwxrwx	root/root	usr/lib/libavfilter.so -> libavfilter.so.6.31.100
+lrwxrwxrwx	root/root	usr/lib/libavfilter.so.6 -> libavfilter.so.6.31.100
+-rwxr-xr-x	root/root	usr/lib/libavfilter.so.6.31.100
 -rw-r--r--	root/root	usr/lib/libavformat.a
-lrwxrwxrwx	root/root	usr/lib/libavformat.so -> libavformat.so.56.40.101
-lrwxrwxrwx	root/root	usr/lib/libavformat.so.56 -> libavformat.so.56.40.101
--rwxr-xr-x	root/root	usr/lib/libavformat.so.56.40.101
+lrwxrwxrwx	root/root	usr/lib/libavformat.so -> libavformat.so.57.25.100
+lrwxrwxrwx	root/root	usr/lib/libavformat.so.57 -> libavformat.so.57.25.100
+-rwxr-xr-x	root/root	usr/lib/libavformat.so.57.25.100
 -rw-r--r--	root/root	usr/lib/libavresample.a
-lrwxrwxrwx	root/root	usr/lib/libavresample.so -> libavresample.so.2.1.0
-lrwxrwxrwx	root/root	usr/lib/libavresample.so.2 -> libavresample.so.2.1.0
--rwxr-xr-x	root/root	usr/lib/libavresample.so.2.1.0
+lrwxrwxrwx	root/root	usr/lib/libavresample.so -> libavresample.so.3.0.0
+lrwxrwxrwx	root/root	usr/lib/libavresample.so.3 -> libavresample.so.3.0.0
+-rwxr-xr-x	root/root	usr/lib/libavresample.so.3.0.0
 -rw-r--r--	root/root	usr/lib/libavutil.a
-lrwxrwxrwx	root/root	usr/lib/libavutil.so -> libavutil.so.54.31.100
-lrwxrwxrwx	root/root	usr/lib/libavutil.so.54 -> libavutil.so.54.31.100
--rwxr-xr-x	root/root	usr/lib/libavutil.so.54.31.100
+lrwxrwxrwx	root/root	usr/lib/libavutil.so -> libavutil.so.55.17.103
+lrwxrwxrwx	root/root	usr/lib/libavutil.so.55 -> libavutil.so.55.17.103
+-rwxr-xr-x	root/root	usr/lib/libavutil.so.55.17.103
 -rw-r--r--	root/root	usr/lib/libpostproc.a
-lrwxrwxrwx	root/root	usr/lib/libpostproc.so -> libpostproc.so.53.3.100
-lrwxrwxrwx	root/root	usr/lib/libpostproc.so.53 -> libpostproc.so.53.3.100
--rwxr-xr-x	root/root	usr/lib/libpostproc.so.53.3.100
+lrwxrwxrwx	root/root	usr/lib/libpostproc.so -> libpostproc.so.54.0.100
+lrwxrwxrwx	root/root	usr/lib/libpostproc.so.54 -> libpostproc.so.54.0.100
+-rwxr-xr-x	root/root	usr/lib/libpostproc.so.54.0.100
 -rw-r--r--	root/root	usr/lib/libswresample.a
-lrwxrwxrwx	root/root	usr/lib/libswresample.so -> libswresample.so.1.2.101
-lrwxrwxrwx	root/root	usr/lib/libswresample.so.1 -> libswresample.so.1.2.101
--rwxr-xr-x	root/root	usr/lib/libswresample.so.1.2.101
+lrwxrwxrwx	root/root	usr/lib/libswresample.so -> libswresample.so.2.0.101
+lrwxrwxrwx	root/root	usr/lib/libswresample.so.2 -> libswresample.so.2.0.101
+-rwxr-xr-x	root/root	usr/lib/libswresample.so.2.0.101
 -rw-r--r--	root/root	usr/lib/libswscale.a
-lrwxrwxrwx	root/root	usr/lib/libswscale.so -> libswscale.so.3.1.101
-lrwxrwxrwx	root/root	usr/lib/libswscale.so.3 -> libswscale.so.3.1.101
--rwxr-xr-x	root/root	usr/lib/libswscale.so.3.1.101
+lrwxrwxrwx	root/root	usr/lib/libswscale.so -> libswscale.so.4.0.100
+lrwxrwxrwx	root/root	usr/lib/libswscale.so.4 -> libswscale.so.4.0.100
+-rwxr-xr-x	root/root	usr/lib/libswscale.so.4.0.100
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libavcodec.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libavdevice.pc
@@ -160,33 +162,6 @@ drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libpostproc.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libswresample.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libswscale.pc
-drwxr-xr-x	root/root	usr/man/
-drwxr-xr-x	root/root	usr/man/man1/
--rw-r--r--	root/root	usr/man/man1/ffmpeg-all.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-bitstream-filters.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-codecs.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-devices.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-filters.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-formats.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-protocols.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-resampler.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-scaler.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg-utils.1.gz
--rw-r--r--	root/root	usr/man/man1/ffmpeg.1.gz
--rw-r--r--	root/root	usr/man/man1/ffplay-all.1.gz
--rw-r--r--	root/root	usr/man/man1/ffplay.1.gz
--rw-r--r--	root/root	usr/man/man1/ffprobe-all.1.gz
--rw-r--r--	root/root	usr/man/man1/ffprobe.1.gz
--rw-r--r--	root/root	usr/man/man1/ffserver-all.1.gz
--rw-r--r--	root/root	usr/man/man1/ffserver.1.gz
-drwxr-xr-x	root/root	usr/man/man3/
--rw-r--r--	root/root	usr/man/man3/libavcodec.3.gz
--rw-r--r--	root/root	usr/man/man3/libavdevice.3.gz
--rw-r--r--	root/root	usr/man/man3/libavfilter.3.gz
--rw-r--r--	root/root	usr/man/man3/libavformat.3.gz
--rw-r--r--	root/root	usr/man/man3/libavutil.3.gz
--rw-r--r--	root/root	usr/man/man3/libswresample.3.gz
--rw-r--r--	root/root	usr/man/man3/libswscale.3.gz
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/ffmpeg/
 drwxr-xr-x	root/root	usr/share/ffmpeg/examples/
@@ -215,3 +190,30 @@ drwxr-xr-x	root/root	usr/share/ffmpeg/examples/
 -rw-r--r--	root/root	usr/share/ffmpeg/libvpx-360p.ffpreset
 -rw-r--r--	root/root	usr/share/ffmpeg/libvpx-720p.ffpreset
 -rw-r--r--	root/root	usr/share/ffmpeg/libvpx-720p50_60.ffpreset
+drwxr-xr-x	root/root	usr/share/man/
+drwxr-xr-x	root/root	usr/share/man/man1/
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-all.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-bitstream-filters.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-codecs.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-devices.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-filters.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-formats.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-protocols.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-resampler.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-scaler.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg-utils.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffmpeg.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffplay-all.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffplay.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffprobe-all.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffprobe.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffserver-all.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/ffserver.1.gz
+drwxr-xr-x	root/root	usr/share/man/man3/
+-rw-r--r--	root/root	usr/share/man/man3/libavcodec.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/libavdevice.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/libavfilter.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/libavformat.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/libavutil.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/libswresample.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/libswscale.3.gz
