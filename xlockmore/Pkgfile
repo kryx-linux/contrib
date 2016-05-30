@@ -5,7 +5,7 @@
 # Depends on: gtk, fortune
 
 name=xlockmore
-version=5.46
+version=5.47
 release=1
 source=(http://www.tux.org/~bagleyd/xlock/xlockmore-$version.tar.xz)
 
@@ -13,8 +13,7 @@ build(){
   cd $name-$version
   ./configure --prefix=/usr --enable-vtlock --enable-syslog \
         --enable-multiple-user --enable-multiple-root \
-        --disable-magick --without-motif --with-opengl \
-        --without-esound
+        --without-motif --with-opengl --without-esound
   make
   make prefix=$PKG/usr xapploaddir=$PKG/etc/X11/app-defaults install
   if [ -d $PKG/usr/lib ]; then
