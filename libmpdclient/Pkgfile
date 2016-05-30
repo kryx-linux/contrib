@@ -10,10 +10,7 @@ source=(http://www.musicpd.org/download/libmpdclient/2/libmpdclient-$version.tar
 build() {
   cd $name-$version
 
-  ./configure \
-      --prefix=/usr \
-      --mandir=/usr/man \
-      --disable-documentation
+  ./configure --prefix=/usr --disable-documentation
 
   make
   make DESTDIR=$PKG install
