@@ -12,11 +12,10 @@ source=(http://www.musicpd.org/download/mpc/0/mpc-$version.tar.xz)
 build() {
   cd $name-$version
 
-  ./configure \
-      --prefix=/usr \
-      --mandir=/usr/man
+  ./configure --prefix=/usr --mandir=/usr/share/man
+
   make
   make DESTDIR=$PKG install
 
-  rm -rf $PKG/usr/share
+  rm -rf $PKG/usr/share/doc
 }
