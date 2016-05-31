@@ -5,10 +5,10 @@
 
 name=docker
 version=1.11.1
-release=3
+release=4
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    $name.rc)
+    $name.rc $name.conf)
 
 build() {
     export AUTO_GOPATH=1
@@ -26,6 +26,8 @@ build() {
 
     install -D -m 0755 $SRC/$name.rc \
         $PKG/etc/rc.d/$name
+    install -D -m 0644 $SRC/$name.conf \
+        $PKG/etc/$name.conf
 
     ln -s containerd $PKG/usr/bin/docker-containerd
     ln -s containerd-shim $PKG/usr/bin/docker-containerd-shim
