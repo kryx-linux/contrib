@@ -6,18 +6,17 @@
 
 name=libquicktime
 version=1.2.4
-release=2
+release=3
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
-	ffmpeg2.0.patch)
+	libquicktime-1.2.4-ffmpeg3-1.patch)
 
 build() {
 	cd $name-$version
 
-	patch -p 1 -i $SRC/ffmpeg2.0.patch
+	patch -p 1 -i $SRC/libquicktime-1.2.4-ffmpeg3-1.patch
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--enable-gpl \
 		--disable-nls \
 		--with-libdv \
