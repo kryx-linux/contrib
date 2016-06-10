@@ -6,12 +6,12 @@
 
 name=xsel
 version=1.2.0
-release=1
+release=2
 source=(http://www.vergenet.net/~conrad/software/xsel/download/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  ./configure --prefix=/usr --mandir=/usr/man
-  make
-  make DESTDIR=$PKG install
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make install DESTDIR=$PKG
 }
