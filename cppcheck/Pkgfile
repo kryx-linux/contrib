@@ -1,0 +1,21 @@
+# Description: Static analysis tool for C/C++ code
+# URL:         http://cppcheck.sourceforge.net/
+# Maintainer:  Svyatoslav Mishyn, juef at openmailbox dot org
+# Depends on:  libpcre python docbook-xsl
+
+name=cppcheck
+version=1.74
+release=1
+source=(https://github.com/danmar/$name/archive/$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	make install	SRCDIR=build			\
+			HAVE_RULES=yes			\
+			CFGDIR=/usr/share/cppcheck/cfg	\
+			DESTDIR=$PKG
+
+	make man DB2MAN=/usr/share/xml/docbook/xsl-stylesheets/manpages/docbook.xsl
+	install -Dm 0444 $name.1 $PKG/usr/share/man/man1/$name.1
+}
