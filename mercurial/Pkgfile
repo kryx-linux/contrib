@@ -15,8 +15,8 @@ build() {
  
   /usr/bin/python setup.py install --root=$PKG
   
-  install -d $PKG/usr/man/man{1,5}
-  install -m 0644 doc/*.1 $PKG/usr/man/man1
-  install -m 0644 doc/*.5 $PKG/usr/man/man5
+  install -d $PKG/usr/share/man/man{1,5}
+  install -m 0644 doc/*.1 $PKG/usr/share/man/man1
+  install -m 0644 doc/*.5 $PKG/usr/share/man/man5
   
 }
