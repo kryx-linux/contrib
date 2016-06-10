@@ -5,17 +5,15 @@
 # Nice to have: libquvi libdvdread libdvdnav
 
 name=mpv
-version=0.14.0
+version=0.17.0
 release=1
 source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 
-build () {
+build() {
 	cd $name-$version
 
 	./bootstrap.py
-	./waf configure \
-		--prefix=/usr \
-		--mandir=/usr/share/man \
+	./waf configure --prefix=/usr
 
 	./waf build
 	./waf install --destdir=$PKG
