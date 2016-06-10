@@ -1,0 +1,20 @@
+# Description: A system for managing library compile/link flags
+# URL:         https://github.com/pkgconf/pkgconf
+# Maintainer:  Svyatoslav Mishyn, juef at openmailbox dot org
+
+name=pkgconf
+version=0.9.12
+release=1
+source=(https://github.com/$name/$name/releases/download/$name-$version/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+
+	./configure	--prefix=/usr				\
+			--with-system-libdir=/lib:/usr/lib
+
+	make
+	make install MANDIR=/usr/share/man/man1 DESTDIR=$PKG
+
+	ln -fs pkgconf $PKG/usr/bin/pkg-config
+}
