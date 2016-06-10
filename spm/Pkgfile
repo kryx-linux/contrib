@@ -1,0 +1,14 @@
+# Description: Simple password manager
+# URL:         https://notabug.org/kl3/spm
+# Maintainer:  Svyatoslav Mishyn, juef at openmailbox dot org
+# Depends on:  gnupg perl tree less sed
+# Optional:    pwgen
+
+name=spm
+version=1.4.3
+release=1
+source=(https://notabug.org/kl3/$name/archive/$version.tar.gz)
+
+build() {
+	make install PREFIX=/usr DESTDIR=$PKG
+}
