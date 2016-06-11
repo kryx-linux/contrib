@@ -4,15 +4,15 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=1.11.1
-release=4
-source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
+version=1.11.2
+release=1
+source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
     $name.rc $name.conf)
 
 build() {
     export AUTO_GOPATH=1
-    export DOCKER_GITCOMMIT=5604cbe
+    export DOCKER_GITCOMMIT=b9f10c9
     cd $name-$version
     hack/make.sh dynbinary
 
