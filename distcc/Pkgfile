@@ -6,17 +6,26 @@
 
 name=distcc
 version=3.1
-release=5
-source=(http://distcc.googlecode.com/files/$name-$version.tar.bz2
-	distccd) 
+release=6
+source=(https://github.com/distcc/distcc/archive/$name-$version.tar.gz
+	distccd
+	distcc-3.1-freedesktop.patch
+	distcc-3.1-python.patch
+	distcc-3.1-argc-fix.patch)
 
 build() {
-	cd $name-$version
+	#cd $name-$version
+	cd distcc-distcc-3.1
+
+	./autogen.sh
+
+	patch -p 1 -i $SRC/distcc-3.1-freedesktop.patch
+	patch -p 1 -i $SRC/distcc-3.1-python.patch
+	patch -p 2 -i $SRC/distcc-3.1-argc-fix.patch
 
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/share/man \
-		--disable-nls \
 		--without-gnome \
 		--without-gtk \
 		--disable-Werror \
