@@ -2,10 +2,10 @@
 # URL: https://developer.gnome.org/gcr/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: gnupg gtk3 libepoxy p11-kit util-linux
+# Depends on: gnupg gtk3 p11-kit util-linux vala xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxrandr
 
 name=gcr
-version=3.16.0
+version=3.20.0
 release=1
 source=(http://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
@@ -14,11 +14,9 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-update-icon-cache \
 		--disable-update-mime \
 		--disable-nls
-		
 
 	make
 	make DESTDIR=$PKG install
