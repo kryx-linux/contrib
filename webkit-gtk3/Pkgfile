@@ -5,7 +5,7 @@
 # Depends on: enchant glu gperf gst-plugins-base gtk gtk3 harfbuzz-icu libsecret libsoup libwebp ruby shared-mime-info xorg-libxt
 
 name=webkit-gtk3
-version=2.4.9
+version=2.4.11
 release=1
 source=(http://webkitgtk.org/releases/webkitgtk-$version.tar.xz)
 
@@ -17,7 +17,6 @@ build() {
 
 	../configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-geolocation \
 		--disable-gtk-doc-html \
 		--disable-silent-rules \
