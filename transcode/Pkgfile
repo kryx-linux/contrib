@@ -2,13 +2,15 @@
 # URL: http://tcforge.berlios.de/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Martin Opel, mo at obbl-net dot de
-# Depends on: imagemagick liba52 libdvdread libmpeg2 lzo mjpegtools
+# Depends on: imagemagick liba52 libdvdread libmpeg2 mjpegtools
 
 name=transcode
 version=1.1.7
-release=3
+release=4
 source=(https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.tar.bz2
 	http://downloads.sourceforge.net/project/subtitleripper/subtitleripper/subtitleripper-0.3-4/subtitleripper-0.3-4.tgz
+	subtitleripper-0.3.4-linkingorder.patch
+        subtitleripper-0.3.4-respect-ldflags.patch
 	transcode-1.1.7-ffmpeg.patch
 	transcode-1.1.7-ffmpeg-0.10.patch
 	transcode-1.1.7-ffmpeg-0.11.patch
@@ -16,11 +18,13 @@ source=(https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.
 	transcode-1.1.7-libav-9.patch
 	transcode-1.1.7-preset-force.patch
 	transcode-1.1.7-ffmpeg2.patch
-	subtitleripper-0.3.4-linkingorder.patch
-	subtitleripper-0.3.4-respect-ldflags.patch)
+	transcode-1.1.7-ffmpeg-2.4.patch
+	transcode-1.1.7-ffmpeg29.patch
+	transcode-ffmpeg3.patch)
 
 build() {
 	cd $name-$version
+
 	CFLAGS+=' -pthread'
 
 	patch -p 0 -i $SRC/transcode-1.1.7-ffmpeg.patch
@@ -30,12 +34,16 @@ build() {
 	patch -p 0 -i $SRC/transcode-1.1.7-libav-9.patch
 	patch -p 1 -i $SRC/transcode-1.1.7-preset-force.patch
 	patch -p 1 -i $SRC/transcode-1.1.7-ffmpeg2.patch
-	sed -i -e 's|freetype/ftglyph.h|freetype2/ftglyph.h|' filter/subtitler/load_font.c
-	libtoolize
+	patch -p 1 -i $SRC/transcode-1.1.7-ffmpeg-2.4.patch
+	patch -p 1 -i $SRC/transcode-1.1.7-ffmpeg29.patch
+	patch -p 1 -i $SRC/transcode-ffmpeg3.patch
+
+	sed \
+	-e 's|freetype/ftglyph.h|freetype2/freetype/ftglyph.h|' \
+	-i filter/subtitler/load_font.c
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-dependency-tracking \
 		--enable-alsa \
 		--enable-a52 \
@@ -60,7 +68,8 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share
+
+	rm -r $PKG/usr/share/doc
 
 	# Subtitle support
 	cd ../subtitleripper
@@ -74,5 +83,7 @@ build() {
 		-i Makefile
 	
 	make
-	install -m 0755 -D pgm2txt srttool subtitle2pgm subtitle2vobsub vobsub2pgm $PKG/usr/bin
+	install -m 0755 -t $PKG/usr/bin \
+		pgm2txt srttool subtitle2pgm \
+		subtitle2vobsub vobsub2pgm
 }
