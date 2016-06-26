@@ -2,11 +2,11 @@
 # URL: http://www.penguin.cz/~utx/amr
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on:
+# Depends on: unzip
 
 name=amrnb
 version=7.0.0.2
-release=1
+release=2
 source=(http://ftp.penguin.cz/pub/users/utx/amr/$name-$version.tar.bz2
 	http://www.3gpp.org/ftp/Specs/archive/26_series/26.104/26104-700.zip)
 
@@ -15,10 +15,7 @@ build() {
 	cp $SRC/26104-700_ANSI_C_source_code.zip .
 	sed -i -e 's|	$(MAKE) $(top_srcdir)/26104-700_ANSI_C_source_code.zip||' Makefile.in
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man \
-		--disable-static
+	./configure --prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
