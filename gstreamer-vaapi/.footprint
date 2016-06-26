@@ -15,6 +15,7 @@ drwxr-xr-x	root/root	usr/include/gstreamer-1.0/gst/vaapi/
 -rw-r--r--	root/root	usr/include/gstreamer-1.0/gst/vaapi/gstvaapidecoder_mpeg4.h
 -rw-r--r--	root/root	usr/include/gstreamer-1.0/gst/vaapi/gstvaapidecoder_vc1.h
 -rw-r--r--	root/root	usr/include/gstreamer-1.0/gst/vaapi/gstvaapidecoder_vp8.h
+-rw-r--r--	root/root	usr/include/gstreamer-1.0/gst/vaapi/gstvaapidecoder_vp9.h
 -rw-r--r--	root/root	usr/include/gstreamer-1.0/gst/vaapi/gstvaapidisplay.h
 -rw-r--r--	root/root	usr/include/gstreamer-1.0/gst/vaapi/gstvaapidisplay_drm.h
 -rw-r--r--	root/root	usr/include/gstreamer-1.0/gst/vaapi/gstvaapidisplay_egl.h
@@ -62,31 +63,31 @@ drwxr-xr-x	root/root	usr/lib/gstreamer-1.0/
 -rwxr-xr-x	root/root	usr/lib/gstreamer-1.0/libgstvaapi.so
 -rwxr-xr-x	root/root	usr/lib/gstreamer-1.0/libgstvaapi_parse.la
 -rwxr-xr-x	root/root	usr/lib/gstreamer-1.0/libgstvaapi_parse.so
--rw-r--r--	root/root	usr/lib/libgstvaapi-1.6.a
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-1.6.la
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-1.6.so -> libgstvaapi-1.6.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-1.6.so.1 -> libgstvaapi-1.6.so.1.0.0
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-1.6.so.1.0.0
--rw-r--r--	root/root	usr/lib/libgstvaapi-drm-1.6.a
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-drm-1.6.la
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-drm-1.6.so -> libgstvaapi-drm-1.6.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-drm-1.6.so.1 -> libgstvaapi-drm-1.6.so.1.0.0
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-drm-1.6.so.1.0.0
--rw-r--r--	root/root	usr/lib/libgstvaapi-egl-1.6.a
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-egl-1.6.la
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-egl-1.6.so -> libgstvaapi-egl-1.6.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-egl-1.6.so.1 -> libgstvaapi-egl-1.6.so.1.0.0
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-egl-1.6.so.1.0.0
--rw-r--r--	root/root	usr/lib/libgstvaapi-glx-1.6.a
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-glx-1.6.la
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-glx-1.6.so -> libgstvaapi-glx-1.6.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-glx-1.6.so.1 -> libgstvaapi-glx-1.6.so.1.0.0
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-glx-1.6.so.1.0.0
--rw-r--r--	root/root	usr/lib/libgstvaapi-x11-1.6.a
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-x11-1.6.la
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-x11-1.6.so -> libgstvaapi-x11-1.6.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libgstvaapi-x11-1.6.so.1 -> libgstvaapi-x11-1.6.so.1.0.0
--rwxr-xr-x	root/root	usr/lib/libgstvaapi-x11-1.6.so.1.0.0
+-rw-r--r--	root/root	usr/lib/libgstvaapi-1.8.a
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-1.8.la
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-1.8.so -> libgstvaapi-1.8.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-1.8.so.0 -> libgstvaapi-1.8.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-1.8.so.0.0.0
+-rw-r--r--	root/root	usr/lib/libgstvaapi-drm-1.8.a
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-drm-1.8.la
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-drm-1.8.so -> libgstvaapi-drm-1.8.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-drm-1.8.so.0 -> libgstvaapi-drm-1.8.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-drm-1.8.so.0.0.0
+-rw-r--r--	root/root	usr/lib/libgstvaapi-egl-1.8.a
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-egl-1.8.la
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-egl-1.8.so -> libgstvaapi-egl-1.8.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-egl-1.8.so.0 -> libgstvaapi-egl-1.8.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-egl-1.8.so.0.0.0
+-rw-r--r--	root/root	usr/lib/libgstvaapi-glx-1.8.a
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-glx-1.8.la
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-glx-1.8.so -> libgstvaapi-glx-1.8.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-glx-1.8.so.0 -> libgstvaapi-glx-1.8.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-glx-1.8.so.0.0.0
+-rw-r--r--	root/root	usr/lib/libgstvaapi-x11-1.8.a
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-x11-1.8.la
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-x11-1.8.so -> libgstvaapi-x11-1.8.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libgstvaapi-x11-1.8.so.0 -> libgstvaapi-x11-1.8.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libgstvaapi-x11-1.8.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/gstreamer-vaapi-1.0.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/gstreamer-vaapi-drm-1.0.pc
