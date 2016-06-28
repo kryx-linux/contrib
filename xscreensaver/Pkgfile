@@ -5,7 +5,7 @@
 # Depends on: bc fortune giflib glu intltool libglade util-linux xorg-libxmu
 
 name=xscreensaver
-version=5.34
+version=5.35
 release=1
 source=(http://www.jwz.org/$name/$name-$version.tar.gz)
 
@@ -19,7 +19,6 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
-		--mandir=/usr/man \
 		--with-x-app-defaults='/etc/X11/app-defaults' \
 		--enable-locking \
 		--enable-root-passwd \
