@@ -2,11 +2,10 @@
 # URL: http://moc.daper.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Stoyan Zhekov, zhware at hotpop dot com
-# Depends on: curl libsndfile libid3tag libmad
- 
+# Depends on: curl libid3tag libmad libsndfile popt
 
 name=moc
-version=2.4.4
+version=2.5.1
 release=1
 source=(ftp://ftp.daper.net/pub/soft/$name/stable/$name-$version.tar.bz2)
 
@@ -15,7 +14,6 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-nls \
 		--disable-debug
 
