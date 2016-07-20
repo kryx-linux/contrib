@@ -3,9 +3,9 @@
 # Maintainer:  Svyatoslav Mishyn, juef at openmailbox dot org
 
 name=pkgconf
-version=0.9.12
+version=1
 release=1
-source=(https://github.com/$name/$name/releases/download/$name-$version/$name-$version.tar.bz2)
+source=(http://rabbit.dereferenced.org/%7Enenolod/distfiles/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
@@ -17,4 +17,5 @@ build() {
 	make install MANDIR=/usr/share/man/man1 DESTDIR=$PKG
 
 	ln -fs pkgconf $PKG/usr/bin/pkg-config
+	rm -fr $PKG/usr/share/doc
 }
