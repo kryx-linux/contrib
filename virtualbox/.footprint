@@ -107,8 +107,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/Makefile
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/build_in_tmp
--rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/dkms.conf
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/do_dkms
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/GenericRequest.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/HGCMInternal.c
@@ -180,7 +178,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/common/tab
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/common/table/avlpv.c
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/common/time/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/common/time/time.c
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/do_Module.symvers
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/generic/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/generic/RTAssertShouldPanic-generic.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/generic/RTLogWriteStdErr-stub-generic.c
@@ -213,6 +210,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/in
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/internal/iprt.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/internal/lockvalidator.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/internal/magics.h
+-rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/internal/mem.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/internal/memobj.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/internal/process.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxguest/include/internal/sched.h
@@ -314,7 +312,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/VbglR0CanUsePhysPageList.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/dirops.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/divdi3.c
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/do_Module.symvers
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/include/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/include/VBox/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxsf/include/VBox/VBoxGuest.h
@@ -383,7 +380,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/Makefile.include.header
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/Modesetting.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/VBVABase.c
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/do_Module.symvers
 -rw-r--r--	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/heapoffset.c
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/include/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/include/VBox/
@@ -469,6 +465,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/src/vboxvideo/include/ip
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/vboxvideo_drv_19.so
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/vboxvideo_drv_70.so
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/additions/vboxvideo_drv_71.so
+-rwxr-xr-x	root/root	usr/share/virtualbox/bin/check_module_dependencies.sh
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/components/
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/components/VBoxC.so
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/components/VBoxSVCM.so
@@ -479,6 +476,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/dtrace/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/dtrace/lib/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/dtrace/lib/amd64/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/dtrace/lib/amd64/CPUMInternal.d
+-rw-r--r--	root/root	usr/share/virtualbox/bin/dtrace/lib/amd64/cpum.d
 -rw-r--r--	root/root	usr/share/virtualbox/bin/dtrace/lib/amd64/cpumctx.d
 -rw-r--r--	root/root	usr/share/virtualbox/bin/dtrace/lib/amd64/vbox-arch-types.d
 -rw-r--r--	root/root	usr/share/virtualbox/bin/dtrace/lib/amd64/vbox-types.d
@@ -487,8 +485,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/dtrace/lib/amd64/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/dtrace/testcase/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/dtrace/testcase/amd64/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/dtrace/testcase/amd64/vbox-vm-struct-test.d
-drwxr-xr-x	root/root	usr/share/virtualbox/bin/helpers/
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/helpers/generate_service_file
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/iPxeBaseBin
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/icons/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/icons/128x128/
@@ -641,11 +637,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/rdesktop-vrdp-keymaps/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/rdesktop-vrdp.tar.gz
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/routines.sh
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/scripts/
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/scripts/VBoxHeadlessXOrg.sh
 -rw-r--r--	root/root	usr/share/virtualbox/bin/scripts/generated.sh
--rw-r--r--	root/root	usr/share/virtualbox/bin/scripts/init_template.sh
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/scripts/install.sh
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/scripts/install_service
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/sdk/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/sdk/bindings/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/sdk/bindings/VirtualBox.xidl
@@ -667,7 +659,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/sdk/bindings/c/include/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/sdk/bindings/c/include/VBoxCAPI_v4_1.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/sdk/bindings/c/include/VBoxCAPI_v4_2.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/sdk/bindings/c/include/VBoxCAPI_v4_3.h
--rw-r--r--	root/root	usr/share/virtualbox/bin/sdk/bindings/c/include/VBoxCAPI_v5_0.h
+-rw-r--r--	root/root	usr/share/virtualbox/bin/sdk/bindings/c/include/VBoxCAPI_v5_1.h
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/sdk/bindings/c/samples/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/sdk/bindings/c/samples/Makefile
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/sdk/bindings/glue/
@@ -1102,8 +1094,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/sdk/bindings/xpcom/samples/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/Makefile
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/src/build_in_tmp
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/dkms.conf
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/src/do_dkms
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv.ko
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxdrv/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/.SUPDrv.o.cmd
@@ -1263,7 +1253,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxdrv/common/time/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/common/time/.time.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/common/time/time.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/common/time/time.o
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxdrv/do_Module.symvers
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxdrv/generic/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/generic/.RTAssertShouldPanic-generic.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/generic/.RTLogWriteStdErr-stub-generic.o.cmd
@@ -1326,6 +1315,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/iprt.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/lockvalidator.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/magics.h
+-rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/mem.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/memobj.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/process.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/include/internal/sched.h
@@ -1503,7 +1493,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/common/string/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/common/string/strformattype.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/common/string/strprintf.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/common/string/strtonum.c
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/do_Module.symvers
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/include/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/include/VBox/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/include/VBox/SUPDrvMangling.h
@@ -1600,7 +1589,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetflt/.tmp_versions/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/VBoxNetFlt.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/VBoxNetFlt.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/VBoxNetFltInternal.h
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetflt/do_Module.symvers
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetflt/include/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetflt/include/VBox/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/include/VBox/SUPDrvMangling.h
@@ -1700,7 +1688,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxpci/.tmp_versions/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/VBoxPci.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/VBoxPci.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/VBoxPciInternal.h
--rwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxpci/do_Module.symvers
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxpci/include/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxpci/include/VBox/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/include/VBox/SUPDrvMangling.h
@@ -1792,6 +1779,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/tools/
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/vbox-img
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/vboxautostart-service.sh
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/vboxballoonctrl-service.sh
+-rwxr-xr-x	root/root	usr/share/virtualbox/bin/vboxdrv.sh
 -rw-r--r--	root/root	usr/share/virtualbox/bin/vboxkeyboard.tar.bz2
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/vboxweb-service.sh
 -rw-r--r--	root/root	usr/share/virtualbox/bin/virtualbox.desktop

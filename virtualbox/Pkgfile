@@ -5,7 +5,7 @@
 # Depends on: bin86 dev86 libsdl libidl qt4 xerces-c iasl xorg-libxmu libcap makeself cdrkit glu libvpx
 
 name=virtualbox
-version=5.0.20
+version=5.1.2
 release=1
 source=(http://download.virtualbox.org/$name/$version/VirtualBox-$version.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
@@ -18,13 +18,14 @@ build() {
 
   sed -i Config.kmk \
       -e "s|VBOX_WITH_WARNINGS_AS_ERRORS = 1|VBOX_WITH_WARNINGS_AS_ERRORS =|g" \
-      -e "s|VBOX_WITH_PAM = 1|VBOX_WITH_PAM =|g"
+      -e "s|VBOX_WITH_PAM = 1|VBOX_WITH_PAM =|g" \
+      -e "s|VBOX_WITH_QTGUI_V5 = 1|VBOX_WITH_QTGUI_V5 =|g"
 
   sed -i src/VBox/Devices/PC/vbox.dsl \
       -e 's|Name (_CID, "smc-napa")|Name (_CID, "smcnapa")|'
 
   # compile
-  ./configure --with-qt4-dir=/usr/share/qt4 \
+  ./configure --enable-qt4 \
               --disable-hardening \
               --ose \
               --disable-pulse \
