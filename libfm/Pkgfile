@@ -1,0 +1,36 @@
+# Description: Library for file management.
+# URL: http://pcmanfm.sourceforge.net/
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Bartlomiej Palmowski, rotwang at crux dot org dot pl
+# Depends on: gtk menu-cache intltool xorg-libxdamage
+
+name=libfm
+version=1.2.4
+release=1
+source=(http://downloads.sourceforge.net/pcmanfm/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--sysconfdir=/etc \
+		--disable-gtk-doc-html
+
+	# https://bugzilla.gnome.org/show_bug.cgi?id=656231
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/locale
+	#rm -r $PKG/usr/share/gtk-doc
+
+	if [[ -h $PKG/usr/include/libfm/libfm-1.0 ]]; then
+		rm -r $PKG/usr/include/libfm
+		cd $PKG/usr/include/
+		ln -s libfm-1.0 libfm
+	fi
+}
+
