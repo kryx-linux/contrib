@@ -1,17 +1,24 @@
-# Description:  fast and lightweight file manager
-# URL:          http://pcmanfm.sourceforge.net/
-# Maintainer:   James Mills, prologic at shortcircuit dot net dot au
-# Depends on:   libfm desktop-file-utils shared-mime-info
+# Description: Fast and lightweight file manager.
+# URL: http://pcmanfm.sourceforge.net/
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: James Mills, prologic at shortcircuit dot net dot au
+# Depends on: libfm desktop-file-utils shared-mime-info
+# Optional: gvfs udisks xarchiver
 
 name=pcmanfm
-version=1.2.3
+version=1.2.4
 release=1
 source=(http://downloads.sourceforge.net/$name/$name-$version.tar.xz)
 
 build() {
-    cd $name-$version
-    ./configure --prefix=/usr --sysconfdir=/etc
-    make
-    make DESTDIR=$PKG install
-    rm -rf $PKG/usr/share/locale
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/locale
 }
