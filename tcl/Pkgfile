@@ -4,7 +4,7 @@
 # Packager: Sven Dahl, dahl at c64 dot org
 
 name=tcl
-version=8.6.4
+version=8.6.6
 release=1
 source=(http://downloads.sourceforge.net/project/$name/Tcl/$version/$name$version-src.tar.gz)
 
@@ -13,7 +13,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
+		--mandir=/usr/share/man \
 		--without-tzdata \
 		--enable-64bit
 
@@ -29,15 +29,13 @@ build() {
 	ln -s libtcl${version%.*}.so $PKG/usr/lib/libtcl.so
 	ln -s libtclstub${version%.*}.a $PKG/usr/lib/libtclstub.a
 
-	chmod -R u+w $PKG/usr/man
-
 	# remove $SRC traces
 	sed \
 		-e "s|$SRC/tcl$version/unix|/usr/lib|g" \
 		-e "s|$SRC/tcl$version|/usr/include|g" \
 		-i $PKG/usr/lib/tclConfig.sh
 
-	local tdbcver=tdbc1.0.3
+	local tdbcver=tdbc1.0.4
 	sed \
 		-e "s|$SRC/tcl$version/unix/pkgs/$tdbcver|/usr/lib/$tdbcver|g" \
 		-e "s|$SRC/tcl$version/pkgs/$tdbcver/generic|/usr/include|g" \
@@ -45,7 +43,7 @@ build() {
 		-e "s|$SRC/tcl$version/pkgs/$tdbcver|/usr/include|g" \
 		-i $PKG/usr/lib/$tdbcver/tdbcConfig.sh
 
-	local itclver=itcl4.0.3
+	local itclver=itcl4.0.5
 	sed \
 		-e "s|$SRC/tcl$version/unix/pkgs/$itclver|/usr/lib/$itclver|g" \
 		-e "s|$SRC/tcl$version/pkgs/$itclver/generic|/usr/include|g" \
