@@ -2,25 +2,24 @@
 # URL: http://p7zip.sourceforge.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Matt Housh, jaeger at crux dot nu
+# Depends on: yasm
 
 name=p7zip
-version=9.20.1
+version=16.02
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version}_src_all.tar.bz2)
 
 build() {
 	cd ${name}_$version
 
-	sed -i -e "s/OPTFLAGS=.*/OPTFLAGS=$CFLAGS/" makefile.machine
+	cp makefile.linux_amd64_asm makefile.machine
 
-	make 7zr 7za sfx
-	sh install.sh usr/bin usr/lib/p7zip usr/man usr/share/doc/p7zip $PKG/
+	make all3 OPTFLAGS="$CFLAGS"
 
-	rm $PKG/usr/bin/7za $PKG/usr/bin/7zr
+	make install \
+		DEST_DIR="$PKG" \
+		DEST_HOME=/usr \
+		DEST_MAN=/usr/share/man
 
-	ln -s /usr/lib/p7zip/7za $PKG/usr/bin/7z
-	ln -s /usr/lib/p7zip/7za $PKG/usr/bin/7za
-	ln -s /usr/lib/p7zip/7zr $PKG/usr/bin/7zr
-	rm -r $PKG/usr/share
-	chmod -vR u+w $PKG
+	rm -r $PKG/usr/share/doc
 }
