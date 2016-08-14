@@ -6,8 +6,9 @@
 
 name=ffmpeg
 version=3.1.2
-release=1
-source=(http://ffmpeg.org/releases/$name-$version.tar.bz2)
+release=2
+source=(http://ffmpeg.org/releases/$name-$version.tar.bz2
+	ffmpeg-x264-10bit.sh)
 
 build() {
 	cd $name-$version
@@ -53,4 +54,6 @@ build() {
 	[ "$CC" ] || CC=gcc
 	make CC="$CC" SHARED_PP='yes' $MAKEFLAGS
 	make DESTDIR=$PKG install install-man
+
+	install -m 0755 -D $SRC/ffmpeg-x264-10bit.sh $PKG/usr/bin/ffmpeg-x264-10bit
 }
