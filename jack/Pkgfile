@@ -6,17 +6,18 @@
 
 name=jack
 version=1.9.10
-release=1
+release=2
 source=(https://dl.dropboxusercontent.com/u/28869550/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-	local JOBS="$(sed -e 's/.*\(\-j[ 0-9]\+\) \{0,1\}.*/\1/' <<< $MAKEFLAGS)"
+
+	local JOBS=$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
+
 	./waf configure \
 		--prefix=/usr \
-		--mandir=/usr/man/man1 \
 		--alsa
 
-	./waf build $JOBS
+	./waf build -j$JOBS
 	./waf install --destdir=$PKG
 }
