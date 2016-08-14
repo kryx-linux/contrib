@@ -5,7 +5,7 @@
 # Depends on: libsamplerate
 
 name=jack-audio-connection-kit
-version=0.121.3
+version=0.124.1
 release=1
 source=(http://jackaudio.org/downloads/$name-$version.tar.gz)
 
@@ -14,10 +14,9 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
+		--libdir=/usr/lib \
 		--disable-portaudio
 
 	make
 	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/share
 }
