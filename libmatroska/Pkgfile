@@ -5,16 +5,14 @@
 # Depends on: libebml
 
 name=libmatroska
-version=1.4.4
+version=1.4.5
 release=1
 source=(https://mkvtoolnix.download/sources/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
+	./configure --prefix=/usr
 
 	make
 	make prefix=$PKG/usr install
