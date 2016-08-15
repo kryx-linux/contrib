@@ -4,13 +4,14 @@
 # Depends on:	qt4
 
 name=keepassx
-version=0.4.3
+version=0.4.4
 release=1
-source=(http://prdownloads.sf.net/$name/$name-$version.tar.gz)
+source=(https://www.keepassx.org/releases/$version/keepassx-$version.tar.gz unistd.patch)
 
-build () {
+build() {
 	cd $name-$version
-	sed -i -e '32a#include <unistd.h>' src/lib/random.cpp
+	patch -p1 -i $SRC/unistd.patch
+
     	qmake
 	make
 	make INSTALL_ROOT=$PKG install
