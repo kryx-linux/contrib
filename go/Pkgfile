@@ -35,4 +35,7 @@ build() {
     install -d $PKG/usr/bin
     ln -s /usr/lib/go/bin/go $PKG/usr/bin/
     ln -s /usr/lib/go/bin/gofmt $PKG/usr/bin/
+
+    # work around a bug in the build system
+    find $PKG -name "*.a" -exec chmod 644 '{}' \;
 }
