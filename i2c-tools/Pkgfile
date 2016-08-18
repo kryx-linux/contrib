@@ -1,5 +1,5 @@
 # Description: I2C Tools for Linux
-# URL: http://www.lm-sensors.org
+# URL: https://github.com/groeck/i2c-tools
 # Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
 # Packager: Mikhail Kolesnik, mike at openbunker dot org
 # Depends on:
@@ -7,13 +7,14 @@
 name=i2c-tools
 version=3.1.0
 release=1
-source=(http://dl.lm-sensors.org/$name/releases/$name-$version.tar.bz2)
+source=(https://github.com/groeck/$name/archive/V${version//./-}.tar.gz)
 
 build() {
-	cd $name-$version
-	sed -i 's|/usr/local|/usr|' Makefile
-	sed -i 's|/share/man|/man|' Makefile
-	make PREFIX=/usr
-	make DESTDIR=$PKG install
-	rm -rf $PKG/usr/include
+  cd $name-${version//./-}
+  sed -e 's|/usr/local|/usr|g' -i Makefile
+
+  make PREFIX=/usr
+  make DESTDIR=$PKG install
+
+  rm -r $PKG/usr/include
 }
