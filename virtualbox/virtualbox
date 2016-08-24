@@ -14,10 +14,10 @@ VBOX_PATH=/usr/share/virtualbox/bin
 export LD_LIBRARY_PATH=${VBOX_PATH}:${LD_LIBRARY_PATH}
 
 cd ${VBOX_PATH}
-./VBoxSVC &>/dev/null &
+./VBoxSVC >/dev/null &
 sleep 2
 ./VirtualBox
-cd - &> /dev/null
+cd - > /dev/null
 
 /usr/bin/pkill VBoxSVC || /bin/kill -9 `/usr/bin/pgrep VBoxSVC`
 

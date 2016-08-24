@@ -6,13 +6,19 @@
 
 name=virtualbox
 version=5.1.4
-release=1
+release=2
 source=(http://download.virtualbox.org/$name/$version/VirtualBox-$version.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
 
 build() {
-  # environment value
-  [ ! -z $KERN_DIR ] && KARG="KERN_DIR=$KERN_DIR"
+  # customize kernel version
+  if [ ! -z $KERN_DIR ]; then
+    KVER="$(make -s -C $KERN_DIR kernelversion)"
+    KARGS="KERN_DIR=$KERN_DIR"
+  else
+    KVER="$(uname -r)"
+  fi
+  KARGS="$KARGS MODULE_DIR=$PKG/lib/modules/$KVER/extra"
 
   cd VirtualBox-$version
 
@@ -37,14 +43,9 @@ build() {
   source ./env.sh
   kmk all
 
-  # compile kernel modules
-  cd out/linux.amd64/release/bin/src
-
-  make $KARG
-
-  # install kernel modules
-  install -d $PKG/lib/modules/$(uname -r)/kernel/drivers/misc
-  install -m 0644 *.ko $PKG/lib/modules/$(uname -r)/kernel/drivers/misc
+  # compile and install kernel modules
+  sed '/depmod -a/d' -i out/linux.amd64/release/bin/src/*/Makefile
+  make -s -C out/linux.amd64/release/bin/src $KARGS install
 
   # remove superfluous files
   rm -rf $SRC/VirtualBox-$version/out/linux.amd64/release/bin/{sdk/samples,testcase,nls*}

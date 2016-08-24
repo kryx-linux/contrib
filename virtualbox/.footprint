@@ -5,13 +5,11 @@ drwxr-xr-x	root/root	etc/udev/rules.d/
 drwxr-xr-x	root/root	lib/
 drwxr-xr-x	root/root	lib/modules/
 drwxr-xr-x	root/root	lib/modules/<kernel-version>/
-drwxr-xr-x	root/root	lib/modules/<kernel-version>/kernel/
-drwxr-xr-x	root/root	lib/modules/<kernel-version>/kernel/drivers/
-drwxr-xr-x	root/root	lib/modules/<kernel-version>/kernel/drivers/misc/
--rw-r--r--	root/root	lib/modules/<kernel-version>/kernel/drivers/misc/vboxdrv.ko
--rw-r--r--	root/root	lib/modules/<kernel-version>/kernel/drivers/misc/vboxnetadp.ko
--rw-r--r--	root/root	lib/modules/<kernel-version>/kernel/drivers/misc/vboxnetflt.ko
--rw-r--r--	root/root	lib/modules/<kernel-version>/kernel/drivers/misc/vboxpci.ko
+drwxr-xr-x	root/root	lib/modules/<kernel-version>/extra/
+-rw-r--r--	root/root	lib/modules/<kernel-version>/extra/vboxdrv.ko
+-rw-r--r--	root/root	lib/modules/<kernel-version>/extra/vboxnetadp.ko
+-rw-r--r--	root/root	lib/modules/<kernel-version>/extra/vboxnetflt.ko
+-rw-r--r--	root/root	lib/modules/<kernel-version>/extra/vboxpci.ko
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/virtualbox
@@ -1094,7 +1092,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/sdk/bindings/xpcom/samples/
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/Makefile
 -rwxr-xr-x	root/root	usr/share/virtualbox/bin/src/build_in_tmp
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv.ko
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxdrv/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/.SUPDrv.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/.SUPDrvGip.o.cmd
@@ -1473,7 +1470,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxdrv/r0drv/linux/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/vboxdrv.mod.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/vboxdrv.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxdrv/version-generated.h
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp.ko
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/.VBoxNetAdp.o.cmd
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/.tmp_versions/
@@ -1482,7 +1478,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/.tmp_versions/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/.vboxnetadp.mod.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/.vboxnetadp.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/Makefile
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/Module.symvers
+-rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/Module.symvers (EMPTY)
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/VBoxNetAdp.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/VBoxNetAdp.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/VBoxNetAdpInternal.h
@@ -1568,7 +1564,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetadp/r0drv/linux/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/vboxnetadp.mod.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/vboxnetadp.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetadp/version-generated.h
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt.ko
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetflt/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/.SUPR0IdcClient.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/.SUPR0IdcClientComponent.o.cmd
@@ -1579,7 +1574,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetflt/.tmp_versions/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/.vboxnetflt.mod.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/.vboxnetflt.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/Makefile
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/Module.symvers
+-rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/Module.symvers (EMPTY)
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/SUPDrvIDC.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/SUPR0IdcClient.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/SUPR0IdcClient.o
@@ -1667,7 +1662,6 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxnetflt/r0drv/linux/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/vboxnetflt.mod.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/vboxnetflt.o
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxnetflt/version-generated.h
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci.ko
 drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxpci/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/.SUPR0IdcClient.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/.SUPR0IdcClientComponent.o.cmd
@@ -1678,7 +1672,7 @@ drwxr-xr-x	root/root	usr/share/virtualbox/bin/src/vboxpci/.tmp_versions/
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/.vboxpci.mod.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/.vboxpci.o.cmd
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/Makefile
--rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/Module.symvers
+-rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/Module.symvers (EMPTY)
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/SUPDrvIDC.h
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/SUPR0IdcClient.c
 -rw-r--r--	root/root	usr/share/virtualbox/bin/src/vboxpci/SUPR0IdcClient.o
