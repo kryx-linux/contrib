@@ -1,0 +1,34 @@
+# Description: GtkGLExtmm is a C++ wrapper for GtkGLExt.
+# URL: http://www.k-3d.org/gtkglext/Main_Page
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: gtkmm gtkglext mesa3d
+
+name=gtkglextmm
+version=1.2.0
+release=4
+source=(http://dl.sourceforge.net/sourceforge/gtkglext/gtkglextmm-$version.tar.bz2
+	gtkglextmm-1.2.0-aclocal.patch
+	fix_ftbfs_gtk_2_20.patch
+	fix_ftbfs_gtk_2_36.patch
+	fix_ftbfs_gtk_2_37.patch)
+
+build() {
+	cd $name-$version
+
+	patch -p1 -i $SRC/gtkglextmm-1.2.0-aclocal.patch
+	patch -p1 -i $SRC/fix_ftbfs_gtk_2_20.patch
+	patch -p1 -i $SRC/fix_ftbfs_gtk_2_36.patch
+	patch -p1 -i $SRC/fix_ftbfs_gtk_2_37.patch
+
+	CXXFLAGS+=' -std=c++11'
+
+	./configure \
+		--prefix=/usr \
+		--disable-gtkglext-test
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/doc
+}
