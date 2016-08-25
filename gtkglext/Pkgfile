@@ -6,11 +6,15 @@
 
 name=gtkglext
 version=1.2.0
-release=1
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
+release=2
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
+	gtk2.20.patch)
 
 build() {
 	cd $name-$version
+
+	patch -Np1 -i $SRC/gtk2.20.patch
+	sed '/AC_PATH_XTRA/d' -i configure.in
 
 	./configure \
 		--prefix=/usr \
