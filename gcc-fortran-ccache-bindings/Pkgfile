@@ -2,15 +2,16 @@
 # URL: http://gcc.gnu.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: gcc-fortran ccache
+# Depends on: ccache
 
 name=gcc-fortran-ccache-bindings
 version=1
-release=1
+release=2
 source=()
 
 build() {
 	install -d $PKG/usr/lib/ccache
+	ln -s ../../bin/ccache $PKG/usr/lib/ccache/f77
 	ln -s ../../bin/ccache $PKG/usr/lib/ccache/f90
 	ln -s ../../bin/ccache $PKG/usr/lib/ccache/f95
 	ln -s ../../bin/ccache $PKG/usr/lib/ccache/gfortran
