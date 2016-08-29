@@ -2,11 +2,10 @@
 # URL: http://www.fftw.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: acrux, acrux at linuxmail dot org
-# Depends on: 
-# Optional: gcc-fortran
+# Depends on: gcc-fortran
 
 name=fftw
-version=3.3.4
+version=3.3.5
 release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
@@ -14,10 +13,15 @@ build() {
 	cd $name-$version
 
 	local config="\
+F77=gfortran \
 --prefix=/usr \
 --enable-threads \
 --with-gnu-ld \
---enable-shared"
+--enable-shared \
+--enable-openmp"
+
+	# use upstream default CFLAGS while keeping our -march/-mtune
+	CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
 
 	# compiling single precision library
 	./configure \
