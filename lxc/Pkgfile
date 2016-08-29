@@ -1,15 +1,15 @@
 # Description: container namespace cgroup virtualisation for linux guests
-# URL:         http://lxc.sf.net
+# URL:         https://linuxcontainers.org/lxc
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 
 name=lxc
-version=1.1.5
+version=2.0.4
 release=1
 source=(http://lxc.sourceforge.net/download/lxc-$version.tar.gz
         man-pages.tar.xz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
   ./configure --prefix=/usr \
               --mandir=/usr/man \
               --libexecdir=/usr/lib \

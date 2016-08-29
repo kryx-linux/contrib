@@ -10,9 +10,9 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/lxc-cgroup
 -rwxr-xr-x	root/root	usr/bin/lxc-checkconfig
 -rwxr-xr-x	root/root	usr/bin/lxc-checkpoint
--rwxr-xr-x	root/root	usr/bin/lxc-clone
 -rwxr-xr-x	root/root	usr/bin/lxc-config
 -rwxr-xr-x	root/root	usr/bin/lxc-console
+-rwxr-xr-x	root/root	usr/bin/lxc-copy
 -rwxr-xr-x	root/root	usr/bin/lxc-create
 -rwxr-xr-x	root/root	usr/bin/lxc-destroy
 -rwxr-xr-x	root/root	usr/bin/lxc-device
@@ -36,9 +36,11 @@ drwxr-xr-x	root/root	usr/include/lxc/
 -rw-r--r--	root/root	usr/include/lxc/version.h
 drwxr-xr-x	root/root	usr/lib/
 lrwxrwxrwx	root/root	usr/lib/liblxc.so -> liblxc.so.1
-lrwxrwxrwx	root/root	usr/lib/liblxc.so.1 -> liblxc.so.1.1.5
--rwxr-xr-x	root/root	usr/lib/liblxc.so.1.1.5
+lrwxrwxrwx	root/root	usr/lib/liblxc.so.1 -> liblxc.so.1.2.0
+-rwxr-xr-x	root/root	usr/lib/liblxc.so.1.2.0
 drwxr-xr-x	root/root	usr/lib/lxc/
+drwxr-xr-x	root/root	usr/lib/lxc/hooks/
+-rwxr-xr-x	root/root	usr/lib/lxc/hooks/unmount-namespace
 -rwxr-xr-x	root/root	usr/lib/lxc/lxc-containers
 -rwxr-xr-x	root/root	usr/lib/lxc/lxc-monitord
 -rwxr-xr-x	root/root	usr/lib/lxc/lxc-net
@@ -87,6 +89,8 @@ drwxr-xr-x	root/root	usr/sbin/
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/lxc/
 drwxr-xr-x	root/root	usr/share/lxc/config/
+-rw-r--r--	root/root	usr/share/lxc/config/alpine.common.conf
+-rw-r--r--	root/root	usr/share/lxc/config/alpine.userns.conf
 -rw-r--r--	root/root	usr/share/lxc/config/archlinux.common.conf
 -rw-r--r--	root/root	usr/share/lxc/config/archlinux.userns.conf
 -rw-r--r--	root/root	usr/share/lxc/config/centos.common.conf
@@ -109,6 +113,10 @@ drwxr-xr-x	root/root	usr/share/lxc/config/common.conf.d/
 -rw-r--r--	root/root	usr/share/lxc/config/oracle.userns.conf
 -rw-r--r--	root/root	usr/share/lxc/config/plamo.common.conf
 -rw-r--r--	root/root	usr/share/lxc/config/plamo.userns.conf
+-rw-r--r--	root/root	usr/share/lxc/config/slackware.common.conf
+-rw-r--r--	root/root	usr/share/lxc/config/slackware.userns.conf
+-rw-r--r--	root/root	usr/share/lxc/config/sparclinux.common.conf
+-rw-r--r--	root/root	usr/share/lxc/config/sparclinux.userns.conf
 -rw-r--r--	root/root	usr/share/lxc/config/ubuntu-cloud.common.conf
 -rw-r--r--	root/root	usr/share/lxc/config/ubuntu-cloud.lucid.conf
 -rw-r--r--	root/root	usr/share/lxc/config/ubuntu-cloud.userns.conf
@@ -141,6 +149,8 @@ drwxr-xr-x	root/root	usr/share/lxc/templates/
 -rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-opensuse
 -rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-oracle
 -rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-plamo
+-rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-slackware
+-rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-sparclinux
 -rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-sshd
 -rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-ubuntu
 -rwxr-xr-x	root/root	usr/share/lxc/templates/lxc-ubuntu-cloud
