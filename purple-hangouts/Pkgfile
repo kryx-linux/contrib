@@ -1,0 +1,17 @@
+# Description: A Pidgin plugin to support the proprietary protocol used by Google for the Hangouts service.
+# URL: https://bitbucket.org/EionRobb/purple-hangouts
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: pidgin protobuf-c json-glib
+
+name=purple-hangouts
+version=20160907
+release=1
+#source=(https://bitbucket.org/EionRobb/$name/get/1c0286e48e92.zip)
+source=(http://crux.ster.zone/downloads/$name/1c0286e48e92.zip)
+
+build() {
+	cd EionRobb-purple-hangouts-*
+	make
+	make DESTDIR=$PKG install
+}
