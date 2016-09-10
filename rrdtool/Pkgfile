@@ -2,26 +2,23 @@
 # URL: http://oss.oetiker.ch/rrdtool/index.en.html
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Younes Hafri, ycrux at club-internet dot fr
-# Depends on: intltool libart_lgpl libcgi libgd pango tcl
+# Depends on: intltool pango
 
 name=rrdtool
-version=1.4.8
+version=1.5.6
 release=1
-source=(http://oss.oetiker.ch/rrdtool/pub/$name-$version.tar.gz
-	rrdtool-pangofont.patch)
+source=(http://oss.oetiker.ch/rrdtool/pub/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/rrdtool-pangofont.patch
-
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--enable-shared \
 		--enable-perl-site-install \
 		--enable-ruby-site-install \
-		--disable-libwrap
+		--disable-libwrap \
+		--disable-rpath
 
 	make LIBS+="-lglib-2.0"
 	make DESTDIR=$PKG install
@@ -39,4 +36,3 @@ build() {
 	# Remove empty directories
 	find $PKG -depth -empty -delete
 }
-
