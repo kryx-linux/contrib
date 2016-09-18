@@ -1,11 +1,11 @@
 # Description: A wired and wireless network manager.
 # URL: http://launchpad.net/wicd
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: dbus-python pygtk urwid
+# Depends on: dbus-python pygtk urwid wpa_supplicant
 
-name=wicd 
+name=wicd
 version=1.7.2.4
-release=4
+release=5
 source=(http://launchpad.net/wicd/1.7/$version/+download/$name-$version.tar.gz
 	wicd.rc
 	http://bazaar.launchpad.net/~wicd-devel/wicd/experimental/diff/770
@@ -32,7 +32,6 @@ build() {
 
 	/usr/bin/python setup.py configure \
 		--dbus=/usr/etc/dbus-1/system.d \
-		--mandir=/usr/man \
 		--etc=/etc/wicd \
 		--no-install-acpi \
 		--no-install-i18n-man \
