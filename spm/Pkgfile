@@ -5,10 +5,11 @@
 # Optional:    pwgen
 
 name=spm
-version=1.4.6
+version=1.4.7
 release=1
 source=(https://notabug.org/kl3/$name/archive/$version.tar.gz)
 
 build() {
+	cd $name
 	make install PREFIX=/usr DESTDIR=$PKG
 }
