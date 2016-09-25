@@ -12,12 +12,13 @@ source=(https://dl.dropboxusercontent.com/u/28869550/$name-$version.tar.bz2)
 build() {
 	cd $name-$version
 
-	local JOBS=$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
+	local JOBS=-j$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
+	[ $JOBS = '-j' ] && unset JOBS
 
 	./waf configure \
 		--prefix=/usr \
 		--alsa
 
-	./waf build -j$JOBS
+	./waf build $JOBS
 	./waf install --destdir=$PKG
 }
