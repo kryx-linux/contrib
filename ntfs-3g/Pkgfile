@@ -5,8 +5,8 @@
 # Depends on: fuse
 
 name=ntfs-3g
-version=2015.3.14
-release=2
+version=2016.2.22
+release=1
 source=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
 
 build() {
@@ -16,10 +16,10 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
-		--disable-static \
 		--disable-ldconfig \
-		--with-fuse=external
+		--with-fuse=external \
+		--enable-posix-acls \
+		--enable-extras
 
 	make
 	make DESTDIR=$PKG install
@@ -30,5 +30,4 @@ build() {
 	rm $PKG/usr/share/doc/ntfs-3g/README
 	rmdir $PKG/usr/share/doc/ntfs-3g
 	rmdir $PKG/usr/share/doc
-	rmdir $PKG/usr/share
 }
