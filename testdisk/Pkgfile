@@ -5,18 +5,18 @@
 # Depends on: ntfs-3g libjpeg-turbo
 
 name=testdisk
-version=6.14
+version=7.0
 release=1
 source=(http://www.cgsecurity.org/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
+	./configure --prefix=/usr
 
 	make 
 	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share
+
+	rm -r $PKG/usr/share/doc
+	rm -r $PKG/usr/share/man/zh_CN
 }
