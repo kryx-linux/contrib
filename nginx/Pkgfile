@@ -4,7 +4,7 @@
 # Depends on: libpcre zlib openssl
 
 name=nginx
-version=1.11.4
+version=1.11.5
 release=1
 source=(http://nginx.org/download/$name-$version.tar.gz \
     $name.conf $name.rc)
@@ -21,8 +21,7 @@ build() {
         --with-http_ssl_module \
         --with-pcre \
         --user=$name \
-        --group=$name \
-        --with-ipv6
+        --group=$name
     make
     make DESTDIR=$PKG install
 
