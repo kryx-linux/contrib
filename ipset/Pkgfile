@@ -5,18 +5,15 @@
 # Depends on: iptables libmnl
 
 name=ipset
-version=6.16.1
+version=6.30
 release=1
 source=(http://$name.netfilter.org/$name-$version.tar.bz2)
 
 build() {
-	cd $name-${version%%-*}
+	cd $name-$version
 
-	./autogen.sh
-
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
+	CONFIG_SHELL=/bin/bash \
+	./configure --prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
