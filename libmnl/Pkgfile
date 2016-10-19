@@ -5,13 +5,15 @@
 # Depends on: libnfnetlink
 
 name=libmnl
-version=1.0.3
+version=1.0.4
 release=1
 source=(http://www.netfilter.org/projects/$name/files/$name-$version.tar.bz2)
 
 build() {
-    cd $name-$version
-    ./configure --prefix=/usr
-    make
-    make DESTDIR=$PKG install
+	cd $name-$version
+
+	./configure --prefix=/usr
+
+	make
+	make DESTDIR=$PKG install
 }
