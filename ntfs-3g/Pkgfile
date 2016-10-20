@@ -6,7 +6,7 @@
 
 name=ntfs-3g
 version=2016.2.22
-release=1
+release=2
 source=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
 
 build() {
@@ -23,11 +23,12 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-	ln -s /usr/bin/ntfsfix $PKG/usr/sbin/fsck.ntfs
-	ln -s /usr/bin/ntfsfix $PKG/usr/sbin/fsck.ntfs-3g
-	chmod a-x $PKG/lib/*.so
 
-	rm $PKG/usr/share/doc/ntfs-3g/README
-	rmdir $PKG/usr/share/doc/ntfs-3g
-	rmdir $PKG/usr/share/doc
+	ln -s ../bin/ntfs-3g $PKG/usr/sbin/mount.ntfs
+	ln -s ../bin/ntfsfix $PKG/usr/sbin/fsck.ntfs
+
+	ln -s ntfs-3g.8 $PKG/usr/share/man/man8/mount.ntfs.8
+	ln -s ntfsfix.8 $PKG//usr/share/man/man8/fsck.ntfs.8
+
+	rm -r $PKG/usr/share/doc
 }
