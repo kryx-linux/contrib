@@ -2,10 +2,10 @@
 # URL: https://github.com/jthornber/thin-provisioning-tools
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: boost
+# Depends on: boost expat libaio
 
 name=thin-provisioning-tools
-version=0.1.4
+version=0.6.3
 release=1
 source=(https://github.com/jthornber/$name/archive/v$version.tar.gz)
 
@@ -14,10 +14,8 @@ build() {
 
 	autoconf
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
+	./configure --prefix=/usr
 
 	make
-	make DESTDIR=$PKG MANDIR="/usr/man" install
+	make DESTDIR=$PKG install
 }
