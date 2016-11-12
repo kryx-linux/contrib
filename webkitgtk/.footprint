@@ -1,7 +1,4 @@
 drwxr-xr-x	root/root	usr/
-drwxr-xr-x	root/root	usr/bin/
--rwxr-xr-x	root/root	usr/bin/MiniBrowser
--rwxr-xr-x	root/root	usr/bin/jsc
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/
 drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/
@@ -9,6 +6,7 @@ drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/JSContextRef.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/JSObjectRef.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/JSStringRef.h
+-rw-r--r--	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/JSTypedArray.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/JSValueRef.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/JavaScript.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/JavaScriptCore/WebKitAvailability.h
@@ -98,6 +96,7 @@ drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/webkitdom/
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCustom.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMCustomUnstable.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMApplicationCache.h
+-rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMCSSNamespace.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMImplementation.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMMimeType.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMMimeTypeArray.h
@@ -109,7 +108,6 @@ drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/webkitdom/
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMStringMap.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMTokenList.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindow.h
--rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindowCSS.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindowSpeechSynthesis.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDOMWindowUnstable.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMDataCue.h
@@ -128,6 +126,7 @@ drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/webkitdom/
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMEventUnstable.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMFile.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMFileList.h
+-rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMFileUnstable.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMGamepad.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMGamepadList.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMGeolocation.h
@@ -201,6 +200,7 @@ drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/webkitdom/
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLSelectElement.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLSelectElementUnstable.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLStyleElement.h
+-rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLStyleElementUnstable.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableCaptionElement.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableCellElement.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMHTMLTableColElement.h
@@ -236,7 +236,6 @@ drwxr-xr-x	root/root	usr/include/webkitgtk-4.0/webkitdom/
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMObject.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMPerformance.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMPerformanceEntry.h
--rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMPerformanceEntryList.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMPerformanceNavigation.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMPerformanceTiming.h
 -rw-r--r--	root/root	usr/include/webkitgtk-4.0/webkitdom/WebKitDOMProcessingInstruction.h
@@ -290,16 +289,17 @@ drwxr-xr-x	root/root	usr/lib/girepository-1.0/
 -rw-r--r--	root/root	usr/lib/girepository-1.0/WebKit2-4.0.typelib
 -rw-r--r--	root/root	usr/lib/girepository-1.0/WebKit2WebExtension-4.0.typelib
 lrwxrwxrwx	root/root	usr/lib/libjavascriptcoregtk-4.0.so -> libjavascriptcoregtk-4.0.so.18
-lrwxrwxrwx	root/root	usr/lib/libjavascriptcoregtk-4.0.so.18 -> libjavascriptcoregtk-4.0.so.18.3.11
--rwxr-xr-x	root/root	usr/lib/libjavascriptcoregtk-4.0.so.18.3.11
+lrwxrwxrwx	root/root	usr/lib/libjavascriptcoregtk-4.0.so.18 -> libjavascriptcoregtk-4.0.so.18.4.9
+-rwxr-xr-x	root/root	usr/lib/libjavascriptcoregtk-4.0.so.18.4.9
 lrwxrwxrwx	root/root	usr/lib/libwebkit2gtk-4.0.so -> libwebkit2gtk-4.0.so.37
-lrwxrwxrwx	root/root	usr/lib/libwebkit2gtk-4.0.so.37 -> libwebkit2gtk-4.0.so.37.13.9
--rwxr-xr-x	root/root	usr/lib/libwebkit2gtk-4.0.so.37.13.9
+lrwxrwxrwx	root/root	usr/lib/libwebkit2gtk-4.0.so.37 -> libwebkit2gtk-4.0.so.37.14.9
+-rwxr-xr-x	root/root	usr/lib/libwebkit2gtk-4.0.so.37.14.9
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/javascriptcoregtk-4.0.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/webkit2gtk-4.0.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/webkit2gtk-web-extension-4.0.pc
 drwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/
+-rwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/MiniBrowser
 -rwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/WebKitDatabaseProcess
 -rwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/WebKitNetworkProcess
 -rwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/WebKitPluginProcess
@@ -307,6 +307,7 @@ drwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/
 -rwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/WebKitWebProcess
 drwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/injected-bundle/
 -rwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/injected-bundle/libwebkit2gtkinjectedbundle.so
+-rwxr-xr-x	root/root	usr/lib/webkit2gtk-4.0/jsc
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/gir-1.0/
 -rw-r--r--	root/root	usr/share/gir-1.0/JavaScriptCore-4.0.gir
