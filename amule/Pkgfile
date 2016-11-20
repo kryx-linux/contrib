@@ -5,19 +5,19 @@
 # Depends on: crypto++ util-linux wxgtk
 
 name=amule
-version=10866
+version=2.3.2
 release=1
-source=(http://amule.sourceforge.net/tarballs/aMule-SVN-r$version.tar.bz2)
+source=(https://downloads.sourceforge.net/project/amule/aMule/$version/aMule-$version.tar.bz2)
 
 build() {
-	cd aMule-SVN-r$version
+	cd aMule-$version
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-nls
 
 	make
 	make install DESTDIR=$PKG
+
 	rm -r $PKG/usr/share/doc
 }
