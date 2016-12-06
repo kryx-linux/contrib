@@ -30,14 +30,16 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/
 -rw-r--r--	root/root	usr/share/nmap/nselib/asn1.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/base32.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/base64.lua
--rw-r--r--	root/root	usr/share/nmap/nselib/bin.luadoc
--rw-r--r--	root/root	usr/share/nmap/nselib/bit.luadoc
+-rw-r--r--	root/root	usr/share/nmap/nselib/bin.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/bit.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/bitcoin.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/bits.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/bittorrent.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/bjnp.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/brute.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/cassandra.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/citrixxml.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/coap.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/comm.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/creds.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/cvs.lua
@@ -88,6 +90,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/wp-plugins.lst
 -rw-r--r--	root/root	usr/share/nmap/nselib/data/wp-themes.lst
 -rw-r--r--	root/root	usr/share/nmap/nselib/datafiles.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/datetime.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/dhcp.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/dhcp6.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/dns.lua
@@ -107,6 +110,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/imap.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/informix.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/ipOps.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/ipmi.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/ipp.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/iscsi.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/isns.lua
@@ -122,6 +126,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/membase.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/mobileme.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/mongodb.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/mqtt.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/msrpc.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/msrpcperformance.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/msrpctypes.lua
@@ -165,6 +170,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/ssh1.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/ssh2.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/sslcert.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/sslv2.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/stdnse.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/strbuf.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/strict.lua
@@ -252,6 +258,9 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/citrix-enum-apps.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/citrix-enum-servers-xml.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/citrix-enum-servers.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/clamav-exec.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/clock-skew.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/coap-resources.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/couchdb-databases.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/couchdb-stats.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/creds-summary.nse
@@ -300,6 +309,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/firewalk.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/firewall-bypass.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/flume-master-info.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/fox-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/freelancer-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ftp-anon.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ftp-bounce.nse
@@ -329,6 +339,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-affiliate-id.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-apache-negotiation.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-apache-server-status.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-aspnet-debug.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-auth-finder.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-auth.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-avaya-ipoffice-users.nse
@@ -375,11 +386,13 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-icloud-sendmsg.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-iis-short-name-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-iis-webdav-vuln.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-internal-ip-disclosure.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-joomla-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-litespeed-sourcecode-download.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-ls.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-majordomo2-dir-traversal.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-malware-host.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/http-mcmp.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-method-tamper.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-methods.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/http-mobileversion-checker.nse
@@ -456,12 +469,14 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/informix-query.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/informix-tables.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-forwarding.nse
--rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-geobytes.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-geoplugin.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-ipinfodb.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-maxmind.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-https-discover.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipidseq.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ipmi-brute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ipmi-cipher-zero.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ipmi-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipv6-multicast-mld-list.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipv6-node-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipv6-ra-flood.nse
@@ -502,6 +517,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/mongodb-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mongodb-databases.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mongodb-info.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/mqtt-subscribe.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/mrinfo.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ms-sql-config.nse
@@ -560,10 +576,12 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/oracle-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/oracle-enum-users.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/oracle-sid-brute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/oracle-tns-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ovs-agent-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/p2p-conficker.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/path-mtu.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/pcanywhere-brute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/pcworx-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/pgsql-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/pjl-ready-message.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/pop3-brute.nse
@@ -669,6 +687,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-heartbleed.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-known-key.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-poodle.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/sslv2-drown.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/sslv2.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/sstp-discover.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/stun-info.nse
@@ -703,6 +722,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/vmauthd-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/vnc-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/vnc-info.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/vnc-title.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/voldemort-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/vuze-dht-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/wdb-version.nse
