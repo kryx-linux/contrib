@@ -2,10 +2,10 @@
 # URL: http://ffmpeg.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: gnutls lame libass libbluray libgmp libmodplug libsdl libtheora libva libvpx libxvid opencore-amr openjpeg opus rtmpdump schroedinger speex x264 x265
+# Depends on: libass libsdl2 libva yasm
 
 name=ffmpeg-compat
-version=2.8.7
+version=2.8.8
 release=1
 source=(http://ffmpeg.org/releases/ffmpeg-$version.tar.bz2)
 
@@ -19,42 +19,20 @@ build() {
 		--shlibdir='/usr/lib/ffmpeg-compat' \
 		--disable-debug \
 		--disable-doc \
+		--enable-gpl \
+		--enable-version3 \
+		--enable-shared \
+		--enable-pic \
 		--enable-avfilter \
 		--enable-avresample \
-		--enable-dxva2 \
-		--enable-fontconfig \
-		--enable-gnutls \
-		--enable-gpl \
-		--enable-libass \
-		--enable-libbluray \
-		--enable-libfreetype \
-		--enable-libmodplug \
-		--enable-libmp3lame \
-		--enable-libopencore_amrnb \
-		--enable-libopencore_amrwb \
-		--enable-libopenjpeg \
-		--enable-libopus \
-		--enable-librtmp \
-		--enable-libschroedinger \
-		--enable-libspeex \
-		--enable-libtheora \
-		--enable-libvorbis \
-		--enable-libx264 \
-		--enable-libx265 \
-		--enable-libvpx \
-		--enable-libxvid \
-		--enable-pic \
 		--enable-postproc \
 		--enable-pthreads \
-		--enable-shared \
 		--enable-swresample \
-		--enable-vaapi \
+		--enable-libass \
 		--enable-vdpau \
-		--enable-version3 \
-		--enable-x11grab
+		--enable-libfreetype
 
-	[ "$CC" ] || CC=gcc
-	make CC="$CC" SHARED_PP='yes' $MAKEFLAGS
+	make
 	make DESTDIR=$PKG install
 
 	install -d $PKG/etc/ld.so.conf.d
