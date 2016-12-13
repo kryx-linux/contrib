@@ -1,0 +1,16 @@
+# Description: A CLI utility that pipes videos from online streaming services to a variety of video players.
+# URL: https://pypi.python.org/pypi/streamlink/
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: futures requests singledispatch six
+
+name=streamlink
+version=0.1.0
+release=1
+source=(https://pypi.python.org/packages/4f/6d/4841879cb0f906a746fca626f7014921b4d899f5cb1fc2a3c560f637f548/streamlink-0.1.0.tar.gz)
+
+build() {
+	cd $name-$version
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --root=$PKG --optimize=1
+}
