@@ -3,11 +3,11 @@
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Matt Housh, jaeger at crux dot nu
 # Depends on: bzip2 xz yasm zlib
-# Optional: alsa-lib fdk-aac lame libass libsdl2 libtheora libva libvdpau libvorbis libvpx libwebp opus x264 x265
+# Optional: alsa-lib fdk-aac gnutls lame libass libsdl2 libtheora libva libvdpau libvorbis libvpx libwebp opus x264 x265
 
 name=ffmpeg
 version=3.2.2
-release=1
+release=2
 source=(http://ffmpeg.org/releases/$name-$version.tar.bz2
 	ffmpeg-x264-10bit.sh)
 
@@ -26,6 +26,12 @@ build() {
 [ -e '/usr/lib/pkgconfig/vorbis.pc' ] && PKGMK_FFMPEG+=' --enable-libvorbis'
 [ -e '/usr/lib/pkgconfig/theora.pc' ] && PKGMK_FFMPEG+=' --enable-libtheora'
 [ -e '/usr/lib/pkgconfig/fdk-aac.pc' ] && PKGMK_FFMPEG+=' --enable-libfdk-aac --enable-nonfree'
+
+	if [ -e '/usr/lib/pkgconfig/gnutls.pc' ]; then
+		PKGMK_FFMPEG+=' --enable-gnutls'
+	else
+		PKGMK_FFMPEG+=' --enable-openssl --enable-nonfree'
+	fi
 
 	./configure ${PKGMK_FFMPEG} \
 		--prefix=/usr \
