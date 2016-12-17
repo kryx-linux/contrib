@@ -1,4 +1,4 @@
-# Description: An API for GnuPG.
+# Description: A C, CXX, and lisp API for GnuPG.
 # URL: http://www.gnupg.org/gpgme.html
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
@@ -6,7 +6,7 @@
 
 name=gpgme
 version=1.8.0
-release=2
+release=3
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2
 	gpgme-1.1.8-et_EE.patch
 	gpgme-1.8.0-cmake.patch)
@@ -19,10 +19,16 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--libexecdir=/usr/lib
+		--enable-languages='cl cpp'
 
 	make
 	make DESTDIR=$PKG install
+
+	sed -i -e 's:^avail_lang=.*:avail_lang="$(cat /usr/etc/gpgme/* | xargs)":' \
+		$PKG/usr/bin/gpgme-config
+
+	install -d $PKG/usr/etc/gpgme
+	echo 'c cl cpp' > $PKG/usr/etc/gpgme/base
 
 	rm -r $PKG/usr/share/info
 }
