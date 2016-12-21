@@ -5,13 +5,13 @@
 name=open-iscsi
 version=2.0-873
 release=1
-source=(http://www.open-iscsi.org/bits/open-iscsi-$version.tar.gz)
+source=(http://distfiles.serverop.de/open-iscsi-$version.tar.gz)
 
 build() {
 
   cd $name-$version
 
   make
-  make DESTDIR=$PKG mandir=/usr/man sbindir=/usr/sbin install
+  make DESTDIR=$PKG install
 
 }
