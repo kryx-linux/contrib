@@ -101,6 +101,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/eigrp.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/formulas.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/ftp.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/geoip.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/giop.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/gps.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/http.lua
@@ -179,6 +180,7 @@ drwxr-xr-x	root/root	usr/share/nmap/nselib/data/psexec/
 -rw-r--r--	root/root	usr/share/nmap/nselib/target.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/tftp.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/tls.lua
+-rw-r--r--	root/root	usr/share/nmap/nselib/tn3270.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/tns.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/unicode.lua
 -rw-r--r--	root/root	usr/share/nmap/nselib/unittest.lua
@@ -253,6 +255,8 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/cassandra-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/cassandra-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/cccam-version.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/cics-enum.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/cics-user-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/citrix-brute-xml.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/citrix-enum-apps-xml.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/citrix-enum-apps.nse
@@ -306,6 +310,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/eppc-enum-processes.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/fcrdns.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/finger.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/fingerprint-strings.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/firewalk.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/firewall-bypass.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/flume-master-info.nse
@@ -471,6 +476,9 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-forwarding.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-geoplugin.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-ipinfodb.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-map-bing.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-map-google.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-map-kml.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-geolocation-maxmind.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ip-https-discover.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ipidseq.nse
@@ -562,6 +570,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/nfs-showmount.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nfs-statfs.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nje-node-brute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/nje-pass-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nntp-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nping-brute.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/nrpe-enum.nse
@@ -679,11 +688,11 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssh2-enum-algos.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/sshv1.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-ccs-injection.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/ssl-cert-intaddr.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-cert.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-date.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-dh-params.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-enum-ciphers.nse
--rw-r--r--	root/root	usr/share/nmap/scripts/ssl-google-cert-catalog.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-heartbleed.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-known-key.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/ssl-poodle.nse
@@ -711,8 +720,11 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/telnet-ntlm-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/tftp-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/tls-nextprotoneg.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/tn3270-screen.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/tor-consensus-checker.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/traceroute-geolocation.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/tso-brute.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/tso-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/unittest.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/unusual-port.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/upnp-info.nse
@@ -724,6 +736,7 @@ drwxr-xr-x	root/root	usr/share/nmap/scripts/
 -rw-r--r--	root/root	usr/share/nmap/scripts/vnc-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/vnc-title.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/voldemort-info.nse
+-rw-r--r--	root/root	usr/share/nmap/scripts/vtam-enum.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/vuze-dht-info.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/wdb-version.nse
 -rw-r--r--	root/root	usr/share/nmap/scripts/weblogic-t3-info.nse
