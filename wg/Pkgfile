@@ -4,13 +4,13 @@
 # Depends on:  libmnl
 
 name=wg
-version=20161116.1
+version=20161218
 release=1
-source=(https://git.zx2c4.com/WireGuard/snapshot/WireGuard-experimental-0.0.${version}.tar.xz)
+source=(https://git.zx2c4.com/WireGuard/snapshot/WireGuard-0.0.${version}.tar.xz)
 
 build() {
 
-	cd WireGuard-experimental-0.0.$version/src/tools
+	cd WireGuard-0.0.$version/src/tools
   make
   make DESTDIR=$PKG install
 

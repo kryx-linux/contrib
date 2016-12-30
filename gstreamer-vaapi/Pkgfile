@@ -5,9 +5,9 @@
 # Depends on: gst-plugins-base gst-plugins-bad libva xorg-libxrandr libvpx
 
 name=gstreamer-vaapi
-version=0.7.0
+version=1.10.2
 release=1
-source=(http://www.freedesktop.org/software/vaapi/releases/$name/$name-$version.tar.bz2)
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
@@ -18,4 +18,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/gtk-doc
 }

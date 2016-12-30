@@ -1,0 +1,16 @@
+# Description: Cryptographic library for Python.
+# URL: https://pypi.python.org/pypi/pycryptodome
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: setuptools
+
+name=pycryptodome
+version=3.4.3
+release=1
+source=(https://pypi.python.org/packages/45/ef/4514a01be3d8f5383cd12fc5612ffd8a2508ac7e7ff6bde2da708e71c9a3/pycryptodome-3.4.3.tar.gz)
+
+build() {
+	cd $name-$version
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --root=$PKG --optimize=1
+}
