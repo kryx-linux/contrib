@@ -30,7 +30,7 @@ build() {
     ln -sf basis${version%.*} basis-link
 
     mkdir -p $PKG/usr/bin
-    local programs=(sbase scalc sdraw simpress smath soffice spadmin swriter)
+    local programs=(sbase scalc sdraw simpress smath soffice swriter)
     for program in ${programs[@]}; do
         ln -sf /usr/lib/$name/program/$program $PKG/usr/bin/$program
     done
