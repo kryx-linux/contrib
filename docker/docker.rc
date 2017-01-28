@@ -4,7 +4,7 @@
 #
 
 SSD=/sbin/start-stop-daemon
-PROG=/usr/bin/dockerd
+PROG=/usr/bin/docker
 PID=/var/run/docker.pid
 CONF=/etc/docker.conf
 LOG=/var/log/docker.log
@@ -27,7 +27,7 @@ case $1 in
 
     /usr/bin/cgroupfs-mount
 
-    $SSD --start --pidfile $PID --background --exec $PROG -- $OPTS >> $LOG 2>&1
+    $SSD --start --pidfile $PID --background --exec $PROG -- daemon $OPTS >> $LOG 2>&1
     ;;
   stop)
     $SSD --stop --retry 10 --pidfile $PID
