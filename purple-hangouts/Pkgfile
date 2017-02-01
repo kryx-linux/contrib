@@ -5,12 +5,12 @@
 # Depends on: pidgin protobuf-c json-glib
 
 name=purple-hangouts
-version=20161029
+version=20170201
 release=1
-source=(http://crux.ster.zone/downloads/$name/f66236a872d9.tar.bz2)
+source=(http://crux.ster.zone/downloads/$name/754e3bb971cf.zip)
 
 build() {
-	cd $name
+	cd EionRobb-purple-hangouts-*
 	make
 	make DESTDIR=$PKG install
 }
