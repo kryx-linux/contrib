@@ -1,18 +1,19 @@
 # Description: memory artifact extraction utility framework
-# URL:         https://www.volatilesystems.com/default/volatility
+# URL:         https://github.com/volatilityfoundation/volatility/wiki
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  python
+# Depends on:  python-setuptools
 
 name=volatility
-version=2.5
+version=2.6
 release=1
-source=(http://downloads.volatilityfoundation.org/releases/${version}/volatility-${version}.zip)
+source=(https://github.com/volatilityfoundation/$name/archive/$version.tar.gz)
 
 build() {
-	cd $name-master
+  cd $name-$version
   /usr/bin/python setup.py install --prefix=/usr --root=$PKG
 
-  mkdir -p $PKG/usr/share/$name
-  mv $PKG/usr/contrib/plugins $PKG/usr/share/$name
-  rm -r $PKG/usr/contrib
+  install -d $PKG/usr/share/$name
+  mv $PKG/usr/tools $PKG/usr/share/$name
+  mv $PKG/usr/contrib $PKG/usr/share/$name
+  /usr/bin/python -m compileall $PKG/usr/share
 }
