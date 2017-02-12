@@ -4,9 +4,9 @@
 # Depends on: python3-iso-639 python3-iso3166 python3-pycryptodome python3-requests
 
 name=python3-streamlink
-version=0.3.1
+version=0.3.2
 release=1
-source=(https://pypi.python.org/packages/ce/56/840b7cfb1de49afc9e089a634c01c8cc9f37fc971f6f8678c266bbc21f50/streamlink-$version.tar.gz)
+source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
 
 build() {
 	cd ${name#*-}-$version
