@@ -1,16 +1,18 @@
 # Description: Freely available NTFS driver with read and write support.
-# URL: http://www.tuxera.com/community/ntfs-3g-download/
+# URL: https://www.tuxera.com/community/ntfs-3g-download/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
 # Depends on: fuse
 
 name=ntfs-3g
 version=2016.2.22
-release=3
-source=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
+release=4
+source=(https://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz
+	CVE-2017-0358.patch)
 
 build() {
 	cd ntfs-3g_ntfsprogs-$version
+
+	patch -p1 -i $SRC/CVE-2017-0358.patch
 
 	install -d $PKG/lib
 
