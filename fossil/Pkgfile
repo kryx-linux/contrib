@@ -5,12 +5,13 @@
 # Optional:    fuse
 
 name=fossil
-version=1.36
+version=1.37
 release=1
 source=(https://www.fossil-scm.org/index.html/uv/download/$name-src-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	#cd $name-$version
+	cd Fossil_2017-01-16_205854_1669115ab9
 
 	./configure	--prefix=/usr			\
 			--disable-internal-sqlite	\
