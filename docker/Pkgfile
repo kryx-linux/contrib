@@ -4,7 +4,7 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=1.13.0
+version=1.13.1
 release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
@@ -13,7 +13,7 @@ source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.gz \
 
 build() {
     export AUTO_GOPATH=1
-    export DOCKER_GITCOMMIT=49bf474
+    export DOCKER_GITCOMMIT=092cba3
     cd $name-$version
     hack/make.sh dynbinary
 
@@ -21,8 +21,6 @@ build() {
         $PKG/usr/bin/$name
     install -D -m 0755 bundles/$version/dynbinary-daemon/dockerd-$version \
         $PKG/usr/bin/dockerd
-    #install -D -m 0755 bundles/$version/dynbinary-daemon/$name-proxy-$version \
-    #  $PKG/usr/bin/$name-proxy
 
     (cd ..; \
         GOROOT=/usr/lib/go GOPATH=${PKGMK_WORK_DIR} go build -o $PKG/usr/bin/$name-proxy \
