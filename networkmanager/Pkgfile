@@ -2,10 +2,10 @@
 # URL:		http://www.gnome.org/projects/NetworkManager/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:	dbus libnl p5-xml-parser openresolv dhcpcd polkit upower libsoup iptables nss libndp
-# Optional:	ppp
+# Optional:	ppp avahi bash-completion
 
 name=networkmanager
-version=1.0.10
+version=1.6.2
 release=1
 source=(
 http://ftp.gnome.org/pub/gnome/sources/NetworkManager/${version%.*}/NetworkManager-${version}.tar.xz
@@ -15,20 +15,22 @@ NetworkManager.conf
 
 build() {
 	cd NetworkManager-$version
-	CPPFLAGS="-I/usr/include/nspr $CPPFLAGS" \
+
 	./configure \
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--libexecdir=/usr/lib/networkmanager \
 		--localstatedir=/var \
+		--with-udev-dir=/lib/udev \
+		--with-systemdsystemunitdir=no \
 		--disable-nls \
 		--disable-static \
 		--enable-polkit \
-		--disable-wimax \
 		--enable-ppp \
 		--enable-tests=no \
 		--enable-gtk-doc=no \
 		--enable-gtk-doc-html=no \
+		--enable-introspection=no \
 		--with-suspend-resume=upower \
 		--with-dhcpcd=/sbin/dhcpcd \
 		--with-resolvconf=/usr/sbin/resolvconf \
@@ -42,9 +44,6 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
-	# Remove unneeded files
-	rm -rf $PKG/usr/share/bash-completion $PKG/usr/share/gtk-doc
-
 	# Fix the CRUX oddity
 	mkdir $PKG/usr/etc
 	mv $PKG/etc/dbus-1 $PKG/usr/etc
@@ -57,4 +56,9 @@ build() {
 
 	# Remove rundir
 	rm -rf $PKG/var/run $PKG/usr/share/doc $PKG/usr/share/man/man5/nmcli-examples.5
+
+	# Remove bash-completion config unless it's installed
+	if [ ! -f /usr/lib/pkgconfig/bash-completion.pc ]; then
+		rm -rf $PKG/usr/share/bash-completion
+	fi
 }
