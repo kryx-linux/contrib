@@ -6,12 +6,18 @@
 
 name=wxpython
 version=3.0.2.0
-release=1
+release=2
 source=(http://downloads.sourceforge.net/wxpython/wxPython-src-$version.tar.bz2)
 
 build() {
 	cd wxPython-src-$version
 
+	sed \
+		-e 's|GST_VERSION_MAJOR=0|GST_VERSION_MAJOR=1|' \
+		-e 's|GST_VERSION_MINOR=10|GST_VERSION_MINOR=0|' \
+		-i configure.in
+
+	./autogen.sh
 	./configure \
 		--prefix=/usr \
 		--libdir=/usr/lib \
