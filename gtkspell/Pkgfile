@@ -1,14 +1,13 @@
 # Description: Spell checking utility for GTK+ applications.
-# URL: http://gtkspell.sourceforge.net/
+# URL: https://gtkspell.sourceforge.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: aspell-en enchant xorg-libxcomposite gtk
+# Depends on: aspell-en enchant gtk intltool xorg-libxdamage
 
 name=gtkspell
 version=2.0.16
 release=1
-source="http://gtkspell.sourceforge.net/download/$name-$version.tar.gz"
-up2date="http://sourceforge.net/projects/gtkspell/files/"
+source=(https://gtkspell.sourceforge.net/download/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
