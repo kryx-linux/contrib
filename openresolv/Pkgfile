@@ -4,16 +4,16 @@
 # Depends on:	
 
 name=openresolv
-version=3.5.6
+version=3.9.0
 release=1
-source=(http://roy.marples.name/downloads/openresolv/openresolv-$version.tar.bz2)
+source=(https://roy.marples.name/downloads/openresolv/openresolv-$version.tar.xz)
 
 build() {
 	cd $name-$version
 	./configure \
 		--prefix=/usr \
 		--sysconfdir=/etc \
-		--mandir=/usr/man
+		--mandir=/usr/share/man
 
 	make
 	make DESTDIR=$PKG install
