@@ -5,7 +5,7 @@
 # Depends on: intltool pango
 
 name=rrdtool
-version=1.5.6
+version=1.6.0
 release=1
 source=(http://oss.oetiker.ch/rrdtool/pub/$name-$version.tar.gz)
 
@@ -20,7 +20,7 @@ build() {
 		--disable-libwrap \
 		--disable-rpath
 
-	make LIBS+="-lglib-2.0"
+	make
 	make DESTDIR=$PKG install
 
 	rm -r \
