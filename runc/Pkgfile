@@ -4,7 +4,7 @@
 # Depends on: go libseccomp
 
 name=runc
-version=9df8b30
+version=a01dafd
 release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz)
@@ -15,7 +15,7 @@ build() {
     ln -sf $SRC/$name-$version
     cd $name-$version
     export GOPATH=$SRC
-    make
+    make COMMIT=a01dafd
 
     install -D -m 0755 $name $PKG/usr/bin/$name
     install -d -m 0755 $PKG/usr/share/man/man8
