@@ -5,7 +5,7 @@
 
 name=containerd
 version=977c511
-release=1
+release=2
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz)
 
 build() {
@@ -13,7 +13,8 @@ build() {
     ln -sf $SRC/$name-$version src/github.com/docker/$name
     cd src/github.com/docker/$name
     export GOPATH=$SRC
-    make GIT_COMMIT=977c511
+    # use the long commit hash here
+    make GIT_COMMIT=977c511eda0925a723debdc94d09459af49d082a
     install -d -m 0755 $PKG/usr/bin
     install -m 0755 bin/* $PKG/usr/bin/
 }
