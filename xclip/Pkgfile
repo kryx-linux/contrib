@@ -5,15 +5,15 @@
 # Depends on:  xorg-libxmu
 
 name=xclip
-version=0.12
-release=2
-source=(http://downloads.sourceforge.net/$name/$name-$version.tar.gz)
+version=0.13
+release=1
+source=(https://crux.nu/~rehabdoll/distfiles/$name-$version.tar.gz)
 
 build() {
-    cd $name-$version
+	cd $name-$version
 
-    ./configure --prefix=/usr \
-                --mandir=/usr/man
-    make
-    make DESTDIR=$PKG install
+	./bootstrap
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
 }
