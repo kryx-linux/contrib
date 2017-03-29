@@ -1,0 +1,20 @@
+# Description: iSNS server and client
+# URL:         https://github.com/open-iscsi/open-isns
+# Maintainer:  Thomas Penteker, tek at serverop dot de 
+
+name=open-isns
+version=0.97
+release=1
+source=(http://distfiles.serverop.de/open-isns-$version.tar.gz)
+
+build() {
+
+  cd $name-$version
+
+  ./configure --prefix=/usr
+
+  make
+  make DESTDIR=$PKG install install_lib install_hdrs
+
+  rm -r $PKG/usr/lib/systemd
+}
