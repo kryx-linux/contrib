@@ -1,12 +1,11 @@
 # Description: VirtualBox is a general-purpose full virtualizer for x86 hardware.
 # URL: http://www.virtualbox.org/
 # Maintainer: Jose V Beneyto, sepen at crux dot nu
-# Packager: Jose V Beneyto, sepen at crux dot nu
-# Depends on: bin86 dev86 libsdl libidl qt4 xerces-c iasl xorg-libxmu libcap makeself cdrkit glu libvpx
+# Depends on: bin86 dev86 libsdl libidl qt5 xerces-c iasl xorg-libxmu libcap makeself cdrkit glu libvpx
 
 name=virtualbox
-version=5.1.4
-release=2
+version=5.1.18
+release=1
 source=(http://download.virtualbox.org/$name/$version/VirtualBox-$version.tar.bz2 \
         $name 60-vboxdrv.rules $name.desktop)
 
@@ -32,7 +31,7 @@ build() {
       -e 's|Name (_CID, "smc-napa")|Name (_CID, "smcnapa")|'
 
   # compile
-  ./configure --enable-qt4 \
+  ./configure --enable-qt5 \
               --disable-hardening \
               --ose \
               --disable-pulse \
