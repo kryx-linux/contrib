@@ -4,8 +4,8 @@
 # Depends on: go libseccomp
 
 name=runc
-version=a01dafd
-release=2
+version=9c2d8d1
+release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz)
 
@@ -16,7 +16,7 @@ build() {
     cd $name-$version
     export GOPATH=$SRC
     # use the long commit hash here
-    make COMMIT=a01dafd48bc1c7cc12bdb01206f9fea7dd6feb70
+    make COMMIT=9c2d8d184e5da67c95d601382adf14862e4f2228
 
     install -D -m 0755 $name $PKG/usr/bin/$name
     install -d -m 0755 $PKG/usr/share/man/man8
