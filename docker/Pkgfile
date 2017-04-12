@@ -4,16 +4,16 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=17.03.0-ce
+version=17.04.0-ce
 release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/libnetwork-0f53435.tar.xz \
+    http://jaeger.morpheus.net/linux/crux/files/libnetwork-7b2b1fe.tar.xz \
     $name.rc $name.conf)
 
 build() {
     export AUTO_GOPATH=1
-    export DOCKER_GITCOMMIT=092cba3
+    export DOCKER_GITCOMMIT=4845c56
     cd $name-$version
     hack/make.sh dynbinary
 
@@ -24,7 +24,7 @@ build() {
 
     (cd ..; \
         GOROOT=/usr/lib/go GOPATH=${PKGMK_WORK_DIR} go build -o $PKG/usr/bin/$name-proxy \
-            libnetwork-0f53435/cmd/proxy)
+            libnetwork-7b2b1fe/cmd/proxy)
 
     for M in 1 5 8; do
         install -d -m 0755 $PKG/usr/share/man/man${M}
