@@ -6,7 +6,7 @@
 
 name=gcr
 version=3.20.0
-release=1
+release=2
 source=(http://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
@@ -14,10 +14,12 @@ build() {
 
 	./configure \
 		--prefix=/usr \
+		--libexecdir=/usr/lib/gcr \
 		--disable-update-icon-cache \
 		--disable-update-mime \
 		--disable-nls
 
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 	make
 	make DESTDIR=$PKG install
 
