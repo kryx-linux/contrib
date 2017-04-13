@@ -1,7 +1,7 @@
 # Description: automate the process of exploiting SQL injection flaws
 # URL:         http://sqlmap.org
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  ptyhon
+# Depends on:  python
 
 name=sqlmap
 version=0.9
@@ -16,5 +16,6 @@ build() {
   install -d $PKG/usr/share/sqlmap $PKG/usr/bin
   cp -r sqlmap $PKG/usr/share
   ln -s /usr/share/sqlmap/sqlmap.py $PKG/usr/bin/sqlmap
+  /usr/bin/python -mcompileall $PKG
   
 }
