@@ -6,7 +6,7 @@
 
 name=ntp
 version=4.2.8p9
-release=1
+release=2
 source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/$name-$version.tar.gz
         ntpd ntpdate ntp.conf ntp-64bit.diff)
 
@@ -22,7 +22,7 @@ build () {
 
    ./configure \
       --prefix=/usr \
-      --mandir=/usr/man \
+      --libexecdir=/usr/lib/ntp \
       --with-sntp \
       --with-crypto \
       --without-ntpsnmpd \
@@ -55,5 +55,5 @@ build () {
    chown -R ntp:ntp $PKG/var/lib/ntp $PKG/var/run/ntp $PKG/var/log/ntp.log
 
    # clean up the mess..
-   rm -rf $PKG/usr/share
+   rm -r $PKG/usr/share/{doc,ntp}
 }
