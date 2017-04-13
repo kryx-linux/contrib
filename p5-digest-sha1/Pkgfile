@@ -1,12 +1,12 @@
 # Description: Perl Digest::SHA1
-# URL: http://search.cpan.org/~gaas/Digest-SHA1-2.11/
+# URL: http://search.cpan.org/~gaas/Digest-SHA1/
 # Maintainer: Jose V Beneyto, sepen at crux dot nu
 # Packager: Han Boetes, han at mijncomputer dot nl
 # Depends on: perl
 
 name=p5-digest-sha1
 version=2.13
-release=1
+release=2
 source=(http://www.cpan.org/modules/by-module/Digest/Digest-SHA1-$version.tar.gz)
 
 build() {
@@ -18,11 +18,12 @@ build() {
   make install DESTDIR=$PKG
 
   # Remove perlcrap
-  find $PKG -name .packlist -or \
-            -name '*.bs' -or \
-            -name autosplit.ix -or \
-            -name perllocal.pod \
-            -exec rm -rf {} \;
+  find $PKG -type f \( \
+    -name '.packlist' -or \
+    -name '*.bs' -or \
+    -name 'autosplit.ix' -or \
+    -name 'perllocal.pod' \) -delete
+
   # Remove empty directories
   find $PKG -depth -empty -exec rm -rf {} \;
 }
