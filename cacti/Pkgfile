@@ -5,7 +5,7 @@
 # Depends on: rrdtool mod_php net-snmp php-mysql php php-sockets
 
 name=cacti
-version=0.8.8h
+version=1.1.5
 release=1
 source=(http://www.$name.net/downloads/$name-$version.tar.gz) 
 
@@ -19,6 +19,6 @@ build () {
   chown -R cactiuser  $PKG/var/www/htdocs/$name/{rra,log}
   sed -i -e "s|\$config\['url_path'] = '/'|\$config\['url_path'] = '/cacti/'|g" \
     $PKG/var/www/htdocs/$name/include/global.php
-  rm $PKG/var/www/htdocs/cacti/{README,LICENSE}
+  rm $PKG/var/www/htdocs/cacti/LICENSE
   rm -r $PKG/var/www/htdocs/cacti/docs
 }
