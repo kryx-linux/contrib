@@ -7,8 +7,11 @@ drwxr-xr-x	root/root	etc/rc.d/
 -rw-r-----	root/named	etc/rndc.key (EMPTY)
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/arpaname
 -rwxr-xr-x	root/root	usr/bin/bind9-config
+-rwxr-xr-x	root/root	usr/bin/delv
 -rwxr-xr-x	root/root	usr/bin/isc-config.sh
+-rwxr-xr-x	root/root	usr/bin/named-rrchecker
 -rwxr-xr-x	root/root	usr/bin/nslookup
 -rwxr-xr-x	root/root	usr/bin/nsupdate
 drwxr-xr-x	root/root	usr/include/
@@ -38,12 +41,14 @@ drwxr-xr-x	root/root	usr/include/dns/
 -rw-r--r--	root/root	usr/include/dns/dns64.h
 -rw-r--r--	root/root	usr/include/dns/dnssec.h
 -rw-r--r--	root/root	usr/include/dns/ds.h
+-rw-r--r--	root/root	usr/include/dns/dsdigest.h
 -rw-r--r--	root/root	usr/include/dns/ecdb.h
 -rw-r--r--	root/root	usr/include/dns/enumclass.h
 -rw-r--r--	root/root	usr/include/dns/enumtype.h
 -rw-r--r--	root/root	usr/include/dns/events.h
 -rw-r--r--	root/root	usr/include/dns/fixedname.h
 -rw-r--r--	root/root	usr/include/dns/forward.h
+-rw-r--r--	root/root	usr/include/dns/geoip.h
 -rw-r--r--	root/root	usr/include/dns/iptable.h
 -rw-r--r--	root/root	usr/include/dns/journal.h
 -rw-r--r--	root/root	usr/include/dns/keydata.h
@@ -110,7 +115,16 @@ drwxr-xr-x	root/root	usr/include/dst/
 -rw-r--r--	root/root	usr/include/dst/gssapi.h
 -rw-r--r--	root/root	usr/include/dst/lib.h
 -rw-r--r--	root/root	usr/include/dst/result.h
+drwxr-xr-x	root/root	usr/include/irs/
+-rw-r--r--	root/root	usr/include/irs/context.h
+-rw-r--r--	root/root	usr/include/irs/dnsconf.h
+-rw-r--r--	root/root	usr/include/irs/netdb.h
+-rw-r--r--	root/root	usr/include/irs/platform.h
+-rw-r--r--	root/root	usr/include/irs/resconf.h
+-rw-r--r--	root/root	usr/include/irs/types.h
+-rw-r--r--	root/root	usr/include/irs/version.h
 drwxr-xr-x	root/root	usr/include/isc/
+-rw-r--r--	root/root	usr/include/isc/aes.h
 -rw-r--r--	root/root	usr/include/isc/app.h
 -rw-r--r--	root/root	usr/include/isc/assertions.h
 -rw-r--r--	root/root	usr/include/isc/atomic.h
@@ -118,15 +132,16 @@ drwxr-xr-x	root/root	usr/include/isc/
 -rw-r--r--	root/root	usr/include/isc/base32.h
 -rw-r--r--	root/root	usr/include/isc/base64.h
 -rw-r--r--	root/root	usr/include/isc/bind9.h
--rw-r--r--	root/root	usr/include/isc/bitstring.h
 -rw-r--r--	root/root	usr/include/isc/boolean.h
 -rw-r--r--	root/root	usr/include/isc/buffer.h
 -rw-r--r--	root/root	usr/include/isc/bufferlist.h
 -rw-r--r--	root/root	usr/include/isc/commandline.h
 -rw-r--r--	root/root	usr/include/isc/condition.h
 -rw-r--r--	root/root	usr/include/isc/counter.h
+-rw-r--r--	root/root	usr/include/isc/crc64.h
 -rw-r--r--	root/root	usr/include/isc/dir.h
 -rw-r--r--	root/root	usr/include/isc/entropy.h
+-rw-r--r--	root/root	usr/include/isc/errno.h
 -rw-r--r--	root/root	usr/include/isc/error.h
 -rw-r--r--	root/root	usr/include/isc/event.h
 -rw-r--r--	root/root	usr/include/isc/eventclass.h
@@ -142,6 +157,7 @@ drwxr-xr-x	root/root	usr/include/isc/
 -rw-r--r--	root/root	usr/include/isc/int.h
 -rw-r--r--	root/root	usr/include/isc/interfaceiter.h
 -rw-r--r--	root/root	usr/include/isc/iterated_hash.h
+-rw-r--r--	root/root	usr/include/isc/json.h
 -rw-r--r--	root/root	usr/include/isc/keyboard.h
 -rw-r--r--	root/root	usr/include/isc/lang.h
 -rw-r--r--	root/root	usr/include/isc/lex.h
@@ -156,7 +172,6 @@ drwxr-xr-x	root/root	usr/include/isc/
 -rw-r--r--	root/root	usr/include/isc/msgs.h
 -rw-r--r--	root/root	usr/include/isc/mutex.h
 -rw-r--r--	root/root	usr/include/isc/mutexblock.h
--rw-r--r--	root/root	usr/include/isc/namespace.h
 -rw-r--r--	root/root	usr/include/isc/net.h
 -rw-r--r--	root/root	usr/include/isc/netaddr.h
 -rw-r--r--	root/root	usr/include/isc/netdb.h
@@ -245,9 +260,21 @@ drwxr-xr-x	root/root	usr/include/lwres/
 -rw-r--r--	root/root	usr/include/lwres/stdlib.h
 -rw-r--r--	root/root	usr/include/lwres/string.h
 -rw-r--r--	root/root	usr/include/lwres/version.h
+drwxr-xr-x	root/root	usr/include/pk11/
+-rw-r--r--	root/root	usr/include/pk11/constants.h
+-rw-r--r--	root/root	usr/include/pk11/internal.h
+-rw-r--r--	root/root	usr/include/pk11/pk11.h
+-rw-r--r--	root/root	usr/include/pk11/result.h
+-rw-r--r--	root/root	usr/include/pk11/site.h
+drwxr-xr-x	root/root	usr/include/pkcs11/
+-rw-r--r--	root/root	usr/include/pkcs11/cryptoki.h
+-rw-r--r--	root/root	usr/include/pkcs11/pkcs11.h
+-rw-r--r--	root/root	usr/include/pkcs11/pkcs11f.h
+-rw-r--r--	root/root	usr/include/pkcs11/pkcs11t.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libbind9.a
 -rw-r--r--	root/root	usr/lib/libdns.a
+-rw-r--r--	root/root	usr/lib/libirs.a
 -rw-r--r--	root/root	usr/lib/libisc.a
 -rw-r--r--	root/root	usr/lib/libisccc.a
 -rw-r--r--	root/root	usr/lib/libisccfg.a
@@ -363,8 +390,8 @@ lrwxrwxrwx	root/root	usr/man/man8/named-compilezone.8.gz -> named-checkzone.8.gz
 -rw-r--r--	root/root	usr/man/man8/nsec3hash.8.gz
 -rw-r--r--	root/root	usr/man/man8/rndc-confgen.8.gz
 -rw-r--r--	root/root	usr/man/man8/rndc.8.gz
+lrwxrwxrwx	root/root	usr/man/man8/tsig-keygen.8.gz -> ddns-confgen.8.gz
 drwxr-xr-x	root/root	usr/sbin/
--rwxr-xr-x	root/root	usr/sbin/arpaname
 -rwxr-xr-x	root/root	usr/sbin/ddns-confgen
 -rwxr-xr-x	root/root	usr/sbin/dnssec-dsfromkey
 -rwxr-xr-x	root/root	usr/sbin/dnssec-importkey
@@ -385,6 +412,7 @@ lrwxrwxrwx	root/root	usr/sbin/named-compilezone -> named-checkzone
 -rwxr-xr-x	root/root	usr/sbin/nsec3hash
 -rwxr-xr-x	root/root	usr/sbin/rndc
 -rwxr-xr-x	root/root	usr/sbin/rndc-confgen
+lrwxrwxrwx	root/root	usr/sbin/tsig-keygen -> ddns-confgen
 drwxr-xr-x	root/root	usr/var/
 drwxr-xr-x	root/root	usr/var/run/
 drwxr-xr-x	root/root	var/
