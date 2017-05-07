@@ -1,18 +1,16 @@
 # Description: Converts HTML into Adobe PDF
-# URL:         http://www.htmldoc.org/
+# URL:         http://michaelrsweet.github.io/htmldoc
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    James Mills,, prologic at shortcircuit dot net dot au
+# Packager:    James Mills, prologic at shortcircuit dot net dot au
 # Depends on:
 
 name=htmldoc
-version=1.8.28
+version=1.8.30
 release=1
-source=(http://msweet.org/files/project1/$name-$version-source.tar.bz2
+source=(https://github.com/michaelrsweet/htmldoc/releases/download/v1.8.30/${name}-${version}-source.tar.gz
         fix_random.diff)
 
 build() {
-  cd $name-$version
-
   patch -i $SRC/fix_random.diff -p1
 
   ./configure --prefix=/usr --disable-gnutls
