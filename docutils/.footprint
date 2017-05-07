@@ -1,6 +1,7 @@
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/rst2html.py
+-rwxr-xr-x	root/root	usr/bin/rst2html5.py
 -rwxr-xr-x	root/root	usr/bin/rst2latex.py
 -rwxr-xr-x	root/root	usr/bin/rst2man.py
 -rwxr-xr-x	root/root	usr/bin/rst2odt.py
@@ -13,7 +14,7 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python2.7/
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils-0.12-py2.7.egg-info
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils-0.13.1-py2.7.egg-info
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/__init__.pyc
@@ -46,6 +47,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/languages/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/eo.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/es.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/es.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/fa.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/fa.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/fi.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/fi.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/fr.py
@@ -60,6 +63,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/languages/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/ja.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/lt.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/lt.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/lv.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/lv.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/nl.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/nl.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/languages/pl.py
@@ -158,6 +163,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/langua
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/eo.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/es.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/es.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/fa.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/fa.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/fi.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/fi.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/fr.py
@@ -172,6 +179,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/langua
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/ja.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/lt.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/lt.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/lv.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/lv.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/nl.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/nl.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/parsers/rst/languages/pl.py
@@ -238,6 +247,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/latex2mathml.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/math2html.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/math2html.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/tex2mathml_extern.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/tex2mathml_extern.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/tex2unichar.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/tex2unichar.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/unichar2tex.py
@@ -253,14 +264,22 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/utils/math/
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/writers/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/__init__.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/_html_base.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/_html_base.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/docutils_xml.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/docutils_xml.pyc
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/writers/html4css1/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html4css1/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html4css1/__init__.pyc
 -rw-rw-r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html4css1/html4css1.css
--rw-rw-r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html4css1/math.css
 -rw-rw-r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html4css1/template.txt
+drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/writers/html5_polyglot/
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html5_polyglot/__init__.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html5_polyglot/__init__.pyc
+-rw-rw-r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html5_polyglot/math.css
+-rw-rw-r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html5_polyglot/minimal.css
+-rw-rw-r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html5_polyglot/plain.css
+-rw-rw-r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/html5_polyglot/template.txt
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/docutils/writers/latex2e/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/latex2e/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/docutils/writers/latex2e/__init__.pyc
