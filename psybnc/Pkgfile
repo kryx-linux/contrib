@@ -5,11 +5,10 @@
 # Depends on:   
 
 name=psybnc
-version=2.3.2-7
+version=2.3.2-9
 release=1
 source=(http://www.psybnc.at/download/beta/psyBNC-$version.tar.gz \
-   Makefile-patch psybnc.rc makefile.out-patch \
-   p_string.c-patch p_global.h-patch psybnc.conf ssl.cnf)
+   psybnc.rc p_string.c-patch p_global.h-patch psybnc.conf ssl.cnf)
 
 psybnc_user=psybnc
 
@@ -25,9 +24,7 @@ build() {
 
    cd $name
 
-   patch -i $SRC/Makefile-patch
    make
-   patch -i $SRC/makefile.out-patch
    patch -i $SRC/p_string.c-patch src/p_string.c
    patch -i $SRC/p_global.h-patch src/p_global.h
    make -f makefile.out
