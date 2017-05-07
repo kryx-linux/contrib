@@ -1,9 +1,9 @@
-# Description: 
-# URL:         http://sourceforge.net/projects/sslscan/
+# Description: test SSL/TLS enabled services to discover supported cipher suites 
+# URL:         https://github.com/rbsec/sslscan
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 
 name=sslscan
-version=1.11.0
+version=1.11.10
 release=1
 source=(https://github.com/rbsec/sslscan/archive/$version-rbsec.tar.gz)
 
@@ -12,5 +12,5 @@ build() {
   make LDFLAGS=-lcrypto
 
   install -m 755 -d $PKG/usr/bin $PKG/usr/man/man1
-  make install MANPATH=$PKG/usr/man/ BINPATH=$PKG/usr/bin
+  make install DESTDIR=$PKG
 }
