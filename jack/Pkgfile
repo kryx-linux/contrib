@@ -6,11 +6,16 @@
 
 name=jack
 version=1.9.10
-release=2
-source=(https://dl.dropboxusercontent.com/u/28869550/$name-$version.tar.bz2)
+release=3
+source=(https://github.com/jackaudio/jack2/archive/v1.9.10.tar.gz
+	gcc6.patch
+	jack1compat.patch)
 
 build() {
-	cd $name-$version
+	cd ${name}2-$version
+
+	patch -p1 -i $SRC/gcc6.patch
+	patch -p1 -i $SRC/jack1compat.patch
 
 	local JOBS=-j$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
 	[ $JOBS = '-j' ] && unset JOBS
