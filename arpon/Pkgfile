@@ -4,7 +4,7 @@
 # Depends on:  libdnet
 
 name=arpon
-version=2.7.2
+version=3.0-ng
 release=1
 source=(http://download.sourceforge.net/$name/ArpON-$version.tar.gz \
         arpon)
@@ -18,5 +18,7 @@ build() {
     cmake -DCMAKE_INSTALL_PREFIX=/usr ..
     make
     make DESTDIR=$PKG install
+
+    rm -r $PKG/usr/share/doc
 
 }
