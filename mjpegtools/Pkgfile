@@ -2,11 +2,12 @@
 # URL: http://mjpeg.sourceforge.net
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: bashy, ronny kornexl at online de
-# Depends on: libquicktime xorg-libxxf86dga
+# Depends on: libdv libjpeg-turbo libpng
+# Optional: v4l-utils
 
 name=mjpegtools
 version=2.1.0
-release=2
+release=3
 source=(http://downloads.sourceforge.net/project/mjpeg/$name/$version/$name-$version.tar.gz)
 
 build() {
@@ -16,8 +17,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
-		--enable-compile-warnings \
+		--enable-largefile \
 		--enable-simd-accel \
 		--disable-dependency-tracking \
 		--disable-assert
@@ -26,5 +26,4 @@ build() {
 	make DESTDIR=$PKG install
 
 	rm -r $PKG/usr/share/info
-	find $PKG -type d -empty -delete
 }
