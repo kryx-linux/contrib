@@ -4,17 +4,16 @@
 # Depends on:  python
 
 name=sqlmap
-version=0.9
+version=1.1
 release=1
-source=(http://downloads.sourceforge.net/project/sqlmap/sqlmap/$version/sqlmap-$version.tar.gz)
+source=(https://crux.nu/~tek/sqlmap-1.1.tar.gz)
 
 build() {
-  rm -r sqlmap/doc
-  find sqlmap -name .svn -print0 | xargs -0 rm -r
-  find sqlmap -name README\* -print0 | xargs -0 rm -r
+
+  find $name-$version -name README\* -delete
   
-  install -d $PKG/usr/share/sqlmap $PKG/usr/bin
-  cp -r sqlmap $PKG/usr/share
+  install -d $PKG/usr/share $PKG/usr/bin
+  cp -r $name-$version $PKG/usr/share/sqlmap
   ln -s /usr/share/sqlmap/sqlmap.py $PKG/usr/bin/sqlmap
   /usr/bin/python -mcompileall $PKG
   
