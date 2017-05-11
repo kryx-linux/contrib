@@ -4,7 +4,7 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=17.04.0-ce
+version=17.05.0-ce
 release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
@@ -13,8 +13,9 @@ source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.gz \
 
 build() {
     export AUTO_GOPATH=1
-    export DOCKER_GITCOMMIT=4845c56
-    cd $name-$version
+    export DOCKER_GITCOMMIT=89658be
+    export DOCKER_BUILDTAGS='seccomp'
+    cd moby-$version
     hack/make.sh dynbinary
 
     install -D -m 0755 bundles/$version/dynbinary-client/$name-$version \
