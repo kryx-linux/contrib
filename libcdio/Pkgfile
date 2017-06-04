@@ -5,21 +5,24 @@
 # Depends on: libcddb ncurses
 
 name=libcdio
-version=0.92
+version=0.94
 release=1
-source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.gz
 	libcdio-0.83-linking.patch)
 
 build() {
 	cd $name-$version
 
 	patch -p 1 -i $SRC/libcdio-0.83-linking.patch
+	sed -i '/AM_INIT_AUTOMAKE/s/subdir-objects//' configure.ac
+	autoreconf -fi
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-vcd-info \
 		--enable-cpp-progs
+
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
 	make
 	make DESTDIR=$PKG install
