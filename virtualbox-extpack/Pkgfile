@@ -5,9 +5,9 @@
 # Depends on: virtualbox
 
 name=virtualbox-extpack
-version=5.1.4
-release=2
-source=(http://download.virtualbox.org/virtualbox/$version/Oracle_VM_VirtualBox_Extension_Pack-$version.vbox-extpack \
+version=5.1.18-114002
+release=1
+source=(http://download.virtualbox.org/virtualbox/${version%%-*}/Oracle_VM_VirtualBox_Extension_Pack-$version.vbox-extpack \
         61-vboxdrv-extpack.rules)
 
 build() {
@@ -16,6 +16,7 @@ build() {
 
   tar xf $SRC/Oracle_VM_VirtualBox_Extension_Pack-$version.vbox-extpack -C $DESTDIR
   rm -rf $DESTDIR/{darwin*,solaris*,win*,linux.x86}
+  chown -R root:root $DESTDIR
 
   install -D -m 0644 $SRC/61-vboxdrv-extpack.rules $PKG/etc/udev/rules.d/61-vboxdrv-extpack.rules
 }
