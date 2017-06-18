@@ -5,13 +5,13 @@
 # Depends on: libdvdnav
 
 name=vobcopy
-version=1.2.0
+version=1.2.0-6
 release=1
-source=(http://vobcopy.org/download/vobcopy-$version.tar.bz2
+source=(https://github.com/barak/vobcopy/archive/debian/$version.tar.gz
 	vobcopy-1.2.0_hardcode-tries-to-1.patch)
 
 build() {
-	cd $name-$version
+	cd $name-debian-$version
 	patch -p 1 -i $SRC/vobcopy-1.2.0_hardcode-tries-to-1.patch
 	sh ./configure.sh --prefix=$PKG/usr
 	make
