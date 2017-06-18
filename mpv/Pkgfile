@@ -1,21 +1,31 @@
 # Description: General Purpose video player based on MPlayer and mplayer2
 # URL:         http://mpv.io/
 # Maintainer:  Svyatoslav Mishyn, juef at openmailbox dot org
-# Depends on:  ffmpeg docutils
-# Optional:    libquvi libdvdread libdvdnav
+# Depends on:  alsa-lib docutils ffmpeg libass mesa3d
+# Optional:    libquvi libdvdnav libbluray libcdio-paranoia libvdpau
 
 name=mpv
 version=0.25.0
-release=1
+release=2
 source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 
 build() {
 	cd $name-$version
 
+[ -e '/usr/lib/pkgconfig/libcdio_cdda.pc' ] && PKGMK_MPV+=' --enable-cdda'
+[ -e '/usr/lib/pkgconfig/dvdnav.pc' ] && PKGMK_MPV+=' --enable-dvdread --enable-dvdnav'
+
+printf "\e[031mNote: for optical audio/dvd/bluray playback you need to:
+prt-get depinst libcdio-paranoia libdvdnav libbluray , respectively.\033[0m\n"
+sleep 10
+
 	./bootstrap.py
-	./waf configure --prefix=/usr
+	./waf configure ${PKGMK_MPV} \
+		--prefix=/usr \
+		--enable-libarchive \
+		--enable-libmpv-shared
 
 	./waf build
 	./waf install --destdir=$PKG
-	rm -rf $PKG/usr/share/doc
+	rm -r $PKG/usr/share/doc
 }
