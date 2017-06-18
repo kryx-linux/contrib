@@ -2,20 +2,16 @@
 # URL: http://www.videolan.org/developers/libbluray.html
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: fontconfig libxml2
+# Depends on: ant fontconfig libxml2
 
 name=libbluray
-version=0.9.2
+version=1.0.1
 release=1
-source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.bz2)
-#source=(ftp://ftp.videolan.org/pub/videolan/$name/$version/$name-$version.tar.bz2) # PASV ... couldn't connect to 127.0.1.1. something is wrong with this ftp /dns, works with curl but not wget
-
+source=(ftp://ftp.videolan.org/pub/videolan/$name/$version/$name-$version.tar.bz2)
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--disable-bdjava
+	./configure --prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
