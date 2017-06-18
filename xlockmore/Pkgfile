@@ -2,7 +2,7 @@
 # URL:         http://sillycycle.com/xlockmore.html
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Daniel Mueller, daniel at danm dot de
-# Depends on:  gtk fortune xorg-libxt xorg-libxdamage
+# Depends on:  fortune glu gtk util-linux xorg-libxmu xorg-libxpm
 
 name=xlockmore
 version=5.54
@@ -10,20 +10,20 @@ release=1
 source=(http://sillycycle.com/xlock/xlockmore-${version}.tar.xz)
 
 build() {
-  cd $name-$version
+	cd $name-$version
 
-  ./configure \
-	--prefix=/usr \
-	--sysconfdir=/etc \
-	--enable-appdefaultdir=/etc/X11/app-defaults \
-	--enable-vtlock \
-	--enable-syslog \
-	--enable-multiple-user \
-	--enable-multiple-root \
-	--without-motif \
-	--with-opengl \
-	--without-esound
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--enable-appdefaultdir=/usr/share/X11/app-defaults \
+		--enable-vtlock \
+		--enable-syslog \
+		--enable-multiple-user \
+		--enable-multiple-root \
+		--with-opengl \
+		--without-motif \
+		--without-esound
 
-  make
-  make DESTDIR=$PKG install
+	make
+	make DESTDIR=$PKG install
 }
