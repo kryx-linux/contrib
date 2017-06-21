@@ -1,17 +1,21 @@
 # Description: accept both HTTPS and SSH connections on the same port
 # URL:         http://www.rutschle.net/tech/sslh.shtml
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on: 
+# Depends on:  libconfig
 
 name=sslh
-version=1.17
+version=1.18
 release=1
-source=(http://www.rutschle.net/tech/$name-v${version}.tar.gz sslh.rc)
+source=(http://www.rutschle.net/tech/$name/$name-v${version}.tar.gz sslh.rc)
 
 build () {
+
   install -D -m 0755 $name.rc $PKG/etc/rc.d/$name
+
   cd $name-v${version}
-  make
+
+  make -j1
+
   install -D -m 0644 $name.8.gz $PKG/usr/man/man8/$name.8.gz
   install -D -m 0755 $name-select $PKG/usr/sbin/$name
 }
