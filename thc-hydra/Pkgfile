@@ -7,14 +7,15 @@
 name=thc-hydra
 version=8.5
 release=1
-source=(https://crux.nu/~tek/hydra-$version.tar.gz)
+source=(https://github.com/vanhauser-thc/thc-hydra/archive/v$version.tar.gz)
 
 build() {
-	cd hydra-$version
+  cd $name-$version
 
   sed -i 's/dummy_ssh/dummy_sshkey/' hydra-sshkey.c
 
   ./configure --prefix=$PKG/usr
+
   make
   make install
   
