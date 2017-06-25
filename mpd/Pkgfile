@@ -2,28 +2,27 @@
 # URL:          http://www.musicpd.org/
 # Maintainer:   Thomas Penteker, tek at serverop dot de
 # Packager:     Mark Rosenstand, mark at borkware dot net
-# Depends on:   libmad libvorbis libid3tag glib
-# Nice to have: faad2 flac audiofile boost
+# Depends on:   libmad libvorbis libid3tag glib boost
+# Optional:     faad2 flac audiofile
 
 name=mpd
-version=0.20.6
+version=0.20.9
 release=1
-source=(http://www.musicpd.org/download/mpd/0.20/$name-$version.tar.xz mpd)
+source=(https://www.musicpd.org/download/mpd/0.20/$name-$version.tar.xz mpd)
 
 build() {
   cd $name-$version
 
   ./configure \
       --prefix=/usr \
-      --mandir=/usr/man \
       --sysconfdir=/etc
 
   make
   make DESTDIR=$PKG install
 
-  mkdir -p $PKG/etc
+  install -d $PKG/etc
   install -m 0644 doc/mpdconf.example $PKG/etc/mpd.conf 
   install -D $SRC/mpd $PKG/etc/rc.d/mpd
 
-  rm -rf $PKG/usr/share
+  rm -r $PKG/usr/share/doc
 }
