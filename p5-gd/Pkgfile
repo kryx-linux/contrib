@@ -1,16 +1,17 @@
 # Description:	Perl interface to GD graphics library 
-# URL:		http://search.cpan.org/~lds/GD-2.53/
+# URL:		http://search.cpan.org/dist/GD/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	perl libgd
+# Depends on:	libgd p5-extutils-pkgconfig
 
 name=p5-gd
-version=2.53
+version=2.66
 release=1
-source=(http://search.cpan.org/CPAN/authors/id/L/LD/LDS/GD-$version.tar.gz )
+source=(http://search.cpan.org/CPAN/authors/id/R/RU/RURBAN/GD-$version.tar.gz)
 
-build () {
-	mkdir -p $PKG/usr/bin
+build() {
+	install -d $PKG/usr/bin
 	cd GD-$version
+	export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL="--skipdeps"
 	perl Makefile.PL
 	make OPTIMIZE="${CFLAGS}"
 	make DESTDIR=${PKG} install
