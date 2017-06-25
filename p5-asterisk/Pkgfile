@@ -1,14 +1,13 @@
 # Description:	Perl module for interfacing Asterisk
-# URL:		http://search.cpan.org/~jamesgol/asterisk-perl-1.01/
+# URL:		http://search.cpan.org/dist/asterisk-perl/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	perl
 
 name=p5-asterisk
-version=1.03
+version=1.08
 release=1
-source=(http://search.cpan.org/CPAN/authors/id/J/JA/JAMESGOL/asterisk-perl-$version.tar.gz)
+source=(http://search.cpan.org/CPAN/authors/id/I/IT/ITCHARLIE/asterisk-perl-$version.tar.gz)
 
-build () {
+build() {
 	cd asterisk-perl-$version
 	perl Makefile.PL
 	make OPTIMIZE="$CFLAGS"
