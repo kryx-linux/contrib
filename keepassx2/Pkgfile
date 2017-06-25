@@ -1,10 +1,10 @@
 # Description:	Password manager application
 # URL:		http://www.keepassx.org/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	qt4 libgcrypt
+# Depends on:	qt4 libgcrypt xorg-libxtst
 
 name=keepassx2
-version=2.0.2
+version=2.0.3
 release=1
 source=(https://www.keepassx.org/releases/$version/keepassx-$version.tar.gz)
 
@@ -22,6 +22,7 @@ build() {
 	cmake ../*-$version/ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
 		-DWITH_TESTS=OFF
 	make
 	make DESTDIR=$PKG install
