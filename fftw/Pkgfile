@@ -5,12 +5,12 @@
 # Depends on: gcc-fortran
 
 name=fftw
-version=3.3.6
+version=3.3.6-pl2
 release=1
-source=(http://www.fftw.org/$name-$version-pl1.tar.gz)
+source=(http://www.fftw.org/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version-pl1
+	cd $name-$version
 
 	local config="\
 F77=gfortran \
