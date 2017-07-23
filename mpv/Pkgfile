@@ -5,19 +5,19 @@
 # Optional:    libquvi libdvdnav libbluray libcdio-paranoia libvdpau
 
 name=mpv
-version=0.25.0
-release=2
+version=0.26.0
+release=1
 source=(https://github.com/$name-player/$name/archive/v$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-[ -e '/usr/lib/pkgconfig/libcdio_cdda.pc' ] && PKGMK_MPV+=' --enable-cdda'
-[ -e '/usr/lib/pkgconfig/dvdnav.pc' ] && PKGMK_MPV+=' --enable-dvdread --enable-dvdnav'
+	[ -e '/usr/lib/pkgconfig/libcdio_cdda.pc' ] && PKGMK_MPV+=' --enable-cdda'
+	[ -e '/usr/lib/pkgconfig/dvdnav.pc' ] && PKGMK_MPV+=' --enable-dvdread --enable-dvdnav'
 
-printf "\e[031mNote: for optical audio/dvd/bluray playback you need to:
-prt-get depinst libcdio-paranoia libdvdnav libbluray , respectively.\033[0m\n"
-sleep 10
+	printf "\e[031mNote: for optical audio/dvd/blu-ray playback you need to:
+	prt-get depinst libcdio-paranoia libdvdnav libbluray, respectively.\033[0m\n"
+	sleep 10
 
 	./bootstrap.py
 	./waf configure ${PKGMK_MPV} \
