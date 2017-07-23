@@ -1,11 +1,11 @@
 # Description: Simple distributed SCM
 # URL:         https://www.fossil-scm.org/
 # Maintainer:  Svyatoslav Mishyn, juef at openmailbox dot org
-# Depends on:  openssl sqlite3 zlib
+# Depends on:  openssl zlib
 # Optional:    fuse
 
 name=fossil
-version=2.2
+version=2.3
 release=1
 source=(https://www.fossil-scm.org/index.html/uv/$name-src-$version.tar.gz)
 
@@ -13,7 +13,6 @@ build() {
 	cd $name-$version
 
 	./configure	--prefix=/usr			\
-			--disable-internal-sqlite	\
 			--json				\
 			--with-th1-docs			\
 			--with-th1-hooks
