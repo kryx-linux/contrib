@@ -1,4 +1,5 @@
 #!/bin/bash
 
-getent passwd redis || useradd -m  -d /var/lib/redis -s /bin/false redis
+getent group redis >/dev/null || groupadd -r redis
+getent passwd redis || useradd -m -g redis -d /var/lib/redis -s /bin/false redis
 passwd -l redis

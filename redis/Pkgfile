@@ -6,18 +6,19 @@
 name=redis
 version=4.0.0
 release=1
-source=(
-    http://download.redis.io/releases/$name-$version.tar.gz
-    redis.conf
-    redis.rc
-)
+source=(http://download.redis.io/releases/$name-$version.tar.gz redis.conf \
+redis.rc)
 
 build() {
     cd $name-$version/src
 
     make
     make PREFIX=$PKG/usr/ install
+
     install -D -m 755 $SRC/redis.rc $PKG/etc/rc.d/redis
-    install -D -m 644 $SRC/redis.conf $PKG/etc/redis.conf
-    install -d -m 755 $PKG/var/lib/redis
+    install -D -m 644 -o redis $SRC/redis.conf $PKG/etc/redis.conf
+    install -d -m 755 -o redis $PKG/var/lib/redis
+
+    install -d -m 755 $PKG/var/log
+    install -m 640 -o redis -g redis /dev/null $PKG/var/log/redis.log
 }
