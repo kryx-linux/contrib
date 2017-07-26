@@ -1,49 +1,40 @@
 #!/bin/sh
 #
-# /etc/rc.d/redis: start/stop Redis daemon
+# /etc/rc.d/redis: start/stop redis server
 #
+# make sure to have set daemonize to no in redis.conf so that PID file
+# creation and tracking by start-stop-daemon work properly
 
-REDISPORT=6379
-EXEC=/usr/bin/redis-server
-CLIEXEC=/usr/bin/redis-cli
-
-PIDFILE=/var/run/redis.pid
-CONF="/etc/redis.conf"
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/redis-server
+PID=/var/run/redis.pid
+USR=redis
+RDBDIR=/var/lib/redis
 
 case $1 in
 start)
-	if [ -f $PIDFILE ]
-	then
-		echo "$PIDFILE exists, process is already running or crashed"
-	else
-		echo "Starting Redis server..."
-		$EXEC $CONF
-	fi
-	;;
+        $SSD --start -c $USR -b -m --pidfile $PID --exec $PROG -- /etc/redis.conf
+        ;;
 stop)
-	if [ ! -f $PIDFILE ]
-	then
-		echo "$PIDFILE does not exist, process is not running"
-	else
-		PID=$(cat $PIDFILE)
-		echo "Stopping ..."
-		$CLIEXEC -p $REDISPORT shutdown
-		while [ -x /proc/${PID} ]
-		do
-			echo "Waiting for Redis to shutdown..."
-			sleep 1
-		done
-		echo "Redis stopped"
-	fi
-	;;
+        $SSD --stop --retry 10 --pidfile $PID --remove-pidfile
+        ;;
 restart)
-	$0 stop
-	sleep 2
-	$0 start
-	;;
+        $0 stop
+        $0 start
+        ;;
+status)
+        $SSD --status --pidfile $PID
+        case $? in
+        0) echo "$PROG is running with pid $(cat $PID)" ;;
+        1) echo "$PROG is not running but the pid file $PID exists" ;;
+        3) echo "$PROG is not running" ;;
+        4) echo "Unable to determine the program status" ;;
+        esac
+        ;;
 *)
-	echo "usage: $0 [start|stop|restart]"
-	;;
+        echo "usage: $0 [start|stop|restart|status]"
+        ;;
 esac
 
 # End of file
+
