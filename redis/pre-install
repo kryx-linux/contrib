@@ -1,0 +1,4 @@
+#!/bin/bash
+
+getent passwd redis || useradd -m  -d /var/lib/redis -s /bin/false redis
+passwd -l redis
