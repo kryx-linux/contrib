@@ -2,12 +2,12 @@
 # URL: http://www.sfml-dev.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: freetype glew libjpeg-turbo libsndfile openal xorg-libxrandr xorg-xcb-util-image
+# Depends on: flac freetype libjpeg-turbo libvorbis mesa3d openal util-linux xorg-libsm xorg-libxrandr xorg-xcb-util-image
 
 name=sfml
 version=2.4.0
-release=1
-source=(http://www.sfml-dev.org/files/SFML-2.4.0-sources.zip)
+release=2
+source=(https://www.sfml-dev.org/files/SFML-$version-sources.zip)
 
 build() {
 	cd SFML-$version
@@ -18,10 +18,16 @@ build() {
 	cmake .. \
 		-DCMAKE_BUILD_TYPE='Release' \
 		-DCMAKE_INSTALL_PREFIX='/usr' \
-		-DSFML_BUILD_EXAMPLES=1 \
+		-DSFML_INSTALL_PKGCONFIG_FILES=1 \
+		-DSFML_BUILD_EXAMPLES=0 \
 		-DSFML_BUILD_DOC=0 \
-		-DSFML_INSTALL_PKGCONFIG_FILES=1
+
 
 	make
 	make DESTDIR=$PKG install
+
+	install -D -m 0644 $PKG/usr/share/SFML/cmake/Modules/FindSFML.cmake \
+		$PKG/usr/share/cmake/Modules/FindSFML.cmake
+
+	rm -r $PKG/usr/share/SFML/{license,readme}.txt
 }
