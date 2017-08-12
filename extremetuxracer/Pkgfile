@@ -2,17 +2,20 @@
 # URL: http://extremetuxracer.com/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Danny Rawlins, crux at romster dot me
-# Depends on: freetype glu libpng sdl_image sdl_mixer tcl xorg-libxi xorg-libxmu
+# Depends on: glu csfml
 
 name=extremetuxracer
-version=0.6.0
+version=0.7.4
 release=1
-source=(http://downloads.sourceforge.net/project/$name/releases/$version/etr-$version.tar.xz)
+source=(https://downloads.sourceforge.net/project/$name/releases/$version/etr-$version.tar.xz)
 
 build() {
 	cd etr-$version
 
 	./configure --prefix=/usr
+
 	make
 	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/doc
 }
