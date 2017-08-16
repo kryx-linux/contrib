@@ -2,27 +2,25 @@
 # URL: https://gitlab.com/o9000/tint2
 # Packager: Vitaly Sinilin, vs at kp4 dot ru
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake imlib2 librsvg ninja startup-notification xorg-libxdamage
+# Depends on: gtk imlib2 librsvg ninja startup-notification xorg-xrandr
 
 name=tint2
-version=0.12.12
+version=0.14.6
 release=1
-source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.gz)
-#source=(https://gitlab.com/o9000/tint2/repository/archive.tar.gz?ref=$version)
+source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.bz2)
+#source=(https://gitlab.com/o9000/tint2/repository/archive.tar.bz2?ref=$version)
 
 build() {
 	cd $name-$version-*
 
 	cmake \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DENABLE_BATTERY=ON \
-		-DENABLE_EXAMPLES=OFF \
+		-DCMAKE_BUILD_TYPE=Release \
 		-DENABLE_TINT2CONF=OFF \
-		-DSYSCONFDIR=/usr/etc \
 		-G Ninja
 
 	ninja
 	DESTDIR=$PKG ninja install
 
-	rm -rf $PKG/usr/share/{doc,locale}
+	rm -r $PKG/{etc,usr/share/doc}
 }
