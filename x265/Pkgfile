@@ -5,7 +5,7 @@
 # Depends on: yasm cmake
 
 name=x265
-version=2.0
+version=2.5
 release=1
 source=(https://bitbucket.org/multicoreware/$name/downloads/${name}_$version.tar.gz)
 
@@ -17,6 +17,7 @@ build() {
 
 	cmake ../source \
 		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
 		-DHIGH_BIT_DEPTH='TRUE' \
 		-DMAIN12='TRUE' \
 		-DEXPORT_C_API='FALSE' \
