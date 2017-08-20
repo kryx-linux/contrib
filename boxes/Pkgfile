@@ -13,6 +13,6 @@ build () {
   sed -i -e "s|^GLOBALCONF.*|GLOBALCONF = /usr/share/boxes/config|" Makefile
   make
   install -D src/boxes $PKG/usr/bin/boxes
-  install -D doc/boxes.1 $PKG/usr/man/man1/boxes.1
+  install -D doc/boxes.1 $PKG/usr/share/man/man1/boxes.1
   install -D boxes-config $PKG/usr/share/boxes/config
 }
