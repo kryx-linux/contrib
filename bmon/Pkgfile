@@ -1,19 +1,21 @@
-# Description: Network bandwidth monitor.
-# URL: http://freshmeat.net/projects/bmon
+# Description: Network bandwidth monitor and rate estimator.
+# URL: http://github.com/tgraf/bmon/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Jukka Heino, jukka dot heino at gmail dot com
-# Depends on: ncurses
+# Depends on: ncurses libconfuse libnl
 
 name=bmon
-version=2.1.0
+version=4.0
 release=1
-source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.gz
-	$name-$version-gcc4.diff)
+source=(https://github.com/tgraf/$name/archive/v$version.tar.gz)
 
 build() {
 	cd $name-$version
-	patch -p 1 -i $SRC/$name-$version-gcc4.diff
+
+	./autogen.sh
 	./configure --prefix=/usr
+
 	make
 	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/doc
 }
