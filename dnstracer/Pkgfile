@@ -11,7 +11,9 @@ source=(http://www.mavetju.org/download/dnstracer-$version.tar.gz)
 
 build() {
 	cd dnstracer-$version
-	./configure --prefix=/usr
+
+	./configure --prefix=/usr --mandir=/usr/share/man
+
 	make
 	make DESTDIR=$PKG install
 }
