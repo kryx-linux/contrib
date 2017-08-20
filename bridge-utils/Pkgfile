@@ -15,8 +15,7 @@ build() {
   sed -i 's/ ; done/ || exit 1 &/g' Makefile.in
   autoconf
 
-  ./configure --prefix=/usr \
-    --mandir=/usr/man
+  ./configure --prefix=/usr
 
   # fix includes...
   sed -i 's|\(#include <sys/socket.h>\)|\1\n#include <netinet/in.h>|1' \
