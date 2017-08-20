@@ -12,8 +12,10 @@ source=(http://download.aircrack-ng.org/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   make \
       prefix=/usr \
+      mandir=/usr/share/man \
       SQLITE=false \
       REVISION=0 \
       DESTDIR=$PKG install
