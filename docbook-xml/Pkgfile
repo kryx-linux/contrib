@@ -5,7 +5,7 @@
 
 name=docbook-xml
 version=4.5
-release=6
+release=7
 source=(http://www.docbook.org/xml/4.5/docbook-xml-4.5.zip
 	http://www.docbook.org/xml/4.4/docbook-xml-4.4.zip
 	http://www.docbook.org/xml/4.3/docbook-xml-4.3.zip
@@ -69,7 +69,7 @@ build() {
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook XML Notations V4.5//EN" \
-		"http://www.oasis-open.org/docbook/xml/4.5/dbnotx.mod" \
+		"http://www.oasis-open.org/docbook/xml/4.5/dbnotnx.mod" \
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook XML Character Entities V4.5//EN" \
@@ -118,7 +118,7 @@ build() {
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook Notations V4.4//EN" \
-		"http://www.oasis-open.org/docbook/xml/4.4/dbnotx.mod" \
+		"http://www.oasis-open.org/docbook/xml/4.4/dbnotnx.mod" \
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook Character Entities V4.4//EN" \
@@ -159,7 +159,7 @@ build() {
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook Notations V4.3//EN" \
-		"http://www.oasis-open.org/docbook/xml/4.3/dbnotx.mod" \
+		"http://www.oasis-open.org/docbook/xml/4.3/dbnotnx.mod" \
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook Character Entities V4.3//EN" \
@@ -200,7 +200,7 @@ build() {
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS/ENTITIES DocBook Notations V4.2//EN" \
-		"http://www.oasis-open.org/docbook/xml/4.2/dbnotx.mod" \
+		"http://www.oasis-open.org/docbook/xml/4.2/dbnotnx.mod" \
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS/ENTITIES DocBook Character Entities V4.2//EN" \
@@ -241,7 +241,7 @@ build() {
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook XML Notations V4.1.2//EN" \
-		"http://www.oasis-open.org/docbook/xml/4.1.2/dbnotx.mod" \
+		"http://www.oasis-open.org/docbook/xml/4.1.2/dbnotnx.mod" \
 		$PKG/etc/xml/$name
 	xmlcatalog --noout --add "public" \
 		"-//OASIS//ENTITIES DocBook XML Character Entities V4.1.2//EN" \
