@@ -2,15 +2,15 @@
 # URL: http://glx-dock.org/
 # Maintainer: Jose V Beneyto, sepen at crux dot nu
 # Packager: Jose V Beneyto, sepen at crux dot nu
-# Depends on: dbus-glib glu gtk3 librsvg cmake
+# Depends on: dbus-glib glu librsvg xorg-libxcomposite
 
 name=cairo-dock
 version=3.4.1
 release=1
-source=(https://github.com/Cairo-Dock/$name-core/archive/$version.tar.gz)
+source=(https://github.com/Cairo-Dock/cairo-dock-core/releases/download/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-core-$version
+  cd $name-$version
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr
 
