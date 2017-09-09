@@ -2,16 +2,16 @@
 # URL: http://glx-dock.org/
 # Maintainer: Jose V Beneyto, sepen at crux dot nu
 # Packager: Jose V Beneyto, sepen at crux dot nu
-# Depends on: cairo-dock libxklavier libexif lm_sensors pulseaudio python upower
-# Nice to have: webkitgtk vte-gtk3 
+# Depends on: cairo-dock libexif libxklavier lm_sensors pulseaudio upowe
+# Optional: webkitgtk vte-gtk3 ruby
 
 name=cairo-dock-plug-ins
 version=3.4.1
 release=1
-source=(https://github.com/Cairo-Dock/$name/archive/$version.tar.gz)
+source=(https://github.com/Cairo-Dock/$name/releases/download/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd cairo-dock-plugins-$version
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr
 
