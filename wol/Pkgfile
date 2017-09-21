@@ -10,7 +10,10 @@ source=(http://prdownloads.sf.net/wake-on-lan/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	./configure --prefix=/usr --disable-nls
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/share/man \
+		--disable-nls
 	make
 	make DESTDIR=$PKG install
 	rm -rf $PKG/usr/info
