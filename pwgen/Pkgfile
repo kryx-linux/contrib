@@ -3,13 +3,13 @@
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 
 name=pwgen
-version=2.07
-release=2
+version=2.08
+release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 	./configure --prefix=/usr
-	make 
+	make
 	make DESTDIR=$PKG install
 }
