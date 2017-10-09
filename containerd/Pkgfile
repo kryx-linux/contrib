@@ -1,20 +1,21 @@
 # Description: A daemon to control runC
-# URL: https://containerd.tools/
+# URL: https://containerd.io/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: go
 
 name=containerd
-version=9048e5e
+version=06b9cb3
 release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz)
 
 build() {
-    mkdir -p src/github.com/docker
-    ln -sf $SRC/$name-$version src/github.com/docker/$name
-    cd src/github.com/docker/$name
+    mkdir -p src/github.com/$name
+    cd src/github.com/$name
+    ln -s $SRC/$name-$version $name
+    cd $name
     export GOPATH=$SRC
     # use the long commit hash here
-    make GIT_COMMIT=9048e5e50717ea4497b757314bad98ea3763c145
+    make GIT_COMMIT=06b9cb35161009dcb7123345749fef02f7cea8e0
     install -d -m 0755 $PKG/usr/bin
     install -m 0755 bin/* $PKG/usr/bin/
 }
