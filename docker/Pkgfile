@@ -1,26 +1,41 @@
 # Description: An open platform for distributed applications for developers and sysadmins
-# URL: https://www.docker.com/
+# URL: https://www.docker.com/community-edition
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=17.05.0-ce
+version=17.09.0-ce
 release=1
-source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.gz \
+source=(https://github.com/docker/docker-ce/archive/v$version/$name-ce-v$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
     http://jaeger.morpheus.net/linux/crux/files/libnetwork-7b2b1fe.tar.xz \
     $name.rc $name.conf)
 
 build() {
-    export AUTO_GOPATH=1
-    export DOCKER_GITCOMMIT=89658be
+    export GOPATH=$SRC
+    export DOCKER_GITCOMMIT=afdb6d4
     export DOCKER_BUILDTAGS='seccomp'
-    cd moby-$version
-    hack/make.sh dynbinary
+    export DISABLE_WARN_OUTSIDE_CONTAINER=1
 
-    install -D -m 0755 bundles/$version/dynbinary-client/$name-$version \
-        $PKG/usr/bin/$name
-    install -D -m 0755 bundles/$version/dynbinary-daemon/dockerd-$version \
+    mkdir -p src/github.com/docker
+
+    pushd src/github.com/docker
+    ln -s $SRC/$name-ce-$version/components/cli
+    pushd cli
+    make dynbinary
+    popd
+    popd
+
+    pushd src/github.com/docker
+    ln -s $SRC/$name-ce-$version/components/engine $name
+    pushd $name
+    hack/make.sh dynbinary
+    popd
+    popd
+
+    cd $name-ce-$version
+    install -D -m 0755 components/cli/build/$name $PKG/usr/bin/$name
+    install -D -m 0755 components/engine/bundles/$version/dynbinary-daemon/dockerd-$version \
         $PKG/usr/bin/dockerd
 
     (cd ..; \
@@ -42,10 +57,10 @@ build() {
     ln -s ctr $PKG/usr/bin/docker-containerd-ctr
     ln -s runc $PKG/usr/bin/docker-runc
 
-    install -D -m 0755 contrib/check-config.sh \
+    install -D -m 0755 components/engine/contrib/check-config.sh \
         $PKG/usr/share/$name/check-config.sh
-    install -D -m 0644 contrib/udev/80-$name.rules \
+    install -D -m 0644 components/engine/contrib/udev/80-$name.rules \
         $PKG/etc/udev/rules.d/80-$name.rules
-    install -D -m 0644 contrib/completion/bash/docker \
+    install -D -m 0644 components/cli/contrib/completion/bash/docker \
         $PKG/etc/bash_completion.d/docker
 }
