@@ -1,12 +1,11 @@
 # Description: Tools to create, alter and inspect Matroska files.
 # URL: https://mkvtoolnix.download/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Han Boetes, han at mijncomputer dot nl
-# Depends on: boost file flac libmatroska libvorbis ruby
-# Nice to have: wxgtk
+# Depends on: boost file flac libmatroska libvorbis ruby docbook-xsl
+# Optional: wxgtk
 
 name=mkvtoolnix
-version=9.3.1
+version=16.0.0
 release=1
 source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
 
@@ -14,29 +13,18 @@ build() {
 	cd $name-$version
 
 	local JOBS=$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
-	test -n "$JOBS" && export DRAKETHREADS="$JOBS"
-
-#	export CFLAGS="${CFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
-#	export CXXFLAGS="${CXXFLAGS} -DBOOST_FILESYSTEM_VERSION=3"
-
-#	autoreconf -vfi
+	test -n "$JOBS" && export JOBS="-j $JOBS"
 
 	./configure \
 		--prefix=/usr \
 		--disable-precompiled-headers \
-		--without-curl
+		--disable-update-check
 
-	[ "$CXX" ] || CXX=g++
-	./drake CXX="$CXX"
-	./drake DESTDIR=$PKG install
+	rake $JOBS
+	rake DESTDIR=$PKG install
 
-	rm -r \
-		$PKG/usr/share/man/{ca,de,es,ja,ko,nl,pl,uk,zh_CN} \
-		$PKG/usr/share/locale
+	rm -r $PKG/usr/share/locale
 
 	# remove doc's if wxgtk is installed
 	rm -rf $PKG/usr/share/doc
-
-	# remove if empty
-	find $PKG/usr/share -depth -empty -delete
 }
