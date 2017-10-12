@@ -20,6 +20,11 @@ build() {
 	install -d build
 	cd build
 
+	# make sure we do not have ccache masquerade directory in PATH
+	# as cmake calls ccache directly, this avoids recursvely
+	# calling ccache and CCACHE_PREFIX
+	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+
 	cmake .. \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE='Release'
