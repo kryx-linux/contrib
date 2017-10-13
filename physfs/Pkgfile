@@ -5,9 +5,9 @@
 # Depends on: cmake readline zlib
 
 name=physfs
-version=2.0.3
+version=3.0.0
 release=1
-source=(http://icculus.org/$name/downloads/$name-$version.tar.bz2)
+source=(https://icculus.org/$name/downloads/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
@@ -16,7 +16,8 @@ build() {
 
 	cmake \
 		-DPHYSFS_BUILD_STATIC=FALSE \
-		-DCMAKE_INSTALL_PREFIX=/usr .
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DPHYSFS_BUILD_TEST=OFF.
 
 	make
 	make DESTDIR=$PKG install
