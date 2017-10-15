@@ -5,7 +5,7 @@
 # Depends on: libevent openssl zlib
 
 name=tor
-version=0.3.0.10
+version=0.3.1.7
 release=1
 source=(https://www.torproject.org/dist/tor-$version.tar.gz
 	tor.rc tor-config.patch)
@@ -17,11 +17,10 @@ build() {
 	# fix for find: The relative path `~/bin' is included in the PATH
 	# environment variable, which is insecure in combination with the
 	# -execdir action of find. Please remove that entry from $PATH
-	export PATH='/sbin:/usr/sbin:/bin:/usr/bin'
+	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/~/ {next} {print}' | sed 's/:*$//')
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--sysconfdir=/etc
 
 	make
