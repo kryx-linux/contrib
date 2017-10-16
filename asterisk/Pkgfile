@@ -1,35 +1,25 @@
 # Description:	PBX Software implementation
 # URL:		http://www.asterisk.org
 # Maintainer:   Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	openssl ncurses jansson
-# Optional:	dahdi pjsip opus
+# Depends on:	openssl ncurses jansson libxml2
+# Optional:	dahdi pjsip opus mysql
 
 name=asterisk
-version=13.7.2
+version=13.17.2
 release=5
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
-https://github.com/seanbright/asterisk-opus/archive/bb2925fc4eaad5b30b93eece851297de5c12e06c.tar.gz
 asterisk.rc
 build-enable-aelparse.patch
 build-disable-astcanary.patch
 build-enable-cdr-mysql.patch
 build-enable-ilbc.patch
 build-disable-moh-wav.patch
-build-enable-opus-vp8.patch
 build-disable-sounds-en-gsm.patch
 )
 
 build () {
 	cd asterisk-$version
-
-	# patch to add Opus transcoding and VP8 passthrough
-	# https://github.com/seanbright/asterisk-opus
-	if [ -f /usr/include/opus/opus.h ]; then
-		cp $SRC/asterisk-opus-*/codecs/* codecs/
-		cp $SRC/asterisk-opus-*/formats/* formats/
-		./bootstrap.sh
-	fi
 
 	./configure \
 		--prefix=/usr \
@@ -40,12 +30,6 @@ build () {
 
 	# Generate a menuselect-tree file
 	make menuselect-tree
-
-	# Enable Opus and VP8
-	if [ -f /usr/include/opus/opus.h ]; then
-		patch -p1 -i $SRC/asterisk-opus-*/asterisk.patch
-		patch -p1 -i $SRC/build-enable-opus-vp8.patch
-	fi
 
 	# Add aelparse utility
 	patch -p1 -i $SRC/build-enable-aelparse.patch
