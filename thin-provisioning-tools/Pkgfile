@@ -5,12 +5,15 @@
 # Depends on: boost expat libaio
 
 name=thin-provisioning-tools
-version=0.6.3
+version=0.7.4
 release=1
-source=(https://github.com/jthornber/$name/archive/v$version.tar.gz)
+source=(https://github.com/jthornber/$name/archive/v$version.tar.gz
+	0001-fix-build-with-testing-disabled.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/0001-fix-build-with-testing-disabled.patch
 
 	autoconf
 
