@@ -1,0 +1,12 @@
+diff -urN clamav-0.99.2.orig/configure clamav-0.99.2/configure
+--- clamav-0.99.2.orig/configure	2016-04-22 11:19:50.000000000 -0500
++++ clamav-0.99.2/configure	2017-11-01 15:09:37.366024510 -0500
+@@ -18718,7 +18718,7 @@
+ 
+     vuln=`grep "ZLIB_VERSION \"1.2.0" $ZLIB_HOME/include/zlib.h`
+     if test -z "$vuln"; then
+-	vuln=`grep "ZLIB_VERSION \"1.2.1" $ZLIB_HOME/include/zlib.h`
++	vuln=`grep "ZLIB_VERSION \"1.2.1\"" $ZLIB_HOME/include/zlib.h`
+     fi
+ 
+     if test -n "$vuln"; then

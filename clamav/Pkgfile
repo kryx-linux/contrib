@@ -1,21 +1,22 @@
 # Description: A GPL virus scanner
 # URL: http://www.clamav.net/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: zlib bzip2 libgmp curl
+# Depends on: bzip2 libgmp curl
 
 name=clamav
 version=0.99.2
-release=1
+release=2
 source=(http://www.clamav.net/downloads/production/$name-$version.tar.gz \
-	clamd.conf freshclam.conf clamd freshclam)
+	clamd.conf freshclam.conf clamd freshclam $name-zlib-vcheck-fix.patch)
 
 build() {
+	CXXFLAGS="${CXXFLAGS} -std=gnu++98"
 	cd $name-$version
+	patch -p1 -i $SRC/$name-zlib-vcheck-fix.patch
 	./configure --prefix=/usr \
 		--sysconfdir=/etc \
 		--enable-id-check \
-		--with-libcurl \
-		--with-tcpwrappers
+		--with-libcurl
 	make
 	make DESTDIR=$PKG install
 	mkdir -p $PKG/var/run/$name $PKG/var/log/$name
