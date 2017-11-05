@@ -1,15 +1,15 @@
-# Description: Zope3 interface library.
-# URL: http://pypi.python.org/pypi/zope.interface/
+# Description: Zope interface library.
+# URL: http://pypi.python.org/pypi/zope.interface
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: python-setuptools
-	
-name=zope.interface
+
+name=python-zope-interface
 version=4.4.3
 release=1
 source=(https://pypi.io/packages/source/z/zope.interface/zope.interface-$version.tar.gz)
 	
 build() {
-	cd $name-$version
+	cd zope.interface-$version
 	/usr/bin/python setup.py build
-	/usr/bin/python setup.py install --root=$PKG --prefix=/usr
+	/usr/bin/python setup.py install --root=$PKG --prefix=/usr --optimize=1
 }
