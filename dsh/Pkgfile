@@ -13,14 +13,12 @@ source=(http://www.netfort.gr.jp/~dancer/software/downloads/$name-$version.tar.g
 build () {
    cd $name-$version
 
-   ./configure --prefix=/usr \
-      --disable-nls \
-      --mandir=/usr/man
+   ./configure --prefix=/usr --disable-nls
 
    make
    make DESTDIR=$PKG install
 
-   rm -rf $PKG/usr/man/ja
+   rm -rf $PKG/usr/share/man/ja
 
    sed -i -e 's|rsh|ssh|g' $name.conf
 
