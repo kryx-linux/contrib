@@ -14,5 +14,5 @@ build() {
     cd $name-$version
     sed "s/#VER#/$version/" ../version.sh > version.sh
     make
-    MANDIR=/usr/man make DESTDIR=$PKG install
+    MANDIR=/usr/share/man make DESTDIR=$PKG install
 }
