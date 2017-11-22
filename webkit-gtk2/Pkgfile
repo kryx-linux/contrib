@@ -6,11 +6,16 @@
 
 name=webkit-gtk2
 version=2.4.11
-release=1
-source=(http://webkitgtk.org/releases/webkitgtk-$version.tar.xz)
+release=2
+source=(http://webkitgtk.org/releases/webkitgtk-$version.tar.xz
+	webkitgtk-2.4.9-abs.patch
+	icu59.patch)
 
 build() {
 	cd webkitgtk-$version
+
+	patch -p1 -i $SRC/webkitgtk-2.4.9-abs.patch
+	patch -p1 -i $SRC/icu59.patch
 
 	install -d build
 	cd build
