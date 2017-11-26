@@ -1,15 +1,16 @@
 # Description: Small, efficient and fast rendering engine for Web Browsers.
 # URL: https://www.webkitgtk.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gst-plugins-base gtk gtk3 harfbuzz-icu libgudev libsecret libsoup libwebp ruby xorg-libxt
-# Optional: enchant libnotify
+# Depends on: gst-plugins-bad gtk harfbuzz-icu hyphen libgudev libsecret libsoup libtasn1 ninja ruby xorg-libxt
+# Optional: enchant libnotify geoclue
 
 name=webkitgtk
-version=2.16.5
+version=2.18.3
 release=1
 source=(https://webkitgtk.org/releases/$name-$version.tar.xz)
 
 build() {
+	mkdir build
 	cd $name-$version
 
 	# setting CC and CXX breaks compilation
@@ -32,22 +33,29 @@ build() {
                 NOTIFY='-DUSE_LIBNOTIFY=OFF'
         fi
 
-	install -d build
-	cd build
+	local GEOLOCATION
+        if [ "$(pkginfo -i | grep '^geoclue ')" ]; then
+                GEOLOCATION='-DENABLE_GEOLOCATION=ON'
+        else
+                GEOLOCATION='-DENABLE_GEOLOCATION=OFF'
+        fi
 
-	cmake .. \
+	cd ../build
+
+	cmake ../$name-$version \
+		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX:PATH=/usr \
 		-DCMAKE_INSTALL_LIBDIR:PATH=/usr/lib \
 		-DCMAKE_INSTALL_LIBEXECDIR:PATH=/usr/lib \
 		-DCMAKE_SKIP_RPATH:BOOL=ON \
 		-DPORT=GTK \
-		-DUSE_LIBHYPHEN=OFF \
 		-DENABLE_MINIBROWSER=ON \
-		-Wno-dev \
-		-DENABLE_GEOLOCATION=OFF $SPELLCHECK $NOTIFY
-	make
-	make DESTDIR=$PKG install
+		-DUSE_SYSTEM_MALLOC=ON \
+		-Wno-dev $GEOLOCATION $SPELLCHECK $NOTIFY
+
+	ninja -j ${JOBS-1}
+	DESTDIR=$PKG ninja install
 
 	rm -r $PKG/usr/share/locale
 }
