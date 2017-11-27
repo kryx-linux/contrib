@@ -6,8 +6,9 @@
 
 name=gtkspell
 version=2.0.16
-release=1
-source=(https://downloads.sourceforge.net/project/$name/$version/$name-$version.tar.gz)
+release=2
+source=(https://downloads.sourceforge.net/project/$name/$version/$name-$version.tar.gz
+	enchant-2.patch)
 
 build() {
 	cd $name-$version
@@ -19,6 +20,8 @@ build() {
 		-e 's/ENABLE_NLS 1/ENABLE_NLS 0/' configure
 
 	sed -i -e 's/SUBDIRS = gtkspell examples docs po/SUBDIRS = gtkspell examples po/' Makefile.in
+
+	patch -p1 -i $SRC/enchant-2.patch
 
 	./configure --prefix=/usr
 	make
