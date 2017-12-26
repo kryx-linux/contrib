@@ -12,5 +12,10 @@ build() {
 	cd $name
 	/usr/bin/python setup.py build
 	/usr/bin/python setup.py install --root=$PKG --optimize=1
+
 	rm -r $PKG/usr/share/doc
+
+	find $PKG/usr/lib/python*/site-packages/ -maxdepth 1 -type f \
+		-name "youtube_dl-$version-py*.egg-info" -delete
+
 }
