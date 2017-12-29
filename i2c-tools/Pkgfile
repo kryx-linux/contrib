@@ -1,16 +1,15 @@
 # Description: I2C Tools for Linux
 # URL: https://github.com/groeck/i2c-tools
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Packager: Mikhail Kolesnik, mike at openbunker dot org
+# Maintainer: Unmaintained 
 # Depends on:
 
 name=i2c-tools
-version=3.1.0
+version=4.0
 release=1
-source=(https://github.com/groeck/$name/archive/V${version//./-}.tar.gz)
+source=(https://www.kernel.org/pub/software/utils/i2c-tools/i2c-tools-$version.tar.xz)
 
 build() {
-  cd $name-${version//./-}
+  cd $name-$version
   sed -e 's|/usr/local|/usr|g' -i Makefile
 
   make PREFIX=/usr
