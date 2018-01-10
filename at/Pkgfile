@@ -1,21 +1,21 @@
 # Description: at, batch - queue, examine or delete jobs for later execution
 # URL: http://ftp.debian.org/debian/pool/main/a/at/
-# Maintainer: Jose V Beneyto, sepen at crux dot nu
-# Packager: Jose V Beneyto, sepen at crux dot nu
+# Maintainer: UNMAINTAINED
 # Depends on: exim
 
 name=at
-version=3.1.12
+version=3.1.20
 release=1
-source=(ftp://ftp.debian.org/debian/pool/main/a/$name/${name}_$version.orig.tar.gz \
+source=(http://ftp.debian.org/debian/pool/main/a/$name/${name}_$version.orig.tar.gz \
         atd)
 
 build() {
   cd $name-$version
   export SENDMAIL=/usr/sbin/sendmail
-  ./configure --prefix=/usr \
-              --mandir=/usr/man
+  autoreconf
+  CONFIG_SHELL=/bin/bash ./configure --prefix=/usr
+  make -j1
   make IROOT=$PKG install
-  rm -rf $PKG/usr/doc
+  rm -r $PKG/usr/doc
   install -D -m 0755 $SRC/atd $PKG/etc/rc.d/atd
 }
