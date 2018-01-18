@@ -5,7 +5,7 @@
 
 name=net-snmp
 version=5.7.3
-release=3
+release=4
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz \
 	snmpd snmpd.conf \
 	0001-Remove-U64-typedef.patch \
@@ -32,7 +32,7 @@ build() {
 				--with-logfile=/var/log/snmp/snmpd.log \
 				--with-persistent-directory=/var/lib/snmp \
 				--with-ldflags="-lsensors"
-	make
+	make -j1
 	make install INSTALL_PREFIX=$PKG DESTDIR=$PKG
 
 	# Clean up perl stuff: clean common junks first, ...
