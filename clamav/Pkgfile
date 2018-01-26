@@ -4,15 +4,14 @@
 # Depends on: bzip2 libgmp curl
 
 name=clamav
-version=0.99.2
-release=2
+version=0.99.3
+release=1
 source=(http://www.clamav.net/downloads/production/$name-$version.tar.gz \
-	clamd.conf freshclam.conf clamd freshclam $name-zlib-vcheck-fix.patch)
+	clamd.conf freshclam.conf clamd freshclam)
 
 build() {
 	CXXFLAGS="${CXXFLAGS} -std=gnu++98"
 	cd $name-$version
-	patch -p1 -i $SRC/$name-zlib-vcheck-fix.patch
 	./configure --prefix=/usr \
 		--sysconfdir=/etc \
 		--enable-id-check \
