@@ -1,19 +1,18 @@
 # Description: text-mode interface for git
-# URL:         http://jonas.nitro.dk/tig/
+# URL:         https://github.com/jonas/tig
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
 # Depends on:  git
 
 name=tig
-version=2.2
+version=2.3.2
 release=1
-source=(http://jonas.nitro.dk/$name/releases/$name-$version.tar.gz) 
+source=(https://github.com/jonas/tig/releases/download/$name-$version/$name-$version.tar.gz) 
 
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr --mandir=/usr/man --sysconfdir=/etc
+  ./configure --prefix=/usr --sysconfdir=/etc
 
-  make LDLIBS="-lncursesw -lreadline"
-  make prefix=/usr DESTDIR=$PKG install-doc-man install
+  make
+  make DESTDIR=$PKG install install-doc-man
 }
