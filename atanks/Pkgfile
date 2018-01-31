@@ -5,9 +5,9 @@
 # Depends on: allegro4
 
 name=atanks
-version=6.4
+version=6.5
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz)
+source=(https://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
@@ -17,5 +17,5 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
-	rm $PKG/usr/share/atanks/{COPYING,Changelog,README,TODO}
+	rm $PKG/usr/share/atanks/{COPYING,Changelog,README,README_ru.txt,TODO}
 }
