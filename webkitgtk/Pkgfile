@@ -7,11 +7,14 @@
 name=webkitgtk
 version=2.18.6
 release=1
-source=(https://webkitgtk.org/releases/$name-$version.tar.xz)
+source=(https://webkitgtk.org/releases/$name-$version.tar.xz
+	enchant-2.patch)
 
 build() {
 	mkdir build
 	cd $name-$version
+
+	patch -p1 -i $SRC/enchant-2.patch
 
 	# setting CC and CXX breaks compilation
 	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
