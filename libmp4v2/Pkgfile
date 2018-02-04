@@ -5,11 +5,14 @@
 
 name=libmp4v2
 version=2.0.0
-release=2
-source=(https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/mp4v2/mp4v2-$version.tar.bz2)
+release=3
+source=(https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/mp4v2/mp4v2-$version.tar.bz2 \
+	0004-Fix-GCC7-build.patch)
 
 build() {
 	cd mp4v2-$version
+
+	patch -p1 -i $SRC/0004-Fix-GCC7-build.patch
 
 	./configure --prefix=/usr
 
