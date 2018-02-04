@@ -1,19 +1,23 @@
 # Description: simple web-browser
 # URL:         http://surf.suckless.org/
 # Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
-# Depends on:  webkit-gtk2 dmenu curl xorg-xprop xterm ca-certificates
+# Depends on: dmenu webkitgtk xorg-xprop xterm
 
 name=surf
-version=0.6
+version=2.0
 release=1
 source=(http://dl.suckless.org/surf/$name-$version.tar.gz config.h)
 
 build () {
     cd "$name-$version"
-    cp $SRC/config.h .
+    #cp $SRC/config.h .
+
+    sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
+    sed -i 's/CFLAGS =/CFLAGS +=/g' config.mk
+    sed -i 's/LDFLAGS =/LDFLAGS +=/g' config.mk
+
     make
     make DESTDIR=$PKG \
-        PREFIX=/usr \
-        MANPREFIX=/usr/man \
-        install
+         PREFIX=/usr \
+         install
 }
