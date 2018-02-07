@@ -1,13 +1,14 @@
 # Description: General Purpose video player based on MPlayer and mplayer2
-# URL:         http://mpv.io/
+# URL:         https://mpv.io/
 # Maintainer:  Svyatoslav Mishyn, svyatoslav dot mishyn at gmail dot com
 # Depends on:  alsa-lib docutils ffmpeg libass mesa3d
-# Optional:    libquvi libdvdnav libbluray libcdio-paranoia libvdpau
+# Optional:    youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libvdpau
 
 name=mpv
 version=0.27.0
-release=1
-source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz)
+release=2
+source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz \
+    09_ytdl-hook-whitelist-protocols.patch)
 
 build() {
 	cd $name-$version
@@ -18,6 +19,9 @@ build() {
 	printf "\e[031mNote: for optical audio/dvd/blu-ray playback you need to:
 	prt-get depinst libcdio-paranoia libdvdnav libbluray, respectively.\033[0m\n"
 	sleep 10
+
+	# CVE-2018-6360 fix
+	patch -p1 -i $SRC/09_ytdl-hook-whitelist-protocols.patch
 
 	./bootstrap.py
 	./waf configure ${PKGMK_MPV} \

@@ -7,12 +7,16 @@
 
 name=ffmpeg
 version=3.4.1
-release=1
+release=2
 source=(https://ffmpeg.org/releases/$name-$version.tar.bz2
-	ffmpeg-x264-10bit.sh)
+	ffmpeg-x264-10bit.sh
+	CVE-2018-6621.patch)
 
 build() {
 	cd $name-$version
+
+	#https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6621
+	patch -p1 -i $SRC/CVE-2018-6621.patch
 
 [ -e '/usr/lib/pkgconfig/libwebp.pc' ] && PKGMK_FFMPEG+=' --enable-libwebp'
 [ -e '/usr/lib/pkgconfig/vdpau.pc' ] && PKGMK_FFMPEG+=' --enable-vdpau'
