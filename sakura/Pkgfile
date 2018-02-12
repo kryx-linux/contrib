@@ -1,19 +1,20 @@
 # Description: A terminal emulator based on GTK and VTE.
 # URL: http://www.pleyades.net/david/projects/sakura
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: vte cmake libidn
+# Depends on: vte3 cmake libidn
 
 name=sakura
-version=2.4.2
+version=3.5.0
 release=1
-source=(http://launchpad.net/sakura/trunk/$version/+download/$name-$version.tar.bz2)
+source=(https://launchpad.net/sakura/trunk/$version/+download/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
+
 	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RELEASE .
+
 	make
 	make DESTDIR=$PKG install
-	mv $PKG/usr/share/man $PKG/usr/man
+
 	rm -r $PKG/usr/share/{locale,doc}
 }
