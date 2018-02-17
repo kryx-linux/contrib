@@ -1,0 +1,26 @@
+# Description: Python bindings for subversion
+# URL:         http://subversion.apache.org
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  subversion swig
+
+name=subversion-python
+version=1.9.7
+release=1
+source=(http://www.apache.org/dist/subversion/subversion-$version.tar.bz2)
+
+build() {
+	PYTHONVERSION=$(python -c "import sys; print \"%s.%s\" % (sys.version_info[0], sys.version_info[1]);")
+
+	cd subversion-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--disable-mod-activation \
+		--with-apr=/usr \
+		--with-apr-util=/usr
+
+	make DESTDIR=$PKG install-swig-py-lib install-swig-py \
+		swig_pydir=/usr/lib/python$PYTHONVERSION/site-packages/libsvn \
+		swig_pydir_extra=/usr/lib/python$PYTHONVERSION/site-packages/svn
+}
