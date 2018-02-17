@@ -1,20 +1,20 @@
 # Description: A real-time software synthesizer.
 # URL: http://www.fluidsynth.org/
-# Maintainer: Jose V Beneyto, sepen at crux dot nu
+# Maintainer: Jan-Michael Franz, jmf at mesecons dot net
 # Packager: Olle Gustafsson, ogg at linux dot se
-# Depends on:
+# Depends on: cmake
+# Nice to have: jack-audio-connection-kit
 
 name=fluidsynth
-version=1.1.3
+version=1.1.9
 release=1
-source=(http://download.sourceforge.net/$name/$name-$version.tar.gz)
+source=(https://github.com/FluidSynth/fluidsynth/archive/v$version.tar.gz)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr \
-              --mandir=/usr/man \
-              --disable-debug \
-              --disable-nls
+  mkdir build
+  cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DLIB_SUFFIX= -DCMAKE_BUILD_TYPE=Release
   make
   make DESTDIR=$PKG install
 }
