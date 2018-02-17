@@ -1,32 +1,34 @@
 # Description: Perl bindings for subversion
-# URL: http://subversion.tigris.org
-# Maintainer: Jose V Beneyto, sepen at crux dot nu
-# Packager: Johannes Winkelmann, jw at tks6 dot net
-# Depends on: subversion swig
+# URL:         http://subversion.tigris.org
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  subversion swig
 
 name=subversion-perl
-version=1.9.5
+version=1.9.7
 release=1
 source=(https://www.apache.org/dist/subversion/subversion-$version.tar.bz2)
 
 build() {
-  P5VERSION="$(pkginfo -i | grep '^perl ' | cut -d' ' -f2 | cut -d'-' -f1)"
-  
-  cd subversion-$version
+	cd subversion-$version
 
-  # build multiple jobs compilation
-  sed 's|Makefile.PL.in$|& libsvn_swig_perl|' -i Makefile.in
+	./configure \
+		--prefix=/usr \
+		--disable-nls \
+		--disable-mod-activation \
+		--with-apr=/usr \
+		--with-apr-util=/usr
 
-  LDFLAGS="-L$PKG/usr/lib" \
-  ./configure --prefix=/usr \
-              --disable-nls \
-              --disable-mod-activation \
-              --with-apr=/usr \
-              --with-apr-util=/usr
+	make swig-pl-lib
+	(cd subversion/bindings/swig/perl/native; perl Makefile.PL)
+	sed -i 's,LD_RUN_PATH="$(LD_RUN_PATH)" ,,' \
+		subversion/bindings/swig/perl/native/Makefile{,.client,.delta,.fs} \
+		subversion/bindings/swig/perl/native/Makefile{.ra,.repos,.wc}
+	touch subversion/bindings/swig/perl/native/Makefile*
+	make -j1 -C subversion/bindings/swig/perl/native
 
-  make DESTDIR=$PKG install-swig-pl-lib install-swig-pl
+	make DESTDIR=$PKG install-swig-pl-lib
+	make -C subversion/bindings/swig/perl/native DESTDIR=$PKG install
 
-  rm -rf $PKG/usr/lib/perl5/$P5VERSION \
-    $PKG/usr/lib/perl5/site_perl/$P5VERSION/linux/auto/SVN/_Core/.packlist \
-    $(find $PKG -type f -size 0)
+	rm -rf $PKG/"$(eval $(perl -V:privlib) && echo $privlib)"
+	find $PKG \( -empty -o -name '.packlist' \) -delete
 }
