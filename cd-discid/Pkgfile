@@ -1,18 +1,14 @@
 # Description: Backend utility to get cddb information
-# URL:         http://lly.org/~rcw/cd-discid/
-# Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
-# Depends on:
+# URL:         http://linukz.org/cd-discid.shtml
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 
 name=cd-discid
-version=0.9
+version=1.4
 release=1
-source=(http://lly.org/~rcw/$name/${name}_$version.orig.tar.gz)
+source=(http://linukz.org/download/$name-$version.tar.gz)
 
 build () {
     cd "$name-$version"
     make
-    make DESTDIR=$PKG \
-        PREFIX=/usr \
-        mandir=$PKG/usr/man/man1 \
-        install
+    make STRIP=/bin/true DESTDIR=$PKG PREFIX=/usr install
 }
