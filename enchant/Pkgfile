@@ -4,16 +4,14 @@
 # Depends on: aspell glib hunspell
 
 name=enchant
-version=2.2.1
+version=2.2.3
 release=1
 source=(https://github.com/AbiWord/$name/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--with-myspell-dir=/usr/share/myspell
+	./configure --prefix=/usr
 
 	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 	make

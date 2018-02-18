@@ -1,18 +1,23 @@
 # Description: Library for parsing video download links. - Scripts
 # URL:         http://quvi.sourceforge.net/
-# Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
-# Depends on:  curl lua
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  lua
 
 name=libquvi-scripts
 version=0.4.21
-release=1
+release=2
 source=(http://downloads.sourceforge.net/sourceforge/quvi/$name-$version.tar.xz)
 
 build () {
-    cd "$name-$version"
-    ./configure --prefix=/usr --mandir=/usr/man --with-nsfw --with-nlfy
-    make
-    make DESTDIR=$PKG \
-        install
-    rm -rf $(find $PKG/usr/share -name README)
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--with-nsfw \
+		--with-nlfy
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -rf $(find $PKG/usr/share -name README)
 }

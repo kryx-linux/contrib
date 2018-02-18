@@ -1,17 +1,16 @@
 # Description: a better cd encoder
-# URL:         http://code.google.com/p/abcde
-# Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
-# Depends on:  bash cd-discid wget vorbis-tools
+# URL:         https://abcde.einval.com/wiki/
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  cd-discid cdparanoia vorbis-tools
+# Optional:    faac fdk-aac flac id3lib lame speex wavpack
 
 name=abcde
-version=2.5.4
-release=2
-source=(http://$name.googlecode.com/files/$name-$version.tar.gz)
+version=2.8.1
+release=1
+source=(https://$name.einval.com/download/$name-$version.tar.gz)
 
 build () {
-    cd "$name-$version"
-    make DESTDIR=$PKG \
-        PREFIX=/usr \
-	mandir=$PKG/usr/man/man1 \
-        install
+	cd "$name-$version"
+	make DESTDIR=$PKG prefix=/usr install
+	rm -rf $PKG/usr/share/doc
 }

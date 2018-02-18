@@ -1,17 +1,18 @@
 # Description: Command-line tool for parsing video download links.
 # URL:         http://quvi.sourceforge.net/
-# Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 # Depends on:  libquvi
 
 name=quvi
 version=0.4.2
-release=1
+release=2
 source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.xz)
 
 build () {
-    cd "$name-$version"
-    ./configure --prefix=/usr --mandir=/usr/man
-    make
-    make DESTDIR=$PKG \
-        install
+	cd $name-$version
+
+	./configure --prefix=/usr
+
+	make
+	make DESTDIR=$PKG install
 }
