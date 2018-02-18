@@ -5,7 +5,7 @@
 
 name=p5-extutils-depends
 version=0.405
-release=1
+release=2
 source=(https://www.cpan.org/modules/by-module/ExtUtils/ExtUtils-Depends-$version.tar.gz)
 
 build() {
@@ -15,6 +15,7 @@ build() {
 	make OPTIMIZE="$CFLAGS"
 	make install DESTDIR=$PKG
 
+	find $PKG -type f -a ! -perm -u+w | xargs chmod u+w
 	find $PKG \
 		-name perllocal.pod \
 		-o -name "*.bs" \
