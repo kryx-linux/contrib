@@ -1,17 +1,16 @@
-# Description: Java Virtual Machine which conforms to the JVM specification version 2 (blue book). In comparison to most other VM's (free and commercial) it is extremely small
-# URL: http://jamvm.sourceforge.net/
-# Maintainer: Jose V Beneyto, sepen at crux dot nu
-# Packager: Jose V Beneyto, sepen at crux dot nu
-# Depends on:
+# Description: Extremely small and JVM spec 2 (blue book) conformant Java Virtual Machine
+# URL:         http://jamvm.sourceforge.net/
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 
 name=jamvm
-version=1.5.3
+version=1.5.4
 release=1
 source=(http://download.sourceforge.net/$name/$name/JamVM%20$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  ./configure --prefix=/usr
-  make
-  make DESTDIR=$PKG install
+	find $name-$version ! -type l -a -perm -go+w | xargs chmod go-w
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
 }
