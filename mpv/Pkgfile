@@ -5,19 +5,15 @@
 # Optional:    youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libvdpau
 
 name=mpv
-version=0.27.0
-release=2
-source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz \
-    09_ytdl-hook-whitelist-protocols.patch)
+version=0.27.2
+release=1
+source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz)
 
 build() {
 	cd $name-$version
 
 	[ -e '/usr/lib/pkgconfig/libcdio_cdda.pc' ] && PKGMK_MPV+=' --enable-cdda'
 	[ -e '/usr/lib/pkgconfig/dvdnav.pc' ] && PKGMK_MPV+=' --enable-dvdread --enable-dvdnav'
-
-	# CVE-2018-6360 fix
-	patch -p1 -i $SRC/09_ytdl-hook-whitelist-protocols.patch
 
 	./bootstrap.py
 	./waf configure ${PKGMK_MPV} \
