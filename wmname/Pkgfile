@@ -1,6 +1,6 @@
 # Description: wmname prints/sets the window manager name property of the root window
 # URL:         http://tools.suckless.org/wmname/
-# Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 # Depends on:  xorg-libx11
 
 name=wmname
@@ -9,8 +9,8 @@ release=1
 source=(http://dl.suckless.org/tools/$name-$version.tar.gz)
 
 build () {
-    cd "$name-$version"
-    make
-    make PREFIX=$PKG/usr \
-        install
+	cd $name-$version
+
+	make CC=gcc
+	make PREFIX=$PKG/usr install
 }
