@@ -1,24 +1,23 @@
 # Description: Perl bindings for depends
-# URL: http://www.cpan.org/
-# Maintainer: Jose V Beneyto, sepen at crux dot nu
-# Packager: Han Boetes, han at mijncomputer dot nl
-# Depends on: p5-xml-parser
+# URL:         https://www.cpan.org/
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  p5-xml-parser
 
 name=p5-extutils-depends
 version=0.405
 release=1
-source=(http://www.cpan.org/modules/by-module/ExtUtils/ExtUtils-Depends-$version.tar.gz)
+source=(https://www.cpan.org/modules/by-module/ExtUtils/ExtUtils-Depends-$version.tar.gz)
 
 build() {
-  cd ExtUtils-Depends-$version
-  perl Makefile.PL
+	cd ExtUtils-Depends-$version
+	perl Makefile.PL
 
-  make OPTIMIZE="$CFLAGS"
-  make install DESTDIR=$PKG
+	make OPTIMIZE="$CFLAGS"
+	make install DESTDIR=$PKG
 
-  find $PKG \
-    -name perllocal.pod \
-    -o -name "*.bs" \
-    -o -name .packlist | xargs rm
-  find $PKG -empty | xargs rmdir -p ||:
+	find $PKG \
+		-name perllocal.pod \
+		-o -name "*.bs" \
+		-o -name .packlist | xargs rm
+	find $PKG -empty | xargs rmdir -p ||:
 }
