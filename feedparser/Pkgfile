@@ -1,8 +1,7 @@
 # Description: Parse RSS and Atom feeds in Python
-# URL: https://github.com/kurtmckee/feedparser
-# Maintainer: Jose V Beneyto, sepen at users dot sourceforge dot net
-# Packager: James Mills, prologic at shortcircuit dot net dot au
-# Depends on: python-setuptools
+# URL:         https://github.com/kurtmckee/feedparser
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  python-setuptools
 
 name=feedparser
 version=5.2.1
@@ -10,7 +9,7 @@ release=1
 source=(https://github.com/kurtmckee/feedparser/archive/$version.tar.gz)
 
 build() {
-  cd $name-$version
-  /usr/bin/python setup.py build
-  /usr/bin/python setup.py install --prefix=/usr --root=$PKG --optimize=1
+	cd $name-$version
+	/usr/bin/python setup.py build
+	/usr/bin/python setup.py install --prefix=/usr --root=$PKG --optimize=1
 }
