@@ -1,22 +1,20 @@
 # Description: simple terminal implementation for X
 # URL:         http://st.suckless.org/
-# Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 # Depends on:  xorg-libxext xorg-libxft
 
 name=st
-version=0.5
-release=3
+version=0.7
+release=1
 source=(http://dl.suckless.org/st/$name-$version.tar.gz config.h)
 
 build () {
-    cd "$name-$version"
-    cp $SRC/config.h .
-    make
-    mkdir -p $PKG/usr/share/terminfo
-    make DESTDIR=$PKG \
-	PREFIX=/usr \
-        MANPREFIX=/usr/share/man \
-	TERMINFO=$PKG/usr/share/terminfo \
-        install
-	rm $PKG/usr/share/terminfo/s/{st,st-256color}
+	cd "$name-$version"
+
+	cp $SRC/config.h .
+	make CC=gcc
+	make DESTDIR=$PKG PREFIX=/usr TERMINFO=$PKG/usr/share/terminfo install
+
+	# Remove duplicates of files from ncurses
+	rm -f $PKG/usr/share/terminfo/s/{st,st-256color}
 }
