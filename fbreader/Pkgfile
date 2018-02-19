@@ -1,24 +1,35 @@
 # Description: An e-book reader for Linux
 # URL: http://www.fbreader.org/
 # Maintainer: Pedja, predivan at mts dot rs
-# Depends on: curl fribidi libunibreak sqlite3 qt4
+# Depends on: fribidi libunibreak qt4
 
 name=fbreader
 version=0.99.4
-release=1
+release=2
 source=(http://fbreader.org/files/desktop/fbreader-sources-$version.tgz
-    FBReader-0.99.4-fix-crash-with-fb2.zip-files.patch
-    fbreader-0.99.4-gcc6-Wno-narrowing.diff
+    fbreader-0.99.4.patch
     FBReader.desktop)
 
 build () {
     cd $name-$version
-    export TARGET_ARCH=desktop
-    export UI_TYPE=qt4
-    export TARGET_STATUS=release
 
-    patch -p1 -i $SRC/FBReader-0.99.4-fix-crash-with-fb2.zip-files.patch
-    patch -p0 -i $SRC/fbreader-0.99.4-gcc6-Wno-narrowing.diff
+#    export CFLAGS="${CFLAGS} -std=c++11"
+    patch -p1 -i $SRC/fbreader-0.99.4.patch
+
+    # Respect *FLAGS
+    sed -e "s/^CFLAGS = -pipe/CFLAGS +=/" \
+        -i makefiles/arch/desktop.mk
+    sed -e "/^ CFLAGS +=/ d" \
+        -i makefiles/config.mk
+    sed -e "/^ LDFLAGS += -s$/ d" \
+        -i makefiles/config.mk
+    sed -e "/^LDFLAGS =$/ d" \
+        -i makefiles/arch/desktop.mk
+
+    echo "TARGET_ARCH = desktop" > makefiles/target.mk
+    echo "UI_TYPE = qt4" >> makefiles/target.mk
+    echo "TARGET_STATUS = release" >> makefiles/target.mk
+
     make
     make DESTDIR=$PKG install
 
@@ -27,7 +38,4 @@ build () {
 
     mkdir -p $PKG/usr/share/applications/
     install -m644 $SRC/FBReader.desktop  $PKG/usr/share/applications/FBReader.desktop
-
-    find $PKG/usr/share/FBReader/help ! -name *.en.fb2 -exec rm '{}' \;
-    find $PKG/usr/share/FBReader/resources ! -name *.en.xml -exec rm '{}' \;
 }
