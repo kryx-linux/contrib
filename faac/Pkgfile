@@ -1,27 +1,18 @@
 # Description: MPEG-4 audio codecs.
 # URL: http://www.audiocoding.com/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Matt Housh, jaeger at morpheus dot net
 # Depends on: libmp4v2
 
 name=faac
-version=1.28
-release=4
-source=(http://download.sourceforge.net/$name/$name-$version.tar.bz2
-	faac-1.28-external-libmp4v2.patch
-	faac-1.28-libmp4v2_r479_compat.patch
-	faac-1.28-inttypes.patch)
+version=1.29.9.2
+release=1
+source=(https://sourceforge.net/projects/$name/files/$name-src/$name-${version::4}/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/faac-1.28-external-libmp4v2.patch
-	patch -p0 -i $SRC/faac-1.28-libmp4v2_r479_compat.patch
-	patch -p0 -i $SRC/faac-1.28-inttypes.patch
-	sed -i -e 's/^AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' configure.in
+	./configure --prefix=/usr
 
-	./bootstrap
-	./configure --prefix=/usr --mandir=/usr/man
 	make
 	make DESTDIR=$PKG install
 }
