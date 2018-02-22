@@ -17,4 +17,6 @@ build() {
 
 	find $PKG -name perllocal.pod -o -name "*.bs" -o -name .packlist | xargs rm
 	find $PKG -empty | xargs rmdir -p ||:
+
+	find $PKG -type f -a -perm -u-w | xargs chmod u+w
 }
