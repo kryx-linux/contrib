@@ -1,7 +1,6 @@
 # Description: extremely simple IRC client
 # URL:         http://tools.suckless.org/sic
-# Maintainer:  Maximilian Dietrich, dxm at openmailbox dot org
-# Depends on:
+# Maintainer:  John Vogel, jvogel at stny dot rr dot com
 
 name=sic
 version=1.2
@@ -11,8 +10,5 @@ source=(http://dl.suckless.org/tools/$name-$version.tar.gz)
 build () {
     cd "$name-$version"
     make
-    make DESTDIR=$PKG \
-        PREFIX=/usr \
-        MANPREFIX=/usr/man \
-        install
+    make DESTDIR=$PKG PREFIX=/usr install
 }
