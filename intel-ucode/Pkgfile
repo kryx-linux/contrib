@@ -1,0 +1,15 @@
+# Description: Intel CPU microcode update
+# URL: https://downloadcenter.intel.com/download/24661/Linux-Processor-Microcode-Data-File
+# Maintainer: Pedja, predivan at mts dot rs
+# Depends on: iucode-tool
+
+name=intel-ucode
+version=20171117
+release=1
+source=(https://downloadmirror.intel.com/27337/eng/microcode-$version.tgz)
+
+build() {
+    install -d -m755 $PKG/boot
+    /usr/sbin/iucode_tool --write-earlyfw=early-ucode.cpio microcode.dat
+    install -m644 early-ucode.cpio $PKG/boot/early-ucode.cpio
+}
