@@ -1,23 +1,20 @@
 # Description: The Pek Window Manager.
-# URL: http://pekwm.org/
+# URL: https://github.com/pekdon/pekwm
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Rene Lengwinat, rugek at dirtyhack dot net
 # Depends on: imlib2 xorg-libxft xorg-libxpm xorg-libxrandr
 
 name=pekwm
 version=0.1.17
 release=1
-source=(http://pekwm.org/projects/3/files/pekwm-$version.tar.bz2)
+source=(https://github.com/pekdon/pekwm/archive/release-0.1.17.tar.gz)
 
 build() {
-	cd $name-$version
+	cd $name-release-$version
 
+	./autogen.sh
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--enable-xft \
-		--enable-pcre \
-		--enable-imlib2 \
 		--disable-xinerama
 
 	make
