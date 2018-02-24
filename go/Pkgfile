@@ -4,7 +4,7 @@
 
 name=go
 version=1.10
-release=1
+release=2
 source=(https://storage.googleapis.com/golang/go1.4.3.linux-amd64.tar.gz \
     https://storage.googleapis.com/golang/${name}${version}.src.tar.gz \
     $name-certpath.diff)
@@ -23,6 +23,7 @@ build() {
     export GOROOT_FINAL=/usr/lib/go
     export GOOS=linux
     export GOARCH=amd64
+    export GOCACHE=off
 
     patch -p0 -i $SRC/$name-certpath.diff
 

@@ -1,0 +1,24 @@
+# Description: Open source planetarium
+# URL: http://stellarium.org
+# Maintainer: Pedja, predivan at mts dot rs
+# Depends on: qt5
+
+name=stellarium
+version=0.17.0
+release=1
+source=(https://github.com/Stellarium/stellarium/releases/download/v"$version"/$name-$version.tar.gz
+        $name.desktop
+        $name.png)
+build() {
+    cd $name-$version
+    mkdir -p builds/unix && cd builds/unix
+    cmake   -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_ENABLE_NLS=0 ../..
+    make
+    make DESTDIR=$PKG install
+
+    rm -rf $PKG/usr/share/locale
+    mkdir -p $PKG/usr/share/{applications,pixmaps}
+    install -m 644 $SRC/stellarium.desktop $PKG/usr/share/applications/stellarium.desktop
+    install -m 644 $SRC/stellarium.png $PKG/usr/share/pixmaps/stellarium.png
+}
