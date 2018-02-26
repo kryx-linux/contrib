@@ -24,7 +24,7 @@ build() {
                 --with-builtin=dso \
                 --with-pic
     make
-    make DESTDIR=$PKG install
+    make -j1 DESTDIR=$PKG install
 
     rm -r $PKG/usr/share/{doc,gtk-doc,gnome,gdm}
     rm -r $PKG/usr/lib/gnome-settings-daemon*
