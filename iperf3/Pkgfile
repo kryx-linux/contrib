@@ -1,0 +1,19 @@
+# Description: iperf3, rewrite of the original iperf
+# URL: http://software.es.net/iperf/
+# Maintainer: Pedja, predivan at mts do rs
+# Depends on: openssl
+
+name=iperf3
+version=3.4
+release=1
+source=(http://downloads.es.net/pub/iperf/iperf-$version.tar.gz)
+
+build() {
+    cd iperf-$version
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man \
+                --disable-static
+    make
+    make DESTDIR=$PKG install
+}
+
