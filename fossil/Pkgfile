@@ -5,18 +5,21 @@
 # Optional:    fuse
 
 name=fossil
-version=2.4
+version=2.5
 release=1
 source=(https://www.fossil-scm.org/index.html/uv/$name-src-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	./configure	--prefix=/usr			\
-			--json				\
-			--with-th1-docs			\
-			--with-th1-hooks
+	./configure \
+		--prefix=/usr \
+		--with-th1-docs \
+		--with-th1-hooks \
+		--json
 
 	make
 	make install DESTDIR=$PKG
+
+	install -D -m 0644 fossil.1 $PKG/usr/share/man/man1/fossil.1
 }
