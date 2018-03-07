@@ -5,13 +5,16 @@
 
 name=dwm
 version=6.1
-release=2
-source=(http://dl.suckless.org/dwm/$name-$version.tar.gz config.h)
+release=3
+source=(http://dl.suckless.org/dwm/$name-$version.tar.gz)
 
 build () {
     cd $name-$version
 
-    cp $SRC/config.h .
+    if [ -f $PKGMK_ROOT/config.h ]; then
+	    cp $PKGMK_ROOT/config.h .
+    fi
+
     make CC=gcc X11INC=/usr/include
     make DESTDIR=$PKG PREFIX=/usr install
 }
