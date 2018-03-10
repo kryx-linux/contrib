@@ -1,12 +1,12 @@
 # Description: A small and lightweight implementation of the XDG Sound Theme Specification
 # URL: http://0pointer.de/lennart/projects/libcanberra
 # Maintainer: Pedja, predivan at mts dot rs
-# Depends on: gtk gtk3 pulseaudio libvorbis
-# Optional: gstreamer tdb
+# Depends on: alsa-lib gtk gtk3 libvorbis
+# Optional: gstreamer pulseaudio tdb
 
 name=libcanberra
 version=0.30
-release=2
+release=3
 source=(http://0pointer.de/lennart/projects/libcanberra/libcanberra-$version.tar.xz
     libcanberra-broadway-fix.patch
     libcanberra-multi-backend.patch)
@@ -18,13 +18,12 @@ build() {
 
     ./configure --prefix=/usr \
                 --enable-alsa \
-                --enable-pulse \
                 --disable-oss \
                 --disable-static \
                 --with-builtin=dso \
                 --with-pic
     make
-    make DESTDIR=$PKG install
+    make -j1 DESTDIR=$PKG install
 
     rm -r $PKG/usr/share/{doc,gtk-doc,gnome,gdm}
     rm -r $PKG/usr/lib/gnome-settings-daemon*

@@ -1,11 +1,10 @@
 # Description: C subroutine library for computing discrete Fourier transform.
 # URL: http://www.fftw.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: acrux, acrux at linuxmail dot org
 # Depends on: gcc-fortran
 
 name=fftw
-version=3.3.6-pl2
+version=3.3.7
 release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
@@ -26,14 +25,19 @@ F77=gfortran \
 	# compiling single precision library
 	./configure \
 		$config \
-		--enable-single
+		--enable-single \
+		--enable-sse \
+		--enable-avx
 
 	make
 	make DESTDIR=$PKG install
 	make clean
 
 	# compiling double precision library
-	./configure $config
+	./configure \
+		$config \
+		--enable-sse2 \
+		--enable-avx
 
 	make
 	make DESTDIR=$PKG install

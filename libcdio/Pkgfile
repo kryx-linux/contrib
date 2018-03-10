@@ -1,20 +1,16 @@
 # Description: A library for CD-ROM and CD image access.
 # URL: http://www.gnu.org/software/libcdio/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Tim Biermann, tim_biermann at web dot de
 # Depends on: libcddb ncurses
 
 name=libcdio
-version=0.94
+version=2.0.0
 release=1
-source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.gz
-	libcdio-0.83-linking.patch)
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
 
-	patch -p 1 -i $SRC/libcdio-0.83-linking.patch
-	sed -i '/AM_INIT_AUTOMAKE/s/subdir-objects//' configure.ac
 	autoreconf -fi
 
 	./configure \
