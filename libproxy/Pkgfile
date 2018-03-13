@@ -1,0 +1,35 @@
+# Description: Provides consistent proxy configuration to applications.
+# URL:         http://libproxy.github.io/libproxy
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  cmake dbus glib
+
+name=libproxy
+version=0.4.15
+release=1
+source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	mkdir build
+	cd build
+
+	cmake .. \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_C_FLAGS="$CFLAGS" \
+		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+		-DWITH_DOTNET=off \
+		-DWITH_GNOME3=off \
+		-DWITH_KDE=off \
+		-DWITH_NM=off \
+		-DWITH_PERL=off \
+		-DWITH_PYTHON2=off \
+		-DWITH_PYTHON3=off \
+		-DWITH_VALA=off \
+		-DWITH_WEBKIT=off \
+		-DWITH_WEBKIT3=off
+
+	make
+	make DESTDIR=$PKG install
+}
