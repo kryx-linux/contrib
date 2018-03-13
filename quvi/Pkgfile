@@ -4,14 +4,14 @@
 # Depends on:  libquvi
 
 name=quvi
-version=0.4.2
-release=2
+version=0.9.5
+release=1
 source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.xz)
 
 build () {
 	cd $name-$version
 
-	./configure --prefix=/usr
+	./configure --prefix=/usr --disable-nls
 
 	make
 	make DESTDIR=$PKG install
