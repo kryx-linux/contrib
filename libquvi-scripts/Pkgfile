@@ -4,8 +4,8 @@
 # Depends on:  lua
 
 name=libquvi-scripts
-version=0.4.21
-release=2
+version=0.9.20131130
+release=1
 source=(http://downloads.sourceforge.net/sourceforge/quvi/$name-$version.tar.xz)
 
 build () {
@@ -14,10 +14,10 @@ build () {
 	./configure \
 		--prefix=/usr \
 		--with-nsfw \
-		--with-nlfy
+		--with-geoblocked
 
 	make
 	make DESTDIR=$PKG install
 
-	rm -rf $(find $PKG/usr/share -name README)
+	find $PKG/usr/share -name README -delete
 }

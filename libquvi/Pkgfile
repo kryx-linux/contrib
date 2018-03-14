@@ -1,17 +1,17 @@
 # Description: Library for parsing video download links.
 # URL:         http://quvi.sourceforge.net/
 # Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
-# Depends on:  libquvi-scripts
+# Depends on:  libgcrypt libproxy libquvi-scripts
 
 name=libquvi
-version=0.4.1
-release=2
+version=0.9.4
+release=1
 source=(http://downloads.sourceforge.net/sourceforge/quvi/$name-$version.tar.xz)
 
 build () {
 	cd $name-$version
 
-	./configure --prefix=/usr
+	./configure --prefix=/usr --disable-nls
 
 	make
 	make DESTDIR=$PKG install
