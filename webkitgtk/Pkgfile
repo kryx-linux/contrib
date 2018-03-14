@@ -1,20 +1,17 @@
 # Description: Small, efficient and fast rendering engine for Web Browsers.
 # URL: https://www.webkitgtk.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gst-plugins-bad gtk harfbuzz-icu hyphen libgudev libsecret libsoup libtasn1 ninja ruby xorg-libxt
+# Depends on: gst-plugins-bad gtk harfbuzz-icu hyphen libgudev libsecret libsoup libtasn1 ninja ruby woff2 xorg-libxt
 # Optional: enchant libnotify geoclue
 
 name=webkitgtk
-version=2.18.6
+version=2.20.0
 release=1
-source=(https://webkitgtk.org/releases/$name-$version.tar.xz
-	enchant-2.patch)
+source=(https://webkitgtk.org/releases/$name-$version.tar.xz)
 
 build() {
 	mkdir build
 	cd $name-$version
-
-	patch -p1 -i $SRC/enchant-2.patch
 
 	# setting CC and CXX breaks compilation
 	if [ -n "$(pkginfo -i | grep '^ccache ')" ]; then
