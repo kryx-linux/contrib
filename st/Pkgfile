@@ -4,14 +4,17 @@
 # Depends on:  xorg-libxext xorg-libxft
 
 name=st
-version=0.7
+version=0.8
 release=1
-source=(http://dl.suckless.org/st/$name-$version.tar.gz config.h)
+source=(http://dl.suckless.org/st/$name-$version.tar.gz)
 
 build () {
 	cd "$name-$version"
 
-	cp $SRC/config.h .
+	if [ -f $PKGMK_ROOT/config.h ]; then
+		cp $PKGMK_ROOT/config.h .
+	fi
+
 	make CC=gcc
 	make DESTDIR=$PKG PREFIX=/usr TERMINFO=$PKG/usr/share/terminfo install
 
