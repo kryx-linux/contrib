@@ -39,7 +39,7 @@ build() {
 	# Use --enable-ccache instead of providing a wrapped compiler.
 	# NOTE: the check for usr/bin/ccache may be too specific, since it rules out
 	#       local or opt installs.
-	if [ -e '/usr/bin/ccache' ] && [ "$PATH" =~ /ccache ]; then
+	if [ -e '/usr/bin/ccache' ] && [[ "$PATH" =~ /ccache ]]; then
 		EXTRA_OPTIONS='--enable-ccache'
 		PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 	fi
