@@ -1,8 +1,7 @@
 # Description: Set of scripts that convert a movie file in any format that mplayer understands to a DVD-compatible VOB file.
 # URL: http://videotrans.sourceforge.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: dvdauthor imagemagick mjpegtools mplayer
+# Depends on: dvdauthor imagemagick mjpegtools mplayer ffmpeg
 
 name=videotrans
 version=1.6.1
@@ -13,8 +12,7 @@ build() {
 	cd $name-$version
 
 	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
+		--prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
