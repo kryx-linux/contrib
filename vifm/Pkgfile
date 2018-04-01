@@ -1,0 +1,27 @@
+# Description: A ncurses based file manager with vi like keybindings
+# URL:         http://vifm.info
+# Maintainer:  Alexandr Savca, alexandr dot savca89 at gmail dot com
+# Depends on:  ncurses
+# Optional:    bash-completion
+
+name=vifm
+version=0.9.1
+release=2
+source=(https://github.com/$name/$name/archive/v$version.tar.gz)
+
+build() {
+        cd $name-$version
+
+        ./configure \
+            --prefix=/usr   \
+            --disable-nls
+
+        make
+        make DESTDIR=$PKG install
+
+        if ! pkginfo -i | grep '^bash-completion '; then
+            rm -rf $PKG/usr/share/bash-completion
+        fi
+
+        rm -rf $PKG/usr/share/doc
+}
