@@ -1,11 +1,10 @@
 # URL: http://gcc.gnu.org/fortran
 # Description: Fortran (f95) add-on for GNU GCC compiler.
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: acrux, acrux at linuxmail dot org
 # Depends on: libmpfr
 
 name=gcc-fortran
-version=6.4.0
+version=7.3.0
 release=1
 source=(ftp://gcc.gnu.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz
 	gcc-nocheck-fixincludes.patch gcc-4.7.3-multilib-dirs.patch)
@@ -46,6 +45,11 @@ build() {
 	ln -fs gfortran $PKG/usr/bin/f90
 	ln -fs gfortran $PKG/usr/bin/f95
 	ln -fs gfortran $PKG/usr/bin/g77
+
+	for D in lib{,32}; do
+		install -d -m 0755 $PKG/usr/share/gdb/auto-load/usr/${D}
+		mv $PKG/usr/${D}/libstdc++.so.*-gdb.py $PKG/usr/share/gdb/auto-load/usr/${D}
+	done
 
 	# remove files already on the system out of the port
 	for i in $(pkginfo -l gcc | sed -e "s|^|/|") $(pkginfo -l binutils | sed -e "s|^|/|"); do
