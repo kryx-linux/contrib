@@ -1,30 +1,22 @@
-REQUIREMENTS:
+README for tor
 
-PRECAUTION:
+PRECAUTION
+    Make sure you edit /etc/pkgadd.conf and add the following line.
 
-	Make sure you edit /etc/pkgadd.conf and add the following line.
+    UPGRADE         ^var/lib/tor/.*$    NO
+    UPGRADE         ^etc/tor/torrc$     NO
 
-	UPGRADE         ^usr/var/lib/tor/.*$    NO
+    Failure to do so will result in the loss of your tor data and
+    configuration upon update!
 
-	Failure to do so will result in the loss of your tor data upon update!
+    If you edit the torrc file for extra logging, make sure you:
+    chmod 0640 /var/log/tor/* files, for security reasons.
 
-	If you edit the torrc file for extra logging, make sure you:
-	chmod 0640 /var/log/tor/* files, for security reasons.
+PRE-INSTALL
+    Tor expects to have a user and group dedicated to it, a
+    pre-install script has been added to the port which takes
+    care of this.
 
-PRE-INSTALL:
-
-	Tor expects to have a user and group dedicated to it, a 
-	pre-install script has been added to the port which takes 
-	care of this.
-
-POST-INSTALL:
-
-PRE-REMOVE:
-
-POST-REMOVE:
-
-NOTES:
-
-	Please edit /etc/tor/torrc and add "tor" to the SERVICES 
-	array in /etc/rc.conf
-
+NOTES
+    Please edit /etc/tor/torrc and add "tor" to the SERVICES
+    array in /etc/rc.conf
