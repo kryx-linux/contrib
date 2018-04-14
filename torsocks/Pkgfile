@@ -1,26 +1,31 @@
-# Description: Wrapper to safely torify applications
-# URL: https://gitweb.torproject.org/torsocks.git
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: tor
+# Description:  Wrapper to safely torify applications
+# URL:          https://gitweb.torproject.org/torsocks.git
+# Maintainer:   Alexandr Savca, alexandr dot savca89 at gmail dot com
+# Depends:
+# Optional:     tor
 
 name=torsocks
-version=2.0.0
+version=2.2.0
 release=1
-source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.xz)
+source=(https://people.torproject.org/~dgoulet/$name/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+        cd $name-$version
 
-	./autogen.sh
+        # Disable tests requiring network access
+        for test in dns fd_passing getpeername; do
+            sed -i -e "/^\ttest_${test} \\\\\$/d" tests/Makefile.am || \
+                { echo 1>&2 "Failed to disable network tests!"; exit 1; }
+        done
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man \
-		--sysconfdir=/etc
+        autoreconf -f -i
 
-	make
-	make DESTDIR=$PKG install
+        ./configure             \
+            --prefix=/usr       \
+            --sysconfdir=/etc
 
-	rm -r $PKG/usr/share/doc
+        make
+        make DESTDIR=$PKG install
+
+        rm -r $PKG/usr/share/doc
 }
