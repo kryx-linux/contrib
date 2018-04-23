@@ -1,11 +1,11 @@
 # Description: Complete solution to record, convert and stream audio and video.
 # URL: http://ffmpeg.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: bzip2 xz yasm zlib
+# Depends on: libsdl2 yasm
 # Optional: alsa-lib fdk-aac gnutls lame libass libsdl2 libtheora libva libvdpau libvorbis libvpx libwebp opus x264 x265
 
 name=ffmpeg
-version=3.4.2
+version=4.0
 release=1
 source=(https://ffmpeg.org/releases/$name-$version.tar.bz2
 	ffmpeg-x264-10bit.sh
@@ -44,8 +44,8 @@ build() {
 		--enable-version3 \
 		--enable-shared \
 		--enable-pic \
+		--enable-ffplay \
 		--enable-avfilter \
-		--enable-avresample \
 		--enable-postproc \
 		--enable-pthreads \
 		--enable-swresample
