@@ -1,12 +1,11 @@
 # Description: Sound sample rate conversion library.
 # URL: http://www.mega-nerd.com/SRC/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Martin Opel, mo at obbl-net dot de
 # Depends on: libsndfile
 # Optional: fftw
 
 name=libsamplerate
-version=0.1.8
+version=0.1.9
 release=1
 source=(http://www.mega-nerd.com/SRC/$name-$version.tar.gz)
 
@@ -15,7 +14,6 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--disable-gcc-pipe \
 		--disable-dependency-tracking
 
