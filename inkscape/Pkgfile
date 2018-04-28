@@ -2,18 +2,19 @@
 # URL: https://www.inkscape.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: boehm-gc boost gsl gtkmm poppler-glib popt
+# Optional: rtmpdump openldap libexif openjade gtk-doc gtkspell brotli
 
 name=inkscape
-version=0.92.2
-release=2
+version=0.92.3
+release=1
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.bz2
-	poppler-0.58.patch)
+	noconst.patch)
 
 build() {
 	cd $name-$version
 
-	# https://gitlab.com/inkscape/inkscape/commit/93ccf03162cd2e46d962822d5507865f3451168c
-	patch -p1 -i $SRC/poppler-0.58.patch
+	patch -p1 -i $SRC/noconst.patch
+	sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
 
 	CXXFLAGS+=' -std=c++11'
 
