@@ -4,12 +4,11 @@
 # Depends on: python postgresql
 
 name=psycopg2
-version=2.6.2
+version=2.7.4
 release=1
-source=(http://initd.org/psycopg/tarballs/PSYCOPG-2-6/$name-$version.tar.gz)
+source=(http://initd.org/psycopg/tarballs/PSYCOPG-2-7/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
     python setup.py install --root=$PKG --prefix=/usr
-    find $PKG -name '*.egg-info' | xargs rm -r
 }
