@@ -5,25 +5,17 @@
 # Depends on: libsamplerate python
 
 name=jack
-version=1.9.10
+version=1.9.12
 release=3
-source=(https://github.com/jackaudio/jack2/archive/v1.9.10.tar.gz
-	gcc6.patch
-	jack1compat.patch)
+source=(https://github.com/jackaudio/jack2/archive/v$version.tar.gz)
 
 build() {
 	cd ${name}2-$version
-
-	patch -p1 -i $SRC/gcc6.patch
-	patch -p1 -i $SRC/jack1compat.patch
-
-	local JOBS=-j$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
-	[ $JOBS = '-j' ] && unset JOBS
 
 	./waf configure \
 		--prefix=/usr \
 		--alsa
 
-	./waf build $JOBS
+	./waf build -j ${JOBS-1}
 	./waf install --destdir=$PKG
 }

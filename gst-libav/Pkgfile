@@ -1,16 +1,17 @@
 # Description: Gstreamer libav Plugin.
 # URL: https://gstreamer.freedesktop.org/modules/gst-libav.html
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: ffmpeg gst-plugins-base
+# Depends on: ffmpeg3 gst-plugins-base
 
 name=gst-libav
 version=1.14.0
-release=1
+release=2
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
+	PKG_CONFIG_PATH="/usr/lib/ffmpeg3/pkgconfig:$PKG_CONFIG_PATH" \
 	./configure \
 		--prefix=/usr \
 		--with-system-libav
