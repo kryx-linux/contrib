@@ -1,16 +1,20 @@
 # Description: Text-based web browser.
 # URL: http://lynx.isc.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Mark Rosenstand, mark at borkware dot net
 # Depends on: ncurses openssl zlib
 
 name=lynx
 version=2.8.8-p2
-release=1
-source=(http://invisible-mirror.net/archives/lynx/tarballs/lynx2.8.8rel.2.tar.bz2)
+release=2
+source=(http://invisible-mirror.net/archives/lynx/tarballs/lynx2.8.8rel.2.tar.bz2
+	lynx-2.8.8rel.2-openssl_1.1.0-1.patch
+	lynx-2.8.8rel.2-ncurses_6.1-1.patch)
 
 build() {
 	cd lynx2-8-8
+
+	patch -p1 -i $SRC/lynx-2.8.8rel.2-openssl_1.1.0-1.patch
+	patch -p1 -i $SRC/lynx-2.8.8rel.2-ncurses_6.1-1.patch
 
 	./configure \
 		--prefix=/usr \
