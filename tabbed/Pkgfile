@@ -5,13 +5,16 @@
 
 name=tabbed
 version=0.6
-release=1
-source=(http://dl.suckless.org/tools/$name-$version.tar.gz config.h)
+release=2
+source=(http://dl.suckless.org/tools/$name-$version.tar.gz)
 
 build () {
-	cd "$name-$version"
+	cd $name-$version
 
-	cp $SRC/config.h .
+	if [ -f $PKGMK_ROOT/config.h ]; then
+		cp $PKGMK_ROOT/config.h .
+	fi
+
 	make CC=gcc
 	make DESTDIR=$PKG PREFIX=/usr install
 }
