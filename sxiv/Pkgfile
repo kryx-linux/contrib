@@ -6,13 +6,15 @@
 name=sxiv
 version=24
 release=1
-source=(https://github.com/muennich/$name/archive/v$version/$name-$version.tar.gz
-	config.h)
+source=(https://github.com/muennich/$name/archive/v$version/$name-$version.tar.gz)
 
 build () {
 	cd $name-$version
 
-	cp $SRC/config.h .
+	if [ -f $PKGMK_ROOT/config.h ]; then
+		cp $SRC/config.h .
+	fi
+
 	make CC=gcc CFLAGS="$CFLAGS"
 	make DESTDIR=$PKG PREFIX=/usr install
 }
