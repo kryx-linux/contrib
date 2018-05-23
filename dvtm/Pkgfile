@@ -5,16 +5,19 @@
 
 name=dvtm
 version=0.15
-release=1
-source=(http://www.brain-dump.org/projects/$name/$name-$version.tar.gz config.h)
+release=2
+source=(http://www.brain-dump.org/projects/$name/$name-$version.tar.gz)
 
 build () {
-    cd "$name-$version"
+	cd "$name-$version"
 
-    cp $SRC/config.h .
-    make
-    make DESTDIR=$PKG PREFIX=/usr install
+	if [ -f $PKGMK_ROOT/config.h ]; then
+		cp $SRC/config.h .
+	fi
 
-    # remove redundant terminfo files that conflict with ncurses
-    rm -rf $PKG/usr/share/terminfo
+	make
+	make DESTDIR=$PKG PREFIX=/usr install
+
+	# remove redundant terminfo files that conflict with ncurses
+	rm -rf $PKG/usr/share/terminfo
 }
