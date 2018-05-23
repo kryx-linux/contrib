@@ -5,14 +5,15 @@
 
 name=surf
 version=2.0
-release=2
-source=(http://dl.suckless.org/surf/$name-$version.tar.gz
-	config.h)
+release=3
+source=(http://dl.suckless.org/surf/$name-$version.tar.gz)
 
 build () {
 	cd "$name-$version"
 
-	cp $SRC/config.h .
+	if [ -f $PKGMK_ROOT/config.h ]; then
+		cp $PKGMK_ROOT/config.h .
+	fi
 
 	sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
 	sed -i 's/CFLAGS =/CFLAGS +=/g' config.mk
