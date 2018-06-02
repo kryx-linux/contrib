@@ -1,25 +1,34 @@
 # Description: Share mouse and keyboard between multiple computers
 # URL:         http://synergy-foss.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de 
-# Depends on:  xorg-libxrender
+# Depends on:  xorg-libxrender xorg-libxdmcp xorg-libxcb qt5 avahi
 
 name=synergy
-version=1.7.5
+version=1.9.1
 release=1
-source=(https://crux.nu/~tek/synergy-${version}.tar.gz)
+source=(https://github.com/symless/synergy-core/archive/v${version}-stable.tar.gz)
 
 build() {
-  cd $name-${version}-stable
+  cd $name-core-$version-stable
 
-  ./hm.sh conf -g1
-  ./hm.sh build
+  # work around a failing cmake file by defining re/version
+  cmake -DCMAKE_INSTALL_PREFIX=/usr \
+        -DSYNERGY_REVISION=0badc0de \
+        -DSYNERGY_VERSION=$version .
 
-  install -D -m 755 doc/synergyc.man $PKG/usr/share/man/man1/synergyc.man  
-  install -D -m 755 doc/synergys.man $PKG/usr/share/man/man1/synergys.man  
+  make
+
+  cd src/gui
+  qmake-qt5
+
+  sed -i 's|-I../lib/shared|-I../lib|g' Makefile
+  sed -i 's|version = version.*|version=version + '-0';|1' src/AboutDialog.cpp
+  make
+
+  cd ../..
+  install -D -m 755 doc/synergyc.man $PKG/usr/share/man1/synergyc.man
+  install -D -m 755 doc/synergys.man $PKG/usr/share/man1/synergys.man
   install -d -m 755 $PKG/usr/bin
-
-  rm -r bin/plugins
-  install -D -m 755 bin/* $PKG/usr/bin
-  rm $PKG/usr/bin/*tests
-
+  install -D -m 755 bin/*syn* $PKG/usr/bin
+  rm -rf $PKG/usr/bin/*tests
 }
