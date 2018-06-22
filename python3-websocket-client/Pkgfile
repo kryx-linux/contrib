@@ -5,16 +5,13 @@
 
 name=python3-websocket-client
 _name=websocket_client
-version=0.47.0
+version=0.48.0
 release=1
-source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/$_name-$version.tar.gz
-	use-system-ca.patch)
+source=(https://pypi.io/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
 
 build() {
 	cd $_name-$version
 
-	patch -p1 -i $SRC/use-system-ca.patch
-	rm websocket/cacert.pem
 	sed -i "s/'backports.ssl_match_hostname'//" setup.py
 
 	/usr/bin/python3 setup.py build
