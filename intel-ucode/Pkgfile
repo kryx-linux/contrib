@@ -4,12 +4,13 @@
 # Depends on: iucode-tool
 
 name=intel-ucode
-version=20180312
+version=20180703
 release=1
-source=(https://downloadmirror.intel.com/27591/eng/microcode-$version.tgz)
+source=(https://downloadmirror.intel.com/27945/eng/microcode-$version.tgz)
 
 build() {
     install -d -m755 $PKG/boot
-    /usr/sbin/iucode_tool --write-earlyfw=early-ucode.cpio microcode.dat
+    rm -f intel-ucode/list
+    /usr/sbin/iucode_tool --write-earlyfw=early-ucode.cpio intel-ucode/
     install -m644 early-ucode.cpio $PKG/boot/early-ucode.cpio
 }
