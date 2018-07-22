@@ -1,11 +1,11 @@
 # Description: Complete solution to record, convert and stream audio and video.
 # URL: http://ffmpeg.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: libsdl2 yasm
-# Optional: alsa-lib fdk-aac gnutls lame libass libsdl2 libtheora libva libvdpau libvorbis libvpx libwebp opus x264 x265
+# Depends on: yasm
+# Optional: alsa-lib fdk-aac gnutls lame libass libsdl2 libtheora libva libvdpau libvorbis libvpx libwebp opus x264 x265 pulseaudio
 
 name=ffmpeg
-version=4.0.1
+version=4.0.2
 release=1
 source=(https://ffmpeg.org/releases/$name-$version.tar.bz2
 	ffmpeg-x264-10bit.sh
@@ -28,6 +28,7 @@ build() {
 [ -e '/usr/lib/pkgconfig/vpx.pc' ] && PKGMK_FFMPEG+=' --enable-libvpx'
 [ -e '/usr/lib/pkgconfig/vorbis.pc' ] && PKGMK_FFMPEG+=' --enable-libvorbis'
 [ -e '/usr/lib/pkgconfig/theora.pc' ] && PKGMK_FFMPEG+=' --enable-libtheora'
+[ -e '/usr/lib/pkgconfig/libpulse.pc' ] && PKGMK_FFMPEG+=' --enable-libpulse'
 [ -e '/usr/lib/pkgconfig/fdk-aac.pc' ] && PKGMK_FFMPEG+=' --enable-libfdk-aac --enable-nonfree'
 
 	if [ -e '/usr/lib/pkgconfig/gnutls.pc' ]; then
