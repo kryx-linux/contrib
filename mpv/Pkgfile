@@ -1,8 +1,8 @@
 # Description: General Purpose video player based on MPlayer and mplayer2
-# URL:         https://mpv.io/
-# Maintainer:  Danny Rawlins, crux at romster dot me
+# URL: https://mpv.io/
+# Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: docutils ffmpeg libass util-linux xorg-libxscrnsaver
-# Optional:    youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libvdpau
+# Optional: youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libvdpau rubberband vulkan-loader
 
 name=mpv
 version=0.28.2
@@ -19,7 +19,8 @@ build() {
 	./waf configure ${PKGMK_MPV} \
 		--prefix=/usr \
 		--enable-libarchive \
-		--enable-libmpv-shared
+		--enable-libmpv-shared \
+		-j ${JOBS-1}
 
 	./waf build
 	./waf install --destdir=$PKG
