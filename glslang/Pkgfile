@@ -1,0 +1,23 @@
+# Description: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
+# URL: https://www.khronos.org/opengles/sdk/tools/Reference-Compiler
+# Maintainer: Pedja, predivan at mts dot rs
+# Depends on: cmake git
+
+name=glslang
+version=20180721
+git_commit=fa4952c3
+release=1
+source=(https://bitbucket.org/predivan/vulkan/downloads/$name-$version-$git_commit.tar.bz2)
+
+build() {
+    cd $name-$version-$git_commit
+    python update_glslang_sources.py
+    mkdir build
+    cd build
+    cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DBUILD_SHARED_LIBS=ON ../
+    make
+    make DESTDIR=$PKG install
+}
