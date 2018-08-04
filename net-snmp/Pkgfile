@@ -4,22 +4,15 @@
 # Depends on: lm_sensors
 
 name=net-snmp
-version=5.7.3
-release=5
+version=5.8
+release=1
 source=(http://download.sourceforge.net/$name/$name-$version.tar.gz \
-	snmpd snmpd.conf \
-	0001-Remove-U64-typedef.patch \
-	0001-CHANGES-BUG-2712-Fix-Perl-module-compilation.patch \
-	CVE-2018-1000116.patch)
+	snmpd snmpd.conf)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/0001-Remove-U64-typedef.patch
-	patch -p1 -i $SRC/0001-CHANGES-BUG-2712-Fix-Perl-module-compilation.patch
-	patch -p1 -i $SRC/CVE-2018-1000116.patch
-
-	export NETSNMP_DONT_CHECK_VERSION=1
+	#export NETSNMP_DONT_CHECK_VERSION=1
 	./configure --prefix=/usr \
 				--sysconfdir=/etc \
 				--mandir=/usr/man \
