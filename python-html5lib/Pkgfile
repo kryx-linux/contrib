@@ -3,13 +3,16 @@
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: python-setuptools
 
-name=html5lib-python
-version=1.0b10
+name=python-html5lib
+version=1.0.1
 release=1
-source=(https://github.com/html5lib/html5lib-python/archive/$version.tar.gz)
+source=(https://github.com/html5lib/html5lib-python/archive/$version/html5lib-python-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd html5lib-python-$version
+
 	/usr/bin/python setup.py build
-	/usr/bin/python setup.py install --prefix=/usr --root=$PKG --optimize=1
+
+	/usr/bin/python setup.py install \
+		--prefix=/usr --root=$PKG --optimize=1
 }
