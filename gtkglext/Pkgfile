@@ -1,20 +1,23 @@
 # Description: OpenGL extension to GTK 2.0.
 # URL: https://projects.gnome.org/gtkglext/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Jay Dolan, jdolan at jdolan dot dyndns dot org
 # Depends on: glu gtk pangox-compat xorg-libxmu
 
 name=gtkglext
 version=1.2.0
-release=2
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
-	gtk2.20.patch)
+release=3
+source=(https://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
+	gtk2.20.patch
+	gtkglext-gcc8.patch)
 
 build() {
 	cd $name-$version
 
-	patch -Np1 -i $SRC/gtk2.20.patch
+	patch -p1 -i $SRC/gtk2.20.patch
 	sed '/AC_PATH_XTRA/d' -i configure.in
+	patch -p1 -i $SRC/gtkglext-gcc8.patch
+
+	autoreconf -vi
 
 	./configure \
 		--prefix=/usr \
