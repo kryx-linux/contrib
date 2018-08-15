@@ -1,16 +1,15 @@
 # Description: Lightweight panel/taskbar.
 # URL: https://gitlab.com/o9000/tint2
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gtk imlib2 librsvg ninja startup-notification xorg-xrandr
+# Depends on: gtk imlib2 librsvg startup-notification xorg-xrandr
 
 name=tint2
-version=15.2
+version=16.6.1
 release=1
-source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.bz2)
-#source=(https://gitlab.com/o9000/tint2/repository/archive.tar.bz2?ref=$version)
+source=(https://gitlab.com/o9000/$name/-/archive/v$version/$name-v$version.tar.bz2)
 
 build() {
-	cd $name-$version-*
+	cd $name-v$version
 
 	cmake \
 		-DCMAKE_INSTALL_PREFIX=/usr \
@@ -18,7 +17,7 @@ build() {
 		-DENABLE_TINT2CONF=OFF \
 		-G Ninja
 
-	ninja
+	ninja -j ${JOBS:-1}
 	DESTDIR=$PKG ninja install
 
 	rm -r $PKG/{etc,usr/share/doc}
