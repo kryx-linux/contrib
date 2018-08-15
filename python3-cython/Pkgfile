@@ -15,4 +15,8 @@ build() {
 
 	/usr/bin/python3 setup.py install \
 		--prefix=/usr --root=$PKG --optimize=1
+
+	for f in cygdb cython cythonize; do
+		mv $PKG/usr/bin/$f $PKG/usr/bin/${f}3
+	done
 }
