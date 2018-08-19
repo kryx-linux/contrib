@@ -6,7 +6,7 @@
 
 name=ffmpeg
 version=4.0.2
-release=1
+release=2
 source=(https://ffmpeg.org/releases/$name-$version.tar.bz2
 	ffmpeg-x264-10bit.sh
 	CVE-2018-6621.patch)
@@ -49,7 +49,8 @@ build() {
 		--enable-avfilter \
 		--enable-postproc \
 		--enable-pthreads \
-		--enable-swresample
+		--enable-swresample \
+		--enable-avresample
 
 	make
 	make DESTDIR=$PKG install install-man
