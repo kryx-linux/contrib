@@ -1,18 +1,15 @@
 # Description: A fast commandline-driven image viewer for X.
 # URL:         http://feh.finalrewind.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Vincenzo Colosimo vico at bicisport dot de
-# Depends on:  giblib xorg-libxinerama xorg-libxt
+# Depends on:  curl giblib harfbuzz xorg-libxinerama
 
 name=feh
-version=2.18.3
+version=2.27.1
 release=1
 source=(http://feh.finalrewind.org/feh-${version}.tar.bz2)
 
 build() {
    cd $name-$version
-
-   sed -i 's|share/man|man|g' config.mk
    make PREFIX=/usr
    make PREFIX=/usr DESTDIR=$PKG install
    rm -rf $PKG/usr/share/doc
