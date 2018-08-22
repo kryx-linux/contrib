@@ -1,41 +1,41 @@
 # Description: Glasgow Haskell compiler.
 # URL: http://www.haskell.org/haskellwiki/Glasgow_Haskell_Compiler
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Moritz Wilhelmy, moritz plus crux at wzff dot de
 # Depends on: docbook-xsl libedit libffi libgmp readline
 
 name=ghc
-version=8.2.2
+version=8.4.3
+_bversion=8.4.2
 release=1
-_bootstrapsum=789fee2f21daa1a4d0bdef282d4e5aa9683405085a61fb968e65dc95f64e9e03
+_bootstrapsum=28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93
 #curl -s http://downloads.haskell.org/~ghc/$version/SHA256SUMS | grep ./ghc-$version-x86_64-centos67-linux.tar.xz | cut -d' ' -f1
 source=(https://downloads.haskell.org/~ghc/$version/$name-$version-src.tar.xz)
 
 build() {
 	# if ghc is not previously installed bootstrap it
-	if [ ! -e /usr/bin/ghc ]; then
+	if [ ! -e '/usr/bin/ghc' ]; then
 
 		# download binary bootstrap file if it does not exist
-		if [ ! -f "$PKGMK_SOURCE_DIR/$name-$version-x86_64-centos67-linux.tar.xz" ]; then
+		if [ ! -f "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz" ]; then
 
-			wget http://downloads.haskell.org/~ghc/$version/$name-$version-x86_64-centos67-linux.tar.xz \
-				--output-document="$PKGMK_SOURCE_DIR/$name-$version-x86_64-centos67-linux.tar.xz"
+			wget "http://downloads.haskell.org/~ghc/$_bversion/$name-$_bversion-x86_64-centos67-linux.tar.xz" \
+				--output-document="$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz"
 
-			if [ $_bootstrapsum != $(sha256sum "$PKGMK_SOURCE_DIR/$name-$version-x86_64-centos67-linux.tar.xz" | cut -d' ' -f1) ]; then
-				echo "Error Bootstrap file $PKGMK_SOURCE_DIR/$name-$version-x86_64-centos67-linux.tar.xz failed sha256sum"
-				exit 1
-			fi
 		fi
 
-		install -d tmp
-		cd tmp
+		if [ $_bootstrapsum != $(sha256sum "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz" | cut -d' ' -f1) ]; then
+			echo "Error Bootstrap file $PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz failed sha256sum"
+			exit $E_GENERAL
+		fi
 
-		bsdtar -xf "$PKGMK_SOURCE_DIR/$name-$version-x86_64-centos67-linux.tar.xz"
-		mv $name-$version ../$name-$version-binary
+		mkdir tmp
+		cd tmp
+		bsdtar -xf "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz"
+		mv $name-$_bversion ../$name-$_bversion-binary
 		cd -
 		rmdir tmp
 
-		cd $name-$version-binary
+		cd $name-$_bversion-binary
 
 		# hack for gmp and ncurses for bootstrap binary ghc
 		ln -s /usr/lib/libgmp.so.10 libgmp.so.3
