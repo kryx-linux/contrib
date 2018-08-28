@@ -4,16 +4,16 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=18.05.0-ce
+version=18.06.1-ce
 release=1
 source=(https://github.com/docker/docker-ce/archive/v$version/$name-ce-v$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/libnetwork-c15b372.tar.xz \
+    http://jaeger.morpheus.net/linux/crux/files/libnetwork-3ac297b.tar.xz \
     $name.rc $name.conf)
 
 build() {
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=f150324
+    export DOCKER_GITCOMMIT=e68fc7a
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
 
@@ -22,25 +22,25 @@ build() {
     pushd src/github.com/docker
     ln -s $SRC/$name-ce-$version/components/cli
     pushd cli
-    make dynbinary
+    make VERSION=$version dynbinary
     popd
     popd
 
     pushd src/github.com/docker
     ln -s $SRC/$name-ce-$version/components/engine $name
     pushd $name
-    hack/make.sh dynbinary
+    VERSION=$version hack/make.sh dynbinary
     popd
     popd
 
     cd $name-ce-$version
     install -D -m 0755 components/cli/build/$name $PKG/usr/bin/$name
-    install -D -m 0755 components/engine/bundles/latest/dynbinary-daemon/dockerd-dev \
+    install -D -m 0755 components/engine/bundles/latest/dynbinary-daemon/dockerd-$version \
         $PKG/usr/bin/dockerd
 
     (cd ..; \
         GOROOT=/usr/lib/go GOPATH=${PKGMK_WORK_DIR} go build -o $PKG/usr/bin/$name-proxy \
-            libnetwork-c15b372/cmd/proxy)
+            libnetwork-3ac297b/cmd/proxy)
 
     for M in 1 5 8; do
         install -d -m 0755 $PKG/usr/share/man/man${M}
