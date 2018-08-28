@@ -1,10 +1,10 @@
 # Description: A daemon to control runC
 # URL: https://containerd.io/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: go btrfs-progs
+# Depends on: go btrfs-progs git
 
 name=containerd
-version=773c489
+version=468a545
 release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz)
 
@@ -15,7 +15,7 @@ build() {
     cd $name
     export GOPATH=$SRC
     # use the long commit hash here
-    make GIT_COMMIT=773c489c9c1b21a6d78b5c538cd395416ec50f88
+    make GIT_COMMIT=468a545b9edcd5932818eb9de8e72413e616e86e
     install -d -m 0755 $PKG/usr/bin
     install -m 0755 bin/* $PKG/usr/bin/
 }
