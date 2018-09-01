@@ -1,0 +1,20 @@
+# Description:	WireGuard userspace tool and out-of-tree kernel module
+# URL:		https://www.wireguard.com/
+# Maintainer:	Fredrik Rinnestam, fredrik at crux dot guru
+# Depends on:	libmnl
+
+name=wireguard
+version=0.0.20180809
+release=1
+source=(https://git.zx2c4.com/WireGuard/snapshot/WireGuard-$version.tar.xz)
+
+build() {
+	cd WireGuard-$version/src
+	make
+	make DESTDIR=$PKG -C tools install
+
+        install -d $PKG/lib/modules/$(uname -r)/extra
+        install -m 0644 *.ko $PKG/lib/modules/$(uname -r)/extra/
+
+	rm -r $PKG/usr/share/bash-completion
+}
