@@ -4,7 +4,7 @@
 # Depends on: python-setuptools
 
 name=python-pyasn1
-version=0.4.3
+version=0.4.4
 release=1
 source=(https://files.pythonhosted.org/packages/source/${name:7:1}/${name#*-}/${name#*-}-$version.tar.gz)
 
@@ -12,4 +12,6 @@ build() {
 	cd ${name#*-}-$version
 	/usr/bin/python setup.py build
 	/usr/bin/python setup.py install --prefix=/usr --root=$PKG --optimize=1
+
+	chmod -R g-w $PKG
 }
