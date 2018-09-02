@@ -5,7 +5,7 @@
 # Optional: python-setuptools
 
 name=youtube-dl
-version=2018.08.04
+version=2018.09.01
 release=1
 source=(https://youtube-dl.org/downloads/$version/$name-$version.tar.gz)
 
@@ -16,7 +16,8 @@ build() {
 
 	rm -r $PKG/usr/share/doc
 
-	find $PKG/usr/lib/python*/site-packages/ -maxdepth 1 -type f \
-		-name "youtube_dl-$version-py*.egg-info" -delete
+	local pyv="$(/usr/bin/python -c "import sys; print \"%s.%s\" % (sys.version_info[0], sys.version_info[1]);")"
+	find $PKG/usr/lib/python$pyv/site-packages/ -maxdepth 1 -type f \
+		-name "youtube_dl-$version-py$pyv.egg-info" -delete
 
 }
