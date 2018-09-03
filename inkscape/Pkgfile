@@ -8,12 +8,14 @@ name=inkscape
 version=0.92.3
 release=1
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.bz2
-	noconst.patch)
+	noconst.patch
+	poppler-0.65.0.patch)
 
 build() {
 	cd $name-$version
 
 	patch -p1 -i $SRC/noconst.patch
+	patch -p1 -i $SRC/poppler-0.65.0.patch
 	sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
 
 	CXXFLAGS+=' -std=c++11'
