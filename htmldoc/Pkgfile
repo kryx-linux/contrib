@@ -5,18 +5,15 @@
 # Depends on:
 
 name=htmldoc
-version=1.8.30
+version=1.9.4
 release=1
-source=(https://github.com/michaelrsweet/htmldoc/releases/download/v1.8.30/${name}-${version}-source.tar.gz
-        fix_random.diff)
+source=(https://github.com/michaelrsweet/htmldoc/releases/download/v${version}/${name}-${version}-source.tar.gz)
 
 build() {
-  patch -i $SRC/fix_random.diff -p1
-
   ./configure --prefix=/usr --disable-gnutls
 
   make
-  make  prefix=$PKG/usr \
+  make prefix=$PKG/usr \
     datadir=$PKG/usr/share \
     bindir=$PKG/usr/bin \
     mandir=$PKG/usr/man install
