@@ -6,18 +6,20 @@
 # Depends on:   
 
 name=cmatrix
-version=1.2a
+version=1.2
 release=1
-source=(http://www.asty.org/cmatrix/dist/cmatrix-$version.tar.gz)
+source=(https://github.com/abishekvashok/cmatrix/archive/${version}.tar.gz)
 
 build() {
    cd $name-$version
 
-   ./configure \
-      --prefix=/usr \
-      --disable-nls
+   ./configure --prefix=/usr
 
    make
-   install -D -m755 -groot -oroot cmatrix $PKG/usr/bin/cmatrix
-   install -D -m644 -groot -oroot cmatrix.1 $PKG/usr/share/man/man1/cmatrix.1
+   make DESTDIR=$PKG install
+   make DESTDIR=$PKG install-data-local
+
+   install -D -m644 -groot -oroot matrix.fnt $PKG/usr/share/kbd/consolefonts/matrix.fnt
+   install -D -m644 -groot -oroot matrix.psf.gz $PKG/usr/share/kbd/consolefonts/matrix.psf.gz
+   install -D -m644 -groot -oroot mtx.pcf $PKG/usr/share/fonts/X11/misc/mtx.pcf
 }
