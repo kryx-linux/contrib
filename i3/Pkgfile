@@ -1,0 +1,65 @@
+# Description: A tiling window manager (depends only on ports from our ISO)
+# URL:         http://i3wm.org/
+# Maintainer:  Juergen Daubert, jue at crux dot nu
+# Depends on:  cmake pango xorg-xcb-util-cursor xorg-xcb-util-keysyms xorg-xcb-util-wm
+
+name=i3
+version=4.15
+release=2
+source=(http://i3wm.org/downloads/$name-$version.tar.bz2
+        https://github.com/lloyd/yajl/archive/2.1.0/yajl-2.1.0.tar.gz
+        http://dist.schmorp.de/libev/Attic/libev-4.24.tar.gz
+        http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
+        http://xkbcommon.org/download/libxkbcommon-0.8.2.tar.xz
+        https://github.com/Airblader/xcb-util-xrm/releases/download/v1.3/xcb-util-xrm-1.3.tar.bz2)
+
+build() {
+
+    local LIBS=$SRC/$name-$version/libs
+    install -d $LIBS/{lib,include}
+
+    # xcb-util-xrm
+    cd $SRC/xcb-util-xrm-1.3
+    ./configure --prefix=/ --disable-shared
+    make
+    make DESTDIR=$LIBS install
+
+    # libxkbcommon
+    cd $SRC/libxkbcommon-0.8.2
+    ./configure --prefix=/ --disable-shared
+    make
+    make DESTDIR=$LIBS install
+
+    # yajl
+    cd $SRC/yajl-2.1.0
+    cmake . -Wno-dev
+    make
+    cp -r yajl-2.1.0/include $LIBS
+    cp yajl-2.1.0/lib/libyajl_s.a $LIBS/lib/libyajl.a
+    cp yajl-2.1.0/share/pkgconfig/yajl.pc $LIBS/lib/pkgconfig
+
+    # libev
+    cd $SRC/libev-4.24
+    ./configure --prefix=/ --disable-shared
+    make
+    make DESTDIR=$LIBS install
+
+    # startup-notification
+    cd $SRC/startup-notification-0.12
+    sed -i '/^Libs: /s/$/ -lX11-xcb/' libstartup-notification-1.0.pc.in
+    ./configure --prefix=/ --disable-shared
+    make
+    make DESTDIR=$LIBS install
+    mv $LIBS/include/{startup-notification-1.0/libsn,libsn}
+
+    # i3
+    cd $SRC/$name-$version
+    export CFLAGS="$CFLAGS -I$LIBS/include"
+    export LDFLAGS="$LDFLAGS -L$LIBS/lib"
+    export PKG_CONFIG_PATH="$LIBS/lib/pkgconfig"
+    ./configure --prefix=/usr --disable-builddir
+    make
+    make DESTDIR=$PKG install
+    install -d $PKG/usr/share/man/man1
+    install -m 0644 man/*.1 $PKG/usr/share/man/man1/
+}
