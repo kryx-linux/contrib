@@ -1,16 +1,18 @@
 # Description: Python bindings for gstreamer.
 # URL: https://gstreamer.freedesktop.org/modules/gst-python.html
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gst-plugins-base pygtk pygobject-gtk3
+# Depends on: gst-plugins-base python-gobject python3-gobject
+
+## python3-gobject is required for pkgconfig and headers
 
 name=gst-python
-version=1.14.2
+version=1.14.3
 release=1
 source=(https://gstreamer.freedesktop.org/src/gst-python/gst-python-$version.tar.xz)
 
 build() {
 	cd gst-python-$version
-	./configure --prefix=/usr
+	PYTHON=/usr/bin/python ./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 }
