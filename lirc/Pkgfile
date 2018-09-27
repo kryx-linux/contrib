@@ -5,7 +5,7 @@
 
 name=lirc
 version=0.9.2
-release=4
+release=5
 source=(
 http://download.sourceforge.net/$name/$name-$version.tar.bz2
 lircd.rc
@@ -32,14 +32,17 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--sysconfdir=/etc \
-		--mandir=/usr/man \
+		--mandir=/usr/share/man \
 		--localstatedir=/var
 	make
 	make DESTDIR=$PKG install
+
+	# bogus symlink
+	rm -f $PKG/usr/bin/lirc-setup $PKG/usr/share/man/man1/lirc-setup.1
 
 	# init script
 	install -D -m 755 $SRC/lircd.rc $PKG/etc/rc.d/lircd
 
 	# remove cruft
-	rm -rf $PKG/configs $PKG/usr/share $PKG/var $PKG/etc/lirc/lircd.conf.d/README.conf.d $PKG/usr/lib/lirc/plugins/*.la
+	rm -rf $PKG/configs $PKG/usr/share/doc $PKG/var $PKG/etc/lirc/lircd.conf.d/README.conf.d $PKG/usr/lib/lirc/plugins/*.la
 }
