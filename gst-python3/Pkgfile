@@ -1,0 +1,18 @@
+# Description: Python bindings for gstreamer.
+# URL: https://gstreamer.freedesktop.org/modules/gst-python.html
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: gst-plugins-base python3-gobject
+
+name=gst-python3
+version=1.14.3
+release=1
+source=(https://gstreamer.freedesktop.org/src/gst-python/gst-python-$version.tar.xz)
+
+build() {
+	cd gst-python-$version
+	PYTHON=/usr/bin/python3 ./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+
+	mv $PKG/usr/lib/gstreamer-1.0/libgstpython{,3}.la
+}
