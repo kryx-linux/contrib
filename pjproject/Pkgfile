@@ -4,12 +4,10 @@
 # Depends on:	portaudio speex libsrtp gsm ffmpeg libsdl2 libsamplerate
 
 name=pjproject
-version=2.4
+version=2.6
 release=2
-
 source=(
-http://www.pjsip.org/release/$version/$name-$version.tar.bz2
-pjmedia-libsamplerate.patch
+http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2
 config_site.h
 )
 
@@ -23,10 +21,9 @@ build() {
 
 	export CFLAGS="$CFLAGS -DNDEBUG"
 
-	# dynamically linked against libpj*
 	./configure \
-		--enable-shared \
 		--prefix=/usr \
+		--enable-shared \
 		--with-external-pa \
 		--with-external-gsm \
 		--with-external-speex \
@@ -37,9 +34,6 @@ build() {
 		--disable-resample_dll
 
 	cp $SRC/config_site.h pjlib/include/pj/config_site.h
-
-	# use system's libsamplerate
-	patch -p1 -i $SRC/pjmedia-libsamplerate.patch
 
 	make dep
 	make
