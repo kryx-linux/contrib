@@ -2,17 +2,16 @@
 # URL:		http://www.asterisk.org
 # Maintainer:   Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:	openssl ncurses jansson libxml2
-# Optional:	dahdi pjsip opus mysql
+# Optional:	dahdi pjsip opus unixodbc
 
 name=asterisk
-version=13.17.2
+version=13.23.1
 release=5
 source=(
 http://downloads.digium.com/pub/asterisk/releases/asterisk-$version.tar.gz
 asterisk.rc
 build-enable-aelparse.patch
 build-disable-astcanary.patch
-build-enable-cdr-mysql.patch
 build-enable-ilbc.patch
 build-disable-moh-wav.patch
 build-disable-sounds-en-gsm.patch
@@ -23,7 +22,7 @@ build () {
 
 	./configure \
 		--prefix=/usr \
-		--with-ncurses \
+		--with-curses \
 		--with-ssl \
 		--disable-xmldoc \
 		--with-sounds-cache=/tmp
@@ -36,9 +35,6 @@ build () {
 
 	# Remove astcanary
 	patch -p1 -i $SRC/build-disable-astcanary.patch
-
-	# Add cdr_mysql
-	patch -p1 -i $SRC/build-enable-cdr-mysql.patch
 
 	# Add iLBC
 	patch -p1 -i $SRC/build-enable-ilbc.patch
