@@ -4,23 +4,32 @@
 # Depends on:	libsrtp
 
 name=pjsip
-version=2.4
+version=2.6
 release=1
-source=(http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2)
+source=(
+http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2
+)
 
 # Related ports:
-# pjsua: just the user-agent
-# pjsip: just what asterisk needs for res_pjsip.so and friends
-# pjproject: libraries and user-agents with everything
+# pjsua: Standalone user-agent.
+# pjsip: The minimum that asterisk needs for res_pjsip.so and friends. Dynamic libraries.
+# pjproject: Libraries with most things enabled. Static and dynamic libraries.
 
 build() {
 	cd pjproject-$version
 
 	export CFLAGS="$CFLAGS -DNDEBUG"
 
+	# webrtc requires SSE2 (disabled temporarily)
+	if [ '' -a -n "$(grep '\bsse2\b' /proc/cpuinfo)" ]; then
+		webrtc="--enable-libwebrtc"
+	else
+		webrtc="--disable-libwebrtc"
+	fi
+
 	./configure \
-		--enable-shared \
 		--prefix=/usr \
+		--enable-shared \
 		--disable-gsm-codec \
 		--with-external-srtp \
 		--disable-g7221-codec \
@@ -31,7 +40,8 @@ build() {
 		--disable-sound \
 		--disable-speex-codec \
 		--disable-speex-aec \
-		--disable-video
+		--disable-video \
+		$webrtc
 
 	make dep
 	make
