@@ -1,15 +1,13 @@
-# Description:	Command line SIP phone
+# Description:	Multimedia communication library
 # URL:		http://www.pjsip.org/
 # Packager:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:	pjproject
 
 name=pjsua
-version=2.4
-release=3
-
+version=2.6
+release=2
 source=(
 http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2
-pjmedia-libsamplerate.patch
 config_site.h
 )
 
@@ -26,7 +24,6 @@ build() {
 	# pjsua will be dynamically linked as long as pjproject is installed beforehand.
 	# otherwise it will be statically linked.
 	./configure \
-		--enable-shared"$([ -f /usr/lib/libpjsua.so ] || echo =no)" \
 		--prefix=/usr \
 		--with-external-pa \
 		--with-external-gsm \
@@ -35,12 +32,10 @@ build() {
 		--with-sdl=/usr \
 		--disable-openh264 \
 		--enable-libsamplerate \
-		--disable-resample_dll
+		--disable-resample_dll \
+		$( [ -f /usr/lib/libpjsua.so ] && echo --enable-shared )
 
 	cp $SRC/config_site.h pjlib/include/pj/config_site.h
-
-	# use system's libsamplerate
-	patch -p1 -i $SRC/pjmedia-libsamplerate.patch
 
 	make dep
 
@@ -51,5 +46,5 @@ build() {
 	make
 
 	# install pjsua only
-	install -D -m755 pjsip-apps/bin/pjsua-* $PKG/usr/bin/pjsua
+	install -D -m755 pjsip-apps/bin/pjsua-`./config.guess` $PKG/usr/bin/pjsua
 }
