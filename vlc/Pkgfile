@@ -2,7 +2,8 @@
 # URL:         http://www.videolan.org/vlc/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Matt Housh, jaeger at morpheus dot net
-# Depends on:  libmad ffmpeg qt4 libdvdnav liba52 libgcrypt alsa-lib
+# Depends on:  libmad ffmpeg qt4 libdvdnav libgcrypt alsa-lib liba52
+# Nice to have:opus libvorbis x264 libogg libmtp libtheora flac
 
 name=vlc
 version=3.0.4
@@ -26,9 +27,9 @@ build() {
     --disable-nls \
     --disable-fribidi \
     --disable-dbus \
-    --enable-alsa \
     --disable-lua \
-    --disable-a52
+    --enable-alsa
+
   make
   make DESTDIR=$PKG install
   rm -rf $PKG/usr/share/doc
