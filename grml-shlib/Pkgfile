@@ -4,13 +4,13 @@
 # Packager:    Simon Glossner, viper at hometux dot de
 
 name=grml-shlib
-version=1.03.1
+version=1.04.1
 release=1
 source=(http://deb.grml.org/pool/main/g/$name/${name}_${version}.tar.gz \
   grml-shlib.3)
 
 build() {
-    cd $name
+    cd $name-$version
 
     mkdir -p $PKG/usr/lib/grml
     mkdir -p $PKG/usr/man/man3
