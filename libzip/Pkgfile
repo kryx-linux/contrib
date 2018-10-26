@@ -4,22 +4,17 @@
 # Depends on: 
 
 name=libzip
-version=0.11.2
+version=1.5.1
 release=2
 source=(
 http://nih.at/$name/$name-$version.tar.xz
-libzip-includes.patch
 )
 
 build() {
 	cd $name-$version
 
-	# Fixes the installation of zipconf.h
-	patch -p1 -i $SRC/libzip-includes.patch
-	autoreconf -i
- 
-	./configure \
-		--prefix=/usr \
-		--man=/usr/man
+	cmake . \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr
 	make DESTDIR=$PKG install
 }
