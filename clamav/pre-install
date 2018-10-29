@@ -5,6 +5,6 @@ if [ -z "`getent group clamav`" ]; then
 fi
 
 if [ -z "`getent passwd clamav`" ]; then
-	/usr/sbin/useradd -r -g clamav -d /etc/clamav -s /bin/false -c "ClamAV" clamav
+	/usr/sbin/useradd -r -g clamav -d /var/empty -s /bin/false -c "ClamAV" clamav
 	/usr/bin/passwd -l clamav
 fi
