@@ -4,15 +4,16 @@
 # Depends on: vulkan-loader glslang
 
 name=vulkan-validation-layers
-version=1.1.82.0
+version=1.1.85.0
 release=1
-source=(https://bitbucket.org/predivan/vulkan/downloads/Vulkan-ValidationLayers-sdk-$version.tar.gz)
+source=(https://github.com/KhronosGroup/Vulkan-ValidationLayers/archive/sdk-$version/Vulkan-ValidationLayers-sdk-$version.tar.gz)
 
 build() {
     cd Vulkan-ValidationLayers-sdk-$version
 
     rm -rf build ; mkdir build ; cd build
     cmake -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_SYSCONFDIR=/etc \
         -DCMAKE_INSTALL_LIBDIR=lib \
         -DCMAKE_INSTALL_DATADIR=/share \
@@ -20,8 +21,7 @@ build() {
         -DCMAKE_SKIP_RPATH=True \
         -DBUILD_TESTS=Off \
         -DBUILD_WSI_WAYLAND_SUPPORT=Off \
-        -DBUILD_WSI_MIR_SUPPORT=Off \
-        -DCMAKE_BUILD_TYPE=Release ..
+        -DBUILD_WSI_MIR_SUPPORT=Off ../
     make
     make DESTDIR=$PKG install
 
