@@ -10,6 +10,7 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/Blowfish.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/CAST.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/ChaCha20.py
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/ChaCha20_Poly1305.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/DES.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/DES3.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/PKCS1_OAEP.py
@@ -31,6 +32,8 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/CAST.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/ChaCha20.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/ChaCha20.cpython-36.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/ChaCha20_Poly1305.cpython-36.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/ChaCha20_Poly1305.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/DES.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/DES.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Cipher/__pycache__/DES3.cpython-36.opt-1.pyc
@@ -98,6 +101,7 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/MD2.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/MD4.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/MD5.py
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/Poly1305.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/RIPEMD.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/RIPEMD160.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/SHA.py
@@ -139,6 +143,8 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/MD4.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/MD5.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/MD5.cpython-36.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/Poly1305.cpython-36.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/Poly1305.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/RIPEMD.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/RIPEMD.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/RIPEMD160.cpython-36.opt-1.pyc
@@ -174,6 +180,7 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/__pycache__/
 -rwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/_ghash_clmul.cpython-36m-x86_64-linux-gnu.so
 -rwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/_ghash_portable.cpython-36m-x86_64-linux-gnu.so
 -rwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/_keccak.cpython-36m-x86_64-linux-gnu.so
+-rwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/_poly1305.cpython-36m-x86_64-linux-gnu.so
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/Hash/keccak.py
 drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/IO/
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/IO/PEM.py
@@ -275,6 +282,8 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_CTR.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_ChaCha20.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_ChaCha20.cpython-36.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_ChaCha20_Poly1305.cpython-36.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_ChaCha20_Poly1305.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_DES.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_DES.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__pycache__/test_DES3.cpython-36.opt-1.pyc
@@ -308,6 +317,7 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/__py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_CFB.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_CTR.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_ChaCha20.py
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_ChaCha20_Poly1305.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_DES.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_DES3.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_EAX.py
@@ -430,6 +440,7 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_vectors/wycheproof/aes_eax_test.json
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_vectors/wycheproof/aes_gcm_test.json
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_vectors/wycheproof/aes_siv_cmac_test.json
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Cipher/test_vectors/wycheproof/chacha20_poly1305_test.json
 drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/
@@ -449,6 +460,8 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pyca
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_MD4.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_MD5.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_MD5.cpython-36.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_Poly1305.cpython-36.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_Poly1305.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_RIPEMD160.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_RIPEMD160.cpython-36.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pycache__/test_SHA1.cpython-36.opt-1.pyc
@@ -480,6 +493,7 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/__pyca
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/test_MD2.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/test_MD4.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/test_MD5.py
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/test_Poly1305.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/test_RIPEMD160.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/test_SHA1.py
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/SelfTest/Hash/test_SHA224.py
@@ -754,9 +768,9 @@ drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/Util/__pycache__/
 drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/Crypto/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/__pycache__/__init__.cpython-36.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.6/site-packages/Crypto/__pycache__/__init__.cpython-36.pyc
-drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.6.6-py3.6.egg-info/
--rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.6.6-py3.6.egg-info/PKG-INFO
--rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.6.6-py3.6.egg-info/SOURCES.txt
--rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.6.6-py3.6.egg-info/dependency_links.txt
--rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.6.6-py3.6.egg-info/not-zip-safe
--rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.6.6-py3.6.egg-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.7.0-py3.6.egg-info/
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.7.0-py3.6.egg-info/PKG-INFO
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.7.0-py3.6.egg-info/SOURCES.txt
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.7.0-py3.6.egg-info/dependency_links.txt
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.7.0-py3.6.egg-info/not-zip-safe
+-rw-r--r--	root/root	usr/lib/python3.6/site-packages/pycryptodome-3.7.0-py3.6.egg-info/top_level.txt
