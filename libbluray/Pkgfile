@@ -1,17 +1,19 @@
 # Description: Blu-Ray access library.
 # URL: http://www.videolan.org/developers/libbluray.html
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: ant fontconfig libxml2
+# Depends on: fontconfig libxml2
+# Optional: ant
 
 name=libbluray
-version=1.0.1
+version=1.0.2
 release=1
 source=(ftp://ftp.videolan.org/pub/videolan/$name/$version/$name-$version.tar.bz2)
 build() {
 	cd $name-$version
 
-	./configure --prefix=/usr
+	./configure \
+		--prefix=/usr \
+		$([ -e /usr/bin/ant ] || echo --disable-bdjava-jar)
 
 	make
 	make DESTDIR=$PKG install
