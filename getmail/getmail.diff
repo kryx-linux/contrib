@@ -1,7 +1,6 @@
-diff -Nru getmail-4.8.0.orig/setup.py getmail-4.8.0/setup.py
---- getmail-4.8.0.orig/setup.py	2008-03-05 21:32:47.000000000 +1000
-+++ getmail-4.8.0/setup.py	2008-03-05 21:35:24.000000000 +1000
-@@ -35,16 +35,8 @@
+--- a/setup.py	2018-11-10 22:03:47.020009522 +0100
++++ b/setup.py	2018-11-10 22:05:11.382810961 +0100
+@@ -35,13 +35,6 @@
          # hack hack hack hack hack hack hack
          datadir = args[pos + 1]
  
@@ -14,12 +13,9 @@ diff -Nru getmail-4.8.0.orig/setup.py getmail-4.8.0/setup.py
 -
  GETMAILMANDIR = os.path.join(
      datadir or prefix,
--    'share',
-     'man',
-     'man1'
- )
-@@ -98,25 +90,6 @@
-     'getmail_mbox'
+     'share',
+@@ -99,25 +92,6 @@
+         'getmail-gmail-xoauth-tokens',
      ],
      data_files=[
 -        (GETMAILDOCDIR, [
