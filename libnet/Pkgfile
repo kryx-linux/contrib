@@ -1,7 +1,6 @@
 # Description: Library for constructing and injecting network packets
 # URL:         http://libnet-dev.sf.net
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:
 
 name=libnet
 version=1.2-rc3
@@ -12,7 +11,7 @@ build() {
     cd $name-$version
     export CFLAGS=$CFLAGS" -fPIC" 
 
-    ./configure --prefix=/usr --mandir=/usr/man
+    ./configure --prefix=/usr
     sed -i 's/ sample//g' Makefile
     make
     make DESTDIR=$PKG install
