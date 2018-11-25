@@ -14,8 +14,8 @@ build() {
     # fix FS#1144
     autoreconf -i -Iconfig
 
-    ./configure --prefix=/usr \
-                --mandir=/usr/man
+    ./configure --prefix=/usr
+
     make
     make install DESTDIR=$PKG
 }
