@@ -1,16 +1,16 @@
 # Description: C parser and AST generator written in Python.
 # URL: https://github.com/eliben/pycparser
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
 # Depends on: python-setuptools
 
-name=pycparser
-version=2.18
+name=python-pycparser
+version=2.19
 release=1
-source=(https://github.com/eliben/$name/archive/release_v$version.zip)
+source=(https://github.com/eliben/${name#*-*}/archive/release_v$version.tar.gz)
 
 build() {
-	cd $name-release_v$version
+	cd ${name#*-}-release_v$version
+
 	/usr/bin/python setup.py build
 
 	cd pycparser
