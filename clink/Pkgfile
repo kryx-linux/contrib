@@ -1,15 +1,13 @@
 # Description: Compacts directories by replacing duplicate files by symbolic links and placing the origional files in ./common-files
-# URL: http://free-electrons.com/community/tools/utils/clink/
+# URL: https://bootlin.com/blog/clink/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
 # Depends on: python
 
 name=clink
 version=1.1.1
-release=1
-source=(http://free-electrons.com/pub/utils/clink/clink-$version)
+release=2
+source=(https://bootlin.com/pub/utils/clink/clink-$version)
 
 build() {
 	install -D -m755 clink-$version $PKG/usr/bin/clink
 }
-
