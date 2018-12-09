@@ -4,7 +4,7 @@
 # Depends on: python3-setuptools
 
 name=python3-urllib3
-version=1.24.1
+version=1.23
 release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
 
@@ -12,4 +12,5 @@ build() {
 	cd ${name#*-}-$version
 	/usr/bin/python3 setup.py build
 	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
+	chmod -R o-w $PKG/usr/lib/python3.6/site-packages/
 }
