@@ -2508,6 +2508,7 @@ drwxr-xr-x	root/root	usr/lib/go/src/cmd/go/internal/generate/
 drwxr-xr-x	root/root	usr/lib/go/src/cmd/go/internal/get/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/internal/get/discovery.go
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/internal/get/get.go
+-rw-r--r--	root/root	usr/lib/go/src/cmd/go/internal/get/path.go
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/internal/get/pkg_test.go
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/internal/get/tag_test.go
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/internal/get/vcs.go
@@ -2848,6 +2849,10 @@ drwxr-xr-x	root/root	usr/lib/go/src/cmd/go/testdata/script/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/cpu_profile_twice.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/fileline.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/gcflags_patterns.txt
+-rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/get_brace.txt
+-rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/get_dotfiles.txt
+-rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/get_tilde.txt
+-rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/get_unicode.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/get_with_git_trace.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/goflags.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/help.txt
@@ -2897,6 +2902,7 @@ drwxr-xr-x	root/root	usr/lib/go/src/cmd/go/testdata/script/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/mod_get_upgrade.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/mod_get_warning.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/mod_getmode_vendor.txt
+-rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/mod_git_export_subst.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/mod_go_version.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/mod_gobuild_import.txt
 -rw-r--r--	root/root	usr/lib/go/src/cmd/go/testdata/script/mod_gofmt_invalid.txt
@@ -9543,8 +9549,10 @@ drwxr-xr-x	root/root	usr/lib/go/test/fixedbugs/issue26341.dir/
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue27143.go
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue27278.go
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue27289.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue27356.go
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue27695.go
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue27695b.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue27961.go
 drwxr-xr-x	root/root	usr/lib/go/test/fixedbugs/issue3552.dir/
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue3552.dir/one.go
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue3552.dir/two.go
