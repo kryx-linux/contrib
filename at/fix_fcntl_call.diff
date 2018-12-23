@@ -1,0 +1,13 @@
+diff --git a/daemon.c b/daemon.c
+index f9d25e718757b243388a6146cc5d8de344fcbc54..4003b5618e37061d93a731d38ac3cc7ac99763d5 100644
+--- a/daemon.c
++++ b/daemon.c
+@@ -205,7 +205,7 @@ daemon_setup()
+      * want to keep the file descriptor in case of an exec().
+      */
+     fflush(fp);
+-    fcntl(fd, F_SETFD, (long) 1);
++    fcntl(fd, F_SETFD, FD_CLOEXEC);
+     PRIV_END
+ 
+     return;
