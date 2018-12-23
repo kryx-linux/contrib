@@ -3,12 +3,12 @@
 # Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 
 name=i2c-tools
-version=4.0
+version=4.1
 release=1
 source=(https://www.kernel.org/pub/software/utils/i2c-tools/i2c-tools-$version.tar.xz)
 
 build() {
 	cd $name-$version
-	make prefix=/usr
-	make prefix=/usr DESTDIR=$PKG install
+	make PREFIX=/usr
+	make PREFIX=/usr DESTDIR=$PKG install
 }
