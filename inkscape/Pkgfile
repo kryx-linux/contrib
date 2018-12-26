@@ -2,29 +2,44 @@
 # URL: https://www.inkscape.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: boehm-gc boost gsl gtkmm poppler-glib popt
-# Optional: rtmpdump openldap libexif openjade gtk-doc gtkspell brotli
+# Optional: rtmpdump openldap libexif openjade gtk-doc gtkspell brotli imagemagick-compat
 
 name=inkscape
 version=0.92.3
-release=1
+release=2
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.bz2
-	noconst.patch
-	poppler-0.65.0.patch)
+	poppler-fixes-from-master.patch)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/noconst.patch
-	patch -p1 -i $SRC/poppler-0.65.0.patch
+	patch -p1 -i $SRC/poppler-fixes-from-master.patch
 	sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
+
+	# Fix build with poppler 0.71
+	sed \
+		-e 's|gTrue|true|g' \
+		-e 's|gFalse|false|g' \
+		-e 's|GBool|bool|g' \
+		-i src/extension/internal/pdfinput/pdf-parser.*
+
+	# Fix build with poppler 0.72
+	sed \
+		-e 's|getCString|c_str|g' \
+		-i src/extension/internal/pdfinput/*
 
 	CXXFLAGS+=' -std=c++11'
 
 	./autogen.sh
 
+	export PKG_CONFIG_PATH='/usr/lib/imagemagick6/pkgconfig'
+	export FREETYPE_CONFIG="/usr/bin/pkg-config freetype2"
+
 	./configure \
 		--prefix=/usr \
 		--disable-nls \
+		--with-python \
+		--with-perl \
 		--enable-lcms \
 		--enable-poppler-cairo \
 		--disable-strict-build \
