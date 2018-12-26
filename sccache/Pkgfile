@@ -1,0 +1,23 @@
+# Description: Sccache is a ccache-like tool
+# URL: https://github.com/mozilla/sccache
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: rust
+
+name=sccache
+version=0.2.7
+release=1
+source=(https://github.com/mozilla/sccache/archive/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	if [ -n "$(pkginfo -i | grep '^sccache ')" ]; then
+		export RUSTC_WRAPPER=/usr/bin/sccache
+	fi
+
+	export CARGO_HOME="$PKGMK_SOURCE_DIR"
+
+	cargo build --release
+	cargo install --root $PKG/usr
+	rm $PKG/usr/.crates.toml
+}
