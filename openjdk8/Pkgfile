@@ -9,7 +9,7 @@ icedtea_version=3.9.0
 boot_version=20181102
 pkgsrc_quarter=2018Q3
 certdata_rev=dc2f7806fbc1
-release=1
+release=2
 source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.tar.xz
 	https://stygian.me/crux/distfiles/$name/corba-$version.tar.xz
 	https://stygian.me/crux/distfiles/$name/hotspot-$version.tar.xz
@@ -19,9 +19,10 @@ source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.t
 	https://stygian.me/crux/distfiles/$name/langtools-$version.tar.xz
 	https://stygian.me/crux/distfiles/$name/nashorn-$version.tar.xz
 	https://stygian.me/crux/distfiles/$name/openjdk-$version.tar.xz
-	https://stygian.me/crux/distfiles/$name-boot-$boot_version-bin.tar.xz
-	http://ftp.netbsd.org/pub/pkgsrc/pkgsrc-$pkgsrc_quarter/pkgsrc/security/mozilla-rootcerts/files/mozilla-rootcerts.sh
-	http://hg.mozilla.org/releases/mozilla-release/raw-file/$certdata_rev/security/nss/lib/ckfw/builtins/certdata.txt)
+	https://stygian.me/crux/distfiles/certdata-$certdata_rev.txt
+	https://stygian.me/crux/distfiles/mozilla-rootcerts-$pkgsrc_quarter.sh
+	https://stygian.me/crux/distfiles/$name-boot-$boot_version-bin.tar.xz)
+	# See README for links to originally named files and rationale of renaming/versioning/mirroring.
 
 unpack_source() {
 	for file in ${source[@]}; do
@@ -133,7 +134,7 @@ build() {
 		-e '/@RM@/s,,/bin/rm,' \
 		-e 's,self extract,self -f $certfile extract,' \
 		-e 's,self rehash,self -f $certfile rehash,' \
-		$SRC/mozilla-rootcerts.sh > $SRC/mozilla-rootcerts
+		$SRC/mozilla-rootcerts-$pkgsrc_quarter.sh > $SRC/mozilla-rootcerts
 
 	export JAVA_HOME=$PKG/usr/lib/java/$name
 	export PATH=$JAVA_HOME/bin:$OLD_PATH
@@ -143,7 +144,7 @@ build() {
 	rm -f $PKG/usr/lib/java/$name/jre/lib/security/cacerts
 	mkdir $SRC/cacerts
 	cd $SRC/cacerts
-	sh $SRC/mozilla-rootcerts -f $SRC/certdata.txt extract
+	sh $SRC/mozilla-rootcerts -f $SRC/certdata-$certdata_rev.txt extract
 	for cert in *.pem; do
 		keytool \
 			-noprompt \
