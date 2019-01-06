@@ -4,9 +4,9 @@
 # Depends on:  alsa-lib cups fontconfig freetype giflib gtk krb5 lcms2 libjpeg-turbo libpng libxslt nss unzip xorg-libxt xorg-libxtst xorg-libxinerama zip
 
 name=openjdk8
-version=8u181-b13
-icedtea_version=3.9.0
-boot_version=20181102
+version=8u191-b12
+icedtea_version=3.10.0
+boot_version=20190106
 pkgsrc_quarter=2018Q3
 certdata_rev=dc2f7806fbc1
 release=2
@@ -59,31 +59,31 @@ build() {
 		--prefix=/usr/lib/java/$name \
 		--disable-docs \
 		--disable-downloading \
-		--disable-precompiled-headers \
-		--disable-tests \
 		--disable-hotspot-tests \
-		--disable-langtools-tests \
 		--disable-jdk-tests \
-		--disable-systemtap-tests \
+		--disable-langtools-tests \
+		--disable-precompiled-headers \
 		--disable-system-pcsc \
 		--disable-system-sctp \
+		--disable-systemtap-tests \
+		--disable-tests \
+		--enable-improved-font-rendering \
+		--enable-non-nss-curves \
+		--enable-nss \
+		--enable-sunec \
 		--enable-system-jpeg \
 		--enable-system-kerberos \
 		--enable-system-lcms \
 		--enable-system-png \
 		--enable-system-zlib \
-		--enable-nss \
-		--enable-sunec \
-		--enable-non-nss-curves \
-		--enable-improved-font-rendering \
-		--with-openjdk-src-zip=$SRC/openjdk-$version.tar.xz \
-		--with-hotspot-src-zip=$SRC/hotspot-$version.tar.xz \
 		--with-corba-src-zip=$SRC/corba-$version.tar.xz \
+		--with-hotspot-src-zip=$SRC/hotspot-$version.tar.xz \
 		--with-jaxp-src-zip=$SRC/jaxp-$version.tar.xz \
 		--with-jaxws-src-zip=$SRC/jaxws-$version.tar.xz \
 		--with-jdk-src-zip=$SRC/jdk-$version.tar.xz \
 		--with-langtools-src-zip=$SRC/langtools-$version.tar.xz \
 		--with-nashorn-src-zip=$SRC/nashorn-$version.tar.xz \
+		--with-openjdk-src-zip=$SRC/openjdk-$version.tar.xz \
 		--with-pkgversion=CRUX \
 		--with-jdk-home=$JAVA_HOME
 
