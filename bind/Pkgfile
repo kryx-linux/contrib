@@ -5,14 +5,13 @@
 # Depends on: 
 
 name=bind
-version=9.10.8-P1
+version=9.12.3-P1
 release=1
 source=(ftp://ftp.isc.org/isc/bind9/$version/$name-$version.tar.gz \
   named.root db.0.0.127 db.localhost db.ip6.arpa named named.conf)
 
 build() {
   cd $name-$version
-  sed -i -e 's|\@LN\@ \${man3}/|ln -s |g' lib/lwres/man/Makefile.in
 
   ./configure \
     --prefix=/usr \
