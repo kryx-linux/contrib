@@ -1,15 +1,16 @@
 # Description: command-line program for getting and setting the contents of the X selection
 # URL:         http://www.vergenet.net/~conrad/software/xsel/
-# Maintainer:  Manu Kumar, maraku at gmx dot com
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 # Depends on:  xorg-libxt
 
 name=xsel
-version=1.2.0
-release=2
-source=(http://www.vergenet.net/~conrad/software/xsel/download/$name-$version.tar.gz)
+version=1.2.0+git9bfc13d
+release=1
+source=(http://github.com/kfish/xsel/archive/${version#*+git}/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd $name-${version#*+git}*
+	autoreconf -fi
 	./configure --prefix=/usr
 	make
 	make install DESTDIR=$PKG
