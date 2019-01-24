@@ -2,27 +2,30 @@
 # URL:          http://www.musicpd.org/
 # Maintainer:   Thomas Penteker, tek at serverop dot de
 # Packager:     Mark Rosenstand, mark at borkware dot net
-# Depends on:   libmad libvorbis libid3tag glib boost
+# Depends on:   libmad libvorbis libid3tag glib boost meson ninja
 # Optional:     faad2 flac audiofile
 
 name=mpd
-version=0.20.9
+version=0.21.4
 release=1
-source=(https://www.musicpd.org/download/mpd/0.20/$name-$version.tar.xz mpd)
+source=(https://www.musicpd.org/download/mpd/${version%.*}/$name-$version.tar.xz mpd)
 
 build() {
   cd $name-$version
 
-  ./configure \
+  meson build \
       --prefix=/usr \
       --sysconfdir=/etc
 
-  make
-  make DESTDIR=$PKG install
+  ninja -C build -j ${JOBS-1}
+  DESTDIR=$PKG meson install -C build
 
   install -d $PKG/etc
   install -m 0644 doc/mpdconf.example $PKG/etc/mpd.conf 
   install -D $SRC/mpd $PKG/etc/rc.d/mpd
+
+  install -D doc/mpd.1 $PKG/usr/share/man/1/mpd.1
+  install -D doc/mpd.conf.5 $PKG/usr/share/man/5/mpd.conf.5
 
   rm -r $PKG/usr/share/doc
 }
