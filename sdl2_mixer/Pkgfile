@@ -5,13 +5,14 @@
 
 name=sdl2_mixer
 version=2.0.4
-release=1
+release=2
 source=(http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-$version.tar.gz)
 
 build() {
     cd SDL2_mixer-$version
-    ./configure --prefix=/usr \
-                --disable-static
+    CONFIG_SHELL=/bin/bash ./configure \
+        --prefix=/usr \
+        --disable-static
     make
     make DESTDIR=$PKG install
 }
