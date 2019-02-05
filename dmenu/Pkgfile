@@ -4,15 +4,15 @@
 # Depends on:  xorg-libxinerama xorg-libxft
 
 name=dmenu
-version=4.8
+version=4.9
 release=1
 source=(http://dl.suckless.org/tools/$name-$version.tar.gz)
 
 build () {
-    cd "$name-$version"
-    sed -i '19d' config.mk
-    make DESTDIR=$PKG \
-        PREFIX=/usr \
-        MANPREFIX=/usr/share/man \
-        install
+	cd "$name-$version"
+	sed -i '19d' config.mk
+	make DESTDIR=$PKG \
+	PREFIX=/usr \
+	MANPREFIX=/usr/share/man \
+	install
 }
