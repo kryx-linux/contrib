@@ -5,15 +5,17 @@
 
 name=runc
 version=96ec217
-release=1
+release=2
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz)
+    http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
+    0001-nsenter-clone-proc-self-exe-to-avoid-exposing-host-b.patch)
 
 build() {
     mkdir -pv src/github.com/opencontainers
     cd src/github.com/opencontainers
     ln -sf $SRC/$name-$version $name
     cd $name
+    patch -p1 -i $SRC/0001-nsenter-clone-proc-self-exe-to-avoid-exposing-host-b.patch
     export GOPATH=$SRC
     export BUILDTAGS="seccomp"
     # use the long commit hash here
