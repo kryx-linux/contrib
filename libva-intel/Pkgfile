@@ -4,7 +4,7 @@
 # Depends on:  glu ffmpeg libva
 
 name=libva-intel
-version=1.8.1
+version=2.3.0
 release=1
 source=(https://github.com/01org/intel-vaapi-driver/releases/download/${version}/intel-vaapi-driver-${version}.tar.bz2)
 
@@ -12,8 +12,6 @@ build() {
   cd intel-vaapi-driver-$version
 
   ./configure --prefix=/usr
-
-  sed -i '1265,1266d' src/Makefile
 
   make
   make DESTDIR=$PKG install
