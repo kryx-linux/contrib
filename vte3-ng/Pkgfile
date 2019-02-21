@@ -1,40 +1,30 @@
 # Description: Enhanced Virtual Terminal Emulator widget for use with GTK3
 # URL: https://github.com/thestinger/vte-ng
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gnutls gtk3 libgmp libpcre2 util-linux gtk-doc
+# Depends on: gnutls gtk-doc gtk3 libpcre2 util-linux
 
 name=vte3-ng
-version=0.50.2
+version=0.54.2
+_version=$version.a
 release=1
-source=(https://github.com/thestinger/vte-ng/archive/$version/vte-ng-$version.tar.gz
-	vte3-790539.patch
-	vte3-pty_memory_leak.patch
-	vte3-790536.patch)
+source=(https://github.com/thestinger/vte-ng/archive/$version/vte-ng-$_version.tar.gz)
 
 build() {
 	cd vte-ng-$version
 
-	# https://bugzilla.gnome.org/show_bug.cgi?id=790539
-	# https://git.gnome.org/browse/vte/commit/?h=vte-0-50&id=1d200a63ac4e39035af35e80881aa4fdae5556c6
-	patch -p1 -i $SRC/vte3-790539.patch
+	NOCONFIGURE=1 ./autogen.sh
 
-	# pty: Fix memory leak
-	# https://git.gnome.org/browse/vte/commit/?h=vte-0-50&id=ddd6dc998d9842369ec20f8e83c380401a8aed02
-	patch -p1 -i $SRC/vte3-pty_memory_leak.patch
-
-	# https://bugzilla.gnome.org/show_bug.cgi?id=790536
-	# https://git.gnome.org/browse/vte/commit/?h=vte-0-50&id=504db1b97f684778ee52f6e280a9e734936be20f
-	patch -p1 -i $SRC/vte3-790536.patch
-
-	./autogen.sh \
+	./configure \
 		--prefix=/usr \
 		--libexecdir=/usr/lib/vte \
-		--disable-static \
+		--enable-static \
 		--disable-gtk-doc \
-		--disable-vala
+		--disable-vala \
+		--disable-introspection \
+		--disable-glade-catalogue
 
 	make
 	make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/locale
+	rm -r $PKG/usr/{share/locale,etc/profile.d/vte.sh}
 }
