@@ -5,11 +5,13 @@
 
 name=streamlink
 version=0.14.2
-release=1
+release=2
 source=(https://files.pythonhosted.org/packages/source/${name:0:1}/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 	/usr/bin/python3 setup.py build
 	/usr/bin/python3 setup.py install --root=$PKG --optimize=1
+
+	install -d $PKG/etc/ssl/certs/
 }
