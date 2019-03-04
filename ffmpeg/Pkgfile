@@ -2,11 +2,11 @@
 # URL: http://ffmpeg.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: yasm
-# Optional: alsa-lib fdk-aac gnutls lame libass libsdl2 libtheora libva libvdpau libvorbis libvpx libwebp opus x264 x265 pulseaudio
+# Optional: alsa-lib fdk-aac ffnvcodec-headers gnutls lame libass libsdl2 libtheora libva libvdpau libvorbis libvpx libwebp opus x264 x265 pulseaudio
 
 name=ffmpeg
 version=4.1.1
-release=1
+release=2
 source=(https://ffmpeg.org/releases/$name-$version.tar.bz2
 	ffmpeg-x264-10bit.sh
 	CVE-2018-6621.patch)
@@ -17,6 +17,7 @@ build() {
 	#https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6621
 	patch -p1 -i $SRC/CVE-2018-6621.patch
 
+[ -e '/usr/lib/pkgconfig/ffnvcodec.pc' ] && PKGMK_FFMPEG+=' --enable-nvdec --enable-nvenc'
 [ -e '/usr/lib/pkgconfig/libwebp.pc' ] && PKGMK_FFMPEG+=' --enable-libwebp'
 [ -e '/usr/lib/pkgconfig/vdpau.pc' ] && PKGMK_FFMPEG+=' --enable-vdpau'
 [ -e '/usr/lib/pkgconfig/freetype2.pc' ] && PKGMK_FFMPEG+=' --enable-libfreetype'
