@@ -1,23 +1,15 @@
 # Description: Midori is a lightweight web browser.
 # URL: http://www.midori-browser.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Brett Goulder, predatorfreak at dcaf-security dot org
-# Depends on: aria2 desktop-file-utils gcr gst-libav gst-plugins-good libnotify webkitgtk xorg-libxscrnsaver
+# Depends on: aria2 desktop-file-utils gcr gst-libav gst-plugins-good json-glib libnotify libpeas webkitgtk xorg-libxscrnsaver
 
 name=midori
-version=0.5.11
-release=2
-source=(http://midori-browser.org/downloads/${name}_${version}_all_.tar.bz2)
+version=8.0
+release=1
+source=(https://github.com/midori-browser/core/releases/download/v$version/$name-v$version.tar.gz)
 
 build() {
-	cd $name-$version
-
-	# The latest release of vala is a bit stricter than the previous one
-	sed 's/protected Tally/public Tally/g' -i midori/midori-notebook.vala
-	sed 's/%d other files/%u other files/g' -i extensions/transfers.vala
-	for f in transfers adblock/widgets apps history-list notes; do
-		sed 's/.remove (iter/.remove (ref iter/g' -i "extensions/$f.vala"
-	done
+	cd $name-v$version
 
 	install -d build
 	cd build
@@ -27,7 +19,8 @@ build() {
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DHALF_BRO_INCOM_WEBKIT2=ON \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_C_FLAGS="$CFLAGS -w" \
+		-DCMAKE_C_FLAGS="$CFLAGS -fPIC -w" \
+		-DVALA_CFLAGS="$CFLAGS -fPIC -w" \
 		-DUSE_ZEITGEIST=OFF \
 		-G Ninja
 
