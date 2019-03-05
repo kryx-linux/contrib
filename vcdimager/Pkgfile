@@ -1,23 +1,22 @@
 # Description: Create (S)VCDs. 
-# URL: http://www.gnu.org/software/vcdimager/
+# URL: https://www.gnu.org/software/vcdimager/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Hannes Mayer, kontakt at ecarux de
 # Depends on: libcdio libxml2 popt
 
 name=vcdimager
-version=0.7.24
+version=2.0.1
 release=1
-source=(http://mirror.aarnet.edu.au/pub/gnu/$name/$name-$version.tar.gz)
+source=(https://mirror.aarnet.edu.au/pub/gnu/$name/$name-$version.tar.gz
+	resurrect_library_symbols.patch)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man  
+	patch -p1 -i $SRC/resurrect_library_symbols.patch
 
+	./configure --prefix=/usr 
 	make 
 	make DESTDIR=$PKG install
+
 	rm -r $PKG/usr/share/info
-	rmdir $PKG/usr/share
 }
