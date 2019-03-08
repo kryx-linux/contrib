@@ -23,8 +23,6 @@ build() {
 	cd build
 
 	cmake .. \
-		-DCMAKE_C_FLAGS:STRING="$CFLAGS" \
-		-DCMAKE_CXX_FLAGS:STRING="$CXXFLAGS" \
 		-DCMAKE_INSTALL_PREFIX='/usr' \
 		-DOBS_VERSION_OVERRIDE="$version" \
 		-DUNIX_STRUCTURE=ON \
