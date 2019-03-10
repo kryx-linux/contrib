@@ -1,0 +1,22 @@
+# Description: A gobject-based plugin engine.
+# URL: https://wiki.gnome.org/Projects/Libpeas
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: gtk gtk3 vala
+
+name=libpeas
+version=1.22.0
+release=1
+source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--disable-nls
+
+	make
+	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/gtk-doc
+}

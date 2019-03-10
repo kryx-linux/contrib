@@ -4,15 +4,12 @@
 # Depends on: fuse
 
 name=ntfs-3g
-version=2016.2.22
-release=4
-source=(https://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz
-	CVE-2017-0358.patch)
+version=2017.3.23
+release=1
+source=(https://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
 
 build() {
 	cd ntfs-3g_ntfsprogs-$version
-
-	patch -p1 -i $SRC/CVE-2017-0358.patch
 
 	install -d $PKG/lib
 
@@ -27,7 +24,7 @@ build() {
 	make DESTDIR=$PKG install
 
 	ln -s ../bin/ntfs-3g $PKG/sbin/mount.ntfs
-	ln -s ../bin/ntfsfix $PKG/sbin/fsck.ntfs
+	ln -s ../usr/bin/ntfsfix $PKG/sbin/fsck.ntfs
 
 	ln -s ntfs-3g.8 $PKG/usr/share/man/man8/mount.ntfs.8
 	ln -s ntfsfix.8 $PKG//usr/share/man/man8/fsck.ntfs.8

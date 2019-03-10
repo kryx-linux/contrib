@@ -1,11 +1,11 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 cbindgen clang gtk gtk3 libidl nodejs nss unzip util-linux xorg-libxt yasm zip libnotify
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang gtk gtk3 libidl nodejs nss unzip util-linux xorg-libxt yasm zip libnotify libxkbcommon
 # Optional: sccache
 
 name=firefox
-version=64.0
+version=65.0.2
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
 	firefox.desktop)
@@ -21,8 +21,10 @@ cat <<- EOF > .mozconfig
 	mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-shared
 	ac_add_options --prefix=/usr
 	ac_add_options --enable-default-toolkit=cairo-gtk3
+	ac_add_options --enable-application=browser
 	ac_add_options --with-system-jpeg
 	ac_add_options --with-system-zlib
+	ac_add_options --with-system-bz2
 	ac_add_options --with-system-png
 	ac_add_options --with-system-nspr
 	ac_add_options --with-system-nss
@@ -30,6 +32,7 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-system-pixman
 	ac_add_options --enable-system-sqlite
 	ac_add_options --enable-alsa
+	ac_add_options --enable-optimize
 	ac_add_options --disable-pulseaudio
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
@@ -43,11 +46,14 @@ cat <<- EOF > .mozconfig
 	ac_add_options --disable-gconf
 EOF
 
+	sed -e 's/checkImpl/checkFFImpl/g' -i js/src/vm/JSContext*.h
+	export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
 	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
 	export MOZBUILD_STATE_PATH="$PKGMK_SOURCE_DIR/.mozbuild"
 	export CARGO_HOME="$PKGMK_SOURCE_DIR"
 
 	./mach build
+	#./mach build toolkit/library/rust
 	DESTDIR=$PKG ./mach install
 
 	install -d $PKG/usr/share/pixmaps

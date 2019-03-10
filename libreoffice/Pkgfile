@@ -5,7 +5,7 @@
 # Depends on:  cups dbus-glib desktop-file-utils glu gtk krb5 shared-mime-info xorg-libxaw xorg-libxi
 
 name=libreoffice
-version=6.1.4
+version=6.2.0
 release=1
 source=(http://download.documentfoundation.org/$name/stable/$version/rpm/x86_64/LibreOffice_${version}_Linux_x86-64_rpm.tar.gz)
 
@@ -53,4 +53,7 @@ build() {
         -iname '*license*' -o \
         -iname '*credits*' \
      \) -exec rm -rf '{}' \; || true
+
+    # prevent crashing because of absent wayland bindings
+    sed -i '$i export SAL_USE_VCLPLUGIN=gen' $PKG/usr/lib/libreoffice/program/soffice
 }
