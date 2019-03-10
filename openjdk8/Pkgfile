@@ -41,7 +41,6 @@ build() {
 	# fix hotspot not recognizing linux version 5 kernels; thanks to ryuo and tb
 	mv $SRC/hotspot_add_linux5.patch $SRC/icedtea-$icedtea_version/patches
 	export DISTRIBUTION_PATCHES=patches/hotspot_add_linux5.patch
-	#patch -d $SRC/icedtea-$icedtea_version -p1 -i $SRC/hotspot_add_linux5.patch
 
 	# Make sure we do not have ccache masquerade directory in PATH.
 	# Use --enable-ccache instead of providing a wrapped compiler.
