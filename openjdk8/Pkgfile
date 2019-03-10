@@ -9,7 +9,7 @@ icedtea_version=3.10.0
 boot_version=20190106
 pkgsrc_quarter=2018Q3
 certdata_rev=dc2f7806fbc1
-release=2
+release=3
 source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.tar.xz
 	https://stygian.me/crux/distfiles/$name/corba-$version.tar.xz
 	https://stygian.me/crux/distfiles/$name/hotspot-$version.tar.xz
@@ -21,7 +21,8 @@ source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.t
 	https://stygian.me/crux/distfiles/$name/openjdk-$version.tar.xz
 	https://stygian.me/crux/distfiles/certdata-$certdata_rev.txt
 	https://stygian.me/crux/distfiles/mozilla-rootcerts-$pkgsrc_quarter.sh
-	https://stygian.me/crux/distfiles/$name-boot-$boot_version-bin.tar.xz)
+	https://stygian.me/crux/distfiles/$name-boot-$boot_version-bin.tar.xz
+	hotspot_add_linux5.patch)
 	# See README for links to originally named files and rationale of renaming/versioning/mirroring.
 
 unpack_source() {
@@ -37,6 +38,11 @@ unpack_source() {
 }
 
 build() {
+	# fix hotspot not recognizing linux version 5 kernels; thanks to ryuo and tb
+	mv $SRC/hotspot_add_linux5.patch $SRC/icedtea-$icedtea_version/patches
+	export DISTRIBUTION_PATCHES=patches/hotspot_add_linux5.patch
+	#patch -d $SRC/icedtea-$icedtea_version -p1 -i $SRC/hotspot_add_linux5.patch
+
 	# Make sure we do not have ccache masquerade directory in PATH.
 	# Use --enable-ccache instead of providing a wrapped compiler.
 	# NOTE: the check for usr/bin/ccache may be too specific, since it rules out
