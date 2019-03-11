@@ -1,16 +1,18 @@
 # Description: Protocol Buffers implementation in C.
 # URL: https://github.com/protobuf-c/protobuf-c
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
 # Depends on: protobuf
 
 name=protobuf-c
-version=1.3.0
+version=1.3.1
 release=1
-source=(https://github.com/protobuf-c/protobuf-c/releases/download/v$version/$name-$version.tar.gz)
+source=(https://github.com/protobuf-c/protobuf-c/releases/download/v$version/$name-$version.tar.gz
+	invalid-namespace.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/invalid-namespace.patch
 
 	./configure --prefix=/usr
 
