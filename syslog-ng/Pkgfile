@@ -19,7 +19,9 @@ build() {
       --localstatedir=/var/run \
       --mandir=/usr/man \
       --enable-dynamic-linking \
-      --sbindir=/sbin
+      --sbindir=/sbin \
+      --disable-java \
+      --disable-java-modules
 
 
    make && make DESTDIR=$PKG install
