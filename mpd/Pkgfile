@@ -15,7 +15,8 @@ build() {
 
   meson build \
       --prefix=/usr \
-      --sysconfdir=/etc
+      --sysconfdir=/etc \
+      -Dmpcdec=disabled
 
   ninja -C build -j ${JOBS-1}
   DESTDIR=$PKG meson install -C build

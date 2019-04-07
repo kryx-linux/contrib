@@ -13,6 +13,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/dqtool
 -rwxr-xr-x	root/root	usr/bin/loggen
 -rwxr-xr-x	root/root	usr/bin/pdbtool
+-rwxr-xr-x	root/root	usr/bin/persist-tool
 -rwxr-xr-x	root/root	usr/bin/update-patterndb
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/syslog-ng/
@@ -37,7 +38,8 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/
 -rw-r--r--	root/root	usr/include/syslog-ng/children.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/compat/
 -rw-r--r--	root/root	usr/include/syslog-ng/compat/compat.h
--rw-r--r--	root/root	usr/include/syslog-ng/compat/getent-bb.h
+-rw-r--r--	root/root	usr/include/syslog-ng/compat/getent-generic.h
+-rw-r--r--	root/root	usr/include/syslog-ng/compat/getent-sun.h
 -rw-r--r--	root/root	usr/include/syslog-ng/compat/getent.h
 -rw-r--r--	root/root	usr/include/syslog-ng/compat/getutent.h
 -rw-r--r--	root/root	usr/include/syslog-ng/compat/glib.h
@@ -48,6 +50,7 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/compat/
 -rw-r--r--	root/root	usr/include/syslog-ng/compat/socket.h
 -rw-r--r--	root/root	usr/include/syslog-ng/compat/string.h
 -rw-r--r--	root/root	usr/include/syslog-ng/compat/time.h
+-rw-r--r--	root/root	usr/include/syslog-ng/compat/un.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/control/
 -rw-r--r--	root/root	usr/include/syslog-ng/control/control-commands.h
 -rw-r--r--	root/root	usr/include/syslog-ng/control/control-main.h
@@ -84,6 +87,8 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/filter/
 -rw-r--r--	root/root	usr/include/syslog-ng/host-id.h
 -rw-r--r--	root/root	usr/include/syslog-ng/host-resolve.h
 -rw-r--r--	root/root	usr/include/syslog-ng/hostname.h
+drwxr-xr-x	root/root	usr/include/syslog-ng/http-auth/
+-rw-r--r--	root/root	usr/include/syslog-ng/http-auth/auth-header.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/ivykis/
 -rw-r--r--	root/root	usr/include/syslog-ng/ivykis/iv.h
 -rw-r--r--	root/root	usr/include/syslog-ng/ivykis/iv_avl.h
@@ -139,8 +144,12 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/logproto/
 -rw-r--r--	root/root	usr/include/syslog-ng/logsource.h
 -rw-r--r--	root/root	usr/include/syslog-ng/logstamp.h
 -rw-r--r--	root/root	usr/include/syslog-ng/logthrdestdrv.h
+drwxr-xr-x	root/root	usr/include/syslog-ng/logthrsource/
+-rw-r--r--	root/root	usr/include/syslog-ng/logthrsource/logthrfetcherdrv.h
+-rw-r--r--	root/root	usr/include/syslog-ng/logthrsource/logthrsourcedrv.h
 -rw-r--r--	root/root	usr/include/syslog-ng/logwriter.h
 -rw-r--r--	root/root	usr/include/syslog-ng/mainloop-call.h
+-rw-r--r--	root/root	usr/include/syslog-ng/mainloop-control.h
 -rw-r--r--	root/root	usr/include/syslog-ng/mainloop-io-worker.h
 -rw-r--r--	root/root	usr/include/syslog-ng/mainloop-worker.h
 -rw-r--r--	root/root	usr/include/syslog-ng/mainloop.h
@@ -159,6 +168,7 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/modules/add-contextual-data/
 -rw-r--r--	root/root	usr/include/syslog-ng/modules/add-contextual-data/contextual-data-record-scanner.h
 -rw-r--r--	root/root	usr/include/syslog-ng/modules/add-contextual-data/csv-contextual-data-record-scanner.h
 -rw-r--r--	root/root	usr/include/syslog-ng/msg-format.h
+-rw-r--r--	root/root	usr/include/syslog-ng/msg-stats.h
 -rw-r--r--	root/root	usr/include/syslog-ng/nondumpable-allocator.h
 -rw-r--r--	root/root	usr/include/syslog-ng/parse-number.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/parser/
@@ -195,12 +205,13 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/scanner/kv-scanner/
 -rw-r--r--	root/root	usr/include/syslog-ng/scanner/kv-scanner/kv-scanner.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/scanner/list-scanner/
 -rw-r--r--	root/root	usr/include/syslog-ng/scanner/list-scanner/list-scanner.h
+drwxr-xr-x	root/root	usr/include/syslog-ng/scanner/xml-scanner/
+-rw-r--r--	root/root	usr/include/syslog-ng/scanner/xml-scanner/xml-scanner.h
 -rw-r--r--	root/root	usr/include/syslog-ng/scratch-buffers.h
 -rw-r--r--	root/root	usr/include/syslog-ng/secret-storage.h
 -rw-r--r--	root/root	usr/include/syslog-ng/seqnum.h
 -rw-r--r--	root/root	usr/include/syslog-ng/serialize.h
 -rw-r--r--	root/root	usr/include/syslog-ng/service-management.h
--rw-r--r--	root/root	usr/include/syslog-ng/signal-handler.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/stats/
 -rw-r--r--	root/root	usr/include/syslog-ng/stats/stats-cluster-logpipe.h
 -rw-r--r--	root/root	usr/include/syslog-ng/stats/stats-cluster-single.h
@@ -212,7 +223,6 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/stats/
 -rw-r--r--	root/root	usr/include/syslog-ng/stats/stats-query-commands.h
 -rw-r--r--	root/root	usr/include/syslog-ng/stats/stats-query.h
 -rw-r--r--	root/root	usr/include/syslog-ng/stats/stats-registry.h
--rw-r--r--	root/root	usr/include/syslog-ng/stats/stats-syslog.h
 -rw-r--r--	root/root	usr/include/syslog-ng/stats/stats.h
 -rw-r--r--	root/root	usr/include/syslog-ng/str-format.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/str-repr/
@@ -234,7 +244,13 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/template/
 -rw-r--r--	root/root	usr/include/syslog-ng/template/templates.h
 -rw-r--r--	root/root	usr/include/syslog-ng/template/user-function.h
 -rw-r--r--	root/root	usr/include/syslog-ng/thread-utils.h
--rw-r--r--	root/root	usr/include/syslog-ng/timeutils.h
+drwxr-xr-x	root/root	usr/include/syslog-ng/timeutils/
+-rw-r--r--	root/root	usr/include/syslog-ng/timeutils/cache.h
+-rw-r--r--	root/root	usr/include/syslog-ng/timeutils/decode.h
+-rw-r--r--	root/root	usr/include/syslog-ng/timeutils/names.h
+-rw-r--r--	root/root	usr/include/syslog-ng/timeutils/strptime-tz.h
+-rw-r--r--	root/root	usr/include/syslog-ng/timeutils/timeutils.h
+-rw-r--r--	root/root	usr/include/syslog-ng/timeutils/zoneinfo.h
 -rw-r--r--	root/root	usr/include/syslog-ng/tls-support.h
 -rw-r--r--	root/root	usr/include/syslog-ng/tlscontext.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/transport/
@@ -262,27 +278,27 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/value-pairs/
 -rw-r--r--	root/root	usr/include/syslog-ng/versioning.h
 -rw-r--r--	root/root	usr/include/syslog-ng/window-size-counter.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libevtlog-3.17.so.0 -> libevtlog-3.17.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libevtlog-3.17.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libevtlog-3.20.so.0 -> libevtlog-3.20.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libevtlog-3.20.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libevtlog.la
-lrwxrwxrwx	root/root	usr/lib/libevtlog.so -> libevtlog-3.17.so.0.0.0
-lrwxrwxrwx	root/root	usr/lib/libloggen_helper-3.17.so.0 -> libloggen_helper-3.17.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libloggen_helper-3.17.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libevtlog.so -> libevtlog-3.20.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_helper-3.20.so.0 -> libloggen_helper-3.20.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libloggen_helper-3.20.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libloggen_helper.la
-lrwxrwxrwx	root/root	usr/lib/libloggen_helper.so -> libloggen_helper-3.17.so.0.0.0
-lrwxrwxrwx	root/root	usr/lib/libloggen_plugin-3.17.so.0 -> libloggen_plugin-3.17.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libloggen_plugin-3.17.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_helper.so -> libloggen_helper-3.20.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_plugin-3.20.so.0 -> libloggen_plugin-3.20.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libloggen_plugin-3.20.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libloggen_plugin.la
-lrwxrwxrwx	root/root	usr/lib/libloggen_plugin.so -> libloggen_plugin-3.17.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_plugin.so -> libloggen_plugin-3.20.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libsecret-storage.la
 lrwxrwxrwx	root/root	usr/lib/libsecret-storage.so -> libsecret-storage.so.0.0.0
 lrwxrwxrwx	root/root	usr/lib/libsecret-storage.so.0 -> libsecret-storage.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libsecret-storage.so.0.0.0
-lrwxrwxrwx	root/root	usr/lib/libsyslog-ng-3.17.so.0 -> libsyslog-ng-3.17.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libsyslog-ng-3.17.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libsyslog-ng-3.20.so.0 -> libsyslog-ng-3.20.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libsyslog-ng-3.20.so.0.0.0
 -rw-r--r--	root/root	usr/lib/libsyslog-ng-native-connector.a
 -rwxr-xr-x	root/root	usr/lib/libsyslog-ng.la
-lrwxrwxrwx	root/root	usr/lib/libsyslog-ng.so -> libsyslog-ng-3.17.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libsyslog-ng.so -> libsyslog-ng-3.20.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/syslog-ng-native-connector.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/syslog-ng.pc
@@ -334,8 +350,6 @@ drwxr-xr-x	root/root	usr/lib/syslog-ng/
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libadd-contextual-data.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libaffile.la
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libaffile.so
--rwxr-xr-x	root/root	usr/lib/syslog-ng/libafmongodb.la
--rwxr-xr-x	root/root	usr/lib/syslog-ng/libafmongodb.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libafprog.la
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libafprog.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libafsocket.la
@@ -362,6 +376,8 @@ drwxr-xr-x	root/root	usr/lib/syslog-ng/
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libdbparser.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libdisk-buffer.la
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libdisk-buffer.so
+-rwxr-xr-x	root/root	usr/lib/syslog-ng/libexamples.la
+-rwxr-xr-x	root/root	usr/lib/syslog-ng/libexamples.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libgraphite.la
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libgraphite.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libhook-commands.la
@@ -378,8 +394,6 @@ drwxr-xr-x	root/root	usr/lib/syslog-ng/
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libmod-python.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libpseudofile.la
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libpseudofile.so
--rwxr-xr-x	root/root	usr/lib/syslog-ng/libsdjournal.la
--rwxr-xr-x	root/root	usr/lib/syslog-ng/libsdjournal.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libsnmptrapd-parser.la
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libsnmptrapd-parser.so
 -rwxr-xr-x	root/root	usr/lib/syslog-ng/libstardate.la
@@ -410,6 +424,8 @@ drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/cim/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/cim/template.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/cisco/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/cisco/plugin.conf
+drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/collectd/
+-rw-r--r--	root/root	usr/share/syslog-ng/include/scl/collectd/plugin.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/default-network-drivers/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/default-network-drivers/plugin.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/elasticsearch/
@@ -427,6 +443,8 @@ drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/iptables/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/iptables/iptables.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/kafka/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/kafka/plugin.conf
+drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/linux-audit/
+-rw-r--r--	root/root	usr/share/syslog-ng/include/scl/linux-audit/linux-audit.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/loadbalancer/
 -rwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/loadbalancer/gen-loadbalancer.sh
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/loadbalancer/plugin.conf
@@ -436,6 +454,8 @@ drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/logmatic/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/logmatic/logmatic.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/mbox/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/mbox/mbox.conf
+drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/netskope/
+-rw-r--r--	root/root	usr/share/syslog-ng/include/scl/netskope/plugin.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/nodejs/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/nodejs/plugin.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/osquery/
@@ -444,6 +464,8 @@ drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/pacct/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/pacct/plugin.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/rewrite/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/rewrite/cc-mask.conf
+drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/slack/
+-rw-r--r--	root/root	usr/share/syslog-ng/include/scl/slack/slack.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/snmptrap/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/snmptrap/snmptrapd-source.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/solaris/
@@ -458,6 +480,8 @@ drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/system/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/system/plugin.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/telegram/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/telegram/telegram.conf
+drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/websense/
+-rw-r--r--	root/root	usr/share/syslog-ng/include/scl/websense/plugin.conf
 drwxr-xr-x	root/root	usr/share/syslog-ng/include/scl/windowseventlog/
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/windowseventlog/plugin.conf
 -rw-r--r--	root/root	usr/share/syslog-ng/include/scl/windowseventlog/windowseventlog.xml

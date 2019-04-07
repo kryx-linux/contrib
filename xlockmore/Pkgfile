@@ -5,7 +5,7 @@
 # Depends on:  fortune glu gtk util-linux xorg-libxmu xorg-libxpm
 
 name=xlockmore
-version=5.54
+version=5.56
 release=1
 source=(http://sillycycle.com/xlock/xlockmore-${version}.tar.xz)
 
@@ -25,5 +25,7 @@ build() {
 		--without-esound
 
 	make
+
+  install -d $PKG//usr/share/xlock/sounds
 	make DESTDIR=$PKG install
 }

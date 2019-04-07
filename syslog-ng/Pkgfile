@@ -4,7 +4,7 @@
 # Depends on:  glib
 
 name=syslog-ng
-version=3.17.2
+version=3.20.1
 release=1
 source=(https://github.com/balabit/${name}/releases/download/${name}-${version}/${name}-${version}.tar.gz
 syslog-ng.rc syslog-ng.conf)
@@ -19,7 +19,9 @@ build() {
       --localstatedir=/var/run \
       --mandir=/usr/man \
       --enable-dynamic-linking \
-      --sbindir=/sbin
+      --sbindir=/sbin \
+      --disable-java \
+      --disable-java-modules
 
 
    make && make DESTDIR=$PKG install

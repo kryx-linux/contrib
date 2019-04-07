@@ -4,9 +4,9 @@
 # Depends on:  lzo
 
 name=openvpn
-version=2.4.6
+version=2.4.7
 release=1
-source=(http://swupdate.openvpn.net/community/releases/$name-$version.tar.gz \
+source=(http://swupdate.openvpn.net/community/releases/$name-$version.tar.xz \
         openvpn)
 
 build() {
@@ -14,7 +14,7 @@ build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --mandir=/usr/man \
+              --mandir=/usr/share/man \
               --enable-iproute2 \
               --disable-plugin-auth-pam
   make
