@@ -7,16 +7,18 @@
 name=htmldoc
 version=1.9.4
 release=1
-source=(https://github.com/michaelrsweet/htmldoc/releases/download/v${version}/${name}-${version}-source.tar.gz)
+source=(https://github.com/michaelrsweet/htmldoc/archive/v${version}/${name}-v${version}-source.tar.gz)
 
 build() {
+  cd $name-$version
+
   ./configure --prefix=/usr --disable-gnutls
 
   make
   make prefix=$PKG/usr \
     datadir=$PKG/usr/share \
     bindir=$PKG/usr/bin \
-    mandir=$PKG/usr/man install
+    mandir=$PKG/usr/share/man install
 
   rm -rf $PKG/usr/share/doc
 }
