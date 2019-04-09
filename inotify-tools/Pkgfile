@@ -4,15 +4,16 @@
 # Packager:    Till Biedermann, tillbiedermann at yahoo dot de
 
 name=inotify-tools
-version=3.14
-release=3
-source=(http://dl.sourceforge.net/sourceforge/$name/$name-$version.tar.gz)
-source=(http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-$version.tar.gz)
+version=3.20.1
+release=1
+source=(http://github.com/rvoicilas/inotify-tools/archive/$version/inotify-tools-$version.tar.gz)
 
 build() {
     cd $name-$version
+
+    ./autogen.sh
     ./configure --prefix=/usr
+
     make
     make DESTDIR=$PKG install
-    rm -r $PKG/usr/share/doc
 }
