@@ -2,23 +2,23 @@
 # URL:         http://www.asty.org/cmatrix/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Vincenzo Colosimo vico at bicisport dot de
-#
-# Depends on:   
+# Depends on:  cmake
 
 name=cmatrix
-version=1.2
+version=2.0
 release=1
-source=(https://github.com/abishekvashok/cmatrix/archive/${version}.tar.gz)
+source=(https://github.com/abishekvashok/cmatrix/archive/v$version/$name-v$version.tar.gz)
 
 build() {
    cd $name-$version
+   ls
 
-   ./configure --prefix=/usr
+   cmake -DCMAKE_INSTALL_PREFIX=/usr
 
    make
    make DESTDIR=$PKG install
-   make DESTDIR=$PKG install-data-local
 
+   install -D -m644 -groot -oroot cmatrix.1 $PKG/usr/share/man/1/cmatrix.1
    install -D -m644 -groot -oroot matrix.fnt $PKG/usr/share/kbd/consolefonts/matrix.fnt
    install -D -m644 -groot -oroot matrix.psf.gz $PKG/usr/share/kbd/consolefonts/matrix.psf.gz
    install -D -m644 -groot -oroot mtx.pcf $PKG/usr/share/fonts/X11/misc/mtx.pcf
