@@ -1,17 +1,19 @@
 # Description: Open source client for Windows NT Terminal Server
-# URL: http://www.rdesktop.org/
+# URL:         http://www.rdesktop.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager: Simone Rota, sip at crux dot nu
-# Depends on: xorg-libx11
+# Packager:    Simone Rota, sip at crux dot nu
+# Depends on:  xorg-libx11
 
 name=rdesktop
 version=1.8.4
 release=1
-source=(https://github.com/rdesktop/rdesktop/releases/download/v${version}/rdesktop-${version}.tar.gz)
+source=(https://github.com/rdesktop/rdesktop/archive/v${version}/rdesktop-v${version}.tar.gz)
+
 build(){
 
   cd $name-$version
 
+  autoreconf -i
   ./configure --prefix=/usr --disable-credssp --disable-smartcard
 
   make
