@@ -3,16 +3,13 @@
 # Maintainer:  Juergen Daubert, jue at crux dot nu
 
 name=iwd
-version=0.16
+version=0.17
 release=1
 source=(https://www.kernel.org/pub/linux/network/wireless/$name-$version.tar.xz
-        iwd
-        include-config.patch)
+        iwd)
 
 build() {
     cd $name-$version
-
-    patch -p1 -i $SRC/include-config.patch
 
     ./configure --prefix=/usr \
                 --libexecdir=/usr/sbin \
