@@ -5,22 +5,19 @@
 # Optional: wxgtk
 
 name=mkvtoolnix
-version=16.0.0
+version=33.1.0
 release=1
 source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
-	local JOBS=$(awk 'BEGIN{RS="-j|--jobs="} NR==2 {print $1}' <<< $MAKEFLAGS)
-	test -n "$JOBS" && export JOBS="-j $JOBS"
-
 	./configure \
 		--prefix=/usr \
 		--disable-precompiled-headers \
 		--disable-update-check
 
-	rake $JOBS
+	rake -j ${JOBS-1}
 	rake DESTDIR=$PKG install
 
 	rm -r $PKG/usr/share/locale
