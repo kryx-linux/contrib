@@ -1,12 +1,15 @@
 # Description: Command line utilities for transcoding various media formats.
-# URL: http://tcforge.berlios.de/
+# URL: http://www.transcoding.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: ffmpeg imagemagick lame liba52 libdvdread libmpeg2 libtheora libxvid mjpegtools x264 xorg-libxaw
+# Optional: libquicktime
 
 name=transcode
 version=1.1.7
 release=5
-source=(https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.tar.bz2
+source=(
+	https://crux.ster.zone/downloads/$name/$name-$version.tar.bz2
+	#https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.tar.bz2
 	http://downloads.sourceforge.net/project/subtitleripper/subtitleripper/subtitleripper-0.3-4/subtitleripper-0.3-4.tgz
 	subtitleripper-0.3.4-linkingorder.patch
         subtitleripper-0.3.4-respect-ldflags.patch
