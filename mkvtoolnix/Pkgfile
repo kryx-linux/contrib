@@ -1,8 +1,8 @@
 # Description: Tools to create, alter and inspect Matroska files.
 # URL: https://mkvtoolnix.download/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: boost file flac libmatroska libvorbis ruby docbook-xsl
-# Optional: wxgtk
+# Depends on: boost cmark docbook-xsl file flac libmatroska libvorbis ruby
+# Optional: qt5 hicolor-icon-theme
 
 name=mkvtoolnix
 version=33.1.0
@@ -21,7 +21,5 @@ build() {
 	rake DESTDIR=$PKG install
 
 	rm -r $PKG/usr/share/locale
-
-	# remove doc's if wxgtk is installed
 	rm -rf $PKG/usr/share/doc
 }
