@@ -1,12 +1,11 @@
 # Description: A simple, fast, cross-platform, and object-oriented multimedia API.
 # URL: http://www.sfml-dev.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: flac freetype libjpeg-turbo libvorbis mesa3d openal util-linux xorg-libsm xorg-libxrandr xorg-xcb-util-image
+# Depends on: flac freetype libjpeg-turbo libvorbis mesa3d openal util-linux xorg-libsm xorg-xcb-util-image
 
 name=sfml
-version=2.4.0
-release=2
+version=2.5.1
+release=1
 source=(https://www.sfml-dev.org/files/SFML-$version-sources.zip)
 
 build() {
@@ -19,6 +18,7 @@ build() {
 		-DCMAKE_BUILD_TYPE='Release' \
 		-DCMAKE_INSTALL_PREFIX='/usr' \
 		-DSFML_INSTALL_PKGCONFIG_FILES=1 \
+		-DSFML_USE_SYSTEM_DEPS=ON \
 		-DSFML_BUILD_EXAMPLES=0 \
 		-DSFML_BUILD_DOC=0 \
 
@@ -26,8 +26,5 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
-	install -D -m 0644 $PKG/usr/share/SFML/cmake/Modules/FindSFML.cmake \
-		$PKG/usr/share/cmake/Modules/FindSFML.cmake
-
-	rm -r $PKG/usr/share/SFML/{license,readme}.txt
+	rm -r $PKG/usr/share/SFML/{license,readme}.md
 }

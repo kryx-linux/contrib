@@ -20,6 +20,7 @@ drwxr-xr-x	root/root	usr/include/SFML/Audio/
 -rw-r--r--	root/root	usr/include/SFML/Audio/SoundSource.hpp
 -rw-r--r--	root/root	usr/include/SFML/Audio/SoundStream.hpp
 -rw-r--r--	root/root	usr/include/SFML/Config.hpp
+-rw-r--r--	root/root	usr/include/SFML/GpuPreference.hpp
 -rw-r--r--	root/root	usr/include/SFML/Graphics.hpp
 drwxr-xr-x	root/root	usr/include/SFML/Graphics/
 -rw-r--r--	root/root	usr/include/SFML/Graphics/BlendMode.hpp
@@ -50,6 +51,7 @@ drwxr-xr-x	root/root	usr/include/SFML/Graphics/
 -rw-r--r--	root/root	usr/include/SFML/Graphics/Transformable.hpp
 -rw-r--r--	root/root	usr/include/SFML/Graphics/Vertex.hpp
 -rw-r--r--	root/root	usr/include/SFML/Graphics/VertexArray.hpp
+-rw-r--r--	root/root	usr/include/SFML/Graphics/VertexBuffer.hpp
 -rw-r--r--	root/root	usr/include/SFML/Graphics/View.hpp
 -rw-r--r--	root/root	usr/include/SFML/Main.hpp
 -rw-r--r--	root/root	usr/include/SFML/Network.hpp
@@ -95,8 +97,10 @@ drwxr-xr-x	root/root	usr/include/SFML/System/
 -rw-r--r--	root/root	usr/include/SFML/System/Vector3.inl
 -rw-r--r--	root/root	usr/include/SFML/Window.hpp
 drwxr-xr-x	root/root	usr/include/SFML/Window/
+-rw-r--r--	root/root	usr/include/SFML/Window/Clipboard.hpp
 -rw-r--r--	root/root	usr/include/SFML/Window/Context.hpp
 -rw-r--r--	root/root	usr/include/SFML/Window/ContextSettings.hpp
+-rw-r--r--	root/root	usr/include/SFML/Window/Cursor.hpp
 -rw-r--r--	root/root	usr/include/SFML/Window/Event.hpp
 -rw-r--r--	root/root	usr/include/SFML/Window/Export.hpp
 -rw-r--r--	root/root	usr/include/SFML/Window/GlResource.hpp
@@ -110,21 +114,28 @@ drwxr-xr-x	root/root	usr/include/SFML/Window/
 -rw-r--r--	root/root	usr/include/SFML/Window/WindowHandle.hpp
 -rw-r--r--	root/root	usr/include/SFML/Window/WindowStyle.hpp
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libsfml-audio.so -> libsfml-audio.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libsfml-audio.so.2.4 -> libsfml-audio.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libsfml-audio.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libsfml-graphics.so -> libsfml-graphics.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libsfml-graphics.so.2.4 -> libsfml-graphics.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libsfml-graphics.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libsfml-network.so -> libsfml-network.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libsfml-network.so.2.4 -> libsfml-network.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libsfml-network.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libsfml-system.so -> libsfml-system.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libsfml-system.so.2.4 -> libsfml-system.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libsfml-system.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libsfml-window.so -> libsfml-window.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libsfml-window.so.2.4 -> libsfml-window.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libsfml-window.so.2.4.0
+drwxr-xr-x	root/root	usr/lib/cmake/
+drwxr-xr-x	root/root	usr/lib/cmake/SFML/
+-rw-r--r--	root/root	usr/lib/cmake/SFML/SFMLConfig.cmake
+-rw-r--r--	root/root	usr/lib/cmake/SFML/SFMLConfigDependencies.cmake
+-rw-r--r--	root/root	usr/lib/cmake/SFML/SFMLConfigVersion.cmake
+-rw-r--r--	root/root	usr/lib/cmake/SFML/SFMLSharedTargets-release.cmake
+-rw-r--r--	root/root	usr/lib/cmake/SFML/SFMLSharedTargets.cmake
+lrwxrwxrwx	root/root	usr/lib/libsfml-audio.so -> libsfml-audio.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libsfml-audio.so.2.5 -> libsfml-audio.so.2.5.1
+-rwxr-xr-x	root/root	usr/lib/libsfml-audio.so.2.5.1
+lrwxrwxrwx	root/root	usr/lib/libsfml-graphics.so -> libsfml-graphics.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libsfml-graphics.so.2.5 -> libsfml-graphics.so.2.5.1
+-rwxr-xr-x	root/root	usr/lib/libsfml-graphics.so.2.5.1
+lrwxrwxrwx	root/root	usr/lib/libsfml-network.so -> libsfml-network.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libsfml-network.so.2.5 -> libsfml-network.so.2.5.1
+-rwxr-xr-x	root/root	usr/lib/libsfml-network.so.2.5.1
+lrwxrwxrwx	root/root	usr/lib/libsfml-system.so -> libsfml-system.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libsfml-system.so.2.5 -> libsfml-system.so.2.5.1
+-rwxr-xr-x	root/root	usr/lib/libsfml-system.so.2.5.1
+lrwxrwxrwx	root/root	usr/lib/libsfml-window.so -> libsfml-window.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libsfml-window.so.2.5 -> libsfml-window.so.2.5.1
+-rwxr-xr-x	root/root	usr/lib/libsfml-window.so.2.5.1
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/sfml-all.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/sfml-audio.pc
@@ -134,9 +145,3 @@ drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/sfml-window.pc
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/SFML/
-drwxr-xr-x	root/root	usr/share/SFML/cmake/
-drwxr-xr-x	root/root	usr/share/SFML/cmake/Modules/
--rw-r--r--	root/root	usr/share/SFML/cmake/Modules/FindSFML.cmake
-drwxr-xr-x	root/root	usr/share/cmake/
-drwxr-xr-x	root/root	usr/share/cmake/Modules/
--rw-r--r--	root/root	usr/share/cmake/Modules/FindSFML.cmake
