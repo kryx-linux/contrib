@@ -5,17 +5,15 @@
 # Optional: rtmpdump openldap libexif openjade gtk-doc gtkspell brotli imagemagick-compat
 
 name=inkscape
-version=0.92.3
-release=3
+version=0.92.4
+release=1
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.bz2
-	inkscape-poppler.patch
-	inkscape-gtk3.patch)
+	inkscape-0.92.4-poppler-0.76.0.patch)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/inkscape-poppler.patch
-	patch -p1 -i $SRC/inkscape-gtk3.patch
+	patch -p1 -i $SRC/inkscape-0.92.4-poppler-0.76.0.patch
 
 	CXXFLAGS+=' -std=c++11'
 

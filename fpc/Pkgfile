@@ -1,41 +1,43 @@
-# Description: A Free Pascal compiler.
-# URL: http://www.freepascal.org/
-# Packager: Danny Rawlins, crux at romster dot me
+# Description: Free Pascal compiler.
+# URL: https://www.freepascal.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=fpc
-version=2.6.4
+version=3.0.4
 release=1
-source=(ftp://ftp.freepascal.org/pub/fpc/dist/$version/source/fpcbuild-$version.tar.gz
-	http://crux.ster.zone/downloads/fpc/md5/2f440a0e40d134ed67db2fbf58c6e30a/x86_64-linux-ppcx64.bz2
-	ftp://ftp.freepascal.org/pub/fpc/contrib/libgdb/v7.2/libgdb_mingw702.zip)
+source=(
+	https://sourceforge.net/projects/freepascal/files/Source/$version/fpcbuild-$version.tar.gz
+	https://sourceforge.net/projects/freepascal/files/Source/$version/fpc-$version.source.tar.gz
+	https://sourceforge.net/projects/freepascal/files/Linux/$version/$name-$version.x86_64-linux.tar
+)
 
 build() {
-	bunzip2 x86_64-linux-ppcx64.bz2
-	chmod 0755 x86_64-linux-ppcx64
+	JOBS='-j1'
 
-	export LIBGDBDIR=$SRC/libgdb/win64/x86_64/
+	tar -xf fpc-$version.x86_64-linux/binary.x86_64-linux.tar
+	tar -xzf base.x86_64-linux.tar.gz
 
 	cd fpcbuild-$version/fpcsrc/
 	
-	make -j 1 PP=$SRC/x86_64-linux-ppcx64 build
+	make $JOBS PP=$SRC/lib/fpc/$version/ppcx64 build
 
 	cp $SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 \
 		$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64.new
 
-	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64.new build
+	make $JOBS PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64.new build
 	rm $SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64.new
 
-	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 rtl_clean
-	make -j 1 PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 rtl packages_all utils
+	make $JOBS PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 rtl_clean
+	make $JOBS PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 rtl packages_all utils
 
 	set -- PP=$SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 \
-		FPCMAKE=$SRC/fpcbuild-$version/fpcsrc/utils/fpcm/fpcmake \
 		INSTALL_PREFIX=$PKG/usr \
 		INSTALL_DOCDIR=$PKG/usr/share/doc/fpcbuild \
 		INSTALL_MANDIR=$PKG/usr/share/man \
 		INSTALL_SOURCEDIR=$PKG/usr/lib/fpc/fpcbuild-$version/source
 
-	make -j 1 "$@" compiler_install rtl_install packages_install utils_install
+	make $JOBS "$@" compiler_install rtl_install packages_install utils_install
 	ln -sf /usr/lib/fpc/$version/ppcx64 $PKG/usr/bin/ppcx64
+
+	rm -r $PKG/usr/share/doc
 }
