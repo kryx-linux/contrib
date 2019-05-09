@@ -4,11 +4,11 @@
 # Depends on: docbook-xsl libedit libffi libgmp readline
 
 name=ghc
-version=8.4.3
-_bversion=8.4.2
+version=8.6.5
+_bversion=8.6.3
 release=1
-_bootstrapsum=28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93
-#curl -s http://downloads.haskell.org/~ghc/$version/SHA256SUMS | grep ./ghc-$version-x86_64-centos67-linux.tar.xz | cut -d' ' -f1
+_bootstrapsum=355bd85c69933c31bbe99b4269ce719acfd0aad0b45e359ac39b9bb13996acc6
+#curl -s http://downloads.haskell.org/~ghc/$version/SHA256SUMS | grep ./ghc-$version-x86_64-centos7-linux.tar.xz | cut -d' ' -f1
 source=(https://downloads.haskell.org/~ghc/$version/$name-$version-src.tar.xz)
 
 build() {
@@ -16,21 +16,21 @@ build() {
 	if [ ! -e '/usr/bin/ghc' ]; then
 
 		# download binary bootstrap file if it does not exist
-		if [ ! -f "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz" ]; then
+		if [ ! -f "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos7-linux.tar.xz" ]; then
 
-			wget "http://downloads.haskell.org/~ghc/$_bversion/$name-$_bversion-x86_64-centos67-linux.tar.xz" \
-				--output-document="$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz"
+			wget "http://downloads.haskell.org/~ghc/$_bversion/$name-$_bversion-x86_64-centos7-linux.tar.xz" \
+				--output-document="$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos7-linux.tar.xz"
 
 		fi
 
-		if [ $_bootstrapsum != $(sha256sum "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz" | cut -d' ' -f1) ]; then
-			echo "Error Bootstrap file $PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz failed sha256sum"
+		if [ $_bootstrapsum != $(sha256sum "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos7-linux.tar.xz" | cut -d' ' -f1) ]; then
+			echo "Error Bootstrap file $PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos7-linux.tar.xz failed sha256sum"
 			exit $E_GENERAL
 		fi
 
 		mkdir tmp
 		cd tmp
-		bsdtar -xf "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos67-linux.tar.xz"
+		bsdtar -xf "$PKGMK_SOURCE_DIR/$name-$_bversion-x86_64-centos7-linux.tar.xz"
 		mv $name-$_bversion ../$name-$_bversion-binary
 		cd -
 		rmdir tmp
