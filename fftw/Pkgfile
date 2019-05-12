@@ -4,19 +4,19 @@
 # Depends on: gcc-fortran
 
 name=fftw
-version=3.3.7
+version=3.3.8
 release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	local config="\
-F77=gfortran \
---prefix=/usr \
---enable-threads \
---with-gnu-ld \
---enable-shared \
+	local config="
+F77=gfortran
+--prefix=/usr
+--enable-threads
+--with-gnu-ld
+--enable-shared
 --enable-openmp"
 
 	# use upstream default CFLAGS while keeping our -march/-mtune
