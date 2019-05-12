@@ -1,16 +1,15 @@
 # Description: A tool to download rtmp streams.
 # URL: http://rtmpdump.mplayerhq.hu/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
 # Depends on: zlib openssl
 
 name=rtmpdump
 version=2.4
-release=1
-source=(http://crux.ster.zone/downloads/$name/$name-${version}_p20131018.tar.gz)
+release=2
+source=(http://crux.ster.zone/downloads/$name/$name-$version-c5f04a58.tar.xz)
 
 build() {
-	#sed -i 's/\$(MAKEFLAGS)//g' Makefile
+	cd $name
 
 	sed -i \
 		-e 's|OPT=|&-fPIC |' \
@@ -35,7 +34,7 @@ build() {
 		CRYPTO=OPENSSL \
 		prefix=/usr \
 		sbindir=/usr/bin \
-		mandir=/usr/man \
+		mandir=/usr/share/man \
 		DESTDIR=$PKG \
 		install
 }
