@@ -5,7 +5,7 @@
 # Optional: sccache
 
 name=cbindgen
-version=0.8.6
+version=0.8.7
 release=1
 source=(https://github.com/eqrion/cbindgen/archive/v$version/$name-v$version.tar.gz)
 
@@ -13,7 +13,8 @@ build() {
 	cd $name-$version
 
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-	export CARGO_HOME="$PKGMK_SOURCE_DIR"
+	mkdir "$PKGMK_SOURCE_DIR/rust" || true
+	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
 	cargo build --release
 	cargo install --root $PKG/usr
