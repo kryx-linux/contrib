@@ -5,7 +5,7 @@
 # Optional: sccache
 
 name=thunderbird
-version=60.6.1
+version=60.7.0
 release=1
 source=(http://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
 	$name.desktop)
@@ -13,9 +13,9 @@ source=(http://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$v
 build() {
 	cd $name-$version
 
-	if [ -n "$(pkginfo -i | grep '^sccache ')" ]; then
-		export RUSTC_WRAPPER=/usr/bin/sccache
-	fi
+	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+	mkdir "$PKGMK_SOURCE_DIR/rust" || true
+	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
 cat <<- EOF > .mozconfig
 	ac_add_options --enable-application=comm/mail
@@ -48,7 +48,6 @@ EOF
 
 	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
 	export MOZBUILD_STATE_PATH="$PKGMK_SOURCE_DIR/.mozbuild"
-	export CARGO_HOME="$PKGMK_SOURCE_DIR"
 
 	./mach build
 	DESTDIR=$PKG ./mach install
