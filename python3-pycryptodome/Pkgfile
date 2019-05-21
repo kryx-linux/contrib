@@ -4,7 +4,7 @@
 # Depends on: python3-setuptools
 
 name=python3-pycryptodome
-version=3.7.2
+version=3.8.1
 release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
 
@@ -13,8 +13,5 @@ build() {
 	/usr/bin/python3 setup.py build
 	/usr/bin/python3 setup.py install --root=$PKG --optimize=1
 
-	local pyv="$(/usr/bin/python3 -c "import sys; print(sys.version_info[0], sys.version_info[1], sep='.');")"
-	rm $PKG/usr/lib/python$pyv/site-packages/Crypto/SelfTest/Signature/test_vectors/ECDSA/README.txt
-
-	chmod -R g-w $PKG
+	find $PKG -name README.txt -delete
 }
