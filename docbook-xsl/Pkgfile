@@ -5,7 +5,7 @@
 
 name=docbook-xsl
 version=1.79.2
-release=1
+release=2
 source=(https://github.com/docbook/xslt10-stylesheets/releases/download/release/$version/$name-$version.tar.bz2
     non-recursive-string-subst.patch)
 
@@ -31,4 +31,6 @@ build() {
 
 	install -v -m 0755 RELEASE-NOTES* NEWS* \
 		$PKG/usr/share/doc/docbook-xsl-$version
+
+	find $PKG \( -name "NEWS*" -o -name "README*" -o -name "ChangeLog*" \) -delete
 }
