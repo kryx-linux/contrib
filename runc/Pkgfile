@@ -4,22 +4,20 @@
 # Depends on: go libseccomp git
 
 name=runc
-version=96ec217
+version=2b18fe1
 release=2
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    0001-nsenter-clone-proc-self-exe-to-avoid-exposing-host-b.patch)
+    http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz)
 
 build() {
     mkdir -pv src/github.com/opencontainers
     cd src/github.com/opencontainers
     ln -sf $SRC/$name-$version $name
     cd $name
-    patch -p1 -i $SRC/0001-nsenter-clone-proc-self-exe-to-avoid-exposing-host-b.patch
     export GOPATH=$SRC
     export BUILDTAGS="seccomp"
     # use the long commit hash here
-    make COMMIT=96ec2177ae841256168fcf76954f7177af9446eb
+    make COMMIT=2b18fe1d885ee5083ef9f0838fee39b62d653e30
 
     install -D -m 0755 $name $PKG/usr/bin/$name
     install -d -m 0755 $PKG/usr/share/man/man8
