@@ -4,7 +4,7 @@
 # Depends on: go btrfs-progs git
 
 name=containerd
-version=9754871
+version=bb71b10
 release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz)
 
@@ -15,7 +15,7 @@ build() {
     cd $name
     export GOPATH=$SRC
     # use the long commit hash here
-    make GIT_COMMIT=9754871865f7fe2f4e74d43e2fc7ccd237edcbce
+    make GIT_COMMIT=bb71b10fd8f58240ca47fbb579b9d1028eea7c84
     install -d -m 0755 $PKG/usr/bin
     install -m 0755 bin/* $PKG/usr/bin/
 }
