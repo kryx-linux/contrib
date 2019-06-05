@@ -5,7 +5,7 @@
 # Optional: sccache
 
 name=firefox
-version=67.0
+version=67.0.1
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
 	firefox.desktop)
@@ -13,9 +13,7 @@ source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$ve
 build() {
 	cd firefox-$version
 
-	if [ -n "$(pkginfo -i | grep '^sccache ')" ]; then
-		export RUSTC_WRAPPER=/usr/bin/sccache
-	fi
+	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
 
 cat <<- EOF > .mozconfig
 	mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-shared
