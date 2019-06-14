@@ -1221,6 +1221,7 @@ drwxr-xr-x	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/internal/sys/
 drwxr-xr-x	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/link/
 -rw-r--r--	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/link/doc.go
 -rw-r--r--	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/link/dwarf_test.go
+-rw-r--r--	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/link/elf_test.go
 drwxr-xr-x	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/link/internal/
 drwxr-xr-x	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/link/internal/amd64/
 -rw-r--r--	root/root	usr/lib/go/pkg/bootstrap/src/bootstrap/cmd/link/internal/amd64/asm.go
@@ -3672,6 +3673,7 @@ drwxr-xr-x	root/root	usr/lib/go/src/cmd/internal/test2json/testdata/
 drwxr-xr-x	root/root	usr/lib/go/src/cmd/link/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/link/doc.go
 -rw-r--r--	root/root	usr/lib/go/src/cmd/link/dwarf_test.go
+-rw-r--r--	root/root	usr/lib/go/src/cmd/link/elf_test.go
 drwxr-xr-x	root/root	usr/lib/go/src/cmd/link/internal/
 drwxr-xr-x	root/root	usr/lib/go/src/cmd/link/internal/amd64/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/link/internal/amd64/asm.go
@@ -4640,6 +4642,8 @@ drwxr-xr-x	root/root	usr/lib/go/src/cmd/vet/testdata/src/nilfunc/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/vet/testdata/src/nilfunc/nilfunc.go
 drwxr-xr-x	root/root	usr/lib/go/src/cmd/vet/testdata/src/print/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/vet/testdata/src/print/print.go
+drwxr-xr-x	root/root	usr/lib/go/src/cmd/vet/testdata/src/print2/
+-rw-r--r--	root/root	usr/lib/go/src/cmd/vet/testdata/src/print2/big.go
 drwxr-xr-x	root/root	usr/lib/go/src/cmd/vet/testdata/src/rangeloop/
 -rw-r--r--	root/root	usr/lib/go/src/cmd/vet/testdata/src/rangeloop/rangeloop.go
 drwxr-xr-x	root/root	usr/lib/go/src/cmd/vet/testdata/src/shift/
@@ -7141,8 +7145,10 @@ drwxr-xr-x	root/root	usr/lib/go/src/os/
 -rw-r--r--	root/root	usr/lib/go/src/os/dir_unix.go
 -rw-r--r--	root/root	usr/lib/go/src/os/dir_windows.go
 -rw-r--r--	root/root	usr/lib/go/src/os/env.go
+-rw-r--r--	root/root	usr/lib/go/src/os/env_default.go
 -rw-r--r--	root/root	usr/lib/go/src/os/env_test.go
 -rw-r--r--	root/root	usr/lib/go/src/os/env_unix_test.go
+-rw-r--r--	root/root	usr/lib/go/src/os/env_windows.go
 -rw-r--r--	root/root	usr/lib/go/src/os/error.go
 -rw-r--r--	root/root	usr/lib/go/src/os/error_plan9.go
 -rw-r--r--	root/root	usr/lib/go/src/os/error_posix.go
@@ -7183,6 +7189,7 @@ drwxr-xr-x	root/root	usr/lib/go/src/os/exec/
 -rw-r--r--	root/root	usr/lib/go/src/os/executable_test.go
 -rw-r--r--	root/root	usr/lib/go/src/os/executable_windows.go
 -rw-r--r--	root/root	usr/lib/go/src/os/export_test.go
+-rw-r--r--	root/root	usr/lib/go/src/os/export_unix_test.go
 -rw-r--r--	root/root	usr/lib/go/src/os/export_windows_test.go
 -rw-r--r--	root/root	usr/lib/go/src/os/fifo_test.go
 -rw-r--r--	root/root	usr/lib/go/src/os/file.go
@@ -8154,6 +8161,7 @@ drwxr-xr-x	root/root	usr/lib/go/src/runtime/trace/
 -rw-r--r--	root/root	usr/lib/go/src/runtime/trace/trace_stack_test.go
 -rw-r--r--	root/root	usr/lib/go/src/runtime/trace/trace_test.go
 -rw-r--r--	root/root	usr/lib/go/src/runtime/traceback.go
+-rw-r--r--	root/root	usr/lib/go/src/runtime/treap_test.go
 -rw-r--r--	root/root	usr/lib/go/src/runtime/type.go
 -rw-r--r--	root/root	usr/lib/go/src/runtime/typekind.go
 -rw-r--r--	root/root	usr/lib/go/src/runtime/unaligned1.go
@@ -10156,6 +10164,14 @@ drwxr-xr-x	root/root	usr/lib/go/test/fixedbugs/issue29919.dir/
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue30956.go
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue30956.out
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue30977.go
+drwxr-xr-x	root/root	usr/lib/go/test/fixedbugs/issue31252.dir/
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue31252.dir/a.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue31252.dir/b.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue31252.dir/c.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue31252.dir/main.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue31252.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue31987.go
+-rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue32477.go
 drwxr-xr-x	root/root	usr/lib/go/test/fixedbugs/issue3552.dir/
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue3552.dir/one.go
 -rw-r--r--	root/root	usr/lib/go/test/fixedbugs/issue3552.dir/two.go
