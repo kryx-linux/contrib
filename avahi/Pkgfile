@@ -1,7 +1,6 @@
 # Description: A system which facilitates service discovery on a local network via the mDNS/DNS-SD protocol suite
 # URL: http://www.avahi.org/
-# Maintainer: crux libreoffice team, tbier at posteo dot de
-# Packager: Matt Housh, jaeger at crux dot ninja
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: libdaemon dbus gobject-introspection intltool
 
 name=avahi
@@ -13,6 +12,7 @@ source=(http://avahi.org/download/$name-$version.tar.gz \
 build() {
   cd $name-$version
   ./configure --prefix=/usr \
+    --sysconfdir=/etc \
     --with-distro=none \
     --disable-gtk \
     --disable-gtk3 \
