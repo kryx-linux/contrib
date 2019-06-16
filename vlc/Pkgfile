@@ -6,7 +6,7 @@
 # Nice to have:opus libvorbis x264 libogg libmtp libtheora flac
 
 name=vlc
-version=3.0.4
+version=3.0.7
 release=1
 source=(http://download.videolan.org/pub/videolan/$name/$version/$name-$version.tar.xz)
 
@@ -14,14 +14,14 @@ build() {
   cd $name-$version
 
   # allow building with new avcodec
-  sed -i 's/ 56/ 57/g' configure.ac
+  #sed -i 's/ 56/ 57/g' configure.ac
   autoreconf -fi
 
   # initialize avformat structure
-  sed -i 's/AVProbeData *pd;/AVProbeData pd={};/g' modules/demux/avformat/demux.c
+  #sed -i 's/AVProbeData *pd;/AVProbeData pd={};/g' modules/demux/avformat/demux.c
 
-  PKG_CONFIG_PATH="/usr/lib/ffmpeg-compat/pkgconfig" \
-  BUILDCC="gcc -std=gnu99" \
+  #PKG_CONFIG_PATH="/usr/lib/ffmpeg-compat/pkgconfig" \
+  BUILDCC="gcc -std=gnu11" \
   ./configure --prefix=/usr \
     --mandir=/usr/man \
     --disable-nls \
@@ -30,7 +30,8 @@ build() {
     --disable-lua \
     --enable-alsa
 
-  make
+  #make
+  V=1 ./compile
   make DESTDIR=$PKG install
   rm -rf $PKG/usr/share/doc
 
