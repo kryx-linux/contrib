@@ -11,6 +11,7 @@ OPTS="-D"
 case $1 in
 	start)
 		$SSD --start --pidfile $PID --exec $PROG -- $OPTS
+		chown root:root $PID 2>/dev/null
 		;;
 	stop)
 		$SSD --stop --retry 10 --pidfile $PID
