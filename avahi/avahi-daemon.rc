@@ -20,7 +20,7 @@ case $1 in
 		$0 start
 		;;
 	status)
-		$SSD --status --name avahi-daemon
+		$SSD --status --name avahi-daemon --pidfile $PID
 		case $? in
 			0) echo "$PROG is running with pid $(cat $PID)" ;;
 			1) echo "$PROG is not running but the pid file $PID exists" ;;
