@@ -5,14 +5,17 @@
 
 name=avahi
 version=0.7
-release=4
+release=5
 source=(http://avahi.org/download/$name-$version.tar.gz \
-  avahi-daemon.rc)
+  avahi-daemon.rc reverse-move-to-run.patch)
 
 build() {
   cd $name-$version
+  patch -Np1 -i ../reverse-move-to-run.patch
+  NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
+    --localstatedir=/var \
     --with-distro=none \
     --disable-gtk \
     --disable-gtk3 \
