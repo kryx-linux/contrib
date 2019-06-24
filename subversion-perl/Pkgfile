@@ -4,13 +4,17 @@
 # Depends on:  subversion swig
 
 name=subversion-perl
-version=1.9.9
+version=1.9.10
 release=1
-source=(https://www.apache.org/dist/subversion/subversion-$version.tar.bz2)
+source=(https://www.apache.org/dist/subversion/subversion-$version.tar.bz2
+	apr-1.7.patch)
 
 build() {
 	cd subversion-$version
 
+	patch -p1 -i $SRC/apr-1.7.patch
+
+	./autogen.sh
 	./configure \
 		--prefix=/usr \
 		--disable-nls \
