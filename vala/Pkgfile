@@ -4,7 +4,7 @@
 # Depends on:  glib
 
 name=vala
-version=0.36.16
+version=0.36.19
 release=1
 source=(http://download.gnome.org/sources/vala/${version%.*}/vala-$version.tar.xz)
 
@@ -12,6 +12,7 @@ build() {
   cd $name-$version
   ./configure --prefix=/usr \
               --mandir=/usr/man 
-  make
+  make CFLAGS="$CFLAGS -Wno-deprecated-declarations"
   make install DESTDIR=$PKG
+  rm -r $PKG/usr/share/devhelp
 }
