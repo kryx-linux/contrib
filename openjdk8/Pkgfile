@@ -6,10 +6,10 @@
 name=openjdk8
 version=8u212-b04
 icedtea_version=3.12.0
-boot_version=20190531
+boot_version=20190705
 pkgsrc_quarter=2018Q3
 certdata_rev=f84b1b428d42
-release=1
+release=2
 source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.tar.xz
 	https://stygian.me/crux/distfiles/$name/corba-$version.tar.xz
 	https://stygian.me/crux/distfiles/$name/hotspot-$version.tar.xz
@@ -37,6 +37,11 @@ unpack_source() {
 }
 
 build() {
+	# Most of these flags were snarfed directly from Alpine Linux APKBUILD for openjdk7, added -fabi-version.
+	# Fixes build failures due to suspected gcc8 changes for default std and abi.
+	export EXTRA_CPP_FLAGS="$CXXFLAGS -fabi-version=10 -std=gnu++98 -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-strict-overflow"
+	export EXTRA_CFLAGS="$CFLAGS -fabi-version=10 -std=gnu++98 -Wno-error -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-strict-overflow"
+
 	# Make sure we do not have ccache masquerade directory in PATH.
 	# Use --enable-ccache instead of providing a wrapped compiler.
 	# NOTE: the check for usr/bin/ccache may be too specific, since it rules out
@@ -90,6 +95,7 @@ build() {
 	LC_ALL=C \
 	make
 
+	# Copy the sdk image first before pruning it, saving original for later inspection/comparison.
 	install -d -m 0755 $PKG/usr/lib/java/$name
 	cp -a openjdk.build/images/j2sdk-image/* $PKG/usr/lib/java/$name
 
@@ -98,25 +104,28 @@ build() {
 	echo "/usr/lib/java/$name/jre/lib/amd64/jli" >> $PKG/etc/revdep.d/$name
 	echo "/usr/lib/java/$name/jre/lib/amd64/server" >> $PKG/etc/revdep.d/$name
 
-	# remove unneeded files
+	# Remove unneeded files
 	rm -f $PKG/usr/lib/java/$name/src.zip
-	rm -rf $PKG/usr/lib/java/$name/{demo,sample}
-	rm -f $PKG/usr/lib/java/$name/man/ja
-	rm -rf $PKG/usr/lib/java/$name/man/ja_JP.UTF-8
+	rm -rf $PKG/usr/lib/java/$name/{demo,man/ja*,sample}
 	rm -f $PKG/usr/lib/java/$name/{,jre/}THIRD_PARTY_README
-	find $PKG/usr/lib/java/$name -name '*.ja' -delete
+	find $PKG/usr/lib/java/$name \( \
+		-name '*.ja' -o \
+		-name 'ASSEMBLY_EXCEPTION' -o \
+		-name 'LICENSE' -o \
+		-name 'THIRD_PARTY_README' \) \
+		-delete
 
-	# deduplicate
+	# Deduplicate
 	rm $PKG/usr/lib/java/$name/jre/lib/amd64/libjawt.so
-	ln -s ../../../lib/amd64/libjawt.so \
+	ln -sr $PKG/usr/lib/java/$name/lib/amd64/libjawt.so \
 		$PKG/usr/lib/java/$name/jre/lib/amd64/libjawt.so
 	rm $PKG/usr/lib/java/$name/jre/lib/amd64/jli/libjli.so
-	ln -s ../../../../lib/amd64/jli/libjli.so \
+	ln -sr $PKG/usr/lib/java/$name/lib/amd64/jli/libjli.so \
 		$PKG/usr/lib/java/$name/jre/lib/amd64/jli/libjli.so
 	for f in $PKG/usr/lib/java/$name/jre/bin/* ; do
 		if [ -f $PKG/usr/lib/java/$name/bin/${f##*/} ]; then
 			rm $f
-			ln -s ../../bin/${f##*/} $f
+			ln -sr $PKG/usr/lib/java/$name/bin/${f##*/} $f
 		fi
 	done
 
@@ -139,8 +148,8 @@ build() {
 	export JAVA_HOME=$PKG/usr/lib/java/$name
 	export PATH=$JAVA_HOME/bin:$OLD_PATH
 
-	# generate java's cacerts
-	# big thanks to pkgsrc's mozilla-rootcerts and openjdk pkg's for this part
+	# Generate java's cacerts.
+	# Big thanks to pkgsrc's mozilla-rootcerts and openjdk pkg's for this part.
 	rm -f $PKG/usr/lib/java/$name/jre/lib/security/cacerts
 	mkdir $SRC/cacerts
 	cd $SRC/cacerts
