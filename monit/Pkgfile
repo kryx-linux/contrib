@@ -1,10 +1,10 @@
 # Description: Utility for monitoring daemons running on a Unix system
 # URL:         http://www.tildeslash.com/monit/
 # Maintainer:  Juergen Daubert, jue at crux dot nu
-# Depends on:  openssl 
+# Depends on:  openssl linux-pam
 
 name=monit
-version=5.25.3
+version=5.26.0
 release=1
 source=(http://mmonit.com/$name/dist/$name-$version.tar.gz \
         monitd)
@@ -13,12 +13,11 @@ build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --sysconfdir=/etc \
-              --without-pam
+              --sysconfdir=/etc
 
   make
   make DESTDIR=$PKG install
 
   install -D -m 0755 $SRC/monitd $PKG/etc/rc.d/monitd
-  install -D -m 0700 $SRC/$name-$version/monitrc $PKG/etc/monitrc
+  install -D -m 0700 monitrc $PKG/etc/monitrc
 }
