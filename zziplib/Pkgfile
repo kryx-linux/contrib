@@ -1,0 +1,49 @@
+# Description: ZIP-access Library with Easy-to-use API
+# URL:         https://github.com/gdraheim/zziplib
+# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
+# Depends on:  zlib python
+
+name=zziplib
+version=0.13.69
+release=2
+source=(https://github.com/gdraheim/$name/archive/v$version/$name-$version.tar.gz
+	0001-zzip_mem_entry_new-if-compressed-size-is-too-big-bai.patch
+	0002-Fix-_zzip_strndup-strndup-is-not-available.patch
+	0004-Avoid-memory-leak-from-__zzip_parse_root_directory.patch
+	0005-Avoid-memory-leak-from-__zzip_parse_root_directory.patch
+	0006-One-more-free-to-avoid-memory-leak.patch
+	0007-Fix-issue-62-Remove-any-.-components-from-pathnames-.patch
+	0009-Code-cleanup-in-bins.patch
+	0010-Prevent-division-by-zero.patch
+	0012-Update-unzip-mem.c.patch)
+
+build() {
+	cd $name-$version
+
+	# Upstream bug fixes (maybe create considated patch)
+	patch -p1 -i $SRC/0001-zzip_mem_entry_new-if-compressed-size-is-too-big-bai.patch
+	patch -p1 -i $SRC/0002-Fix-_zzip_strndup-strndup-is-not-available.patch
+	patch -p1 -i $SRC/0004-Avoid-memory-leak-from-__zzip_parse_root_directory.patch
+	patch -p1 -i $SRC/0005-Avoid-memory-leak-from-__zzip_parse_root_directory.patch
+	patch -p1 -i $SRC/0006-One-more-free-to-avoid-memory-leak.patch
+	patch -p1 -i $SRC/0007-Fix-issue-62-Remove-any-.-components-from-pathnames-.patch
+	patch -p1 -i $SRC/0009-Code-cleanup-in-bins.patch
+	patch -p1 -i $SRC/0010-Prevent-division-by-zero.patch
+	patch -p1 -i $SRC/0012-Update-unzip-mem.c.patch
+
+	# docs building currently broken for almost 1/6 or more of manpages
+	# TODO: troubleshoot and report upstream
+	sed -i -e 's,^\(SUBDIRS = .*\) docs\(.*\)$,\1\2,' \
+		-e 's,^\(DIST_SUBDIRS = .*\) docs\(.*\)$,\1\2,' Makefile.in
+
+	mkdir build
+	cd build
+
+	CONFIG_SHELL=/bin/bash \
+	../configure \
+		--prefix=/usr \
+		--disable-static
+
+	make
+	make DESTDIR=$PKG install
+}
