@@ -6,7 +6,7 @@
 
 name=networkmanager
 version=1.8.0
-release=1
+release=2
 source=(
 http://ftp.gnome.org/pub/gnome/sources/NetworkManager/${version%.*}/NetworkManager-${version}.tar.xz
 networkmanager.rc
@@ -48,8 +48,8 @@ build() {
 	make DESTDIR=$PKG install
 
 	# Fix the CRUX oddity
-	mkdir $PKG/usr/etc
-	mv $PKG/etc/dbus-1 $PKG/usr/etc
+	#mkdir $PKG/usr/etc
+	#mv $PKG/etc/dbus-1 $PKG/usr/etc
 
 	# Install config file
 	install -D -m 644 -o root -g root $SRC/NetworkManager.conf $PKG/etc/NetworkManager/NetworkManager.conf
