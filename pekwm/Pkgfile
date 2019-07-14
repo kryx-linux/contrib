@@ -5,13 +5,18 @@
 
 name=pekwm
 version=0.1.17
-release=1
+release=2
 source=(https://github.com/pekdon/pekwm/archive/release-0.1.17.tar.gz)
 
 build() {
 	cd $name-release-$version
 
-	./autogen.sh
+	#./autogen.sh
+	aclocal
+	autoheader
+	autoconf
+	automake -a
+
 	./configure \
 		--prefix=/usr \
 		--enable-xft \
