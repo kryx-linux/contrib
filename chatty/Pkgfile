@@ -4,7 +4,7 @@
 # Depends on: openjdk8
 
 name=chatty
-version=0.9.6
+version=0.9.7
 release=1
 source=(https://github.com/chatty/chatty/releases/download/v$version/Chatty_${version}_hotkey_64bit.zip)
 
@@ -19,5 +19,5 @@ EOF
 
 	chmod 0775 $PKG/usr/bin/$name
 
-	rm -r $PKG/usr/lib/chatty/LICENSE
+	rm $PKG/usr/lib/chatty/{LICENSE,readme.txt}
 }
