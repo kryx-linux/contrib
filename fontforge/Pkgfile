@@ -1,35 +1,24 @@
 # Description: Outline and bitmap font editor.
 # URL: https://fontforge.github.io/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
-# Packager: Antti Nykanen, aon at iki dot fi
-# Depends on: giflib git libspiro libtiff pango
+# Depends on: giflib gtk3 libspiro util-linux woff2
 
 name=fontforge
-version=20170731
+version=20190413
 release=1
-source=(https://github.com/fontforge/fontforge/archive/$version.tar.gz
-	https://fontforge.github.io/cidmaps.tgz)
+source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	./bootstrap --force
 	./configure \
 		--prefix=/usr \
-		--enable-python-extension
+		--enable-python-extension \
+		--enable-woff2 \
+		--enable-gdk
 
 	make
-	make install DESTDIR=$PKG
-
-	install -d $PKG/usr/share/fontforge
-	install -m 0644 -t $PKG/usr/share/fontforge $SRC/Adobe-*
-
-	install -d $PKG/usr/share/icons
-	cp -a desktop/icons $PKG/usr/share/icons/hicolor
-	rm -fr $PKG/usr/share/icons/hicolor/src
-
-	install -m 0644 -D desktop/fontforge.desktop \
-		$PKG/usr/share/applications/fontforge.desktop
+	make DESTDIR=$PKG install
 
 	rm -r $PKG/usr/share/{doc,locale}
 	rm $PKG/usr/share/fontforge/python/gdraw/README
