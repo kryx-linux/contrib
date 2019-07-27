@@ -1,14 +1,19 @@
 # Description: Python bindings for PostgreSQL
-# URL: http://www.initd.org/
+# URL: http://initd.org/psycopg/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: python postgresql
 
 name=psycopg2
 version=2.7.4
+_version=${version%.*}
+_version=${_version/./-}
 release=1
-source=(http://initd.org/psycopg/tarballs/PSYCOPG-2-7/$name-$version.tar.gz)
+source=(http://initd.org/psycopg/tarballs/PSYCOPG-$_version/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
     python setup.py install --root=$PKG --prefix=/usr
+
+    find $PKG/usr/lib/python*/site-packages/ -maxdepth 1 -type f \
+        -name "${name#*-}-$version-py*.egg-info" -delete
 }
