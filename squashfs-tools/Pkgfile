@@ -1,17 +1,17 @@
 # Description: SquashFS tools
 # URL: http://squashfs.sourceforge.net/
 # Maintainer: Matt Housh, jaeger at morpheus dot net
-# Depends on: xz
- 
+# Depends on: gzip lzo xz
+
 name=squashfs-tools
 version=4.3
-release=1
+release=2
 source=(http://download.sourceforge.net/squashfs/squashfs${version}.tar.gz)
 
 build() {
 	cd squashfs${version}/$name
-	sed -i -e 's/^#\(XZ_SUPPORT = 1\)/\1/' Makefile
-	make
-	install -D -m 0755 mksquashfs ${PKG}/sbin/mksquashfs
-	install -D -m 0755 unsquashfs ${PKG}/sbin/unsquashfs
+	sed -i -e '/^#include <ctype.h>/a #include <sys/sysmacros.h>' \
+		{mk,un}squashfs.c
+	make GZIP_SUPPORT=1 LZO_SUPPORT=1 XZ_SUPPORT=1
+	make install INSTALL_DIR=$PKG/sbin
 }
