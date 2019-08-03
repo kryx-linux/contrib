@@ -18,6 +18,9 @@ case $1 in
         $0 stop
         $0 start
         ;;
+    "reload")
+        $PROG -s reload
+        ;;
     "status")
         $SSD --status --pidfile $PID
         case $? in
