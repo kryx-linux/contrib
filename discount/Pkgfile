@@ -4,7 +4,7 @@
 
 name=discount
 version=2.2.6
-release=1
+release=2
 source=(https://github.com/Orc/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
@@ -12,7 +12,8 @@ build() {
 
 	./configure.sh \
 		--prefix=/usr \
-		--pkg-config
+		--pkg-config \
+		--shared
 
 	make
 	make DESTDIR=$PKG install install.man install.samples
