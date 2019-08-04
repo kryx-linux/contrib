@@ -5,7 +5,7 @@
 # Optional: pulseaudio-32
 
 name=steam
-version=1.0.0.59
+version=1.0.0.61
 release=1
 source=(http://repo.steampowered.com/$name/pool/$name/s/$name/${name}_$version.tar.gz
 	steam-native.sh
@@ -29,7 +29,6 @@ build() {
 	ln -sf /bin/true $PKG/usr/bin/steamdeps
 
 	install -d $PKG/etc/ssl/certs
-	ln -sf /etc/ssl/cert.pem $PKG/etc/ssl/certs/ca-certificates.crt
 
 	mv $PKG/usr/lib $PKG/usr/lib32
 
