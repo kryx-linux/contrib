@@ -1,10 +1,10 @@
 # Description: Outline and bitmap font editor.
 # URL: https://fontforge.github.io/
 # Maintainer: Danny Rawlins, monster dot romster at gmail dot com
-# Depends on: giflib gtk3 libspiro util-linux woff2
+# Depends on: giflib gtk3 libspiro libuninameslist libwebp potrace woff2
 
 name=fontforge
-version=20190413
+version=20190801
 release=1
 source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.gz)
 
@@ -21,5 +21,4 @@ build() {
 	make DESTDIR=$PKG install
 
 	rm -r $PKG/usr/share/{doc,locale}
-	rm $PKG/usr/share/fontforge/python/gdraw/README
 }
