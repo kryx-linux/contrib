@@ -1,0 +1,20 @@
+# Description: Utility for tracing a bitmap (input: PBM,PGM,PPM,BMP; output: EPS,PS,PDF,SVG,DXF,PGM,Gimppath,XFig)
+# URL: http://potrace.sourceforge.net/
+# Maintainer: Danny Rawlins, crux at romster dot me
+
+name=potrace
+version=1.15
+release=1
+source=(https://sourceforge.net/projects/$name/files/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--with-libpotrace
+
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/share/doc
+}
