@@ -1,0 +1,73 @@
+# Description: Network configuration tool
+# URL: https://wiki.gnome.org/Projects/NetworkManager/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: dbus-glib nss libndp jansson-32 curl-32 libxslt
+
+name=libnm
+version=1.18.0
+release=1
+source=(https://ftp.gnome.org/pub/gnome/sources/NetworkManager/${version%.*}/NetworkManager-${version}.tar.xz)
+
+build() {
+  cd NetworkManager-$version
+
+  sed '/initrd/d' -i src/meson.build
+
+  mkdir build
+  cd build
+
+  CXXFLAGS+="-O2 -fPIC" \
+  meson --prefix /usr \
+    --sysconfdir /etc \
+    --localstatedir /var \
+    --libexecdir /usr/lib/networkmanager \
+    -Ddbus_conf_dir=/usr/share/dbus-1/system.d \
+    -Dudev_dir=/lib/udev \
+    -Ddhcpcd=/sbin/dhcpcd \
+    -Dresolvconf=true \
+    -Dconfig_dns_rc_manager_default=resolvconf \
+    -Dcrypto=nss \
+    -Dintrospection=false \
+    -Dsession_tracking_consolekit=false \
+    -Dwifi=false \
+    -Dwext=false \
+    -Dpolkit=false \
+    -Dmodify_system=true \
+    -Dlibnm_glib=true \
+    -Difupdown=false \
+    -Dnmtui=false \
+    -Dnmcli=false \
+    -Dsession_tracking=no \
+    -Db_lto=false \
+    -Dlibaudit=no \
+    -Dlibpsl=false \
+    -Dppp=false \
+    -Dofono=false \
+    -Dselinux=false \
+    -Dmodem_manager=false \
+    -Dsystemdsystemunitdir=false \
+    -Dsystemd_journal=false \
+    -Dqt=false \
+    -Ddocs=false \
+    -Dtests=no \
+    -Djson_validation=true \
+    -Dovs=false \
+    -Dmore_logging=false \
+    -Dmore_asserts=0 \
+    -Dlibpsl=false \
+    ..
+  ninja
+  mkdir $SRC/install
+  DESTDIR=$SRC/install/ ninja install
+
+  install -d -m 0755 $PKG/usr/lib/pkgconfig
+  cp -dr --no-preserve='ownership' $SRC/install/usr/lib/{libnm,libnm-glib,libnm-glib-vpn,libnm-util}.so* $PKG/usr/lib/
+  cp -dr --no-preserve='ownership' $SRC/install/usr/lib/pkgconfig/{libnm,libnm-glib,libnm-glib-vpn,libnm-util}.pc $PKG/usr/lib/pkgconfig/ 
+  rm $PKG/usr/lib/*.so
+
+  # conflicts with networkmanager
+  rm \
+    $PKG/usr/lib/libnm.so.0 \
+    $PKG/usr/lib/libnm.so.0.1.0 \
+    $PKG/usr/lib/pkgconfig/libnm.pc
+}
