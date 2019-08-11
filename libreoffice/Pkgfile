@@ -43,6 +43,7 @@ build() {
      -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
   # determine configure options based on installed packages on the system
+  [[ -e /usr/lib/ccache ]] && PKGMK_LIBREOFFICE+="" || PKGMK_LIBREOFFICE+=" --disable-ccache"
   [[ -e /usr/lib/cups ]] && PKGMK_LIBREOFFICE+=" --enable-cups" || PKGMK_LIBREOFFICE+=" --disable-cups"
   [[ -e /usr/lib/pkgconfig/gstreamer-plugins-base-1.0.pc ]] && PKGMK_LIBREOFFICE+=" --enable-gstreamer-1-0" || PKGMK_LIBREOFFICE+=" --disable-gstreamer-1-0"
   [[ -e /usr/lib/pkgconfig/Qt5Core.pc ]] && PKGMK_LIBREOFFICE+=" --enable-qt5" || PKGMK_LIBREOFFICE+=" --disable-qt5"
