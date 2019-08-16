@@ -1,7 +1,7 @@
 # Description: Network configuration tool
 # URL: https://wiki.gnome.org/Projects/NetworkManager/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: dbus-glib nss libndp jansson-32 curl-32 libxslt
+# Depends on: curl dbus-glib intltool jansson libndp libxslt nss
 
 name=libnm
 version=1.18.0
@@ -62,7 +62,7 @@ build() {
 
   install -d -m 0755 $PKG/usr/lib/pkgconfig
   cp -dr --no-preserve='ownership' $SRC/install/usr/lib/{libnm,libnm-glib,libnm-glib-vpn,libnm-util}.so* $PKG/usr/lib/
-  cp -dr --no-preserve='ownership' $SRC/install/usr/lib/pkgconfig/{libnm,libnm-glib,libnm-glib-vpn,libnm-util}.pc $PKG/usr/lib/pkgconfig/ 
+  cp -dr --no-preserve='ownership' $SRC/install/usr/lib/pkgconfig/{libnm,libnm-glib,libnm-glib-vpn,libnm-util}.pc $PKG/usr/lib/pkgconfig/
   rm $PKG/usr/lib/*.so
 
   # conflicts with networkmanager
