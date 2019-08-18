@@ -5,13 +5,14 @@
 
 name=libodfgen
 version=0.1.7
-release=1
+release=2
 source=(https://sourceforge.net/projects/libwpd/files/libodfgen/$name-$version/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
   ./configure --prefix=/usr \
-    --disable-werror
+    --disable-werror \
+    --without-docs
   make
   make DESTDIR=$PKG install
 }
