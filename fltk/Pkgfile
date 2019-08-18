@@ -1,26 +1,47 @@
 # Description: Cross-platform C++ GUI toolkit for Unix, Windows and Mac OS X.
 # URL: http://www.fltk.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib libjpeg-turbo mesa3d xorg-libxft xorg-libxinerama
+# Depends on: alsa-lib libjpeg-turbo mesa3d util-linux xorg-libxft xorg-libxinerama
 
 name=fltk
-version=1.3.4-2
+version=1.3.5
 release=1
-source=(http://fltk.org/pub/$name/${version%-*}/$name-$version-source.tar.bz2)
+source=(https://fltk.org/pub/$name/${version%-*}/$name-$version-source.tar.bz2
+	fltk-fix-lib-mess.patch)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--enable-threads \
-		--enable-shared \
-		--enable-xft
+	# https://github.com/fltk/fltk/issues/20
+	patch -p1 -i $SRC/fltk-fix-lib-mess.patch
+
+	mkdir build
+	cd build
+
+	cmake .. \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DFLTK_LIBDIR=/usr/lib \
+		-DOPTION_CREATE_LINKS=ON \
+		-DOPTION_BUILD_SHARED_LIBS=ON \
+		-DOpenGL_GL_PREFERENCE=GLVND \
+		-DOPTION_BUILD_HTML_DOCUMENTATION=OFF
 
 	make
 	make DESTDIR=$PKG install
 
-	chmod a-x $PKG/usr/lib/*.a
+	# example apps and integration files, that are not covered by make install
+	for app in {blocks,checkers,sudoku}; do
+		install -D -m 0755 -t "$PKG/usr/bin/" "bin/examples/$app"
 
-	rm -r $PKG/usr/share/doc
+		install -D -m 0644 "../test/desktop/$app.desktop" \
+			-t "$PKG/usr/share/applications/"
+
+		install -D -m 0644 "../test/desktop/$app-32.png" \
+			"$PKG/usr/share/icons/hicolor/32x32/apps/$app.png"
+
+		install -D -m 0644 "../test/desktop/$app-128.png" \
+			"$PKG/usr/share/icons/hicolor/128x128/apps/$app.png"
+	done
+
+	rm $PKG/usr/include/FL/README.Xcode
 }
