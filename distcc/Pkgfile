@@ -1,41 +1,33 @@
 # Description: A tool to distribute compilations.
 # URL: http://distcc.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Johannes Winkelmann, jw at tks6 dot net
-# Optional: python
+# Optional: python3 gtk avahi
 
 name=distcc
-version=3.1
-release=6
-source=(https://github.com/distcc/distcc/archive/$name-$version.tar.gz
-	distccd
-	distcc-3.1-freedesktop.patch
-	distcc-3.1-python.patch
-	distcc-3.1-argc-fix.patch)
+version=3.3.3
+release=1
+source=(https://github.com/distcc/distcc/releases/download/v$version/$name-$version.tar.gz
+	distccd)
 
 build() {
-	#cd $name-$version
-	cd distcc-distcc-3.1
+	cd $name-$version
+
+[ -e '/usr/lib/pkgconfig/python-3.7.pc' ] || PKGMK_DISTCC+=' --disable-pump-mode'
+[ -e '/usr/lib/pkgconfig/gtk+-2.0.pc' ] || PKGMK_DISTCC+=' --without-gtk'
+[ -e '/usr/lib/pkgconfig/popt.pc' ] || PKGMK_DISTCC+=' --with-included-popt'
 
 	./autogen.sh
 
-	patch -p 1 -i $SRC/distcc-3.1-freedesktop.patch
-	patch -p 1 -i $SRC/distcc-3.1-python.patch
-	patch -p 2 -i $SRC/distcc-3.1-argc-fix.patch
-
-	./configure \
+	./configure ${PKGMK_DISTCC} \
 		--prefix=/usr \
-		--mandir=/usr/share/man \
-		--without-gnome \
-		--without-gtk \
-		--disable-Werror \
-		--with-included-popt
+		--sysconfdir=/etc \
+		--enable-rfc2553 \
+		--disable-Werror
 
 	make
 	make DESTDIR=$PKG install
 
 	# distccd should be in sbin
-	install -d $PKG/usr/sbin
 	mv $PKG/usr/bin/distccd $PKG/usr/sbin/distccd
 
 	# install service
@@ -49,11 +41,11 @@ build() {
 	done
 	cd -
 
-	rm -rf $PKG/usr/share/doc $PKG/usr/etc/default $PKG/usr/etc/distcc
-	rmdir $PKG/usr/etc
+	# cleanup
+	rm -r $PKG/usr/share/doc $PKG/etc/distcc $PKG/etc/default
+	rm $PKG//usr/sbin/update-distcc-symlinks
 
 	# python is required for pump mode
-	if [ "$(prt-get isinst python)" = 'package python is not installed' ]; then
-		rm $PKG/usr/share/man/man1/{pump,include_server}.1
-	fi
+[ -e '/usr/lib/pkgconfig/python-3.7.pc' ] || \
+	rm $PKG/usr/share/man/man1/{pump,include_server}.1.gz
 }
