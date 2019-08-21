@@ -1,0 +1,21 @@
+# Description: Audio Effects for Pulseaudio Applications
+# URL: https://github.com/wwmm/pulseeffects
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: boost desktop-file-utils gst-plugins-bad gtkmm3 itstool libebur128 pulseaudio
+# Optional: calf mda.lv2 rubberband vamp-plugin-sdk zam-plugins zita-convolver libbs2b lilv
+
+name=pulseeffects
+version=4.6.6
+release=1
+source=(https://github.com/wwmm/pulseeffects/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  mkdir build && cd build
+  meson .. \
+    --prefix=/usr \
+    --sysconfdir=/etc
+  ninja
+  DESTDIR=$PKG ninja install
+  rm -fr $PKG/usr/share/{locale,help}
+}
