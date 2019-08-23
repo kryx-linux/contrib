@@ -1,0 +1,31 @@
+# Description: Bluetooth libraries and utilities
+# URL: https://www.bluez.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: alsa-lib dbus glib
+
+name=bluez
+version=5.50
+release=1
+source=(https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
+  bluetoothd bluez-5.50-obexd_without_systemd-1.patch)
+
+build() {
+  cd bluez-$version
+
+  [[ -e /usr/lib/cups ]] && PKGMK_BLUEZ+=" --enable-cups" || PKGMK_BLUEZ+=" --disable-cups"
+  [[ -e /usr/lib/pkgconfig/libical.pc ]] && PKGMK_BLUEZ+=" --enable-obex" || PKGMK_BLUEZ+=" --disable-obex"
+
+  patch -Np1 -i $SRC/bluez-5.50-obexd_without_systemd-1.patch
+  ./configure $PKGMK_BLUEZ \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --libexecdir=/usr/lib/$name \
+    --enable-{a2dp,experimental,library,midi,tools} \
+    --disable-systemd
+  make
+  make DESTDIR=$PKG install
+  install -D -m 0644 src/main.conf $PKG/etc/bluetooth/main.conf
+  install -D -m 0755 $SRC/bluetoothd $PKG/etc/rc.d/bluetoothd
+  rm -rf $PKG/usr/share/man/man1
+}
