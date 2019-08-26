@@ -2,7 +2,6 @@
 # URL:         http://vifm.info
 # Maintainer:  Alexandr Savca, alexandr dot savca89 at gmail dot com
 # Depends on:  ncurses
-# Optional:    bash-completion
 
 name=vifm
 version=0.10.1
@@ -19,10 +18,21 @@ build() {
         make
         make DESTDIR=$PKG install
 
+        # bash completion
         if ! pkginfo -i | grep '^bash-completion '; then
             rm -rf $PKG/usr/share/bash-completion
         fi
 
+        # zsh completion
+        if ! pkginfo -i | grep '^zsh '; then
+            rm -rf $PKG/usr/share/zsh
+        fi
+
+        # remove docs & osx-specific
+        rm -rf $PKG/usr/share/vifm/vim-doc
+        rm -rf $PKG/usr/share/vifm/vim/doc
+        rm -rf $PKG/usr/share/vifm/vifm-help.txt
+        rm -rf $PKG/usr/share/vifm/vifmrc-osx
         rm -rf $PKG/usr/share/vifm/vifm-media-osx
         rm -rf $PKG/usr/share/doc
 }
