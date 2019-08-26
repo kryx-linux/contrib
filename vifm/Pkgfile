@@ -5,9 +5,9 @@
 # Optional:    bash-completion
 
 name=vifm
-version=0.9.1
-release=2
-source=(https://github.com/$name/$name/archive/v$version.tar.gz)
+version=0.10.1
+release=1
+source=(https://github.com/$name/$name/archive/v$version/$name-v$version.tar.gz)
 
 build() {
         cd $name-$version
@@ -23,5 +23,6 @@ build() {
             rm -rf $PKG/usr/share/bash-completion
         fi
 
+        rm -rf $PKG/usr/share/vifm/vifm-media-osx
         rm -rf $PKG/usr/share/doc
 }
