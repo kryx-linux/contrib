@@ -1,11 +1,11 @@
 # Description: Email client from the Mozilla project
 # URL: https://www.thunderbird.net/en-US/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 gtk gtk3 libidl nss rust unzip util-linux xorg-libxt yasm zip
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang gtk gtk3 libidl nss unzip xorg-libxt yasm zip nodejs
 # Optional: sccache
 
 name=thunderbird
-version=60.8.0
+version=68.0
 release=1
 source=(http://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
 	$name.desktop)
@@ -31,7 +31,6 @@ cat <<- EOF > .mozconfig
 	#breaks search:
 	#ac_add_options --enable-system-sqlite
 	ac_add_options --enable-alsa
-	ac_add_options --with-pthreads
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
 	ac_add_options --disable-tests
@@ -43,9 +42,9 @@ cat <<- EOF > .mozconfig
 	ac_add_options --disable-pulseaudio
 	ac_add_options --disable-gconf
 	ac_add_options --enable-calendar
-	ac_add_options --disable-stylo
 EOF
 
+	export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
 	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
 	export MOZBUILD_STATE_PATH="$PKGMK_SOURCE_DIR/.mozbuild"
 
