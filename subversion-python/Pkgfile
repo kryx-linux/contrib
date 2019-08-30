@@ -4,7 +4,7 @@
 # Depends on:  subversion swig
 
 name=subversion-python
-version=1.9.12
+version=1.12.2
 release=1
 source=(https://www.apache.org/dist/subversion/subversion-$version.tar.bz2)
 
@@ -15,10 +15,11 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--disable-nls \
 		--disable-mod-activation \
-		--with-apr=/usr \
-		--with-apr-util=/usr
+		--disable-nls \
+		--disable-static \
+		--with-lz4=internal \
+		--with-utf8proc=internal
 
 	make DESTDIR=$PKG install-swig-py-lib install-swig-py \
 		swig_pydir=/usr/lib/python$PYTHONVERSION/site-packages/libsvn \
