@@ -4,16 +4,16 @@
 # Depends on:  libpcre python docbook-xsl
 
 name=cppcheck
-version=1.88
+version=1.89
 release=1
 source=(https://github.com/danmar/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	make install	SRCDIR=build			\
-			HAVE_RULES=yes			\
-			CFGDIR=/usr/share/cppcheck/cfg	\
+	make install	HAVE_RULES=yes	\
+			MATCHCOMPILER=yes	\
+			FILESDIR=/usr/share/cppcheck	\
 			DESTDIR=$PKG
 
 	make man DB2MAN=/usr/share/xml/docbook/xsl-stylesheets/manpages/docbook.xsl
