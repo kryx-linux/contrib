@@ -1,0 +1,19 @@
+# Description: An open-source formatting library
+# URL: http://fmtlib.net/latest/index.html
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Packager: Matt Housh, jaeger at crux dot ninja
+# Depends on: cmake
+
+name=fmt
+version=6.0.0
+release=1
+source=(https://github.com/fmtlib/$name/archive/$version/$name-$version.tar.gz)
+
+build() {
+  mkdir build; cd build
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    ../$name-$version
+  make
+  make DESTDIR=$PKG install
+}
