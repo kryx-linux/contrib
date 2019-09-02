@@ -4,14 +4,12 @@
 # Depends on: gzip lzo xz
 
 name=squashfs-tools
-version=4.3
-release=2
+version=4.4
+release=1
 source=(http://download.sourceforge.net/squashfs/squashfs${version}.tar.gz)
 
 build() {
 	cd squashfs${version}/$name
-	sed -i -e '/^#include <ctype.h>/a #include <sys/sysmacros.h>' \
-		{mk,un}squashfs.c
 	make GZIP_SUPPORT=1 LZO_SUPPORT=1 XZ_SUPPORT=1
 	make install INSTALL_DIR=$PKG/sbin
 }
