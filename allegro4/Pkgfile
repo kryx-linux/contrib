@@ -1,22 +1,26 @@
 # Description: A multi-platform game programming library for C/C++.
-# URL: http://alleg.sourceforge.net/
+# URL: https://liballeg.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: sten, nick dot steeves at shaw dot ca
 # Depends on: alsa-lib glu libidn libpng libvorbis xorg-libxcursor xorg-libxpm xorg-libxxf86dga
 
 name=allegro4
-version=4.4.2
-release=2
-source=(http://download.sourceforge.net/alleg/allegro/$version/allegro-$version.tar.gz)
+version=4.4.3.1
+release=1
+source=(https://github.com/liballeg/allegro5/releases/download/$version/allegro-$version.tar.gz)
 
 build() {
 	cd allegro-$version
 
-	cmake \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release .
+	mkdir build
+	cd build
 
-	make
-	make DESTDIR=$PKG install
+	cmake .. \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-GNinja
+
+	ninja -j ${JOBS:-1}
+	DESTDIR=$PKG ninja install
+
 	rm -r $PKG/usr/doc
 }
