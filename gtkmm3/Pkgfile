@@ -1,6 +1,7 @@
 # Description: A C++ wrapper for GTK3+
 # URL: http://www.gtkmm.org/en/
-# Maintainer: Pedja, predivan at mts dot rs
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Packager: Pedja, predivan at mts dot rs
 # Depends on: glibmm pangomm cairomm gtk3 atkmm
 
 name=gtkmm3
@@ -9,9 +10,9 @@ release=1
 source=(https://download.gnome.org/sources/gtkmm/${version%.*}/gtkmm-$version.tar.xz)
 
 build() {
-    cd gtkmm-$version
-    ./configure --prefix=/usr
-    make
-    make DESTDIR=$PKG install
-    rm -r $PKG/usr/share/doc
+  cd gtkmm-$version
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
+  rm -r $PKG/usr/share/doc
 }
