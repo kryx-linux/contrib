@@ -5,14 +5,12 @@
 # Depends on: cmake
 
 name=pugixml
-version=1.9
-release=2
-source=(http://github.com/zeux/pugixml/releases/download/v$version/$name-$version.tar.gz
-  pkg-config.patch)
+version=1.10
+release=1
+source=(http://github.com/zeux/pugixml/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  patch -p1 -i $SRC/pkg-config.patch
 
   mkdir -p build && cd build
   cmake \
@@ -22,6 +20,4 @@ build() {
     -DBUILD_SHARED_LIBS=ON ../
   make
   make DESTDIR=$PKG install
-  # weird
-  # touch $PKG/usr/include/*.hpp -r $PKG/usr/lib/cmake/pugixml/pugixml-config.cmake
 }
