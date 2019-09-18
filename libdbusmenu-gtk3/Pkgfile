@@ -5,7 +5,7 @@
 
 name=libdbusmenu-gtk3
 version=18.10
-release=1
+release=2
 source=(http://cdn-fastly.deb.debian.org/debian/pool/main/libd/libdbusmenu/libdbusmenu_18.10.20180917~bzr490+repack1.orig.tar.xz
 0001_no-deprecated-gnome-common-macros.patch)
 
@@ -15,6 +15,7 @@ build() {
   sed -e 's/gtkdocize || exit 1//g' -i autogen.sh
   sed -e 's/--enable-gtk-doc//g' -i autogen.sh
   sed -e 's/AM_MAINTAINER_MODE//g' -i configure.ac
+  export CFLAGS+=" -O2 -Wno-error"
   ./autogen.sh --prefix=/usr \
     --sysconfdir=/etc \
     --libexecdir=/usr/lib/$name \
