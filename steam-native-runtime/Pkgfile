@@ -6,19 +6,26 @@
 
 name=steam-native-runtime
 version=0.1
-release=2
-source=()
+release=3
+source=(steam-native.sh)
 
 build() {
-  install -d $PKG/usr/lib/steam
+  cp /usr/share/applications/steam.desktop steam-native.desktop
+  sed -r 's|(Name=Steam) \(Runtime\)|\1 (Native)|' -i steam-native.desktop
+  sed -r 's|(/usr/bin/steam)-runtime|\1-native|' -i steam-native.desktop
+
+  install -Dm 644 steam-native.desktop -t ${PKG}/usr/share/applications
+  install -Dm 755 steam-native.sh ${PKG}/usr/bin/steam-native
+
+  install -d ${PKG}/usr/lib/steam
   ln -s /usr/lib/libcurl.so.3 ${PKG}/usr/lib/steam/libcurl.so.3
-  ln -s /usr/lib/libcurl.so.4.5.0 ${PKG}/usr/lib/steam/libcurl.so.4
-  ln -s /usr/lib/libcurl.so.4.5.0 ${PKG}/usr/lib/steam/libcurl.so.4.5.0
+  ln -s /usr/lib/libcurl.so.4.2.0 ${PKG}/usr/lib/steam/libcurl.so.4
+  ln -s /usr/lib/libcurl.so.4.2.0 ${PKG}/usr/lib/steam/libcurl.so.4.2.0
 
   install -d ${PKG}/usr/lib32/steam
   ln -s /usr/lib32/libcurl.so.3 ${PKG}/usr/lib32/steam/libcurl.so.3
-  ln -s /usr/lib32/libcurl.so.4.5.0 ${PKG}/usr/lib32/steam/libcurl.so.4
-  ln -s /usr/lib32/libcurl.so.4.5.0 ${PKG}/usr/lib32/steam/libcurl.so.4.5.0
+  ln -s /usr/lib32/libcurl.so.4.2.0 ${PKG}/usr/lib32/steam/libcurl.so.4
+  ln -s /usr/lib32/libcurl.so.4.2.0 ${PKG}/usr/lib32/steam/libcurl.so.4.2.0
 
   # Apparently libpcre.so.3 is just a Debian-specific version of libpcre.so.1
   # https://sources.debian.org/src/pcre3/2:8.39-12/debian/README.Debian/
