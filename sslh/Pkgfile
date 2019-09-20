@@ -4,7 +4,7 @@
 # Depends on:  libconfig
 
 name=sslh
-version=1.18
+version=1.20
 release=1
 source=(http://www.rutschle.net/tech/$name/$name-v${version}.tar.gz sslh.rc)
 
@@ -16,6 +16,6 @@ build () {
 
   make -j1
 
-  install -D -m 0644 $name.8.gz $PKG/usr/man/man8/$name.8.gz
+  install -D -m 0644 $name.8.gz $PKG/usr/share/man8/$name.8.gz
   install -D -m 0755 $name-select $PKG/usr/sbin/$name
 }
