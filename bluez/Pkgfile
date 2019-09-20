@@ -4,7 +4,7 @@
 # Depends on: alsa-lib dbus glib
 
 name=bluez
-version=5.50
+version=5.51
 release=1
 source=(https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
   bluetoothd bluez-5.50-obexd_without_systemd-1.patch)
@@ -15,7 +15,7 @@ build() {
   [[ -e /usr/lib/cups ]] && PKGMK_BLUEZ+=" --enable-cups" || PKGMK_BLUEZ+=" --disable-cups"
   [[ -e /usr/lib/pkgconfig/libical.pc ]] && PKGMK_BLUEZ+=" --enable-obex" || PKGMK_BLUEZ+=" --disable-obex"
 
-  patch -Np1 -i $SRC/bluez-5.50-obexd_without_systemd-1.patch
+  #patch -Np1 -i $SRC/bluez-5.50-obexd_without_systemd-1.patch
   ./configure $PKGMK_BLUEZ \
     --prefix=/usr \
     --sysconfdir=/etc \
