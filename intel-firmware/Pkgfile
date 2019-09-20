@@ -1,0 +1,14 @@
+# Description: Microcode update for Intel CPUs
+# URL: https://downloadcenter.intel.com/download/27591/Linux-Processor-Microcode-Data-File
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=intel-firmware
+version=20190918
+release=1
+source=(https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/microcode-$version.tar.gz)
+
+build() {
+  cd Intel-Linux-Processor-Microcode-Data-Files-microcode-$version
+  install -Dm755 -t $PKG/lib/firmware/intel-ucode intel-ucode/*
+}
