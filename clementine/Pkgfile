@@ -2,36 +2,18 @@
 # URL: http://www.clementine-player.org/
 # Packager: Chris Farrell, timcowchip at gmail dot com
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: boost crypto++ glew glu gst-plugins-bad gst-plugins-good gst-plugins-ugly libechonest protobuf
+# Depends on: boost crypto++ glew gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qt5
 
 name=clementine
-version=1.3.1
-release=3
-source=(https://github.com/clementine-player/Clementine/archive/$version.tar.gz
-	https://github.com/clementine-player/Clementine/pull/5974/commits/f371fcb89f1441b50eab5015fc1bdcbd630d19ee.patch
-	https://github.com/clementine-player/Clementine/commit/8a6cc8b5069265e1e92e22def985e22c5955e503.patch
-	https://github.com/clementine-player/Clementine/commit/75f9439843a0e9cdc26cd739d5e1dbd93bd974bc.patch
-	https://github.com/clementine-player/Clementine/commit/ddfa5e63f1ef0e243a007efbe576fceb9b2442e8.patch
-	clementine-gcc6.patch
-	clementine-1.3.1-chromaprint-1.4.0.patch)
+version=1.3.1.r771.75f18dab2
+release=1
+source=(https://github.com/clementine-player/Clementine/archive/75f18dab23f0842713a4200a7e362efd51b12e31.zip
+	clementine-gcc6.patch)
 
 build() {
-	cd Clementine-$version
+	cd Clementine-75f18dab23f0842713a4200a7e362efd51b12e31
 
 	patch -p1 -i $SRC/clementine-gcc6.patch
-	patch -p1 -i $SRC/clementine-1.3.1-chromaprint-1.4.0.patch
-
-	# [PATCH] Fix compilation with crypto++ >= 6.0.0
-	patch -p1 -i $SRC/f371fcb89f1441b50eab5015fc1bdcbd630d19ee.patch
-
-	# [PATCH] Add missing <functional> includes (#5630)
-	patch -p1 -i $SRC/8a6cc8b5069265e1e92e22def985e22c5955e503.patch
-
-	# [PATCH 1/3] disconnect GVolumeMonitor signals from GioLister before destroying it fixes #5369
-	patch -p1 -i $SRC/75f9439843a0e9cdc26cd739d5e1dbd93bd974bc.patch
-
-	# [PATCH] Fix channels loading for DI.fm services after API domain changes (#6023)
-	patch -p1 -i $SRC/ddfa5e63f1ef0e243a007efbe576fceb9b2442e8.patch
 
 	install -d build
 	cd build
