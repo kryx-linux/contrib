@@ -29,6 +29,8 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/Salsa20.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/Salsa20.pyi
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_ARC4.cpython-37m-x86_64-linux-gnu.so
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_EKSBlowfish.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_EKSBlowfish.pyi
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_Salsa20.cpython-37m-x86_64-linux-gnu.so
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__init__.pyi (EMPTY)
@@ -57,6 +59,8 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/PKCS1_v1_5.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/Salsa20.cpython-37.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/Salsa20.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/_EKSBlowfish.cpython-37.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/_EKSBlowfish.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/__init__.cpython-37.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/__init__.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/_mode_cbc.cpython-37.opt-1.pyc
@@ -115,6 +119,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/__pycache__/
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_raw_des.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_raw_des3.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_raw_ecb.cpython-37m-x86_64-linux-gnu.so
+-rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_raw_eksblowfish.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_raw_ocb.cpython-37m-x86_64-linux-gnu.so
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Cipher/_raw_ofb.cpython-37m-x86_64-linux-gnu.so
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Hash/
@@ -314,7 +319,11 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/__pycache_
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/__pycache__/RSA.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/__pycache__/__init__.cpython-37.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/__pycache__/__init__.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/__pycache__/_openssh.cpython-37.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/__pycache__/_openssh.cpython-37.pyc
 -rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/_ec_ws.cpython-37m-x86_64-linux-gnu.so
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/_openssh.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/PublicKey/_openssh.pyi
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/Random/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Random/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/Random/__init__.pyi
@@ -688,8 +697,13 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/t
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_ecparams.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_enc_aes128.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_enc_aes192.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_enc_aes256.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_enc_aes256_gcm.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_enc_des3.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_openssh.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_openssh_old.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_openssh_pwd.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_openssh_pwd_old.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_p8.der
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_p8.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p256_private_p8_clear.der
@@ -706,8 +720,13 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/t
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_enc_aes128.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_enc_aes192.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_enc_aes256.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_enc_aes256_gcm.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_enc_des3.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_openssh.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_openssh_old.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_openssh_pwd.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_openssh_pwd_old.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_p8.der
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_p8.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p384_private_p8_clear.der
@@ -724,8 +743,13 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/t
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_enc_aes128.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_enc_aes192.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_enc_aes256.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_enc_aes256_gcm.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_enc_des3.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_openssh.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_openssh_old.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_openssh_pwd.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_openssh_pwd_old.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_p8.der
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_p8.pem
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/ecc_p521_private_p8_clear.der
@@ -746,6 +770,15 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/t
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/point-at-infinity.org-P256.txt
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/point-at-infinity.org-P384.txt
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/ECC/point-at-infinity.org-P521.txt
+drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/gen_rsa_2048.sh
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/openssl_version.txt
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/rsa2048_private.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/rsa2048_private_openssh.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/rsa2048_private_openssh_old.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/rsa2048_private_openssh_pwd.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/rsa2048_private_openssh_pwd_old.pem
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/PublicKey/test_vectors/RSA/rsa2048_public_openssh.txt
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/Random/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/Random/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/SelfTest/Random/__pycache__/
@@ -918,9 +951,9 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/Crypto/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/__pycache__/__init__.cpython-37.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/__pycache__/__init__.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/Crypto/py.typed (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.8.2-py3.7.egg-info/
--rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.8.2-py3.7.egg-info/PKG-INFO
--rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.8.2-py3.7.egg-info/SOURCES.txt
--rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.8.2-py3.7.egg-info/dependency_links.txt
--rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.8.2-py3.7.egg-info/not-zip-safe
--rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.8.2-py3.7.egg-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.9.0-py3.7.egg-info/
+-rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.9.0-py3.7.egg-info/PKG-INFO
+-rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.9.0-py3.7.egg-info/SOURCES.txt
+-rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.9.0-py3.7.egg-info/dependency_links.txt
+-rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.9.0-py3.7.egg-info/not-zip-safe
+-rw-rw-r--	root/root	usr/lib/python3.7/site-packages/pycryptodome-3.9.0-py3.7.egg-info/top_level.txt
