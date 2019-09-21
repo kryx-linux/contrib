@@ -5,21 +5,18 @@
 
 name=spdlog
 version=1.4.0
-release=1
+release=2
 source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
   mkdir build
   cd build
-  cmake .. \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DSPDLOG_FMT_EXTERNAL=ON \
-    -DSPDLOG_BUILD_EXAMPLES=OFF \
-    -DSPDLOG_BUILD_BENCH=OFF \
-    -DSPDLOG_BUILD_TESTS=OFF
-  make
-  make DESTDIR=$PKG install
+  meson .. \
+    --prefix=/usr \
+    -D external_fmt=true \
+    -D enable_examples=false \
+    -D library_type=static
+  ninja
+  DESTDIR=$PKG ninja install
 }
