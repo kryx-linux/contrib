@@ -4,16 +4,18 @@
 # Depends on: libevent pciutils qtkeychain qtwebengine qtwebkit
 
 name=nextcloud-client
-version=2.5.3
+version=2.6.0
 release=1
-source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/nextcloud/desktop/archive/v2.6.0/$name-$version.tar.gz)
 
 build() {
   cd desktop-$version
-  cmake -DCMAKE_INSTALL_PREFIX=/usr \
+  mkdir build ; cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_SYSCONFDIR=/etc/nextcloud
+    -DCMAKE_INSTALL_SYSCONFDIR=/etc/nextcloud \
+    -DNO_SHIBBOLETH=1
   make
   make DESTDIR=$PKG install
   rm -fr $PKG/usr/share/nextcloud/i18n
