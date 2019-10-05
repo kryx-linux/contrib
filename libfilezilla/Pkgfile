@@ -1,21 +1,21 @@
 # Description: ftp client
 # URL:         http://filezilla-project.org
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  wxgtk gnutls xdg-utils tinyxml
+# Depends on:  gnutls libidn2
 
 name=libfilezilla
-version=0.9.1
+version=0.18.2
 release=1
-source=(http://download.filezilla-project.org/${name}/${name}-${version}.tar.bz2)
+source=(https://download.filezilla-project.org/${name}/${name}-${version}.tar.bz2)
 
 build() {
-    cd $name-$version
-    ./configure \
-        --prefix=/usr \
-        --mandir=/usr/man #\
-        #--disable-static \
-    make
-    make DESTDIR=$PKG install
-    rm -rf $PKG/usr/share/locale
+  cd $name-$version
+  export CXX=clang++
+  export CC=clang
+  ./configure \
+    --prefix=/usr \
+    --disable-static
+  make
+  make DESTDIR=$PKG install
+  rm -rf $PKG/usr/share/locale
 }
