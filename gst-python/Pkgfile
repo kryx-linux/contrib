@@ -6,13 +6,25 @@
 ## python3-gobject is required for pkgconfig and headers
 
 name=gst-python
-version=1.16.0
+version=1.16.1
 release=1
 source=(https://gstreamer.freedesktop.org/src/gst-python/gst-python-$version.tar.xz)
 
 build() {
 	cd gst-python-$version
-	PYTHON=/usr/bin/python ./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+
+	meson build \
+		--prefix=/usr \
+		--libexecdir=/usr/lib \
+		-D buildtype=release \
+		-D python=/usr/bin/python
+
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
+
+	/usr/bin/python -m compileall -d /usr/lib $PKG/usr/lib
+	/usr/bin/python -O -m compileall -d /usr/lib $PKG/usr/lib
+
+	# Remove conflicting loader with gst-python3
+	rm -r $PKG/usr/lib/gstreamer-1.0
 }
