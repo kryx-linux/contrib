@@ -4,26 +4,22 @@
 # Depends on: gst-plugins-base liba52 libcdio libdvdread libmpeg2 opencore-amr x264
 
 name=gst-plugins-ugly
-version=1.16.0
+version=1.16.1
 release=1
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
-	./configure \
+	meson build \
 		--prefix=/usr \
-		--disable-debug \
-		--disable-nls \
-		--disable-dependency-tracking \
-		--disable-valgrind \
-		--disable-examples
+		--libexecdir=/usr/lib \
+		-D buildtype=release \
+		-D gtk_doc=disabled \
+		-D nls=disabled \
+		-D package-name="GStreamer (CRUX Linux)" \
+		-D package-origin="https://crux.nu/"
 
-	# fight unused direct deps
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-
-	make
-	make DESTDIR=$PKG install
-
-	rm -r $PKG/usr/share/gtk-doc
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
 }
