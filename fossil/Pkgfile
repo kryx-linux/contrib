@@ -1,11 +1,11 @@
 # Description: Simple distributed SCM
 # URL:         https://www.fossil-scm.org/
 # Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
-# Depends on:  openssl zlib
+# Depends on:  openssl sqlite3 zlib
 # Optional:    fuse
 
 name=fossil
-version=2.9
+version=2.10
 release=1
 source=(https://www.fossil-scm.org/index.html/uv/$name-src-$version.tar.gz)
 
@@ -14,9 +14,10 @@ build() {
 
 	./configure \
 		--prefix=/usr \
+		--disable-internal-sqlite \
+		--json \
 		--with-th1-docs \
-		--with-th1-hooks \
-		--json
+		--with-th1-hooks
 
 	make
 	make install DESTDIR=$PKG
