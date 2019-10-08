@@ -12,6 +12,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/initdb
 -rwxr-xr-x	root/root	usr/bin/pg_archivecleanup
 -rwxr-xr-x	root/root	usr/bin/pg_basebackup
+-rwxr-xr-x	root/root	usr/bin/pg_checksums
 -rwxr-xr-x	root/root	usr/bin/pg_config
 -rwxr-xr-x	root/root	usr/bin/pg_controldata
 -rwxr-xr-x	root/root	usr/bin/pg_ctl
@@ -26,7 +27,6 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/pg_test_fsync
 -rwxr-xr-x	root/root	usr/bin/pg_test_timing
 -rwxr-xr-x	root/root	usr/bin/pg_upgrade
--rwxr-xr-x	root/root	usr/bin/pg_verify_checksums
 -rwxr-xr-x	root/root	usr/bin/pg_waldump
 -rwxr-xr-x	root/root	usr/bin/pgbench
 -rwxr-xr-x	root/root	usr/bin/postgres
@@ -108,6 +108,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/access/
 -rw-r--r--	root/root	usr/include/postgresql/server/access/parallel.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/printsimple.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/printtup.h
+-rw-r--r--	root/root	usr/include/postgresql/server/access/relation.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/reloptions.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/relscan.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/rewriteheap.h
@@ -123,6 +124,8 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/access/
 -rw-r--r--	root/root	usr/include/postgresql/server/access/stratnum.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/subtrans.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/sysattr.h
+-rw-r--r--	root/root	usr/include/postgresql/server/access/table.h
+-rw-r--r--	root/root	usr/include/postgresql/server/access/tableam.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/timeline.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/transam.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/tsmapi.h
@@ -261,6 +264,8 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/catalog/
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_statistic_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_statistic_ext.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_statistic_ext_d.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_statistic_ext_data.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_statistic_ext_data_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_subscription.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_subscription_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_subscription_rel.h
@@ -336,6 +341,9 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/common/
 -rw-r--r--	root/root	usr/include/postgresql/server/common/int128.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/ip.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/keywords.h
+-rw-r--r--	root/root	usr/include/postgresql/server/common/kwlookup.h
+-rw-r--r--	root/root	usr/include/postgresql/server/common/link-canary.h
+-rw-r--r--	root/root	usr/include/postgresql/server/common/logging.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/md5.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/pg_lzcompress.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/relpath.h
@@ -343,13 +351,13 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/common/
 -rw-r--r--	root/root	usr/include/postgresql/server/common/saslprep.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/scram-common.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/sha2.h
+-rw-r--r--	root/root	usr/include/postgresql/server/common/shortest_dec.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/string.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/unicode_norm.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/unicode_norm_table.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/username.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/datatype/
 -rw-r--r--	root/root	usr/include/postgresql/server/datatype/timestamp.h
--rw-r--r--	root/root	usr/include/postgresql/server/dynloader.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/executor/
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/execExpr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/executor/execParallel.h
@@ -433,6 +441,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/lib/
 -rw-r--r--	root/root	usr/include/postgresql/server/lib/dshash.h
 -rw-r--r--	root/root	usr/include/postgresql/server/lib/hyperloglog.h
 -rw-r--r--	root/root	usr/include/postgresql/server/lib/ilist.h
+-rw-r--r--	root/root	usr/include/postgresql/server/lib/integerset.h
 -rw-r--r--	root/root	usr/include/postgresql/server/lib/knapsack.h
 -rw-r--r--	root/root	usr/include/postgresql/server/lib/pairingheap.h
 -rw-r--r--	root/root	usr/include/postgresql/server/lib/rbtree.h
@@ -441,6 +450,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/lib/
 drwxr-xr-x	root/root	usr/include/postgresql/server/libpq/
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/auth.h
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/be-fsstubs.h
+-rw-r--r--	root/root	usr/include/postgresql/server/libpq/be-gssapi-common.h
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/crypt.h
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/hba.h
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/ifaddr.h
@@ -466,16 +476,18 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/nodes/
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/nodes.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/params.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/parsenodes.h
+-rw-r--r--	root/root	usr/include/postgresql/server/nodes/pathnodes.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/pg_list.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/plannodes.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/primnodes.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/print.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/readfuncs.h
--rw-r--r--	root/root	usr/include/postgresql/server/nodes/relation.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/replnodes.h
+-rw-r--r--	root/root	usr/include/postgresql/server/nodes/supportnodes.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/tidbitmap.h
 -rw-r--r--	root/root	usr/include/postgresql/server/nodes/value.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/optimizer/
+-rw-r--r--	root/root	usr/include/postgresql/server/optimizer/appendinfo.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/clauses.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/cost.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/geqo.h
@@ -487,7 +499,9 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/optimizer/
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/geqo_random.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/geqo_recombination.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/geqo_selection.h
+-rw-r--r--	root/root	usr/include/postgresql/server/optimizer/inherit.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/joininfo.h
+-rw-r--r--	root/root	usr/include/postgresql/server/optimizer/optimizer.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/orclauses.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/paramassign.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/pathnode.h
@@ -496,12 +510,10 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/optimizer/
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/plancat.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/planmain.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/planner.h
--rw-r--r--	root/root	usr/include/postgresql/server/optimizer/predtest.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/prep.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/restrictinfo.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/subselect.h
 -rw-r--r--	root/root	usr/include/postgresql/server/optimizer/tlist.h
--rw-r--r--	root/root	usr/include/postgresql/server/optimizer/var.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/parser/
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/analyze.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/gram.h
@@ -529,6 +541,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/parser/
 drwxr-xr-x	root/root	usr/include/postgresql/server/partitioning/
 -rw-r--r--	root/root	usr/include/postgresql/server/partitioning/partbounds.h
 -rw-r--r--	root/root	usr/include/postgresql/server/partitioning/partdefs.h
+-rw-r--r--	root/root	usr/include/postgresql/server/partitioning/partdesc.h
 -rw-r--r--	root/root	usr/include/postgresql/server/partitioning/partprune.h
 -rw-r--r--	root/root	usr/include/postgresql/server/pg_config.h
 -rw-r--r--	root/root	usr/include/postgresql/server/pg_config_ext.h
@@ -564,6 +577,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/port/atomics/
 -rw-r--r--	root/root	usr/include/postgresql/server/port/linux.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port/netbsd.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port/openbsd.h
+-rw-r--r--	root/root	usr/include/postgresql/server/port/pg_bitutils.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port/pg_bswap.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port/pg_crc32c.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port/solaris.h
@@ -653,15 +667,18 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/snowball/libstemmer/
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_finnish.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_french.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_german.h
--rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_hungarian.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_indonesian.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_irish.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_italian.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_norwegian.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_porter.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_portuguese.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_spanish.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_1_swedish.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_2_hungarian.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_ISO_8859_2_romanian.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_KOI8_R_russian.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_arabic.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_danish.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_dutch.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_english.h
@@ -669,7 +686,11 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/snowball/libstemmer/
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_french.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_german.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_hungarian.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_indonesian.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_irish.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_italian.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_lithuanian.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_nepali.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_norwegian.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_porter.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_portuguese.h
@@ -677,6 +698,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/snowball/libstemmer/
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_russian.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_spanish.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_swedish.h
+-rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_tamil.h
 -rw-r--r--	root/root	usr/include/postgresql/server/snowball/libstemmer/stem_UTF_8_turkish.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/statistics/
 -rw-r--r--	root/root	usr/include/postgresql/server/statistics/extended_stats_internal.h
@@ -711,6 +733,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/storage/
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/lockdefs.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/lwlock.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/lwlocknames.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/md.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/off.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/pg_sema.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/pg_shmem.h
@@ -735,6 +758,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/storage/
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/spin.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/standby.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/standbydefs.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/sync.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/tcop/
 -rw-r--r--	root/root	usr/include/postgresql/server/tcop/deparse_utility.h
 -rw-r--r--	root/root	usr/include/postgresql/server/tcop/dest.h
@@ -758,7 +782,6 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/arrayaccess.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/ascii.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/attoptcache.h
--rw-r--r--	root/root	usr/include/postgresql/server/utils/backend_random.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/builtins.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/bytea.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/cash.h
@@ -769,12 +792,12 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/datum.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/dsa.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/dynahash.h
--rw-r--r--	root/root	usr/include/postgresql/server/utils/dynamic_loader.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/elog.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/errcodes.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/evtcache.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/expandeddatum.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/expandedrecord.h
+-rw-r--r--	root/root	usr/include/postgresql/server/utils/float.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/fmgroids.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/fmgrprotos.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/fmgrtab.h
@@ -793,11 +816,11 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/json.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/jsonapi.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/jsonb.h
+-rw-r--r--	root/root	usr/include/postgresql/server/utils/jsonpath.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/logtape.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/lsyscache.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/memdebug.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/memutils.h
--rw-r--r--	root/root	usr/include/postgresql/server/utils/nabstime.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/numeric.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/palloc.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/partcache.h
@@ -833,7 +856,6 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/syscache.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/timeout.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/timestamp.h
--rw-r--r--	root/root	usr/include/postgresql/server/utils/tqual.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/tuplesort.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/tuplestore.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/typcache.h
@@ -850,24 +872,26 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/sqlda.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libecpg.a
-lrwxrwxrwx	root/root	usr/lib/libecpg.so -> libecpg.so.6.11
-lrwxrwxrwx	root/root	usr/lib/libecpg.so.6 -> libecpg.so.6.11
--rwxr-xr-x	root/root	usr/lib/libecpg.so.6.11
+lrwxrwxrwx	root/root	usr/lib/libecpg.so -> libecpg.so.6.12
+lrwxrwxrwx	root/root	usr/lib/libecpg.so.6 -> libecpg.so.6.12
+-rwxr-xr-x	root/root	usr/lib/libecpg.so.6.12
 -rw-r--r--	root/root	usr/lib/libecpg_compat.a
-lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so -> libecpg_compat.so.3.11
-lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so.3 -> libecpg_compat.so.3.11
--rwxr-xr-x	root/root	usr/lib/libecpg_compat.so.3.11
+lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so -> libecpg_compat.so.3.12
+lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so.3 -> libecpg_compat.so.3.12
+-rwxr-xr-x	root/root	usr/lib/libecpg_compat.so.3.12
 -rw-r--r--	root/root	usr/lib/libpgcommon.a
+-rw-r--r--	root/root	usr/lib/libpgcommon_shlib.a
 -rw-r--r--	root/root	usr/lib/libpgfeutils.a
 -rw-r--r--	root/root	usr/lib/libpgport.a
+-rw-r--r--	root/root	usr/lib/libpgport_shlib.a
 -rw-r--r--	root/root	usr/lib/libpgtypes.a
-lrwxrwxrwx	root/root	usr/lib/libpgtypes.so -> libpgtypes.so.3.11
-lrwxrwxrwx	root/root	usr/lib/libpgtypes.so.3 -> libpgtypes.so.3.11
--rwxr-xr-x	root/root	usr/lib/libpgtypes.so.3.11
+lrwxrwxrwx	root/root	usr/lib/libpgtypes.so -> libpgtypes.so.3.12
+lrwxrwxrwx	root/root	usr/lib/libpgtypes.so.3 -> libpgtypes.so.3.12
+-rwxr-xr-x	root/root	usr/lib/libpgtypes.so.3.12
 -rw-r--r--	root/root	usr/lib/libpq.a
-lrwxrwxrwx	root/root	usr/lib/libpq.so -> libpq.so.5.11
-lrwxrwxrwx	root/root	usr/lib/libpq.so.5 -> libpq.so.5.11
--rwxr-xr-x	root/root	usr/lib/libpq.so.5.11
+lrwxrwxrwx	root/root	usr/lib/libpq.so -> libpq.so.5.12
+lrwxrwxrwx	root/root	usr/lib/libpq.so.5 -> libpq.so.5.12
+-rwxr-xr-x	root/root	usr/lib/libpq.so.5.12
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libecpg.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libecpg_compat.pc
@@ -931,6 +955,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/oid2name.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_archivecleanup.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_basebackup.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/pg_checksums.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_config.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_controldata.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_ctl.1.gz
@@ -946,7 +971,6 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/pg_test_fsync.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_test_timing.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_upgrade.1.gz
--rw-r--r--	root/root	usr/share/man/man1/pg_verify_checksums.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pg_waldump.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/pgbench.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/postgres.1.gz
@@ -957,6 +981,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/vacuumlo.1.gz
 drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/SPI_commit.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/SPI_commit_and_chain.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_connect.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_connect_ext.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_copytuple.3.gz
@@ -1001,6 +1026,7 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/SPI_result_code_string.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_returntuple.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_rollback.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/SPI_rollback_and_chain.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_saveplan.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_scroll_cursor_fetch.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/SPI_scroll_cursor_move.3.gz
@@ -1211,7 +1237,6 @@ drwxr-xr-x	root/root	usr/share/man/man7/
 -rw-r--r--	root/root	usr/share/man/man7/VALUES.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/WITH.7.gz
 drwxr-xr-x	root/root	usr/share/postgresql/
--rw-r--r--	root/root	usr/share/postgresql/conversion_create.sql
 -rw-r--r--	root/root	usr/share/postgresql/errcodes.txt
 drwxr-xr-x	root/root	usr/share/postgresql/extension/
 -rw-r--r--	root/root	usr/share/postgresql/extension/plpgsql--1.0.sql
@@ -1226,7 +1251,6 @@ drwxr-xr-x	root/root	usr/share/postgresql/extension/
 -rw-r--r--	root/root	usr/share/postgresql/postgres.shdescription
 -rw-r--r--	root/root	usr/share/postgresql/postgresql.conf.sample
 -rw-r--r--	root/root	usr/share/postgresql/psqlrc.sample
--rw-r--r--	root/root	usr/share/postgresql/recovery.conf.sample
 -rw-r--r--	root/root	usr/share/postgresql/snowball_create.sql
 -rw-r--r--	root/root	usr/share/postgresql/sql_features.txt
 -rw-r--r--	root/root	usr/share/postgresql/system_views.sql
@@ -1875,6 +1899,7 @@ drwxr-xr-x	root/root	usr/share/postgresql/tsearch_data/
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/ispell_sample.affix
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/ispell_sample.dict
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/italian.stop
+-rw-r--r--	root/root	usr/share/postgresql/tsearch_data/nepali.stop
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/norwegian.stop
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/portuguese.stop
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/russian.stop
