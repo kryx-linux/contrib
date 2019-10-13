@@ -1,23 +1,26 @@
 # Description: DVD authoring tools.
 # URL: http://dvdauthor.sourceforge.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Matt Housh, jaeger at morpheus dot net
 # Depends on: freetype fribidi libdvdnav libxml2
+# Optional: imagemagick
 
 name=dvdauthor
-version=0.7.1
-release=2
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
-	dvdauthor-0.7.1-glibc220.patch)
+version=0.7.2
+release=1
+source=(https://sourceforge.net/projects/$name/files/$name-$version.tar.gz
+	dvdauthor-freetype_pkgconfig.patch
+	dvdauthor-0.7.2-imagemagick7.patch)
 
 build() {
 	cd $name
 
-	patch -p1 -i $SRC/dvdauthor-0.7.1-glibc220.patch
+	patch -p1 -i $SRC/dvdauthor-freetype_pkgconfig.patch
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
+	prt-get isinst imagemagick && patch -p1 -i $SRC/dvdauthor-0.7.2-imagemagick7.patch
+
+	autoreconf -vi
+
+	./configure --prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
