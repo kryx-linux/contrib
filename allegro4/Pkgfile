@@ -4,12 +4,28 @@
 # Depends on: alsa-lib glu libidn libpng libvorbis xorg-libxcursor xorg-libxpm xorg-libxxf86dga
 
 name=allegro4
-version=4.4.3.1
+version=4.4.2
 release=1
-source=(https://github.com/liballeg/allegro5/releases/download/$version/allegro-$version.tar.gz)
+source=(https://github.com/liballeg/allegro5/releases/download/$version/allegro-$version.tar.gz
+	allegro-4.4.2-GLX_RGBA_FLOAT_BIT.patch
+	allegro-4.4.2-Werror-format-security.patch
+	allegro-4.4.2-glibc228.patch
+	allegro-4.4.2-rpath.patch
+	allegro-4.4.2-shared.patch
+	allegro-4.4.2-static-func.patch
+	allegro-4.4.2-underlink.patch
+)
 
 build() {
 	cd allegro-$version
+
+	patch -p1 -i $SRC/allegro-4.4.2-GLX_RGBA_FLOAT_BIT.patch
+	patch -p1 -i $SRC/allegro-4.4.2-Werror-format-security.patch
+	patch -p1 -i $SRC/allegro-4.4.2-glibc228.patch
+	patch -p1 -i $SRC/allegro-4.4.2-rpath.patch
+	patch -p1 -i $SRC/allegro-4.4.2-shared.patch
+	patch -p1 -i $SRC/allegro-4.4.2-static-func.patch
+	patch -p1 -i $SRC/allegro-4.4.2-underlink.patch
 
 	mkdir build
 	cd build
