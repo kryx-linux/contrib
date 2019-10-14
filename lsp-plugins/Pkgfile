@@ -1,22 +1,22 @@
 # Description: Collection of free plugins compatible with LADSPA, LV2 and LinuxVST
 # URL: https://lsp-plug.in
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cairo jack opus util-linux php lv2 ladspa
+# Depends on: cairo jack ladspa lv2 mesa3d opus php util-linux
 
 name=lsp-plugins
-version=1.1.9
+version=1.1.10
 release=1
 source=(https://github.com/sadko4u/$name/archive/$name-$version.tar.gz)
 
 build() {
   cd $name-$name-$version
   sed -e '/LD_PATH/ s|:/usr/local/lib||g' \
-      -i scripts/make/configure.mk
+    -i scripts/make/configure.mk
   make
   make BIN_PATH=/usr/bin \
-       LIB_PATH=/usr/lib \
-       DOC_PATH=/usr/share/doc \
-       DESTDIR="$PKG/" \
-       install
+    LIB_PATH=/usr/lib \
+    DOC_PATH=/usr/share/doc \
+    DESTDIR="$PKG/" \
+    install
   rm -fr $PKG/usr/share/doc
 }
