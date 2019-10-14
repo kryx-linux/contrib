@@ -4,7 +4,7 @@
 # Depends on: ant boost hyphen libevent mathjax openjdk8 pandoc-bin qtwebengine r
 
 name=rstudio
-version=1.2.1335
+version=1.2.5001
 _gwtver=2.8.1
 _ginver=2.1.2
 release=1
@@ -25,6 +25,7 @@ unpack_source() {
         #git clone $git $SRC/$name-$version ;;
       gwt-$_gwtver.zip)
         gwtdir=$SRC/$name-$version/src/gwt
+
         install -d $gwtdir/dictionaries
         install -d $gwtdir/lib/gwt
         install -d $gwtdir/lib/gwt/$_gwtver
@@ -42,36 +43,38 @@ unpack_source() {
 }
 
 build() {
-    cd $name-$version
-    #if you want your git snapshot to be a particular version
-    #git checkout v$version
+  cd $name-$version
+  #if you want your git snapshot to be a particular version
+  #git checkout v$version
 
-    pushd dependencies/common
-    install -d pandoc
-    ln -sfT /usr/share/myspell/dicts dictionaries
-    ln -sfT /usr/share/mathjax mathjax-26
-    ln -sfT /usr/bin/pandoc pandoc/pandoc
-    ln -sfT /usr/bin/pandoc-citeproc pandoc/pandoc-citeproc
-    bash install-packages
-    popd
+  pushd dependencies/common
+  install -d pandoc
+  ln -sfT /usr/share/myspell/dicts dictionaries
+  ln -sfT /usr/share/mathjax mathjax-26
+  ln -sfT /usr/bin/pandoc pandoc/pandoc
+  ln -sfT /usr/bin/pandoc-citeproc pandoc/pandoc-citeproc
+  bash install-packages
+  popd
 
-    rm -fr build
-    mkdir build
-    pushd build
-    export PATH=/usr/lib/java/openjdk8/jre/bin/:${PATH}
-    cmake -DRSTUDIO_TARGET=Desktop \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX=/usr/lib/rstudio \
-        -DQT_QMAKE_EXECUTABLE=/usr/lib/qt5/bin/qmake \
-        -DRSTUDIO_BUNDLE_QT=FALSE ..
+  mkdir build
+  pushd build
+  export PATH="/usr/lib/java/openjdk8/jre/bin/:${PATH}"
+  cmake -DRSTUDIO_TARGET=Desktop \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr/lib/rstudio \
+    -DRSTUDIO_USE_SYSTEM_BOOST=yes \
+    -DBoost_NO_BOOST_CMAKE=ON \
+    -DRSTUDIO_BUNDLE_QT=FALSE \
+    -DQT_QMAKE_EXECUTABLE=/usr/lib/qt5/bin/qmake \
+    ..
 
-    make DESTDIR=$PKG install
-    install -dm755 $PKG/usr/bin/
-    ln -s "/usr/lib/$name/bin/$name" "$PKG/usr/bin/$name"
-    sed -i 's|/usr/lib/rstudio/bin/rstudio|/usr/bin/rstudio|g' "$PKG/usr/share/applications/rstudio.desktop"
-    find $PKG \(\
-        -iname '*README*' -o \
-        -iname '*COPYING*' -o \
-        -iname 'INSTALL' \
-        \) -delete || true
+  make DESTDIR=$PKG install
+  install -dm755 $PKG/usr/bin/
+  ln -s /usr/lib/$name/bin/$name $PKG/usr/bin/$nam
+  sed -i 's|/usr/lib/rstudio/bin/rstudio|/usr/bin/rstudio|g' $PKG/usr/share/applications/rstudio.desktop
+  find $PKG \(\
+    -iname '*README*' -o \
+    -iname '*COPYING*' -o \
+    -iname 'INSTALL' \
+    \) -delete || true
 }
