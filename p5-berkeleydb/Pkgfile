@@ -1,12 +1,12 @@
 # Description: BerkeleyDB PERL module
 # URL: http://search.cpan.org/dist/BerkeleyDB/
 # Packager: Lucas Hazel, lucas at die dot net dot au
-# Maintainer: Moritz Wilhelmy, moritz plus crux at wzff dot de
+# Maintainer: unmaintained
 # Depends on: db
 
 name=p5-berkeleydb
 distname=BerkeleyDB
-version=0.55
+version=0.63
 release=1
 source=(http://search.cpan.org/CPAN/authors/id/P/PM/PMQS/$distname-$version.tar.gz)
 
@@ -15,6 +15,6 @@ build() {
 	perl Makefile.PL
 	make OPTIMIZE="$CFLAGS"
 	make DESTDIR=$PKG install
-	find $PKG -name .packlist -o -name perllocal.pod -o -name '*.bs' | 
+	find $PKG -name .packlist -o -name perllocal.pod -o -name '*.bs' |
 		xargs rm
 }
