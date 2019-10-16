@@ -5,13 +5,13 @@
 
 name=libetonyek
 version=0.1.9
-release=2
+release=3
 source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
   ./configure --prefix=/usr \
-    --with-mdds=1.4 \
+    --with-mdds=1.5 \
     --without-docs
   make
   make DESTDIR=$PKG install
