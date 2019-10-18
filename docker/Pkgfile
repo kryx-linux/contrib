@@ -4,11 +4,11 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=19.03.1
+version=19.03.3
 release=1
 source=(https://github.com/docker/docker-ce/archive/v$version/$name-ce-v$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/libnetwork-fc5a7d9.tar.xz \
+    http://jaeger.morpheus.net/linux/crux/files/libnetwork-45c7102.tar.xz \
     $name.rc $name.conf)
 
 build() {
@@ -35,12 +35,12 @@ build() {
 
     cd $name-ce-$version
     install -D -m 0755 components/cli/build/$name $PKG/usr/bin/$name
-    install -D -m 0755 components/engine/bundles/latest/dynbinary-daemon/dockerd-$version \
+    install -D -m 0755 components/engine/bundles/dynbinary-daemon/dockerd-$version \
         $PKG/usr/bin/dockerd
 
     (cd ..; \
         GOROOT=/usr/lib/go GOPATH=${PKGMK_WORK_DIR} go build -o $PKG/usr/bin/$name-proxy \
-            libnetwork-fc5a7d9/cmd/proxy)
+            libnetwork-45c7102/cmd/proxy)
 
     for M in 1 5 8; do
         install -d -m 0755 $PKG/usr/share/man/man${M}
