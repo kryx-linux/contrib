@@ -1,42 +1,34 @@
 # Description: Shoot balls and get 3 of the same colour in a group to make them drop.
 # URL: http://www.frozen-bubble.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: p5-sdl1-perl sdl_pango p5-locale-gettext
+# Depends on: p5-compress-bzip2 p5-file-slurp p5-ipc-system-simple p5-locale-maketext-lexicon p5-sdl
 
 name=frozen-bubble
-version=2.2.0
+version=2.2.1-beta1
 release=1
 source=(http://www.frozen-bubble.org/data/$name-$version.tar.bz2
+	fix-buffer-size-when-formatting-current-date.patch
 	$name.desktop)
 
 build() {
 	cd $name-$version
+
+	# https://bugzilla.redhat.com/show_bug.cgi?id=1541359
+	patch -p1 -i $SRC/fix-buffer-size-when-formatting-current-date.patch
+
+	sed -e 's|-Werror||' -i inc/My/Builder.pm
+
+	perl Build.PL installdirs=vendor
+	perl Build
+	perl Build install destdir="$PKG"
+
+	chmod -R u+w $PKG
 	
-	sed -i settings.mk \
-		-e "s|PREFIX = .*|PREFIX = /usr|" \
-		-e 's|MANDIR = .*|MANDIR = $(PREFIX)/man|'
+	install -D -m 0644 share/icons/frozen-bubble-icon-64x64.png \
+		$PKG/usr/share/pixmaps/frozen-bubble.png
 
-	make
-	make DESTDIR=$PKG install
-	rm -r $PKG/usr/share/locale
+	install -D -m 0644 $SRC/frozen-bubble.desktop \
+		$PKG/usr/share/applications/frozen-bubble.desktop
 
-	# install icons
-	install -D -m 0644 icons/frozen-bubble-icon-16x16.png $PKG/usr/share/icons/hicolor/16x16/apps/frozen-bubble.png
-	install -D -m 0644 icons/frozen-bubble-icon-32x32.png $PKG/usr/share/icons/hicolor/32x32/apps/frozen-bubble.png
-	install -D -m 0644 icons/frozen-bubble-icon-48x48.png $PKG/usr/share/icons/hicolor/48x48/apps/frozen-bubble.png
-	install -D -m 0644 icons/frozen-bubble-icon-64x64.png $PKG/usr/share/icons/hicolor/64x64/apps/frozen-bubble.png
-
-	# install menu entry
-	install -D -m 0644 $SRC/frozen-bubble.desktop $PKG/usr/share/applications/frozen-bubble.desktop
-
-	# Remove perlcrap
-	find $PKG \( \
-		-name '.packlist' -o \
-		-name '*.bs' -o \
-		-name 'autosplit.ix' -o \
-		-name 'perllocal.pod' \) -delete
-
-	# Remove empty directories
-	find $PKG -depth -empty -delete
+	find $PKG \( -name '.packlist' -o -name '*.bs' \) -delete
 }
