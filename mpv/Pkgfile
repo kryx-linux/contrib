@@ -5,17 +5,19 @@
 # Optional: youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libvdpau rubberband
 
 name=mpv
-version=0.29.1
-release=2
-source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz)
+version=0.30.0
+release=1
+source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz
+	https://waf.io/waf-2.0.9)
 
 build() {
 	cd $name-$version
 
-	[ -e '/usr/lib/pkgconfig/libcdio_cdda.pc' ] && PKGMK_MPV+=' --enable-cdda'
-	[ -e '/usr/lib/pkgconfig/dvdnav.pc' ] && PKGMK_MPV+=' --enable-dvdread --enable-dvdnav'
+	install -m0755 $SRC/waf-2.0.9 waf
 
-	./bootstrap.py
+	[ -e '/usr/lib/pkgconfig/libcdio_cdda.pc' ] && PKGMK_MPV+=' --enable-cdda'
+	[ -e '/usr/lib/pkgconfig/dvdnav.pc' ] && PKGMK_MPV+=' --enable-dvdnav'
+
 	./waf configure ${PKGMK_MPV} \
 		--prefix=/usr \
 		--enable-libarchive \
