@@ -1,10 +1,10 @@
 # Description:  Bittorrent client programmed in C++ / Qt that uses libtorrent
 # URL:          http://www.qbittorrent.org/
 # Maintainer:   Alexandr Savca, alexandr dot savca89 at gmail dot com
-# Depends on:   qt5 libtorrent-rasterbar xdg-utils
+# Depends on:   qt5 libtorrent-rasterbar1 xdg-utils
 
 name=qbittorrent
-version=4.1.1
+version=4.1.8
 release=1
 
 source=(https://github.com/${name}/qBittorrent/archive/release-${version}.tar.gz)
@@ -12,10 +12,11 @@ source=(https://github.com/${name}/qBittorrent/archive/release-${version}.tar.gz
 build() {
         cd qBittorrent-release-${version}
 
+        PKG_CONFIG_PATH="/usr/lib/libtorrent-rasterbar1/pkgconfig" \
         ./configure --prefix=/usr
         make
         make INSTALL_ROOT=${PKG} install
 
         # remove group write permissions
-        find ${PKG} -type f -a -perm -g+w | xargs chmod g-w
+        #find ${PKG} -type f -a -perm -g+w | xargs chmod g-w
 }
