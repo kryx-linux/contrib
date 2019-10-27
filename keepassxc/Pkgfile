@@ -4,12 +4,13 @@
 # Depends on: qt5 qrencode libgcrypt yubico-c yubikey-personalization libgpg-error llvm argon2 libsodium
 
 name=keepassxc
-version=2.4.3
+version=2.5.0
 release=1
 source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$name-$version-src.tar.xz)
 
 build() {
   cd $name-$version
+  [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   mkdir build && cd build
   cmake -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_BINDIR=/usr/bin \
@@ -19,5 +20,5 @@ build() {
     ..
   make
   make DESTDIR=$PKG install
-  rm -fr $PKG/usr/share/keepassxc/translations
+  rm -fr $PKG/usr/share/keepassxc/{translations,docs}
 }
