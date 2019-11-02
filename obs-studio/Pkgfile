@@ -5,7 +5,7 @@
 # Optional: jack-audio-connection-kit ffnvcodec-headers vlc luajit speexdsp x265 pulseaudio
 
 name=obs-studio
-version=23.2.1
+version=24.0.3
 release=1
 source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz)
 
@@ -17,6 +17,7 @@ build() {
 
 	cmake .. \
 		-DCMAKE_INSTALL_PREFIX='/usr' \
+		-DCMAKE_INSTALL_LIBDIR='/usr/lib' \
 		-DOBS_VERSION_OVERRIDE="$version" \
 		-DUNIX_STRUCTURE=ON \
 		-DCMAKE_BUILD_TYPE=Release
