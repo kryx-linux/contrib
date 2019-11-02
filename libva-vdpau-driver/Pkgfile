@@ -35,7 +35,4 @@ build() {
 
 	mv $PKG/usr/lib/libva1/* $PKG/usr/lib/
 	rmdir $PKG/usr/lib/libva1
-
-	# required for nouveau driver
-	ln -s vdpau_drv_video.so $PKG/usr/lib/dri/nouveau_drv_video.so
 }
