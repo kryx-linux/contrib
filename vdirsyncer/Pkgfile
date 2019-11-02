@@ -16,4 +16,7 @@ build() {
     --skip-build \
     --optimize=1 \
     --root=$PKG
+  pyv="$(python3 -V | awk '{ print $2 }')"
+  find $PKG/usr/lib/python${pyv::3}/site-packages/ -maxdepth 1 -type d \
+    -iname "vdirsyncer-$version-py${pyv::3}.egg-info" -exec rm -r '{}' \+
 }
