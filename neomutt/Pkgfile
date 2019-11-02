@@ -1,0 +1,32 @@
+# Description: a fork of Mutt with added features
+# URL: https://neomutt.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=neomutt
+version=20191102
+release=1
+source=(https://github.com/neomutt/neomutt/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libexecdir=/usr/lib \
+    --gpgme \
+    --enable-lua \
+    --gss \
+    --ssl \
+    --sasl \
+    --notmuch \
+    --with-ui=ncurses \
+    --with-idn2=/usr \
+    --idn=0 \
+    --idn2=1 \
+    --gdbm \
+    --doc=0
+  make
+  make DESTDIR=$PKG install
+  rm -fr $PKG/usr/share/
+}
