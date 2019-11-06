@@ -1,7 +1,7 @@
 # Description: ftp client
 # URL:         http://filezilla-project.org
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  libfilezilla libidn2 libnotify libwebp
+# Depends on:  libfilezilla libidn2 libnotify libwebp wxgtk
 
 name=filezilla
 version=3.45.1
@@ -12,7 +12,7 @@ build() {
     cd $name-$version
     ./configure \
         --prefix=/usr \
-        --mandir=/usr/man \
+        --mandir=/usr/share/man \
         --disable-manualupdatecheck \
         --disable-autoupdatecheck \
         --disable-locales \
