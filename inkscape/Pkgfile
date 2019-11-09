@@ -6,14 +6,22 @@
 
 name=inkscape
 version=0.92.4
-release=1
+release=2
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.bz2
-	inkscape-0.92.4-poppler-0.76.0.patch)
+	inkscape-0.92.4-poppler_0_82_0_fixes-1.patch
+	inkscape-0.92.4-use_versioned_ImageMagick6-1.patch
+	inkscape-0.92.4-upstream_fixes-1.patch)
 
 build() {
 	cd $name-$version
 
-	patch -p1 -i $SRC/inkscape-0.92.4-poppler-0.76.0.patch
+	# fix a problem introduced by Poppler-0.76.1
+	sed -e 's|new Lexer(xref, obj)|obj|g' -i src/extension/internal/pdfinput/pdf-parser.cpp
+
+	patch -p1 -i $SRC/inkscape-0.92.4-poppler_0_82_0_fixes-1.patch
+	patch -p1 -i $SRC/inkscape-0.92.4-use_versioned_ImageMagick6-1.patch
+	patch -p1 -i $SRC/inkscape-0.92.4-upstream_fixes-1.patch
+
 
 	CXXFLAGS+=' -std=c++11'
 
@@ -29,8 +37,7 @@ build() {
 		--with-perl \
 		--enable-lcms \
 		--enable-poppler-cairo \
-		--disable-strict-build \
-		--disable-dependency-tracking
+		--disable-strict-build
 
 	make
 	make DESTDIR=$PKG install
