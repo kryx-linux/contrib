@@ -14,6 +14,7 @@ drwxr-xr-x	root/root	usr/include/SFML/Audio/
 -rw-r--r--	root/root	usr/include/SFML/Audio/SoundStream.h
 -rw-r--r--	root/root	usr/include/SFML/Audio/Types.h
 -rw-r--r--	root/root	usr/include/SFML/Config.h
+-rw-r--r--	root/root	usr/include/SFML/GPUPreference.h
 -rw-r--r--	root/root	usr/include/SFML/Graphics.h
 drwxr-xr-x	root/root	usr/include/SFML/Graphics/
 -rw-r--r--	root/root	usr/include/SFML/Graphics/BlendMode.h
@@ -42,6 +43,7 @@ drwxr-xr-x	root/root	usr/include/SFML/Graphics/
 -rw-r--r--	root/root	usr/include/SFML/Graphics/Types.h
 -rw-r--r--	root/root	usr/include/SFML/Graphics/Vertex.h
 -rw-r--r--	root/root	usr/include/SFML/Graphics/VertexArray.h
+-rw-r--r--	root/root	usr/include/SFML/Graphics/VertexBuffer.h
 -rw-r--r--	root/root	usr/include/SFML/Graphics/View.h
 -rw-r--r--	root/root	usr/include/SFML/Network.h
 drwxr-xr-x	root/root	usr/include/SFML/Network/
@@ -71,7 +73,9 @@ drwxr-xr-x	root/root	usr/include/SFML/System/
 -rw-r--r--	root/root	usr/include/SFML/System/Vector3.h
 -rw-r--r--	root/root	usr/include/SFML/Window.h
 drwxr-xr-x	root/root	usr/include/SFML/Window/
+-rw-r--r--	root/root	usr/include/SFML/Window/Clipboard.h
 -rw-r--r--	root/root	usr/include/SFML/Window/Context.h
+-rw-r--r--	root/root	usr/include/SFML/Window/Cursor.h
 -rw-r--r--	root/root	usr/include/SFML/Window/Event.h
 -rw-r--r--	root/root	usr/include/SFML/Window/Export.h
 -rw-r--r--	root/root	usr/include/SFML/Window/Joystick.h
@@ -85,18 +89,18 @@ drwxr-xr-x	root/root	usr/include/SFML/Window/
 -rw-r--r--	root/root	usr/include/SFML/Window/Window.h
 -rw-r--r--	root/root	usr/include/SFML/Window/WindowHandle.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libcsfml-audio.so -> libcsfml-audio.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libcsfml-audio.so.2.4 -> libcsfml-audio.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libcsfml-audio.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libcsfml-graphics.so -> libcsfml-graphics.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libcsfml-graphics.so.2.4 -> libcsfml-graphics.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libcsfml-graphics.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libcsfml-network.so -> libcsfml-network.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libcsfml-network.so.2.4 -> libcsfml-network.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libcsfml-network.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libcsfml-system.so -> libcsfml-system.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libcsfml-system.so.2.4 -> libcsfml-system.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libcsfml-system.so.2.4.0
-lrwxrwxrwx	root/root	usr/lib/libcsfml-window.so -> libcsfml-window.so.2.4
-lrwxrwxrwx	root/root	usr/lib/libcsfml-window.so.2.4 -> libcsfml-window.so.2.4.0
--rwxr-xr-x	root/root	usr/lib/libcsfml-window.so.2.4.0
+lrwxrwxrwx	root/root	usr/lib/libcsfml-audio.so -> libcsfml-audio.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libcsfml-audio.so.2.5 -> libcsfml-audio.so.2.5.0
+-rwxr-xr-x	root/root	usr/lib/libcsfml-audio.so.2.5.0
+lrwxrwxrwx	root/root	usr/lib/libcsfml-graphics.so -> libcsfml-graphics.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libcsfml-graphics.so.2.5 -> libcsfml-graphics.so.2.5.0
+-rwxr-xr-x	root/root	usr/lib/libcsfml-graphics.so.2.5.0
+lrwxrwxrwx	root/root	usr/lib/libcsfml-network.so -> libcsfml-network.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libcsfml-network.so.2.5 -> libcsfml-network.so.2.5.0
+-rwxr-xr-x	root/root	usr/lib/libcsfml-network.so.2.5.0
+lrwxrwxrwx	root/root	usr/lib/libcsfml-system.so -> libcsfml-system.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libcsfml-system.so.2.5 -> libcsfml-system.so.2.5.0
+-rwxr-xr-x	root/root	usr/lib/libcsfml-system.so.2.5.0
+lrwxrwxrwx	root/root	usr/lib/libcsfml-window.so -> libcsfml-window.so.2.5
+lrwxrwxrwx	root/root	usr/lib/libcsfml-window.so.2.5 -> libcsfml-window.so.2.5.0
+-rwxr-xr-x	root/root	usr/lib/libcsfml-window.so.2.5.0
