@@ -3,15 +3,14 @@
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=faad2
-version=2.9.0
+version=2.9.1
 release=1
 source=(https://github.com/knik0/$name/archive/${version//./_}/${name}_${version//./_}.tar.gz)
 
 build() {
 	cd $name-${version//./_}
 
-	autoreconf -i
-
+	./bootstrap
 	./configure --prefix=/usr
 
 	make
