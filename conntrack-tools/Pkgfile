@@ -1,21 +1,18 @@
 # Description: Userspace tools for netfilter connection tracking.
-# URL: http://conntrack-tools.netfilter.org/
+# URL: https://www.netfilter.org/projects/conntrack-tools/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: libnetfilter_conntrack libnetfilter_cttimeout libnetfilter_cthelper libnetfilter_queue
+# Depends on: libnetfilter_conntrack libnetfilter_cthelper libnetfilter_cttimeout libnetfilter_queue
 
 name=conntrack-tools
-version=1.4.0
+version=1.4.5
 release=1
-source=(http://www.netfilter.org/projects/$name/files/$name-$version.tar.bz2
+source=(https://www.netfilter.org/projects/$name/files/$name-$version.tar.bz2
 	conntrackd.rc)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/man
+	./configure --prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
