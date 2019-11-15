@@ -5,7 +5,7 @@
 
 name=libdbusmenu-gtk3
 version=18.10
-release=2
+release=3
 source=(http://cdn-fastly.deb.debian.org/debian/pool/main/libd/libdbusmenu/libdbusmenu_18.10.20180917~bzr490+repack1.orig.tar.xz
 0001_no-deprecated-gnome-common-macros.patch)
 
@@ -16,17 +16,20 @@ build() {
   sed -e 's/--enable-gtk-doc//g' -i autogen.sh
   sed -e 's/AM_MAINTAINER_MODE//g' -i configure.ac
   export CFLAGS+=" -O2 -Wno-error"
+  export HAVE_VALGRIND_TRUE='#'
+  export HAVE_VALGRIND_FALSE=''
   ./autogen.sh --prefix=/usr \
     --sysconfdir=/etc \
     --libexecdir=/usr/lib/$name \
     --localstatedir=/var \
-    --with-gtk=3
+    --with-gtk=3 \
+    --disable-{dumper,static,tests,valgrind}
   make -j1
-  make DESTDIR=$PKG -C libdbusmenu-glib install
-  make DESTDIR=$PKG -C libdbusmenu-gtk install
-  make DESTDIR=$PKG -C libdbusmenu-glib uninstall
+  make -j1 DESTDIR=$PKG -C libdbusmenu-glib install
+  make -j1 DESTDIR=$PKG -C libdbusmenu-gtk install
+  make -j1 DESTDIR=$PKG -C libdbusmenu-glib uninstall
 
-  rm -fr $PKG/usr/share/doc
+  #rm -r $PKG/usr/share/doc
 
   find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
