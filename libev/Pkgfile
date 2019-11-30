@@ -1,17 +1,15 @@
 # Description: high-performance event loop/event model with lots of features
 # URL:         http://software.schmorp.de/pkg/libev.html
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Younes Hafri <ycrux@club-internet.fr>
 
 name=libev
-version=4.25
+version=4.27
 release=1
-source=(http://dist.schmorp.de/$name/Attic/$name-$version.tar.gz)
+source=(http://dist.schmorp.de/$name/$name-$version.tar.gz)
 
 build () {
     cd $name-$version
     ./configure --prefix=/usr \
-        --mandir=$PKG/usr/man \
         --disable-nls \
         --disable-static
     make
