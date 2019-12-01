@@ -6,18 +6,26 @@
 
 name=shaderc
 version=2019.0
-release=2
-source=(https://github.com/google/$name/archive/v$version/$name-v$version.tar.gz
+commit=34c412f21f945f4ef6ed4453f8b5dc4bb9d739e4
+release=3
+source=(
+	https://github.com/KhronosGroup/shaderc/archive/$commit.tar.gz#/$name-$commit.tar.gz
+	#https://github.com/google/$name/archive/v$version/$name-v$version.tar.gz
 	glslc.1 spvc.1 glslc-asciidoc.patch spvc-asciidoc.patch
-	fix-glslang-link-order.patch)
+	fix-glslang-link-order.patch
+	0001-Drop-third-party-code-in-CMakeLists.txt.patch
+	shaderc-2019.0-fix-build-against-new-glslang.patch)
 
 build() {
-	cd $name-$version
+	cd $name-$commit
+	#cd $name-$version
 
 	patch -d glslc -p0 -i $SRC/glslc-asciidoc.patch
 	patch -d spvc -p0 -i $SRC/spvc-asciidoc.patch
 
 	patch -p1 -i $SRC/fix-glslang-link-order.patch
+	patch -p1 -i $SRC/0001-Drop-third-party-code-in-CMakeLists.txt.patch
+	patch -p1 -i $SRC/shaderc-2019.0-fix-build-against-new-glslang.patch
 
 	# de-vendor libs and disable git versioning
 	sed '/examples/d;/third_party/d' -i CMakeLists.txt
