@@ -1,0 +1,22 @@
+# Description: Reusable library for GPU-accelerated video/image rendering primitives
+# URL: https://github.com/haasn/libplacebo
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: lcms2 shaderc vulkan-loader
+
+name=libplacebo
+version=1.21.0
+release=1
+source=(https://code.videolan.org/videolan/libplacebo/-/archive/v$version/$name-v$version.tar.gz)
+
+build() {
+	CXXFLAGS+=" -I/usr/include/glslang" \
+	meson build $name-v$version \
+		--prefix=/usr \
+		-D vulkan=enabled \
+		-D glslang=enabled \
+		-D shaderc=enabled \
+		-D lcms=enabled
+
+	ninja -C build -j ${JOBS:-1}
+        DESTDIR=$PKG ninja -C build install
+}
