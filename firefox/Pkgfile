@@ -5,16 +5,13 @@
 # Optional: sccache
 
 name=firefox
-version=70.0.1
-release=2
+version=71.0
+release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
-	firefox.desktop
-	firefox-70.0.1-rust-1.39+.patch)
+	firefox.desktop)
  
 build() {
 	cd firefox-$version
-
-	patch -p1 -i $SRC/firefox-70.0.1-rust-1.39+.patch
 
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
 
