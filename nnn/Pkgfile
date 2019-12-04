@@ -5,7 +5,7 @@
 # Optional: patool mediainfo
 
 name=nnn
-version=2.7
+version=2.8
 release=1
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
@@ -16,20 +16,26 @@ build() {
   make DESTDIR=$PKG PREFIX=/usr install
   mkdir $PKG/usr/share/nnn
 
-  # install auto-completion files if the ports for it are installed
-  if [ -e /lib/zsh ]; then
-    install -Dm644 misc/auto-completion/zsh/_nnn $PKG/usr/share/zsh/site-functions/_nnn
-  fi
-  if [ -e /usr/share/bash-completion ]; then
-    install -Dm644 misc/auto-completion/bash/nnn-completion.bash $PKG/usr/share/bash-completion/completions/nnn
-  fi
-  # fish is not in core/opt/contrib so I'll ignore it
   # install provided scripts and plugins to $PKG/usr/share
   pushd misc
-  for i in $(find . -type d -not -path "./auto-completion*" | xargs) ; do
+  for i in $(find . -type d | xargs) ; do
     cp -r $i $PKG/usr/share/nnn;
   done
   popd
   mv plugins $PKG/usr/share/nnn
+
+  # install auto-completion files if the ports for it are installed
+  if [ -e /lib/zsh ]; then
+    mkdir -p $PKG/usr/share/zsh/site-functions/
+    ln -s  /usr/share/nnn/auto-completions/zsh/_nnn \
+      $PKG/usr/share/zsh/site-functions/_nnn
+  fi
+  if [ -e /usr/share/bash-completion ]; then
+    mkdir -p $PKG/usr/share/bash-completion/completions
+    ln -s /usr/share/nnn/auto-completion/bash/nnn-completion.bash \
+      $PKG/usr/share/bash-completion/completions/nnn
+  fi
+  # fish is not in core/opt/contrib, but the script get's installed to
+
   find $PKG -name README.md -delete
 }
