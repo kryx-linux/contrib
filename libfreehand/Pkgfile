@@ -5,11 +5,13 @@
 
 name=libfreehand
 version=0.1.2
-release=2
-source=(https://dev-www.libreoffice.org/src/libfreehand/$name-$version.tar.xz)
+release=3
+source=(https://dev-www.libreoffice.org/src/libfreehand/$name-$version.tar.xz
+  0001-Add-missing-semicolon-to-fix-build-with-icu-65.1.patch)
 
 build() {
   cd $name-$version
+  patch -Np1 -i $SRC/0001-Add-missing-semicolon-to-fix-build-with-icu-65.1.patch
   ./configure --prefix=/usr \
     --disable-werror \
     --without-docs
