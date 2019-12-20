@@ -5,11 +5,14 @@
 
 name=spdlog
 version=1.4.2
-release=1
-source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz
+  include-cassert.patch)
 
 build() {
   cd $name-$version
+  # https://github.com/gabime/spdlog/issues/1340
+  patch -Np1 -i $SRC/include-cassert.patch
   mkdir build
   cd build
   meson .. \
