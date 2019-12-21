@@ -5,13 +5,13 @@
 # Depends on:  gtk sdl_mixer
 
 name=freeciv
-version=2.6.0
+version=2.6.1
 release=1
 source=(http://prdownloads.sf.net/freeciv/$name-$version.tar.bz2)
 
 build() {
    cd $name-$version
-   ./configure --prefix=/usr --without-ggz-client --mandir=/usr/man
+   ./configure --prefix=/usr --without-ggz-client
 
    make && make DESTDIR=$PKG install
    rm -rf $PKG/usr/share/{locale,doc}
