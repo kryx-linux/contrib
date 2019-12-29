@@ -1,18 +1,18 @@
 # Description: In-depth CPU information tool.
 # URL:         http://www.codemonkey.org.uk/projects/x86info/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Depends on:
+# Depends on:  python
 
 name=x86info
 version=1.30
 release=1
-source=(http://codemonkey.org.uk/projects/$name/$name-$version.tgz)
+source=(https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/x86info/1.30-3/x86info_$version.orig.tar.gz)
 
 build() {
    cd $name-$version
+   sed -e 's/-Werror //' -i Makefile
    make
    mkdir -p $PKG/usr/{bin,man/man1}
    install -D -m755 -oroot -groot $name $PKG/usr/bin/$name
-   install -D -m644 -oroot -groot $name.1 $PKG/usr/man/man1/$name.1
+   install -D -m644 -oroot -groot $name.1 $PKG/usr/share/man/man1/$name.1
 }
