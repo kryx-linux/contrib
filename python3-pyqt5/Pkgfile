@@ -22,4 +22,7 @@ build() {
   python3 -O -m compileall -d / $PKG/usr/lib
   sip-module --sdist PyQt5.sip
   pip3 install PyQt5_sip-*.tar.gz --root "$PKG"
+  find $PKG \
+    -iname "*INSTALLER*" \
+    -delete
 }
