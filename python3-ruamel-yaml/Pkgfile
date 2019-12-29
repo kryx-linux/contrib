@@ -11,4 +11,7 @@ source=(https://files.pythonhosted.org/packages/source/r/ruamel.yaml/ruamel.yaml
 build() {
   cd ruamel.yaml-$version
   pip3 install . --root=$PKG
+  find $PKG \
+    -iname "*INSTALLER*" \
+    -delete
 }
