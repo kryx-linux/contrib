@@ -14,4 +14,7 @@ build() {
   python3 setup.py install --skip-build \
     --root=$PKG \
     --optimize=1
+  find $PKG \
+    -iname "*README*" \
+    -delete
 }
