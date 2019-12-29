@@ -1,13 +1,12 @@
 # Description: X Window System Lock Screen
 # URL:         http://sillycycle.com/xlockmore.html
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Daniel Mueller, daniel at danm dot de
-# Depends on:  fortune glu gtk util-linux xorg-libxmu xorg-libxpm
+# Depends on: fortune glu gtk xorg-libxmu xorg-libxpm
 
 name=xlockmore
-version=5.59
+version=5.61
 release=1
-source=(http://sillycycle.com/xlock/xlockmore-${version}.tar.xz)
+source=(https://sillycycle.com/xlock/xlockmore-${version}.tar.xz)
 
 build() {
 	cd $name-$version
@@ -26,6 +25,6 @@ build() {
 
 	make
 
-  install -d $PKG//usr/share/xlock/sounds
+	install -d $PKG/usr/share/xlock/sounds
 	make DESTDIR=$PKG install
 }
