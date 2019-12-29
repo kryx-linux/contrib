@@ -16,4 +16,7 @@ build() {
   cd build
   make
   make INSTALL_ROOT=$PKG install -j1
+  find $PKG \
+    -iname "*INSTALLER*" \
+    -delete
 }
