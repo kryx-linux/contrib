@@ -12,4 +12,7 @@ build() {
   cd $name-$version
   make -f misc/Makefile all
   make -f misc/Makefile DESTDIR=$PKG PREFIX=/usr install
+  find $PKG \
+    -iname "*README*" \
+    -delete
 }
