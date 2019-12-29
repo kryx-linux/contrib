@@ -21,5 +21,9 @@ build() {
 
   local pyv="$(python3 -c "import sys; print (sys.version_info[0], sys.version_info[1])" | sed -e 's/\ /./g')"
   rm $PKG/usr/lib/python$pyv/site-packages/numpy/LICENSE.txt
+  find $PKG \( \
+    -iname "LICENSE.txt" -o \
+    -iname "*README*" \
+    \) -delete
   chmod -R g-w $PKG
 }
