@@ -4,16 +4,12 @@
 # Depends on: libcdio
 
 name=libcdio-paranoia
-version=10.2+0.94+2
+version=10.2+2.0.1
 release=1
-source=(https://ftp.gnu.org/gnu/libcdio/$name-$version.tar.gz
-	enable_symbol_versions.patch)
+source=(https://ftp.gnu.org/gnu/libcdio/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	patch -p1 -i $SRC/enable_symbol_versions.patch
-	autoreconf -fi
 
 	./configure \
 		--prefix=/usr \
