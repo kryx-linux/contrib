@@ -1,8 +1,7 @@
 # Description: A command-line program to download videos from YouTube.com and a few more sites.
 # URL: https://rg3.github.io/youtube-dl/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3
-# Optional: python3-setuptools
+# Depends on: python3-setuptools
 
 name=youtube-dl
 version=2020.01.01
@@ -15,8 +14,4 @@ build() {
 	/usr/bin/python3 setup.py install --root=$PKG --optimize=1
 
 	rm -r $PKG/usr/share/doc
-
-	find $PKG/usr/lib/python*/site-packages/ -maxdepth 1 -type f \
-		-name "youtube_dl-$version-py$pyv.egg-info" -delete
-
 }
