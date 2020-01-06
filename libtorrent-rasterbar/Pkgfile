@@ -4,15 +4,12 @@
 # Depends on: boost
 
 name=libtorrent-rasterbar
-version=1.2.2
-release=2
-source=(https://github.com/arvidn/libtorrent/releases/download/libtorrent-${version//./_}/$name-$version.tar.gz
-	fix-boost-1.72.patch)
+version=1.2.3
+release=1
+source=(https://github.com/arvidn/libtorrent/releases/download/libtorrent-${version//./_}/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	patch -p1 -i $SRC/fix-boost-1.72.patch
 
 	./configure \
 		--prefix=/usr \
