@@ -4,21 +4,29 @@
 # Depends on: cmake
 
 name=glm
-version=0.9.9.5
+version=0.9.9.7
 release=1
-source=(https://github.com/g-truc/glm/releases/download/$version/glm-$version.zip)
+source=(https://github.com/g-truc/glm/releases/download/$version/glm-$version.zip
+  glm.pc.in
+  glmConfig.cmake.in
+  glmConfigVersion.cmake.in
+  glmTargets.cmake)
 
 build() {
     cd $name
-    mkdir build && cd build
-    cmake .. \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_INSTALL_LIBDIR=lib
-    make DESTDIR=$PKG install
-    find $PKG -type f -exec chmod 644 {} \;
-    find $PKG -type d -exec chmod 755 {} \;
-    sed -i \
-    "s/PACKAGE_VERSION_UNSUITABLE TRUE/PACKAGE_VERSION_UNSUITABLE FALSE/g" \
-    $PKG/usr/lib/cmake/glm/glmConfigVersion.cmake
-    sed -i "s/(__GNUC__ == 7) && (__GNUC_MINOR__ == 2)/(__GNUC__ == 7) \&\& (__GNUC_MINOR__ >= 2)/" $PKG/usr/include/glm/simd/platform.h
+    mkdir -p $PKG/usr/include/
+    cp -r glm $PKG/usr/include/
+
+    mkdir -p $PKG/usr/share/doc
+    cp -r doc $PKG/usr/share/doc/glm
+
+    mkdir -p $PKG/usr/lib/pkgconfig/
+    sed s/@VERSION@/$version/ $SRC/glm.pc.in > $PKG/usr/lib/pkgconfig/glm.pc
+
+    mkdir -p $PKG/usr/lib/cmake/glm/
+    sed s/@VERSION@/$version/ $SRC/glmConfigVersion.cmake.in > $PKG/usr/lib/cmake/glm/glmConfigVersion.cmake
+    sed s/@VERSION@/$version/ $SRC/glmConfig.cmake.in > $PKG/usr/lib/cmake/glm/glmConfig.cmake
+    install -Dm644 $SRC/glmTargets.cmake $PKG/usr/lib/cmake/glm/glmTargets.cmake
+
+    rm -r $PKG/usr/share/
 }
