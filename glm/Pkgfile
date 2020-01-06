@@ -6,14 +6,14 @@
 name=glm
 version=0.9.9.7
 release=1
-source=(https://github.com/g-truc/glm/releases/download/$version/glm-$version.zip
+source=(https://github.com/g-truc/glm/archive/$version/$name-$version.tar.gz
   glm.pc.in
   glmConfig.cmake.in
   glmConfigVersion.cmake.in
   glmTargets.cmake)
 
 build() {
-    cd $name
+    cd $name-$version
     mkdir -p $PKG/usr/include/
     cp -r glm $PKG/usr/include/
 
