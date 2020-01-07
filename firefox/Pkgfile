@@ -5,12 +5,10 @@
 # Optional: sccache
 
 name=firefox
-version=71.0
-release=2
+version=72.0
+release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
-	firefox.desktop
-	mozilla-bug1601707-gcc-fixup.patch
-	firefox-71.0-bug1602358-fix-older-builds-with-newer-cbindgen.patch)
+	firefox.desktop)
  
 build() {
 	cd firefox-$version
@@ -19,9 +17,6 @@ build() {
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
 		export CCACHE_COMPILERCHECK="string:$OS_CCACHE_COMPILERCHECK"
 	fi	
-
-	patch -p1 -i $SRC/mozilla-bug1601707-gcc-fixup.patch
-	patch -p1 -i $SRC/firefox-71.0-bug1602358-fix-older-builds-with-newer-cbindgen.patch
 
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
@@ -58,7 +53,6 @@ cat <<- EOF > .mozconfig
 	ac_add_options --disable-gconf
 EOF
 
-#	sed -e 's/checkImpl/checkFFImpl/g' -i js/src/vm/JSContext*.h
 	export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
 	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
 	export MOZBUILD_STATE_PATH="$PKGMK_SOURCE_DIR/.mozbuild"
