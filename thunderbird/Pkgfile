@@ -5,11 +5,10 @@
 # Optional: sccache
 
 name=thunderbird
-version=68.3.1
+version=68.4.1
 release=1
 source=(http://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
-	$name.desktop
-	thunderbird-68.2.2-rust-1.39+.patch)
+	$name.desktop)
  
 build() {
 	cd $name-$version
@@ -18,8 +17,6 @@ build() {
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
 		export CCACHE_COMPILERCHECK="string:$OS_CCACHE_COMPILERCHECK"
 	fi
-
-	patch -p1 -i $SRC/thunderbird-68.2.2-rust-1.39+.patch
 
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
