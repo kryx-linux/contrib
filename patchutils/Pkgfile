@@ -4,16 +4,16 @@
 # Packager: Younes Hafri, ycrux at club-internet dot fr
 
 name=patchutils
-version=0.3.2
+version=0.3.4
 release=1
-source=(http://cyberelk.net/tim/data/patchutils/stable/$name-$version.tar.bz2)
+source=(https://github.com/twaugh/patchutils/releases/download/$version/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man
+		--mandir=/usr/share/man
 
 	make CFLAGS="$CFLAGS"
 	make DESTDIR=$PKG install
