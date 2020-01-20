@@ -5,7 +5,7 @@
 # Nice to have: mysql, libssh, libidn, libssh, gtk
 
 name=thc-hydra
-version=8.9.1
+version=9.0
 release=1
 source=(https://github.com/vanhauser-thc/thc-hydra/archive/v$version/$name-v$version.tar.gz)
 
@@ -17,6 +17,5 @@ build() {
   ./configure --prefix=$PKG/usr
 
   make
-  make install
-  
+  MANDIR="/share/man" make install
 }
