@@ -5,17 +5,17 @@
 # Depends on: iptables libmnl
 
 name=xtables-addons
-version=2.9
+version=3.7
 release=1
 source=(http://downloads.sourceforge.net/project/$name/Xtables-addons/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
-
+	./autogen.sh
 	./configure \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
-		--mandir=/usr/man \
+		--with-xtlibdir=/usr/lib/xtables \
 		--disable-dependency-tracking
 
 	make
