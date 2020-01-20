@@ -5,7 +5,7 @@
 
 name=grml-shlib
 version=1.04.1
-release=1
+release=2
 source=(http://deb.grml.org/pool/main/g/$name/${name}_${version}.tar.gz \
   grml-shlib.3)
 
@@ -13,8 +13,8 @@ build() {
     cd $name-$version
 
     mkdir -p $PKG/usr/lib/grml
-    mkdir -p $PKG/usr/man/man3
-    
+    mkdir -p $PKG/usr/share/man/man3
+
     install -m 755 sh-lib $PKG/usr/lib/grml
-    install -m 644 $SRC/grml-shlib.3 $PKG/usr/man/man3
+    install -m 644 $SRC/grml-shlib.3 $PKG/usr/share/man/man3
 }
