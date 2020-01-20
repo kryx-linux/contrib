@@ -5,7 +5,7 @@
 
 name=libmcrypt
 version=2.5.8
-release=2
+release=3
 source=(http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/$version/$name-$version.tar.gz)
 
 build() {
@@ -13,6 +13,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/share/man \
 		--disable-posix-threads
 
 	make DESTDIR=$PKG install
