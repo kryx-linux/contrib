@@ -6,7 +6,7 @@
 
 name=openblas
 version=0.3.7
-release=1
+release=2
 source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz)
 
 build () {
@@ -28,13 +28,9 @@ build () {
   ln -sf libopenblas.so libcblas.so.${_lapackver:0:1}
   ln -sf libopenblas.so libcblas.so.${_lapackver}
   # LAPACK
-  ln -sf libopenblas.so liblapack.so
-  ln -sf libopenblas.so liblapack.so.${_lapackver:0:1}
-  ln -sf libopenblas.so liblapack.so.${_lapackver}
+  # provided by lapack
   # LAPACKE
-  ln -sf libopenblas.so liblapacke.so
-  ln -sf libopenblas.so liblapacke.so.${_lapackver:0:1}
-  ln -sf libopenblas.so liblapacke.so.${_lapackver}
+  # provided by lapack
 
   # fix paths
   sed -i 's|'$PKG'||g' $PKG/usr/lib/cmake/$name/*.cmake
