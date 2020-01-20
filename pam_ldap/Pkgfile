@@ -5,7 +5,7 @@
 
 name=pam_ldap
 version=186
-release=2
+release=3
 source=(http://www.padl.com/download/$name-$version.tar.gz)
 
 build() {
@@ -14,10 +14,10 @@ build() {
 		--prefix=/usr \
 		--libdir=/lib \
 		--sysconfdir=/etc \
-		--mandir=/usr/man \
+		--mandir=/usr/share/man \
 		--with-ldap-lib=openldap \
 		--with-ldap-conf-file=/etc/pam_ldap.conf
-	make
+	PERL5LIB="$PWD" PATH="$PATH:$SRC/$name-$version" make
 	make DESTDIR=$PKG install
 
 	mv $PKG/etc/ldap.conf $PKG/etc/pam_ldap.conf
