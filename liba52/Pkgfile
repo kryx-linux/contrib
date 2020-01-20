@@ -4,7 +4,7 @@
 
 name=liba52
 version=0.7.4
-release=6
+release=7
 source=(http://liba52.sourceforge.net/files/a52dec-$version.tar.gz
 	a52dec-0.7.4-build.patch)
 
@@ -20,7 +20,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
+		--mandir=/usr/share/man \
 		--disable-solaris-audio \
 		--disable-win \
 		--enable-shared \
