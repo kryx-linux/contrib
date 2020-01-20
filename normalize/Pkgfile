@@ -6,14 +6,15 @@
 
 name=normalize
 version=0.7.7
-release=1
-source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.bz2)
+release=2
+source=(https://download.savannah.gnu.org/releases/$name/$name-$version.tar.bz2)
 
 build() {
 	cd normalize-$version
 
 	./configure \
 		--prefix=/usr \
+		--mandir=/usr/share/man \
 		--disable-nls
 
 	make
@@ -21,4 +22,3 @@ build() {
 	# Don't make and or use this for oggs. Use vorbisgain.
 	rm $PKG/usr/bin/normalize-ogg
 }
-
