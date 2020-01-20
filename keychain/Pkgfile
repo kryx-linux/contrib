@@ -5,12 +5,12 @@
 # Depends on:
 
 name=keychain
-version=2.8.3
+version=2.8.5
 release=1
-source=(http://www.funtoo.org/archive/$name/$name-$version.tar.bz2)
+source=(https://github.com/funtoo/keychain/archive/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 	install -D -m755 keychain $PKG/usr/bin/keychain
-	install -D -m644 keychain.1 $PKG/usr/man/man1/keychain.1
+	install -D -m644 keychain.1 $PKG/usr/share/man/man1/keychain.1
 }
