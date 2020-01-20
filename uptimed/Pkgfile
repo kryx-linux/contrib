@@ -2,12 +2,12 @@
 # URL: https://github.com/rpodgorny/uptimed
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: 
+# Depends on:
 
 name=uptimed
-version=0.4.0
+version=0.4.2
 release=1
-source=(https://github.com/rpodgorny/uptimed/archive/v$version.tar.gz
+source=(https://github.com/rpodgorny/uptimed/archive/v$version/$name-$version.tar.gz
 	uptimed.rc)
 
 build() {
@@ -16,8 +16,7 @@ build() {
 	./autogen.sh
 	./configure \
 		--prefix=/usr \
-		--sysconfdir=/etc \
-		--mandir=/usr/man
+		--sysconfdir=/etc
 
 	make
 	make DESTDIR=$PKG install
