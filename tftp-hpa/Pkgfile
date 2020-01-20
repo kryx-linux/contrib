@@ -4,13 +4,12 @@
 
 name=tftp-hpa
 version=5.2
-release=1
+release=2
 source=(http://www.kernel.org/pub/software/network/tftp/tftp-hpa/$name-$version.tar.xz)
 
 build () {
   cd $name-$version
-  ./configure --prefix=/usr \
-              --mandir=/usr/man
+  ./configure --prefix=/usr
   make
   make INSTALLROOT=$PKG install
 }
