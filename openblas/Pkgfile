@@ -11,12 +11,12 @@ source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.t
 
 build () {
   cd OpenBLAS-$version
-  make NO_LAPACK=0 NO_STATIC=1 \
+  make NO_LAPACK=1 NO_LAPACKE=1 NO_STATIC=1 \
     USE_OPENMP=1 DYNAMIC_ARCH=1 DYNAMIC_OLDER=1 NUM_THREADS=64 \
     CFLAGS="$CFLAGS $CPPFLAGS" libs netlib shared
   make PREFIX=$PKG/usr install
 
-  # Symlink to provide blas, cblas, lapack and lapacke
+  # Symlink to provide blas, cblas
   cd $PKG/usr/lib/
   local _lapackver='3.8.0'
   # BLAS
@@ -29,9 +29,11 @@ build () {
   ln -sf libopenblas.so libcblas.so.${_lapackver}
   # LAPACK
   # provided by lapack
+  #rm -r $PKG/usr/lib/liblapack.so.3
   # LAPACKE
   # provided by lapack
-
+  rm -r $PKG/usr/include/lapacke{.h,_config.h,_mangling.h,_utils.h}
+  #rm -r $PKG/usr/lib/liblapacke.so.3
   # fix paths
   sed -i 's|'$PKG'||g' $PKG/usr/lib/cmake/$name/*.cmake
   sed -i 's|'$PKG'||g' $PKG/usr/lib/pkgconfig/openblas.pc
