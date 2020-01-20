@@ -4,7 +4,7 @@
 
 name=gsm
 version=1.0.14
-release=1
+release=2
 source=(
 http://www.quut.com/$name/$name-$version.tar.gz
 gsm.patch
@@ -16,7 +16,8 @@ build() {
 	# Patch to build shared library instead of static
 	patch -p0 -i $SRC/gsm.patch
 
-	install -d -m 755  $PKG/usr/{bin,include/gsm,man/man{1,3},lib}
+	install -d -m 755  $PKG/usr/{bin,include/gsm,share/man/man{1,3},lib}
+	sed 's!\/man\/man3!\/share\/man\/man3!g' -i Makefile
 
 	make CCFLAGS="-c $CFLAGS -fPIC"
 	make -j1 INSTALL_ROOT=$PKG/usr GSM_INSTALL_INC="$PKG/usr/include/gsm" install
