@@ -5,30 +5,38 @@
 
 name=dsniff
 version=2.4b1
-release=1
+release=2
 source=(http://monkey.org/~dugsong/dsniff/beta/$name-$version.tar.gz
+        http://ftp.de.debian.org/debian/pool/main/d/$name/${name}_2.4b1+debian-29.debian.tar.xz
         2.3-makefile.patch dsniff-2.4_beta1-debian-r1.patch
-        dsniff-httppostfix.patch)
+        dsniff-httppostfix.patch dsniff-rpc.patch
+        dsniff-macof-size-calculation.patch
+        dsniff-rpc.patch dsniff-macof-size-calculation.patch)
 
 build() {
     cd  $name-2.4
-    patch -i ../2.3-makefile.patch
-    patch -i ../dsniff-2.4_beta1-debian-r1.patch
+    ## https://git.archlinux.org/svntogit/community.git/tree/trunk/PKGBUILD?h=packages/dsniff
+    while IFS='' read -r patch || [[ -n "${patch}" ]]; do
+      echo "** Applying patch ${patch}"
+      patch -Np1 < "../debian/patches/${patch}"
+    done < ../debian/patches/series
+    patch -i ../dsniff-macof-size-calculation.patch
     patch -i ../dsniff-httppostfix.patch
+    patch -i ../dsniff-rpc.patch
     sed -i -e 's/CLK_TCK/CLOCKS_PER_SEC/g' sshow.c
-    export LDFLAGS="`pkg-config --libs gthread-2.0` -lresolv" 
-    export CFLAGS="`pkg-config --cflags gthread-2.0`" 
-    ./configure --prefix=/usr
+    export LDFLAGS="`pkg-config --libs gthread-2.0` -lresolv"
+    export CFLAGS="`pkg-config --cflags gthread-2.0`"
+    autoreconf -fiv
+    ./configure --prefix=/usr --with-libtirpc
     #echo 'LDFLAGS += -lresolv' >> Makefile
     make
     install -d -m 755 $PKG/usr/sbin
     for prog in arpspoof dnsspoof dsniff filesnarf macof mailsnarf msgsnarf \
-    sshmitm sshow tcpkill tcpnice  urlsnarf webmitm webspy; do \
+    sshmitm sshow tcpkill tcpnice  urlsnarf webmitm; do \
       install -m 755 $prog $PKG/usr/sbin/; done
-    install -d -m 755 $PKG/usr/man/man8
-    for man in *.8; do install -D -m 644 $man $PKG/usr/man/man8; done
+    install -d -m 755 $PKG/usr/share/man/man8
+    for man in *.8; do install -D -m 644 $man $PKG/usr/share/man/man8; done
     install -d -m 755 $PKG/usr/share/dsniff
     for shares in dnsspoof.hosts dsniff.magic dsniff.services; do \
       install -m 644 $shares $PKG/usr/share/dsniff; done
-
 }
