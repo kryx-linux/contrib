@@ -6,7 +6,7 @@
 
 name=grml-crypt
 version=0.27
-release=1
+release=2
 source=(http://deb.grml.org/pool/main/g/$name/${name}_${version}.tar.gz \
   path_fstype.patch)
 
@@ -16,7 +16,6 @@ build() {
     patch -p1 < $SRC/path_fstype.patch
 
     mkdir -p $PKG/usr/sbin
-    mkdir -p $PKG/usr/man/man8
 
     install -m 755 grml-crypt $PKG/usr/sbin
 }
