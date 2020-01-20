@@ -1,7 +1,7 @@
 # Description: Linear Algebra PACKage - F77 routines for Linear Algebra.
 # URL: http://www.netlib.org/lapack/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cmake gcc-fortran python3
+# Depends on: cmake gcc-fortran python3 openblas
 
 name=lapack
 version=3.9.0
@@ -34,4 +34,8 @@ build() {
 
   make
   make DESTDIR=$PKG install
+
+  # provided by openblas
+  rm -r $PKG/usr/include/{lapacke.h,lapacke_config.h,lapacke_mangling.h,lapacke_utils.h}
+  rm -r $PKG/usr/lib/{liblapack.so,liblapack.so.3,liblapacke.so,liblapacke.so.3}
 }
