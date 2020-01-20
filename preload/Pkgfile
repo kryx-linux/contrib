@@ -6,7 +6,7 @@
 
 name=preload
 version=0.6.4
-release=2
+release=3
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
 	rc.preload
 	$name-0.6.3-memcached-default.patch
@@ -22,7 +22,6 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
 		--sysconfdir=/etc \
 		--localstatedir=/var
 
@@ -31,12 +30,11 @@ build() {
 
 	rm -r $PKG/etc/{rc.d,logrotate.d,sysconfig}
 	rm -r $PKG/usr/share/doc
-	rmdir $PKG/usr/share
-	
+
 	# preload.state is installed 0644 but changed to 0600 on first run,
 	# so we change the mode in the package to avoid rejmerge.
 	chmod 0600 $PKG/var/cache/preload/preload.state
-	
+
 	# install services rc script
 	install -m 0755 -D $SRC/rc.preload $PKG/etc/rc.d/preload
 }
