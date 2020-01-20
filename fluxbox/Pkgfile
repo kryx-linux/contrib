@@ -13,8 +13,7 @@ build() {
 
    ./configure \
       --prefix=/usr \
-      --disable-nls \
-      --mandir=/usr/man
+      --disable-nls
 
    # skip NLS stuff
    sed -i '/nls\/[a-z][a-z]_[A-Z][A-Z]/d' Makefile
