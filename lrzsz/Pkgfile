@@ -4,7 +4,7 @@
 
 name=lrzsz
 version=0.12.20
-release=2
+release=3
 source=(http://www.ohse.de/uwe/releases/$name-$version.tar.gz)
 
 build() {
@@ -13,10 +13,10 @@ build() {
 	make
 	for d in r s; do
 		install -D src/l${d}z $PKG/usr/bin/${d}z
-		install -D man/l${d}z.1 $PKG/usr/man/man1/${d}z.1
+		install -D man/l${d}z.1 $PKG/usr/share/man/man1/${d}z.1
 		for p in b x; do
 			ln -s ${d}z $PKG/usr/bin/${d}${p}
-			ln -s ${d}z.1.gz $PKG/usr/man/man1/${d}${p}.1.gz
+			ln -s ${d}z.1.gz $PKG/usr/share/man/man1/${d}${p}.1.gz
 		done
 	done
 }
