@@ -6,13 +6,13 @@
 
 name=nmap
 version=7.80
-release=1
-source=(http://nmap.org/dist/$name-$version.tar.bz2)
+release=2
+source=(https://nmap.org/dist/$name-$version.tar.bz2)
 
 
 build () {
     cd $name-$version
-    ./configure --prefix=/usr --libexecdir=/usr/lib --mandir=/usr/man \
+    ./configure --prefix=/usr --libexecdir=/usr/lib \
     --with-libpcre=included --with-liblua=included \
     --without-zenmap --without-ndiff --disable-nls \
     --without-nmap-update
@@ -21,5 +21,4 @@ build () {
     make DESTDIR=$PKG install
 
     rm -f $PKG/usr/share/nmap/nselib/data/psexec/README
-    
 }
