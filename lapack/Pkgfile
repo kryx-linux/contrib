@@ -34,8 +34,4 @@ build() {
 
   make
   make DESTDIR=$PKG install
-
-  # provided by openblas
-  rm -r $PKG/usr/include/{lapacke.h,lapacke_config.h,lapacke_mangling.h,lapacke_utils.h}
-  rm -r $PKG/usr/lib/{liblapack.so,liblapack.so.3,liblapacke.so,liblapacke.so.3}
 }
