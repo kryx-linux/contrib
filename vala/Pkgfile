@@ -4,15 +4,15 @@
 # Depends on:  glib
 
 name=vala
-version=0.36.20
+version=0.46.5
 release=1
 source=(http://download.gnome.org/sources/vala/${version%.*}/vala-$version.tar.xz)
 
 build() {
   cd $name-$version
   ./configure --prefix=/usr \
-              --mandir=/usr/man 
-  make CFLAGS="$CFLAGS -Wno-deprecated-declarations"
+    --disable-valadoc
+  make
   make install DESTDIR=$PKG
-  rm -r $PKG/usr/share/devhelp
+  rm -r $PKG/usr/share/valadoc
 }
