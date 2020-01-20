@@ -1,24 +1,22 @@
-# Description: Ncurse-based MPD console client 
+# Description: Ncurse-based MPD console client
 # URL:         http://www.musicpd.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Depends on:  ncurses libmpdclient
+# Depends on:  boost ncurses libmpdclient
 
 name=ncmpc
-version=0.27
+version=0.36
 release=1
-source=(http://www.musicpd.org/download/ncmpc/0/ncmpc-$version.tar.xz)
+source=(https://www.musicpd.org/download/ncmpc/0/ncmpc-$version.tar.xz)
 
 build() {
   cd $name-$version
-    
-  ./configure \
-    --sysconfdir=/etc \
+
+  meson build . \
     --prefix=/usr \
-    --mandir=/usr/man \
-    --disable-nls
-  make
-  make install DESTDIR=$PKG
+    --sysconfdir=/etc \
+    -Dnls=disabled
+  ninja -C build
+  DESTDIR=$PKG ninja -C build install
 
   mkdir -p $PKG/etc/ncmpc
 
