@@ -5,7 +5,7 @@
 # Depends on: libusb openssl tcp_wrappers
 
 name=nut
-version=2.7.1
+version=2.7.4
 release=1
 source=(http://www.networkupstools.org/source/${version%.*}/$name-$version.tar.gz
 	upsd)
@@ -17,7 +17,6 @@ build() {
 		--prefix=/usr \
 		--with-user=nut \
 		--with-group=nut \
-		--mandir=/usr/man \
 		--sysconfdir=/etc/$name \
 		--datadir=/usr/share/$name \
 		--localstatedir=/var/$name
