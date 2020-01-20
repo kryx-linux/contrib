@@ -1,22 +1,22 @@
-# Description: Extracts URLs from text 
+# Description: Extracts URLs from text
 # URL:         ftp://ftp.mutt.org/pub/mutt/contrib/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Simon Glossner, viper at hometux dot de
 # Depends on:  ncurses
 
 name=urlview
 version=0.9
-release=1
+release=2
 source=(ftp://ftp.netbsd.org/pub/pkgsrc/distfiles/${name}-${version}.tar.gz \
   ${name}-${version}.patch)
 
 build () {
     cd $name-$version
-    
-    mkdir -p $PKG/usr/man/man1
+
+    mkdir -p $PKG/usr/share/man/man1
     patch -p1 < ../$name-$version.patch
-    
-    ./configure --prefix=/usr
+
+    ./configure --prefix=/usr \
+      --mandir=/usr/share/man
     make
     make DESTDIR=$PKG install
 }
