@@ -5,23 +5,24 @@
 
 name=nss_ldap
 version=265
-release=3
-source=(http://www.padl.com/download/$name-$version.tar.gz nss_ldap-265-glibc-2.16.patch)
+release=4
+source=(https://www.padl.com/download/$name-$version.tar.gz nss_ldap-265-glibc-2.16.patch)
 
 build() {
-        cd $name-$version
+  cd $name-$version
 
-	patch -p1 -i $SRC/nss_ldap-265-glibc-2.16.patch
-	sed -i -e 's|CVSVERSIONDIR=\$(top_srcdir) vers_string|CVSVERSIONDIR=\$(top_srcdir) ./vers_string|g' Makefile.am Makefile.in
+  patch -p1 -i $SRC/nss_ldap-265-glibc-2.16.patch
+  sed -i -e 's|CVSVERSIONDIR=\$(top_srcdir) vers_string|CVSVERSIONDIR=\$(top_srcdir) ./vers_string|g' Makefile.am Makefile.in
 
-	./configure \
-		--prefix=/usr \
-		--libdir=/lib \
-		--sysconfdir=/etc \
-		--mandir=/usr/man \
-		--with-ldap-lib=openldap \
-		--with-ldap-conf-file=/etc/nss_ldap.conf
-	make
-	mkdir -p $PKG/lib $PKG/usr/man
-	make DESTDIR=$PKG install
+  export PERL5LIB="$PWD"
+  ./configure \
+    --prefix=/usr \
+    --libdir=/lib \
+    --sysconfdir=/etc \
+    --mandir=/usr/share/man \
+    --with-ldap-lib=openldap \
+    --with-ldap-conf-file=/etc/nss_ldap.conf
+  make
+  mkdir -p $PKG/lib $PKG/usr/man
+  make DESTDIR=$PKG install
 }
