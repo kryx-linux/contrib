@@ -1,11 +1,10 @@
 # Description: multi-protocol instant messaging client.
 # URL: http://pidgin.im/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Simone Rota, sip at crux dot nu
 # Depends on: cyrus-sasl dbus-glib farstream gtkspell libidn nss xorg-libxscrnsaver
 
 name=pidgin
-version=2.12.0
+version=2.13.0
 release=1
 source=(http://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$version.tar.bz2
 	$name.desktop)
@@ -35,4 +34,6 @@ build() {
 
 	find $PKG/usr/lib/ -name '*.la' -delete
 	rm -rf $PKG/usr/etc/gconf
+
+	rm $PKG/usr/lib/perl5/linux-thread-multi/perllocal.pod
 }
