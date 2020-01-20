@@ -6,18 +6,18 @@
 
 name=muttprint
 version=0.72d
-release=1
+release=2
 source=(http://download.sourceforge.net/${name}/${name}-${version}.tar.gz)
 
 build() {
   cd $name-$version
 
   mkdir -p $PKG/usr/bin \
-    $PKG/usr/man/man1 \
+    $PKG/usr/share/man/man1 \
     $PKG/usr/share/muttprint
 
   install -m 0755 muttprint $PKG/usr/bin/
-  install -m 0644 doc/manpages/en/muttprint.1.gz $PKG/usr/man/man1/ 
+  install -m 0644 doc/manpages/en/muttprint.1.gz $PKG/usr/share/man/man1/
 
   install -m 0644 sample-muttprintrc-en $PKG/usr/share/muttprint/muttprintrc
   install -m 0644 pics/*.eps $PKG/usr/share/muttprint/
