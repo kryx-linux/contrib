@@ -7,7 +7,7 @@
 
 name=libdv
 version=1.0.0
-release=2
+release=3
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
 	http://crux.ster.zone/downloads/$name/$name-1.0.0-pic.patch.bz2
 	$name-0.99-2.6.patch)
@@ -20,7 +20,7 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--mandir=/usr/man \
+		--mandir=/usr/share/man \
 		--enable-sdl
 
 	make
