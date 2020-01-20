@@ -1,17 +1,17 @@
 # Description:	DietC is a libc that is optimized for size
 # URL:		http://www.fefe.de/dietlibc/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on: 
+# Depends on:
 
 name=dietlibc
-version=0.33
+version=0.34
 release=1
 
-source=(http://www.fefe.de/$name/$name-$version.tar.bz2)
+source=(http://www.fefe.de/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
-	mkdir -p $PKG/{etc,usr} 
+	mkdir -p $PKG/{etc,usr/share}
 
 	make prefix=/usr/dietlibc
 
@@ -20,6 +20,6 @@ build() {
 
 	make prefix=/usr/dietlibc DESTDIR=$PKG install
 
-	mv $PKG/usr/dietlibc/man $PKG/usr
+	mv $PKG/usr/dietlibc/man $PKG/usr/share
 	rmdir $PKG/etc
 }
