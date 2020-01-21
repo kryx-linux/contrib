@@ -4,9 +4,9 @@
 # Depends on:  glib
 
 name=syslog-ng
-version=3.20.1
+version=3.25.1
 release=1
-source=(https://github.com/balabit/$name/archive/$version/$name-$version.tar.gz
+source=(https://github.com/$name/$name/releases/download/$name-$version/$name-$version.tar.gz
 syslog-ng.rc syslog-ng.conf)
 
 build() {
@@ -15,9 +15,8 @@ build() {
    ./configure \
       --prefix=/usr \
       --sysconfdir=/etc \
-      --libexecdir=/var/libexec \
+      --libexecdir=/var/lib/$name \
       --localstatedir=/var/run \
-      --mandir=/usr/man \
       --enable-dynamic-linking \
       --sbindir=/sbin \
       --disable-java \
