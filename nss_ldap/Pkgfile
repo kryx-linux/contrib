@@ -23,6 +23,6 @@ build() {
     --with-ldap-lib=openldap \
     --with-ldap-conf-file=/etc/nss_ldap.conf
   make
-  mkdir -p $PKG/lib $PKG/usr/man
+  mkdir -p $PKG/lib
   make DESTDIR=$PKG install
 }
