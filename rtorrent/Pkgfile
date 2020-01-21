@@ -15,7 +15,7 @@ build() {
   sed -i '/AM_PATH_CPPUNIT(.*)/d' configure.ac
   ./autogen.sh
 
-  ./configure --prefix=/usr --mandir=/usr/man --enable-debug=no
+  ./configure --prefix=/usr --enable-debug=no
   make
   make install DESTDIR=$PKG
   #install -m 644 -D doc/old/rtorrent.1 $PKG/usr/share/man/man1/rtorrent.1
