@@ -13,19 +13,18 @@ build() {
 	cd DenyHosts-$version
 
 	/usr/bin/python setup.py install --root=$PKG
-	
+
 	install -d $PKG/etc/{denyhosts,rc.d} $PKG/usr/sbin
-	
+
 	mv $PKG/etc/denyhosts.conf \
 		$PKG/etc/denyhosts/denyhosts.conf
-	
+
 	mv $PKG/usr/bin/daemon-control-dist \
 		$PKG/etc/rc.d/denyhosts
-	
-	mv $PKG/usr/bin/denyhosts.py $PKG/usr/sbin/denyhosts
-	mv $PKG/usr/share/man $PKG/usr/man
 
-	rmdir $PKG/usr/share $PKG/usr/bin
+	mv $PKG/usr/bin/denyhosts.py $PKG/usr/sbin/denyhosts
+
+	rmdir $PKG/usr/bin
 
 	sed -i \
 		-e 's|^DENYHOSTS_LOCK  = .*|DENYHOSTS_LOCK  = "/var/run/denyhosts.pid"|' \
