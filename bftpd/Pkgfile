@@ -19,7 +19,7 @@ build() {
 		--enable-libz
 
 	make
-	install -d $PKG/usr/sbin $PKG/usr/man/man8 $PKG/etc $PKG/etc/rc.d
+	install -d $PKG/usr/sbin $PKG/etc $PKG/etc/rc.d
 	make DESTDIR=$PKG install
 
 	# bftpd version 3.7 moved these directories and --sysconfdir
