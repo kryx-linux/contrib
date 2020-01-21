@@ -4,13 +4,13 @@
 # Depends on:
 
 name=intel-tbb
-version=2020.0
+version=2020.1
 release=1
 source=(https://github.com/01org/tbb/archive/v${version::4}.${version:5:7}/$name-$version.tar.gz)
 #source=(https://github.com/intel/tbb/archive/v2020.0.tar.gz)
 
 build() {
-  cd tbb-2020.0
+  cd tbb-$version
   make
   install -d $PKG/usr/lib
   install -m755 build/linux_*/*.so* $PKG/usr/lib
