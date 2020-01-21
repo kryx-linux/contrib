@@ -4,19 +4,17 @@
 # Depends on:
 
 name=gradm
-version=201701031918
+version=3.1-201903191516
 release=1
-source=(https://grsecurity.net/stable/gradm-3.1-$version.tar.gz)
+source=(https://grsecurity.net/stable/gradm-$version.tar.gz)
 
 build() {
-
-	cd $name
+  cd $name
 
   install -d $PKG/etc/udev/rules.d
 
   make
-  make DESTDIR=$PKG MANDIR=/usr/man install
+  make DESTDIR=$PKG MANDIR=/usr/share/man install
 
   rm -r $PKG/dev
-
 }
