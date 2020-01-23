@@ -24,6 +24,7 @@ drwxr-xr-x	root/root	usr/include/flatpak/
 -rw-r--r--	root/root	usr/include/flatpak/flatpak.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/flatpak-dbus-proxy
+-rwxr-xr-x	root/root	usr/lib/flatpak-oci-authenticator
 -rwxr-xr-x	root/root	usr/lib/flatpak-portal
 -rwxr-xr-x	root/root	usr/lib/flatpak-session-helper
 -rwxr-xr-x	root/root	usr/lib/flatpak-system-helper
@@ -31,9 +32,9 @@ drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/girepository-1.0/
 -rw-r--r--	root/root	usr/lib/girepository-1.0/Flatpak-1.0.typelib
 -rwxr-xr-x	root/root	usr/lib/libflatpak.la
-lrwxrwxrwx	root/root	usr/lib/libflatpak.so -> libflatpak.so.0.10600.0
-lrwxrwxrwx	root/root	usr/lib/libflatpak.so.0 -> libflatpak.so.0.10600.0
--rwxr-xr-x	root/root	usr/lib/libflatpak.so.0.10600.0
+lrwxrwxrwx	root/root	usr/lib/libflatpak.so -> libflatpak.so.0.10601.0
+lrwxrwxrwx	root/root	usr/lib/libflatpak.so.0 -> libflatpak.so.0.10601.0
+-rwxr-xr-x	root/root	usr/lib/libflatpak.so.0.10601.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/flatpak.pc
 -rwxr-xr-x	root/root	usr/lib/revokefs-fuse
@@ -43,9 +44,11 @@ drwxr-xr-x	root/root	usr/share/bash-completion/completions/
 -rw-r--r--	root/root	usr/share/bash-completion/completions/flatpak
 drwxr-xr-x	root/root	usr/share/dbus-1/
 drwxr-xr-x	root/root	usr/share/dbus-1/interfaces/
+-rw-r--r--	root/root	usr/share/dbus-1/interfaces/org.freedesktop.Flatpak.Authenticator.xml
 -rw-r--r--	root/root	usr/share/dbus-1/interfaces/org.freedesktop.Flatpak.xml
 -rw-r--r--	root/root	usr/share/dbus-1/interfaces/org.freedesktop.portal.Flatpak.xml
 drwxr-xr-x	root/root	usr/share/dbus-1/services/
+-rw-r--r--	root/root	usr/share/dbus-1/services/org.flatpak.Authenticator.Oci.service
 -rw-r--r--	root/root	usr/share/dbus-1/services/org.freedesktop.Flatpak.service
 -rw-r--r--	root/root	usr/share/dbus-1/services/org.freedesktop.portal.Flatpak.service
 drwxr-xr-x	root/root	usr/share/dbus-1/system-services/
@@ -86,9 +89,11 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-kill.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-list.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-make-current.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/flatpak-mask.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-override.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-permission-remove.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-permission-reset.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/flatpak-permission-set.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-permission-show.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-permissions.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flatpak-ps.1.gz
