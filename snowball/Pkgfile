@@ -1,17 +1,16 @@
 # Description: String processing language for creating stemming algorithms
 # URL: http://snowballstem.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: git
+# Depends on:
 
 name=snowball
-version=git
+version=2.0.0
 release=1
-source=(dynamiclib.patch)
-git=(https://github.com/snowballstem/snowball.git)
+source=(https://github.com/snowballstem/snowball/archive/v$version/$name-$version.tar.gz
+  dynamiclib.patch)
 
 build() {
-    git clone $git $name
-    cd $name
+    cd $name-$version
     patch -Np1 -i ../dynamiclib.patch
 
     make
