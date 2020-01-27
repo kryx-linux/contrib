@@ -1,38 +1,17 @@
 # Description: Python Imaging Library (PIL) fork.
-# URL: http://python-pillow.github.io/
+# URL: https://python-pillow.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: lcms2 libwebp python3-setuptools
-# Optional: sane
+# Depends on: lcms2 libraqm libwebp
+# Optional: tk
 
 name=python3-pillow
-version=4.3.0
-_saneversion=2.8.3
+_name=Pillow
+version=7.0.0
 release=1
-source=(https://github.com/python-pillow/Pillow/archive/$version/Pillow-$version.tar.gz
-	https://github.com/python-pillow/Sane/archive/v$_saneversion/Sane-v$_saneversion.tar.gz)
+source=(https://files.pythonhosted.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
 
 build() {
-	# allow sane to build
-	sed -i -e "s|os.path.join|'../libImaging', &|" "$SRC/Sane-$_saneversion/setup.py"
-	cp -r "$SRC/Sane-$_saneversion" "$SRC/Pillow-$version/Sane"
-
-	cd Pillow-$version
+	cd $_name-$version
 	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --root=$PKG --optimize=0
-
-	if pkg-config --exists sane-backends; then
-		cd Sane
-		/usr/bin/python3 setup.py build
-		/usr/bin/python3 setup.py install --root=$PKG --optimize=0
-		cd -
-
-		install -d -m 0755 "$PKG/usr/include/python3.6m/"
-		install -m 0644 -t "$PKG/usr/include/python3.6m/" libImaging/*.h
-	fi
-
-	# clean up bins
-	cd $PKG/usr/bin
-	for f in *.py; do
-		mv "$f" "${f%.py}3"
-	done
+	/usr/bin/python3 setup.py install --root=$PKG --optimize=1
 }
