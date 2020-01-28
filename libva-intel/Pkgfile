@@ -1,12 +1,12 @@
 # Description: libva video acceleration for newer intel based setups
-# URL:         http://freedesktop.org/wiki/Software/vaapi
+# URL:         https://github.com/intel/intel-vaapi-driver
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Depends on:  glu ffmpeg libva
 
 name=libva-intel
 version=2.4.0
 release=1
-source=(https://github.com/01org/intel-vaapi-driver/releases/download/${version}/intel-vaapi-driver-${version}.tar.bz2)
+source=(https://github.com/intel/intel-vaapi-driver/releases/download/${version}/intel-vaapi-driver-${version}.tar.bz2)
 
 build() {
   cd intel-vaapi-driver-$version
