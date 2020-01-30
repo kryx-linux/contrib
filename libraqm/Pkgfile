@@ -6,15 +6,14 @@
 name=libraqm
 version=0.7.0
 release=1
-source=(https://github.com/HOST-Oman/libraqm/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/HOST-Oman/libraqm/releases/download/v$version/raqm-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd raqm-$version
 
-	./autogen.sh
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 
-	rm -rf $PKG/usr/share/gtk-doc
+	rm -r $PKG/usr/share/gtk-doc
 }
