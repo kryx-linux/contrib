@@ -1,16 +1,19 @@
 # Description: Perl extension for using OpenSSL.
-# URL: http://search.cpan.org/dist/Net-SSLeay/
+# URL: https://metacpan.org/release/Net-SSLeay
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: openssl
 
 name=p5-net-ssleay
-version=1.85
+version=1.88
+_realname=Net-SSLeay
+_author=CHRISN
 release=1
-source=(https://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/${_author::1}/${_author::2}/$_author/$_realname-$version.tar.gz)
 
 build() {
-	cd Net-SSLeay-$version
-	echo y | perl Makefile.PL
+	cd $_realname-$version
+
+	PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
 	make OPTIMIZE="$CFLAGS"
 	make DESTDIR=$PKG install
 
