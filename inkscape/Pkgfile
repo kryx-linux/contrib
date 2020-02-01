@@ -6,17 +6,17 @@
 
 name=inkscape
 version=0.92.4
-release=3
+release=4
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.bz2
-	https://poppler.freedesktop.org/poppler-0.82.0.tar.xz
-	inkscape-0.92.4-poppler_0_82_0_fixes-1.patch
+	https://poppler.freedesktop.org/poppler-0.85.0.tar.xz
+	inkscape-0.92.4-poppler_0_83_0_fixes-1.patch
 	inkscape-0.92.4-use_versioned_ImageMagick6-1.patch
 	inkscape-0.92.4-upstream_fixes-1.patch)
 
 poppler() {
 #-boehm-gc boost gsl gtkmm poppler-glib popt
 #+cmake cairo lcms2 boehm-gc boost gsl gtkmm popt
-	cd poppler-0.82.0
+	cd poppler-0.85.0
 	cmake . \
         -DCMAKE_INSTALL_PREFIX=$SRC/poppler \
 	-DCMAKE_INSTALL_LIBDIR=$SRC/poppler/lib \
@@ -34,7 +34,7 @@ poppler() {
 	make
 	make install
 
-	install -D -t $PKG/usr/lib/ $SRC/poppler/lib/libpoppler.so.92
+	install -D -t $PKG/usr/lib/ $SRC/poppler/lib/libpoppler.so.95
 
 	export CXXFLAGS+=" -I$SRC/poppler/include -I$SRC/poppler/include/poppler"
 	export PKG_CONFIG_PATH="$SRC/poppler/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -48,7 +48,10 @@ build() {
 	# fix a problem introduced by Poppler-0.76.1
 	sed -e 's|new Lexer(xref, obj)|obj|g' -i src/extension/internal/pdfinput/pdf-parser.cpp
 
-	patch -p1 -i $SRC/inkscape-0.92.4-poppler_0_82_0_fixes-1.patch
+	# fix Inkscape to be able to build with poppler-0.82.0 and higher
+	sed -e 's|Unicode \*u|Unicode const *u|g' -i src/extension/internal/pdfinput/*
+
+	patch -p1 -i $SRC/inkscape-0.92.4-poppler_0_83_0_fixes-1.patch
 	patch -p1 -i $SRC/inkscape-0.92.4-use_versioned_ImageMagick6-1.patch
 	patch -p1 -i $SRC/inkscape-0.92.4-upstream_fixes-1.patch
 
