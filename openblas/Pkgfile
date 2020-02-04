@@ -6,13 +6,13 @@
 
 name=openblas
 version=0.3.7
-release=2
+release=3
 source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz)
 
 build () {
   cd OpenBLAS-$version
-  make NO_LAPACK=1 NO_LAPACKE=1 NO_STATIC=1 \
-    USE_OPENMP=1 DYNAMIC_ARCH=1 DYNAMIC_OLDER=1 NUM_THREADS=64 \
+  make NO_LAPACK=1 NO_LAPACKE=1 NO_STATIC=1 NO_AFFINITY=1 \
+    USE_OPENMP=1 DYNAMIC_ARCH=1 NUM_THREADS=64 MAJOR_VERSION=3 \
     CFLAGS="$CFLAGS $CPPFLAGS" libs netlib shared
   make PREFIX=$PKG/usr install
 
@@ -20,20 +20,19 @@ build () {
   cd $PKG/usr/lib/
   local _lapackver='3.8.0'
   # BLAS
-  ln -sf libopenblas.so libblas.so
-  ln -sf libopenblas.so libblas.so.${_lapackver:0:1}
-  ln -sf libopenblas.so libblas.so.${_lapackver}
+  ln -sf libopenblasp-r$version.so libblas.so
+  ln -sf libopenblasp-r$version.so libblas.so.${_lapackver:0:1}
+  ln -sf libopenblasp-r$version.so libblas.so.${_lapackver}
   # CBLAS
-  ln -sf libopenblas.so libcblas.so
-  ln -sf libopenblas.so libcblas.so.${_lapackver:0:1}
-  ln -sf libopenblas.so libcblas.so.${_lapackver}
+  ln -sf libopenblasp-r$version.so libcblas.so
+  ln -sf libopenblasp-r$version.so libcblas.so.${_lapackver:0:1}
+  ln -sf libopenblasp-r$version.so libcblas.so.${_lapackver}
   # LAPACK
   # provided by lapack
-  #rm -r $PKG/usr/lib/liblapack.so.3
   # LAPACKE
   # provided by lapack
-  rm -r $PKG/usr/include/lapacke{.h,_config.h,_mangling.h,_utils.h}
-  #rm -r $PKG/usr/lib/liblapacke.so.3
+  rm -r $PKG/usr/include/lapacke*
+
   # fix paths
   sed -i 's|'$PKG'||g' $PKG/usr/lib/cmake/$name/*.cmake
   sed -i 's|'$PKG'||g' $PKG/usr/lib/pkgconfig/openblas.pc
@@ -41,4 +40,8 @@ build () {
   # remove host CPU info if built with DYNAMIC_ARCH=1
   sed -i '/#define OPENBLAS_NEEDBUNDERSCORE/,/#define OPENBLAS_VERSION/{//!d}' \
     $PKG/usr/include/openblas_config.h
+
+  # provide pkgconfig files for blas and cblas
+  ln -s openblas.pc $PKG/usr/lib/pkgconfig/blas.pc
+  ln -s openblas.pc $PKG/usr/lib/pkgconfig/cblas.pc
 }
