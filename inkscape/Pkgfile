@@ -41,7 +41,7 @@ poppler() {
 }
 
 build() {
-	poppler
+	[ ! -e '/usr/lib/libpoppler.so.95' ] && poppler
 
 	cd $SRC/$name-$version
 
