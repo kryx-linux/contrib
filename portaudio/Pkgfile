@@ -2,24 +2,23 @@
 # URL:		http://portaudio.com
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on:	alsa-lib
+# Optional:	jack-audio-connection-kit
 
 name=portaudio
-version=19_20140130
+version=19.6.0
+_version=190600_20161030
 release=1
-source=(http://www.portaudio.com/archives/pa_stable_v${version}.tgz)
+source=(http://www.portaudio.com/archives/pa_stable_v${_version}.tgz)
 
 build() {
-	cd $name
+	mv $name $name-$version
+	cd $name-$version
+
 	./configure \
 		--prefix=/usr \
-		--enable-cxx \
-		--enable-static=no
+		--enable-cxx
 
-		#--with-host_os \
-		#--without-jack \
-		#--without-oss \
-		#--enable-shared=yes \
-	make -j 1
+	make -j1
 	make DESTDIR=$PKG install
 }
 
