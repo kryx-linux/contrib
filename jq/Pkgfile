@@ -11,8 +11,8 @@ source=(https://github.com/stedolan/jq/releases/download/jq-$version/jq-$version
 build() {
   cd $name-$version
 
-  # never use bundlded oniguruma for regex support
-  sed -i '242,245d;248,250d;256,267d'  configure.ac
+  # never use bundled oniguruma for regex support
+  sed -i '242,245d;248,250d;256,267d' configure.ac
   autoreconf -i
 
   ./configure --prefix=/usr \
