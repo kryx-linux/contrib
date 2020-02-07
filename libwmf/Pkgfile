@@ -1,15 +1,20 @@
 # Description:	Library to convert WMF files.
 # URL:	http://wvware.sourceforge.net/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	libgd, freetype
+# Depends on: libgd
 
 name=libwmf
-version=0.2.8.4
+version=0.2.12
 release=1
-source=(http://download.sourceforge.net/sourceforge/wvware/$name-$version.tar.gz)
+source=(https://github.com/caolanm/$name/archive/v$version/$name-v$version.tar.gz
+	libwmf-freetype.patch)
 
 build() {
         cd $name-$version
+
+	patch -p1 -i $SRC/libwmf-freetype.patch
+	autoreconf -vif -Ipatches
+
         ./configure --prefix=/usr
         make
         make DESTDIR=$PKG install
