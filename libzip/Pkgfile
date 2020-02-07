@@ -1,20 +1,22 @@
 # Description:	Library to handle zip files
-# URL:		http://nih.at/libzip/
+# URL:		https://nih.at/libzip/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Depends on: cmake
 
 name=libzip
-version=1.5.2
+version=1.6.1
 release=1
-source=(
-http://nih.at/$name/$name-$version.tar.xz
-)
+source=(https://nih.at/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
-	cmake . \
+	mkdir build
+	cd build
+
+	cmake .. \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
 	make DESTDIR=$PKG install
 }
