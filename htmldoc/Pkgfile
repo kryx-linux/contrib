@@ -1,24 +1,23 @@
 # Description: Converts HTML into Adobe PDF
 # URL:         http://michaelrsweet.github.io/htmldoc
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Depends on:
+# Depends on:  zlib
 
 name=htmldoc
-version=1.9.4
+version=1.9.7
 release=1
 source=(https://github.com/michaelrsweet/htmldoc/archive/v${version}/${name}-v${version}-source.tar.gz)
 
 build() {
   cd $name-$version
 
+  [ ! -e '/usr/bin/clang' ] && export CC='gcc'
+  [ ! -e '/usr/bin/clang++' ] && export CXX='g++'
+
   ./configure --prefix=/usr --disable-gnutls
 
   make
-  make prefix=$PKG/usr \
-    datadir=$PKG/usr/share \
-    bindir=$PKG/usr/bin \
-    mandir=$PKG/usr/share/man install
+  make DESTDIR=$PKG install
 
   rm -rf $PKG/usr/share/doc
 }
