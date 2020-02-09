@@ -1,12 +1,12 @@
 # Description: A screen saver and locker daemon for xorg.
 # URL: http://www.jwz.org/xscreensaver/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: bc fortune giflib glu libglade util-linux xorg-libxmu linux-pam
+# Depends on: bc fortune giflib glu libglade linux-pam xorg-libxmu
 
 name=xscreensaver
-version=5.42
+version=5.43
 release=1
-source=(https://www.jwz.org/$name/$name-$version.tar.gz \
+source=(https://www.jwz.org/$name/$name-$version.tar.gz
 	$name.pam)
 
 build() {
@@ -34,11 +34,14 @@ build() {
 
 	make
 	make install_prefix=$PKG install
-
+	chmod 755 $PKG/usr/bin/xscreensaver
 	install -d $PKG/usr/share/wallpapers
+
+	echo "NotShowIn=KDE;GNOME;" >> $PKG/usr/share/applications/xscreensaver-properties.desktop
 
 	# PAM service file
 	install -D -m 0644 $SRC/$name.pam \
 		$PKG/etc/pam.d/$name
+
 	rm -r $PKG/usr/share/{locale,xscreensaver/config/README}
 }
