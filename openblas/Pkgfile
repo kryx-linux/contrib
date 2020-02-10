@@ -5,8 +5,8 @@
 # Depends on: gcc-fortran
 
 name=openblas
-version=0.3.7
-release=3
+version=0.3.8
+release=1
 source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz)
 
 build () {
@@ -31,7 +31,7 @@ build () {
   # provided by lapack
   # LAPACKE
   # provided by lapack
-  rm -r $PKG/usr/include/lapacke*
+  rm -r $PKG/usr/include/lapack*
 
   # fix paths
   sed -i 's|'$PKG'||g' $PKG/usr/lib/cmake/$name/*.cmake
