@@ -5,7 +5,7 @@
 # Optional: sccache
 
 name=cbindgen
-version=0.13.0
+version=0.13.1
 release=1
 source=(https://github.com/eqrion/cbindgen/archive/v$version/$name-v$version.tar.gz)
 
@@ -19,5 +19,5 @@ build() {
 	cargo fetch
 	cargo build --release
 	cargo install --path . --root $PKG/usr
-	rm $PKG/usr/.crates.toml
+	rm $PKG/usr/.crates.toml $PKG/usr/.crates2.json
 }
