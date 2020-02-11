@@ -18,10 +18,10 @@ build() {
     cp -r glm $PKG/usr/include/
 
     mkdir -p $PKG/usr/lib/pkgconfig/
-    sed 's/@VERSION@/$version/' $SRC/glm.pc.in > $PKG/usr/lib/pkgconfig/glm.pc
+    sed "s/@VERSION@/$version/" $SRC/glm.pc.in > $PKG/usr/lib/pkgconfig/glm.pc
 
     mkdir -p $PKG/usr/lib/cmake/glm/
-    sed 's/@VERSION@/$version/' $SRC/glmConfigVersion.cmake.in > $PKG/usr/lib/cmake/glm/glmConfigVersion.cmake
-    sed 's/@VERSION@/$version/' $SRC/glmConfig.cmake.in > $PKG/usr/lib/cmake/glm/glmConfig.cmake
+    sed "s/@VERSION@/$version/" $SRC/glmConfigVersion.cmake.in > $PKG/usr/lib/cmake/glm/glmConfigVersion.cmake
+    sed "s/@VERSION@/$version/" $SRC/glmConfig.cmake.in > $PKG/usr/lib/cmake/glm/glmConfig.cmake
     install -Dm644 $SRC/glmTargets.cmake $PKG/usr/lib/cmake/glm/glmTargets.cmake
 }
