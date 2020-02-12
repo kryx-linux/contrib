@@ -5,12 +5,12 @@
 # Optional: patool mediainfo
 
 name=nnn
-version=2.9
+version=3.0
 release=1
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
 build() {
-  cd $name
+  cd $name-$version
   sed -i 's/install: all/install:/' Makefile
   make
   make DESTDIR=$PKG PREFIX=/usr install
