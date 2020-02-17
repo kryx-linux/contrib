@@ -4,11 +4,11 @@
 # Depends on:  alsa-lib cups fontconfig freetype giflib gtk krb5 lcms2 libjpeg-turbo libpng libxslt nss unzip xorg-libxt xorg-libxtst xorg-libxinerama zip
 
 name=openjdk8
-version=8u222-b10
-icedtea_version=3.13.0
-boot_version=20190719
+version=8u242-b08
+icedtea_version=3.15.0
+boot_version=20200217
 pkgsrc_quarter=2018Q3
-certdata_rev=f84b1b428d42
+certdata_rev=dc8776ff4759
 release=1
 source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.tar.xz
 	https://stygian.me/crux/distfiles/$name/corba-$version.tar.xz
@@ -75,7 +75,10 @@ build() {
 		--enable-improved-font-rendering \
 		--enable-non-nss-curves \
 		--enable-nss \
-		--enable-sunec \
+		--enable-system-cups \
+		--enable-system-fontconfig \
+		--enable-system-gio \
+		--enable-system-gtk \
 		--enable-system-jpeg \
 		--enable-system-kerberos \
 		--enable-system-lcms \
