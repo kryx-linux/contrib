@@ -4,12 +4,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.7/
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard-2.2.3-py3.7.egg-info/
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.2.3-py3.7.egg-info/PKG-INFO
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.2.3-py3.7.egg-info/SOURCES.txt
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.2.3-py3.7.egg-info/dependency_links.txt
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.2.3-py3.7.egg-info/requires.txt
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.2.3-py3.7.egg-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard-2.3-py3.7.egg-info/
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.3-py3.7.egg-info/PKG-INFO
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.3-py3.7.egg-info/SOURCES.txt
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.3-py3.7.egg-info/dependency_links.txt
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.3-py3.7.egg-info/requires.txt
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard-2.3-py3.7.egg-info/top_level.txt
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/__pycache__/
@@ -35,6 +35,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/__pycache__/similarity.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/__pycache__/tagger.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/__pycache__/track.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/__pycache__/version.cpython-37.pyc
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/acoustid/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/acoustid/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/acoustid/__pycache__/
@@ -97,7 +98,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/formats/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/__init__.cpython-37.pyc
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/aac.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/ac3.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/apev2.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/asf.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/id3.cpython-37.pyc
@@ -105,7 +106,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/mp4.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/vorbis.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/__pycache__/wav.cpython-37.pyc
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/aac.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/ac3.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/apev2.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/asf.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/id3.py
@@ -115,8 +116,12 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/__pycache__/__init__.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/__pycache__/aac.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/__pycache__/ac3.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/__pycache__/compatid3.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/__pycache__/tak.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/aac.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/ac3.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/compatid3.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/mutagenext/tak.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/formats/vorbis.py
@@ -161,6 +166,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/playertoolbar.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ratingwidget.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/scriptsmenu.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/statusindicator.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/tagsfromfilenames.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_cdlookup.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_edittagdialog.cpython-37.pyc
@@ -177,6 +183,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_genres.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_interface.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_interface_colors.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_interface_top_tags.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_matching.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_metadata.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_network.cpython-37.pyc
@@ -186,10 +193,12 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_renaming.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_script.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_tags.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_options_tags_compatibility.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_passworddialog.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_provider_options_caa.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_provider_options_local.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_tagsfromfilenames.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/ui_widget_taglisteditor.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/__pycache__/util.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/cdlookup.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/checkbox_list_item.py
@@ -220,6 +229,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/genres.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/interface.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/interface_colors.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/interface_top_tags.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/matching.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/metadata.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/network.cpython-37.pyc
@@ -229,6 +239,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/renaming.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/scripting.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/tags.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache__/tags_compatibility.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/about.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/advanced.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/cdlookup.py
@@ -239,6 +250,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/genres.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/interface.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/interface_colors.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/interface_top_tags.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/matching.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/metadata.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/network.py
@@ -248,6 +260,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/options/__pycache
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/renaming.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/scripting.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/tags.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/options/tags_compatibility.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/passworddialog.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/playertoolbar.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ratingwidget.py
@@ -262,6 +275,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/searchdialog/__py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/searchdialog/album.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/searchdialog/artist.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/searchdialog/track.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/statusindicator.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/tagsfromfilenames.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_cdlookup.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_edittagdialog.py
@@ -278,6 +292,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/searchdialog/__py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_genres.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_interface.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_interface_colors.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_interface_top_tags.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_matching.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_metadata.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_network.py
@@ -287,11 +302,25 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/searchdialog/__py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_renaming.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_script.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_tags.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_options_tags_compatibility.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_passworddialog.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_provider_options_caa.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_provider_options_local.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_tagsfromfilenames.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/ui_widget_taglisteditor.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/util.py
+drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/__init__.py
+drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/__pycache__/__init__.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/__pycache__/editablelistview.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/__pycache__/scriptlistwidget.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/__pycache__/taglisteditor.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/__pycache__/tristatesortheaderview.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/editablelistview.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/scriptlistwidget.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/taglisteditor.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/ui/widgets/tristatesortheaderview.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/util/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/
@@ -306,6 +335,8 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/imageinfo.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/imagelist.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/lrucache.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/natsort.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/preservedtags.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/scripttofilename.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/settingsoverride.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/tags.cpython-37.pyc
@@ -314,7 +345,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/versions.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/webbrowser2.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/xml.cpython-37.pyc
--rwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/util/_astrcmp.cpython-37m-x86_64-linux-gnu.so
+-rwxrwxr-x	root/root	usr/lib/python3.7/site-packages/picard/util/_astrcmp.cpython-37m-x86_64-linux-gnu.so
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/astrcmp.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/bytes2human.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/cdrom.py
@@ -325,6 +356,8 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/imageinfo.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/imagelist.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/lrucache.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/natsort.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/preservedtags.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/scripttofilename.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/settingsoverride.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/tags.py
@@ -333,6 +366,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/util/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/versions.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/webbrowser2.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/util/xml.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/version.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/webservice/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/picard/webservice/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/picard/webservice/__pycache__/
