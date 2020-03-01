@@ -5,7 +5,7 @@
 # Depends on: gcc-fortran
 
 name=openblas
-version=0.3.8
+version=0.3.9
 release=1
 source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz)
 
@@ -18,7 +18,7 @@ build () {
 
   # Symlink to provide blas, cblas
   cd $PKG/usr/lib/
-  local _lapackver='3.8.0'
+  local _lapackver='3.9.0'
   # BLAS
   ln -sf libopenblasp-r$version.so libblas.so
   ln -sf libopenblasp-r$version.so libblas.so.${_lapackver:0:1}
