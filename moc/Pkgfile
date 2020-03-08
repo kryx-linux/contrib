@@ -6,15 +6,17 @@
 
 name=moc
 version=2.5.2
-release=2
+release=3
 source=(http://ftp.daper.net/pub/soft/moc/stable/$name-$version.tar.bz2
-	moc-ffmpeg4.patch)
+	moc-ffmpeg4.patch
+	moc-https.patch)
 
 
 build() {
 	cd $name-$version
 
 	patch -p0 -i $SRC/moc-ffmpeg4.patch
+	patch -p0 -i $SRC/moc-https.patch
 
 	./configure \
 		--prefix=/usr \
