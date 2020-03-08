@@ -1,0 +1,28 @@
+diff -urN openexr-2.4.1.orig/IlmBase/config/CMakeLists.txt openexr-2.4.1/IlmBase/config/CMakeLists.txt
+--- openexr-2.4.1.orig/IlmBase/config/CMakeLists.txt	2020-02-10 23:01:19.000000000 +0000
++++ openexr-2.4.1/IlmBase/config/CMakeLists.txt	2020-03-08 15:56:36.483454378 +0000
+@@ -72,8 +72,8 @@
+   function(ilmbase_pkg_config_help pcinfile)
+     set(prefix ${CMAKE_INSTALL_PREFIX})
+     set(exec_prefix ${CMAKE_INSTALL_BINDIR})
+-    set(libdir ${CMAKE_INSTALL_LIBDIR})
+-    set(includedir ${CMAKE_INSTALL_INCLUDEDIR})
++    set(libdir ${CMAKE_INSTALL_FULL_LIBDIR})
++    set(includedir ${CMAKE_INSTALL_FULL_INCLUDEDIR})
+     set(LIB_SUFFIX_DASH ${ILMBASE_LIB_SUFFIX})
+     if(TARGET Threads::Threads)
+       # hrm, can't use properties as they end up as generator expressions
+diff -urN openexr-2.4.1.orig/OpenEXR/config/CMakeLists.txt openexr-2.4.1/OpenEXR/config/CMakeLists.txt
+--- openexr-2.4.1.orig/OpenEXR/config/CMakeLists.txt	2020-02-10 23:01:19.000000000 +0000
++++ openexr-2.4.1/OpenEXR/config/CMakeLists.txt	2020-03-08 15:56:47.120615245 +0000
+@@ -73,8 +73,8 @@
+   function(openexr_pkg_config_help pcinfile)
+     set(prefix ${CMAKE_INSTALL_PREFIX})
+     set(exec_prefix ${CMAKE_INSTALL_BINDIR})
+-    set(libdir ${CMAKE_INSTALL_LIBDIR})
+-    set(includedir ${CMAKE_INSTALL_INCLUDEDIR})
++    set(libdir ${CMAKE_INSTALL_FULL_LIBDIR})
++    set(includedir ${CMAKE_INSTALL_FULL_INCLUDEDIR})
+     set(LIB_SUFFIX_DASH ${OPENEXR_LIB_SUFFIX})
+     if(TARGET Threads::Threads)
+       # hrm, can't use properties as they end up as generator expressions
