@@ -20,5 +20,6 @@ build() {
     ..
   make
   make DESTDIR=$PKG install
-  rm -fr $PKG/usr/share/keepassxc/{translations,docs}
+  rm -r $PKG/usr/share/keepassxc/{translations,docs}
+  rm -r $PKG/usr/share/gtk-doc
 }
