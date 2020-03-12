@@ -4,11 +4,11 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=19.03.6
+version=19.03.8
 release=1
 source=(https://github.com/docker/docker-ce/archive/v$version/$name-ce-v$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/libnetwork-3eb3938.tar.xz \
+    http://jaeger.morpheus.net/linux/crux/files/libnetwork-9fd385b.tar.xz \
     $name.rc $name.conf)
 
 build() {
@@ -40,7 +40,7 @@ build() {
 
     (cd ..; \
         GOROOT=/usr/lib/go GOPATH=${PKGMK_WORK_DIR} go build -o $PKG/usr/bin/$name-proxy \
-            libnetwork-3eb3938/cmd/proxy)
+            libnetwork-9fd385b/cmd/proxy)
 
     for M in 1 5 8; do
         install -d -m 0755 $PKG/usr/share/man/man${M}
