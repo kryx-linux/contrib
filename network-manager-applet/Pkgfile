@@ -1,10 +1,10 @@
 # Description: A system tray applet for NetworkManager
 # URL: https://wiki.gnome.org/Projects/NetworkManager/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: consolekit gcr gtk-doc gtk3 iso-codes libgudev libnotify libsecret networkmanager
+# Depends on: consolekit libgudev libnma libnotify libsecret
 
 name=network-manager-applet
-version=1.8.24
+version=1.16.0
 release=1
 source=(https://github.com/NetworkManager/network-manager-applet/archive/$version/$name-$version.tar.gz)
 
@@ -13,16 +13,11 @@ build() {
   mkdir build
   meson --prefix=/usr \
     --sysconfdir=/etc \
-    -Dteam=true \
-    -Dintrospection=true \
-    -Dlibnm_gtk=false \
-    -Dwwan=false \
     -Dselinux=false \
     -Dteam=false \
-    -Dmobile_broadband_provider_info=false \
-    -Denable-gtk-doc=false \
+    -Dwwan=false \
     build
   ninja -C build
   DESTDIR=$PKG ninja -C build install
-  rm -r $PKG/usr/share/{locale,gtk-doc}
+  rm -r $PKG/usr/share/locale
 }
