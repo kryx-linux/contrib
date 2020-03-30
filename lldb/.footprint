@@ -3,7 +3,6 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/lldb
 -rwxr-xr-x	root/root	usr/bin/lldb-argdumper
 -rwxr-xr-x	root/root	usr/bin/lldb-instr
--rwxr-xr-x	root/root	usr/bin/lldb-mi
 -rwxr-xr-x	root/root	usr/bin/lldb-server
 -rwxr-xr-x	root/root	usr/bin/lldb-vscode
 drwxr-xr-x	root/root	usr/include/
@@ -29,6 +28,7 @@ drwxr-xr-x	root/root	usr/include/lldb/API/
 -rw-r--r--	root/root	usr/include/lldb/API/SBEvent.h
 -rw-r--r--	root/root	usr/include/lldb/API/SBExecutionContext.h
 -rw-r--r--	root/root	usr/include/lldb/API/SBExpressionOptions.h
+-rw-r--r--	root/root	usr/include/lldb/API/SBFile.h
 -rw-r--r--	root/root	usr/include/lldb/API/SBFileSpec.h
 -rw-r--r--	root/root	usr/include/lldb/API/SBFileSpecList.h
 -rw-r--r--	root/root	usr/include/lldb/API/SBFrame.h
@@ -121,6 +121,7 @@ drwxr-xr-x	root/root	usr/include/lldb/Core/
 -rw-r--r--	root/root	usr/include/lldb/Core/FormatEntity.h
 -rw-r--r--	root/root	usr/include/lldb/Core/Highlighter.h
 -rw-r--r--	root/root	usr/include/lldb/Core/IOHandler.h
+-rw-r--r--	root/root	usr/include/lldb/Core/IOHandlerCursesGUI.h
 -rw-r--r--	root/root	usr/include/lldb/Core/IOStreamMacros.h
 -rw-r--r--	root/root	usr/include/lldb/Core/LoadedModuleInfoList.h
 -rw-r--r--	root/root	usr/include/lldb/Core/Mangled.h
@@ -133,7 +134,6 @@ drwxr-xr-x	root/root	usr/include/lldb/Core/
 -rw-r--r--	root/root	usr/include/lldb/Core/PluginInterface.h
 -rw-r--r--	root/root	usr/include/lldb/Core/PluginManager.h
 -rw-r--r--	root/root	usr/include/lldb/Core/RichManglingContext.h
--rw-r--r--	root/root	usr/include/lldb/Core/STLUtils.h
 -rw-r--r--	root/root	usr/include/lldb/Core/SearchFilter.h
 -rw-r--r--	root/root	usr/include/lldb/Core/Section.h
 -rw-r--r--	root/root	usr/include/lldb/Core/SourceManager.h
@@ -143,8 +143,6 @@ drwxr-xr-x	root/root	usr/include/lldb/Core/
 -rw-r--r--	root/root	usr/include/lldb/Core/StructuredDataImpl.h
 -rw-r--r--	root/root	usr/include/lldb/Core/ThreadSafeDenseMap.h
 -rw-r--r--	root/root	usr/include/lldb/Core/ThreadSafeDenseSet.h
--rw-r--r--	root/root	usr/include/lldb/Core/ThreadSafeSTLMap.h
--rw-r--r--	root/root	usr/include/lldb/Core/ThreadSafeSTLVector.h
 -rw-r--r--	root/root	usr/include/lldb/Core/ThreadSafeValue.h
 -rw-r--r--	root/root	usr/include/lldb/Core/UniqueCStringMap.h
 -rw-r--r--	root/root	usr/include/lldb/Core/UserSettingsController.h
@@ -179,7 +177,6 @@ drwxr-xr-x	root/root	usr/include/lldb/DataFormatters/
 -rw-r--r--	root/root	usr/include/lldb/DataFormatters/TypeFormat.h
 -rw-r--r--	root/root	usr/include/lldb/DataFormatters/TypeSummary.h
 -rw-r--r--	root/root	usr/include/lldb/DataFormatters/TypeSynthetic.h
--rw-r--r--	root/root	usr/include/lldb/DataFormatters/TypeValidator.h
 -rw-r--r--	root/root	usr/include/lldb/DataFormatters/ValueObjectPrinter.h
 -rw-r--r--	root/root	usr/include/lldb/DataFormatters/VectorIterator.h
 -rw-r--r--	root/root	usr/include/lldb/DataFormatters/VectorType.h
@@ -221,6 +218,7 @@ drwxr-xr-x	root/root	usr/include/lldb/Host/
 -rw-r--r--	root/root	usr/include/lldb/Host/HostNativeThreadForward.h
 -rw-r--r--	root/root	usr/include/lldb/Host/HostProcess.h
 -rw-r--r--	root/root	usr/include/lldb/Host/HostThread.h
+-rw-r--r--	root/root	usr/include/lldb/Host/LZMA.h
 -rw-r--r--	root/root	usr/include/lldb/Host/LockFile.h
 -rw-r--r--	root/root	usr/include/lldb/Host/LockFileBase.h
 -rw-r--r--	root/root	usr/include/lldb/Host/MainLoop.h
@@ -312,6 +310,7 @@ drwxr-xr-x	root/root	usr/include/lldb/Interpreter/
 -rw-r--r--	root/root	usr/include/lldb/Interpreter/OptionGroupFormat.h
 -rw-r--r--	root/root	usr/include/lldb/Interpreter/OptionGroupOutputFile.h
 -rw-r--r--	root/root	usr/include/lldb/Interpreter/OptionGroupPlatform.h
+-rw-r--r--	root/root	usr/include/lldb/Interpreter/OptionGroupPythonClassWithDict.h
 -rw-r--r--	root/root	usr/include/lldb/Interpreter/OptionGroupString.h
 -rw-r--r--	root/root	usr/include/lldb/Interpreter/OptionGroupUInt64.h
 -rw-r--r--	root/root	usr/include/lldb/Interpreter/OptionGroupUUID.h
@@ -345,10 +344,11 @@ drwxr-xr-x	root/root	usr/include/lldb/Interpreter/
 drwxr-xr-x	root/root	usr/include/lldb/Symbol/
 -rw-r--r--	root/root	usr/include/lldb/Symbol/ArmUnwindInfo.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/Block.h
+-rw-r--r--	root/root	usr/include/lldb/Symbol/CallFrameInfo.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/ClangASTContext.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/ClangASTImporter.h
+-rw-r--r--	root/root	usr/include/lldb/Symbol/ClangASTMetadata.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/ClangExternalASTSourceCallbacks.h
--rw-r--r--	root/root	usr/include/lldb/Symbol/ClangExternalASTSourceCommon.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/ClangUtil.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/CompactUnwindInfo.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/CompileUnit.h
@@ -384,7 +384,6 @@ drwxr-xr-x	root/root	usr/include/lldb/Symbol/
 -rw-r--r--	root/root	usr/include/lldb/Symbol/UnwindTable.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/Variable.h
 -rw-r--r--	root/root	usr/include/lldb/Symbol/VariableList.h
--rw-r--r--	root/root	usr/include/lldb/Symbol/VerifyDecl.h
 drwxr-xr-x	root/root	usr/include/lldb/Target/
 -rw-r--r--	root/root	usr/include/lldb/Target/ABI.h
 -rw-r--r--	root/root	usr/include/lldb/Target/DynamicLoader.h
@@ -454,7 +453,6 @@ drwxr-xr-x	root/root	usr/include/lldb/Utility/
 -rw-r--r--	root/root	usr/include/lldb/Utility/Args.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Baton.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Broadcaster.h
--rw-r--r--	root/root	usr/include/lldb/Utility/CleanUp.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/CompletionRequest.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Connection.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/ConstString.h
@@ -466,12 +464,11 @@ drwxr-xr-x	root/root	usr/include/lldb/Utility/
 -rw-r--r--	root/root	usr/include/lldb/Utility/Endian.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Environment.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Event.h
--rw-r--r--	root/root	usr/include/lldb/Utility/FileCollector.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/FileSpec.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Flags.h
+-rw-r--r--	root/root	usr/include/lldb/Utility/GDBRemote.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/IOObject.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Iterable.h
--rw-r--r--	root/root	usr/include/lldb/Utility/JSON.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/LLDBAssert.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Listener.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Log.h
@@ -492,7 +489,6 @@ drwxr-xr-x	root/root	usr/include/lldb/Utility/
 -rw-r--r--	root/root	usr/include/lldb/Utility/Status.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/Stream.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/StreamCallback.h
--rw-r--r--	root/root	usr/include/lldb/Utility/StreamGDBRemote.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/StreamString.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/StreamTee.h
 -rw-r--r--	root/root	usr/include/lldb/Utility/StringExtractor.h
@@ -523,11 +519,11 @@ drwxr-xr-x	root/root	usr/include/lldb/Utility/
 -rw-r--r--	root/root	usr/include/lldb/lldb-types.h
 -rw-r--r--	root/root	usr/include/lldb/lldb-versioning.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/liblldb.so -> liblldb.so.9
-lrwxrwxrwx	root/root	usr/lib/liblldb.so.9 -> liblldb.so.9.0.1
--rwxr-xr-x	root/root	usr/lib/liblldb.so.9.0.1
-lrwxrwxrwx	root/root	usr/lib/liblldbIntelFeatures.so -> liblldbIntelFeatures.so.9
--rwxr-xr-x	root/root	usr/lib/liblldbIntelFeatures.so.9
+lrwxrwxrwx	root/root	usr/lib/liblldb.so -> liblldb.so.10
+lrwxrwxrwx	root/root	usr/lib/liblldb.so.10 -> liblldb.so.10.0.0
+-rwxr-xr-x	root/root	usr/lib/liblldb.so.10.0.0
+lrwxrwxrwx	root/root	usr/lib/liblldbIntelFeatures.so -> liblldbIntelFeatures.so.10
+-rwxr-xr-x	root/root	usr/lib/liblldbIntelFeatures.so.10
 drwxr-xr-x	root/root	usr/lib/python3.7/
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/
@@ -539,7 +535,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/__pycache__/embedded_interpreter.cpython-37.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/__pycache__/embedded_interpreter.cpython-37.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/__pycache__/embedded_interpreter.cpython-37.pyc
-lrwxrwxrwx	root/root	usr/lib/python3.7/site-packages/lldb/_lldb.so -> ../../../../lib/liblldb.so
+lrwxrwxrwx	root/root	usr/lib/python3.7/site-packages/lldb/_lldb.so -> ../../../liblldb.so
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/embedded_interpreter.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/formatters/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/formatters/Logger.py
@@ -582,19 +578,17 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/formatters/cpp/__pycac
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/formatters/metrics.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/formatters/synth.py
 lrwxrwxrwx	root/root	usr/lib/python3.7/site-packages/lldb/lldb-argdumper -> ../../../../bin/lldb-argdumper
-drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/runtime/
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/runtime/__init__.py
-drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/runtime/__pycache__/
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/runtime/__pycache__/__init__.cpython-37.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/runtime/__pycache__/__init__.cpython-37.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/runtime/__pycache__/__init__.cpython-37.pyc
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/utils/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/__init__.cpython-37.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/__init__.cpython-37.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/__init__.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/in_call_stack.cpython-37.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/in_call_stack.cpython-37.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/in_call_stack.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/symbolication.cpython-37.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/symbolication.cpython-37.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/__pycache__/symbolication.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/in_call_stack.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/lldb/utils/symbolication.py
