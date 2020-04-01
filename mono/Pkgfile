@@ -1,13 +1,13 @@
 # Description: Cross platform, open source .NET framework
-# URL: http://www.mono-project.com
+# URL: https://www.mono-project.com
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Packager: poq <jbloomfield at live dot com>
-# Depends on: python cmake zlib
+# Depends on: cmake python3 zlib
 
 name=mono
 version=6.8.0.105
 release=1
-source=(http://download.mono-project.com/sources/$name/$name-$version.tar.xz)
+source=(https://download.mono-project.com/sources/$name/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
@@ -17,7 +17,7 @@ build() {
     --with-mcs-docs=no \
     --disable-crash-reporting \
     --disable-nls
-  make
+  PYTHON=python3 make
   make DESTDIR=$PKG install
   rm -fr $PKG/usr/share/locale
   find $PKG \( -iname "*README*" \
