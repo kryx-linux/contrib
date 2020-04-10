@@ -4,21 +4,32 @@
 # Depends on: giflib gtk3 libspiro libuninameslist libwebp potrace woff2
 
 name=fontforge
-version=20190801
+version=20200314
 release=1
-source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.gz)
+source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--enable-python-extension \
-		--enable-woff2 \
-		--enable-gdk
+if [ -e '/usr/lib/ccache' ]; then
+	PKGMK_FONTFORGE+=' -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_C_COMPILER_LAUNCHER=ccache'
+	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+fi
 
-	make
-	make DESTDIR=$PKG install
+	mkdir build
+	cd build
 
-	rm -r $PKG/usr/share/{doc,locale}
+	cmake .. ${PKGMK_FONTFORGE} \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DENABLE_MAINTAINER_TOOLS=TRUE \
+		-DENABLE_FONTFORGE_EXTRAS=TRUE \
+		-DUNIX=TRUE \
+		-GNinja
+
+	ninja -j ${JOBS:-1}
+	DESTDIR=$PKG ninja install
+
+	rm -r $PKG/usr/share/locale
 }
