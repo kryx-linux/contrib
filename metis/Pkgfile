@@ -10,7 +10,6 @@ source=(http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  ls
   make config shared=1 prefix=/usr
   make
   make install DESTDIR=$PKG
