@@ -177,6 +177,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/
 -rw-r--r--	root/root	usr/include/wine/windows/cmdtxt.idl
 -rw-r--r--	root/root	usr/include/wine/windows/cmnquery.h
 -rw-r--r--	root/root	usr/include/wine/windows/cmnquery.idl
+-rw-r--r--	root/root	usr/include/wine/windows/codecapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/colinf.idl
 -rw-r--r--	root/root	usr/include/wine/windows/colordlg.h
 -rw-r--r--	root/root	usr/include/wine/windows/comcat.h
@@ -387,6 +388,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/dpnathlp.h
 -rw-r--r--	root/root	usr/include/wine/windows/drmexternals.h
 -rw-r--r--	root/root	usr/include/wine/windows/drmexternals.idl
+-rw-r--r--	root/root	usr/include/wine/windows/dsclient.h
 -rw-r--r--	root/root	usr/include/wine/windows/dsconf.h
 -rw-r--r--	root/root	usr/include/wine/windows/dsgetdc.h
 -rw-r--r--	root/root	usr/include/wine/windows/dshow.h
@@ -831,6 +833,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/slpublic.h
 -rw-r--r--	root/root	usr/include/wine/windows/snmp.h
 -rw-r--r--	root/root	usr/include/wine/windows/softpub.h
+-rw-r--r--	root/root	usr/include/wine/windows/spatialaudioclient.h
+-rw-r--r--	root/root	usr/include/wine/windows/spatialaudioclient.idl
 -rw-r--r--	root/root	usr/include/wine/windows/sperror.h
 -rw-r--r--	root/root	usr/include/wine/windows/sql.h
 -rw-r--r--	root/root	usr/include/wine/windows/sqlext.h
@@ -1428,6 +1432,7 @@ drwxr-xr-x	root/root	usr/lib/wine/
 -rwxr-xr-x	root/root	usr/lib/wine/dsound.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/dsquery.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/dssenh.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/dsuiext.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/dswave.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/dwmapi.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/dwrite.dll.so
@@ -1875,6 +1880,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/dsound.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/dsquery.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/dssenh.dll
+-rw-r--r--	root/root	usr/lib/wine/fakedlls/dsuiext.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/dswave.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/dwmapi.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/dwrite.dll
@@ -2321,6 +2327,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/winemsibuilder.exe
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/winepath.exe
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/wineps.drv
+-rw-r--r--	root/root	usr/lib/wine/fakedlls/winepulse.drv
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/winevulkan.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/winex11.drv
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/wing32.dll
@@ -2948,6 +2955,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/winemsibuilder.exe.so
 -rwxr-xr-x	root/root	usr/lib/wine/winepath.exe.so
 -rwxr-xr-x	root/root	usr/lib/wine/wineps.drv.so
+-rwxr-xr-x	root/root	usr/lib/wine/winepulse.drv.so
 -rwxr-xr-x	root/root	usr/lib/wine/winevulkan.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/winex11.drv.so
 -rwxr-xr-x	root/root	usr/lib/wine/wing32.dll.so
@@ -3390,6 +3398,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/
 -rwxr-xr-x	root/root	usr/lib32/wine/dsound.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/dsquery.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/dssenh.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/dsuiext.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/dswave.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/dwmapi.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/dwrite.dll.so
@@ -3846,6 +3855,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/dsound.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/dsquery.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/dssenh.dll
+-rw-r--r--	root/root	usr/lib32/wine/fakedlls/dsuiext.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/dswave.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/dwmapi.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/dwrite.dll
