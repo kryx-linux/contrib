@@ -5,7 +5,7 @@
 
 name=libpaper
 version=1.1.28
-release=1
+release=2
 source=(http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.28.tar.gz)
 
 build() {
@@ -17,7 +17,7 @@ build() {
   make
   make DESTDIR=$PKG install
   mkdir -vp $PKG/etc/libpaper.d
-  cat > /usr/bin/run-parts << "EOF"
+  cat > $PKG/usr/bin/run-parts << "EOF"
 #!/bin/sh
 # run-parts:  Runs all the scripts found in a directory.
 # from Slackware, by Patrick J. Volkerding with ideas borrowed
