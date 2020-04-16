@@ -1,11 +1,11 @@
 # Description: VDPAU back-end for NVIDIA and VIA chipsets.
 # URL: http://freedesktop.org/wiki/Software/vaapi
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: libva1
+# Depends on: libva libvdpau
 
 name=libva-vdpau-driver
 version=0.7.4
-release=6
+release=7
 source=(https://www.freedesktop.org/software/vaapi/releases/$name/$name-$version.tar.bz2
 	libva-vdpau-driver-0.7.4-glext-missing-definition.patch
 	libva-vdpau-driver-0.7.4-libvdpau-0.8.patch
@@ -25,14 +25,10 @@ build() {
 	sed -i 's:AM_CONFIG_HEADER:AC_CONFIG_HEADERS:' configure.ac
 	autoreconf -i
 
-	PKG_CONFIG_PATH="/usr/lib/libva1/pkgconfig" \
 	./configure \
 		--prefix=/usr \
 		--enable-glx
 
 	make
 	make DESTDIR=$PKG install
-
-	mv $PKG/usr/lib/libva1/* $PKG/usr/lib/
-	rmdir $PKG/usr/lib/libva1
 }
