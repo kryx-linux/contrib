@@ -3,7 +3,7 @@
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=help2man
-version=1.47.12
+version=1.47.13
 release=1
 source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
 
@@ -18,9 +18,6 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
-	rm -rf $PKG/usr/share/info
+	rm -r $PKG/usr/share/info
 
-	rmdir \
-		$PKG/usr/lib/help2man \
-		$PKG/usr/lib
 }
