@@ -5,26 +5,22 @@
 # Depends on: boost crypto++ glew gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qt5
 
 name=clementine
-version=1.4.0rc1
+version=1.4.0rc1-169
 release=1
-source=(https://github.com/clementine-player/Clementine/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/clementine-player/Clementine/archive/$version-g934fd336d/$name-$version-g934fd336d.tar.gz
+	clementine-gcc6.patch)
 
 build() {
-	cd Clementine-$version
-
-	install -d build
-	cd build
-
 	# make sure we do not have ccache masquerade directory in PATH
 	# as cmake calls ccache directly, this avoids recursvely
 	# calling ccache and CCACHE_PREFIX
 	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 
-	cmake .. \
+	cmake -HClementine-$version-g934fd336d -Bbuild \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE='Release' \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS -Wno-catch-value"
 
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
 }
