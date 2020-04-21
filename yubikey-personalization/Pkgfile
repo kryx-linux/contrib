@@ -5,11 +5,15 @@
 
 name=yubikey-personalization
 version=1.20.0
-release=1
+release=2
 source=(https://github.com/Yubico/yubikey-personalization/archive/v$version/$name-v$version.tar.gz 10-security-key.rules)
 
 build() {
   cd $name-$version
+
+  # Fix build with json-c 0.14
+  sed -e 's/TRUE/1/' -e 's/FALSE/0/' -i ykpers-json.c
+
   autoreconf --install
   ./configure --prefix=/usr \
     --with-udevrulesdir=/lib/udev/rules.d/
