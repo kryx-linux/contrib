@@ -1,0 +1,26 @@
+# Description: High quality, one-dimensional sample-rate conversion library
+# URL: https://sourceforge.net/p/soxr/wiki/Home/
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: cmake ffmpeg
+
+name=libsoxr
+version=0.1.3
+release=1
+source=(https://downloads.sourceforge.net/soxr/soxr-$version-Source.tar.xz)
+
+build() {
+	cmake -Hsoxr-$version-Source -Bbuild \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DBUILD_EXAMPLES='OFF' \
+		-DBUILD_SHARED_LIBS='ON' \
+		-DWITH_AVFFT='ON' \
+		-DWITH_LSR_BINDINGS='ON' \
+		-DWITH_OPENMP='ON' \
+		-DWITH_PFFFT='ON'
+
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
+
+	rm -r $PKG/usr/share/doc
+}
