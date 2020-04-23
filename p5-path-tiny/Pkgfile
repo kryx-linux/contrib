@@ -4,12 +4,12 @@
 # Depends on:
 
 name=p5-path-tiny
-version=0.112
+version=0.113-TRIAL
 release=1
 source=(https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Path-Tiny-$version.tar.gz)
 
 build() {
-  cd Path-Tiny-$version
+  cd Path-Tiny-${version/-TRIAL/}
   export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
   unset PERL5LIB PERL_MM_OPT
   perl Makefile.PL
