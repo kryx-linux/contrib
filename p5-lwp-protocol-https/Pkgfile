@@ -4,14 +4,12 @@
 # Depends on: ca-certificates p5-io-socket-ssl p5-libwww p5-net-http
 
 name=p5-lwp-protocol-https
-version=6.07
+version=6.08-TRIAL
 release=1
-source=(https://cpan.metacpan.org/authors/id/O/OA/OALDERS/LWP-Protocol-https-$version.tar.gz
-certs.patch)
+source=(https://cpan.metacpan.org/authors/id/O/OA/OALDERS/LWP-Protocol-https-$version.tar.gz)
 
 build() {
-  cd LWP-Protocol-https-$version
-  patch -p1 -i ../certs.patch
+  cd LWP-Protocol-https-${version/-TRIAL/}
   perl Makefile.PL INSTALLDIRS=vendor
   make
   make DESTDIR=$PKG install
