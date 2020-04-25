@@ -4,13 +4,13 @@
 # Depends on: qt5
 
 name=cutemaze
-version=1.2.5
+version=1.2.6
 release=1
 source=(https://gottcode.org/$name/$name-$version-src.tar.bz2)
 
 build() {
 	cd $name-$version
-	qmake-qt5 PREFIX=/usr
+	qmake PREFIX=/usr
 	make
 	make INSTALL_ROOT=$PKG install
 }
