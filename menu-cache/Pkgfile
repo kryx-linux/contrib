@@ -1,12 +1,12 @@
-# Description: library creating and utilizing caches to speed up the manipulation for freedesktop.org defined application menus
-# URL:         http://lxde.org/
+# Description: Caching mechanism for freedesktop.org compliant menus
+# URL:         https://lxde.org/
 # Maintainer:  Bartlomiej Palmowski, rotwang at crux dot org dot pl
-# Depends on:  glib
-# Comment:     
+# Depends on:  libfm-extra
+
 name=menu-cache
-version=0.5.1
+version=1.1.0
 release=1
-source=(http://downloads.sourceforge.net/project/lxde/$name/$name%20${version%.*}.x/$name-$version.tar.gz)
+source=(https://downloads.sourceforge.net/lxde/$name-$version.tar.xz)
 
 build() {
     cd $name-$version
