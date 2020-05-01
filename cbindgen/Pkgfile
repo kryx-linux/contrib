@@ -5,16 +5,12 @@
 # Optional: sccache
 
 name=cbindgen
-version=0.14.1
+version=0.14.2
 release=1
-source=(https://github.com/eqrion/cbindgen/archive/v$version/$name-v$version.tar.gz
-	firefox.patch)
+source=(https://github.com/eqrion/cbindgen/archive/v$version/$name-v$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	# https://github.com/eqrion/cbindgen/issues/500
-	patch -p1 -R -i $SRC/firefox.patch
 
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
