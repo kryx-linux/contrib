@@ -5,12 +5,11 @@
 # Optional: sccache
 
 name=firefox
-version=75.0
-release=2
+version=76.0
+release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
 	firefox.desktop
 	0001-Use-remoting-name-for-GDK-application-names.patch
-	0001-Bug-1623885-Add-subsystem-to-Mesa-sandbox-policy.patch
 	fix-unicode-errors.patch)
  
 build() {
@@ -18,9 +17,6 @@ build() {
 
 	# https://bugzilla.mozilla.org/show_bug.cgi?id=1530052
 	patch -p1 -i $SRC/0001-Use-remoting-name-for-GDK-application-names.patch
-
-	# https://bugzilla.mozilla.org/show_bug.cgi?id=1627486
-	patch -p1 -i $SRC/0001-Bug-1623885-Add-subsystem-to-Mesa-sandbox-policy.patch
 
 	# https://bugzilla.mozilla.org/show_bug.cgi?id=1532169
 	patch -p1 -i $SRC/fix-unicode-errors.patch
