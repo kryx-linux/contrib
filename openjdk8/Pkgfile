@@ -1,14 +1,12 @@
 # Description: OpenJDK 8 built using IcedTea build harness
 # URL:         http://icedtea.classpath.org http://openjdk.java.net
 # Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
-# Depends on:  alsa-lib cups fontconfig freetype giflib gtk krb5 lcms2 libjpeg-turbo libpng libxslt nss unzip xorg-libxt xorg-libxtst xorg-libxinerama zip
+# Depends on:  alsa-lib cups fontconfig freetype giflib gtk krb5 lcms2 libjpeg-turbo libpng libxslt nss p11-kit unzip xorg-libxt xorg-libxtst xorg-libxinerama zip
 
 name=openjdk8
-version=8u242-b08
-icedtea_version=3.15.0
-boot_version=20200217
-pkgsrc_quarter=2018Q3
-certdata_rev=dc8776ff4759
+version=8u252-b09
+icedtea_version=3.16.0
+boot_version=20200504
 release=1
 source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.tar.xz
 	https://stygian.me/crux/distfiles/$name/corba-$version.tar.xz
@@ -19,8 +17,6 @@ source=(http://icedtea.wildebeest.org/download/source/icedtea-$icedtea_version.t
 	https://stygian.me/crux/distfiles/$name/langtools-$version.tar.xz
 	https://stygian.me/crux/distfiles/$name/nashorn-$version.tar.xz
 	https://stygian.me/crux/distfiles/$name/openjdk-$version.tar.xz
-	https://stygian.me/crux/distfiles/certdata-$certdata_rev.txt
-	https://stygian.me/crux/distfiles/mozilla-rootcerts-$pkgsrc_quarter.sh
 	https://stygian.me/crux/distfiles/$name-boot-$boot_version-bin.tar.xz)
 	# See README for links to originally named files and rationale of renaming/versioning/mirroring.
 
@@ -55,9 +51,17 @@ build() {
 	export JAVA_HOME=$SRC/$name-boot
 	export PATH=$JAVA_HOME/bin:$OLD_PATH
 
+	if [ -f /etc/pki/tls/java/cacerts ]; then
+		JAVA_CACERTS=/etc/pki/tls/java/cacerts
+	else
+		/usr/sbin/make-ca -g -D $SRC/certs || exit 1
+		JAVA_CACERTS=$SRC/certs/etc/pki/tls/java/cacerts
+	fi
+
 	mkdir $SRC/build
 	cd $SRC/build
 
+	# Will fail if make-ca has not been run after p11-kit install
 	LC_ALL=C \
 	CONFIG_SHELL=/bin/bash \
 	../icedtea-$icedtea_version/configure ${EXTRA_OPTIONS} \
@@ -93,7 +97,9 @@ build() {
 		--with-nashorn-src-zip=$SRC/nashorn-$version.tar.xz \
 		--with-openjdk-src-zip=$SRC/openjdk-$version.tar.xz \
 		--with-pkgversion=CRUX \
-		--with-jdk-home=$JAVA_HOME
+		--with-jdk-home=$JAVA_HOME \
+		--with-cacerts-file=$JAVA_CACERTS \
+		--with-tzdata-dir=/usr/share/zoneinfo
 
 	LC_ALL=C \
 	make
@@ -132,38 +138,5 @@ build() {
 		fi
 	done
 
-	sed -e "/# cd \/etc\/openssl\/certs/s//# cd \/usr\/share\/$name\/certs/" \
-		-e '/@AWK@/s,,/usr/bin/awk,' \
-		-e "/@DATADIR@/s,,/usr/share/$name," \
-		-e '/@ECHO@/s,,/bin/echo,' \
-		-e '/@EXPR@/s,,/usr/bin/expr,' \
-		-e '/@LN@/s,,/bin/ln,' \
-		-e '/@LS@/s,,/bin/ls,' \
-		-e '/@MKDIR@/s,,/bin/mkdir,' \
-		-e '/@OPENSSL@/s,,/usr/bin/openssl,' \
-		-e '/@PREFIX@/s,,/usr,' \
-		-e "/@SSLDIR@/s,,/usr/share/$name," \
-		-e '/@RM@/s,,/bin/rm,' \
-		-e 's,self extract,self -f $certfile extract,' \
-		-e 's,self rehash,self -f $certfile rehash,' \
-		$SRC/mozilla-rootcerts-$pkgsrc_quarter.sh > $SRC/mozilla-rootcerts
-
-	export JAVA_HOME=$PKG/usr/lib/java/$name
-	export PATH=$JAVA_HOME/bin:$OLD_PATH
-
-	# Generate java's cacerts.
-	# Big thanks to pkgsrc's mozilla-rootcerts and openjdk pkg's for this part.
-	rm -f $PKG/usr/lib/java/$name/jre/lib/security/cacerts
-	mkdir $SRC/cacerts
-	cd $SRC/cacerts
-	sh $SRC/mozilla-rootcerts -f $SRC/certdata-$certdata_rev.txt extract
-	for cert in *.pem; do
-		keytool \
-			-noprompt \
-			-importcert \
-			-keystore $PKG/usr/lib/java/$name/jre/lib/security/cacerts \
-			-alias $(echo $cert | sed 's,.*/\([^/]*\)\.pem,\1,') \
-			-file $cert \
-			-storepass changeit
-	done
+	chmod u+w $PKG/usr/lib/java/$name/jre/lib/security/cacerts
 }
