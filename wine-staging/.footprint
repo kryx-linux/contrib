@@ -60,6 +60,7 @@ drwxr-xr-x	root/root	usr/include/wine/msvcrt/
 -rw-r--r--	root/root	usr/include/wine/msvcrt/fenv.h
 -rw-r--r--	root/root	usr/include/wine/msvcrt/float.h
 -rw-r--r--	root/root	usr/include/wine/msvcrt/fpieee.h
+-rw-r--r--	root/root	usr/include/wine/msvcrt/intrin.h
 -rw-r--r--	root/root	usr/include/wine/msvcrt/inttypes.h
 -rw-r--r--	root/root	usr/include/wine/msvcrt/io.h
 -rw-r--r--	root/root	usr/include/wine/msvcrt/limits.h
@@ -394,6 +395,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/dshow.h
 -rw-r--r--	root/root	usr/include/wine/windows/dsound.h
 -rw-r--r--	root/root	usr/include/wine/windows/dsrole.h
+-rw-r--r--	root/root	usr/include/wine/windows/dvdif.h
+-rw-r--r--	root/root	usr/include/wine/windows/dvdif.idl
 -rw-r--r--	root/root	usr/include/wine/windows/dvdmedia.h
 -rw-r--r--	root/root	usr/include/wine/windows/dvoice.h
 -rw-r--r--	root/root	usr/include/wine/windows/dwmapi.h
@@ -2011,6 +2014,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/kernel32.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/kernelbase.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/ksecdd.sys
+-rw-r--r--	root/root	usr/lib/wine/fakedlls/ksproxy.ax
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/ksuser.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/ktmw32.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/l3codeca.acm
@@ -2219,6 +2223,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/scsiport.sys
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/sdbinst.exe
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/secedit.exe
+-rw-r--r--	root/root	usr/lib/wine/fakedlls/sechost.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/secur32.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/security.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/sensapi.dll
@@ -2441,6 +2446,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/kernel32.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/kernelbase.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/ksecdd.sys.so
+-rwxr-xr-x	root/root	usr/lib/wine/ksproxy.ax.so
 -rwxr-xr-x	root/root	usr/lib/wine/ksuser.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/ktmw32.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/l3codeca.acm.so
@@ -2583,6 +2589,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/librsaenh.def
 -rw-r--r--	root/root	usr/lib/wine/librtutils.def
 -rw-r--r--	root/root	usr/lib/wine/librtworkq.def
+-rw-r--r--	root/root	usr/lib/wine/libsechost.def
 -rw-r--r--	root/root	usr/lib/wine/libsecur32.def
 -rw-r--r--	root/root	usr/lib/wine/libsensapi.def
 -rw-r--r--	root/root	usr/lib/wine/libsetupapi.def
@@ -2848,6 +2855,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/scsiport.sys.so
 -rwxr-xr-x	root/root	usr/lib/wine/sdbinst.exe.so
 -rwxr-xr-x	root/root	usr/lib/wine/secedit.exe.so
+-rwxr-xr-x	root/root	usr/lib/wine/sechost.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/secur32.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/security.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/sensapi.dll.so
@@ -3993,6 +4001,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/keyboard.drv16
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/krnl386.exe16
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/ksecdd.sys
+-rw-r--r--	root/root	usr/lib32/wine/fakedlls/ksproxy.ax
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/ksuser.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/ktmw32.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/l3codeca.acm
@@ -4218,6 +4227,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/scsiport.sys
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/sdbinst.exe
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/secedit.exe
+-rw-r--r--	root/root	usr/lib32/wine/fakedlls/sechost.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/secur32.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/security.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/sensapi.dll
@@ -4476,6 +4486,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/keyboard.drv16.so
 -rwxr-xr-x	root/root	usr/lib32/wine/krnl386.exe16.so
 -rwxr-xr-x	root/root	usr/lib32/wine/ksecdd.sys.so
+-rwxr-xr-x	root/root	usr/lib32/wine/ksproxy.ax.so
 -rwxr-xr-x	root/root	usr/lib32/wine/ksuser.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/ktmw32.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/l3codeca.acm.so
@@ -4619,6 +4630,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/librsaenh.def
 -rw-r--r--	root/root	usr/lib32/wine/librtutils.def
 -rw-r--r--	root/root	usr/lib32/wine/librtworkq.def
+-rw-r--r--	root/root	usr/lib32/wine/libsechost.def
 -rw-r--r--	root/root	usr/lib32/wine/libsecur32.def
 -rw-r--r--	root/root	usr/lib32/wine/libsensapi.def
 -rw-r--r--	root/root	usr/lib32/wine/libsetupapi.def
@@ -4902,6 +4914,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/scsiport.sys.so
 -rwxr-xr-x	root/root	usr/lib32/wine/sdbinst.exe.so
 -rwxr-xr-x	root/root	usr/lib32/wine/secedit.exe.so
+-rwxr-xr-x	root/root	usr/lib32/wine/sechost.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/secur32.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/security.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/sensapi.dll.so
