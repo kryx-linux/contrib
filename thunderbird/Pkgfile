@@ -1,11 +1,11 @@
 # Description: Email client from the Mozilla project
 # URL: https://www.thunderbird.net/en-US/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 cbindgen clang gtk gtk3 libidl nss unzip xorg-libxt yasm zip nodejs libnotify
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang gtk gtk3 libidl lld nss unzip xorg-libxt yasm zip nodejs libnotify
 # Optional: sccache
 
 name=thunderbird
-version=68.7.0
+version=68.8.0
 release=1
 source=(http://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
 	$name.desktop)
@@ -27,6 +27,7 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-application=comm/mail
 	ac_add_options --prefix=/usr
 	ac_add_options --enable-default-toolkit=cairo-gtk3
+	ac_add_options --enable-linker=lld
 	ac_add_options --with-system-jpeg
 	ac_add_options --with-system-zlib
 	ac_add_options --with-system-png
@@ -35,6 +36,9 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
 	ac_add_options --enable-alsa
+	ac_add_options --enable-optimize
+	ac_add_options --enable-release
+	ac_add_options --enable-rust-simd
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
 	ac_add_options --disable-tests
