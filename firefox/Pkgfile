@@ -1,11 +1,11 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gtk libidl libnotify libxkbcommon nodejs nss unzip xorg-libxt yasm zip python
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gtk libidl libnotify libxkbcommon lld nodejs nss unzip xorg-libxt yasm zip python
 # Optional: sccache
 
 name=firefox
-version=76.0
+version=76.0.1
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
 	firefox.desktop
@@ -60,6 +60,7 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
 	ac_add_options --enable-extensions=default,-gnomevfs
+	ac_add_options --enable-linker=lld
 	ac_add_options --disable-tests
 	ac_add_options --disable-debug
 	ac_add_options --disable-updater
