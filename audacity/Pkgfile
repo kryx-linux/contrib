@@ -1,18 +1,19 @@
 # Description: Audio recording and editing program
 # URL: https://www.audacityteam.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: jack-audio-connection-kit lame libid3tag libmad libsoxr lilv soundtouch suil twolame vamp-plugin-sdk wxgtk
+# Depends on: jack-audio-connection-kit lame libid3tag libmad libsoxr lilv soundtouch suil twolame vamp-plugin-sdk wxgtk3
 # Optional: portsmf
 
 name=audacity
 version=2.3.3
-release=1
+release=2
 source=(https://github.com/$name/$name/archive/Audacity-$version.tar.gz)
 
 build() {
 	cd $name-Audacity-$version
 
 	CONFIG_SHELL=/bin/bash \
+	WX_CONFIG=wx-config-gtk3 \
 	./configure \
 		--prefix=/usr \
 		--with-libsndfile="system" \
