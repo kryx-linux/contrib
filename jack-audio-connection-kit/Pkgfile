@@ -1,13 +1,12 @@
 # Description: A real-time, low latency audio daemon.
 # URL: http://jackaudio.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Jay Dolan, jdolan at jdolan dot dyndns dot org
 # Depends on: libsamplerate
 
 name=jack-audio-connection-kit
 version=0.125.0
 release=1
-source=(http://jackaudio.org/downloads/$name-$version.tar.gz)
+source=(https://crux.ster.zone/downloads/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
@@ -19,4 +18,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+
+	rm -rf $PKG/usr/share/$name
 }
