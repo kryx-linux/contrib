@@ -4,22 +4,17 @@
 # Depends on: flac glu gtk libtheora libwebp openal opus physfs xorg-libxi xorg-libxpm
 
 name=allegro
-version=5.2.5.0
+version=5.2.6.0
 release=1
 source=(https://github.com/liballeg/allegro5/releases/download/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-
-	mkdir build
-	cd build
-
-	cmake .. \
+	cmake -S$name-$version -Bbuild -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DWANT_DOCS_HTML=OFF \
-		-G Ninja
+		-Wno-dev
 
-	ninja -j ${JOBS:-1}
-	DESTDIR=$PKG ninja install
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
 }
