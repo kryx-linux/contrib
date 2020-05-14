@@ -5,15 +5,22 @@
 
 name=rstudio
 version=1.2.5042
+release=2
+
+# $SRC/$name-$version/dependencies/common/install-gwt
 _gwtver=2.8.1
 _ginver=2.1.2
-release=1
+
 source=(
   https://github.com/rstudio/rstudio/archive/v$version/$name-$version.tar.gz
   https://s3.amazonaws.com/rstudio-buildtools/gin-$_ginver.zip
   https://s3.amazonaws.com/rstudio-buildtools/gwt-$_gwtver.zip
   https://s3.amazonaws.com/rstudio-dictionaries/core-dictionaries.zip
-  217ce0962734ae85621fd82f0eed86129c991a79.patch)
+  # https://gitweb.gentoo.org/repo/gentoo.git/tree/sci-mathematics/rstudio/files
+  rstudio-1.2.1335-boost-1.70.0_p1.patch rstudio-1.2.1335-boost-1.70.0_p2.patch
+  rstudio-1.2.5042-boost-1.73.0.patch
+  # https://github.com/rstudio/rstudio/commit/60dd6e3cd349cc208e33a12635378a1e338f8efc.patch
+  r-nosave.patch)
 git=(https://github.com/rstudio/rstudio.git)
 
 unpack_source() {
@@ -43,11 +50,18 @@ unpack_source() {
 }
 
 build() {
-  cd $name-$version
-  #if you want your git snapshot to be a particular version
-  #git checkout v$version
-  patch -Np1 -i $SRC/217ce0962734ae85621fd82f0eed86129c991a79.patch
-  pushd dependencies/common
+  ## if you want your git snapshot to be a particular version
+  ## uncomment below and change every occurance of $name-$version to $name
+  #git checkout v$version $name
+
+  patch -Np1 -d $name-$version -i $SRC/rstudio-1.2.1335-boost-1.70.0_p1.patch
+  patch -Np1 -d $name-$version -i $SRC/rstudio-1.2.1335-boost-1.70.0_p2.patch
+  patch -Np1 -d $name-$version -i $SRC/rstudio-1.2.5042-boost-1.73.0.patch
+
+  sed -i 's/2009-12/2009-19/g' $name-$version/src/cpp/r/session/REmbeddedPosix.cpp
+  patch -Np1 -d $name-$version -i $SRC/r-nosave.patch
+
+  pushd $name-$version/dependencies/common
   install -d pandoc
   ln -sfT /usr/share/myspell/dicts dictionaries
   ln -sfT /usr/share/mathjax mathjax-26
@@ -56,21 +70,22 @@ build() {
   bash install-packages
   popd
 
-  mkdir build
-  pushd build
   export PATH="/usr/lib/java/openjdk8/jre/bin/:${PATH}"
-  cmake -DRSTUDIO_TARGET=Desktop \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake -S$name-$version -Bbuild -GNinja\
     -DCMAKE_INSTALL_PREFIX=/usr/lib/rstudio \
-    -DRSTUDIO_USE_SYSTEM_BOOST=yes \
+    -DRSTUDIO_TARGET=Desktop \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DRSTUDIO_USE_SYSTEM_BOOST=ON \
+    -DQT_QMAKE_EXECUTABLE=/usr/lib/qt5/bin/qmake \
     -DBoost_NO_BOOST_CMAKE=ON \
     -DRSTUDIO_BUNDLE_QT=FALSE \
-    -DQT_QMAKE_EXECUTABLE=/usr/lib/qt5/bin/qmake \
-    ..
+    -Wno-dev
 
-  make DESTDIR=$PKG install
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
+
   install -dm755 $PKG/usr/bin/
-  ln -s /usr/lib/$name/bin/$name $PKG/usr/bin/$nam
+  ln -s /usr/lib/$name/bin/$name $PKG/usr/bin/$name
   sed -i 's|/usr/lib/rstudio/bin/rstudio|/usr/bin/rstudio|g' $PKG/usr/share/applications/rstudio.desktop
   find $PKG \(\
     -iname '*README*' -o \
