@@ -5,11 +5,14 @@
 
 name=libetonyek
 version=0.1.9
-release=3
-source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
+release=4
+source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
+  libetonyek-0.1.9-boost-1.73.patch)
 
 build() {
   cd $name-$version
+  ## https://gitweb.gentoo.org/repo/gentoo.git/tree/app-text/libetonyek/files/libetonyek-0.1.9-boost-1.73.patch
+  patch -Np1 -i $SRC/libetonyek-0.1.9-boost-1.73.patch
   ./configure --prefix=/usr \
     --with-mdds=1.5 \
     --without-docs
