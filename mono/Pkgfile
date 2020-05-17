@@ -5,7 +5,7 @@
 # Depends on: cmake python3 zlib
 
 name=mono
-version=6.8.0.105
+version=6.8.0.123
 release=1
 source=(https://download.mono-project.com/sources/$name/$name-$version.tar.xz)
 
@@ -14,10 +14,12 @@ build() {
   [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   ./configure --prefix=/usr \
     --mandir=/usr/share/man \
+    --enable-ninja \
     --with-mcs-docs=no \
     --disable-crash-reporting \
     --disable-nls
-  PYTHON=python3 make
+  sed -e 's/python/python3/g' -i mono/mini/Makefile*
+  PYTHON=/usr/bin/python3 make
   make DESTDIR=$PKG install
   rm -fr $PKG/usr/share/locale
   find $PKG \( -iname "*README*" \
