@@ -1,23 +1,17 @@
 # Description: Fast C++ logging library
 # URL: https://github.com/gabime/spdlog
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fmt meson ninja
+# Depends on: fmt cmake ninja
 
 name=spdlog
-version=1.5.0
+version=1.6.0
 release=1
 source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  mkdir build
-  cd build
-  meson .. \
-    --prefix=/usr \
-    -D external_fmt=true \
-    -D enable_examples=false \
-    -D library_type=static \
-    -D enable_tests=false
-  ninja
-  DESTDIR=$PKG ninja install
+  cmake -S$name-$version -Bbuild -G Ninja \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
 }
