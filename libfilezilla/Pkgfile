@@ -1,17 +1,17 @@
-# Description: ftp client
-# URL:         http://filezilla-project.org
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  gnutls libidn2 clang
+# Description: filezilla common library
+# URL: https://filezilla-project.org
+# Maintainer: Thomas Penteker, tek at serverop dot de
+# Depends on: clang gnutls libidn2
 
 name=libfilezilla
-version=0.19.3
+version=0.21.0
 release=1
 source=(https://download.filezilla-project.org/${name}/${name}-${version}.tar.bz2)
 
 build() {
   cd $name-$version
-  export CXX=clang++
-  export CC=clang
+  export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
+  autoreconf -vfi
   ./configure \
     --prefix=/usr \
     --disable-static
