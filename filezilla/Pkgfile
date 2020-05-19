@@ -1,25 +1,29 @@
 # Description: ftp client
-# URL:         http://filezilla-project.org
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on: libfilezilla libnotify libwebp wxgtk xdg-utils
+# URL: https://filezilla-project.org
+# Maintainer: Thomas Penteker, tek at serverop dot de
+# Depends on: libfilezilla libnotify libwebp pugixml wxgtk3 xdg-utils
 
 name=filezilla
-version=3.46.3
+version=3.48.0
 release=1
-source=(https://download.filezilla-project.org/client/FileZilla_${version}_src.tar.bz2)
+source=(https://download.filezilla-project.org/client/FileZilla_${version}_src.tar.bz2
+  missing-list-include.patch)
 
 build() {
-    cd $name-$version
-    ./configure \
-        --prefix=/usr \
-        --mandir=/usr/share/man \
-        --disable-manualupdatecheck \
-        --disable-autoupdatecheck \
-        --disable-locales \
-        --disable-static \
-        --with-pugixml=builtin \
-        --disable-dependency-tracking
-    make
-    make DESTDIR=$PKG install
-    rm -rf $PKG/usr/share/locale
+  cd $name-$version
+  export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
+  patch -Np0 -i $SRC/missing-list-include.patch
+  autoreconf -vfi
+  ./configure \
+    --prefix=/usr \
+    --mandir=/usr/share/man \
+    --disable-manualupdatecheck \
+    --disable-autoupdatecheck \
+    --disable-locales \
+    --disable-static \
+    --with-pugixml=system \
+    --disable-dependency-tracking --with-wx-config=/usr/bin/wx-config-gtk3
+  make
+  make DESTDIR=$PKG install
+  rm -rf $PKG/usr/share/locale
 }
