@@ -180,7 +180,7 @@ lrwxrwxrwx	root/root	usr/bin/fail2ban-python -> /usr/bin/python3
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.7/
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/
--rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban-0.10.5-py3.7.egg-info
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban-0.11.1-py3.7.egg-info
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/__pycache__/
@@ -248,6 +248,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__/jails.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__/jailthread.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__/mytime.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__/observer.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__/server.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__/strptime.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__/ticket.cpython-37.pyc
@@ -272,6 +273,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/server/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/jails.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/jailthread.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/mytime.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/observer.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/server.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/strptime.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/server/ticket.py
@@ -295,6 +297,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/failmanagertestcase.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/filtertestcase.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/misctestcase.cpython-37.pyc
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/observertestcase.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/samplestestcase.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/servertestcase.cpython-37.pyc
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/__pycache__/sockettestcase.cpython-37.pyc
@@ -378,6 +381,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/config
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/config/apache-auth/noentry/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/config/apache-auth/noentry/.htaccess
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/database_v1.db
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/database_v2.db
 drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/filter.d/
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/filter.d/substition.conf
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/filter.d/testcase-common.conf
@@ -485,6 +489,7 @@ drwxr-xr-x	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/logs/b
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/files/zzz-sshd-obsolete-multiline.log
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/filtertestcase.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/misctestcase.py
+-rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/observertestcase.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/samplestestcase.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/servertestcase.py
 -rw-r--r--	root/root	usr/lib/python3.7/site-packages/fail2ban/tests/sockettestcase.py
