@@ -122,6 +122,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/
 -rw-r--r--	root/root	usr/include/wine/windows/appcompatapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/appmgmt.h
 -rw-r--r--	root/root	usr/include/wine/windows/appmodel.h
+-rw-r--r--	root/root	usr/include/wine/windows/asferr.h
 -rw-r--r--	root/root	usr/include/wine/windows/asptlb.h
 -rw-r--r--	root/root	usr/include/wine/windows/asptlb.idl
 -rw-r--r--	root/root	usr/include/wine/windows/asynot.idl
@@ -145,6 +146,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/
 -rw-r--r--	root/root	usr/include/wine/windows/avrt.h
 -rw-r--r--	root/root	usr/include/wine/windows/axcore.idl
 -rw-r--r--	root/root	usr/include/wine/windows/axextend.idl
+-rw-r--r--	root/root	usr/include/wine/windows/axextendenums.h
 -rw-r--r--	root/root	usr/include/wine/windows/basetsd.h
 -rw-r--r--	root/root	usr/include/wine/windows/basetyps.h
 -rw-r--r--	root/root	usr/include/wine/windows/bcrypt.h
@@ -382,6 +384,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/downloadmgr.h
 -rw-r--r--	root/root	usr/include/wine/windows/downloadmgr.idl
 -rw-r--r--	root/root	usr/include/wine/windows/dpaddr.h
+-rw-r--r--	root/root	usr/include/wine/windows/dpfilter.h
 -rw-r--r--	root/root	usr/include/wine/windows/dplay.h
 -rw-r--r--	root/root	usr/include/wine/windows/dplay8.h
 -rw-r--r--	root/root	usr/include/wine/windows/dplobby.h
@@ -450,6 +453,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/exdisp.h
 -rw-r--r--	root/root	usr/include/wine/windows/exdisp.idl
 -rw-r--r--	root/root	usr/include/wine/windows/exdispid.h
+-rw-r--r--	root/root	usr/include/wine/windows/exposeenums2managed.h
 -rw-r--r--	root/root	usr/include/wine/windows/fci.h
 -rw-r--r--	root/root	usr/include/wine/windows/fdi.h
 -rw-r--r--	root/root	usr/include/wine/windows/fileapi.h
@@ -712,6 +716,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/ole2ver.h
 -rw-r--r--	root/root	usr/include/wine/windows/oleacc.h
 -rw-r--r--	root/root	usr/include/wine/windows/oleacc.idl
+-rw-r--r--	root/root	usr/include/wine/windows/oleacc.tlb
 -rw-r--r--	root/root	usr/include/wine/windows/oleauto.h
 -rw-r--r--	root/root	usr/include/wine/windows/olectl.h
 -rw-r--r--	root/root	usr/include/wine/windows/oledb.h
@@ -847,7 +852,9 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/srrestoreptapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/sspi.h
 -rw-r--r--	root/root	usr/include/wine/windows/stdole2.idl
+-rw-r--r--	root/root	usr/include/wine/windows/stdole2.tlb
 -rw-r--r--	root/root	usr/include/wine/windows/stdole32.idl
+-rw-r--r--	root/root	usr/include/wine/windows/stdole32.tlb
 -rw-r--r--	root/root	usr/include/wine/windows/stgprop.h
 -rw-r--r--	root/root	usr/include/wine/windows/sti.h
 -rw-r--r--	root/root	usr/include/wine/windows/storage.h
@@ -899,6 +906,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/uiautomationcoreapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/uiribbon.h
 -rw-r--r--	root/root	usr/include/wine/windows/uiribbon.idl
+-rw-r--r--	root/root	usr/include/wine/windows/unexposeenums2managed.h
 -rw-r--r--	root/root	usr/include/wine/windows/unknwn.h
 -rw-r--r--	root/root	usr/include/wine/windows/unknwn.idl
 -rw-r--r--	root/root	usr/include/wine/windows/urlhist.h
@@ -943,6 +951,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/wia_xp.idl
 -rw-r--r--	root/root	usr/include/wine/windows/wiadef.h
 -rw-r--r--	root/root	usr/include/wine/windows/wimgapi.h
+-rw-r--r--	root/root	usr/include/wine/windows/winapifamily.h
 -rw-r--r--	root/root	usr/include/wine/windows/winbase.h
 -rw-r--r--	root/root	usr/include/wine/windows/wincodec.h
 -rw-r--r--	root/root	usr/include/wine/windows/wincodec.idl
@@ -2595,6 +2604,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/libsetupapi.def
 -rw-r--r--	root/root	usr/lib/wine/libsfc.def
 -rw-r--r--	root/root	usr/lib/wine/libsfc_os.def
+-rw-r--r--	root/root	usr/lib/wine/libshcore.def
 -rw-r--r--	root/root	usr/lib/wine/libshdocvw.def
 -rw-r--r--	root/root	usr/lib/wine/libshell32.def
 -rw-r--r--	root/root	usr/lib/wine/libshfolder.def
@@ -2770,6 +2780,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/npmshtml.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/npptools.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/ntdll.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/ntdll.so
 -rwxr-xr-x	root/root	usr/lib/wine/ntdsapi.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/ntoskrnl.exe.so
 -rwxr-xr-x	root/root	usr/lib/wine/ntprint.dll.so
@@ -4636,6 +4647,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/libsetupapi.def
 -rw-r--r--	root/root	usr/lib32/wine/libsfc.def
 -rw-r--r--	root/root	usr/lib32/wine/libsfc_os.def
+-rw-r--r--	root/root	usr/lib32/wine/libshcore.def
 -rw-r--r--	root/root	usr/lib32/wine/libshdocvw.def
 -rw-r--r--	root/root	usr/lib32/wine/libshell32.def
 -rw-r--r--	root/root	usr/lib32/wine/libshfolder.def
@@ -4819,6 +4831,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/npmshtml.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/npptools.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/ntdll.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/ntdll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/ntdsapi.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/ntoskrnl.exe.so
 -rwxr-xr-x	root/root	usr/lib32/wine/ntprint.dll.so
