@@ -2,15 +2,17 @@
 # URL: https://www.videolan.org/vlc/
 # Maintainer: Thomas Penteker, tek at serverop dot de
 # Depends on: ffmpeg liba52 libdvdnav libgcrypt libmad qt5
-# Nice to have: opus libvorbis x264 libogg libmtp libtheora flac
+# Nice to have: opus libvorbis x264 libogg libmtp libtheora flac libvdpau
 
 name=vlc
-version=3.0.8
-release=2
+version=3.0.10
+release=1
 source=(https://download.videolan.org/pub/videolan/$name/$version/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
+
+  [ -z "$(pkg-config --libs --static libavutil | grep -- '-lvdpau')" ] && PKGMK_VLC=' --disable-vdpau'
 
   # allow building with new avcodec
   #sed -i 's/ 56/ 57/g' configure.ac
@@ -31,13 +33,12 @@ build() {
   export RCC=/usr/bin/rcc-qt5
   sed -e 's|-Werror-implicit-function-declaration||g' -i configure
   BUILDCC="gcc -std=gnu11" \
-  ./configure --prefix=/usr \
+  ./configure ${PKGMK_VLC} --prefix=/usr \
     --disable-nls \
     --disable-fribidi \
     --disable-dbus \
     --disable-lua \
     --disable-update-check \
-    --disable-vdpau \
     --enable-alsa
 
   #make
