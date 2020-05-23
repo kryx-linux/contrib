@@ -11,11 +11,10 @@ build() {
 	cd $name-$version
 
 	./bootstrap
-	./configure --prefix=/usr
+	./configure --prefix=/usr --disable-static
 
 	make
 	make DESTDIR=$PKG install
 
-	rm $PKG/usr/lib/libdca.a
-	ln -s libdts.a $PKG/usr/lib/libdca.a
+	rm -f $PKG/usr/lib/libdts.a
 }
