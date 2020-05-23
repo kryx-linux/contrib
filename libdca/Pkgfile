@@ -3,18 +3,19 @@
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=libdca
-version=0.0.6
+version=0.0.7
 release=1
 source=(https://download.videolan.org/pub/videolan/$name/$version/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
 
-	sed -i configure -e 's/-mtune=pentiumpro//'
-
+	./bootstrap
 	./configure --prefix=/usr
 
 	make
 	make DESTDIR=$PKG install
-}
 
+	rm $PKG/usr/lib/libdca.a
+	ln -s libdts.a $PKG/usr/lib/libdca.a
+}
