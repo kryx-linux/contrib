@@ -1,48 +1,35 @@
-# Description:	Linux Infrared Remote Control
-# URL:		http://www.lirc.org/
-# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	
+# Description:  Linux Infrared Remote Control
+# URL:  http://www.lirc.org/
+# Maintainer: Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: alsa-lib libdtdi libxslt libusb-compat python3-setuptools xorg-libx11
 
 name=lirc
-version=0.9.2
-release=5
-source=(
-http://download.sourceforge.net/$name/$name-$version.tar.bz2
-lircd.rc
-20141211102847-eb44af1-add-euid-to-template.patch
-20141229144508-034dcf8-lirc.pc-variable-order.patch
-20150109124636-35d9b9a-lirc-lsplugins-bugfixes.patch
-20150110013032-39d7085-log-priority-labels.patch
-20150115020157-b7758ca-user-config.patch
-20150123231142-97282f2-help-message.patch
-lirc-0.9.2-noextras.diff
-)
+version=0.10.1
+release=1
+source=(https://download.sourceforge.net/$name/$name-$version.tar.bz2
+  lircd.rc lirc.patch)
 
 build() {
-	cd lirc-$version
+  cd lirc-$version
 
-	# Apply bugfixes waiting for next release
-	for i in $SRC/*.patch; do
-		patch -i $i -p1
-	done
+  patch -p1 -i $SRC/lirc.patch
+  autoreconf -fi
+  automake -ac
 
-	patch -p1 -i $SRC/lirc-0.9.2-noextras.diff
-	./autogen.sh
+  ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --mandir=/usr/share/man \
+    --localstatedir=/var
+  make
+  make DESTDIR=$PKG install
 
-	./configure \
-		--prefix=/usr \
-		--sysconfdir=/etc \
-		--mandir=/usr/share/man \
-		--localstatedir=/var
-	make
-	make DESTDIR=$PKG install
+  # bogus symlink
+  rm -f $PKG/usr/bin/lirc-setup $PKG/usr/share/man/man1/lirc-setup.1
 
-	# bogus symlink
-	rm -f $PKG/usr/bin/lirc-setup $PKG/usr/share/man/man1/lirc-setup.1
+  # init script
+  install -D -m 755 $SRC/lircd.rc $PKG/etc/rc.d/lircd
 
-	# init script
-	install -D -m 755 $SRC/lircd.rc $PKG/etc/rc.d/lircd
-
-	# remove cruft
-	rm -rf $PKG/configs $PKG/usr/share/doc $PKG/var $PKG/etc/lirc/lircd.conf.d/README.conf.d $PKG/usr/lib/lirc/plugins/*.la
+  # remove cruft
+  rm -rf $PKG/configs $PKG/usr/share/doc $PKG/var $PKG/etc/lirc/lircd.conf.d/README.conf.d $PKG/usr/lib/lirc/plugins/*.la
 }
