@@ -5,22 +5,19 @@
 # Optional: asciidoc
 
 name=picom
-version=7.5
+version=8
 release=1
 source=(https://github.com/yshui/picom/archive/v$version/$name-v$version.tar.gz
 	picom.conf picom-trans.1 picom.1)
 
 build() {
-	cd $name-$version
-
 [ -e '/usr/bin/asciidoctor' ] && PKGMK_PICOM+=' -D build_docs=true'
 
-	meson build ${PKGMK_PICOM} \
+	meson $name-$version build ${PKGMK_PICOM} \
 		--prefix=/usr \
 		-D b_ndebug=true
 
 	ninja -C build -j ${JOBS:-1}
-
 	DESTDIR=$PKG ninja -C build install
 
 	install -Dm644 $SRC/picom.conf $PKG/etc/xdg/picom.conf
