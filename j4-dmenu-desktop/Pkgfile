@@ -7,11 +7,11 @@ name=j4-dmenu-desktop
 version=2.17
 release=1
 source=(https://github.com/enkore/j4-dmenu-desktop/archive/r$version/$name-$version.tar.gz)
-git=(https://github.com/enkore/j4-dmenu-desktop.git)
 
 build() {
-  cd $name-r$version
-  cmake -DCMAKE_INSTALL_PREFIX=/usr .
-  make
-  make DESTDIR=$PKG install
+  cmake -S$name-r$version -Bbuild \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DWITH_TESTS="no"
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
 }
