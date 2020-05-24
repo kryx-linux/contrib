@@ -6,7 +6,7 @@
 
 name=r
 version=4.0.0
-release=1
+release=2
 source=(https://cran.r-project.org/src/base/R-4/R-$version.tar.gz
   r.desktop r.png R.conf
   R-3.4.1-parallel.patch R-3.4.1-rmath-shared.patch
@@ -92,9 +92,10 @@ build() {
     -iname '*THANKS*' -o \
     -iname '*NEWS*' -o \
     -iname '*LICENSE*' -o \
-    -iname 'doc' -o \
     -iname '*CHANGELOG*' \
     \) -exec rm -r '{}' \+ || true
-    #doh! don't remove INSTALL or you won't be able to install R packages
+    ## doh! don't remove INSTALL or you won't be able to install R packages
     #-iname '*INSTALL*' -o \
+    ## rstudio now depends on finding docs that R provides..
+    #-iname 'doc' -o \
 }
