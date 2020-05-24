@@ -5,7 +5,7 @@
 # Depends on:  p5-digest-sha1, p5-net-dns, p5-libwww, p5-netaddr-ip, gnupg
 
 name=spamassassin
-version=3.4.2
+version=3.4.4
 release=1
 source=(http://apache.mirror.digionline.de/spamassassin/source/Mail-SpamAssassin-$version.tar.bz2 \
    $name.rc)
@@ -16,7 +16,7 @@ build() {
    LOCALSTATEDIR=/usr/share/$name < /dev/null
    make
    make spamc/libspamc.so
-   make install 
+   make install
 
    mkdir -p $PKG/{etc/rc.d,usr/include,usr/lib}
    install -m0755 ../$name.rc $PKG/etc/rc.d/$name
