@@ -4,7 +4,7 @@
 # Depends on: lcms2 pango xorg-libxt
 
 name=imagemagick-compat
-version=6.9.10-90
+version=6.9.11-14
 release=1
 source=(https://www.imagemagick.org/download/ImageMagick-$version.tar.xz
 	IM6-GS-policy.patch)
@@ -16,12 +16,12 @@ build () {
     patch -p1 -i $SRC/IM6-GS-policy.patch
 
     ./configure \
-		PKG_CONFIG="/usr/bin/env PKG_CONFIG_PATH=/usr/lib/$name/pkgconfig pkg-config" \
-		--prefix=/usr \
-                --enable-shared \
-                --with-modules \
-                --with-perl=yes \
-                --with-lcms=yes
+      PKG_CONFIG="/usr/bin/env PKG_CONFIG_PATH=/usr/lib/$name/pkgconfig pkg-config" \
+      --prefix=/usr \
+      --enable-shared \
+      --with-modules \
+      --with-perl=yes \
+      --with-lcms=yes
 
     sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
@@ -35,7 +35,7 @@ build () {
     make DESTDIR=$PKG install
 
     rm -r $PKG/usr/share/doc
-    find $PKG -regex '.*\(ChangeLog\|LICENSE\|NEWS\.txt\)$' -delete 
+    find $PKG -regex '.*\(ChangeLog\|LICENSE\|NEWS\.txt\)$' -delete
     find $PKG -regex '.*\(\.packlist\|perllocal.pod\|\.bs\)$' -delete
     find $PKG -type d -empty -delete
 
