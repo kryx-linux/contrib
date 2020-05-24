@@ -6,7 +6,7 @@
 
 name=dia
 version=0.97.3
-release=1
+release=2
 source=(ftp://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$version.tar.xz
 	# https://gitweb.gentoo.org/repo/gentoo.git/tree/app-office/dia/files
 	dia-0.97.2-underlinking.patch dia-0.97.3-freetype_pkgconfig.patch
@@ -35,6 +35,7 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+	/usr/bin/python -mcompileall $PKG
 
 	rm -r \
 		$PKG/usr/share/locale \
