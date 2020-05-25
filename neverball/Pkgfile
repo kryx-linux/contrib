@@ -2,20 +2,22 @@
 # URL: http://icculus.org/neverball/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: Mark Rosenstand, mark at borkware dot net
-# Depends on: sdl_image sdl_mixer sdl_ttf physfs
+# Depends on: libsdl2 physfs sdl2_image sdl2_mixer sdl2_ttf
 
 name=neverball
-version=1.5.4
+version=1.6.0
 release=1
-source=(http://icculus.org/neverball/neverball-$version.tar.gz)
+source=(http://icculus.org/neverball/neverball-$version.tar.gz
+  https://github.com/Neverball/neverball/commit/27279856.patch)
 
 build() {
 	cd $name-$version
+	patch -Np1 -i $SRC/27279856.patch
 
 	sed -i -e '/CONFIG_DATA/s|\./data|/usr/share/neverball|g' \
 		share/base_config.h
 
-	make
+	make CPPFLAGS="$CPPFLAGS -DNDEBUG" CFLAGS="$CFLAGS" DATADIR=/usr/share/neverball LOCALEDIR=/usr/share/locale
 
 	install -d $PKG/usr/{bin,share/icons}
 	cp neverball neverputt $PKG/usr/bin
