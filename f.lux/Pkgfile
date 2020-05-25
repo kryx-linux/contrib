@@ -1,16 +1,16 @@
 # Description: makes the color of your display adapt to the time of day
 # URL:         https://justgetflux.com
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  xorg-libxrandr xorg-libxxf86vm
+# Depends on:  glib xorg-libxrandr xorg-libxxf86vm
 
 name=f.lux
-version=2014-05-03
+version=1.2.0
 release=1
-source=(http://crux.nu/~tek/$name-$version.tar.xz)
+source=(https://github.com/xflux-gui/fluxgui/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd f.lux
-  /usr/bin/python setup.py install --prefix=$PKG/usr
+  cd fluxgui-$version
+  /usr/bin/python3 setup.py install --prefix=$PKG/usr
 
   # fix possible umask issues
   find $PKG/usr -type f -exec chmod a+r '{}' \;
