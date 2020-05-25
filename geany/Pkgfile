@@ -1,8 +1,8 @@
-# Description: gtk2 text editor with syntax highlighting
-# URL: http://www.geany.org/
+# Description: gtk3 text editor with syntax highlighting
+# URL: https://www.geany.org/
 # Maintainer: Jan-Michael Franz, jmf at mesecons dot net
 # Packager: Hannes Mayer, kontakt at ecarux dot de
-# Depends on: gtk
+# Depends on: gtk3 xorg-libxcomposite xorg-libxcursor xorg-libxinerama
 # Nice to have: vte
 
 name=geany
@@ -14,9 +14,10 @@ build () {
   cd $name-$version
 
   ./configure --prefix=/usr \
+              --enable-gtk3 \
               --enable-plugins
 
   make
   make DESTDIR=$PKG install
-  rm -rf $PKG/usr/share/{doc,locale}
+  rm -r $PKG/usr/share/{doc,locale}
 }
