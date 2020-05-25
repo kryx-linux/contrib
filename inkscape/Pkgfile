@@ -1,8 +1,8 @@
 # Description: An open source SVG editor.
 # URL: https://www.inkscape.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: boehm-gc boost gsl gtkmm poppler-glib popt
-# Optional: rtmpdump openldap libexif openjade gtk-doc gtkspell brotli imagemagick-compat
+# Depends on: boehm-gc boost gsl gtkmm libxslt poppler-glib popt
+# Optional: brotli gtk-doc gtkspell imagemagick-compat libexif openjade openldap rtmpdump
 
 name=inkscape
 version=0.92.4
@@ -18,18 +18,18 @@ poppler() {
 #+cmake cairo lcms2 boehm-gc boost gsl gtkmm popt
 	cd poppler-0.85.0
 	cmake . \
-        -DCMAKE_INSTALL_PREFIX=$SRC/poppler \
-	-DCMAKE_INSTALL_LIBDIR=$SRC/poppler/lib \
-        -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
-	-DENABLE_UTILS=ON \
-        -DENABLE_SPLASH=ON \
-        -DENABLE_CPP=ON \
-        -DENABLE_GLIB=ON \
-        -DENABLE_QT5=OFF \
-        -DENABLE_ZLIB=ON \
-        -DENABLE_CMS=lcms2 \
-        -DENABLE_LIBOPENJPEG=none \
-	-DWITH_NSS3=OFF
+		-DCMAKE_INSTALL_PREFIX=$SRC/poppler \
+		-DCMAKE_INSTALL_LIBDIR=$SRC/poppler/lib \
+		-DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+		-DENABLE_UTILS=ON \
+		-DENABLE_SPLASH=ON \
+		-DENABLE_CPP=ON \
+		-DENABLE_GLIB=ON \
+		-DENABLE_QT5=OFF \
+		-DENABLE_ZLIB=ON \
+		-DENABLE_CMS=lcms2 \
+		-DENABLE_LIBOPENJPEG=none \
+		-DWITH_NSS3=OFF
 
 	make
 	make install
