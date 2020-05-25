@@ -1,19 +1,15 @@
 # Description: initiator and target implementation of iscsi
 # URL:		     https://github.com/open-iscsi/open-iscsi
-# Maintainer:  Thomas Penteker, tek at serverop dot de 
+# Maintainer:  Thomas Penteker, tek at serverop dot de
 # Depends on:  open-isns
 
 name=open-iscsi
-version=2.0.876
+version=2.1.1
 release=1
-source=(http://distfiles.serverop.de/open-iscsi-$version.tar.gz)
+source=(https://github.com/open-iscsi/open-iscsi/archive/$version/$name-$version.tar.gz)
 
 build() {
-  # yes, upstream screwed up directory name OR version
-  #cd $name-$version
-  cd $name-2.0.875
-
-  make
-  make DESTDIR=$PKG install
-
+  cd $name-$version
+  make OPTFLAGS=" -DNO_SYSTEMD"
+  make DESTDIR=$PKG install LIB_DIR="/usr/lib"
 }
