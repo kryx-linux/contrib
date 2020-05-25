@@ -16,9 +16,11 @@ build() {
 
 	tar -xf fpc-$version.x86_64-linux/binary.x86_64-linux.tar
 	tar -xzf base.x86_64-linux.tar.gz
+	PATH="$SRC/bin:$PATH"
+	#PATH="$SRC/fpc-$version.x86_64-linux/fpcbuild-$version/fpcsrc/compiler:$PATH"
 
 	cd fpcbuild-$version/fpcsrc/
-	
+
 	make $JOBS PP=$SRC/lib/fpc/$version/ppcx64 build
 
 	cp $SRC/fpcbuild-$version/fpcsrc/compiler/ppcx64 \

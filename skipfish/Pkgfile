@@ -6,11 +6,13 @@
 name=skipfish
 version=2.10b
 release=1
-source=(https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/$name/$name-$version.tgz)
+source=(https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/$name/$name-$version.tgz
+  skipfish.patch)
 
 build() {
   cd $name-$version
 
+  patch -Np0 -i $SRC/skipfish.patch
   sed -i -e 's|"assets"|"/usr/share/skipfish/assets"|g' src/config.h
   sed -i -e 's|"signatures/|"/usr/share/skipfish/signatures/|g' src/config.h
   sed -i -e 's|include signatures/|include /usr/share/skipfish/signatures/|g' signatures/signatures.conf
