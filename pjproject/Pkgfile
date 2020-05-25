@@ -1,15 +1,15 @@
-# Description:	Multimedia communication library
-# URL:		http://www.pjsip.org/
-# Packager:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	portaudio speex libsrtp gsm ffmpeg libsdl2 libsamplerate
+# Description: Multimedia communication library
+# URL: https://www.pjsip.org/
+# Packager: Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: ffmpeg gsm libedit libsamplerate libsdl2 libsrtp portaudio speex speexdsp
 
 name=pjproject
-version=2.6
-release=2
-source=(
-http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2
-config_site.h
-)
+version=2.10
+release=1
+source=(https://github.com/pjsip/pjproject/archive/$version/$name-$version.tar.gz
+  config_site.h
+  # https://aur.archlinux.org/cgit/aur.git/plain/0001-Don-t-build-Java-bindings.patch?h=pjproject
+  0001-Don-t-build-Java-bindings.patch)
 
 # Related ports:
 # pjsua: Standalone user-agent.
@@ -17,32 +17,32 @@ config_site.h
 # pjproject: Libraries with most things enabled. Static and dynamic libraries.
 
 build() {
-	cd pjproject-$version
+  cd pjproject-$version
 
-	export CFLAGS="$CFLAGS -DNDEBUG"
+  export CFLAGS+=" -fPIC -DNDEBUG -Wno-error=deprecated-declarations"
+  export CXXFLAGS+=" -fPIC -DNDEBUG -Wno-error=deprecated-declarations"
 
-	./configure \
-		--prefix=/usr \
-		--enable-shared \
-		--with-external-pa \
-		--with-external-gsm \
-		--with-external-speex \
-		--with-external-srtp \
-		--with-sdl=/usr \
-		--disable-openh264 \
-		--enable-libsamplerate \
-		--disable-resample_dll
+  patch -Np1 -i $SRC/0001-Don-t-build-Java-bindings.patch
 
-	cp $SRC/config_site.h pjlib/include/pj/config_site.h
+  ./configure \
+    --prefix=/usr \
+    --enable-shared \
+    --with-external-pa \
+    --with-external-gsm \
+    --with-external-speex \
+    --with-external-srtp \
+    --with-sdl=/usr \
+    --enable-libsamplerate \
+    --disable-openh264 \
+    --disable-opencore-amr \
+    --disable-resample_dll
 
-	make dep
-	make
-	make DESTDIR=$PKG install
+  cp $SRC/config_site.h pjlib/include/pj/config_site.h
 
-	# install pjsua too (this is now in a separate port)
-	# mkdir -p $PKG/usr/bin
-	# cp pjsip-apps/bin/pjsua-* $PKG/usr/bin/pjsua
+  make -j1 dep
+  make -j1
 
-	# remove static libs
-	# rm -f $PKG/usr/lib/*.a
+  make -j1 DESTDIR=$PKG install
+  rm -rf $PKG/usr/lib/{libpj.so.2,libpjlib-util.so*,libpjmedia-audiodev.so*,libpjmedia-codec.so*,libpjmedia-videodev.so*,libpjmedia.so*,libpjnath.so,libpjsip-simple.so*,libpjsip-ua.so*,libpjsip.so*,libpj.so,libpjnath.so.2,pkgconfig/libpjproject.pc}
+  rm -r $PKG/usr/include/{pj++,pj,pjlib++.hpp,pjlib-util.h,pjlib-util,pjlib.h,pjmedia-audiodev,pjmedia-codec.h,pjmedia-codec,pjmedia-videodev,pjmedia.h,pjmedia,pjnath.h,pjnath,pjsip-simple,pjsip-ua,pjsip.h,pjsip,pjsua-lib,pjsua2.hpp,pjsua2,pjmedia_audiodev.h,pjmedia_videodev.h,pjsip_auth.h,pjsip_simple.h,pjsip_ua.h,pjsua.h}
 }
