@@ -5,14 +5,15 @@
 # Depends on: ucl zlib
 
 name=upx
-version=3.91
+version=3.96
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version-src.tar.bz2
+source=(https://github.com/upx/upx/releases/download/v$version/$name-$version-src.tar.xz
 	http://downloads.sourceforge.net/sevenzip/lzma465.tar.bz2)
 
 build() {
 	cd $name-$version-src
 
+	sed -i 's/bool warn = true/bool warn = false/' src/main.cpp
 	make UPX_LZMA_VERSION=0x465 UPX_LZMADIR=$SRC all
 
 	install -m 0644 -D doc/upx.1 $PKG/usr/share/man/man1/upx.1
