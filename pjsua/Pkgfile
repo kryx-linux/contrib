@@ -1,15 +1,13 @@
-# Description:	Multimedia communication library
-# URL:		http://www.pjsip.org/
-# Packager:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	pjproject
+# Description:  Multimedia communication library
+# URL: http://www.pjsip.org/
+# Packager: Alan Mizrahi, alan at mizrahi dot com dot ve
+# Depends on: pjproject swig
 
 name=pjsua
-version=2.6
-release=2
-source=(
-http://www.pjsip.org/release/$version/pjproject-$version.tar.bz2
-config_site.h
-)
+version=2.10
+release=1
+source=(https://github.com/pjsip/pjproject/archive/$version/pjproject-$version.tar.gz
+  config_site.h 0001-Don-t-build-Java-bindings.patch)
 
 # Related ports:
 # pjsua: Standalone user-agent.
@@ -17,34 +15,38 @@ config_site.h
 # pjproject: Libraries with most things enabled. Static and dynamic libraries.
 
 build() {
-	cd pjproject-$version
+  cd pjproject-$version
+  patch -Np1 -i $SRC/0001-Don-t-build-Java-bindings.patch
 
-	export CFLAGS="$CFLAGS -DNDEBUG"
+  export CFLAGS+=" -fPIC -DNDEBUG -Wno-error=deprecated-declarations"
+  export CXXFLAGS+=" -fPIC -DNDEBUG -Wno-error=deprecated-declarations"
 
-	# pjsua will be dynamically linked as long as pjproject is installed beforehand.
-	# otherwise it will be statically linked.
-	./configure \
-		--prefix=/usr \
-		--with-external-pa \
-		--with-external-gsm \
-		--with-external-speex \
-		--with-external-srtp \
-		--with-sdl=/usr \
-		--disable-openh264 \
-		--enable-libsamplerate \
-		--disable-resample_dll \
-		$( [ -f /usr/lib/libpjsua.so ] && echo --enable-shared )
+  # pjsua will be dynamically linked as long as pjproject is installed beforehand.
+  # otherwise it will be statically linked.
+  ./configure \
+    --prefix=/usr \
+    --with-external-pa \
+    --with-external-gsm \
+    --with-external-speex \
+    --with-external-srtp \
+    --with-sdl=/usr \
+    --disable-openh264 \
+    --enable-libsamplerate \
+    --disable-resample_dll \
+    $( [ -f /usr/lib/libpjsua.so ] && echo --enable-shared )
 
-	cp $SRC/config_site.h pjlib/include/pj/config_site.h
+  cp $SRC/config_site.h pjlib/include/pj/config_site.h
 
-	make dep
+  make -j1 dep
+  make -j1
 
-	# would be nice if something like this worked:
-	# make -j1 -C pjsip-apps/build pjsua-`./config.guess`
+  make -j1 -C pjsip-apps/src/swig
+  pushd pjsip-apps/src/swig/python
+  python3 setup.py build
+  python3 setup.py install --root=$PKG --optimize=1 --skip-build
+  popd
+  make DESTDIR=$PKG -j1 -C pjsip-apps/src/swig
 
-	# but for now:
-	make
-
-	# install pjsua only
-	install -D -m755 pjsip-apps/bin/pjsua-`./config.guess` $PKG/usr/bin/pjsua
+  # install pjsua only
+  install -D -m755 pjsip-apps/bin/pjsua-`./config.guess` $PKG/usr/bin/pjsua
 }
