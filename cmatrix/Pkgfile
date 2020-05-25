@@ -10,16 +10,13 @@ release=1
 source=(https://github.com/abishekvashok/cmatrix/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-   cd $name-$version
-   ls
+  cmake -S$name-$version -Bbuild \
+     -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
 
-   cmake -DCMAKE_INSTALL_PREFIX=/usr
-
-   make
-   make DESTDIR=$PKG install
-
-   install -D -m644 -groot -oroot cmatrix.1 $PKG/usr/share/man/1/cmatrix.1
-   install -D -m644 -groot -oroot matrix.fnt $PKG/usr/share/kbd/consolefonts/matrix.fnt
-   install -D -m644 -groot -oroot matrix.psf.gz $PKG/usr/share/kbd/consolefonts/matrix.psf.gz
-   install -D -m644 -groot -oroot mtx.pcf $PKG/usr/share/fonts/X11/misc/mtx.pcf
+  install -D -m644 -groot -oroot $name-$version/cmatrix.1 $PKG/usr/share/man/1/cmatrix.1
+  install -D -m644 -groot -oroot $name-$version/matrix.fnt $PKG/usr/share/kbd/consolefonts/matrix.fnt
+  install -D -m644 -groot -oroot $name-$version/matrix.psf.gz $PKG/usr/share/kbd/consolefonts/matrix.psf.gz
+  install -D -m644 -groot -oroot $name-$version/mtx.pcf $PKG/usr/share/fonts/X11/misc/mtx.pcf
 }
