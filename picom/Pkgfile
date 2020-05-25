@@ -21,7 +21,7 @@ build() {
 	DESTDIR=$PKG ninja -C build install
 
 	install -Dm644 $SRC/picom.conf $PKG/etc/xdg/picom.conf
-	install -Dm644 picom.sample.conf $PKG/etc/xdg/picom.conf.example
+	install -Dm644 $name-$version/picom.sample.conf $PKG/etc/xdg/picom.conf.example
 
 [ -e '/usr/bin/asciidoctor' ] || install -D -m 0644 -t $PKG/usr/share/man/man1 $SRC/picom-trans.1 $SRC/picom.1
 }
