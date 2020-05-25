@@ -1,15 +1,15 @@
 # Description: GTK Interface Builder.
 # URL:         http://glade.gnome.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  libglade
+# Depends on:  docbook-xsl gtk3 libglade libxslt itstool
 
 name=glade3
-version=3.8.5
+version=3.20.4
 release=1
-source=(http://ftp.gnome.org/pub/GNOME/sources/$name/3.8/$name-$version.tar.xz)
+source=(http://ftp.gnome.org/pub/GNOME/sources/glade/${version::4}/glade-$version.tar.xz)
 
 build() {
-   cd $name-$version
+   cd glade-$version
 
    ./configure \
       --prefix=/usr \
@@ -17,5 +17,5 @@ build() {
 
    make && make DESTDIR=$PKG install
    ln -sf /usr/bin/glade-3 $PKG/usr/bin/glade
-   rm -rf $PKG/usr/share/{locale,gnome,omf,gtk-doc}
+   rm -rf $PKG/usr/share/{locale,gnome,omf,gtk-doc,help}
 }
