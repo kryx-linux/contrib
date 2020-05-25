@@ -5,10 +5,11 @@
 name=crypto++
 version=8.2.0
 release=1
-source=(http://www.cryptopp.com/${name/++/pp}${version//\./}.zip
+source=(https://github.com/weidai11/cryptopp/archive/CRYPTOPP_${version//./_}/$name-$version.tar.gz
 	libcrypto++.pc.in)
 
 build() {
+	cd ${name//++/pp}-CRYPTOPP_${version//./_}
 	sed -i -e 's/^CXXFLAGS/#CXXFLAGS/' GNUmakefile
 	export CXXFLAGS="$CXXFLAGS -DNDEBUG -fPIC"
 
