@@ -9,7 +9,7 @@ release=1
 source=(https://github.com/fmtlib/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cmake -H$name-$version -Bbuild\
+  cmake -S$name-$version -Bbuild\
     -DCMAKE_INSTALL_PREFIX=/usr
   cmake --build build
   DESTDIR=$PKG cmake --build build --target install
