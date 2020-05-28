@@ -1,23 +1,19 @@
 # Description: Share mouse and keyboard between multiple computers
 # URL:         http://synergy-foss.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  xorg-libxrender xorg-libxdmcp xorg-libxcb avahi xorg-libxtst
+# Depends on:  avahi cmake qt5 xorg-libxcb xorg-libxdmcp xorg-libxrender xorg-libxtst
 
 name=synergy
-version=2.0.0
+version=1.11.1
 release=1
-source=(https://github.com/symless/synergy-core/archive/v${version}-stable.tar.gz)
+source=(https://github.com/symless/synergy-core/archive/v${version}-stable/$name-$version.tar.gz)
 
 build() {
-  # work around a failing cmake file by defining re/version
   cmake -S$name-core-$version-stable -Bbuild -GNinja \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DSYNERGY_REVISION=0bd448d5 \
-    -DSYNERGY_VERSION=$version .
-
+    -DCMAKE_INSTALL_PREFIX=/usr
   cmake --build build
   install -d -m 755 $PKG/usr/bin
+  install -D -m 755 build/bin/synergy $PKG/usr/bin
   install -D -m 755 build/bin/synergyc $PKG/usr/bin
-  install -D -m 755 build/bin/synergy-core $PKG/usr/bin
   install -D -m 755 build/bin/synergys $PKG/usr/bin
 }
