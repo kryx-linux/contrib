@@ -5,26 +5,21 @@
 # Optional: ppp avahi bash-completion dbus libnl jansson libteam dnsmasq
 
 name=networkmanager
-version=1.24.0
+version=1.24.2
 release=1
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
   networkmanager.rc
   NetworkManager.conf
   polkit.conf
   dhcp.conf
-  org.freedesktop.NetworkManager.rules
-)
+  org.freedesktop.NetworkManager.rules)
 
 build() {
-  cd NetworkManager-$version
-
-  sed '/initrd/d' -i src/meson.build
-
-  mkdir build
-  cd build
+  sed '/initrd/d' -i NetworkManager-$version/src/meson.build
 
   CXXFLAGS+="-O2 -fPIC" \
-  meson --prefix /usr \
+  meson NetworkManager-$version build \
+    --prefix /usr \
     --sysconfdir /etc \
     --localstatedir /var \
     --libexecdir /usr/lib/networkmanager \
@@ -63,10 +58,9 @@ build() {
     -Dmore_logging=false \
     -Dmore_asserts=0 \
     -Dlibpsl=false \
-    ..
 
-  ninja
-  DESTDIR=$PKG ninja install
+  ninja -C build
+  DESTDIR=$PKG ninja -C build install
 
   # Install config file
   install -Dm 644 $SRC/NetworkManager.conf $PKG/etc/NetworkManager/NetworkManager.conf
@@ -82,6 +76,8 @@ build() {
   # install polkit rules
   install -Dm 644 $SRC/org.freedesktop.NetworkManager.rules $PKG/usr/share/polkit-1/rules.d/org.freedesktop.NetworkManager.rules
 
-  # Remove bash-completion config
-  rm -rf $PKG/usr/share/bash-completion
+  # cleanup
+
+  rm -rf $PKG/usr/lib/firewalld
+  [ -e /usr/lib/pkgconfig/bash-completion.pc ] || rm -rf $PKG/usr/share/bash-completion
 }
