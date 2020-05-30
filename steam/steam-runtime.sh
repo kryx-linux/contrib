@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/lib/steam/steam "$@"
+exec /usr/lib/steam/bin_steam.sh "$@"

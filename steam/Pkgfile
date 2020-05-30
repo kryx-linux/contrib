@@ -1,25 +1,25 @@
 # Description: Digital distribution client bootstrap package.
 # URL: http://store.steampowered.com/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: dbus-32 desktop-file-utils gtk-32 libgcrypt-32 mesa3d-32 nss-32 openal-32
+# Depends on: dbus-32 desktop-file-utils gtk-32 libgcrypt-32 mesa3d-32 nss-32 openal-32 zenity
 # Optional: pulseaudio-32
 
 name=steam
-version=1.0.0.61
-release=2
+version=1.0.0.62
+release=1
 source=(http://repo.steampowered.com/$name/pool/$name/s/$name/${name}_$version.tar.gz
 	steam-runtime.sh
 	alsa_sdl_audiodriver.patch)
 
 build() {
-	cd $name
+	cd steam-launcher
 
-	patch -p1 -i $SRC/alsa_sdl_audiodriver.patch
+	#patch -p1 -i $SRC/alsa_sdl_audiodriver.patch
 
 	# apply roundups for udev rules
-	sed -r 's|("0666")|"0660", TAG+="uaccess"|g' -i lib/udev/rules.d/60-steam-input.rules
-	sed -r 's|("misc")|\1, OPTIONS+="static_node=uinput"|g' -i lib/udev/rules.d/60-steam-input.rules
-	sed -r 's|(, TAG\+="uaccess")|, MODE="0660"\1|g' -i lib/udev/rules.d/60-steam-vr.rules
+	sed -r 's|("0666")|"0660", TAG+="uaccess"|g' -i subprojects/steam-devices/60-steam-input.rules
+	sed -r 's|("misc")|\1, OPTIONS+="static_node=uinput"|g' -i subprojects/steam-devices/60-steam-input.rules
+	sed -r 's|(, TAG\+="uaccess")|, MODE="0660"\1|g' -i subprojects/steam-devices/60-steam-vr.rules
 
 	# separated runtime/native desktop files
 	sed -r 's|(Name=Steam)|\1 (Runtime)|' -i steam.desktop
@@ -27,22 +27,23 @@ build() {
 
 	make DESTDIR=$PKG install
 
+	rm $PKG/usr/bin/steam
+	ln -sf /usr/bin/steam-runtime $PKG/usr/bin/steam
+
 	install -Dm 755 $SRC/steam-runtime.sh \
                 $PKG/usr/bin/steam-runtime
 
 	install -d $PKG/usr/lib/steam
-	mv $PKG/usr/bin/steam $PKG/usr/lib/steam/steam
-	ln -sf /usr/bin/steam-runtime $PKG/usr/bin/steam
 
 	# blank steamdeps because apt-get
 	ln -sf /bin/true $PKG/usr/bin/steamdeps
 
 	install -d $PKG/etc/ssl/certs
 
-	install -Dm 644 lib/udev/rules.d/60-steam-input.rules \
+	install -Dm 644 subprojects/steam-devices/60-steam-input.rules \
 		$PKG/usr/lib/udev/rules.d/70-steam-input.rules
 
-	install -Dm 644 lib/udev/rules.d/60-steam-vr.rules \
+	install -Dm 644 subprojects/steam-devices/60-steam-vr.rules \
 		$PKG/usr/lib/udev/rules.d/70-steam-vr.rules
 
 	rm -r $PKG/usr/share/doc
