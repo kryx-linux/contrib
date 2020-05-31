@@ -1,18 +1,20 @@
 # Description: SDL graphics drawing primitives and other support functions.
-# URL: http://www.ferzkopp.net/joomla/software-mainmenu-14/4-ferzkopps-linux-software/19-sdlgfx
+# URL: https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Simone Rota, sip at crux dot nu
 # Depends on: libsdl
 
 name=sdl_gfx
-version=2.0.23
+version=2.0.26
 release=1
-source=(http://downloads.sourceforge.net/project/sdlgfx/SDL_gfx-$version.tar.gz)
+source=(https://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-$version.tar.gz)
 
 build() {
 	cd SDL_gfx-$version
-	./configure	--prefix=/usr
+
+	# shipped configure was not regenerated since 2.0.25, resulting in bad soname
+	autoreconf -fvi
+
+	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 }
-
