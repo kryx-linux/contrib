@@ -4,17 +4,17 @@
 # Depends on: vte3
 
 name=sakura
-version=3.7.0
+version=3.7.1
 release=1
-source=(https://launchpad.net/sakura/trunk/$version/+download/$name-$version.tar.gz)
+source=(https://launchpad.net/sakura/trunk/$version/+download/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+	cmake -S$name-$version -Bbuild -GNinja \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=RELEASE
 
-	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RELEASE .
-
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
 
 	rm -r $PKG/usr/share/{locale,doc}
 }
