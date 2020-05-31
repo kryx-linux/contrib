@@ -1,17 +1,15 @@
 # Description: A gobject-based plugin engine.
 # URL: https://wiki.gnome.org/Projects/Libpeas
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gtk gtk3 vala
+# Depends on: gtk3 python3-gobject vala
 
 name=libpeas
-version=1.24.1
+version=1.26.0
 release=1
 source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
-
-	meson build --prefix=/usr
+	meson build $name-$version --prefix=/usr
 	ninja -C build -j ${JOBS:-1}
 	DESTDIR=$PKG ninja -C build install
 
