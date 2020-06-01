@@ -2,15 +2,15 @@
 # URL:		https://01.org/powertop/
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 # Packager:	Mikhail Kolesnik, mike at openbunker dot org
-# Depends on:	ncurses libnl
+# Depends on:	libnl ncurses
 
 name=powertop
-version=2.10
+version=2.12
 release=1
-source=(https://01.org/sites/default/files/downloads/$name-v$version.tar.gz)
+source=(https://01.org/sites/default/files/downloads/$name-$version.tar.gz)
 
 build() {
-	cd $name-v$version
+	cd $name-$version
 
 	./configure \
 		--prefix=/usr \
