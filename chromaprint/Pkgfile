@@ -1,22 +1,20 @@
 # Description:	Audio fingerprinting library.
 # URL: https://acoustid.org/chromaprint
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake ffmpeg
+# Depends on: cmake ffmpeg ninja
 # Optional: fftw
 
 name=chromaprint
-version=1.4.3
+version=1.5.0
 release=1
 source=(https://github.com/acoustid/chromaprint/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-v$version
-
-	cmake . \
+	cmake -S$name-v$version -Bbuild -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=RELEASE \
 		-DBUILD_TESTS=OFF
 
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
 }
