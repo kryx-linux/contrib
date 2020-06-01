@@ -9,7 +9,7 @@ release=1
 source=(https://github.com/stachenov/quazip/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cmake -Hquazip-$version -Bbuild  \
+  cmake -Squazip-$version -Bbuild -GNinja \
     -DCMAKE_INSTALL_PREFIX=/usr
   cmake --build build
   DESTDIR=$PKG cmake --build build --target install
