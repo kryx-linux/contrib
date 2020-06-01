@@ -1,5 +1,5 @@
 # Description: HFS+ Filesystem Access Utilities (a PPC filesystem)
-# URL: http://penguinppc.org/historical/hfsplus/
+# URL: https://sourceforge.net/projects/hfsplusutils/
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=hfsplusutils
@@ -24,7 +24,7 @@ build() {
 	patch -p1 -i $SRC/hfsplusutils-1.0.4-cflags.patch
 
 	sed -i -e 's/^CFLAGS\s/AM_CFLAGS /' {libhfsp/src,src}/Makefile.am
-	
+
 	mv configure.{in,ac}
 	autoreconf -i
 

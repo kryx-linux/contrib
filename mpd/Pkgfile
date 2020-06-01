@@ -1,5 +1,5 @@
 # Description:  Music playback daemon
-# URL:          http://www.musicpd.org/
+# URL:          https://www.musicpd.org/
 # Maintainer:   Thomas Penteker, tek at serverop dot de
 # Depends on:   boost glib libid3tag libmad libvorbis
 # Optional:     faad2 flac audiofile
@@ -21,7 +21,7 @@ build() {
   DESTDIR=$PKG meson install -C build
 
   install -d $PKG/etc
-  install -m 0644 doc/mpdconf.example $PKG/etc/mpd.conf 
+  install -m 0644 doc/mpdconf.example $PKG/etc/mpd.conf
   install -D $SRC/mpd $PKG/etc/rc.d/mpd
 
   install -D doc/mpd.1 $PKG/usr/share/man/1/mpd.1

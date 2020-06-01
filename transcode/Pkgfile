@@ -1,5 +1,5 @@
 # Description: Command line utilities for transcoding various media formats.
-# URL: http://www.transcoding.org/
+# URL: https://www.transcoding.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: ffmpeg imagemagick lame liba52 libdvdread libmpeg2 libtheora libxvid mjpegtools x264 xorg-libxaw
 # Optional: libquicktime
@@ -74,7 +74,7 @@ build() {
 		-e 's|^\(.*D_HAVE_LIB_PPM.*\)$|#\1|' \
 		-e 's/DEFINES :=/DEFINES = -DHAVE_GETLINE/' \
 		-i Makefile
-	
+
 	make
 	install -m 0755 -t $PKG/usr/bin \
 		pgm2txt srttool subtitle2pgm \

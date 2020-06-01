@@ -1,5 +1,5 @@
 # Description: A music player and library organizer.
-# URL: http://www.clementine-player.org/
+# URL: https://www.clementine-player.org/
 # Packager: Chris Farrell, timcowchip at gmail dot com
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: boost crypto++ glew gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qt5
@@ -16,7 +16,7 @@ build() {
 	# calling ccache and CCACHE_PREFIX
 	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 
-	cmake -HClementine-$version-g934fd336d -Bbuild \
+	cmake -SClementine-$version-g934fd336d -Bbuild \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE='Release' \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS -Wno-catch-value"
