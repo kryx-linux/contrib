@@ -1,7 +1,6 @@
 # Description: Light-weight, simple and fast XML parser for C++ with XPath support
-# URL: http://pugixml.org
+# URL: https://pugixml.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Packager: Pedja, predivan at mts dot rs
 # Depends on: cmake
 
 name=pugixml
@@ -10,14 +9,11 @@ release=1
 source=(http://github.com/zeux/pugixml/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-
-  mkdir -p build && cd build
-  cmake \
+  cmake -S$name-$version -Bbuild -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DBUILD_SHARED_LIBS=ON ../
-  make
-  make DESTDIR=$PKG install
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
 }
