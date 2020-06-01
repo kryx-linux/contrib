@@ -1,18 +1,18 @@
 # Description: ssh library
-# URL:         http://libssh.org
+# URL:         https://libssh.org
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Depends on:  cmake
 
 name=libssh
-version=0.9.0
+version=0.9.4
 release=1
 source=(https://www.libssh.org/files/${version%.*}/libssh-${version}.tar.xz)
 
 build() {
-	cd $name-$version
-
-  mkdir -p build
-  cd build
-  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
-  make DESTDIR=$PKG install
+  cmake -S$name-$version -Bbuild -GNinja \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
 }
