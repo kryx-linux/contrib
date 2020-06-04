@@ -1,0 +1,15 @@
+# Description: Add .env support to your django/flask apps in development and deployments
+# URL: https://pypi.org/project/python-dotenv/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: python3-setuptools
+
+name=python3-dotenv
+version=0.13.0
+release=1
+source=(https://files.pythonhosted.org/packages/4c/9e/95b06d832d8e5bbc60bed4a6d88463e5bbce82c383af6917eb17a3d8a60a/python-dotenv-$version.tar.gz)
+
+build() {
+	cd python-dotenv-$version
+	python3 setup.py build
+	python3 setup.py install --root=$PKG
+}
