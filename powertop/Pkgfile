@@ -17,4 +17,5 @@ build() {
 		--disable-nls
 	make
 	make DESTDIR=$PKG install
+	[ ! -e /usr/lib/pkgconfig/bash-completion.pc ] && rm -r $PKG/usr/share/bash-completion
 }
