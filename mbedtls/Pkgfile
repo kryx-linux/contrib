@@ -1,21 +1,26 @@
-# Description: Portable cryptographic and SSL/TLS library, aka polarssl.
+# Description: Cryptographic library for embedded systems
 # URL: https://tls.mbed.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: cmake ninja
 
 name=mbedtls
-version=2.16.6
+version=2.22.0
 release=1
-source=(https://tls.mbed.org/download/$name-$version-gpl.tgz)
+source=(https://github.com/ARMmbed/mbedtls/archive/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-
 	# enable flags for non-embedded systems
-	sed -i 's|//\(#define MBEDTLS_THREADING_C\)|\1|' include/mbedtls/config.h
-	sed -i 's|//\(#define MBEDTLS_THREADING_PTHREAD\)|\1|' include/mbedtls/config.h
+	sed -i 's|//\(#define MBEDTLS_HAVE_SSE2\)|\1|' $name-$name-$version/include/mbedtls/config.h
+	sed -i 's|//\(#define MBEDTLS_ZLIB_SUPPORT\)|\1|' $name-$name-$version/include/mbedtls/config.h
+	sed -i 's|//\(#define MBEDTLS_THREADING_C\)|\1|' $name-$name-$version/include/mbedtls/config.h
+	sed -i 's|//\(#define MBEDTLS_THREADING_PTHREAD\)|\1|' $name-$name-$version/include/mbedtls/config.h
 
-	sed -i 's|<time.h>|"platform.h"|' include/mbedtls/ssl.h
+	cmake -S$name-$name-$version -Bbuild -G Ninja \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DENABLE_ZLIB_SUPPORT=ON \
+		-DUSE_SHARED_MBEDTLS_LIBRARY=ON \
+		-DINSTALL_MBEDTLS_HEADERS=ON
 
-	LDFLAGS+=' -I../include ' make SHARED=1 no_test
-	make DESTDIR="$PKG/usr" install
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
 }
