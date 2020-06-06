@@ -9,11 +9,8 @@ release=1
 source=(https://github.com/lloyd/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  mkdir build
-  cd build
-  cmake ..
-  make
-  install -d $PKG/usr
-  cp -a $name-$version/* $PKG/usr/
+  cmake -S$name-$version -Bbuild \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
 }
