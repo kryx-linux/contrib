@@ -4,17 +4,15 @@
 # Depends on: dbus pulseaudio rust
 
 name=i3status-rust
-version=0.13.1
-release=2
-source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version.tar.gz
-  561.patch)
+version=0.14.0
+release=1
+source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
-  patch -Np1 -i $SRC/561.patch
   cargo fetch
   cargo build --release
   install -Dt $PKG/usr/bin target/release/i3status-rs
