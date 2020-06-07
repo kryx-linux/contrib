@@ -6,7 +6,7 @@
 
 name=steam
 version=1.0.0.62
-release=1
+release=2
 source=(http://repo.steampowered.com/$name/pool/$name/s/$name/${name}_$version.tar.gz
 	steam-runtime.sh)
 
@@ -24,13 +24,8 @@ build() {
 
 	make DESTDIR=$PKG install
 
-	rm $PKG/usr/bin/steam
-	ln -sf /usr/bin/steam-runtime $PKG/usr/bin/steam
-
-	install -Dm 755 $SRC/steam-runtime.sh \
-                $PKG/usr/bin/steam-runtime
-
-	install -d $PKG/usr/lib/steam
+	mv $PKG/usr/bin/steam $PKG/usr/lib/steam/steam
+	install -Dm 755 $SRC/steam-runtime.sh $PKG/usr/bin/steam-runtime
 
 	# blank steamdeps because apt-get
 	ln -sf /bin/true $PKG/usr/bin/steamdeps
