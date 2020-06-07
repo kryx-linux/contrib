@@ -15,7 +15,7 @@ Additionally, libshaderc_util also depends on SPIRV-Tools
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/glslc/CMakeLists.txt b/glslc/CMakeLists.txt
-index acf6fb0b..0f5d8886 100644
+index acf6fb0..0f5d888 100644
 --- a/glslc/CMakeLists.txt
 +++ b/glslc/CMakeLists.txt
 @@ -18,7 +18,7 @@ add_library(glslc STATIC
@@ -28,10 +28,10 @@ index acf6fb0b..0f5d8886 100644
  
  add_executable(glslc_exe src/main.cc)
 diff --git a/libshaderc_util/CMakeLists.txt b/libshaderc_util/CMakeLists.txt
-index 873540ab..6d0c465c 100644
+index 873540a..6d0c465 100644
 --- a/libshaderc_util/CMakeLists.txt
 +++ b/libshaderc_util/CMakeLists.txt
-@@ -34,8 +34,8 @@ endif(SHADERC_ENABLE_INSTALL)
+@@ -32,8 +32,8 @@ add_definitions(-DENABLE_HLSL)
  
  find_package(Threads)
  target_link_libraries(shaderc_util PRIVATE

@@ -5,16 +5,17 @@
 # Optional: asciidoctor
 
 name=shaderc
-version=2019.0
-commit=34c412f21f945f4ef6ed4453f8b5dc4bb9d739e4
-release=3
+version=2019.1
+commit=f76bb2f09f858c3014b329961d836964e515095d
+release=1
 source=(
 	https://github.com/google/shaderc/archive/$commit.tar.gz#/$name-$commit.tar.gz
 	#https://github.com/google/$name/archive/v$version/$name-v$version.tar.gz
 	glslc.1 spvc.1 glslc-asciidoc.patch spvc-asciidoc.patch
-	fix-glslang-link-order.patch
+	0001-Fix-the-link-order-of-libglslang-and-libHLSL.patch
 	0001-Drop-third-party-code-in-CMakeLists.txt.patch
-	shaderc-2019.0-fix-build-against-new-glslang.patch)
+	0001-Fix-SPIRV-includes-location.patch
+	0001-Handle-new-Glslang-profile-enum-in-switch.patch)
 
 build() {
 	cd $name-$commit
@@ -23,9 +24,10 @@ build() {
 	patch -d glslc -p0 -i $SRC/glslc-asciidoc.patch
 	patch -d spvc -p0 -i $SRC/spvc-asciidoc.patch
 
-	patch -p1 -i $SRC/fix-glslang-link-order.patch
+	patch -p1 -i $SRC/0001-Fix-the-link-order-of-libglslang-and-libHLSL.patch
 	patch -p1 -i $SRC/0001-Drop-third-party-code-in-CMakeLists.txt.patch
-	patch -p1 -i $SRC/shaderc-2019.0-fix-build-against-new-glslang.patch
+	patch -p1 -i $SRC/0001-Fix-SPIRV-includes-location.patch
+	patch -p1 -i $SRC/0001-Handle-new-Glslang-profile-enum-in-switch.patch
 
 	# de-vendor libs and disable git versioning
 	sed '/examples/d;/third_party/d' -i CMakeLists.txt
