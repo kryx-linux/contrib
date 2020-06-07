@@ -1,0 +1,20 @@
+# Description: An open source implementation of iCalendar protocols and protocol data units
+# URL: https://github.com/libical/libical
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake glib libxml2
+
+name=libical
+version=3.0.8
+release=1
+source=(https://github.com/libical/libical/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cmake -S$name-$version -Bbuild -GNinja \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DSHARED_ONLY=true \
+    -DENABLE_GTK_DOC=false \
+    -DICAL_BUILD_DOCS=false
+  cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
+}
