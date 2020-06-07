@@ -9,27 +9,22 @@ release=1
 source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
-
 if [ -e '/usr/lib/ccache' ]; then
 	PKGMK_FONTFORGE+=' -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_C_COMPILER_LAUNCHER=ccache'
 	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 fi
 
-	mkdir build
-	cd build
-
-	cmake .. ${PKGMK_FONTFORGE} \
+	cmake -S$name-$version -Bbuild -GNinja ${PKGMK_FONTFORGE} \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DENABLE_MAINTAINER_TOOLS=TRUE \
 		-DENABLE_FONTFORGE_EXTRAS=TRUE \
 		-DUNIX=TRUE \
-		-GNinja
+		-DENABLE_DOCS=FALSE
 
-	ninja -j ${JOBS:-1}
-	DESTDIR=$PKG ninja install
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
 
 	rm -r $PKG/usr/share/locale
 }
