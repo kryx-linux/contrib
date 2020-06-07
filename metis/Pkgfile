@@ -4,11 +4,12 @@
 # Depends on: cmake
 
 name=metis
-version=5.1.0
+version=5.1.0-p8
 release=1
-source=(http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/$name-$version.tar.gz)
+source=(https://bitbucket.org/petsc/pkg-metis/get/v$version.tar.bz2)
 
 build() {
+  mv petsc-pkg-metis-* $name-$version
   cd $name-$version
   make config shared=1 prefix=/usr
   make
