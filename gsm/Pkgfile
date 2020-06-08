@@ -3,12 +3,10 @@
 # Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
 
 name=gsm
-version=1.0.18
+version=1.0.19
 release=1
-source=(
-http://www.quut.com/$name/$name-$version.tar.gz
-gsm.patch
-)
+source=(http://www.quut.com/$name/$name-$version.tar.gz
+  gsm.patch)
 
 build() {
 	cd $name-${version%.*}-pl${version##*.}
