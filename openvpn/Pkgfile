@@ -4,7 +4,7 @@
 # Depends on:  lzo
 
 name=openvpn
-version=2.4.8
+version=2.4.9
 release=1
 source=(http://swupdate.openvpn.net/community/releases/$name-$version.tar.xz \
         openvpn)
@@ -20,5 +20,4 @@ build() {
   make
   make DESTDIR=$PKG install
   rm -r $PKG/usr/share
-
 }
