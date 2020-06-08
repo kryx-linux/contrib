@@ -5,21 +5,21 @@
 # Depends on:  mod_php
 
 name=dokuwiki
-version=2018-04-22b
+version=2018-04-22c
 release=1
 source=(http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$version.tgz)
 
 build() {
     cd $name-$version
-    
+
     touch data/changes.log
 
     mkdir -p $PKG/var/www/htdocs/dokuwiki/
     cp -r ./ $PKG/var/www/htdocs/dokuwiki/
-    
+
     chown -R www.www $PKG/var/www/htdocs/dokuwiki/data
-    
+
     rm -f  $PKG/var/www/htdocs/dokuwiki/{COPYING,README,VERSION}
     rm -f  $PKG/var/www/htdocs/dokuwiki/lib/{_fla,images/admin}/README
-    find $PKG -path '*lang/*' ! -wholename '*/en*' -type d | xargs rm -rf 
+    find $PKG -path '*lang/*' ! -wholename '*/en*' -type d | xargs rm -rf
 }
