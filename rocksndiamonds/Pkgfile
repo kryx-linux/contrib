@@ -2,10 +2,10 @@
 # URL: https://www.artsoft.org/rocksndiamonds/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Packager: James Mills, prologic at shortcircuit dot net dot au
-# Depends on: sdl_image sdl_mixer sdl_net
+# Depends on: sdl2_image sdl2_mixer sdl2_net
 
 name=rocksndiamonds
-version=3.3.1.2
+version=4.1.4.1
 release=1
 source=(http://www.artsoft.org/RELEASES/unix/rocksndiamonds/rocksndiamonds-$version.tar.gz)
 
@@ -33,7 +33,7 @@ build() {
 	cp -r music $PKG/usr/share/rocksndiamonds
 	cp -r sounds $PKG/usr/share/rocksndiamonds
 
-	cp -r scores $PKG/var/lib/games/rocksndiamonds
+	#cp -r scores $PKG/var/lib/games/rocksndiamonds
 	install -D -m 0755 rocksndiamonds $PKG/usr/bin/rocksndiamonds
 
 	rm $PKG/usr/share/rocksndiamonds/levels/Tutorials/rnd_tutorial_niko_boehm/README
