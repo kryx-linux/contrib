@@ -4,14 +4,14 @@
 # Depends on:
 
 name=ttf-unifont
-version=13.0.01
+version=13.0.02
 release=1
 source=(http://unifoundry.com/pub/unifont/unifont-$version/unifont-$version.tar.gz)
 
 build() {
-    cd unifont-$version/font/precompiled
-    install -d $PKG/usr/share/fonts/TTF
-    for i in *.ttf; do
-        install -m644 $i $PKG/usr/share/fonts/TTF/;
-    done
+  cd unifont-$version/font/precompiled
+  install -d $PKG/usr/share/fonts/TTF
+  for i in *.ttf; do
+      install -m644 $i $PKG/usr/share/fonts/TTF/;
+  done
 }
