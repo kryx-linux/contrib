@@ -4,13 +4,11 @@
 # Depends on: alsa-lib dbus fdk-aac ffmpeg glib gnutls lame libva libvpx libwebp meson ninja x264 x265
 
 name=pipewire
-version=0.3.5
+version=0.3.6
 release=1
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-
   [[ -e /usr/lib/pkgconfig/jack.pc ]] || PKGMK_PW+=' -Dpipewire-jack=false -Djack=false'
   [[ -e /usr/lib/pkgconfig/vulkan.pc ]] || PKGMK_PW+=' -Dpipewire-vulkan=false -Dvulkan=false'
   [[ -e /usr/lib/pkgconfig/bluez.pc ]] || PKGMK_PW+=' -Dbluez5=false'
@@ -18,13 +16,11 @@ build() {
   [[ -e /usr/include/pulse/glib-mainloop.h ]] || PKGMK_PW+=' -Dpipewire-pulseaudio=false'
   [[ -e /usr/lib/pkgconfig/gstreamer-1.0.pc ]] || PKGMK_PW+=' -Dgstreamer=false'
 
-  mkdir build && cd build
-  meson $PKGMK_PW \
+  meson $name-$version build $PKGMK_PW \
     -D prefix=/usr \
     -D docs=false \
     -D examples=false \
-    -D tests=false \
-    ..
-  ninja
-  DESTDIR=$PKG ninja install
+    -D tests=false
+  ninja -C build
+  DESTDIR=$PKG ninja -C build install
 }
