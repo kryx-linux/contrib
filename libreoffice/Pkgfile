@@ -5,17 +5,15 @@
 # Optional: cups kio qt5 valgrind vlc
 
 name=libreoffice
-version=6.4.4.2
+version=6.4.5.1
 release=1
 pdfiumversion=3963
-source=(
-  https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
+source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
   https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-dictionaries-$version.tar.xz
   https://dev-www.libreoffice.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
   https://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
   https://dev-www.libreoffice.org/src/pdfium-$pdfiumversion.tar.bz2
-  makefile.in.patch
-)
+  makefile.in.patch)
 
 unpack_source() {
   for file in ${source[@]}; do
