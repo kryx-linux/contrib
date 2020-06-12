@@ -1,11 +1,15 @@
-# Description: Lossless audio compression software.
+# Description: Audio compression format with lossless, lossy and hybrid compression modes
 # URL: http://www.wavpack.com/
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=wavpack
-version=5.1.0
+version=5.3.0
 release=1
-source=(http://www.wavpack.com/$name-$version.tar.bz2)
+source=(
+	#TLS Certificate is expired.
+	#The certificate was valid from 24/Jul/2018 through 24/Jul/2019.
+	#https://www.wavpack.com/$name-$version.tar.bz2
+	http://www.wavpack.com/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
