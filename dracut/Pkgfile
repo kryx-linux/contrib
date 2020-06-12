@@ -3,14 +3,12 @@
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 
 name=dracut
-version=048
+version=050
 release=1
-source=(https://mirrors.edge.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.xz \
-	$name-bash5.patch)
+source=(https://mirrors.edge.kernel.org/pub/linux/utils/boot/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
-	patch -p1 -i $SRC/$name-bash5.patch
 	./configure --prefix=/usr \
 		--sysconfdir=/etc
 	make
