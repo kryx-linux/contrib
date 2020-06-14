@@ -1,0 +1,16 @@
+# Description: Lightweight cross platform C++ GUID/UUID library
+# URL: https://github.com/graeme-hill/crossguid
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake
+
+name=crossguid
+version=0.2.2
+release=1
+source=(https://github.com/graeme-hill/crossguid/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cmake -S$name-$version -Bbuild
+  cmake --build build
+  install -D -m 0644 build/libxg.a $PKG/usr/lib/libxg.a
+  install -D -m 0644 $name-$version/Guid.hpp $PKG/usr/include/Guid.hpp
+}
