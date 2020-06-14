@@ -4,24 +4,23 @@
 # Depends on: gnupg gtk3 p11-kit vala xorg-libxcomposite xorg-libxcursor xorg-libxinerama
 
 name=gcr
-version=3.34.0
+version=3.36.0
 release=1
 source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
-
-	./configure \
+	meson setup build $name-$version \
 		--prefix=/usr \
-		--libexecdir=/usr/lib/gcr \
-		--disable-update-icon-cache \
-		--disable-update-mime \
-		--disable-gtk-doc \
-		--disable-nls
+		--libexecdir=/usr/lib \
+		-D gtk_doc=false
 
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-	make
-	make DESTDIR=$PKG install
+	ninja -j ${JOBS-1} -C build
+	DESTDIR=$PKG meson install -C build
 
-	rm -r $PKG/usr/share/gtk-doc
+	rm -r $PKG/usr/share/locale
+
+	# https://bugzilla.gnome.org/show_bug.cgi?id=688161
+	install -Dm 644 /dev/stdin "$PKG/etc/security/limits.d/10-gcr.conf" <<END
+@users - memlock 1024
+END
 }
