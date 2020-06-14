@@ -1,23 +1,21 @@
 # Description: GTK Interface Builder.
-# URL: http://glade.gnome.org/
+# URL: https://glade.gnome.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: docbook-xsl gtk3 itstool libglade
+# Depends on: gtk3 itstool
+# Optional: webkitgtk gtk-doc python3-gobject
 
 name=glade
-version=3.22.2
+version=3.36.0
 release=1
-source=(https://ftp.gnome.org/pub/GNOME/sources/$name/${version::4}/$name-$version.tar.xz)
+source=(
+	#https://ftp.gnome.org/pub/GNOME/sources/$name/${version::4}/$name-$version.tar.xz
+	https://gitlab.gnome.org/GNOME/glade/-/archive/3907987d318875fae551ca9a2bce97f33749d230/glade-3907987d318875fae551ca9a2bce97f33749d230.tar.bz2)
 
 build() {
-	cd $name-$version
+	prt-get isinst gtk-doc || PKGMK_GLADE+=' -D man=false'
+	meson setup build $name-3907987* --prefix=/usr ${PKGMK_GLADE}
+	ninja -j ${JOBS-1} -C build
+	DESTDIR=$PKG meson install -C build
 
-	./configure \
-		--prefix=/usr \
-		--disable-gtk-doc-html \
-		--disable-nls
-
-	make
-	make DESTDIR=$PKG install
-
-	rm -r $PKG/usr/share/gtk-doc
+	rm -r $PKG/usr/share/{help,locale}
 }
