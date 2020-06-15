@@ -9,7 +9,7 @@ release=1
 source=(https://www.libssh.org/files/${version%.*}/libssh-${version}.tar.xz)
 
 build() {
-  cmake -S$name-$version -Bbuild -GNinja \
+  cmake -S$name-$version -Bbuild \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release
