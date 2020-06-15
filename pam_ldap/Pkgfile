@@ -6,7 +6,10 @@
 name=pam_ldap
 version=186
 release=3
-source=(http://www.padl.com/download/$name-$version.tar.gz)
+source=(
+	#http://www.padl.com/download/$name-$version.tar.gz
+	https://deb.debian.org/debian/pool/main/libp/libpam-ldap/libpam-ldap_$version.orig.tar.gz
+)
 
 build() {
         cd $name-$version
