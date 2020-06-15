@@ -13,6 +13,6 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
     -DASSIMP_BUILD_SAMPLES=OFF
-  cmake --build build --target install
+  cmake --build build
   DESTDIR=$PKG cmake --build build --target install
 }
