@@ -5,17 +5,15 @@
 # Optional: calf mda.lv2 rubberband vamp-plugin-sdk zam-plugins zita-convolver libbs2b lilv
 
 name=pulseeffects
-version=4.7.2
+version=4.7.3
 release=1
 source=(https://github.com/wwmm/pulseeffects/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  mkdir build && cd build
-  meson .. \
+  meson $name-$version build \
     --prefix=/usr \
     --sysconfdir=/etc
-  ninja
-  DESTDIR=$PKG ninja install
+  ninja -C build
+  DESTDIR=$PKG ninja -C build install
   rm -fr $PKG/usr/share/{locale,help}
 }
