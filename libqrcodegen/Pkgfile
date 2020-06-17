@@ -4,19 +4,17 @@
 # Depends on:
 
 name=libqrcodegen
-version=1.5.0
+version=1.6.0
 release=1
 source=(https://github.com/nayuki/QR-Code-generator/archive/v$version/$name-$version.tar.gz
-  c-lib.patch cpp-lib.patch)
+  qr-code-generator-build-fixes.patch)
 
 build() {
+  # https://raw.githubusercontent.com/OpenMandrivaAssociation/qr-code-generator/master/qr-code-generator-build-fixes.patch
+  patch -Np1 -d QR-Code-generator-$version -i $SRC/qr-code-generator-build-fixes.patch
   cp -R QR-Code-generator-$version{,-cpp}
   cd QR-Code-generator-$version
-  # https://raw.githubusercontent.com/OpenMandrivaAssociation/libqrcodegen/master/c-lib.patch
-  patch -Np1 -i $SRC/c-lib.patch
   make DESTDIR=$PKG -C c install
   cd $SRC/QR-Code-generator-$version-cpp
-  # https://raw.githubusercontent.com/OpenMandrivaAssociation/libqrcodegen/master/cpp-lib.patch
-  patch -Np1 -i $SRC/cpp-lib.patch
   make DESTDIR=$PKG -C cpp install
 }
