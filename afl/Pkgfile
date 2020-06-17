@@ -4,17 +4,16 @@
 # Depends on:
 
 name=afl
-version=2.52b
+version=2.56b
 release=1
-source=(http://lcamtuf.coredump.cx/afl/releases/$name-$version.tgz)
+source=(https://github.com/google/AFL/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd AFL-$version
 
   make
   make PREFIX=/usr DESTDIR=$PKG install
 
   rm -r $PKG/usr/share/doc
   rm $PKG/usr/share/afl/testcases/README.testcases
-
 }
