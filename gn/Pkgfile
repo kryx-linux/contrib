@@ -6,16 +6,15 @@
 name=gn
 version=20200520
 release=1
-source=(https://gn.googlesource.com/gn/+archive/2c801de70b8ed3c8e404245d61d32a3d61b328d0.tar.gz)
+source=(https://nullvoid.de/crux/distfiles/$name-$version.tar.gz)
+  # because this ALWAYS changes it's signature! -.-
+  #https://gn.googlesource.com/gn/+archive/2c801de70b8ed3c8e404245d61d32a3d61b328d0.tar.gz)
 
 build() {
-  #[[ -e /usr/bin/clang && -e /usr/bin/clang++ && -e /usr/bin/lld ]] && export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib LDFLAGS+=' -fuse-ld=lld' || echo "Please install clang first"
+  [[ -e /usr/bin/clang && -e /usr/bin/clang++ ]] && export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
   unset CFLAGS
-  #patch -Np1 -i gn-gen-r4.patch
-  #patch -Np1 -i lastcommit.patch
 
   python3 build/gen.py --no-last-commit-position --no-strip --no-static-libstdc++
-  #python3 build/gen.py --no-last-commit-position --no-strip --no-static-libstdc++
   export CXXFLAGS=+" -std=c++17"
   cat >out/last_commit_position.h <<-EOF
 #ifndef OUT_LAST_COMMIT_POSITION_H_
