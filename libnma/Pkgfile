@@ -5,17 +5,16 @@
 
 name=libnma
 version=1.8.28
-release=1
-source=(https://gitlab.gnome.org/GNOME/libnma/-/archive/1.8.28/libnma-1.8.28.tar.bz2)
+release=2
+source=(https://gitlab.gnome.org/GNOME/libnma/-/archive/$version/libnma-$version.tar.bz2)
 
 build() {
-  cd $name-$version
-  meson \
+  meson $name-$version build \
     --prefix=/usr \
     -Dmobile_broadband_provider_info=false \
     -Dgtk_doc=false \
-    -Dvapi=false \
-    . build
+    -Dvapi=false
   ninja -C build
   DESTDIR=$PKG meson install -C build
+  rm -r $PKG/usr/share/locale/
 }
