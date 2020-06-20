@@ -1,13 +1,12 @@
 # Description: Lex and yacc parsing tools for Python
-# URL: https://www.dabeaz.com/ply/
+# URL: https://github.com/dabeaz/ply
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-setuptools
 
 name=python3-ply
 version=3.11
 release=1
-# ssl cert seems broken..
-source=(http://www.dabeaz.com/ply/ply-$version.tar.gz)
+source=(https://github.com/dabeaz/ply/archive/$version/ply-$version.tar.gz)
 
 build() {
   cd ply-$version

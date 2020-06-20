@@ -1,5 +1,5 @@
 # Description:  Versatile media player and encoder/converter
-# URL:          https://gitorious.org/vaapi/mplayer/
+# URL:          https://github.com/gbeauchesne/mplayer-vaapi
 # Maintainer:   Thomas Penteker, tek at serverop dot de
 # Depends on:   freetype glu libva xorg-libxinerama xorg-libxxf86dga yasm
 # Optional:     libva-intel libsdl libjpeg-turbo libpng lame zlib libogg libvorbis cdparanoia win32-essential-codecs faac x264 libdvdnav libdca
@@ -23,7 +23,7 @@ build() {
       --codecsdir=/usr/share/codecs \
       --confdir=/etc/mplayer \
       --enable-vaapi
- 
+
   make
   make DESTDIR=$PKG install
 
