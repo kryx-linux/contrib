@@ -4,19 +4,18 @@
 # Depends on: consolekit libgudev libnma libnotify libsecret
 
 name=network-manager-applet
-version=1.16.0
+version=1.18.0
 release=1
 source=(https://github.com/NetworkManager/network-manager-applet/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  mkdir build
-  meson --prefix=/usr \
+  meson $name-$version build \
+    --prefix=/usr \
     --sysconfdir=/etc \
     -Dselinux=false \
     -Dteam=false \
-    -Dwwan=false \
-    build
+    -Dappindicator=no \
+    -Dwwan=false
   ninja -C build
   DESTDIR=$PKG ninja -C build install
   rm -r $PKG/usr/share/locale
