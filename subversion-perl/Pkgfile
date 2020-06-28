@@ -4,7 +4,7 @@
 # Depends on:  subversion swig
 
 name=subversion-perl
-version=1.12.2
+version=1.14.0
 release=1
 source=(https://archive.apache.org/dist/subversion/subversion-$version.tar.bz2)
 
@@ -13,11 +13,9 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--disable-mod-activation \
 		--disable-nls \
 		--disable-static \
-		--with-lz4=internal \
-		--with-utf8proc=internal
+		--disable-mod-activation
 
 	make swig-pl-lib
 	(cd subversion/bindings/swig/perl/native; perl Makefile.PL)
