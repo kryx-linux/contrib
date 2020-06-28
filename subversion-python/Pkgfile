@@ -1,27 +1,32 @@
 # Description: Python bindings for subversion
 # URL:         https://subversion.apache.org
 # Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
-# Depends on:  python subversion swig
+# Depends on:  python3-py3c subversion swig
 
 name=subversion-python
-version=1.12.2
-release=2
+version=1.14.0
+release=1
 source=(https://archive.apache.org/dist/subversion/subversion-$version.tar.bz2)
 
 build() {
-	PYTHONVERSION=$(python -c "import sys; print \"%s.%s\" % (sys.version_info[0], sys.version_info[1]);")
+	pylibdir=$(/usr/bin/python3 -c "import sysconfig; print(sysconfig.get_path('stdlib'))")
 
 	cd subversion-$version
 
+	export PYTHON="/usr/bin/python3"
+
 	./configure \
 		--prefix=/usr \
-		--disable-mod-activation \
 		--disable-nls \
 		--disable-static \
-		--with-lz4=internal \
-		--with-utf8proc=internal
+		--disable-mod-activation \
+		--without-apxs
+
+	make swig-py-lib swig-py \
+		swig_pydir="$pylibdir/libsvn" \
+		swig_pydir_extra="$pylibdir/svn"
 
 	make DESTDIR=$PKG install-swig-py-lib install-swig-py \
-		swig_pydir=/usr/lib/python$PYTHONVERSION/site-packages/libsvn \
-		swig_pydir_extra=/usr/lib/python$PYTHONVERSION/site-packages/svn
+		swig_pydir=$pylibdir/libsvn \
+		swig_pydir_extra=$pylibdir/svn
 }
