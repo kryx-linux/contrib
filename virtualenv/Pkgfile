@@ -2,14 +2,14 @@
 # URL:         http://www.virtualenv.org/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
-# Depends on:  python-setuptools
+# Depends on:  python3-setuptools
 
 name=virtualenv
-version=16.7.5
+version=20.0.25
 release=1
 source=(https://pypi.io/packages/source/v/virtualenv/virtualenv-${version}.tar.gz)
 
 build() {
     cd $name-$version
-    /usr/bin/python setup.py install --root=$PKG
+    /usr/bin/python3 setup.py install --root=$PKG
 }
