@@ -1,24 +1,30 @@
 # Description: A firewalling tool to transparently filter network traffic passing a bridge
-# URL:         http://ebtables.sourceforge.net/
+# URL:         https://netfilter.org/index.html
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    Mikhail Kolesnik, mike at openbunker dot org
 
 name=ebtables
-version=2.0.10-4
+version=2.0.11
 release=1
-source=(http://download.sourceforge.net/$name/$name-v$version.tar.gz)
+source=(http://distfiles.exherbo.org/distfiles/$name-$version.tar.gz
+  # https://gitweb.gentoo.org/repo/gentoo.git/tree/net-firewall/ebtables/files
+  ebtables-2.0.11-ebt-save.patch ebtables-2.0.11-makefile.patch
+  ebtables-2.0.11-remove-stray-atsign.patch)
 
 build() {
-	cd $name-v$version
+  cd $name-$version
+  patch -Np1 -i $SRC/ebtables-2.0.11-ebt-save.patch
+  patch -Np1 -i $SRC/ebtables-2.0.11-makefile.patch
+  patch -Np1 -i $SRC/ebtables-2.0.11-remove-stray-atsign.patch
 
-  sed -i -e 's|BINDIR:=.*|BINDIR:=/usr/sbin|g' \
-         -e 's|MANDIR:=.*|MANDIR:=/usr/share/man|g' \
-         -e 's|rc.d/init.d|rc.d|g' -e 's|-Werror||g' Makefile
+  ./autogen.sh
+  ./configure --prefix=/usr \
+    --sysconfdir=/etc
 
-	mkdir -p $PKG/usr/sbin
+  mkdir -p $PKG/usr/sbin
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	rm -rf $PKG/etc/{rc.d,sysconfig}
+  rm -rf $PKG/etc/{rc.d,sysconfig}
 }
