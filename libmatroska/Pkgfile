@@ -4,22 +4,17 @@
 # Depends on: libebml
 
 name=libmatroska
-version=1.5.2
+version=1.6.0
 release=1
 source=(https://dl.matroska.org/downloads/$name/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
-
-	mkdir build
-	cd build
-
-	cmake .. \
+	cmake -S$name-$version -Bbuild -GNinja \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
 		-DBUILD_SHARED_LIBS=ON
 
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
 }
