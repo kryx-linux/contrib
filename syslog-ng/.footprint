@@ -14,7 +14,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/loggen
 -rwxr-xr-x	root/root	usr/bin/pdbtool
 -rwxr-xr-x	root/root	usr/bin/persist-tool
--rwxr-xr-x	root/root	usr/bin/slogimport
+-rwxr-xr-x	root/root	usr/bin/slogencrypt
 -rwxr-xr-x	root/root	usr/bin/slogkey
 -rwxr-xr-x	root/root	usr/bin/slogverify
 -rwxr-xr-x	root/root	usr/bin/update-patterndb
@@ -97,8 +97,6 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/filter/
 -rw-r--r--	root/root	usr/include/syslog-ng/host-id.h
 -rw-r--r--	root/root	usr/include/syslog-ng/host-resolve.h
 -rw-r--r--	root/root	usr/include/syslog-ng/hostname.h
-drwxr-xr-x	root/root	usr/include/syslog-ng/http-auth/
--rw-r--r--	root/root	usr/include/syslog-ng/http-auth/auth-header.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/ivykis/
 -rw-r--r--	root/root	usr/include/syslog-ng/ivykis/iv.h
 -rw-r--r--	root/root	usr/include/syslog-ng/ivykis/iv_avl.h
@@ -218,6 +216,7 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/scanner/xml-scanner/
 -rw-r--r--	root/root	usr/include/syslog-ng/seqnum.h
 -rw-r--r--	root/root	usr/include/syslog-ng/serialize.h
 -rw-r--r--	root/root	usr/include/syslog-ng/service-management.h
+-rw-r--r--	root/root	usr/include/syslog-ng/signal-handler.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/signal-slot-connector/
 -rw-r--r--	root/root	usr/include/syslog-ng/signal-slot-connector/signal-slot-connector.h
 drwxr-xr-x	root/root	usr/include/syslog-ng/stats/
@@ -293,27 +292,27 @@ drwxr-xr-x	root/root	usr/include/syslog-ng/value-pairs/
 -rw-r--r--	root/root	usr/include/syslog-ng/versioning.h
 -rw-r--r--	root/root	usr/include/syslog-ng/window-size-counter.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libevtlog-3.27.so.0 -> libevtlog-3.27.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libevtlog-3.27.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libevtlog-3.28.so.0 -> libevtlog-3.28.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libevtlog-3.28.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libevtlog.la
-lrwxrwxrwx	root/root	usr/lib/libevtlog.so -> libevtlog-3.27.so.0.0.0
-lrwxrwxrwx	root/root	usr/lib/libloggen_helper-3.27.so.0 -> libloggen_helper-3.27.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libloggen_helper-3.27.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libevtlog.so -> libevtlog-3.28.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_helper-3.28.so.0 -> libloggen_helper-3.28.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libloggen_helper-3.28.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libloggen_helper.la
-lrwxrwxrwx	root/root	usr/lib/libloggen_helper.so -> libloggen_helper-3.27.so.0.0.0
-lrwxrwxrwx	root/root	usr/lib/libloggen_plugin-3.27.so.0 -> libloggen_plugin-3.27.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libloggen_plugin-3.27.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_helper.so -> libloggen_helper-3.28.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_plugin-3.28.so.0 -> libloggen_plugin-3.28.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libloggen_plugin-3.28.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libloggen_plugin.la
-lrwxrwxrwx	root/root	usr/lib/libloggen_plugin.so -> libloggen_plugin-3.27.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libloggen_plugin.so -> libloggen_plugin-3.28.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libsecret-storage.la
 lrwxrwxrwx	root/root	usr/lib/libsecret-storage.so -> libsecret-storage.so.0.0.0
 lrwxrwxrwx	root/root	usr/lib/libsecret-storage.so.0 -> libsecret-storage.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libsecret-storage.so.0.0.0
-lrwxrwxrwx	root/root	usr/lib/libsyslog-ng-3.27.so.0 -> libsyslog-ng-3.27.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/libsyslog-ng-3.27.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libsyslog-ng-3.28.so.0 -> libsyslog-ng-3.28.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libsyslog-ng-3.28.so.0.0.0
 -rw-r--r--	root/root	usr/lib/libsyslog-ng-native-connector.a
 -rwxr-xr-x	root/root	usr/lib/libsyslog-ng.la
-lrwxrwxrwx	root/root	usr/lib/libsyslog-ng.so -> libsyslog-ng-3.27.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libsyslog-ng.so -> libsyslog-ng-3.28.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/syslog-ng-native-connector.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/syslog-ng.pc
