@@ -1,24 +1,22 @@
 # Description: KeePass Cross-Platform Community Edition
 # URL: https://keepassxc.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: qt5 qrencode libgcrypt yubico-c yubikey-personalization libgpg-error llvm argon2 libsodium
+# Depends on: argon2 libgcrypt libsodium qrencode qt5 yubikey-personalization
 
 name=keepassxc
-version=2.5.4
+version=2.6.0
 release=1
 source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$name-$version-src.tar.xz)
 
 build() {
-  cd $name-$version
   [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
-  mkdir build && cd build
-  cmake -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_BINDIR=/usr/bin \
-    -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+  cmake -S$name-$version -Bbuild -GNinja \
+    -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
     -DWITH_XC_ALL=ON \
-    ..
-  make
-  make DESTDIR=$PKG install
-  rm -r $PKG/usr/share/keepassxc/{translations,docs}
+    -DWITH_XC_DOCS=OFF
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+
+  rm -r $PKG/usr/share/keepassxc/translations
 }
