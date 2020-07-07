@@ -7,13 +7,15 @@
 name=vlc
 version=3.0.11
 release=1
-source=(https://download.videolan.org/pub/videolan/$name/$version/$name-$version.tar.xz)
+source=(https://download.videolan.org/pub/videolan/$name/$version/$name-$version.tar.xz
+  qt-5.15.patch)
 
 build() {
   cd $name-$version
 
   [ -z "$(pkg-config --libs --static libavutil | grep -- '-lvdpau')" ] && PKGMK_VLC+=' --disable-vdpau'
 
+  patch -Np1 -i $SRC/qt-5.15.patch
   autoreconf -fi
 
   export RCC=/usr/bin/rcc-qt5
