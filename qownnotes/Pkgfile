@@ -4,7 +4,7 @@
 # Depends on: qt5
 
 name=qownnotes
-version=20.6.11
+version=20.7.1
 release=1
 source=(https://download.tuxfamily.org/$name/src/$name-$version.tar.xz)
 
@@ -18,13 +18,13 @@ build() {
     QMAKE_LFLAGS_RELEASE="${LDFLAGS}"
   make
 
-  install -D -m755 QOwnNotes "${PKG}/usr/bin/QOwnNotes"
-  install -D -m644 PBE.QOwnNotes.desktop "${PKG}/usr/share/applications/PBE.QOwnNotes.desktop"
-  install -D -m644 "images/icons/128x128/apps/QOwnNotes.png" "${PKG}/usr/share/pixmaps/QOwnNotes.png"
+  install -D -m755 QOwnNotes $PKG/usr/bin/QOwnNotes
+  install -D -m644 PBE.QOwnNotes.desktop $PKG/usr/share/applications/PBE.QOwnNotes.desktop
+  install -D -m644 "images/icons/128x128/apps/QOwnNotes.png" $PKG/usr/share/pixmaps/QOwnNotes.png
   for format in {16x16,24x24,32x32,48x48,64x64,96x96,128x128,256x256,512x512}; do
-    install -D -m644 "images/icons/${format}/apps/QOwnNotes.png" \
-      "${PKG}/usr/share/icons/hicolor/$format/apps/QOwnNotes.png"
+    install -D -m644 images/icons/$format/apps/QOwnNotes.png \
+      $PKG/usr/share/icons/hicolor/$format/apps/QOwnNotes.png
   done
-  install -D -m644 "images/icons/scalable/apps/QOwnNotes.svg" \
-    "${PKG}/usr/share/icons/hicolor/scalable/apps/QOwnNotes.svg"
+  install -D -m644 images/icons/scalable/apps/QOwnNotes.svg \
+    $PKG/usr/share/icons/hicolor/scalable/apps/QOwnNotes.svg
 }
