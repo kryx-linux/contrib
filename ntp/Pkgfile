@@ -1,13 +1,13 @@
 # Description: Network Time Protocol software
-# URL:         http://www.ntp.org
+# URL:         https://www.ntp.org
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
 # Depends on:  openssl
 
 name=ntp
-version=4.2.8p14
+version=4.2.8p15
 release=1
-source=(http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/$name-$version.tar.gz
+source=(https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/$name-$version.tar.gz
         ntpd ntpdate ntp.conf ntp-64bit.diff)
 
 build () {
@@ -31,7 +31,7 @@ build () {
       --enable-parse-clocks \
       --enable-all-clocks \
       CFLAGS="$CFLAGS" \
-      LDFLAGS="$LDFLAGS" 
+      LDFLAGS="$LDFLAGS"
 
    # substitute the default configuration path
    sed -i -e 's;\(CONFIG_FILE[^"]*"\)/etc/ntp.conf;\1/etc/ntp/ntp.conf;' \
