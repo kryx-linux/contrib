@@ -1,36 +1,38 @@
 # Description: Audio recording and editing program
 # URL: https://www.audacityteam.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: jack-audio-connection-kit lame libid3tag libmad libsoxr lilv soundtouch suil twolame vamp-plugin-sdk wxgtk3
+# Depends on: jack-audio-connection-kit libid3tag libmad libsoxr lilv soundtouch suil twolame vamp-plugin-sdk wxgtk3
 # Optional: portsmf
 
 name=audacity
-version=2.4.1
+version=2.4.2
 release=1
-source=(https://github.com/$name/$name/archive/Audacity-$version.tar.gz)
+source=(https://github.com/$name/$name/archive/Audacity-$version.tar.gz
+	lame.pc)
 
 build() {
-	cd $name-Audacity-$version
+	# included in src/AboutDialog.cpp but not supplied in source tarball
+	touch $name-Audacity-$version/include/RevisionIdent.h
 
-	CONFIG_SHELL=/bin/bash \
-	WX_CONFIG=wx-config-gtk3 \
-	./configure \
-		--prefix=/usr \
-		--with-libsndfile="system" \
-		--with-ffmpeg="system" \
-		--with-expat="system" \
-		--with-lame="system" \
-		--with-libsoxr="system" \
-		--with-libflac \
-		--with-libsamplerate \
-		--with-lv2 \
-		--disable-dynamic-loading
+	# cmake can't find libmp3lame without a .pc file
+	cp $SRC/lame.pc $name-Audacity-$version/lame.pc
 
-	make
-	make DESTDIR=$PKG install
+	export WX_CONFIG=wx-config-gtk3
+	export PKG_CONFIG_PATH="$PWD:$PKG_CONFIG_PATH"
 
-	install -vDm 644 plug-ins/*.ny -t $PKG/usr/share/$name/plug-ins
-	install -vDm 644 nyquist/*.lsp -t $PKG/usr/share/$name/nyquist
+	[ -e '/usr/bin/ccache' ] && PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+
+	cmake -S$name-Audacity-$version -Bbuild -GNinja \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DBUILD_SHARED_LIBS=True \
+		-DCMAKE_BUILD_TYPE=Release
+
+	cmake --build build
+	DESTDIR=$PKG cmake --build build --target install
+
+#	install -vDm 644 plug-ins/*.ny -t $PKG/usr/share/$name/plug-ins
+#	install -vDm 644 nyquist/*.lsp -t $PKG/usr/share/$name/nyquist
 
 	rm -r $PKG/usr/share/{doc,locale}
 }
