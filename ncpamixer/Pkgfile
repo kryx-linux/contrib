@@ -14,6 +14,6 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr
   cmake --build build
-  DESTDIR=$PKG cmake --build build --target install
+  DESTDIR=$PKG cmake --install build
   install -Dm644 $SRC/$name.1 $PKG/usr/share/man/man1/$name.1
 }

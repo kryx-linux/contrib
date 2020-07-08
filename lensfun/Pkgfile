@@ -17,5 +17,5 @@ build() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_CXX_FLAGS="${CXXFLAGS} -fno-delete-null-pointer-checks"
   cmake --build build
-  DESTDIR=$PKG cmake --build build --target install
+  DESTDIR=$PKG cmake --install build
 }

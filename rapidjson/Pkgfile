@@ -18,6 +18,6 @@ build() {
     -DRAPIDJSON_BUILD_EXAMPLES=OFF \
     -DRAPIDJSON_BUILD_TESTS=OFF
   cmake --build build
-  DESTDIR=$PKG cmake --build build --target install
+  DESTDIR=$PKG cmake --install build
   rm -r $PKG/usr/share/doc
 }

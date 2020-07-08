@@ -22,5 +22,5 @@ build() {
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS -Wno-catch-value"
 
 	cmake --build build
-	DESTDIR=$PKG cmake --build build --target install
+	DESTDIR=$PKG cmake --install build
 }

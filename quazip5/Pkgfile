@@ -12,7 +12,7 @@ build() {
   cmake -Squazip-$version -Bbuild -GNinja \
     -DCMAKE_INSTALL_PREFIX=/usr
   cmake --build build
-  DESTDIR=$PKG cmake --build build --target install
+  DESTDIR=$PKG cmake --install build
   cd $SRC/quazip-$version/quazip
   qmake quazip.pro
   make pkgconfig/quazip.pc

@@ -48,7 +48,7 @@ build() {
     -Wno-dev
 
   cmake --build build
-  DESTDIR=$PKG cmake --build build --target install
+  DESTDIR=$PKG cmake --install build
 
   install -dm755 $PKG/usr/bin/
   ln -s /usr/lib/$name/bin/$name $PKG/usr/bin/$name
