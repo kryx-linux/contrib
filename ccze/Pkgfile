@@ -1,25 +1,24 @@
 # Description: A log colorizer written in C with plugin support.
-# URL: http://freshmeat.net/projects/ccze/
+# URL: https://github.com/madhouse/ccze/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: libpcre ncurses
 
 name=ccze
-version=0.2.1
-release=3
-source=(http://ftp.debian.org/debian/pool/main/c/$name/${name}_$version.orig.tar.gz)
+version=0.2.1.2
+sversion=0.2.1-2
+release=1
+source=(https://github.com/madhouse/ccze/archive/$name-$sversion.tar.gz)
 
 build() {
-	cd $name-$version
+	cd $name-$name-$sversion
 
 	# GCC 4.x fixes
-	sed -i src/Makefile.in -e 's/-Wswitch -Wmulticharacter/-Wswitch/'   
+	sed -i src/Makefile.in -e 's/-Wswitch -Wmulticharacter/-Wswitch/'
 	sed -i configure.ac -e '/AC_CHECK_TYPE(error_t, int)/d'
+	autoheader
 	autoconf
 
-	./configure \
-		--prefix=/usr \
-		--disable-nls
-
+	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
 }
