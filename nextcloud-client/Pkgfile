@@ -22,5 +22,5 @@ build() {
   # there are no ports for nautilus nor nemo in CRUX atm
   rm -r $PKG/usr/share/{nautilus-python,nemo-python}
   # there is caja for mate though, only make it available if it's installed
-  [[ ! -e /usr/lib/pkgconfig/libcaja-extension.pc ]] && rm -r $PKG/usr/share/caja-python
+  [[ ! -e /usr/lib/pkgconfig/libcaja-extension.pc ]] && rm -r $PKG/usr/share/caja-python || true
 }
