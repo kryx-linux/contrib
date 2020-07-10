@@ -12,4 +12,10 @@ build() {
   cd python-xlib-$version
   python3 setup.py build
   python3 setup.py install --root=$PKG --optimize=1 --skip-build
+  find $PKG \(\
+    -iname '*pkg-info*' -o \
+    -iname '*sources*' -o \
+    -iname '*dependency_links*' -o \
+    -iname '*top_level*' -o \
+    -iname '*requires*' \) -exec rm -fr '{}' \+
 }
