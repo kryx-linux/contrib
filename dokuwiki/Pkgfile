@@ -22,4 +22,8 @@ build() {
     rm -f  $PKG/var/www/htdocs/dokuwiki/{COPYING,README,VERSION}
     rm -f  $PKG/var/www/htdocs/dokuwiki/lib/{_fla,images/admin}/README
     find $PKG -path '*lang/*' ! -wholename '*/en*' -type d | xargs rm -rf
+    find $PKG \(\
+      -iname '*readme*' -o \
+      -iname '*authors*' -o \
+      -iname '*thanks*' \) -exec rm -fr '{}' \+
 }
