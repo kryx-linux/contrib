@@ -19,6 +19,5 @@ build () {
 
     make
     make DESTDIR=$PKG install
-
-    rm -f $PKG/usr/share/nmap/nselib/data/psexec/README
+    find $PKG -iname '*readme*' -exec rm -fr '{}' \+
 }
