@@ -15,5 +15,5 @@ build() {
   make PREFIX=/usr DESTDIR=$PKG install
 
   rm -r $PKG/usr/share/doc
-  rm $PKG/usr/share/afl/testcases/README.testcases
+  find $PKG -iname '*readme*' -delete
 }
