@@ -12,4 +12,9 @@ build() {
 	cd importlib_metadata-$version
 	python3 setup.py build
 	python3 setup.py install --root=$PKG
+	find $PKG \(\
+		-iname '*changelog*' -o \
+		-iname '*index*' -o \
+		-iname '*example*' -o \
+		-iname '*using*' \) -exec rm -fr '{}' \+
 }
