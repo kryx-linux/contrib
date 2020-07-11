@@ -12,13 +12,11 @@ source=(https://downloads.sourceforge.net/$name/$name-$version.tar.xz
   https://github.com/scribusproject/scribus/commit/37425599.patch
   https://github.com/scribusproject/scribus/commit/17d6a983.patch
   scribus-boost-1.71.patch scribus-poppler-0.86.patch
-  https://poppler.freedesktop.org/poppler-0.82.0.tar.xz)
+  https://poppler.freedesktop.org/poppler-0.90.0.tar.xz)
 
 # snatched from contrib/inkscape, thx romster :>
 poppler() {
-#-boehm-gc boost gsl gtkmm poppler-glib popt
-#+cmake cairo lcms2 boehm-gc boost gsl gtkmm popt
-  cmake -Spoppler-0.82.0 -Bbuild -GNinja \
+  cmake -Spoppler-0.90.0 -Bbuild-poppler -GNinja \
     -DCMAKE_INSTALL_PREFIX=$SRC/poppler \
     -DCMAKE_INSTALL_LIBDIR=$SRC/poppler/lib \
     -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
@@ -31,10 +29,11 @@ poppler() {
     -DENABLE_CMS=lcms2 \
     -DENABLE_LIBOPENJPEG=none \
     -DWITH_NSS3=OFF
-  cmake --build build
-  cmake --install build
 
-  install -D -t $PKG/usr/lib/ $SRC/poppler/lib/libpoppler.so.92
+  cmake --build build-poppler
+  cmake --install build-poppler
+
+  install -D -t $PKG/usr/lib/ $SRC/poppler/lib/libpoppler.so.101
 
   export CXXFLAGS+=" -I$SRC/poppler/include -I$SRC/poppler/include/poppler"
   export PKG_CONFIG_PATH="$SRC/poppler/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -45,32 +44,29 @@ build() {
   # build a static poppler to use with the build
   # scribus is using the internal poppler api which
   # is known to break every other release
-  #poppler
-
+  [ ! -e '/usr/lib/libpoppler.so.101' ] && poppler
   # https://git.archlinux.org/svntogit/community.git/tree/trunk/PKGBUILD?h=packages/scribus
-  patch -Np1 -d $name-$version -i $SRC/6db15ec1.patch
-  patch -Np1 -d $name-$version -i $SRC/b51c2bab.patch
-  patch -Np1 -d $name-$version -i $SRC/37425599.patch
-  patch -Np1 -d $name-$version -i $SRC/scribus-poppler-0.86.patch
-  patch -Np1 -d $name-$version -i $SRC/scribus-boost-1.71.patch
-  patch -Np1 -d $name-$version -i $SRC/17d6a983.patch
+  patch -p1 -d $name-$version -i $SRC/6db15ec1.patch
+  patch -p1 -d $name-$version -i $SRC/b51c2bab.patch
+  patch -p1 -d $name-$version -i $SRC/37425599.patch
+  patch -p1 -d $name-$version -i $SRC/scribus-poppler-0.86.patch
+  patch -p1 -d $name-$version -i $SRC/scribus-boost-1.71.patch
+  patch -p1 -d $name-$version -i $SRC/17d6a983.patch
 
-  # clean up poppler build dir if there is one
-  [[ -e build ]] && rm -rf build || true
   sed \
     -e 's|#!/usr/bin/python|#!/usr/bin/python3|' \
     -e 's|#!/usr/bin/env python|#!/usr/bin/env python3|' \
     -i $name-$version/scribus/plugins/scriptplugin/{samples,scripts}/*
+
   cmake -S$name-$version -Bbuild -GNinja \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 
-  rm -rf $PKG/usr/share/man/de
-  rm -rf $PKG/usr/share/man/pl
-  rm -rf $PKG/usr/share/doc
-  find $PKG \(\
+  rm -r $PKG/usr/share/man/??
+  rm -r $PKG/usr/share/doc
+  find $PKG \( \
     -iname '*changelog*' -o \
     -iname '*news*' -o \
     -iname '*todo*' -o \
