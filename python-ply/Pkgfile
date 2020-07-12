@@ -1,5 +1,5 @@
 # Description: Lex and yacc parsing tools for Python
-# URL:         https://www.dabeaz.com/ply/
+# URL:         https://github.com/dabeaz/ply
 # Maintainer:  Thomas Penteker, tek at serverop dot de
 # Depends on:  python
 
@@ -14,5 +14,5 @@ build() {
 	python setup.py install --prefix=/usr --root=$PKG --optimize=1
 
 	find $PKG/usr/lib/python*/site-packages/ -maxdepth 1 -type f \
-		-name "${name#*-}-$version-py*.egg-info" -delete
+		 lists buffers-name "${name#*-}-$version-py*.egg-info" -delete
 }
