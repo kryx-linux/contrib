@@ -5,7 +5,7 @@
 # Optional: patool mediainfo
 
 name=nnn
-version=3.2
+version=3.3
 release=1
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
@@ -35,5 +35,7 @@ build() {
   fi
   # fish is not in core/opt/contrib, but the script get's installed to
 
-  find $PKG -name README.md -delete
+  find $PKG \(\
+    -iname '*README.md*' -o \
+    -iname '*contributing*' \) -delete
 }
