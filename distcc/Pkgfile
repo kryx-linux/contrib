@@ -5,9 +5,11 @@
 
 name=distcc
 version=3.3.3
-release=1
+release=2
 source=(https://github.com/distcc/distcc/releases/download/v$version/$name-$version.tar.gz
-	distccd)
+	distccd
+	distcc-3.3.3-py38.patch
+	distcc-3.3.3-gcc-10-fix.patch)
 
 build() {
 	cd $name-$version
@@ -15,6 +17,9 @@ build() {
 [ -e '/usr/lib/pkgconfig/python-3.7.pc' ] || PKGMK_DISTCC+=' --disable-pump-mode'
 [ -e '/usr/lib/pkgconfig/gtk+-2.0.pc' ] || PKGMK_DISTCC+=' --without-gtk'
 [ -e '/usr/lib/pkgconfig/popt.pc' ] || PKGMK_DISTCC+=' --with-included-popt'
+
+	patch -p1 -i $SRC/distcc-3.3.3-py38.patch
+	patch -p1 -i $SRC/distcc-3.3.3-gcc-10-fix.patch
 
 	./autogen.sh
 
