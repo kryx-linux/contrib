@@ -14,6 +14,5 @@ build () {
     cp -R $name-$version/* $PKG/var/www/$name
     mv $PKG/var/www/$name/{docs/sample-config.php,local/config.php.sample}
     rm -r $PKG/var/www/$name/docs
-    find $PKG \( -name 'README*' -o \
-      -iname '*changelog*' \) -delete
+    find $PKG -name 'README*' -delete
 }
