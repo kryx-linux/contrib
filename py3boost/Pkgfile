@@ -13,9 +13,9 @@ build() {
   cd ${name#py3}_${version//./_}
 
   # these numbers need to be changed according to systems python3 version
-  sed -i '19s:=python:=python3.7:' bootstrap.sh
+  sed -i '19s:=python:=python3.8:' bootstrap.sh
   ## here too
-  sed -i '20s:=:=3.7:' bootstrap.sh
+  sed -i '20s:=:=3.8:' bootstrap.sh
 
   export _stagedir="$SRC/stagedir"
 
@@ -29,7 +29,7 @@ build() {
   ./b2 stage \
     --prefix="${_stagedir/python3}" \
     --with-python \
-    python=3.7 \
+    python=3.8 \
     variant=release \
     threading=multi \
     runtime-link=shared \
@@ -41,5 +41,5 @@ build() {
   install -dm 755 $PKG/usr/lib
   cp -a ${_stagedir}/lib/libboost_python3* $PKG/usr/lib
   #https://github.com/boostorg/python/issues/203#issuecomment-391477685
-  ln -srL $PKG/usr/lib/libboost_python3{7,}.so
+  ln -srL $PKG/usr/lib/libboost_python3{8,}.so
 }
