@@ -3,21 +3,23 @@
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=fpc
-version=3.0.4
+version=3.2.0
 release=1
 source=(
 	https://sourceforge.net/projects/freepascal/files/Source/$version/fpcbuild-$version.tar.gz
 	https://sourceforge.net/projects/freepascal/files/Source/$version/fpc-$version.source.tar.gz
-	https://sourceforge.net/projects/freepascal/files/Linux/$version/$name-$version.x86_64-linux.tar
+	https://sourceforge.net/projects/freepascal/files/Linux/$version/$name-$version-x86_64-linux.tar
 )
 
 build() {
 	JOBS='-j1'
 
-	tar -xf fpc-$version.x86_64-linux/binary.x86_64-linux.tar
+	tar -xf fpc-$version-x86_64-linux/binary.x86_64-linux.tar
 	tar -xzf base.x86_64-linux.tar.gz
-	PATH="$SRC/bin:$PATH"
-	#PATH="$SRC/fpc-$version.x86_64-linux/fpcbuild-$version/fpcsrc/compiler:$PATH"
+	tar -xzf utils-fpcm.x86_64-linux.tar.gz
+
+	# use precompiled fpc to build fpc if it's not installed on the host already
+	[ ! -e /usr/bin/fpc ] && PATH="$SRC/bin:$PATH"
 
 	cd fpcbuild-$version/fpcsrc/
 
