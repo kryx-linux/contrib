@@ -4,24 +4,21 @@
 # Depends on: clang python3-six swig
 
 name=lldb
-version=10.0.0
-release=2
+version=10.0.1
+release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/lldb-$version.src.tar.xz)
 
 build() {
-  cd $name-$version.src
-  mkdir build
-  cd build
-  cmake .. \
-    -GNinja \
+  cmake -S$name-$version.src -Bbuild -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DLLVM_LINK_LLVM_DYLIB=ON \
     -DPYTHON_EXECUTABLE=/usr/bin/python3 \
     -DLLDB_USE_SYSTEM_SIX=1
-  ninja
-  DESTDIR=$PKG ninja install
-  python3 -m compileall $PKG
-  python3 -O -m compileall $PKG
-  python3 -OO -m compileall $PKG
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+
+  python3 -m compileall -d $name-$version.src $PKG
+  python3 -O -m compileall -d $name-$version.src $PKG
+  python3 -OO -m compileall -d $name-$version.src $PKG
 }

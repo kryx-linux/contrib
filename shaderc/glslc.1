@@ -2,12 +2,12 @@
 .\"     Title: glslc
 .\"    Author: [see the "AUTHOR(S)" section]
 .\" Generator: Asciidoctor 2.0.10
-.\"      Date: 2019-10-12
+.\"      Date: 2020-07-24
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "`GLSLC`" "1" "2019-10-12" "\ \&" "\ \&"
+.TH "`GLSLC`" "1" "2020-07-24" "\ \&" "\ \&"
 .ie \n(.g .ds Aq \(aq
 .el       .ds Aq '
 .ss \n[.ss] 0
@@ -229,7 +229,7 @@ file\(cqs name and extension.
 If the input file has a shader stage selection
 extension, the output file will be named as by appending the file extension
 for the compilation stage to the input file\(cqs name. E.g., \f(CRglslc \-c foo.vert\fP
-will generate \f(CRfoo.vert.spv\fP, and \f(CRglslc \-s bar.frag\fP will generate
+will generate \f(CRfoo.vert.spv\fP, and \f(CRglslc \-S bar.frag\fP will generate
 \f(CRbar.frag.spvasm\fP.
 .RE
 .sp
@@ -243,7 +243,7 @@ will generate \f(CRfoo.vert.spv\fP, and \f(CRglslc \-s bar.frag\fP will generate
 .\}
 Otherwise, the output file will be named as by replacing the input file\(cqs
 file extension, if any, with the file extension for the compilation stage.
-E.g., \f(CRglslc \-c foo\fP will generate \f(CRfoo.spv\fP, and \f(CRglslc \-s bar.glsl\fP will
+E.g., \f(CRglslc \-c foo\fP will generate \f(CRfoo.spv\fP, and \f(CRglslc \-S bar.glsl\fP will
 generate \f(CRbar.spvasm\fP.
 .RE
 .RE
@@ -273,7 +273,7 @@ by \f(CR\-flimit\-file\fP.
 \f(CR\-o\fP lets you specify the output file\(cqs name. It cannot be used when there are
 multiple files generated. A filename of \f(CR\-\fP represents standard output.
 .SS "Language and Mode Selection Options"
-.SS "\f(CR\-finverty\fP"
+.SS "\f(CR\-finvert\-y\fP"
 .sp
 Inverts position.Y output in a vertex shader.
 .SS "\f(CR\-flimit=\fP"
@@ -517,6 +517,17 @@ the following:
 .  sp -1
 .  IP \(bu 2.3
 .\}
+\f(CRvulkan1.2\fP: create SPIR\-V under Vulkan 1.2 semantics.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
 \f(CRopengl\fP: create SPIR\-V under OpenGL 4.5 semantics.
 .RE
 .sp
@@ -543,15 +554,17 @@ the following:
 profile functions.
 .RE
 .sp
-Generated code uses SPIR\-V 1.0, except that code compiled for Vulkan 1.1 uses SPIR\-V 1.3.
+Generated code uses SPIR\-V 1.0, except for code compiled for Vulkan 1.1, which uses
+SPIR\-V 1.3, and code compiled for Vulkan 1.5, which uses SPIR\-V 1.5.
 .sp
 If this option is not specified, a default of \f(CRvulkan1.0\fP is used.
 .SS "\f(CR\-\-target\-spv=\fP"
 .sp
 \f(CR\-\-target\-spv=<value>\fP lets you specify the SPIR\-V version to be used by the generated
 module.  The default is to use the highest version of SPIR\-V required to be supported
-by the target environment.  For example, the default is SPIR\-V 1.0 for Vulkan 1.0, and
-and SPIR\-V 1.3 for Vulkan 1.1.
+by the target environment.  The defaults for specific Vulkan target environments are
+as follows: SPIR\-V 1.0 for Vulkan 1.0, SPIR\-V 1.3 for Vulkan 1.1, and SPIR\-V 1.5 for
+Vulkan 1.2.
 .sp
 The \f(CR<value>\fP can be one of the following:
 .sp
@@ -608,6 +621,17 @@ The \f(CR<value>\fP can be one of the following:
 .  IP \(bu 2.3
 .\}
 \f(CRspv1.4\fP
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\f(CRspv1.5\fP
 .RE
 .SS "\f(CR\-x\fP"
 .sp

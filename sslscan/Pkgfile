@@ -1,16 +1,15 @@
 # Description: test SSL/TLS enabled services to discover supported cipher suites
 # URL: https://github.com/rbsec/sslscan
 # Maintainer: Thomas Penteker, tek at serverop dot de
-# Depends on: openssl1
+# Depends on:
 
 name=sslscan
-version=1.11.13
+version=2.0.0
 release=1
-source=(https://github.com/rbsec/sslscan/archive/$version-rbsec.tar.gz openssl1.patch)
+source=(https://github.com/rbsec/sslscan/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version-rbsec
-  patch -Np1 -i $SRC/openssl1.patch
+  cd $name-$version
   make
 
   install -m 755 -d $PKG/usr/bin $PKG/usr/share/man/man1
