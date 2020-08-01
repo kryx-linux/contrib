@@ -3,21 +3,12 @@
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=wgetpaste
-version=2.29
+version=2.30
 release=1
-source=(http://wgetpaste.zlin.dk/$name-$version.tar.bz2
-	http://wgetpaste.zlin.dk/zlin.conf)
+source=(https://github.com/zlin/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
-	# adjust including files as per http://wgetpaste.zlin.dk/inst.bash
 	cd $name-$version
-	install -d $PKG/usr/bin $PKG/usr/etc/wgetpaste.d
-
-	cat wgetpaste _wgetpaste \
-	| sed 's|for f in {/etc/|for f in {/usr/etc/|' \
-	| sed 's|/etc/wgetpaste.d|/usr/etc/wgetpaste.d|' \
-	> $PKG/usr/bin/wgetpaste
-
-	install -m 0644 $SRC/zlin.conf $PKG/usr/etc/wgetpaste.d
-	chmod +x $PKG/usr/bin/wgetpaste
+	install -Dm755 wgetpaste $PKG/usr/bin/wgetpaste
+	[ ! -e '/usr/bin/zsh' ] || install -Dm644 _wgetpaste $PKG/usr/share/zsh/site-functions/_wgetpaste
 }
