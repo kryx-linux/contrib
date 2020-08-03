@@ -5,12 +5,13 @@
 # Depends on:  mod_php
 
 name=dokuwiki
-version=2018-04-22c
+version=20200729
+_version=2020-07-29
 release=1
-source=(http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$version.tgz)
+source=(http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$_version.tgz)
 
 build() {
-    cd $name-$version
+    cd $name-$_version
 
     touch data/changes.log
 

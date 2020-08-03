@@ -4,12 +4,10 @@
 # Depends on: bash
 
 name=neofetch
-version=7.0.0
+version=7.1.0
 release=1
 source=(https://github.com/dylanaraps/neofetch/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  mkdir -p $PKG/usr/bin
-  cp neofetch $PKG/usr/bin
+  install -Dt $PKG/usr/bin $name-$version/neofetch
 }

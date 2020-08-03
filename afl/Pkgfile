@@ -4,12 +4,12 @@
 # Depends on:
 
 name=afl
-version=2.57b
+version=2.66c
 release=1
-source=(https://github.com/google/AFL/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/AFLplusplus/AFLplusplus/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd AFL-$version
+  cd AFLplusplus-$version
 
   make
   make PREFIX=/usr DESTDIR=$PKG install
