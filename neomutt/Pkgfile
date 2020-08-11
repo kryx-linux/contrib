@@ -4,14 +4,12 @@
 # Depends on: cyrus-sasl keyutils krb5 lua notmuch
 
 name=neomutt
-version=20200626
-release=2
-source=(https://github.com/neomutt/neomutt/archive/$version/$name-$version.tar.gz
-  https://patch-diff.githubusercontent.com/raw/neomutt/neomutt/pull/2424.patch)
+version=20200807
+release=1
+source=(https://github.com/neomutt/neomutt/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  patch -Np1 -i $SRC/2424.patch
   ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
