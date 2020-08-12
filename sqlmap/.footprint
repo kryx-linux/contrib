@@ -896,14 +896,17 @@ drwxr-xr-x	root/root	usr/share/sqlmap/plugins/generic/__pycache__/
 -rwxr-xr-x	root/root	usr/share/sqlmap/sqlmap.py
 -rwxr-xr-x	root/root	usr/share/sqlmap/sqlmapapi.py
 drwxr-xr-x	root/root	usr/share/sqlmap/tamper/
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/0eunion.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__init__.py
 drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/0eunion.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/__init__.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/apostrophemask.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/apostrophenullencode.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/appendnullbyte.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/base64encode.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/between.cpython-38.pyc
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/binary.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/bluecoat.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/chardoubleencode.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/charencode.cpython-38.pyc
@@ -913,6 +916,7 @@ drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/commalessmid.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/commentbeforeparentheses.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/concat2concatws.cpython-38.pyc
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/dunion.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/equaltolike.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/escapequotes.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/greatest.cpython-38.pyc
@@ -925,6 +929,7 @@ drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/least.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/lowercase.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/luanginx.cpython-38.pyc
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/misunion.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/modsecurityversioned.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/modsecurityzeroversioned.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/multiplespaces.cpython-38.pyc
@@ -935,6 +940,7 @@ drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/plus2fnconcat.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/randomcase.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/randomcomments.cpython-38.pyc
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/schemasplit.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/sp_password.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/space2comment.cpython-38.pyc
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/__pycache__/space2dash.cpython-38.pyc
@@ -961,6 +967,7 @@ drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/appendnullbyte.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/base64encode.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/between.py
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/binary.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/bluecoat.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/chardoubleencode.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/charencode.py
@@ -970,6 +977,7 @@ drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/commalessmid.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/commentbeforeparentheses.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/concat2concatws.py
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/dunion.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/equaltolike.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/escapequotes.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/greatest.py
@@ -982,6 +990,7 @@ drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/least.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/lowercase.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/luanginx.py
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/misunion.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/modsecurityversioned.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/modsecurityzeroversioned.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/multiplespaces.py
@@ -992,6 +1001,7 @@ drwxr-xr-x	root/root	usr/share/sqlmap/tamper/__pycache__/
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/plus2fnconcat.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/randomcase.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/randomcomments.py
+-rw-r--r--	root/root	usr/share/sqlmap/tamper/schemasplit.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/sp_password.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/space2comment.py
 -rw-r--r--	root/root	usr/share/sqlmap/tamper/space2dash.py

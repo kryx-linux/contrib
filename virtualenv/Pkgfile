@@ -5,11 +5,16 @@
 # Depends on:  python3-setuptools
 
 name=virtualenv
-version=20.0.29
+version=20.0.30
 release=1
 source=(https://pypi.io/packages/source/v/virtualenv/virtualenv-${version}.tar.gz)
 
 build() {
     cd $name-$version
-    /usr/bin/python3 setup.py install --root=$PKG
+  python3 setup.py build
+  python3 setup.py install \
+    --skip-build \
+    --optimize=1 \
+    --prefix=/usr \
+    --root=$PKG
 }
