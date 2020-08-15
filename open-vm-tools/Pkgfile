@@ -1,16 +1,17 @@
 # Description: A set of services and modules that enable several features in VMware products for better management of, and seamless user interactions with, guests
 # URL: https://github.com/vmware/open-vm-tools
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: libmspack libdnet glib
+# Depends on: libmspack libdnet glib rpcsvc-proto
 
 name=open-vm-tools
 version=11.1.0-16036546
 release=2
 source=(https://github.com/vmware/$name/releases/download/stable-${version%-*}/$name-$version.tar.gz \
-	vmtoolsd)
+	vmtoolsd gcc10-warning.patch)
 
 build() {
 	cd $name-$version
+	patch -p2 -i $SRC/gcc10-warning.patch
 	./configure --prefix=/usr \
 		--without-icu \
 		--without-x \
