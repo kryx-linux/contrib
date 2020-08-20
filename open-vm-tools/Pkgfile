@@ -4,14 +4,13 @@
 # Depends on: libmspack libdnet glib rpcsvc-proto
 
 name=open-vm-tools
-version=11.1.0-16036546
-release=2
+version=11.1.5-16724464
+release=1
 source=(https://github.com/vmware/$name/releases/download/stable-${version%-*}/$name-$version.tar.gz \
-	vmtoolsd gcc10-warning.patch)
+	vmtoolsd)
 
 build() {
 	cd $name-$version
-	patch -p2 -i $SRC/gcc10-warning.patch
 	./configure --prefix=/usr \
 		--without-icu \
 		--without-x \
