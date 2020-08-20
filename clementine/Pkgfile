@@ -1,13 +1,12 @@
 # Description: A music player and library organizer.
 # URL: https://www.clementine-player.org/
-# Packager: Chris Farrell, timcowchip at gmail dot com
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: boost crypto++ glew gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qt5
 
 name=clementine
-version=1.4.0rc1-169
+version=1.4.0rc1-269
 release=1
-source=(https://github.com/clementine-player/Clementine/archive/$version-g934fd336d/$name-$version-g934fd336d.tar.gz
+source=(https://github.com/clementine-player/Clementine/archive/$version-g68d375c43/$name-$version.tar.gz
 	clementine-gcc6.patch)
 
 build() {
@@ -16,7 +15,7 @@ build() {
 	# calling ccache and CCACHE_PREFIX
 	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 
-	cmake -SClementine-$version-g934fd336d -Bbuild \
+	cmake -SClementine-68d375c43c108d1888c64b14d736597dbb83f0b7 -Bbuild -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE='Release' \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS -Wno-catch-value"
