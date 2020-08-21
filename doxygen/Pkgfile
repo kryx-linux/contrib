@@ -1,21 +1,17 @@
 # Description: Source code documentation generator tool
-# URL: http://www.doxygen.nl/
+# URL: https://www.doxygen.nl/
 # Maintainer: Jan-Michael Franz, jmf at mesecons dot net
-# Packager: Hannes Mayer, kontakt at ecarux dot de
-# Depends on: cmake python
+# Depends on: cmake python3
 
-name=doxygen 
-version=1.8.18
+name=doxygen
+version=1.8.19
 release=1
-source=(http://doxygen.nl/files/$name-$version.src.tar.gz)
+source=(https://doxygen.nl/files/$name-$version.src.tar.gz)
 
 build() {
-  cd $name-$version
-
-  cmake . -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr
-
-  make CXXFLAGS="$CXXFLAGS"
-  make DESTDIR=$PKG install
-
-  install -D -m 0755 doc/$name.1 $PKG/usr/share/man/man1/$name.1
+  cmake -S$name-$version -Bbuild -G"Unix Makefiles" \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+  install -D -m 0755 $SRC/$name-$version/doc/$name.1 $PKG/usr/share/man/man1/$name.1
 }
