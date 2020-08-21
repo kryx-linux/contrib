@@ -26,6 +26,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/snmpgetnext
 lrwxrwxrwx	root/root	usr/bin/snmpinform -> snmptrap
 -rwxr-xr-x	root/root	usr/bin/snmpnetstat
+-rwxr-xr-x	root/root	usr/bin/snmppcap
 -rwxr-xr-x	root/root	usr/bin/snmpping
 -rwxr-xr-x	root/root	usr/bin/snmpps
 -rwxr-xr-x	root/root	usr/bin/snmpset
@@ -132,6 +133,7 @@ drwxr-xr-x	root/root	usr/include/net-snmp/library/
 -rw-r--r--	root/root	usr/include/net-snmp/library/snmp.h
 -rw-r--r--	root/root	usr/include/net-snmp/library/snmpAliasDomain.h
 -rw-r--r--	root/root	usr/include/net-snmp/library/snmpCallbackDomain.h
+-rw-r--r--	root/root	usr/include/net-snmp/library/snmpIPBaseDomain.h
 -rw-r--r--	root/root	usr/include/net-snmp/library/snmpIPv4BaseDomain.h
 -rw-r--r--	root/root	usr/include/net-snmp/library/snmpIPv6BaseDomain.h
 -rw-r--r--	root/root	usr/include/net-snmp/library/snmpSocketBaseDomain.h
@@ -185,23 +187,14 @@ drwxr-xr-x	root/root	usr/include/net-snmp/system/
 -rw-r--r--	root/root	usr/include/net-snmp/system/bsdi4.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/cygwin.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/darwin.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin10.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin11.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin12.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin13.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin14.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin15.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin16.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin17.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin7.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin8.h
--rw-r--r--	root/root	usr/include/net-snmp/system/darwin9.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/dragonfly.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/dynix.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/freebsd.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/freebsd10.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/freebsd11.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/freebsd12.h
+-rw-r--r--	root/root	usr/include/net-snmp/system/freebsd13.h
+-rw-r--r--	root/root	usr/include/net-snmp/system/freebsd14.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/freebsd2.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/freebsd3.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/freebsd4.h
@@ -213,7 +206,6 @@ drwxr-xr-x	root/root	usr/include/net-snmp/system/
 -rw-r--r--	root/root	usr/include/net-snmp/system/generic.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/hpux.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/irix.h
--rw-r--r--	root/root	usr/include/net-snmp/system/kfreebsd.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/linux.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/mingw32.h
 -rw-r--r--	root/root	usr/include/net-snmp/system/mingw32msvc.h
@@ -241,29 +233,29 @@ drwxr-xr-x	root/root	usr/include/net-snmp/system/
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libnetsnmp.a
 -rwxr-xr-x	root/root	usr/lib/libnetsnmp.la
-lrwxrwxrwx	root/root	usr/lib/libnetsnmp.so -> libnetsnmp.so.35.0.0
-lrwxrwxrwx	root/root	usr/lib/libnetsnmp.so.35 -> libnetsnmp.so.35.0.0
--rwxr-xr-x	root/root	usr/lib/libnetsnmp.so.35.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmp.so -> libnetsnmp.so.40.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmp.so.40 -> libnetsnmp.so.40.0.0
+-rwxr-xr-x	root/root	usr/lib/libnetsnmp.so.40.0.0
 -rw-r--r--	root/root	usr/lib/libnetsnmpagent.a
 -rwxr-xr-x	root/root	usr/lib/libnetsnmpagent.la
-lrwxrwxrwx	root/root	usr/lib/libnetsnmpagent.so -> libnetsnmpagent.so.35.0.0
-lrwxrwxrwx	root/root	usr/lib/libnetsnmpagent.so.35 -> libnetsnmpagent.so.35.0.0
--rwxr-xr-x	root/root	usr/lib/libnetsnmpagent.so.35.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmpagent.so -> libnetsnmpagent.so.40.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmpagent.so.40 -> libnetsnmpagent.so.40.0.0
+-rwxr-xr-x	root/root	usr/lib/libnetsnmpagent.so.40.0.0
 -rw-r--r--	root/root	usr/lib/libnetsnmphelpers.a
 -rwxr-xr-x	root/root	usr/lib/libnetsnmphelpers.la
-lrwxrwxrwx	root/root	usr/lib/libnetsnmphelpers.so -> libnetsnmphelpers.so.35.0.0
-lrwxrwxrwx	root/root	usr/lib/libnetsnmphelpers.so.35 -> libnetsnmphelpers.so.35.0.0
--rwxr-xr-x	root/root	usr/lib/libnetsnmphelpers.so.35.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmphelpers.so -> libnetsnmphelpers.so.40.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmphelpers.so.40 -> libnetsnmphelpers.so.40.0.0
+-rwxr-xr-x	root/root	usr/lib/libnetsnmphelpers.so.40.0.0
 -rw-r--r--	root/root	usr/lib/libnetsnmpmibs.a
 -rwxr-xr-x	root/root	usr/lib/libnetsnmpmibs.la
-lrwxrwxrwx	root/root	usr/lib/libnetsnmpmibs.so -> libnetsnmpmibs.so.35.0.0
-lrwxrwxrwx	root/root	usr/lib/libnetsnmpmibs.so.35 -> libnetsnmpmibs.so.35.0.0
--rwxr-xr-x	root/root	usr/lib/libnetsnmpmibs.so.35.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmpmibs.so -> libnetsnmpmibs.so.40.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmpmibs.so.40 -> libnetsnmpmibs.so.40.0.0
+-rwxr-xr-x	root/root	usr/lib/libnetsnmpmibs.so.40.0.0
 -rw-r--r--	root/root	usr/lib/libnetsnmptrapd.a
 -rwxr-xr-x	root/root	usr/lib/libnetsnmptrapd.la
-lrwxrwxrwx	root/root	usr/lib/libnetsnmptrapd.so -> libnetsnmptrapd.so.35.0.0
-lrwxrwxrwx	root/root	usr/lib/libnetsnmptrapd.so.35 -> libnetsnmptrapd.so.35.0.0
--rwxr-xr-x	root/root	usr/lib/libnetsnmptrapd.so.35.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmptrapd.so -> libnetsnmptrapd.so.40.0.0
+lrwxrwxrwx	root/root	usr/lib/libnetsnmptrapd.so.40 -> libnetsnmptrapd.so.40.0.0
+-rwxr-xr-x	root/root	usr/lib/libnetsnmptrapd.so.40.0.0
 drwxr-xr-x	root/root	usr/lib/perl5/
 drwxr-xr-x	root/root	usr/lib/perl5/5.28/
 drwxr-xr-x	root/root	usr/lib/perl5/5.28/linux-thread-multi/
@@ -308,6 +300,9 @@ drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.28/linux-thread-multi/auto/NetSNM
 drwxr-xr-x	root/root	usr/lib/perl5/site_perl/5.28/linux-thread-multi/auto/SNMP/
 -r-xr-xr-x	root/root	usr/lib/perl5/site_perl/5.28/linux-thread-multi/auto/SNMP/SNMP.so
 -r--r--r--	root/root	usr/lib/perl5/site_perl/5.28/linux-thread-multi/auto/SNMP/autosplit.ix
+drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-rwxr-xr-x	root/root	usr/lib/pkgconfig/netsnmp-agent.pc
+-rwxr-xr-x	root/root	usr/lib/pkgconfig/netsnmp.pc
 drwxr-xr-x	root/root	usr/sbin/
 -rwxr-xr-x	root/root	usr/sbin/snmpd
 -rwxr-xr-x	root/root	usr/sbin/snmptrapd
