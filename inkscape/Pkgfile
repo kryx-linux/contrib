@@ -5,12 +5,13 @@
 
 name=inkscape
 version=1.0
-release=1
+release=2
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
-	https://poppler.freedesktop.org/poppler-0.88.0.tar.xz)
+	https://poppler.freedesktop.org/poppler-0.90.1.tar.xz
+	inkscape.patch)
 
 poppler() {
-	cmake -Spoppler-0.88.0 -Bbuild-poppler -GNinja \
+	cmake -Spoppler-0.90.1 -Bbuild-poppler -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
@@ -26,14 +27,16 @@ poppler() {
 
 	cmake --build build-poppler
 	DESTDIR=$SRC/poppler cmake --build build-poppler --target install
-	install -D -t $PKG/usr/lib $SRC/poppler/usr/lib/libpoppler.so.99
+	install -D -t $PKG/usr/lib $SRC/poppler/usr/lib/libpoppler.so.101
 
 	export CXXFLAGS+=" -I$SRC/poppler/usr/include -I$SRC/poppler/usr/include/poppler"
 	export PKG_CONFIG_PATH="$SRC/poppler/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
 build() {
-	[ ! -e '/usr/lib/libpoppler.so.99' ] && poppler
+	[ ! -e '/usr/lib/libpoppler.so.101' ] && poppler
+
+	patch -d $name-${version}_2020-05-01_4035a4fb49 -p1 -i $SRC/inkscape.patch
 
 	export PKG_CONFIG_PATH="/usr/lib/imagemagick6/pkgconfig:$PKG_CONFIG_PATH"
 
