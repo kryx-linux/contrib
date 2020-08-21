@@ -1,17 +1,15 @@
 # Description: POP3 mail retriever with reliable Maildir and command delivery
 # URL:         http://pyropus.ca/software/getmail/
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Han Boetes, han at mijncomputer dot nl
-# Depends on:  python
+# Depends on:  python3
 
 name=getmail
-version=5.14
+version=6.03
 release=1
-source=(http://pyropus.ca/software/$name/old-versions/$name-$version.tar.gz
-      $name.diff)
+source=(https://github.com/getmail6/getmail6/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  patch -p1 < $SRC/$name.diff
-  /usr/bin/python setup.py install --prefix=/usr --root=$PKG
+  cd ${name}6-$version
+  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG
+  rm -fr $PKG/usr/share/doc
 }
