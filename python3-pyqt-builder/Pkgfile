@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools
 
 name=python3-pyqt-builder
-version=1.4.0
+version=1.5.0
 release=1
 source=(https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-$version.tar.gz)
 
 build() {
   cd PyQt-builder-$version
-  python3 setup.py build
-  python3 setup.py install --root=$PKG
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG
 }

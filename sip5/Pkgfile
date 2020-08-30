@@ -4,14 +4,14 @@
 # Depends on: python3-toml
 
 name=sip5
-version=5.3.0
+version=5.4.0
 release=1
 source=(https://pypi.python.org/packages/source/s/sip/sip-$version.tar.gz)
 
 build() {
   cd sip-$version
-  python3 setup.py build
-  python3 setup.py install --skip-build \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --skip-build \
     --root=$PKG \
     --optimize=1
   find $PKG \

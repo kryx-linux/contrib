@@ -5,7 +5,7 @@
 # Optional: cups kio qt5 valgrind vlc
 
 name=libreoffice
-version=7.0.0.2
+version=7.0.1.2
 release=1
 pdfiumversion=4137
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
@@ -69,7 +69,6 @@ build() {
     --with-external-tar="$SRC/tarballs" \
     --enable-{build-opensymbol,dbus,firebird-sdbc=no,gtk3,introspection=yes,release-build,odk,openssl,pdfium,python=system} \
     --with-{lang="",package-format=archive,myspell-dicts,parallelism} \
-    --with-build-version="$name-$version" \
     --with-extra-buildid="$(crux | awk '{ print $1 " " $3 }') ${build_date}" \
     --with-package-version="$version" \
     --with-system-{headers,libs} \

@@ -4,7 +4,7 @@
 # Depends on: python3
 
 name=sip
-version=4.19.23
+version=4.19.24
 release=1
 source=(https://www.riverbankcomputing.com/static/Downloads/sip/$version/$name-$version.tar.gz)
 
@@ -12,7 +12,7 @@ build() {
   cd $name-$version
   mkdir build
   cd build
-  python3 ../configure.py CFLAGS="$CFLAGS"
+  /usr/bin/python3 ../configure.py CFLAGS="$CFLAGS"
   make
   make DESTDIR=$PKG install -C sipgen
   mv $PKG/usr/include/{python*/sip.h,}
