@@ -4,15 +4,15 @@
 # Depends on: docbook-xsl gtk3 json-glib keyutils krb5 libsoup libyaml snowball
 
 name=appstream-glib
-version=0.7.17
+version=0.7.18
 release=1
 source=(https://people.freedesktop.org/~hughsient/appstream-glib/releases/$name-$version.tar.xz)
 
 build() {
-  cd $name-$version
-  mkdir build && cd build
-  meson ../ -Drpm=false -Dprefix=/usr
-  ninja
-  DESTDIR=$PKG ninja install
+  meson $name-$version build \
+    -Dprefix=/usr \
+    -Drpm=false
+  ninja -C build
+  DESTDIR=$PKG ninja -C build install
   rm -fr $PKG/usr/share/locale
 }
