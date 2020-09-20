@@ -4,11 +4,12 @@
 # Depends on:
 
 name=noto-emoji
-version=2020-07-22-unicode13_0
+version=20200916
+_version=2020-09-16-unicode13_1
 release=1
-source=(https://github.com/googlefonts/noto-emoji/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/googlefonts/noto-emoji/archive/v$_version/$name-$version.tar.gz)
 
 build() {
   mkdir -p $PKG/usr/share/fonts/noto
-  install -m644 $name-$version/fonts/NotoColorEmoji.ttf $PKG/usr/share/fonts/noto
+  install -m644 $name-$_version/fonts/NotoColorEmoji.ttf $PKG/usr/share/fonts/noto
 }
