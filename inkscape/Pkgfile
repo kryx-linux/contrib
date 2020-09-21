@@ -4,14 +4,14 @@
 # Depends on: boehm-gc boost double-conversion gsl gtkmm3 libsoup libxslt poppler-glib popt potrace gdl
 
 name=inkscape
-version=1.0
-release=2
+version=1.0.1
+release=1
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
-	https://poppler.freedesktop.org/poppler-0.90.1.tar.xz
+	https://poppler.freedesktop.org/poppler-20.09.0.tar.xz
 	inkscape.patch)
 
 poppler() {
-	cmake -Spoppler-0.90.1 -Bbuild-poppler -GNinja \
+	cmake -Spoppler-20.09.0 -Bbuild-poppler -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
@@ -27,20 +27,20 @@ poppler() {
 
 	cmake --build build-poppler
 	DESTDIR=$SRC/poppler cmake --build build-poppler --target install
-	install -D -t $PKG/usr/lib $SRC/poppler/usr/lib/libpoppler.so.101
+	install -D -t $PKG/usr/lib $SRC/poppler/usr/lib/libpoppler.so.102
 
 	export CXXFLAGS+=" -I$SRC/poppler/usr/include -I$SRC/poppler/usr/include/poppler"
 	export PKG_CONFIG_PATH="$SRC/poppler/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
 build() {
-	[ ! -e '/usr/lib/libpoppler.so.101' ] && poppler
+	[ ! -e '/usr/lib/libpoppler.so.102' ] && poppler
 
-	patch -d $name-${version}_2020-05-01_4035a4fb49 -p1 -i $SRC/inkscape.patch
+	patch -d $name-${version}_2020-09-07_3bc2e813f5 -p1 -i $SRC/inkscape.patch
 
 	export PKG_CONFIG_PATH="/usr/lib/imagemagick6/pkgconfig:$PKG_CONFIG_PATH"
 
-	cmake -S$name-${version}_2020-05-01_4035a4fb49 -Bbuild -GNinja \
+	cmake -S$name-${version}_2020-09-07_3bc2e813f5 -Bbuild -GNinja \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr
 
