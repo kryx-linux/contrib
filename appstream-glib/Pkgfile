@@ -1,18 +1,21 @@
 # Description: Objects and methods for reading and writing AppStream metadata
 # URL: https://people.freedesktop.org/~hughsient/appstream-glib/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: docbook-xsl gtk3 json-glib keyutils krb5 libsoup libyaml snowball
+# Depends on: gtk3 json-glib keyutils krb5 libsoup libyaml
+# Optional: docbook-xsl snowball
 
 name=appstream-glib
-version=0.7.17
+version=0.7.18
 release=1
 source=(https://people.freedesktop.org/~hughsient/appstream-glib/releases/$name-$version.tar.xz)
 
 build() {
-  cd $name-$version
-  mkdir build && cd build
-  meson ../ -Drpm=false -Dprefix=/usr
-  ninja
-  DESTDIR=$PKG ninja install
+  [[ -f /usr/lib/libstemmer.so ]] && PKGMK_APPSTREAM_GLIB=' -Dstemmer=true' || PKGMK_APPSTREAM_GLIB=' -Dstemmer=false'
+  meson $name-$version build $PKGMK_APPSTREAM_GLIB \
+    -Dprefix=/usr \
+    -Drpm=false \
+    -Dgtk-doc=false
+  ninja -C build
+  DESTDIR=$PKG ninja -C build install
   rm -fr $PKG/usr/share/locale
 }

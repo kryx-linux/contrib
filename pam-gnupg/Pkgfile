@@ -5,13 +5,23 @@
 
 name=pam-gnupg
 version=0.1
-release=1
-source=(https://github.com/cruegge/pam-gnupg/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/cruegge/pam-gnupg/archive/v$version/$name-$version.tar.gz
+  # cherry picked commits
+  https://github.com/cruegge/pam-gnupg/commit/11d3e44c9868d0dfcc2dee1eb372b86af273e8da.patch
+  https://github.com/cruegge/pam-gnupg/commit/d2e25475296d0403b14a0d02c73326d0bbef5a2f.patch
+  https://github.com/cruegge/pam-gnupg/commit/21a03265ab2a001a3afadc1ffb73ef63c1fb7bdd.patch
+  https://github.com/cruegge/pam-gnupg/commit/c3c764feac3efe5d9dea94885c10bbb15e6d2b55.patch)
 
 build() {
   cd $name-$version
+  patch -Np1 -i $SRC/11d3e44c9868d0dfcc2dee1eb372b86af273e8da.patch
+  patch -Np1 -i $SRC/d2e25475296d0403b14a0d02c73326d0bbef5a2f.patch
+  patch -Np1 -i $SRC/21a03265ab2a001a3afadc1ffb73ef63c1fb7bdd.patch
+  patch -Np1 -i $SRC/c3c764feac3efe5d9dea94885c10bbb15e6d2b55.patch
   ./autogen.sh
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr \
+    --libexecdir=/usr/lib
   make
   make DESTDIR=$PKG install
 }

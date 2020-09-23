@@ -4,13 +4,13 @@
 # Depends on:  xorg-libxi xorg-libxt
 
 name=xbanish
-version=1.6
+version=1.7
 release=1
 source=(https://github.com/jcs/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-	
+
 	make INCLUDES= LDPATH=
 	make BINDIR=$PKG/usr/bin MANDIR=$PKG/usr/share/man/man1 install
 }

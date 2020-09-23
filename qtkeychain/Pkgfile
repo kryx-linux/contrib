@@ -4,18 +4,19 @@
 # Depends on: qt5
 
 name=qtkeychain
-version=0.10.0
+version=0.11.1
 release=1
 source=(https://github.com/frankosterfeld/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  cmake -DCMAKE_BUILD_TYPE=Release \
+  cmake -S$name-$version -Bbuild -GNinja \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_INSTALL_LIBEXECDIR=lib/$name \
     -DLIBSECRET_SUPPORT=OFF
-  make
-  make DESTDIR=$PKG install
-  rm -fr $PKG/usr/share/qt5/translations
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+
+  rm -fr $PKG/usr/share/qt5*
 }

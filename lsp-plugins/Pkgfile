@@ -4,12 +4,12 @@
 # Depends on: cairo jack ladspa lv2 mesa opus php util-linux
 
 name=lsp-plugins
-version=1.1.24
+version=1.1.26
 release=1
-source=(https://github.com/sadko4u/$name/archive/$name-$version.tar.gz)
+source=(https://github.com/sadko4u/lsp-plugins/releases/download/lsp-plusings-$version/$name-src-$version.tar.gz)
 
 build() {
-  cd $name-$name-$version
+  cd $name-src-$version
   sed -e '/LD_PATH/ s|:/usr/local/lib||g' \
     -i scripts/make/configure.mk
   make
