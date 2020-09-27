@@ -4,7 +4,7 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=19.03.12
+version=19.03.13
 release=1
 source=(https://github.com/docker/docker-ce/archive/v$version/$name-ce-v$version.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
@@ -13,7 +13,7 @@ source=(https://github.com/docker/docker-ce/archive/v$version/$name-ce-v$version
 
 build() {
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=42e35e6
+    export DOCKER_GITCOMMIT=4484c46
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
 
