@@ -973,6 +973,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/windns.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.foundation.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.foundation.idl
+-rw-r--r--	root/root	usr/include/wine/windows/windows.globalization.h
+-rw-r--r--	root/root	usr/include/wine/windows/windows.globalization.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.h
 -rw-r--r--	root/root	usr/include/wine/windows/windowsx.h
 -rw-r--r--	root/root	usr/include/wine/windows/winerror.h
@@ -1054,6 +1056,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/wuapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/wuapi.idl
 -rw-r--r--	root/root	usr/include/wine/windows/x3daudio.h
+-rw-r--r--	root/root	usr/include/wine/windows/xact.h
+-rw-r--r--	root/root	usr/include/wine/windows/xact2wb.h
 -rw-r--r--	root/root	usr/include/wine/windows/xact3.h
 -rw-r--r--	root/root	usr/include/wine/windows/xact3wb.h
 -rw-r--r--	root/root	usr/include/wine/windows/xapo.h
@@ -2355,6 +2359,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/wimgapi.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/win32k.sys
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windows.gaming.input.dll
+-rw-r--r--	root/root	usr/lib/wine/fakedlls/windows.globalization.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windows.media.speech.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windowscodecs.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windowscodecsext.dll
@@ -2968,6 +2973,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/urlmon.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/usbd.sys.so
 -rwxr-xr-x	root/root	usr/lib/wine/user32.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/user32.so
 -rwxr-xr-x	root/root	usr/lib/wine/userenv.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/usp10.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/utildll.dll.so
@@ -3001,6 +3007,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/wimgapi.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/win32k.sys.so
 -rwxr-xr-x	root/root	usr/lib/wine/windows.gaming.input.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/windows.globalization.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/windows.media.speech.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/windowscodecs.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/windowscodecsext.dll.so
@@ -4421,6 +4428,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/winaspi.dll16
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windebug.dll16
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windows.gaming.input.dll
+-rw-r--r--	root/root	usr/lib32/wine/fakedlls/windows.globalization.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windows.media.speech.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windowscodecs.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windowscodecsext.dll
@@ -5076,6 +5084,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/usbd.sys.so
 -rwxr-xr-x	root/root	usr/lib32/wine/user.exe16.so
 -rwxr-xr-x	root/root	usr/lib32/wine/user32.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/user32.so
 -rwxr-xr-x	root/root	usr/lib32/wine/userenv.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/usp10.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/utildll.dll.so
@@ -5122,6 +5131,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/winaspi.dll16.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windebug.dll16.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windows.gaming.input.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/windows.globalization.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windows.media.speech.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windowscodecs.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windowscodecsext.dll.so
@@ -5233,6 +5243,8 @@ lrwxrwxrwx	root/root	usr/share/man/man1/wineg++.1.gz -> winegcc.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/wmc.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/wrc.1.gz
 drwxr-xr-x	root/root	usr/share/wine/
+drwxr-xr-x	root/root	usr/share/wine/color/
+-rw-r--r--	root/root	usr/share/wine/color/sRGB_Color_Space_Profile.icm
 drwxr-xr-x	root/root	usr/share/wine/fonts/
 -rw-r--r--	root/root	usr/share/wine/fonts/arial.ttf
 -rw-r--r--	root/root	usr/share/wine/fonts/coue1255.fon
