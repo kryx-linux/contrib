@@ -4,17 +4,12 @@
 # Depends on: libtheora openssl speex
 
 name=libshout
-version=2.4.3
+version=2.4.4
 release=1
-source=(https://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz
-	corrected-blocking-state.patch
-	icy-port-increment.patch)
+source=(https://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
-
-	patch -p1 -i $SRC/corrected-blocking-state.patch
-	patch -p1 -i $SRC/icy-port-increment.patch
 
 	./configure --prefix=/usr
 
