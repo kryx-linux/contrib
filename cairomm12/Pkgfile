@@ -1,15 +1,15 @@
 # Description: C++ wrapper for the cairo graphics library.
 # URL: http://cairographics.org/cairomm/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cairo libsigc++
+# Depends on: cairo libsigc++2
 
-name=cairomm
+name=cairomm12
 version=1.12.2
 release=1
-source=(https://cairographics.org/releases/$name-$version.tar.gz)
+source=(https://cairographics.org/releases/cairomm-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cd cairomm-$version
 
 	NOCONFIGURE=1 ./autogen.sh
 	./configure --prefix=/usr
