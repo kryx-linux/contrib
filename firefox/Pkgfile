@@ -5,7 +5,7 @@
 # Optional: sccache
 
 name=firefox
-version=80.0.1
+version=81.0.1
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
 	firefox.desktop
@@ -69,6 +69,7 @@ EOF
 	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
 	export MOZBUILD_STATE_PATH="$PKGMK_SOURCE_DIR/.mozbuild"
 	export MOZ_NOSPAM=1
+	export MACH_USE_SYSTEM_PYTHON=1
 
 	./mach build
 	#./mach build toolkit/library/rust

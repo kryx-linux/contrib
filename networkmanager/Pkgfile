@@ -6,17 +6,15 @@
 
 name=networkmanager
 version=1.26.2
-release=1
+release=2
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
-  networkmanager.rc
-  NetworkManager.conf
-  polkit.conf
-  dhcp.conf
-  org.freedesktop.NetworkManager.rules)
+  networkmanager.rc NetworkManager.conf polkit.conf dhcp.conf
+  org.freedesktop.NetworkManager.rules docs.patch)
 
 build() {
   sed '/initrd/d' -i NetworkManager-$version/src/meson.build
 
+  patch -Np1 -d NetworkManager-$version -i $SRC/docs.patch
   CXXFLAGS+="-O2 -fPIC" \
   meson NetworkManager-$version build \
     --prefix /usr \
@@ -25,7 +23,6 @@ build() {
     --libexecdir /usr/lib/networkmanager \
     -Ddbus_conf_dir=/usr/share/dbus-1/system.d \
     -Dudev_dir=/lib/udev \
-    -Ddhcpcd=/sbin/dhcpcd \
     -Dresolvconf=true \
     -Dconfig_dns_rc_manager_default=resolvconf \
     -Dcrypto=nss \

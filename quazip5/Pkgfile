@@ -4,18 +4,14 @@
 # Depends on: qt5
 
 name=quazip5
-version=0.9.1
+version=1.0
 release=1
 source=(https://github.com/stachenov/quazip/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cmake -Squazip-$version -Bbuild -GNinja \
-    -DCMAKE_INSTALL_PREFIX=/usr
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib
   cmake --build build
   DESTDIR=$PKG cmake --install build
-  cd $SRC/quazip-$version/quazip
-  qmake quazip.pro
-  make pkgconfig/quazip.pc
-  install -Dm644 pkgconfig/quazip.pc $PKG/usr/lib/pkgconfig/quazip5.pc
-  sed -e 's!-lquazip!-lquazip5!' -i $PKG/usr/lib/pkgconfig/quazip5.pc
 }
