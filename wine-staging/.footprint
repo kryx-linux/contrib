@@ -251,6 +251,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/
 -rw-r--r--	root/root	usr/include/wine/windows/d3d11shader.h
 -rw-r--r--	root/root	usr/include/wine/windows/d3d12.h
 -rw-r--r--	root/root	usr/include/wine/windows/d3d12.idl
+-rw-r--r--	root/root	usr/include/wine/windows/d3d12sdklayers.h
+-rw-r--r--	root/root	usr/include/wine/windows/d3d12sdklayers.idl
 -rw-r--r--	root/root	usr/include/wine/windows/d3d12shader.h
 -rw-r--r--	root/root	usr/include/wine/windows/d3d12shader.idl
 -rw-r--r--	root/root	usr/include/wine/windows/d3d8.h
@@ -712,6 +714,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/objectarray.idl
 -rw-r--r--	root/root	usr/include/wine/windows/objidl.h
 -rw-r--r--	root/root	usr/include/wine/windows/objidl.idl
+-rw-r--r--	root/root	usr/include/wine/windows/objidlbase.h
+-rw-r--r--	root/root	usr/include/wine/windows/objidlbase.idl
 -rw-r--r--	root/root	usr/include/wine/windows/objsafe.h
 -rw-r--r--	root/root	usr/include/wine/windows/objsafe.idl
 -rw-r--r--	root/root	usr/include/wine/windows/objsel.h
@@ -1335,6 +1339,7 @@ drwxr-xr-x	root/root	usr/lib/wine/
 -rwxr-xr-x	root/root	usr/lib/wine/avifil32.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/avrt.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/bcrypt.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/bcrypt.so
 -rwxr-xr-x	root/root	usr/lib/wine/bluetoothapis.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/browseui.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/bthprops.cpl.so
@@ -2352,6 +2357,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/webservices.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/wer.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/wevtapi.dll
+-rw-r--r--	root/root	usr/lib/wine/fakedlls/wevtsvc.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/wevtutil.exe
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/where.exe
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/whoami.exe
@@ -2361,6 +2367,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windows.gaming.input.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windows.globalization.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windows.media.speech.dll
+-rw-r--r--	root/root	usr/lib/wine/fakedlls/windows.networking.connectivity.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windowscodecs.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/windowscodecsext.dll
 -rw-r--r--	root/root	usr/lib/wine/fakedlls/winealsa.drv
@@ -2837,6 +2844,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/nvencodeapi64.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/objsel.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/odbc32.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/odbc32.so
 -rwxr-xr-x	root/root	usr/lib/wine/odbcbcp.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/odbccp32.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/odbccu32.dll.so
@@ -3000,6 +3008,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/webservices.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/wer.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/wevtapi.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/wevtsvc.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/wevtutil.exe.so
 -rwxr-xr-x	root/root	usr/lib/wine/where.exe.so
 -rwxr-xr-x	root/root	usr/lib/wine/whoami.exe.so
@@ -3009,6 +3018,7 @@ drwxr-xr-x	root/root	usr/lib/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib/wine/windows.gaming.input.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/windows.globalization.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/windows.media.speech.dll.so
+-rwxr-xr-x	root/root	usr/lib/wine/windows.networking.connectivity.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/windowscodecs.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/windowscodecsext.dll.so
 -rwxr-xr-x	root/root	usr/lib/wine/winealsa.drv.so
@@ -3342,6 +3352,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/
 -rwxr-xr-x	root/root	usr/lib32/wine/avifile.dll16.so
 -rwxr-xr-x	root/root	usr/lib32/wine/avrt.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/bcrypt.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/bcrypt.so
 -rwxr-xr-x	root/root	usr/lib32/wine/bluetoothapis.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/browseui.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/bthprops.cpl.so
@@ -4417,6 +4428,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/webservices.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/wer.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/wevtapi.dll
+-rw-r--r--	root/root	usr/lib32/wine/fakedlls/wevtsvc.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/wevtutil.exe
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/where.exe
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/whoami.exe
@@ -4430,6 +4442,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windows.gaming.input.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windows.globalization.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windows.media.speech.dll
+-rw-r--r--	root/root	usr/lib32/wine/fakedlls/windows.networking.connectivity.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windowscodecs.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/windowscodecsext.dll
 -rw-r--r--	root/root	usr/lib32/wine/fakedlls/winealsa.drv
@@ -4928,6 +4941,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/nvencodeapi.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/objsel.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/odbc32.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/odbc32.so
 -rwxr-xr-x	root/root	usr/lib32/wine/odbcbcp.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/odbccp32.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/odbccu32.dll.so
@@ -5120,6 +5134,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/webservices.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/wer.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/wevtapi.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/wevtsvc.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/wevtutil.exe.so
 -rwxr-xr-x	root/root	usr/lib32/wine/where.exe.so
 -rwxr-xr-x	root/root	usr/lib32/wine/whoami.exe.so
@@ -5133,6 +5148,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/fakedlls/
 -rwxr-xr-x	root/root	usr/lib32/wine/windows.gaming.input.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windows.globalization.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windows.media.speech.dll.so
+-rwxr-xr-x	root/root	usr/lib32/wine/windows.networking.connectivity.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windowscodecs.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/windowscodecsext.dll.so
 -rwxr-xr-x	root/root	usr/lib32/wine/winealsa.drv.so
@@ -5243,8 +5259,6 @@ lrwxrwxrwx	root/root	usr/share/man/man1/wineg++.1.gz -> winegcc.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/wmc.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/wrc.1.gz
 drwxr-xr-x	root/root	usr/share/wine/
-drwxr-xr-x	root/root	usr/share/wine/color/
--rw-r--r--	root/root	usr/share/wine/color/sRGB_Color_Space_Profile.icm
 drwxr-xr-x	root/root	usr/share/wine/fonts/
 -rw-r--r--	root/root	usr/share/wine/fonts/arial.ttf
 -rw-r--r--	root/root	usr/share/wine/fonts/coue1255.fon
@@ -5310,7 +5324,7 @@ drwxr-xr-x	root/root	usr/share/wine/gecko/
 -rwxr-xr-x	root/root	usr/share/wine/gecko/wine-gecko-2.47.1-x86.msi
 -rwxr-xr-x	root/root	usr/share/wine/gecko/wine-gecko-2.47.1-x86_64.msi
 drwxr-xr-x	root/root	usr/share/wine/mono/
--rwxr-xr-x	root/root	usr/share/wine/mono/wine-mono-5.1.0-x86.msi
+-rwxr-xr-x	root/root	usr/share/wine/mono/wine-mono-5.1.1-x86.msi
 drwxr-xr-x	root/root	usr/share/wine/nls/
 -rw-r--r--	root/root	usr/share/wine/nls/c_037.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_10000.nls
@@ -5357,6 +5371,7 @@ drwxr-xr-x	root/root	usr/share/wine/nls/
 -rw-r--r--	root/root	usr/share/wine/nls/c_28605.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_437.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_500.nls
+-rw-r--r--	root/root	usr/share/wine/nls/c_708.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_737.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_775.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_850.nls
