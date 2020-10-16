@@ -23,6 +23,7 @@ fi
 		-DUNIX=TRUE \
 		-DENABLE_DOCS=FALSE
 
+	sed -i 's!-R/usr/lib!!g' build/build.ninja
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
 
