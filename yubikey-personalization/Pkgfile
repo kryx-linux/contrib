@@ -5,11 +5,14 @@
 
 name=yubikey-personalization
 version=1.20.0
-release=2
-source=(https://github.com/Yubico/yubikey-personalization/archive/v$version/$name-v$version.tar.gz 10-security-key.rules)
+release=3
+source=(#https://github.com/Yubico/yubikey-personalization/archive/v$version/$name-v$version.tar.gz 10-security-key.rules)
+  https://github.com/Yubico/yubikey-personalization/archive/d4c1d57033a45ea51189e7818954cf62508576de/$name-$version-1.tar.gz
+  10-security-key.rules)
 
 build() {
-  cd $name-$version
+  #cd $name-$version
+  cd $name-d4c1d57033a45ea51189e7818954cf62508576de
 
   # Fix build with json-c 0.14
   sed -e 's/TRUE/1/' -e 's/FALSE/0/' -i ykpers-json.c
