@@ -5,20 +5,19 @@
 
 name=vkquake
 version=1.04.1
-release=1
-source=(https://github.com/Novum/vkQuake/archive/$version/vkQuake-$version.tar.gz
-  vkquake.desktop
-  vkquake.png)
+release=2
+source=(#https://github.com/Novum/vkQuake/archive/$version/vkQuake-$version.tar.gz
+  https://github.com/Novum/vkQuake/archive/77e14cf31cfac6571a3c9d9388435c5c8f394590/$name-$version-1.tar.gz
+  vkquake.desktop vkquake.png)
 
 build() {
-  cd vkQuake-$version
-  make -C Quake clean
-  make -C Quake \
+  make -C vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Quake clean
+  make -C vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Quake \
       DO_USERDIRS=1
-  make -C Misc/vq_pak
+  make -C vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Misc/vq_pak
 
-  install -Dm755 Quake/vkquake $PKG/usr/bin/vkquake
-  install -Dm644 Misc/vq_pak/vkquake.pak $PKG/usr/share/games/vkquake/vkquake.pak
+  install -Dm755 vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Quake/vkquake $PKG/usr/bin/vkquake
+  install -Dm644 vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Misc/vq_pak/vkquake.pak $PKG/usr/share/games/vkquake/vkquake.pak
 
   install -Dm644 $SRC/$name.desktop $PKG/usr/share/applications/vkquake.desktop
   install -Dm644 $SRC/$name.png $PKG/usr/share/pixmaps/vkquake.png
