@@ -11,5 +11,5 @@ source=(https://github.com/PapirusDevelopmentTeam/papirus-folders/archive/v$vers
 build() {
   cd $name-$version
   make DESTDIR=$PKG install
-  [ ! -d  /lib/zsh || ! -d /usr/lib/zsh ] && rm -r $PKG/usr/share/zsh
+  [[ ! -d  /lib/zsh || ! -d /usr/lib/zsh ]] && rm -r $PKG/usr/share/zsh
 }
