@@ -5,14 +5,18 @@
 
 name=libsrtp
 version=2.3.0
-release=1
-source=(https://github.com/cisco/libsrtp/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(#https://github.com/cisco/libsrtp/archive/v$version/$name-$version.tar.gz)
+  # ugly fix, but hey.. let's wait for a release here
+  https://github.com/cisco/libsrtp/archive/7d351de8177b33c96669bb79dc684a8dc64c2483/$name-$version-1.tar.gz)
 
 build() {
-  cd $name-$version
+  #cd $name-$version
+  cd $name-7d351de8177b33c96669bb79dc684a8dc64c2483
+  autoreconf -fvi
   ./configure \
     --prefix=/usr \
-    --disable-debug
+    --enable-openssl
   make
   make DESTDIR=$PKG install
 }
