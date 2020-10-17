@@ -9,7 +9,8 @@ release=1
 cldrver=36.0 # $SRC/babel-$version/scripts/download_import_cldr.py
 
 source=(https://github.com/python-babel/babel/archive/v$version/$name-$version.tar.gz
-  https://unicode.org/Public/cldr/${cldrver::2}/cldr-common-$cldrver.zip)
+  https://unicode.org/Public/cldr/${cldrver::2}/cldr-common-$cldrver.zip
+  0001-py39.patch 0002-py39.patch)
 
 unpack_source() {
   for file in ${source[@]}; do
@@ -27,6 +28,8 @@ unpack_source() {
 build() {
   cd babel-$version
 
+  patch -Np1 -i $SRC/0001-py39.patch
+  patch -Np1 -i $SRC/0002-py39.patch
   python3 setup.py import_cldr
   python3 setup.py build
   python3 setup.py install --root=$PKG \
