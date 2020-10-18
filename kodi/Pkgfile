@@ -9,6 +9,7 @@ release=1
 source=(https://github.com/xbmc/xbmc/archive/$version-Leia.tar.gz gl-headers.patch)
 
 build() {
+	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 	patch -d xbmc-$version-Leia -p1 -i $SRC/gl-headers.patch
 	mkdir build; cd build
 	cmake \
@@ -20,6 +21,7 @@ build() {
 		-DENABLE_INTERNAL_FSTRCMP=ON \
 		-DENABLE_INTERNAL_RapidJSON=ON \
 		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
 		../xbmc-$version-Leia
 	make
 	make DESTDIR=$PKG install
