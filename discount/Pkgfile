@@ -10,7 +10,6 @@ source=(https://github.com/Orc/$name/archive/v$version/$name-$version.tar.gz)
 build() {
 	cd $name-$version
 
-  export PKG_CONFIG_PATH+=":$SRC/$name-$version"
 	./configure.sh \
 		--prefix=/usr \
 		--pkg-config \
