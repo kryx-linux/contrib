@@ -3,8 +3,8 @@
 # Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
 
 name=discount
-version=2.2.6
-release=2
+version=2.2.7
+release=1
 source=(https://github.com/Orc/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
@@ -15,6 +15,7 @@ build() {
 		--pkg-config \
 		--shared
 
+	make libmarkdown
 	make
 	make DESTDIR=$PKG install install.man install.samples
 }
