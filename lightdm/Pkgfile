@@ -5,14 +5,11 @@
 
 name=lightdm
 version=1.30.0
-release=3
+release=4
 source=(
 https://github.com/CanonicalLtd/lightdm/releases/download/$version/$name-$version.tar.xz
-Xsession
-lightdm-default-config.patch
-lightdm.rules lightdm.service
-lightdm.pam lightdm-autologin.pam lightdm-greeter.pam
-)
+  Xsession lightdm-default-config.patch lightdm.rules lightdm.service
+  lightdm.pam lightdm-autologin.pam lightdm-greeter.pam)
 
 build() {
   cd $name-$version
