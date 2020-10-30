@@ -4,20 +4,19 @@
 # Depends on: libmad libsdl2 libvorbis vulkan-loader xorg-libx11
 
 name=vkquake
-version=1.04.1
-release=2
-source=(#https://github.com/Novum/vkQuake/archive/$version/vkQuake-$version.tar.gz
-  https://github.com/Novum/vkQuake/archive/77e14cf31cfac6571a3c9d9388435c5c8f394590/$name-$version-1.tar.gz
+version=1.05.0
+release=1
+source=(https://github.com/Novum/vkQuake/archive/$version/vkQuake-$version.tar.gz
   vkquake.desktop vkquake.png)
 
 build() {
-  make -C vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Quake clean
-  make -C vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Quake \
+  make -C vkQuake-$version/Quake clean
+  make -C vkQuake-$version/Quake \
       DO_USERDIRS=1
-  make -C vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Misc/vq_pak
+  make -C vkQuake-$version/Misc/vq_pak
 
-  install -Dm755 vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Quake/vkquake $PKG/usr/bin/vkquake
-  install -Dm644 vkQuake-77e14cf31cfac6571a3c9d9388435c5c8f394590/Misc/vq_pak/vkquake.pak $PKG/usr/share/games/vkquake/vkquake.pak
+  install -Dm755 vkQuake-$version/Quake/vkquake $PKG/usr/bin/vkquake
+  install -Dm644 vkQuake-$version/Misc/vq_pak/vkquake.pak $PKG/usr/share/games/vkquake/vkquake.pak
 
   install -Dm644 $SRC/$name.desktop $PKG/usr/share/applications/vkquake.desktop
   install -Dm644 $SRC/$name.png $PKG/usr/share/pixmaps/vkquake.png
