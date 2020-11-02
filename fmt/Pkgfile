@@ -4,12 +4,13 @@
 # Depends on: cmake
 
 name=fmt
-version=7.1.0
+version=7.1.1
 release=1
 source=(https://github.com/fmtlib/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S$name-$version -Bbuild \
+  [[ -e /usr/bin/ninja ]] && PKGMK_FMT_OPTIONS=' -GNinja'
+  cmake -S$name-$version -Bbuild $PKGMK_FMT_OPTIONS \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib
   cmake --build build
