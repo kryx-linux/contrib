@@ -9,12 +9,12 @@ release=1
 source=(https://github.com/jiixyj/libebur128/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  mkdir build && cd build
-  cmake .. -DCMAKE_BUILD_TYPE=Release \
+  [[ -e /usr/bin/ninja ]] && PKGMK_LIBEBUR128_OPTIONS=' -GNinja'
+  cmake -S$name-$version -Bbuild $PKGMK_LIBEBUR128_OPTIONS \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_STATIC_LIBS=OFF
-  make
-  make DESTDIR=$PKG install
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }
