@@ -9,12 +9,12 @@ release=1
 source=(https://github.com/google/flatbuffers/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  cmake . \
+  [[ -e /usr/bin/ninja ]] && PKGMK_FLATBUFFERS_OPTIONS=' -GNinja'
+  cmake -S$name-$version -Bbuild $PKGMK_FLATBUFFERS_OPTIONS \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DFLATBUFFERS_BUILD_FLATLIB=OFF \
     -DFLATBUFFERS_BUILD_SHAREDLIB=ON
-  make
-  make DESTDIR=$PKG install
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }
