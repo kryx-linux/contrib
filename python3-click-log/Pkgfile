@@ -10,8 +10,8 @@ source=(https://github.com/click-contrib/click-log/archive/$version/$name-$versi
 
 build() {
   cd click-log-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --prefix=/usr \
     --optimize=1 \
     --skip-build \
