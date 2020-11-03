@@ -10,7 +10,8 @@ source=(https://pypi.python.org/packages/source/P/PyQt5-sip/PyQt5_sip-$version.t
 
 build() {
   cd PyQt5_sip-$version
-  python3 setup.py build
-  python3 setup.py install \
-    --skip-build --root=$PKG
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
+    --skip-build \
+    --root=$PKG
 }
