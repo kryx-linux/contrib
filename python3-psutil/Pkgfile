@@ -10,7 +10,7 @@ source=(https://github.com/giampaolo/psutil/archive/release-$version/$name-relea
 
 build() {
   cd psutil-release-$version
-  python3 setup.py build --build-lib=build/python
-  python3 setup.py build --build-lib=build/python \
-    install --root=$PKG --optimize=1
+  /usr/bin/python3 setup.py build --build-lib=build/python
+  /usr/bin/python3 setup.py build --build-lib=build/python \
+    install --root=$PKG --optimize=1 --skip-build
 }
