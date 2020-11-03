@@ -10,10 +10,12 @@ release=1
 source=(https://github.com/wwmm/pulseeffects/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  meson $name-$version build \
+  meson setup $name-$version build \
     --prefix=/usr \
-    --sysconfdir=/etc
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+    --sysconfdir=/etc \
+    --buildtype=plain \
+    -Db_ndebug=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
   rm -fr $PKG/usr/share/{locale,help}
 }
