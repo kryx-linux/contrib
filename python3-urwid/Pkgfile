@@ -10,8 +10,8 @@ source=(https://github.com/urwid/urwid/archive/release-$version/urwid-$version.t
 
 build() {
   cd urwid-release-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --prefix=/usr \
     -O1 \
     --skip-build \
