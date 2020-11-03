@@ -9,18 +9,16 @@ release=1
 source=(https://ftp.gnome.org/pub/gnome/sources/NetworkManager/${version%.*}/NetworkManager-${version}.tar.xz)
 
 build() {
-  cd NetworkManager-$version
-
-  sed '/initrd/d' -i src/meson.build
-
-  mkdir build
-  cd build
+  sed '/initrd/d' -i NetworkManager-$version/src/meson.build
 
   CXXFLAGS+="-O2 -fPIC" \
-  meson --prefix /usr \
+  meson setup NetworkManager-$version build \
+    --prefix /usr \
     --sysconfdir /etc \
     --localstatedir /var \
     --libexecdir /usr/lib/networkmanager \
+    --buildtype=plain \
+    -Db_ndebug=true \
     -Ddbus_conf_dir=/usr/share/dbus-1/system.d \
     -Dudev_dir=/lib/udev \
     -Ddhcpcd=/sbin/dhcpcd \
@@ -54,11 +52,9 @@ build() {
     -Dovs=false \
     -Dmore_logging=false \
     -Dmore_asserts=0 \
-    -Dlibpsl=false \
-    ..
-  ninja
-  mkdir $SRC/install
-  DESTDIR=$SRC/install/ ninja install
+    -Dlibpsl=false
+  meson compile -C build
+  DESTDIR=$SRC/install meson install -C build
 
   install -d -m 0755 $PKG/usr/lib/pkgconfig
   cp -dr --no-preserve='ownership' $SRC/install/usr/lib/{libnm,libnm-glib,libnm-glib-vpn,libnm-util}.so* $PKG/usr/lib/
