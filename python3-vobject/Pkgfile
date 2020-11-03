@@ -10,8 +10,8 @@ source=(https://github.com/eventable/vobject/archive/$version/$name-$version.tar
 
 build() {
   cd vobject-$version
-  python3 setup.py build
-  python3 setup.py install --skip-build \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --skip-build \
     --optimize=1 \
     --prefix=/usr \
     --root=$PKG
