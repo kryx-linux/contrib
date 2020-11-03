@@ -12,7 +12,8 @@ build () {
   cd $name-release-$version
   sed -i '/import sip/d' setup.py
   sed -i '/^sip.setapi/d' setup.py
-  python3 setup.py config
-  python3 setup.py install --root=$PKG --prefix=/usr
+  /usr/bin/python3 setup.py config
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --prefix=/usr --skip-build
   rm -rf $PKG/usr/share/locale
 }
