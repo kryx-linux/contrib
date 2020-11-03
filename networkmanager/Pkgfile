@@ -15,11 +15,13 @@ build() {
   sed '/initrd/d' -i NetworkManager-$version/src/meson.build
 
   CXXFLAGS+="-O2 -fPIC" \
-  meson NetworkManager-$version build \
+  meson setup NetworkManager-$version build \
     --prefix /usr \
     --sysconfdir /etc \
     --localstatedir /var \
     --libexecdir /usr/lib/networkmanager \
+    --buildtype=plain \
+    -Db_ndebug=true \
     -Ddbus_conf_dir=/usr/share/dbus-1/system.d \
     -Dudev_dir=/lib/udev \
     -Dresolvconf=true \
@@ -55,8 +57,8 @@ build() {
     -Dmore_asserts=0 \
     -Dlibpsl=false \
 
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
   # Install config file
   install -Dm 644 $SRC/NetworkManager.conf $PKG/etc/NetworkManager/NetworkManager.conf
