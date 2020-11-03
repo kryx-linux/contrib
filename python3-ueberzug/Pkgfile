@@ -10,7 +10,8 @@ source=(https://github.com/seebye/ueberzug/archive/$version/ueberzug-$version.ta
 
 build() {
   cd ueberzug-$version
-  python3 setup.py build
-  python3 setup.py install --prefix=/usr \
-    --root=$PKG
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
 }
