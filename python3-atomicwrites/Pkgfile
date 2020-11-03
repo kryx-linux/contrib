@@ -11,8 +11,8 @@ source=(https://files.pythonhosted.org/packages/source/${_name::1}/${_name}/${_n
 
 build() {
   cd $_name-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --skip-build \
     --optimize=1 \
     --prefix=/usr \
