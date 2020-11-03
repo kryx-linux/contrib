@@ -10,7 +10,8 @@ source=(https://github.com/ianw/libiptcdata/releases/download/release_${version/
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr \
+    --disable-nls
   make
   make DESTDIR=$PKG install
   rm -fr $PKG/usr/share/{gtk-doc,locale}
