@@ -11,8 +11,8 @@ source=(https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34
 
 build() {
   cd toml-$version
-  python3 setup.py build
-  python3 setup.py install --skip-build \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --skip-build \
     --optimize=1 \
     --prefix=/usr \
     --root=$PKG
