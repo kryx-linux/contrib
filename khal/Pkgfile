@@ -10,13 +10,13 @@ source=(https://files.pythonhosted.org/packages/source/k/$name/$name-$version.ta
 
 build() {
   cd $name-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --prefix=/usr \
     --optimize=1 \
     --skip-build \
     --root=$PKG
-  if [ -e /lib/zsh ]; then
+  if [ -e /lib/zsh || -e /usr/lib/zsh ]; then
     install -Dm644 misc/__khal $PKG/usr/share/zsh/site-functions/_khal
   fi
 }
