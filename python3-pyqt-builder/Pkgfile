@@ -11,5 +11,6 @@ source=(https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-$version.tar
 build() {
   cd PyQt-builder-$version
   /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG
+  /usr/bin/python3 setup.py install --root=$PKG \
+    --skip-build
 }
