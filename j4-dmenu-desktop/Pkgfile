@@ -9,7 +9,8 @@ release=1
 source=(https://github.com/enkore/j4-dmenu-desktop/archive/r$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S$name-r$version -Bbuild \
+  [[ -e /usr/bin/ninja ]] && PKGMK_J4DD_OPTIONS=' -GNinja'
+  cmake -S$name-r$version -Bbuild $PKGMK_J4DD_OPTIONS \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DWITH_TESTS="no"
   cmake --build build
