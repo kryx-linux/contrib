@@ -9,11 +9,17 @@ release=1
 source=(https://gitlab.gnome.org/GNOME/libhandy/-/archive/v$version/$name-v$version.tar.bz2)
 
 build() {
-  meson $name-v$version build \
+  # don't build nls files
+  rm -r $name-v$version/po
+  sed -e '143d' -i $name-v$version/meson.build
+
+  meson setup $name-v$version build \
     --prefix=/usr \
+    --buildtype=plain \
+    -Db_ndebug=true \
     -Dgtk_doc=false \
     -Dexamples=false \
     -Dtests=false
-  ninja -C build
+  meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
