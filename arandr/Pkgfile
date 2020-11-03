@@ -9,6 +9,9 @@ release=1
 source=(http://christian.amsuess.com/tools/arandr/files/$name-$version.tar.gz)
 build() {
   cd $name-$version
-  python3 setup.py install --prefix=/usr --root=$PKG
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
   rm -fr $PKG/usr/share/locale
 }
