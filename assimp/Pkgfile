@@ -9,7 +9,8 @@ release=1
 source=(https://github.com/assimp/assimp/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S$name-$version -Bbuild \
+  [[ -e /usr/bin/ninja ]] && PKGMK_ASSIMP_OPTIONS=' -GNinja'
+  cmake -S$name-$version -Bbuild $PKGMK_ASSIMP_OPTIONS \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
     -DASSIMP_BUILD_SAMPLES=OFF
