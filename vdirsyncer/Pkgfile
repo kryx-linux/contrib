@@ -10,8 +10,8 @@ source=(https://pypi.io/packages/source/v/$name/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --prefix=/usr \
     --skip-build \
     --optimize=1 \
