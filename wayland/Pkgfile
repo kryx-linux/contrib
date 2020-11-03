@@ -9,9 +9,10 @@ release=1
 source=(https://wayland.freedesktop.org/releases/$name-$version.tar.xz)
 
 build() {
-  meson $name-$version build --prefix=/usr \
-    --buildtype=release \
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
     -Ddocumentation=false
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
