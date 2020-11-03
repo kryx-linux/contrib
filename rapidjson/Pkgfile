@@ -9,9 +9,10 @@ release=2
 source=(https://github.com/Tencent/rapidjson/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  find -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
+  #find -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
+  [[ -e /usr/bin/ninja ]] && PKGMK_RAPIDJSON_OPTIONS=' -GNinja'
   [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
-  cmake -S$name-$version -Bbuild \
+  cmake -S$name-$version -Bbuild $PKGMK_RAPIDJSON_OPTIONS \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DRAPIDJSON_BUILD_DOC=OFF \
