@@ -7,14 +7,14 @@ name=lensfun
 version=0.3.2
 release=1
 source=(https://github.com/lensfun/lensfun/archive/v$version/$name-$version.tar.gz
-lensfun-fix-python-install-dir.patch)
+  lensfun-fix-python-install-dir.patch)
 
 build() {
   patch -p1 -d $name-$version -i $SRC/lensfun-fix-python-install-dir.patch
   cmake -S$name-$version -Bbuild -GNinja \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="${CXXFLAGS} -fno-delete-null-pointer-checks"
   cmake --build build
   DESTDIR=$PKG cmake --install build
