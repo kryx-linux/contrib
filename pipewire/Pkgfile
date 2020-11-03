@@ -16,11 +16,13 @@ build() {
   [[ -e /usr/include/pulse/glib-mainloop.h ]] || PKGMK_PW+=' -Dpipewire-pulseaudio=false'
   [[ -e /usr/lib/pkgconfig/gstreamer-1.0.pc ]] || PKGMK_PW+=' -Dgstreamer=false'
 
-  meson $name-$version build $PKGMK_PW \
+  meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
+    --buildtype=plain \
+    -D b_ndebug=true \
     -D docs=false \
     -D examples=false \
     -D tests=false
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
