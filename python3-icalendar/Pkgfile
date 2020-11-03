@@ -10,8 +10,8 @@ source=(https://files.pythonhosted.org/packages/source/i/icalendar/icalendar-$ve
 
 build() {
   cd icalendar-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --prefix=/usr \
     --optimize=1 \
     --skip-build \
