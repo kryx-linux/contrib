@@ -9,11 +9,12 @@ release=1
 source=(http://github.com/zeux/pugixml/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S$name-$version -Bbuild \
+  [[ -e /usr/bin/ninja ]] && PKGMK_PUGIXML_OPTIONS=' -GNinja'
+  cmake -S$name-$version -Bbuild $PKGMK_PUGIXML_OPTIONS \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
-    -DBUILD_SHARED_LIBS=ON ../
+    -DBUILD_SHARED_LIBS=ON
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }
