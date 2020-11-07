@@ -10,17 +10,16 @@ release=1
 source=(https://github.com/htacg/tidy-html5/archive/$commit.tar.gz#/$name-$commit.tar.gz)
 
 build() {
-	cd tidy-html5-$commit
-
-	mkdir -p build
-	cd build
-
-	cmake .. \
+	[[ -e /usr/bin/ninja ]] && PKGMK_TIDY_OPTIONS=' -GNinja'
+	cmake -Stidy-html5-$commit -Bbuild $PKGMK_TIDY_OPTIONS \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev
 
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 
 	# Compatibility symlinks until everything is ported
 	ln -s tidybuffio.h $PKG/usr/include/buffio.h
