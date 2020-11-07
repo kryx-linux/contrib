@@ -13,8 +13,11 @@ source=(
 
 build() {
 	prt-get isinst gtk-doc || PKGMK_GLADE+=' -D man=false'
-	meson setup build $name-3907987* --prefix=/usr ${PKGMK_GLADE}
-	ninja -j ${JOBS-1} -C build
+	meson setup build $name-3907987* ${PKGMK_GLADE} \
+		--prefix=/usr \
+		--buildtype=plain \
+		-Db_ndebug=true
+	meson compile -C build -j ${JOBS-1}
 	DESTDIR=$PKG meson install -C build
 
 	rm -r $PKG/usr/share/{help,locale}
