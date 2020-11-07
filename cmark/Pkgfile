@@ -9,16 +9,15 @@ release=1
 source=(https://github.com/jgm/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-
-	mkdir -p build
-	cd build
-
-	cmake .. \
+	[[ -e /usr/bin/ninja ]] && PKGMK_CMARK_OPTIONS=' -GNinja'
+	cmake -S$name-$version -Bbuild $PKGMK_CMARK_OPTIONS \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
-		-DCMAKE_BUILD_TYPE=Release
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev
 
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 }
