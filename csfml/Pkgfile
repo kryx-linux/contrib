@@ -9,18 +9,13 @@ release=1
 source=(https://www.sfml-dev.org/files/CSFML-$version-sources.zip)
 
 build() {
-	cd CSFML-$version
-
-	install -d build
-	cd build
-
-	cmake .. \
+	cmake -SCSFML-$version -Bbuild -GNinja \
 		-DCMAKE_BUILD_TYPE='Release' \
 		-DCMAKE_INSTALL_PREFIX='/usr' \
 		-DSFML_BUILD_DOC=false
 
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 
 	rm -r $PKG/usr/share/CSFML/{license,readme}.txt
 	rmdir $PKG/usr/share/CSFML
