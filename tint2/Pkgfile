@@ -9,19 +9,16 @@ release=1
 source=(https://gitlab.com/o9000/$name/-/archive/v$version/$name-v$version.tar.bz2)
 
 build() {
-	cd $name-v$version
-
-	mkdir build
-	cd build
-
-	cmake .. \
+	cmake -S$name-v$version -Bbuild -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DENABLE_TINT2CONF=OFF \
-		-G Ninja
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev \
+		-DENABLE_TINT2CONF=OFF
 
-	ninja -j ${JOBS:-1}
-	DESTDIR=$PKG ninja install
+	cmake --build build -j ${JOBS:-1}
+	DESTDIR=$PKG cmake --install build
 
 	rm -r $PKG/{etc,usr/share/doc}
 }
