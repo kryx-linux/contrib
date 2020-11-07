@@ -1,7 +1,7 @@
 # Description: Binary-decimal and decimal-binary routines for IEEE doubles
 # URL: https://github.com/google/double-conversion
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake ninja
+# Depends on: cmake
 
 name=double-conversion
 version=3.1.5
@@ -9,10 +9,14 @@ release=1
 source=(https://github.com/google/double-conversion/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	cmake -S$name-$version -Bbuild -GNinja \
-		-DCMAKE_BUILD_TYPE=Release \
+	[[ -e /usr/bin/ninja ]] && PKGMK_DC_OPTIONS=' -GNinja'
+	cmake -S$name-$version -Bbuild $PKGMK_DC_OPTIONS \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev \
 		-DBUILD_SHARED_LIBS=ON
 
 	cmake --build build
