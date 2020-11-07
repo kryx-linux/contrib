@@ -9,15 +9,15 @@ release=1
 source=(https://github.com/uclouvain/openjpeg/archive/v$version/openjpeg-$version.tar.gz)
 
 build() {
-	cd openjpeg-$version
-
-	mkdir build
-	cd build
-
-	cmake .. \
+	[[ -e /usr/bin/ninja ]] && PKGMK_OJPG2_OPTIONS=' -GNinja'
+	cmake -Sopenjpeg-$version -Bbuild $PKGMK_OJPG2_OPTIONS \
+		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev
 
-	make
-	make DESTDIR=$PKG install
+	# cmake --build/install fails
+	make -C build
+	make DESTDIR=$PKG -C build install
 }
