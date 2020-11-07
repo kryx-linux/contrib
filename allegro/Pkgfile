@@ -12,6 +12,8 @@ build() {
 	cmake -S$name-$version -Bbuild -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
 		-DWANT_DOCS_HTML=OFF \
 		-Wno-dev
 
