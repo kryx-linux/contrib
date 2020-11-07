@@ -9,9 +9,13 @@ release=1
 source=(https://downloads.sourceforge.net/soxr/soxr-$version-Source.tar.xz)
 
 build() {
-	cmake -Hsoxr-$version-Source -Bbuild \
-		-DCMAKE_BUILD_TYPE=Release \
+	[[ -e /usr/bin/ninja ]] && PKGMK_SOXR_OPTIONS=' -GNinja'
+	cmake -Hsoxr-$version-Source -Bbuild $PKGMK_SOXR_OPTIONS \
 		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev \
 		-DBUILD_EXAMPLES='OFF' \
 		-DBUILD_SHARED_LIBS='ON' \
 		-DWITH_AVFFT='ON' \
