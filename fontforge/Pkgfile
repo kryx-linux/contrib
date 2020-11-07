@@ -18,10 +18,15 @@ fi
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
 		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev \
 		-DENABLE_MAINTAINER_TOOLS=TRUE \
 		-DENABLE_FONTFORGE_EXTRAS=TRUE \
 		-DUNIX=TRUE \
 		-DENABLE_DOCS=FALSE
+
+	sed -i 's|-R/usr/lib||g' build/build.ninja
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
