@@ -11,7 +11,10 @@ source=(https://launchpad.net/sakura/trunk/$version/+download/$name-$version.tar
 build() {
 	cmake -S$name-$version -Bbuild -GNinja \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=RELEASE
+		-DCMAKE_BUILD_TYPE=RELEASE \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
