@@ -13,17 +13,19 @@ build() {
 	# https://github.com/fltk/fltk/issues/20
 	patch -d $name-$version -p1 -i $SRC/fltk-fix-lib-mess.patch
 
-	cmake -S$name-$version -Bbuild \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DFLTK_LIBDIR=/usr/lib \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
-		-Wno-dev \
-		-DOPTION_CREATE_LINKS=ON \
-		-DOPTION_BUILD_SHARED_LIBS=ON \
-		-DOpenGL_GL_PREFERENCE=GLVND \
-		-DOPTION_BUILD_HTML_DOCUMENTATION=OFF
+	# fltk currently has a problem with ninja that I don't want to investigate right now
+	#[[ -e /usr/bin/ninja ]] && PKGMK_FLTK+=' -G Ninja'
+	cmake -S $name-$version -B build $PKGMK_FLTK \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D FLTK_LIBDIR=/usr/lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D OPTION_CREATE_LINKS=ON \
+		-D OPTION_BUILD_SHARED_LIBS=ON \
+		-D OpenGL_GL_PREFERENCE=GLVND \
+		-D OPTION_BUILD_HTML_DOCUMENTATION=OFF \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
