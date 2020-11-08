@@ -10,12 +10,12 @@ release=1
 source=(https://github.com/htacg/tidy-html5/archive/$commit.tar.gz#/$name-$commit.tar.gz)
 
 build() {
-	[[ -e /usr/bin/ninja ]] && PKGMK_TIDY_OPTIONS=' -GNinja'
-	cmake -Stidy-html5-$commit -Bbuild $PKGMK_TIDY_OPTIONS \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+	[[ -e /usr/bin/ninja ]] && PKGMK_TIDY+=' -G Ninja'
+	cmake -S tidy-html5-$commit -B build $PKGMK_TIDY \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
 		-Wno-dev
 
 	cmake --build build
