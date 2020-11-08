@@ -9,15 +9,15 @@ release=1
 source=(https://icculus.org/$name/downloads/$name-$version.tar.bz2)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_PHYSFS_OPTIONS=' -GNinja'
+  [[ -e /usr/bin/ninja ]] && PKGMK_PHYSFS+=' -G Ninja'
 
-	cmake -S$name-$version -Bbuild $PKGMK_PHYSFS_OPTIONS \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
-		-Wno-dev \
-		-DPHYSFS_BUILD_TEST=OFF
+	cmake -S $name-$version -B build $PKGMK_PHYSFS \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D PHYSFS_BUILD_TEST=OFF \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
