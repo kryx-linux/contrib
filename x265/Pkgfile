@@ -9,46 +9,51 @@ release=1
 source=(https://bitbucket.org/multicoreware/$name/downloads/${name}_$version.tar.gz)
 
 build() {
-	cd ${name}_$version
+	[[ -e /usr/bin/ninja ]] && PKGMK_X265+=' -G Ninja'
 
-	install -d build-{12,10,8}
-	cd build-12
+	# build 12
+	cmake -S $SRC/${name}_$version/source -B build-12 $PKGMK_X265 \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG -Wno-deprecated" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG -Wno-deprecated" \
+		-D HIGH_BIT_DEPTH=TRUE \
+		-D MAIN12=TRUE \
+		-D EXPORT_C_API=FALSE \
+		-D ENABLE_CLI=FALSE \
+		-D ENABLE_SHARED=FALSE \
+		-Wno-dev
+	cmake --build build-12
 
-	cmake ../source \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DHIGH_BIT_DEPTH='TRUE' \
-		-DMAIN12='TRUE' \
-		-DEXPORT_C_API='FALSE' \
-		-DENABLE_CLI='FALSE' \
-		-DENABLE_SHARED='FALSE'
+	# build 10
+	cmake -S $SRC/${name}_$version/source -B build-10 $PKGMK_X265 \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D HIGH_BIT_DEPTH=TRUE \
+		-D EXPORT_C_API=FALSE \
+		-D ENABLE_CLI=FALSE \
+		-D ENABLE_SHARED=FALSE \
+		-Wno-dev
+	cmake --build build-10
 
-	make
+	# build 8
+	mkdir build-8
+	ln -s $SRC/build-12/libx265.a $SRC/build-8/libx265_main12.a
+	ln -s $SRC/build-10/libx265.a $SRC/build-8/libx265_main10.a
 
-	cd ../build-10
-
-	cmake ../source \
-		-DCMAKE_INSTALL_PREFIX='/usr' \
-		-DHIGH_BIT_DEPTH='TRUE' \
-		-DEXPORT_C_API='FALSE' \
-		-DENABLE_CLI='FALSE' \
-		-DENABLE_SHARED='FALSE'
-
-	make
-
-	cd ../build-8
-
-	ln -s ../build-12/libx265.a libx265_main12.a
-	ln -s ../build-10/libx265.a libx265_main10.a
-
-	cmake ../source \
-		-DCMAKE_INSTALL_PREFIX='/usr' \
-		-DENABLE_SHARED='TRUE' \
-		-DEXTRA_LIB='x265_main10.a;x265_main12.a' \
-		-DEXTRA_LINK_FLAGS='-L.' \
-		-DLINKED_10BIT='TRUE' \
-		-DLINKED_12BIT='TRUE'
-
-	make
-	make DESTDIR=$PKG install
+	cmake -S $SRC/${name}_$version/source -B build-8 $PKGMK_X265 \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D ENABLE_SHARED=TRUE \
+		-D EXTRA_LIB='x265_main10.a;x265_main12.a' \
+		-D EXTRA_LINK_FLAGS='-L.' \
+		-D LINKED_10BIT=TRUE \
+		-D LINKED_12BIT=TRUE \
+		-Wno-dev
+	cmake --build build-8
+	DESTDIR=$PKG cmake --install build-8
 }
