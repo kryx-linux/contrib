@@ -9,19 +9,19 @@ release=1
 source=(https://downloads.sourceforge.net/soxr/soxr-$version-Source.tar.xz)
 
 build() {
-	[[ -e /usr/bin/ninja ]] && PKGMK_SOXR_OPTIONS=' -GNinja'
-	cmake -Hsoxr-$version-Source -Bbuild $PKGMK_SOXR_OPTIONS \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
-		-Wno-dev \
-		-DBUILD_EXAMPLES='OFF' \
-		-DBUILD_SHARED_LIBS='ON' \
-		-DWITH_AVFFT='ON' \
-		-DWITH_LSR_BINDINGS='ON' \
-		-DWITH_OPENMP='ON' \
-		-DWITH_PFFFT='ON'
+	[[ -e /usr/bin/ninja ]] && PKGMK_SOXR+=' -G Ninja'
+	cmake -S soxr-$version-Source -B build $PKGMK_SOXR \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D BUILD_EXAMPLES=OFF \
+		-D BUILD_SHARED_LIBS=ON \
+		-D WITH_AVFFT=ON \
+		-D WITH_LSR_BINDINGS=ON \
+		-D WITH_OPENMP=ON \
+		-D WITH_PFFFT=ON \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
