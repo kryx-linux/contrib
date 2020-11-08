@@ -4,14 +4,15 @@
 # Depends on: protobuf cmake gnutls git
 
 name=hefur
-version=0.6-8b3dd3c
+version=1.0
 release=1
-source=(https://crux.nu/~jaeger/files/$name-8b3dd3c.tar.xz \
+source=(https://crux.nu/~jaeger/files/$name-$version.tar.xz \
 	hefurd)
 
 build() {
-	cd $name-8b3dd3c
+	cd $name-$version
 	sed -i -e '45,48d' CMakeLists.txt
+	sed -i -e '124,126d' hefur/CMakeLists.txt
 	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
@@ -21,4 +22,5 @@ build() {
 	install -d -m 0755 -o root -g root $PKG/var/run/hefur $PKG/usr/share/hefur/torrents
 	install -D -m 0644 -o root -g root /dev/null $PKG/var/log/hefurd.log
 	install -D -m 0755 -o root -g root $SRC/hefurd $PKG/etc/rc.d/hefurd
+	rm -r $PKG/usr/share/doc
 }
