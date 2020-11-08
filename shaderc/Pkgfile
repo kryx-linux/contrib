@@ -30,14 +30,14 @@ build() {
 "$(prt-get info glslang | awk '/^Version:/ {print $2}')\\n"
 EOF
 
-	cmake -S$name-$version -Bbuild -GNinja \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
-		-Wno-dev \
-		-DSHADERC_SKIP_TESTS=ON
+	cmake -S $name-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D SHADERC_SKIP_TESTS=ON \
+		-Wno-dev
 
 	cmake --build build -j ${JOBS:-1}
 
