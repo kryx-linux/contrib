@@ -16,10 +16,13 @@ build() {
   patch -Np2 -d ArpON-$version -i $SRC/arpon-gcc7.patch
   patch -Np2 -d ArpON-$version -i $SRC/arpon-syslog.patch
 
-  cmake -SArpON-$version -Bbuild \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_C_FLAGS="-Wno-error=stringop-truncation"
+  [[ -e /usr/bin/ninja ]] && PKGMK_ARPON+=' -G Ninja'
+  cmake -S ArpON-$version -B build $PKGMK_ARPON \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG -Wno-error=stringop-truncation" \
+    -W no-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
   rm -r $PKG/usr/share/doc
