@@ -10,16 +10,14 @@ release=1
 source=(https://github.com/silnrsi/graphite/releases/download/$version/$name-$version.tgz)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_GRAPHITE2_OPTIONS=' -GNinja'
-  cmake -S$name-$version -Bbuild $PKGMK_GRAPHITE2_OPTIONS \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE:STRING=Release \
-    -DCMAKE_C_FLAGS:STRING="$CFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$CXXFLAGS" \
-    -DGRAPHITE2_COMPARE_RENDERER=OFF
-
-  find . -type f ! -name "rules" ! -name "changelog" -exec sed -i -e 's/\-03//g' {} \;
-
+  [[ -e /usr/bin/ninja ]] && PKGMK_GRAPHITE2+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_GRAPHITE2 \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D GRAPHITE2_COMPARE_RENDERER=OFF \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }
