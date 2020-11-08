@@ -11,7 +11,7 @@ source=(https://downloads.sourceforge.net/project/clucene/clucene-core-unstable/
 fix_zlib_detections.diff clucene-core-2.3.3.4-install_contribs_lib.patch clucene-narrowing-conversions.patch clucene-warnings.patch clucene-debug.patch clucene-gcc-atomics.patch clucene-multimap-put.patch clucene-2.3.3.4-contribs_lib-1.patch cmake.patch contribs-lib-makefile.patch)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_CLUCENE_OPTIONS=' -GNinja'
+  [[ -e /usr/bin/ninja ]] && PKGMK_CLUCENE_OPTIONS=' -G Ninja'
 
   patch -Np1 -d $name-core-$version -i $SRC/cmake.patch
   patch -Np1 -d $name-core-$version -i $SRC/clucene-2.3.3.4-contribs_lib-1.patch
@@ -23,13 +23,16 @@ build() {
   patch -Np0 -d $name-core-$version -i $SRC/clucene-narrowing-conversions.patch
   patch -Np0 -d $name-core-$version -i $SRC/clucene-multimap-put.patch
 
-  cmake -S$name-core-$version -Bbuild $PKGMK_CLUCENE_OPTIONS \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DBUILD_CONTRIBS_LIB=ON \
-    -DENABLE_ASCII_MODE=OFF \
-    -DENABLE_PACKAGING=OFF \
-    -DDISABLE_MULTITHREADING=OFF
+  cmake -S $name-core-$version -B build $PKGMK_CLUCENE_OPTIONS \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D BUILD_CONTRIBS_LIB=ON \
+    -D ENABLE_ASCII_MODE=OFF \
+    -D ENABLE_PACKAGING=OFF \
+    -D DISABLE_MULTITHREADING=OFF \
+    -W no-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }
