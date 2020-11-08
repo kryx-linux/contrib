@@ -15,7 +15,7 @@ build() {
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
 		-D WANT_DOCS_HTML=OFF \
-		-W no-dev
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build

@@ -32,7 +32,7 @@ build() {
     -D ENABLE_ASCII_MODE=OFF \
     -D ENABLE_PACKAGING=OFF \
     -D DISABLE_MULTITHREADING=OFF \
-    -W no-dev
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }
