@@ -9,10 +9,14 @@ release=1
 source=(https://www.libssh.org/files/${version%.*}/libssh-${version}.tar.xz)
 
 build() {
-  cmake -S$name-$version -Bbuild \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_BUILD_TYPE=Release
+  [[ -e /usr/bin/ninja ]] && PKGMK_LIBSSH+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_LIBSSH \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }
