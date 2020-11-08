@@ -17,7 +17,7 @@ build() {
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC -w -DNDEBUG" \
 		-D HALF_BRO_INCOM_WEBKIT2=ON \
 		-D USE_ZEITGEIST=OFF \
-		-W no-dev
+		-Wno-dev
 
 	cmake --build build -j ${JOBS-1}
 	DESTDIR=$PKG cmake --install build
