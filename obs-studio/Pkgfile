@@ -21,7 +21,7 @@ build() {
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
 		-D OBS_VERSION_OVERRIDE="$version" \
 		-D UNIX_STRUCTURE=ON \
-		-W no-dev
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
