@@ -11,8 +11,7 @@ source=(https://github.com/xbmc/xbmc/archive/$version-Leia.tar.gz gl-headers.pat
 build() {
 	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 	patch -d xbmc-$version-Leia -p1 -i $SRC/gl-headers.patch
-	mkdir build; cd build
-	cmake \
+	cmake -Bbuild \
 		-DVERBOSE=ON \
 		-DENABLE_DVDCSS=ON \
 		-DENABLE_OPTICAL=ON \
@@ -22,9 +21,13 @@ build() {
 		-DENABLE_INTERNAL_RapidJSON=ON \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
-		../xbmc-$version-Leia
-	make
-	make DESTDIR=$PKG install
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-Wno-dev \
+		xbmc-$version-Leia
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 
 	find $PKG -name "README*" -delete
 }
