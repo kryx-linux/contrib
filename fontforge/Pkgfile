@@ -14,17 +14,17 @@ if [ -e '/usr/lib/ccache' ]; then
 	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 fi
 
-	cmake -S$name-$version -Bbuild -GNinja ${PKGMK_FONTFORGE} \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
-		-Wno-dev \
-		-DENABLE_MAINTAINER_TOOLS=TRUE \
-		-DENABLE_FONTFORGE_EXTRAS=TRUE \
-		-DUNIX=TRUE \
-		-DENABLE_DOCS=FALSE
+	cmake -S $name-$version -B build -G Ninja $PKGMK_FONTFORGE \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D ENABLE_MAINTAINER_TOOLS=TRUE \
+		-D ENABLE_FONTFORGE_EXTRAS=TRUE \
+		-D UNIX=TRUE \
+		-D ENABLE_DOCS=FALSE \
+		-Wno-dev
 
 	sed -i 's|-R/usr/lib||g' build/build.ninja
 
