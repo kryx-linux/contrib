@@ -10,12 +10,13 @@ release=1
 source=(https://github.com/acoustid/chromaprint/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-	cmake -S$name-v$version -Bbuild -GNinja \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=RELEASE \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
-		-DBUILD_TESTS=OFF
+	cmake -S $name-v$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=RELEASE \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D BUILD_TESTS=OFF \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
