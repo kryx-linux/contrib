@@ -11,14 +11,17 @@ source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$
 
 build() {
   [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
-  [[ -e /usr/lib/ccache ]] && PKGMK_KEEPASSXC=' -DWITH_CCACHE=ON'
-  cmake -S$name-$version -Bbuild -GNinja $PKGMK_KEEPASSXC \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DWITH_XC_ALL=ON \
-    -DWITH_XC_DOCS=OFF \
-    -DWITH_TESTS=OFF
+  [[ -e /usr/lib/ccache ]] && PKGMK_KEEPASSXC+=' -D WITH_CCACHE=ON'
+  cmake -S $name-$version -B build -G Ninja $PKGMK_KEEPASSXC \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D WITH_XC_ALL=ON \
+    -D WITH_XC_DOCS=OFF \
+    -D WITH_TESTS=OFF \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 
