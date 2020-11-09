@@ -1,7 +1,7 @@
 # Description: Cryptographic library for embedded systems
 # URL: https://tls.mbed.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake
+# Depends on: cmake python3
 
 name=mbedtls
 version=2.24.0
@@ -15,7 +15,7 @@ build() {
 	sed -i 's|//\(#define MBEDTLS_THREADING_C\)|\1|' $name-$name-$version/include/mbedtls/config.h
 	sed -i 's|//\(#define MBEDTLS_THREADING_PTHREAD\)|\1|' $name-$name-$version/include/mbedtls/config.h
 
-	[[ -e /usr/bin/ninja ]] && PKGMK_MBEDTLS+='-G Ninja'
+	[[ -e '/usr/bin/ninja' ]] && PKGMK_MBEDTLS+=' -G Ninja'
 
 	cmake -S $name-$name-$version -B build $PKGMK_MBEDTLS \
 		-D CMAKE_INSTALL_PREFIX=/usr \
@@ -24,9 +24,9 @@ build() {
 		-D ENABLE_ZLIB_SUPPORT=ON \
 		-D USE_SHARED_MBEDTLS_LIBRARY=ON \
 		-D INSTALL_MBEDTLS_HEADERS=ON \
-    -D MBEDTLS_FATAL_WARNINGS=OFF \
+		-D MBEDTLS_FATAL_WARNINGS=OFF \
 		-Wno-dev
 
-	cmake --build build -v
+	cmake --build build
 	DESTDIR=$PKG cmake --install build
 }
