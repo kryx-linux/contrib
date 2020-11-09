@@ -1,22 +1,23 @@
 # Description: Open Source H265/HEVC video encoder.
-# URL: https://bitbucket.org/multicoreware/x265/wiki/Home
+# URL: https://bitbucket.org/multicoreware/x265_git/wiki/Home
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: yasm cmake
+# Depends on: cmake
 
 name=x265
 version=3.4
 release=1
-source=(https://bitbucket.org/multicoreware/$name/downloads/${name}_$version.tar.gz)
+source=(#https://bitbucket.org/multicoreware/$name/downloads/${name}_$version.tar.gz
+	https://crux.ster.zone/downloads/$name/${name}_$version.tar.gz)
 
 build() {
-	[[ -e /usr/bin/ninja ]] && PKGMK_X265+=' -G Ninja'
+	[[ -e '/usr/bin/ninja' ]] && PKGMK_X265+=' -G Ninja'
 
 	# build 12
 	cmake -S $SRC/${name}_$version/source -B build-12 $PKGMK_X265 \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG -Wno-deprecated" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG -Wno-deprecated" \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG -Wno-restrict -Wno-format-overflow" \
+		-D CMAKE_ASM_NASM_FLAGS_RELEASE=' -wno-macro-params-legacy' \
 		-D HIGH_BIT_DEPTH=TRUE \
 		-D MAIN12=TRUE \
 		-D EXPORT_C_API=FALSE \
@@ -29,8 +30,8 @@ build() {
 	cmake -S $SRC/${name}_$version/source -B build-10 $PKGMK_X265 \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG -Wno-restrict -Wno-format-overflow" \
+		-D CMAKE_ASM_NASM_FLAGS_RELEASE=' -wno-macro-params-legacy' \
 		-D HIGH_BIT_DEPTH=TRUE \
 		-D EXPORT_C_API=FALSE \
 		-D ENABLE_CLI=FALSE \
@@ -46,8 +47,8 @@ build() {
 	cmake -S $SRC/${name}_$version/source -B build-8 $PKGMK_X265 \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG -Wno-restrict -Wno-format-overflow" \
+		-D CMAKE_ASM_NASM_FLAGS_RELEASE=' -wno-macro-params-legacy' \
 		-D ENABLE_SHARED=TRUE \
 		-D EXTRA_LIB='x265_main10.a;x265_main12.a' \
 		-D EXTRA_LINK_FLAGS='-L.' \
