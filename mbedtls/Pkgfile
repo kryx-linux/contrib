@@ -24,8 +24,9 @@ build() {
 		-D ENABLE_ZLIB_SUPPORT=ON \
 		-D USE_SHARED_MBEDTLS_LIBRARY=ON \
 		-D INSTALL_MBEDTLS_HEADERS=ON \
+    -D MBEDTLS_FATAL_WARNINGS=OFF \
 		-Wno-dev
 
-	cmake --build build
+	cmake --build build -v
 	DESTDIR=$PKG cmake --install build
 }

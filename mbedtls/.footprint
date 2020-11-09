@@ -13,6 +13,8 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/dh_server
 -rwxr-xr-x	root/root	usr/bin/dtls_client
 -rwxr-xr-x	root/root	usr/bin/dtls_server
+-rwxr-xr-x	root/root	usr/bin/ecdh_curve25519
+-rwxr-xr-x	root/root	usr/bin/ecdsa
 -rwxr-xr-x	root/root	usr/bin/gen_entropy
 -rwxr-xr-x	root/root	usr/bin/gen_key
 -rwxr-xr-x	root/root	usr/bin/gen_random_ctr_drbg
@@ -20,6 +22,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/generic_sum
 -rwxr-xr-x	root/root	usr/bin/hello
 -rwxr-xr-x	root/root	usr/bin/key_app
+-rwxr-xr-x	root/root	usr/bin/key_app_writer
 -rwxr-xr-x	root/root	usr/bin/key_ladder_demo
 -rwxr-xr-x	root/root	usr/bin/key_ladder_demo.sh
 -rwxr-xr-x	root/root	usr/bin/mini_client
@@ -36,16 +39,21 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/rsa_encrypt
 -rwxr-xr-x	root/root	usr/bin/rsa_genkey
 -rwxr-xr-x	root/root	usr/bin/rsa_sign
+-rwxr-xr-x	root/root	usr/bin/rsa_sign_pss
 -rwxr-xr-x	root/root	usr/bin/rsa_verify
+-rwxr-xr-x	root/root	usr/bin/rsa_verify_pss
 -rwxr-xr-x	root/root	usr/bin/selftest
 -rwxr-xr-x	root/root	usr/bin/ssl_client1
 -rwxr-xr-x	root/root	usr/bin/ssl_client2
+-rwxr-xr-x	root/root	usr/bin/ssl_context_info
 -rwxr-xr-x	root/root	usr/bin/ssl_fork_server
 -rwxr-xr-x	root/root	usr/bin/ssl_mail_client
 -rwxr-xr-x	root/root	usr/bin/ssl_pthread_server
 -rwxr-xr-x	root/root	usr/bin/ssl_server
+-rwxr-xr-x	root/root	usr/bin/ssl_server2
 -rwxr-xr-x	root/root	usr/bin/strerror
 -rwxr-xr-x	root/root	usr/bin/udp_proxy
+-rwxr-xr-x	root/root	usr/bin/zeroize
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/aes.h
@@ -141,15 +149,15 @@ drwxr-xr-x	root/root	usr/include/psa/
 -rw-r--r--	root/root	usr/include/psa/crypto_types.h
 -rw-r--r--	root/root	usr/include/psa/crypto_values.h
 drwxr-xr-x	root/root	usr/lib/
--rwxr-xr-x	root/root	usr/lib/libmbedcrypto.a
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.4
--rwxr-xr-x	root/root	usr/lib/libmbedcrypto.so.2.22.0
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.4 -> libmbedcrypto.so.2.22.0
--rwxr-xr-x	root/root	usr/lib/libmbedtls.a
+-rw-r--r--	root/root	usr/lib/libmbedcrypto.a
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.5
+-rw-r--r--	root/root	usr/lib/libmbedcrypto.so.2.24.0
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.5 -> libmbedcrypto.so.2.24.0
+-rw-r--r--	root/root	usr/lib/libmbedtls.a
 lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.13
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.13 -> libmbedtls.so.2.22.0
--rwxr-xr-x	root/root	usr/lib/libmbedtls.so.2.22.0
--rwxr-xr-x	root/root	usr/lib/libmbedx509.a
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.13 -> libmbedtls.so.2.24.0
+-rw-r--r--	root/root	usr/lib/libmbedtls.so.2.24.0
+-rw-r--r--	root/root	usr/lib/libmbedx509.a
 lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.1
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.1 -> libmbedx509.so.2.22.0
--rwxr-xr-x	root/root	usr/lib/libmbedx509.so.2.22.0
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.1 -> libmbedx509.so.2.24.0
+-rw-r--r--	root/root	usr/lib/libmbedx509.so.2.24.0
