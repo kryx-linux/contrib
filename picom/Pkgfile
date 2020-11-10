@@ -6,14 +6,14 @@
 
 name=picom
 version=8.2
-release=1
+release=2
 source=(https://github.com/yshui/picom/archive/v$version/$name-v$version.tar.gz
 	picom.conf picom-trans.1 picom.1)
 
 build() {
-[ -e '/usr/bin/asciidoctor' ] && PKGMK_PICOM+=' -D build_docs=true'
+[[ -e '/usr/bin/asciidoctor' ]] && PKGMK_PICOM+=' -D with_docs=true'
 
-	meson setup $name-$version build ${PKGMK_PICOM} \
+	meson setup build $name-$version ${PKGMK_PICOM} \
 		--prefix=/usr \
 		--buildtype=plain \
 		-D b_ndebug=true
