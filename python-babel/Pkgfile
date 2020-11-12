@@ -4,20 +4,21 @@
 # Depends on: python-pytz python-setuptools
 
 name=python-babel
-version=2.8.1
+version=2.9.0
 release=1
-cldrver=36.0 # $SRC/babel-$version/scripts/download_import_cldr.py
+cldrver=37.0 # $SRC/babel-$version/scripts/download_import_cldr.py
 
-source=(https://github.com/python-babel/babel/archive/v$version/$name-$version.tar.gz
+source=(https://pypi.io/packages/source/B/Babel/Babel-${version}.tar.gz
   https://unicode.org/Public/cldr/${cldrver::2}/cldr-common-$cldrver.zip)
 
 unpack_source() {
   for file in ${source[@]}; do
     case ${file##*/} in
-      $name-$version.tar.gz)
+      Babel-$version.tar.gz)
         bsdtar -p -o -C $SRC -xf $(get_filename $file) ;;
       cldr-common-$cldrver.zip)
-        cp $(get_filename $file) $SRC/babel-$version/cldr/cldr-core-${cldrver::2}.zip ;;
+        mkdir $SRC/Babel-$version/cldr
+        cp $(get_filename $file) $SRC/Babel-$version/cldr/cldr-core-${cldrver::2}.zip ;;
       *)
         cp $(get_filename $file) $SRC ;;
     esac
@@ -25,7 +26,7 @@ unpack_source() {
 }
 
 build() {
-  cd babel-$version
+  cd Babel-$version
 
   /usr/bin/python setup.py import_cldr
   /usr/bin/python setup.py build
