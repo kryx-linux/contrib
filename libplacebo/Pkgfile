@@ -5,15 +5,11 @@
 # Optional: libepoxy
 
 name=libplacebo
-version=2.72.0
-release=2
-source=(https://code.videolan.org/videolan/libplacebo/-/archive/v$version/$name-v$version.tar.gz
-	glslang_header_include_path.patch)
+version=2.72.2
+release=1
+source=(https://code.videolan.org/videolan/libplacebo/-/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	patch -d $name-v$version -p1 -i $SRC/glslang_header_include_path.patch
-
-	CXXFLAGS+=" -I/usr/include/glslang" \
 	meson setup build $name-v$version \
 		--prefix=/usr \
 		--buildtype=plain \
