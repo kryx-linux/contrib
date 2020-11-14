@@ -6,9 +6,14 @@
 name=libical
 version=3.0.8
 release=1
-source=(https://github.com/libical/libical/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/libical/libical/archive/v$version/$name-$version.tar.gz
+  # https://github.com/libical/libical/commit/a3308a23912bba2db654a8c456165c31888cc897
+  # i removed the ReleaseNotes.txt as it failed to apply on the tagged ball
+  icu-68.1.patch)
 
 build() {
+  [ $(pkginfo -i | awk '/^icu / {split($2,a,"."); print a[1]}') -ge 68 ] && \
+    patch -p1 -d $name-$version -i $SRC/icu-68.1.patch
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
