@@ -9,11 +9,13 @@ release=1
 source=(https://github.com/hughsie/libgusb/archive/$version/$name-$version.tar.gz)
 
 build() {
-  meson $name-$version build \
+  meson setup $name-$version build \
     --prefix=/usr \
+    --buildtype=plain \
+    -D b_ndebug=true \
     -D vapi=false \
     -D tests=false \
     -D docs=false
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }

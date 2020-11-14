@@ -9,10 +9,14 @@ release=1
 source=(https://github.com/assimp/assimp/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S$name-$version -Bbuild \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DASSIMP_BUILD_SAMPLES=OFF
+  [[ -e /usr/bin/ninja ]] && PKGMK_ASSIMP+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_ASSIMP_OPTIONS \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D ASSIMP_BUILD_SAMPLES=OFF \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }

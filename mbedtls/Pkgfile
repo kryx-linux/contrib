@@ -1,10 +1,10 @@
 # Description: Cryptographic library for embedded systems
 # URL: https://tls.mbed.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake ninja
+# Depends on: cmake python3
 
 name=mbedtls
-version=2.22.0
+version=2.24.0
 release=1
 source=(https://github.com/ARMmbed/mbedtls/archive/$name-$version.tar.gz)
 
@@ -15,11 +15,17 @@ build() {
 	sed -i 's|//\(#define MBEDTLS_THREADING_C\)|\1|' $name-$name-$version/include/mbedtls/config.h
 	sed -i 's|//\(#define MBEDTLS_THREADING_PTHREAD\)|\1|' $name-$name-$version/include/mbedtls/config.h
 
-	cmake -S$name-$name-$version -Bbuild -G Ninja \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DENABLE_ZLIB_SUPPORT=ON \
-		-DUSE_SHARED_MBEDTLS_LIBRARY=ON \
-		-DINSTALL_MBEDTLS_HEADERS=ON
+	[[ -e '/usr/bin/ninja' ]] && PKGMK_MBEDTLS+=' -G Ninja'
+
+	cmake -S $name-$name-$version -B build $PKGMK_MBEDTLS \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D ENABLE_ZLIB_SUPPORT=ON \
+		-D USE_SHARED_MBEDTLS_LIBRARY=ON \
+		-D INSTALL_MBEDTLS_HEADERS=ON \
+		-D MBEDTLS_FATAL_WARNINGS=OFF \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build

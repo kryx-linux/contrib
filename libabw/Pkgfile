@@ -13,5 +13,5 @@ build() {
   ./configure --prefix=/usr \
     --without-docs
   make
-  make DESTDIR="$PKG" install
+  make DESTDIR=$PKG install
 }

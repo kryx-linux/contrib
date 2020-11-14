@@ -9,9 +9,12 @@ release=1
 source=(https://launchpad.net/sakura/trunk/$version/+download/$name-$version.tar.bz2)
 
 build() {
-	cmake -S$name-$version -Bbuild -GNinja \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=RELEASE
+	cmake -S $name-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=RELEASE \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build

@@ -11,8 +11,8 @@ source=(https://files.pythonhosted.org/packages/source/a/$name/$name-$version.ta
 
 build() {
   cd $name-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --root=$PKG \
     --optimize=1 \
     --skip-build

@@ -10,8 +10,8 @@ source=(https://files.pythonhosted.org/packages/source/J/Jinja2/Jinja2-$version.
 
 build() {
   cd Jinja2-$version
-  python setup.py build
-  python setup.py install --root=$PKG \
+  /usr/bin/python setup.py build
+  /usr/bin/python setup.py install --root=$PKG \
     --optimize=1 \
     --skip-build
 }

@@ -4,21 +4,17 @@
 # Depends on: gstreamer
 
 name=libnice
-version=0.1.17
+version=0.1.18
 release=1
 source=(https://nice.freedesktop.org/releases/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-
-	./configure \
+	meson setup $name-$version build \
 		--prefix=/usr \
-		--enable-gtk-doc=no \
-		--enable-gtk-doc-html=no
+		--buildtype=plain \
+		-D b_ndebug=true \
+		-D gtk_doc=disabled
 
-	make
-	make DESTDIR=$PKG install
-
-	# gtk-doc is still generated!
-	rm -r $PKG/usr/share/gtk-doc
+	meson compile -C build
+	DESTDIR=$PKG meson install -C build
 }

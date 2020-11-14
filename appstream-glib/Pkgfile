@@ -11,11 +11,13 @@ source=(https://people.freedesktop.org/~hughsient/appstream-glib/releases/$name-
 
 build() {
   [[ -f /usr/lib/libstemmer.so ]] && PKGMK_APPSTREAM_GLIB=' -Dstemmer=true' || PKGMK_APPSTREAM_GLIB=' -Dstemmer=false'
-  meson $name-$version build $PKGMK_APPSTREAM_GLIB \
+  meson setup $name-$version build $PKGMK_APPSTREAM_GLIB \
     -Dprefix=/usr \
+    -Dbuildtype=plain \
+    -Db_ndebug=true \
     -Drpm=false \
     -Dgtk-doc=false
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
   rm -fr $PKG/usr/share/locale
 }

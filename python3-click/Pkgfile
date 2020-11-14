@@ -10,8 +10,8 @@ source=(https://github.com/pallets/click/archive/$version/click-$version.tar.gz)
 
 build() {
   cd click-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --skip-build \
     --root=$PKG \
     --optimize=1

@@ -9,7 +9,7 @@ release=1
 source=(https://www.coin-or.org/download/source/Cbc/Cbc-${version}.tgz)
 
 build() {
-cd Cbc-$version
+  cd Cbc-$version
   COIN_SKIP_PROJECTS="Sample" \
   ./configure --prefix=/usr \
     --with-osi-lib="$(pkg-config --libs osi)" \

@@ -9,12 +9,17 @@ release=1
 source=(https://gitlab.gnome.org/GNOME/libnma/-/archive/$version/libnma-$version.tar.bz2)
 
 build() {
-  meson $name-$version build \
+  # don't build nls
+  rm -r $name-$version/po
+  sed -e '298d' -i $name-$version/meson.build
+
+  meson setup $name-$version build \
     --prefix=/usr \
+    --buildtype=plain \
+    -Db_ndebug=true \
     -Dmobile_broadband_provider_info=false \
     -Dgtk_doc=false \
     -Dvapi=false
-  ninja -C build
+  meson compile -C build
   DESTDIR=$PKG meson install -C build
-  rm -r $PKG/usr/share/locale/
 }

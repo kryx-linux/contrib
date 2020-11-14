@@ -9,11 +9,15 @@ release=1
 source=(https://dl.matroska.org/downloads/$name/$name-$version.tar.xz)
 
 build() {
-	cmake -S$name-$version -Bbuild -GNinja \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
-		-DBUILD_SHARED_LIBS=ON
+	[[ -e /usr/bin/ninja ]] && PKGMK_LIBMATROSKA+=' -G Ninja'
+	cmake -S $name-$version -B build $PKGMK_LIBMATROSKA \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D BUILD_SHARED_LIBS=ON \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build

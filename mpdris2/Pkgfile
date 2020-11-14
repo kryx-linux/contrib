@@ -11,7 +11,7 @@ source=(https://github.com/eonpatapon/mpDris2/archive/$version/$name-$version.ta
 build() {
   cd mpDris2-$version
   NOCONFIGURE=1 ./autogen.sh
-  PYTHON=python3 ./configure \
+  PYTHON=/usr/bin/python3 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --disable-nls

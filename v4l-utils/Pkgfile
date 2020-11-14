@@ -10,7 +10,9 @@ source=(https://linuxtv.org/downloads/v4l-utils/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr \
+  [[ -e /usr/bin/clang ]] && PKGMK_V4L+=" --enable-bpf" || PKGMK_V4L+=" --disable-bpf"
+  ./configure $PKGMK_V4L \
+    --prefix=/usr \
     --disable-nls
   make
   MAKEFLAGS="-j1" make install DESTDIR=$PKG

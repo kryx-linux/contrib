@@ -10,12 +10,16 @@ source=(#https://github.com/google/flatbuffers/archive/v$version/$name-$version.
   https://github.com/google/flatbuffers/archive/a402b3abaea6490d8aad1fe90d8bafe2a6396fe8/$name-$version-1.tar.gz)
 
 build() {
-  #cmake -S$name-$version -Bbuild \
-  cmake -S$name-a402b3abaea6490d8aad1fe90d8bafe2a6396fe8 -Bbuild \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DFLATBUFFERS_BUILD_FLATLIB=OFF \
-    -DFLATBUFFERS_BUILD_SHAREDLIB=ON
+  [[ -e /usr/bin/ninja ]] && PKGMK_FLATBUFFERS+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_FLATBUFFERS \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D FLATBUFFERS_BUILD_FLATLIB=OFF \
+    -D FLATBUFFERS_BUILD_SHAREDLIB=ON \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }

@@ -5,17 +5,20 @@
 # Optional: doxygen kde5
 
 name=nextcloud-client
-version=3.0.2
+version=3.0.3
 release=1
 source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
-  cmake -Sdesktop-$version -Bbuild -GNinja \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_SYSCONFDIR=/usr/etc/nextcloud \
-    -DNO_SHIBBOLETH=1
+  cmake -S desktop-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_INSTALL_SYSCONFDIR=/usr/etc/nextcloud \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D NO_SHIBBOLETH=1 \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 

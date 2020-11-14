@@ -10,6 +10,6 @@ source=(https://pypi.io/packages/source/p/pytz/pytz-$version.tar.gz)
 
 build() {
   cd pytz-$version
-  python setup.py build
-  python setup.py install --root="$PKG" --optimize=1 --skip-build
+  /usr/bin/python setup.py build
+  /usr/bin/python setup.py install --root="$PKG" --optimize=1 --skip-build
 }

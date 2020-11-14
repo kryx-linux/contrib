@@ -10,8 +10,8 @@ source=(https://github.com/quodlibet/mutagen/archive/release-$version/$name-$ver
 
 build() {
   cd mutagen-release-$version
-  python3 setup.py build
-  python3 setup.py install --skip-build \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --skip-build \
     --optimize=1 \
     --prefix=/usr \
     --root=$PKG

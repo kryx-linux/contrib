@@ -9,12 +9,15 @@ release=1
 source=(https://github.com/jiixyj/libebur128/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  mkdir build && cd build
-  cmake .. -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DBUILD_STATIC_LIBS=OFF
-  make
-  make DESTDIR=$PKG install
+  [[ -e /usr/bin/ninja ]] && PKGMK_LIBEBUR128+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_LIBEBUR128 \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D BUILD_STATIC_LIBS=OFF \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }

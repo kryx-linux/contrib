@@ -14,37 +14,34 @@ source=(https://github.com/google/$name/archive/v$version/$name-v$version.tar.gz
 	0001-Fix-SPIRV-includes-location.patch)
 
 build() {
-	cd $name-$version
+	patch -d $name-$version/glslc -p0 -i $SRC/glslc-asciidoc.patch
+	patch -d $name-$version/spvc -p0 -i $SRC/spvc-asciidoc.patch
 
-	patch -d glslc -p0 -i $SRC/glslc-asciidoc.patch
-	patch -d spvc -p0 -i $SRC/spvc-asciidoc.patch
-
-	patch -p1 -i $SRC/0001-Drop-third-party-code-in-CMakeLists.txt.patch
-	patch -p1 -i $SRC/0001-Fix-SPIRV-includes-location.patch
-	patch -p1 -i $SRC/shaderc-2020.3-system-glslang.patch
+	patch -p1 -d $name-$version -i $SRC/0001-Drop-third-party-code-in-CMakeLists.txt.patch
+	patch -p1 -d $name-$version -i $SRC/0001-Fix-SPIRV-includes-location.patch
+	patch -p1 -d $name-$version -i $SRC/shaderc-2020.3-system-glslang.patch
 
 	# de-vendor libs and disable git versioning
-	sed '/examples/d;/third_party/d' -i CMakeLists.txt
-	sed '/build-version/d' -i glslc/CMakeLists.txt
-	cat <<- EOF > glslc/src/build-version.inc
+	sed '/examples/d;/third_party/d' -i $name-$version/CMakeLists.txt
+	sed '/build-version/d' -i $name-$version/glslc/CMakeLists.txt
+	cat <<- EOF > $name-$version/glslc/src/build-version.inc
 "${version}\\n"
 "$(prt-get info spirv-tools | awk '/^Version:/ {print $2}')\\n"
 "$(prt-get info glslang | awk '/^Version:/ {print $2}')\\n"
 EOF
 
-	mkdir build
-	cd build
+	cmake -S $name-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D SHADERC_SKIP_TESTS=ON \
+		-Wno-dev
 
-	cmake .. \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DSHADERC_SKIP_TESTS=ON \
-		-GNinja
+	cmake --build build -j ${JOBS:-1}
 
-	ninja -j ${JOBS:-1}
-
-	DESTDIR=$PKG ninja install
+	DESTDIR=$PKG cmake --install build
 
 	if [ -e '/usr/bin/asciidoctor' ]; then
 		cd ../glslc

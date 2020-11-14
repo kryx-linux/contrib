@@ -14,7 +14,7 @@ build() {
   [[ -e /usr/bin/clang && -e /usr/bin/clang++ ]] && export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
   unset CFLAGS
 
-  python3 build/gen.py --no-last-commit-position --no-strip --no-static-libstdc++
+  /usr/bin/python3 build/gen.py --no-last-commit-position --no-strip --no-static-libstdc++
   export CXXFLAGS=+" -std=c++17"
   cat >out/last_commit_position.h <<-EOF
 #ifndef OUT_LAST_COMMIT_POSITION_H_

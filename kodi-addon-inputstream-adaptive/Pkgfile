@@ -10,12 +10,13 @@ release=2
 source=(https://github.com/peak3d/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz)
 
 build() {
-  cmake -Sinputstream.adaptive-$version-$_codename -Bbuild -GNinja \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_INSTALL_LIBEXECDIR=lib \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DBUILD_SHARED_LIBS=1
+  cmake -S inputstream.adaptive-$version-$_codename -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D BUILD_SHARED_LIBS=1 \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 }

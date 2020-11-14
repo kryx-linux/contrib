@@ -9,14 +9,16 @@ release=1
 source=(https://github.com/NetworkManager/network-manager-applet/archive/$version/$name-$version.tar.gz)
 
 build() {
-  meson $name-$version build \
+  meson setup $name-$version build \
     --prefix=/usr \
     --sysconfdir=/etc \
+    --buildtype=plain \
+    -Db_ndebug=true \
     -Dselinux=false \
     -Dteam=false \
     -Dappindicator=no \
     -Dwwan=false
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
   rm -r $PKG/usr/share/locale
 }

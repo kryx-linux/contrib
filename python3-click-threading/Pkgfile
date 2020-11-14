@@ -10,8 +10,8 @@ source=(https://github.com/click-contrib/click-threading/archive/$version/click-
 
 build() {
   cd click-threading-$version
-  python3 setup.py build
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --prefix=/usr \
     --optimize=1 \
     --skip-build \

@@ -9,22 +9,19 @@ release=1
 source=(https://www.sfml-dev.org/files/SFML-$version-sources.zip)
 
 build() {
-	cd SFML-$version
+	cmake -S SFML-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+		-D SFML_INSTALL_PKGCONFIG_FILES=1 \
+		-D SFML_USE_SYSTEM_DEPS=ON \
+		-D SFML_BUILD_EXAMPLES=0 \
+		-D SFML_BUILD_DOC=0 \
+		-Wno-dev
 
-	install -d build
-	cd build
-
-	cmake .. \
-		-DCMAKE_BUILD_TYPE='Release' \
-		-DCMAKE_INSTALL_PREFIX='/usr' \
-		-DSFML_INSTALL_PKGCONFIG_FILES=1 \
-		-DSFML_USE_SYSTEM_DEPS=ON \
-		-DSFML_BUILD_EXAMPLES=0 \
-		-DSFML_BUILD_DOC=0 \
-
-
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 
 	rm -r $PKG/usr/share/SFML/{license,readme}.md
 }

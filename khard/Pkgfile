@@ -10,12 +10,12 @@ source=(https://files.pythonhosted.org/packages/source/k/khard/$name-$version.ta
 
 build() {
   cd $name-$version
-  python3 setup.py build
-  python3 setup.py install --skip-build \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --skip-build \
     --optimize=1 \
     --prefix=/usr \
     --root=$PKG
-  if [ -e /lib/zsh ]; then
+  if [ -e /lib/zsh || /usr/lib/zsh ]; then
     install -vDm 644 misc/zsh/_* \
       -t $PKG/usr/share/zsh/site-functions/
   fi

@@ -30,14 +30,16 @@ build() {
   popd
 
   export PATH="/usr/lib/java/openjdk8/jre/bin/:${PATH}"
-  cmake -S$name-$version -Bbuild -GNinja\
-    -DCMAKE_INSTALL_PREFIX=/usr/lib/rstudio \
-    -DRSTUDIO_TARGET=Desktop \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DRSTUDIO_USE_SYSTEM_BOOST=ON \
-    -DQT_QMAKE_EXECUTABLE=/usr/lib/qt5/bin/qmake \
-    -DBoost_NO_BOOST_CMAKE=ON \
-    -DRSTUDIO_BUNDLE_QT=FALSE \
+  cmake -S $name-$version -B build -G Ninja\
+    -D CMAKE_INSTALL_PREFIX=/usr/lib/rstudio \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -D RSTUDIO_TARGET=Desktop \
+    -D RSTUDIO_USE_SYSTEM_BOOST=ON \
+    -D QT_QMAKE_EXECUTABLE=/usr/lib/qt5/bin/qmake \
+    -D Boost_NO_BOOST_CMAKE=ON \
+    -D RSTUDIO_BUNDLE_QT=FALSE \
     -Wno-dev
 
   cmake --build build

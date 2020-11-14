@@ -10,8 +10,10 @@ _commit=e8c0720f3251e50aa8e777f44e3c2406dceb919c
 source=(https://github.com/vkmark/vkmark/archive/$_commit/$name-$version.tar.gz)
 
 build() {
-  meson $name-$_commit build \
-    --prefix=/usr
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson setup $name-$_commit build \
+    --prefix=/usr \
+    --buildtype=plain \
+    -Db_ndebug=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }

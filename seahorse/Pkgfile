@@ -5,17 +5,19 @@
 # Optional: pam_ldap
 
 name=seahorse
-version=3.36.2
+version=3.38.0.1
 release=1
 source=(https://gitlab.gnome.org/GNOME/seahorse/-/archive/$version/seahorse-$version.tar.bz2)
 
 build() {
-  meson $name-$version build \
+  meson setup $name-$version build \
     --prefix=/usr \
     --libexecdir=/usr/lib/$name \
-    -Dhelp=false \
-    -Dkey-sharing=false
-  ninja -C build
+    --buildtype=plain \
+    -D b_ndebug=true \
+    -D help=false \
+    -D key-sharing=false
+  meson compile -C build
   DESTDIR=$PKG meson install -C build
   rm -r $PKG/usr/share/locale
 }

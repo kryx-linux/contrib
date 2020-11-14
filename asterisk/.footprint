@@ -107,6 +107,7 @@ drwxr-x---	root/asterisk	etc/asterisk/default/
 -rw-r-----	root/asterisk	etc/asterisk/default/ss7.timers
 -rw-r-----	root/asterisk	etc/asterisk/default/stasis.conf
 -rw-r-----	root/asterisk	etc/asterisk/default/statsd.conf
+-rw-r-----	root/asterisk	etc/asterisk/default/stir_shaken.conf
 -rw-r-----	root/asterisk	etc/asterisk/default/test_sorcery.conf
 -rw-r-----	root/asterisk	etc/asterisk/default/udptl.conf
 -rw-r-----	root/asterisk	etc/asterisk/default/unistim.conf
@@ -262,6 +263,7 @@ drwxr-xr-x	root/root	usr/include/asterisk/doxygen/
 -rw-r--r--	root/root	usr/include/asterisk/presencestate.h
 -rw-r--r--	root/root	usr/include/asterisk/privacy.h
 -rw-r--r--	root/root	usr/include/asterisk/pval.h
+-rw-r--r--	root/root	usr/include/asterisk/res_audiosocket.h
 -rw-r--r--	root/root	usr/include/asterisk/res_fax.h
 -rw-r--r--	root/root	usr/include/asterisk/res_hep.h
 -rw-r--r--	root/root	usr/include/asterisk/res_mwi_external.h
@@ -275,8 +277,10 @@ drwxr-xr-x	root/root	usr/include/asterisk/doxygen/
 -rw-r--r--	root/root	usr/include/asterisk/res_pjsip_presence_xml.h
 -rw-r--r--	root/root	usr/include/asterisk/res_pjsip_pubsub.h
 -rw-r--r--	root/root	usr/include/asterisk/res_pjsip_session.h
+-rw-r--r--	root/root	usr/include/asterisk/res_pjsip_session_caps.h
 -rw-r--r--	root/root	usr/include/asterisk/res_prometheus.h
 -rw-r--r--	root/root	usr/include/asterisk/res_srtp.h
+-rw-r--r--	root/root	usr/include/asterisk/res_stir_shaken.h
 -rw-r--r--	root/root	usr/include/asterisk/rtp_engine.h
 -rw-r--r--	root/root	usr/include/asterisk/say.h
 -rw-r--r--	root/root	usr/include/asterisk/sched.h
@@ -336,6 +340,7 @@ drwxr-xr-x	root/root	usr/include/asterisk/doxygen/
 -rw-r--r--	root/root	usr/include/asterisk/ulaw.h
 -rw-r--r--	root/root	usr/include/asterisk/unaligned.h
 -rw-r--r--	root/root	usr/include/asterisk/uri.h
+-rw-r--r--	root/root	usr/include/asterisk/utf8.h
 -rw-r--r--	root/root	usr/include/asterisk/utils.h
 -rw-r--r--	root/root	usr/include/asterisk/uuid.h
 -rw-r--r--	root/root	usr/include/asterisk/vector.h
@@ -351,6 +356,7 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_alarmreceiver.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_amd.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_attended_transfer.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_audiosocket.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_authenticate.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_blind_transfer.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/app_bridgeaddchan.so
@@ -428,6 +434,7 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/cel_custom.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/cel_manager.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/cel_sqlite3_custom.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_audiosocket.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_bridge_media.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_iax2.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/chan_mgcp.so
@@ -529,6 +536,7 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_ari_playbacks.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_ari_recordings.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_ari_sounds.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_audiosocket.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_calendar.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_clialiases.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_clioriginate.so
@@ -580,6 +588,7 @@ drwxr-xr-x	root/root	usr/lib/asterisk/modules/
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_stasis_recording.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_stasis_snoop.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_statsd.so
+-rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_stir_shaken.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_stun_monitor.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_timing_pthread.so
 -rwxr-xr-x	root/root	usr/lib/asterisk/modules/res_timing_timerfd.so
@@ -616,6 +625,7 @@ drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/images/
 -rw-r--r--	asterisk/asterisk	var/lib/asterisk/images/asterisk-intro.jpg
 -rw-r--r--	asterisk/asterisk	var/lib/asterisk/images/kpad2.jpg
 drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/keys/
+drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/keys/stir_shaken/
 drwxr-xr-x	asterisk/asterisk	var/lib/asterisk/moh/
 -rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/.asterisk-moh-opsound-wav-2.03 (EMPTY)
 -rw-r--r--	asterisk/asterisk	var/lib/asterisk/moh/CHANGES-asterisk-moh-opsound-wav (EMPTY)

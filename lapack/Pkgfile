@@ -10,28 +10,26 @@ source=(https://github.com/Reference-LAPACK/lapack/archive/v$version/$name-$vers
   https://github.com/Reference-LAPACK/lapack/commit/87536aa3.patch)
 
 build() {
-  cd $name-$version
-  patch -p1 -i ../87536aa3.patch
-  cd $SRC
-  mkdir build
-  cd build
+  patch -d $name-$version -p1 -i ../87536aa3.patch
 
   export CFLAGS+=' -fPIC'
+  [[ -e /usr/bin/ninja ]] && PKGMK_LAPACK+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_LAPACK \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -fPIC -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC -DNDEBUG" \
+    -D CMAKE_Fortran_FLAGS="$CFLAGS -fPIC -DNDEBUG" \
+    -D CMAKE_Fortran_COMPILER=gfortran \
+    -D CMAKE_SKIP_RPATH=YES \
+    -D USE_OPTIMIZED_BLAS=ON \
+    -D CBLAS=OFF \
+    -D LAPACKE_WITH_TMG=ON \
+    -D BUILD_SHARED_LIBS=ON \
+    -D BUILD_DEPRECATED=ON \
+    -Wno-dev
 
-  cmake ../$name-$version \
-    -DCMAKE_Fortran_FLAGS:STRING="$CFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_Fortran_COMPILER=gfortran \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_SKIP_RPATH=YES \
-    -DUSE_OPTIMIZED_BLAS=ON \
-    -DCBLAS=OFF \
-    -DLAPACKE_WITH_TMG=ON \
-    -DBUILD_SHARED_LIBS=ON \
-    -DBUILD_DEPRECATED=ON
-    #-DCMAKE_VERBOSE_MAKEFILE=TRUE
-
-  make
-  make DESTDIR=$PKG install
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }

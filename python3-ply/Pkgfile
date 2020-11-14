@@ -10,9 +10,10 @@ source=(https://github.com/dabeaz/ply/archive/$version/ply-$version.tar.gz)
 
 build() {
   cd ply-$version
-  python3 setup.py build
-  python3 setup.py install --prefix=/usr \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
+    --skip-build \
     --optimize=1
 
   find $PKG/usr/lib/python*/site-packages/ \

@@ -10,9 +10,12 @@ source=(https://github.com/fulhax/ncpamixer/archive/$version/$name-$version.tar.
   $name.1)
 
 build() {
-  cmake -S$name-$version/src -Bbuild -GNinja \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake -S $name-$version/src -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
   install -Dm644 $SRC/$name.1 $PKG/usr/share/man/man1/$name.1

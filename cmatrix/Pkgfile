@@ -10,8 +10,12 @@ release=1
 source=(https://github.com/abishekvashok/cmatrix/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-  cmake -S$name-$version -Bbuild \
-     -DCMAKE_INSTALL_PREFIX=/usr
+  [[ -e /usr/bin/ninja ]] && PKGMK_CMATRIX+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_CMATRIX \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+    -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 

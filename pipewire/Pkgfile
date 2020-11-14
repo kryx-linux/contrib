@@ -1,10 +1,10 @@
 # Description: Server and user space API to deal with multimedia pipelines
 # URL: https://pipewire.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: alsa-lib dbus fdk-aac ffmpeg glib gnutls lame libva libvpx libwebp meson ninja x264 x265
+# Depends on: alsa-lib dbus fdk-aac ffmpeg glib gnutls lame libva libvpx libwebp x264 x265
 
 name=pipewire
-version=0.3.13
+version=0.3.15
 release=1
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
@@ -16,11 +16,13 @@ build() {
   [[ -e /usr/include/pulse/glib-mainloop.h ]] || PKGMK_PW+=' -Dpipewire-pulseaudio=false'
   [[ -e /usr/lib/pkgconfig/gstreamer-1.0.pc ]] || PKGMK_PW+=' -Dgstreamer=false'
 
-  meson $name-$version build $PKGMK_PW \
+  meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
+    --buildtype=plain \
+    -D b_ndebug=true \
     -D docs=false \
     -D examples=false \
     -D tests=false
-  ninja -C build
-  DESTDIR=$PKG ninja -C build install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }

@@ -10,7 +10,9 @@ source=(https://github.com/DiffSK/configobj/archive/v$version/configobj-$version
 
 build() {
   cd configobj-$version
-  python3 setup.py install \
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install \
     --optimize=1 \
-    --root=$PKG
+    --root=$PKG \
+    --skip-build
 }
