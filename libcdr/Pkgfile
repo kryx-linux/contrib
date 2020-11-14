@@ -6,13 +6,15 @@
 name=libcdr
 version=0.1.6
 release=1
-source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
+source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
+	libcdr-0.1.6-icu-68.patch)
 
 build() {
   cd $name-$version
+  [ $(pkginfo -i | awk '/^icu / {split($2,a,"."); print a[1]}') -ge 68 ] && \
+    patch -p1 -i $SRC/libcdr-0.1.6-icu-68.patch
   ./configure --prefix=/usr \
-    --without-docs \
-    --without-tests
+    --without-docs
   make
   make DESTDIR=$PKG install
 }
