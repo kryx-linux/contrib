@@ -2,20 +2,25 @@
 # URL: https://github.com/jarun/nnn
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: ncurses readline
-# Optional: patool mediainfo
+# Optional: patool mediainfo icons-in-terminal
 
 name=nnn
-version=3.4
+version=3.5
 release=1
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
 build() {
   cd $name-$version
-  sed -i 's/install: all/install:/' Makefile
-  make
-  make DESTDIR=$PKG PREFIX=/usr install
-  mkdir $PKG/usr/share/nnn
 
+  sed -i 's/install: all/install:/' Makefile
+
+  # build with icons support if contrib/icons-in-terminal is installed
+  [[ -e /usr/share/icons-in-terminal ]] && PKGMK_NNN=' O_ICONS=1'
+
+  make $PKGMK_NNN
+  make DESTDIR=$PKG PREFIX=/usr install
+
+  mkdir $PKG/usr/share/nnn
   # install provided scripts and plugins to $PKG/usr/share
   pushd misc
   for i in $(find . -type d | xargs) ; do
