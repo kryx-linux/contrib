@@ -1,0 +1,19 @@
+# Description: Reader and rewriter of EXIF informations that supports raw files
+# URL: http://search.cpan.org/perldoc?exiftool
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=p5-image-exiftool
+version=12.00
+release=1
+source=(http://search.cpan.org/CPAN/authors/id/E/EX/EXIFTOOL/Image-ExifTool-$version.tar.gz)
+
+build() {
+  cd Image-ExifTool-$version
+  perl Makefile.PL INSTALLDIRS=vendor
+  make
+  make DESTDIR=$PKG install
+  install -dm 755 $PKG/usr/share/$name
+  cp -R fmt_files config_files arg_files $PKG/usr/share/$name
+  find $PKG \( -name '.packlist' -o -name '*.pod' -o -name 'README' \) -delete
+}
