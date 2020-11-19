@@ -4,9 +4,9 @@
 # Depends on:  cmake pango xorg-xcb-util-cursor xorg-xcb-util-keysyms xorg-xcb-util-wm
 
 name=i3
-version=4.18.3
+version=4.19
 release=1
-source=(http://i3wm.org/downloads/$name-$version.tar.bz2
+source=(http://i3wm.org/downloads/$name-$version.tar.xz
         https://github.com/lloyd/yajl/archive/2.1.0/yajl-2.1.0.tar.gz
         http://dist.schmorp.de/libev/Attic/libev-4.33.tar.gz
         http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
@@ -26,17 +26,25 @@ build() {
 
     # libxkbcommon
     cd $SRC/libxkbcommon-1.0.1
-    meson build --prefix=/ --default-library=static -Denable-{wayland,docs}=false
-    ninja -C build -j ${JOBS:-1}
-    DESTDIR=$LIBS ninja -C build install
+    meson setup build . \
+        --prefix=/ \
+        --buildtype=plain \
+        --default-library=static \
+        -D enable-wayland=false \
+        -D enable-docs=false
+    meson compile  -C build -j ${JOBS:-1}
+    DESTDIR=$LIBS meson install -C build
 
     # yajl
     cd $SRC/yajl-2.1.0
-    cmake . -Wno-dev
-    make
-    cp -r yajl-2.1.0/include $LIBS
-    cp yajl-2.1.0/lib/libyajl_s.a $LIBS/lib/libyajl.a
-    cp yajl-2.1.0/share/pkgconfig/yajl.pc $LIBS/lib/pkgconfig
+    cmake -S .  -B build \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+        -Wno-dev
+    cmake --build build
+    cp -r build/yajl-2.1.0/include $LIBS
+    cp build/yajl-2.1.0/lib/libyajl_s.a $LIBS/lib/libyajl.a
+    cp build/yajl-2.1.0/share/pkgconfig/yajl.pc $LIBS/lib/pkgconfig
 
     # libev
     cd $SRC/libev-4.33
@@ -56,10 +64,14 @@ build() {
     cd $SRC/$name-$version
     export CFLAGS="$CFLAGS -I$LIBS/include"
     export LDFLAGS="$LDFLAGS -L$LIBS/lib"
-    export PKG_CONFIG_PATH="$LIBS/lib/pkgconfig"
-    ./configure --prefix=/usr --disable-builddir
-    make
-    make DESTDIR=$PKG install
+    meson setup build . \
+        --prefix=/usr \
+        --sysconfdir=/usr/etc \
+        --buildtype=release \
+        --pkg-config-path="$LIBS/lib/pkgconfig" 
+    meson compile -C build -j ${JOBS:-1}
+    DESTDIR=$PKG meson install -C build
     install -d $PKG/usr/share/man/man1
     install -m 0644 man/*.1 $PKG/usr/share/man/man1/
+    rm -r $PKG/usr/share/doc
 }
