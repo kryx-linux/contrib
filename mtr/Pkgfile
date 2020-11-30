@@ -5,11 +5,14 @@
 
 name=mtr
 version=0.94
-release=1
-source=(https://github.com/traviscross/mtr/archive/v$version/$name-v$version.tar.gz)
+release=2
+source=(https://github.com/traviscross/mtr/archive/v$version/$name-v$version.tar.gz
+	mtr-setcap.patch)
 
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/mtr-setcap.patch
 
 	./bootstrap.sh
 	./configure \
