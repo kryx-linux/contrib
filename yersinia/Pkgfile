@@ -14,7 +14,7 @@ build() {
 	cd $name-$_commit
 
 	# remove default debug/optimization flags
-	sed -i -e "/CFLAGS=\"/s/-O3 -Wall -g /$CFLAGS -Wall /g" configure.ac
+	sed -i -e "/CFLAGS=\"/s/-O3 -Wall -g/$CFLAGS -Wall -fcommon/g" configure.ac
 
 	# font-fix
 	patch -p1 < $SRC/0001-gtk-interface.c-respect-system-font.patch
