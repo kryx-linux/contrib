@@ -18,6 +18,7 @@ build() {
 		--without-gnomeprint \
 		--without-glade
 
+	sed -i '/^CCFLAGS /s/-pipe //' Makefile
 	make OPTIMIZE="$CFLAGS"
 	make install DESTDIR=$PKG
 
