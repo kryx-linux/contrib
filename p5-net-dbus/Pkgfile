@@ -12,6 +12,7 @@ source=(http://search.cpan.org/CPAN/authors/id/D/DA/DANBERR/Net-DBus-$version.ta
 build () {
         cd Net-DBus-$version
         perl Makefile.PL
+        sed -i '/^CCFLAGS /s/-pipe //' Makefile
         make OPTIMIZE="$CFLAGS"
         make DESTDIR=$PKG install
 
