@@ -17,6 +17,7 @@ build() {
         gunzip -c $SRC/makefile.patch.gz  | patch -p1
 
         perl Makefile.PL
+        sed -i '/^CCFLAGS /s/-pipe //' Makefile
         make OPTIMIZE="$CFLAGS"
         make DESTDIR=$PKG install
 
