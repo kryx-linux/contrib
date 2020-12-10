@@ -11,7 +11,7 @@ source=(http://search.cpan.org/CPAN/authors/id/X/XA/XAOC/Pango-$version.tar.gz)
 build() {
 	cd Pango-$version
 	perl Makefile.PL
-
+	sed -i '/^CCFLAGS /s/-pipe //' Makefile
 	make OPTIMIZE="$CFLAGS"
 	make install DESTDIR=$PKG
 
