@@ -13,6 +13,7 @@ build() {
         cd Glib-Object-Introspection-$version
         perl Makefile.PL
 
+        sed -i '/^CCFLAGS /s/-pipe //' Makefile
         make OPTIMIZE="$CFLAGS"
         make install DESTDIR=$PKG
 
