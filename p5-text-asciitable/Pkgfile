@@ -11,7 +11,7 @@ source=(https://cpan.metacpan.org/authors/id/L/LU/LUNATIC/Text-ASCIITable-$versi
 build() {
 	cd Text-ASCIITable-$version
 
-	yes | perl Makefile.PL
+	yes n | perl Makefile.PL
 
 	make
 	make DESTDIR=$PKG install
