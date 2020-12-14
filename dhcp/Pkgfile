@@ -13,7 +13,7 @@ build() {
   cd dhcp-$version
   patch -p1 -i $SRC/default-config.diff
 
-  ./configure --prefix=/usr \
+  CFLAGS="$CFLAGS -fcommon" ./configure --prefix=/usr \
               --sysconfdir=/etc
 
   make -j1
