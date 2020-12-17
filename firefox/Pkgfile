@@ -5,20 +5,16 @@
 # Optional: sccache
 
 name=firefox
-version=83.0
-release=2
+version=84.0
+release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/$version/source/firefox-$version.source.tar.xz
 	firefox.desktop
-	0001-Use-remoting-name-for-GDK-application-names.patch
-	0002-Bug-1667736-Update-packed_simd.patch)
+	0001-Use-remoting-name-for-GDK-application-names.patch)
 build() {
 	cd firefox-$version
 
 	# https://bugzilla.mozilla.org/show_bug.cgi?id=1530052
 	patch -p1 -i $SRC/0001-Use-remoting-name-for-GDK-application-names.patch
-
-	# Fix build with Rust 1.48 https://bugs.archlinux.org/task/68747
-	patch -p1 -i $SRC/0002-Bug-1667736-Update-packed_simd.patch
 
 	if [ $(/usr/bin/python -c "import sys; print sys.stdout.encoding") = 'UTF-8' ]; then
 		printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
