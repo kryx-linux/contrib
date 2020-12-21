@@ -5,17 +5,15 @@
 # Optional: mpd fftw taglib
 
 name=ncmpcpp
-version=0.8.2
-release=3
-source=(https://github.com/arybczak/$name/archive/$version/$name-$version.tar.gz
-  gcc10.patch)
+version=0.9
+release=1
+source=(https://github.com/arybczak/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
   [[ -e /usr/lib/pkgconfig/fftw3.pc ]] && PKGMK_NCMPCPP+=' --with-fftw --enable-visualizer'
   [[ -e /usr/lib/pkgconfig/taglib.pc ]] && PKGMK_NCMPCPP+=' --with-taglib'
-  patch -Np1 -i $SRC/gcc10.patch
   ./autogen.sh
   ./configure $PKGMK_NCMPCPP \
     --prefix=/usr \
