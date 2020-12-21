@@ -10,6 +10,7 @@ source=(https://github.com/open-iscsi/open-isns/archive/v$version/$name-$version
 build() {
   cd $name-$version
 
+  CFLAGS+=' -Wno-error=deprecated-declarations'
   ./configure --prefix=/usr
 
   make
