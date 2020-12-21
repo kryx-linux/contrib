@@ -6,12 +6,18 @@
 
 name=obs-studio
 version=25.0.8
-release=1
-source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz
+	c7f84f8fc4e90ef779a204ac268f5ee1a962e324.patch
+	fix_python_binary_loading.patch)
 
 build() {
 #	cmake ..
 #	cmake -LA
+
+	# https://github.com/obsproject/obs-studio/commit/c7f84f8fc4e90ef779a204ac268f5ee1a962e324
+	patch -d $name-$version -p1 -i $SRC/c7f84f8fc4e90ef779a204ac268f5ee1a962e324.patch
+	patch -d $name-$version -p1 -i $SRC/fix_python_binary_loading.patch
 
 	cmake -S $name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
