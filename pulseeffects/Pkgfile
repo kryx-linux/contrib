@@ -5,7 +5,7 @@
 # Optional: calf mda.lv2 rubberband vamp-plugin-sdk zam-plugins zita-convolver libbs2b lilv
 
 name=pulseeffects
-version=4.8.2
+version=4.8.3
 release=1
 source=(https://github.com/wwmm/pulseeffects/archive/v$version/$name-$version.tar.gz)
 
@@ -13,8 +13,7 @@ build() {
   meson setup $name-$version build \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --buildtype=plain \
-    -Db_ndebug=true
+    --buildtype=plain
   meson compile -C build
   DESTDIR=$PKG meson install -C build
   rm -fr $PKG/usr/share/{locale,help}
