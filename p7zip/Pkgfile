@@ -5,11 +5,12 @@
 
 name=p7zip
 version=16.02
-release=2
+release=3
 source=(https://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version}_src_all.tar.bz2
 	CVE-2016-9296.patch
 	CVE-2017-17969.patch
-	CVE-2018-5996.patch)
+	CVE-2018-5996.patch
+	CPP_Windows_ErrorMsg.patch)
 
 build() {
 	cd ${name}_$version
@@ -23,6 +24,10 @@ build() {
 	# https://nvd.nist.gov/vuln/detail/CVE-2018-5996
 	patch -p1 -i $SRC/CVE-2018-5996.patch
 
+	# fix build against gcc 10
+	patch -p0 -i $SRC/CPP_Windows_ErrorMsg.patch
+
+	sed -i 's/ -pipe / /g' makefile.*
 	cp makefile.linux_amd64_asm makefile.machine
 
 	make all3 OPTFLAGS="$CFLAGS"
