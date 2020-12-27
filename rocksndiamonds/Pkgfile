@@ -4,21 +4,19 @@
 # Depends on: sdl2_image sdl2_mixer sdl2_net
 
 name=rocksndiamonds
-version=4.2.1.0
+version=4.2.2.0
 release=1
-source=(https://www.artsoft.org/RELEASES/unix/rocksndiamonds/rocksndiamonds-$version.tar.gz)
+source=(https://www.artsoft.org/RELEASES/unix/rocksndiamonds/$name-$version.tar.gz
+	rocksndiamonds.desktop)
 
 build() {
-	cd rocksndiamonds-$version
+	cd $name-$version
 
-	sed -i src/Makefile \
-		-e '/^OPTIONS = $(DEBUG) -Wall.*$/d' \
-		-e "/^OPTIONS = -O3 -Wall/s/-O3 -Wall/$CFLAGS -Wall -O3/"
-
-	export BUILD_DIST=1
-	export RO_GAME_DIR='/usr/share/rocksndiamonds'
-	export RW_GAME_DIR='/var/lib/games/rocksndiamonds'
-	make
+	make \
+	RO_GAME_DIR='/usr/share/rocksndiamonds' \
+	RW_GAME_DIR='/var/lib/games/rocksndiamonds' \
+	EXTRA_CFLAGS="$CFLAGS" \
+	EXTRA_LDFLAGS="$LDFLAGS"
 
 	install -d \
 		$PKG/usr/share/rocksndiamonds/graphics \
@@ -34,11 +32,7 @@ build() {
 
 	#cp -r scores $PKG/var/lib/games/rocksndiamonds
 	install -D -m 0755 rocksndiamonds $PKG/usr/bin/rocksndiamonds
+	install -D -m 0644 $SRC/rocksndiamonds.desktop $PKG/usr/share/applications/rocksndiamonds.desktop
 
 	rm $PKG/usr/share/rocksndiamonds/levels/Tutorials/rnd_tutorial_niko_boehm/README
-
-	unset BUILD_DIST
-	unset RO_GAME_DIR
-	unset RW_GAME_DIR
 }
-
