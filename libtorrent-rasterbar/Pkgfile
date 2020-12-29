@@ -4,10 +4,11 @@
 # Depends on: boost
 
 name=libtorrent-rasterbar
-version=1.2.10
-release=2
-source=(https://github.com/arvidn/libtorrent/releases/download/libtorrent-$version/$name-$version.tar.gz
-	libtorrent-rasterbar-cxx14-fix.patch)
+version=1.2.11
+release=1
+source=(https://github.com/arvidn/libtorrent/releases/download/v$version/$name-$version.tar.gz
+	libtorrent-rasterbar-cxx14-fix.patch
+	really-disable-debug-flags.patch)
 
 build() {
 	cd $name-$version
@@ -15,15 +16,15 @@ build() {
 	# https://github.com/arvidn/libtorrent/issues/5024
 	patch -p1 -i $SRC/libtorrent-rasterbar-cxx14-fix.patch
 
-	export PYTHON='/usr/bin/python3'
-	mkdir $SRC/bin
-	ln -s /usr/bin/python3 $SRC/bin/python
-	export PATH="$SRC/bin:$PATH"
+	patch -p1 -i $SRC/really-disable-debug-flags.patch
+	autoreconf -fi
 
+	PYTHON='/usr/bin/python3' \
 	./configure \
 		--prefix=/usr \
 		--enable-python-binding \
 		--with-libiconv \
+		--enable-python-binding \
 		--with-boost-python=boost_python3
 
 	make
