@@ -1,0 +1,16 @@
+README for dma
+
+  The DragonFly Mail Agent does not listen on ports and therefore
+  does not handle incoming mail.  It can handle a local system
+  and will send out mails when online.  Queue as below.
+  Aliases can reside in /etc/aliases (by default).
+
+  MBOX mailboxes will be created with mode 0620.
+  Dma does not provide a daemon, so in order to get messages
+  flushed out a crontab entry is used (via post-install).
+
+  You can add a sendmail prt-get alias, too:
+
+    $ echo dma: sendmail >> /var/lib/pkg/prt-get.aliases
+
+# s-tm-mode

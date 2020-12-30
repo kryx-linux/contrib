@@ -1,0 +1,27 @@
+# Description: DragonFly Mail Agent, a local MTA (not listening, but sending)
+# URL:         https://github.com/corecode/dma
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# Depends on:  openssl
+
+name=dma
+version=20200904
+gitver=e09aa9e0a3a0f91a06d12008b9d8fbfa4ec355bd
+release=1
+source=(https://github.com/corecode/$name/archive/$gitver/$name-$version.tar.gz
+      post-install)
+
+build() {
+   cd $name-$gitver
+
+   make PREFIX=/usr LIBEXEC=/usr/lib/dma CONFDIR=/usr/etc/ \
+         DESTDIR=$PKG \
+      all install install-etc
+
+   ln -s -f dma "$PKG"/usr/sbin/sendmail
+
+	mkdir -p "$PKG"/var/spool/dma
+	chown root:mail "$PKG"/var/spool/dma
+	chmod 2770 "$PKG"/var/spool/dma
+}
+
+# s-sh-mode
