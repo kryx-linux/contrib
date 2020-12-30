@@ -1,0 +1,18 @@
+# Description: Linux port of the OpenBSD window manager
+# URL:         https://github.com/leahneukirchen/cwm
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# Depends on:  pkg-config xorg-libx11 xorg-libxft xorg-xrandr
+
+name=cwm
+version=20200522
+gitver=9fb725f417a5cee1be4a768c94e49c4f0ce65dcf
+release=1
+source=(https://github.com/leahneukirchen/${name}/archive/${gitver}/${name}-${version}.tar.gz)
+
+build() {
+   cd ${name}-${gitver}
+
+   make PREFIX=/usr DESTDIR="$PKG" install
+}
+
+# s-sh-mode
