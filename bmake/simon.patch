@@ -1,0 +1,12 @@
+diff -Napru bmake.orig/mk/sys.mk bmake/mk/sys.mk
+--- bmake.orig/mk/sys.mk	2020-08-19 19:52:06.000000000 +0200
++++ bmake/mk/sys.mk	2020-12-22 20:24:45.701882157 +0100
+@@ -119,7 +119,7 @@ unix ?= We run ${_HOST_OSNAME}.
+ 
+ # We need a Bourne/POSIX shell
+ MAKE_SHELL ?= sh
+-SHELL ?= ${MAKE_SHELL}
++SHELL := ${.SHELL}
+ 
+ # A race condition in mkdir, means that it can bail if another
+ # process made a dir that mkdir expected to.
