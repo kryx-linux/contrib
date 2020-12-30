@@ -1,0 +1,22 @@
+# Description: Tiny C Compiler - C Scripting Everywhere
+# URL:         https://repo.or.cz/tinycc.git/
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+
+name=tcc
+version=20201211
+gitver=f233cb182c7168a0705f82aa293ec36478a022c1
+release=1
+source=(https://repo.or.cz/tinycc.git/snapshot/$gitver.tar.gz)
+
+build() {
+   cd tinycc-*
+
+   ./configure --prefix=/usr
+
+   sed -i -E 's/^TCCDOCS.*$/TCCDOCS = tcc.1/' Makefile
+
+   make MAKEFLAGS="$MAKEFLAGS" &&
+      make DESTDIR="$PKG" install
+}
+
+# s-sh-mode
