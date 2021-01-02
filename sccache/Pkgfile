@@ -5,18 +5,19 @@
 
 name=sccache
 version=0.2.14
-release=1
+release=2
 source=(https://github.com/mozilla/sccache/archive/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-
 	prt-get isinst sccache && export RUSTC_WRAPPER='/usr/bin/sccache'
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-	cargo fetch
-	cargo build --release
-	cargo install --path . --root $PKG/usr
-	rm $PKG/usr/{.crates.toml,.crates2.json}
+	cargo fetch --manifest-path $name-$version/Cargo.toml --locked
+
+	cargo build --manifest-path $name-$version/Cargo.toml --release --frozen \
+		--features all --features native-zlib
+
+	cargo install --path $name-$version --root $PKG/usr --frozen --no-track --offline \
+		--features all --features native-zlib
 }
