@@ -4,14 +4,12 @@
 # Depends on:
 
 name=lpsolve
-version=5.5.2.5
+version=5.5.2.11
 release=1
-source=(http://downloads.sourceforge.net/project/lpsolve/lpsolve/$version/lp_solve_"$version"_source.tar.gz cflags.patch lpsolve-5.5.2.0.defines.patch)
+source=(http://downloads.sourceforge.net/project/lpsolve/lpsolve/$version/lp_solve_"$version"_source.tar.gz)
 
 build() {
   cd lp_solve_${version:0:3}
-  patch -Np1 -i $SRC/cflags.patch
-  patch -Np1 -i $SRC/lpsolve-5.5.2.0.defines.patch
   cd lpsolve55
   sh -x ccc
   cd ../lp_solve
