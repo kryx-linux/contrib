@@ -1,22 +1,25 @@
-# Description: a Mixed Integer Linear Programming (MILP) solver
+# Description: A Mixed Integer Linear Programming (MILP) solver
 # URL: http://lpsolve.sourceforge.net/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on:
 
 name=lpsolve
 version=5.5.2.11
-release=1
-source=(http://downloads.sourceforge.net/project/lpsolve/lpsolve/$version/lp_solve_"$version"_source.tar.gz)
+release=2
+source=(https://downloads.sourceforge.net/project/lpsolve/lpsolve/$version/lp_solve_"$version"_source.tar.gz)
 
 build() {
   cd lp_solve_${version:0:3}
-  cd lpsolve55
-  sh -x ccc
-  cd ../lp_solve
-  sh -x ccc
-  cd ..
+
+  sed -e "s|^\(opts=\).*|\1'$CFLAGS'|" -i lpsolve55/ccc lp_solve/ccc
+
+  ( cd lpsolve55
+  sh -x ccc )
+
+  ( cd lp_solve
+  sh -x ccc )
+
   install -dm755 $PKG/usr/{bin,lib,include/lpsolve}
-  install -m755 lp_solve/bin/ux*/lp_solve $PKG/usr/bin/
-  install -m755 lpsolve55/bin/ux*/liblpsolve55.so $PKG/usr/lib/
-  install -m644 lp*.h $PKG/usr/include/lpsolve/
+  install -m755 -t $PKG/usr/bin lp_solve/bin/ux*/lp_solve
+  install -m755 -t $PKG/usr/lib lpsolve55/bin/ux*/liblpsolve55.so
+  install -m644 -t $PKG/usr/include/lpsolve lp*.h
 }
