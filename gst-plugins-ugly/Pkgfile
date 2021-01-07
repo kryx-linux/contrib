@@ -4,7 +4,7 @@
 # Depends on: gst-plugins-base liba52 libcdio libdvdread libmpeg2 opencore-amr x264
 
 name=gst-plugins-ugly
-version=1.18.1
+version=1.18.2
 release=1
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
@@ -14,7 +14,7 @@ build() {
 	meson build \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
-		-D buildtype=release \
+		-D buildtype=plain \
 		-D gtk_doc=disabled \
 		-D nls=disabled \
 		-D package-name="GStreamer (CRUX Linux)" \
