@@ -2,10 +2,11 @@
 # URL: https://pipewire.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: alsa-lib dbus fdk-aac ffmpeg glib gnutls lame libva libvpx libwebp x264 x265
+# Optional: bluez gst-plugins-base jack pulseaudio v4l2 vulkan-loader
 
 name=pipewire
 version=0.3.19
-release=1
+release=2
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
 build() {
@@ -21,8 +22,10 @@ build() {
     --buildtype=plain \
     -D b_ndebug=true \
     -D docs=false \
-    -D examples=false \
     -D tests=false
+  # will remove executable pipewire-media-session
+  #  -D examples=false \
+
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
