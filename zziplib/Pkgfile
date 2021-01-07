@@ -1,29 +1,24 @@
 # Description: ZIP-access Library with Easy-to-use API
 # URL:         https://github.com/gdraheim/zziplib
 # Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
-# Depends on:  zlib python
+# Depends on:  cmake python3 zlib
 
 name=zziplib
-version=0.13.71
+version=0.13.72
 release=1
 source=(https://github.com/gdraheim/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	[[ -e /usr/bin/ninja ]] && PKGMK_ZZIPLIB+=' -G Ninja'
 
-	# docs building currently broken for almost 1/6 or more of manpages
-	# TODO: troubleshoot and report upstream
-	sed -i -e 's,^\(SUBDIRS = .*\) docs\(.*\)$,\1\2,' \
-		-e 's,^\(DIST_SUBDIRS = .*\) docs\(.*\)$,\1\2,' Makefile.in
+	cmake -S $name-$version -B build $PKGMK_ZZIPLIB \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D ZZIPTEST=OFF \
+		-Wno-dev
 
-	mkdir build
-	cd build
-
-	CONFIG_SHELL=/bin/bash \
-	../configure \
-		--prefix=/usr \
-		--disable-static
-
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 }
