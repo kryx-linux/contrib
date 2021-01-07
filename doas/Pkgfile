@@ -1,0 +1,20 @@
+# Description: A port of OpenBSD's doas
+# URL: https://github.com/slicer69/doas
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: linux-pam
+
+name=doas
+version=6.3p2
+release=1
+source=(https://github.com/slicer69/doas/archive/$version/$name-$version.tar.gz
+  #shamelessly grabbed from archs aur
+  doas-pam doas.conf Makefile.patch)
+
+build() {
+  cd $name-$version
+  patch -Np0 -i $SRC/Makefile.patch
+  make
+  make DESTDIR=$PKG install
+  install -Dm644 $SRC/doas.conf $PKG/etc/doas.conf
+  install -Dm644 $SRC/doas-pam $PKG/etc/pam.d/doas
+}
