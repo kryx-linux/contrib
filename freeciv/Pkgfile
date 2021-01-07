@@ -2,21 +2,22 @@
 # URL:         http://www.freeciv.org
 # Packager:    James Mills, prologic at shortcircuit dot net dot au
 # Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  gtk3 lua sdl2_mixer xorg-libxaw xorg-libxpm
+# Depends on:  gtk3 sdl2_mixer xorg-libxaw xorg-libxpm
 
 name=freeciv
-version=2.6.2
+version=2.6.3
 release=1
 source=(http://prdownloads.sf.net/freeciv/$name-$version.tar.bz2)
 
 build() {
    cd $name-$version
+   CFLAGS+=' -Wno-cpp' \
    ./configure --prefix=/usr \
      --enable-shared \
-     --enable-sys-lua \
      --enable-client=gtk3 \
      --enable-fcmp=gtk3 \
-     --without-ggz-client
+     --without-ggz-client \
+     --disable-nls
    make
    make DESTDIR=$PKG install
    rm -rf $PKG/usr/share/{locale,doc}
