@@ -1,0 +1,20 @@
+# Description: LDAC Bluetooth encoder library
+# URL: https://github.com/EHfive/ldacBT
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake
+
+name=libldac
+version=2.0.2.3
+release=1
+source=(https://github.com/EHfive/ldacBT/releases/download/v$version/ldacBT-$version.tar.gz)
+
+build() {
+  [[ -e /usr/bin/ninja ]] && PKGMK_LIBLDAC+=' -G Ninja'
+  cmake -S ldacBT -B build $PKGMK_LIBLDAC \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
