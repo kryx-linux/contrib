@@ -4,7 +4,7 @@
 # Depends on: gst-plugins-base python3-gobject
 
 name=gst-python3
-version=1.18.1
+version=1.18.2
 release=1
 source=(https://gstreamer.freedesktop.org/src/gst-python/gst-python-$version.tar.xz)
 
@@ -14,7 +14,7 @@ build() {
 	meson build \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
-		-D buildtype=release \
+		-D buildtype=plain \
 		-D python=/usr/bin/python3
 
 	ninja -C build -j ${JOBS:-1}
@@ -22,4 +22,5 @@ build() {
 
 	/usr/bin/python3 -m compileall -d /usr/lib $PKG/usr/lib
 	/usr/bin/python3 -O -m compileall -d /usr/lib $PKG/usr/lib
+	/usr/bin/python3 -OO -m compileall -d /usr/lib $PKG/usr/lib
 }
