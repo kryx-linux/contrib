@@ -1,0 +1,13 @@
+# Description: Open Source aptX codec library
+# URL: https://github.com/pali/libopenaptx
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=libopenaptx
+version=0.2.0
+release=1
+source=(https://github.com/pali/libopenaptx/releases/download/$version/libopenaptx-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  CC=cc make DESTDIR=$PKG PREFIX=/usr install
+}
