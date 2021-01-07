@@ -1,19 +1,17 @@
 # Description:  Secure Realtime transport protocol library
 # URL: https://github.com/cisco/libsrtp
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on:
 
 name=libsrtp
 version=2.3.0
-release=2
-source=(#https://github.com/cisco/libsrtp/archive/v$version/$name-$version.tar.gz)
-  # ugly fix, but hey.. let's wait for a release here
-  https://github.com/cisco/libsrtp/archive/7d351de8177b33c96669bb79dc684a8dc64c2483/$name-$version-1.tar.gz)
+release=3
+source=(https://github.com/cisco/libsrtp/archive/v$version/$name-$version.tar.gz
+  libsrtp-2.3.0-shared-fix.patch)
 
 build() {
-  #cd $name-$version
-  cd $name-7d351de8177b33c96669bb79dc684a8dc64c2483
-  autoreconf -fvi
+  cd $name-$version
+  patch -p1 -i $SRC/libsrtp-2.3.0-shared-fix.patch
+  CFLAGS+=' -fcommon' \
   ./configure \
     --prefix=/usr \
     --enable-openssl
