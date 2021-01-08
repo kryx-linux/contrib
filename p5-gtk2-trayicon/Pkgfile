@@ -4,9 +4,9 @@
 # Depends on:  p5-gtk2 p5-module-install
 
 name=p5-gtk2-trayicon
-version=0.06
+version=0.07
 release=1
-source=(https://cpan.metacpan.org/authors/id/B/BO/BORUP/Gtk2-TrayIcon-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/X/XA/XAOC/Gtk2-TrayIcon-$version.tar.gz)
 
 build () {
 	cd Gtk2-TrayIcon-$version
@@ -28,5 +28,5 @@ build () {
 	| xargs rm -f
 
 	# remove empty dirs
-	find $PKG -depth -type d -empty -delete
+	find $PKG -depth -type d -empty -exec rmdir {} \;
 }
