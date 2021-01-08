@@ -1,0 +1,78 @@
+# Description: an open-source systems monitoring and alerting toolkit
+# URL: https://prometheus.io
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: go yarn
+
+name=prometheus
+version=2.24.0
+release=1
+source=(https://github.com/prometheus/prometheus/archive/v$version/$name-$version.tar.gz
+  prometheus.conf prometheus.service)
+
+build() {
+  cd $name-$version
+
+  cd web/ui/react-app
+  yarn --frozen-lockfile
+  yarn lint
+  cd ../../../
+  ./scripts/build_react_app.sh
+  cd web/ui
+  CGO_ENABLED=0 GOARCH= go generate -x -v
+
+  cd ../../
+  gofmt -w ./web/ui
+
+  GOLDFLAGS="-X github.com/prometheus/common/version.Version=$version
+    -X github.com/prometheus/common/version.Revision=CRUX
+    -X github.com/prometheus/common/version.Branch=master
+    -X github.com/prometheus/common/version.BuildUser=$USER@$HOSTNAME
+    -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S ${SOURCE_DATE_EPOCH:+-d @$SOURCE_DATE_EPOCH})
+    "
+
+  if [ -n $LDFLAGS ]; then
+    # LDFLAGS (and only LDFLAGS) should be passed to -extldflags.
+    GOLDFLAGS="$GOLDFLAGS -extldflags $LDFLAGS"
+  fi
+
+  go build \
+    -trimpath \
+    -mod=vendor \
+    -ldflags "$GOLDFLAGS" \
+    -tags netgo,builtinassets \
+    ./cmd/prometheus
+  go build \
+    -trimpath \
+    -mod=vendor \
+    -ldflags "$GOLDFLAGS" \
+    ./cmd/promtool
+
+  install -Dm755 -t $PKG/usr/bin prometheus promtool
+
+  install -Dm644 $SRC/prometheus.conf \
+    $PKG/etc/conf.d/prometheus
+  install -dm644 $PKG/var/lib/prometheus/data
+
+  install -Dm644 -t $PKG/etc/prometheus \
+    documentation/examples/prometheus.yml
+
+  mkdir -p $PKG/etc/prometheus/console_libraries
+  for file in console_libraries/*
+  do
+    install -Dm644 -t $PKG/etc/prometheus/console_libraries/ $file
+  done
+
+  mkdir -p $PKG/etc/prometheus/consoles
+  for file in consoles/*
+  do
+    install -Dm644 -t $PKG/etc/prometheus/consoles/ $file
+  done
+
+  ## web
+  install -dm755 $PKG/usr/share/prometheus/web/ui
+  cp -R web/ui/{static,templates} $PKG/usr/share/prometheus/web/ui/
+  install -Dm644 $SRC/prometheus.conf $PKG/etc/conf.d/prometheus
+
+  ## install rc file
+  install -Dm 755 $SRC/prometheus.service $PKG/etc/rc.d/prometheus
+}
