@@ -1,0 +1,40 @@
+# Description: Scalable datastore for metrics, events, and real-time analytics
+# URL: https://github.com/InfluxData/influxdb
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: go
+
+name=influxdb
+version=1.8.3
+release=1
+source=(https://github.com/influxdata/influxdb/archive/v$version/$name-$version.tar.gz
+  influxdb.service)
+
+build() {
+  cd $name-$version
+  mkdir -p build
+
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+
+  go build -v -o build ./cmd/...
+
+  ## needs asciidoc
+  ## and fails when it gets it
+  #make -C man
+
+  install -d $PKG/usr/bin/
+  install -Dm755 build/influx         $PKG/usr/bin/
+  install -Dm755 build/influxd        $PKG/usr/bin/
+  install -Dm755 build/influx_inspect $PKG/usr/bin/
+  install -Dm755 build/influx_stress  $PKG/usr/bin/
+  install -Dm755 build/influx_tools   $PKG/usr/bin/
+  install -Dm755 build/influx_tsm     $PKG/usr/bin/
+
+  install -Dm644 etc/config.sample.toml   $PKG/etc/influxdb/influxdb.conf
+
+  ## install rc file
+  install -Dm 755 $SRC/influxdb.service $PKG/etc/rc.d/influxdb
+}
