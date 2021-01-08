@@ -4,17 +4,18 @@
 # Depends on: crypto++ wxgtk
 
 name=amule
-version=11025
+version=11066
 release=1
-source=(https://repo.or.cz/amule.git/snapshot/314e62e87ff0481d3171f74751aaf0179e518765.tar.gz)
+source=(https://repo.or.cz/amule.git/snapshot/7744fca103ef84bcd9d92792e5afb5d3957d44b5.tar.gz)
 #https://downloads.sourceforge.net/project/amule/aMule/$version/aMule-$version.tar.bz2
 
 build() {
-	cd amule-314e62e
+	cd amule-*
 	#cd aMule-$version
 
 	./configure \
 		--prefix=/usr \
+		--enable-optimize \
 		--disable-nls
 
 	make
