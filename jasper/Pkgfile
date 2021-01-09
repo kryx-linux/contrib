@@ -4,7 +4,7 @@
 # Depends on: freeglut libjpeg-turbo xorg-libxmu
 
 name=jasper
-version=2.0.23
+version=2.0.24
 release=1
 source=(https://github.com/jasper-software/jasper/archive/version-$version/$name-$version.tar.gz
 	jasper-1.900.1-fix-filename-buffer-overflow.patch)
@@ -18,24 +18,24 @@ build() {
 	mkdir -p build-{shared,static}
 
 	local config="
--DCMAKE_INSTALL_PREFIX=/usr
--DCMAKE_INSTALL_LIBDIR=lib
--DCMAKE_BUILD_TYPE=Release
--DJAS_ENABLE_OPENGL=ON
--DJAS_ENABLE_LIBJPEG=ON
--DJAS_ENABLE_AUTOMATIC_DEPENDENCIES=OFF
--DCMAKE_SKIP_RPATH=ON
--DOpenGL_GL_PREFERENCE=GLVND"
+-D CMAKE_INSTALL_PREFIX=/usr
+-D CMAKE_INSTALL_LIBDIR=lib
+-D CMAKE_BUILD_TYPE=Release
+-D JAS_ENABLE_OPENGL=ON
+-D JAS_ENABLE_LIBJPEG=ON
+-D JAS_ENABLE_AUTOMATIC_DEPENDENCIES=OFF
+-D CMAKE_SKIP_RPATH=ON
+-D OpenGL_GL_PREFERENCE=GLVND"
 
 	#build static lib
-	(cd build-static
-	cmake .. $config -DJAS_ENABLE_SHARED=OFF
+	( cd build-static
+	cmake .. $config -D JAS_ENABLE_SHARED=OFF
 	make
 	)
 
 	#build shared lib
-	(cd build-shared
-	cmake .. $config -DJAS_ENABLE_SHARED=ON
+	( cd build-shared
+	cmake .. $config -D JAS_ENABLE_SHARED=ON
 	make
 	)
 
