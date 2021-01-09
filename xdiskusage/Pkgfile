@@ -4,14 +4,14 @@
 # Depends on: fltk
 
 name=xdiskusage
-version=1.53
+version=1.54
 release=1
 source=(http://xdiskusage.sourceforge.net/$name-$version.tgz)
 
 build() {
 	cd $name-$version
 	./configure --prefix=/usr
-	make
+	make CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS"
 	install -D -m 0755 -o root -g root -s xdiskusage $PKG/usr/bin/xdiskusage
 	install -D -m 0644 -o root -g root xdiskusage.1 $PKG/usr/share/man/man1/xdiskusage.1
 }
