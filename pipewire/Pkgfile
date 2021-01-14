@@ -6,7 +6,7 @@
 
 name=pipewire
 version=0.3.19
-release=2
+release=3
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
 build() {
@@ -28,4 +28,9 @@ build() {
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  # enable alsa by default
+  mkdir -p $PKG/etc/alsa/conf.d
+  touch $PKG/etc/pipewire/media-session.d/with-alsa
+  ln -st $PKG/etc/alsa/conf.d /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
 }
