@@ -4,12 +4,12 @@
 # Depends on:  openssl
 
 name=hcxdumptool
-version=6.1.4
+version=6.1.5
 release=1
 source=(https://github.com/ZerBea/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	make INSTALLDIR=$PKG/usr/bin install
+	make BINDIR=$PKG/usr/bin install
 }
