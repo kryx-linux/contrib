@@ -1,21 +1,22 @@
-# Description: filezilla common library
-# URL: https://filezilla-project.org
-# Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: clang gnutls libidn2
+# Description: Small and modern C++ library, which offers some basic functionalities
+# URL:         https://lib.filezilla-project.org/
+# Maintainer:  UNMAINTAINED
+# Depends on:  gnutls
 
 name=libfilezilla
 version=0.26.0
-release=1
+release=2
 source=(https://download.filezilla-project.org/$name/$name-$version.tar.bz2)
 
 build() {
-  cd $name-$version
-  export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
-  autoreconf -vfi
-  ./configure \
-    --prefix=/usr \
-    --disable-static
-  make
-  make DESTDIR=$PKG install
-  rm -rf $PKG/usr/share/locale
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr          \
+		--disable-doxygen-doc  \
+		--disable-locales      \
+		--disable-static       \
+
+	make
+	make DESTDIR=$PKG install
 }
