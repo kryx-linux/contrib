@@ -5,13 +5,17 @@
 # Optional: quazip5
 
 name=keepassxc
-version=2.6.2
+version=2.6.3
 release=1
-source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$name-$version-src.tar.xz)
+source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$name-$version-src.tar.xz
+  keepassxc-quazip1.patch)
 
 build() {
   [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   [[ -e /usr/lib/ccache ]] && PKGMK_KEEPASSXC+=' -D WITH_CCACHE=ON'
+
+  patch -Np1 -d $name-$version -i $SRC/keepassxc-quazip1.patch
+
   cmake -S $name-$version -B build -G Ninja $PKGMK_KEEPASSXC \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
