@@ -6,11 +6,20 @@
 
 name=boost
 version=1.75.0
-release=1
-source=(https://dl.bintray.com/boostorg/release/$version/source/${name}_${version//./_}.tar.bz2)
+release=2
+source=(https://dl.bintray.com/boostorg/release/$version/source/${name}_${version//./_}.tar.bz2
+	boost-1.74-CVE-2012-2677.patch
+	boost-1.71.0-disable_icu_rpath.patch
+	boost-ublas-c++20-iterator.patch)
 
 build() {
 	cd ${name}_${version//./_}
+
+	patch -p1 -i $SRC/boost-1.74-CVE-2012-2677.patch
+	patch -p1 -i $SRC/boost-1.71.0-disable_icu_rpath.patch
+
+	# https://github.com/boostorg/ublas/commit/a31e5cffa85f.patch
+	patch -p2 -i $SRC/boost-ublas-c++20-iterator.patch
 
        local config="
 variant=release \
@@ -27,6 +36,9 @@ toolset=gcc \
 
 	./b2 stage $config python="$pyver2"
 	./b2 install threading=multi link=shared
+
+	install -m 0755 -D b2 $PKG/usr/bin/b2
+	ln -s b2 $PKG/usr/bin/bjam
 
 	##
 	./bootstrap.sh --prefix=$PKG/usr --with-toolset=gcc $ICU --with-python=/usr/bin/python3 --with-libraries=python
