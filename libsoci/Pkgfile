@@ -1,0 +1,29 @@
+# Description: a database access library for C++
+# URL: http://soci.sourceforge.net/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: boost cmake postgresql zlib
+# Optional: mysql unixodbc
+
+name=libsoci
+version=4.0.1
+release=1
+source=(https://downloads.sourceforge.net/project/soci/soci/soci-4.0.1/soci-$version.tar.gz)
+
+build() {
+  [[ -e /usr/bin/ninja ]] && PKGMK_LIBSOCI+=' -G Ninja'
+
+  cmake -S soci-$version -B build $PKGMK_LIBSOCI \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D SOCI_LIBDIR=lib \
+    -D CMAKE_PREFIX_PATH=/usr/lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D WITH_POSTGRESQL=ON \
+    -D SOCI_CXX11=ON \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+
+  # https://github.com/SOCI/soci/issues/849
+  mv $PKG/usr/cmake $PKG/usr/lib/cmake
+}
