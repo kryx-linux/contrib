@@ -1,0 +1,52 @@
+diff --git a/dependencies/common/install-pandoc b/dependencies/common/install-pandoc
+index e10e4dd44d..a0342d1d4f 100755
+--- a/dependencies/common/install-pandoc
++++ b/dependencies/common/install-pandoc
+@@ -20,7 +20,7 @@ set -e
+ source rstudio-tools
+ 
+ # variables that control download + installation process
+-PANDOC_VERSION="2.11.2"
++PANDOC_VERSION="2.11.3.2"
+ PANDOC_SUBDIR="pandoc/${PANDOC_VERSION}"
+ PANDOC_URL_BASE="https://s3.amazonaws.com/rstudio-buildtools/pandoc/${PANDOC_VERSION}"
+ 
+diff --git a/dependencies/tools/upload-pandoc.sh b/dependencies/tools/upload-pandoc.sh
+index 48e9deb412..6848f7b401 100755
+--- a/dependencies/tools/upload-pandoc.sh
++++ b/dependencies/tools/upload-pandoc.sh
+@@ -8,7 +8,7 @@
+ # filenames, so tweaking for new releases is expected.
+ 
+ # Modify to set the Pandoc version to upload
+-PANDOC_VERSION=2.11.2
++PANDOC_VERSION=2.11.3.2
+ 
+ for PLATFORM in linux-amd64.tar.gz macOS.zip windows-x86_64.zip; do
+ 
+diff --git a/dependencies/windows/install-dependencies.cmd b/dependencies/windows/install-dependencies.cmd
+index 197ef55932..43c429c65b 100644
+--- a/dependencies/windows/install-dependencies.cmd
++++ b/dependencies/windows/install-dependencies.cmd
+@@ -19,7 +19,7 @@ set WINPTY_FILES=winpty-0.4.3-msys2-2.7.0.zip
+ set OPENSSL_FILES=openssl-1.1.1d.zip
+ set BOOST_FILES=boost-1.69.0-win-msvc141.zip
+ 
+-set PANDOC_VERSION=2.11.2
++set PANDOC_VERSION=2.11.3.2
+ set PANDOC_NAME=pandoc-%PANDOC_VERSION%
+ set PANDOC_FILE=%PANDOC_NAME%-windows-x86_64.zip
+ 
+diff --git a/src/cpp/session/CMakeLists.txt b/src/cpp/session/CMakeLists.txt
+index 6efb62559f..0a1a052111 100644
+--- a/src/cpp/session/CMakeLists.txt
++++ b/src/cpp/session/CMakeLists.txt
+@@ -25,7 +25,7 @@ endif()
+ if(NOT EXISTS "${RSTUDIO_DEPENDENCIES_DIR}/common/mathjax-27")
+   message(FATAL_ERROR "Mathjax 2.7 not found (re-run install-dependencies script to install)")
+ endif()
+-set(PANDOC_VERSION "2.11.2" CACHE INTERNAL "Pandoc version")
++set(PANDOC_VERSION "2.11.3.2" CACHE INTERNAL "Pandoc version")
+ if(NOT EXISTS "${RSTUDIO_DEPENDENCIES_DIR}/common/pandoc/${PANDOC_VERSION}")
+   message(FATAL_ERROR "pandoc ${PANDOC_VERSION} not found (re-run install-dependencies script to install)")
+ endif()
