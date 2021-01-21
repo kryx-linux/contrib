@@ -5,8 +5,8 @@
 # Optional: bluez gst-plugins-base jack pulseaudio libldac libopenaptx v4l2 vulkan-loader
 
 name=pipewire
-version=0.3.19
-release=3
+version=0.3.20
+release=1
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
 build() {
@@ -20,7 +20,6 @@ build() {
   meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
     --buildtype=plain \
-    -D b_ndebug=true \
     -D docs=false \
     -D tests=false
   # will remove executable pipewire-media-session
@@ -30,7 +29,10 @@ build() {
   DESTDIR=$PKG meson install -C build
 
   # enable alsa by default
-  mkdir -p $PKG/etc/alsa/conf.d
   touch $PKG/etc/pipewire/media-session.d/with-alsa
+  mkdir -p $PKG/etc/alsa/conf.d
   ln -st $PKG/etc/alsa/conf.d /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
+
+  # remove leftovers
+  rm -r $PKG/usr/share/locale
 }
