@@ -1,0 +1,20 @@
+# Description: cpptoml is a header-only library for parsing TOML
+# URL: https://github.com/skystrife/cpptoml
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake
+
+name=cpptoml
+version=0.1.1
+release=1
+source=(https://github.com/skystrife/cpptoml/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  [[ -e /usr/bin/ninja ]] && PKGMK_CPPTOML+=' -G Ninja'
+  cmake -S $name-$version -B build $PKGMK_CPPTOML \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
