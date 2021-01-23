@@ -10,13 +10,13 @@ release=1
 source=(https://people.freedesktop.org/~hughsient/appstream-glib/releases/$name-$version.tar.xz)
 
 build() {
-  [[ -f /usr/lib/libstemmer.so ]] && PKGMK_APPSTREAM_GLIB=' -Dstemmer=true' || PKGMK_APPSTREAM_GLIB=' -Dstemmer=false'
+  [[ -f /usr/lib/libstemmer.so ]] && PKGMK_APPSTREAM_GLIB+=' -D stemmer=true' || PKGMK_APPSTREAM_GLIB+=' -D stemmer=false'
+  [[ -e /usr/share/xml/docbook ]] && PKGMK_APPSTREAM_GLIB+=' -D man=true' || PKGMK_APPSTREAM_GLIB+=' -D man=false'
   meson setup $name-$version build $PKGMK_APPSTREAM_GLIB \
-    -Dprefix=/usr \
-    -Dbuildtype=plain \
-    -Db_ndebug=true \
-    -Drpm=false \
-    -Dgtk-doc=false
+    -D prefix=/usr \
+    -D buildtype=plain \
+    -D rpm=false \
+    -D gtk-doc=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
   rm -fr $PKG/usr/share/locale
