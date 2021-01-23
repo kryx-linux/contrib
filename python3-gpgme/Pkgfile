@@ -4,7 +4,7 @@
 # Depends on: gpgme swig python3
 
 name=python3-gpgme
-version=1.15.0
+version=1.15.1
 release=1
 source=(https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-$version.tar.bz2)
 
@@ -19,6 +19,9 @@ build() {
 	make
 	cd lang/python
 	make DESTDIR=$PKG install
+
+	# don't install python 2
+	rm -rf $PKG/usr/lib/python2.7
 
 	install -d $PKG/usr/etc/gpgme
 	echo python3 > $PKG/usr/etc/gpgme/python
