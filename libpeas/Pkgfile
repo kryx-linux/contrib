@@ -11,8 +11,7 @@ source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.t
 build() {
 	meson setup build $name-$version \
 		--prefix=/usr \
-		--buildtype=plain \
-		-D b_ndebug=true
+		--buildtype=plain
 	meson compile -C build -j ${JOBS:-1}
 	DESTDIR=$PKG meson install -C build
 
