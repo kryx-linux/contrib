@@ -15,8 +15,7 @@ build() {
 
 	meson setup build $name-$version ${PKGMK_PICOM} \
 		--prefix=/usr \
-		--buildtype=plain \
-		-D b_ndebug=true
+		--buildtype=plain
 
 	meson compile -C build -j ${JOBS:-1}
 	DESTDIR=$PKG meson install -C build
