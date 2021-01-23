@@ -12,11 +12,11 @@ build() {
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
-    -D b_ndebug=true \
     -D gtk_doc=false \
     -D examples=false \
     -D tests=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
   rm -r $PKG/usr/share/locale
 }
