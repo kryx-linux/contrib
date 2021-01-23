@@ -12,7 +12,6 @@ build() {
 	meson setup $name-$version build \
 		--prefix=/usr \
 		--buildtype=plain \
-		-D b_ndebug=true \
 		-D gtk_doc=disabled
 
 	meson compile -C build
