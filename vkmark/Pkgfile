@@ -12,8 +12,7 @@ source=(https://github.com/vkmark/vkmark/archive/$_commit/$name-$version.tar.gz)
 build() {
   meson setup $name-$_commit build \
     --prefix=/usr \
-    --buildtype=plain \
-    -Db_ndebug=true
+    --buildtype=plain
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
