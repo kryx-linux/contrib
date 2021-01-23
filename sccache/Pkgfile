@@ -4,9 +4,9 @@
 # Depends on: rust
 
 name=sccache
-version=0.2.14
-release=2
-source=(https://github.com/mozilla/sccache/archive/$version/$name-$version.tar.gz)
+version=0.2.15
+release=1
+source=(https://github.com/mozilla/sccache/archive/v$version/$name-v$version.tar.gz)
 
 build() {
 	prt-get isinst sccache && export RUSTC_WRAPPER='/usr/bin/sccache'
