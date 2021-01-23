@@ -16,10 +16,9 @@ build() {
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
-    -Db_ndebug=true \
-    -Dmobile_broadband_provider_info=false \
-    -Dgtk_doc=false \
-    -Dvapi=false
+    -D mobile_broadband_provider_info=false \
+    -D gtk_doc=false \
+    -D vapi=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
