@@ -8,74 +8,64 @@ name=networkmanager
 version=1.28.0
 release=1
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
-  networkmanager.rc NetworkManager.conf polkit.conf dhcp.conf
-  org.freedesktop.NetworkManager.rules)
+  networkmanager.rc NetworkManager.conf polkit.conf dhcp.conf org.freedesktop.NetworkManager.rules)
 
 build() {
   sed '/initrd/d' -i NetworkManager-$version/src/meson.build
 
-  CXXFLAGS+="-O2 -fPIC" \
-  meson setup NetworkManager-$version build \
+  [[ -e /usr/lib/pppd/ ]] || PKGMK_NM+=' -D ppp=false'
+  [[ -e /usr/lib/pkgconfig/jansson.pc ]] || PKGMK_NM+=' -D ovs=false'
+  [[ -e /usr/lib/pkgconfig/libpsl.pc ]] || PKGMK_NM+=' -D libpsl=false'
+
+  CXXFLAGS+=" -O2 -fPIC" \
+  meson setup NetworkManager-$version build $PKGMK_NM \
     --prefix /usr \
     --sysconfdir /etc \
     --localstatedir /var \
     --libexecdir /usr/lib/networkmanager \
     --buildtype=plain \
-    -Db_ndebug=true \
-    -Ddbus_conf_dir=/usr/share/dbus-1/system.d \
-    -Dudev_dir=/lib/udev \
-    -Dresolvconf=true \
-    -Dconfig_dns_rc_manager_default=resolvconf \
-    -Dcrypto=nss \
-    -Dintrospection=true \
-    -Dsession_tracking_consolekit=true \
-    -Dwifi=true \
-    -Dwext=true \
-    -Dpolkit=true \
-    -Dpolkit_agent=true \
-    -Dmodify_system=true \
-    -Difupdown=true \
-    -Dnmtui=true \
-    -Dnmcli=true \
-    -Dlibnm_glib=false \
-    -Dsession_tracking=no \
-    -Db_lto=false \
-    -Dlibaudit=no \
-    -Dlibpsl=false \
-    -Dppp=false \
-    -Dofono=false \
-    -Dselinux=false \
-    -Djson_validation=false \
-    -Dovs=false \
-    -Dmodem_manager=false \
-    -Dsystemdsystemunitdir=no \
-    -Dsystemd_journal=false \
-    -Dqt=false \
-    -Ddocs=false \
-    -Dtests=no \
-    -Dmore_logging=false \
-    -Dmore_asserts=0 \
-    -Dlibpsl=false \
-
+    -D b_lto=false \
+    -D ld_gc=true \
+    -D dbus_conf_dir=/usr/share/dbus-1/system.d \
+    -D udev_dir=/lib/udev \
+    -D resolvconf=true \
+    -D config_dns_rc_manager_default=resolvconf \
+    -D crypto=nss \
+    -D introspection=true \
+    -D session_tracking=no \
+    -D session_tracking_consolekit=true \
+    -D wifi=true \
+    -D wext=true \
+    -D polkit=true \
+    -D polkit_agent=true \
+    -D modify_system=true \
+    -D ifupdown=true \
+    -D docs=false \
+    -D selinux=false \
+    -D libaudit=no \
+    -D modem_manager=false \
+    -D more_logging=false \
+    -D qt=false \
+    -D systemdsystemunitdir=no \
+    -D systemd_journal=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 
   # Install config file
   install -Dm 644 $SRC/NetworkManager.conf $PKG/etc/NetworkManager/NetworkManager.conf
   install -Dm 644 $SRC/dhcp.conf $PKG/etc/NetworkManager/conf.d/dhcp.conf
+
+  # install polkit rules
+  install -Dm 644 $SRC/org.freedesktop.NetworkManager.rules $PKG/usr/share/polkit-1/rules.d/org.freedesktop.NetworkManager.rules
   install -Dm 644 $SRC/polkit.conf $PKG/etc/NetworkManager/conf.d/polkit.conf
 
   # Install startup script
   install -Dm 755 $SRC/$name.rc $PKG/etc/rc.d/$name
 
   # Remove rundir etc
-  rm -rf $PKG/var/run $PKG/usr/share/{gtk-,}doc $PKG/usr/share/man/man5/nmcli-examples.5 $PKG/usr/share/locale $PKG/usr/share/bash-completion
-
-  # install polkit rules
-  install -Dm 644 $SRC/org.freedesktop.NetworkManager.rules $PKG/usr/share/polkit-1/rules.d/org.freedesktop.NetworkManager.rules
+  rm -rf $PKG/var/run $PKG/usr/share/{gtk-,}doc $PKG/usr/share/man/man5/nmcli-examples.5 $PKG/usr/share/locale
 
   # cleanup
-
   rm -rf $PKG/usr/lib/firewalld
   [ -e /usr/lib/pkgconfig/bash-completion.pc ] || rm -rf $PKG/usr/share/bash-completion
 }
