@@ -4,7 +4,7 @@
 # Depends on: python3-setuptools
 
 name=python3-pygments
-version=2.7.3
+version=2.7.4
 release=1
 source=(https://files.pythonhosted.org/packages/source/P/Pygments/Pygments-$version.tar.gz)
 
@@ -12,8 +12,5 @@ build() {
 	cd Pygments-$version
 
 	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG
-
-	# why setuptools why?
-	find $PKG/usr/lib/python3.9/site-packages -type f -exec chmod o-w '{}' \+
+	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
 }
