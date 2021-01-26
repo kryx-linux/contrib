@@ -9,7 +9,7 @@ release=1
 source=(https://github.com/dduan/tre/archive/v$version/tre-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd tre-$version
 
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
