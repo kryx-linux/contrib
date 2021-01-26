@@ -1,0 +1,17 @@
+README for pam_shrundir
+
+This is a "module" for PAM which manages creation of XDG_RUNTIME_DIR
+as defined in the XDG Base Directory Specification [1].
+The directory will be created once a user logs in the first time,
+and it will be removed once she logs out last.
+
+For it to work it must be included in /etc/pam.d -- to make it a
+vivid part of session handling the file /etc/pam.d/common-session
+seems best.  Include the following early:
+
+	session optional pam_exec.so quiet /sbin/pam_shrundir
+
+Note this PAM module does not address setting of the $XDG_RUNTIME_DIR
+environment variable.  Errors will be logged via syslog.
+
+  [1] https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html

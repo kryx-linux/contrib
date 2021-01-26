@@ -1,0 +1,16 @@
+# Description: PAM shell script to manage XDG_RUNTIME_DIR creation
+# URL:         https://www.sdaoden.eu/code.html#s-toolbox
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+
+name=pam_shrundir
+version=20210126
+release=1
+source=($name $name.8)
+
+build () {
+   install -d $PKG/sbin $PKG/usr/share/man/man8
+   install -m 755 $name $PKG/sbin
+   install -m 644 $name.8 $PKG/usr/share/man/man8/
+}
+
+# s-sh-mode
