@@ -1,23 +1,26 @@
-# Description: simple terminal implementation for X
-# URL:         https://st.suckless.org/
-# Maintainer:  John Vogel, jvogel4 at stny dot rr dot com
-# Depends on:  xorg-libxext xorg-libxft
+# Description: Simple terminal emulator for X, with X resource support (patch)
+# URL:         https://st.suckless.org
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# Depends on:  fontconfig freetype xorg-libx11 xorg-libxext xorg-libxft 
 
 name=st
 version=0.8.4
 release=1
-source=(https://dl.suckless.org/st/$name-$version.tar.gz)
+realn=st
+source=(https://dl.suckless.org/$realn/$realn-$version.tar.gz \
+   xrdb-plus.patch)
 
-build () {
-	cd "$name-$version"
+build() {
+   cd $realn-$version
 
-	if [ -f $PKGMK_ROOT/config.h ]; then
-		cp $PKGMK_ROOT/config.h .
-	fi
+   patch -p1 -i $SRC/xrdb-plus.patch
 
-	make CC=gcc
-	make DESTDIR=$PKG PREFIX=/usr TERMINFO=$PKG/usr/share/terminfo install
+   sed -i '/tic/d' Makefile
 
-	# Remove duplicates of files from ncurses
-	rm -f $PKG/usr/share/terminfo/s/{st,st-256color}
+   make CC="${CC:-cc}" PREFIX=/usr \
+         X11INC=/usr/include/X11 X11LIB=/usr/lib \
+         DESTDIR="$PKG" \
+      all install
 }
+
+# s-sh-mode
