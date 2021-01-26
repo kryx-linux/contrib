@@ -1,12 +1,12 @@
 # Description: a lightweight universal runtime container
-# URL: https://runc.io/
+# URL: https://github.com/opencontainers/runc
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: go libseccomp git
 
 name=runc
-version=1.0.0-rc10
+version=1.0.0-rc92
 release=1
-source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz \
+source=(https://github.com/opencontainers/runc/archive/v${version}/$name-${version}.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz)
 
 build() {
@@ -17,7 +17,7 @@ build() {
     export GOPATH=$SRC
     export BUILDTAGS="seccomp"
     # use the long commit hash here
-    make COMMIT=dc9208a3303feef5b3839f4323d9beb36df0a9dd
+    make COMMIT=ff819c7e9184c13b7c2607fe6c30ae19403a7aff
 
     install -D -m 0755 $name $PKG/usr/bin/$name
     install -d -m 0755 $PKG/usr/share/man/man8
