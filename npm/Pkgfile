@@ -2,42 +2,37 @@
 # URL: https://nodejs.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: nodejs
-# Optional: icu brotli ninja
-
-# c-ares  wait until a newer release than 1.16.1
 
 name=npm
-version=15.5.1
+version=7.4.3
 release=1
-source=(https://nodejs.org/dist/v$version/node-v$version.tar.xz)
+source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz
+  destdir.patch)
 
 build() {
-  cd node-v$version
+  cd cli-$version
 
-  [ -e '/usr/lib/pkgconfig/icu-i18n.pc' ] && PKGMK_NODEJS+=' --with-intl=system-icu'
-  [ -e '/usr/lib/pkgconfig/libbrotlicommon.pc' ] && PKGMK_NODEJS+=' --shared-brotli'
-  [ -e '/usr/bin/ninja' ] && PKGMK_NODEJS+=' --ninja'
+  export NPM_CONFIG_USERCONFIG=$SRC/.npm
+  export NPM_CONFIG_CACHE=$SRC/.npm/cache
+  export GATSBY_TELEMETRY_DISABLED="1"
 
-  ./configure ${PKGMK_NODEJS} \
-    --prefix=/usr \
-    --shared-libuv \
-    --shared-zlib \
-    --shared-openssl
-    # -shared-cares
+  # fix some build issues
+  node bin/npm-cli.js install cmark-gfm --no-global --no-timing --no-save
+  patch -Np1 -i $SRC/destdir.patch
 
-  make
-  make DESTDIR=$PKG install
+  make mandocs
+  NODE_PATH=/usr/lib/node_modules node bin/npm-cli.js pack
+  NODE_PATH=/usr/lib/node_modules DESTDIR=$PKG node bin/npm-cli.js install -g -f npm-$version.tgz
 
-  rm -r $PKG/usr/include/
-  rm -r $PKG/usr/bin/node
-  rm -rf $PKG/usr/share/{doc,man,systemtap}
+  mkdir -p $PKG/usr/share
+  mv $PKG/usr/lib/node_modules/npm/man $PKG/usr/share/
 
-  # clean up
-  find $PKG -type f \( \
-    -name 'README.md' -o \
-    -name 'AUTHORS.md' -o \
-    -name 'INSTALL.md' -o \
-    -name 'TODO.org' -o \
-    -name 'ChangeLog' -o \
-    -name 'NEWS' \) -delete
+  find $PKG \(\
+    -iname "README*" -o \
+    -iname "LICENCE" -o \
+    -iname "LICENSE" -o \
+    -iname "CHANGELOG" -o \
+    -iname "AUTHORS*" \)\
+    -exec rm '{}' \+
+  rm -r $PKG/usr/lib/node_modules/npm/docs $PKG/usr/lib/node_modules/npm/changelogs
 }
