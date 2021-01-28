@@ -10,6 +10,7 @@ source=(http://bumblebee-project.org/$name-$version.tar.gz \
 	libglvnd.patch blacklist.conf bumblebeed.rc)
 
 build() {
+	CFLAGS="${CFLAGS} -fcommon"
 	cd $name-$version
 	patch -p1 -i $SRC/libglvnd.patch
 	./configure \
