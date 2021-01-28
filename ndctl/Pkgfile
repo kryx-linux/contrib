@@ -11,11 +11,10 @@ source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version.tar.gz)
 build() {
   cd $name-$version
   NOCONFIGURE=1 ./autogen.sh
-  sed '13944s/yes/no/' -i configure
-  sed '13961s/yes/no/' -i configure
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --with-systemd=no \
+    --without-bash \
     --disable-docs
   make
   make DESTDIR=$PKG install
