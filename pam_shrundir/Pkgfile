@@ -3,14 +3,14 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=pam_shrundir
-version=20210126
+version=20210129
 release=1
 source=($name $name.8)
 
 build () {
    install -d $PKG/sbin $PKG/usr/share/man/man8
-   install -m 755 $name $PKG/sbin
-   install -m 644 $name.8 $PKG/usr/share/man/man8/
+   install -m 0755 $name $PKG/sbin
+   install -m 0644 $name.8 $PKG/usr/share/man/man8/
 }
 
 # s-sh-mode
