@@ -1,0 +1,14 @@
+# Description: PAM module to manage XDG Base Directories
+# URL:         https://www.sdaoden.eu/code.html#s-toolbox
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+
+name=pam_xdg
+version=20210130
+release=1
+source=($name.c $name.8 makefile)
+
+build () {
+   make install DESTDIR=$PKG
+}
+
+# s-sh-mode

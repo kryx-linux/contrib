@@ -1,0 +1,17 @@
+README for pam_xdg
+
+This is a module for PAM that handles the XDG Base Directory
+Specification[1] directories, including lifetime management
+of XDG_RUNTIME_DIR and injection of according environment variables
+into the user session.
+
+For it to work it must be included in /etc/pam.d -- to make it a
+vivid part of session handling the file /etc/pam.d/common-session
+seems best.  Include the following early:
+
+	session optional pam_xdg.so [notroot] [runtime]
+
+Use notroot argument to only handle XDG for non-root users.
+Use runtime argument to only handle of XDG_RUNTIME_DIR.
+
+  [1] https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
