@@ -5,15 +5,19 @@
 
 name=doas
 version=6.3p4
-release=1
+release=2
 source=(https://github.com/slicer69/doas/archive/$version/$name-$version.tar.gz
   #shamelessly grabbed from archs aur
   doas-pam doas.conf)
 
 build() {
   cd $name-$version
-  make
-  make PREFIX=/usr DESTDIR=$PKG install
+  make PREFIX=/usr \
+    SYSCONFDIR=/etc
+  make PREFIX=/usr \
+    SYSCONFDIR=/etc \
+    DESTDIR=$PKG \
+    install
   install -Dm644 $SRC/doas.conf $PKG/etc/doas.conf
   install -Dm644 $SRC/doas-pam $PKG/etc/pam.d/doas
 }
