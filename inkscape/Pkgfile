@@ -1,17 +1,17 @@
 # Description: An open source SVG editor.
 # URL: https://www.inkscape.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: boehm-gc boost double-conversion gsl gtkmm3 libsoup libxslt poppler-glib popt potrace gdl
+# Depends on: boehm-gc boost double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler-glib popt potrace gdl
 
 name=inkscape
-version=1.0.1
+version=1.0.2
 release=1
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
-	https://poppler.freedesktop.org/poppler-20.09.0.tar.xz
+	https://poppler.freedesktop.org/poppler-21.01.0.tar.xz
 	inkscape.patch)
 
 poppler() {
-	cmake -S poppler-20.09.0 -B build-poppler -G Ninja \
+	cmake -S poppler-21.01.0 -B build-poppler -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
@@ -38,19 +38,16 @@ poppler() {
 }
 
 build() {
-	[ ! -e '/usr/lib/libpoppler.so.102' ] && poppler
+	[ ! -e '/usr/lib/libpoppler.so.106' ] && poppler
 
-	patch -d $name-${version}_2020-09-07_3bc2e813f5 -p1 -i $SRC/inkscape.patch
+	patch -d $name-${version}_* -p1 -i $SRC/inkscape.patch
 
-	export PKG_CONFIG_PATH="/usr/lib/imagemagick6/pkgconfig:$PKG_CONFIG_PATH"
-
-	cmake -S $name-${version}_2020-09-07_3bc2e813f5 -B build -G Ninja \
+	cmake -S $name-${version}_* -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
 		-Wno-dev
-
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
@@ -63,5 +60,8 @@ build() {
 		$PKG/usr/share/inkscape/extensions/inkex/deprecated-simple/README.rst \
 
 	find $PKG/usr/share/inkscape -name README -exec rm -f {} +
+
 	/usr/bin/python3 -mcompileall $PKG
+	/usr/bin/python3 -O -m compileall $PKG
+	/usr/bin/python3 -OO -m compileall $PKG
 }
