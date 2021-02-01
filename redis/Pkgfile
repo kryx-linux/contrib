@@ -1,13 +1,12 @@
 # Description: An open source, advanced key-value store
-# URL:         https://redis.io
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    James Mills, prologic at shortcircuit dot net dot au
+# URL: https://redis.io
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=redis
 version=6.0.10
 release=1
-source=(http://download.redis.io/releases/$name-$version.tar.gz redis.conf \
-redis.rc)
+source=(https://download.redis.io/releases/$name-$version.tar.gz redis.conf
+  redis.rc)
 
 build() {
   cd $name-$version/src
