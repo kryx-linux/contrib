@@ -5,13 +5,13 @@
 
 name=inkscape
 version=1.0.2
-release=1
+release=2
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
-	https://poppler.freedesktop.org/poppler-21.01.0.tar.xz
+	https://poppler.freedesktop.org/poppler-21.02.0.tar.xz
 	inkscape.patch)
 
 poppler() {
-	cmake -S poppler-21.01.0 -B build-poppler -G Ninja \
+	cmake -S poppler-21.02.0 -B build-poppler -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
@@ -31,14 +31,14 @@ poppler() {
 
 	cmake --build build-poppler
 	DESTDIR=$SRC/poppler cmake --install build-poppler
-	install -D -t $PKG/usr/lib $SRC/poppler/usr/lib/libpoppler.so.102
+	install -D -t $PKG/usr/lib $SRC/poppler/usr/lib/libpoppler.so.107
 
 	export CXXFLAGS+=" -I$SRC/poppler/usr/include -I$SRC/poppler/usr/include/poppler"
 	export PKG_CONFIG_PATH="$SRC/poppler/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
 build() {
-	[ ! -e '/usr/lib/libpoppler.so.106' ] && poppler
+	[ ! -e '/usr/lib/libpoppler.so.107' ] && poppler
 
 	patch -d $name-${version}_* -p1 -i $SRC/inkscape.patch
 
