@@ -14,6 +14,10 @@ PRECAUTION
     If you edit the torrc file for extra logging, make sure you:
     chmod 0640 /var/log/tor/* files, for security reasons.
 
+    Make sure that in torrc file this option is commented, because
+    the tor's rc script already do that:
+    # RunAsDaemon=1
+
 PRE-INSTALL
 
     Tor expects to have a user and group dedicated to it.
