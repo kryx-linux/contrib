@@ -1,0 +1,11 @@
+#!/bin/sh -
+
+getent group lighttpd || groupadd -r lighttpd
+
+if [ -z "`getent passwd named`" ]; then
+	useradd -g lighttpd -d /var/www/lighttpd -s /bin/false lighttpd
+	passwd -l lighttpd
+fi
+
+chown root:lighttpd /var/log/lighttpd
+chmod 0775 /var/log/lighttpd

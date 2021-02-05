@@ -1,27 +1,33 @@
 # Description: Secure, fast, compliant and very flexible web server
-# URL: http://www.lighttpd.net/
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on: libpcre
+# URL:         https://www.lighttpd.net/
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# Depends on:  libpcre lua
 
 name=lighttpd
-version=1.4.58
+version=1.4.59
 release=1
-source=(https://download.$name.net/$name/releases-1.4.x/$name-$version.tar.xz \
-        $name.conf \
-        $name.rc)
+source=(
+  https://download.${name}.net/${name}/releases-1.4.x/${name}-${version}.tar.xz
+   ${name}.rc ${name}.conf
+   cgi.conf dirlisting.conf fastcgi.conf userdir.conf
+)
 
 build() {
-    cd $name-$version
-    ./configure --prefix=/usr --libdir=/usr/lib/$name --with-openssl --with-pcre
+    cd ${name}-${version}
+
+    ./configure --prefix=/usr \
+       --libdir=/usr/lib/${name} \
+       --with-openssl --with-pam \
+         --with-bzip2 --with-zlib --with-zstd \
+      --with-pcre --with-lua
     make
     make DESTDIR=$PKG install
 
-    install -D -m 644 $SRC/$name.conf $PKG/etc/$name.conf
-    install -D -m 755 $SRC/$name.rc $PKG/etc/rc.d/$name
-    install -d $PKG/var/www/{htdocs,logs}
-    install -d $PKG/var/run
-    install -d $PKG/etc/ssl/certs
-    #touch $PKG/var/run/lighttpd.pid
-    touch $PKG/etc/ssl/certs/lighttpd.pem
-    chmod 0600 $PKG/etc/ssl/certs/lighttpd.pem
+    install -D -m 0755 "${SRC}"/${name}.rc "${PKG}"/etc/rc.d/${name}
+    install -d -m 0755 "${PKG}"/etc/${name}
+    install -D -m 0644 "${SRC}"/*.conf "${PKG}"/etc/${name}/
+    install -d -m 0755 "${PKG}"/var/log/${name}
+    install -d -m 0755 "${PKG}"/var/www/${name}/htdocs
 }
+
+# s-sh-mode
