@@ -1,10 +1,14 @@
 #!/bin/sh -
 
-getent group lighttpd || groupadd -r lighttpd
+usr=lighttpd
+grp=${usr}
+dir=${usr}
 
-if [ -z "`getent passwd named`" ]; then
-	useradd -g lighttpd -d /var/www/lighttpd -s /bin/false lighttpd
-	passwd -l lighttpd
+getent group ${grp} || groupadd -r ${grp}
+
+if [ -z "`getent passwd ${usr}`" ]; then
+	useradd -r -g ${grp} -d /var/www/${usr} -s /bin/false ${usr}
+	passwd -l ${usr}
 fi
 
-chown lighttpd:wheel /var/log/lighttpd /var/lib/lighttpd
+chown ${usr}:daemon /var/log/${usr} /var/lib/${usr}

@@ -1,11 +1,11 @@
 # Description: Secure, fast, compliant and very flexible web server
 # URL:         https://www.lighttpd.net/
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
-# Depends on:  libpcre lua
+# Depends on:  libpcre lua   bzip2 linux-pam openssl zlib zstd
 
 name=lighttpd
 version=1.4.59
-release=2
+release=3
 source=(
   https://download.${name}.net/${name}/releases-1.4.x/${name}-${version}.tar.xz
    ${name}.rc ${name}.conf
