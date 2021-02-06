@@ -345,7 +345,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/hgext3rd/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/hgext3rd/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/hgext3rd/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/hgext3rd/__pycache__/__init__.cpython-39.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial-5.6.1-py3.9.egg-info
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial-5.7-py3.9.egg-info
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__modulepolicy__.py
@@ -358,6 +358,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/bookmarks.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/branchmap.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/bundle2.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/bundlecaches.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/bundlerepo.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/cacheutil.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/changegroup.cpython-39.pyc
@@ -467,6 +468,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/statprof.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/store.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/streamclone.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/strip.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/subrepo.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/subrepoutil.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/tagmerge.cpython-39.pyc
@@ -503,6 +505,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/bookmarks.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/branchmap.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/bundle2.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/bundlecaches.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/bundlerepo.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/cacheutil.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/cext/
@@ -755,6 +758,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/statprof.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/store.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/streamclone.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/strip.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/subrepo.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/subrepoutil.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/tagmerge.py
@@ -1044,6 +1048,14 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/thirdparty/zope/i
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/ui.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/unionrepo.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade.py
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/__pycache__/actions.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/__pycache__/engine.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/actions.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/upgrade_utils/engine.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/url.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/urllibcompat.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/util.py
@@ -1055,6 +1067,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__/compression.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__/dateutil.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__/hashutil.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__/memorytop.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__/procutil.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__/repoviewutil.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__/resourceutil.cpython-39.pyc
@@ -1064,6 +1077,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/utils/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/compression.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/dateutil.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/hashutil.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/memorytop.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/procutil.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/repoviewutil.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/utils/resourceutil.py
