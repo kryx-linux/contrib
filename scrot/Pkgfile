@@ -4,7 +4,7 @@
 # Depends on: autoconf-archive giblib xorg-libxcursor xorg-libxcomposite
 
 name=scrot
-version=1.4
+version=1.5
 release=1
 source=(https://github.com/resurrecting-open-source-projects/scrot/archive/$version/$name-$version.tar.gz)
 
@@ -18,4 +18,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+
+	rm -r $PKG/usr/share/doc
 }
