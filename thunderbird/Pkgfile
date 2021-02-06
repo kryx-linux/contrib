@@ -1,13 +1,13 @@
 # Description: Email client from the Mozilla project
 # URL: https://www.thunderbird.net/en-US/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 cbindgen clang gtk gtk3 libidl lld nss unzip xorg-libxt yasm zip nodejs libnotify
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gnupg gtk libidl libnotify lld nodejs nss startup-notification unzip yasm zip
 # Optional: sccache
 
 name=thunderbird
-version=68.11.0
+version=78.7.1
 release=1
-source=(http://ftp.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
+source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
 	$name.desktop)
  
 build() {
@@ -38,17 +38,15 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-alsa
 	ac_add_options --enable-optimize
 	ac_add_options --enable-release
-	ac_add_options --enable-rust-simd
+#	ac_add_options --enable-rust-simd
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
 	ac_add_options --disable-tests
-	ac_add_options --disable-dbus
 	ac_add_options --disable-debug
 	ac_add_options --disable-updater
 	ac_add_options --disable-crashreporter
 	ac_add_options --disable-necko-wifi
 	ac_add_options --disable-pulseaudio
-	ac_add_options --disable-gconf
 	ac_add_options --enable-calendar
 EOF
 
