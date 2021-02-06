@@ -5,29 +5,29 @@
 
 name=lighttpd
 version=1.4.59
-release=1
+release=2
 source=(
   https://download.${name}.net/${name}/releases-1.4.x/${name}-${version}.tar.xz
    ${name}.rc ${name}.conf
-   cgi.conf dirlisting.conf fastcgi.conf userdir.conf
 )
 
 build() {
-    cd ${name}-${version}
+   cd ${name}-${version}
 
-    ./configure --prefix=/usr \
-       --libdir=/usr/lib/${name} \
-       --with-openssl --with-pam \
+   ./configure --prefix=/usr \
+      --libdir=/usr/lib/${name} \
+      --with-openssl --with-pam \
          --with-bzip2 --with-zlib --with-zstd \
       --with-pcre --with-lua
-    make
-    make DESTDIR=$PKG install
+   make
+   make DESTDIR="${PKG}" install
 
-    install -D -m 0755 "${SRC}"/${name}.rc "${PKG}"/etc/rc.d/${name}
-    install -d -m 0755 "${PKG}"/etc/${name}
-    install -D -m 0644 "${SRC}"/*.conf "${PKG}"/etc/${name}/
-    install -d -m 0755 "${PKG}"/var/log/${name}
-    install -d -m 0755 "${PKG}"/var/www/${name}/htdocs
+   install -d -m 0755 "${PKG}"/var/lib/${name} "${PKG}"/var/log/${name} \
+      "${PKG}"/var/www/${name}/htdocs
+   install -D -m 0755 "${SRC}"/${name}.rc "${PKG}"/etc/rc.d/${name}
+   install -D -m 0644 "${SRC}"/${name}.conf "${PKG}"/etc/
+
+   rm -f "${PKG}"/usr/lib/${name}/*.la
 }
 
 # s-sh-mode
