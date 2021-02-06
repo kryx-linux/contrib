@@ -66,4 +66,7 @@ EOF
 
 	find $PKG -iname '*README*' -delete
 	#rm -r $PKG/usr/{include,lib/thunderbird-devel,share/idl}
+
+	install -d $PKG/etc/revdep.d
+	echo "/usr/lib/thunderbird" > $PKG/etc/revdep.d/$name
 }
