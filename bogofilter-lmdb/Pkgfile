@@ -7,17 +7,20 @@ name=bogofilter-lmdb
 version=1.2.5
 release=1
 realn=bogofilter
-source=(https://downloads.sourceforge.net/project/${realn}/${realn}-stable/${realn}-${version}.tar.xz)
+source=(
+   https://downloads.sourceforge.net/project/\
+${realn}/${realn}-stable/${realn}-${version}.tar.xz
+)
 
 build() {
    cd ${realn}-${version}
 
    ./configure --prefix=/usr --sysconfdir=/usr/etc --with-database=lmdb
-   make DESTDIR="$PKG" install
+   make DESTDIR="${PKG}" install
 
    # Fix manual misconversion? a bit
-   for f in `find "$PKG"/usr/share/man -type f`; do
-      sed -i -E -e 's/^[[:space:]]+(\.[[:alpha:]].+)$/\1/' $f
+   for f in `find "${PKG}"/usr/share/man -type f`; do
+      sed -i -E -e 's/^[[:space:]]+(\.[[:alpha:]].+)$/\1/' "${f}"
    done
 }
 
