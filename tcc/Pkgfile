@@ -6,7 +6,7 @@ name=tcc
 version=20210204
 gitver=fbef90a7039b994907db34fde50f6fa5e46ab535
 release=1
-source=(https://repo.or.cz/tinycc.git/snapshot/$gitver.tar.gz)
+source=(https://repo.or.cz/tinycc.git/snapshot/${gitver}.tar.gz)
 
 build() {
    cd tinycc-*
@@ -15,8 +15,8 @@ build() {
 
    sed -i -E 's/^TCCDOCS.*$/TCCDOCS = tcc.1/' Makefile
 
-   make MAKEFLAGS="$MAKEFLAGS" &&
-      make DESTDIR="$PKG" install
+   make MAKEFLAGS="${MAKEFLAGS}" &&
+      make DESTDIR="${PKG}" install
 }
 
 # s-sh-mode
