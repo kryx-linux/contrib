@@ -6,22 +6,25 @@
 name=dma
 version=20201022
 gitver=a9f892c0b161531548223cd1159d2adbf7e02e0a
-release=1
-source=(https://github.com/corecode/$name/archive/$gitver/$name-$version.tar.gz
-      post-install)
+release=2
+source=(
+   https://github.com/corecode/${name}/archive/\
+${gitver}/${name}-${version}.tar.gz
+   pre-install post-install README
+)
 
 build() {
-   cd $name-$gitver
+   cd ${name}-${gitver}
 
    make PREFIX=/usr LIBEXEC=/usr/lib/dma CONFDIR=/usr/etc/ \
-         DESTDIR=$PKG \
+         DESTDIR="${PKG}" \
       all install install-etc
 
-   ln -s -f dma "$PKG"/usr/sbin/sendmail
+   ln -s -f dma "${PKG}"/usr/sbin/sendmail
 
-	mkdir -p "$PKG"/var/spool/dma
-	chown root:mail "$PKG"/var/spool/dma
-	chmod 2770 "$PKG"/var/spool/dma
+   mkdir -p "${PKG}"/var/spool/dma
+   chown root:mail "${PKG}"/var/spool/dma
+   chmod 2770 "${PKG}"/var/spool/dma
 }
 
 # s-sh-mode

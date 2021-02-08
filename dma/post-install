@@ -1,8 +1,4 @@
 #!/bin/sh -
 
-getent group mail || groupadd -r mail
-
 grep -q dma /etc/crontab ||
 	echo '*/15 * * * * exec dma -q' >> /etc/crontab
-
-exit 0
