@@ -8,14 +8,14 @@ OPTS='-f /etc/lighttpd.conf'
 
 case ${1} in
 start)
-   ${SSD} --start --pidfile ${PID} --exec ${PROG} -- ${OPTS}
+   exec ${SSD} --start --pidfile ${PID} --exec ${PROG} -- ${OPTS}
    ;;
 stop)
-   ${SSD} --stop --remove-pidfile --retry 10 --pidfile ${PID}
+   exec ${SSD} --stop --remove-pidfile --retry 10 --pidfile ${PID}
    ;;
 restart)
    ${0} stop
-   ${0} start
+   exec ${0} start
    ;;
 status)
    ${SSD} --status --pidfile ${PID}
