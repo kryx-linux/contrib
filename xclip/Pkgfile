@@ -5,11 +5,14 @@
 
 name=xclip
 version=0.13
-release=2
-source=(https://github.com/astrand/xclip/archive/0.13/xclip-0.13.tar.gz)
+release=3
+source=(
+   https://github.com/astrand/${name}/archive/\
+${version}/${name}-${version}.tar.gz
+)
 
 build() {
-   cd $name-$version
+   cd ${name}-${version}
 
    ./bootstrap
    ./configure --prefix=/usr
