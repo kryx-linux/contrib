@@ -8,14 +8,17 @@ version=20210110
 realn=awk
 gitver=178f660b5a4fde6f39e8065185373166f55b6e0c
 release=1
-source=(https://github.com/onetrueawk/${realn}/archive/${gitver}/${realn}-${version}.tar.gz)
+source=(
+   https://github.com/onetrueawk/${realn}/archive/\
+${gitver}/${realn}-${version}.tar.gz
+)
 
 build() {
    cd ${realn}-${gitver}
 
    make
-   install -D a.out $PKG/usr/bin/$name
-   install -D -m 0644 awk.1 $PKG/usr/share/man/man1/$name.1
+   install -D a.out "${PKG}"/usr/bin/${name}
+   install -D -m 0644 awk.1 "${PKG}"/usr/share/man/man1/${name}.1
 }
 
 # s-sh-mode
