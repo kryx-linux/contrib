@@ -8,20 +8,24 @@
 name=bluealsa
 rname=bluez-alsa
 version=3.0.0
-release=1
+release=2
 source=(
-https://github.com/Arkq/${rname}/archive/v${version}/${rname}-${version}.tar.gz
+   https://github.com/Arkq/${rname}/archive/\
+v${version}/${rname}-${version}.tar.gz
    bluealsa bluealsa.conf)
 
 build() {
-   cd $rname-$version
+   cd ${rname}-${version}
+
    autoreconf --install --symlink
    mkdir build && cd build
-   ../configure --prefix=/usr --enable-aac
+   ../configure --prefix=/usr --runstatedir=/run --enable-aac
    make all
-   make DESTDIR=$PKG install
-   install -D -m 0755 $SRC/bluealsa $PKG/etc/rc.d/bluealsa
-   install -D -m 0644 $SRC/bluealsa.conf $PKG/etc/dbus-1/system.d/bluealsa.conf
+   make DESTDIR="${PKG}" install
+
+   install -D -m 0755 "${SRC}"/bluealsa "${PKG}"/etc/rc.d/${name}
+   install -D -m 0644 "${SRC}"/bluealsa.conf \
+      "${PKG}"/etc/dbus-1/system.d/${name}.conf
 }
 
 # s-sh-mode
