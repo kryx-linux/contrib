@@ -3,16 +3,15 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=bmake
-version=20201212
+version=20210110
 release=2
-source=(http://www.crufty.net/ftp/pub/sjg/$name-$version.tar.gz
-   u-t-makefile.patch simon.patch)
+source=(http://www.crufty.net/ftp/pub/sjg/${name}-${version}.tar.gz
+   u-t-makefile.patch)
 
 build() {
-   cd $name
+   cd ${name}
 
-   patch -p0 < ../u-t-makefile.patch
-   patch -p1 < ../simon.patch
+   patch -p0 < "${SRC}"/u-t-makefile.patch
 
    mkdir -p build
    cd build
@@ -20,12 +19,12 @@ build() {
    sh ../boot-strap --with-default-sys-path=/usr/share/mk
    sh ../boot-strap --prefix=/usr \
       --with-mksrc=/usr/share/mk \
-      --install-destdir="$PKG" op=install
+      --install-destdir="${PKG}" op=install
 
-   chmod g-w "$PKG"/usr/bin "$PKG"/usr/share/mk
-   rm -rf "$PKG"/usr/share/man/cat1
-   mkdir "$PKG"/usr/share/man/man1
-   cp ../bmake.1 "$PKG"/usr/share/man/man1/
+   chmod g-w "${PKG}"/usr/bin "${PKG}"/usr/share/mk
+   rm -rf "${PKG}"/usr/share/man/cat1
+   mkdir "${PKG}"/usr/share/man/man1
+   cp ../bmake.1 "${PKG}"/usr/share/man/man1/
 }
 
 # s-sh-mode
