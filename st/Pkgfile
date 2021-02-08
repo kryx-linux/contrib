@@ -5,21 +5,23 @@
 
 name=st
 version=0.8.4
-release=1
+release=2
 realn=st
-source=(https://dl.suckless.org/$realn/$realn-$version.tar.gz \
-   xrdb-plus.patch)
+source=(
+   https://dl.suckless.org/${realn}/${realn}-${version}.tar.gz
+   xrdb-plus.patch
+)
 
 build() {
-   cd $realn-$version
+   cd ${realn}-${version}
 
-   patch -p1 -i $SRC/xrdb-plus.patch
+   patch -p1 -i "${SRC}"/xrdb-plus.patch
 
    sed -i '/tic/d' Makefile
 
    make CC="${CC:-cc}" PREFIX=/usr \
          X11INC=/usr/include/X11 X11LIB=/usr/lib \
-         DESTDIR="$PKG" \
+         DESTDIR="${PKG}" \
       all install
 }
 
