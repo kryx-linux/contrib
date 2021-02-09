@@ -124,7 +124,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/completion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/is-windows-shell.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/is-windows.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/lifecycle-cmd.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/no-progress-while-running.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/npm-usage.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/open-url.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/otplease.js
@@ -140,7 +139,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/completion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/reify-output.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/replace-info.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/setup-log.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/spawn.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/split-package-names.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/tar.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/unsupported.js
@@ -152,6 +150,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/completion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/make.bat
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/.bin/
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/arborist -> ../@npmcli/arborist/bin/index.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/installed-package-contents -> ../@npmcli/installed-package-contents/index.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/mkdirp -> ../mkdirp/bin/cmd.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/node-gyp -> ../node-gyp/bin/node-gyp.js
@@ -167,6 +166,21 @@ lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/uuid -> ../uuid/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/CHANGELOG.md
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/actual.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/audit.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/funding.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/ideal.js
+-rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/index.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/lib/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/lib/logging.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/lib/options.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/lib/print-tree.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/lib/timers.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/license.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/reify.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/shrinkwrap.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/bin/virtual.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/add-rm-pkg-deps.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/
@@ -1720,6 +1734,45 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/is-package-bin.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/npm.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/proc-log.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/.editorconfig
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/.eslintrc.json
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/.travis.yml
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/bower.json
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/index.umd.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/test/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/test/.eslintrc.json
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/err-code/test/test.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/promise-retry/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/promise-retry/.editorconfig
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/promise-retry/.travis.yml
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/promise-retry/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/promise-retry/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/promise-retry/test/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/promise-retry/test/test.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/.npmignore
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/.travis.yml
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/Makefile
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/equation.gif
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/example/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/example/dns.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/example/stop.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/index.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/lib/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/lib/retry.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/lib/retry_operation.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/test/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/test/common.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/test/integration/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/test/integration/test-forever.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/test/integration/test-retry-operation.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/test/integration/test-retry-wrap.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/node_modules/retry/test/integration/test-timeouts.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/parse-conflict-json/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/parse-conflict-json/index.js
