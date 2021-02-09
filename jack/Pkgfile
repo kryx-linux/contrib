@@ -13,7 +13,9 @@ build() {
 
 	./waf configure \
 		--prefix=/usr \
-		--alsa
+		--alsa \
+		--dbus \
+		--classic
 
 	./waf build -j ${JOBS-1}
 	./waf install --destdir=$PKG
