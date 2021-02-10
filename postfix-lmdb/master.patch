@@ -1,0 +1,16 @@
+--- master.cf	2021-02-10 01:28:29.091526626 +0100
++++ master.cf.new	2021-02-10 01:30:19.998198603 +0100
+@@ -10,6 +10,13 @@
+ #               (yes)   (yes)   (no)    (never) (100)
+ # ==========================================================================
+ smtp      inet  n       -       n       -       -       smtpd
++#TLS   -o smtpd_tls_security_level=none
++#TLS   -o smtpd_sasl_auth_enable=no
++#TLS submission inet n       -       n       -       -       smtpd
++#TLS  -o smtpd_tls_security_level=encrypt
++#TLS submissions     inet  n       -       n       -       -       smtpd
++#TLS  -o smtpd_tls_wrappermode=yes
++tlsproxy  unix  -       -       n       -       0       tlsproxy
+ #smtp      inet  n       -       n       -       1       postscreen
+ #smtpd     pass  -       -       n       -       -       smtpd
+ #dnsblog   unix  -       -       n       -       0       dnsblog
