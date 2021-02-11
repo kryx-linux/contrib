@@ -3,10 +3,13 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 rname=nghttp2
-name=${rname}-libs
+name=nghttp2-libs
 version=1.43.0
 release=1
-source=(https://github.com/${rname}/${rname}/releases/download/v${version}/${rname}-${version}.tar.xz)
+source=(
+   https://github.com/${rname}/${rname}/releases/download/\
+v${version}/${rname}-${version}.tar.xz
+)
 
 build() {
    cd ${rname}-${version}
