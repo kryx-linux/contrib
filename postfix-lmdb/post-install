@@ -19,7 +19,7 @@ getent group ${usrgrp} >/dev/null || groupadd -r ${usrgrp}
 getent passwd ${usr} >/dev/null 2>&1 || {
 	useradd -r -g ${usrgrp} -d /var/spool/${usr} -s /bin/false ${usr}
 	passwd -l ${usr}
-} 
+}
 
 getent group ${queuegrp} >/dev/null || groupadd -r ${queuegrp}
 
