@@ -6,7 +6,7 @@
 
 name=i3status-rust
 version=0.14.5
-release=1
+release=2
 source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version-01.tar.gz)
 
 build() {
@@ -14,7 +14,7 @@ build() {
 
   # configure optional dependencies
   [[ -e /usr/lib/libnotmuch.so ]] && PKGMK_I3STATUS_RUST+=' notmuch'
-  [[ -e /usr/lib/pulseaudio/libpulsecommon-13.0.so ]] && PKGMK_I3STATUS_RUST+=' libpulse-binding'
+  [[ -e /usr/lib/pkgconfig/libpulse.pc ]] && PKGMK_I3STATUS_RUST+=' libpulse-binding'
 
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
