@@ -5,25 +5,26 @@
 # Optional: notmuch pulseaudio
 
 name=i3status-rust
-version=0.14.5
-release=2
+version=0.14.6
+release=1
 source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version-01.tar.gz)
 
 build() {
-  cd $name-$version
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  mkdir "$PKGMK_SOURCE_DIR/rust" || true
+  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
   # configure optional dependencies
   [[ -e /usr/lib/libnotmuch.so ]] && PKGMK_I3STATUS_RUST+=' notmuch'
   [[ -e /usr/lib/pkgconfig/libpulse.pc ]] && PKGMK_I3STATUS_RUST+=' libpulse-binding'
 
-  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-  mkdir "$PKGMK_SOURCE_DIR/rust" || true
-  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  cargo update --manifest-path $name-$version/Cargo.toml
 
-  cargo update
-  cargo fetch
+  cargo fetch --manifest-path $name-$version/Cargo.toml --locked
+
   [[ -n $PKGMK_I3STATUS_RUST ]] \
-    && cargo build --release --features "$PKGMK_I3STATUS_RUST" \
-    || cargo build --release --no-default-features
-  install -Dt $PKG/usr/bin target/release/i3status-rs
+    && cargo build --manifest-path $name-$version/Cargo.toml --release --features "$PKGMK_I3STATUS_RUST" \
+    || cargo build --manifest-path $name-$version/Cargo.toml --release --no-default-features
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/i3status-rs
 }
