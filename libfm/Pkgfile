@@ -1,21 +1,24 @@
 # Description: Library for file management.
 # URL: https://wiki.lxde.org/en/PCManFM
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gtk menu-cache xorg-libxdamage
+# Depends on: gtk gtk3 menu-cache xorg-libxdamage libfm-extra
 
 name=libfm
-version=1.3.1
-release=2
+version=1.3.2
+release=1
 source=(https://downloads.sourceforge.net/pcmanfm/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
-
 	# https://github.com/lxde/libfm/issues/35
 	sed -i 's/create=xarchiver --add-to %F/create=xarchiver --compress %F/' data/archivers.list
-
 	autoreconf -fi
+	cd -
 
+	cp -r $name-$version gtk3
+	cp -r $name-$version gtk2
+
+	cd $SRC/gtk2
 	./configure \
 		--prefix=/usr \
 		--sysconfdir=/etc \
@@ -29,12 +32,25 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
+	cd $SRC/gtk3
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--with-gnu-ld \
+		--disable-nls \
+		--disable-gtk-doc-html \
+		--with-gtk=3
+
+	make
+	make DESTDIR=$PKG install
+
 	rm -r $PKG/usr/share/locale
 
-	if [[ -h $PKG/usr/include/libfm/libfm-1.0 ]]; then
-		rm -r $PKG/usr/include/libfm
-		cd $PKG/usr/include/
-		ln -s libfm-1.0 libfm
-	fi
-}
+	rm -r $PKG/usr/include/libfm
+	mv $PKG/usr/include/libfm-1.0/ $PKG/usr/include/libfm
 
+	# In libfm-extra
+	rm -r $PKG/usr/include/libfm/fm-{extra,version,xml-file}.h \
+		$PKG/usr/lib/libfm-extra.* \
+		$PKG/usr/lib/pkgconfig/libfm-extra.pc
+}
