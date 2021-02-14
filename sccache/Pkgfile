@@ -5,13 +5,16 @@
 
 name=sccache
 version=0.2.15
-release=1
+release=2
 source=(https://github.com/mozilla/sccache/archive/v$version/$name-v$version.tar.gz)
 
 build() {
 	prt-get isinst sccache && export RUSTC_WRAPPER='/usr/bin/sccache'
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+	# warning: package `futures v0.3.9` in Cargo.lock is yanked in registry
+	cargo update --manifest-path $name-$version/Cargo.toml --package futures:0.3.9
 
 	cargo fetch --manifest-path $name-$version/Cargo.toml --locked
 
