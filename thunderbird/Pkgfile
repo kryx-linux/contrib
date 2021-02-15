@@ -6,12 +6,15 @@
 
 name=thunderbird
 version=78.7.1
-release=1
+release=2
 source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
-	$name.desktop)
+	$name.desktop
+	fix-rust-1.50-build.patch)
  
 build() {
 	cd $name-$version
+
+	patch -p0 -i $SRC/fix-rust-1.50-build.patch
 
 	if [ -e '/usr/bin/ccache' ]; then
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
