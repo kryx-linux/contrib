@@ -2,7 +2,7 @@
 # URL: https://www.libreoffice.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: box2d clucene coin-or-mp fakeroot fontforge gpgme graphite2 gst-plugins-base gtk3 harfbuzz hyphen libabw libcdr libcmis libe-book libepubgen libetonyek libexttextcat libfreehand libmspub libmwaw libmythes libnumbertext libodfgen liborcus libpagemaker libqxp libstaroffice libtommath libvisio libwpg libwps libzmf lpsolve libqrcodegen mysql neon libpaper python3-lxml redland sane unzip xmlsec zip
-# Optional: cups kio qt5 valgrind vlc
+# Optional: cups kio qt5 valgrind
 
 name=libreoffice
 version=7.1.1.1
@@ -59,7 +59,6 @@ build() {
   [[ -e /usr/lib/cups ]] && PKGMK_LIBREOFFICE+=" --enable-cups" || PKGMK_LIBREOFFICE+=" --disable-cups"
   [[ -e /usr/lib/pkgconfig/Qt5Core.pc ]] && PKGMK_LIBREOFFICE+=" --enable-qt5" || PKGMK_LIBREOFFICE+=" --disable-qt5"
   [[ -e /usr/include/KF5/KIOCore ]] && PKGMK_LIBREOFFICE+=" --enable-kde5 --enable-gtk3-kde5"
-  [[ -e /usr/share/vlc ]] && PKGMK_LIBREOFFICE+=" --enable-vlc" || PKGMK_LIBREOFFICE+=" --disable-vlc" # experimental vlc av backend
   [[ -e /usr/lib/pkgconfig/valgrind.pc ]] && PKGMK_LIBREOFFICE+=" --with-valgrind"
 
   local build_date=$(date +%Y%m%d)
