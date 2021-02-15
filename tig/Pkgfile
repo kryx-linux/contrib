@@ -1,18 +1,16 @@
 # Description: text-mode interface for git
-# URL:         https://github.com/jonas/tig
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  git
+# URL: https://github.com/jonas/tig
+# Maintainer: Juergen Daubert, jue at crux dot nu
+# Depends on: readline git
 
 name=tig
-version=2.5.1
+version=2.5.2
 release=1
 source=(https://github.com/jonas/tig/releases/download/$name-$version/$name-$version.tar.gz) 
 
 build() {
-  cd $name-$version
-
-  ./configure --prefix=/usr --sysconfdir=/etc
-
-  make
-  make DESTDIR=$PKG install install-doc-man
+	cd $name-$version
+	./configure --prefix=/usr --sysconfdir=/etc
+	make
+	make DESTDIR=$PKG install install-doc-man
 }
