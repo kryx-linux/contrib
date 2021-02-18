@@ -5,13 +5,13 @@
 # Optional: ppp avahi bash-completion dbus libnl jansson libteam dnsmasq
 
 name=networkmanager
-version=1.28.0
+version=1.30.0
 release=1
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
   networkmanager.rc NetworkManager.conf polkit.conf dhcp.conf org.freedesktop.NetworkManager.rules)
 
 build() {
-  sed '/initrd/d' -i NetworkManager-$version/src/meson.build
+  #sed '/initrd/d' -i NetworkManager-$version/src/meson.build
 
   [[ -e /usr/lib/pppd/ ]] || PKGMK_NM+=' -D ppp=false'
   [[ -e /usr/lib/pkgconfig/jansson.pc ]] || PKGMK_NM+=' -D ovs=false'
