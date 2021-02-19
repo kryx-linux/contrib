@@ -5,26 +5,30 @@
 
 name=avahi
 version=0.8
-release=2
+release=3
 source=(https://github.com/lathiat/avahi/releases/download/v$version/$name-$version.tar.gz
-  avahi-0.8-ipv6_race_condition_fix-1.patch
-  avahi-daemon.rc reverse-move-to-run.patch)
+  avahi-0.8-ipv6_race_condition_fix-1.patch avahi-daemon.service reverse-move-to-run.patch)
 
 build() {
   cd $name-$version
   patch -Np1 -i $SRC/reverse-move-to-run.patch
   patch -Np1 -i $SRC/avahi-0.8-ipv6_race_condition_fix-1.patch
+
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --with-distro=none \
-    --disable-{gtk,gtk3,qt3,qt4,qt5,python} \
-    --disable-{pygobject,python-dbus,mono,mono-doc,nls} \
-    --enable-compat-libdns_sd
+    --with-autoipd-user=avahi \
+    --with-autoipd-group=avahi \
+    --with-avahi-priv-access-group=wheel \
+    --enable-compat-libdns_sd \
+    --disable-{gtk,gtk3,qt3,qt4,qt5,python,static} \
+    --disable-{pygobject,python-dbus,mono,mono-doc,nls}
   make
   make DESTDIR=$PKG install
 
   ln -s avahi-compat-libdns_sd/dns_sd.h $PKG/usr/include/dns_sd.h
-  install -D -m 0755 $SRC/avahi-daemon.rc $PKG/etc/rc.d/avahi-daemon
+  install -D -m 0755 $SRC/avahi-daemon.service $PKG/etc/rc.d/avahi-daemon
+  mkdir $PKG/var/run/avahi
 }
