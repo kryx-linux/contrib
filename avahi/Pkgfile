@@ -5,13 +5,15 @@
 
 name=avahi
 version=0.8
-release=1
-source=(http://avahi.org/download/$name-$version.tar.gz \
+release=2
+source=(https://github.com/lathiat/avahi/releases/download/v$version/$name-$version.tar.gz
+  avahi-0.8-ipv6_race_condition_fix-1.patch
   avahi-daemon.rc reverse-move-to-run.patch)
 
 build() {
   cd $name-$version
-  patch -Np1 -i ../reverse-move-to-run.patch
+  patch -Np1 -i $SRC/reverse-move-to-run.patch
+  patch -Np1 -i $SRC/avahi-0.8-ipv6_race_condition_fix-1.patch
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
