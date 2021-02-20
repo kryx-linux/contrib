@@ -9,23 +9,22 @@ release=1
 source=(https://github.com/ogham/exa/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update
-  cargo fetch
-  cargo build --release --locked
-  install -Dt $PKG/usr/bin target/release/exa
+  cargo update --manifest-path $name-$version/Cargo.toml
+  cargo fetch --manifest-path $name-$version/Cargo.toml
+  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
+  install -Dt $PKG/usr/bin $name-$version/target/release/exa
 
   # install auto-completion files if the ports for it are installed
-  if [ -e /usr/share/zsh ]; then
-    install -Dm644 contrib/completions.zsh \
+  if [ -e /usr/bin/zsh ]; then
+    install -Dm644 $name-$version/contrib/completions.zsh \
       $PKG/usr/share/zsh/site-functions/_$name
   fi
   if [ -e /usr/lib/pkgconfig/bash-completion.pc ]; then
-    install -Dm644 contrib/completions.bash \
+    install -Dm644 $name-$version/contrib/completions.bash \
       $PKG/usr/share/bash-completion/completions/$name
   fi
 }
