@@ -19,6 +19,7 @@ build() {
 
 	./autogen.sh
 
+	CFLAGS+=' -fcommon' \
 	./configure \
 		--prefix=/usr \
 		--sysconfdir=/etc
