@@ -10,6 +10,7 @@ source=(ftp://ftp.ncftp.com/ncftp/ncftp-$version-src.tar.xz)
 
 build() {
   cd $name-$version
+  CFLAGS+=' -fcommon'
   ./configure --prefix=/usr
 
   make
