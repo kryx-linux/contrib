@@ -6,15 +6,17 @@
 
 name=transcode
 version=1.1.7
-release=5
+release=6
 source=(
 	https://crux.ster.zone/downloads/$name/$name-$version.tar.bz2
 	#https://bitbucket.org/france/transcode-tcforge/downloads/$name-$version.tar.bz2
 	http://downloads.sourceforge.net/project/subtitleripper/subtitleripper/subtitleripper-0.3-4/subtitleripper-0.3-4.tgz
 	subtitleripper-0.3.4-linkingorder.patch
-        subtitleripper-0.3.4-respect-ldflags.patch
+	subtitleripper-0.3.4-respect-ldflags.patch
 	transcode-ffmpeg3.patch
 	transcode-ffmpeg4.patch
+	transcode-glibc-2.32.patch
+	transcode-gcc10.patch
 	transcode-imagemagick7.patch)
 
 build() {
@@ -25,6 +27,8 @@ build() {
 	patch -p 1 -i $SRC/transcode-ffmpeg3.patch
 	patch -p 1 -i $SRC/transcode-ffmpeg4.patch
 	patch -p 1 -i $SRC/transcode-imagemagick7.patch
+	patch -p 1 -i $SRC/transcode-glibc-2.32.patch
+	patch -p 1 -i $SRC/transcode-gcc10.patch
 
 	sed \
 	-e 's|freetype/ftglyph.h|freetype2/freetype/ftglyph.h|' \
