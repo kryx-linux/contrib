@@ -1,0 +1,43 @@
+Description: Fix FTBFS with binutils version >= 2.36
+ Thanks to Matthias Klose <doko@debian.org> for pointing this out.
+Origin: http://launchpadlibrarian.net/521074457/tightvnc_1%3A1.3.10-1_1%3A1.3.10-1ubuntu1.diff.gz
+Bug-Debian: http://bugs.debian.org/981734
+Author: Sven Geuer <debmaint@g-e-u-e-r.de>
+Last-Update: 2021-02-03
+--- a/Xvnc/config/cf/Imake.tmpl
++++ b/Xvnc/config/cf/Imake.tmpl
+@@ -598,21 +598,21 @@
+ #if HasLargeTmp || SystemV4
+ #define ArCmd ArCmdBase cq
+ #else
+-#define ArCmd ArCmdBase clq
++#define ArCmd ArCmdBase cq
+ #endif
+ #endif
+ #ifndef ArAddCmd
+ #if HasLargeTmp || SystemV4
+ #define ArAddCmd ArCmdBase ru
+ #else
+-#define ArAddCmd ArCmdBase rul
++#define ArAddCmd ArCmdBase ru
+ #endif
+ #endif
+ #ifndef ArExtCmd
+ #if HasLargeTmp || SystemV4
+ #define ArExtCmd ArCmdBase x
+ #else
+-#define ArExtCmd ArCmdBase xl
++#define ArExtCmd ArCmdBase x
+ #endif
+ #endif
+ #ifndef BootstrapCFlags
+--- a/Xvnc/config/util/crayar.sh
++++ b/Xvnc/config/util/crayar.sh
+@@ -4,6 +4,6 @@
+ if cray2; then
+         bld cr $lib `lorder $* | tsort`
+ else
+-        ar clq $lib $*
++        ar cq $lib $*
+ fi
+ 
