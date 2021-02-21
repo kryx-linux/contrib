@@ -2,11 +2,11 @@
 # URL: https://pipewire.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: alsa-lib dbus fdk-aac ffmpeg glib gnutls lame libva libvpx libwebp x264 x265
-# Optional: bluez gst-plugins-base jack pulseaudio libldac libopenaptx v4l2 vulkan-loader
+# Optional: alsa-ucm-conf bluez gst-plugins-base jack pulseaudio libldac libopenaptx v4l2 vulkan-loader
 
 name=pipewire
 version=0.3.22
-release=1
+release=2
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
 build() {
@@ -32,6 +32,7 @@ build() {
   touch $PKG/etc/pipewire/media-session.d/with-alsa
   mkdir -p $PKG/etc/alsa/conf.d
   ln -st $PKG/etc/alsa/conf.d /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
+  ln -st $PKG/etc/alsa/conf.d /usr/share/alsa/alsa.conf.d/50-pipewire.conf
 
   # remove leftovers
   rm -r $PKG/usr/share/locale
