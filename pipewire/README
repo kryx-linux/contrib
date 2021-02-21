@@ -16,14 +16,19 @@ Getting `pipewire` to run is relatively easy on `CRUX`. This is a simple guide a
 This might also be considered a WIP entry. You can help by sharing your experiences and thoughts.
 
 # Prerequisites
- - working kernel with alsa audio
- - `opt/alsa-utils` will be installed by default as a dependency and needs to be configured by the user
- - currently, pipewires default config makes use of `opt/alsa-ucm-conf`, consider installing that alongside the default dependency `opt/alsa-utils`
+  - working kernel with alsa audio
+  - `opt/alsa-utils` will be installed by default as a dependency and needs to be configured by the user
+  - currently, pipewires default config makes use of `opt/alsa-ucm-conf`, consider installing that alongside the default dependency `opt/alsa-utils`
 
 ## Optional prerequisites
- - pipewire needs pulseaudio to be built with xorg-libxtst around to have the pulseaudio portal available
-   - `prt-get depinst xorg-libxtst && prt-get update -fr pulseaudio`
- - please look at `contrib/pipewire/Pkgfile` for further optional dependencies listed and rebuild the package after installing new optional dependencies
+  - pipewire needs pulseaudio to be built with xorg-libxtst around to have the pulseaudio portal available
+    - `prt-get depinst xorg-libxtst && prt-get update -fr pulseaudio`
+  - `contrib/rtkit` and a realtime compatible kernel to help with latency, add your user to `rtkit group` to be able to make use of it
+    - [an stackoverflow question on the topic](https://stackoverflow.com/questions/817059/what-is-preemption-what-is-a-preemtible-kernel-what-is-it-good-for)
+    - [Real-Time Linux collaborative project](https://wiki.linuxfoundation.org/realtime/start)
+    - [Arch wiki](https://wiki.archlinux.org/index.php/Realtime_kernel_patchset)
+    - [linuxaudio.org wiki](https://wiki.linuxaudio.org/wiki/system_configuration#the_kernel)
+  - please look at `contrib/pipewire/Pkgfile` for further optional dependencies listed and rebuild the package after installing new optional dependencies
 
 # Running pipewire
 `pipewire` will always leverage `alsa`, so you should configure that first. Use `alsactl store` to store those settings, and configure `/etc/rc.conf` to start `/etc/rc.d/alsa` by default. While you are in `rc.conf`, make sure you start `/etc/rc.d/dbus` too, if you haven't already.
