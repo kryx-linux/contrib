@@ -9,6 +9,7 @@ source=(http://www.kernel.org/pub/software/network/tftp/tftp-hpa/$name-$version.
 
 build () {
   cd $name-$version
+  CFLAGS+=' -fcommon' \
   ./configure --prefix=/usr
   make
   make INSTALLROOT=$PKG install
