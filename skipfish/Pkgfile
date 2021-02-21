@@ -18,7 +18,7 @@ build() {
   sed -i -e 's|"signatures/|"/usr/share/skipfish/signatures/|g' src/config.h
   sed -i -e 's|include signatures/|include /usr/share/skipfish/signatures/|g' signatures/signatures.conf
 
-  CFLAGS+=" -I/usr/include/openssl-1.0"
+  CFLAGS+=" -I/usr/include/openssl-1.0 -fcommon"
   LDFLAGS+=" -I/usr/lib/openssl-1.0"
   make
   rm assets/COPYING
