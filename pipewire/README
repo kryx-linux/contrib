@@ -1,6 +1,8 @@
 contrib/pipewire how to
 ====================
 
+Consider reading online [CRUX wiki](https://crux.nu/Wiki/Pipewire)
+
 # Intro
 `pipewire` is a modern multimedia server. Quoting gentoo wiki, it's strenghts are:
 >  -  Minimal latency capture/playback of audio and video
@@ -18,7 +20,7 @@ This might also be considered a WIP entry. You can help by sharing your experien
  - `opt/alsa-utils` will be installed by default as a dependency and needs to be configured by the user
  - currently, pipewires default config makes use of `opt/alsa-ucm-conf`, consider installing that alongside the default dependency `opt/alsa-utils`
 
-## Optional prerequisites:
+## Optional prerequisites
  - pipewire needs pulseaudio to be built with xorg-libxtst around to have the pulseaudio portal available
    - `prt-get depinst xorg-libxtst && prt-get update -fr pulseaudio`
  - please look at `contrib/pipewire/Pkgfile` for further optional dependencies listed and rebuild the package after installing new optional dependencies
@@ -31,8 +33,8 @@ Resources:
   - [Gentoo wiki](https://wiki.gentoo.org/wiki/ALSA)
   - [Arch wiki](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture)
 
-Currently, pipewires default config format might always change, so it is advised to keep an eye on `rejmerge` to keep your configs updated.
-The default config can be modified in directly `/etc/pipewire`. The configuration of `/etc/pipewire` can be copied over to `$XDG_CONFIG_HOME/pipewire-media-session`, which should most likely point you to `$HOME/config/pipewire-media-session`.
+Currently, pipewires default config format might always change, so it is advised to keep an eye on `rejmerge` to keep your configs updated.  
+The default config can be modified in directly `/etc/pipewire`. The configuration of `/etc/pipewire` can be copied over to `$XDG_CONFIG_HOME/pipewire`, which should most likely point you to `$HOME/config/pipewire`.
 
 Normally, you wouldn't need to change anything to run `pipewire` as an a/v-server, so in the simplest setup it should suffice to run `/usr/bin/pipewire` from a users shell or script (for example I have this in my `i3` config: `exec "/usr/bin/pipewire"`), just make sure that whatever session you are running will be executed as a `dbus-user-session` too (for example from my `~/.xinitrc`: `exec dbus-run-session -- i3`)
 
@@ -42,6 +44,9 @@ If you are a `pulseaudio`-user, make sure it won't autostart with your session. 
 ## Running jack applications through pipewire
 to be expanded
 
+## Debbuging pipewire
+You can run pipewire like that from a terminal: `PIPEWIRE_DEBUG=3 pipewire`
+
 # Further configuration and fine-tuning
 To help configuring, consider reading through the following resources alongside the extensive comments in the default config:
  - [Official pipewire wiki](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/home)
@@ -50,7 +55,7 @@ To help configuring, consider reading through the following resources alongside 
  - [Gentoo wiki](https://wiki.gentoo.org/wiki/PipeWire)
 
 # tl;dr
-"I don't have any time to read up on stuff myself, tell me what I need to do right now to get this hot mess!" -some user
+> "I don't have any time to read up on stuff myself, tell me what I need to do right now to get this hot mess!" -some user
  - install `prt-get depinst pipewire`
  - optional: `prt-get depinst xorg-libxtst pulseaudio` et al
  - execute while executing your X11/Wayland-Session: `/usr/bin/pipewire`
