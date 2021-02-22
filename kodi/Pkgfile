@@ -1,31 +1,34 @@
 # Description: A free and open source software media player and entertainment hub
 # URL: https://kodi.tv/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: cmake ffmpeg fmt ghostscript giflib glu jdk8-bin libass libcdio libmicrohttpd mysql samba swig taglib tinyxml python
+# Depends on: cmake ffmpeg fmt ghostscript giflib glu jdk8-bin libass libcdio libmicrohttpd mysql samba swig taglib tinyxml python spdlog
 
 name=kodi
-version=18.9
+version=19.0
 release=1
-source=(https://github.com/xbmc/xbmc/archive/$version-Leia.tar.gz gl-headers.patch)
+source=(https://github.com/xbmc/xbmc/archive/$version-Matrix.tar.gz gl-headers.patch)
 
 build() {
 	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
-	patch -d xbmc-$version-Leia -p1 -i $SRC/gl-headers.patch
+	patch -d xbmc-$version-Matrix -p1 -i $SRC/gl-headers.patch
 	cmake -Bbuild \
 		-DVERBOSE=ON \
+		-DAPP_RENDER_SYSTEM=gl \
+		-DCORE_PLATFORM_NAME=x11 \
 		-DENABLE_DVDCSS=ON \
 		-DENABLE_OPTICAL=ON \
 		-DENABLE_PYTHON=ON \
 		-DENABLE_INTERNAL_FLATBUFFERS=ON \
 		-DENABLE_INTERNAL_FSTRCMP=ON \
 		-DENABLE_INTERNAL_RapidJSON=ON \
+		-DENABLE_TESTING=OFF \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
 		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
 		-Wno-dev \
-		xbmc-$version-Leia
+		xbmc-$version-Matrix
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
 
