@@ -26,11 +26,10 @@ build() {
   export R_LIBS_USER="$PKG/usr/lib/R/library/"
 
   (pushd $name-$version/dependencies/common
-  local pandoc_version=$(prt-get current pandoc-bin)
   install -d pandoc node/10.19.0/bin
   ln -sfT /usr/share/myspell/dicts dictionaries
   ln -sfT /usr/share/mathjax mathjax-27
-  ln -sfT /usr/bin/ "pandoc/${pandoc_version/\-1/}"
+  ln -sfT /usr/bin/ "pandoc/2.11.3.2"
   ln -sfT /usr/bin/node node/10.19.0/bin/node
   bash install-packages
   unset pandoc_version)
