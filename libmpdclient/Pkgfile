@@ -1,7 +1,7 @@
-# Description: Library for the Command line MPD client
-# URL:         http://www.musicpd.org/libs/libmpdclient
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  meson ninja
+# Description: asynchronous API library for interfacing MPD in the C, C++ & Objective C languages
+# URL: https://www.musicpd.org/libs/libmpdclient/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: meson ninja
 
 name=libmpdclient
 version=2.19
@@ -11,7 +11,9 @@ source=(https://www.musicpd.org/download/libmpdclient/2/libmpdclient-$version.ta
 build() {
   cd $name-$version
 
-  meson build --prefix /usr -Ddocumentation=false
+  meson build --prefix=/usr \
+    --buildtype=plain \
+    -D documentation=false
   DESTDIR=$PKG ninja -C build -j ${JOBS:-1} install
   rm -r $PKG/usr/share/doc
 }
