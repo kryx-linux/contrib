@@ -1,16 +1,17 @@
 # Description: libva video acceleration for newer intel based setups
-# URL:         https://github.com/intel/intel-vaapi-driver
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  glu ffmpeg libva meson ninja
+# URL: https://github.com/intel/intel-vaapi-driver
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: glu ffmpeg libva meson ninja
 
 name=libva-intel-driver
 version=2.4.1
-release=1
+release=2
 source=(https://github.com/intel/intel-vaapi-driver/releases/download/${version}/intel-vaapi-driver-${version}.tar.bz2)
 
 build() {
   meson intel-vaapi-driver-$version build \
-    --prefix=/usr
+    --prefix=/usr \
+    --buildtype=plain
   ninja -C build
   DESTDIR=$PKG ninja -C build install
 }
