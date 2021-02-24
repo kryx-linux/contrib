@@ -1,7 +1,22 @@
-This port, pkgconf, can be used as a replacement for pkg-config.
-To accomplish that, you will need a symlink:
+# Part 1:
 
-# ln -s pkgconf /usr/bin/pkg-config
+Please read up on the following ticket:
+https://todo.sr.ht/~kaniini/pkgconf/1
 
-You should be aware that is conflicts with the core/pkg-config
-package, so the link is not automatically created.
+The gist: since we exchange pkg-config for pkgconf here, this should not be a
+problem, still, this is not 'nice'.
+
+# Part 2:
+
+#!/bin/sh
+#
+# This was originally my post-install for this port!
+# pkgconf and pkg-config are not meant to co-exist, but
+# the decision to swap them out is only yours to make! 
+# Please review the consequences of this script!
+
+alias="pkgconf: pkg-config"
+
+if [ -z "$(grep "$alias" /var/lib/pkg/prt-get.aliases)" ]; then
+	echo "$alias" >> /var/lib/pkg/prt-get.aliases
+fi
