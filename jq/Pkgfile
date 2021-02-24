@@ -1,7 +1,7 @@
 # Description: Lightweight and flexible command-line JSON processor
-# URL:         https://stedolan.github.io/jq/
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Optional:    oniguruma
+# URL: https://stedolan.github.io/jq/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Optional: oniguruma
 
 name=jq
 version=1.6
@@ -16,7 +16,7 @@ build() {
   autoreconf -i
 
   ./configure --prefix=/usr \
-              --with-oniguruma=/usr
+    --with-oniguruma=/usr
 
   make
   make DESTDIR=$PKG install
