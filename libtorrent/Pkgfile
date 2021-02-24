@@ -1,7 +1,7 @@
 # Description: torrent library
-# URL:         https://rakshasa.github.io/rtorrent
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Depends on:  libsigc++ curl
+# URL: https://rakshasa.github.io/rtorrent
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libsigc++ curl
 
 name=libtorrent
 version=0.13.8
@@ -11,11 +11,10 @@ source=(http://rtorrent.net/downloads/libtorrent-$version.tar.gz)
 build() {
   cd $name-$version
 
-  # remove cppunit dependency
-  sed -i '/AM_PATH_CPPUNIT(.*)/d' configure.ac
   ./autogen.sh
 
-  ./configure --prefix=/usr --enable-debug=no
+  ./configure --prefix=/usr \
+    --enable-debug=no
   make
   make install DESTDIR=$PKG
 }
