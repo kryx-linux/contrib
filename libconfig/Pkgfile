@@ -1,7 +1,6 @@
 # Description: C/C++ configuration file library.
-# URL:         https://github.com/hyperrealm/libconfig
-# Maintainer:  Thomas Penteker, tek at serverop dot de
-# Packager:    Tilman Sauerbeck, tilman at crux dot nu
+# URL: https://github.com/hyperrealm/libconfig
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=libconfig
 version=1.7.2
@@ -17,9 +16,10 @@ build() {
   sed -i 's|all: all-am|all:|1' doc/Makefile.in
   sed -i 's|install: install-am|install:|1' doc/Makefile.in
 
-  ./configure --prefix=/usr --disable-examples
+  ./configure --prefix=/usr \
+    --disable-static \
+    --disable-examples
 
   make
   make DESTDIR=$PKG install
-
 }
