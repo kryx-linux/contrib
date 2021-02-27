@@ -5,16 +5,13 @@
 # Optional: sccache
 
 name=thunderbird
-version=78.7.1
-release=2
+version=78.8.0
+release=1
 source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
-	$name.desktop
-	fix-rust-1.50-build.patch)
+	$name.desktop)
  
 build() {
 	cd $name-$version
-
-	patch -p0 -i $SRC/fix-rust-1.50-build.patch
 
 	if [ -e '/usr/bin/ccache' ]; then
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
