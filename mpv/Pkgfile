@@ -6,13 +6,16 @@
 
 name=mpv
 version=0.33.0
-release=1
+release=2
 source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz
 	https://waf.io/waf-2.0.9
+	mpv-libplacebo-3.104.0-api-change.patch
 	mpv.1)
 
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/mpv-libplacebo-3.104.0-api-change.patch
 
 	install -m0755 $SRC/waf-2.0.9 waf
 
