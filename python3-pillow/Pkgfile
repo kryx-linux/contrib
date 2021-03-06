@@ -6,9 +6,10 @@
 
 name=python3-pillow
 _name=Pillow
-version=8.1.1
+version=8.1.2
 release=1
-source=(https://files.pythonhosted.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
+source=(https://github.com/python-pillow/Pillow/archive/$version/$_name-$version.tar.gz)
+	#https://files.pythonhosted.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
 
 build() {
 	cd $_name-$version
