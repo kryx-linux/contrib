@@ -1,0 +1,17 @@
+# Description: Compile and distribute Python extensions written in rust as easily as if they were written in C.
+# URL: https://github.com/PyO3/setuptools-rust
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: python3-setuptools python3-toml python3-semantic-version
+
+name=python3-setuptools-rust
+version=0.11.6
+release=1
+source=(https://github.com/PyO3/setuptools-rust/archive/v$version/python-setuptools-rust-$version.tar.gz)
+
+build() {
+	export SETUPTOOLS_SCM_PRETEND_VERSION=$version
+
+	cd setuptools-rust-$version
+	/usr/bin/python3 setup.py build
+	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1 --skip-build
+}
