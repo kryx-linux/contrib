@@ -1,36 +1,29 @@
 # Description: A tool to distribute compilations.
-# URL: http://distcc.org/
+# URL: https://github.com/distcc/distcc
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Optional: python3 gtk avahi
+# Optional: gtk avahi
 
 name=distcc
-version=3.3.3
-release=2
+version=3.3.5
+release=1
 source=(https://github.com/distcc/distcc/releases/download/v$version/$name-$version.tar.gz
-	distccd
-	distcc-3.3.3-py38.patch
-	distcc-3.3.3-gcc-10-fix.patch)
+	distccd distccd.conf)
 
 build() {
 	cd $name-$version
 
-[ -e '/usr/lib/pkgconfig/python-3.7.pc' ] || PKGMK_DISTCC+=' --disable-pump-mode'
-[ -e '/usr/lib/pkgconfig/gtk+-2.0.pc' ] || PKGMK_DISTCC+=' --without-gtk'
-[ -e '/usr/lib/pkgconfig/popt.pc' ] || PKGMK_DISTCC+=' --with-included-popt'
-
-	patch -p1 -i $SRC/distcc-3.3.3-py38.patch
-	patch -p1 -i $SRC/distcc-3.3.3-gcc-10-fix.patch
+prt-get isinst gtk3 || PKGMK_DISTCC+=' --without-gtk'
+prt-get isinst popt || PKGMK_DISTCC+=' --with-included-popt'
 
 	./autogen.sh
 
 	./configure ${PKGMK_DISTCC} \
 		--prefix=/usr \
 		--sysconfdir=/etc \
-		--enable-rfc2553 \
-		--disable-Werror
+		--enable-rfc2553
 
-	make
-	make DESTDIR=$PKG install
+	make WERROR_CFLAGS= INCLUDESERVER_PYTHON=/usr/bin/python3
+	make DESTDIR=$PKG INCLUDESERVER_PYTHON=/usr/bin/python3 install
 
 	# distccd should be in sbin
 	mv $PKG/usr/bin/distccd $PKG/usr/sbin/distccd
@@ -46,11 +39,14 @@ build() {
 	done
 	cd -
 
+	# install config file
+	install -D -m 0644 $SRC/distccd.conf $PKG/etc/distccd.conf
+
+	# create rundir
+	install -d $PKG/var/run/distcc
+	chown distcc:distcc $PKG/var/run/distcc
+
 	# cleanup
 	rm -r $PKG/usr/share/doc $PKG/etc/distcc $PKG/etc/default
-	rm $PKG//usr/sbin/update-distcc-symlinks
-
-	# python is required for pump mode
-[ -e '/usr/lib/pkgconfig/python-3.7.pc' ] || \
-	rm $PKG/usr/share/man/man1/{pump,include_server}.1.gz
+	rm $PKG/usr/sbin/update-distcc-symlinks
 }
