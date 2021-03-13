@@ -9,6 +9,7 @@ release=1
 source=(http://jaeger.morpheus.net/linux/crux/files/$name-$version.tar.xz)
 
 build() {
+    export GO111MODULE=auto
     mkdir -p src/github.com/$name
     cd src/github.com/$name
     ln -s $SRC/$name-$version $name
