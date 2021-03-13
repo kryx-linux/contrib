@@ -15,6 +15,7 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
     $name.rc $name.conf)
 
 build() {
+    export GO111MODULE=auto
     export GOPATH=$SRC
     export DOCKER_GITCOMMIT=363e9a8
     export DOCKER_BUILDTAGS='seccomp'
