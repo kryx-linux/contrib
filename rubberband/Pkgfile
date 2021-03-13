@@ -1,23 +1,36 @@
 # Description: Time-stretching and pitch-shifting audio library and utility.
 # URL: https://www.breakfastquay.com/rubberband/
 # Maintainer:  Danny Rawlins, crux at romster dot me
-# Depends on: fftw libsamplerate openjdk8 ladspa vamp-plugin-sdk
+# Depends on: fftw libsamplerate meson ninja vamp-plugin-sdk
+# Optional: openjdk8 openjdk11 openjdk15 ladspa libogg libvorbis opus
 
 name=rubberband
-version=1.9
+version=1.9.1
 release=1
 source=(https://github.com/breakfastquay/$name/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	cd $name-$version
+	if [ -e '/usr/lib/java' ]; then
+		[ -n "${JAVA_HOME}" ] || export JAVA_HOME="/usr/lib/java/openjdk8"
 
-	autoreconf -vfi
+		if prt-get isinst openjdk8; then
+local java_major="$($JAVA_HOME/bin/java -version 2>&1 | awk '/openjdk/ {split($3,java,".");  print java[2]}')"
+PKGMK_RUBBERBAND+=" -D extra_include_dirs=/usr/lib/java/openjdk${java_major}/include,/usr/lib/java/openjdk${java_major}/include/linux"
+export PATH="/usr/lib/java/openjdk${java_major}/bin:$PATH"
+		else
+#local java_major=$($JAVA_HOME/bin/java -version 2>&1 | awk '/openjdk/ {split($3,java,"."); print java[1]}' | awk -F'"' '{print $1}')
+local java_major="$($JAVA_HOME/bin/java -version 2>&1 | awk '/OpenJDK 64-Bit/ {split($6,java,"."); print java[1]}')"
+PKGMK_RUBBERBAND+=" -D extra_include_dirs=/usr/lib/java/openjdk${java_major}-jdk/include,/usr/lib/java/openjdk${java_major}-jdk/include/linux"
+export PATH="/usr/lib/java/openjdk${java_major}-jdk/bin:$PATH"
+		fi
+	fi
 
-	./configure --prefix=/usr
-	make
+	meson setup build $name-$version ${PKGMK_RUBBERBAND} \
+		--prefix=/usr \
+		--buildtype=plain \
+		-D fft=fftw \
+		-D resampler=libsamplerate
 
-	export JAVA_HOME=/usr/lib/java/openjdk8
-	make jni
-
-	make DESTDIR=$PKG install
+	meson compile -C build -j ${JOBS:-1}
+	DESTDIR=$PKG meson install -C build
 }
