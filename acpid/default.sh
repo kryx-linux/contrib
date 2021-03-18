@@ -5,18 +5,28 @@ log() {
 	logger -t /etc/acpi/default.sh "${*}"
 }
 
+unhandled() {
+	t=${1}
+	shift
+	log "ACPI: no handler for event ${t}, data: ${*}";;
+
+}
+
 set ${*}
 
-# In order to not cumulate ACPI events actual actions should be detached
-# from/to /dev/null and backgrounded via &
-(
+# In order to not cumulate actions of ACPI event they should be detached via
+#	( ACTION ) </dev/null >/dev/null 2>&1 &
+# (At least setting volume or other things which depend on hardware which might
+# block and cause the script not to return for a while.)
 case "${1}" in
 button/power)
 	case "${2}" in
-	PWRF)	/sbin/init 0;;
-	*)	log "button/power action ${2} not handled (${*})";;
+	PWRF)
+		/sbin/init 0;;
+	*)
+		unhandled "${@}";;
 	esac
 	;;
-*)	log "ACPI group ${1} / action ${2} is not defined (${*})";;
+*)
+	unhandled;;
 esac
-) </dev/null >/dev/null 2>&1 &
