@@ -12,7 +12,7 @@ release=2
 source=(
    https://github.com/Arkq/${rname}/archive/\
 v${version}/${rname}-${version}.tar.gz
-   bluealsa bluealsa.conf)
+   bluealsa.rc bluealsa.conf)
 
 build() {
    cd ${rname}-${version}
@@ -23,7 +23,7 @@ build() {
    make all
    make DESTDIR="${PKG}" install
 
-   install -D -m 0755 "${SRC}"/bluealsa "${PKG}"/etc/rc.d/${name}
+   install -D -m 0755 "${SRC}"/bluealsa.rc "${PKG}"/etc/rc.d/${name}
    install -D -m 0644 "${SRC}"/bluealsa.conf \
       "${PKG}"/etc/dbus-1/system.d/${name}.conf
 }

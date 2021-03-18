@@ -1,14 +1,15 @@
 #!/bin/sh
 #@ bluez-alsa startup script.
-#@ Likely requires <- bluetoothd <- dbus 
+#@ Likely requires <- bluetoothd [<- dbus]
+
+RD=/run
+PID=${RD}/bluealsa.pid
 
 SSD=/sbin/start-stop-daemon
 PROG=/usr/bin/bluealsa
-PID=/run/bluealsa.pid
-RUNDIR=/run/bluealsa
 OPTS=-S
 
-case $1 in
+case "${1}" in
 start)
 	exec "${SSD}" --start --background --make-pidfile --pidfile "${PID}" \
 		--exec "${PROG}" -- ${OPTS}
@@ -18,7 +19,7 @@ stop)
 		--exec "${PROG}"
 	;;
 restart)
-	"${0}" stop
+	"${SSD}" --status --pidfile "${PID}" --exec "${PROG}" && "${0}" stop
 	exec "${0}" start
 	;;
 status)
@@ -33,6 +34,6 @@ status)
 	exit ${e}
 	;;
 *)
-	echo "usage: $0 start|stop|restart|status"
+	echo "usage: ${0} start|stop|restart|status"
 	;;
 esac
