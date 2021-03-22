@@ -4,12 +4,14 @@
 # Depends on: docutils python3-alabaster python3-imagesize python3-jinja python3-packaging python3-pygments python3-requests python3-snowballstemmer python3-sphinxcontrib-applehelp python3-sphinxcontrib-devhelp python3-sphinxcontrib-htmlhelp python3-sphinxcontrib-jsmath python3-sphinxcontrib-qthelp python3-sphinxcontrib-serializinghtml python3-sphinxcontrib-websupport
 
 name=python3-sphinx
-version=3.5.2
+_name=Sphinx
+version=3.5.3
 release=1
-source=(https://github.com/sphinx-doc/${name#*-}/archive/v$version/${name#*-}-$version.tar.gz)
+source=(#https://github.com/sphinx-doc/$_name/archive/v$version/$_name-$version.tar.gz
+	https://files.pythonhosted.org/packages/47/8c/b8edf8b293613057355d45365201d9e98560a484a9c177934a6f25115826/$_name-$version.tar.gz)
 
 build() {
-	cd ${name#*-}-$version
+	cd $_name-$version
 
 	sed -i -e '/^tag_build = .*/d' -e 's,^\(tag_date =\).*$,\1 false,' setup.cfg
 
