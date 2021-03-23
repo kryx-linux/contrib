@@ -104,7 +104,12 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/completion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/completion/installed-deep.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/completion/installed-shallow.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/config.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/config/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/config/definition.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/config/definitions.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/config/describe-all.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/config/flatten.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/config/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/deref-command.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/did-you-mean.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/error-handler.js
@@ -112,7 +117,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/completion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/explain-dep.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/explain-eresolve.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/file-exists.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/flat-options.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/get-identity.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/get-project-scope.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/hosted-git-info-from-manifest.js
@@ -142,6 +146,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/completion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/version.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/view.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/whoami.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/workspaces/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/workspaces/get-workspaces.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/.bin/
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/arborist -> ../@npmcli/arborist/bin/index.js
@@ -227,8 +233,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/ci-detect/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/env-replace.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/get-user-agent.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js.orig
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/nerf-dart.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/parse-field.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/proc-log.js
@@ -1377,6 +1383,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/enforce-clean.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/proc-log.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/read-json.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/retrieve-tag.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/tag.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmversion/lib/version.js
@@ -1627,6 +1634,13 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-dat
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/lib/safe_format.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/lib/typos.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/lib/warning_messages.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/node_modules/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/node_modules/hosted-git-info/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/node_modules/hosted-git-info/CHANGELOG.md
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/node_modules/hosted-git-info/git-host-info.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/node_modules/hosted-git-info/git-host.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/node_modules/hosted-git-info/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/node_modules/hosted-git-info/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/normalize-package-data/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npm-audit-report/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-audit-report/CHANGELOG.md
@@ -1661,6 +1675,13 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npm-normalize-package
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-normalize-package-bin/test/string.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/CHANGELOG.md
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/node_modules/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/node_modules/hosted-git-info/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/node_modules/hosted-git-info/CHANGELOG.md
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/node_modules/hosted-git-info/git-host-info.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/node_modules/hosted-git-info/git-host.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/node_modules/hosted-git-info/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/node_modules/hosted-git-info/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/npa.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npm-package-arg/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npm-packlist/
@@ -1825,11 +1846,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/psl/dist/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/psl/dist/psl.min.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/psl/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/psl/package.json
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/puka/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/puka/CHANGELOG.md
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/puka/LICENSE.txt
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/puka/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/puka/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/punycode/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/punycode/LICENSE-MIT.txt
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/punycode/package.json
@@ -2597,6 +2613,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/npm-exec.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-explain.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-explore.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/npm-find-dupes.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-fund.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-help-search.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-help.1.gz
