@@ -4,11 +4,14 @@
 # Depends on: cmake gcc-fortran python3 openblas
 
 name=lapack
-version=3.9.1
+version=3.9.0
 release=1
-source=(https://github.com/Reference-LAPACK/lapack/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/Reference-LAPACK/lapack/archive/v$version/$name-$version.tar.gz
+  https://github.com/Reference-LAPACK/lapack/commit/87536aa3.patch)
 
 build() {
+  patch -d $name-$version -p1 -i ../87536aa3.patch
+
   export CFLAGS+=' -fPIC'
   [[ -e /usr/bin/ninja ]] && PKGMK_LAPACK+=' -G Ninja'
   cmake -S $name-$version -B build $PKGMK_LAPACK \
