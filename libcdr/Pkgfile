@@ -4,15 +4,12 @@
 # Depends on: lcms2 librevenge icu
 
 name=libcdr
-version=0.1.6
+version=0.1.7
 release=1
-source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
-	libcdr-0.1.6-icu-68.patch)
+source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
-  [ $(pkginfo -i | awk '/^icu / {split($2,a,"."); print a[1]}') -ge 68 ] && \
-    patch -p1 -i $SRC/libcdr-0.1.6-icu-68.patch
   ./configure --prefix=/usr \
     --without-docs
   make
