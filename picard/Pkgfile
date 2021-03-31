@@ -4,7 +4,7 @@
 # Depends on: chromaprint python3-discid python3-mutagen python3-pyqt5
 
 name=picard
-version=2.5.6
+version=2.6
 release=1
 source=(ftp://ftp.musicbrainz.org/pub/musicbrainz/$name/$name-$version.tar.gz)
 
@@ -13,6 +13,7 @@ build () {
   sed -i '/import sip/d' setup.py
   sed -i '/^sip.setapi/d' setup.py
   python3 setup.py config
+  python3 setup.py build
   python3 setup.py install --root=$PKG --prefix=/usr
   rm -rf $PKG/usr/share/locale
 }
