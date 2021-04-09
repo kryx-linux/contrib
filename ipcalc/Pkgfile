@@ -1,18 +1,23 @@
-# Description: ipcalc: calculate IPv4 broadcast, network and host range.
-# URL:         http://jodies.de/ipcalc
+# Description: ipcalc: calculate IPv4/6 broadcast, network and host range.
+# URL:         https://gitlab.com/ipcalc/ipcalc
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=ipcalc
-version=0.41
+version=1.0.0
 release=1
-source=(http://jodies.de/${name}-archive/${name}-${version}.tar.gz)
+source=(https://gitlab.com/${name}/${name}/-/archive/${version}/\
+${name}-${version}.tar.bz2 build.patch)
 
 build() {
    cd ${name}-${version}
 
-   #
+   patch -Np1 -i "${SRC}"/build.patch
+
+   meson setup build
+   ninja -C build
+
    cat > ./ipcalc.1 <<- \!
-	.Dd January 4, 2021
+	.Dd April 9, 2021
 	.Dt IPCALC 1
 	.Os
 	.
@@ -22,11 +27,10 @@ build() {
 	.
 	.Bd -literal
 	!
-
-   perl ipcalc >> ./ipcalc.1
+   cat ipcalc.1.md >> ./ipcalc.1
    echo '.Ed' >> ./ipcalc.1
 
-   install -D -m 0755 ipcalc "${PKG}"/usr/bin/${name}
+   install -D -m 0755 build/ipcalc "${PKG}"/usr/bin/${name}
    install -D -m 0644 ipcalc.1 "${PKG}"/usr/share/man/man1/${name}.1
 }
 

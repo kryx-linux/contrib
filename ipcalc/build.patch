@@ -1,0 +1,49 @@
+commit 322294d7bf61f9fdf0e45e9b6c6013a7c6a35bfd
+Author:     Derrick Lyndon Pallas <derrick@meter.com>
+AuthorDate: 2020-10-14 18:25:54 +0000
+Commit:     Derrick Lyndon Pallas <derrick@meter.com>
+CommitDate: 2020-10-14 18:33:24 +0000
+
+    Do not fail to build if ronn is missing
+    
+    If ruby-ronn is missing, we can not compile the man page from markdown but
+    that should not prevent the application from building.
+    
+    Signed-off-by: Derrick Lyndon Pallas <derrick@meter.com>
+---
+ meson.build | 23 ++++++++++++-----------
+ 1 file changed, 12 insertions(+), 11 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index a2169fc17d..981d4a424f 100644
+--- a/meson.build
++++ b/meson.build
+@@ -72,16 +72,17 @@ ipcalc = executable('ipcalc',
+ 	install : true
+ )
+ 
+-ronn = find_program('ronn', required: true)
+-
+-ipcalc_1 = custom_target(
+-	'ipcalc.1',
+-	output : 'ipcalc.1',
+-	input : 'ipcalc.1.md',
+-	command : [ronn, '--pipe', '-r', '@INPUT@'],
+-	capture: true,
+-	install_dir: join_paths(get_option('mandir'), 'man1'),
+-	install: true
+-)
++ronn = find_program('ronn', required: false)
++if ronn.found()
++	ipcalc_1 = custom_target(
++		'ipcalc.1',
++		output : 'ipcalc.1',
++		input : 'ipcalc.1.md',
++		command : [ronn, '--pipe', '-r', '@INPUT@'],
++		capture: true,
++		install_dir: join_paths(get_option('mandir'), 'man1'),
++		install: true
++	)
++endif
+ 
+ subdir('tests')
