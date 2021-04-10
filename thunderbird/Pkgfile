@@ -5,13 +5,16 @@
 # Optional: sccache
 
 name=thunderbird
-version=78.9.0
+version=78.9.1
 release=1
 source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
-	$name.desktop)
+	$name.desktop
+	0038-bmo-1667736-Update-packed_simd-to-compile-on-Rust-1.patch)
  
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/0038-bmo-1667736-Update-packed_simd-to-compile-on-Rust-1.patch
 
 	if [ -e '/usr/bin/ccache' ]; then
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
@@ -27,8 +30,8 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-application=comm/mail
 	ac_add_options --prefix=/usr
 	ac_add_options --enable-default-toolkit=cairo-gtk3
-	ac_add_options --enable-linker=lld
 	ac_add_options --with-system-jpeg
+	ac_add_options --with-system-libevent
 	ac_add_options --with-system-zlib
 	ac_add_options --with-system-png
 	ac_add_options --with-system-nspr
@@ -36,22 +39,27 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
 	ac_add_options --enable-alsa
-	ac_add_options --enable-optimize
+	ac_add_options --enable-optimize=-O2
+	ac_add_options --enable-linker=lld
 	ac_add_options --enable-release
-#	ac_add_options --enable-rust-simd
+	ac_add_options --enable-rust-simd
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
-	ac_add_options --disable-tests
 	ac_add_options --disable-debug
+	ac_add_options --disable-debug-symbols
+	ac_add_options --disable-tests
 	ac_add_options --disable-updater
 	ac_add_options --disable-crashreporter
 	ac_add_options --disable-necko-wifi
 	ac_add_options --disable-pulseaudio
 	ac_add_options --enable-calendar
+	ac_add_options --disable-elf-hack
 EOF
 
 	[[ -e '/usr/bin/ccache' ]] && echo 'ac_add_options --enable-ccache' >> .mozconfig
 
+	export PYTHON=/usr/bin/python3
+	export RUSTFLAGS="$RUSTFLAGS -C debuginfo=0"
 	export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
 	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
 	export MOZBUILD_STATE_PATH="$PKGMK_SOURCE_DIR/.mozbuild"
