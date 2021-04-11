@@ -11,6 +11,7 @@ source=(https://github.com/storaged-project/$name/releases/download/$version-1/$
 build() {
   cd $name-$version
 
+  export CFLAGS="${CFLAGS} -Wno-deprecated-declarations"
   patch -Np1 -i $SRC/foo.patch
   aclocal
   automake
