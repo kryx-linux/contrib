@@ -1,0 +1,24 @@
+# Description: Sound eXchange, the Swiss Army knife of audio manipulation
+# URL:         http://sox.sourceforge.net/
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+
+name=sox
+version=20210412
+release=1
+xtarget=sox-code-7524160b29a476f7e87bc14fddf12d349f9a3c5e
+source=(https://sourceforge.net/code-snapshots/git/s/so/${name}/code.git/\
+${xtarget}.zip)
+
+build() {
+   cd "${xtarget}"
+
+   sed -i'' -e /^AX_APPEND/d configure.ac
+   autoreconf -vis
+
+   ./configure --prefix=/usr --disable-openmp
+
+   make
+   make DESTDIR="${PKG}" install
+}
+
+# s-sh-mode
