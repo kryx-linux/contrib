@@ -2,11 +2,12 @@
 # URL:         https://www.postfix.org/
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 # Depends on:  libpcre lmdb   openssl
+# Optional:    dovecot cyrus-sasl
 
 rname=postfix
 name=postfix-lmdb
-version=3.5.9
-release=2
+version=3.5.10
+release=1
 source=(
    https://de.${rname}.org/ftpmirror/official/${rname}-${version}.tar.gz
    lmdb-default.patch postfix-install.patch post-install
@@ -14,8 +15,6 @@ source=(
    aliases README relay_clientcerts sender_restrict
    main-addon.cf master.patch
 )
-
-isinst() { pkginfo -i | grep -qE "^${1}[[:space:]]"; }
 
 build() {
    cd ${rname}-${version}
@@ -27,11 +26,11 @@ build() {
    cca=${cca}' -DHAS_LMDB -DDEF_DB_TYPE=\"lmdb\" -DHAS_PCRE -DUSE_TLS'
    aux=
 
-   if isinst dovecot; then # TODO UNTESTED!
+   if prt-get isinst dovecot; then # TODO UNTESTED!
       cca=${cca}' -DUSE_SASL_AUTH -DDEF_SASL_SERVER=dovecot'
    fi
 
-   if isinst cyrus-sasl; then # TODO UNTESTED!
+   if prt-get isinst cyrus-sasl; then # TODO UNTESTED!
       cca=${cca}' -DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/include/sasl'
       aux=${aux}' -lsasl2'
    fi
