@@ -5,7 +5,7 @@
 # Optional: patool mediainfo icons-in-terminal
 
 name=nnn
-version=3.7
+version=4.0
 release=1
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
@@ -15,7 +15,7 @@ build() {
   sed -i 's/install: all/install:/' Makefile
 
   # build with icons support if contrib/icons-in-terminal is installed
-  [[ -e /usr/share/icons-in-terminal ]] && PKGMK_NNN=' O_ICONS=1'
+  prt-get isinst icons-in-terminal && PKGMK_NNN+=' O_ICONS=1'
 
   make $PKGMK_NNN
   make DESTDIR=$PKG PREFIX=/usr install
