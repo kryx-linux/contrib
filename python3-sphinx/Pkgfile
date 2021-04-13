@@ -5,10 +5,9 @@
 
 name=python3-sphinx
 _name=Sphinx
-version=3.5.3
+version=3.5.4
 release=1
-source=(#https://github.com/sphinx-doc/$_name/archive/v$version/$_name-$version.tar.gz
-	https://files.pythonhosted.org/packages/47/8c/b8edf8b293613057355d45365201d9e98560a484a9c177934a6f25115826/$_name-$version.tar.gz)
+source=(https://pypi.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
 
 build() {
 	cd $_name-$version
