@@ -1,0 +1,24 @@
+From d1a1cf158016f24ee9d4785e3e07b82329964d0f Mon Sep 17 00:00:00 2001
+From: Thomas Jensen <boxes@thomasjensen.com>
+Date: Tue, 20 Apr 2021 21:27:22 +0200
+Subject: [PATCH] Declare our src/Makefile as serial #79
+
+because for some reason, make exhibits very strange behavior
+when executing it in parallel jobs
+---
+ src/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/Makefile b/src/Makefile
+index 6a6fc8f..3f61aa7 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -39,6 +39,8 @@ ORIG_FILES = $(ORIG_SRC) $(ORIG_HDR)
+ 
+ .PHONY: check_dir clean build debug package flags_unix flags_win32 flags_
+ 
++.NOTPARALLEL:
++
+ check_dir:
+ 	@if [ "$(shell pwd | sed -e 's/^.*\///')" != "out" ] ; then \
+ 	    echo ERROR: Please call make from the top level directory. ; \
