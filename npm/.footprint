@@ -45,6 +45,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/auth/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/doctor.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/edit.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/exec.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/exec/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/exec/get-workspace-location-msg.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/explain.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/explore.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/find-dupes.js
@@ -533,6 +535,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/aws4/.github/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/aws4/lru.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/aws4/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/balanced-match/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/balanced-match/.github/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/balanced-match/.github/FUNDING.yml
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/balanced-match/LICENSE.md
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/balanced-match/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/balanced-match/package.json
@@ -1310,7 +1314,9 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/just-diff-apply/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/just-diff-apply/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/just-diff-apply/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/just-diff/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/just-diff/index.d.ts
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/just-diff/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/just-diff/index.tests.ts
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/just-diff/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/leven/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/leven/index.d.ts
@@ -1337,6 +1343,16 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmdiff/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmdiff/lib/tarball.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmdiff/lib/untar.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmdiff/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/CHANGELOG.md
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/cache-install-dir.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/get-bin-from-manifest.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/manifest-missing.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/no-tty.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/run-script.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmfund/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmfund/CHANGELOG.md
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmfund/index.js
@@ -1508,6 +1524,12 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gy
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/MSVSUtil.py
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/MSVSVersion.py
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/__init__.py
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/common.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/input.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/simple_copy.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/xcode_emulation.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/common.py
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/common_test.py
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/easy_xml.py
@@ -1515,6 +1537,9 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gy
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/flock_tool.py
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__/make.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/analyzer.py
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/android.py
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/cmake.py
@@ -1765,6 +1790,9 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/performance-now/test/
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/performance-now/test/scripts/delayed-require.coffee
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/performance-now/test/scripts/difference.coffee
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/performance-now/test/scripts/initial-value.coffee
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/proc-log/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/proc-log/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/proc-log/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/process-nextick-args/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/process-nextick-args/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/process-nextick-args/license.md
