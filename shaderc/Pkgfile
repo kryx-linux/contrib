@@ -5,11 +5,12 @@
 # Optional: asciidoctor
 
 name=shaderc
-version=2020.5
-_spirv_headers=a3fdfe81465d57efc97cfd28ac6c8190fb31a6c8
+version=2021.0
+## DEPS
+_spirv_headers=dafead1765f6c1a5f9f8a76387dcb2abe4e54acd
 release=1
 source=(https://github.com/google/shaderc/archive/v$version/$name-v$version.tar.gz
-	https://github.com/KhronosGroup/SPIRV-Headers/archive/$_spirv_headers/$name-$_spirv_headers.tar.gz
+	https://github.com/KhronosGroup/SPIRV-Headers/archive/$_spirv_headers/SPIRV-Headers-$_spirv_headers.tar.gz
 	glslc.1)
 
 build() {
