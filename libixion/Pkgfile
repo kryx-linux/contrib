@@ -5,14 +5,17 @@
 
 name=libixion
 version=0.16.1
-release=1
+release=2
 source=(https://kohei.us/files/ixion/src/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
+
+  [[ -e /usr/lib/libcuda.so ]] && PKGMK_LIBIXION+=' --enable-cuda'
+
   CFLAGS="-O2 -fPIC" \
   CXXFLAGS="-O2 -fPIC" \
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr $PKGMK_LIBIXION
   make
   make DESTDIR=$PKG install
 }
