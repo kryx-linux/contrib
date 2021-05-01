@@ -9,7 +9,7 @@ alias_maps = $alias_database
 # all # or ipv4, ipv6 or ipv4 or ipv6
 inet_protocols = all
 
-#myhostname = arch-2020 # default: gethostname
+#myhostname = crux-0306 # default: gethostname
 #mydomain = localdomain # default: $myhostname less one component
 #myorigin = $mydomain
 # , lists.$myhostname
@@ -72,8 +72,8 @@ smtpd_client_restrictions =
    sleep 1,
     #reject_rbl_client cbl.abuseat.org,
     #reject_rbl_client sbl.spamhaus.org,
-#DNSBL   reject_rbl_client zen.spamhaus.org,
-#DNSBL   reject_rbl_client dnsbl.sorbs.net,
+#DNSDL   reject_rbl_client zen.spamhaus.org,
+#DNSDL   reject_rbl_client dnsbl.sorbs.net,
     #reject_rbl_client bl.spamcop.net,
     #reject_rbl_client list.dsbl.org,
    reject_unauth_pipelining,
@@ -93,13 +93,29 @@ smtpd_helo_restrictions =
    reject_non_fqdn_helo_hostname,
    reject_unknown_helo_hostname
 
+smtpd_relay_before_recipient_restrictions = yes
+
+# RCPT TO checks, relay policy
+# Local clients and authenticated clients may specify any destination domain
+smtpd_relay_restrictions =
+#  permit_inet_interfaces, OR
+   permit_mynetworks,
+#RELAY   permit_tls_clientcerts,
+#[RELAY]  permit_sasl_authenticated,
+   reject_non_fqdn_sender,
+   reject_non_fqdn_recipient,
+   #permit_auth_destination,
+   #reject
+   reject_unauth_destination,
+   permit
+
 # RCPT TO checks, spam blocking policy
 # Match fast for $mynetworks and authenticated clients.
 smtpd_recipient_restrictions =
 #  permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#  permit_sasl_authenticated,
+#[RELAY]  permit_sasl_authenticated,
    reject_unknown_sender_domain,
    reject_unknown_reverse_client_hostname,
    reject_unknown_recipient_domain,
@@ -108,26 +124,12 @@ smtpd_recipient_restrictions =
    #check_policy_service inet:127.0.0.1:5525,
    permit
 
-# RCPT TO checks, relay policy
-# Local clients and authenticated clients may specify any destination domain
-smtpd_relay_restrictions =
-#  permit_inet_interfaces, OR
-   permit_mynetworks,
-#RELAY   permit_tls_clientcerts,
-#  permit_sasl_authenticated,
-   reject_non_fqdn_sender,
-   reject_non_fqdn_recipient,
-   #permit_auth_destination,
-   #reject
-   reject_unauth_destination,
-   permit
-
 # MAIL FROM Checks
 smtpd_sender_restrictions =
 #  permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#  permit_sasl_authenticated,
+#[RELAY]  permit_sasl_authenticated,
     # Eg: qq.com reject
    lmdb:/etc/postfix-lmdb/sender_restrict,
    reject_unknown_sender_domain,
@@ -170,7 +172,6 @@ smtpd_tls_mandatory_exclude_ciphers =
    EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CDB3-SHA, KRB5-DES, CBC3-SHA
 smtpd_tls_ciphers = $smtpd_tls_mandatory_ciphers
 smtpd_tls_exclude_ciphers = $smtpd_tls_mandatory_exclude_ciphers
-smtpd_tls_connection_reuse = yes
 smtpd_tls_session_cache_database = lmdb:/var/lib/postfix-lmdb/smtpd_scache
 smtpd_tls_session_cache_timeout = 3600s
 
@@ -198,7 +199,7 @@ smtp_tls_mandatory_ciphers = $smtpd_tls_mandatory_ciphers
 smtp_tls_mandatory_exclude_ciphers = $smtpd_tls_mandatory_exclude_ciphers
 smtp_tls_ciphers = $smtpd_tls_ciphers
 smtp_tls_exclude_ciphers = $smtpd_tls_exclude_ciphers
-smtp_tls_connection_reuse = $smtpd_tls_connection_reuse
+smtp_tls_connection_reuse = yes
 smtp_tls_session_cache_database = lmdb:/var/lib/postfix-lmdb/smtp_scache
 smtp_tls_session_cache_timeout = $smtpd_tls_session_cache_timeout 
 

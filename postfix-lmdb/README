@@ -67,7 +67,7 @@ to verify $relayhost, because the $smtp_tls_CAfile way requires a full
 chain, to the best of my knowledge.
 
 You need to have cyrus-sasl installed otherwise (usually), and also
-dovecot that drive the SASL authentication.  The default configuration
+dovecot that drives the SASL authentication.  The default configuration
 contains the necessary entries, you should only need to adjust and
 uncomment it.  Just search #SMART.
 
@@ -94,14 +94,14 @@ or
 It seems to support public-key-only fingerprinting also.
 
 You need to have cyrus-sasl installed otherwise (usually), and also
-dovecot that drive the SASL authentication.  The default configuration
+dovecot that drives the SASL authentication.  The default configuration
 contains the necessary entries, you should only need to adjust and
 uncomment it.  See above for SmartHost.
 
-DNS black lists
----------------
+DNS deny lists
+--------------
 
-Edit main.cf and uncomment and edit lines marked #DNSBL.
+Edit main.cf and uncomment and edit lines marked #DNSDL.
 Run "/etc/rc.d/postfix-lmdb reload" (or restart).
 
 # s-ts-mode
