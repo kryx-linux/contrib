@@ -8,7 +8,7 @@ log() {
 unhandled() {
 	t=${1}
 	shift
-	log "ACPI: no handler for event ${t}, data: ${*}";;
+	log "ACPI: no handler for event ${t}, data: ${*}"
 
 }
 
@@ -24,9 +24,9 @@ button/power)
 	PWRF)
 		/sbin/init 0;;
 	*)
-		unhandled "${@}";;
+		unhandled "${#}: ${@}";;
 	esac
 	;;
 *)
-	unhandled;;
+	unhandled "${#}: $@";;
 esac
