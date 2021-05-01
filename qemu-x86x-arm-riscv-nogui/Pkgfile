@@ -1,19 +1,32 @@
 # Description: QEMU VM for x86(_64), ARM and RISCV, with only curses UI
-# URL:         http://www.qemu-project.org/
+# URL:         https://www.qemu.org/
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 # Depends on:  glib xorg-libpixman
 # Optional:    libseccomp libiscsi libusb usbredir spice
 
 name=qemu-x86x-arm-riscv-nogui
 realn=qemu
-version=5.2.0
+version=6.0.0
 release=1
-source=(http://www.qemu-project.org//download/$realn-$version.tar.bz2)
+source=(https://www.qemu.org/download/$realn-$version.tar.xz)
 
 build() {
-  cd $realn-$version
+   cd $realn-$version
 
-  ./configure --prefix=/usr \
+   if { echo "${CFLAGS}" | grep -q -F NDEBUG; }; then
+      CFLAGS=$(echo "${CFLAGS}" | sed -e 's/-DNDEBUG//g')
+      export CFLAGS
+      echo >&2 'QEMU does not like -DNDEBUG, stripped CFLAGS to '${CFLAGS}
+      sleep .5
+   fi
+   if { echo "${CXXFLAGS}" | grep -q -F NDEBUG; }; then
+      CXXFLAGS=$(echo "${CXXFLAGS}" | sed -e 's/-DNDEBUG//g')
+      export CXXFLAGS
+      echo >&2 'QEMU does not like -DNDEBUG, stripped CXXFLAGS to '${CXXFLAGS}
+      sleep .5
+   fi
+
+   ./configure --prefix=/usr \
       --cc="${CC:=gcc}" \
       --host-cc="${CC:=gcc}" \
       --sysconfdir=/etc \
@@ -38,12 +51,14 @@ i386-linux-user,\
 riscv32-linux-user,riscv64-linux-user,\
 x86_64-linux-user
 
-  make ${MAKEFLAGS:=}
+   make ${MAKEFLAGS:=}
 
-  make DESTDIR=$PKG install
-  rm -rf $PKG/usr/share/locale $PKG/usr/share/locale
+   make DESTDIR=$PKG install
+   rm -rf $PKG/usr/share/locale $PKG/usr/share/locale
 
-  install -d $PKG/etc/udev/rules.d/
-  echo 'KERNEL=="kvm", NAME="kvm", OWNER="root", GROUP="kvm", MODE="0660"' > \
-    $PKG/etc/udev/rules.d/60-kvm.rules
+   install -d $PKG/etc/udev/rules.d/
+   echo 'KERNEL=="kvm", NAME="kvm", OWNER="root", GROUP="kvm", MODE="0660"' > \
+     $PKG/etc/udev/rules.d/60-kvm.rules
 }
+
+# s-sh-mode
