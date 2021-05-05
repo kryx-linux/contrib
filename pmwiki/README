@@ -1,4 +1,4 @@
-README for pmwiki 2.1.x
+README for pmwiki 2.2.x
 
 REQUIREMENTS
 
@@ -13,7 +13,7 @@ POST-INSTALL
 
 1. Add the following directives to httpd.conf:
    
-   LoadModule php5_module lib/apache/libphp5.so
+   LoadModule php7_module lib/apache/libphp7.so
    AddType application/x-httpd-php .php
 
    Alias /wiki/uploads /var/www/pmwiki/uploads/
@@ -23,14 +23,13 @@ POST-INSTALL
    <Directory /var/www/pmwiki/>
       Options None
       AllowOverride None
-      Order deny,allow
-      Deny from all
+      Require all denied
       <Files pmwiki.php>
-         Allow from all
+         Require all granted
       </Files>
    </Directory>
    <DirectoryMatch /var/www/pmwiki/(uploads|pub)/>
-      Allow from all
+      Require all granted
    </DirectoryMatch>
 
    The first alias can be omitted if file uploads
