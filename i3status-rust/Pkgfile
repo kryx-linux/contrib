@@ -2,12 +2,12 @@
 # URL: https://github.com/greshake/i3status-rust
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: dbus rust
-# Optional: notmuch pulseaudio
+# Optional: alsa-utils bluez curl font-powerline font-awesome-compat kdeconnect lm_sensors notmuch pulseaudio upower
 
 name=i3status-rust
 version=0.20.0
-release=2
-source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version-01.tar.gz)
+release=3
+source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
@@ -16,7 +16,7 @@ build() {
 
   # configure optional dependencies
   [[ -e /usr/lib/libnotmuch.so ]] && PKGMK_I3STATUS_RUST+=' notmuch'
-  [[ -e /usr/lib/pkgconfig/libpulse.pc ]] && PKGMK_I3STATUS_RUST+='pulseaudio'
+  [[ -e /usr/lib/pkgconfig/libpulse.pc ]] && PKGMK_I3STATUS_RUST+=' libpulse-binding'
 
   cargo update --manifest-path $name-$version/Cargo.toml
 
@@ -32,10 +32,10 @@ build() {
   install -Dm644 $name-$version/man/i3status-rs.1 -t "$PKG/usr/share/man/man1"
 
   for icon_set in $name-$version/files/icons/*.toml; do
-    install -Dm644 "$icon_set" -t "$PKG/usr/share/${name%-*}/icons"
+    install -Dm644 $icon_set -t $PKG/usr/share/$name/icons
   done
 
   for theme in $name-$version/files/themes/*.toml; do
-    install -Dm644 "$theme" -t "$PKG/usr/share/${name%-*}/themes"
+    install -Dm644 $theme -t $PKG/usr/share/$name/themes
   done
 }
