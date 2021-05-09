@@ -4,13 +4,13 @@
 # Depends on: cmake ffmpeg fmt ghostscript giflib glu jdk8-bin libass libcdio libmicrohttpd mysql samba swig taglib tinyxml python spdlog
 
 name=kodi
-version=19.0
+version=19.1
 release=1
-source=(https://github.com/xbmc/xbmc/archive/$version-Matrix.tar.gz gl-headers.patch)
+source=(https://github.com/xbmc/xbmc/archive/v$version/$name-$version.tar.gz gl-headers.patch)
 
 build() {
 	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
-	patch -d xbmc-$version-Matrix -p1 -i $SRC/gl-headers.patch
+	patch -d xbmc-$version -p1 -i $SRC/gl-headers.patch
 	cmake -Bbuild \
 		-DVERBOSE=ON \
 		-DAPP_RENDER_SYSTEM=gl \
@@ -28,7 +28,7 @@ build() {
 		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
 		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
 		-Wno-dev \
-		xbmc-$version-Matrix
+		xbmc-$version
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
 
