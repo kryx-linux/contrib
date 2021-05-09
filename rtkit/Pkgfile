@@ -5,11 +5,14 @@
 
 name=rtkit
 version=0.13
-release=1
+release=2
 source=(https://github.com/heftig/rtkit/releases/download/v$version/$name-$version.tar.xz
-  rtkit.service)
+  rtkit.service org.freedesktop.RealtimeKit1.conf)
 
 build() {
+  # allow rtkit group to own the service besides rtkit user and root
+  mv $SRC/org.freedesktop.RealtimeKit1.conf $name-$version/org.freedesktop.RealtimeKit1.conf
+
   meson setup $name-$version build \
     --prefix=/usr \
     --libexecdir=/usr/lib/$name \
@@ -19,7 +22,8 @@ build() {
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 
-  rm -r $PKG/usr/lib/systemd
+  install -Dm755 $SRC/rtkit.service $PKG/etc/rc.d/rtkit
 
-  install -Dm744 $SRC/rtkit.service $PKG/etc/rc.d/rtkit
+  rm -r $PKG/usr/lib/systemd
+  rm -r $PKG/usr/share/dbus-1/system-services
 }
