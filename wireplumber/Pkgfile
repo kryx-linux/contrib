@@ -1,20 +1,19 @@
 # Description: Session / policy manager implementation for PipeWire
 # URL: https://gitlab.freedesktop.org/pipewire/wireplumber
 # Maintainer: Tim Biermann
-# Depends on: cpptoml pipewire util-linux
+# Depends on: cpptoml lua53 pipewire util-linux
 
 
 name=wireplumber
-version=0.3.0
+version=0.3.95
 release=1
-source=(https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$name-$version.tar.bz2
-  wireplumber-0.3.0-devendor_cpptoml.patch)
+source=(https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$name-$version.tar.bz2)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/wireplumber-0.3.0-devendor_cpptoml.patch
   meson setup $name-$version build \
     -D prefix=/usr \
     --buildtype=plain \
+    -Dsystem-lua=true \
     --wrap-mode nodownload
   meson compile -C build
   DESTDIR=$PKG meson install -C build
