@@ -11,7 +11,7 @@ It's recommended to set the following setting in `/etc/pkgmk.conf`:
 ```sh
 PKGMK_IGNORE_NEW="yes"
 ```
-This will ignore any *new* files found a footprint. This is needed, because
+This will ignore any *new* files found in a footprint. This is needed, because
 it's expected to produce more files than a minimal build for some individual
 ports, e.g. `contrib/pipewire`, `contrib/gst-plugins-bad`, etc..
 
@@ -23,8 +23,8 @@ Alternatively, you will need to watch out for ports that would run
 pre-/post-install scripts yourself and execute them in order to expect a
 fault-free environment.
 
-After considering those stepts, if you manually want to ensure that everything
-will be fine, the steps should be as followed:
+After considering those steps, if you manually want to ensure that everything
+will be fine, the steps should be as follow:
  1. `prt-get depinst pulseaudio`
  2. `prt-get depinst pipewire`
  3. `prt-get depinst pulseeffects`
