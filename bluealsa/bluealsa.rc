@@ -19,7 +19,8 @@ stop)
 		--exec "${PROG}"
 	;;
 restart)
-	"${SSD}" --status --pidfile "${PID}" --exec "${PROG}" && "${0}" stop
+	"${SSD}" --status --pidfile "${PID}" --exec "${PROG}" &&
+		"${0}" stop
 	exec "${0}" start
 	;;
 status)
