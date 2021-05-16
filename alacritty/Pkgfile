@@ -30,8 +30,8 @@ build() {
     $PKG/usr/share/pixmaps/Alacritty.svg
 
   # install auto-completion files if the ports for it are installed
-  prt-get isinst zsh && install -D -m644 extra/completions/_alacritty \
+  prt-get isinst zsh && install -D -m644 $name-$version/extra/completions/_alacritty \
       $PKG/usr/share/zsh/site-functions/_alacritty || true
-  prt-get isinst bash-completion && install -D -m644 extra/completions/alacritty.bash \
+  prt-get isinst bash-completion && install -D -m644 $name-$version/extra/completions/alacritty.bash \
       $PKG/usr/share/bash-completion/completions/alacritty || true
 }
