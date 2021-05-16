@@ -4,7 +4,7 @@
 # Depends on: cyrus-sasl dbus-glib farstream gtkspell libidn nss xorg-libxscrnsaver
 
 name=pidgin
-version=2.14.3
+version=2.14.4
 release=1
 source=(https://downloads.sourceforge.net/project/$name/Pidgin/$version/$name-$version.tar.bz2
 	$name.desktop)
@@ -24,6 +24,7 @@ build() {
 		--disable-nm \
 		--disable-schemas-install \
 		--disable-tcl \
+		--disable-gevolution \
 		--enable-cyrus-sasl \
 		--with-system-ssl-certs=/etc/ssl/certs
 
