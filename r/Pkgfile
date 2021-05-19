@@ -5,9 +5,9 @@
 # Optional: lapack openjdk8 texlive tk
 
 name=r
-version=4.0.5
+version=4.1.0
 release=1
-source=(https://cran.r-project.org/src/base/R-4/R-$version.tar.gz
+source=(https://cran.r-project.org/src/base/R-${version::1}/R-$version.tar.gz
   r.desktop r.png R.conf
   R-3.4.1-parallel.patch R-3.4.1-rmath-shared.patch
   R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch)
@@ -21,8 +21,8 @@ build() {
   patch -Np1 -i $SRC/R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch
 
   # configuring R
-  [[ -e /usr/lib/pkgconfig/tk.pc ]] && PKGMK_R+=" --with-x=yes" || PKGMK_R+=" --with-x=no"
-  [[ -e /usr/lib/pkgconfig/lapack.pc ]] && PKGMK_R+=" --with-lapack LAPACK_LIBS=$(pkg-config --libs lapack)"
+  prt-get isinst tk && PKGMK_R+=" --with-x=yes" || PKGMK_R+=" --with-x=no"
+  prt-get isinst lapack && PKGMK_R+=" --with-lapack LAPACK_LIBS=$(pkg-config --libs lapack)"
   # this needs a properly working java environment!
   [[ -e $(whereis javac) ]] && PKGMK_R+=" --enable-java" || PKGMK_R+=" --disable-java"
 
@@ -66,21 +66,21 @@ build() {
   #popd
 
   sed -i "s|$PKG ||" "$PKG/usr/bin/R"
-  rm "$PKG/usr/lib/R/bin/R"
-  cd "$PKG/usr/lib/R/bin"
+  rm $PKG/usr/lib/R/bin/R
+  cd $PKG/usr/lib/R/bin
   ln -s ../../../bin/R
 
-  install -Dm644 "$SRC/r.desktop" \
-    "$PKG/usr/share/applications/r.desktop"
-  install -Dm644 "$SRC/r.png" \
-    "$PKG/usr/share/pixmaps/r.png"
-  install -Dm644 "$SRC/R.conf" \
-    "$PKG/etc/ld.so.conf.d/R.conf"
+  install -Dm644 $SRC/r.desktop \
+    $PKG/usr/share/applications/r.desktop
+  install -Dm644 $SRC/r.png \
+    $PKG/usr/share/pixmaps/r.png
+  install -Dm644 $SRC/R.conf \
+    $PKG/etc/ld.so.conf.d/R.conf
 
   install -d $PKG/etc/R
   cd $PKG/usr/lib/R/etc
   for i in *; do
-    mv -f ${i} $PKG/etc/R
+    mv -f $i $PKG/etc/R
     ln -s /etc/R/$i $i
   done
 
