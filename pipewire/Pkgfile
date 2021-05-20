@@ -5,7 +5,7 @@
 # Optional: alsa-ucm-conf bluez gst-plugins-base jack libldac libopenaptx pulseaudio rtkit v4l2 vulkan-loader
 
 name=pipewire
-version=0.3.27
+version=0.3.28
 release=1
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
@@ -29,7 +29,7 @@ build() {
   DESTDIR=$PKG meson install -C build
 
   # enable alsa by default
-  touch $PKG/etc/pipewire/media-session.d/with-alsa
+  install -Dm644 /dev/null $PKG/usr/share/pipewire/media-session.d/with-alsa
   mkdir -p $PKG/etc/alsa/conf.d
   ln -st $PKG/etc/alsa/conf.d /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
   ln -st $PKG/etc/alsa/conf.d /usr/share/alsa/alsa.conf.d/50-pipewire.conf
