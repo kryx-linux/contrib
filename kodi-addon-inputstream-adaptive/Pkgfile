@@ -8,32 +8,17 @@ version=2.6.16
 release=1
 
 _codename=Matrix
-_gtest_ver=1.10.0
 
-source=(https://github.com/peak3d/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz
-  https://github.com/google/googletest/archive/refs/tags/release-$_gtest_ver.tar.gz)
-
-_build_gtest() {
-  cmake -S googletest-release-$_gtest_ver -B _build-gtest -G Ninja \
-    -D CMAKE_INSTALL_PREFIX=/usr \
-    -D CMAKE_INSTALL_LIBDIR=lib \
-    -D BUILD_SHARED_LIBS=OFF
-  cmake --build _build-gtest
-  DESTDIR=$SRC/static-gtest cmake --install _build-gtest
-}
+source=(https://github.com/peak3d/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz)
 
 build() {
-  _build_gtest
-
-  export PATH=$SRC/static-gtest/bin:$PATH
-  export PKG_CONFIG_PATH="$SRC/static-gtest/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-
   cmake -S inputstream.adaptive-$version-$_codename -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-    -D BUILD_SHARED_LIBS=1 \
+    -D BUILD_SHARED_LIBS=ON \
+    -D BUILD_TESTING=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
