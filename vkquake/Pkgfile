@@ -4,7 +4,7 @@
 # Depends on: libmad libsdl2 libvorbis vulkan-loader xorg-libx11
 
 name=vkquake
-version=1.05.2
+version=1.05.3
 release=1
 source=(https://github.com/Novum/vkQuake/archive/$version/vkQuake-$version.tar.gz
   vkquake.desktop vkquake.png)
@@ -12,7 +12,7 @@ source=(https://github.com/Novum/vkQuake/archive/$version/vkQuake-$version.tar.g
 build() {
   make -C vkQuake-$version/Quake clean
   make -C vkQuake-$version/Quake \
-      DO_USERDIRS=1
+    DO_USERDIRS=1
   make -C vkQuake-$version/Misc/vq_pak
 
   install -Dm755 vkQuake-$version/Quake/vkquake $PKG/usr/bin/vkquake
