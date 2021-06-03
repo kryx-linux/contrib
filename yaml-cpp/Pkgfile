@@ -1,0 +1,25 @@
+# Description: YAML parser and emitter in C++, written around the YAML 1.2 spec
+# URL: https://github.com/jbeder/yaml-cpp
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake
+# Optional: ninja
+
+name=yaml-cpp
+version=0.6.3
+release=1
+source=(https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-$version/$name-$version.tar.gz)
+
+build() {
+  cmake -S $name-$name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D BUILD_SHARED_LIBS=ON \
+    -D YAML_BUILD_SHARED_LIBS=ON \
+    -D YAML_CPP_BUILD_TESTS=OFF \
+    -D YAML_CPP_BUILD_TOOLS=OFF \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
