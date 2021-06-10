@@ -5,7 +5,7 @@
 # Optional: cups kio qt5 valgrind
 
 name=libreoffice
-version=7.1.4.1
+version=7.1.4.2
 release=1
 pdfiumversion=4306
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
@@ -64,8 +64,8 @@ build() {
   [[ -e /usr/include/KF5/KIOCore ]] && PKGMK_LIBREOFFICE+=" --enable-kde5 --enable-gtk3-kde5"
   [[ -e /usr/lib/pkgconfig/valgrind.pc ]] && PKGMK_LIBREOFFICE+=" --with-valgrind"
 
-  ls /usr/include/harfbuzz/hb-icu.h || printf '\e[1;31m%-6s\e[m\n' "you need to install icu, then rebuild harfbuzz for libreoffice to work, quitting.." ||  exit
-  ls /usr/lib/pkgconfig/xmlsec1-nss.pc || printf '\e[1;31m%-6s\e[m\n' "you need to install nss, then rebuild xmlsec for libreoffice to work, quitting.." || exit
+  ls /usr/include/harfbuzz/hb-icu.h || (printf '\e[1;31m%-6s\e[m\n' "you need to install icu, then rebuild harfbuzz for libreoffice to work, quitting.." ; exit 1)
+  ls /usr/lib/pkgconfig/xmlsec1-nss.pc || (printf '\e[1;31m%-6s\e[m\n' "you need to install nss, then rebuild xmlsec for libreoffice to work, quitting.." ; exit 1)
 
   local build_date=$(date +%Y%m%d)
   ./autogen.sh $PKGMK_LIBREOFFICE \
