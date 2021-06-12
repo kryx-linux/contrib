@@ -4,19 +4,18 @@
 # Depends on: rust
 
 name=ripgrep
-version=12.1.1
+version=13.0.0
 release=1
 source=(https://github.com/BurntSushi/ripgrep/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update
-  cargo fetch
-  cargo build --release --locked
-  ls target/release/ -la
-  install -Dt $PKG/usr/bin target/release/rg
+  cargo update --manifest-path $name-$version/Cargo.toml
+  cargo fetch --manifest-path $name-$version/Cargo.toml --locked
+  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/rg
 }
