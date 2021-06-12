@@ -4,15 +4,12 @@
 # Depends on: boehm-gc boost double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler-glib popt potrace gdl
 
 name=inkscape
-version=1.0.2
-_pversion=21.05.0
-_psoversion=110
+version=1.1
+_pversion=21.06.1
+_psoversion=111
 release=5
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
-	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz
-	avoid-syntaxwarning-in-python-extension.patch
-	check-for-atomic.patch
-	python3.patch)
+	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz)
 
 poppler() {
 	cmake -S poppler-$_pversion -B build-poppler -G Ninja \
@@ -44,10 +41,6 @@ poppler() {
 build() {
 	[ ! -e "/usr/lib/libpoppler.so.$_psoversion" ] && poppler
 
-	patch -d $name-${version}_* -p1 -i $SRC/avoid-syntaxwarning-in-python-extension.patch
-	patch -d $name-${version}_* -p1 -i $SRC/check-for-atomic.patch
-	patch -d $name-${version}_* -p1 -i $SRC/python3.patch
-
 	# https://gitlab.gnome.org/GNOME/glib/-/issues/2331
 	CFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66'
 	CXXFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66'
@@ -63,6 +56,7 @@ build() {
 	DESTDIR=$PKG cmake --install build
 
 	rm -r 	$PKG/usr/share/man/?? \
+		$PKG/usr/share/man/zh_TW \
 		$PKG/usr/share/locale \
 		$PKG/usr/share/inkscape/doc
 
