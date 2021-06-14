@@ -1,0 +1,19 @@
+# Description: Cleo allows you to create beautiful and testable command-line interfaces.
+# URL: https://github.com/sdispater/cleo
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-clikit
+
+name=python3-cleo
+version=0.8.1
+release=1
+source=(https://github.com/sdispater/cleo/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd cleo-$version
+  dephell deps convert --from pyproject.toml --to setup.py
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
