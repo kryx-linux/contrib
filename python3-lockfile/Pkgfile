@@ -1,0 +1,18 @@
+# Description: Platform-independent file locking module
+# URL:https://github.com/openstack/pylockfile
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pbr
+
+name=python3-lockfile
+version=0.12.2
+release=1
+source=(https://files.pythonhosted.org/packages/source/l/lockfile/lockfile-$version.tar.gz)
+
+build() {
+  cd lockfile-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
