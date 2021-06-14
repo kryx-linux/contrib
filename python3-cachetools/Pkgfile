@@ -1,0 +1,18 @@
+# Description: Extensible memoizing collections and decorators
+# URL: https://github.com/tkem/cachetools
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-cachetools
+version=4.2.2
+release=1
+source=(https://github.com/tkem/cachetools/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd cachetools-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
