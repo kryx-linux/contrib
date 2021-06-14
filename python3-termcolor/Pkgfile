@@ -1,0 +1,18 @@
+# Description: ANSII Color formatting for output in terminal
+# URL: https://pypi.python.org/pypi/termcolor
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-termcolor
+version=1.1.0
+release=1
+source=(https://pypi.python.org/packages/source/t/termcolor/termcolor-$version.tar.gz)
+
+build() {
+  cd termcolor-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
