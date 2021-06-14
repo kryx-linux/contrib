@@ -1,0 +1,18 @@
+# Description: Fork of lib2to3 with patch for Python issue33983 support
+# URL: https://github.com/jreese/fissix
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-fissix
+version=19.2b1
+release=1
+source=(https://github.com/jreese/fissix/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd fissix-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
