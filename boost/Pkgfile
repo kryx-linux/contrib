@@ -6,7 +6,7 @@
 
 name=boost
 version=1.76.0
-release=1
+release=2
 source=(https://boostorg.jfrog.io/artifactory/main/release/$version/source/${name}_${version//./_}.tar.bz2
 	boost-1.74-CVE-2012-2677.patch
 	boost-1.71.0-disable_icu_rpath.patch
@@ -36,6 +36,7 @@ toolset=gcc \
 
 	./b2 stage $config python="$pyver2"
 	./b2 install threading=multi link=shared
+	./b2 install threading=multi link=static
 
 	install -m 0755 -D b2 $PKG/usr/bin/b2
 	ln -s b2 $PKG/usr/bin/bjam
