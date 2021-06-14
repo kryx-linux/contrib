@@ -1,0 +1,16 @@
+# Description: python bindings for libolm
+# URL: https://gitlab.matrix.org/matrix-org/olm
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libolm python3-cffi python3-future
+
+name=python3-olm
+version=3.2.4
+release=1
+source=(https://gitlab.matrix.org/matrix-org/olm/-/archive/$version/olm-$version.tar.bz2)
+
+build() {
+  cd olm-$version/python
+
+  make olm-python3
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1 --skip-build
+}
