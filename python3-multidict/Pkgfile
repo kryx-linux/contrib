@@ -1,0 +1,17 @@
+# Description: The multidict implementation
+# URL: https://github.com/aio-libs/multidict
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-cython
+
+name=python3-multidict
+version=5.1.0
+release=1
+source=(https://github.com/aio-libs/multidict/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd multidict-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
