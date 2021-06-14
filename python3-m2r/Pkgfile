@@ -1,0 +1,17 @@
+# Description: Markdown to reStructuredText converter
+# URL: https://github.com/miyakogi/m2r
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-docutils python3-mistune
+
+name=python3-m2r
+version=0.2.1
+release=1
+source=(https://github.com/miyakogi/m2r/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd m2r-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
