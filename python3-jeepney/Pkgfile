@@ -1,0 +1,18 @@
+# Description: Low-level, pure Python DBus protocol wrapper
+# URL: https://gitlab.com/takluyver/jeepney
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-jeepney
+version=0.6.0
+release=1
+source=(https://pypi.io/packages/source/j/jeepney/jeepney-$version.tar.gz)
+
+build() {
+  cd jeepney-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
