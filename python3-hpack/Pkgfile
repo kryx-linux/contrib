@@ -1,0 +1,18 @@
+# Description: Pure-Python HPACK header compression
+# URL: https://hyper.rtfd.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-hpack
+version=4.0.0
+release=1
+source=(https://github.com/python-hyper/hpack/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd hpack-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
