@@ -1,0 +1,19 @@
+# Description: provides an easy way to access the system keyring service from python
+# URL: https://github.com/jaraco/keyring
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-entrypoints python3-importlib_metadata python3-secretstorage
+
+name=python3-keyring
+version=23.0.1
+release=1
+source=(https://pypi.io/packages/source/k/keyring/keyring-$version.tar.gz)
+
+build() {
+  cd keyring-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+   rm -rf $PKG/usr/lib/python3.9/site-packages/keyring/tests
+}
