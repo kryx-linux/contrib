@@ -1,0 +1,21 @@
+From 1dbd550b3481fa597a3a43d1ab5b1d8aab776085 Mon Sep 17 00:00:00 2001
+From: Gram <master_fess@mail.ru>
+Date: Mon, 26 Oct 2020 08:16:35 +0100
+Subject: [PATCH] update for 3.9 support
+
+---
+ dephell_venvs/_builder.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/dephell_venvs/_builder.py b/dephell_venvs/_builder.py
+index 4775c8e..f773b3f 100644
+--- a/dephell_venvs/_builder.py
++++ b/dephell_venvs/_builder.py
+@@ -21,6 +21,7 @@ class VEnvBuilder(EnvBuilder):
+     symlinks = attr.ib(type=bool, default=False)
+     upgrade = attr.ib(type=bool, default=False)
+     with_pip = attr.ib(type=bool, default=False)
++    upgrade_deps = attr.ib(type=bool, default=False)
+ 
+     prompt = attr.ib(type=str, default=None)
+     python = attr.ib(type=Optional[str], default=None)  # path to the python interpreter
