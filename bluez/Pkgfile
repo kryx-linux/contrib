@@ -2,9 +2,10 @@
 # URL: http://www.bluez.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: alsa-lib dbus glib
+# Optional: cups docutils libical
 
 name=bluez
-version=5.58
+version=5.59
 release=1
 source=(https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
   bluetoothd)
@@ -12,8 +13,9 @@ source=(https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-$version.tar.x
 build() {
   cd bluez-$version
 
-  [[ -e /usr/lib/cups ]] && PKGMK_BLUEZ+=" --enable-cups" || PKGMK_BLUEZ+=" --disable-cups"
-  [[ -e /usr/lib/pkgconfig/libical.pc ]] && PKGMK_BLUEZ+=" --enable-obex" || PKGMK_BLUEZ+=" --disable-obex"
+  prt-get isinst cups && PKGMK_BLUEZ+=' --enable-cups' || PKGMK_BLUEZ+=' --disable-cups'
+  prt-get isinst docutils || PKGMK_BLUEZ+=' --disable-manpages'
+  prt-get isinst libical && PKGMK_BLUEZ+=' --enable-obex' || PKGMK_BLUEZ+=' --disable-obex'
 
   ./configure $PKGMK_BLUEZ \
     --prefix=/usr \
@@ -26,6 +28,5 @@ build() {
   make DESTDIR=$PKG install
   install -D -m 0644 src/main.conf $PKG/etc/bluetooth/main.conf
   install -D -m 0755 $SRC/bluetoothd $PKG/etc/rc.d/bluetoothd
-  [[ -e /usr/lib/pkgconfig/libical.pc ]] && install -D -m 0755 tools/obexctl $PKG/usr/lib/bluetooth/obexctl
-  rm -rf $PKG/usr/share/man/man1
+  prt-get isinst libical && install -D -m 0755 tools/obexctl $PKG/usr/lib/bluetooth/obexctl || true
 }
