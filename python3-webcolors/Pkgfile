@@ -1,0 +1,17 @@
+# Description: A library for working with color names and color value formats defined by the HTML and CSS specifications for use in documents on the Web
+# URL: https://github.com/ubernostrum/webcolors
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-webcolors
+version=1.11.1
+release=1
+source=(https://pypi.io/packages/source/w/webcolors/webcolors-$version.tar.gz)
+
+build() {
+  cd webcolors-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
