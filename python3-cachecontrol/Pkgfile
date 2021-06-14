@@ -1,0 +1,19 @@
+# Description: httplib2 caching for requests
+# URL: https://github.com/ionrock/cachecontrol
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-msgpack python3-requests
+# Optional: python3-lockfile
+
+name=python3-cachecontrol
+version=0.12.6
+release=1
+source=(https://github.com/ionrock/cachecontrol/archive/v$version/$name-$version.tar.gz
+  0001-Remove-unnecessary-console-script.patch)
+
+build() {
+  cd cachecontrol-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
