@@ -1,0 +1,18 @@
+# Description: Bump project version like a pro
+# URL: https://github.com/dephell/dephell_versioning
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-packaging
+
+name=python3-dephell-versioning
+version=0.1.2
+release=1
+source=(https://files.pythonhosted.org/packages/source/d/dephell_versioning/dephell_versioning-$version.tar.gz)
+
+build() {
+  cd dephell_versioning-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
