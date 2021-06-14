@@ -1,0 +1,18 @@
+# Description: HTTP/2 framing layer for Python
+# URL: https://hyper.rtfd.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-hyperframe
+version=6.0.1
+release=1
+source=(https://github.com/python-hyper/hyperframe/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd hyperframe-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
