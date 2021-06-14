@@ -1,0 +1,18 @@
+# Description: Safe code refactoring for modern Python
+# URL: https://github.com/facebookincubator/bowler
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-attrs python3-click python3-fissix python3-sh
+
+name=python3-bowler
+version=0.8.0
+release=1
+source=(https://files.pythonhosted.org/packages/source/b/bowler/bowler-$version.tar.gz)
+
+build() {
+  cd bowler-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
