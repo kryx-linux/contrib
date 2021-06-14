@@ -1,0 +1,18 @@
+# Description: Proxy (HTTP, SOCKS) connector for aiohttp
+# URL: https://github.com/romis2012/aiohttp-socks/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-aiohttp
+
+name=python3-aiohttp-socks
+version=0.4.2
+release=1
+source=(https://github.com/romis2012/aiohttp-socks/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd aiohttp-socks-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
