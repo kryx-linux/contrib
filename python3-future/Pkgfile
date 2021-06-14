@@ -1,0 +1,17 @@
+# Description: Easy, clean, reliable Python 2/3 compatibility
+# URL: https://python-future.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-future
+version=0.18.2
+release=1
+source=(https://pypi.io/packages/source/f/future/future-$version.tar.gz)
+
+build() {
+  cd future-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
