@@ -1,0 +1,18 @@
+# Description: Python virtualenv management and testing tool
+# URL: https://pypi.org/project/tox/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-packaging python3-pluggy python3-py python3-toml python3-virtualenv
+
+name=python3-tox
+version=3.23.1
+release=1
+source=(https://pypi.io/packages/source/t/tox/tox-$version.tar.gz)
+
+build() {
+  cd tox-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
