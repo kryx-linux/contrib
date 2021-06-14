@@ -1,0 +1,17 @@
+# Description:
+# URL: https://github.com/dephell/dephell
+# Maintainer:
+# Depends on: python3-aiohttp python3-appdirs python3-bowler python3-cerberus python3-colorama python3-dephell-archive python3-dephell-argparse python3-dephell-changelogs python3-dephell-discover python3-dephell-licenses python3-dephell-links python3-dephell-markers python3-dephell-setuptools python3-dephell-shells python3-dephell-venvs python3-dephell-versioning python3-html5lib python3-jinja python3-m2r python3-pip python3-pygments python3-ruamel-yaml python3-tabulate python3-tomlkit
+
+name=python3-dephell
+version=0.8.3
+release=1
+source=(https://files.pythonhosted.org/packages/source/d/dephell/dephell-$version.tar.gz)
+
+build() {
+  cd dephell-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
