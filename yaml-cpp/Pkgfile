@@ -6,10 +6,15 @@
 
 name=yaml-cpp
 version=0.6.3
-release=1
-source=(https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-$version/$name-$version.tar.gz
+  yaml-cpp-0.6.3-CVE-2017-11692.patch yaml-cpp-0.6.3-abi-breakage.patch yaml-cpp-0.6.3-fix-overflows.patch)
 
 build() {
+  patch -Np1 -d $name-$name-$version -i $SRC/yaml-cpp-0.6.3-CVE-2017-11692.patch
+  patch -Np1 -d $name-$name-$version -i $SRC/yaml-cpp-0.6.3-abi-breakage.patch
+  patch -Np1 -d $name-$name-$version -i $SRC/yaml-cpp-0.6.3-fix-overflows.patch
+
   cmake -S $name-$name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
