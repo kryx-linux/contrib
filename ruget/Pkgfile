@@ -1,5 +1,5 @@
 # Description: Alternative to wget written in Rust
-# URL:  Alternative to wget written in Rust
+# URL: https://github.com/ksk001100/ruget
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: rust
 
@@ -9,14 +9,12 @@ release=1
 source=(https://github.com/ksk001100/ruget/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update
-  cargo fetch
-  cargo build --release --locked
-  install -Dt $PKG/usr/bin target/release/ruget
+  cargo update --manifest-path $name-$version/Cargo.toml
+  cargo build --manifest-path $name-$version/Cargo.toml --release
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
 }
