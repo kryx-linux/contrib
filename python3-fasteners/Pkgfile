@@ -1,5 +1,5 @@
 # Description: A python package that provides useful locks
-# URL: A python package that provides useful locks
+# URL: https://github.com/harlowja/fasteners
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-setuptools
 # Optional: python3-six
@@ -7,10 +7,10 @@
 name=python3-fasteners
 version=0.16.2
 release=1
-source=(https://pypi.org/packages/source/f/fasteners/${name#*-}-$version.tar.gz)
+source=(https://pypi.org/packages/source/f/fasteners/fasteners-$version.tar.gz)
 
 build() {
-  cd ${name#*-}-$version
+  cd fasteners-$version
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --optimize=1 --root=$PKG
 }
