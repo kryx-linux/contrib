@@ -4,15 +4,13 @@
 # Depends on: libpcre2 libunistring
 
 name=boxes
-version=2.1.0
+version=2.1.1
 release=1
-source=(https://github.com/ascii-boxes/boxes/archive/v$version/$name-$version.tar.gz
-  makefile.patch)
+source=(https://github.com/ascii-boxes/boxes/archive/v$version/$name-$version.tar.gz)
 
 build () {
   cd $name-$version
 
-  patch -Np1 -i $SRC/makefile.patch
   sed -i -e "s|^GLOBALCONF.*|GLOBALCONF = /usr/share/boxes/config|" Makefile
 
   make
