@@ -1,11 +1,11 @@
 # Description: Network configuration tool
 # URL: https://wiki.gnome.org/Projects/NetworkManager/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: curl dbus libndp libnewt libxslt nss polkit python3-gobject
+# Depends on: curl dbus gnutls libndp libnewt libxslt nss polkit python3-gobject
 # Optional: ppp avahi bash-completion dbus libnl jansson libteam dnsmasq wireguard-tools
 
 name=networkmanager
-version=1.30.4
+version=1.32.0
 release=1
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
   networkmanager.rc NetworkManager.conf polkit.conf dhcp.conf org.freedesktop.NetworkManager.rules)
@@ -23,6 +23,7 @@ build() {
     --libexecdir /usr/lib/networkmanager \
     --buildtype=plain \
     -D b_lto=false \
+    -D crypto=gnutls \
     -D dbus_conf_dir=/usr/share/dbus-1/system.d \
     -D udev_dir=/lib/udev \
     -D resolvconf=true \
