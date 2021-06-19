@@ -7,7 +7,7 @@ name=inkscape
 version=1.1
 _pversion=21.06.1
 _psoversion=111
-release=5
+release=6
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
 	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz)
 
@@ -47,6 +47,7 @@ build() {
 
 	cmake -S $name-${version}_* -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
