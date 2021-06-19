@@ -4,21 +4,19 @@
 # Depends on:  meson ninja
 
 name=ipcalc
-version=1.0.0
+version=1.0.1
 release=1
 source=(https://gitlab.com/${name}/${name}/-/archive/${version}/\
-${name}-${version}.tar.bz2 build.patch)
+${name}-${version}.tar.bz2)
 
 build() {
    cd ${name}-${version}
-
-   patch -Np1 -i "${SRC}"/build.patch
 
    meson setup build
    ninja -C build
 
    cat > ./ipcalc.1 <<- \!
-	.Dd April 9, 2021
+	.Dd June 20, 2021
 	.Dt IPCALC 1
 	.Os
 	.
