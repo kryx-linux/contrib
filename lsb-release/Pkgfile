@@ -4,21 +4,22 @@
 # Depends on: bash
 
 name=lsb-release
-version=1.4
-release=3
-source=(https://downloads.sourceforge.net/lsb/$name-$version.tar.gz
-lsb_release_description.patch)
+version=3.1
+release=1
+source=(https://github.com/thkukuk/lsb-release_os-release/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  patch -Np0 < "$SRC/lsb_release_description.patch"
+  cd ${name}_os-release-$version
   make
-  install -dm755 "$PKG/etc"
-  echo "LSB_VERSION=$version" >> "$PKG/etc/lsb-release"
-  echo "DISTRIB_ID=CRUX" >> "$PKG/etc/lsb-release"
-  echo "DISTRIB_RELEASE=$(crux | awk '{ print $2 " " $3 }')" >> "$PKG/etc/lsb-release"
-  echo "DISTRIB_DESCRIPTION=CRUX" >> "$PKG/etc/lsb-release"
+  make INSTALL_ROOT=$PKG/usr install
 
-  install -Dm 644 lsb_release.1.gz "$PKG/usr/share/man/man1/lsb_release.1.gz"
-  install -Dm 755 lsb_release "$PKG/usr/bin/lsb_release"
+  install -dm755 "$PKG/etc"
+  cat <<- EOF > $PKG/etc/lsb-release
+# only uncomment if we are LSB compliant and certified..
+#LSB_VERSION=$version
+DISTRIB_ID=CRUX
+DISTRIB_RELEASE=$(crux | awk '{ print $3 }')
+DISTRIB_CODENAME=CRUX
+DISTRIB_DESCRIPTION="CRUX is a lightweight Linux distribution for the x86-64 architecture targeted at experienced Linux users"
+EOF
 }
