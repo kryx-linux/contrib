@@ -1,0 +1,15 @@
+# Description:  A utility for removing files based on when they were last accessed
+# URL: https://pagure.io/tmpwatch
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=tmpwatch
+version=2.11
+release=1
+source=(https://releases.pagure.org/$name/$name-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
+}
