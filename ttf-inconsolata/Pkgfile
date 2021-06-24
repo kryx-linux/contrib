@@ -1,0 +1,15 @@
+# Description: Monospace font for pretty code listings and for the terminal
+# URL: https://www.google.com/fonts/specimen/Inconsolata
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=ttf-inconsolata
+version=3.000
+release=1
+source=(https://github.com/googlefonts/Inconsolata/releases/download/v3.000/fonts_ttf.zip
+  75-ttf-inconsolata.conf)
+
+build() {
+  install -d $PKG/usr/share/fonts/TTF
+  install -Dm644 $SRC/fonts/ttf/*.ttf $PKG/usr/share/fonts/TTF
+  install -Dm644 $SRC/75-ttf-inconsolata.conf $PKG/usr/share/fontconfig/conf.avail/75-ttf-inconsolata.conf
+}
