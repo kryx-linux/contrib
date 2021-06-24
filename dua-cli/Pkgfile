@@ -1,0 +1,30 @@
+# Description: View disk space usage and delete unwanted data, fast.
+# URL: https://github.com/Byron/dua-cli
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=dua-cli
+version=2.13.1
+release=1
+source=(https://github.com/Byron/dua-cli/archive/v$version/$name-$version.tar.gz)
+
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+      $name-$version.tar.gz)
+        tar xfvz $(get_filename $file) -C $SRC ;;
+      *)
+        cp $(get_filename $file) $SRC ;;
+    esac
+  done
+}
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  mkdir "$PKGMK_SOURCE_DIR/rust" || true
+  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+  cargo update --manifest-path $name-$version/Cargo.toml
+  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/dua
+}
