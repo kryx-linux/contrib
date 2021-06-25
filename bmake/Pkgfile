@@ -3,17 +3,20 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=bmake
-version=20210206
+version=20210621
 release=1
 source=(http://www.crufty.net/ftp/pub/sjg/${name}-${version}.tar.gz)
 
 build() {
    cd ${name}
 
+   sed -i'' -e '/cmd-interrupt$/d' -e '/var-op-shell$/d' unit-tests/Makefile
+
    mkdir -p build
    cd build
 
    sh ../boot-strap --with-default-sys-path=/usr/share/mk
+
    sh ../boot-strap --prefix=/usr \
       --with-mksrc=/usr/share/mk \
       --install-destdir="${PKG}" op=install
