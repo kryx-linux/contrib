@@ -12,7 +12,6 @@ OPTS="-D"
 
 case $1 in
   start)
-    mkdir /var/run/avahi
     $SSD --start --pidfile $PID --user $USER --exec $PROG -- $OPTS
     ;;
   stop)
