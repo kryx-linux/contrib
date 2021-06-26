@@ -4,28 +4,25 @@
 # Depends on: rust
 
 name=delta
-version=0.8.0
+version=0.8.1
 release=1
 source=(https://github.com/dandavison/delta/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update
-  cargo fetch
-  cargo build --release --locked
-  install -Dt $PKG/usr/bin target/release/delta
+  cargo update --manifest-path $name-$version/Cargo.toml
+  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
 
   # install auto-completion files if the ports for it are installed
-  if [ -e /usr/share/zsh ]; then
-    install -Dm644 etc/completion/completion.zsh \
-      $PKG/usr/share/zsh/site-functions/_delta
-  fi
-  if [ -e /usr/lib/pkgconfig/bash-completion.pc ]; then
-    install -Dm644 etc/completion/completion.bash \
-      $PKG/usr/share/bash-completion/completions/delta
-  fi
+  prt-get isinst zsh &&
+    install -Dm644 $name-$version/etc/completion/completion.zsh \
+      $PKG/usr/share/zsh/site-functions/_delta || true
+  prt-get isinst bash-completion &&
+    install -Dm644 $name-$version/etc/completion/completion.bash \
+      $PKG/usr/share/bash-completion/completions/delta || true
 }
