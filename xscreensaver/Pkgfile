@@ -1,13 +1,24 @@
 # Description: A screen saver and locker daemon for xorg.
 # URL: https://www.jwz.org/xscreensaver/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: bc fortune gdk-pixbuf-xlib giflib glu intltool libglade linux-pam xorg-libxmu
+# Depends on: bc fortune gdk-pixbuf-xlib giflib glu intltool libglade linux-pam xorg-libxmu xorg-libxi
 
 name=xscreensaver
-version=6.00
+version=6.01
 release=1
 source=(https://www.jwz.org/$name/$name-$version.tar.gz
 	$name.pam)
+
+unpack_source() {
+	for file in ${source[@]}; do
+		case ${file##*/} in
+			$name-$version.tar.gz)
+				tar xfvz $(get_filename $file) -C $SRC ;;
+			*)
+				cp $(get_filename $file) $SRC ;;
+		esac
+	done
+}
 
 build() {
 	cd $name-$version
