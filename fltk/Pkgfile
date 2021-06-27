@@ -4,17 +4,12 @@
 # Depends on: alsa-lib libjpeg-turbo mesa util-linux xorg-libxft xorg-libxinerama
 
 name=fltk
-version=1.3.5
+version=1.3.6
 release=1
-source=(https://fltk.org/pub/$name/${version%-*}/$name-$version-source.tar.bz2
-	fltk-fix-lib-mess.patch)
+source=(https://fltk.org/pub/$name/${version%-*}/$name-$version-source.tar.bz2)
 
 build() {
-	# https://github.com/fltk/fltk/issues/20
-	patch -d $name-$version -p1 -i $SRC/fltk-fix-lib-mess.patch
-
-	# fltk currently has a problem with ninja that I don't want to investigate right now
-	#[[ -e /usr/bin/ninja ]] && PKGMK_FLTK+=' -G Ninja'
+	[[ -e /usr/bin/ninja ]] && PKGMK_FLTK+=' -G Ninja'
 	cmake -S $name-$version -B build $PKGMK_FLTK \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D FLTK_LIBDIR=/usr/lib \
@@ -29,20 +24,4 @@ build() {
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
-
-	# example apps and integration files, that are not covered by make install
-	for app in {blocks,checkers,sudoku}; do
-		install -D -m 0755 -t "$PKG/usr/bin/" "$SRC/build/bin/examples/$app"
-
-		install -D -m 0644 "$name-$version/test/desktop/$app.desktop" \
-			-t "$PKG/usr/share/applications/"
-
-		install -D -m 0644 "$name-$version/test/desktop/$app-32.png" \
-			"$PKG/usr/share/icons/hicolor/32x32/apps/$app.png"
-
-		install -D -m 0644 "$name-$version/test/desktop/$app-128.png" \
-			"$PKG/usr/share/icons/hicolor/128x128/apps/$app.png"
-	done
-
-	rm $PKG/usr/include/FL/README.Xcode
 }
