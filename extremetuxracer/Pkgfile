@@ -4,7 +4,7 @@
 # Depends on: glu csfml
 
 name=extremetuxracer
-version=0.8.0
+version=0.8.1
 release=1
 source=(https://downloads.sourceforge.net/project/$name/releases/$version/etr-$version.tar.xz)
 
@@ -16,5 +16,5 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/doc
+	rm -r $PKG/usr/share/{doc,etr/translations}
 }
