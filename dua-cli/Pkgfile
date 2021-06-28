@@ -18,6 +18,7 @@ unpack_source() {
     esac
   done
 }
+
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
