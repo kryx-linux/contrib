@@ -3,9 +3,8 @@
 # Maintainer: Tim Biermann
 # Depends on: cpptoml lua53 pipewire util-linux
 
-
 name=wireplumber
-version=0.4.0
+version=0.4.1
 release=1
 source=(https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$name-$version.tar.bz2)
 
@@ -13,8 +12,8 @@ build() {
   meson setup $name-$version build \
     -D prefix=/usr \
     --buildtype=plain \
-    -Dsystem-lua=true \
     --wrap-mode nodownload
+    -D system-lua=true
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
