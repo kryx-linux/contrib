@@ -12,7 +12,7 @@ build() {
   meson setup $name-$version build \
     -D prefix=/usr \
     --buildtype=plain \
-    --wrap-mode nodownload
+    --wrap-mode nodownload \
     -D system-lua=true
   meson compile -C build
   DESTDIR=$PKG meson install -C build
