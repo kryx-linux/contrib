@@ -1,15 +1,16 @@
 # Description: Self-service finite-state machines for the programmer on the go.
 # URL: https://pypi.python.org/pypi/automat
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3-attrs
+# Depends on: python3-attrs python3-m2r python3-setuptools-scm python3-pip
 
-name=python3-Automat
+name=python3-automat
+_name=python3-Automat
 version=20.2.0
 release=1
-source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
+source=(https://files.pythonhosted.org/packages/source/${_name:8:1}/${_name#*-}/${_name#*-}-$version.tar.gz)
 
 build() {
-	cd ${name#*-}-$version
+	cd ${_name#*-}-$version
 	/usr/bin/python3 setup.py build
 	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
 
