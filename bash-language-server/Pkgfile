@@ -1,0 +1,30 @@
+# Description:  A language server for Bash
+# URL: https://github.com/bash-lsp/bash-language-server
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: acorn typescript yarn
+
+name=bash-language-server
+version=1.17.0
+release=2
+source=(https://github.com/bash-lsp/bash-language-server/archive/server-$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-server-$version
+  yarn
+  yarn run compile
+
+  install -d $PKG/usr/lib/$name
+  cp -a server/* $PKG/usr/lib/$name
+  install -d $PKG/usr/bin
+  ln -s /usr/lib/$name/bin/main.js $PKG/usr/bin/$name
+
+  find $PKG \(\
+    -iname "*README.md*" -o \
+    -iname "*README.markdown*" -o \
+    -iname "*CHANGELOG.md*" -o \
+    -iname "*AUTHORS*" -o \
+    -iname "*ChangeLog*" -o \
+    -iname "*README_js.md*" -o \
+    -iname "*COPYING*" -o \
+    -iname "*LICENSE*" \) -delete
+}
