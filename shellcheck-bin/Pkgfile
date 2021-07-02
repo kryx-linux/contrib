@@ -1,0 +1,13 @@
+# Description: finds bugs in your shell scripts
+# URL: https://www.shellcheck.net/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=shellcheck-bin
+version=0.7.2
+release=1
+source=(https://github.com/koalaman/shellcheck/releases/download/v$version/shellcheck-v$version.linux.x86_64.tar.xz)
+
+build() {
+  cd shellcheck-v$version
+  install -Dm775 shellcheck $PKG/usr/bin/shellcheck
+}
