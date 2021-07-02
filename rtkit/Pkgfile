@@ -5,9 +5,9 @@
 
 name=rtkit
 version=0.13
-release=2
+release=3
 source=(https://github.com/heftig/rtkit/releases/download/v$version/$name-$version.tar.xz
-  rtkit.service org.freedesktop.RealtimeKit1.conf)
+  rtkit.service org.freedesktop.RealtimeKit1.conf rtkit.rules)
 
 build() {
   # allow rtkit group to own the service besides rtkit user and root
@@ -23,6 +23,7 @@ build() {
   DESTDIR=$PKG meson install -C build
 
   install -Dm755 $SRC/rtkit.service $PKG/etc/rc.d/rtkit
+  install -Dm755 $SRC/rtkit.rules $PKG/etc/polkit-1/rules.d/60-rtkit.rules
 
   rm -r $PKG/usr/lib/systemd
   rm -r $PKG/usr/share/dbus-1/system-services
