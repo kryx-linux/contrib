@@ -1,0 +1,22 @@
+# Description: General purpose Language Server that integrate with linter to support diagnostic features
+# URL: https://www.npmjs.com/package/diagnostic-languageserver
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: npm yarn
+
+name=diagnostic-languageserver
+version=1.11.0
+release=1
+source=(https://registry.npmjs.org/$name/-/$name-$version.tgz)
+
+build() {
+  npm install -g \
+    --user root \
+    --prefix $PKG/usr \
+    $PKGMK_SOURCE_DIR/$name-$version.tgz
+  find $PKG/usr -type d -exec chmod 755 {} +
+  find $PKG/usr \(\
+    -iname "*README.md*" -o \
+    -iname "*README.markdown*" -o \
+    -iname "*CHANGELOG.md*" -o \
+    -iname "*LICENSE*" \) -delete
+}
