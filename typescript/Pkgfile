@@ -1,0 +1,23 @@
+# Description: Typed JavaScript at Any Scale.
+# URL: https://www.typescriptlang.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: npm
+
+name=typescript
+version=4.3.4
+release=1
+source=(https://registry.npmjs.org/$name/-/$name-$version.tgz)
+
+build() {
+  cp $PKGMK_SOURCE_DIR/$name-$version.tgz .
+  npm install -g --prefix "$PKG"/usr $SRC/$name-$version.tgz
+
+  chmod -R u=rwX,go=rX $PKG
+  chown -R root:root $PKG
+
+  find $PKG \(\
+    -iname "*README.md*" -o \
+    -iname "*AUTHORS.md*" -o \
+    -iname "*CHANGELOG.md*" -o \
+    -iname "*LICENSE*" \) -delete
+}
