@@ -4,7 +4,7 @@
 # Depends on: gpgme qt5
 
 name=gpgme-qt5
-version=1.15.1
+version=1.16.0
 release=1
 source=(https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-$version.tar.bz2)
 
@@ -30,7 +30,7 @@ build() {
 		$PKG/usr/share/aclocal/gpgme.m4
 
 	rm $PKG/usr/lib/libgpgmepp.*
-	rm -r $PKG/usr/include/gpgme++ $PKG/usr/lib/cmake/Gpgmepp		
+	rm -r $PKG/usr/include/gpgme++ $PKG/usr/lib/cmake/Gpgmepp
 
 	rm -r $PKG/usr/share/info
 }
