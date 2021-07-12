@@ -2,7 +2,7 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.9/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney-0.6.0-py3.9.egg-info
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney-0.7.0-py3.9.egg-info
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/
@@ -16,6 +16,8 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/bus.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/bus_messages.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/bus_messages.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/fds.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/fds.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/low_level.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/low_level.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/routing.cpython-39.opt-1.pyc
@@ -26,6 +28,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/bindgen.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/bus.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/bus_messages.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/fds.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/integrate/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/integrate/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/integrate/__pycache__/
@@ -73,6 +76,8 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/conftest.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/conftest.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/test_asyncio.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/test_asyncio.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/test_blocking.cpython-39.opt-1.pyc
@@ -83,6 +88,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache_
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/test_trio.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/utils.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/__pycache__/utils.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/conftest.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/test_asyncio.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/test_blocking.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/io/tests/test_threading.py
@@ -106,6 +112,8 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_bus.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_bus_messages.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_bus_messages.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_fds.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_fds.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_low_level.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_low_level.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/test_routing.cpython-39.opt-1.pyc
@@ -115,6 +123,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/jeepney/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/test_bindgen.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/test_bus.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/test_bus_messages.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/test_fds.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/test_low_level.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/tests/test_routing.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/jeepney/wrappers.py
