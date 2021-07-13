@@ -1,20 +1,29 @@
 # Description: Fast C++ logging library
 # URL: https://github.com/gabime/spdlog
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cmake fmt
+# Depends on: fmt
 
 name=spdlog
 version=1.8.5
-release=1
-source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz
+  spdlog-1.8.5-fmt8.patch spdlog-1.8.5-fmt8_tests.patch)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_SPDLOG+=' -G Ninja'
+  patch -Np1 -d $name-$version -i $SRC/spdlog-1.8.5-fmt8.patch
+  patch -Np1 -d $name-$version -i $SRC/spdlog-1.8.5-fmt8_tests.patch
+
+  prt-get isinst ninja && PKGMK_SPDLOG+=' -G Ninja'
   cmake -S $name-$version -B build $PKGMK_SPDLOG \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D SPDLOG_FMT_EXTERNAL=ON \
+    -D SPDLOG_INSTALL=ON \
+    -D SPDLOG_BUILD_SHARED=ON \
+    -D SPDLOG_BUILD_EXAMPLE=OFF \
+    -D SPDLOG_BUILD_BENCH=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
