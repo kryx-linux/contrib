@@ -5,7 +5,7 @@
 
 name=rstudio
 version=1.4.1717
-release=1
+release=2
 
 source=(https://github.com/rstudio/rstudio/archive/v$version/$name-$version.tar.gz
   # https://src.fedoraproject.org/rpms/rstudio/tree/rawhide
@@ -26,9 +26,7 @@ build() {
   ln -sfT /usr/share/mathjax mathjax-27
   ln -sfT /usr/bin/ "pandoc/2.11.4"
   ln -sfT /usr/bin/node node/10.19.0/bin/node
-  ln -sfT /usr/include/yaml-cpp yaml-cpp
-  bash install-packages
-  unset pandoc_version)
+  bash install-packages)
 
   patch -Np1 -d $name-$version -i $SRC/0000-unbundle-dependencies-common.patch
   patch -Np1 -d $name-$version -i $SRC/0003-fix-resources-path.patch
