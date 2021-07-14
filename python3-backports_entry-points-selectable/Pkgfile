@@ -1,0 +1,17 @@
+# Description: Compatibility shim providing selectable entry points for older implementations
+# URL: https://pypi.org/project/backports.entry-points-selectable/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-backports_entry-points-selectable
+version=1.1.0
+release=1
+source=(https://pypi.python.org/packages/source/b/backports.entry_points_selectable/backports.entry_points_selectable-$version.tar.gz)
+
+build() {
+  cd backports.entry_points_selectable-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
