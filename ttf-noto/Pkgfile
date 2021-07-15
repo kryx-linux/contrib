@@ -1,0 +1,16 @@
+# Description: Noto fonts
+# URL: https://www.google.com/get/noto/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=ttf-noto
+version=20201206
+release=1
+source=(https://github.com/googlefonts/noto-fonts/archive/v$version-phase3/noto-fonts-$version-phase3.tar.gz)
+
+build() {
+  cd noto-fonts-$version-phase3/unhinted/ttf
+  install -d $PKG/usr/share/fonts/noto
+  for i in */*.ttf;
+    do install -m644 $i $PKG/usr/share/fonts/noto;
+  done
+}
