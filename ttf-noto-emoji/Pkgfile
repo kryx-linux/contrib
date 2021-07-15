@@ -1,0 +1,13 @@
+# Description: Noto emoji font
+# URL: https://www.google.com/get/noto/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=ttf-noto-emoji
+version=2.028
+release=1
+source=(https://github.com/googlefonts/noto-emoji/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  mkdir -p $PKG/usr/share/fonts/noto
+  install -m644 noto-emoji-$version/fonts/NotoColorEmoji.ttf $PKG/usr/share/fonts/noto
+}
