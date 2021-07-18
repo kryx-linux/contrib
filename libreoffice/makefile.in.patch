@@ -1,6 +1,5 @@
-diff -Naur libreoffice-7.1.0.1.orig/Makefile.in libreoffice-7.1.0.1/Makefile.in
---- libreoffice-7.1.0.1.orig/Makefile.in	2021-01-02 15:03:18.306037152 +0000
-+++ libreoffice-7.1.0.1/Makefile.in	2021-01-02 15:04:27.232129141 +0000
+--- libreoffice-7.2.0.1.orig/Makefile.in	2021-07-16 20:47:21.615601263 +0200
++++ libreoffice-7.2.0.1/Makefile.in	2021-07-16 20:48:10.346072072 +0200
 @@ -9,7 +9,7 @@
  
  gb_Top_MODULE_CHECK_TARGETS := slowcheck unitcheck subsequentcheck perfcheck uicheck screenshot
@@ -10,22 +9,25 @@ diff -Naur libreoffice-7.1.0.1.orig/Makefile.in libreoffice-7.1.0.1/Makefile.in
  
  MAKECMDGOALS?=build
  build_goal:=$(if $(filter build build-nocheck uicheck,$(MAKECMDGOALS)),build)\
-@@ -58,14 +58,6 @@
+@@ -58,17 +58,6 @@
  
  .DEFAULT_GOAL := build
  
 -check-if-root:
--	@if test ! `uname` = 'Haiku' -a `id -u` = 0 && test -z $$container && ! grep -q 'lxc\|docker' /proc/self/cgroup && ! grep -q 'libpod_parent' /proc/self/cgroup; then \
--		echo; \
--		echo 'Building LibreOffice as root is a very bad idea, use a regular user.'; \
--		echo; \
--		exit 1; \
+-	@if test ! `uname` = 'Haiku' -a `id -u` = 0; then \
+-		# if the systemd-detect-virt command doesn't exist or it reports we're not in a container \
+-		if test ! -x "$$(command -v systemd-detect-virt)" || ! systemd-detect-virt -c -q; then \
+-			echo; \
+-			echo 'Building LibreOffice as root is a very bad idea, use a regular user.'; \
+-			echo; \
+-			exit 1; \
+-		fi \
 -	fi
 -
  gb_Side ?= host
  
  include $(BUILDDIR)/config_$(gb_Side).mk
-@@ -268,7 +260,7 @@
+@@ -274,7 +263,7 @@
  #
  # Bootstrap
  #
