@@ -2,13 +2,14 @@
 # URL: https://github.com/Arkq/bluez-alsa
 # Maintainer: Steffen Nurpmeso, steffen at sdaoden dot eu
 # Depends on: bluez fdk-aac sbc
+# Optional: lame libbsd libldac mpg123 python3-docutils
 
 #@ .. via bluez: alsa-lib dbus
 
 name=bluealsa
 rname=bluez-alsa
 version=3.1.0
-release=1
+release=2
 source=(https://github.com/Arkq/${rname}/archive/\
 v${version}/${rname}-${version}.tar.gz
    bluealsa.rc bluealsa.conf)
@@ -16,9 +17,17 @@ v${version}/${rname}-${version}.tar.gz
 build() {
    cd ${rname}-${version}
 
+   cnf=--enable-aac
+   prt-get isinst libbsd >/dev/null 2>&1 && cnf=${cnf}' --enable-hcitop'
+   prt-get isinst lame >/dev/null 2>&1 && cnf=${cnf}' --enable-lame'
+   prt-get isinst libldac >/dev/null 2>&1 && cnf=${cnf}' --enable-ldac'
+   prt-get isinst mpg123 >/dev/null 2>&1 && cnf=${cnf}' --enable-mpg123'
+   prt-get isinst python3-docutils >/dev/null 2>&1 &&
+      cnf=${cnf}' --enable-manpages'
+
    autoreconf --install --symlink
    mkdir build && cd build
-   ../configure --prefix=/usr --runstatedir=/run --enable-aac
+   ../configure --prefix=/usr --runstatedir=/run ${cnf}
    make all
    make DESTDIR="${PKG}" install
 
