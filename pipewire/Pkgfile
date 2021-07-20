@@ -5,7 +5,7 @@
 # Optional: alsa-ucm-conf bluez gst-plugins-base jack libldac libopenaptx pulseaudio rtkit v4l2 vulkan-loader
 
 name=pipewire
-version=0.3.31
+version=0.3.32
 release=1
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
@@ -20,6 +20,9 @@ build() {
   meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
     --buildtype=plain \
+    --wrap-mode=nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
     -D docs=disabled \
     -D tests=disabled
   # will remove executable pipewire-media-session
