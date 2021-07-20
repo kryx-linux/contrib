@@ -4,15 +4,11 @@
 # Depends on: fmt
 
 name=spdlog
-version=1.8.5
-release=2
-source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz
-  spdlog-1.8.5-fmt8.patch spdlog-1.8.5-fmt8_tests.patch)
+version=1.9.0
+release=1
+source=(https://github.com/gabime/spdlog/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/spdlog-1.8.5-fmt8.patch
-  patch -Np1 -d $name-$version -i $SRC/spdlog-1.8.5-fmt8_tests.patch
-
   prt-get isinst ninja && PKGMK_SPDLOG+=' -G Ninja'
   cmake -S $name-$version -B build $PKGMK_SPDLOG \
     -D CMAKE_INSTALL_PREFIX=/usr \
