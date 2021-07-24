@@ -4,7 +4,7 @@
 # Depends on: go
 
 name=influxdb
-version=1.8.6
+version=1.8.7
 release=1
 source=(https://github.com/influxdata/influxdb/archive/v$version/$name-$version.tar.gz
   influxdb.service)
@@ -25,13 +25,10 @@ build() {
   ## and fails when it gets it
   #make -C man
 
-  install -d $PKG/usr/bin/
-  install -Dm755 build/influx         $PKG/usr/bin/
-  install -Dm755 build/influxd        $PKG/usr/bin/
-  install -Dm755 build/influx_inspect $PKG/usr/bin/
-  install -Dm755 build/influx_stress  $PKG/usr/bin/
-  install -Dm755 build/influx_tools   $PKG/usr/bin/
-  install -Dm755 build/influx_tsm     $PKG/usr/bin/
+  # influx_tsm missing
+  for i in influx influxd influx_inspect influx_stress influx_tools; do
+    install -Dm755 build/$i $PKG/usr/bin/$i;
+  done
 
   install -Dm644 etc/config.sample.toml   $PKG/etc/influxdb/influxdb.conf
 
