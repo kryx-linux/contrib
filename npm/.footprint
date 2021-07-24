@@ -150,6 +150,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/workspaces/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/.bin/
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/arborist -> ../@npmcli/arborist/bin/index.js
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/color-support -> ../color-support/bin.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/installed-package-contents -> ../@npmcli/installed-package-contents/index.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/mkdirp -> ../mkdirp/bin/cmd.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/node-gyp -> ../node-gyp/bin/node-gyp.js
@@ -161,6 +162,9 @@ lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/pacote -> ../pac
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/qrcode-terminal -> ../qrcode-terminal/bin/qrcode-terminal.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/rimraf -> ../rimraf/bin.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/semver -> ../semver/bin/semver.js
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/sshpk-conv -> ../sshpk/bin/sshpk-conv
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/sshpk-sign -> ../sshpk/bin/sshpk-sign
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/sshpk-verify -> ../sshpk/bin/sshpk-verify
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/uuid -> ../uuid/bin/uuid
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/
@@ -671,6 +675,11 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/color-convert/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/color-name/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/color-name/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/color-name/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/color-support/
+-rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/color-support/bin.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/color-support/browser.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/color-support/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/color-support/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/colors/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/colors/examples/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/colors/examples/normal-usage.js
@@ -910,16 +919,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/gauge/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/error.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/has-color.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/index.js
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/aproba/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/aproba/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/aproba/package.json
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/is-fullwidth-code-point/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/is-fullwidth-code-point/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/is-fullwidth-code-point/package.json
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/string-width/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/string-width/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/node_modules/string-width/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/plumbing.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/gauge/process.js
@@ -1535,6 +1534,36 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/lib/util.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/macOS_Catalina.md
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/macOS_Catalina_acid_test.sh
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/aproba/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/aproba/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/aproba/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/base-theme.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/error.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/has-color.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/package.json
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/plumbing.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/process.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/progress-bar.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/render-template.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/set-immediate.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/set-interval.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/spin.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/template-item.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/theme-set.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/themes.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/wide-truncate.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/is-fullwidth-code-point/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/is-fullwidth-code-point/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/is-fullwidth-code-point/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/npmlog/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/npmlog/log.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/npmlog/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/string-width/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/string-width/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/string-width/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/src/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/src/win_delay_load_hook.cc
