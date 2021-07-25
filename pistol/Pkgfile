@@ -1,0 +1,26 @@
+# Description: General purpose file previewer designed for Ranger, Lf to make scope.sh redundant
+# URL: https://github.com/doronbehar/pistol
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: go
+
+name=pistol
+version=0.2.1
+release=1
+source=(https://github.com/doronbehar/pistol/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export GO111MODULE=on
+
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+
+  go get -u github.com/doronbehar/pistol/cmd/pistol
+
+  install -Dm755 $GOPATH/bin/$name $PKG/usr/bin/$name
+}
