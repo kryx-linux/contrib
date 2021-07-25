@@ -6,7 +6,7 @@
 
 name=nnn
 version=4.2
-release=1
+release=2
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
 build() {
@@ -19,6 +19,7 @@ build() {
 
   make $PKGMK_NNN
   make DESTDIR=$PKG PREFIX=/usr install
+  make DESTDIR=$PKG PREFIX=/usr install-desktop
 
   mkdir $PKG/usr/share/nnn
   # install provided scripts and plugins to $PKG/usr/share
