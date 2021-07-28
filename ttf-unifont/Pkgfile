@@ -9,8 +9,8 @@ source=(https://unifoundry.com/pub/unifont/unifont-$version/unifont-$version.tar
 
 build() {
   cd unifont-$version/font/precompiled
-  install -d $PKG/usr/share/fonts/TTF
+  install -d $PKG/usr/share/fonts/TTF/unifont/
   for i in *.ttf; do
-    install -m644 $i $PKG/usr/share/fonts/TTF/;
+    install -Dm644 $i $PKG/usr/share/fonts/TTF/unifont/;
   done
 }
