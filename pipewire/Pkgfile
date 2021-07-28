@@ -2,20 +2,20 @@
 # URL: https://pipewire.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: alsa-utils dbus fdk-aac ffmpeg glib lame libva libvpx libwebp x264 x265
-# Optional: alsa-ucm-conf bluez gst-plugins-base jack libldac libopenaptx pulseaudio rtkit v4l2 vulkan-loader
+# Optional: alsa-ucm-conf bluez gst-plugins-base jack libldac pulseaudio rtkit v4l2 vulkan-loader wireplumber
 
 name=pipewire
 version=0.3.32
-release=1
+release=2
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
 build() {
-  prt-get isinst jack || PKGMK_PW+=' -Dpipewire-jack=disabled -Djack=disabled'
-  prt-get isinst vulkan-loader || PKGMK_PW+=' -Dpipewire-vulkan=disabled -Dvulkan=disabled'
   prt-get isinst bluez || PKGMK_PW+=' -Dbluez5=disabled'
-  prt-get isinst v4l-utils || PKGMK_PW+=' -Dv4l2=disabled'
   prt-get isinst gst-plugins-base || PKGMK_PW+=' -Dgstreamer=disabled'
-  [[ -e /usr/include/pulse/glib-mainloop.h ]] || PKGMK_PW+=' -Dpipewire-pulseaudio=disabled'
+  prt-get isinst jack || PKGMK_PW+=' -Dpipewire-jack=disabled -Djack=disabled'
+  prt-get isinst pulseaudio || PKGMK_PW+=' -Dpipewire-pulseaudio=disabled'
+  prt-get isinst v4l-utils || PKGMK_PW+=' -Dv4l2=disabled'
+  prt-get isinst vulkan-loader || PKGMK_PW+=' -Dpipewire-vulkan=disabled -Dvulkan=disabled'
 
   meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
