@@ -4,12 +4,12 @@
 
 name=ttf-inconsolata
 version=3.000
-release=1
-source=(https://github.com/googlefonts/Inconsolata/releases/download/v3.000/fonts_ttf.zip
+release=2
+source=(https://github.com/googlefonts/Inconsolata/archive/v$version/$name-$version.tar.gz
   75-ttf-inconsolata.conf)
 
 build() {
-  install -d $PKG/usr/share/fonts/TTF
-  install -Dm644 $SRC/fonts/ttf/*.ttf $PKG/usr/share/fonts/TTF
+  install -d $PKG/usr/share/fonts/TTF/Inconsolata
+  install -Dm644 $SRC/Inconsolata-$version/fonts/ttf/*.ttf $PKG/usr/share/fonts/TTF/Inconsolata/
   install -Dm644 $SRC/75-ttf-inconsolata.conf $PKG/usr/share/fontconfig/conf.avail/75-ttf-inconsolata.conf
 }
