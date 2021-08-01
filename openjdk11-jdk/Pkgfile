@@ -5,7 +5,7 @@
 # Depends on: alsa-lib cups fontconfig giflib krb5 lcms2 libxslt nss unzip xorg-libxrandr xorg-libxt xorg-libxtst zip
 
 name=openjdk11-jdk
-version=11.0.12+5
+version=11.0.12+7
 _boot_ver=20210620
 _cert_ver=20210620
 release=1
@@ -23,14 +23,23 @@ build() {
   export JAVA_HOME=$SRC/openjdk11-boot
   export PATH=$JAVA_HOME/bin:$OLD_PATH
 
+  export MAKEFLAGS=${MAKEFLAGS/-j${MAKEFLAG_J}/}
+  # Avoid optimization of HotSpot being lowered from O3 to O2
+  local _CFLAGS+=" ${CFLAGS//-O2/-O3} ${CPPFLAGS} -fcommon"
+  local _CXXFLAGS+=" ${CXXFLAGS//-O2/-O3} ${CPPFLAGS} -fcommon"
+  local _LDFLAGS="${LDFLAGS}"
+
+  [ -z $JOBS ] && JOBS=$(nproc)
+
+  # CFLAGS, CXXFLAGS and LDFLAGS are ignored as shown by a warning
+  # in the output of ./configure unless used like such:
+  # --with-extra-cflags="${CFLAGS}"
+  # --with-extra-cxxflags="${CXXFLAGS}"
+  # --with-extra-ldflags="${LDFLAGS}"
+  # See also paragraph "Configure Control Variables" from common/doc/building.md
   unset CFLAGS
   unset CXXFLAGS
   unset LDFLAGS
-  unset MAKEFLAGS
-  export _CFLAGS+=' -fcommon'
-  export _CXXFLAGS+=' -fcommon'
-
-  [ -z $JOBS ] && JOBS=$(nproc)
 
   mkdir $SRC/build
   cd $SRC/build
@@ -54,13 +63,17 @@ build() {
     --with-version-build="${version#*+}" \
     --with-vendor-name="CRUX" \
     --with-jobs=$JOBS \
+    --with-num-cores=$JOBS \
     --with-libjpeg=system \
     --with-giflib=system \
     --with-libpng=system \
     --with-zlib=system \
     --with-lcms=system \
-    --with-extra-cflags="$_CFLAGS" \
-    --with-extra-cxxflags="$_CXXFLAGS"
+    --with-harfbuzz=system \
+    --with-jvm-features=zgc \
+    --with-extra-cflags="${_CFLAGS}" \
+    --with-extra-cxxflags="${_CXXFLAGS}" \
+    --with-extra-ldflags="${_LDFLAGS}"
 
   # NOTE: for debugging build issues: set LOG to debug, JOBS to 1.
   LC_ALL=C \
