@@ -8,9 +8,11 @@ For it to work it must be included in /etc/pam.d -- to make it a
 vivid part of session handling the file /etc/pam.d/common-session
 seems best.  Include the following early:
 
-   session optional pam_xdg.so [notroot] [runtime]
+   session optional pam_xdg.so [notroot] [runtime] [track_sessions]
 
 Use notroot argument to only handle XDG for non-root users.
 Use runtime argument to only handle of XDG_RUNTIME_DIR.
+Use track_sessions to remove XDG_RUNTIME_DIR once the last user
+session ends (take care of CAVEATS of manual, maybe).
 
   [1] https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
