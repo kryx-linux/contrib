@@ -1,0 +1,28 @@
+# Description: User space utility to load and exec another kernel
+# URL:        https://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# Depends on:  zlib
+
+name=kexec
+version=2.0.22
+release=1
+source=(https://git.kernel.org/pub/scm/utils/kernel/${name}/\
+${name}-tools.git/snapshot/${name}-tools-${version}.tar.gz
+)
+
+build() {
+   cd ${name}-tools-${version}
+
+   ./bootstrap
+   LDFLAGS="-static ${LDFLAGS}" ./configure --prefix=/usr --without-lzma
+   make
+   make DESTDIR="${PKG}" install
+
+   mv "${PKG}"/usr/sbin/kexec "${PKG}"/usr/sbin/kexec.static
+   rm -rf \
+      "${PKG}"/usr/lib \
+      "${PKG}"/usr/sbin/vmcore-dmesg \
+      "${PKG}"/usr/share/man/man8/vmcore-dmesg.8
+}
+
+# s-sh-mode
