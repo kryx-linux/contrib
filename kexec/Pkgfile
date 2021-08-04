@@ -5,7 +5,7 @@
 
 name=kexec
 version=2.0.22
-release=1
+release=2
 source=(https://git.kernel.org/pub/scm/utils/kernel/${name}/\
 ${name}-tools.git/snapshot/${name}-tools-${version}.tar.gz
 )
@@ -14,11 +14,12 @@ build() {
    cd ${name}-tools-${version}
 
    ./bootstrap
-   LDFLAGS="-static ${LDFLAGS}" ./configure --prefix=/usr --without-lzma
+   #LDFLAGS="-static ${LDFLAGS}" 
+      ./configure --prefix=/usr --without-lzma
    make
    make DESTDIR="${PKG}" install
 
-   mv "${PKG}"/usr/sbin/kexec "${PKG}"/usr/sbin/kexec.static
+   #mv "${PKG}"/usr/sbin/kexec "${PKG}"/usr/sbin/kexec.static
    rm -rf \
       "${PKG}"/usr/lib \
       "${PKG}"/usr/sbin/vmcore-dmesg \
