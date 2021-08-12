@@ -2,16 +2,38 @@
 # URL: https://www.postgresql.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: openssl
+# Optional: clang icu krb5 libxml2 libxslt openldap tcl
 
 name=postgresql
-version=13.3
+version=13.4
 release=1
-source=(https://ftp.postgresql.org/pub/source/v$version/postgresql-$version.tar.bz2 postgresql)
+source=(https://ftp.postgresql.org/pub/source/v$version/postgresql-$version.tar.bz2
+  postgresql-run-socket.patch
+  postgresql.rc postgresql.pam)
 
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr --with-openssl
+  patch -Np1 -i $SRC/postgresql-run-socket.patch
+
+  # optionals {{{
+  prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
+  prt-get isinst icu && PKGMK_PGSQL+=' --with-icu'
+  prt-get isinst krb5 && PKGMK_PGSQL+=' --with-gssapi'
+  prt-get isinst libxml2 && PKGMK_PGSQL+=' --with-libxml'
+  prt-get isinst libxslt && PKGMK_PGSQL+=' --with-libxslt'
+  prt-get isinst tcl && PKGMK_PGSQL+=' --with-tcl'
+  # }}}
+
+  ./configure --prefix=/usr $PKGMK_PGSQL \
+    --with-openssl \
+    --with-pam \
+    --with-perl \
+    --with-python \
+    --with-uuid=e2fs \
+    --disable-nls \
+    --disable-rpath \
+    PYTHON=/usr/bin/python3
   make
   make DESTDIR=$PKG install
 
@@ -19,5 +41,9 @@ build() {
   make DESTDIR=$PKG install-man
   rm -rf $PKG/usr/share/doc
 
-  install -D -m 755 $SRC/postgresql $PKG/etc/rc.d/postgresql
+  install -Dm 755 $SRC/postgresql.rc $PKG/etc/rc.d/postgresql
+  install -Dm 755 $SRC/postgresql.pam $PKG/etc/pam/postgresql
+
+  install -Dm 660 -o 42 -g 42 /dev/null $PKG/var/log/postgresql
 }
+# vim: foldmethod=marker foldlevelstart=0

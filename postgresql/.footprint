@@ -1,4 +1,6 @@
 drwxr-xr-x	root/root	etc/
+drwxr-xr-x	root/root	etc/pam/
+-rwxr-xr-x	root/root	etc/pam/postgresql
 drwxr-xr-x	root/root	etc/rc.d/
 -rwxr-xr-x	root/root	etc/rc.d/postgresql
 drwxr-xr-x	root/root	usr/
@@ -569,7 +571,22 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/partitioning/
 -rw-r--r--	root/root	usr/include/postgresql/server/pgstat.h
 -rw-r--r--	root/root	usr/include/postgresql/server/pgtar.h
 -rw-r--r--	root/root	usr/include/postgresql/server/pgtime.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plperl.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plperl_helpers.h
 -rw-r--r--	root/root	usr/include/postgresql/server/plpgsql.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_cursorobject.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_elog.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_exec.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_main.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_planobject.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_plpymodule.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_procedure.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_resultobject.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_spi.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_subxactobject.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_typeio.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpy_util.h
+-rw-r--r--	root/root	usr/include/postgresql/server/plpython.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/port/
 -rw-r--r--	root/root	usr/include/postgresql/server/port/aix.h
@@ -637,6 +654,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/postmaster/
 -rw-r--r--	root/root	usr/include/postgresql/server/postmaster/startup.h
 -rw-r--r--	root/root	usr/include/postgresql/server/postmaster/syslogger.h
 -rw-r--r--	root/root	usr/include/postgresql/server/postmaster/walwriter.h
+-rw-r--r--	root/root	usr/include/postgresql/server/ppport.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/regex/
 -rw-r--r--	root/root	usr/include/postgresql/server/regex/regcustom.h
 -rw-r--r--	root/root	usr/include/postgresql/server/regex/regerrs.h
@@ -940,10 +958,15 @@ drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/
 drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/makefiles/
 -rw-r--r--	root/root	usr/lib/postgresql/pgxs/src/makefiles/pgxs.mk
 -rw-r--r--	root/root	usr/lib/postgresql/pgxs/src/nls-global.mk
+drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/pl/
+drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/pl/plpython/
+-rw-r--r--	root/root	usr/lib/postgresql/pgxs/src/pl/plpython/regress-python3-mangle.mk
 drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/test/
 drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/test/regress/
 -rwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/test/regress/pg_regress
+-rwxr-xr-x	root/root	usr/lib/postgresql/plperl.so
 -rwxr-xr-x	root/root	usr/lib/postgresql/plpgsql.so
+-rwxr-xr-x	root/root	usr/lib/postgresql/plpython3.so
 -rwxr-xr-x	root/root	usr/lib/postgresql/utf8_and_big5.so
 -rwxr-xr-x	root/root	usr/lib/postgresql/utf8_and_cyrillic.so
 -rwxr-xr-x	root/root	usr/lib/postgresql/utf8_and_euc2004.so
@@ -1258,8 +1281,14 @@ drwxr-xr-x	root/root	usr/share/man/man7/
 drwxr-xr-x	root/root	usr/share/postgresql/
 -rw-r--r--	root/root	usr/share/postgresql/errcodes.txt
 drwxr-xr-x	root/root	usr/share/postgresql/extension/
+-rw-r--r--	root/root	usr/share/postgresql/extension/plperl--1.0.sql
+-rw-r--r--	root/root	usr/share/postgresql/extension/plperl.control
+-rw-r--r--	root/root	usr/share/postgresql/extension/plperlu--1.0.sql
+-rw-r--r--	root/root	usr/share/postgresql/extension/plperlu.control
 -rw-r--r--	root/root	usr/share/postgresql/extension/plpgsql--1.0.sql
 -rw-r--r--	root/root	usr/share/postgresql/extension/plpgsql.control
+-rw-r--r--	root/root	usr/share/postgresql/extension/plpython3u--1.0.sql
+-rw-r--r--	root/root	usr/share/postgresql/extension/plpython3u.control
 -rw-r--r--	root/root	usr/share/postgresql/information_schema.sql
 -rw-r--r--	root/root	usr/share/postgresql/pg_hba.conf.sample
 -rw-r--r--	root/root	usr/share/postgresql/pg_ident.conf.sample
@@ -1924,3 +1953,6 @@ drwxr-xr-x	root/root	usr/share/postgresql/tsearch_data/
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/synonym_sample.syn
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/thesaurus_sample.ths
 -rw-r--r--	root/root	usr/share/postgresql/tsearch_data/turkish.stop
+drwxr-xr-x	root/root	var/
+drwxr-xr-x	root/root	var/log/
+-rw-rw----	postgres/postgres	var/log/postgresql (EMPTY)
