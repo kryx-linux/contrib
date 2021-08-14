@@ -5,12 +5,13 @@
 
 name=kodi
 version=19.1
-release=1
-source=(https://github.com/xbmc/xbmc/archive/$version-Matrix/$name-$version.tar.gz gl-headers.patch)
+release=2
+source=(https://github.com/xbmc/xbmc/archive/$version-Matrix/$name-$version.tar.gz gl-headers.patch fmt8.patch)
 
 build() {
 	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 	patch -d xbmc-$version-Matrix -p1 -i $SRC/gl-headers.patch
+	patch -d xbmc-$version-Matrix -p1 -i $SRC/fmt8.patch
 	cmake -Bbuild \
 		-DVERBOSE=ON \
 		-DAPP_RENDER_SYSTEM=gl \
