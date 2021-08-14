@@ -1,0 +1,24 @@
+# Description: EFI "BIOS" for qemu: -bios /usr/share/edk2-ovmf/x64/OVMF_CODE.fd
+# URL:         https://archlinux.org/packages/extra/any/edk2-ovmf
+# (Really:     https://github.com/tianocore/edk2)
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+
+name=qemu-efi-bin
+version=20210814
+realn=edk2-ovmf
+realver=202105-1
+release=1
+source=(
+   https://archlinux.org/packages/extra/any/${realn}/download
+)
+
+build() {
+   bsdtar -xf download
+
+   mkdir -p "${PKG}"/usr/share/${realn} "${PKG}"/usr/share/qemu/firmware
+
+   cp -r usr/share/${realn} "${PKG}"/usr/share
+   cp -r usr/share/qemu/firmware "${PKG}"/usr/share/qemu
+}
+
+# s-sh-mode
