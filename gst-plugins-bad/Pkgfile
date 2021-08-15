@@ -1,15 +1,19 @@
 # Description: A set of plugins for gstreamer that may pose distribution problems.
 # URL: https://gstreamer.freedesktop.org/modules/gst-plugins-bad.html
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: brotli chromaprint e2fsprogs faac faad2 gst-plugins-base ladspa lame libass libdca libdvdnav libmms libmodplug libmpcdec librsvg libsndfile libsrtp libusb libva libvpx libwebp mjpegtools neon openal openjpeg openldap rtmpdump x264 x265
-# Optional: krb5
+# Depends on: chromaprint e2fsprogs faac faad2 gst-plugins-base ladspa lame libass libdca libdvdnav libmms libmodplug libmpcdec librsvg libsndfile libsrtp libusb libva libvpx libwebp mjpegtools neon openal openjpeg rtmpdump x264 x265
+# Optional: brotli krb5 openldap
 
 name=gst-plugins-bad
 version=1.18.4
 release=1
-source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz
+	68858358544dd3b7e20663f731db22fd74a78a45.patch
+	a9fafd98b74fd184b178604095d35ac6105119b8.patch)
 
 build() {
+	patch -Np1 -d $name-$version -i $SRC/68858358544dd3b7e20663f731db22fd74a78a45.patch
+	patch -Np1 -d $name-$version -i $SRC/a9fafd98b74fd184b178604095d35ac6105119b8.patch
 	cd $name-$version
 
 	meson build \
