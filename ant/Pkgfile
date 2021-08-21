@@ -1,7 +1,7 @@
 # Description: Ant is a Java-based build tool.
 # URL: http://ant.apache.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: openjdk8
+# Depends on: openjdk16-jdk
 # Optional: python
 
 name=ant
@@ -17,7 +17,7 @@ build() {
 		src/script/runant.py
 
 	unset JAVA_HOME
-	export JAVA_HOME='/usr/lib/java/openjdk8'
+	export JAVA_HOME='/usr/lib/java/openjdk16-jdk'
 
 	./bootstrap.sh
 	bootstrap/bin/ant -Ddest=optional -f fetch.xml
