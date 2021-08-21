@@ -4,7 +4,7 @@
 # Depends on: gsettings-desktop-schemas gtk3 iso-codes libseccomp xorg-libxcomposite xorg-libxcursor xorg-libxinerama xkeyboard-config
 
 name=gnome-desktop
-version=40.3
+version=40.4
 release=1
 source=(https://download.gnome.org/sources/gnome-desktop/${version::2}/$name-$version.tar.xz)
 
@@ -13,6 +13,10 @@ build() {
     --prefix=/usr \
     --libexecdir=/usr/lib/$name \
     --buildtype=plain \
+    --wrap-mode nodownload \
+    --auto-features disabled \
+    -D b_lto=true \
+    -D b_pie=true \
     -D gnome_distributor="CRUX" \
     -D udev=enabled \
     -D gtk_doc=false \
