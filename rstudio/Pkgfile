@@ -1,38 +1,52 @@
 # Description: RStudio - an Interface for GNU R
 # URL: https://www.rstudio.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: ant boost hyphen libevent libsoci mathjax nodejs openjdk8 pandoc-bin qtwebengine r yaml-cpp yarn
+# Depends on: ant hyphen libevent libsoci mathjax npm openjdk8 pandoc-bin qtwebengine r yaml-cpp yarn
 
 name=rstudio
 version=1.4.1717
-release=2
+release=3
 
 source=(https://github.com/rstudio/rstudio/archive/v$version/$name-$version.tar.gz
   # https://src.fedoraproject.org/rpms/rstudio/tree/rawhide
   0000-unbundle-dependencies-common.patch 0003-fix-resources-path.patch
-  0004-use-system-node.patch)
-git=(https://github.com/rstudio/rstudio.git)
+  0002-fix-rstudio-exec-path.patch 0004-use-system-node.patch)
 
 build() {
-  ## if you want your git snapshot to be a particular version
-  ## uncomment below and change every occurance of $name-$version to $name
-  #git checkout v$version $name
-
-  export R_LIBS_USER="$PKG/usr/lib/R/library/"
-
-  (pushd $name-$version/dependencies/common
-  install -d pandoc node/10.19.0/bin
-  ln -sfT /usr/share/myspell/dicts dictionaries
-  ln -sfT /usr/share/mathjax mathjax-27
-  ln -sfT /usr/bin/ "pandoc/2.11.4"
-  ln -sfT /usr/bin/node node/10.19.0/bin/node
-  bash install-packages)
-
   patch -Np1 -d $name-$version -i $SRC/0000-unbundle-dependencies-common.patch
+  patch -Np1 -d $name-$version -i $SRC/0002-fix-rstudio-exec-path.patch
   patch -Np1 -d $name-$version -i $SRC/0003-fix-resources-path.patch
   patch -Np1 -d $name-$version -i $SRC/0004-use-system-node.patch
 
-  export PATH="/usr/lib/java/openjdk8/jre/bin/:${PATH}"
+  export R_LIBS_USER="$PKG/usr/lib/R/library/"
+  export JAVA_ANT_REWRITE_CLASSPATH="yes"
+  export JAVA_TOOL_OPTIONS="-Djava.util.prefs.userRoot=$SRC"
+
+  export JAVA_HOME=/usr/lib/java/openjdk8
+  export PATH="${JAVA_HOME}/bin/:${PATH}"
+
+  (pushd $name-$version/dependencies/common
+  install -d node/10.19.0/bin
+  ln -sfT /usr/share/myspell/dicts dictionaries
+  ln -sfT /usr/share/mathjax mathjax-27
+  ln -sfT /usr/bin/pandoc pandoc
+  ln -sfT /usr/bin/node node/10.19.0/bin/node
+  bash install-packages
+  yarn config set ignore-engines true
+  yarn install)
+
+  pushd $name-$version/src/gwt
+
+  pushd panmirror/src/editor
+  npm install --no-optional --legacy-peer-deps
+  popd
+
+  ant clean
+  ant build
+  popd
+
+  sed -i 's@gwt_build ALL@gwt_build@g' $name-$version/src/gwt/CMakeLists.txt
+
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr/lib/rstudio \
     -D CMAKE_BUILD_TYPE=Release \
@@ -45,6 +59,7 @@ build() {
     -D RSTUDIO_USE_SYSTEM_YAML_CPP=ON \
     -D Boost_NO_BOOST_CMAKE=ON \
     -D RSTUDIO_BUNDLE_QT=FALSE \
+    -D RSTUDIO_CRASHPAD_ENABLED=FALSE \
     -Wno-dev
 
   cmake --build build
