@@ -345,7 +345,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/hgext3rd/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/hgext3rd/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/hgext3rd/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/hgext3rd/__pycache__/__init__.cpython-39.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial-5.8.1-py3.9.egg-info
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial-5.9-py3.9.egg-info
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__modulepolicy__.py
@@ -382,6 +382,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/diffutil.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/dirstate.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/dirstateguard.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/dirstatemap.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/discovery.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/dispatch.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/__pycache__/encoding.cpython-39.pyc
@@ -559,6 +560,13 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/defaultrc/__pycac
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/diffutil.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dirstate.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dirstateguard.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dirstatemap.py
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/dirstateutils/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dirstateutils/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/dirstateutils/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dirstateutils/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dirstateutils/__pycache__/docket.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dirstateutils/docket.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/discovery.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dispatch.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/dummycert.pem
@@ -590,6 +598,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/__pycach
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/deprecated.txt
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/diffs.txt
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/environment.txt
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/evolution.txt
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/extensions.txt
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/filesets.txt
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/helptext/flags.txt
@@ -730,14 +739,22 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/concurrency_checker.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/constants.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/deltas.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/docket.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/flagutil.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/nodemap.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/randomaccessfile.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/revlogv0.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/rewrite.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/__pycache__/sidedata.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/concurrency_checker.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/constants.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/deltas.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/docket.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/flagutil.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/nodemap.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/randomaccessfile.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/revlogv0.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/rewrite.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revlogutils/sidedata.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revset.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/mercurial/revsetlang.py
