@@ -1,15 +1,16 @@
 # Description: Java project management and project comprehension tool
 # URL: https://maven.apache.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: openjdk8
+# Depends on: openjdk16-jdk
 
 name=maven
-version=3.8.1
+version=3.8.2
 release=1
 source=(https://www-eu.apache.org/dist/maven/maven-3/$version/source/apache-$name-$version-src.tar.gz)
 bin_source=(https://archive.apache.org/dist/maven/maven-3/$version/binaries/apache-$name-$version-bin.tar.gz)
-_bootstrapsum=b98a1905eb554d07427b2e5509ff09bd53e2f1dd7a0afa38384968b113abef02
+_bootstrapsum=8dae10b09feb7b8e4c079fc39a11f3296ab630fd9bc44ecea0fb288cec7770f7
 
+# bootstrap_mvn() {{{
 bootstrap_mvn() {
   # check if the binary is already available
   if [ ! -f "$PKGMK_SOURCE_DIR/apache-$name-$version-bin.tar.gz" ];
@@ -35,23 +36,27 @@ bootstrap_mvn() {
   export PATH="$SRC/binary/apache-$name-$version/bin:${PATH}"
   cd $SRC
 }
-
+# }}}
 build() {
+  export PATH="/usr/lib/java/openjdk16-jdk/bin:${PATH}"
+
   # if we don't have maven on our system already, bootstrap it
   if [ ! -e "/usr/bin/mvn" ]; then
     bootstrap_mvn
   fi
 
   cd apache-$name-$version
-  export PATH="/usr/lib/java/openjdk8/bin:${PATH}"
+
   mvn -DdistributionTargetDir=$PKG/usr \
     -Dproject.build.sourceEncoding=UTF-8 -e \
     -Dmaven.repo.local=$PKGMK_SOURCE_DIR/maven-repo \
     -DskipTests -Dmaven.test.skip=true \
     install
+
   find $PKG \( \
     -iname "*readme*" -o \
     -iname "*notice*" -o \
     -iname "*license*" -o \
     -iname "*licence*" \) -exec rm -fr '{}' \+
 }
+# vim: foldmethod=marker foldlevelstart=1
