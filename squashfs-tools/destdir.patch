@@ -1,0 +1,17 @@
+diff -urN squashfs-tools-4.5.orig/squashfs-tools/Makefile squashfs-tools-4.5/squashfs-tools/Makefile
+--- squashfs-tools-4.5.orig/squashfs-tools/Makefile	2021-07-22 20:11:24.000000000 +0000
++++ squashfs-tools-4.5/squashfs-tools/Makefile	2021-08-21 20:04:10.212179427 +0000
+@@ -403,8 +403,8 @@
+ 
+ .PHONY: install
+ install: mksquashfs unsquashfs
+-	mkdir -p $(INSTALL_DIR)
+-	cp mksquashfs $(INSTALL_DIR)
+-	cp unsquashfs $(INSTALL_DIR)
+-	ln -fs $(INSTALL_DIR)/unsquashfs $(INSTALL_DIR)/sqfscat
+-	ln -fs $(INSTALL_DIR)/mksquashfs $(INSTALL_DIR)/sqfstar
++	mkdir -p $(DESTDIR)/$(INSTALL_DIR)
++	cp mksquashfs $(DESTDIR)/$(INSTALL_DIR)
++	cp unsquashfs $(DESTDIR)/$(INSTALL_DIR)
++	ln -fs unsquashfs $(DESTDIR)/$(INSTALL_DIR)/sqfscat
++	ln -fs mksquashfs $(DESTDIR)/$(INSTALL_DIR)/sqfstar

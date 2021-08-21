@@ -4,12 +4,14 @@
 # Depends on: gzip lzo xz
 
 name=squashfs-tools
-version=4.4
+version=4.5
 release=1
-source=(https://github.com/plougher/$name/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/plougher/$name/archive/$version/$name-$version.tar.gz\
+	destdir.patch)
 
 build() {
 	cd $name-$version/$name
+	patch -p2 -i $SRC/destdir.patch
 	make GZIP_SUPPORT=1 LZO_SUPPORT=1 XZ_SUPPORT=1 EXTRA_CFLAGS="-fcommon"
-	make install INSTALL_DIR=$PKG/sbin
+	make install INSTALL_DIR=/sbin DESTDIR=$PKG
 }
