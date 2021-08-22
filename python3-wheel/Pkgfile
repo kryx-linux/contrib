@@ -4,12 +4,23 @@
 # Depends on: python3-setuptools
 
 name=python3-wheel
-version=0.36.2
+version=0.37.0
 release=1
-source=(# https://files.pythonhosted.org/packages/source/w/wheel/${name#*-}-$version.tar.gz
+source=(https://files.pythonhosted.org/packages/source/w/wheel/${name#*-}-$version.tar.gz
 	# bsdtar: Pathname can't be converted from UTF-8 to current locale.
 	# bsdtar: Error exit delayed from previous errors.
-	http://crux.ster.zone/downloads/$name/${name#*-}-$version.tar.gz)
+	#http://crux.ster.zone/downloads/$name/${name#*-}-$version.tar.gz)
+	)
+unpack_source() {
+	for file in ${source[@]}; do
+		case ${file##*/} in
+			${name#*-}-$version.tar.gz)
+				tar xfvz $(get_filename $file) -C $SRC ;;
+			*)
+				cp $(get_filename $file) $SRC ;;
+		esac
+	done
+}
 
 build() {
 	cd ${name#*-}-$version
