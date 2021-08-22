@@ -4,14 +4,13 @@
 # Depends on: libxslt cmake
 
 name=tidy
-version=5.7.47
-_commit=2c75207c5e9bb77bf7069ca091efef51e0af1d90
+version=5.8.0
 release=1
-source=(https://github.com/htacg/tidy-html5/archive/$_commit.tar.gz#/$name-$_commit.tar.gz)
+source=(https://github.com/htacg/tidy-html5/archive/$version/$name-$version.tar.gz)
 
 build() {
 	[[ -e /usr/bin/ninja ]] && PKGMK_TIDY+=' -G Ninja'
-	cmake -S tidy-html5-$_commit -B build $PKGMK_TIDY \
+	cmake -S tidy-html5-$version -B build $PKGMK_TIDY \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
