@@ -1,18 +1,18 @@
 # Description: Tools to create, alter and inspect Matroska files.
 # URL: https://mkvtoolnix.download/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: boost cmark docbook-xsl file flac libmatroska libpcre2 libvorbis ruby
-# Optional: qt5 hicolor-icon-theme
+# Depends on: boost cmark docbook-xsl file flac libmatroska libpcre2 libvorbis qt5 ruby
+# Optional: hicolor-icon-theme qt6
 
 name=mkvtoolnix
-version=58.0.0
+version=60.0.0
 release=1
 source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
 
-	./configure \
+	./configure $PKGMK_MKVTOOLNIX \
 		--prefix=/usr \
 		--disable-precompiled-headers \
 		--disable-update-check
