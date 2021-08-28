@@ -12,7 +12,12 @@ build() {
   meson setup gtkmm-$version build \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --buildtype=plain
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D build-demos=false \
+    -D build-tests=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
