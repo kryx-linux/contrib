@@ -1,31 +1,3 @@
-drwxr-xr-x	root/root	etc/
-drwxr-xr-x	root/root	etc/wireplumber/
--rw-r--r--	root/root	etc/wireplumber/bluetooth.conf
-drwxr-xr-x	root/root	etc/wireplumber/bluetooth.lua.d/
--rw-r--r--	root/root	etc/wireplumber/bluetooth.lua.d/00-functions.lua
--rw-r--r--	root/root	etc/wireplumber/bluetooth.lua.d/30-bluez-monitor.lua
--rw-r--r--	root/root	etc/wireplumber/bluetooth.lua.d/50-bluez-config.lua
--rw-r--r--	root/root	etc/wireplumber/bluetooth.lua.d/90-enable-all.lua
-drwxr-xr-x	root/root	etc/wireplumber/common/
--rw-r--r--	root/root	etc/wireplumber/common/00-functions.lua
--rw-r--r--	root/root	etc/wireplumber/main.conf
-drwxr-xr-x	root/root	etc/wireplumber/main.lua.d/
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/00-functions.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/20-default-access.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/30-alsa-monitor.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/30-v4l2-monitor.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/40-device-defaults.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/50-alsa-config.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/50-default-access-config.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/50-v4l2-config.lua
--rw-r--r--	root/root	etc/wireplumber/main.lua.d/90-enable-all.lua
--rw-r--r--	root/root	etc/wireplumber/policy.conf
-drwxr-xr-x	root/root	etc/wireplumber/policy.lua.d/
--rw-r--r--	root/root	etc/wireplumber/policy.lua.d/00-functions.lua
--rw-r--r--	root/root	etc/wireplumber/policy.lua.d/10-default-policy.lua
--rw-r--r--	root/root	etc/wireplumber/policy.lua.d/50-endpoints-config.lua
--rw-r--r--	root/root	etc/wireplumber/policy.lua.d/90-enable-all.lua
--rw-r--r--	root/root	etc/wireplumber/wireplumber.conf
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/wireplumber
@@ -46,6 +18,7 @@ drwxr-xr-x	root/root	usr/include/wireplumber-0.4/wp/
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/link.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/log.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/metadata.h
+-rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/module.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/node.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/object-interest.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/object-manager.h
@@ -67,8 +40,8 @@ drwxr-xr-x	root/root	usr/include/wireplumber-0.4/wp/
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/wpversion.h
 drwxr-xr-x	root/root	usr/lib/
 lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.4.so -> libwireplumber-0.4.so.0
-lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.4.so.0 -> libwireplumber-0.4.so.0.4.1
--rwxr-xr-x	root/root	usr/lib/libwireplumber-0.4.so.0.4.1
+lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.4.so.0 -> libwireplumber-0.4.so.0.4.2
+-rwxr-xr-x	root/root	usr/lib/libwireplumber-0.4.so.0.4.2
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/wireplumber-0.4.pc
 drwxr-xr-x	root/root	usr/lib/wireplumber-0.4/
@@ -76,6 +49,7 @@ drwxr-xr-x	root/root	usr/lib/wireplumber-0.4/
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-default-nodes.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-default-profile.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-device-activation.so
+-rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-file-monitor-api.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-lua-scripting.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-metadata.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-mixer-api.so
@@ -87,6 +61,31 @@ drwxr-xr-x	root/root	usr/lib/wireplumber-0.4/
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-si-standard-link.so
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/wireplumber/
+-rw-r--r--	root/root	usr/share/wireplumber/bluetooth.conf
+drwxr-xr-x	root/root	usr/share/wireplumber/bluetooth.lua.d/
+-rw-r--r--	root/root	usr/share/wireplumber/bluetooth.lua.d/00-functions.lua
+-rw-r--r--	root/root	usr/share/wireplumber/bluetooth.lua.d/30-bluez-monitor.lua
+-rw-r--r--	root/root	usr/share/wireplumber/bluetooth.lua.d/50-bluez-config.lua
+-rw-r--r--	root/root	usr/share/wireplumber/bluetooth.lua.d/90-enable-all.lua
+drwxr-xr-x	root/root	usr/share/wireplumber/common/
+-rw-r--r--	root/root	usr/share/wireplumber/common/00-functions.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.conf
+drwxr-xr-x	root/root	usr/share/wireplumber/main.lua.d/
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/00-functions.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/20-default-access.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/30-alsa-monitor.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/30-v4l2-monitor.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/40-device-defaults.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/50-alsa-config.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/50-default-access-config.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/50-v4l2-config.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/90-enable-all.lua
+-rw-r--r--	root/root	usr/share/wireplumber/policy.conf
+drwxr-xr-x	root/root	usr/share/wireplumber/policy.lua.d/
+-rw-r--r--	root/root	usr/share/wireplumber/policy.lua.d/00-functions.lua
+-rw-r--r--	root/root	usr/share/wireplumber/policy.lua.d/10-default-policy.lua
+-rw-r--r--	root/root	usr/share/wireplumber/policy.lua.d/50-endpoints-config.lua
+-rw-r--r--	root/root	usr/share/wireplumber/policy.lua.d/90-enable-all.lua
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/access/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/access/access-default.lua
@@ -95,6 +94,7 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/access/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/default-routes.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/intended-roles.lua
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/alsa-midi.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/alsa.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/v4l2.lua
@@ -105,3 +105,4 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/restore-stream.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/static-endpoints.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/suspend-node.lua
+-rw-r--r--	root/root	usr/share/wireplumber/wireplumber.conf
