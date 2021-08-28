@@ -1,0 +1,22 @@
+# Description: JSON for Modern C++
+# URL: https://github.com/nlohmann/json
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake
+# Optional: ninja
+
+name=nlohmann-json
+version=3.10.2
+release=1
+source=(https://github.com/nlohmann/json/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst ninja && PKGMK_NLJSON+=' -G Ninja'
+  cmake -S json-$version -B build $PKGMK_NLJSON \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
