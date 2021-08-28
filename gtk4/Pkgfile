@@ -1,21 +1,24 @@
 # Description: A multi-platform toolkit for creating graphical user interfaces, version 4
 # URL: https://www.gtk.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: adwaita-icon-theme docbook-xsl graphene sassc
-# Optional: cups colord wayland xorg-libxinerama vulkan
+# Depends on: adwaita-icon-theme docbook-xsl graphene sassc xorg-libxcursor xorg-libxinerama gst-plugins-bad
+# Optional: colord cups vulkan wayland
 
 name=gtk4
-version=4.2.1
+version=4.4.0
 release=1
 source=(https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/gtk-$version.tar.bz2)
 
 build() {
-  [[ -e '/usr/lib/pkgconfig/colord.pc' ]] && PKGMK_GTK4+=' -D colord=enabled'
-  [[ -e '/usr/lib/pkgconfig/wayland-server.pc' ]] || PKGMK_GTK4+=' -D wayland-backend=false'
+  prt-get isinst colord && PKGMK_GTK4+=' -D colord=enabled'
+  prt-get isinst wayland || PKGMK_GTK4+=' -D wayland-backend=false'
 
   meson setup gtk-$version build $PKGMK_GTK4 \
     --prefix=/usr \
     -D buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
     -D broadway-backend=true \
     -D man-pages=true \
     -D build-tests=false \
