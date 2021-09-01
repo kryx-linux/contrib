@@ -1,13 +1,14 @@
-# Description: PAM module to manage XDG Base Directories (sessions)
+# Description: PAM module to manage XDG Base Directories (see manual)
 # URL:         https://www.sdaoden.eu/code.html#s-toolbox
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=pam_xdg
-version=20210801
+version=0.8.0
 release=1
-source=($name.c $name.8 makefile)
+source=(https://ftp.sdaoden.eu/${name}-${version}.tar.gz)
 
 build () {
+   cd ${name}-${version}
    make install DESTDIR=$PKG
 }
 
