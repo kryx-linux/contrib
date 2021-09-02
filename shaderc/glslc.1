@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: glslc Manual
 .\"    Author: [see the "AUTHOR(S)" section]
-.\" Generator: Asciidoctor 2.0.13
-.\"      Date: 2021-04-22
+.\" Generator: Asciidoctor 2.0.16
+.\"      Date: 2021-06-22
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "`GLSLC`" "1" "2021-04-22" "\ \&" "\ \&"
+.TH "`GLSLC`" "1" "2021-06-22" "\ \&" "\ \&"
 .ie \n(.g .ds Aq \(aq
 .el       .ds Aq '
 .ss \n[.ss] 0
@@ -545,22 +545,12 @@ the following:
 \f(CRopengl4.5\fP: create SPIR\-V under OpenGL 4.5 semantics.
 .RE
 .sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.  sp -1
-.  IP \(bu 2.3
-.\}
-\f(CRopengl_compat\fP: create SPIR\-V under OpenGL semantics, including compatibility
-profile functions.
-.RE
-.sp
 Generated code uses SPIR\-V 1.0, except for code compiled for Vulkan 1.1, which uses
 SPIR\-V 1.3, and code compiled for Vulkan 1.5, which uses SPIR\-V 1.5.
 .sp
 If this option is not specified, a default of \f(CRvulkan1.0\fP is used.
+.sp
+Note: Support for OpenGL compatibility profile, \f(CRopengl_compat\fP, has been removed.
 .SS "\f(CR\-\-target\-spv=\fP"
 .sp
 \f(CR\-\-target\-spv=<value>\fP lets you specify the SPIR\-V version to be used by the generated
@@ -640,7 +630,7 @@ The \f(CR<value>\fP can be one of the following:
 .sp
 \f(CR\-x\fP lets you specify the language of the input shader files. Valid languages
 are \f(CRglsl\fP and \f(CRhlsl\fP.  If the file extension is \f(CRhlsl\fP then the default language
-is HLSL.  Otherwise the default is \(aqglsl\(aq.
+is HLSL.  Otherwise the default is \*(Aqglsl\*(Aq.
 .sp
 Note: HLSL compilation will use HLSL packing (offset) rules for variables
 that are vertex shader outputs, and inputs and outputs of both geometry
@@ -1403,8 +1393,8 @@ the \f(CRGL_GOOGLE_include_directive\fP extension.
 .sp
 The file argument to \f(CR#include\fP must be enclosed in double quotes.  It must be a
 relative path, using whatever path separator the OS supports.  However, the last
-path element \(em the name of the file itself \(em must not contain either \(aq/\(aq or
-\(aq\(rs\(aq, regardless of which path separator is used.  This will not be flagged as an
+path element \(em the name of the file itself \(em must not contain either \*(Aq/\*(Aq or
+\*(Aq\(rs\*(Aq, regardless of which path separator is used.  This will not be flagged as an
 error but will instead trigger undefined behavior.  For example, let\(cqs say there
 is a file named \f(CRf\(rsilename.vert\fP on a Unix OS.  It is not possible to craft a
 \f(CR#include\fP that includes that file.
