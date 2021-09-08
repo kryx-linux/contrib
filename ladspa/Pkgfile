@@ -1,18 +1,16 @@
 # Description: Linux Audio Developer's Simple Plugin API.
 # URL: http://www.ladspa.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Packager: Danny Rawlins, crux at romster dot me
-# Packager: Han Boetes, han at mijncomputer dot nl
-# Depends on:
+# Depends on: libsndfile
 
 name=ladspa
-version=1.15
+version=1.16
 release=1
-source=(https://ladspa.org/download/ladspa_sdk_$version.tgz fix-memleak-in-plugin-scanning.patch)
+source=(https://ladspa.org/download/ladspa_sdk_$version.tgz
+  fix-memleak-in-plugin-scanning.patch)
 
 build() {
   cd ladspa_sdk_$version
-  #patch -p2 -i $SRC/ladspa-$version.patch
   patch -Np0 -i ../fix-memleak-in-plugin-scanning.patch
   export \
     CFLAGS="${CFLAGS//-O?/-O3}" \
