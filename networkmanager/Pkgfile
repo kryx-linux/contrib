@@ -6,7 +6,7 @@
 
 name=networkmanager
 version=1.32.10
-release=1
+release=2
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
   networkmanager.rc NetworkManager.conf polkit.conf dhcp.conf org.freedesktop.NetworkManager.rules)
 
@@ -15,7 +15,6 @@ build() {
   prt-get isinst jansson || PKGMK_NM+=' -D ovs=false'
   prt-get isinst libpsl || PKGMK_NM+=' -D libpsl=false'
 
-  CXXFLAGS+=" -O2 -fPIC" \
   meson setup NetworkManager-$version build $PKGMK_NM \
     --prefix /usr \
     --sysconfdir /etc \
@@ -23,10 +22,9 @@ build() {
     --libexecdir /usr/lib/networkmanager \
     --buildtype=plain \
     --wrap-mode nodownload \
-    --auto-features disabled \
     -D b_lto=true \
     -D b_pie=true \
-    -D crypto=gnutls \
+    -D crypto=nss \
     -D dbus_conf_dir=/usr/share/dbus-1/system.d \
     -D udev_dir=/lib/udev \
     -D resolvconf=true \
