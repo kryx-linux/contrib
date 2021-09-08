@@ -6,11 +6,11 @@
 
 name=network-manager-applet
 version=1.24.0
-release=1
+release=2
 source=(https://gitlab.gnome.org/GNOME/network-manager-applet/-/archive/$version/network-manager-applet-$version.tar.bz2)
 
 build() {
-  prt-get isinst libappindicator-gtk3 && $PKGMK_NMA+=' -D appidicator=yes' || PKGMK_NMA+=' -D appindicator=no'
+  prt-get isinst libappindicator-gtk3 && PKGMK_NMA+=' -D appidicator=yes' || PKGMK_NMA+=' -D appindicator=no'
   meson setup $name-$version build $PKGMK_NMA \
     --prefix=/usr \
     --sysconfdir=/etc \
