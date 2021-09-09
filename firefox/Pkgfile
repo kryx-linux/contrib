@@ -5,14 +5,14 @@
 # Optional: sccache jack
 
 name=firefox
-version=91.0.2
+version=92.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
 	firefox.desktop
 	0001-Use-remoting-name-for-GDK-application-names.patch)
 
 build() {
-	cd firefox-$version
+	cd $name-$version
 
 	# https://bugzilla.mozilla.org/show_bug.cgi?id=1530052
 	patch -p1 -i $SRC/0001-Use-remoting-name-for-GDK-application-names.patch
@@ -26,9 +26,9 @@ build() {
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
 		export CCACHE_COMPILERCHECK="string:$OS_CCACHE_COMPILERCHECK"
 		PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
-	fi	
+	fi
 
-	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+	prt-get isinst sccache && export RUSTC_WRAPPER='/usr/bin/sccache'
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
@@ -36,13 +36,17 @@ cat <<- EOF > .mozconfig
 	mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-shared
 	unset MOZ_TELEMETRY_REPORTING
 	ac_add_options --prefix=/usr
-	ac_add_options --enable-default-toolkit=cairo-gtk3
 	ac_add_options --enable-application=browser
 	ac_add_options --with-system-jpeg
 	ac_add_options --with-system-zlib
 	ac_add_options --with-system-png
 	ac_add_options --with-system-nspr
 	ac_add_options --with-system-nss
+	#ac_add_options --with-system-harfbuzz
+	#ac_add_options --with-system-graphite2
+	ac_add_options --with-system-libevent
+	ac_add_options --with-system-libvpx
+	ac_add_options --with-system-webp
 	ac_add_options --enable-av1
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
@@ -51,11 +55,11 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-release
 	ac_add_options --enable-rust-simd
 	ac_add_options --disable-debug-symbols
-	ac_add_options --disable-pulseaudio
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
 	ac_add_options --enable-extensions=default,-gnomevfs
 	ac_add_options --enable-linker=lld
+	ac_add_options --enable-lto=thin
 	ac_add_options --disable-tests
 	ac_add_options --disable-debug
 	ac_add_options --disable-updater
@@ -64,13 +68,36 @@ cat <<- EOF > .mozconfig
 	ac_add_options --disable-elf-hack
 EOF
 
+	# audio
+	prt-get isinst alsa-lib && echo 'ac_add_options --enable-alsa' >> .mozconfig || echo 'ac_add_options --disable-alsa' >> .mozconfig
+	prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig || echo 'ac_add_options --disable-jack' >> .mozconfig
+	prt-get isinst pulseaudio && echo 'ac_add_options --enable-pulseaudio' >> .mozconfig || echo 'ac_add_options --disable-pulseaudio' >> .mozconfig
+
+	prt-get isinst wayland-protocols && \
+		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
+		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3' >> .mozconfig
+
 	[[ -e '/usr/bin/ccache' ]] && echo 'ac_add_options --enable-ccache' >> .mozconfig
 
 	export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
 	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
 	export MOZBUILD_STATE_PATH="$PKGMK_SOURCE_DIR/.mozbuild"
+
+	# Disable notification when build system has finished
 	export MOZ_NOSPAM=1
+
+	# Use system's Python environment
 	export MACH_USE_SYSTEM_PYTHON=1
+
+	# Show flags set at the beginning
+	echo "Current BINDGEN_CFLAGS:\t${BINDGEN_CFLAGS:-no value set}"
+	echo "Current CFLAGS:\t\t${CFLAGS:-no value set}"
+	echo "Current CXXFLAGS:\t\t${CXXFLAGS:-no value set}"
+	echo "Current LDFLAGS:\t\t${LDFLAGS:-no value set}"
+	echo "Current RUSTFLAGS:\t\t${RUSTFLAGS:-no value set}"
+
+	# python/mach/mach/mixin/process.py fails to detect SHELL
+	export SHELL='/usr/bin/bash'
 
 	./mach build
 	#./mach build toolkit/library/rust
