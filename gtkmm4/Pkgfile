@@ -4,7 +4,7 @@
 # Depends on: gtk4 pangomm-2.48
 
 name=gtkmm4
-version=4.2.0
+version=4.4.0
 release=1
 source=(https://gitlab.gnome.org/GNOME/gtkmm/-/archive/$version/gtkmm-$version.tar.bz2)
 
@@ -20,5 +20,6 @@ build() {
     -D build-documentation=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
   rm -rf $PKG/usr/share/{devhelp,doc}
 }
