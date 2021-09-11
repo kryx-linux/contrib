@@ -20,7 +20,10 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/api/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/api/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/api/__pycache__/egs.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/api/__pycache__/egs.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/api/__pycache__/lgd.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/api/__pycache__/lgd.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/api/egs.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/api/lgd.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/cli.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/core.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/downloader/
@@ -28,12 +31,17 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/downloader/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/downloader/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/__pycache__/__init__.cpython-39.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/__pycache__/manager.cpython-39.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/__pycache__/manager.cpython-39.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/__pycache__/workers.cpython-39.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/__pycache__/workers.cpython-39.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/manager.py
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/workers.py
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__pycache__/__init__.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__pycache__/__init__.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__pycache__/manager.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__pycache__/manager.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__pycache__/workers.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/__pycache__/workers.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/manager.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/downloader/mp/workers.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/lfs/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/lfs/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/lfs/__pycache__/
@@ -78,8 +86,12 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/__init__.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/cli.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/cli.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/config.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/config.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/custom_parser.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/custom_parser.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/env.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/env.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/game_workarounds.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/game_workarounds.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/lfs.cpython-39.opt-1.pyc
@@ -95,7 +107,9 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/wine_helpers.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__/wine_helpers.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/cli.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/config.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/custom_parser.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/env.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/game_workarounds.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/lfs.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/manifests.py
@@ -103,10 +117,10 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary/utils/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/savegame_helper.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/selective_dl.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary/utils/wine_helpers.py
-drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.6-py3.9.egg-info/
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.6-py3.9.egg-info/PKG-INFO
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.6-py3.9.egg-info/SOURCES.txt
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.6-py3.9.egg-info/dependency_links.txt
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.6-py3.9.egg-info/entry_points.txt
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.6-py3.9.egg-info/requires.txt
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.6-py3.9.egg-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.10-py3.9.egg-info/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.10-py3.9.egg-info/PKG-INFO
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.10-py3.9.egg-info/SOURCES.txt
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.10-py3.9.egg-info/dependency_links.txt
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.10-py3.9.egg-info/entry_points.txt
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.10-py3.9.egg-info/requires.txt
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/legendary_gl-0.20.10-py3.9.egg-info/top_level.txt
