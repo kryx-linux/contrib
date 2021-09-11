@@ -4,7 +4,7 @@
 # Depends on: meson ninja
 
 name=seatd
-version=0.5.0
+version=0.6.0
 release=1
 source=(https://github.com/kennylevinsen/seatd/archive/$version/$name-$version.tar.gz
   seatd.service)
@@ -13,6 +13,9 @@ build() {
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
     -D builtin=enabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
