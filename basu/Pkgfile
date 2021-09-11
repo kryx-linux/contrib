@@ -1,0 +1,22 @@
+# Description: The sd-bus library, extracted from systemd
+# URL: https://git.sr.ht/~emersion/basu
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: dbus meson ninja
+
+name=basu
+version=0.2.0
+release=1
+source=(https://github.com/emersion/basu/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  meson $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D system-bus-address='unix:path=/var/run/dbus/system_bus_socket' \
+    -D nobody-user=nobody
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
