@@ -4,7 +4,7 @@
 # Depends on: ffmpeg glfw3 lcms2 libepoxy shaderc vulkan-loader
 
 name=libplacebo
-version=4.157.0-rc1
+version=4.157.0
 release=1
 source=(https://code.videolan.org/videolan/libplacebo/-/archive/v$version/$name-v$version.tar.gz)
 
@@ -12,6 +12,9 @@ build() {
 	meson setup build $name-v$version \
 		--prefix=/usr \
 		--buildtype=plain \
+		--wrap-mode nodownload \
+		-D b_lto=true \
+		-D b_pie=true \
 		-D vulkan=enabled \
 		-D glslang=enabled \
 		-D shaderc=enabled \
