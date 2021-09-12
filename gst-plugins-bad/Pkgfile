@@ -5,15 +5,11 @@
 # Optional: brotli krb5 openldap
 
 name=gst-plugins-bad
-version=1.18.4
+version=1.18.5
 release=1
-source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz
-	68858358544dd3b7e20663f731db22fd74a78a45.patch
-	a9fafd98b74fd184b178604095d35ac6105119b8.patch)
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
-	patch -Np1 -d $name-$version -i $SRC/68858358544dd3b7e20663f731db22fd74a78a45.patch
-	patch -Np1 -d $name-$version -i $SRC/a9fafd98b74fd184b178604095d35ac6105119b8.patch
 	cd $name-$version
 
 	meson build \
