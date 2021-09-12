@@ -5,9 +5,9 @@
 
 name=inkscape
 version=1.1
-_pversion=21.06.1
-_psoversion=111
-release=6
+_pversion=21.09.0
+_psoversion=113
+release=7
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
 	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz)
 
@@ -26,6 +26,7 @@ poppler() {
 		-D ENABLE_QT5=OFF \
 		-D ENABLE_ZLIB=ON \
 		-D ENABLE_CMS=lcms2 \
+		-D WITH_INTERNAL_2GEOM=ON \
 		-D ENABLE_LIBOPENJPEG=none \
 		-D WITH_NSS3=OFF \
 		-Wno-dev
