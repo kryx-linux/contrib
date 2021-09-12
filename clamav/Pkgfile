@@ -1,22 +1,25 @@
 # Description: A GPL virus scanner
 # URL: http://www.clamav.net/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: bzip2 libgmp curl
+# Depends on: bzip2 libgmp curl cmake libxml2 libpcre2 json-c
 
 name=clamav
-version=0.103.3
+version=0.104.0
 release=1
 source=(http://www.clamav.net/downloads/production/$name-$version.tar.gz \
 	clamd.conf freshclam.conf clamd freshclam)
 
 build() {
-	CXXFLAGS="${CXXFLAGS} -std=gnu++98"
-	cd $name-$version
-	./configure --prefix=/usr \
-		--sysconfdir=/etc \
-		--enable-id-check \
-		--with-libcurl
-	make
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
+		-DAPP_CONFIG_DIRECTORY=/etc \
+		-DENABLE_MILTER=OFF \
+		-DENABLE_TESTS=OFF \
+		../$name-$version
+	cmake .
 	make DESTDIR=$PKG install
 	mkdir -p $PKG/var/run/$name $PKG/var/log/$name
 	chown -R $name:$name $PKG/var/run/$name $PKG/var/log/$name
@@ -26,5 +29,5 @@ build() {
 	install -o root -g root -m 0755 $SRC/{clamd,freshclam} \
 		$PKG/etc/rc.d/
 	install -o clamav -g clamav -m 0775 -d $PKG/usr/share/clamav
-	rm $PKG/etc/*.sample
+	rm -r $PKG/usr/share/doc $PKG/etc/*.sample
 }
