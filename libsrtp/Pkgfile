@@ -2,15 +2,13 @@
 # URL: https://github.com/cisco/libsrtp
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: meson ninja nss
-# Optional: clang
 
 name=libsrtp
 version=2.4.1
-release=1
+release=2
 source=(https://github.com/cisco/libsrtp/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  prt-get isinst clang && PKGMK_SRTP+=' -D fuzzer=enabled'
   meson setup $name-$version build $PKGMK_SRTP \
     --prefix=/usr \
     --buildtype=plain \
