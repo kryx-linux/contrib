@@ -1,6 +1,6 @@
---- master.cf.orig	2021-04-12 20:30:45.650213781 +0200
-+++ master.cf	2021-04-12 20:32:34.676882357 +0200
-@@ -10,6 +10,18 @@
+--- master.cf.orig	2021-09-15 16:42:06.307124019 +0200
++++ master.cf	2021-09-15 16:47:11.560462685 +0200
+@@ -10,6 +10,20 @@
  #               (yes)   (yes)   (no)    (never) (100)
  # ==========================================================================
  smtp      inet  n       -       n       -       -       smtpd
@@ -8,14 +8,16 @@
 +#TLS   -o smtpd_tls_security_level=may
 +#TLS   -o smtpd_sasl_auth_enable=no
 +#TLS submission inet n       -       n       -       -       smtpd
++#TLS  -o syslog_name=postfix/submission
 +#TLS  -o smtpd_tls_security_level=encrypt
 +#TLS  -o smtpd_sasl_auth_enable=yes
 +#TLS # This was SMTPS aka :465. I use it as that.
 +#TLS submissions     inet  n       -       n       -       -       smtpd
++#TLS  -o syslog_name=postfix/submissions
 +#TLS  -o smtpd_tls_wrappermode=yes
 +#TLS  -o smtpd_sasl_auth_enable=no
 +tlsproxy  unix  -       -       n       -       0       tlsproxy
-+   -o tlsproxy_tls_security_level=encrypt
++  -o tlsproxy_tls_security_level=encrypt
  #smtp      inet  n       -       n       -       1       postscreen
  #smtpd     pass  -       -       n       -       -       smtpd
  #dnsblog   unix  -       -       n       -       0       dnsblog

@@ -51,5 +51,8 @@ p_i upgrade-permissions
 
 /usr/sbin/postalias /etc/${name}/aliases
 
-/usr/sbin/postmap lmdb:/etc/${name}/sender_restrict
 /usr/sbin/postmap lmdb:/etc/${name}/relay_clientcerts
+
+/usr/sbin/postmap lmdb:/etc/${name}/client_restrict
+/usr/sbin/postmap lmdb:/etc/${name}/sender_access
+/usr/sbin/postmap lmdb:/etc/${name}/sender_restrict

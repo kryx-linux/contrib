@@ -61,12 +61,13 @@ relay_domains = $mynetworks,$transport_maps
 # Only localhost for mailing-lists etc.; maybe $mynetworks?
 smtpd_authorized_verp_clients = 127.0.0.1
 
-# Clients which are allowed to invoke commands
+# Clients connection checks
 smtpd_client_restrictions =
 #  permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#  permit_sasl_authenticated,
+#[RELAY]  permit_sasl_authenticated,
+   check_client_access lmdb:/etc/postfix-lmdb/client_restrict,
    reject_unknown_client_hostname,
    # in case you want reject DNS blacklists rather than greylist them
    # with gross, exchange sleep (maybe) and uncomment the lines below
@@ -89,10 +90,21 @@ smtpd_helo_restrictions =
 #  permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#  permit_sasl_authenticated,
+#[RELAY]  permit_sasl_authenticated,
    reject_invalid_helo_hostname,
    reject_non_fqdn_helo_hostname,
    reject_unknown_helo_hostname
+
+# MAIL FROM Checks
+smtpd_sender_restrictions =
+#  permit_inet_interfaces, OR
+   permit_mynetworks,
+#RELAY   permit_tls_clientcerts,
+#[RELAY]  permit_sasl_authenticated,
+    # Total no-goes database, eg: qq.com reject
+   check_sender_access lmdb:/etc/postfix-lmdb/sender_restrict,
+   reject_unknown_sender_domain,
+   permit
 
 smtpd_relay_before_recipient_restrictions = yes
 
@@ -120,20 +132,16 @@ smtpd_recipient_restrictions =
    reject_unknown_sender_domain,
    reject_unknown_reverse_client_hostname,
    reject_unknown_recipient_domain,
+   # (SMTPD_POLICY_README says
+   #   reject_unauth_destination is not needed here if the mail relay policy is
+   #   specified with smtpd_relay_restrictions (available with Postfix 2.10 and
+   #   later))
    reject_unauth_destination,
-   # better not reject_unverified_sender,
-   #check_policy_service inet:127.0.0.1:5525,
-   permit
-
-# MAIL FROM Checks
-smtpd_sender_restrictions =
-#  permit_inet_interfaces, OR
-   permit_mynetworks,
-#RELAY   permit_tls_clientcerts,
-#[RELAY]  permit_sasl_authenticated,
-    # Eg: qq.com reject
-   lmdb:/etc/postfix-lmdb/sender_restrict,
-   reject_unknown_sender_domain,
+   # better not: reject_unverified_sender,
+   # DB of MAIL FROM's without policy server checks (one way, or another)
+   check_sender_access lmdb:/etc/postfix-lmdb/sender_access,
+   #check_policy_service unix:/run/greylistd.socket,
+   ##check_policy_service inet:127.0.0.1:5525,
    permit
 
 # i would turn that on..
@@ -195,7 +203,8 @@ smtp_tls_security_level = may
 smtp_tls_fingerprint_digest = $smtpd_tls_fingerprint_digest
 smtp_tls_mandatory_protocols = $smtpd_tls_mandatory_protocols
 smtp_tls_protocols = $smtpd_tls_protocols
-#SMART When only relaying to smarthost, the next can be =high !?!
+#SMART When only relaying to smarthost, the next should be =high
+#SMART smtp_tls_mandatory_ciphers = high
 smtp_tls_mandatory_ciphers = $smtpd_tls_mandatory_ciphers
 smtp_tls_mandatory_exclude_ciphers = $smtpd_tls_mandatory_exclude_ciphers
 smtp_tls_ciphers = $smtpd_tls_ciphers

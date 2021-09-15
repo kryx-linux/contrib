@@ -1,0 +1,40 @@
+diff -ru postfix-3.6.2.orig/src/util/sys_compat.c postfix-3.6.2/src/util/sys_compat.c
+--- postfix-3.6.2.orig/src/util/sys_compat.c	2021-09-15 16:42:06.337124020 +0200
++++ postfix-3.6.2/src/util/sys_compat.c	2021-09-15 16:43:00.893791647 +0200
+@@ -286,7 +286,7 @@
+ 
+ /* closefrom() - closes all file descriptors from the given one up */
+ 
+-int     closefrom(int lowfd)
++void     closefrom(int lowfd)
+ {
+     int     fd_limit = open_limit(0);
+     int     fd;
+@@ -298,14 +298,12 @@
+      */
+     if (lowfd < 0) {
+ 	errno = EBADF;
+-	return (-1);
++	return;
+     }
+     if (fd_limit > 500)
+ 	fd_limit = 500;
+     for (fd = lowfd; fd < fd_limit; fd++)
+ 	(void) close(fd);
+-
+-    return (0);
+ }
+ 
+ #endif
+diff -ru postfix-3.6.2.orig/src/util/sys_defs.h postfix-3.6.2/src/util/sys_defs.h
+--- postfix-3.6.2.orig/src/util/sys_defs.h	2021-09-15 16:42:06.337124020 +0200
++++ postfix-3.6.2/src/util/sys_defs.h	2021-09-15 16:42:34.500457851 +0200
+@@ -1509,7 +1509,7 @@
+ #endif
+ 
+ #ifndef HAS_CLOSEFROM
+-extern int closefrom(int);
++extern void closefrom(int);
+ 
+ #endif
+ 
