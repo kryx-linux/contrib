@@ -1,0 +1,24 @@
+# Description: Ping, but with a graph
+# URL: https://github.com/orf/gping
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: rust
+
+name=gping
+version=1.2.5
+release=1
+source=(https://github.com/orf/gping/archive/refs/tags/$name-v$version.tar.gz)
+
+build() {
+	mv $name-$name-v$version $name-v$version
+	cd $name-v$version
+
+	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+	mkdir "$PKGMK_SOURCE_DIR/rust" || true
+	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+	cargo update
+	cargo fetch --locked
+	cargo build --release --frozen
+
+	install -D -m 0755 -t $PKG/usr/bin target/release/gping
+}
