@@ -5,7 +5,7 @@
 # Optional: calf mda-lv2 vamp-plugin-sdk zam-plugins
 
 name=easyeffects
-version=6.1.0
+version=6.1.1
 release=1
 source=(https://github.com/wwmm/easyeffects/archive/v$version/$name-$version.tar.gz)
 
@@ -14,6 +14,7 @@ build() {
     --prefix=/usr \
     --sysconfdir=/etc \
     --buildtype plain \
+    --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true
   meson compile -C build
