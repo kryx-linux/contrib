@@ -1,0 +1,21 @@
+# Description: Select a region in a Wayland compositor
+# URL: https://wayland.emersion.fr/slurp/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cairo libxkbcommon wayland-protocols
+# Optional: scdoc
+
+name=slurp
+version=1.3.2
+release=1
+source=(https://github.com/emersion/slurp/releases/download/v$version/slurp-$version.tar.gz)
+
+build() {
+  meson $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
