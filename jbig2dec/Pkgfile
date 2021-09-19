@@ -1,0 +1,22 @@
+# Description: Decoder implementation of JBIG2 image compression format
+# URL: http://www.jbig2dec.com/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: openjpeg2
+
+name=jbig2dec
+version=0.19
+release=1
+source=(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9533/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  ./autogen.sh \
+    --prefix=/usr \
+    --with-libpng=/usr/lib
+
+  make
+  make DESTDIR=$PKG install
+
+  install -m 644 memento.h $PKG/usr/include
+}
