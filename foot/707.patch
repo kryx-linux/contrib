@@ -1,0 +1,281 @@
+From 171d3657dab493faaef2fdb209bff1318aa82d2b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ekl=C3=B6f?= <daniel@ekloef.se>
+Date: Thu, 2 Sep 2021 14:55:26 +0200
+Subject: [PATCH 1/3] box-drawing: add braille characters
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Render braille ourselves, instead of using font glyphs. Decoding a
+braille character is easy enough; there are 256 codepoints,
+represented by an 8-bit integer (i.e. subtract the Unicode codepoint
+offset, 0x2800, and you’re left with an integer in the range 0-255).
+
+Each bit corresponds to a dot. The first 6 bits represent the upper 6
+dots, while the two last bits represent the fourth (and last) row of
+dots.
+
+The hard part is sizing the dots and the spacing between them.
+
+The aim is to have the spacing between the dots be the same size as
+the dots themselves, and to have the margins on each side be half the
+size of the dots.
+
+In a perfectly sized cell, this means two braille characters next to
+each other will be evenly spaced.
+
+This is however almost never the case. The layout logic currently:
+
+* Set dot size to either the width / 4, or height / 8, depending on
+  which one is smallest.
+
+* Horizontal spacing is initialized to the width / 4
+
+* Vertical spacing is initialized to the height / 8
+
+* Horizontal margins are initialized to the horizontal spacing / 2
+
+* Vertical margins are initialized to the vertical spacing / 2.
+
+Next, we calculate the number of “remaining” pixels. That is, if we
+add the left margin, two dots and the spacing between, how many pixels
+are left on the horizontal axis?
+
+These pixels are distributed in the following order (we “stop” as soon
+as we run out of pixels):
+
+* If the dot size is 0 (happens for very small font sizes), increase
+  it to 1.
+* If the margins are 0, increase them to 1.
+* If we have enough pixels (need at 2 horizontal and 4 vertical),
+  increase the dot size.
+* Increase spacing.
+* Increase margins.
+
+Closes #702
+---
+ box-drawing.c | 88 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ render.c      | 15 ++++++---
+ terminal.h    |  7 ++--
+ 4 files changed, 105 insertions(+), 7 deletions(-)
+
+diff --git a/box-drawing.c b/box-drawing.c
+index f246fd01..a1940392 100644
+--- a/box-drawing.c
++++ b/box-drawing.c
+@@ -1953,6 +1953,92 @@ draw_quadrant(struct buf *buf, wchar_t wc)
+         quad_lower_right(buf);
+ }
+ 
++static void
++draw_braille(struct buf *buf, wchar_t wc)
++{
++    int w = min(buf->width / 4, buf->height / 8);
++    int x_spacing = buf->width / 4;
++    int y_spacing = buf->height / 8;
++    int x_margin = x_spacing / 2;
++    int y_margin = y_spacing / 2;
++
++    int x_pix_left = buf->width - 2 * x_margin - x_spacing - 2 * w;
++    int y_pix_left = buf->height - 2 * y_margin - 3 * y_spacing - 4 * w;
++
++    LOG_DBG(
++        "braille: before adjusting: "
++        "cell: %dx%d, margin=%dx%d, spacing=%dx%d, width=%d, left=%dx%d",
++        buf->width, buf->height, x_margin, y_margin, x_spacing, y_spacing,
++        w, x_pix_left, y_pix_left);
++
++    /* First, try hard to ensure the DOT width is non-zero */
++    if (x_pix_left >= 2 && y_pix_left >= 4 && w == 0) {
++        w++;
++        x_pix_left -= 2;
++        y_pix_left -= 4;
++    }
++
++    /* Second, prefer a non-zero margin */
++    if (x_pix_left >= 2 && x_margin == 0) { x_margin = 1; x_pix_left -= 2; }
++    if (y_pix_left >= 2 && y_margin == 0) { y_margin = 1; y_pix_left -= 2; }
++
++    if (x_pix_left >= 2 && y_pix_left >= 4) {
++        w++;
++        x_pix_left -= 2;
++        y_pix_left -= 4;
++    }
++
++    if (x_pix_left >= 1) { x_spacing++; x_pix_left--; }
++    if (y_pix_left >= 3) { y_spacing++; y_pix_left -= 3; }
++
++    if (x_pix_left >= 2) { x_margin++; x_pix_left -= 2; }
++    if (y_pix_left >= 2) { y_margin++; y_pix_left -= 2; }
++
++    LOG_DBG(
++        "braille: after adjusting: "
++        "cell: %dx%d, margin=%dx%d, spacing=%dx%d, width=%d, left=%dx%d",
++        buf->width, buf->height, x_margin, y_margin, x_spacing, y_spacing,
++        w, x_pix_left, y_pix_left);
++
++    xassert(x_pix_left <= 1 || y_pix_left <= 1);
++    xassert(2 * x_margin + 2 * w + x_spacing <= buf->width);
++    xassert(2 * y_margin + 4 * w + 3 * y_spacing <= buf->height);
++
++    int x[2], y[4];
++    x[0] = x_margin;
++    x[1] = x_margin + w + x_spacing;
++    y[0] = y_margin;
++    y[1] = y[0] + w + y_spacing;
++    y[2] = y[1] + w + y_spacing;
++    y[3] = y[2] + w + y_spacing;
++
++    assert(wc >= 0x2800);
++    assert(wc <= 0x28ff);
++    uint8_t sym = wc - 0x2800;
++
++    /* Left side */
++    if (sym & 1)
++        rect(x[0], y[0], x[0] + w, y[0] + w);
++    if (sym & 2)
++        rect(x[0], y[1], x[0] + w, y[1] + w);
++    if (sym & 4)
++        rect(x[0], y[2], x[0] + w, y[2] + w);
++
++    /* Right side */
++    if (sym & 8)
++        rect(x[1], y[0], x[1] + w, y[0] + w);
++    if (sym & 16)
++        rect(x[1], y[1], x[1] + w, y[1] + w);
++    if (sym & 32)
++        rect(x[1], y[2], x[1] + w, y[2] + w);
++
++    /* 8-dot patterns */
++    if (sym & 64)
++        rect(x[0], y[3], x[0] + w, y[3] + w);
++    if (sym & 128)
++        rect(x[1], y[3], x[1] + w, y[3] + w);
++}
++
+ static void
+ sextant_upper_left(struct buf *buf)
+ {
+@@ -2653,6 +2739,8 @@ draw_glyph(struct buf *buf, wchar_t wc)
+     case 0x2595: draw_right_one_eighth_block(buf); break;
+     case 0x2596 ... 0x259f: draw_quadrant(buf, wc); break;
+ 
++    case 0x2800 ... 0x28ff: draw_braille(buf, wc); break;
++
+     case 0x1fb00 ... 0x1fb3b: draw_sextant(buf, wc); break;
+ 
+     case 0x1fb3c ... 0x1fb40:
+diff --git a/render.c b/render.c
+index cfb6f0bb..1cbff10d 100644
+--- a/render.c
++++ b/render.c
+@@ -515,6 +515,9 @@ render_cell(struct terminal *term, pixman_image_t *pix,
+                 /* Classic box drawings */
+                 (base >= 0x2500 && base <= 0x259f) ||
+ 
++                /* Braille */
++                (base >= 0x2800 && base <= 0x28ff) ||
++
+                 /*
+                  * Unicode 13 "Symbols for Legacy Computing"
+                  * sub-ranges below.
+@@ -531,9 +534,12 @@ render_cell(struct terminal *term, pixman_image_t *pix,
+             /* Box drawing characters */
+             size_t idx = base >= 0x1fb00
+                 ? (base >= 0x1fb9a
+-                   ? base - 0x1fb9a + 300
+-                   : base - 0x1fb00 + 160)
+-                : base - 0x2500;
++                   ? base - 0x1fb9a + 556
++                   : base - 0x1fb00 + 416)
++                : (base >= 0x2800
++                   ? base - 0x2800 + 160
++                   : base - 0x2500);
++
+             xassert(idx < ALEN(term->box_drawing));
+ 
+             if (likely(term->box_drawing[idx] != NULL))
+@@ -541,7 +547,8 @@ render_cell(struct terminal *term, pixman_image_t *pix,
+             else {
+                 mtx_lock(&term->render.workers.lock);
+ 
+-                /* Parallel thread may have instantiated it while we took the lock */
++                /* Other thread may have instantiated it while we
++                 * aquired the lock */
+                 if (term->box_drawing[idx] == NULL)
+                     term->box_drawing[idx] = box_drawing(term, base);
+                 mtx_unlock(&term->render.workers.lock);
+diff --git a/terminal.h b/terminal.h
+index df253434..7196224b 100644
+--- a/terminal.h
++++ b/terminal.h
+@@ -335,10 +335,11 @@ struct terminal {
+ 
+     /*
+      *   0-159: U+02500+0259F
+-     * 160-299: U+1FB00-1FB8B
+-     * 300-301: U+1FB9A-1FB9B
++     * 160-415: U+02800-028FF
++     * 416-555: U+1FB00-1FB8B
++     * 556-557: U+1FB9A-1FB9B
+      */
+-    struct fcft_glyph *box_drawing[302];
++    struct fcft_glyph *box_drawing[558];
+ 
+     bool is_sending_paste_data;
+     ptmx_buffer_list_t ptmx_buffers;
+-- 
+2.30.2
+
+
+From fb28152da1fa3d89dc9ad18f657bb5a7c58a4f3b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ekl=C3=B6f?= <daniel@ekloef.se>
+Date: Fri, 3 Sep 2021 21:38:08 +0200
+Subject: [PATCH 2/3] render: codespell: aquire -> acquire
+
+---
+ render.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/render.c b/render.c
+index 1cbff10d..684c86e4 100644
+--- a/render.c
++++ b/render.c
+@@ -548,7 +548,7 @@ render_cell(struct terminal *term, pixman_image_t *pix,
+                 mtx_lock(&term->render.workers.lock);
+ 
+                 /* Other thread may have instantiated it while we
+-                 * aquired the lock */
++                 * acquired the lock */
+                 if (term->box_drawing[idx] == NULL)
+                     term->box_drawing[idx] = box_drawing(term, base);
+                 mtx_unlock(&term->render.workers.lock);
+-- 
+2.30.2
+
+
+From 5d7efd22e8afc97e3eba812e7e5a007b6eaca67a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ekl=C3=B6f?= <daniel@ekloef.se>
+Date: Sun, 5 Sep 2021 10:05:35 +0200
+Subject: [PATCH 3/3] box-drawing: NOINLINE braille
+
+---
+ box-drawing.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/box-drawing.c b/box-drawing.c
+index a1940392..1c694627 100644
+--- a/box-drawing.c
++++ b/box-drawing.c
+@@ -1953,7 +1953,7 @@ draw_quadrant(struct buf *buf, wchar_t wc)
+         quad_lower_right(buf);
+ }
+ 
+-static void
++static void NOINLINE
+ draw_braille(struct buf *buf, wchar_t wc)
+ {
+     int w = min(buf->width / 4, buf->height / 8);
+-- 
+2.30.2
+
