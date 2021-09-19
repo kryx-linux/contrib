@@ -1,0 +1,17 @@
+# Description: Terminal graphics for the 21st century
+# URL: https://github.com/hpjansson/chafa
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: imagemagick libraqm libxml2 libzip
+
+name=chafa
+version=1.8.0
+release=1
+source=(https://github.com/hpjansson/chafa/releases/download/$version/chafa-$version.tar.xz)
+
+build() {
+  cd $name-$version
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
+}
