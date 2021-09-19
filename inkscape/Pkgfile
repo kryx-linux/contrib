@@ -26,7 +26,6 @@ poppler() {
 		-D ENABLE_QT5=OFF \
 		-D ENABLE_ZLIB=ON \
 		-D ENABLE_CMS=lcms2 \
-		-D WITH_INTERNAL_2GEOM=ON \
 		-D ENABLE_LIBOPENJPEG=none \
 		-D WITH_NSS3=OFF \
 		-Wno-dev
@@ -52,6 +51,7 @@ build() {
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D WITH_INTERNAL_2GEOM=ON \
 		-Wno-dev
 
 	cmake --build build
