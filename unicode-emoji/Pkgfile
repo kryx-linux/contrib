@@ -1,0 +1,22 @@
+# Description: Unicode Emoji Data Files
+# URL: https://www.unicode.org/emoji/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: unicode-character-database
+
+name=unicode-emoji
+version=13.1
+release=1
+source=(http://www.unicode.org/Public/emoji/$version/emoji-sequences.txt
+  http://www.unicode.org/Public/emoji/$version/emoji-test.txt
+  http://www.unicode.org/Public/emoji/$version/emoji-zwj-sequences.txt)
+renames=(emoji-sequences-$version.txt emoji-test-$version.txt emoji-zwj-sequences-$version.txt)
+
+build() {
+  cp $PKGMK_SOURCE_DIR/emoji-sequences-$version.txt .
+  cp $PKGMK_SOURCE_DIR/emoji-test-$version.txt .
+  cp $PKGMK_SOURCE_DIR/emoji-zwj-sequences-$version.txt .
+
+  for _f in sequences test zwj-sequences; do
+    install -Dm644 emoji-$_f-$version.txt "$PKG/usr/share/unicode/emoji/emoji-$_f.txt"
+  done
+}
