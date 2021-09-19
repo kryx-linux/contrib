@@ -1,26 +1,28 @@
 # Description: C subroutine library for computing discrete Fourier transform.
-# URL: http://www.fftw.org/
+# URL: https://www.fftw.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: gcc-fortran
 
 name=fftw
-version=3.3.9
+version=3.3.10
 release=1
-source=(http://www.fftw.org/$name-$version.tar.gz)
+source=(https://www.fftw.org/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
+
+	# libtool fails to link with ccache in the path
+	[ -e '/usr/bin/ccache' ] && PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 
 	local config="
 F77=gfortran
 --prefix=/usr
 --enable-threads
---with-gnu-ld
 --enable-shared
 --enable-openmp"
 
 	# use upstream default CFLAGS while keeping our -march/-mtune
-	CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
+	CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math -fPIC -mavx2"
 
 	# compiling single precision library
 	./configure \
