@@ -1,0 +1,20 @@
+# Description: dconf Editor
+# URL: https://wiki.gnome.org/Projects/dconf
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: dconf gtk3 meson vala
+
+name=dconf-editor
+version=3.38.3
+release=1
+source=(https://gitlab.gnome.org/GNOME/dconf-editor/-/archive/$version/dconf-editor-$version.tar.bz2)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
