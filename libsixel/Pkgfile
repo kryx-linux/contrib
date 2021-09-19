@@ -1,0 +1,18 @@
+# Description: A SIXEL encoder/decoder implementation derived from kmiya's sixel
+# URL: https://github.com/saitoha/libsixel
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=libsixel
+version=1.8.6
+release=1
+source=(https://github.com/saitoha/libsixel/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  PYTHON=/usr/bin/python3 \
+  ./configure --prefix=/usr \
+    --enable-python
+  make
+  make DESTDIR=$PKG install
+}
