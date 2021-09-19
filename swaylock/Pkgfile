@@ -1,0 +1,27 @@
+# Description: Screen locker for Wayland
+# URL: https://github.com/swaywm/swaylock
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cairo libxkbcommon wayland-protocols
+# Optional: gdk-pixbuf scdoc
+
+name=swaylock
+version=1.5
+release=1
+source=(https://github.com/swaywm/swaylock/archive/$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst bash-completion || PKGMK_SWAYLOCK+=' -D bash-completions=false'
+  prt-get isinst zsh || PKGMK_SWAYLOCK+=' -D zsh-completions=false'
+
+  CFLAGS+=' -Wno-error' \
+  meson setup $name-$version build $PKGMK_SWAYLOCK \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D pam=enabled \
+    -D fish-completions=false
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
