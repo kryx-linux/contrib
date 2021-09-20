@@ -1,8 +1,8 @@
 # Description: A modular Wayland compositor library.
 # URL: https://github.com/swaywm/wlroots
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: libcap libinput libxkbcommon mesa seatd wayland-protocols xorg-libpixman xorg-xcb-util-error xorg-xcb-util-image xorg-xcb-util-wm
-# Optional: xorg-libxcomposite xorg-server xorg-xcb-util-renderutil xorg-xinput
+# Depends on: libcap libinput libxkbcommon mesa seatd wayland-protocols xorg-libpixman xorg-xcb-util-image xorg-xcb-util-wm
+# Optional:  xorg-libxcomposite xorg-server xorg-xcb-util-error xorg-xcb-util-renderutil xorg-xinput
 
 name=wlroots
 version=0.14.1
@@ -12,18 +12,14 @@ source=(https://github.com/swaywm/wlroots/archive/$version/$name-$version.tar.gz
 build() {
   # use xwayland support in case that xorg-server was compiled with wayland around
   [[ -e /usr/bin/Xwayland ]] && PKGMK_WLROOTS+=' -D xwayland=enabled' || PKGMK_WLROOTS+=' -D xwayland=disabled'
-  prt-get isinst xorg-server && PKGMK_WLROOTS+=' -D x11-backend=enabled' || PKGMK_WLROOTS+=' -D x11-backend=disabled'
-  prt-get isinst xorg-xcb-util-renderutil && PKGMK_WLROOTS+=' -D x11-backend=enabled' || PKGMK_WLROOTS+=' -Dx11-backend=disabled'
+  prt-get isinst xorg-server xorg-xcb-util-renderutil && PKGMK_WLROOTS+=' -D x11-backend=enabled' || PKGMK_WLROOTS+=' -D x11-backend=disabled'
 
   meson setup $name-$version build $PKGMK_WLROOTS \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
-    -D b_pie=true \
-    -D xcb-errors=enabled \
-    -D xcb-icccm=enabled \
-    -D libseat=enabled
+    -D b_pie=true
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
