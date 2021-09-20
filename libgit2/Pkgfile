@@ -1,12 +1,12 @@
 # Description: A linkable library for Git
-# URL: https://libgit2.github.com/
+# URL: https://libgit2.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: cmake http-parser
 
 name=libgit2
 version=1.2.0
 release=1
-source=(https://github.com/$name/$name/archive/v$version.tar.gz)
+source=(https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst ninja && PKGMK_LIBGIT2+=' -G Ninja'
