@@ -1,0 +1,19 @@
+# Description: LaTeX semantic checker
+# URL: https://www.nongnu.org/chktex/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libpcre texlive
+
+name=chktex
+version=1.7.6
+release=1
+source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz
+  encoding.patch)
+
+build() {
+  cd $name-$version
+  patch -Np0 -i $SRC/encoding.patch
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
+}
