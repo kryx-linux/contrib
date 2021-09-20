@@ -4,7 +4,7 @@
 # Depends on:  boost eigen3 exiv2 fftw gsl karchive kcompletion kcoreaddons kguiaddons ki18n kitemmodels kitemviews kwindowsystem libbsd openexr quazip5
 
 name=krita
-version=4.4.5
+version=4.4.8
 release=1
 source=(https://download.kde.org/stable/$name/${version:0:5}/$name-$version.tar.gz \
 	fix-build-with-openexr3.patch \
@@ -13,8 +13,8 @@ source=(https://download.kde.org/stable/$name/${version:0:5}/$name-$version.tar.
 build() {
 	rm -r $name-$version/po/*
 
-	patch -p1 -d $name-$version -i $SRC/fix-build-with-boost-1.75.patch
 	patch -p1 -d $name-$version -i $SRC/fix-build-with-openexr3.patch
+	patch -p1 -d $name-$version -i $SRC/fix-build-with-boost-1.75.patch
 
 	cmake -S$name-$version -Bbuild      \
 		-DCMAKE_INSTALL_PREFIX=/usr \
