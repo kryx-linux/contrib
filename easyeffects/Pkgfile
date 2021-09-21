@@ -2,10 +2,10 @@
 # URL: https://github.com/wwmm/easyeffects
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: appstream-glib gtkmm4 libbs2b libebur128 lilv nlohmann-json pipewire rnnoise rubberband speexdsp zita-convolver
-# Optional: calf mda-lv2 vamp-plugin-sdk zam-plugins
+# Optional: calf desktop-file-utils mda-lv2 vamp-plugin-sdk zam-plugins
 
 name=easyeffects
-version=6.1.1
+version=6.1.2
 release=1
 source=(https://github.com/wwmm/easyeffects/archive/v$version/$name-$version.tar.gz)
 
@@ -19,5 +19,6 @@ build() {
     -D b_pie=true
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
   rm -fr $PKG/usr/share/{locale,help}
 }
