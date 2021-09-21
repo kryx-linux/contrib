@@ -9,6 +9,7 @@ release=1
 source=(https://gitlab.gnome.org/GNOME/glibmm/-/archive/$version/glibmm-$version.tar.bz2)
 
 build() {
+  CC="gcc" CXX="g++" \
   meson setup glibmm-$version build \
     --prefix=/usr \
     --buildtype=plain \
@@ -17,6 +18,7 @@ build() {
     -D b_lto=true \
     -D b_pie=true \
     -D maintainer-mode=true \
+    -D build-examples=false \
     -D build-documentation=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
