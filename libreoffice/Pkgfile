@@ -5,7 +5,7 @@
 # Optional: cups kio openldap qt5 valgrind
 
 name=libreoffice
-version=7.2.1.2
+version=7.2.2.1
 release=1
 pdfiumversion=4500
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
@@ -16,8 +16,7 @@ source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/
   #https://dev-www.libreoffice.org/src/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz
   https://dev-www.libreoffice.org/src/pdfium-$pdfiumversion.tar.bz2
   #https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
-  makefile.in.patch pdfium-use-system-libopenjpeg.diff
-  bison.patch)
+  makefile.in.patch pdfium-use-system-libopenjpeg.diff)
 
 # unpack_source() {{{
 unpack_source() {
@@ -51,7 +50,6 @@ build() {
   cd $name-$version
 
   patch -Np1 -i $SRC/makefile.in.patch
-  patch -Np1 -i $SRC/bison.patch
 
   # https://sources.debian.org/patches/libreoffice/1:7.1.4%7Erc1-1/pdfium-use-system-libopenjpeg.diff/
   patch -Np1 -i $SRC/pdfium-use-system-libopenjpeg.diff
