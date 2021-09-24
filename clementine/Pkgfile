@@ -4,9 +4,10 @@
 # Depends on: boost crypto++ glew gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qt5
 
 name=clementine
-version=1.4.0rc1-484
+version=1.4.0rc1-733
+_tag=$version-g679a0ee54
 release=1
-source=(https://github.com/clementine-player/Clementine/archive/$version-g2d8a56b7c/$name-$version.tar.gz
+source=(https://github.com/clementine-player/Clementine/archive/$_tag/$name-$version.tar.gz
 	clementine-gcc6.patch)
 
 build() {
@@ -15,7 +16,10 @@ build() {
 	# calling ccache and CCACHE_PREFIX
 	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 
-	cmake -S Clementine-$version-g2d8a56b7c -B build -G Ninja \
+	# -Wl,--as-needed breaks linking
+	LDFLAGS=$(echo ${LDFLAGS} | awk -v RS=' ' -v ORS=' ' '/-Wl,--as-needed/ {next} {print}')
+
+	cmake -S Clementine-$_tag -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
