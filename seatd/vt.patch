@@ -1,0 +1,186 @@
+From 2eee9aa445e3f9dc6a7ca115489f87b10f60b9ba Mon Sep 17 00:00:00 2001
+From: Kenny Levinsen <kl@kl.wtf>
+Date: Mon, 20 Sep 2021 23:43:10 +0200
+Subject: [PATCH] seatd: Implement ping request to wake up later
+
+When device open or close messages are sent to seatd, libseat must read
+messages from the socket until it sees the associated response message.
+This means that it may drain enable/disable seat events from the socket,
+queueing them internally for deferred processing.
+
+As the socket is drained, the caller will not wake from a poll and have
+no reason to dispatch libseat. To ensure that these messages would not
+be left in the queue, 6fa82930d0c5660eea3102989c765dc864514e36 made it
+so that open/close calls would execute all queued events just before
+returning.
+
+Unfortunately, this had the side-effect of having events fire from the
+stack of libseat_open_device or libseat_close_device, which we now see
+cause problems in compositors. Specifically, an issue has been observed
+where libinput end up calling libseat_close_device, which in turn
+dispatch a disable seat event that calls libinput_suspend. libinput does
+not like this.
+
+Instead, remove the execution from libseat_open_device and
+libseat_close_device, and instead make a "ping" request to seatd if
+events have been queued. The response to this will wake us up and ensure
+that dispatch is called.
+---
+ include/protocol.h      |  2 ++
+ libseat/backend/seatd.c | 45 +++++++++++++++++++++++++++++++++++++----
+ seatd/client.c          | 22 ++++++++++++++++++++
+ 3 files changed, 65 insertions(+), 4 deletions(-)
+
+diff --git a/include/protocol.h b/include/protocol.h
+index b3361ba..cb994fc 100644
+--- a/include/protocol.h
++++ b/include/protocol.h
+@@ -15,6 +15,7 @@
+ #define CLIENT_CLOSE_DEVICE   CLIENT_EVENT(4)
+ #define CLIENT_DISABLE_SEAT   CLIENT_EVENT(5)
+ #define CLIENT_SWITCH_SESSION CLIENT_EVENT(6)
++#define CLIENT_PING	      CLIENT_EVENT(7)
+ 
+ #define SERVER_SEAT_OPENED   SERVER_EVENT(1)
+ #define SERVER_SEAT_CLOSED   SERVER_EVENT(2)
+@@ -22,6 +23,7 @@
+ #define SERVER_DEVICE_CLOSED SERVER_EVENT(4)
+ #define SERVER_DISABLE_SEAT  SERVER_EVENT(5)
+ #define SERVER_ENABLE_SEAT   SERVER_EVENT(6)
++#define SERVER_PONG	     SERVER_EVENT(7)
+ #define SERVER_ERROR	     SERVER_EVENT(0x7FFF)
+ 
+ #include <stdint.h>
+diff --git a/libseat/backend/seatd.c b/libseat/backend/seatd.c
+index 85df9f5..26308d1 100644
+--- a/libseat/backend/seatd.c
++++ b/libseat/backend/seatd.c
+@@ -36,6 +36,7 @@ struct backend_seatd {
+ 	const struct libseat_seat_listener *seat_listener;
+ 	void *seat_listener_data;
+ 	struct linked_list pending_events;
++	bool awaiting_pong;
+ 	bool error;
+ 
+ 	char seat_name[MAX_SEAT_LEN];
+@@ -243,6 +244,12 @@ static int dispatch_pending(struct backend_seatd *backend, int *opcode) {
+ 	while (connection_get(&backend->connection, &header, sizeof header) != -1) {
+ 		packets++;
+ 		switch (header.opcode) {
++		case SERVER_PONG:
++			// We care about whether or not the answer has been
++			// read from the connection, so handle it here instead
++			// of pushing it to the pending event list.
++			backend->awaiting_pong = false;
++			break;
+ 		case SERVER_DISABLE_SEAT:
+ 		case SERVER_ENABLE_SEAT:
+ 			if (queue_event(backend, header.opcode) == -1) {
+@@ -450,6 +457,36 @@ static const char *seat_name(struct libseat *base) {
+ 	return backend->seat_name;
+ }
+ 
++static int send_ping(struct backend_seatd *backend) {
++	struct proto_header header = {
++		.opcode = CLIENT_PING,
++		.size = 0,
++	};
++	if (conn_put(backend, &header, sizeof header) == -1 || conn_flush(backend) == -1) {
++		return -1;
++	}
++	return 0;
++}
++
++static void check_pending_events(struct backend_seatd *backend) {
++	if (linked_list_empty(&backend->pending_events)) {
++		return;
++	}
++	if (backend->awaiting_pong) {
++		return;
++	}
++
++	// We have events pending execution, so a dispatch is required.
++	// However, we likely already drained our socket, so there will not be
++	// anything to read. Instead, send a ping request to seatd, so that the
++	// user will be woken up by its response.
++	if (send_ping(backend) == -1) {
++		log_errorf("Could not send ping request: %s", strerror(errno));
++		return;
++	}
++	backend->awaiting_pong = true;
++}
++
+ static int open_device(struct libseat *base, const char *path, int *fd) {
+ 	struct backend_seatd *backend = backend_seatd_from_libseat_backend(base);
+ 	if (backend->error) {
+@@ -481,11 +518,11 @@ static int open_device(struct libseat *base, const char *path, int *fd) {
+ 		goto error;
+ 	}
+ 
+-	execute_events(backend);
++	check_pending_events(backend);
+ 	return rmsg.device_id;
+ 
+ error:
+-	execute_events(backend);
++	check_pending_events(backend);
+ 	return -1;
+ }
+ 
+@@ -516,11 +553,11 @@ static int close_device(struct libseat *base, int device_id) {
+ 		goto error;
+ 	}
+ 
+-	execute_events(backend);
++	check_pending_events(backend);
+ 	return 0;
+ 
+ error:
+-	execute_events(backend);
++	check_pending_events(backend);
+ 	return -1;
+ }
+ 
+diff --git a/seatd/client.c b/seatd/client.c
+index 1bfe94a..220c5d3 100644
+--- a/seatd/client.c
++++ b/seatd/client.c
+@@ -309,6 +309,20 @@ error:
+ 	return client_send_error(client, errno);
+ }
+ 
++static int handle_ping(struct client *client) {
++	struct proto_header header = {
++		.opcode = SERVER_PONG,
++		.size = 0,
++	};
++
++	if (connection_put(&client->connection, &header, sizeof header) == -1) {
++		log_errorf("Could not write response: %s", strerror(errno));
++		return -1;
++	}
++
++	return 0;
++}
++
+ static int client_handle_opcode(struct client *client, uint16_t opcode, size_t size) {
+ 	int res = 0;
+ 	switch (opcode) {
+@@ -372,6 +386,14 @@ static int client_handle_opcode(struct client *client, uint16_t opcode, size_t s
+ 		res = handle_disable_seat(client);
+ 		break;
+ 	}
++	case CLIENT_PING: {
++		if (size != 0) {
++			log_error("Protocol error: invalid ping message");
++			return -1;
++		}
++		res = handle_ping(client);
++		break;
++	}
+ 	default:
+ 		log_errorf("Protocol error: unknown opcode: %d", opcode);
+ 		res = -1;
+-- 
+2.32.0
+

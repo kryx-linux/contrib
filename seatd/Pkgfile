@@ -5,11 +5,14 @@
 
 name=seatd
 version=0.6.2
-release=1
+release=2
 source=(https://github.com/kennylevinsen/seatd/archive/$version/$name-$version.tar.gz
-  seatd.service)
+  seatd.service
+  vt.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/vt.patch
+
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
