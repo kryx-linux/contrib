@@ -5,7 +5,7 @@
 # Optional: sccache
 
 name=thunderbird
-version=91.1.1
+version=91.1.2
 release=1
 source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
 	$name.desktop)
@@ -24,18 +24,20 @@ build() {
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
 cat <<- EOF > .mozconfig
-	ac_add_options --enable-application=comm/mail
 	ac_add_options --prefix=/usr
-	ac_add_options --enable-default-toolkit=cairo-gtk3
+	ac_add_options --enable-application=comm/mail
 	ac_add_options --with-system-jpeg
-	ac_add_options --with-system-libevent
 	ac_add_options --with-system-zlib
 	ac_add_options --with-system-png
 	ac_add_options --with-system-nspr
 	ac_add_options --with-system-nss
+	ac_add_options --with-system-libevent
+	ac_add_options --with-system-libvpx
+	ac_add_options --with-system-webp
+	ac_add_options --enable-av1
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
-	ac_add_options --enable-optimize=-O2
+	ac_add_options --enable-optimize
 	ac_add_options --enable-linker=lld
 	ac_add_options --enable-lto=thin
 	ac_add_options --enable-release
@@ -60,7 +62,6 @@ EOF
 	prt-get isinst wayland-protocols && \
 		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
 		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3' >> .mozconfig
-
 
 	[[ -e '/usr/bin/ccache' ]] && echo 'ac_add_options --enable-ccache' >> .mozconfig
 
