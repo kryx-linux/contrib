@@ -4,14 +4,13 @@
 
 PG_DATA=/var/pgsql/data
 
-[ -e /run/postgresql ] && install -D -u 42 -g 42 /run/postgresql
+[ ! -e /run/postgresql ] && install -d -o postgres -g postgres /run/postgresql
 
 case "$1" in
-    start|stop|status|restart|reload)
-      [ ! -e /run/postgresql ] && mkdir /run/postgresql && chown postgres /run/postgresql
-      sudo -u postgres pg_ctl -D "$PG_DATA" -l /var/log/postgresql "$1" ;;
-    *)
-        echo "usage: $0 start|stop|restart|reload|status" ;;
+  start|stop|status|restart|reload)
+    sudo -u postgres pg_ctl -D "$PG_DATA" -l /var/log/postgresql "$1" ;;
+  *)
+    echo "usage: $0 start|stop|restart|reload|status" ;;
 esac
 
 # End of file
