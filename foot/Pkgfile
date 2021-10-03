@@ -5,15 +5,12 @@
 # Optional: utf8proc
 
 name=foot
-version=1.9.0
+version=1.9.2
 release=1
-source=(https://codeberg.org/dnkl/foot/archive/$version.tar.gz
-  707.patch)
+source=(https://codeberg.org/dnkl/foot/archive/$version.tar.gz)
 
 build() {
   prt-get isinst utf8proc && PKGMK_FOOT+=' -D grapheme-clustering=enabled'
-
-  patch -Np1 -d $name -i $SRC/707.patch
 
   # doing the lto dance
   export CFLAGS='-march=x86-64 -O3 -Wno-missing-profile -Wno-error'
