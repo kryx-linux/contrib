@@ -576,6 +576,27 @@ drwxrwxr-x	root/root	usr/share/lua-language-server/meta/3rd/love2d/library/
 -rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/love2d/library/love.touch.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/love2d/library/love.video.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/love2d/library/love.window.lua
+drwxrwxr-x	root/root	usr/share/lua-language-server/meta/3rd/skynet/
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/config.lua
+drwxrwxr-x	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet.lua
+drwxrwxr-x	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/cluster.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/crypt.lua
+drwxrwxr-x	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/db/
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/db/mongo.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/debug.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/habor.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/muliticast.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/netpack.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/profile.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/sharedata.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/sharemap.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/sharetable.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/socket.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/socketchannel.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/socketdriver.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/meta/3rd/skynet/library/skynet/stm.lua
 drwxr-xr-x	root/root	usr/share/lua-language-server/meta/Lua 5.4 zh-cn/
 -rw-r--r--	root/root	usr/share/lua-language-server/meta/Lua 5.4 zh-cn/basic.lua
 -rw-r--r--	root/root	usr/share/lua-language-server/meta/Lua 5.4 zh-cn/builtin.lua
@@ -635,6 +656,7 @@ drwxrwxr-x	root/root	usr/share/lua-language-server/script/core/diagnostics/
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/code-after-break.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/count-down-loop.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/deprecated.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/different-requires.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/doc-field-no-class.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/duplicate-doc-class.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/duplicate-doc-field.lua
@@ -652,6 +674,7 @@ drwxrwxr-x	root/root	usr/share/lua-language-server/script/core/diagnostics/
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/redundant-parameter.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/redundant-value.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/trailing-space.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/type-check.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/unbalanced-assignments.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/undefined-doc-class.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/core/diagnostics/undefined-doc-name.lua
@@ -694,6 +717,7 @@ drwxrwxr-x	root/root	usr/share/lua-language-server/script/core/hover/
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/doctor.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/file-uri.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/files.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/script/filewatch.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/fs-utility.lua
 drwxrwxr-x	root/root	usr/share/lua-language-server/script/glob/
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/glob/gitignore.lua
@@ -717,12 +741,15 @@ drwxrwxr-x	root/root	usr/share/lua-language-server/script/parser/
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/init.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/lines.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/luadoc.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/newparser.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/parse.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/relabel.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/split.lua
+-rw-rw-r--	root/root	usr/share/lua-language-server/script/parser/tokens.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/plugin.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/progress.lua
 drwxrwxr-x	root/root	usr/share/lua-language-server/script/proto/
+-rw-rw-r--	root/root	usr/share/lua-language-server/script/proto/converter.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/proto/define.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/proto/init.lua
 -rw-rw-r--	root/root	usr/share/lua-language-server/script/proto/proto.lua
