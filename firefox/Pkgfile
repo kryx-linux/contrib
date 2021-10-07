@@ -5,7 +5,7 @@
 # Optional: sccache jack
 
 name=firefox
-version=92.0.1
+version=93.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
 	firefox.desktop
@@ -42,15 +42,12 @@ cat <<- EOF > .mozconfig
 	ac_add_options --with-system-png
 	ac_add_options --with-system-nspr
 	ac_add_options --with-system-nss
-	#ac_add_options --with-system-harfbuzz
-	#ac_add_options --with-system-graphite2
 	ac_add_options --with-system-libevent
 	ac_add_options --with-system-libvpx
 	ac_add_options --with-system-webp
 	ac_add_options --enable-av1
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
-	ac_add_options --enable-alsa
 	ac_add_options --enable-optimize
 	ac_add_options --enable-release
 	ac_add_options --enable-rust-simd
