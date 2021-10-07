@@ -4,7 +4,7 @@
 # Depends on: gobject-introspection
 
 name=libgusb
-version=0.3.7
+version=0.3.8
 release=1
 source=(https://github.com/hughsie/libgusb/archive/$version/$name-$version.tar.gz)
 
@@ -12,6 +12,9 @@ build() {
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
     -D vapi=false \
     -D tests=false \
     -D docs=false
