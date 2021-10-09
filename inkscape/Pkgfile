@@ -4,11 +4,14 @@
 # Depends on: boehm-gc boost double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler-glib popt potrace gdl
 
 name=inkscape
-version=1.1
-_pversion=21.09.0
-_psoversion=113
+_name=inkscape-INKSCAPE
+version=1.1.1
+_version=1.1.1_2021-09-20_3bf5ae0d25
+_pversion=21.10.0
+_psoversion=114
 release=7
-source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
+source=(#https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
+	https://inkscape.org/gallery/item/29255/inkscape-$_version.tar.xz
 	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz)
 
 poppler() {
@@ -20,7 +23,6 @@ poppler() {
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
 		-D ENABLE_UNSTABLE_API_ABI_HEADERS=ON \
 		-D ENABLE_UTILS=ON \
-		-D ENABLE_SPLASH=ON \
 		-D ENABLE_CPP=ON \
 		-D ENABLE_GLIB=ON \
 		-D ENABLE_QT5=OFF \
@@ -45,7 +47,7 @@ build() {
 	CFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66'
 	CXXFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66'
 
-	cmake -S $name-${version}_* -B build -G Ninja \
+	cmake -S $name-$_version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
