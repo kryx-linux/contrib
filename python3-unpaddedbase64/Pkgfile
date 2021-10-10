@@ -13,4 +13,6 @@ build() {
   poetry build --format wheel
   export PYTHONHASHSEED=0
   PIP_CONFIG_FILE=/dev/null pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+
+  rm -r $PKG/usr/lib/python3.9/site-packages/unpaddedbase64-$version.dist-info/INSTALLER
 }
