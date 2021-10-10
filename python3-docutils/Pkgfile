@@ -5,7 +5,7 @@
 
 name=python3-docutils
 version=0.17.1
-release=1
+release=2
 source=(https://downloads.sourceforge.net/docutils/docutils-$version.tar.gz)
 
 build() {
@@ -14,4 +14,6 @@ build() {
   /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
     --skip-build
+
+  find $PKG -iname "*README*" -delete
 }
