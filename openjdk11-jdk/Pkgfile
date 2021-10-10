@@ -6,10 +6,9 @@
 
 name=openjdk11-jdk
 version=11.0.13+7
-_version=11.0.13-7
 _boot_ver=20210620
 _cert_ver=20210620
-release=2
+release=1
 source=(#http://hg.openjdk.java.net/jdk-updates/jdk11u/archive/jdk-$version.tar.bz2
 	https://github.com/openjdk/jdk11u/archive/refs/tags/jdk-$version.tar.gz
   https://crux.ster.zone/downloads/java/openjdk11-boot-$_boot_ver.tar.xz
@@ -47,7 +46,7 @@ build() {
   cd $SRC/build
 
   LC_ALL=C
-  /bin/bash ../jdk11u-jdk-$_version/configure $PKGMK_JDK11 \
+  /bin/bash ../jdk11u-jdk-${version/+/-}/configure $PKGMK_JDK11 \
     --prefix=/usr/lib/java/$name \
     --disable-hotspot-gtest \
     --disable-precompiled-headers \
