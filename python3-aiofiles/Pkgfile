@@ -11,7 +11,7 @@ source=(https://github.com/Tinche/aiofiles/archive/v$version/$name-$version.tar.
 build() {
   cd aiofiles-$version
   poetry build --format wheel
-  LANG=C \
-  tox -e py39
   PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+
+  find $PKG -iname "*INSTALLER*" -delete
 }
