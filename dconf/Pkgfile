@@ -6,7 +6,7 @@
 
 name=dconf
 version=0.40.0
-release=1
+release=2
 source=(https://gitlab.gnome.org/GNOME/dconf/-/archive/$version/dconf-$version.tar.bz2)
 
 build() {
@@ -16,6 +16,7 @@ build() {
 
   meson setup $name-$version build $PKGMK_DCONF \
     --prefix=/usr \
+    --libexecdir=lib/$name \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
