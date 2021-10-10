@@ -16,4 +16,13 @@ build() {
     --root=$PKG \
     --skip-build \
     -O1
+
+  find $PKG \(\
+    -iname '*PKG-INFO*' -o \
+    -iname '*SOURCES*' -o \
+    -iname '*dependency_links.txt' -o \
+    -iname '*entry_points.txt*' -o \
+    -iname '*requires.txt*' -o \
+    -iname '*top_level.txt*' \
+    \) -exec rm -r '{}' \+ || true
 }
