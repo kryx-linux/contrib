@@ -5,7 +5,7 @@
 
 name=dconf-editor
 version=3.38.3
-release=1
+release=2
 source=(https://gitlab.gnome.org/GNOME/dconf-editor/-/archive/$version/dconf-editor-$version.tar.bz2)
 
 build() {
@@ -17,4 +17,6 @@ build() {
     -D b_pie=true
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
 }
