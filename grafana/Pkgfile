@@ -4,7 +4,7 @@
 # Depends on: fontconfig go git npm yarn
 
 name=grafana
-version=8.2.0
+version=8.2.1
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
@@ -30,7 +30,6 @@ build() {
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export GOFLAGS="-buildmode=pie -trimpath -modcacherw"
-  local ldflags="-X main.version=$version -X main.commit=$version -X main.buildstamp=1607529777"
   # }}}
   # setup default paths {{{
   sed -ri 's,^(\s*data\s*=).*,\1 /var/lib/grafana,' $name-$version/conf/defaults.ini
@@ -40,8 +39,6 @@ build() {
   # }}}
   # build backend {{{
   cd "$GOPATH/src/github.com/grafana/grafana"
-  #go run build.go setup
-  #go run build.go build
   make build-go
   # }}}
   # build frontend {{{
