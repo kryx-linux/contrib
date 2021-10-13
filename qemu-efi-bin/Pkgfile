@@ -4,13 +4,10 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=qemu-efi-bin
-version=202105-1
+version=202108-1
 realn=edk2-ovmf
 release=1
-source=(
-   https://mirrors.edge.kernel.org/archlinux/extra/os/x86_64/\
-${realn}-${version}-any.pkg.tar.zst
-)
+source=(https://ftp.sdaoden.eu/${realn}-${version}-any.pkg.tar.zst)
 
 build() {
    [ -d usr ] || # TODO pkgmk native support
