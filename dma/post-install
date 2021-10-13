@@ -1,4 +1,0 @@
-#!/bin/sh -
-
-grep -q dma /etc/crontab ||
-	echo '*/15 * * * * exec dma -q' >> /etc/crontab
