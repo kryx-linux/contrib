@@ -9,6 +9,8 @@ release=2
 source=(https://gitlab.gnome.org/GNOME/dconf-editor/-/archive/$version/dconf-editor-$version.tar.bz2)
 
 build() {
+  ls /usr/share/vala/vapi/dconf.vapi || (printf '\e[1;31m%-6s\e[m\n' "$name needs dconf build with vala bindings, install vala, rebuild dconf, then install $name" ; exit 1)
+
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
