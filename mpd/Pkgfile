@@ -1,13 +1,13 @@
 # Description: Music playback daemon
 # URL: https://www.musicpd.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: boost meson ninja
+# Depends on: boost fmt meson ninja
 # Optional: alsa-lib audiofile avahi chromaprint dbus faad2 ffmpeg flac fluidsynth icu jack lame libcdio-paranoia libid3tag libisofs libmad libmikmod libmodplug libmpcdec libsamplerate libsndfile libsoxr liburing libvorbis mpg123 opus pipewire pulseaudio python3-sphinx samba twolame wavpack yajl zziplib
 
 name=mpd
-version=0.22.11
+version=0.23
 release=1
-source=(https://www.musicpd.org/download/mpd/${version%.*}/$name-$version.tar.xz mpd)
+source=(https://www.musicpd.org/download/mpd/$version/$name-$version.tar.xz mpd)
 
 build() {
   # optional features {{{
@@ -36,7 +36,7 @@ build() {
   prt-get isinst libvorbis && PKGMK_MPD+=' -D libvorbis=enabled'
   prt-get isinst mpg123 && PKGMK_MPD+=' -D mpg123=enabled'
   prt-get isinst opus && PKGMK_MPD+=' -D opus=enabled'
-  #prt-get isinst pipewire && PKGMK_MPD+=' -D pipewire=enabled'
+  prt-get isinst pipewire && PKGMK_MPD+=' -D pipewire=enabled'
   prt-get isinst pulseaudio && PKGMK_MPD+=' -D pulse=enabled'
   prt-get isinst samba && PKGMK_MPD+=' -D smbclient=enabled'
   prt-get isinst twolame && PKGMK_MPD+=' -D twolame=enabled'
@@ -68,4 +68,5 @@ build() {
 
   rm -r $PKG/usr/share/doc
 }
+
 # vim: foldmethod=marker foldlevelstart=1
