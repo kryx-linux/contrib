@@ -6,13 +6,12 @@
 name=libtorrent
 version=0.13.8
 release=1
-source=(http://rtorrent.net/downloads/libtorrent-$version.tar.gz)
+source=(https://github.com/rakshasa/libtorrent/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
   ./autogen.sh
-
   ./configure --prefix=/usr \
     --enable-debug=no
   make
