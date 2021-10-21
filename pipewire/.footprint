@@ -10,7 +10,6 @@ drwxr-xr-x	root/root	lib/udev/rules.d/
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/pipewire
--rwxr-xr-x	root/root	usr/bin/pipewire-media-session
 -rwxr-xr-x	root/root	usr/bin/pipewire-pulse
 -rwxr-xr-x	root/root	usr/bin/pw-cli
 -rwxr-xr-x	root/root	usr/bin/pw-dot
@@ -23,6 +22,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/pw-profiler
 -rwxr-xr-x	root/root	usr/bin/pw-reserve
 -rwxr-xr-x	root/root	usr/bin/pw-top
+-rwxr-xr-x	root/root	usr/bin/pw-v4l2
 -rwxr-xr-x	root/root	usr/bin/spa-acp-tool
 -rwxr-xr-x	root/root	usr/bin/spa-inspect
 -rwxr-xr-x	root/root	usr/bin/spa-json-dump
@@ -189,8 +189,8 @@ drwxr-xr-x	root/root	usr/lib/alsa-lib/
 -rwxr-xr-x	root/root	usr/lib/alsa-lib/libasound_module_ctl_pipewire.so
 -rwxr-xr-x	root/root	usr/lib/alsa-lib/libasound_module_pcm_pipewire.so
 lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so -> libpipewire-0.3.so.0
-lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.338.0
--rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.338.0
+lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.339.0
+-rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.339.0
 drwxr-xr-x	root/root	usr/lib/pipewire-0.3/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-access.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-adapter.so
@@ -213,6 +213,8 @@ drwxr-xr-x	root/root	usr/lib/pipewire-0.3/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-spa-device.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-spa-node-factory.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-spa-node.so
+drwxr-xr-x	root/root	usr/lib/pipewire-0.3/v4l2/
+-rwxr-xr-x	root/root	usr/lib/pipewire-0.3/v4l2/libpw-v4l2.so
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libpipewire-0.3.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libspa-0.2.pc
@@ -327,12 +329,6 @@ drwxr-xr-x	root/root	usr/share/pipewire/filter-chain/
 -rw-r--r--	root/root	usr/share/pipewire/filter-chain/source-rnnoise.conf
 -rw-r--r--	root/root	usr/share/pipewire/jack.conf
 drwxr-xr-x	root/root	usr/share/pipewire/media-session.d/
--rw-r--r--	root/root	usr/share/pipewire/media-session.d/alsa-monitor.conf
--rw-r--r--	root/root	usr/share/pipewire/media-session.d/bluez-monitor.conf
--rw-r--r--	root/root	usr/share/pipewire/media-session.d/media-session.conf
--rw-r--r--	root/root	usr/share/pipewire/media-session.d/v4l2-monitor.conf
 -rw-r--r--	root/root	usr/share/pipewire/media-session.d/with-alsa (EMPTY)
--rw-r--r--	root/root	usr/share/pipewire/media-session.d/with-jack (EMPTY)
--rw-r--r--	root/root	usr/share/pipewire/media-session.d/with-pulseaudio (EMPTY)
 -rw-r--r--	root/root	usr/share/pipewire/pipewire-pulse.conf
 -rw-r--r--	root/root	usr/share/pipewire/pipewire.conf
