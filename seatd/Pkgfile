@@ -5,7 +5,7 @@
 
 name=seatd
 version=0.6.3
-release=1
+release=2
 source=(https://github.com/kennylevinsen/seatd/archive/$version/$name-$version.tar.gz
   seatd.service)
 
@@ -16,7 +16,7 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D builtin=enabled
+    -D libseat-builtin=enabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
   install -Dm 755 $SRC/seatd.service $PKG/etc/rc.d/seatd
