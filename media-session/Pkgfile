@@ -1,0 +1,23 @@
+# Description: Example session manager for PipeWire
+# URL: https://gitlab.freedesktop.org/pipewire/media-session
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: pipewire
+
+name=media-session
+version=0.4.0
+release=1
+source=(https://gitlab.freedesktop.org/pipewire/media-session/-/archive/$version/media-session-$version.tar.bz2)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D tests=disabled
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
+}
