@@ -10,6 +10,26 @@ source=(https://github.com/prometheus/prometheus/archive/v$version/$name-$versio
   prometheus.conf prometheus.service)
 
 build() {
+  # setup build env {{{
+  export LC_ALL=C
+  #export NODE_ENV=production
+  [ ! -d $PKGMK_SOURCE_DIR/yarn_cache ] && mkdir $PKGMK_SOURCE_DIR/yarn_cache
+  export YARN_CACHE_FOLDER=$PKGMK_SOURCE_DIR/yarn_cache
+  [ ! -d $PKGMK_SOURCE_DIR/npm_cache ] && mkdir $PKGMK_SOURCE_DIR/npm_cache
+  export npm_config_cache=$PKGMK_SOURCE_DIR/npm_cache
+  export NPM_CONFIG_PREFIX="$SRC/npm"
+  export PATH+=":$NPM_CONFIG_PREFIX/bin"
+
+  export GOPATH="$SRC/gopath"
+  export PATH+=":$GOPATH/bin"
+  mkdir -p "$GOPATH/src/github.com/grafana/"
+  ln -fsrT "$SRC/grafana-$version/" "$GOPATH/src/github.com/grafana/grafana"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export GOFLAGS="-buildmode=pie -trimpath -modcacherw"
+  # }}}
   cd $name-$version
 
   cd web/ui/react-app
@@ -27,7 +47,7 @@ build() {
     -X github.com/prometheus/common/version.Revision=CRUX
     -X github.com/prometheus/common/version.Branch=master
     -X github.com/prometheus/common/version.BuildUser=$USER@$HOSTNAME
-    -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S ${SOURCE_DATE_EPOCH:+-d @$SOURCE_DATE_EPOCH})
+    -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)
     "
 
   if [ -n $LDFLAGS ]; then
@@ -77,3 +97,5 @@ build() {
   ## install rc file
   install -Dm 755 $SRC/prometheus.service $PKG/etc/rc.d/prometheus
 }
+
+# vim: foldmethod=marker foldlevelstart=1
