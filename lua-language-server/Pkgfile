@@ -7,17 +7,17 @@ name=lua-language-server
 version=2.4.5
 
 # https://github.com/sumneko/lua-language-server/tree/master/3rd
-_bee_commit=e80d939780637703050f9941e4325d4675cd500b
-#_bee2_commit=53a033cab8277a6b9710c6087e5792bb5106971e
+_bee_commit=32f65b92739fa236d87fc1b2e7617470d47f0355
+_bee2_commit=e80d939780637703050f9941e4325d4675cd500b
 _loveapi_commit=4fa1de69cb04af2e405b3ac400d4e0cec0e07530
 _lpeglabel_commit=ed183860289664af0f3727307653c9bf2bccdc80
-_luamake_commit=103e91764532db5b951ba6594937a123ec9bacb8
+_luamake_commit=cb42ad2cf3244be23f73eae5a4ffbe7c05c9f112
 _rcedit_commit=b807b34a644c86c0b0d89c7f073967e79202731a
 
 release=1
 source=(https://github.com/sumneko/lua-language-server/archive/$version/$name-$version.tar.gz
   https://github.com/actboy168/bee.lua/archive/$_bee_commit/bee.lua-$_bee_commit.tar.gz
-  #https://github.com/actboy168/bee.lua/archive/$_bee2_commit/bee.lua-$_bee2_commit.tar.gz
+  https://github.com/actboy168/bee.lua/archive/$_bee2_commit/bee.lua-$_bee2_commit.tar.gz
   https://github.com/love2d-community/love-api/archive/$_loveapi_commit/love-api-$_loveapi_commit.tar.gz
   https://github.com/sqmedeiros/lpeglabel/archive/$_lpeglabel_commit/lpeglabel-$_lpeglabel_commit.tar.gz
   https://github.com/actboy168/luamake/archive/$_luamake_commit/luamake-$_luamake_commit.tar.gz
@@ -29,8 +29,8 @@ build() {
   for i in bee.lua-$_bee_commit love-api-$_loveapi_commit lpeglabel-$_lpeglabel_commit luamake-$_luamake_commit rcedit-$_rcedit_commit;
     do rsync --recursive $i/ $name-$version/3rd/${i/-*/}/ ;
   done
-  rsync --recursive bee.lua-$_bee_commit/ -t $name-$version/3rd/luamake/3rd/bee.lua
-  #rsync --recursive bee.lua-$_bee2_commit/ -t $name-$version/3rd/luamake/3rd/bee.lua
+  #rsync --recursive bee.lua-$_bee_commit/ -t $name-$version/3rd/luamake/3rd/bee.lua
+  rsync --recursive bee.lua-$_bee2_commit/ -t $name-$version/3rd/luamake/3rd/bee.lua
 
   cd $name-$version
 
