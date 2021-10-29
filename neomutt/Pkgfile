@@ -5,21 +5,18 @@
 # Optional: cyrus-sasl gpgme krb5 lua notmuch
 
 name=neomutt
-version=20211022
-release=2
-source=(https://github.com/neomutt/neomutt/archive/$version/$name-$version.tar.gz
-  3090.patch)
+version=20211029
+release=1
+source=(https://github.com/neomutt/neomutt/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  patch -Np1 -i $SRC/3090.patch
-
-  [[ -e /usr/lib/pkgconfig/gpgme.pc ]] && PKGMK_NEOMUTT+=' --gpgme'
-  [[ -e /usr/lib/pkgconfig/lua.pc ]] && PKGMK_NEOMUTT+=' --enable-lua'
-  [[ -e /usr/lib/pkgconfig/gssrpc.pc ]] && PKGMK_NEOMUTT+=' --gss'
-  [[ -e /usr/lib/pkgconfig/libsasl2.pc ]] && PKGMK_NEOMUTT+=' --sasl'
-  [[ -e /usr/lib/libnotmuch.so ]] && PKGMK_NEOMUTT+=' --notmuch'
+  prt-get isinst cyrus-sasl && PKGMK_NEOMUTT+=' --sasl'
+  prt-get isinst gpgme && PKGMK_NEOMUTT+=' --gpgme'
+  prt-get isinst krb5 && PKGMK_NEOMUTT+=' --gss'
+  prt-get isinst lua && PKGMK_NEOMUTT+=' --enable-lua'
+  prt-get isinst notmuch && PKGMK_NEOMUTT+=' --notmuch'
 
   ./configure $PKGMK_NEOMUTT \
     --prefix=/usr \
@@ -34,5 +31,6 @@ build() {
     --doc=0
   make
   make DESTDIR=$PKG install
+
   rm -fr $PKG/usr/share/
 }
