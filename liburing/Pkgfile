@@ -1,6 +1,6 @@
 # Description: liburing provides helpers to setup and teardown io_uring instances
 # URL: https://github.com/axboe/liburing
-# Maintainer: Tim Biermann, tbier at posteo dot de
+# Maintainer: Danny Rawlins, crux at romster dot me
 
 name=liburing
 version=2.1
@@ -8,9 +8,12 @@ release=1
 source=(https://github.com/axboe/liburing/archive/liburing-$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$name-$version
-  ./configure --prefix=/usr \
-    --mandir=/usr/share/man
-  make
-  make DESTDIR=$PKG install
+	cd $name-$name-$version
+
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/share/man
+
+	make
+	make DESTDIR=$PKG install
 }
