@@ -1,10 +1,10 @@
 # Description: an open-source systems monitoring and alerting toolkit
 # URL: https://prometheus.io
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: go npm yarn
+# Depends on: go npm
 
 name=prometheus
-version=2.30.3
+version=2.31.1
 release=1
 source=(https://github.com/prometheus/prometheus/archive/v$version/$name-$version.tar.gz
   prometheus.conf prometheus.service)
@@ -12,14 +12,15 @@ source=(https://github.com/prometheus/prometheus/archive/v$version/$name-$versio
 build() {
   # setup build env {{{
   export LC_ALL=C
+
+  ## Node Setup
   #export NODE_ENV=production
-  [ ! -d $PKGMK_SOURCE_DIR/yarn_cache ] && mkdir $PKGMK_SOURCE_DIR/yarn_cache
-  export YARN_CACHE_FOLDER=$PKGMK_SOURCE_DIR/yarn_cache
-  [ ! -d $PKGMK_SOURCE_DIR/npm_cache ] && mkdir $PKGMK_SOURCE_DIR/npm_cache
-  export npm_config_cache=$PKGMK_SOURCE_DIR/npm_cache
+  #[ ! -d $PKGMK_SOURCE_DIR/npm_cache ] && mkdir $PKGMK_SOURCE_DIR/npm_cache
+  #export npm_config_cache=$PKGMK_SOURCE_DIR/npm_cache
   export NPM_CONFIG_PREFIX="$SRC/npm"
   export PATH+=":$NPM_CONFIG_PREFIX/bin"
 
+  ## Go Setup
   export GOPATH="$SRC/gopath"
   export PATH+=":$GOPATH/bin"
   mkdir -p "$GOPATH/src/github.com/grafana/"
@@ -29,32 +30,30 @@ build() {
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export GOFLAGS="-buildmode=pie -trimpath -modcacherw"
-  # }}}
-  cd $name-$version
-
-  cd web/ui/react-app
-  yarn --frozen-lockfile
-  yarn lint
-  cd ../../../
-  ./scripts/build_react_app.sh
-  cd web/ui
-  CGO_ENABLED=0 GOARCH= go generate -x -v
-
-  cd ../../
-  gofmt -w ./web/ui
 
   GOLDFLAGS="-X github.com/prometheus/common/version.Version=$version
     -X github.com/prometheus/common/version.Revision=CRUX
     -X github.com/prometheus/common/version.Branch=master
     -X github.com/prometheus/common/version.BuildUser=$USER@$HOSTNAME
     -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)
-    "
+  "
 
   if [ -n $LDFLAGS ]; then
     # LDFLAGS (and only LDFLAGS) should be passed to -extldflags.
     GOLDFLAGS="$GOLDFLAGS -extldflags $LDFLAGS"
   fi
+  # }}}
+  cd $name-$version
 
+  cd web/ui
+  npm install
+  npm run build
+  npm run build:module
+  npm run lint
+  GOOS= GOARCH= go generate -x -v
+  cd ../..
+
+  gofmt -w ./web/ui
   go mod vendor
   go build \
     -trimpath \
@@ -67,7 +66,7 @@ build() {
     -mod=vendor \
     -ldflags "$GOLDFLAGS" \
     ./cmd/promtool
-
+  # install
   install -Dm755 -t $PKG/usr/bin prometheus promtool
 
   install -Dm644 $SRC/prometheus.conf \
@@ -89,7 +88,6 @@ build() {
     install -Dm644 -t $PKG/etc/prometheus/consoles/ $file
   done
 
-  ## web
   install -dm755 $PKG/usr/share/prometheus/web/ui
   cp -R web/ui/{static,templates} $PKG/usr/share/prometheus/web/ui/
   install -Dm644 $SRC/prometheus.conf $PKG/etc/conf.d/prometheus
