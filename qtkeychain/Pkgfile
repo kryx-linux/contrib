@@ -16,6 +16,8 @@ build() {
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D BUILD_WITH_QT6=OFF \
+    -D BUILD_WITH_QT5=ON \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
