@@ -2,10 +2,10 @@
 # URL: https://github.com/greshake/i3status-rust
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: dbus rust
-# Optional: alsa-utils bluez curl font-powerline font-awesome-compat kdeconnect lm_sensors notmuch pulseaudio upower
+# Optional: alsa-utils bluez curl font-awesome-compat font-powerline kdeconnect lm_sensors notmuch pulseaudio upower
 
 name=i3status-rust
-version=0.20.5
+version=0.20.6
 release=1
 source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version.tar.gz)
 
@@ -15,8 +15,8 @@ build() {
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
   # configure optional dependencies
-  [[ -e /usr/lib/libnotmuch.so ]] && PKGMK_I3STATUS_RUST+=' notmuch'
-  [[ -e /usr/lib/pkgconfig/libpulse.pc ]] && PKGMK_I3STATUS_RUST+=' libpulse-binding'
+  prt-get isinst notmuch && PKGMK_I3STATUS_RUST+=' notmuch'
+  prt-get isinst pulseaudio && PKGMK_I3STATUS_RUST+=' libpulse-binding'
 
   cargo update --manifest-path $name-$version/Cargo.toml
 
