@@ -5,19 +5,20 @@
 
 name=snowball
 version=2.2.0
-release=1
+release=2
 source=(https://github.com/snowballstem/snowball/archive/v$version/$name-$version.tar.gz
   dynamiclib.patch)
 
 build() {
-    cd $name-$version
-    patch -Np1 -i ../dynamiclib.patch
+  cd $name-$version
+  patch -Np1 -i ../dynamiclib.patch
 
-    make
+  make
 
-    install -d $PKG/usr/{bin,lib}
-    install -t $PKG/usr/bin snowball stemwords
-    install -Dm644 {.,$PKG/usr}/include/libstemmer.h
-    ln -s libstemmer.so.* $PKG/usr/lib/
-    ln -s libstemmer.so.0 $PKG/usr/lib/libstemmer.so
+  install -d $PKG/usr/{bin,lib}
+  install -t $PKG/usr/bin snowball stemwords
+  install -Dm644 {.,$PKG/usr}/include/libstemmer.h
+  install libstemmer.a $PKG/usr/lib
+  ln -s libstemmer.so.* $PKG/usr/lib/
+  ln -s libstemmer.so.0 $PKG/usr/lib/libstemmer.so
 }
