@@ -2,7 +2,8 @@
 # URL: https://icedtea.classpath.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Co-Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib cups giflib gtk3 krb5 lcms2 libxslt nss p11-kit unzip xorg-libxcomposite xorg-libxinerama xorg-libxt zip
+# Depends on: alsa-lib cups giflib gtk3 lcms2 libxslt nss p11-kit unzip xorg-libxcomposite xorg-libxinerama xorg-libxt zip
+# Optional: krb5
 
 name=openjdk8
 version=8u292-b10
@@ -44,7 +45,7 @@ build() {
   # NOTE: the check for usr/bin/ccache may be too specific, since it rules out
   #       local or opt installs.
   if [ -e '/usr/bin/ccache' ]; then
-   EXTRA_OPTIONS='--enable-ccache'
+   EXTRA_OPTIONS+='--enable-ccache'
    PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
   fi
 
@@ -62,6 +63,8 @@ build() {
   mkdir $SRC/build
   cd $SRC/build
 
+  prt-get isinst krb5 && EXTRA_OPTIONS+=' --enable-system-kerberos' || EXTRA_OPTIONS+=' --disable-system-kerberos'
+
   # Will fail if make-ca has not been run after p11-kit install
   LC_ALL=C \
   CONFIG_SHELL=/bin/bash \
@@ -78,14 +81,8 @@ build() {
    --disable-systemtap-tests \
    --disable-tests \
    --enable-improved-font-rendering \
-   --enable-non-nss-curves \
    --enable-nss \
-   --enable-system-cups \
-   --enable-system-fontconfig \
-   --enable-system-gio \
-   --enable-system-gtk \
    --enable-system-jpeg \
-   --enable-system-kerberos \
    --enable-system-lcms \
    --enable-system-png \
    --enable-system-zlib \
