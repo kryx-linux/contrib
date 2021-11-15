@@ -4,16 +4,21 @@
 # Depends on: fribidi harfbuzz
 
 name=libraqm
-version=0.7.1
+version=0.7.2
 release=1
-source=(https://github.com/HOST-Oman/libraqm/releases/download/v$version/raqm-$version.tar.gz)
+source=(https://github.com/HOST-Oman/libraqm/releases/download/v$version/raqm-$version.tar.xz
+	https://github.com/HOST-Oman/libraqm/commit/819a3e9c.patch)
 
 build() {
-	cd raqm-$version
+	patch -d raqm-$version -p1 -i $SRC/819a3e9c.patch # Fix meson library version
 
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
-
-	rm -r $PKG/usr/share/gtk-doc
+	meson setup raqm-$version build \
+		--prefix=/usr \
+		--buildtype=plain \
+		--wrap-mode nodownload \
+		-D b_lto=true \
+		-D b_pie=true \
+		-D docs=false
+	meson compile -C build
+	DESTDIR=$PKG meson install -C build
 }
