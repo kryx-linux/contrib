@@ -7,13 +7,12 @@ name=python3-lark-parser
 version=0.12.0
 release=1
 
-_nearley_commit=a46b37471db486db0f6e1ce6a2934fb238346b44
+_nearley_commit=326831689826cb1b9a4d21d1ce0d5db9278e9636
 
 source=(https://github.com/lark-parser/lark/archive/$version/$name-$version.tar.gz
   https://github.com/kach/nearley/archive/$_nearley_commit/nearley-$_nearley_commit.tar.gz)
 
 build() {
-  ls
   rmdir lark-$version/tests/test_nearley/nearley
   ln -s nearely-$_nearley_commit lark-$version/tests/test_nearley/nearley
   cd lark-$version
