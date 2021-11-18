@@ -4,7 +4,7 @@
 # Depends on: dbus gdk-pixbuf pango xorg-libxinerama xorg-libxrandr xorg-libxscrnsaver libnotify
 
 name=dunst
-version=1.6.1
+version=1.7.1
 release=1
 source=(https://github.com/dunst-project/$name/archive/v$version/$name-$version.tar.gz)
 
@@ -12,5 +12,5 @@ build() {
 	export WAYLAND=0
 	cd $name-$version
 	make
-	make PREFIX=/usr DESTDIR=$PKG install
+	make PREFIX=/usr SYSCONFDIR=/etc DESTDIR=$PKG install
 }
