@@ -4,11 +4,12 @@
 
 name=dtach
 version=0.9
-release=2
-source=(https://github.com/crigler/${name}/archive/v${version}.tar.gz)
+gitver=7acac922770597f5da5df7b290078770d20dac32
+release=3
+source=(https://github.com/crigler/${name}/archive/${gitver}/${name}-${version}.tar.gz)
 
 build() {
-   cd ${name}-${version}
+   cd ${name}-${gitver}
 
    ./configure
 
