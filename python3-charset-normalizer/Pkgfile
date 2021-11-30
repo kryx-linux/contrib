@@ -1,0 +1,17 @@
+# Description: Encoding and language detection alternative to chardet
+# URL: https://github.com/ousret/charset_normalizer
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-charset-normalizer
+version=2.0.8
+release=1
+source=(https://github.com/Ousret/charset_normalizer/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd charset_normalizer-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG \
+    --optimize=1 \
+    --skip-build
+}
