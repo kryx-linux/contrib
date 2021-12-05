@@ -1,0 +1,17 @@
+# Description: ISO country, subdivision, language, currency and script definitions and their translations
+# URL: https://pypi.org/project/pycountry/
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: python3-lxml
+
+name=python3-pycountry
+_name=pycountry
+version=20.7.3
+release=1
+source=(https://files.pythonhosted.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
+
+build() {
+	cd $_name-$version
+
+	/usr/bin/python3 setup.py build
+	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1 --skip-build
+}
