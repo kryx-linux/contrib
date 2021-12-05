@@ -4,9 +4,9 @@
 # Depends on: python3-setuptools
 
 name=python3-pycryptodome
-version=3.11.0
+version=3.12.0
 release=1
-source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
+source=(https://github.com/Legrandin/pycryptodome/archive/v$version/${name#*-}-$version.tar.gz)
 
 build() {
 	cd ${name#*-}-$version
