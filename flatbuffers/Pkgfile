@@ -4,12 +4,12 @@
 # Depends on: cmake python3-setuptools
 
 name=flatbuffers
-version=2.0.0
+version=2.0.5
 release=1
 source=(https://github.com/google/flatbuffers/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_FLATBUFFERS+=' -G Ninja'
+  prt-get isinst ninja && PKGMK_FLATBUFFERS+=' -G Ninja'
   cmake -S $name-$version -B build $PKGMK_FLATBUFFERS \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \

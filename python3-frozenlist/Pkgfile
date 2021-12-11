@@ -1,0 +1,21 @@
+# Description: FrozenList is a list-like structure which can be made immutable
+# URL: https://github.com/aio-libs/frozenlist
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-cython
+
+name=python3-frozenlist
+version=1.2.0
+release=1
+source=(https://github.com/aio-libs/frozenlist/archive/v$version/frozenlist-$version.tar.gz)
+
+build() {
+  cd frozenlist-$version
+  sed -e 's|.install-cython ||' \
+    -e '13s|cython|cython3|g' \
+    -i Makefile
+  make cythonize
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG \
+    --optimize=1 \
+    --skip-build
+}

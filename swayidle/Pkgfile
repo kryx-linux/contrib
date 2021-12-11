@@ -7,11 +7,14 @@
 name=swayidle
 version=1.7
 release=1
-source=(https://github.com/swaywm/swayidle/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/swaywm/swayidle/archive/$version/$name-$version.tar.gz
+  89.patch)
 
 build() {
   prt-get isinst bash-completion || PKGMK_SWAYIDLE+=' -D bash-completions=false'
   prt-get isinst zsh || PKGMK_SWAYIDLE+=' -D zsh-completions=false'
+
+  patch -Np1 -d $name-$version -i $SRC/89.patch
 
   meson setup $name-$version build $PKGMK_SWAYIDLE \
     --prefix=/usr \

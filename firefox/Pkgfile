@@ -1,11 +1,11 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 brotli cbindgen clang dbus-glib libevent libidl libnotify libvpx libwebp libxkbcommon lld nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
+# Depends on: alsa-lib autoconf-2.13 brotli cbindgen clang dbus-glib libevent libidl libnotify libvpx libwebp libxkbcommon lld nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip wasi-compiler-rt wasi-libc wasi-libc++
 # Optional: sccache jack
 
 name=firefox
-version=93.0
+version=95.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
 	firefox.desktop
@@ -17,7 +17,7 @@ build() {
 	# https://bugzilla.mozilla.org/show_bug.cgi?id=1530052
 	patch -p1 -i $SRC/0001-Use-remoting-name-for-GDK-application-names.patch
 
-	if [ $(/usr/bin/python -c "import sys; print sys.stdout.encoding") = 'UTF-8' ]; then
+	if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
 		printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
 		exit 1
 	fi
@@ -45,6 +45,7 @@ cat <<- EOF > .mozconfig
 	ac_add_options --with-system-libevent
 	ac_add_options --with-system-libvpx
 	ac_add_options --with-system-webp
+	ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot
 	ac_add_options --enable-av1
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman

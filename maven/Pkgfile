@@ -1,14 +1,14 @@
 # Description: Java project management and project comprehension tool
 # URL: https://maven.apache.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: openjdk16-jdk
+# Depends on: openjdk17-jdk
 
 name=maven
-version=3.8.3
+version=3.8.4
 release=1
 source=(https://www-eu.apache.org/dist/maven/maven-3/$version/source/apache-$name-$version-src.tar.gz)
 bin_source=(https://archive.apache.org/dist/maven/maven-3/$version/binaries/apache-$name-$version-bin.tar.gz)
-_bootstrapsum=0f1597d11085b8fe93d84652a18c6deea71ece9fabba45a02cf6600c7758fd5b
+_bootstrapsum=2cdc9c519427bb20fdc25bef5a9063b790e4abd930e7b14b4e9f4863d6f9f13c
 
 # bootstrap_mvn() {{{
 bootstrap_mvn() {
@@ -38,7 +38,7 @@ bootstrap_mvn() {
 }
 # }}}
 build() {
-  export PATH="/usr/lib/java/openjdk16-jdk/bin:${PATH}"
+  export PATH="/usr/lib/java/openjdk17-jdk/bin:${PATH}"
 
   # if we don't have maven on our system already, bootstrap it
   if [ ! -e "/usr/bin/mvn" ]; then

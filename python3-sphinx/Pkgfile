@@ -1,11 +1,11 @@
 # Description: The Sphinx documentaion generator
 # URL: https://www.sphinx-doc.org/en/master/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3-alabaster python3-docutils python3-imagesize python3-jinja2 python3-packaging python3-pygments python3-requests python3-snowballstemmer python3-sphinxcontrib-applehelp python3-sphinxcontrib-devhelp python3-sphinxcontrib-htmlhelp python3-sphinxcontrib-jsmath python3-sphinxcontrib-qthelp python3-sphinxcontrib-serializinghtml python3-sphinxcontrib-websupport
+# Depends on: python3-alabaster python3-docutils-compat python3-imagesize python3-jinja2 python3-packaging python3-pygments python3-requests python3-snowballstemmer python3-sphinxcontrib-applehelp python3-sphinxcontrib-devhelp python3-sphinxcontrib-htmlhelp python3-sphinxcontrib-jsmath python3-sphinxcontrib-qthelp python3-sphinxcontrib-serializinghtml python3-sphinxcontrib-websupport
 
 name=python3-sphinx
 _name=Sphinx
-version=4.2.0
+version=4.3.1
 release=1
 source=(https://pypi.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
 
@@ -14,7 +14,7 @@ unpack_source() {
 	for file in ${source[@]}; do
 		case ${file##*/} in
 			$_name-$version.tar.gz)
-				tar xfvz $(get_filename $file) -C $SRC ;;
+				bsdtar xfvz $(get_filename $file) -C $SRC ;;
 			*)
 				cp $(get_filename $file) $SRC ;;
 		esac

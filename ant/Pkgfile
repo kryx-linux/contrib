@@ -1,11 +1,10 @@
 # Description: Ant is a Java-based build tool.
 # URL: http://ant.apache.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: openjdk16-jdk
-# Optional: python
+# Depends on: openjdk17-jdk
 
 name=ant
-version=1.10.11
+version=1.10.12
 release=1
 source=(https://www-eu.apache.org/dist/ant/source/apache-$name-$version-src.tar.xz
 	ant.conf)
@@ -13,11 +12,11 @@ source=(https://www-eu.apache.org/dist/ant/source/apache-$name-$version-src.tar.
 build() {
 	cd apache-$name-$version
 
-	sed -i 's|/usr/bin/python|/usr/bin/python2|' \
+	sed -i 's|/usr/bin/python|/usr/bin/python3|' \
 		src/script/runant.py
 
 	unset JAVA_HOME
-	export JAVA_HOME='/usr/lib/java/openjdk16-jdk'
+	export JAVA_HOME='/usr/lib/java/openjdk17-jdk'
 
 	./bootstrap.sh
 	bootstrap/bin/ant -Ddest=optional -f fetch.xml

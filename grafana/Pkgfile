@@ -4,7 +4,7 @@
 # Depends on: fontconfig go git npm yarn
 
 name=grafana
-version=8.2.1
+version=8.3.2
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
@@ -13,7 +13,6 @@ source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.
 build() {
   # setup build env {{{
   export LC_ALL=C
-  export NODE_ENV=production
   [ ! -d $PKGMK_SOURCE_DIR/yarn_cache ] && mkdir $PKGMK_SOURCE_DIR/yarn_cache
   export YARN_CACHE_FOLDER=$PKGMK_SOURCE_DIR/yarn_cache
   [ ! -d $PKGMK_SOURCE_DIR/npm_cache ] && mkdir $PKGMK_SOURCE_DIR/npm_cache
@@ -21,10 +20,6 @@ build() {
   export NPM_CONFIG_PREFIX="$SRC/npm"
   export PATH+=":$NPM_CONFIG_PREFIX/bin"
 
-  export GOPATH="$SRC/gopath"
-  export PATH+=":$GOPATH/bin"
-  mkdir -p "$GOPATH/src/github.com/grafana/"
-  ln -fsrT "$SRC/grafana-$version/" "$GOPATH/src/github.com/grafana/grafana"
   export CGO_LDFLAGS="${LDFLAGS}"
   export CGO_CPPFLAGS="${CPPFLAGS}"
   export CGO_CFLAGS="${CFLAGS}"
@@ -37,15 +32,17 @@ build() {
   sed -ri 's,^(\s*provisioning\s*=).*,\1 /var/lib/grafana/conf/provisioning,' $name-$version/conf/defaults.ini
   sed -ri 's,^(\s*logs\s*=).*,\1 /var/log/grafana,' $name-$version/conf/defaults.ini
   # }}}
+  cd $SRC/$name-$version
   # build backend {{{
-  cd "$GOPATH/src/github.com/grafana/grafana"
   make build-go
+  go run build.go setup
+  go run build.go build
   # }}}
   # build frontend {{{
-  yarn install --frozen-lockfile --no-progress --production
+  yarn install --frozen-lockfile
+  NODE_ENV=production yarn run build
   # }}}
 
-  cd $SRC/$name-$version
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name
   install -Dsm755 bin/linux-amd64/grafana-server $PKG/usr/bin/grafana-server
   install -Dsm755 bin/linux-amd64/grafana-cli $PKG/usr/bin/grafana-cli

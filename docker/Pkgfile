@@ -6,7 +6,7 @@
 # LIBNETWORK_COMMIT:=64b7a4574d1426139437d20e81c0b6d391130ec8
 
 name=docker
-version=20.10.9
+version=20.10.11
 release=1
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
@@ -17,7 +17,7 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
 build() {
     export GO111MODULE=auto
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=75249d8
+    export DOCKER_GITCOMMIT=847da18
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
 

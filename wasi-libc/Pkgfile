@@ -1,0 +1,28 @@
+# Description: WASI libc implementation for WebAssembly
+# URL: https://github.com/WebAssembly/wasi-libc
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: clang
+
+name=wasi-libc
+version=0+222+ad5133
+_commit=ad5133410f66b93a2381db5b542aad5e0964db96
+release=1
+source=(https://github.com/WebAssembly/wasi-libc/archive/$_commit.zip)
+ 
+build() {
+	cd $name-$_commit
+
+	make \
+		WASM_CC=/usr/bin/clang \
+		WASM_AR=/usr/bin/llvm-ar \
+		WASM_NM=/usr/bin/llvm-nm
+
+	install -dm755 $PKG/usr/share
+	cp -dr --preserve=mode,timestamp sysroot $PKG/usr/share/wasi-sysroot
+
+	cd $PKG/usr/share/wasi-sysroot/lib/wasm32-wasi
+	for f in *.a; do
+		/usr/bin/llvm-ranlib $f
+		/usr/bin/llvm-strip --strip-debug $f
+	done
+}

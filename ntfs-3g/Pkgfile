@@ -1,49 +1,38 @@
 # Description: Freely available NTFS driver with read and write support.
 # URL: https://www.tuxera.com/company/open-source/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: fuse
+# Depends on: fuse gnutls libgcrypt
 
 name=ntfs-3g
-version=2017.3.23
-release=3
-source=(https://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz
-	ntfs3g-2014.2.15-no-split-usr.patch
-	ntfs3g-2016.2.22-sysmacros.patch
-	ntfs3g-2017.3.23-check-mftmirr.patch
-	ntfs3g-2017.3.23-big-sectors.patch
-	ntfs3g-2017.3.23-full-clusters.patch
-	CVE-2019-9755.patch)
+version=2021.8.22
+release=1
+source=(https://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
 
 build() {
 	cd ntfs-3g_ntfsprogs-$version
 
-	patch -p1 -i $SRC/ntfs3g-2014.2.15-no-split-usr.patch
-	patch -p1 -i $SRC/ntfs3g-2016.2.22-sysmacros.patch
-	patch -p1 -i $SRC/ntfs3g-2017.3.23-check-mftmirr.patch
-	patch -p1 -i $SRC/ntfs3g-2017.3.23-big-sectors.patch
-	patch -p1 -i $SRC/ntfs3g-2017.3.23-full-clusters.patch
-	patch -p1 -i $SRC/CVE-2019-9755.patch
-
+	sed 's|$(DESTDIR)/sbin|$(DESTDIR)/usr/bin|' -i {ntfsprogs,src}/Makefile.in
 	install -d $PKG/lib
 
 	./configure \
 		--prefix=/usr \
 		--exec-prefix=/usr \
+		--enable-crypto \
+		--enable-extras \
 		--enable-ldscript \
-		--disable-ldconfig \
-		--with-fuse=external \
 		--enable-posix-acls \
 		--enable-xattr-mappings \
+		--with-fuse=external \
+		--disable-ldconfig \
+		--disable-static \
 		--without-uuid \
-		--without-hd \
-		--enable-extras
-		#--enable-crypto
+		--without-hd
 
 	make
 	make DESTDIR=$PKG install
 
-	ln -s ../usr/bin/ntfs-3g $PKG/sbin/mount.ntfs
-	ln -s ../usr/bin/ntfsfix $PKG/sbin/fsck.ntfs
+	ln -s ../usr/bin/ntfs-3g $PKG/usr/bin/mount.ntfs
+	ln -s ../usr/bin/ntfsfix $PKG/usr/bin/fsck.ntfs
 
 	ln -s ntfs-3g.8 $PKG/usr/share/man/man8/mount.ntfs.8
 	ln -s ntfsfix.8 $PKG/usr/share/man/man8/fsck.ntfs.8

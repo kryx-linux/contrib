@@ -4,12 +4,11 @@
 # Depends on: basu inih pipewire wayland-protocols
 
 name=xdg-desktop-portal-wlr
-version=0.4.0
-release=3
+version=0.5.0
+release=1
 source=(https://github.com/emersion/xdg-desktop-portal-wlr/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  #meson setup $name-$_commit build \
   meson setup $name-$version build \
     --prefix=/usr \
     --libexecdir=lib \
