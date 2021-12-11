@@ -4,7 +4,7 @@
 # Depends on: expat libffi libxml2 meson ninja
 
 name=wayland
-version=1.19.0
+version=1.20.0
 release=1
 source=(https://wayland.freedesktop.org/releases/$name-$version.tar.xz)
 
@@ -12,7 +12,10 @@ build() {
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
-    -Ddocumentation=false
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D documentation=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
