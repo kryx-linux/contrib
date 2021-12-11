@@ -1,11 +1,11 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 brotli cbindgen clang dbus-glib libevent libidl libnotify libvpx libwebp libxkbcommon lld nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
+# Depends on: alsa-lib autoconf-2.13 brotli cbindgen clang dbus-glib libevent libidl libnotify libvpx libwebp libxkbcommon lld nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip wasi-compiler-rt wasi-libc wasi-libc++
 # Optional: sccache jack
 
 name=firefox
-version=94.0.2
+version=95.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
 	firefox.desktop
@@ -45,6 +45,7 @@ cat <<- EOF > .mozconfig
 	ac_add_options --with-system-libevent
 	ac_add_options --with-system-libvpx
 	ac_add_options --with-system-webp
+	ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot
 	ac_add_options --enable-av1
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
