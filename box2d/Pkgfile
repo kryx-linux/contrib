@@ -9,8 +9,7 @@ release=1
 source=(https://github.com/erincatto/box2d/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_BOX2D+=' -G Ninja'
-  cmake -S $name-$version -B build $PKGMK_BOX2D \
+  cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
@@ -18,6 +17,7 @@ build() {
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC" \
     -D BUILD_SHARED_LIBS=ON \
     -D BOX2D_BUILD_TESTBED=OFF \
+    -D BOX2D_BUILD_UNIT_TESTS=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
