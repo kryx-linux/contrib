@@ -5,7 +5,7 @@
 
 name=basu
 version=0.2.0
-release=1
+release=2
 source=(https://github.com/emersion/basu/archive/v$version/$name-$version.tar.gz)
 
 build() {
@@ -15,7 +15,7 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D system-bus-address='unix:path=/var/run/dbus/system_bus_socket' \
+    -D system-bus-address='unix:path=/run/dbus/system_bus_socket' \
     -D nobody-user=nobody
   meson compile -C build
   DESTDIR=$PKG meson install -C build
