@@ -17,7 +17,7 @@ getent group mail >/dev/null || groupadd -r mail
 
 getent group ${usrgrp} >/dev/null || groupadd -r ${usrgrp}
 getent passwd ${usr} >/dev/null 2>&1 || {
-	useradd -r -g ${usrgrp} -d /var/spool/${usr} -s /bin/false ${usr}
+	useradd -r -g ${usrgrp} -d /var/spool/${name} -s /bin/false ${usr}
 	passwd -l ${usr}
 }
 
