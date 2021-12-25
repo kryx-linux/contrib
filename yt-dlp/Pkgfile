@@ -1,10 +1,10 @@
 # Description: CLI program to access YouTub and other data content
 # URL:         https://github.com/yt-dlp/yt-dlp
-# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# Maintainer:  Tim Biermann, tbier at posteo dot de
 # Depends on:  python3-setuptools
 
 name=yt-dlp
-version=2021.12.01
+version=2021.12.25
 release=1
 source=(https://github.com/${name}/${name}/archive/\
 ${version}/${name}-${version}.tar.gz)
@@ -15,7 +15,7 @@ build() {
    python3 setup.py build
 
    cat > ./yt-dlp.1 <<- \!
-	.Dd December 22, 2021
+	.Dd December 25, 2021
 	.Dt YT-DLP 1
 	.Os
 	.
