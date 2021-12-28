@@ -1,0 +1,15 @@
+# Description: Python bindings for PostgreSQL
+# URL: https://www.psycopg.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: postgresql python3-setuptools
+
+name=python3-psycopg2
+version=2.9.2
+release=1
+source=(https://pypi.python.org/packages/source/p/psycopg2/psycopg2-$version.tar.gz)
+
+build() {
+    cd psycopg2-$version
+    /usr/bin/python3 setup.py build
+    /usr/bin/python3 setup.py install --root=$PKG --prefix=/usr
+}
