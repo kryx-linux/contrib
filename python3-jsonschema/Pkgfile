@@ -4,12 +4,14 @@
 # Depends on: python3-attrs python3-pyrsistent python3-importlib_metadata
 
 name=python3-jsonschema
-version=3.2.0
+version=4.3.3
 release=1
-source=(https://files.pythonhosted.org/packages/69/11/a69e2a3c01b324a77d3a7c0570faa372e8448b666300c4117a516f8b1212/jsonschema-$version.tar.gz)
+source=(https://pypi.python.org/packages/source/j/jsonschema/jsonschema-$version.tar.gz \
+	setup.py)
 
 build() {
 	cd jsonschema-$version
+	cp $SRC/setup.py .
 	python3 setup.py build
 	python3 setup.py install --root=$PKG
 }

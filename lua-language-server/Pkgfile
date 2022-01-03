@@ -4,17 +4,17 @@
 # Depends on: lua ninja
 
 name=lua-language-server
-version=2.5.3
+version=2.5.6
 
 # https://github.com/sumneko/lua-language-server/tree/master/3rd
-_bee_commit=efa8dd41f60322f33df30ff47acb86256cc619af
+_bee_commit=9132c7ecb4a68c40d52a6d750308237bf054feb6
 _loveapi_commit=fa88219b16b652cccee983aa08dcf706e1b5f0e6
-_lovrdocs_commit=58580f0f8ba3852fa7fe1b31a275e0d2a657ec37
+_lovrdocs_commit=92d3742eb6c3f4999a0c575984c82a75652e2b74
 _lpeglabel_commit=ed183860289664af0f3727307653c9bf2bccdc80
-_luamake_commit=f2336d09633caf39cbca3d96d01211bca3b7f29b
+_luamake_commit=637ca44922ac125ceaebfb53650e4d7c6ae92473
 _rcedit_commit=b807b34a644c86c0b0d89c7f073967e79202731a
 # https://github.com/actboy168/luamake/tree/$_luamake_commit/3rd
-_bee2_commit=f34037c854cc5abcb61c9ae2abfd37edac512c4e
+_bee2_commit=9132c7ecb4a68c40d52a6d750308237bf054feb6
 
 release=1
 source=(https://github.com/sumneko/lua-language-server/archive/$version/$name-$version.tar.gz
@@ -40,15 +40,10 @@ build() {
   ninja -C 3rd/luamake -f compile/ninja/linux.ninja
   ./3rd/luamake/luamake rebuild
 
-  install -dm0755 $PKG/usr/lib/$name
-  cp -a bin/Linux/* $PKG/usr/lib/$name
-
-  install -dm0755 $PKG/usr/share/$name
-
-  cp -a \
-    main.lua debugger.lua \
-    locale script meta \
-    $PKG/usr/share/$name
+  install -Dt $PKG/usr/lib/$name/bin bin/$name
+  install -m644 -t $PKG/usr/lib/$name/bin bin/main.lua
+  install -m644 -t $PKG/usr/lib/$name {debugger,main}.lua
+  cp -r locale meta script $PKG/usr/lib/$name
 
   install -Dm0755 $SRC/wrapper.sh $PKG/usr/bin/lua-language-server
   }
