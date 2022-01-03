@@ -11,7 +11,10 @@ source=(https://github.com/intel/intel-vaapi-driver/releases/download/${version}
 build() {
   meson intel-vaapi-driver-$version build \
     --prefix=/usr \
-    --buildtype=plain
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
   ninja -C build
   DESTDIR=$PKG ninja -C build install
 }
