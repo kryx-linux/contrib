@@ -4,13 +4,13 @@
 # Depends on: python3-pyproject2setuppy
 
 name=python3-mistune
-version=2.0.0
+version=2.0.1
 release=1
 source=(https://github.com/lepture/mistune/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd mistune-$version
-  echo 'build-backend = "setuptools.build_meta"' >> pyproject.toml
+  #echo 'build-backend = "setuptools.build_meta"' >> pyproject.toml
   /usr/bin/python3 -m pyproject2setuppy.main build
   /usr/bin/python3 -m pyproject2setuppy.main install --prefix=/usr \
     --root=$PKG \
