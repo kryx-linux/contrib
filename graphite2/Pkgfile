@@ -1,7 +1,7 @@
 # Description: reimplementation of the SIL Graphite text processing engine.
 # URL: https://github.com/silnrsi/graphite
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cmake freetype python3
+# Depends on: freetype
 # Optional: asciidoc dblatex doxygen graphviz
 
 name=graphite2
@@ -10,8 +10,7 @@ release=1
 source=(https://github.com/silnrsi/graphite/releases/download/$version/$name-$version.tgz)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_GRAPHITE2+=' -G Ninja'
-  cmake -S $name-$version -B build $PKGMK_GRAPHITE2 \
+  cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
