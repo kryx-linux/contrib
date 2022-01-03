@@ -1,7 +1,7 @@
 # Description: asynchronous API library for interfacing MPD in the C, C++ & Objective C languages
 # URL: https://www.musicpd.org/libs/libmpdclient/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: meson ninja
+# Depends on:
 
 name=libmpdclient
 version=2.20
@@ -13,6 +13,9 @@ build() {
 
   meson build --prefix=/usr \
     --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
     -D documentation=false
   DESTDIR=$PKG ninja -C build -j ${JOBS:-1} install
   rm -r $PKG/usr/share/doc
