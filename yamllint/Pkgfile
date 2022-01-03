@@ -1,0 +1,18 @@
+# Description: Linter for YAML files
+# URL: https://github.com/adrienverge/yamllint
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pathspec python3-yaml
+
+name=yamllint
+version=1.26.3
+release=1
+source=(https://files.pythonhosted.org/packages/source/y/yamllint/yamllint-$version.tar.gz)
+
+build() {
+  cd yamllint-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build \
+    -O1
+}
