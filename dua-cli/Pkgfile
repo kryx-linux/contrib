@@ -8,17 +8,6 @@ version=2.14.11
 release=1
 source=(https://github.com/Byron/dua-cli/archive/v$version/$name-$version.tar.gz)
 
-unpack_source() {
-  for file in ${source[@]}; do
-    case ${file##*/} in
-      $name-$version.tar.gz)
-        tar xfvz $(get_filename $file) -C $SRC ;;
-      *)
-        cp $(get_filename $file) $SRC ;;
-    esac
-  done
-}
-
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
