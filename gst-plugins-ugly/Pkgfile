@@ -1,23 +1,26 @@
 # Description: A set of plugins for gstreamer that may pose distribution problems.
 # URL: https://gstreamer.freedesktop.org/modules/gst-plugins-ugly.html
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gst-plugins-base liba52 libcdio libdvdread libmpeg2 opencore-amr x264
+# Depends on: gst-plugins-base x264
+# Optional: libcdio libdvdread libsidplay libmpeg2 liba52 opencore-amr
 
 name=gst-plugins-ugly
 version=1.18.5
-release=1
+release=2
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
-
-	meson build \
+	meson build $name-$version \
 		--prefix=/usr \
-		--libexecdir=/usr/lib \
-		-D buildtype=plain \
-		-D gtk_doc=disabled \
+		--libexecdir lib \
+		--buildtype plain \
+		--wrap-mode nodownload \
+		-D b_lto=true \
+		-D b_pie=true \
+		-D doc=disabled \
 		-D nls=disabled \
-		-D package-name="GStreamer (CRUX Linux)" \
+		-D gobject-cast-checks=disabled \
+		-D package-name="GStreamer Ugly Plugins (CRUX Linux)" \
 		-D package-origin="https://crux.nu/"
 
 	ninja -C build -j ${JOBS:-1}
