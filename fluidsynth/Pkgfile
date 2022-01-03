@@ -1,7 +1,7 @@
 # Description: A real-time software synthesizer.
 # URL: https://www.fluidsynth.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cmake glib
+# Depends on: glib
 # Optional: jack-audio-connection-kit
 
 name=fluidsynth
@@ -10,7 +10,7 @@ release=1
 source=(https://github.com/FluidSynth/fluidsynth/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S$name-$version -Bbuild -GNinja \
+  cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
