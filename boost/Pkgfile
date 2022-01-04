@@ -1,55 +1,67 @@
 # Description: Free peer-reviewed portable C++ source libraries.
 # URL: https://www.boost.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python
-# Optional: icu python3-numpy
+# Depends on: bzip2 zstd
+# Optional: icu openmpi python3-numpy
 
 name=boost
-version=1.76.0
-release=2
+version=1.78.0
+release=1
 source=(https://boostorg.jfrog.io/artifactory/main/release/$version/source/${name}_${version//./_}.tar.bz2
-	boost-1.74-CVE-2012-2677.patch
-	boost-1.71.0-disable_icu_rpath.patch
+	boost-b2-fix-lib-install.patch
 	boost-ublas-c++20-iterator.patch)
 
 build() {
 	cd ${name}_${version//./_}
 
-	patch -p1 -i $SRC/boost-1.74-CVE-2012-2677.patch
-	patch -p1 -i $SRC/boost-1.71.0-disable_icu_rpath.patch
+	# https://github.com/bfgroup/b2/issues/104
+	patch -p1 -d tools/build -i $SRC/boost-b2-fix-lib-install.patch
 
-	# https://github.com/boostorg/ublas/commit/a31e5cffa85f.patch
+	# https://github.com/boostorg/ublas/pull/97
 	patch -p2 -i $SRC/boost-ublas-c++20-iterator.patch
 
-       local config="
-variant=release \
-threading=multi \
-runtime-link=shared \
-link=shared,static \
-debug-symbols=off \
-toolset=gcc \
--j ${JOBS-1}"
+	# Boost.Build does not allow for disabling of numpy
+	# extensions, thereby leading to automagic numpy
+	# https://github.com/boostorg/python/issues/111#issuecomment-280447482
+	prt-get isinst python3-numpy || sed \
+		-e 's/\[ unless \[ python\.numpy \] : <build>no \]/<build>no/g' \
+		-i libs/python/build/Jamfile
 
-	local ICU="$([ -e /usr/bin/icu-config ] && echo --with-icu)"
-	./bootstrap.sh --prefix=$PKG/usr --with-toolset=gcc $ICU --with-python=/usr/bin/python2
-	local pyver2="$(/usr/bin/python2 -c 'import sys; print("%s.%s" % sys.version_info[:2])')"
-
-	./b2 stage $config python="$pyver2"
-	./b2 install threading=multi link=shared
-	./b2 install threading=multi link=static
-
-	install -m 0755 -D b2 $PKG/usr/bin/b2
+	pushd tools/build
+	./bootstrap.sh --cxxflags="$CXXFLAGS $LDFLAGS"
+	./b2 install --prefix=$PKG/usr
 	ln -s b2 $PKG/usr/bin/bjam
+	popd
 
-	##
-	./bootstrap.sh --prefix=$PKG/usr --with-toolset=gcc $ICU --with-python=/usr/bin/python3 --with-libraries=python
-	local pyver3=$(/usr/bin/python3 -c 'import sys; print("%s.%s" % sys.version_info[:2])')
+	# Boost.Build does not allow for disabling of numpy
+	# extensions, thereby leading to automagic numpy
+	# https://github.com/boostorg/python/issues/111#issuecomment-280447482
+	prt-get isinst python3-numpy || sed \
+		-e 's/\[ unless \[ python\.numpy \] : <build>no \]/<build>no/g' \
+		-i libs/python/build/Jamfile
 
-	./b2 clean
-	./b2 stage $config python="$pyver3"
-	./b2 install threading=multi link=shared
+	./bootstrap.sh --with-toolset=gcc --with-python=/usr/bin/python3
 
-	# https://github.com/boostorg/python/issues/203#issuecomment-391477685
-	local pyver="$(/usr/bin/python3 -c 'import sys; print("%s%s" % sys.version_info[:2])')"
-	ln -s libboost_python$pyver.so $PKG/usr/lib/libboost_python3.so
+	# support for OpenMPI
+	prt-get isinst openmpi && echo "using mpi ;" >>project-config.jam || PKGMK_BOOST+=' --without-mpi --without-graph_parallel'
+	prt-get isinst icu || PKGMK_BOOST+=' --disable-icu boost.locale.icu=off'
+
+	./b2 install ${PKGMK_BOOST} \
+		--prefix=$PKG/usr \
+		--layout=system \
+		--without-stacktrace \
+		-j ${JOBS-1} \
+		variant=release \
+		debug-symbols=off \
+		threading=multi \
+		runtime-link=shared \
+		link=shared,static \
+		toolset=gcc \
+		python=$(/usr/bin/python3 -c 'import sys; print("%s.%s" % sys.version_info[:2])') \
+		cflags="$CPPFLAGS $CFLAGS -fPIC -O3 -ffat-lto-objects" \
+		cxxflags="$CPPFLAGS $CXXFLAGS -fPIC -O3 -ffat-lto-objects" \
+		linkflags="$LDFLAGS"
+
+	prt-get isinst python3-numpy || rm -r $PKG/usr/include/boost/python/numpy*
+	prt-get isinst openmpi || rm -r $PKG//usr/include/boost/mpi/python*
 }
