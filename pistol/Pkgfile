@@ -5,7 +5,7 @@
 
 name=pistol
 version=0.3.2
-release=1
+release=2
 source=(https://github.com/doronbehar/pistol/archive/v$version/$name-$version.tar.gz)
 
 build() {
@@ -16,11 +16,13 @@ build() {
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export CGO_LDFLAGS="${LDFLAGS}"
   export GO111MODULE=on
+  export CGO_ENABLED=1
+  export GO111MODULE=on
 
   mkdir "$PKGMK_SOURCE_DIR/gopath" || true
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
-  go get -u github.com/doronbehar/pistol/cmd/pistol
+  go build -ldflags "-X 'main.Version=${version}-git'" ./cmd/pistol
 
-  install -Dm755 $GOPATH/bin/$name $PKG/usr/bin/$name
+  install -Dm755 pistol $PKG/usr/bin/pistol
 }
