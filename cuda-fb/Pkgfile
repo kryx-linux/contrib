@@ -1,12 +1,12 @@
 # Description: NVIDIA's GPU programming toolkit (feature branch)
 # URL: https://developer.nvidia.com/cuda-zone
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: nvidia lsb-release
+# Depends on: nvidia-fb lsb-release
 
 name=cuda-fb
 version=11.5.1
 _driverver=495.29.05
-release=1
+release=2
 source=(http://developer.download.nvidia.com/compute/cuda/${version}/local_installers/cuda_${version}_${_driverver}_linux.run
 	cuda.sh cuda.conf $name.revdep
 	cuda-findgllib_mk.diff
@@ -38,6 +38,12 @@ build() {
 	# Delete some unnecessary files
 	rm -r "${PKG}"/opt/cuda/{bin/cuda-uninstaller,samples/bin/cuda-uninstaller}
 
+	# remove foreign archs
+	rm -r "${PKG}"/opt/cuda/nsight_compute/target/linux-desktop-glibc_2_19_0-ppc64le
+	rm -r "${PKG}"/opt/cuda/nsight_compute/target/linux-desktop-t210-a64
+	rm -r "${PKG}"/opt/cuda/nsight_systems/target-linux-armv8
+	rm "${PKG}"/opt/cuda/samples/common/lib/linux/{aarch64,armv7l}/libGLEW.a
+
 	# Define compilers for CUDA to use.
 	# This allows us to use older versions of GCC if we have to.
 	ln -s /usr/bin/gcc "${PKG}/opt/cuda/bin/gcc"
@@ -51,8 +57,7 @@ build() {
 	mkdir -p "$PKG"/usr/lib/pkgconfig
 	cp "${SRC}"/*.pc "${PKG}"/usr/lib/pkgconfig
 
-	# Allow newer compilers to work. This is not officially supported in the Arch package but
-	# if users want to try, let them try.
+	# Allow newer compilers to work.
 	# See https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements
 	# for official requirements
 	sed -i "/.*unsupported GNU version.*/d" "${PKG}"/opt/cuda/targets/x86_64-linux/include/crt/host_config.h
