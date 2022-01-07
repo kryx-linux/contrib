@@ -4,15 +4,12 @@
 # Depends on: iniparser json-c keyutils
 
 name=ndctl
-version=72
+version=72.1
 release=1
-source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version.tar.gz
-  186.patch)
+source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-
-  patch -Np1 -i $SRC/186.patch
 
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr \
