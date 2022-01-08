@@ -1,28 +1,8 @@
 diff --git a/config.def.h b/config.def.h
-index 6f05dce..b1c2ccc 100644
+index 91ab8cab2c..d3f9f00cbc 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -120,6 +120,8 @@ static const char *colorname[] = {
- 	/* more colors can be added after 255 to use with DefaultXX */
- 	"#cccccc",
- 	"#555555",
-+	"gray90",
-+	"black"
- };
- 
- 
-@@ -127,8 +129,8 @@ static const char *colorname[] = {
-  * Default colors (colorname index)
-  * foreground, background, cursor, reverse cursor
-  */
--unsigned int defaultfg = 7;
--unsigned int defaultbg = 0;
-+unsigned int defaultfg = 258;
-+unsigned int defaultbg = 259;
- static unsigned int defaultcs = 256;
- static unsigned int defaultrcs = 257;
- 
-@@ -168,6 +170,42 @@ static unsigned int defaultattr = 11;
+@@ -170,6 +170,42 @@ static unsigned int defaultattr = 11;
   */
  static uint forcemousemod = ShiftMask;
  
@@ -65,7 +45,7 @@ index 6f05dce..b1c2ccc 100644
  /*
   * Internal mouse shortcuts.
   * Beware that overloading Button1 will disable the selection.
-@@ -175,10 +213,12 @@ static uint forcemousemod = ShiftMask;
+@@ -177,10 +213,12 @@ static uint forcemousemod = ShiftMask;
  static MouseShortcut mshortcuts[] = {
  	/* mask                 button   function        argument       release */
  	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
@@ -79,7 +59,7 @@ index 6f05dce..b1c2ccc 100644
  
  /* Internal keyboard shortcuts. */
 diff --git a/x.c b/x.c
-index 210f184..76f167f 100644
+index 8a16faaad0..2cce27d1c9 100644
 --- a/x.c
 +++ b/x.c
 @@ -14,6 +14,7 @@
@@ -110,7 +90,7 @@ index 210f184..76f167f 100644
  /* X modifiers */
  #define XK_ANY_MOD    UINT_MAX
  #define XK_NO_MOD     0
-@@ -828,8 +842,8 @@ xclear(int x1, int y1, int x2, int y2)
+@@ -843,8 +857,8 @@ xclear(int x1, int y1, int x2, int y2)
  void
  xhints(void)
  {
@@ -121,7 +101,7 @@ index 210f184..76f167f 100644
  	XWMHints wm = {.flags = InputHint, .input = 1};
  	XSizeHints *sizeh;
  
-@@ -1104,8 +1118,6 @@ xinit(int cols, int rows)
+@@ -1119,8 +1133,6 @@ xinit(int cols, int rows)
  	pid_t thispid = getpid();
  	XColor xmousefg, xmousebg;
  
@@ -130,7 +110,7 @@ index 210f184..76f167f 100644
  	xw.scr = XDefaultScreen(xw.dpy);
  	xw.vis = XDefaultVisual(xw.dpy, xw.scr);
  
-@@ -1964,6 +1976,59 @@ run(void)
+@@ -1995,6 +2007,59 @@ run(void)
  	}
  }
  
@@ -190,7 +170,7 @@ index 210f184..76f167f 100644
  void
  usage(void)
  {
-@@ -2037,6 +2102,11 @@ run:
+@@ -2068,6 +2133,11 @@ run:
  
  	setlocale(LC_CTYPE, "");
  	XSetLocaleModifiers("");
