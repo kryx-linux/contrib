@@ -4,7 +4,7 @@
 # Depends on: rust
 
 name=bat
-version=0.18.3
+version=0.19.0
 release=1
 source=(https://github.com/sharkdp/bat/archive/v$version/$name-$version.tar.gz)
 
@@ -16,7 +16,6 @@ build() {
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
   cargo update
-  cargo fetch
   cargo build --release --locked
   install -Dt $PKG/usr/bin target/release/bat
 }
