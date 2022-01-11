@@ -1,7 +1,7 @@
 # Description: Unpadded Base64
 # URL: https://pypi.python.org/pypi/unpaddedbase64/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-poetry
+# Depends on: python3-pyproject2setuppy
 
 name=python3-unpaddedbase64
 version=2.1.0
@@ -10,9 +10,8 @@ source=(https://github.com/matrix-org/python-unpaddedbase64/archive/v$version/$n
 
 build() {
   cd python-unpaddedbase64-$version
-  poetry build --format wheel
-  export PYTHONHASHSEED=0
-  PIP_CONFIG_FILE=/dev/null pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
-
-  rm -r $PKG/usr/lib/python3.10/site-packages/unpaddedbase64-$version.dist-info/INSTALLER
+  /usr/bin/python3 -m pyproject2setuppy.main build
+  /usr/bin/python3 -m pyproject2setuppy.main install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
 }

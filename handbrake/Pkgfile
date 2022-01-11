@@ -4,19 +4,33 @@
 # Depends on: faad2 jansson lame libass libdvdcss libjpeg-turbo libsamplerate libtheora libva libvpx libxml2 numactl speex x264
 
 name=handbrake
-version=1.4.2
+version=1.5.1
 release=1
+_HASH=09690d61027d52e37a86f24ecff4bca7ee3a03b6
+_HASHDATE="2022-01-09 21:18:17 +0000"
 source=(https://github.com/HandBrake/HandBrake/releases/download/$version/$name-$version-source.tar.bz2)
 
 build() {
   [[ -e /usr/lib/pkgconfig/gdk-x11-3.0.pc ]] || PKGMK_HANDBRAKE+='--disable-gtk --disable-gtk-update-checks'
+
+  ## from inside a git checkout..
+  #./HandBrake-$version/scripts/repo-info.sh HandBrake-$version > HandBrake-$version/version.txt
+  echo "URL=https://github.com/HandBrake/HandBrake.git" >> HandBrake-$version/version.txt
+  echo "HASH=$_HASH" >> HandBrake-$version/version.txt
+  echo "SHORTHASH=${_HASH:0:9}" >> HandBrake-$version/version.txt
+  echo "TAG=$version" >> HandBrake-$version/version.txt
+  echo "TAG_HASH=${_HASH:0:9}" >> HandBrake-$version/version.txt
+  echo "REV=0" >> HandBrake-$version/version.txt
+  echo "BRANCH=" >> HandBrake-$version/version.txt
+  echo "REMOTE=https://github.com/HandBrake/HandBrake.git" >> HandBrake-$version/version.txt
+  echo "DATE=$_HASHDATE" >> HandBrake-$version/version.txt
 
   ./HandBrake-$version/configure $PKGMK_HANDBRAKE \
     --prefix=/usr \
     --launch \
     --launch-jobs=$(nproc) \
     --build=build \
-    --enable-fdk
+    --enable-fdk-aac
 
   mkdir -p $SRC/build/build_tmp
 

@@ -1,0 +1,20 @@
+# Description: Portable Hardware Locality is a portable abstraction of hierarchical architectures
+# URL: https://www.open-mpi.org/projects/hwloc/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libxml2 xorg-libpciaccess xorg-libx11
+
+name=hwloc
+version=2.7.0
+release=1
+source=(https://www.open-mpi.org/software/hwloc/v${version%.*}/downloads/${name}-${version}.tar.bz2)
+
+build() {
+  cd $name-$version
+  ./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --sysconfdir=/etc \
+    --enable-plugins
+  make
+  make DESTDIR=$PKG install
+}
