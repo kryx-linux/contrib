@@ -1,0 +1,18 @@
+# Description: diff-so-fancy strives to make your diffs human readable instead of machine readable. This helps improve code quality and helps you spot defects faster
+# URL: https://github.com/so-fancy/diff-so-fancy
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: perl
+
+name=diff-so-fancy
+version=1.4.3
+release=1
+source=(https://github.com/so-fancy/$name/archive/refs/tags/v$version/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    install -o root -g root -m 0755 -D $name $PKG/usr/bin/$name
+    install -o root -g root -m 0644 -D lib/DiffHighlight.pm \
+        $PKG/usr/share/diff-so-fancy/DiffHighlight.pm
+    sed -i -e 's,^\(use lib\) .*$,\1 "/usr/share/diff-so-fancy";,' \
+        $PKG/usr/bin/$name
+}
