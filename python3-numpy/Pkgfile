@@ -4,7 +4,7 @@
 # Depends on: lapack python3-cython
 
 name=python3-numpy
-version=1.22.0
+version=1.22.1
 release=1
 source=(https://github.com/${name#*-}/${name#*-}/releases/download/v$version/${name#*-}-$version.tar.gz)
 
@@ -13,6 +13,7 @@ build() {
   export ATLAS=None
   export LDFLAGS="$LDFLAGS -shared"
 
+  ## broken port, this requires an older setuptools
   cd ${name#*-}-$version
   /usr/bin/python3 setup.py config_fc --fcompiler=gnu95 build
   /usr/bin/python3 setup.py config_fc --fcompiler=gnu95 install \
