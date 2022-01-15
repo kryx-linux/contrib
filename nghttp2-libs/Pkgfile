@@ -1,0 +1,27 @@
+# Description: nghttp2-libs: HTTP/2 libraries (for eg cURL)
+# URL:         https://nghttp2.org
+# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+
+rname=nghttp2
+name=nghttp2-libs
+version=1.46.0
+release=1
+source=(
+   https://github.com/${rname}/${rname}/releases/download/\
+v${version}/${rname}-${version}.tar.xz
+)
+
+build() {
+   cd ${rname}-${version}
+
+   ./configure --prefix=/usr --enable-lib-only \
+      --without-libxml2 --without-mruby --without-neverbleed \
+      --without-systemd --without-jemalloc
+
+   make
+   make DESTDIR="${PKG}" install
+
+   rm -rf "${PKG}"/usr/share/doc "${PKG}"/usr/share/man
+}
+
+# s-sh-mode
