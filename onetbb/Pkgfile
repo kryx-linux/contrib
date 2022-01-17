@@ -1,11 +1,11 @@
 # Description: High level abstract threading library
 # URL: https://www.threadingbuildingblocks.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cmake ninja
+# Depends on: cmake hwloc ninja swig
 
 name=onetbb
 version=2021.5.0
-release=1
+release=2
 source=(https://github.com/oneapi-src/oneTBB/archive/v$version/$name-$version.tar.gz)
 
 build() {
@@ -15,8 +15,10 @@ build() {
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D TBB4PY_BUILD=ON \
     -Wno-dev
-  cmake --build build
+  cmake --build build --target all python_build
   DESTDIR=$PKG cmake --install build
+
   rm -r $PKG/usr/share/doc
 }
