@@ -1,4 +1,4 @@
-From 4cc31289ee8159e656a5d4795db525791e266b01 Mon Sep 17 00:00:00 2001
+From 28950f78781363a61175eedb81973121cf7b1cea Mon Sep 17 00:00:00 2001
 From: Jan Beich <jbeich@FreeBSD.org>
 Date: Mon, 21 Dec 2020 21:03:14 +0000
 Subject: [PATCH 1/4] Drop dependency on sd-login
@@ -9,11 +9,11 @@ Only sd_bus_* functions appear to be used, also supported by basu.
  1 file changed, 2 deletions(-)
 
 diff --git a/main.c b/main.c
-index bdf4ad61..89da9693 100644
+index a33d6465..8a7823d5 100644
 --- a/main.c
 +++ b/main.c
-@@ -18,10 +18,8 @@
- #include "idle-client-protocol.h"
+@@ -19,10 +19,8 @@
+ #include "log.h"
  #if HAVE_SYSTEMD
  #include <systemd/sd-bus.h>
 -#include <systemd/sd-login.h>
@@ -24,7 +24,7 @@ index bdf4ad61..89da9693 100644
  
  static struct org_kde_kwin_idle *idle_manager = NULL;
 
-From efb2264837822a6743ff9c65e7f1c1227cbe86c8 Mon Sep 17 00:00:00 2001
+From ff7569ad112997085e4d2c90fa38aea4818aef27 Mon Sep 17 00:00:00 2001
 From: Jan Beich <jbeich@FreeBSD.org>
 Date: Mon, 21 Dec 2020 21:24:35 +0000
 Subject: [PATCH 2/4] build: rename logind-provider to sd-bus-provider
@@ -37,13 +37,13 @@ Based on https://github.com/swaywm/sway/commit/fdbe98512a71
  3 files changed, 45 insertions(+), 22 deletions(-)
 
 diff --git a/main.c b/main.c
-index 89da9693..9acf448f 100644
+index 8a7823d5..b15462e3 100644
 --- a/main.c
 +++ b/main.c
-@@ -16,9 +16,9 @@
- #include <wordexp.h>
+@@ -17,9 +17,9 @@
  #include "config.h"
  #include "idle-client-protocol.h"
+ #include "log.h"
 -#if HAVE_SYSTEMD
 +#if HAVE_LIBSYSTEMD
  #include <systemd/sd-bus.h>
@@ -52,7 +52,7 @@ index 89da9693..9acf448f 100644
  #include <elogind/sd-bus.h>
  #endif
  
-@@ -141,7 +141,7 @@ static void cmd_exec(char *param) {
+@@ -169,7 +169,7 @@ static void cmd_exec(char *param) {
  	}
  }
  
@@ -61,7 +61,7 @@ index 89da9693..9acf448f 100644
  #define DBUS_LOGIND_SERVICE "org.freedesktop.login1"
  #define DBUS_LOGIND_PATH "/org/freedesktop/login1"
  #define DBUS_LOGIND_MANAGER_INTERFACE "org.freedesktop.login1.Manager"
-@@ -545,7 +545,7 @@ static void enable_timeouts(void) {
+@@ -585,7 +585,7 @@ static void enable_timeouts(void) {
  	if (state.timeouts_enabled) {
  		return;
  	}
@@ -70,7 +70,7 @@ index 89da9693..9acf448f 100644
  	if (get_logind_idle_inhibit()) {
  		swayidle_log(LOG_INFO, "Not enabling timeouts: idle inhibitor found");
  		return;
-@@ -560,7 +560,7 @@ static void enable_timeouts(void) {
+@@ -600,7 +600,7 @@ static void enable_timeouts(void) {
  	}
  }
  
@@ -79,7 +79,7 @@ index 89da9693..9acf448f 100644
  static void disable_timeouts(void) {
  	if (!state.timeouts_enabled) {
  		return;
-@@ -582,7 +582,7 @@ static void handle_idle(void *data, struct org_kde_kwin_idle_timeout *timer) {
+@@ -622,7 +622,7 @@ static void handle_idle(void *data, struct org_kde_kwin_idle_timeout *timer) {
  	struct swayidle_timeout_cmd *cmd = data;
  	cmd->resume_pending = true;
  	swayidle_log(LOG_DEBUG, "idle state");
@@ -88,7 +88,7 @@ index 89da9693..9acf448f 100644
  	if (cmd->idlehint) {
  		set_idle_hint(true);
  	} else
-@@ -599,7 +599,7 @@ static void handle_resume(void *data, struct org_kde_kwin_idle_timeout *timer) {
+@@ -639,7 +639,7 @@ static void handle_resume(void *data, struct org_kde_kwin_idle_timeout *timer) {
  	if (cmd->registered_timeout != cmd->timeout) {
  		register_timeout(cmd, cmd->timeout);
  	}
@@ -97,7 +97,7 @@ index 89da9693..9acf448f 100644
  	if (cmd->idlehint) {
  		set_idle_hint(false);
  	} else
-@@ -672,7 +672,7 @@ static int parse_timeout(int argc, char **argv) {
+@@ -712,7 +712,7 @@ static int parse_timeout(int argc, char **argv) {
  }
  
  static int parse_sleep(int argc, char **argv) {
@@ -106,7 +106,7 @@ index 89da9693..9acf448f 100644
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled "
  		       "with neither systemd nor elogind support.", "before-sleep");
  	exit(-1);
-@@ -692,7 +692,7 @@ static int parse_sleep(int argc, char **argv) {
+@@ -732,7 +732,7 @@ static int parse_sleep(int argc, char **argv) {
  }
  
  static int parse_resume(int argc, char **argv) {
@@ -115,7 +115,7 @@ index 89da9693..9acf448f 100644
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled "
  			"with neither systemd nor elogind support.", "after-resume");
  	exit(-1);
-@@ -712,7 +712,7 @@ static int parse_resume(int argc, char **argv) {
+@@ -752,7 +752,7 @@ static int parse_resume(int argc, char **argv) {
  }
  
  static int parse_lock(int argc, char **argv) {
@@ -124,7 +124,7 @@ index 89da9693..9acf448f 100644
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled"
  			" with neither systemd nor elogind support.", "lock");
  	exit(-1);
-@@ -732,7 +732,7 @@ static int parse_lock(int argc, char **argv) {
+@@ -772,7 +772,7 @@ static int parse_lock(int argc, char **argv) {
  }
  
  static int parse_unlock(int argc, char **argv) {
@@ -133,7 +133,7 @@ index 89da9693..9acf448f 100644
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled"
  			" with neither systemd nor elogind support.", "unlock");
  	exit(-1);
-@@ -752,7 +752,7 @@ static int parse_unlock(int argc, char **argv) {
+@@ -792,7 +792,7 @@ static int parse_unlock(int argc, char **argv) {
  }
  
  static int parse_idlehint(int argc, char **argv) {
@@ -142,7 +142,7 @@ index 89da9693..9acf448f 100644
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled"
  			" with neither systemd nor elogind support.", "idlehint");
  	exit(-1);
-@@ -1035,7 +1035,7 @@ int main(int argc, char *argv[]) {
+@@ -1077,7 +1077,7 @@ int main(int argc, char *argv[]) {
  	}
  
  	bool should_run = !wl_list_empty(&state.timeout_cmds);
@@ -152,12 +152,12 @@ index 89da9693..9acf448f 100644
  	setup_property_changed_listener();
  	if (state.before_sleep_cmd || state.after_resume_cmd) {
 diff --git a/meson.build b/meson.build
-index 0e75c66f..fc6f544e 100644
+index fce3ca3e..6bc71c78 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -3,7 +3,7 @@ project(
  	'c',
- 	version: '1.7',
+ 	version: '1.8',
  	license: 'MIT',
 -	meson_version: '>=0.48.0',
 +	meson_version: '>=0.50.0',
@@ -231,7 +231,7 @@ index d40de9cb..f96aba0e 100644
  option('bash-completions', type: 'boolean', value: true, description: 'Install bash shell completions.')
  option('fish-completions', type: 'boolean', value: true, description: 'Install fish shell completions.')
 
-From 88bc257f72f62f7dcc5046656ae53b9df74f5e67 Mon Sep 17 00:00:00 2001
+From f2f7e4d0a7c84d7dcd0de3e0344c8b3844708da1 Mon Sep 17 00:00:00 2001
 From: Jan Beich <jbeich@FreeBSD.org>
 Date: Thu, 24 Dec 2020 23:24:05 +0000
 Subject: [PATCH 3/4] build: add basu as sd-bus provider
@@ -244,10 +244,10 @@ Based on https://github.com/swaywm/sway/commit/a52176f83035
  3 files changed, 13 insertions(+), 6 deletions(-)
 
 diff --git a/main.c b/main.c
-index 9acf448f..66dbd981 100644
+index b15462e3..b0025e24 100644
 --- a/main.c
 +++ b/main.c
-@@ -20,6 +20,8 @@
+@@ -21,6 +21,8 @@
  #include <systemd/sd-bus.h>
  #elif HAVE_LIBELOGIND
  #include <elogind/sd-bus.h>
@@ -256,7 +256,7 @@ index 9acf448f..66dbd981 100644
  #endif
  
  static struct org_kde_kwin_idle *idle_manager = NULL;
-@@ -674,7 +676,7 @@ static int parse_timeout(int argc, char **argv) {
+@@ -714,7 +716,7 @@ static int parse_timeout(int argc, char **argv) {
  static int parse_sleep(int argc, char **argv) {
  #if !HAVE_LOGIND
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled "
@@ -265,7 +265,7 @@ index 9acf448f..66dbd981 100644
  	exit(-1);
  #endif
  	if (argc < 2) {
-@@ -694,7 +696,7 @@ static int parse_sleep(int argc, char **argv) {
+@@ -734,7 +736,7 @@ static int parse_sleep(int argc, char **argv) {
  static int parse_resume(int argc, char **argv) {
  #if !HAVE_LOGIND
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled "
@@ -274,7 +274,7 @@ index 9acf448f..66dbd981 100644
  	exit(-1);
  #endif
  	if (argc < 2) {
-@@ -714,7 +716,7 @@ static int parse_resume(int argc, char **argv) {
+@@ -754,7 +756,7 @@ static int parse_resume(int argc, char **argv) {
  static int parse_lock(int argc, char **argv) {
  #if !HAVE_LOGIND
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled"
@@ -283,7 +283,7 @@ index 9acf448f..66dbd981 100644
  	exit(-1);
  #endif
  	if (argc < 2) {
-@@ -734,7 +736,7 @@ static int parse_lock(int argc, char **argv) {
+@@ -774,7 +776,7 @@ static int parse_lock(int argc, char **argv) {
  static int parse_unlock(int argc, char **argv) {
  #if !HAVE_LOGIND
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled"
@@ -292,7 +292,7 @@ index 9acf448f..66dbd981 100644
  	exit(-1);
  #endif
  	if (argc < 2) {
-@@ -754,7 +756,7 @@ static int parse_unlock(int argc, char **argv) {
+@@ -794,7 +796,7 @@ static int parse_unlock(int argc, char **argv) {
  static int parse_idlehint(int argc, char **argv) {
  #if !HAVE_LOGIND
  	swayidle_log(LOG_ERROR, "%s not supported: swayidle was compiled"
@@ -302,7 +302,7 @@ index 9acf448f..66dbd981 100644
  #endif
  	if (state.logind_idlehint) {
 diff --git a/meson.build b/meson.build
-index fc6f544e..2fb8a3a7 100644
+index 6bc71c78..b147c0cf 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -87,8 +87,12 @@ if get_option('sd-bus-provider') == 'auto'
@@ -339,7 +339,7 @@ index f96aba0e..4cb0cb65 100644
  option('bash-completions', type: 'boolean', value: true, description: 'Install bash shell completions.')
  option('fish-completions', type: 'boolean', value: true, description: 'Install fish shell completions.')
 
-From e639f341c9900de9fd16b47b5d4ea650bc44eadf Mon Sep 17 00:00:00 2001
+From 47056e5c6e7ffc636ef88f93dbe801ca3b731124 Mon Sep 17 00:00:00 2001
 From: Jan Beich <jbeich@FreeBSD.org>
 Date: Thu, 24 Dec 2020 23:50:40 +0000
 Subject: [PATCH 4/4] ci: add FreeBSD job

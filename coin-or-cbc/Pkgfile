@@ -4,12 +4,12 @@
 # Depends on: coin-or-cgl
 
 name=coin-or-cbc
-version=2.10.5
+version=2.10.6
 release=1
-source=(https://www.coin-or.org/download/source/Cbc/Cbc-${version}.tgz)
+source=(https://github.com/coin-or/Cbc/archive/releases/$version/$name-$version.tar.gz)
 
 build() {
-  cd Cbc-$version
+  cd Cbc-releases-$version
   COIN_SKIP_PROJECTS="Sample" \
   ./configure --prefix=/usr \
     --with-osi-lib="$(pkg-config --libs osi)" \

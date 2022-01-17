@@ -4,12 +4,12 @@
 # Depends on: coin-or-clp
 
 name=coin-or-cgl
-version=0.60.3
+version=0.60.4
 release=1
-source=(https://www.coin-or.org/download/source/Cgl/Cgl-${version}.tgz)
+source=(https://github.com/coin-or/Cgl/archive/releases/$version/$name-$version.tar.gz)
 
 build() {
-  cd Cgl-$version/Cgl
+  cd Cgl-releases-$version/Cgl
   COIN_SKIP_PROJECTS="Sample" \
   ./configure --prefix=/usr \
     --with-osi-lib="$(pkg-config --libs osi)" \

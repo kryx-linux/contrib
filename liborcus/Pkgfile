@@ -4,17 +4,12 @@
 # Depends on: libixion zstd
 
 name=liborcus
-version=0.16.1
+version=0.17.2
 release=1
-source=(https://kohei.us/files/orcus/src/$name-$version.tar.xz
-  gcc11-1.patch gcc11-2.patch gcc11-3.patch)
+source=(https://kohei.us/files/orcus/src/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
-
-  patch -Np1 -i $SRC/gcc11-1.patch
-  patch -Np1 -i $SRC/gcc11-2.patch
-  patch -Np1 -i $SRC/gcc11-3.patch
 
   ./configure --prefix=/usr --disable-python
   make
