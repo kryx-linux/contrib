@@ -4,19 +4,19 @@
 # Depends on: glpk lapack openblas
 
 name=coin-or-coinutils
-version=2.11.4
+version=2.11.6
 release=1
-source=(https://www.coin-or.org/download/source/CoinUtils/CoinUtils-$version.tgz)
+source=(https://github.com/coin-or/CoinUtils/archive/releases/$version/$name-$version.tar.gz)
 
 build() {
-  cd CoinUtils-$version
+  cd CoinUtils-releases-$version
   ./configure --prefix=/usr \
     --with-blas-lib='-lblas' \
     --with-lapack-lib='-llapack' \
     --with-glpk-lib='-lglpk' \
     --enable-dependency-linking
   make
-  PKG_CONFIG_LIBDIR="$PKG"/usr/lib/pkgconfig/ \
-  make DESTDIR="$PKG" install
+  PKG_CONFIG_LIBDIR=$PKG/usr/lib/pkgconfig/ \
+  make DESTDIR=$PKG install
   rm -fr $PKG/usr/share/coin/doc
 }
