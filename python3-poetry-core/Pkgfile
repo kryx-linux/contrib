@@ -5,11 +5,12 @@
 
 name=python3-poetry-core
 version=1.0.7
-release=1
-source=(https://github.com/python-poetry/poetry-core/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/python-poetry/poetry-core/archive/$version/$name-$version.tar.gz poetry-core-1.0.2-devendor.patch)
 
 build() {
   cd poetry-core-$version
+  patch -Np1 -i $SRC/poetry-core-1.0.2-devendor.patch
   sed -i '/^__version__/!d' poetry/core/__init__.py
   rm -r poetry/core/_vendor
   rm poetry/__init__.py

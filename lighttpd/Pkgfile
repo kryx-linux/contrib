@@ -1,11 +1,11 @@
 # Description: Secure, fast, compliant and very flexible web server
 # URL:         https://www.lighttpd.net/
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
-# Depends on:  libpcre lua   bzip2 linux-pam openssl zlib zstd
+# Depends on:  libpcre2 lua   bzip2 linux-pam openssl zlib zstd
 
 name=lighttpd
-version=1.4.63
-release=1
+version=1.4.64
+release=2
 source=(
   https://download.${name}.net/${name}/releases-1.4.x/${name}-${version}.tar.xz
    ${name}.rc ${name}.conf
@@ -18,7 +18,7 @@ build() {
       --libdir=/usr/lib/${name} \
       --with-openssl --with-pam \
          --with-bzip2 --with-zlib --with-zstd \
-      --with-pcre --with-lua
+      --with-lua
    make
    make DESTDIR="${PKG}" install
 
