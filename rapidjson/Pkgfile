@@ -9,8 +9,8 @@ release=2
 source=(https://github.com/Tencent/rapidjson/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_RAPIDJSON+=' -G Ninja'
-  [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+  prt-get isinst ninja && PKGMK_RAPIDJSON+=' -G Ninja'
+  prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   cmake -S $name-$version -B build $PKGMK_RAPIDJSON \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
