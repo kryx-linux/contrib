@@ -148,6 +148,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/config/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/unsupported.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/update-notifier.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/usage.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/validate-lockfile.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/with-chown-sync.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/workspaces/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/workspaces/get-workspaces.js
@@ -272,6 +273,10 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/node.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/owner.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/copy-file.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/cp/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/cp/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/cp/polyfill.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/errors.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/fs.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/index.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/mkdir/
@@ -1410,9 +1415,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npmlog/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/npmlog/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npmlog/lib/log.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/npmlog/package.json
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/object-assign/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/object-assign/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/object-assign/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/once/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/once/once.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/once/package.json
@@ -1886,8 +1888,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/which/bin/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/which/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/which/which.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/wide-align/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/wide-align/align.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/wide-align/package.json
+-rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/wide-align/align.js
+-rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/wide-align/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/wrappy/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/wrappy/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/wrappy/wrappy.js
