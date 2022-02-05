@@ -5,12 +5,12 @@
 # Optional: fftw
 
 name=chromaprint
-version=1.5.0
+version=1.5.1
 release=1
 source=(https://github.com/acoustid/chromaprint/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-	cmake -S $name-v$version -B build -G Ninja \
+	cmake -S $name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=RELEASE \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
