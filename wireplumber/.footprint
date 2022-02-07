@@ -21,28 +21,29 @@ drwxr-xr-x	root/root	usr/include/wireplumber-0.4/wp/
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/metadata.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/module.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/node.h
--rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/object.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/object-interest.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/object-manager.h
+-rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/object.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/plugin.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/port.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/properties.h
--rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/proxy.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/proxy-interfaces.h
+-rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/proxy.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/session-item.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/si-factory.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/si-interfaces.h
+-rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/spa-json.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/spa-pod.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/spa-type.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/state.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/transition.h
--rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/wpenums.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/wp.h
+-rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/wpenums.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.4/wp/wpversion.h
 drwxr-xr-x	root/root	usr/lib/
--rwxr-xr-x	root/root	usr/lib/libwireplumber-0.4.so.0.4.7
-lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.4.so.0 -> libwireplumber-0.4.so.0.4.7
 lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.4.so -> libwireplumber-0.4.so.0
+lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.4.so.0 -> libwireplumber-0.4.so.0.4.8
+-rwxr-xr-x	root/root	usr/lib/libwireplumber-0.4.so.0.4.8
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/wireplumber-0.4.pc
 drwxr-xr-x	root/root	usr/lib/wireplumber-0.4/
@@ -56,7 +57,6 @@ drwxr-xr-x	root/root	usr/lib/wireplumber-0.4/
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-mixer-api.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-portal-permissionstore.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-reserve-device.so
--rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-route-settings-api.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-si-audio-adapter.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-si-audio-endpoint.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.4/libwireplumber-module-si-node.so
@@ -79,6 +79,7 @@ drwxr-xr-x	root/root	usr/share/wireplumber/main.lua.d/
 -rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/30-libcamera-monitor.lua
 -rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/30-v4l2-monitor.lua
 -rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/40-device-defaults.lua
+-rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/40-stream-defaults.lua
 -rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/50-alsa-config.lua
 -rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/50-default-access-config.lua
 -rw-r--r--	root/root	usr/share/wireplumber/main.lua.d/50-libcamera-config.lua
@@ -98,11 +99,12 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/access/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/default-routes.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/intended-roles.lua
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/
--rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/alsa.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/alsa-midi.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/alsa.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/libcamera.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/v4l2.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/policy-bluetooth.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/policy-endpoint-client-links.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/policy-endpoint-client.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/policy-endpoint-device.lua
