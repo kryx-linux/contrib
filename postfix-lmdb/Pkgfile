@@ -1,12 +1,12 @@
 # Description: Secure and fast drop-in replacement for Sendmail (MTA)
 # URL:         https://www.postfix.org/
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
-# Depends on:  libpcre lmdb   openssl
+# Depends on:  libpcre2 lmdb   openssl
 # Optional:    dovecot cyrus-sasl
 
 rname=postfix
 name=postfix-lmdb
-version=3.6.5
+version=3.7.0
 release=1
 source=(
    https://de.${rname}.org/ftpmirror/official/${rname}-${version}.tar.gz
@@ -29,8 +29,9 @@ build() {
    patch -p1 < "${SRC}"/postfix-install.patch
    patch -p1 < "${SRC}"/closefrom.patch
 
-   cca='-DNO_DB -DNO_EAI -DNO_NIS -DNO_NISPLUS '
-   cca=${cca}' -DHAS_LMDB -DDEF_DB_TYPE=\"lmdb\" -DHAS_PCRE -DUSE_TLS'
+   cca='-DNO_DB -DNO_EAI -DNO_NIS -DNO_NISPLUS -DUSE_TLS'
+   cca=${cca}' -DHAS_LMDB -DDEF_DB_TYPE=\"lmdb\"'
+   cca=${cca}' -DHAS_PCRE=2 '"$(pcre2-config --cflags)"
    aux=
 
    if prt-get isinst dovecot; then # TODO UNTESTED!
@@ -42,13 +43,14 @@ build() {
       aux=${aux}' -lsasl2'
    fi
 
+   unset LD_LIBRARY_PATH
    make tidy
    make pie=yes shared=yes \
       DEBUG= \
       CCARGS="${cca}" \
       OPT="${CFLAGS}" \
       AUXLIBS_LMDB=-llmdb \
-      AUXLIBS_PCRE=-lpcre \
+      AUXLIBS_PCRE="$(pkg-config --libs libpcre2-8)" \
       AUXLIBS="-lssl -lcrypto" \
       ${aux} \
          install_root="${PKG}" \
