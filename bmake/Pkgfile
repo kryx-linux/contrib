@@ -3,19 +3,24 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=bmake
-version=20220204
+version=20220208
 release=1
 source=(http://www.crufty.net/ftp/pub/sjg/${name}-${version}.tar.gz)
 
 build() {
    cd ${name}
 
-   sed -i'' \
-      -e '/cmd-interrupt$/d' \
-      -e '/deptgt-interrupt$/d' \
-      -e '/opt-debug-x-trace$/d' \
-      -e '/var-op-shell$/d' \
-      unit-tests/Makefile
+   # The first block may only be broken in util-linux's unshare(1) which
+   # disables interrupts (busybox unshare(1) does not), the second is broken
+   # due to dash or whatever else
+   BROKEN_TESTS='\
+      cmd-interrupt \
+      deptgt-interrupt \
+      \
+      opt-debug-x-trace \
+      var-op-shell \
+      '
+   export BROKEN_TESTS
 
    mkdir -p build
    cd build
