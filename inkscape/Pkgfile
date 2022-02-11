@@ -5,14 +5,13 @@
 
 name=inkscape
 _name=inkscape-INKSCAPE
-version=1.1.1
-_version=1.1.1_2021-09-20_3bf5ae0d25
-_pversion=21.11.0
-_psoversion=115
+version=1.1.2
+_version=1.1.2_2022-02-04_0a00cf5339
+_pversion=22.02.0
+_psoversion=118
 release=1
-source=(https://inkscape.org/gallery/item/29255/inkscape-$version.tar.xz
-	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz
-	poppler-21.11.0.patch)
+source=(https://inkscape.org/gallery/item/31668/inkscape-$version.tar.xz
+	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz)
 
 poppler() {
 	cmake -S poppler-$_pversion -B build-poppler -G Ninja \
@@ -42,9 +41,6 @@ poppler() {
 
 build() {
 	[ ! -e "/usr/lib/libpoppler.so.$_psoversion" ] && poppler
-
-	# https://gitlab.com/inkscape/inkscape/-/merge_requests/3622
-	patch -d $name-$_version -p1 -i $SRC/poppler-21.11.0.patch
 
 	# https://gitlab.gnome.org/GNOME/glib/-/issues/2331
 	CFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66'
