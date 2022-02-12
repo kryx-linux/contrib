@@ -1,26 +1,21 @@
 # Description: Discover and load entry points from installed packages
 # URL: https://github.com/takluyver/entrypoints
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-setuptools
+# Depends on: python3-pip
+# Optional: python3-flit
 
 name=python3-entrypoints
-version=0.3
+version=0.4
 release=1
 source=(https://github.com/takluyver/entrypoints/archive/$version/$name-$version-github.tar.gz
-  https://files.pythonhosted.org/packages/py2.py3/e/entrypoints/entrypoints-$version-py2.py3-none-any.whl
   https://pypi.io/packages/source/e/entrypoints/entrypoints-$version.tar.gz)
 
 build() {
   cd entrypoints-$version
-  # install -Dm644 entrypoints.py $PKG/usr/lib/python3.9/site-packages/entrypoints.py
-  # _dist="entrypoints-$version.dist-info"
-  # cd $SRC/$_dist
-  # for _i in ./*; do
-  #   install -Dm644 $_i "$PKG/usr/lib/python3.9/site-packages/$_dist/$_i"
-  # done
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+  if prt-get isinst python3-flit; then
+    /usr/bin/python3 -m flit build --format wheel
+    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps dist/*.whl
+  else
+    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps entrypoints
+  fi
 }
