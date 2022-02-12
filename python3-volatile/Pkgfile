@@ -1,0 +1,15 @@
+# Description: A small extension for the tempfile module
+# URL: https://github.com/mbr/volatile
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-volatile
+version=2.1.0
+release=1
+source=(https://files.pythonhosted.org/packages/source/v/volatile/volatile-$version.tar.gz)
+
+build() {
+  cd volatile-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1 --skip-build
+}
