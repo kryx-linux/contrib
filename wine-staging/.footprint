@@ -704,6 +704,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/mtxdm.h
 -rw-r--r--	root/root	usr/include/wine/windows/mulres.idl
 -rw-r--r--	root/root	usr/include/wine/windows/multimon.h
+-rw-r--r--	root/root	usr/include/wine/windows/namespaceapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/natupnp.h
 -rw-r--r--	root/root	usr/include/wine/windows/natupnp.idl
 -rw-r--r--	root/root	usr/include/wine/windows/nb30.h
@@ -791,6 +792,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/poppack.h
 -rw-r--r--	root/root	usr/include/wine/windows/powrprof.h
 -rw-r--r--	root/root	usr/include/wine/windows/prntvpt.h
+-rw-r--r--	root/root	usr/include/wine/windows/processthreadsapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/profinfo.h
 -rw-r--r--	root/root	usr/include/wine/windows/proofofpossessioncookieinfo.h
 -rw-r--r--	root/root	usr/include/wine/windows/proofofpossessioncookieinfo.idl
@@ -943,6 +945,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/transact.h
 -rw-r--r--	root/root	usr/include/wine/windows/transact.idl
 -rw-r--r--	root/root	usr/include/wine/windows/trnjoi.idl
+-rw-r--r--	root/root	usr/include/wine/windows/trnlcl.idl
+-rw-r--r--	root/root	usr/include/wine/windows/trnobj.idl
 -rw-r--r--	root/root	usr/include/wine/windows/twain.h
 -rw-r--r--	root/root	usr/include/wine/windows/txcoord.h
 -rw-r--r--	root/root	usr/include/wine/windows/txcoord.idl
@@ -1155,6 +1159,10 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/xmldsodid.h
 -rw-r--r--	root/root	usr/include/wine/windows/xmllite.h
 -rw-r--r--	root/root	usr/include/wine/windows/xmllite.idl
+-rw-r--r--	root/root	usr/include/wine/windows/xpsobjectmodel.h
+-rw-r--r--	root/root	usr/include/wine/windows/xpsobjectmodel.idl
+-rw-r--r--	root/root	usr/include/wine/windows/xpsobjectmodel_1.h
+-rw-r--r--	root/root	usr/include/wine/windows/xpsobjectmodel_1.idl
 -rw-r--r--	root/root	usr/include/wine/windows/zmouse.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/wine/
@@ -1266,7 +1274,6 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/liblz32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmapi32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmf.a
--rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmfmediaengine.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmfplat.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmfplay.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmfreadwrite.a
@@ -1282,6 +1289,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmsi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmsimg32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmspatcha.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmsvcp140.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmsvcr100.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmsvcr110.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libmsvcr120.a
@@ -1413,7 +1421,6 @@ lrwxrwxrwx	root/root	usr/lib/wine/x86_64-unix/libwine.so.1 -> libwine.so.1.0
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winealsa.drv.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winebus.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/wined3d.dll.so
--rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winejoystick.drv.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winepulse.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/wineusb.sys.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winevulkan.so
@@ -1573,6 +1580,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/api-ms-win-core-version-private-l1-1-0.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/api-ms-win-core-versionansi-l1-1-0.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/api-ms-win-core-windowserrorreporting-l1-1-0.dll
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/api-ms-win-core-windowserrorreporting-l1-1-1.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/api-ms-win-core-winrt-error-l1-1-0.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/api-ms-win-core-winrt-error-l1-1-1.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/api-ms-win-core-winrt-errorprivate-l1-1-1.dll
@@ -2061,7 +2069,6 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/liblz32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmapi32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmf.a
--rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmfmediaengine.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmfplat.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmfplay.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmfreadwrite.a
@@ -2077,6 +2084,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmsi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmsimg32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmspatcha.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmsvcp140.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmsvcr100.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmsvcr110.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libmsvcr120.a
@@ -2271,6 +2279,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/msvcp120_app.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/msvcp140.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/msvcp140_1.dll
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/msvcp140_atomic_wait.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/msvcp60.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/msvcp70.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/msvcp71.dll
@@ -2520,7 +2529,6 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winedevice.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winefile.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winehid.sys
--rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winejoystick.drv
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winemapi.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winemenubuilder.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winemine.exe
@@ -2549,6 +2557,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wlanapi.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wlanui.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wldap32.dll
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wmadmod.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wmasf.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wmi.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wmic.exe
@@ -2730,7 +2739,6 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-unix/
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/liblz32.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmapi32.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmf.a
--rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmfmediaengine.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmfplat.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmfplay.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmfreadwrite.a
@@ -2746,6 +2754,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-unix/
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmsi.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmsimg32.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmspatcha.a
+-rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmsvcp140.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmsvcr100.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmsvcr110.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-unix/libmsvcr120.a
@@ -2877,7 +2886,6 @@ lrwxrwxrwx	root/root	usr/lib32/wine/i386-unix/libwine.so.1 -> libwine.so.1.0
 -rwxr-xr-x	root/root	usr/lib32/wine/i386-unix/winealsa.drv.so
 -rwxr-xr-x	root/root	usr/lib32/wine/i386-unix/winebus.so
 -rwxr-xr-x	root/root	usr/lib32/wine/i386-unix/wined3d.dll.so
--rwxr-xr-x	root/root	usr/lib32/wine/i386-unix/winejoystick.drv.so
 -rwxr-xr-x	root/root	usr/lib32/wine/i386-unix/winepulse.so
 -rwxr-xr-x	root/root	usr/lib32/wine/i386-unix/winevulkan.so
 -rwxr-xr-x	root/root	usr/lib32/wine/i386-unix/winex11.drv.so
@@ -3036,6 +3044,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/api-ms-win-core-version-private-l1-1-0.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/api-ms-win-core-versionansi-l1-1-0.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/api-ms-win-core-windowserrorreporting-l1-1-0.dll
+-rw-r--r--	root/root	usr/lib32/wine/i386-windows/api-ms-win-core-windowserrorreporting-l1-1-1.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/api-ms-win-core-winrt-error-l1-1-0.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/api-ms-win-core-winrt-error-l1-1-1.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/api-ms-win-core-winrt-errorprivate-l1-1-1.dll
@@ -3538,7 +3547,6 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/liblz32.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmapi32.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmf.a
--rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmfmediaengine.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmfplat.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmfplay.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmfreadwrite.a
@@ -3554,6 +3562,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmsi.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmsimg32.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmspatcha.a
+-rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmsvcp140.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmsvcr100.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmsvcr110.a
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/libmsvcr120.a
@@ -3754,6 +3763,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/msvcp120_app.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/msvcp140.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/msvcp140_1.dll
+-rw-r--r--	root/root	usr/lib32/wine/i386-windows/msvcp140_atomic_wait.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/msvcp60.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/msvcp70.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/msvcp71.dll
@@ -4037,7 +4047,6 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/winedevice.exe
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/winefile.exe
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/winehid.sys
--rw-r--r--	root/root	usr/lib32/wine/i386-windows/winejoystick.drv
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/winemapi.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/winemenubuilder.exe
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/winemine.exe
@@ -4073,6 +4082,7 @@ drwxr-xr-x	root/root	usr/lib32/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/wlanapi.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/wlanui.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/wldap32.dll
+-rw-r--r--	root/root	usr/lib32/wine/i386-windows/wmadmod.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/wmasf.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/wmi.dll
 -rw-r--r--	root/root	usr/lib32/wine/i386-windows/wmic.exe
