@@ -1,13 +1,15 @@
 # Description: Scalable datastore for metrics, events, and real-time analytics
 # URL: https://github.com/InfluxData/influxdb
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: go
+# Depends on: clang go protobuf rust yarn
 
 name=influxdb
-version=1.8.10
+version=2.1.1
 release=1
 source=(https://github.com/influxdata/influxdb/archive/v$version/$name-$version.tar.gz
   influxdb.service)
+
+_commit=657e1839de9e8a734abad1207ca28e7d02444207
 
 build() {
   cd $name-$version
@@ -17,20 +19,12 @@ build() {
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export CGO_LDFLAGS="${LDFLAGS}"
-  export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+  export GOFLAGS="-trimpath -mod=readonly -modcacherw -buildmode=pie"
+  export LDFLAGS="-linkmode external"
 
-  go build -v -o build ./cmd/...
+  PATH="$(go env GOPATH)/bin:$PATH" make -j1 VERSION=$version COMMIT=$_commit INFLUXDB_SHA=$_commit
 
-  ## needs asciidoc
-  ## and fails when it gets it
-  #make -C man
-
-  # influx_tsm missing
-  for i in influx influxd influx_inspect influx_stress influx_tools; do
-    install -Dm755 build/$i $PKG/usr/bin/$i;
-  done
-
-  install -Dm644 etc/config.sample.toml   $PKG/etc/influxdb/influxdb.conf
+  install -Dm755 bin/linux/influxd -t $PKG/usr/bin
 
   ## install rc file
   install -Dm 755 $SRC/influxdb.service $PKG/etc/rc.d/influxdb
