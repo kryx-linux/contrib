@@ -5,7 +5,9 @@
 
 SSD=/sbin/start-stop-daemon
 PROG=/usr/bin/influxd
-OPTS=""
+OPTS="--bolt-path /var/lib/influxdb/influxd.bolt --engine-path /var/lib/influxdb/engine"
+
+INFLUXD_CONFIG_PATH="/etc/influxdb"
 
 case $1 in
 start)
