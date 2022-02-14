@@ -8,9 +8,8 @@ release=1
 source=(https://unifoundry.com/pub/unifont/unifont-$version/unifont-$version.tar.gz)
 
 build() {
-  cd unifont-$version/font/precompiled
-  install -d $PKG/usr/share/fonts/TTF/unifont/
-  for i in *.ttf; do
-    install -Dm644 $i $PKG/usr/share/fonts/TTF/unifont/;
-  done
+  find unifont-$version/font/precompiled \
+    -iname "*.ttf" \
+    -execdir install -Dm644 {} $PKG/usr/share/fonts/TTF/unifont/{} \;
+  cd
 }
