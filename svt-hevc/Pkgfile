@@ -1,0 +1,27 @@
+# Description: SVT HEVC encoder
+# URL: https://github.com/OpenVisualCloud/SVT-HEVC
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake yasm
+
+name=svt-hevc
+version=1.5.1
+release=1
+source=(https://github.com/OpenVisualCloud/SVT-HEVC/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst ninja && PKGMK_SVTHEVC+=' -G Ninja'
+
+  export LDFLAGS="$LDFLAGS -Wl,-z,noexecstack"
+
+  cmake -S SVT-HEVC-$version -B build $PKGMK_SVTHEVC \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D BUILD_SHARED_LIBS=ON \
+    -D NATIVE=OFF \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
