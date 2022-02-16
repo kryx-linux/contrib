@@ -7,8 +7,8 @@ name=wasi-libc
 version=0+222+ad5133
 _commit=ad5133410f66b93a2381db5b542aad5e0964db96
 release=1
-source=(https://github.com/WebAssembly/wasi-libc/archive/$_commit.zip)
- 
+source=(https://github.com/WebAssembly/wasi-libc/archive/$_commit/$name-$version.tar.gz)
+
 build() {
 	cd $name-$_commit
 
