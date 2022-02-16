@@ -9,7 +9,9 @@ source=(https://github.com/googlefonts/Inconsolata/archive/v$version/$name-$vers
   75-ttf-inconsolata.conf)
 
 build() {
-  install -d $PKG/usr/share/fonts/TTF/Inconsolata
-  install -Dm644 $SRC/Inconsolata-$version/fonts/ttf/*.ttf $PKG/usr/share/fonts/TTF/Inconsolata/
+  find Inconsolata-$version/fonts/ttf \
+    -iname "*.ttf" \
+    -execdir install -Dm644 {} $PKG/usr/share/fonts/TTF/Inconsolata/{} \;
+
   install -Dm644 $SRC/75-ttf-inconsolata.conf $PKG/usr/share/fontconfig/conf.avail/75-ttf-inconsolata.conf
 }

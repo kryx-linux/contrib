@@ -8,7 +8,7 @@ release=2
 source=(https://github.com/icons8/line-awesome/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd ${name/ttf-}-$version
-  install -d $PKG/usr/share/fonts/TTF/line-awesome/
-  install -m644 dist/line-awesome/fonts/*.ttf $PKG/usr/share/fonts/TTF/line-awesome/
+  find ${name/ttf-}-$version \
+    -iname "*.ttf" \
+    -execdir install -Dm644 {} $PKG/usr/share/fonts/TTF/line-awesome/{} \;
 }
