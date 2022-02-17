@@ -5,10 +5,9 @@
 # Optional: alsa-ucm-conf avahi bluez gst-plugins-base jack libldac pulseaudio rtkit v4l2 vulkan-loader wireplumber
 
 name=pipewire
-version=0.3.45
-release=2
-source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz
-  97a5fe80c1d0fb0d8173a61a87051053cff7a5c2.patch)
+version=0.3.46
+release=1
+source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst avahi || PKGMK_PW+=' -Davahi=disabled'
@@ -18,8 +17,6 @@ build() {
   prt-get isinst pulseaudio || PKGMK_PW+=' -Dlibpulse=disabled'
   prt-get isinst v4l-utils || PKGMK_PW+=' -Dv4l2=disabled'
   prt-get isinst vulkan-loader || PKGMK_PW+=' -Dvulkan=disabled -Dvulkan=disabled'
-
-  patch -Np1 -d $name-$version -i $SRC/97a5fe80c1d0fb0d8173a61a87051053cff7a5c2.patch
 
   meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
