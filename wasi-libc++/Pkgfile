@@ -4,7 +4,7 @@
 # Depends on: clang wasi-libc wasi-compiler-rt
 
 name=wasi-libc++
-version=13.0.0
+version=13.0.1
 release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz
         https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/libcxx-$version.src.tar.xz
@@ -48,7 +48,7 @@ build() {
 		-D CMAKE_C_FLAGS_RELEASE="-fno-exceptions --sysroot=/usr/share/wasi-sysroot" \
 		-D CMAKE_CXX_FLAGS_RELEASE="-fno-exceptions --sysroot=/usr/share/wasi-sysroot" \
 		-D LIBCXX_LIBDIR_SUFFIX=/wasm32-wasi
-		
+
 	cmake --build build-libcxx
 
 	cmake -S libcxxabi -B build-libcxxabi -G Ninja \
@@ -75,7 +75,7 @@ build() {
 		-D CMAKE_C_FLAGS_RELEASE="-fno-exceptions --sysroot=/usr/share/wasi-sysroot" \
 		-D CMAKE_CXX_FLAGS_RELEASE="-fno-exceptions --sysroot=/usr/share/wasi-sysroot" \
 		-D LIBCXXABI_LIBDIR_SUFFIX=/wasm32-wasi
-		
+
 	cmake --build build-libcxxabi -v
 
 	DESTDIR=$PKG cmake --install build-libcxx
