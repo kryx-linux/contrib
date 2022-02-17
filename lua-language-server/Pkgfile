@@ -4,34 +4,14 @@
 # Depends on: lua ninja
 
 name=lua-language-server
-version=2.6.4
-
-# https://github.com/sumneko/lua-language-server/tree/master/3rd
-_bee_commit=226b4f55938dff7e3424437aac77e1b0932d98c2
-_loveapi_commit=6532c3890915ceb265afc64a33ca1b838a28acbe
-_lpeglabel_commit=ed183860289664af0f3727307653c9bf2bccdc80
-_luamake_commit=843262572a2765ebe187573e32c4f8f22952c2c0
-_rcedit_commit=b807b34a644c86c0b0d89c7f073967e79202731a
-# https://github.com/actboy168/luamake/tree/$_luamake_commit/3rd
-_bee2_commit=6d50b51196f13ba9acc1cb2aa5a17ddb96519094
-
+version=2.6.5
 release=1
 source=(https://github.com/sumneko/lua-language-server/archive/$version/$name-$version.tar.gz
-  https://github.com/actboy168/bee.lua/archive/$_bee_commit/bee.lua-$_bee_commit.tar.gz
-  https://github.com/actboy168/bee.lua/archive/$_bee2_commit/bee.lua-$_bee2_commit.tar.gz
-  https://github.com/love2d-community/love-api/archive/$_loveapi_commit/love-api-$_loveapi_commit.tar.gz
-  https://github.com/sqmedeiros/lpeglabel/archive/$_lpeglabel_commit/lpeglabel-$_lpeglabel_commit.tar.gz
-  https://github.com/actboy168/luamake/archive/$_luamake_commit/luamake-$_luamake_commit.tar.gz
-  https://github.com/electron/rcedit/archive/$_rcedit_commit/rcedit-$_rcedit_commit.tar.gz
+  https://github.com/sumneko/lua-language-server/releases/download/$version/lua-language-server-$version-submodules.zip
   wrapper.sh)
 
 build() {
-  shopt -s dotglob
-  for i in bee.lua-$_bee_commit love-api-$_loveapi_commit lpeglabel-$_lpeglabel_commit luamake-$_luamake_commit rcedit-$_rcedit_commit;
-    do rsync --recursive $i/ $name-$version/3rd/${i/-*/}/ ;
-  done
-  #rsync --recursive bee.lua-$_bee_commit/ -t $name-$version/3rd/luamake/3rd/bee.lua
-  rsync --recursive bee.lua-$_bee2_commit/ -t $name-$version/3rd/luamake/3rd/bee.lua
+  rsync --recursive $SRC/3rd -t $SRC/$name-$version/
 
   cd $name-$version
 
