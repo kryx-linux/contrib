@@ -4,16 +4,15 @@
 # Depends on: gnupg swig
 
 name=gpgme
-version=1.16.0
+version=1.17.0
 release=1
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2
-	python310.patch closefrom.patch)
+	python310.patch)
 
 build() {
 	cd $name-$version
 
 	patch -Np1 -i $SRC/python310.patch
-	patch -Np1 -i $SRC/closefrom.patch
 
 	export PYTHON='/usr/bin/python3'
 	./configure \

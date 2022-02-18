@@ -6,6 +6,7 @@ drwxr-xr-x	root/root	usr/etc/gpgme/
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/QGpgME/
 -rw-r--r--	root/root	usr/include/QGpgME/AbstractImportJob
+-rw-r--r--	root/root	usr/include/QGpgME/AddExistingSubkeyJob
 -rw-r--r--	root/root	usr/include/QGpgME/AddUserIDJob
 -rw-r--r--	root/root	usr/include/QGpgME/ChangeExpiryJob
 -rw-r--r--	root/root	usr/include/QGpgME/ChangeOwnerTrustJob
@@ -34,6 +35,7 @@ drwxr-xr-x	root/root	usr/include/QGpgME/
 -rw-r--r--	root/root	usr/include/QGpgME/Protocol
 -rw-r--r--	root/root	usr/include/QGpgME/QGpgMENewCryptoConfig
 -rw-r--r--	root/root	usr/include/QGpgME/QuickJob
+-rw-r--r--	root/root	usr/include/QGpgME/ReceiveKeysJob
 -rw-r--r--	root/root	usr/include/QGpgME/RefreshKeysJob
 -rw-r--r--	root/root	usr/include/QGpgME/SignEncryptJob
 -rw-r--r--	root/root	usr/include/QGpgME/SignJob
@@ -42,9 +44,12 @@ drwxr-xr-x	root/root	usr/include/QGpgME/
 -rw-r--r--	root/root	usr/include/QGpgME/TofuPolicyJob
 -rw-r--r--	root/root	usr/include/QGpgME/VerifyDetachedJob
 -rw-r--r--	root/root	usr/include/QGpgME/VerifyOpaqueJob
+-rw-r--r--	root/root	usr/include/QGpgME/WKDLookupJob
+-rw-r--r--	root/root	usr/include/QGpgME/WKDLookupResult
 -rw-r--r--	root/root	usr/include/QGpgME/WKSPublishJob
 drwxr-xr-x	root/root	usr/include/qgpgme/
 -rw-r--r--	root/root	usr/include/qgpgme/abstractimportjob.h
+-rw-r--r--	root/root	usr/include/qgpgme/addexistingsubkeyjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/adduseridjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/changeexpiryjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/changeownertrustjob.h
@@ -75,6 +80,7 @@ drwxr-xr-x	root/root	usr/include/qgpgme/
 -rw-r--r--	root/root	usr/include/qgpgme/qgpgme_version.h
 -rw-r--r--	root/root	usr/include/qgpgme/qgpgmenewcryptoconfig.h
 -rw-r--r--	root/root	usr/include/qgpgme/quickjob.h
+-rw-r--r--	root/root	usr/include/qgpgme/receivekeysjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/refreshkeysjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/signencryptjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/signjob.h
@@ -83,6 +89,8 @@ drwxr-xr-x	root/root	usr/include/qgpgme/
 -rw-r--r--	root/root	usr/include/qgpgme/tofupolicyjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/verifydetachedjob.h
 -rw-r--r--	root/root	usr/include/qgpgme/verifyopaquejob.h
+-rw-r--r--	root/root	usr/include/qgpgme/wkdlookupjob.h
+-rw-r--r--	root/root	usr/include/qgpgme/wkdlookupresult.h
 -rw-r--r--	root/root	usr/include/qgpgme/wkspublishjob.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/cmake/
@@ -90,9 +98,9 @@ drwxr-xr-x	root/root	usr/lib/cmake/QGpgme/
 -rw-r--r--	root/root	usr/lib/cmake/QGpgme/QGpgmeConfig.cmake
 -rw-r--r--	root/root	usr/lib/cmake/QGpgme/QGpgmeConfigVersion.cmake
 -rwxr-xr-x	root/root	usr/lib/libqgpgme.la
-lrwxrwxrwx	root/root	usr/lib/libqgpgme.so -> libqgpgme.so.7.6.0
-lrwxrwxrwx	root/root	usr/lib/libqgpgme.so.7 -> libqgpgme.so.7.6.0
--rwxr-xr-x	root/root	usr/lib/libqgpgme.so.7.6.0
+lrwxrwxrwx	root/root	usr/lib/libqgpgme.so -> libqgpgme.so.7.7.0
+lrwxrwxrwx	root/root	usr/lib/libqgpgme.so.7 -> libqgpgme.so.7.7.0
+-rwxr-xr-x	root/root	usr/lib/libqgpgme.so.7.7.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/aclocal/
