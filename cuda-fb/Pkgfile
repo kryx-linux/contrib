@@ -4,21 +4,15 @@
 # Depends on: nvidia-fb lsb-release
 
 name=cuda-fb
-version=11.5.1
-_driverver=495.29.05
-release=2
+version=11.6.0
+_driverver=510.39.01
+release=1
 source=(http://developer.download.nvidia.com/compute/cuda/${version}/local_installers/cuda_${version}_${_driverver}_linux.run
 	cuda.sh cuda.conf $name.revdep
-	cuda-findgllib_mk.diff
 	*.pc)
 
 build() {
 	sh cuda_${version}_${_driverver}_linux.run --target "${SRC}" --noexec
-
-	# Fix up samples that use findgllib_mk
-	for f in builds/cuda_samples/*/*/findgllib.mk; do
-		patch $f cuda-findgllib_mk.diff
-	done
 
 	cd builds
 
@@ -41,8 +35,6 @@ build() {
 	# remove foreign archs
 	rm -r "${PKG}"/opt/cuda/nsight_compute/target/linux-desktop-glibc_2_19_0-ppc64le
 	rm -r "${PKG}"/opt/cuda/nsight_compute/target/linux-desktop-t210-a64
-	rm -r "${PKG}"/opt/cuda/nsight_systems/target-linux-armv8
-	rm "${PKG}"/opt/cuda/samples/common/lib/linux/{aarch64,armv7l}/libGLEW.a
 
 	# Define compilers for CUDA to use.
 	# This allows us to use older versions of GCC if we have to.
