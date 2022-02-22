@@ -9,19 +9,35 @@ alias_maps = $alias_database
 # all # or ipv4, ipv6 or ipv4 or ipv6
 inet_protocols = all
 
-#myhostname = crux-0306 # default: gethostname
+#myhostname = crux-box # default: gethostname
 #mydomain = localdomain # default: $myhostname less one component
 #myorigin = $mydomain
 # , lists.$myhostname
 mydestination = $myhostname, localhost.$mydomain, localhost
 mynetworks_style = host
-# One class A, 16 class B, 256 class C networks; loopback
+
+# mynetworks: which addresses we treat as belonging to "our network".
+# RFC 1918 defines several "address ranges for private internets",
+# one class A, 16 class B, 256 class C networks:
+#  10.0.0.0    - 10.255.255.255  (10/8 prefix)
+#  172.16.0.0  - 172.31.255.255  (172.16/12 prefix)
+#  192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+# In practice these are used by WLAN and other such networks, which is not
+# "our" per se.  RFC 5737 defines several blocks "reserved for documentation"
+# that SHOULD NOT occur on the public internet, so they should be blocked on
+# ingress and better not leave on egress, but they can be assigned to local
+# namespaces etc., and be used within VPNs:
+#     192.0.2.0    - 192.0.2.255    (192.0.2.0/24, TEST-NET-1, from RFC 1166)
+#     198.51.100.0 - 198.51.100.255 (198.51.100.0/24, TEST-NET-2)
+#     203.0.113.0  - 203.0.113.255  (203.0.113.0/24, TEST-NET-3)
 # Dunno how to specify IPv6 link-local and site-local
-mynetworks = 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16  127.0.0.0/8
+#mynetworks = 192.0.2.0/24 198.51.100.0/24 203.0.113.0/24 127.0.0.0/8
+mynetworks = 127.0.0.0/8
+
 #inet_interfaces = localhost
 #inet_interfaces = $myhostname, localhost
 inet_interfaces = all
-#debug_peer_list = 10.0.0.1
+#debug_peer_list = localhost
 
 smtputf8_enable = no
 disable_vrfy_command = yes
@@ -67,10 +83,10 @@ smtpd_client_restrictions =
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
 #[RELAY]  permit_sasl_authenticated,
-   check_client_access lmdb:/etc/postfix-lmdb/client_restrict,
    reject_unknown_client_hostname,
-   # in case you want reject DNS blacklists rather than greylist them
-   # with gross, exchange sleep (maybe) and uncomment the lines below
+   check_client_access lmdb:/etc/postfix-lmdb/client_restrict,
+   # in case you want reject DNS blacklists rather than greylist them,
+   # exchange sleep (maybe) and uncomment the lines below
    sleep 1,
     #reject_rbl_client cbl.abuseat.org,
     #reject_rbl_client sbl.spamhaus.org,
@@ -105,7 +121,6 @@ smtpd_sender_restrictions =
    check_sender_access lmdb:/etc/postfix-lmdb/sender_restrict,
    reject_unknown_sender_domain,
    permit
-
 smtpd_relay_before_recipient_restrictions = yes
 
 # RCPT TO checks, relay policy
@@ -129,19 +144,17 @@ smtpd_recipient_restrictions =
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
 #[RELAY]  permit_sasl_authenticated,
-   reject_unknown_sender_domain,
-   reject_unknown_reverse_client_hostname,
    reject_unknown_recipient_domain,
    # (SMTPD_POLICY_README says
    #   reject_unauth_destination is not needed here if the mail relay policy is
    #   specified with smtpd_relay_restrictions (available with Postfix 2.10 and
    #   later))
-   reject_unauth_destination,
+   #reject_unauth_destination,
    # better not: reject_unverified_sender,
    # DB of MAIL FROM's without policy server checks (one way, or another)
    check_sender_access lmdb:/etc/postfix-lmdb/sender_access,
-   #check_policy_service unix:/run/greylistd.socket,
-   ##check_policy_service inet:127.0.0.1:5525,
+   #check_policy_service inet:127.0.0.1:5525,
+   #check_policy_service unix:private/postgray
    permit
 
 # i would turn that on..
@@ -211,7 +224,7 @@ smtp_tls_ciphers = $smtpd_tls_ciphers
 smtp_tls_exclude_ciphers = $smtpd_tls_exclude_ciphers
 smtp_tls_connection_reuse = yes
 smtp_tls_session_cache_database = lmdb:/var/lib/postfix-lmdb/smtp_scache
-smtp_tls_session_cache_timeout = $smtpd_tls_session_cache_timeout 
+smtp_tls_session_cache_timeout = $smtpd_tls_session_cache_timeout
 
 #smtp_sasl_auth_enable = $smtpd_sasl_auth_enable
 #smtp_sasl_type = $smtpd_sasl_type
