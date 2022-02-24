@@ -4,7 +4,7 @@
 # Depends on: gtk-engine-murrine inkscape sassc gnome-icon-theme gtk3 adwaita-icon-theme meson gtk-theme-adwaita
 
 name=arc-theme
-version=20220105
+version=20220223
 release=1
 source=(https://github.com/jnsh/$name/releases/download/$version/$name-$version.tar.xz)
 
@@ -14,7 +14,4 @@ build() {
 		-D themes="gtk2,gtk3,metacity,plank,unity,xfwm"
 	meson compile -C build
 	DESTDIR=$PKG meson install -C build
-
-	# meson seems to want all the PNGs to be 0755
-	find $PKG -type f \( -name "*.png" -o -name "*.gresource" \) -exec chmod 0644 '{}' \;
 }
