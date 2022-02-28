@@ -1,21 +1,23 @@
 # Description: A tool to distribute compilations.
 # URL: https://github.com/distcc/distcc
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Optional: gtk avahi
+# Optional: avahi gtk3
 
 name=distcc
 version=3.4
-release=2
+release=3
 source=(https://github.com/distcc/distcc/releases/download/v$version/$name-$version.tar.gz
 	distccd distccd.conf)
 
 build() {
 	cd $name-$version
 
-prt-get isinst gtk3 || PKGMK_DISTCC+=' --without-gtk'
-prt-get isinst popt || PKGMK_DISTCC+=' --with-included-popt'
+	prt-get isinst gtk3 || PKGMK_DISTCC+=' --without-gtk'
+	prt-get isinst popt || PKGMK_DISTCC+=' --with-included-popt'
 
 	./autogen.sh
+
+	sed -i 's/ install-gnome-data//g' Makefile.in
 
 	./configure ${PKGMK_DISTCC} \
 		--prefix=/usr \
