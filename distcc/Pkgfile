@@ -5,7 +5,7 @@
 
 name=distcc
 version=3.4
-release=1
+release=2
 source=(https://github.com/distcc/distcc/releases/download/v$version/$name-$version.tar.gz
 	distccd distccd.conf)
 
@@ -20,6 +20,7 @@ prt-get isinst popt || PKGMK_DISTCC+=' --with-included-popt'
 	./configure ${PKGMK_DISTCC} \
 		--prefix=/usr \
 		--sysconfdir=/etc \
+		--runstatedir=/run \
 		--enable-rfc2553
 
 	make WERROR_CFLAGS= INCLUDESERVER_PYTHON=/usr/bin/python3
@@ -41,10 +42,6 @@ prt-get isinst popt || PKGMK_DISTCC+=' --with-included-popt'
 
 	# install config file
 	install -D -m 0644 $SRC/distccd.conf $PKG/etc/distccd.conf
-
-	# create rundir
-	install -d $PKG/var/run/distcc
-	chown distcc:distcc $PKG/var/run/distcc
 
 	# cleanup
 	rm -r $PKG/usr/share/doc $PKG/etc/distcc $PKG/etc/default
