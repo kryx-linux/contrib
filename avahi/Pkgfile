@@ -7,11 +7,14 @@ name=avahi
 version=0.8
 release=4
 source=(https://github.com/lathiat/avahi/releases/download/v$version/$name-$version.tar.gz
-  avahi-0.8-ipv6_race_condition_fix-1.patch avahi-daemon.service reverse-move-to-run.patch)
+  avahi-0.8-ipv6_race_condition_fix-1.patch
+  0001-Fix-avahi-browse-Invalid-service-type.patch
+  avahi-daemon.service)
 
 build() {
   cd $name-$version
-  patch -Np1 -i $SRC/reverse-move-to-run.patch
+  patch -Np1 -i $SRC/0001-Fix-avahi-browse-Invalid-service-type.patch
+  #patch -Np1 -i $SRC/282.patch
   patch -Np1 -i $SRC/avahi-0.8-ipv6_race_condition_fix-1.patch
 
   NOCONFIGURE=1 ./autogen.sh
