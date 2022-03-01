@@ -4,33 +4,17 @@
 # Depends on:  python3-setuptools
 
 name=yt-dlp
-version=2022.01.21
+version=2022.02.04
 release=1
 source=(https://github.com/${name}/${name}/releases/download/\
 ${version}/${name}.tar.gz)
+renames=(${name}-${version}.tar.gz)
 
 build() {
    cd ${name} #-${version}
 
-   python3 setup.py build
-
-   cat > ./yt-dlp.1 <<- \!
-	.Dd December 27, 2021
-	.Dt YT-DLP 1
-	.Os
-	.
-	.Sh NAME
-	.Nm yt-dlp.1
-	.Nd CLI program to access YouTub and other data content
-	.
-	.Bd -literal
-	!
-   sed -E -e '/^# USAGE AND OPTIONS/,/^#### Removed/p;d' < README.md >> yt-dlp.1
-   echo '.Ed' >> ./yt-dlp.1
-
-   python3 setup.py install --root="${PKG}" --optimize=1 --skip-build
-
-   rm -fr "${PKG}"/usr/share/{bash-completion,doc,fish,zsh}
+   install -D ${name} "${PKG}"/usr/bin/${name}
+   install -D -m 0644 ${name}.1 "${PKG}"/usr/share/man/man1/${name}.1
 }
 
 # s-sh-mode
