@@ -1,7 +1,7 @@
 # Description: A free and open source software media player and entertainment hub
 # URL: https://kodi.tv/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: cmake ffmpeg fmt ghostscript giflib glu jdk8-bin libass libcdio libmicrohttpd mysql samba swig taglib tinyxml python spdlog
+# Depends on: cmake fmt ghostscript giflib glu jdk8-bin libass libcdio libmicrohttpd mysql samba swig taglib tinyxml python spdlog libva libvdpau
 
 name=kodi
 version=19.3
@@ -19,6 +19,7 @@ build() {
 		-DENABLE_DVDCSS=ON \
 		-DENABLE_OPTICAL=ON \
 		-DENABLE_PYTHON=ON \
+		-DENABLE_INTERNAL_FFMPEG=ON \
 		-DENABLE_INTERNAL_FLATBUFFERS=ON \
 		-DENABLE_INTERNAL_FSTRCMP=ON \
 		-DENABLE_INTERNAL_RapidJSON=ON \
