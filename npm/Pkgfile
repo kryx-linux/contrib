@@ -4,13 +4,15 @@
 # Depends on: nodejs
 
 name=npm
-version=8.5.2
+version=8.5.3
 release=1
 source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz
   destdir.patch)
 
 build() {
   cd cli-$version
+
+  prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
   export NPM_CONFIG_USERCONFIG=$SRC/.npm
   export NPM_CONFIG_CACHE=$SRC/.npm/cache
