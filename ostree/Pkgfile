@@ -5,12 +5,13 @@
 # Optional: docbook-xsl
 
 name=ostree
-version=2022.1
+version=2022.2
 release=1
 source=(https://github.com/ostreedev/ostree/releases/download/v$version/libostree-$version.tar.xz)
 
 build() {
   prt-get isinst docbook-xsl && PKGMK_OSTREE+=' --enable-man=yes' || PKGMK_OSTREE+=' --enable-man=no'
+
   cd lib$name-$version
   ./configure $PKGMK_OSTREE \
     --prefix=/usr \
@@ -21,5 +22,6 @@ build() {
     --disable-static
   make
   make DESTDIR=$PKG install
-  rm -fr $PKG/usr/share/ostree/trusted.gpg.d/
+
+  rm -fr $PKG/usr/share/ostree/trusted.gpg.d/README-gpg
 }
