@@ -5,9 +5,9 @@
 
 name=libappindicator-gtk3
 version=16.10
-release=2
+release=3
 source=(http://unrealize.co.uk/source/libappindicator-16.10.tar.gz
-0001-Glib.Timeout-fix.patch 0002-Fix-mono-nunit-pkgconfig-name.patch 0003-Fix-Mono-assemblies-directory.patch badfunction.patch conditional-py-bindings.patch disable-mono.patch gtk3.patch improved-plasma-support.patch vala-inherit.patch)
+0001-Glib.Timeout-fix.patch 0002-Fix-mono-nunit-pkgconfig-name.patch 0003-Fix-Mono-assemblies-directory.patch badfunction.patch conditional-py-bindings.patch disable-mono.patch gtk3.patch improved-plasma-support.patch vala-inherit.patch segfault-fix.patch n_elements.patch)
 
 build() {
   cd libappindicator-$version
@@ -29,6 +29,10 @@ build() {
 
   # Having mono or gtk-sharp installed kills this build
   patch -p1 -i $SRC/disable-mono.patch
+
+  # https://bugs.launchpad.net/ubuntu/+source/libappindicator/+bug/1867996
+  patch -p1 -i $SRC/segfault-fix.patch
+  patch -p1 -i $SRC/n_elements.patch
 
   sed -i -e 's/ -Werror//' src/Makefile.am
   sed -e 's/--enable-gtk-doc//g' -i autogen.sh
