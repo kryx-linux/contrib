@@ -11,9 +11,9 @@ source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$r
 
 build() {
   # you need both librsvg and qtwebengine to build the gui client
-  prt-get isinst librsvg qtwebengine || PKGMK_NCC+=' -D BUILD_GUI=OFF'
-  # always use librsvg-convert to generate icons, if building the gui
-  sed -i -e 's/inkscape inkscape.exe//' desktop-$version/src/gui/CMakeLists.txt
+  prt-get isinst librsvg qtwebengine && \
+    PKGMK_NCC+=' -D SVG_CONVERTER=/usr/bin/rsvg-convert' || \
+    PKGMK_NCC+=' -D BUILD_GUI=OFF'
 
   cmake -S desktop-$version -B build -G Ninja $PKGMK_NCC \
     -D CMAKE_INSTALL_PREFIX=/usr \
