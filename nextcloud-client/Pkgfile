@@ -1,8 +1,8 @@
 # Description: Nextcloud desktop client
 # URL: https://nextcloud.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: inkscape libevent pciutils qtkeychain qtwebengine
-# Optional: doxygen kde5
+# Depends on: libevent pciutils qtkeychain
+# Optional: doxygen kde5 librsvg qtwebengine
 
 name=nextcloud-client
 version=3.4.3
@@ -10,20 +10,24 @@ release=1
 source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
-  cmake -S desktop-$version -B build -G Ninja \
+  # you need both librsvg and qtwebengine to build the gui client
+  prt-get isinst librsvg qtwebengine || PKGMK_NCC+=' -D BUILD_GUI=OFF'
+  # always use librsvg-convert to generate icons, if building the gui
+  sed -i -e 's/inkscape inkscape.exe//' desktop-$version/src/gui/CMakeLists.txt
+
+  cmake -S desktop-$version -B build -G Ninja $PKGMK_NCC \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_INSTALL_SYSCONFDIR=/usr/etc/nextcloud \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D APPLICATION_HELP_URL="https://crux.nu/bugs/" \
+    -D BUILD_SHELL_INTEGRATION_DOLPHIN=OFF \
+    -D BUILD_SHELL_INTEGRATION_NAUTILUS=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
 
-  rm -r $PKG/usr/share/nextcloud
-  # there are no ports for nautilus nor nemo in CRUX atm
-  rm -r $PKG/usr/share/{nautilus-python,nemo-python}
-  # there is caja for mate though, only make it available if it's installed
-  [[ ! -e /usr/lib/pkgconfig/libcaja-extension.pc ]] && rm -r $PKG/usr/share/caja-python || true
+  rm -rf $PKG/usr/share/nextcloud
 }
