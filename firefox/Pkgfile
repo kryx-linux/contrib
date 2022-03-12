@@ -5,17 +5,13 @@
 # Optional: sccache jack
 
 name=firefox
-version=97.0.1
+version=98.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
-	firefox.desktop
-	0001-Use-remoting-name-for-GDK-application-names.patch)
+	firefox.desktop)
 
 build() {
 	cd $name-$version
-
-	# https://bugzilla.mozilla.org/show_bug.cgi?id=1530052
-	patch -p1 -i $SRC/0001-Use-remoting-name-for-GDK-application-names.patch
 
 	if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
 		printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
