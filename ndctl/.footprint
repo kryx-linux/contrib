@@ -3,10 +3,10 @@ drwxr-xr-x	root/root	etc/daxctl.conf.d/
 -rw-r--r--	root/root	etc/daxctl.conf.d/daxctl.example.conf
 drwxr-xr-x	root/root	etc/modprobe.d/
 -rw-r--r--	root/root	etc/modprobe.d/nvdimm-security.conf
-drwxr-xr-x	root/root	etc/ndctl/
 drwxr-xr-x	root/root	etc/ndctl.conf.d/
 -rw-r--r--	root/root	etc/ndctl.conf.d/monitor.conf
 -rw-r--r--	root/root	etc/ndctl.conf.d/ndctl.conf
+drwxr-xr-x	root/root	etc/ndctl/
 drwxr-xr-x	root/root	etc/ndctl/keys/
 -rw-r--r--	root/root	etc/ndctl/keys/keys.readme
 drwxr-xr-x	root/root	usr/
@@ -16,36 +16,31 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/ndctl
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/cxl/
--rw-r--r--	root/root	usr/include/cxl/cxl_mem.h
 -rw-r--r--	root/root	usr/include/cxl/libcxl.h
 drwxr-xr-x	root/root	usr/include/daxctl/
 -rw-r--r--	root/root	usr/include/daxctl/libdaxctl.h
 drwxr-xr-x	root/root	usr/include/ndctl/
--rw-r--r--	root/root	usr/include/ndctl/cxl_mem.h
--rw-r--r--	root/root	usr/include/ndctl/libcxl.h
--rw-r--r--	root/root	usr/include/ndctl/libdaxctl.h
 -rw-r--r--	root/root	usr/include/ndctl/libndctl.h
 -rw-r--r--	root/root	usr/include/ndctl/ndctl.h
 drwxr-xr-x	root/root	usr/lib/
--rwxr-xr-x	root/root	usr/lib/libcxl.la
--rwxr-xr-x	root/root	usr/lib/libcxl.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libcxl.so.1 -> libcxl.so.1.0.0
-lrwxrwxrwx	root/root	usr/lib/libcxl.so -> libcxl.so.1.0.0
--rwxr-xr-x	root/root	usr/lib/libdaxctl.la
--rwxr-xr-x	root/root	usr/lib/libdaxctl.so.1.6.0
-lrwxrwxrwx	root/root	usr/lib/libdaxctl.so.1 -> libdaxctl.so.1.6.0
-lrwxrwxrwx	root/root	usr/lib/libdaxctl.so -> libdaxctl.so.1.6.0
--rwxr-xr-x	root/root	usr/lib/libndctl.la
--rwxr-xr-x	root/root	usr/lib/libndctl.so.6.20.1
-lrwxrwxrwx	root/root	usr/lib/libndctl.so.6 -> libndctl.so.6.20.1
-lrwxrwxrwx	root/root	usr/lib/libndctl.so -> libndctl.so.6.20.1
+lrwxrwxrwx	root/root	usr/lib/libcxl.so -> libcxl.so.1
+lrwxrwxrwx	root/root	usr/lib/libcxl.so.1 -> libcxl.so.1.0.1
+-rwxr-xr-x	root/root	usr/lib/libcxl.so.1.0.1
+lrwxrwxrwx	root/root	usr/lib/libdaxctl.so -> libdaxctl.so.1
+lrwxrwxrwx	root/root	usr/lib/libdaxctl.so.1 -> libdaxctl.so.1.1.5
+-rwxr-xr-x	root/root	usr/lib/libdaxctl.so.1.1.5
+lrwxrwxrwx	root/root	usr/lib/libndctl.so -> libndctl.so.6
+lrwxrwxrwx	root/root	usr/lib/libndctl.so.6 -> libndctl.so.6.0.20
+-rwxr-xr-x	root/root	usr/lib/libndctl.so.6.0.20
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libcxl.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libdaxctl.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libndctl.pc
-drwxr-xr-x	root/root	usr/lib/udev/
-drwxr-xr-x	root/root	usr/lib/udev/rules.d/
--rw-r--r--	root/root	usr/lib/udev/rules.d/90-daxctl-device.rules
 drwxr-xr-x	root/root	usr/share/
+drwxr-xr-x	root/root	usr/share/bash-completion/
+drwxr-xr-x	root/root	usr/share/bash-completion/completions/
+-rw-r--r--	root/root	usr/share/bash-completion/completions/cxl
+-rw-r--r--	root/root	usr/share/bash-completion/completions/daxctl
+-rw-r--r--	root/root	usr/share/bash-completion/completions/ndctl
 drwxr-xr-x	root/root	usr/share/daxctl/
 -rw-r--r--	root/root	usr/share/daxctl/daxctl.conf
