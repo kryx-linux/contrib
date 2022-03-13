@@ -5,17 +5,25 @@
 
 name=dbus-python3
 version=1.2.18
-release=1
-source=(https://dbus.freedesktop.org/releases/dbus-python/dbus-python-$version.tar.gz)
+release=2
+source=(https://dbus.freedesktop.org/releases/dbus-python/dbus-python-$version.tar.gz
+  0001-Move-python-modules-to-architecture-specific-directo.patch)
 
 build() {
   cd dbus-python-$version
-  mkdir build && cd build
-  PYTHON=/usr/bin/python3 \
-  ../configure --prefix=/usr
-  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+  patch -Np1 -i $SRC/0001-Move-python-modules-to-architecture-specific-directo.patch
+  autoreconf -vfi
+
+  ./configure --prefix=/usr \
+    PYTHON=/usr/bin/python3 \
+    PYTHON_EXTRA_LIBS=' '
   make
+
   make DESTDIR=$PKG install
-  rm -fr $PKG/usr/{share,include}
-  mv $PKG/usr/lib/pkgconfig/dbus-python.pc $PKG/usr/lib/pkgconfig/dbus-python3.pc
+  /usr/bin/python3 setup.py install --root=$PKG \
+    --optimize=1 \
+    --skip-build
+
+  find $PKG -name '*.la' -type f -delete
 }
