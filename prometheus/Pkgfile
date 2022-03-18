@@ -4,7 +4,7 @@
 # Depends on: go npm
 
 name=prometheus
-version=2.33.5
+version=2.34.0
 release=1
 source=(https://github.com/prometheus/prometheus/archive/v$version/$name-$version.tar.gz
   prometheus.conf prometheus.service)
@@ -89,7 +89,7 @@ build() {
   done
 
   install -dm755 $PKG/usr/share/prometheus/web/ui
-  cp -R web/ui/{static,templates} $PKG/usr/share/prometheus/web/ui/
+  cp -R web/ui/static $PKG/usr/share/prometheus/web/ui/
   install -Dm644 $SRC/prometheus.conf $PKG/etc/conf.d/prometheus
 
   ## install rc file
