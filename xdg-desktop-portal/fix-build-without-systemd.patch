@@ -1,0 +1,65 @@
+From 7deeb2f7f748afd62b7ed23f0ca623136a5c5b78 Mon Sep 17 00:00:00 2001
+From: Phaedrus Leeds <mwleeds@protonmail.com>
+Date: Fri, 18 Mar 2022 09:20:13 -0700
+Subject: [PATCH] Fix building without libsystemd
+
+---
+ src/xdp-utils.c        | 2 ++
+ src/xdp-utils.h        | 2 ++
+ tests/test-xdp-utils.c | 2 ++
+ 3 files changed, 6 insertions(+)
+
+diff --git a/src/xdp-utils.c b/src/xdp-utils.c
+index 5017af92..1de5a4ff 100644
+--- a/src/xdp-utils.c
++++ b/src/xdp-utils.c
+@@ -144,6 +144,7 @@ xdp_app_info_new (XdpAppInfoKind kind)
+   return app_info;
+ }
+ 
++#ifdef HAVE_LIBSYSTEMD
+ char *
+ _xdp_parse_app_id_from_unit_name (const char *unit)
+ {
+@@ -183,6 +184,7 @@ _xdp_parse_app_id_from_unit_name (const char *unit)
+ 
+   return g_steal_pointer (&app_id);
+ }
++#endif /* HAVE_LIBSYSTEMD */
+ 
+ void
+ set_appid_from_pid (XdpAppInfo *app_info, pid_t pid)
+diff --git a/src/xdp-utils.h b/src/xdp-utils.h
+index b0968beb..9861e739 100644
+--- a/src/xdp-utils.h
++++ b/src/xdp-utils.h
+@@ -199,7 +199,9 @@ gboolean  xdp_has_path_prefix (const char *str,
+ /* exposed for the benefit of tests */
+ int _xdp_parse_cgroup_file (FILE     *f,
+                             gboolean *is_snap);
++#ifdef HAVE_LIBSYSTEMD
+ char *_xdp_parse_app_id_from_unit_name (const char *unit);
++#endif
+ 
+ #if !GLIB_CHECK_VERSION (2, 58, 0)
+ static inline gboolean
+diff --git a/tests/test-xdp-utils.c b/tests/test-xdp-utils.c
+index 8a30b515..d0bc363c 100644
+--- a/tests/test-xdp-utils.c
++++ b/tests/test-xdp-utils.c
+@@ -127,6 +127,7 @@ test_alternate_doc_path (void)
+   xdp_set_documents_mountpoint (NULL);
+ }
+ 
++#ifdef HAVE_LIBSYSTEMD
+ static void
+ test_app_id_via_systemd_unit (void)
+ {
+@@ -166,6 +167,7 @@ test_app_id_via_systemd_unit (void)
+   g_assert_cmpstr (app_id, ==, "org.gnome.Terminal");
+   g_clear_pointer (&app_id, g_free);
+ }
++#endif /* HAVE_LIBSYSTEMD */
+ 
+ int main (int argc, char **argv)
+ {
