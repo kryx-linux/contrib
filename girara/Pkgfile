@@ -7,7 +7,7 @@
 name=girara
 version=0.3.7
 release=1
-source=(https://pwmt.org/projects/$name/download/$name-$version.tar.xz)
+source=(https://git.pwmt.org/pwmt/$name/-/archive/$version/$name-$version.tar.bz2)
 
 build() {
   prt-get isinst json-c && PKGMK_GIRARA+=' -D json=enabled' || PKGMK_GIRARA+=' -D json=disabled'

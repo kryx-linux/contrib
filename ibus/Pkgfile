@@ -5,11 +5,10 @@
 # Optional: dconf desktop-file-utils gtk4 libappindicator-gtk3 unicode-character-database vala xorg-setxkbmap wayland-protocols
 #  xorg-libxcomposite xorg-libxcursor xorg-libxinerama
 name=ibus
-version=1.5.25
-release=2
+version=1.5.26
+release=1
 source=(https://github.com/ibus/ibus/releases/download/$version/$name-$version.tar.gz
-  https://raw.githubusercontent.com/ibus/ibus/dd4cc5b028c35f9bb8fa9d3bdc8f26bcdfc43d40/engine/denylist.txt
-  936a0e76df79d92a8bdc03e9205330fb84a2083e.patch)
+  https://raw.githubusercontent.com/ibus/ibus/dd4cc5b028c35f9bb8fa9d3bdc8f26bcdfc43d40/engine/denylist.txt)
 
 build() {
   cd $name-$version
@@ -17,7 +16,6 @@ build() {
   sed -i 's|$(libibus) $(libibus_emoji_dialog)|$(libibus_emoji_dialog) $(libibus)|' ui/gtk3/Makefile.am
   sed -i "/UCD_DIR=/s/\$with_emoji_annotation_dir/\$with_ucd_dir/" configure.ac
   grep -r -l '#!/usr/bin/python' . | xargs sed -i '1s|python|python3|'
-  patch -Np1 -i $SRC/936a0e76df79d92a8bdc03e9205330fb84a2083e.patch
 
   prt-get isinst dconf && PKGMK_IBUS+=' --enable-dconf' || PKGMK_IBUS+=' --disable-dconf'
   prt-get isinst gtk3 && PKGMK_IBUS+=' --enable-gtk3' || PKGMK_IBUS+=' --disable-gtk3'
@@ -40,9 +38,10 @@ build() {
     --disable-memconf \
     --disable-nls \
     --disable-python2 \
-    --disable-schemas-compile
+    --disable-schemas-compile \
+    --disable-systemd-services
   sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-  mv $SRC/denylist.txt engine/denylist.txt
+  #mv $SRC/denylist.txt engine/denylist.txt
   make
   make DESTDIR=$PKG install
 
