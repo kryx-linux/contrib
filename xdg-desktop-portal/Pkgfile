@@ -5,18 +5,15 @@
 # Optional: geoclue pipewire
 
 name=xdg-desktop-portal
-version=1.14.0
+version=1.14.1
 release=1
-source=(https://github.com/flatpak/xdg-desktop-portal/archive/$version/$name-$version.tar.gz
-  fix-build-without-systemd.patch)
+source=(https://github.com/flatpak/xdg-desktop-portal/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
   prt-get isinst pipewire && PKGMK_XDGDP+=' --enable-pipewire' || PKGMK_XDGDP+=' --disable-pipewire'
   prt-get isinst geoclue && PKGMK_XDGDP+=' --enable-geoclue' || PKGMK_XDGDP+=' --disable-geoclue'
-
-  patch -Np1 -i $SRC/fix-build-without-systemd.patch
 
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr $PKGMK_XDGDP \
