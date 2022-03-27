@@ -1,0 +1,18 @@
+# Description: XPath 1.0/2.0 parsers and selectors for ElementTree and lxml
+# URL: https://github.com/sissaschool/elementpath
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-elementpath
+version=2.5.0
+release=1
+source=(https://github.com/sissaschool/elementpath/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd elementpath-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
