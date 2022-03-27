@@ -1,0 +1,18 @@
+# Description: A self-contained Python package of low-level cryptographic primitives
+# URL: https://www.pycryptodome.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-pycryptodomex
+version=3.14.1
+release=1
+source=(https://pypi.org/packages/source/p/pycryptodomex/pycryptodomex-$version.tar.gz)
+
+build() {
+  cd pycryptodomex-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}

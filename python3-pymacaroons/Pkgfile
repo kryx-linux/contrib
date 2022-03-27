@@ -1,0 +1,18 @@
+# Description: Python implementation of Macaroons. They’re better than cookies!
+# URL: https://github.com/ecordell/pymacaroons
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pynacl python3-six
+
+name=python3-pymacaroons
+version=0.13.0
+release=1
+source=(https://github.com/ecordell/pymacaroons/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd pymacaroons-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}

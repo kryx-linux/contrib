@@ -1,0 +1,18 @@
+# Description: Various helpers to pass trusted data to untrusted environments
+# URL: http://pypi.python.org/pypi/itsdangerous
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-itsdangerous
+version=2.1.1
+release=1
+source=(https://github.com/mitsuhiko/itsdangerous/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd itsdangerous-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}

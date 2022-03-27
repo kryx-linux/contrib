@@ -1,0 +1,19 @@
+# Description: Python Sorted Container Types: SortedList, SortedDict, and SortedSet
+# URL: http://www.grantjenks.com/docs/sortedcontainers/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-sortedcontainers
+version=2.4.0
+release=1
+source=(https://github.com/grantjenks/python-sortedcontainers/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd python-sortedcontainers-$version
+  sed -i '/tests_require/d' setup.py
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}

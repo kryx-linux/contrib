@@ -1,0 +1,18 @@
+# Description: An easy whitelist-based HTML-sanitizing tool
+# URL: https://pypi.org/project/bleach/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-packaging python3-webencodings
+
+name=python3-bleach
+version=4.1.0
+release=1
+source=(https://pypi.org/packages/source/b/bleach/bleach-$version.tar.gz)
+
+build() {
+  cd bleach-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}

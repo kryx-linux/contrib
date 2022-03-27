@@ -1,0 +1,18 @@
+# Description: An immutable dictionary
+# URL: https://pypi.python.org/pypi/frozendict/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-frozendict
+version=2.3.0
+release=1
+source=(https://pypi.org/packages/source/f/frozendict/frozendict-$version.tar.gz)
+
+build() {
+  cd frozendict-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}

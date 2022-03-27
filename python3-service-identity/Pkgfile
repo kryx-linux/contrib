@@ -1,0 +1,18 @@
+# Description: Service identity verification for pyOpenSSL
+# URL: https://pypi.python.org/pypi/service_identity
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-attrs python3-cryptography python3-idna python3-pyasn1-modules
+
+name=python3-service-identity
+version=21.1.0
+release=1
+source=(https://github.com/pyca/service-identity/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd service-identity-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
