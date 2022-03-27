@@ -1,0 +1,16 @@
+# Description: Python Decorator module
+# URL: https://pypi.python.org/pypi/decorator
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-decorator
+_name=decorator
+version=5.1.1
+release=1
+source=(https://pypi.python.org/packages/source/${_name:0:1}/${_name}/$_name-$version.tar.gz)
+
+build() {
+  cd $_name-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root="$PKG" --optimize=1 --skip-build
+}
