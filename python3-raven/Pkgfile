@@ -1,0 +1,18 @@
+# Description: Python client for Sentry
+# URL: https://pypi.python.org/pypi/raven
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-raven
+version=6.10.0
+release=1
+source=(https://github.com/getsentry/raven-python/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd raven-python-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
