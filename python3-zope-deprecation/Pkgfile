@@ -1,0 +1,15 @@
+# Description: Zope Deprecation Infrastructure
+# URL: https://github.com/zopefoundation/zope.deprecation
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-zope-deprecation
+version=4.4.0
+release=1
+source=(https://github.com/zopefoundation/zope.deprecation/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd zope.deprecation-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+}

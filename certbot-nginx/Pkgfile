@@ -1,0 +1,15 @@
+# Description: Nginx plugin for Let’s Encrypt client
+# URL: https://pypi.python.org/pypi/certbot-nginx
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: certbot python3-mock
+
+name=certbot-nginx
+version=1.25.0
+release=2
+source=(https://pypi.io/packages/source/c/certbot-nginx/certbot-nginx-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  /usr/bin/python3 -m build --wheel --no-isolation
+  /usr/bin/python3 -m install --destdir=$PKG dist/*.whl
+}

@@ -1,0 +1,15 @@
+# Description: A drop-in replacement for argparse
+# URL: https://github.com/bw2/ConfigArgParse/
+# Maintainer: Tim Biermann, tbier at poste dot de
+# Depends on: python3-setuptools
+
+name=python3-configargparse
+version=1.5.3
+release=1
+source=(https://github.com/bw2/ConfigArgParse/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd ConfigArgParse-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1 --skip-build
+}

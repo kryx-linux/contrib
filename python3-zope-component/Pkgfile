@@ -1,0 +1,15 @@
+# Description: the core of the Zope Component Architecture
+# URL: https://github.com/zopefoundation/zope.component
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-zope-deferredimport python3-zope-deprecation python3-zope-event python3-zope-hookable
+
+name=python3-zope-component
+version=5.0.1
+release=1
+source=(https://github.com/zopefoundation/zope.component/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd zope.component-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+}

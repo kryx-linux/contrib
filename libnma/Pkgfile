@@ -4,26 +4,24 @@
 # Depends on: gcr gtk3 iso-codes networkmanager
 
 name=libnma
-version=1.8.34
+version=1.8.36
 release=1
 source=(https://gitlab.gnome.org/GNOME/libnma/-/archive/$version/libnma-$version.tar.bz2)
 
 build() {
-  # don't build nls
-  rm -r $name-$version/po
-  sed -e '298d' -i $name-$version/meson.build
+  #prt-get isinst gtk4 && PKGMK_LIBNMA+=' -D libnma_gtk4=true'
+  prt-get isinst vala || PKGMK_LIBNMA+=' -D vapi=false'
 
-  ls /usr/include/gcr-3/gcr/gcr.h || (printf '\e[1;31m%-6s\e[m\n' "gcr wasn't build with gtk3 bindings, install gtk3 and rebuild gcr to build $name" ; exit 1)
-
-  meson setup $name-$version build \
+  meson setup $name-$version build $PKGMK_LIBNMA \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
     -D mobile_broadband_provider_info=false \
-    -D gtk_doc=false \
-    -D vapi=false
+    -D gtk_doc=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
 }
