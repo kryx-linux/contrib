@@ -1,0 +1,18 @@
+# Description: Provides a simple event system
+# URL: https://github.com/zopefoundation/zope.event
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-zope-event
+version=4.5.0
+release=1
+source=(https://github.com/zopefoundation/zope.event/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd zope.event-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
