@@ -1,0 +1,25 @@
+# Description: Matrix reference homeserver
+# URL: https://github.com/matrix-org/synapse
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-bcrypt python3-bleach python3-ijson python3-netaddr python3-phonenumbers python3-pillow python3-prometheus_client python3-pymacaroons python3-pysaml2 python3-signedjson python3-sortedcontainers python3-treq python3-yaml
+# Optional: python3-hiredis python3-lxml python3-psutil python3-psycopg2 python3-pyjwt python3-txredisapi psycopg2
+
+name=matrix-synapse
+version=1.55.2
+release=1
+source=(https://github.com/matrix-org/synapse/archive/v$version/$name-$version.tar.gz
+  synapse.service)
+
+build() {
+  cd synapse-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+
+  install -dm0700 -o synapse -g synapse /etc/synapse
+  install -dm0700 -o synapse -g synapse /var/lib/synapse
+  install -Dm0755 -o root -g root $SRC/synapse.service \
+    $PKG/etc/rc.d/synapse
+}
