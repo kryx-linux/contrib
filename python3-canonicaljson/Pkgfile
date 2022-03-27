@@ -1,0 +1,18 @@
+# Description: Canonical JSON
+# URL: https://pypi.python.org/pypi/canonicaljson/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-frozendict python3-simplejson
+
+name=python3-canonicaljson
+version=1.6.0
+release=1
+source=(https://github.com/matrix-org/python-canonicaljson/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd python-canonicaljson-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
