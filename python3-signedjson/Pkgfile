@@ -1,0 +1,18 @@
+# Description: Sign JSON with Ed25519 signatures
+# URL: https://pypi.python.org/pypi/signedjson/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-canonicaljson python3-pynacl python3-unpaddedbase64
+
+name=python3-signedjson
+version=1.1.1
+release=1
+source=(https://files.pythonhosted.org/packages/source/s/signedjson/signedjson-$version.tar.gz)
+
+build() {
+  cd signedjson-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
