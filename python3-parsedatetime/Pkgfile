@@ -1,0 +1,15 @@
+# Description: Parse human-readable date/time strings
+# URL: https://github.com/bear/parsedatetime
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-future
+
+name=python3-parsedatetime
+version=2.6
+release=1
+source=(https://github.com/bear/parsedatetime/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd parsedatetime-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+}
