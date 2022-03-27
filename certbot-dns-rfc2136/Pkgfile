@@ -1,0 +1,15 @@
+# Description: RFC 2136 DNS Authenticator plugin for Certbot
+# URL: https://pypi.python.org/pypi/certbot-dns-rfc2136
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: certbot python3-dnspython
+
+name=certbot-dns-rfc2136
+version=1.25.0
+release=1
+source=(https://pypi.io/packages/source/c/certbot-dns-rfc2136/certbot-dns-rfc2136-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  /usr/bin/python3 -m build --wheel --no-isolation
+  /usr/bin/python3 -m install --destdir=$PKG dist/*.whl
+}
