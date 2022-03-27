@@ -1,0 +1,15 @@
+# Description: Generic Transparent Proxies
+# URL: https://github.com/zopefoundation/zope.proxy
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-zope-interface
+
+name=python3-zope-proxy
+version=4.5.0
+release=1
+source=(https://github.com/zopefoundation/zope.proxy/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd zope.proxy-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+}
