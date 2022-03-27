@@ -1,0 +1,15 @@
+# Description: Generate and parse RFC 3339 timestamps
+# URL: https://pypi.org/project/pyRFC3339/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pytz
+
+name=python3-pyrfc3339
+version=1.1
+release=1
+source=(https://pypi.python.org/packages/source/p/pyRFC3339/pyRFC3339-$version.tar.gz)
+
+build() {
+  cd pyRFC3339-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG/ --optimize=1
+}
