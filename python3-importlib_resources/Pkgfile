@@ -1,18 +1,20 @@
 # Description: Design and implementation for a planned importlib.resources
 # URL: https://github.com/python/importlib_resources
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-toml python3-zipp
+# Depends on: python3-build python3-install python3-toml python3-zipp
 
 name=python3-importlib_resources
-version=5.4.0
+version=5.6.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/i/importlib_resources/importlib_resources-$version.tar.gz)
 
 build() {
   cd importlib_resources-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+    /usr/bin/python3 -m build \
+    --wheel \
+    --skip-dependency-check \
+    --no-isolation
+  /usr/bin/python3 -m install \
+    --optimize=1 \
+    --destdir=$PKG dist/*.whl
 }
