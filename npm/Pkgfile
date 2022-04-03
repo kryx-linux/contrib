@@ -4,7 +4,7 @@
 # Depends on: nodejs
 
 name=npm
-version=8.5.5
+version=8.6.0
 release=1
 source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz
   destdir.patch)
@@ -12,19 +12,26 @@ source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz
 build() {
   cd cli-$version
 
-  prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+  prt-get isinst ccache && \
+    PATH="$(echo ${PATH} | \
+    awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
-  export NPM_CONFIG_USERCONFIG=$SRC/.npm
-  export NPM_CONFIG_CACHE=$SRC/.npm/cache
+  export npm_config_cache="$SRC/.npm/cache"
+  export npm_config_userconfig="$SRC/.npm/cache"
   export GATSBY_TELEMETRY_DISABLED="1"
 
   # fix some build issues
-  node bin/npm-cli.js install cmark-gfm --no-global --no-timing --no-save
+  # starting with 8.6.0, `make mandocs` would remove the node_modules dir
+  awk -i inplace \
+    '/node bin\/npm-cli.js run resetdeps/ gsub(/resetdeps/, "dumpconf")' \
+    Makefile
+  node bin/npm-cli.js install marked-man --no-global --no-timing --no-save
   patch -Np1 -i $SRC/destdir.patch
 
   make mandocs
   NODE_PATH=/usr/lib/node_modules node bin/npm-cli.js pack
-  NODE_PATH=/usr/lib/node_modules DESTDIR=$PKG node bin/npm-cli.js install -g -f npm-$version.tgz
+  NODE_PATH=/usr/lib/node_modules DESTDIR=$PKG node bin/npm-cli.js \
+    install -g -f npm-$version.tgz
 
   mkdir -p $PKG/usr/share
   mv $PKG/usr/lib/node_modules/npm/man $PKG/usr/share/
@@ -36,5 +43,6 @@ build() {
     -iname "CHANGELOG" -o \
     -iname "AUTHORS*" \)\
     -exec rm '{}' \+
-  rm -r $PKG/usr/lib/node_modules/npm/docs #$PKG/usr/lib/node_modules/npm/changelogs
+  rm -r $PKG/usr/lib/node_modules/npm/docs
+  #$PKG/usr/lib/node_modules/npm/changelogs
 }
