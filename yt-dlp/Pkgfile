@@ -4,11 +4,11 @@
 # Depends on:  python3-setuptools
 
 name=yt-dlp
-version=2022.03.08.1
+version=2022.04.08
 release=1
 source=(https://github.com/${name}/${name}/releases/download/\
 ${version}/${name}.tar.gz)
-#3.7 renames=(${name}-${version}.tar.gz)
+renames=(${name}-${version}.tar.gz)
 
 build() {
    cd ${name} #-${version}
