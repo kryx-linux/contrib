@@ -4,13 +4,13 @@
 # Depends on: python3-appdirs python3-backports_entry-points-selectable python3-distlib python3-filelock python3-pip python3-platformdirs python3-six
 
 name=python3-virtualenv
-version=20.14.0
+version=20.14.1
 release=1
 source=(https://pypi.org/packages/source/v/virtualenv/virtualenv-$version.tar.gz)
 
 build() {
   cd virtualenv-$version
-  #sed -i "s|pkgutil.get_data(\"pip._vendor.certifi\", \"cacert.pem\")|open(os.path.join('/etc/ssl/certs/ca-certificates.crt'), 'rb').read()|" virtualenv-$pkgver/tests/conftest.py
+
   /usr/bin/python3 setup.py build egg_info
   /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --skip-build
 }
