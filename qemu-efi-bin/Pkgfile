@@ -1,22 +1,34 @@
-# Description: EFI "BIOS" for qemu: -bios /usr/share/edk2-ovmf/x64/OVMF_CODE.fd
-# URL:         https://archlinux.org/packages/extra/any/edk2-ovmf
-# (Really:     https://github.com/tianocore/edk2)
+# Description: EFI "BIOS" for qemu : -bios /usr/share/qemu-efi-bin/MACHINE.fd
+# URL:         https://github.com/tianocore/edk2)
+# Really a conglomerate of
+# - https://archlinux.org/packages/extra/any/edk2-ovmf
+# - https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/latest/QEMU-ARM/RELEASE_CLANG38/QEMU_EFI.fd
+# - https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/latest/QEMU-AARCH64/RELEASE_CLANG38/QEMU_EFI.fd
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=qemu-efi-bin
 version=202202-1
 realn=edk2-ovmf
-release=1
-source=(https://ftp.sdaoden.eu/${realn}-${version}-any.pkg.tar.zst)
+lindate=20220412
+release=2
+source=(
+   https://ftp.sdaoden.eu/${realn}-${version}-any.pkg.tar.zst
+   https://ftp.sdaoden.eu/qemu-aarch64-efi-${lindate}.fd
+   https://ftp.sdaoden.eu/qemu-arm-efi-${lindate}.fd
+)
 
 build() {
    [ -d usr ] || # TODO pkgmk native support
       bsdtar -xf $(basename "$source")
 
-   mkdir -p "${PKG}"/usr/share/${realn} "${PKG}"/usr/share/qemu/firmware
+   mkdir -p "${PKG}"/usr/share/${name}
 
-   cp -r usr/share/${realn} "${PKG}"/usr/share
-   cp -r usr/share/qemu/firmware "${PKG}"/usr/share/qemu
+   cp -r usr/share/${realn}/ia32/OVMF.fd \
+         "${PKG}"/usr/share/${name}/i386.fd
+   cp -r usr/share/${realn}/x64/OVMF.fd "${PKG}"/usr/share/${name}/x86_64.fd
+   cp -r qemu-aarch64-efi-${lindate}.fd "${PKG}"/usr/share/${name}/aarch64.fd
+   cp -r qemu-arm-efi-${lindate}.fd "${PKG}"/usr/share/${name}/arm.fd
+   chmod 0644 "${PKG}"/usr/share/${name}/*.*
 }
 
 # s-sh-mode
