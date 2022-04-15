@@ -1,10 +1,10 @@
 # Description: TeX distribution for UNIX compatible systems, including luatex and xindy support
 # URL: https://www.tug.org/tetex/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: clisp ghostscript graphite2 icu harfbuzz libgd libmpfr libpaper poppler xorg-libxaw xorg-libxi zziplib
+# Depends on: clisp ghostscript graphite2 harfbuzz icu libgd libmpfr xorg-libxaw xorg-libxi zziplib
 
 name=texlive
-version=20210325
+version=20220321
 release=1
 source=(ftp://tug.org/historic/systems/texlive/${version:0:4}/$name-$version-texmf.tar.xz
   ftp://tug.org/historic/systems/texlive/${version:0:4}/$name-$version-source.tar.xz
@@ -30,7 +30,6 @@ unpack_source() {
 build() {
   # remove broken symlinks
   find $SRC -type l -xtype l -exec rm '{}' \+
-  find $PKG -type l -xtype l -exec rm '{}' \+
 
   # make ConTeXt work, and remove unused settings
   sed -i \
@@ -68,7 +67,7 @@ build() {
     --with-banner-add=" $(crux)" \
     --with-clisp-runtime=system \
     --enable-{dvipdfm-x,gc=system,libtool-hack,luatex,pdftex,pdftex-syncex,shared,makeindexk,tex,texlive,tex-synctex,web2c,xindy} \
-    --with-system-{cairo,freetype2,gd,graphite2,gmp,harfbuzz,icu,libpaper,libpng,mpfr,ncurses,pixman,poppler,potrace,t1lib,zlib,zziplib} \
+    --with-system-{cairo,freetype2,gd,graphite2,gmp,harfbuzz,icu,libpaper,libpng,mpfr,ncurses,pixman,potrace,t1lib,zlib,zziplib} \
     --with-x \
     --with-xdvi-x-toolkit=xaw \
     --disable-{all-pkgs,aleph,native-texlive-build,xetex,xindy-docs,xindy-rules}
