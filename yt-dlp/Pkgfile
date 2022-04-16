@@ -5,7 +5,7 @@
 
 name=yt-dlp
 version=2022.04.08
-release=2
+release=3
 source=(https://github.com/${name}/${name}/releases/download/\
 ${version}/${name}.tar.gz)
 renames=(${name}-${version}.tar.gz)
@@ -17,7 +17,7 @@ build() {
    install -D -m 0644 ${name}.1 "${PKG}"/usr/share/man/man1/${name}.1
 
    if prt-get isinst bash-completion > /dev/null 2>&1; then
-      install -D ${name}/completions/bash/yt-dlp \
+      install -D completions/bash/yt-dlp \
          "${PKG}"/usr/share/bash-completion/completions/${name}
    fi
 }
