@@ -6,13 +6,12 @@
 
 rname=postfix
 name=postfix-lmdb
-version=3.7.0
-release=2
+version=3.7.1
+release=1
 source=(
    https://de.${rname}.org/ftpmirror/official/${rname}-${version}.tar.gz
    lmdb-default.patch
    postfix-install.patch
-   closefrom.patch
    post-install
    ${rname}.rc
    README 
@@ -27,7 +26,6 @@ build() {
 
    patch -p1 < "${SRC}"/lmdb-default.patch
    patch -p1 < "${SRC}"/postfix-install.patch
-   patch -p1 < "${SRC}"/closefrom.patch
 
    cca='-DNO_DB -DNO_EAI -DNO_NIS -DNO_NISPLUS -DUSE_TLS'
    cca=${cca}' -DHAS_LMDB -DDEF_DB_TYPE=\"lmdb\"'
