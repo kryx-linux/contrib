@@ -5,13 +5,16 @@
 
 name=exa
 version=0.10.1
-release=1
-source=(https://github.com/ogham/exa/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/ogham/exa/archive/v$version/$name-$version.tar.gz
+  1051.patch)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+  patch -Np1 -d $name-$version -i $SRC/1051.patch
 
   cargo update --manifest-path $name-$version/Cargo.toml
   cargo fetch --manifest-path $name-$version/Cargo.toml
