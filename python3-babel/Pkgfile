@@ -4,9 +4,9 @@
 # Depends on: python3-pytz python3-setuptools
 
 name=python3-babel
-version=2.9.1
+version=2.10.1
 release=1
-cldrver=37.0 # $SRC/babel-$version/scripts/download_import_cldr.py
+cldrver=41.0 # $SRC/babel-$version/scripts/download_import_cldr.py
 
 source=(https://github.com/python-babel/babel/archive/v$version/$name-$version.tar.gz
   https://unicode.org/Public/cldr/${cldrver::2}/cldr-common-$cldrver.zip)
@@ -17,7 +17,7 @@ unpack_source() {
       $name-$version.tar.gz)
         bsdtar -p -o -C $SRC -xf $(get_filename $file) ;;
       cldr-common-$cldrver.zip)
-        cp $(get_filename $file) $SRC/babel-$version/cldr/cldr-core-${cldrver::2}.zip ;;
+        cp $(get_filename $file) $SRC/babel-$version/cldr/cldr-common-$cldrver.zip ;;
       *)
         cp $(get_filename $file) $SRC ;;
     esac
