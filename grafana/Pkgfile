@@ -1,51 +1,42 @@
 # Description: The analytics platform for all your metrics
 # URL: https://grafana.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fontconfig go git npm yarn
+# Depends on: fontconfig go
 
 name=grafana
-version=8.4.6
+version=8.5.0
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
   grafana.confd grafana.service)
 
 build() {
-  # setup build env {{{
-  export LC_ALL=C
-  [ ! -d $PKGMK_SOURCE_DIR/yarn_cache ] && mkdir $PKGMK_SOURCE_DIR/yarn_cache
-  export YARN_CACHE_FOLDER=$PKGMK_SOURCE_DIR/yarn_cache
-  [ ! -d $PKGMK_SOURCE_DIR/npm_cache ] && mkdir $PKGMK_SOURCE_DIR/npm_cache
-  export npm_config_cache=$PKGMK_SOURCE_DIR/npm_cache
-  export NPM_CONFIG_PREFIX="$SRC/npm"
-  export PATH+=":$NPM_CONFIG_PREFIX/bin"
-
   export CGO_LDFLAGS="${LDFLAGS}"
   export CGO_CPPFLAGS="${CPPFLAGS}"
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export GOFLAGS="-buildmode=pie -trimpath -modcacherw"
-  # }}}
-  # setup default paths {{{
-  sed -ri 's,^(\s*data\s*=).*,\1 /var/lib/grafana,' $name-$version/conf/defaults.ini
-  sed -ri 's,^(\s*plugins\s*=).*,\1 /var/lib/grafana/plugins,' $name-$version/conf/defaults.ini
-  sed -ri 's,^(\s*provisioning\s*=).*,\1 /var/lib/grafana/conf/provisioning,' $name-$version/conf/defaults.ini
-  sed -ri 's,^(\s*logs\s*=).*,\1 /var/log/grafana,' $name-$version/conf/defaults.ini
-  # }}}
+
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+
   cd $SRC/$name-$version
-  # build backend {{{
-  make build-go
-  go run build.go setup
-  go run build.go build
-  # }}}
-  # build frontend {{{
-  yarn install
-  NODE_ENV=production yarn run build
-  # }}}
+
+  sed -ri 's,^(\s*data\s*=).*,\1 /var/lib/grafana,' conf/defaults.ini
+  sed -ri 's,^(\s*plugins\s*=).*,\1 /var/lib/grafana/plugins,' conf/defaults.ini
+  sed -ri 's,^(\s*provisioning\s*=).*,\1 /var/lib/grafana/conf/provisioning,' conf/defaults.ini
+  sed -ri 's,^(\s*logs\s*=).*,\1 /var/log/grafana,' conf/defaults.ini
+
+  go get -u gonum.org/v1/gonum@v0.11.0
+  GOBIN="$(pwd)" go install github.com/google/wire/cmd/wire@v0.5.0
+  ./wire gen -tags oss ./pkg/server ./pkg/cmd/grafana-cli/runner
+  local ldflags="-X main.version=$pkgver -X main.commit=$_commit -X main.buildstamp=$_stamp"
+  go build -ldflags "$ldflags" -v ./pkg/cmd/grafana-server
+  go build -ldflags "$ldflags" -v ./pkg/cmd/grafana-cli
 
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name
-  install -Dsm755 bin/linux-amd64/grafana-server $PKG/usr/bin/grafana-server
-  install -Dsm755 bin/linux-amd64/grafana-cli $PKG/usr/bin/grafana-cli
+  install -Dsm755 grafana-server $PKG/usr/bin/grafana-server
+  install -Dsm755 grafana-cli $PKG/usr/bin/grafana-cli
   install -Dm644 conf/sample.ini $PKG/etc/grafana.ini
   install -dm755 $PKG/usr/share/grafana
   cp -r conf public $PKG/usr/share/$name/
@@ -53,5 +44,3 @@ build() {
   ## install rc file
   install -Dm 755 $SRC/grafana.service $PKG/etc/rc.d/grafana
 }
-
-# vim: foldmethod=marker foldlevelstart=1
