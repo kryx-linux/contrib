@@ -1,20 +1,17 @@
 # Description: an open-source systems monitoring and alerting toolkit
 # URL: https://prometheus.io
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: go npm typescript yamllint yarn
+# Depends on: go typescript yamllint yarn
 
 name=prometheus
 version=2.35.0
-release=1
+release=2
 source=(https://github.com/prometheus/prometheus/archive/v$version/$name-$version.tar.gz
   prometheus.conf prometheus.service)
 
 build() {
   # setup build env {{{
   ## Node Setup
-  #export NODE_ENV=production
-  #[ ! -d $PKGMK_SOURCE_DIR/npm_cache ] && mkdir $PKGMK_SOURCE_DIR/npm_cache
-  #export npm_config_cache=$PKGMK_SOURCE_DIR/npm_cache
   export NPM_CONFIG_PREFIX="$SRC/npm"
   export PATH+=":$NPM_CONFIG_PREFIX/bin"
 
@@ -28,69 +25,23 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/gopath" || true
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
-  GOLDFLAGS="-X github.com/prometheus/common/version.Version=$version
-    -X github.com/prometheus/common/version.Revision=CRUX
-    -X github.com/prometheus/common/version.Branch=master
-    -X github.com/prometheus/common/version.BuildUser=$USER@$HOSTNAME
-    -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)
-  "
-
-  if [ -n $LDFLAGS ]; then
-    # LDFLAGS (and only LDFLAGS) should be passed to -extldflags.
-    GOLDFLAGS="$GOLDFLAGS -extldflags $LDFLAGS"
-  fi
+  LDFLAGS="-X github.com/prometheus/common/version.Version=$version \
+    -X github.com/prometheus/common/version.Revision=CRUX \
+    -X github.com/prometheus/common/version.Branch=master \
+    -X github.com/prometheus/common/version.BuildUser=$USER@$HOSTNAME \
+    -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)"
   # }}}
   cd $name-$version
 
-  pushd web/ui
-  GOOS= GOARCH= go generate -x -v
-  popd
-  make ui-install
-  make assets
+  make build -j1
 
-  go build \
-    -trimpath \
-    -buildmode=pie \
-    -mod=readonly \
-    -modcacherw \
-    -ldflags "$GOLDFLAGS" \
-    ./cmd/prometheus
-
-  go build \
-    -trimpath \
-    -buildmode=pie \
-    -mod=readonly \
-    -modcacherw \
-    -ldflags "$GOLDFLAGS" \
-    ./cmd/promtool
-
-  # install
   install -Dm755 -t $PKG/usr/bin prometheus promtool
-
-  install -Dm644 $SRC/prometheus.conf \
-    $PKG/etc/conf.d/prometheus
-  install -dm644 $PKG/var/lib/prometheus/data
-
-  install -Dm644 -t $PKG/etc/prometheus \
-    documentation/examples/prometheus.yml
-
-  mkdir -p $PKG/etc/prometheus/console_libraries
-  for file in console_libraries/*
-  do
-    install -Dm644 -t $PKG/etc/prometheus/console_libraries/ $file
-  done
-
-  mkdir -p $PKG/etc/prometheus/consoles
-  for file in consoles/*
-  do
-    install -Dm644 -t $PKG/etc/prometheus/consoles/ $file
-  done
-
+  install -Dm640 -g prometheus -t $PKG/etc/prometheus documentation/examples/prometheus.yml
+  install -dm750 -o prometheus -g prometheus $PKG/var/lib/prometheus
   install -dm755 $PKG/usr/share/prometheus/web/ui
   cp -R web/ui/static $PKG/usr/share/prometheus/web/ui/
-  install -Dm644 $SRC/prometheus.conf $PKG/etc/conf.d/prometheus
 
-  ## install rc file
+  install -Dm644 $SRC/prometheus.conf $PKG/etc/conf.d/prometheus
   install -Dm 755 $SRC/prometheus.service $PKG/etc/rc.d/prometheus
 }
 
