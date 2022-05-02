@@ -3,15 +3,16 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 # Depends on:  zlib
 
-name=kexec
-version=2.0.23
+name=kexec-tools
+xname=kexec
+version=2.0.24
 release=1
-source=(https://git.kernel.org/pub/scm/utils/kernel/${name}/\
-${name}-tools.git/snapshot/${name}-tools-${version}.tar.gz
+source=(https://git.kernel.org/pub/scm/utils/kernel/${xname}/\
+${name}.git/snapshot/${name}-${version}.tar.gz
 )
 
 build() {
-   cd ${name}-tools-${version}
+   cd ${name}-${version}
 
    ./bootstrap
    #LDFLAGS="-static ${LDFLAGS}" 
