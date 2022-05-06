@@ -5,18 +5,19 @@
 # Optional: python3-hiredis python3-lxml python3-psutil python3-psycopg2 python3-pyjwt python3-txredisapi psycopg2
 
 name=matrix-synapse
-version=1.57.1
+version=1.58.1
 release=1
 source=(https://github.com/matrix-org/synapse/archive/v$version/$name-$version.tar.gz
   synapse.service)
 
 build() {
   cd synapse-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+
+  # fix bin  dir
+  chmod +x $PKG/usr/bin/*
 
   install -dm0700 -o synapse -g synapse /etc/synapse
   install -dm0700 -o synapse -g synapse /var/lib/synapse
