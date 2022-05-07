@@ -3,10 +3,11 @@
 # Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
 
 name=tcc
-version=20220401
-gitver=e2e5377e7b68d57def00acda17ffcfca6dce8b84
+version=20220507
+gitver=499cf2305b0541799130a5c670c113ed1bdb36aa
 release=1
 source=(https://repo.or.cz/tinycc.git/snapshot/${gitver}.tar.gz)
+renames=(${name}-${version}.tar.gz)
 
 build() {
    cd tinycc-*
