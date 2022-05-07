@@ -5,10 +5,13 @@
 
 name=zathura-pdf-mupdf
 version=0.3.8
-release=1
-source=(https://git.pwmt.org/pwmt/$name/-/archive/$version/$name-$version.tar.bz2)
+release=2
+source=(https://git.pwmt.org/pwmt/$name/-/archive/$version/$name-$version.tar.bz2
+  0001-Remove-mupdf-linking-detection.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/0001-Remove-mupdf-linking-detection.patch
+
   meson setup $name-$version build \
     --prefix=/usr \
     --sysconfdir=/etc \
