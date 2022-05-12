@@ -3,15 +3,15 @@
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
-# LIBNETWORK_COMMIT:=64b7a4574d1426139437d20e81c0b6d391130ec8
+# LIBNETWORK_COMMIT:=339b972b464ee3d401b5788b2af9e31d09d6b7da
 
 name=docker
-version=20.10.14
+version=20.10.15
 release=1
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/libnetwork-64b7a45.tar.xz \
+    http://jaeger.morpheus.net/linux/crux/files/libnetwork-339b972.tar.xz \
     $name.rc $name.conf)
 
 build() {
@@ -43,7 +43,7 @@ build() {
 
     (cd ..; \
         GOROOT=/usr/lib/go GOPATH=${PKGMK_WORK_DIR} go build -o $PKG/usr/bin/$name-proxy \
-            libnetwork-64b7a45/cmd/proxy)
+            libnetwork-339b972/cmd/proxy)
 
     for M in 1 5 8; do
         install -d -m 0755 $PKG/usr/share/man/man${M}
