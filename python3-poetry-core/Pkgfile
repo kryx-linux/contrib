@@ -1,25 +1,20 @@
 # Description: Poetry PEP 517 Build Backend & Core Utilities
 # URL: https://github.com/python-poetry/poetry-core
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-dephell python3-jsonschema python3-lark-parser
+# Depends on: python3-install python3-jsonschema python3-lark-parser python3-tomlkit
 
 name=python3-poetry-core
 version=1.0.8
 release=1
-source=(https://github.com/python-poetry/poetry-core/archive/$version/$name-$version.tar.gz poetry-core-1.0.2-devendor.patch)
+source=(https://github.com/python-poetry/poetry-core/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd poetry-core-$version
-  patch -Np1 -i $SRC/poetry-core-1.0.2-devendor.patch
+
   sed -i '/^__version__/!d' poetry/core/__init__.py
   rm -r poetry/core/_vendor
   rm poetry/__init__.py
 
-  dephell deps convert --from pyproject.toml --to setup.py
-
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
 }
