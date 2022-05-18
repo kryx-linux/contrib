@@ -10,10 +10,11 @@ source=(https://github.com/sdispater/cleo/archive/$version/$name-$version.tar.gz
 
 build() {
   cd cleo-$version
-  dephell deps convert --from pyproject.toml --to setup.py
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  if prt-get isinst python3-poetry; then
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+  else
+    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps cleo
+  fi
 }
