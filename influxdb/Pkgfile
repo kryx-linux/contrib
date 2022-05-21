@@ -1,15 +1,13 @@
 # Description: Scalable datastore for metrics, events, and real-time analytics
 # URL: https://github.com/InfluxData/influxdb
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: clang go protobuf rust yarn
+# Depends on: clang go git protobuf rust yarn
 
 name=influxdb
-version=2.1.1
+version=2.2.0
 release=1
 source=(https://github.com/influxdata/influxdb/archive/v$version/$name-$version.tar.gz
   influxdb.service)
-
-_commit=657e1839de9e8a734abad1207ca28e7d02444207
 
 build() {
   cd $name-$version
@@ -22,10 +20,8 @@ build() {
   export GOFLAGS="-trimpath -mod=readonly -modcacherw -buildmode=pie"
   export LDFLAGS="-linkmode external"
 
-  PATH="$(go env GOPATH)/bin:$PATH" make -j1 VERSION=$version COMMIT=$_commit INFLUXDB_SHA=$_commit
+  PATH="$(go env GOPATH)/bin:$PATH" make -j1 VERSION=$version
 
   install -Dm755 bin/linux/influxd -t $PKG/usr/bin
-
-  ## install rc file
   install -Dm 755 $SRC/influxdb.service $PKG/etc/rc.d/influxdb
 }
