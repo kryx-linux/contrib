@@ -20,7 +20,9 @@ build() {
 		-D glslang=enabled \
 		-D shaderc=enabled \
 		-D lcms=enabled \
-		-D d3d11=disabled
+		-D d3d11=disabled \
+		-D demos=false \
+		-D tests=false
 
 	meson compile -C build -j ${JOBS:-1}
 	DESTDIR=$PKG meson install -C build
