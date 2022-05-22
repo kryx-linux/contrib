@@ -4,18 +4,22 @@
 # Depends on: gnome-common linux-pam p11-kit gcr gtk3 harfbuzz pango libepoxy desktop-file-utils docbook-xsl
 
 name=gnome-keyring
-version=40.0
+version=42.0
 release=1
 source=(https://github.com/GNOME/gnome-keyring/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr \
     --with-pam-dir=/lib/security \
     --with-root-certs=/etc/ssl/certs \
+    --disable-static \
     --disable-schemas-compile \
     --disable-nls
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0 /g' libtool
+
   make
   make DESTDIR=$PKG install
 }
