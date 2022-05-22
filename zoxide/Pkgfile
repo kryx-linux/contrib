@@ -1,0 +1,21 @@
+# Description: A smarter cd command. Supports all major shells.
+# URL: https://github.com/ajeetdsouza/zoxide
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=zoxide
+version=0.8.1
+release=2
+source=(https://github.com/ajeetdsouza/zoxide/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+
+  prt-get isinst bash-completion && install -vDm644 $name-$version/contrib/completions/zoxide.bash $PKG/usr/share/bash-completion/completions/zoxide
+  prt-get isinst zsh && install -vDm644 -t $PKG/usr/share/zsh/site-functions $name-$version/contrib/completions/_zoxide
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
+}
