@@ -5,18 +5,12 @@
 # Optional: asciidoctor
 
 name=shaderc
-version=2021.3
-## DEPS
-_spirv_headers=f027d53ded7e230e008d37c8b47ede7cd308e19d
+version=2022.1
 release=1
 source=(https://github.com/google/shaderc/archive/v$version/$name-v$version.tar.gz
-	https://github.com/KhronosGroup/SPIRV-Headers/archive/$_spirv_headers/SPIRV-Headers-$_spirv_headers.tar.gz
 	glslc.1)
 
 build() {
-	mkdir -p $name-$version/third_party/spirv-headers
-	mv SPIRV-Headers-$_spirv_headers/* $name-$version/third_party/spirv-headers
-
 	# de-vendor libs and disable git versioning
 	sed '/examples/d;/third_party/d' -i $name-$version/CMakeLists.txt
 	sed '/build-version/d' -i $name-$version/glslc/CMakeLists.txt
@@ -32,12 +26,9 @@ EOF
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D CMAKE_EXE_LINKER_FLAGS="$LDFLAGS -Wl,-z,defs" \
+		-D CMAKE_CXX_FLAGS_RELEASE="${CXXFLAGS} -ffat-lto-objects" \
 		-D SHADERC_SKIP_TESTS=ON \
-		-D glslang_SOURCE_DIR:PATH='/usr/include/glslang' \
-		-D SPIRV-Headers_SOURCE_DIR:PATH="$SRC/$name-$version/third_party/spirv-headers"
+		-D glslang_SOURCE_DIR:PATH='/usr/include/glslang'
 
 	cmake --build build -j ${JOBS:-1}
 	DESTDIR=$PKG cmake --install build
