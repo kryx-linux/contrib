@@ -1,11 +1,11 @@
 # Description: C subroutine library for computing discrete Fourier transform.
 # URL: https://www.fftw.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gcc-fortran
+# Depends on: gcc-fortran openmpi
 
 name=fftw
 version=3.3.10
-release=1
+release=2
 source=(https://www.fftw.org/$name-$version.tar.gz)
 
 build() {
@@ -28,8 +28,9 @@ F77=gfortran
 	./configure \
 		$config \
 		--enable-single \
+		--enable-avx \
 		--enable-sse \
-		--enable-avx
+		--enable-mpi
 
 	make
 	make DESTDIR=$PKG install
@@ -38,8 +39,9 @@ F77=gfortran
 	# compiling double precision library
 	./configure \
 		$config \
-		--enable-sse2 \
-		--enable-avx
+		--enable-avx \
+		--enable-mpi \
+		--enable-sse2
 
 	make
 	make DESTDIR=$PKG install
@@ -48,7 +50,8 @@ F77=gfortran
        # compiling long double precision library
 	./configure \
 		$config \
-		--enable-long-double
+		--enable-long-double \
+		--enable-mpi
 
 	make
 	make DESTDIR=$PKG install
@@ -64,4 +67,5 @@ F77=gfortran
 
 	# clean up
 	rm -r $PKG/usr/share/info
+	rm $PKG/usr/lib/*.la
 }
