@@ -2,9 +2,10 @@
 # URL: https://git.sr.ht/~kennylevinsen/seatd
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: meson ninja
+# Optional: scdoc
 
 name=seatd
-version=0.6.4
+version=0.7.0
 release=1
 source=(https://github.com/kennylevinsen/seatd/archive/$version/$name-$version.tar.gz
   seatd.service)
@@ -19,5 +20,6 @@ build() {
     -D libseat-builtin=enabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
   install -Dm 755 $SRC/seatd.service $PKG/etc/rc.d/seatd
 }
