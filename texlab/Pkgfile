@@ -4,16 +4,15 @@
 # Depends on: rust
 
 name=texlab
-version=3.3.2
+version=4.0.0
 release=1
 source=(https://github.com/latex-lsp/texlab/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-  mkdir "$PKGMK_SOURCE_DIR/rust" || true
-  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
-  cargo fetch --manifest-path $name-$version/Cargo.toml
-  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
-  install -Dt $PKG/usr/bin $name-$version/target/release/texlab
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
 }
