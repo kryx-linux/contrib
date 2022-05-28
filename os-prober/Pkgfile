@@ -1,21 +1,36 @@
 # Description: Tool to detect other OSes.
 # URL: http://joey.kitenet.net/code/os-prober
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on:
+# Depends on: grub2
 
 name=os-prober
-version=1.79
+version=1.80
 release=1
 source=(http://ftp.de.debian.org/debian/pool/main/o/$name/${name}_$version.tar.xz
-Fix-CRUX-grub-menu-entry-detection.patch)
+  # grabbed from gentoo
+  os-prober-1.79-btrfs-subvolume-detection.patch
+  os-prober-1.79-use-fstab-name.patch
+  os-prober-1.79-mounted-boot-partition-fix.patch
+  os-prober-1.79-fix-busy-umount-message.patch
+  os-prober-1.79-efi-chroot-blkid-fallback.patch
+  add-CRUX-detection.patch)
 
 build() {
-  cd $name
-  patch -Np1 -i $SRC/Fix-CRUX-grub-menu-entry-detection.patch
+  cd $name-$version
+
+  patch -Np1 -i $SRC/add-CRUX-detection.patch
+  patch -Np1 -i $SRC/os-prober-1.79-btrfs-subvolume-detection.patch
+  patch -Np1 -i $SRC/os-prober-1.79-use-fstab-name.patch
+  patch -Np1 -i $SRC/os-prober-1.79-mounted-boot-partition-fix.patch
+  patch -Np1 -i $SRC/os-prober-1.79-fix-busy-umount-message.patch
+  patch -Np1 -i $SRC/os-prober-1.79-efi-chroot-blkid-fallback.patch
+
   # Adjust lib dir to allow detection of 64-bit distros
   sed -i -e "s:/lib/ld\*\.so\*:/lib*/ld*.so*:g" os-probes/mounted/common/90linux-distro
   rm -f Makefile
   make newns
+
+  find . -iname "*.orig" -delete
 
   install -Dm755 linux-boot-prober $PKG/usr/bin/linux-boot-prober
   install -Dm755 $name $PKG/usr/bin/$name
