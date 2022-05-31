@@ -2,21 +2,23 @@
 # URL: https://gitlab.gnome.org/GNOME/zenity
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: gtk3 itstool
+# Optional: libnotify webkitgtk
 
 name=zenity
-version=3.32.0
+version=3.42.1
 release=1
 source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
-
-	export CFLAGS+=' -Wno-error=implicit-function-declaration'
-
-	./configure \
+	meson setup $name-$version build \
 		--prefix=/usr \
-		--disable-nls
+		--buildtype=plain \
+		--wrap-mode nodownload \
+		-D b_lto=true \
+		-D b_pie=true
 
-	make
-	make DESTDIR=$PKG install
+	meson compile -C build
+	DESTDIR=$PKG meson install -C build
+
+	rm -r $PKG/usr/share/{locale,help}
 }
