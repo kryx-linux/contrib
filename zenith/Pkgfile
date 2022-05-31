@@ -1,11 +1,11 @@
 # Description: Terminal system monitor with histograms
 # URL: https://github.com/bvaisvil/zenith
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: rust
+# Depends on: clang rust
 # Optional: nvidia
 
 name=zenith
-version=0.13.0
+version=0.13.1
 release=1
 source=(https://github.com/bvaisvil/zenith/archive/$version/$name-$version.tar.gz)
 
@@ -18,8 +18,6 @@ build() {
 	prt-get isinst nvidia && PKGMK_ZENITH+=' --features nvidia'
 	prt-get isinst nvidia-sl && PKGMK_ZENITH+=' --features nvidia'
 
-	cargo update
-	cargo fetch
-	cargo build --release --locked ${PKGMK_ZENITH}
+	cargo build --release ${PKGMK_ZENITH}
 	install -Dt $PKG/usr/bin target/release/zenith
 }
