@@ -4,8 +4,8 @@
 # Depends on: rust
 
 name=sccache
-version=0.2.15
-release=2
+version=0.3.0
+release=1
 source=(https://github.com/mozilla/sccache/archive/v$version/$name-v$version.tar.gz)
 
 build() {
@@ -13,14 +13,8 @@ build() {
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-	# warning: package `futures v0.3.9` in Cargo.lock is yanked in registry
-	cargo update --manifest-path $name-$version/Cargo.toml --package futures:0.3.9
-
-	cargo fetch --manifest-path $name-$version/Cargo.toml --locked
-
-	cargo build --manifest-path $name-$version/Cargo.toml --release --frozen \
+	cargo build --manifest-path $name-$version/Cargo.toml --release \
 		--features all --features native-zlib
-
-	cargo install --path $name-$version --root $PKG/usr --frozen --no-track --offline \
+	cargo install --path $name-$version --root $PKG/usr --no-track \
 		--features all --features native-zlib
 }
