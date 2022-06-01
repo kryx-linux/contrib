@@ -18,12 +18,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.9/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.59.1.dist-info/
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.59.1.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.59.1.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.59.1.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.59.1.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.59.1.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.60.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.60.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.60.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.60.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.60.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.60.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/__pycache__/
@@ -484,7 +484,6 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/push/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/__init__.cpython-39.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/action_generator.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/baserules.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/bulk_push_rule_evaluator.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/clientformat.cpython-39.opt-1.pyc
@@ -498,7 +497,6 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/pusher.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/pusherpool.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/__pycache__/rulekinds.cpython-39.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/action_generator.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/baserules.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/bulk_push_rule_evaluator.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/push/clientformat.py
@@ -1457,6 +1455,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/69/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/69/01as_txn_seq.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/69/01device_list_oubound_by_room.sql
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/69/02cache_invalidation_index.sql
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/69/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/69/__pycache__/01as_txn_seq.cpython-39.opt-1.pyc
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/full_schemas/
@@ -1499,6 +1498,8 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/stat
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/delta/56/state_group_room_idx.sql
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/delta/61/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/delta/61/02state_groups_state_n_distinct.sql.postgres
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/delta/70/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/delta/70/08_state_group_edges_unique.sql
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/full_schemas/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/full_schemas/54/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/state/full_schemas/54/full.sql
