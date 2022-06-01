@@ -1,25 +1,20 @@
 # Description: Open Broadcaster Software Studio
 # URL: https://obsproject.com/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: fdk-aac ffmpeg jansson libgmp mbedtls qt5 x264
-# Optional: jack-audio-connection-kit ffnvcodec-headers vlc luajit speexdsp x265 pulseaudio libva
+# Depends on: fdk-aac ffmpeg jansson libgmp mbedtls pulseaudio qt5 x264
+# Optional: ffnvcodec-headers jack-audio-connection-kit libva luajit pipewire pulseaudio speexdsp vlc wayland-protocols x265
 
 name=obs-studio
-version=25.0.8
-release=2
-source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz
-	c7f84f8fc4e90ef779a204ac268f5ee1a962e324.patch
-	fix_python_binary_loading.patch)
+version=27.2.4
+release=1
+source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz)
 
 build() {
-#	cmake ..
-#	cmake -LA
+	prt-get isinst wayland-protocols && PKGMK_OBS+=' -D ENABLE_WAYLAND=ON' || PKGMK_OBS+=' -D ENABLE_WAYLAND=OFF'
+	prt-get isinst pipewire || PKGMK_OBS+=' -D ENABLE_PIPEWIRE=OFF'
 
-	# https://github.com/obsproject/obs-studio/commit/c7f84f8fc4e90ef779a204ac268f5ee1a962e324
-	patch -d $name-$version -p1 -i $SRC/c7f84f8fc4e90ef779a204ac268f5ee1a962e324.patch
-	patch -d $name-$version -p1 -i $SRC/fix_python_binary_loading.patch
-
-	cmake -S $name-$version -B build -G Ninja \
+	export QT_QPA_PLATFORMTHEME="qt5ct"
+	cmake -S $name-$version -B build -G Ninja $PKGMK_OBS \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
@@ -27,12 +22,14 @@ build() {
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
 		-D OBS_VERSION_OVERRIDE="$version" \
 		-D UNIX_STRUCTURE=ON \
+		-D BUILD_VST=OFF \
+		-D BUILD_BROWSER=OFF \
 		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
 
-	chmod -R g-w $PKG
+	find $PKG -type d -exec chmod g-w '{}' \;
 
 	rm $PKG/usr/share/obs/obs-studio/authors/AUTHORS
 
