@@ -4,7 +4,7 @@
 # Depends on: sqlite xz
 
 name=botan
-version=2.19.1
+version=2.19.2
 release=1
 source=(https://botan.randombit.net/releases/Botan-$version.tar.xz)
 
@@ -16,7 +16,6 @@ build() {
   /usr/bin/python3 ./configure.py --prefix=/usr \
     --with-bzip \
     --with-zlib \
-    --with-openssl \
     --with-sqlite3 \
     --with-os-feature=getrandom
   make
