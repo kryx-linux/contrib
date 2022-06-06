@@ -6,7 +6,7 @@
 
 name=kodi-gbm
 version=19.4
-release=1
+release=2
 
 # version variables {{{
 _codename=Matrix
@@ -19,7 +19,8 @@ _libdvdread_version="6.0.0-Leia-Alpha-3"
 # }}}
 # source {{{
 source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$_codename.tar.gz
-  https://github.com/xbmc/FFmpeg/archive/$_ffmpeg_version.tar.gz
+  https://github.com/BlackIkeEagle/kodi-FFmpeg/archive/refs/heads/fix/4.3-kodi-dav1d-1.0.tar.gz
+  #https://github.com/xbmc/FFmpeg/archive/$_ffmpeg_version.tar.gz
   http://mirrors.kodi.tv/build-deps/sources/fmt-$_fmt_version.tar.gz
   http://mirrors.kodi.tv/build-deps/sources/crossguid-$_crossguid_version.tar.gz
   https://github.com/xbmc/libdvdcss/archive/$_libdvdcss_version/${name/-gbm/}-libdvdcss-$_libdvdcss_version.tar.gz
@@ -84,7 +85,7 @@ build()  {
     -D ENABLE_TESTING=OFF \
     -D VERBOSE=OFF \
     -D ENABLE_INTERNAL_FFMPEG=ON \
-    -D FFMPEG_URL="$SRC/$_ffmpeg_version.tar.gz" \
+    -D FFMPEG_URL="$SRC/4.3-kodi-dav1d-1.0.tar.gz" \
     -D ENABLE_INTERNAL_CROSSGUID=ON \
     -D CROSSGUID_URL="$SRC/crossguid-$_crossguid_version.tar.gz" \
     -D LIBDVDCSS_URL="$SRC/${name/-gbm/}-libdvdcss-$_libdvdcss_version.tar.gz" \
@@ -96,6 +97,7 @@ build()  {
     -D ENABLE_INTERNAL_GTEST=OFF \
     -D ENABLE_INTERNAL_RapidJSON=OFF \
     -Wno-dev
+    #-D FFMPEG_URL="$SRC/$_ffmpeg_version.tar.gz" \
   cmake --build build
   DESTDIR=$PKG cmake --build build --target install
 }
