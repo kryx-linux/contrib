@@ -4,11 +4,11 @@
 # Depends on:  libpcre2 lua   bzip2 linux-pam openssl zlib zstd
 
 name=lighttpd
-version=1.4.64
-release=2
+version=1.4.65
+release=1
 source=(
   https://download.${name}.net/${name}/releases-1.4.x/${name}-${version}.tar.xz
-   ${name}.rc ${name}.conf
+   ${name}.rc ${name}.conf post-install
 )
 
 build() {
