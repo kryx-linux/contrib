@@ -8,8 +8,8 @@
 
 name=bluealsa
 rname=bluez-alsa
-version=3.1.0
-release=2
+version=4.0.0
+release=1
 source=(https://github.com/Arkq/${rname}/archive/\
 v${version}/${rname}-${version}.tar.gz
    bluealsa.rc bluealsa.conf)
@@ -34,6 +34,8 @@ build() {
    install -D -m 0755 "${SRC}"/bluealsa.rc "${PKG}"/etc/rc.d/${name}
    install -D -m 0644 "${SRC}"/bluealsa.conf \
       "${PKG}"/etc/dbus-1/system.d/${name}.conf
+
+   rm -rf "${PKG}"/usr/lib/alsa-lib/*.la
 }
 
 # s-sh-mode
