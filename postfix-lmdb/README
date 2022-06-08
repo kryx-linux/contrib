@@ -7,6 +7,8 @@ The CRUX postfix package
 * SmartHost
 * Relay
 * DNS black lists
+* Gray listing
+* Address verification
 
 Abstract
 --------
@@ -101,7 +103,29 @@ uncomment it.  See above for SmartHost.
 DNS deny lists
 --------------
 
-Edit main.cf and uncomment and edit lines marked #DNSDL.
-Run "/etc/rc.d/postfix-lmdb reload" (or restart).
+. Edit main.cf and uncomment and edit lines marked #DNSDL.
+. Run "/etc/rc.d/postfix-lmdb reload" (or restart).
+
+Gray listing
+------------
+
+. Install s-postgray, and create a minimal configuration file.
+. Edit main.cf and uncomment and edit lines marked #GRAY.
+. Run "/etc/rc.d/postfix-lmdb reload" (or restart).
+. Track your logs to fill in configuration some days or weeks.
+. Remove "-c 0" s-postgray command line option from master.cf.
+
+Address verification
+--------------------
+
+. Unless you use gray listing with --msg-allow=permit allowance, and
+  have a completed set of allowlisted entries, you should read postfix's
+  README_FILES/ADDRESS_VERIFICATION_README.
+. Edit main.cf and uncomment and edit lines marked #VERIFY.
+  If gray listing is enabled, you could reconfigure it to not include
+  recipients but only senders and client addresses via --focus-sender;
+  then, change GRAY and VERIFY to happen in smtpd_sender_restrictions
+  not smtpd_recipient_restrictions.
+. Run "/etc/rc.d/postfix-lmdb reload" (or restart).
 
 # s-ts-mode
