@@ -4,7 +4,7 @@
 default_privs = _postfix_xlocal
 setgid_group = _postfix_queue
 mail_spool_directory = /var/spool/mail
-alias_database = lmdb:/etc/postfix-lmdb/aliases
+alias_database = lmdb:$meta_directory/aliases
 alias_maps = $alias_database
 # all # or ipv4, ipv6 or ipv4 or ipv6
 inet_protocols = all
@@ -68,9 +68,9 @@ tls_append_default_CA = no
 # Put the hash only in relay_clientcerts, right hand value is not inspected:
 #   FINGERPRINT-HERE  whatever value
 # Search #RELAY for this, uncomment
-#RELAY relay_clientcerts = lmdb:/etc/postfix-lmdb/relay_clientcerts
+#RELAY relay_clientcerts = lmdb:$meta_directory/relay_clientcerts
 # relay_domains <-> reject_unauth_destination,permit_auth_destination
- # eg lmdb:/etc/postfix-lmdb/transport
+ # eg lmdb:$meta_directory/transport
 transport_maps =
 relay_domains = $mynetworks,$transport_maps
 
@@ -79,12 +79,12 @@ smtpd_authorized_verp_clients = 127.0.0.1
 
 # Clients connection checks
 smtpd_client_restrictions =
-#  permit_inet_interfaces, OR
+#   permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#[RELAY]  permit_sasl_authenticated,
+#[RELAY]   permit_sasl_authenticated,
+   check_client_access lmdb:$meta_directory/client_restrict,
    reject_unknown_client_hostname,
-   check_client_access lmdb:/etc/postfix-lmdb/client_restrict,
    # in case you want reject DNS blacklists rather than greylist them,
    # exchange sleep (maybe) and uncomment the lines below
    sleep 1,
@@ -103,34 +103,41 @@ smtpd_data_restrictions =
    permit
 
 smtpd_helo_restrictions =
-#  permit_inet_interfaces, OR
+#   permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#[RELAY]  permit_sasl_authenticated,
+#[RELAY]   permit_sasl_authenticated,
    reject_invalid_helo_hostname,
    reject_non_fqdn_helo_hostname,
-   reject_unknown_helo_hostname
+   reject_unknown_helo_hostname,
+   permit
 
 # MAIL FROM Checks
 smtpd_sender_restrictions =
-#  permit_inet_interfaces, OR
+#   permit_inet_interfaces, OR
    permit_mynetworks,
+#RELAY   reject_authenticated_sender_login_mismatch,
 #RELAY   permit_tls_clientcerts,
-#[RELAY]  permit_sasl_authenticated,
+#[RELAY]   permit_sasl_authenticated,
+   reject_non_fqdn_sender,
     # Total no-goes database, eg: qq.com reject
-   check_sender_access lmdb:/etc/postfix-lmdb/sender_restrict,
+   check_sender_access lmdb:$meta_directory/sender_restrict,
    reject_unknown_sender_domain,
+   reject_unknown_reverse_client_hostname,
+#GRAY: with --focus-sender only!  And --msg-allow=permit
+#GRAY   check_policy_service unix:private/postgray,
+#VERIFY(..then)   reject_unverified_sender,
    permit
+
 smtpd_relay_before_recipient_restrictions = yes
 
 # RCPT TO checks, relay policy
 # Local clients and authenticated clients may specify any destination domain
 smtpd_relay_restrictions =
-#  permit_inet_interfaces, OR
+#   permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#[RELAY]  permit_sasl_authenticated,
-   reject_non_fqdn_sender,
+#[RELAY]   permit_sasl_authenticated,
    reject_non_fqdn_recipient,
    #permit_auth_destination,
    #reject
@@ -140,27 +147,24 @@ smtpd_relay_restrictions =
 # RCPT TO checks, spam blocking policy
 # Match fast for $mynetworks and authenticated clients.
 smtpd_recipient_restrictions =
-#  permit_inet_interfaces, OR
+#   permit_inet_interfaces, OR
    permit_mynetworks,
 #RELAY   permit_tls_clientcerts,
-#[RELAY]  permit_sasl_authenticated,
+#[RELAY]   permit_sasl_authenticated,
    reject_unknown_recipient_domain,
-   # (SMTPD_POLICY_README says
-   #   reject_unauth_destination is not needed here if the mail relay policy is
-   #   specified with smtpd_relay_restrictions (available with Postfix 2.10 and
-   #   later))
-   #reject_unauth_destination,
-   # better not: reject_unverified_sender,
    # DB of MAIL FROM's without policy server checks (one way, or another)
-   check_sender_access lmdb:/etc/postfix-lmdb/sender_access,
+   check_sender_access lmdb:$meta_directory/sender_access,
    #check_policy_service inet:127.0.0.1:5525,
-   #check_policy_service unix:private/postgray
+#GRAY: without --focus-sender
+#GRAY   check_policy_service unix:private/postgray,
+#VERIFY(..then)   reject_unverified_sender,
+#(VERIFY would not)   reject_unverified_recipient,
    permit
 
 # i would turn that on..
 #smtpd_delay_reject = no
 smtpd_helo_required = yes
-smtpd_hard_error_limit = 1
+smtpd_hard_error_limit = 2
 smtpd_soft_error_limit = 1
 smtpd_per_record_deadline = yes
 smtpd_timeout = 15s
@@ -172,11 +176,14 @@ smtpd_junk_command_limit = 5
 #smtpd_client_connection_rate_limit = 20
 #smtpd_client_connection_count_limit = 2
 
+#VERIFY address_verify_map = lmdb:$data_directory/verify_cache
+#VERIFY address_verify_cache_cleanup_interval = 86400s
+
 #TLS Do not forget to look into master.cf!
 # That one is for client certificates!
 #smtpd_tls_CAfile = /etc/dovecot/cert.pem
-#TLS smtpd_tls_chain_files = /etc/postfix-lmdb/key_and_cert.pem
-#TLS smtpd_tls_dh1024_param_file = /etc/postfix-lmdb/dh2048.pem
+#TLS smtpd_tls_chain_files = $meta_directory/key_and_cert.pem
+#TLS smtpd_tls_dh1024_param_file = $meta_directory/dh2048.pem
 # This are managed per-service in master.cf!
 #smtpd_tls_security_level = none
 #RELAY smtpd_tls_ask_ccert = yes
@@ -194,7 +201,7 @@ smtpd_tls_mandatory_exclude_ciphers =
    EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CDB3-SHA, KRB5-DES, CBC3-SHA
 smtpd_tls_ciphers = $smtpd_tls_mandatory_ciphers
 smtpd_tls_exclude_ciphers = $smtpd_tls_mandatory_exclude_ciphers
-smtpd_tls_session_cache_database = lmdb:/var/lib/postfix-lmdb/smtpd_scache
+smtpd_tls_session_cache_database = lmdb:$data_directory/smtpd_scache
 smtpd_tls_session_cache_timeout = 3600s
 
 # Usually enabled per-service in master.cf!
@@ -223,7 +230,7 @@ smtp_tls_mandatory_exclude_ciphers = $smtpd_tls_mandatory_exclude_ciphers
 smtp_tls_ciphers = $smtpd_tls_ciphers
 smtp_tls_exclude_ciphers = $smtpd_tls_exclude_ciphers
 smtp_tls_connection_reuse = yes
-smtp_tls_session_cache_database = lmdb:/var/lib/postfix-lmdb/smtp_scache
+smtp_tls_session_cache_database = lmdb:$data_directory/smtp_scache
 smtp_tls_session_cache_timeout = $smtpd_tls_session_cache_timeout
 
 #smtp_sasl_auth_enable = $smtpd_sasl_auth_enable
@@ -256,8 +263,8 @@ smtp_tls_session_cache_timeout = $smtpd_tls_session_cache_timeout
 #SMART Authentication like that not tried, this from postfix SASL_README:
 #smtp_sasl_auth_enable = yes
 #smtp_sasl_tls_security_options = noanonymous
-#smtp_sasl_password_maps = lmdb:/etc/postfix-lmdb/sasl_passwd
-# /etc/postfix-lmdb/sasl_passwd:
+#smtp_sasl_password_maps = lmdb:$meta_directory/sasl_passwd
+# $meta_directory/sasl_passwd:
 #   # destination        credentials
 #   #user1@example.com   username1:password1
 #   #user2@example.net   username2:password2
@@ -265,9 +272,9 @@ smtp_tls_session_cache_timeout = $smtpd_tls_session_cache_timeout
 #   # Alternative form:
 #   # [mail.isp.example]:submission username:password
 #SMART Even sender-specific, uncomment the user1 user2 entries above then
-# sender_dependent_relayhost_maps = lmdb:/etc/postfix/sender_relay
-# /etc/postfix/sender_relay:
-#   # Per-sender provider; see also /etc/postfix/sasl_passwd.
+# sender_dependent_relayhost_maps = lmdb:$meta_directory/sender_relay
+# $meta_directory/sender_relay:
+#   # Per-sender provider; see also $meta_directory/sasl_passwd.
 #   user1@example.com  [mail.example.com]:submission
 #   user2@example.net  [mail.example.net]
 

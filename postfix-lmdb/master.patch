@@ -1,5 +1,5 @@
---- master.cf.orig	2021-09-15 16:42:06.307124019 +0200
-+++ master.cf	2021-09-15 16:47:11.560462685 +0200
+--- master.cf.orig	2022-06-08 22:53:27.956225130 +0200
++++ master.cf	2022-06-08 22:56:16.596225800 +0200
 @@ -10,6 +10,20 @@
  #               (yes)   (yes)   (no)    (never) (100)
  # ==========================================================================
@@ -21,3 +21,17 @@
  #smtp      inet  n       -       n       -       1       postscreen
  #smtpd     pass  -       -       n       -       -       smtpd
  #dnsblog   unix  -       -       n       -       0       dnsblog
+@@ -86,7 +100,12 @@
+ # agent.  See the pipe(8) man page for information about ${recipient}
+ # and other message envelope options.
+ # ====================================================================
+-#
++
++#GRAY
++#GRAY postgray unix - n n - - spawn
++#GRAY
++#GRAY  user=_postfix_xlocal argv=/usr/libexec/s-postgray -c0 -R /etc/postfix-lmdb/pg.rc
++
+ # maildrop. See the Postfix MAILDROP_README file for details.
+ # Also specify in main.cf: maildrop_destination_recipient_limit=1
+ #
