@@ -7,7 +7,7 @@ PID=${RD}/bluealsa.pid
 
 SSD=/sbin/start-stop-daemon
 PROG=/usr/bin/bluealsa
-OPTS=-S
+OPTS="-p a2dp-sink -p a2dp-source -c AAC"
 
 case "${1}" in
 start)
