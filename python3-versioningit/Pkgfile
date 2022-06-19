@@ -1,0 +1,16 @@
+# Description: Versioning It with your Version In Git
+# URL: https://github.com/jwodder/versioningit
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Depends on: python3-build python3-install
+
+name=python3-versioningit
+version=2.0.0
+release=1
+source=(https://github.com/jwodder/versioningit/releases/download/v$version/versioningit-$version.tar.gz)
+
+build() {
+  cd versioningit-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+}
