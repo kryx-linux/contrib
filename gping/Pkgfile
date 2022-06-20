@@ -4,7 +4,7 @@
 # Depends on: rust
 
 name=gping
-version=1.3.1
+version=1.3.2
 release=1
 source=(https://github.com/orf/gping/archive/refs/tags/$name-v$version.tar.gz)
 
@@ -16,9 +16,7 @@ build() {
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-	cargo update
-	cargo fetch --locked
-	cargo build --release --frozen
+	cargo build --release
 
 	install -D -m 0755 -t $PKG/usr/bin target/release/gping
 }

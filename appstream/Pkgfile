@@ -1,0 +1,31 @@
+# Description: a cross-distribution effort for enhancing the way we interact with the software repositories provided by (Linux) distributions by standardizing software component metadata
+# URL: https://www.freedesktop.org/wiki/Distributions/AppStream/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: librsvg libsoup libxmlb libxslt libyaml vala docbook-xsl
+# Optional: qt5
+
+name=appstream
+version=0.15.4
+release=1
+source=(https://www.freedesktop.org/software/appstream/releases/AppStream-$version.tar.xz)
+
+build() {
+  prt-get isinst qt5 && PKGMK_APPSTREAM+=' -D qt=true'
+
+  meson setup AppStream-$version build $PKGMK_APPSTREAM \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D vapi=true \
+    -D compose=true \
+    -D docs=false \
+    -D apidocs=false \
+    -D install-docs=false
+
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/{locale,installed-tests}
+}

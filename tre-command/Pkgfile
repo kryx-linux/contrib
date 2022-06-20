@@ -4,17 +4,15 @@
 # Depends on: rust
 
 name=tre-command
-version=0.3.6
+version=0.4.0
 release=1
-source=(https://github.com/dduan/tre/archive/v$version/tre-$version.tar.gz)
+source=(https://github.com/dduan/tre/archive/$version/tre-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update --manifest-path tre-$version/Cargo.toml
-  cargo fetch --manifest-path tre-$version/Cargo.toml
-  cargo build --release --locked --manifest-path tre-$version/Cargo.toml
+  cargo build --release --manifest-path tre-$version/Cargo.toml
   install -Dt $PKG/usr/bin tre-$version/target/release/tre
 }
