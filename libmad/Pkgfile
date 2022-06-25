@@ -1,24 +1,22 @@
 # Description: High-quality MPEG Audio Decoder library.
 # URL: http://www.underbit.com/products/mad/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Rene Thuemmler, rene dot thuemmler at gmx dot net
+# Depends on: cmake
 
 name=libmad
-version=0.15.1b
+version=0.16.1
 release=4
-source=(http://downloads.sourceforge.net/project/mad/$name/$version/$name-$version.tar.gz
-	mad.pc)
+source=(https://github.com/tenacityteam/libmad/archive/$version/$name-$version.tar.gz)
 
 build() {
-	install -d $PKG/usr/lib/pkgconfig
-	sed -e "s/#version#/$version/" mad.pc > $PKG/usr/lib/pkgconfig/mad.pc
+	cmake -S $name-$version -B build \
+	  -D CMAKE_INSTALL_PREFIX=/usr \
+	  -D CMAKE_INSTALL_LIBDIR=lib \
+	  -D CMAKE_BUILD_TYPE=Release \
+	  -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+	  -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+	  -Wno-dev
 
-	cd $name-$version
-
-	# remove -fforce-mem
-	sed -i -e '19102d' configure
-
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 }
