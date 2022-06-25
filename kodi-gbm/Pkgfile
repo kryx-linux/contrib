@@ -100,5 +100,7 @@ build()  {
     #-D FFMPEG_URL="$SRC/$_ffmpeg_version.tar.gz" \
   cmake --build build
   DESTDIR=$PKG cmake --build build --target install
+
+  rm -r $PKG/usr/{lib/firewalld,share/doc}
 }
 # vim: foldmethod=marker foldlevelstart=1
