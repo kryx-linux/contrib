@@ -30,6 +30,7 @@ drwxr-xr-x	root/root	usr/include/absl/base/internal/
 -rw-r--r--	root/root	usr/include/absl/base/internal/low_level_alloc.h
 -rw-r--r--	root/root	usr/include/absl/base/internal/low_level_scheduling.h
 -rw-r--r--	root/root	usr/include/absl/base/internal/per_thread_tls.h
+-rw-r--r--	root/root	usr/include/absl/base/internal/prefetch.h
 -rw-r--r--	root/root	usr/include/absl/base/internal/pretty_function.h
 -rw-r--r--	root/root	usr/include/absl/base/internal/raw_logging.h
 -rw-r--r--	root/root	usr/include/absl/base/internal/scheduling_mode.h
@@ -81,10 +82,9 @@ drwxr-xr-x	root/root	usr/include/absl/container/internal/
 -rw-r--r--	root/root	usr/include/absl/container/internal/hashtable_debug.h
 -rw-r--r--	root/root	usr/include/absl/container/internal/hashtable_debug_hooks.h
 -rw-r--r--	root/root	usr/include/absl/container/internal/hashtablez_sampler.h
--rw-r--r--	root/root	usr/include/absl/container/internal/have_sse.h
 -rw-r--r--	root/root	usr/include/absl/container/internal/inlined_vector.h
 -rw-r--r--	root/root	usr/include/absl/container/internal/layout.h
--rw-r--r--	root/root	usr/include/absl/container/internal/node_hash_policy.h
+-rw-r--r--	root/root	usr/include/absl/container/internal/node_slot_policy.h
 -rw-r--r--	root/root	usr/include/absl/container/internal/raw_hash_map.h
 -rw-r--r--	root/root	usr/include/absl/container/internal/raw_hash_set.h
 -rw-r--r--	root/root	usr/include/absl/container/internal/test_instance_tracker.h
@@ -149,9 +149,11 @@ drwxr-xr-x	root/root	usr/include/absl/flags/internal/
 -rw-r--r--	root/root	usr/include/absl/flags/usage.h
 -rw-r--r--	root/root	usr/include/absl/flags/usage_config.h
 drwxr-xr-x	root/root	usr/include/absl/functional/
+-rw-r--r--	root/root	usr/include/absl/functional/any_invocable.h
 -rw-r--r--	root/root	usr/include/absl/functional/bind_front.h
 -rw-r--r--	root/root	usr/include/absl/functional/function_ref.h
 drwxr-xr-x	root/root	usr/include/absl/functional/internal/
+-rw-r--r--	root/root	usr/include/absl/functional/internal/any_invocable.h
 -rw-r--r--	root/root	usr/include/absl/functional/internal/front_binder.h
 -rw-r--r--	root/root	usr/include/absl/functional/internal/function_ref.h
 drwxr-xr-x	root/root	usr/include/absl/hash/
@@ -236,6 +238,8 @@ drwxr-xr-x	root/root	usr/include/absl/strings/
 -rw-r--r--	root/root	usr/include/absl/strings/ascii.h
 -rw-r--r--	root/root	usr/include/absl/strings/charconv.h
 -rw-r--r--	root/root	usr/include/absl/strings/cord.h
+-rw-r--r--	root/root	usr/include/absl/strings/cord_analysis.h
+-rw-r--r--	root/root	usr/include/absl/strings/cord_buffer.h
 -rw-r--r--	root/root	usr/include/absl/strings/cord_test_helpers.h
 -rw-r--r--	root/root	usr/include/absl/strings/cordz_test_helpers.h
 -rw-r--r--	root/root	usr/include/absl/strings/escaping.h
@@ -243,11 +247,13 @@ drwxr-xr-x	root/root	usr/include/absl/strings/internal/
 -rw-r--r--	root/root	usr/include/absl/strings/internal/char_map.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/charconv_bigint.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/charconv_parse.h
+-rw-r--r--	root/root	usr/include/absl/strings/internal/cord_data_edge.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_internal.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_btree.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_btree_navigator.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_btree_reader.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_consume.h
+-rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_crc.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_flat.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_ring.h
 -rw-r--r--	root/root	usr/include/absl/strings/internal/cord_rep_ring_reader.h
@@ -355,142 +361,141 @@ drwxr-xr-x	root/root	usr/lib/cmake/absl/
 -rw-r--r--	root/root	usr/lib/cmake/absl/abslConfigVersion.cmake
 -rw-r--r--	root/root	usr/lib/cmake/absl/abslTargets-release.cmake
 -rw-r--r--	root/root	usr/lib/cmake/absl/abslTargets.cmake
-lrwxrwxrwx	root/root	usr/lib/libabsl_bad_any_cast_impl.so -> libabsl_bad_any_cast_impl.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_bad_any_cast_impl.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_bad_optional_access.so -> libabsl_bad_optional_access.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_bad_optional_access.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_bad_variant_access.so -> libabsl_bad_variant_access.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_bad_variant_access.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_base.so -> libabsl_base.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_base.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_city.so -> libabsl_city.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_city.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_civil_time.so -> libabsl_civil_time.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_civil_time.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_cord.so -> libabsl_cord.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_cord.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_cord_internal.so -> libabsl_cord_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_cord_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_functions.so -> libabsl_cordz_functions.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_cordz_functions.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_handle.so -> libabsl_cordz_handle.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_cordz_handle.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_info.so -> libabsl_cordz_info.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_cordz_info.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_sample_token.so -> libabsl_cordz_sample_token.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_cordz_sample_token.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_debugging_internal.so -> libabsl_debugging_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_debugging_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_demangle_internal.so -> libabsl_demangle_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_demangle_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_examine_stack.so -> libabsl_examine_stack.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_examine_stack.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_exponential_biased.so -> libabsl_exponential_biased.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_exponential_biased.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_failure_signal_handler.so -> libabsl_failure_signal_handler.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_failure_signal_handler.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags.so -> libabsl_flags.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_commandlineflag.so -> libabsl_flags_commandlineflag.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_commandlineflag.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_commandlineflag_internal.so -> libabsl_flags_commandlineflag_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_commandlineflag_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_config.so -> libabsl_flags_config.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_config.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_internal.so -> libabsl_flags_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_marshalling.so -> libabsl_flags_marshalling.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_marshalling.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_parse.so -> libabsl_flags_parse.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_parse.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_private_handle_accessor.so -> libabsl_flags_private_handle_accessor.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_private_handle_accessor.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_program_name.so -> libabsl_flags_program_name.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_program_name.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_reflection.so -> libabsl_flags_reflection.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_reflection.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_usage.so -> libabsl_flags_usage.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_usage.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_flags_usage_internal.so -> libabsl_flags_usage_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_flags_usage_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_graphcycles_internal.so -> libabsl_graphcycles_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_graphcycles_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_hash.so -> libabsl_hash.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_hash.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_hashtablez_sampler.so -> libabsl_hashtablez_sampler.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_hashtablez_sampler.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_int128.so -> libabsl_int128.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_int128.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_leak_check.so -> libabsl_leak_check.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_leak_check.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_leak_check_disable.so -> libabsl_leak_check_disable.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_leak_check_disable.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_log_severity.so -> libabsl_log_severity.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_log_severity.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_low_level_hash.so -> libabsl_low_level_hash.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_low_level_hash.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_malloc_internal.so -> libabsl_malloc_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_malloc_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_periodic_sampler.so -> libabsl_periodic_sampler.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_periodic_sampler.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_distributions.so -> libabsl_random_distributions.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_distributions.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_distribution_test_util.so -> libabsl_random_internal_distribution_test_util.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_distribution_test_util.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_platform.so -> libabsl_random_internal_platform.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_platform.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_pool_urbg.so -> libabsl_random_internal_pool_urbg.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_pool_urbg.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen.so -> libabsl_random_internal_randen.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen_hwaes.so -> libabsl_random_internal_randen_hwaes.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen_hwaes.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen_hwaes_impl.so -> libabsl_random_internal_randen_hwaes_impl.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen_hwaes_impl.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen_slow.so -> libabsl_random_internal_randen_slow.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen_slow.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_seed_material.so -> libabsl_random_internal_seed_material.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_seed_material.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_seed_gen_exception.so -> libabsl_random_seed_gen_exception.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_seed_gen_exception.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_random_seed_sequences.so -> libabsl_random_seed_sequences.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_random_seed_sequences.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_raw_hash_set.so -> libabsl_raw_hash_set.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_raw_hash_set.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_raw_logging_internal.so -> libabsl_raw_logging_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_raw_logging_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_scoped_set_env.so -> libabsl_scoped_set_env.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_scoped_set_env.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_spinlock_wait.so -> libabsl_spinlock_wait.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_spinlock_wait.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_stacktrace.so -> libabsl_stacktrace.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_stacktrace.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_status.so -> libabsl_status.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_status.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_statusor.so -> libabsl_statusor.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_statusor.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_str_format_internal.so -> libabsl_str_format_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_str_format_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_strerror.so -> libabsl_strerror.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_strerror.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_strings.so -> libabsl_strings.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_strings.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_strings_internal.so -> libabsl_strings_internal.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_strings_internal.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_symbolize.so -> libabsl_symbolize.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_symbolize.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_synchronization.so -> libabsl_synchronization.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_synchronization.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_throw_delegate.so -> libabsl_throw_delegate.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_throw_delegate.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_time.so -> libabsl_time.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_time.so.2111.0.0
-lrwxrwxrwx	root/root	usr/lib/libabsl_time_zone.so -> libabsl_time_zone.so.2111.0.0
--rwxr-xr-x	root/root	usr/lib/libabsl_time_zone.so.2111.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_bad_any_cast_impl.so -> libabsl_bad_any_cast_impl.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_bad_any_cast_impl.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_bad_optional_access.so -> libabsl_bad_optional_access.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_bad_optional_access.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_bad_variant_access.so -> libabsl_bad_variant_access.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_bad_variant_access.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_base.so -> libabsl_base.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_base.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_city.so -> libabsl_city.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_city.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_civil_time.so -> libabsl_civil_time.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_civil_time.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_cord.so -> libabsl_cord.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_cord.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_cord_internal.so -> libabsl_cord_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_cord_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_functions.so -> libabsl_cordz_functions.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_cordz_functions.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_handle.so -> libabsl_cordz_handle.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_cordz_handle.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_info.so -> libabsl_cordz_info.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_cordz_info.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_cordz_sample_token.so -> libabsl_cordz_sample_token.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_cordz_sample_token.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_debugging_internal.so -> libabsl_debugging_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_debugging_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_demangle_internal.so -> libabsl_demangle_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_demangle_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_examine_stack.so -> libabsl_examine_stack.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_examine_stack.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_exponential_biased.so -> libabsl_exponential_biased.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_exponential_biased.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_failure_signal_handler.so -> libabsl_failure_signal_handler.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_failure_signal_handler.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags.so -> libabsl_flags.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_commandlineflag.so -> libabsl_flags_commandlineflag.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_commandlineflag.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_commandlineflag_internal.so -> libabsl_flags_commandlineflag_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_commandlineflag_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_config.so -> libabsl_flags_config.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_config.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_internal.so -> libabsl_flags_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_marshalling.so -> libabsl_flags_marshalling.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_marshalling.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_parse.so -> libabsl_flags_parse.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_parse.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_private_handle_accessor.so -> libabsl_flags_private_handle_accessor.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_private_handle_accessor.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_program_name.so -> libabsl_flags_program_name.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_program_name.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_reflection.so -> libabsl_flags_reflection.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_reflection.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_usage.so -> libabsl_flags_usage.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_usage.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_flags_usage_internal.so -> libabsl_flags_usage_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_flags_usage_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_graphcycles_internal.so -> libabsl_graphcycles_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_graphcycles_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_hash.so -> libabsl_hash.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_hash.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_hashtablez_sampler.so -> libabsl_hashtablez_sampler.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_hashtablez_sampler.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_int128.so -> libabsl_int128.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_int128.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_leak_check.so -> libabsl_leak_check.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_leak_check.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_log_severity.so -> libabsl_log_severity.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_log_severity.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_low_level_hash.so -> libabsl_low_level_hash.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_low_level_hash.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_malloc_internal.so -> libabsl_malloc_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_malloc_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_periodic_sampler.so -> libabsl_periodic_sampler.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_periodic_sampler.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_distributions.so -> libabsl_random_distributions.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_distributions.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_distribution_test_util.so -> libabsl_random_internal_distribution_test_util.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_distribution_test_util.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_platform.so -> libabsl_random_internal_platform.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_platform.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_pool_urbg.so -> libabsl_random_internal_pool_urbg.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_pool_urbg.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen.so -> libabsl_random_internal_randen.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen_hwaes.so -> libabsl_random_internal_randen_hwaes.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen_hwaes.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen_hwaes_impl.so -> libabsl_random_internal_randen_hwaes_impl.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen_hwaes_impl.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_randen_slow.so -> libabsl_random_internal_randen_slow.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_randen_slow.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_internal_seed_material.so -> libabsl_random_internal_seed_material.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_internal_seed_material.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_seed_gen_exception.so -> libabsl_random_seed_gen_exception.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_seed_gen_exception.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_random_seed_sequences.so -> libabsl_random_seed_sequences.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_random_seed_sequences.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_raw_hash_set.so -> libabsl_raw_hash_set.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_raw_hash_set.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_raw_logging_internal.so -> libabsl_raw_logging_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_raw_logging_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_scoped_set_env.so -> libabsl_scoped_set_env.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_scoped_set_env.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_spinlock_wait.so -> libabsl_spinlock_wait.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_spinlock_wait.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_stacktrace.so -> libabsl_stacktrace.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_stacktrace.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_status.so -> libabsl_status.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_status.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_statusor.so -> libabsl_statusor.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_statusor.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_str_format_internal.so -> libabsl_str_format_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_str_format_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_strerror.so -> libabsl_strerror.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_strerror.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_strings.so -> libabsl_strings.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_strings.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_strings_internal.so -> libabsl_strings_internal.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_strings_internal.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_symbolize.so -> libabsl_symbolize.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_symbolize.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_synchronization.so -> libabsl_synchronization.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_synchronization.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_throw_delegate.so -> libabsl_throw_delegate.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_throw_delegate.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_time.so -> libabsl_time.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_time.so.2206.0.0
+lrwxrwxrwx	root/root	usr/lib/libabsl_time_zone.so -> libabsl_time_zone.so.2206.0.0
+-rwxr-xr-x	root/root	usr/lib/libabsl_time_zone.so.2206.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_algorithm.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_algorithm_container.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_any.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/absl_any_invocable.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_atomic_hook.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_bad_any_cast.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_bad_any_cast_impl.pc
@@ -555,26 +560,25 @@ drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_hashtable_debug.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_hashtable_debug_hooks.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_hashtablez_sampler.pc
--rw-r--r--	root/root	usr/lib/pkgconfig/absl_have_sse.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_inlined_vector.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_inlined_vector_internal.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_int128.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_kernel_timeout_internal.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_layout.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_leak_check.pc
--rw-r--r--	root/root	usr/lib/pkgconfig/absl_leak_check_disable.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_log_severity.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_low_level_hash.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_malloc_internal.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_memory.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_meta.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_node_hash_map.pc
--rw-r--r--	root/root	usr/lib/pkgconfig/absl_node_hash_policy.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_node_hash_set.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/absl_node_slot_policy.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_numeric.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_numeric_representation.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_optional.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_periodic_sampler.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/absl_prefetch.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_pretty_function.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_random_bit_gen_ref.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/absl_random_distributions.pc
