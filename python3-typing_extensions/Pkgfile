@@ -5,12 +5,12 @@
 # Optional: python3-flit-core
 
 name=python3-typing_extensions
-version=4.2.0
+version=4.3.0
 release=1
-source=(https://github.com/python/typing/archive/$version/$name-$version.tar.gz)
+source=(https://pypi.org/packages/source/t/typing_extensions/typing_extensions-$version.tar.gz)
 
 build() {
-  cd typing-$version/typing_extensions
+  cd typing_extensions-$version
 
   if prt-get isinst python3-flit-core; then
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
