@@ -5,14 +5,12 @@
 
 name=python3-matrix-nio
 version=0.19.0
-release=1
+release=2
 source=(https://github.com/poljar/matrix-nio/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd matrix-nio-$version
-  dephell deps convert --from pyproject.toml --to setup.py
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
 }
