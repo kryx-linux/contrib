@@ -5,17 +5,13 @@
 # Optional: icu openmpi python3-numpy
 
 name=boost
-version=1.78.0
+version=1.79.0
 release=1
 source=(https://boostorg.jfrog.io/artifactory/main/release/$version/source/${name}_${version//./_}.tar.bz2
-	boost-b2-fix-lib-install.patch
 	boost-ublas-c++20-iterator.patch)
 
 build() {
 	cd ${name}_${version//./_}
-
-	# https://github.com/bfgroup/b2/issues/104
-	patch -p1 -d tools/build -i $SRC/boost-b2-fix-lib-install.patch
 
 	# https://github.com/boostorg/ublas/pull/97
 	patch -p2 -i $SRC/boost-ublas-c++20-iterator.patch
