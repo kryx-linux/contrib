@@ -18,12 +18,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.9/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.61.1.dist-info/
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.61.1.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.61.1.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.61.1.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.61.1.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.61.1.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/__pycache__/
@@ -144,6 +144,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/emailconfig.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/experimental.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/federation.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/groups.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/homeserver.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/jwt.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/key.cpython-39.opt-1.pyc
@@ -189,6 +190,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/config/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/emailconfig.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/experimental.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/federation.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/groups.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/homeserver.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/jwt.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/config/key.py
@@ -825,6 +827,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/__pycache__/pick_idp.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/__pycache__/pick_username.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/__pycache__/sso_register.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/__pycache__/unsubscribe.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/new_user_consent.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/oidc/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/oidc/__init__.py
@@ -844,6 +847,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/saml2/metadata_resource.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/saml2/response_resource.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/sso_register.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/client/unsubscribe.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/well_known.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/server.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/server_notices/
@@ -940,7 +944,6 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/m
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/__pycache__/events_forward_extremities.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/__pycache__/events_worker.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/__pycache__/filtering.cpython-39.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/__pycache__/group_server.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/__pycache__/keys.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/__pycache__/lock.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/__pycache__/media_repository.cpython-39.opt-1.pyc
@@ -988,7 +991,6 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/m
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/events_forward_extremities.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/events_worker.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/filtering.py
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/group_server.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/keys.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/lock.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/databases/main/media_repository.py
@@ -1444,6 +1446,14 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/69/__pycache__/01as_txn_seq.cpython-39.opt-1.pyc
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/70/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/70/01clean_table_purged_rooms.sql
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/71/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/71/01rebuild_event_edges.sql.postgres
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/71/01rebuild_event_edges.sql.sqlite
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/71/01remove_noop_background_updates.sql
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/71/02event_push_summary_unique.sql
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/72/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/72/01event_push_summary_receipt.sql
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/72/02event_push_actions_index.sql
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/full_schemas/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/full_schemas/16/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/full_schemas/16/application_services.sql
