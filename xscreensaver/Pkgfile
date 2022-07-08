@@ -4,7 +4,7 @@
 # Depends on: bc fortune gdk-pixbuf-xlib giflib glu intltool libglade linux-pam xorg-libxmu xorg-libxi
 
 name=xscreensaver
-version=6.02
+version=6.04
 release=1
 source=(https://www.jwz.org/$name/$name-$version.tar.gz
 	$name.pam)
@@ -26,16 +26,18 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
-		--with-x-app-defaults='/etc/X11/app-defaults' \
+		--with-app-defaults='/usr/share/X11/app-defaults' \
 		--enable-locking \
 		--enable-root-passwd \
 		--disable-nls \
 		--with-dpms-ext \
 		--with-xinerama-ext \
 		--with-xshm-ext \
-		--with-proc-interrupts \
-		--with-shadow \
+		--with-pam \
+		--with-gl \
+		--with-glx \
 		--with-pixbuf \
+		--with-xft \
 		--with-jpeg \
 		--without-motif \
 		--without-gle \
@@ -51,5 +53,7 @@ build() {
 	# PAM service file
 	install -D -m 0644 $SRC/$name.pam $PKG/etc/pam.d/$name
 
-	rm -r $PKG/usr/share/{locale,xscreensaver/config/README}
+	rm -r \
+		$PKG/usr/share/xscreensaver/xscreensaver.service \
+		$PKG/usr/share/xscreensaver/config/README
 }
