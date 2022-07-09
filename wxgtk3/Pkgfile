@@ -4,17 +4,13 @@
 # Depends on: gtk3 wxgtk-common
 
 name=wxgtk3
-version=3.0.5.1
+version=3.2.0
 release=1
 source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
 	make-abicheck-non-fatal.patch)
 
 build() {
 	cd wxWidgets-$version
-
-	# C++ ABI check is too strict and breaks with GCC 5.1
-	# https://bugzilla.redhat.com/show_bug.cgi?id=1200611
-	patch -p1 -i $SRC/make-abicheck-non-fatal.patch
 
 	./configure \
 		--prefix=/usr \
@@ -36,5 +32,5 @@ build() {
 	make DESTDIR=$PKG install
 
 	rm -r $PKG/usr/{include,share,lib/libwx_base*,bin/wxrc*}
-	mv $PKG/usr/bin/wx-config{,-gtk3}	
+	mv $PKG/usr/bin/wx-config{,-gtk3}
 }
