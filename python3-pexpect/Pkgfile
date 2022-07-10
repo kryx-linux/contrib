@@ -10,8 +10,14 @@ source=(https://github.com/pexpect/pexpect/archive/$version/$name-$version.tar.g
 
 build() {
   cd pexpect-$version
-  sed -i 's,env python,env python3,' pexpect/FSM.py
-  #/usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG
+  _pyver=$(/usr/bin/python3 -c 'import sys; print("%s.%s" % sys.version_info[:2])')
+
+  if prt-get isinst python3-flit-core; then
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
+  else
+    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps pexpect
+  fi
+
+  rm -rf $PKG/usr/lib/python$_pyver/site-packages/pexpect-$version.dist-info/{INSTALLER,REQUESTED}
 }
