@@ -12,5 +12,5 @@ build() {
   cd matrix-nio-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
