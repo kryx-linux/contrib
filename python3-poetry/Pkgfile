@@ -1,22 +1,16 @@
 # Description:  python3 packaging and dependency management made easy
 # URL: https://poetry.eustace.io/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-cachecontrol python3-cachy python3-cleo python3-html5lib python3-keyring python3-lockfile python3-pkginfo python3-poetry-core python3-requests-toolbelt python3-shellingham python3-virtualenv
+# Depends on: python3-cachecontrol python3-cachy python3-cleo python3-html5lib python3-keyring python3-lockfile python3-pexpect python3-pkginfo python3-poetry-core python3-requests-toolbelt python3-shellingham python3-virtualenv
 
 name=python3-poetry
-version=1.1.13
+version=1.1.14
 release=1
 source=(https://github.com/sdispater/poetry/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd poetry-$version
 
-  /usr/bin/pip3 install --compile \
-    --no-deps \
-    --no-warn-script-location \
-    --root=$PKG .
-
-  local sitedir=$(/usr/bin/python3 -c "import site; print(site.getsitepackages()[0])")
-  rm $PKG/$sitedir/poetry/__init__.py \
-    $PKG/$sitedir/poetry/__pycache__/__init__.cpython-*.pyc
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
