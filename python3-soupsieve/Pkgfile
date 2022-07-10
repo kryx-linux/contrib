@@ -1,7 +1,7 @@
 # Description: A CSS4 selector implementation for Beautiful Soup
 # URL: https://pypi.python.org/pypi/soupsieve
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3-build python3-hatchling python3-install
+# Depends on: python3-build python3-hatchling python3-installer
 
 name=python3-soupsieve
 _name=${name#*-}
@@ -13,5 +13,5 @@ build() {
 	cd $_name-$version
 
 	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-	/usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+	/usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }

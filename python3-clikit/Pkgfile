@@ -14,7 +14,7 @@ build() {
 
   if prt-get isinst python3-poetry; then
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
   else
     /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps clikit
   fi

@@ -1,7 +1,8 @@
 # Description: Run a subprocess in a pseudo terminal
 # URL: https://github.com/pexpect/ptyprocess
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-setuptools
+# Depends on: python3-pip
+# Optional: python3-flit-core
 
 name=python3-ptyprocess
 version=0.7.0
@@ -10,8 +11,15 @@ source=(https://pypi.io/packages/source/p/ptyprocess/ptyprocess-$version.tar.gz)
 
 build() {
   cd ptyprocess-$version
-  #/usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1
+
+  _pyver=$(/usr/bin/python3 -c 'import sys; print("%s.%s" % sys.version_info[:2])')
+
+  if prt-get isinst python3-flit-core; then
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
+  else
+    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps ptyprocess
+  fi
+
+  rm -rf $PKG/usr/lib/python$_pyver/site-packages/ptyprocess-$version.dist-info/{INSTALLER,REQUESTED}
 }

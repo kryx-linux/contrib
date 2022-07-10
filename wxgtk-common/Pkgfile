@@ -4,17 +4,12 @@
 # Depends on: gtk glu gst-plugins-base
 
 name=wxgtk-common
-version=3.0.5.1
+version=3.2.0
 release=1
-source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
-	make-abicheck-non-fatal.patch)
+source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2)
 
 build() {
 	cd wxWidgets-$version
-
-	# C++ ABI check is too strict and breaks with GCC 5.1
-	# https://bugzilla.redhat.com/show_bug.cgi?id=1200611
-	patch -p1 -i $SRC/make-abicheck-non-fatal.patch
 
 	./configure \
 		--prefix=/usr \

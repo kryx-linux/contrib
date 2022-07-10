@@ -1,7 +1,7 @@
 # Description: A python package that provides useful locks
 # URL: https://github.com/harlowja/fasteners
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-build python3-install
+# Depends on: python3-build python3-installer
 # Optional: python3-six
 
 name=python3-fasteners
@@ -12,5 +12,5 @@ source=(https://pypi.org/packages/source/f/fasteners/fasteners-$version.tar.gz)
 build() {
   cd fasteners-$version
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }

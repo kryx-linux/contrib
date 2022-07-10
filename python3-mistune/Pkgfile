@@ -1,7 +1,7 @@
 # Description: A fast yet powerful Python Markdown parser with renderers and plugins
 # URL: https://github.com/lepture/mistune
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-build python3-install python3-wheel
+# Depends on: python3-build python3-installer
 
 name=python3-mistune
 version=2.0.3
@@ -11,5 +11,5 @@ source=(https://github.com/lepture/mistune/archive/v$version/$name-$version.tar.
 build() {
   cd mistune-$version
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
