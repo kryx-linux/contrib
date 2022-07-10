@@ -1,10 +1,10 @@
 # Description: A package designed to expose cryptographic recipes and primitives to Python developers.
 # URL: https://pypi.org/project/cryptography/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3-cffi python3-setuptools-rust python3-typing_extensions
+# Depends on: python3-cffi python3-setuptools-rust
 
 name=python3-cryptography
-version=37.0.2
+version=37.0.4
 release=1
 source=(https://pypi.python.org/packages/source/c/cryptography/cryptography-$version.tar.gz)
 
@@ -14,6 +14,7 @@ build() {
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
 	cd ${name#*-}-$version
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1 --skip-build
+
+	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+	/usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
