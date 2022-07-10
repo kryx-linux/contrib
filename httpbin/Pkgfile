@@ -1,7 +1,7 @@
 # Description: HTTP Request and Response Service
 # URL: https://github.com/requests/httpbin
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-blinker python3-decorator python3-flasgger python3-gevent python3-raven
+# Depends on: brotli python3-blinker python3-decorator python3-flasgger python3-gevent python3-raven
 
 name=httpbin
 version=0.7.0
@@ -19,5 +19,4 @@ build() {
     --root=$PKG \
     -O1 \
     --skip-build
-
 }
