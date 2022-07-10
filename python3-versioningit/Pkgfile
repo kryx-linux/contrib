@@ -1,7 +1,7 @@
 # Description: Versioning It with your Version In Git
 # URL: https://github.com/jwodder/versioningit
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3-build python3-install
+# Depends on: python3-build python3-installer
 
 name=python3-versioningit
 version=2.0.0
@@ -12,5 +12,5 @@ build() {
   cd versioningit-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m install --optimize=1 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
