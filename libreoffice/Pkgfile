@@ -1,13 +1,13 @@
 # Description: LibreOffice is a powerful office suite
 # URL: https://www.libreoffice.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: abseil-cpp box2d clucene fakeroot fontforge graphite2 gst-plugins-base hyphen icu libabw libcdr libcuckoo libe-book libepubgen libetonyek libexttextcat libfreehand libmspub libmwaw libmythes libnumbertext libodfgen liborcus libpagemaker libqrcodegen libqxp libstaroffice libtommath libvisio libwpg libwps libzmf neon nss openjpeg2 paper redland unzip xmlsec xorg-libxcomposite zip
+# Depends on: abseil-cpp box2d clucene dragonbox fakeroot fontforge graphite2 gst-plugins-base hyphen icu libabw libcdr libcmis libcuckoo libe-book libepubgen libetonyek libexttextcat libfixmath libfreehand libmspub libmwaw libmythes libnumbertext libodfgen liborcus libpagemaker libqrcodegen libqxp libstaroffice libtommath libvisio libwpg libwps libzmf neon nss openjpeg2 paper redland unzip xmlsec xorg-libxcomposite zip
 # Optional: avahi coin-or-mp cups gpgme kio lpsolve mariadb openldap postgresql python3-lxml qt5 sane valgrind
 
 name=libreoffice
-version=7.3.5.1
+version=7.4.0.1
 release=1
-pdfiumversion=4699
+pdfiumversion=5058
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
   https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-dictionaries-$version.tar.xz
   https://dev-www.libreoffice.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
@@ -52,6 +52,7 @@ build() {
   patch -Np1 -i $SRC/makefile.in.patch
   sed -i 's:application/pdf;::g' sysui/desktop/menus/draw.desktop
   sed -i 's:text/plain;::g' sysui/desktop/menus/writer.desktop
+  sed -i 's:dragonbox-1.0.0:dragonbox:g' configure.ac
   # optionals {{{
   prt-get isinst avahi && PKGMK_LIBREOFFICE+=' --enable-avahi' || PKGMK_LIBREOFFICE+=' --disable-avahi'
   #prt-get isinst box2d && PKGMK_LIBREOFFICE+=' --with-system-box2d' || PKGMK_LIBREOFFICE+=' --without-system-box2d'
