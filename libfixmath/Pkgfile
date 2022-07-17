@@ -1,0 +1,26 @@
+# Description: the math.h functions in fixed point (16.16) format
+# URL: https://github.com/PetteriAimonen/libfixmath
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=libfixmath
+version=2022.06.23
+release=1
+_commit=809bceac540b14d182589ce4c6f74330a2ff682a
+source=(https://github.com/PetteriAimonen/libfixmath/archive/$_commit/$name-$version.tar.gz)
+
+build() {
+  cmake -S $name-$_commit -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -Wno-dev
+
+  cmake --build build
+  #DESTDIR=$PKG cmake --install build
+  mkdir -p $PKG/usr/{lib,include/libfixmath}
+  cp build/liblibfixmath.a $PKG/usr/lib
+  cp libfixmath-$_commit/libfixmath/*.h libfixmath-$_commit/libfixmath/*.hpp $PKG/usr/include/libfixmath
+}
