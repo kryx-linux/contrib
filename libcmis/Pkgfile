@@ -5,11 +5,24 @@
 
 name=libcmis
 version=0.5.2
-release=1
-source=(https://github.com/tdf/libcmis/releases/download/v${version}/$name-$version.tar.gz)
+release=2
+source=(https://github.com/tdf/libcmis/releases/download/v${version}/$name-$version.tar.gz
+  0001-rename-class-GetObject-to-avoid-name-clash-on-Window.patch
+  libcmis-libxml2_compatibility.patch
+  libcmis_gdrive.patch
+  libcmis_onedrive.patch
+  libcmis_oauth_pw_as_refreshtoken.patch)
 
 build() {
   cd $name-$version
+
+  # libreoffice patches
+  patch -Np1 -i $SRC/0001-rename-class-GetObject-to-avoid-name-clash-on-Window.patch
+  patch -Np1 -i $SRC/libcmis-libxml2_compatibility.patch
+  patch -Np1 -i $SRC/libcmis_onedrive.patch
+  patch -Np1 -i $SRC/libcmis_oauth_pw_as_refreshtoken.patch
+  patch -Np1 -i $SRC/libcmis_gdrive.patch
+
   ./configure --prefix=/usr \
     --disable-werror \
     --with-man=no
