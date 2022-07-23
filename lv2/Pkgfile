@@ -1,17 +1,21 @@
 # Description: Successor to the LADSPA audio plug-in standard.
 # URL: https://lv2plug.in/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: libsndfile
+# Depends on: libsndfile meson ninja
 
 name=lv2
-version=1.18.4
+version=1.18.6
 release=1
-source=(http://lv2plug.in/spec/$name-$version.tar.bz2)
+source=(http://lv2plug.in/spec/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
 
-	/usr/bin/python3 waf configure --prefix=/usr
-	/usr/bin/python3 waf build $MAKEFLAGS
-	/usr/bin/python3 waf install --destdir="$PKG"
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
