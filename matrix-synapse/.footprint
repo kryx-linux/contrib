@@ -18,12 +18,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.9/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.62.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.63.1.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.63.1.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.63.1.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.63.1.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.63.1.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.63.1.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/__pycache__/
@@ -89,6 +89,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/admin_cmd.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/appservice.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/client_reader.cpython-39.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/complement_fork_starter.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/event_creator.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/federation_reader.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/federation_sender.cpython-39.opt-2.pyc
@@ -104,6 +105,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/app/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/admin_cmd.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/appservice.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/client_reader.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/complement_fork_starter.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/event_creator.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/federation_reader.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/app/federation_sender.py
@@ -515,6 +517,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/__
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/__pycache__/push.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/__pycache__/register.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/__pycache__/send_event.cpython-39.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/__pycache__/state.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/__pycache__/streams.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/_base.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/account_data.py
@@ -526,6 +529,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/__
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/push.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/register.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/send_event.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/state.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/http/streams.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/replication/slave/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/replication/slave/__init__.py
@@ -1452,6 +1456,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/71/01remove_noop_background_updates.sql
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/71/02event_push_summary_unique.sql
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/72/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/72/01add_room_type_to_state_stats.sql
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/72/01event_push_summary_receipt.sql
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/delta/72/02event_push_actions_index.sql
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/storage/schema/main/full_schemas/
