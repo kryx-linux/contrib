@@ -5,7 +5,7 @@
 
 name=wireplumber
 version=0.4.11
-release=1
+release=2
 source=(https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$name-$version.tar.bz2)
 
 build() {
@@ -18,7 +18,10 @@ build() {
     -D system-lua=true \
     -D system-lua-version=5.4 \
     -D introspection=disabled \
+    -D doc=disabled \
     -D tests=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
 }
