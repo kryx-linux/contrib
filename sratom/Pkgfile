@@ -1,20 +1,21 @@
 # Description: An LV2 Atom RDF serialisation library.
 # URL: http://drobilla.net/software/sratom
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Packager: Danny Rawlins, crux at romster dot me
-# Depends on: sord lv2
+# Depends on: lv2 sord
 
 name=sratom
-version=0.6.10
+version=0.6.12
 release=1
-source=(http://download.drobilla.net/$name-$version.tar.bz2)
+source=(http://download.drobilla.net/$name-$version.tar.xz)
 
 build() {
-  cd $name-$version
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
 
-  sed -i "/ldconfig/d" wscript
-
-  /usr/bin/python3 waf configure --prefix=/usr
-  /usr/bin/python3 waf build $MAKEFLAGS
-  /usr/bin/python3 waf install --destdir="$PKG"
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
