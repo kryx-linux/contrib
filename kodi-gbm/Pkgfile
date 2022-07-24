@@ -6,26 +6,27 @@
 
 name=kodi-gbm
 version=19.4
-release=2
+release=3
 
 # version variables {{{
 _codename=Matrix
-_ffmpeg_version="4.3.1-$_codename-Beta1"
+_ffmpeg_version="4.3-kodi-dav1d-1.0"
 _crossguid_version="8f399e8bd4"
-_fmt_version="5.1.0"
+_fmt_version="6.1.2"
 _libdvdcss_version="1.4.2-Leia-Beta-5"
 _libdvdnav_version="6.0.0-Leia-Alpha-3"
 _libdvdread_version="6.0.0-Leia-Alpha-3"
 # }}}
 # source {{{
 source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$_codename.tar.gz
-  https://github.com/BlackIkeEagle/kodi-FFmpeg/archive/refs/heads/fix/4.3-kodi-dav1d-1.0.tar.gz
+  https://github.com/BlackIkeEagle/kodi-FFmpeg/archive/refs/heads/fix/$_ffmpeg_version.tar.gz
   #https://github.com/xbmc/FFmpeg/archive/$_ffmpeg_version.tar.gz
-  http://mirrors.kodi.tv/build-deps/sources/fmt-$_fmt_version.tar.gz
+  #http://mirrors.kodi.tv/build-deps/sources/fmt-$_fmt_version.tar.gz
   http://mirrors.kodi.tv/build-deps/sources/crossguid-$_crossguid_version.tar.gz
   https://github.com/xbmc/libdvdcss/archive/$_libdvdcss_version/${name/-gbm/}-libdvdcss-$_libdvdcss_version.tar.gz
   https://github.com/xbmc/libdvdnav/archive/$_libdvdnav_version/${name/-gbm/}-libdvdnav-$_libdvdnav_version.tar.gz
-  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-gbm}-libdvdread-$_libdvdread_version.tar.gz)
+  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-gbm}-libdvdread-$_libdvdread_version.tar.gz
+  kodi-19.4-fmt-9.patch)
 # }}}
 # unpack_source() {{{
 unpack_source() {
@@ -66,6 +67,20 @@ build()  {
   prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   # }}}
 
+  patch -Np1 -d xbmc-$version-$_codename -i $SRC/kodi-19.4-fmt-9.patch
+
+  # grabbed off from gentoo
+  #for i in xbmc-$version-$_codename/tools/depends/native/TexturePacker/src xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src; do
+  for i in xbmc-$version-$_codename/tools/depends/native/{TexturePacker,JsonSchemaBuilder}/src; do
+    pushd $i;
+    autoreconf -vfi;
+    popd
+  done
+
+  sed -e 's/autoreconf -vif/echo "autoreconf already done"/' -i \
+    xbmc-$version-$_codename/tools/depends/native/TexturePacker/src/autogen.sh \
+    xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh \
+
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
@@ -100,6 +115,10 @@ build()  {
     #-D FFMPEG_URL="$SRC/$_ffmpeg_version.tar.gz" \
   cmake --build build
   DESTDIR=$PKG cmake --build build --target install
+
+  export PYTHONHASHSEED=0
+  /usr/bin/python3 -m compileall -d / $PKG/usr/lib
+  /usr/bin/python3 -O -m compileall -d / $PKG/usr/lib
 
   rm -r $PKG/usr/{lib/firewalld,share/doc}
 }
