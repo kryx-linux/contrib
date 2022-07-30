@@ -2,10 +2,10 @@
 # URL: https://github.com/qarmin/czkawka
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: rust
-# Optional: gtk3
+# Optional: gtk4
 
 name=czkawka
-version=4.1.0
+version=5.0.0
 release=1
 source=(https://github.com/qarmin/czkawka/archive/$version/$name-$version.tar.gz)
 
@@ -14,12 +14,21 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update --manifest-path $name-$version/Cargo.toml
-  cargo build --bin czkawka_cli --release --locked --manifest-path $name-$version/Cargo.toml
-  prt-get isinst gtk3 && cargo build --bin czkawka_gui --release --locked --manifest-path $name-$version/Cargo.toml
-
+  cargo build --bin czkawka_cli --release --manifest-path $name-$version/Cargo.toml
   install -Dt $PKG/usr/bin $name-$version/target/release/${name}_cli
-  prt-get isinst gtk3 && install -Dt $PKG/usr/bin $name-$version/target/release/${name}_gui
-  prt-get isinst gtk3 && install -Dm644 $SRC/czkawka-$version/pkgs/com.github.qarmin.czkawka.desktop \
-    $PKG/usr/share/applications/com.github.qarmin.czkawka.desktop || true
+
+  if prt-get isinst gtk4; then
+    cargo build --bin czkawka_gui --release --locked --manifest-path $name-$version/Cargo.toml
+    install -Dm644 $SRC/czkawka-$version/data/com.github.qarmin.czkawka.desktop \
+      $PKG/usr/share/applications/com.github.qarmin.czkawka.desktop
+    install -Dm644 $SRC/czkawka-$version/data/icons/com.github.qarmin.czkawka.svg \
+      $PKG/usr/share/icons/hicolor/scalable/apps/com.github.qarmin.czkawka.svg
+    install -Dm644 $SRC/czkawka-$version/data/icons/com.github.qarmin.czkawka.Devel.svg \
+      $PKG/usr/share/icons/hicolor/scalable/apps/com.github.qarmin.czkawka.Devel.svg
+    install -Dm644 $SRC/czkawka-$version/data/icons/com.github.qarmin.czkawka-symbolic.svg \
+      $PKG/usr/share/icons/hicolor/scalable/apps/com.github.qarmin.czkawka-symbolic.svg
+    install -Dm644 $SRC/czkawka-$version/data/com.github.qarmin.czkawka.metainfo.xml \
+      $PKG/usr/share/metainfo/com.github.qarmin.czkawka.metainfo.xml
+    install -Dt $PKG/usr/bin $name-$version/target/release/${name}_gui
+  fi
 }
