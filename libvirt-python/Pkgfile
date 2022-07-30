@@ -1,0 +1,15 @@
+# Description: Python bindings for libvirt
+# URL: https://libvirt.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: python3 libvirt
+
+name=libvirt-python
+version=8.5.0
+release=1
+source=(https://libvirt.org/sources/python/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root $PKG
+}
