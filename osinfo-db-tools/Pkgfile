@@ -1,0 +1,19 @@
+# Description: Tools for management of the osinfo database
+# URL: https://libosinfo.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: meson glib json-glib libsoup3
+
+name=osinfo-db-tools
+version=1.10.0
+release=1
+source=(https://releases.pagure.org/libosinfo/$name-$version.tar.xz)
+
+build() {
+	meson setup $name-$version build \
+		--prefix=/usr \
+		--buildtype=plain
+	meson compile -C build
+	DESTDIR=$PKG meson install -C build
+
+	rm -r $PKG/usr/share/locale
+}
