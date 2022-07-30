@@ -3,15 +3,13 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=parallel
-version=20220622
+version=20220722
 release=1
-source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2
-  0002-Fix-makefile.patch)
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
 
-  patch -Np1 -i $SRC/0002-Fix-makefile.patch
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
