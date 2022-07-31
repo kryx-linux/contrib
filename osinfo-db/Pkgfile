@@ -1,0 +1,17 @@
+# Description: The osinfo database
+# URL: https://libosinfo.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: osinfo-db-tools
+
+name=osinfo-db
+version=20220727
+release=1
+source=(https://releases.pagure.org/libosinfo/$name-$version.tar.xz)
+
+unpack_source() {
+	:
+}
+
+build() {
+	osinfo-db-import --root $PKG --system $PKGMK_SOURCE_DIR/$name-$version.tar.xz
+}

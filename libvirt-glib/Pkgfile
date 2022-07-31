@@ -1,0 +1,21 @@
+# Description: Glib bindings for libvirt
+# URL: https://libvirt.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: meson glib libvirt
+
+name=libvirt-glib
+version=4.0.0
+release=1
+source=(https://libvirt.org/sources/glib/$name-$version.tar.xz)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    -Dtests=disabled \
+    -Dvapi=disabled
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
+}
