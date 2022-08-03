@@ -70,6 +70,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/profile.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/prune.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/publish.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/query.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/rebuild.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/repo.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/restart.js
@@ -93,8 +94,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/version.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/view.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/whoami.js
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/exec/
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/exec/get-workspace-location-msg.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/lifecycle-cmd.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/npm.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/package-url-cmd.js
@@ -147,6 +146,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/.bin/
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/arborist -> ../@npmcli/arborist/bin/index.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/color-support -> ../color-support/bin.js
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/cssesc -> ../cssesc/bin/cssesc
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/installed-package-contents -> ../@npmcli/installed-package-contents/index.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/mkdirp -> ../mkdirp/bin/cmd.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/node-gyp -> ../node-gyp/bin/node-gyp.js
@@ -249,6 +249,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/peer-entry-sets.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/place-dep.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/printable.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/query-selector-all.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/realpath.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/relpath.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/reset-dep-flags.js
@@ -287,9 +288,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/LICENSE.md
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/file-url-to-path/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/file-url-to-path/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/file-url-to-path/polyfill.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/get-options.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/node.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/common/owner-sync.js
@@ -301,9 +299,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/cp/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/errors.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/fs.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/index.js
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/mkdir/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/mkdir/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/mkdir/polyfill.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/mkdir.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/mkdtemp.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/rm/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/rm/index.js
@@ -367,6 +363,10 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/promise-spawn
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/lib/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/query/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/query/lib/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/query/lib/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/query/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/run-script/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/escape.js
@@ -594,6 +594,14 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/concat-map/test/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/console-control-strings/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/console-control-strings/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/console-control-strings/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/cssesc/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/cssesc/LICENSE-MIT.txt
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/cssesc/bin/
+-rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/cssesc/bin/cssesc
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/cssesc/cssesc.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/cssesc/man/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/cssesc/man/cssesc.1
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/cssesc/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/debug/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/debug/node_modules/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/debug/node_modules/ms/
@@ -934,7 +942,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmdiff/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmdiff/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/cache-install-dir.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/file-exists.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/get-bin-from-manifest.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js
@@ -1376,6 +1383,44 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/parse-conflict-json/l
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/path-is-absolute/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/path-is-absolute/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/path-is-absolute/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/API.md
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/LICENSE-MIT
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/parser.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/processor.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/attribute.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/className.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/combinator.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/comment.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/constructors.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/container.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/guards.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/id.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/namespace.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/nesting.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/node.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/pseudo.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/root.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/selector.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/string.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/tag.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/types.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/selectors/universal.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/sortAscending.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/tokenTypes.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/tokenize.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/util/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/util/ensureObject.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/util/getProp.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/util/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/util/stripComments.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/dist/util/unesc.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/package.json
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/postcss-selector-parser/postcss-selector-parser.d.ts
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/proc-log/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/proc-log/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/proc-log/lib/index.js
@@ -1872,6 +1917,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/npm-profile.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-prune.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-publish.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/npm-query.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-rebuild.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-repo.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-restart.1.gz
@@ -1905,6 +1951,7 @@ drwxr-xr-x	root/root	usr/share/man/man5/
 -rw-r--r--	root/root	usr/share/man/man5/package-lock-json.5.gz
 drwxr-xr-x	root/root	usr/share/man/man7/
 -rw-r--r--	root/root	usr/share/man/man7/config.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/dependency-selectors.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/developers.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/logging.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/orgs.7.gz
