@@ -9,6 +9,7 @@ release=2
 source=(https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$name-$version.tar.bz2)
 
 build() {
+  _lua_version=$(prt-get info lua | awk '/Version/ { print $2}')
   meson setup $name-$version build \
     -D prefix=/usr \
     --buildtype=plain \
@@ -16,10 +17,11 @@ build() {
     -D b_lto=true \
     -D b_pie=true \
     -D system-lua=true \
-    -D system-lua-version=5.4 \
+    -D system-lua-version=${_lua_version::3} \
     -D introspection=disabled \
     -D doc=disabled \
-    -D tests=false
+    -D elogind=disabled \
+    -D systemd=disabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 
