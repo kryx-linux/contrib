@@ -1214,6 +1214,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/macOS_Catalina.md
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/macOS_Catalina_acid_test.sh
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/.bin/
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/.bin/nopt -> ../nopt/bin/nopt.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/brace-expansion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/brace-expansion/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/brace-expansion/package.json
@@ -1225,6 +1227,13 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/minimatch/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/minimatch/minimatch.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/minimatch/package.json
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/nopt/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/nopt/CHANGELOG.md
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/nopt/bin/
+-rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/nopt/bin/nopt.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/nopt/lib/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/nopt/lib/nopt.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/node_modules/nopt/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/src/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/src/win_delay_load_hook.cc
@@ -1238,14 +1247,11 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixture
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/VS_2019_BuildTools_minimal.txt
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/VS_2019_Community_workload.txt
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/VS_2019_Preview.txt
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/ca-bundle.crt
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/ca.crt
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/certs.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/nodedir/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/nodedir/include/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/nodedir/include/node/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/nodedir/include/node/config.gypi
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/server.crt
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/server.key
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixtures/test-charmap.py
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/process-exec-sync.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/simple-proxy.js
@@ -1262,7 +1268,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/fixture
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/test/test-process-release.js
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/node-gyp/update-gyp.py
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/nopt/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/nopt/CHANGELOG.md
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/nopt/bin/
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/nopt/bin/nopt.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/nopt/lib/
