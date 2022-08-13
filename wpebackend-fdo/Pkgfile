@@ -4,14 +4,17 @@
 # Depends on: glib libepoxy libwpe wayland-protocols
 
 name=wpebackend-fdo
-version=1.12.0
+version=1.12.1
 release=1
 source=(https://wpewebkit.org/releases/$name-$version.tar.xz)
 
 build() {
   meson setup $name-$version build \
     --prefix=/usr \
-    --buildtype=plain
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
