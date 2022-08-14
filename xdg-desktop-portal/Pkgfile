@@ -1,28 +1,27 @@
 # Description: Desktop integration portals for sandboxed apps
 # URL: https://github.com/flatpak/xdg-desktop-portal
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fuse3 json-glib libportal
-# Optional: geoclue pipewire
+# Depends on: flatpak fuse3
+# Optional: geoclue libportal pipewire
 
 name=xdg-desktop-portal
-version=1.14.6
+version=1.15.0
 release=1
 source=(https://github.com/flatpak/xdg-desktop-portal/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --libexecdir=lib/$name \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D systemd=disabled \
+    -D docbook-docs=disabled
 
-  prt-get isinst pipewire && PKGMK_XDGDP+=' --enable-pipewire' || PKGMK_XDGDP+=' --disable-pipewire'
-  prt-get isinst geoclue && PKGMK_XDGDP+=' --enable-geoclue' || PKGMK_XDGDP+=' --disable-geoclue'
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
-  NOCONFIGURE=1 ./autogen.sh
-  ./configure --prefix=/usr $PKGMK_XDGDP \
-    --libexecdir=/usr/lib \
-    --enable-libportal \
-    --without-systemd \
-    --disable-docbook-docs \
-    --disable-nls
-  make
-  make DESTDIR=$PKG install
-  rm -fr $PKG/usr/{lib/systemd,share/doc}
+  rm -r $PKG/usr/{lib/systemd,share/locale}
 }
