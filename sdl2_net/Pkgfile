@@ -4,13 +4,16 @@
 # Depends on: libsdl2
 
 name=sdl2_net
-version=2.0.1
+version=2.2.0
 release=1
 source=(https://www.libsdl.org/projects/SDL_net/release/SDL2_net-$version.tar.gz)
 
 build() {
 	cd SDL2_net-$version
-	./configure --prefix=/usr
+	./configure --prefix=/usr \
+		--disable-examples \
+		--disable-static \
+		--disable-sdltest
 	make
 	make DESTDIR=$PKG install
 }
