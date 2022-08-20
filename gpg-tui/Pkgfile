@@ -4,7 +4,7 @@
 # Depends on: gpgme libxkbcommon rust
 
 name=gpg-tui
-version=0.9.0
+version=0.9.1
 release=1
 source=(https://github.com/orhun/gpg-tui/archive/v$version/$name-$version.tar.gz)
 
@@ -13,15 +13,18 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update --manifest-path $name-$version/Cargo.toml
-  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
+  cargo build --release --manifest-path $name-$version/Cargo.toml
   mkdir $SRC/completions
-  OUT_DIR=$SRC/completions/ cargo run --bin gpg-tui-completions --manifest-path $name-$version/Cargo.toml
+  OUT_DIR=$SRC/completions/ cargo run --bin gpg-tui-completions \
+    --manifest-path $name-$version/Cargo.toml
 
   install -Dt $PKG/usr/bin $name-$version/target/release/$name
 
-  prt-get isinst bash-completion && install -Dm 644 $SRC/completions/$name.bash -t $PKG/usr/share/bash-completion/completions/$name || true
-  prt-get isinst zsh && install -Dm 644 completions/_$name -t $PKG/usr/share/zsh/site-functions || true
+  prt-get isinst bash-completion && install -Dm 644 \
+    $SRC/completions/$name.bash \
+    -t $PKG/usr/share/bash-completion/completions/$name
+  prt-get isinst zsh && install -Dm 644 completions/_$name \
+    -t $PKG/usr/share/zsh/site-functions
 
   install -Dm 644 $name-$version/man/$name.1 -t $PKG/usr/share/man/man1
 }
