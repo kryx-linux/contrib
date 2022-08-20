@@ -3,17 +3,13 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=lz4
-version=1.9.3
-release=2
-source=(https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz
-  lz4-1.9.3-negative-memmove.patch)
+version=1.9.4
+release=1
+source=(https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  # https://github.com/lz4/lz4/commit/8301a21773ef61656225e264f4f06ae14462bca7
-  # Fix potential memory corruption with negative memmove() size
-  patch -p1 -i $SRC/lz4-1.9.3-negative-memmove.patch
   make -C lib PREFIX=/usr
   make -C programs PREFIX=/usr lz4 lz4c
   make install PREFIX=/usr DESTDIR=$PKG
