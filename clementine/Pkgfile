@@ -1,14 +1,12 @@
 # Description: A music player and library organizer.
 # URL: https://www.clementine-player.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: boost crypto++ glew gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qt5
+# Depends on: boost crypto++ glew glu gst-plugins-bad gst-plugins-good gst-plugins-ugly protobuf qt5
 
 name=clementine
-version=1.4.0rc1-733
-_tag=$version-g679a0ee54
+version=1.4.0rc2
 release=1
-source=(https://github.com/clementine-player/Clementine/archive/$_tag/$name-$version.tar.gz
-	clementine-gcc6.patch)
+source=(https://github.com/clementine-player/Clementine/archive/$version/$name-$version.tar.gz)
 
 build() {
 	# make sure we do not have ccache masquerade directory in PATH
@@ -17,9 +15,11 @@ build() {
 	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
 
 	# -Wl,--as-needed breaks linking
-	LDFLAGS=$(echo ${LDFLAGS} | awk -v RS=' ' -v ORS=' ' '/-Wl,--as-needed/ {next} {print}')
+	#LDFLAGS=$(echo ${LDFLAGS} | awk -v RS=' ' -v ORS=' ' '/-Wl,--as-needed/ {next} {print}')
 
-	cmake -S Clementine-$_tag -B build -G Ninja \
+	sed -e 's|CRYPTOPP cryptopp|CRYPTOPP libcryptopp|' -i Clementine-$version/CMakeLists.txt
+
+	cmake -S Clementine-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
