@@ -4,7 +4,7 @@
 # Depends on: rust
 
 name=git-cliff
-version=0.8.1
+version=0.9.0
 release=1
 source=(https://github.com/orhun/git-cliff/archive/v$version/$name-$version.tar.gz)
 
@@ -12,7 +12,7 @@ build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
-  cargo update --manifest-path $name-$version/Cargo.toml
-  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
   install -Dt $PKG/usr/bin $name-$version/target/release/$name
 }

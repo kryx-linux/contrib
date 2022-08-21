@@ -4,13 +4,18 @@
 # Depends on: qt6-base qt6-svg qt6-tools
 
 name=cutemaze
-version=1.3.0
+version=1.3.1
 release=1
 source=(https://gottcode.org/$name/$name-$version-src.tar.bz2)
 
 build() {
-	cd $name-$version
-	qmake-qt6 PREFIX=/usr
-	make
-	make INSTALL_ROOT=$PKG install
+	cmake -S $name-$version -B build -G Ninja \
+	  -D CMAKE_INSTALL_PREFIX=/usr \
+	  -D CMAKE_INSTALL_LIBDIR=lib \
+	  -D CMAKE_BUILD_TYPE=Release \
+	  -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+	  -Wno-dev
+
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 }
