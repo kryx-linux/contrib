@@ -16,7 +16,6 @@ build() {
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -Wno-dev
-  ccmake build
   cmake --build build
   DESTDIR=$PKG cmake --install build
   install -Dm644 $SRC/$name.1 $PKG/usr/share/man/man1/$name.1
