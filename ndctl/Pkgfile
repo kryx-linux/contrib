@@ -4,8 +4,8 @@
 # Depends on: iniparser json-c keyutils meson ninja
 
 name=ndctl
-version=73
-release=2
+version=74
+release=1
 source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
@@ -13,7 +13,7 @@ build() {
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
-    -D b_lto=true \
+    -D b_lto=false \
     -D b_pie=true \
     -D asciidoctor=disabled \
     -D docs=disabled \
