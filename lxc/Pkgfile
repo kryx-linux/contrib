@@ -2,48 +2,64 @@
 # URL: https://linuxcontainers.org/lxc
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Packager: ryuo, James Buren
-# Packager: Thomas Penteker, tek at serverop dot de
-# Depends: libseccomp
-# Optional: gnupg dnsmasq
+# Depends: libseccomp meson ninja
+# Optional: dnsmasq gnupg lua
 
 name=lxc
-version=4.0.12
+version=5.0.1
 release=1
 source=(https://linuxcontainers.org/downloads/$name/$name-$version.tar.gz
-  man-pages.tar.xz default.conf lxc-usernet lxc-users-setup
-  lxc-users lxc-cgroups lxc-net)
+  default.conf lxc-usernet lxc-users-setup lxc-users lxc-cgroups lxc-net
+  02-distrosysconfdir.patch)
 
 build() {
-  cd $name-$version
-  ./configure --prefix=/usr \
-    --mandir=/usr/share/man \
-    --libexecdir=/usr/lib \
-    --localstatedir=/var \
+  patch -Np1 -d $name-$version -i $SRC/02-distrosysconfdir.patch
+
+  # fix pam_libdir
+  sed "/pam_security/s/libdir/'\/', 'lib'/" -i $name-$version/meson.build
+
+  prt-get isinst docbook2x && PKGMK_LXC+=' -D man=true' || PKGMK_LXC+=' -D man=false'
+
+  meson setup $name-$version build $PKGMK_LXC \
+    --prefix=/usr \
     --sysconfdir=/etc \
-    --enable-pam \
-    --with-pamdir=/lib/security \
-    --disable-apparmor \
-    --with-init-script=sysvinit
+    --libexecdir=lib \
+    --localstatedir=/var \
+    -D distrosysconfdir=/etc/default \
+    -D data-path=/var/lib/lxc \
+    -D log-path=/var/log/lxc \
+    -D rootfs-mount-path=/usr/lib/lxc/rootfs \
+    -D runtime-path=/run \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D init-script=sysvinit \
+    -D pam-cgroup=true \
+    -D apparmor=false
 
-  make
-  make DESTDIR=$PKG install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
-  install -d $PKG/usr/share/man
+  install -d $PKG/etc/{default,rc.d}
   install -d $PKG/var/lib/misc
 
   install -m 0755 $SRC/lxc-users-setup $PKG/usr/sbin/
-  mv $SRC/man* $PKG/usr/share/man
-  rm -rf $PKG/usr/lib/lxc/rootfs/README $PKG/usr/share/doc
-  rm -rf $PKG/usr/share/lxc/config/common.conf.d/README
-  mv $PKG/etc/rc.d/init.d/* $PKG/etc/rc.d/
+
+  rm -rf $PKG/usr/lib/lxc/rootfs/README \
+    $PKG/usr/lib/lxc/lxc-apparmor-load \
+    $PKG/usr/share/doc \
+    $PKG/usr/share/lxc/config/common.conf.d/README
+
+  mv $PKG/etc/init.d/* $PKG/etc/rc.d/
   install -m755 $SRC/lxc-cgroups $PKG/etc/rc.d/
   install -m755 $SRC/lxc-users $PKG/etc/rc.d/
-  rmdir $PKG/etc/rc.d/init.d/
+  rmdir $PKG/etc/init.d/
   install -m644 $SRC/lxc-net $PKG/etc/default/
   rm $PKG/etc/lxc/default.conf
   install -m644 $SRC/default.conf $PKG/etc/lxc/
   install -m644 $SRC/lxc-usernet $PKG/etc/lxc/
-  if [ "$(prt-get isinst bash-completion)" = 'package bash-completion is not installed' ]; then
-    rm -fr $PKG/etc/bash_completion.d;
-  fi
+
+  prt-get isinst bash-completion || rm -fr $PKG/etc/bash_completion.d \
+    $PKG/usr/share/bash-completion
 }
