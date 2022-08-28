@@ -22,6 +22,7 @@ drwxr-xr-x	root/root	opt/cuda/bin/crt/
 -rwxr-xr-x	root/root	opt/cuda/bin/cuda-gdb
 -rwxr-xr-x	root/root	opt/cuda/bin/cuda-gdbserver
 -rwxr-xr-x	root/root	opt/cuda/bin/cuda-memcheck
+-rwxr-xr-x	root/root	opt/cuda/bin/cuda-uninstaller
 -rwxr-xr-x	root/root	opt/cuda/bin/cudafe++
 -rwxr-xr-x	root/root	opt/cuda/bin/cuobjdump
 -rwxr-xr-x	root/root	opt/cuda/bin/fatbinary
@@ -112,12 +113,11 @@ drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/doc/Cupti/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/index.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/modules.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/notices-header.html
--rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/r_changelog.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/r_library_support.html
--rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/r_limitations.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/r_main.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/r_overview.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/r_special_configurations.html
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/release_notes.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structBufferInfo.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUPTI_1_1PcSamplingUtil_1_1CUptiUtil__GetBufferInfoParams.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUPTI_1_1PcSamplingUtil_1_1CUptiUtil__GetHeaderDataParams.html
@@ -145,6 +145,7 @@ drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/doc/Cupti/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityGlobalAccess.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityGlobalAccess2.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityGlobalAccess3.html
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityGraphTrace.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityInstantaneousEvent.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityInstantaneousEventInstance.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityInstantaneousMetric.html
@@ -157,6 +158,7 @@ drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/doc/Cupti/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityKernel4.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityKernel5.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityKernel6.html
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityKernel7.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityMarker.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityMarker2.html
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/doc/Cupti/structCUpti__ActivityMarkerData.html
@@ -397,9 +399,9 @@ drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/include/Openmp/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/include/nvperf_target.h
 drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/lib64/
 -rwxr-xr-x	root/root	opt/cuda/extras/CUPTI/lib64/libcheckpoint.so
-lrwxrwxrwx	root/root	opt/cuda/extras/CUPTI/lib64/libcupti.so -> libcupti.so.11.6
-lrwxrwxrwx	root/root	opt/cuda/extras/CUPTI/lib64/libcupti.so.11.6 -> libcupti.so.2022.1.1
--rwxr-xr-x	root/root	opt/cuda/extras/CUPTI/lib64/libcupti.so.2022.1.1
+lrwxrwxrwx	root/root	opt/cuda/extras/CUPTI/lib64/libcupti.so -> libcupti.so.11.7
+lrwxrwxrwx	root/root	opt/cuda/extras/CUPTI/lib64/libcupti.so.11.7 -> libcupti.so.2022.2.0
+-rwxr-xr-x	root/root	opt/cuda/extras/CUPTI/lib64/libcupti.so.2022.2.0
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/lib64/libcupti_static.a
 -rwxr-xr-x	root/root	opt/cuda/extras/CUPTI/lib64/libnvperf_host.so
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/lib64/libnvperf_host_static.a
@@ -439,6 +441,10 @@ drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/samples/cuda_memory_trace/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cuda_memory_trace/Makefile
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cuda_memory_trace/cuda_memory_trace.cpp
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cuda_memory_trace/memory_trace.cu
+drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/samples/cupti_correlation/
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_correlation/Makefile
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_correlation/cupti_correlation.cpp
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_correlation/vec.cu
 drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/samples/cupti_external_correlation/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_external_correlation/Makefile
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_external_correlation/cupti_external_correlation.cpp
@@ -457,6 +463,9 @@ drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/samples/cupti_nvtx/
 drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/samples/cupti_query/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_query/Makefile
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_query/cupti_query.cpp
+drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/samples/cupti_trace_injection/
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_trace_injection/Makefile
+-rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/cupti_trace_injection/cupti_trace_injection.cpp
 drwxr-xr-x	root/root	opt/cuda/extras/CUPTI/samples/event_multi_gpu/
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/event_multi_gpu/Makefile
 -rw-r--r--	root/root	opt/cuda/extras/CUPTI/samples/event_multi_gpu/event_multi_gpu.cu
@@ -540,6 +549,8 @@ drwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/docs/ComputeSanitizer/
 drwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/docs/ComputeSanitizer/graphics/
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/ComputeSanitizer/graphics/no-padding.png
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/ComputeSanitizer/graphics/padding.png
+-rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/ComputeSanitizer/graphics/use-after-free.png
+-rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/ComputeSanitizer/graphics/use-before-alloc.png
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/ComputeSanitizer/index.html
 drwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/docs/CopyrightAndLicenses/
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/CopyrightAndLicenses/index.html
@@ -575,6 +586,7 @@ drwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/notices-header.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__BatchMemopData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__CallbackData.html
+-rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__EventData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__GraphExecData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__GraphNodeLaunchData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__LaunchData.html
@@ -582,6 +594,7 @@ drwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__MemsetData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__ResourceArrayData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__ResourceContextData.html
+-rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__ResourceFunctionData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__ResourceMemoryData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__ResourceMempoolData.html
 -rw-r--r--	root/root	opt/cuda/extras/compute-sanitizer/docs/SanitizerApi/structSanitizer__ResourceModuleData.html
@@ -736,7 +749,7 @@ drwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/x86/
 -rwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/x86/libTreeLauncherPlaceholder.so
 -rwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/x86/libTreeLauncherTargetInjection.so
 -rwxr-xr-x	root/root	opt/cuda/extras/compute-sanitizer/x86/libTreeLauncherTargetUpdatePreloadInjection.so
--rw-r--r--	root/root	opt/cuda/extras/cuda-gdb-11.6.124.src.tar.gz
+-rw-r--r--	root/root	opt/cuda/extras/cuda-gdb-11.7.50.src.tar.gz
 drwxr-xr-x	root/root	opt/cuda/extras/demo_suite/
 -rwxr-xr-x	root/root	opt/cuda/extras/demo_suite/bandwidthTest
 -rwxr-xr-x	root/root	opt/cuda/extras/demo_suite/busGrind
@@ -778,35 +791,35 @@ drwxr-xr-x	root/root	opt/cuda/libnvvp/configuration/org.eclipse.update/
 -rw-r--r--	root/root	opt/cuda/libnvvp/configuration/org.eclipse.update/platform.xml
 -rw-r--r--	root/root	opt/cuda/libnvvp/epl-v10.html
 drwxr-xr-x	root/root	opt/cuda/libnvvp/features/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/META-INF/
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/META-INF/MANIFEST.MF
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/META-INF/maven/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.editor.feature/
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.editor.feature/pom.properties
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.editor.feature/pom.xml
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.6.0.202203090240/feature.xml
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/META-INF/
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/META-INF/MANIFEST.MF
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/META-INF/maven/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.remote.feature/
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.remote.feature/pom.properties
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.remote.feature/pom.xml
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/feature.properties
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/feature.xml
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.6.0.202203090240/license.html
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/META-INF/
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/META-INF/MANIFEST.MF
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/META-INF/maven/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.viper/
-drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.viper/com.nvidia.viper.feature/
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.viper/com.nvidia.viper.feature/pom.properties
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/META-INF/maven/com.nvidia.viper/com.nvidia.viper.feature/pom.xml
--rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.6.0.202203090240/feature.xml
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/META-INF/
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/META-INF/MANIFEST.MF
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/META-INF/maven/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.editor.feature/
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.editor.feature/pom.properties
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.editor.feature/pom.xml
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.editor.feature_11.7.0.202204060229/feature.xml
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/META-INF/
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/META-INF/MANIFEST.MF
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/META-INF/maven/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.remote.feature/
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.remote.feature/pom.properties
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.cuda.ide/com.nvidia.cuda.ide.remote.feature/pom.xml
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/feature.properties
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/feature.xml
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.cuda.ide.remote.feature_11.7.0.202204060229/license.html
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/META-INF/
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/META-INF/MANIFEST.MF
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/META-INF/maven/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.viper/
+drwxr-xr-x	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.viper/com.nvidia.viper.feature/
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.viper/com.nvidia.viper.feature/pom.properties
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/META-INF/maven/com.nvidia.viper/com.nvidia.viper.feature/pom.xml
+-rw-r--r--	root/root	opt/cuda/libnvvp/features/com.nvidia.viper.feature_11.7.0.202204060229/feature.xml
 drwxr-xr-x	root/root	opt/cuda/libnvvp/features/org.eclipse.e4.rcp_1.3.100.v20140909-1633/
 drwxr-xr-x	root/root	opt/cuda/libnvvp/features/org.eclipse.e4.rcp_1.3.100.v20140909-1633/META-INF/
 -rw-r--r--	root/root	opt/cuda/libnvvp/features/org.eclipse.e4.rcp_1.3.100.v20140909-1633/META-INF/ECLIPSE_.RSA
@@ -1019,7 +1032,7 @@ drwxr-xr-x	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/
 drwxr-xr-x	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/cache/
 -rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/cache/artifacts.xml
 drwxr-xr-x	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/cache/binary/
--rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/cache/binary/com.nvidia.viper.application.product.executable.gtk.linux.x86_64_11.6.0.202203090240
+-rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/cache/binary/com.nvidia.viper.application.product.executable.gtk.linux.x86_64_11.7.0.202204060229
 -rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/cache/binary/org.eclipse.platform_root_4.4.0.v20140925-0400
 -rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.core/cache/binary/org.eclipse.rcp_root_4.4.0.v20140925-0400
 drwxr-xr-x	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/
@@ -1030,25 +1043,25 @@ drwxr-xr-x	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRe
 drwxr-xr-x	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/
 drwxr-xr-x	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.data/
 -rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.lock (EMPTY)
--rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1646793670589.profile.gz
--rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1646793670607.profile.gz
--rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1646793671887.profile.gz
--rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1646793672142.profile.gz
+-rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1649212193563.profile.gz
+-rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1649212193587.profile.gz
+-rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1649212195435.profile.gz
+-rw-r--r--	root/root	opt/cuda/libnvvp/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1649212195834.profile.gz
 drwxr-xr-x	root/root	opt/cuda/libnvvp/plugins/
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.ibm.icu_52.1.0.v201404241930.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.jcraft.jsch_0.1.50.v201403120620.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.lowagie.text_2.1.7.v201004222200.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.common_11.6.0.202203090240.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.cuda.ide.editor_11.6.0.202203090240.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.cuda.ide.remote.connection_11.6.0.202203090240.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.help.bpg_11.6.0.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.help.pug_11.6.0.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.pgprof.application_11.6.0.202203090240.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.pgprof.help.pug_11.6.0.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper.application_11.6.0.202203090240.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper.birt_11.6.0.202203090240.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper.help_11.6.0.202203090240.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper_11.6.0.202203090240.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.common_11.7.0.202204060229.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.cuda.ide.editor_11.7.0.202204060229.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.cuda.ide.remote.connection_11.7.0.202204060229.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.help.bpg_11.7.0.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.help.pug_11.7.0.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.pgprof.application_11.7.0.202204060229.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.pgprof.help.pug_11.7.0.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper.application_11.7.0.202204060229.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper.birt_11.7.0.202204060229.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper.help_11.7.0.202204060229.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.nvidia.viper_11.7.0.202204060229.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/com.sun.el_2.2.0.v201303151357.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/javax.annotation_1.2.0.v201401042248.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/javax.el_2.2.0.v201303151357.jar
@@ -1317,7 +1330,7 @@ drwxr-xr-x	root/root	opt/cuda/libnvvp/plugins/org.eclipse.equinox.launcher.gtk.l
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.jsch.ui_1.1.500.v20131112-1442.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.ltk.core.refactoring_3.6.101.v20140817-1500.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.ltk.ui.refactoring_3.7.100.v20140324-1358.jar
--rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.nebula.widgets.pshelf_1.0.0.202203090240.jar
+-rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.nebula.widgets.pshelf_1.0.0.202204060229.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.osgi.services_3.4.0.v20140312-2051.jar
 -rw-r--r--	root/root	opt/cuda/libnvvp/plugins/org.eclipse.osgi.util_3.3.0.v20131023-1243.jar
@@ -2007,6 +2020,12 @@ drwxr-xr-x	root/root	opt/cuda/nsight_compute/docs/NsightCompute/
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/add-remote-connection-private-key.png
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/add-remote-connection.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/as-viewer-cam.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/as-viewer-display-filter.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/as-viewer-open-button.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/as-viewer-property-filter.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/as-viewer-rendering-options.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/as-viewer.png
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/baselines-multiple.png
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/baselines.png
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NsightCompute/graphics/connection-dialog.png
@@ -2103,6 +2122,10 @@ drwxr-xr-x	root/root	opt/cuda/nsight_compute/docs/NvRulesAPI/
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/NvRulesAPI/tabs.css
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/hw-model-l1tex-ga100-global.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/hw-model-l1tex.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/hw-model-lts-ga100.png
+-rw-r--r--	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/hw-model-lts.png
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/memory-chart-a100.png
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/memory-peak-mapping.png
 -rw-r--r--	root/root	opt/cuda/nsight_compute/docs/ProfilingGuide/graphics/memory-tables-dram.png
@@ -2282,13 +2305,13 @@ drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/SassDebuggerPlugin/
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/SassDebuggerPlugin/libSassDebuggerPlugin.so
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqgif.so
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqico.so
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqjpeg.so
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqsvg.so
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqtga.so
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqtiff.so
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqwbmp.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqgif.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqico.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqjpeg.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqsvg.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqtga.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqtiff.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/imageformats/libqwbmp.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/libArmServerPlatformPlugin.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/libExternalIntegrationPlugin.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/libLinuxPPCPlatformPlugin.so
@@ -2297,40 +2320,45 @@ drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/libTPSSystemServerPlugin.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/libWindowsPlatformPlugin.so
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/platforms/
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/platforms/libqxcb.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/platforms/libqxcb.so
+drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/tls/
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/tls/libqcertonlybackend.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/tls/libqopensslbackend.so
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/xcbglintegrations/
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/xcbglintegrations/libqxcb-glx-integration.so
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/Plugins/xcbglintegrations/libqxcb-glx-integration.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libAppLib.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libAppLibInterfaces.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libNvQtGui.so
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Charts.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Concurrent.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Core.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5DBus.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Gui.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Network.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5OpenGL.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5PrintSupport.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Qml.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Sql.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Svg.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Widgets.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5XcbQpa.so.5
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt5Xml.so.5
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Charts.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Concurrent.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Core.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6DBus.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Gui.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Network.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6OpenGL.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6OpenGLWidgets.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6PrintSupport.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Qml.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Sql.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Svg.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Widgets.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6XcbQpa.so.6
+-rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQt6Xml.so.6
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libQtPropertyBrowser.so
 lrwxrwxrwx	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libcrypto.so -> libcrypto.so.1.1
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libcrypto.so.1.1
 drwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libexec/
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libexec/QtWebEngineProcess
--rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libexec/qt.conf
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libicudata.so.56
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libicui18n.so.56
--rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libicuuc.so.56
+-rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libicudata.so.70
+-rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libicui18n.so.70
+-rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libicuuc.so.70
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libnvlog.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libnvperf_host.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libssh.so
 lrwxrwxrwx	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libssl.so -> libssl.so.1.1
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libssl.so.1.1
+-rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libstdc++.so.6
+-rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/libzstd.so.1
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/ncu-ui
 -rwxr-xr-x	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.bin
 -rw-r--r--	root/root	opt/cuda/nsight_compute/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.png
@@ -2538,6 +2566,9 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/
 -rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/memory_allocation_graph1.png
 -rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/memory_allocation_graph2.png
 -rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/memory_utilization.png
+-rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/mpi-comparam1.png
+-rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/mpi-comparam2.png
+-rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/mpi-comparam3.png
 -rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/mpi-project.png
 -rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/mpi-trace.png
 -rw-r--r--	root/root	opt/cuda/nsight_systems/documentation/UserGuide/graphics/network-connection.png
@@ -2763,6 +2794,22 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Plugins/xcbglintegra
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Plugins/xcbglintegrations/libqxcb-glx-integration.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/QdstrmImporter
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/ResolveSymbols
+drwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/
+drwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/CentOS/
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/CentOS/dependency_resolver
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/CentOS/install-dependencies.sh
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/CentOS/non-root-dependencies-installer-centos.sh
+-rw-r--r--	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/CentOS/packages.list
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/CentOS/rpm_extract
+drwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/Ubuntu/
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/Ubuntu/install-dependencies.sh
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/Ubuntu/non-root-dependencies-installer-ubuntu.sh
+-rw-r--r--	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/Ubuntu/packages.list
+-rw-r--r--	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/Ubuntu/packages_18.04.list
+-rw-r--r--	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/Ubuntu/packages_20.04.list
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/install-dependencies-without-root.sh
+-rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/install-dependencies.sh
+-rw-r--r--	root/root	opt/cuda/nsight_systems/host-linux-x64/Scripts/setup-dependencies-environment.sh
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/libAgentAPI.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/libAnalysis.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/libAnalysisData.so
@@ -2890,7 +2937,9 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/apigpusum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/cudaapisum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/cudaapitrace.py
+-r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/dx11pixsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/dx12gpumarkersum.py
+-r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/dx12pixsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/gpukernsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/gpumemsizesum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/gpumemtimesum.py
@@ -2910,7 +2959,6 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/openaccsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/openmpevtsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/osrtsum.py
--r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/pixsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/umcpupagefaults.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/unifiedmemory.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/reports/unifiedmemorytotals.py
@@ -2928,6 +2976,7 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/rules/
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/rules/cuda-sync-api.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/rules/cuda-sync-memcpy.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/rules/cuda-sync-memset.py
+-r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/rules/dx12-mem-op.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/rules/gpu-low-util.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/rules/gpu-starv.py
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/host-linux-x64/sqlite3
@@ -3047,6 +3096,7 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/NvTraceFormat/
 -r--r--r--	root/root	opt/cuda/nsight_systems/target-linux-x64/libcupti.so.11.4
 -r--r--r--	root/root	opt/cuda/nsight_systems/target-linux-x64/libcupti.so.11.5
 -r--r--r--	root/root	opt/cuda/nsight_systems/target-linux-x64/libcupti.so.11.6
+-r--r--r--	root/root	opt/cuda/nsight_systems/target-linux-x64/libcupti.so.11.7
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/libnvlog.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/libnvperf_host.so
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/nsys
@@ -3086,7 +3136,9 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/apigpusum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/cudaapisum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/cudaapitrace.py
+-r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/dx11pixsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/dx12gpumarkersum.py
+-r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/dx12pixsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/gpukernsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/gpumemsizesum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/gpumemtimesum.py
@@ -3106,7 +3158,6 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/openaccsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/openmpevtsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/osrtsum.py
--r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/pixsum.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/umcpupagefaults.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/unifiedmemory.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/reports/unifiedmemorytotals.py
@@ -3118,6 +3169,7 @@ drwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/rules/
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/rules/cuda-sync-api.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/rules/cuda-sync-memcpy.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/rules/cuda-sync-memset.py
+-r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/rules/dx12-mem-op.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/rules/gpu-low-util.py
 -r-xr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/rules/gpu-starv.py
 -rwxr-xr-x	root/root	opt/cuda/nsight_systems/target-linux-x64/sqlite3
@@ -3166,9 +3218,6 @@ drwxr-xr-x	root/root	opt/cuda/nvvm/libnvvm-samples/simple/
 -rw-r--r--	root/root	opt/cuda/nvvm/libnvvm-samples/simple/simple-gpu.ll
 -rw-r--r--	root/root	opt/cuda/nvvm/libnvvm-samples/simple/simple-gpu64.ll
 -rw-r--r--	root/root	opt/cuda/nvvm/libnvvm-samples/simple/simple.c
-drwxr-xr-x	root/root	opt/cuda/samples/
--rwxr-xr-x	root/root	opt/cuda/samples/README_CUDA_Samples.txt
-drwxr-xr-x	root/root	opt/cuda/samples/bin/
 drwxr-xr-x	root/root	opt/cuda/share/
 drwxr-xr-x	root/root	opt/cuda/share/gdb/
 drwxr-xr-x	root/root	opt/cuda/share/gdb/python/
@@ -3262,6 +3311,7 @@ drwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/include/cooperative_groups/de
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cooperative_groups/scan.h
 drwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/include/crt/
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/crt/common_functions.h
+-rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/crt/cudacc_ext.h
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/crt/device_double_functions.h
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/crt/device_double_functions.hpp
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/crt/device_functions.h
@@ -3423,8 +3473,10 @@ drwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/include/cuda/
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/pipeline
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/semaphore
 drwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/
+-rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/array
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/atomic
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/barrier
+-rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/bit
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/cassert
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/ccomplex
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/cfloat
@@ -3648,6 +3700,8 @@ drwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/detail/libcx
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/detail/libcxx/include/wchar.h
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/detail/libcxx/include/wctype.h
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/functional
+-rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/initializer_list
+-rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/iterator
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/latch
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/limits
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/include/cuda/std/ratio
@@ -4679,116 +4733,116 @@ lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libOpenCL.so -> libOpenCL
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libOpenCL.so.1 -> libOpenCL.so.1.0
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libOpenCL.so.1.0 -> libOpenCL.so.1.0.0
 -rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libOpenCL.so.1.0.0
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libaccinj64.so -> libaccinj64.so.11.6
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libaccinj64.so.11.6 -> libaccinj64.so.11.6.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libaccinj64.so.11.6.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libaccinj64.so -> libaccinj64.so.11.7
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libaccinj64.so.11.7 -> libaccinj64.so.11.7.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libaccinj64.so.11.7.50
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcublas.so -> libcublas.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcublas.so.11 -> ./libcublas.so.11.9.2.110
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcublas.so.11.9.2.110
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcublas.so.11 -> ./libcublas.so.11.10.1.25
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcublas.so.11.10.1.25
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcublasLt.so -> libcublasLt.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcublasLt.so.11 -> ./libcublasLt.so.11.9.2.110
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcublasLt.so.11.9.2.110
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcublasLt.so.11 -> ./libcublasLt.so.11.10.1.25
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcublasLt.so.11.10.1.25
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcublasLt_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcublas_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcudadevrt.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcudart.so -> libcudart.so.11.0
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcudart.so.11.0 -> libcudart.so.11.6.55
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcudart.so.11.6.55
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcudart.so.11.0 -> libcudart.so.11.7.60
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcudart.so.11.7.60
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcudart_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcufft.so -> libcufft.so.10
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcufft.so.10 -> libcufft.so.10.7.2.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcufft.so.10.7.2.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcufft.so.10 -> libcufft.so.10.7.2.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcufft.so.10.7.2.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcufft_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcufft_static_nocallback.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcufftw.so -> libcufftw.so.10
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcufftw.so.10 -> libcufftw.so.10.7.2.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcufftw.so.10.7.2.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcufftw.so.10 -> libcufftw.so.10.7.2.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcufftw.so.10.7.2.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcufftw_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcufilt.a
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcuinj64.so -> libcuinj64.so.11.6
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcuinj64.so.11.6 -> libcuinj64.so.11.6.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcuinj64.so.11.6.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcuinj64.so -> libcuinj64.so.11.7
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcuinj64.so.11.7 -> libcuinj64.so.11.7.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcuinj64.so.11.7.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libculibos.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcurand.so -> libcurand.so.10
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcurand.so.10 -> libcurand.so.10.2.9.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcurand.so.10.2.9.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcurand.so.10 -> libcurand.so.10.2.10.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcurand.so.10.2.10.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcurand_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolver.so -> libcusolver.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolver.so.11 -> libcusolver.so.11.3.4.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolver.so.11.3.4.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolver.so.11 -> libcusolver.so.11.3.5.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolver.so.11.3.5.50
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolverMg.so -> libcusolverMg.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolverMg.so.11 -> libcusolverMg.so.11.3.4.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolverMg.so.11.3.4.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolverMg.so.11 -> libcusolverMg.so.11.3.5.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolverMg.so.11.3.5.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolver_lapack_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcusolver_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusparse.so -> libcusparse.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusparse.so.11 -> libcusparse.so.11.7.2.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcusparse.so.11.7.2.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libcusparse.so.11 -> libcusparse.so.11.7.3.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libcusparse.so.11.7.3.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libcusparse_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/liblapack_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libmetis_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppc.so -> libnppc.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppc.so.11 -> libnppc.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppc.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppc.so.11 -> libnppc.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppc.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppc_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppial.so -> libnppial.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppial.so.11 -> libnppial.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppial.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppial.so.11 -> libnppial.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppial.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppial_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppicc.so -> libnppicc.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppicc.so.11 -> libnppicc.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppicc.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppicc.so.11 -> libnppicc.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppicc.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppicc_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppidei.so -> libnppidei.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppidei.so.11 -> libnppidei.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppidei.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppidei.so.11 -> libnppidei.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppidei.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppidei_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppif.so -> libnppif.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppif.so.11 -> libnppif.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppif.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppif.so.11 -> libnppif.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppif.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppif_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppig.so -> libnppig.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppig.so.11 -> libnppig.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppig.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppig.so.11 -> libnppig.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppig.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppig_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppim.so -> libnppim.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppim.so.11 -> libnppim.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppim.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppim.so.11 -> libnppim.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppim.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppim_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppist.so -> libnppist.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppist.so.11 -> libnppist.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppist.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppist.so.11 -> libnppist.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppist.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppist_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppisu.so -> libnppisu.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppisu.so.11 -> libnppisu.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppisu.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppisu.so.11 -> libnppisu.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppisu.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppisu_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppitc.so -> libnppitc.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppitc.so.11 -> libnppitc.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppitc.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnppitc.so.11 -> libnppitc.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnppitc.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnppitc_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnpps.so -> libnpps.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnpps.so.11 -> libnpps.so.11.6.3.9
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnpps.so.11.6.3.9
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnpps.so.11 -> libnpps.so.11.7.3.21
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnpps.so.11.7.3.21
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnpps_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvToolsExt.so -> libnvToolsExt.so.1
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvToolsExt.so.1 -> libnvToolsExt.so.1.0.0
 -rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvToolsExt.so.1.0.0
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvblas.so -> libnvblas.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvblas.so.11 -> ./libnvblas.so.11.9.2.110
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvblas.so.11.9.2.110
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvblas.so.11 -> ./libnvblas.so.11.10.1.25
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvblas.so.11.10.1.25
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvjpeg.so -> libnvjpeg.so.11
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvjpeg.so.11 -> libnvjpeg.so.11.6.2.8
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvjpeg.so.11.6.2.8
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvjpeg.so.11 -> libnvjpeg.so.11.7.2.34
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvjpeg.so.11.7.2.34
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnvjpeg_static.a
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnvptxcompiler_static.a
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc-builtins.so -> libnvrtc-builtins.so.11.6
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc-builtins.so.11.6 -> libnvrtc-builtins.so.11.6.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc-builtins.so.11.6.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc-builtins.so -> libnvrtc-builtins.so.11.7
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc-builtins.so.11.7 -> libnvrtc-builtins.so.11.7.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc-builtins.so.11.7.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc-builtins_static.a
 lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc.so -> libnvrtc.so.11.2
-lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc.so.11.2 -> libnvrtc.so.11.6.124
--rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc.so.11.6.124
+lrwxrwxrwx	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc.so.11.2 -> libnvrtc.so.11.7.50
+-rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc.so.11.7.50
 -rw-r--r--	root/root	opt/cuda/targets/x86_64-linux/lib/libnvrtc_static.a
 drwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/stubs/
 -rwxr-xr-x	root/root	opt/cuda/targets/x86_64-linux/lib/stubs/libcublas.so
