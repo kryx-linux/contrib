@@ -1,20 +1,17 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 brotli cbindgen dbus-glib ffmpeg4 libevent libidl libnotify libvpx libwebp libxkbcommon lld nodejs nss unzip wasi-libc++ xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
+# Depends on: alsa-lib autoconf-2.13 brotli cbindgen dbus-glib ffmpeg4 libevent libnotify libvpx libwebp libxkbcommon lld nodejs nss unzip wasi-libc++ xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
 # Optional: sccache jack
 
 name=firefox
-version=102.0
+version=104.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
-	firefox.desktop
-	fix-ftbfs-newer-cbindgen.patch)
+	firefox.desktop)
 
 build() {
 	cd $name-$version
-
-	patch -p1 -i $SRC/fix-ftbfs-newer-cbindgen.patch
 
 	if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
 		printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
