@@ -1,10 +1,10 @@
 # Description: The analytics platform for all your metrics
 # URL: https://grafana.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fontconfig go
+# Depends on: fontconfig go yarn
 
 name=grafana
-version=9.1.1
+version=9.1.2
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
@@ -27,19 +27,22 @@ build() {
   sed -ri 's,^(\s*provisioning\s*=).*,\1 /var/lib/grafana/conf/provisioning,' conf/defaults.ini
   sed -ri 's,^(\s*logs\s*=).*,\1 /var/log/grafana,' conf/defaults.ini
 
-  go get -u gonum.org/v1/gonum@v0.11.0
-  GOBIN="$(pwd)" go install github.com/google/wire/cmd/wire@v0.5.0
-  ./wire gen -tags oss ./pkg/server ./pkg/cmd/grafana-cli/runner
-  local ldflags="-X main.version=$pkgver -X main.commit=$_commit -X main.buildstamp=$_stamp"
-  go build -ldflags "$ldflags" -v ./pkg/cmd/grafana-server
-  go build -ldflags "$ldflags" -v ./pkg/cmd/grafana-cli
+  make gen-go
+  go run build.go setup
+  go run build.go build
+  export NPM_CONFIG_PREFIX="$srcdir/npm"
+  export PATH+=":$NPM_CONFIG_PREFIX/bin"
+  export NODE_OPTIONS="--max-old-space-size=16000" # Increase to 8 GB
+  yarn install
+  NODE_ENV=production yarn run build
 
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name
-  install -Dsm755 grafana-server $PKG/usr/bin/grafana-server
-  install -Dsm755 grafana-cli $PKG/usr/bin/grafana-cli
+  install -Dsm755 bin/linux-amd64/grafana-server $PKG/usr/bin/grafana-server
+  install -Dsm755 bin/linux-amd64/grafana-cli $PKG/usr/bin/grafana-cli
   install -Dm644 conf/sample.ini $PKG/etc/grafana.ini
-  install -dm755 $PKG/usr/share/grafana
-  cp -r conf public $PKG/usr/share/$name/
+  install -Dm644 conf/defaults.ini $PKG/usr/share/$name/conf/defaults.ini
+  install -dm755 $PKG/usr/share/$name
+  cp -r public $PKG/usr/share/$name/
 
   ## install rc file
   install -Dm 755 $SRC/grafana.service $PKG/etc/rc.d/grafana
