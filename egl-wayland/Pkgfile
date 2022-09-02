@@ -4,7 +4,7 @@
 # Depends on: eglexternalplatform mesa wayland-protocols
 
 name=egl-wayland
-version=1.1.10
+version=1.1.11
 release=1
 source=(https://github.com/NVIDIA/egl-wayland/archive/$version/$name-$version.tar.gz
   glvnd.diff)
@@ -16,7 +16,7 @@ build() {
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
-    -D b_lto=true \
+    -D b_lto=false \
     -D b_pie=true
   meson compile -C build
   DESTDIR=$PKG meson install -C build
