@@ -18,12 +18,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.9/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.65.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.65.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.65.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.65.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.65.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.65.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.66.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.66.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.66.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.66.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.66.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/matrix_synapse-1.66.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/__pycache__/
@@ -634,6 +634,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/__pycache__/__init__.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/__pycache__/health.cpython-39.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/__pycache__/models.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/__pycache__/well_known.cpython-39.opt-2.pyc
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/admin/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/admin/__init__.py
@@ -682,6 +683,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycac
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycache__/knock.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycache__/login.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycache__/logout.cpython-39.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycache__/models.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycache__/mutual_rooms.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycache__/notifications.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycache__/openid.cpython-39.opt-2.pyc
@@ -723,6 +725,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/__pycac
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/knock.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/login.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/logout.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/models.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/mutual_rooms.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/notifications.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/client/openid.py
@@ -802,6 +805,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/media/v1/__pyc
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/media/v1/thumbnail_resource.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/media/v1/thumbnailer.py
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/media/v1/upload_resource.py
+-rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/models.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/
 -rw-r--r--	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/site-packages/synapse/rest/synapse/__pycache__/
