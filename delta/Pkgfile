@@ -4,19 +4,17 @@
 # Depends on: rust
 
 name=delta
-version=0.13.0
+version=0.14.0
 release=1
 source=(https://github.com/dandavison/delta/archive/$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-  mkdir "$PKGMK_SOURCE_DIR/rust" || true
-  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
-  cargo update --manifest-path $name-$version/Cargo.toml
-  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
+  cargo build --release --manifest-path $name-$version/Cargo.toml
 
-  # install auto-completion files if the ports for it are installed
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
 
   prt-get isinst zsh &&
     install -Dm644 $name-$version/etc/completion/completion.zsh \
