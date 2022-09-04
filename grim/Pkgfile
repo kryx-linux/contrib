@@ -6,11 +6,14 @@
 
 name=grim
 version=1.4.0
-release=1
-source=(https://github.com/emersion/grim/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/emersion/grim/archive/v$version/$name-$version.tar.gz
+  89e02e663fabc534b7e7039514f60a8c5d70070d.patch)
 
 build() {
   prt-get isinst bash-completion && PKGMK_GRIM+=' -D bash-completions=true'
+
+  patch -Np1 -d $name-$version -i $SRC/89e02e663fabc534b7e7039514f60a8c5d70070d.patch
 
   meson setup $name-$version build $PKGMK_GRIM \
     --prefix=/usr \
