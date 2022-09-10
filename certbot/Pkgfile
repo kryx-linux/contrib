@@ -4,14 +4,14 @@
 # Depends on: python3-acme python3-configargparse python3-configobj python3-distro python3-parsedatetime python3-zope-component
 
 name=certbot
-version=1.29.0
+version=1.30.0
 release=1
 source=(https://pypi.io/packages/source/c/certbot/certbot-$version.tar.gz)
 
 build() {
   cd $name-$version
   /usr/bin/python3 -m build --wheel --no-isolation
-  /usr/bin/python3 -m install --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 
   mkdir -p $PKG/{etc,var/lib,var/log}/letsencrypt
   chmod 700 $PKG/var/log/letsencrypt
