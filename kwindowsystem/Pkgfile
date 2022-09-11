@@ -1,20 +1,24 @@
 # Description: KDE Framework - kwindowsystem
-# URL:         https://api.kde.org/frameworks/kwindowsystem/html/index.html
-# Maintainer:  Stamatin Cristina, dear dot volgk at gmail dot com
-# Depends on:  extra-cmake-modules qt5
+# URL: https://api.kde.org/frameworks/kwindowsystem/html/index.html
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: extra-cmake-modules qt5
 
 name=kwindowsystem
-version=5.97.0
+version=5.98.0
 release=1
 source=(https://download.kde.org/stable/frameworks/${version:0:4}/$name-$version.tar.xz)
 
 build() {
-	rm -r $name-$version/po/*
+  rm -r $name-$version/po/*
 
-	cmake -S$name-$version -Bbuild \
-		-DCMAKE_INSTALL_PREFIX=/usr
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -Wno-dev
 
-	cmake --build build -v
-
-	DESTDIR=$PKG cmake --install build
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }
