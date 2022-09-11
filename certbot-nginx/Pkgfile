@@ -4,12 +4,12 @@
 # Depends on: certbot python3-mock
 
 name=certbot-nginx
-version=1.29.0
+version=1.30.0
 release=1
 source=(https://pypi.io/packages/source/c/certbot-nginx/certbot-nginx-$version.tar.gz)
 
 build() {
   cd $name-$version
   /usr/bin/python3 -m build --wheel --no-isolation
-  /usr/bin/python3 -m install --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
