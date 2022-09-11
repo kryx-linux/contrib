@@ -1,17 +1,27 @@
 # Description: Open Broadcaster Software Studio
 # URL: https://obsproject.com/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: fdk-aac ffmpeg jansson libgmp mbedtls pulseaudio qt5 x264
-# Optional: ffnvcodec-headers jack-audio-connection-kit libva luajit pipewire pulseaudio speexdsp vlc wayland-protocols x265
+# Depends on: fdk-aac ffmpeg jansson libgmp mbedtls qt5 speexdsp swig x264
+# Optional: ffnvcodec-headers jack-audio-connection-kit libva lua luajit pipewire pulseaudio speexdsp v4l-utils vlc vlc wayland-protocols x265
 
 name=obs-studio
-version=27.2.4
+version=28.0.1
 release=1
-source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz
+	disable-some-plugins.patch)
 
 build() {
-	prt-get isinst wayland-protocols && PKGMK_OBS+=' -D ENABLE_WAYLAND=ON' || PKGMK_OBS+=' -D ENABLE_WAYLAND=OFF'
+	prt-get isinst lua || PKGMK_OBS+=' -D ENABLE_SCRIPTING_LUA=OFF'
 	prt-get isinst pipewire || PKGMK_OBS+=' -D ENABLE_PIPEWIRE=OFF'
+	prt-get isinst pulseaudio || PKGMK_OBS+=' -D ENABLE_PULSEAUDIO=OFF'
+	prt-get isinst v4l-utils || PKGMK_OBS+=' -D ENABLE_V4L2=OFF'
+	prt-get isinst vlc || PKGMK_OBS+=' -D ENABLE_VLC=OFF'
+	prt-get isinst wayland-protocols && PKGMK_OBS+=' -D ENABLE_WAYLAND=ON' || PKGMK_OBS+=' -D ENABLE_WAYLAND=OFF'
+
+	prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: \
+		-v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+
+	patch -Np1 -d $name-$version -i $SRC/disable-some-plugins.patch
 
 	export QT_QPA_PLATFORMTHEME="qt5ct"
 	cmake -S $name-$version -B build -G Ninja $PKGMK_OBS \
@@ -24,6 +34,9 @@ build() {
 		-D UNIX_STRUCTURE=ON \
 		-D BUILD_VST=OFF \
 		-D BUILD_BROWSER=OFF \
+		-D ENABLE_DECKLINK=OFF \
+		-D ENABLE_NEW_MPEGTS_OUTPUT=OFF \
+		-D LIBOBS_PREFER_IMAGEMAGICK=OFF \
 		-Wno-dev
 
 	cmake --build build

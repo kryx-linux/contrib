@@ -4,9 +4,6 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/obs-ffmpeg-mux
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/obs/
-drwxr-xr-x	root/root	usr/include/obs/audio-monitoring/
-drwxr-xr-x	root/root	usr/include/obs/audio-monitoring/pulse/
--rw-r--r--	root/root	usr/include/obs/audio-monitoring/pulse/pulseaudio-wrapper.h
 drwxr-xr-x	root/root	usr/include/obs/callback/
 -rw-r--r--	root/root	usr/include/obs/callback/calldata.h
 -rw-r--r--	root/root	usr/include/obs/callback/decl.h
@@ -14,6 +11,7 @@ drwxr-xr-x	root/root	usr/include/obs/callback/
 -rw-r--r--	root/root	usr/include/obs/callback/signal.h
 drwxr-xr-x	root/root	usr/include/obs/graphics/
 -rw-r--r--	root/root	usr/include/obs/graphics/axisang.h
+-rw-r--r--	root/root	usr/include/obs/graphics/basemath.hpp
 -rw-r--r--	root/root	usr/include/obs/graphics/bounds.h
 -rw-r--r--	root/root	usr/include/obs/graphics/device-exports.h
 -rw-r--r--	root/root	usr/include/obs/graphics/effect-parser.h
@@ -55,13 +53,18 @@ drwxr-xr-x	root/root	usr/include/obs/media-io/
 -rw-r--r--	root/root	usr/include/obs/obs-encoder.h
 -rw-r--r--	root/root	usr/include/obs/obs-ffmpeg-compat.h
 -rw-r--r--	root/root	usr/include/obs/obs-frontend-api.h
+-rw-r--r--	root/root	usr/include/obs/obs-hevc.h
 -rw-r--r--	root/root	usr/include/obs/obs-hotkey.h
 -rw-r--r--	root/root	usr/include/obs/obs-hotkeys.h
 -rw-r--r--	root/root	usr/include/obs/obs-interaction.h
 -rw-r--r--	root/root	usr/include/obs/obs-internal.h
 -rw-r--r--	root/root	usr/include/obs/obs-missing-files.h
 -rw-r--r--	root/root	usr/include/obs/obs-module.h
+-rw-r--r--	root/root	usr/include/obs/obs-nal.h
 -rw-r--r--	root/root	usr/include/obs/obs-nix-platform.h
+-rw-r--r--	root/root	usr/include/obs/obs-nix-wayland.h
+-rw-r--r--	root/root	usr/include/obs/obs-nix-x11.h
+-rw-r--r--	root/root	usr/include/obs/obs-nix.h
 -rw-r--r--	root/root	usr/include/obs/obs-output.h
 -rw-r--r--	root/root	usr/include/obs/obs-properties.h
 -rw-r--r--	root/root	usr/include/obs/obs-scene.h
@@ -72,6 +75,7 @@ drwxr-xr-x	root/root	usr/include/obs/media-io/
 -rw-r--r--	root/root	usr/include/obs/obs.hpp
 -rw-r--r--	root/root	usr/include/obs/obsconfig.h
 drwxr-xr-x	root/root	usr/include/obs/util/
+-rw-r--r--	root/root	usr/include/obs/util/AlignedNew.hpp
 -rw-r--r--	root/root	usr/include/obs/util/array-serializer.h
 -rw-r--r--	root/root	usr/include/obs/util/base.h
 -rw-r--r--	root/root	usr/include/obs/util/bitstream.h
@@ -86,6 +90,7 @@ drwxr-xr-x	root/root	usr/include/obs/util/curl/
 -rw-r--r--	root/root	usr/include/obs/util/curl/curl-helper.h
 -rw-r--r--	root/root	usr/include/obs/util/darray.h
 -rw-r--r--	root/root	usr/include/obs/util/dstr.h
+-rw-r--r--	root/root	usr/include/obs/util/dstr.hpp
 -rw-r--r--	root/root	usr/include/obs/util/file-serializer.h
 -rw-r--r--	root/root	usr/include/obs/util/lexer.h
 -rw-r--r--	root/root	usr/include/obs/util/pipe.h
@@ -120,38 +125,46 @@ drwxr-xr-x	root/root	usr/include/obs/util/simde/x86/
 -rw-r--r--	root/root	usr/include/obs/util/util_uint64.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/cmake/
-drwxr-xr-x	root/root	usr/lib/cmake/LibObs/
--rw-r--r--	root/root	usr/lib/cmake/LibObs/LibObsConfig.cmake
--rw-r--r--	root/root	usr/lib/cmake/LibObs/LibObsConfigVersion.cmake
--rw-r--r--	root/root	usr/lib/cmake/LibObs/LibObsTarget-release.cmake
--rw-r--r--	root/root	usr/lib/cmake/LibObs/LibObsTarget.cmake
+drwxr-xr-x	root/root	usr/lib/cmake/libobs/
+-rw-r--r--	root/root	usr/lib/cmake/libobs/libobsConfig.cmake
+-rw-r--r--	root/root	usr/lib/cmake/libobs/libobsConfigVersion.cmake
+-rw-r--r--	root/root	usr/lib/cmake/libobs/libobsTargets-release.cmake
+-rw-r--r--	root/root	usr/lib/cmake/libobs/libobsTargets.cmake
+drwxr-xr-x	root/root	usr/lib/cmake/obs-frontend-api/
+-rw-r--r--	root/root	usr/lib/cmake/obs-frontend-api/obs-frontend-apiConfig.cmake
+-rw-r--r--	root/root	usr/lib/cmake/obs-frontend-api/obs-frontend-apiConfigVersion.cmake
+-rw-r--r--	root/root	usr/lib/cmake/obs-frontend-api/obs-frontend-apiTargets-release.cmake
+-rw-r--r--	root/root	usr/lib/cmake/obs-frontend-api/obs-frontend-apiTargets.cmake
 lrwxrwxrwx	root/root	usr/lib/libobs-frontend-api.so -> libobs-frontend-api.so.0
-lrwxrwxrwx	root/root	usr/lib/libobs-frontend-api.so.0 -> libobs-frontend-api.so.0.0
--rwxr-xr-x	root/root	usr/lib/libobs-frontend-api.so.0.0
-lrwxrwxrwx	root/root	usr/lib/libobs-opengl.so -> libobs-opengl.so.0
-lrwxrwxrwx	root/root	usr/lib/libobs-opengl.so.0 -> libobs-opengl.so.0.0
--rwxr-xr-x	root/root	usr/lib/libobs-opengl.so.0.0
+lrwxrwxrwx	root/root	usr/lib/libobs-frontend-api.so.0 -> libobs-frontend-api.so.28
+-rwxr-xr-x	root/root	usr/lib/libobs-frontend-api.so.28
+lrwxrwxrwx	root/root	usr/lib/libobs-opengl.so -> libobs-opengl.so.1
+lrwxrwxrwx	root/root	usr/lib/libobs-opengl.so.1 -> libobs-opengl.so.28
+-rwxr-xr-x	root/root	usr/lib/libobs-opengl.so.28
+lrwxrwxrwx	root/root	usr/lib/libobs-scripting.so -> libobs-scripting.so.1
+lrwxrwxrwx	root/root	usr/lib/libobs-scripting.so.1 -> libobs-scripting.so.28
+-rwxr-xr-x	root/root	usr/lib/libobs-scripting.so.28
 lrwxrwxrwx	root/root	usr/lib/libobs.so -> libobs.so.0
--rwxr-xr-x	root/root	usr/lib/libobs.so.0
-lrwxrwxrwx	root/root	usr/lib/libobsglad.so -> libobsglad.so.0
--rwxr-xr-x	root/root	usr/lib/libobsglad.so.0
+lrwxrwxrwx	root/root	usr/lib/libobs.so.0 -> libobs.so.28
+-rwxr-xr-x	root/root	usr/lib/libobs.so.28
+lrwxrwxrwx	root/root	usr/lib/libobsglad.so -> libobsglad.so.1
+lrwxrwxrwx	root/root	usr/lib/libobsglad.so.1 -> libobsglad.so.28
+-rwxr-xr-x	root/root	usr/lib/libobsglad.so.28
 drwxr-xr-x	root/root	usr/lib/obs-plugins/
--rwxr-xr-x	root/root	usr/lib/obs-plugins/decklink-captions.so
--rwxr-xr-x	root/root	usr/lib/obs-plugins/decklink-ouput-ui.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/frontend-tools.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/image-source.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/linux-alsa.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/linux-capture.so
--rwxr-xr-x	root/root	usr/lib/obs-plugins/linux-decklink.so
--rwxr-xr-x	root/root	usr/lib/obs-plugins/linux-pulseaudio.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/obs-ffmpeg.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/obs-filters.so
--rwxr-xr-x	root/root	usr/lib/obs-plugins/obs-libfdk.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/obs-outputs.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/obs-transitions.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/obs-x264.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/rtmp-services.so
 -rwxr-xr-x	root/root	usr/lib/obs-plugins/text-freetype2.so
+drwxr-xr-x	root/root	usr/lib/obs-scripting/
+-rw-r--r--	root/root	usr/lib/obs-scripting/obspython.py
+-rwxr-xr-x	root/root	usr/lib/obs-scripting/obspython.so
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libobs.pc
 drwxr-xr-x	root/root	usr/share/
@@ -178,6 +191,7 @@ drwxr-xr-x	root/root	usr/share/obs/libobs/
 -rw-rw-r--	root/root	usr/share/obs/libobs/area.effect
 -rw-rw-r--	root/root	usr/share/obs/libobs/bicubic_scale.effect
 -rw-rw-r--	root/root	usr/share/obs/libobs/bilinear_lowres_scale.effect
+-rw-rw-r--	root/root	usr/share/obs/libobs/color.effect
 -rw-rw-r--	root/root	usr/share/obs/libobs/default.effect
 -rw-rw-r--	root/root	usr/share/obs/libobs/default_rect.effect
 -rw-rw-r--	root/root	usr/share/obs/libobs/deinterlace_base.effect
@@ -196,10 +210,6 @@ drwxr-xr-x	root/root	usr/share/obs/libobs/
 -rw-rw-r--	root/root	usr/share/obs/libobs/repeat.effect
 -rw-rw-r--	root/root	usr/share/obs/libobs/solid.effect
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/decklink-captions/
--rw-rw-r--	root/root	usr/share/obs/obs-plugins/decklink-captions/.keepme (EMPTY)
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/decklink-ouput-ui/
--rw-rw-r--	root/root	usr/share/obs/obs-plugins/decklink-ouput-ui/.keepme (EMPTY)
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/frontend-tools/
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/frontend-tools/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/frontend-tools/locale/en-US.ini
@@ -224,13 +234,6 @@ drwxr-xr-x	root/root	usr/share/obs/obs-plugins/linux-alsa/locale/
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/linux-capture/
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/linux-capture/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/linux-capture/locale/en-US.ini
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/linux-decklink/
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/linux-decklink/locale/
--rw-rw-r--	root/root	usr/share/obs/obs-plugins/linux-decklink/locale/en-GB.ini
--rw-rw-r--	root/root	usr/share/obs/obs-plugins/linux-decklink/locale/en-US.ini
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/linux-pulseaudio/
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/linux-pulseaudio/locale/
--rw-rw-r--	root/root	usr/share/obs/obs-plugins/linux-pulseaudio/locale/en-US.ini
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-ffmpeg/
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-ffmpeg/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-ffmpeg/locale/en-GB.ini
@@ -250,11 +253,13 @@ drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-filters/LUTs/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/blend_sub_filter.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/chroma_key_filter.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/chroma_key_filter_v2.effect
+-rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/color.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/color_correction_filter.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/color_grade_filter.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/color_key_filter.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/color_key_filter_v2.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/crop_filter.effect
+-rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/hdr_tonemap_filter.effect
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-filters/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/locale/en-GB.ini
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/locale/en-US.ini
@@ -262,10 +267,8 @@ drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-filters/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/luma_key_filter_v2.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/mask_alpha_filter.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/mask_color_filter.effect
+-rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/rtx_greenscreen.effect
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-filters/sharpness.effect
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-libfdk/
-drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-libfdk/locale/
--rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-libfdk/locale/en-US.ini
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-outputs/
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/obs-outputs/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/obs-outputs/locale/en-GB.ini
@@ -323,6 +326,9 @@ drwxr-xr-x	root/root	usr/share/obs/obs-plugins/rtmp-services/
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/rtmp-services/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/rtmp-services/locale/en-US.ini
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/rtmp-services/package.json
+drwxr-xr-x	root/root	usr/share/obs/obs-plugins/rtmp-services/schema/
+-rw-rw-r--	root/root	usr/share/obs/obs-plugins/rtmp-services/schema/package-schema.json
+-rw-rw-r--	root/root	usr/share/obs/obs-plugins/rtmp-services/schema/service-schema-v3.json
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/rtmp-services/services.json
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/text-freetype2/
 drwxr-xr-x	root/root	usr/share/obs/obs-plugins/text-freetype2/locale/
@@ -330,6 +336,7 @@ drwxr-xr-x	root/root	usr/share/obs/obs-plugins/text-freetype2/locale/
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/text-freetype2/locale/en-US.ini
 -rw-rw-r--	root/root	usr/share/obs/obs-plugins/text-freetype2/text_default.effect
 drwxr-xr-x	root/root	usr/share/obs/obs-studio/
+-rwxrwxr-x	root/root	usr/share/obs/obs-studio/OBSPublicRSAKey.pem
 drwxr-xr-x	root/root	usr/share/obs/obs-studio/authors/
 drwxr-xr-x	root/root	usr/share/obs/obs-studio/images/
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/images/overflow.png
@@ -362,7 +369,12 @@ drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Acri/
 drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Dark/
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/alert.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/close.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/cogs.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/collapse.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/dots-vert.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/dots.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/down.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/entry-clear.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/expand.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/filter.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/interact.svg
@@ -383,8 +395,10 @@ drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Dark/media/
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/popout.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/refresh.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/revert.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/right.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/save.svg
 drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Dark/settings/
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/settings/accessibility.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/settings/advanced.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/settings/audio.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/settings/general.svg
@@ -406,10 +420,78 @@ drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Dark/sources/
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/sources/slideshow.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/sources/text.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/sources/window.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/sources/windowaudio.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/trash.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/up.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/updown.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Dark/visible.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Grey.qss
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light.qss
+drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Light/
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/alert.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/checkbox_checked.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/checkbox_checked_disabled.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/checkbox_checked_focus.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/checkbox_unchecked.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/checkbox_unchecked_disabled.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/checkbox_unchecked_focus.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/close.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/cogs.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/collapse.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/dots-vert.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/dots.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/down.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/entry-clear.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/expand.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/filter.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/interact.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/left.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/locked.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/media-pause.svg
+drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Light/media/
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/media/media_next.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/media/media_pause.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/media/media_play.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/media/media_previous.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/media/media_restart.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/media/media_stop.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/minus.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/mute.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/no_sources.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/plus.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/popout.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/refresh.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/revert.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/right.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/save.svg
+drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Light/settings/
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/accessibility.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/advanced.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/audio.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/general.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/hotkeys.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/output.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/stream.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/settings/video.svg
+drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Light/sources/
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/brush.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/camera.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/default.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/gamepad.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/globe.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/group.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/image.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/media.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/microphone.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/scene.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/slideshow.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/text.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/window.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/sources/windowaudio.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/trash.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/up.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/updown.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Light/visible.svg
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Rachni.qss
 drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Rachni/
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Rachni/checkbox_checked.png
@@ -434,3 +516,11 @@ drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Rachni/
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Rachni/up_arrow.png
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Rachni/up_arrow_disabled.png
 -rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/System.qss
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Yami.qss
+drwxr-xr-x	root/root	usr/share/obs/obs-studio/themes/Yami/
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Yami/checkbox_checked.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Yami/checkbox_checked_disabled.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Yami/checkbox_checked_focus.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Yami/checkbox_unchecked.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Yami/checkbox_unchecked_disabled.svg
+-rw-rw-r--	root/root	usr/share/obs/obs-studio/themes/Yami/checkbox_unchecked_focus.svg
