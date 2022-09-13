@@ -5,7 +5,7 @@
 # Optional: colord cups vulkan wayland
 
 name=gtk4
-version=4.6.7
+version=4.8.0
 release=1
 source=(https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/gtk-$version.tar.bz2)
 
@@ -18,7 +18,7 @@ build() {
     --prefix=/usr \
     -D buildtype=plain \
     --wrap-mode nodownload \
-    -D b_lto=true \
+    -D b_lto=false \
     -D b_pie=true \
     -D broadway-backend=true \
     -D man-pages=false \
