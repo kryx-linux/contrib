@@ -5,7 +5,7 @@
 # Optional: avahi coin-or-mp cups gpgme kio lpsolve mariadb openldap postgresql python3-lxml qt5 sane valgrind
 
 name=libreoffice
-version=7.4.1.1
+version=7.4.1.2
 release=1
 pdfiumversion=5058
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
@@ -53,6 +53,8 @@ build() {
   sed -i 's:application/pdf;::g' sysui/desktop/menus/draw.desktop
   sed -i 's:text/plain;::g' sysui/desktop/menus/writer.desktop
   sed -i 's:dragonbox-1.0.0:dragonbox:g' configure.ac
+
+  prt-get isinst gpgme && export ac_cv_lib_gpgmepp_progress_callback=yes
   # optionals {{{
   prt-get isinst avahi && PKGMK_LIBREOFFICE+=' --enable-avahi' || PKGMK_LIBREOFFICE+=' --disable-avahi'
   #prt-get isinst box2d && PKGMK_LIBREOFFICE+=' --with-system-box2d' || PKGMK_LIBREOFFICE+=' --without-system-box2d'
