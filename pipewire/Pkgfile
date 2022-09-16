@@ -5,7 +5,7 @@
 # Optional: alsa-ucm-conf avahi bluez gst-plugins-base jack libldac pulseaudio rtkit v4l2 vulkan-loader wireplumber
 
 name=pipewire
-version=0.3.57
+version=0.3.58
 release=1
 source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
 
@@ -21,7 +21,7 @@ build() {
   meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
     --buildtype=plain \
-    -D b_lto=true \
+    -D b_lto=false \
     -D b_pie=true \
     -D docs=disabled \
     -D tests=disabled \
