@@ -6,7 +6,7 @@
 
 name=steam-native-runtime
 version=1.0.0.70
-release=1
+release=2
 source=(steam-native.sh)
 
 build() {
@@ -19,16 +19,14 @@ build() {
 
   install -d $PKG/usr/lib/steam
   ln -s /usr/lib/libcurl.so.3 $PKG/usr/lib/steam/libcurl.so.3
-  ln -s /usr/lib/libcurl.so.4.2.0 $PKG/usr/lib/steam/libcurl.so.4
-  ln -s /usr/lib/libcurl.so.4.2.0 $PKG/usr/lib/steam/libcurl.so.4.2.0
+  ln -s /usr/lib/libcurl.so.4.8.0 $PKG/usr/lib/steam/libcurl.so.4
+  ln -s /usr/lib/libcurl.so.4.8.0 $PKG/usr/lib/steam/libcurl.so.4.8.0
 
   install -d $PKG/usr/lib32/steam
   ln -s /usr/lib32/libcurl.so.3 $PKG/usr/lib32/steam/libcurl.so.3
-  ln -s /usr/lib32/libcurl.so.4.2.0 $PKG/usr/lib32/steam/libcurl.so.4
-  ln -s /usr/lib32/libcurl.so.4.2.0 $PKG/usr/lib32/steam/libcurl.so.4.2.0
+  ln -s /usr/lib32/libcurl.so.4.8.0 $PKG/usr/lib32/steam/libcurl.so.4
+  ln -s /usr/lib32/libcurl.so.4.8.0 $PKG/usr/lib32/steam/libcurl.so.4.8.0
 
-  # Apparently libpcre.so.3 is just a Debian-specific version of libpcre.so.1
-  # https://sources.debian.org/src/pcre3/2:8.39-12/debian/README.Debian/
   ln -s /usr/lib/libpcre.so $PKG/usr/lib/steam/libpcre.so.3
   ln -s /usr/lib32/libpcre.so $PKG/usr/lib32/steam/libpcre.so.3
 }
