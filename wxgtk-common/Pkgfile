@@ -4,35 +4,32 @@
 # Depends on: gtk glu gst-plugins-base
 
 name=wxgtk-common
-version=3.2.0
+version=3.2.1
 release=1
 source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2)
 
 build() {
-	cd wxWidgets-$version
+	cmake -S wxWidgets-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D wxBUILD_TOOLKIT=gtk2 \
+		-D wxUSE_OPENGL=ON \
+		-D wxUSE_REGEX=sys\
+		-D wxUSE_ZLIB=sys \
+		-D wxUSE_EXPAT=sys \
+		-D wxUSE_LIBJPEG=sys \
+		-D wxUSE_LIBPNG=sys \
+		-D wxUSE_LIBTIFF=sys \
+		-D wxUSE_LIBLZMA=sys \
+		-D wxUSE_LIBMSPACK=ON \
+		-D wxUSE_PRIVATE_FONTS=ON \
+		-Wno-dev
 
-	./configure \
-		--prefix=/usr \
-		--libdir=/usr/lib \
-		--with-gtk=2 \
-		--with-opengl \
-		--enable-unicode \
-		--enable-graphics_ctx \
-		--enable-mediactrl \
-		--enable-webview \
-		--with-regex=builtin \
-		--with-libpng=sys \
-		--with-libxpm=sys \
-		--with-libjpeg=sys \
-		--with-libtiff=sys \
-		--disable-precomp-headers
-
-	make
-	make DESTDIR=$PKG install
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 
 	rm -r $PKG/usr/{bin/wx-config,lib/{wx,libwx_gtk*}}
-
-	rm -r \
-		$PKG/usr/share/locale \
-		$PKG/usr/share/bakefile
 }

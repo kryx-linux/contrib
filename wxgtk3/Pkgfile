@@ -4,33 +4,34 @@
 # Depends on: gtk3 wxgtk-common
 
 name=wxgtk3
-version=3.2.0
+version=3.2.1
 release=1
-source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
-	make-abicheck-non-fatal.patch)
+source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2)
 
 build() {
-	cd wxWidgets-$version
+	cmake -S wxWidgets-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D wxBUILD_TOOLKIT=gtk3 \
+		-D wxUSE_OPENGL=ON \
+		-D wxUSE_REGEX=sys\
+		-D wxUSE_ZLIB=sys \
+		-D wxUSE_EXPAT=sys \
+		-D wxUSE_LIBJPEG=sys \
+		-D wxUSE_LIBPNG=sys \
+		-D wxUSE_LIBTIFF=sys \
+		-D wxUSE_LIBLZMA=sys \
+		-D wxUSE_LIBMSPACK=ON \
+		-D wxUSE_PRIVATE_FONTS=ON \
+		-D wxUSE_GTKPRINT=ON \
+		-Wno-dev
 
-	./configure \
-		--prefix=/usr \
-		--libdir=/usr/lib \
-		--with-gtk=3 \
-		--with-opengl \
-		--enable-unicode \
-		--enable-graphics_ctx \
-		--enable-mediactrl \
-		--enable-webview \
-		--with-regex=builtin \
-		--with-libpng=sys \
-		--with-libxpm=sys \
-		--with-libjpeg=sys \
-		--with-libtiff=sys \
-		--disable-precomp-headers
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
 
-	make
-	make DESTDIR=$PKG install
-
-	rm -r $PKG/usr/{include,share,lib/libwx_base*,bin/wxrc*}
+	rm -r $PKG/usr/{include,lib/libwx_base*,bin/wxrc*}
 	mv $PKG/usr/bin/wx-config{,-gtk3}
 }
