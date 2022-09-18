@@ -1,19 +1,19 @@
 # Description: Extra cmake modules
-# URL:         https://github.com/KDE/extra-cmake-modules
-# Maintainer:  Stamatin Cristina, dear dot volgk at gmail dot com
-# Depends on:  cmake
+# URL: https://github.com/KDE/extra-cmake-modules
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cmake ninja
 
 name=extra-cmake-modules
-version=5.97.0
+version=5.98.0
 release=1
 source=(https://github.com/KDE/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
-	cmake -S$name-$version -Bbuild      \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DBUILD_TESTING=OFF
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -Wno-dev
 
-	cmake --build build -v
-
-	DESTDIR=$PKG cmake --install build
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }
