@@ -1,17 +1,24 @@
 # Description: Email client from the Mozilla project
 # URL: https://www.thunderbird.net/en-US/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gnupg gtk libwebp libevent libidl libnotify libvpx lld nodejs nss startup-notification unzip zip
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gnupg gtk libwebp libevent libidl libnotify libvpx lld nodejs nss startup-notification unzip zip wasi-libc++
 # Optional: sccache
 
 name=thunderbird
-version=91.10.0
+version=102.2.2
 release=1
 source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
-	$name.desktop)
+	$name.desktop
+	cbindgen-0.24.patch
+	rustc_version-0.4.0.patch
+	packed_simd_2-0.3.8.patch)
  
 build() {
 	cd $name-$version
+
+	patch -p1 -i $SRC/cbindgen-0.24.patch
+	patch -p1 -i $SRC/rustc_version-0.4.0.patch
+	patch -p1 -i $SRC/packed_simd_2-0.3.8.patch
 
 	if [ -e '/usr/bin/ccache' ]; then
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
@@ -34,6 +41,7 @@ cat <<- EOF > .mozconfig
 	ac_add_options --with-system-libevent
 	ac_add_options --with-system-libvpx
 	ac_add_options --with-system-webp
+	ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot
 	ac_add_options --enable-av1
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
