@@ -4,7 +4,7 @@
 # Depends on: rust
 
 name=rust-analyzer
-version=20220822
+version=20220919
 _version=${version::4}-${version:4:2}-${version:6:2}
 release=1
 source=(https://github.com/rust-analyzer/rust-analyzer/archive/$_version/$name-$version.tar.gz)
@@ -14,7 +14,6 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  #cargo update --manifest-path $name-$version/Cargo.toml
   cargo build --release --locked --manifest-path $name-$_version/Cargo.toml
 
   install -Dt $PKG/usr/bin $name-$_version/target/release/$name
