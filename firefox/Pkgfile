@@ -1,11 +1,11 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libaom libdav1d libevent libnotify libvpx libwebp libxkbcommon lld nodejs nss unzip wasi-libc++ xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
-# Optional: sccache jack
+# Depends on: alsa-lib autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libaom libdav1d libevent libnotify libvpx libwebp libxkbcommon lld nodejs pulseaudio nss unzip wasi-libc++ xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
+# Optional: sccache jack pipewire
 
 name=firefox
-version=104.0.2
+version=105.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
 	firefox.desktop
@@ -41,10 +41,8 @@ source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$
 	0029-bmo-1196777-Set-GDK_FOCUS_CHANGE_MASK.patch
 	0030-bmo-1754469-memory_mozalloc_throw.patch
 	0031-bmo-1769631-python-3.11-compatibility.patch
-	0032-bmo-1773336-disable_audio_thread_priority_default_features.patch
 	0033-rhbz-2115253-vaapi-fixes.patch
 	0034-bgo-860033-firefox-wayland-no-dbus.patch
-	arc4random.patch
 	libwebrtc-screen-cast-sync-1.patch
 	no-ccache-stats.patch)
 
@@ -58,10 +56,6 @@ build() {
 	for p in $SRC/*.patch; do
 		patch -p1 -i $p
 	done
-
-	_clear_vendor_checksums audioipc
-	_clear_vendor_checksums audioipc-client
-	_clear_vendor_checksums audioipc-server
 
 	if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
 		printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
@@ -102,23 +96,25 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-optimize
 	ac_add_options --enable-release
 	ac_add_options --enable-rust-simd
+	ac_add_options --enable-sandbox
 	ac_add_options --disable-debug-symbols
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
 	ac_add_options --enable-linker=lld
 	ac_add_options --enable-lto=thin
 	ac_add_options --disable-tests
-	ac_add_options --disable-debug
+	ac_add_options --disable-debug-symbols
 	ac_add_options --disable-updater
 	ac_add_options --disable-crashreporter
 	ac_add_options --disable-necko-wifi
+	ac_add_options --disable-parental-controls
 	ac_add_options --disable-elf-hack
 EOF
 
 	# audio
-	prt-get isinst alsa-lib && echo 'ac_add_options --enable-alsa' >> .mozconfig || echo 'ac_add_options --disable-alsa' >> .mozconfig
-	prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig || echo 'ac_add_options --disable-jack' >> .mozconfig
-	prt-get isinst pulseaudio && echo 'ac_add_options --enable-pulseaudio' >> .mozconfig || echo 'ac_add_options --disable-pulseaudio' >> .mozconfig
+	prt-get isinst alsa-lib && echo 'ac_add_options --enable-alsa' >> .mozconfig
+	prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig
+	prt-get isinst pulseaudio && echo 'ac_add_options --enable-pulseaudio' >> .mozconfig
 
 	prt-get isinst wayland-protocols && \
 		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
@@ -127,7 +123,7 @@ EOF
 	[[ -e '/usr/bin/ccache' ]] && echo 'ac_add_options --enable-ccache' >> .mozconfig
 
 	export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib RUSTFLAGS="-C opt-level=2 $RUSTFLAGS"
-	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
+	export MOZ_MAKE_FLAGS="-j ${JOBS-1}" LDFLAGS+=" -Wl,--thinlto-jobs=$((JOBS / 2))"
 	export MOZBUILD_STATE_PATH="$SRC"/mozbuild
 
 	# Disable notification when build system has finished
