@@ -1,71 +1,55 @@
 # Description: C subroutine library for computing discrete Fourier transform.
 # URL: https://www.fftw.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gcc-fortran openmpi
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: openmpi gcc-fortran
 
 name=fftw
 version=3.3.10
 release=2
-source=(https://www.fftw.org/$name-$version.tar.gz)
+source=(http://www.fftw.org/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cp -av $name-$version ${name}-${version}-double
+	cp -av $name-$version ${name}-${version}-long-double
+	cp -av $name-$version ${name}-${version}-quad
+
+	export F77='gfortran'
+	CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
+	# default configure call
+	_default_configure="./configure --prefix=/usr --enable-shared --enable-threads --enable-mpi --enable-openmp"
 
 	# libtool fails to link with ccache in the path
 	[ -e '/usr/bin/ccache' ] && PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+	# configure single precision
+	cd $SRC/$name-$version
+	${_default_configure} --enable-sse --enable-avx --enable-single
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	local config="
-F77=gfortran
---prefix=/usr
---enable-threads
---enable-shared
---enable-openmp"
+	# configure double precision
+	cd $SRC/$name-$version-double
+	${_default_configure} --enable-sse2 --enable-avx
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	# use upstream default CFLAGS while keeping our -march/-mtune
-	CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math -fPIC -mavx2"
+	# configure long-double precission
+	cd $SRC/$name-$version-long-double
+	${_default_configure} --enable-long-double
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	# compiling single precision library
-	./configure \
-		$config \
-		--enable-single \
-		--enable-avx \
-		--enable-sse \
-		--enable-mpi
+	# configure quad precision
+	cd $SRC/$name-$version-quad
+	${_default_configure} --disable-mpi --enable-quad-precision
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	make
-	make DESTDIR=$PKG install
-	make clean
+	make -C $SRC/$name-$version
+	make -C $SRC/$name-$version-double
+	make -C $SRC/$name-$version-long-double
+	make -C $SRC/$name-$version-quad
 
-	# compiling double precision library
-	./configure \
-		$config \
-		--enable-avx \
-		--enable-mpi \
-		--enable-sse2
+	make DESTDIR=$PKG install -C $SRC/$name-$version
+	make DESTDIR=$PKG install -C $SRC/$name-$version-double
+	make DESTDIR=$PKG install -C $SRC/$name-$version-long-double
+	make DESTDIR=$PKG install -C $SRC/$name-$version-quad
 
-	make
-	make DESTDIR=$PKG install
-	make clean
-
-       # compiling long double precision library
-	./configure \
-		$config \
-		--enable-long-double \
-		--enable-mpi
-
-	make
-	make DESTDIR=$PKG install
-	make clean
-
-	# compiling quad precision library
-	./configure \
-		$config \
-		--enable-quad-precision
-
-	make
-	make DESTDIR=$PKG install
-
-	# clean up
 	rm -r $PKG/usr/share/info
 	rm $PKG/usr/lib/*.la
 }
