@@ -4,14 +4,11 @@
 # Depends on: cmake hwloc ninja swig
 
 name=onetbb
-version=2021.5.0
-release=3
-source=(https://github.com/oneapi-src/oneTBB/archive/v$version/$name-$version.tar.gz
-  824.patch)
+version=2021.6.0
+release=1
+source=(https://github.com/oneapi-src/oneTBB/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  patch -Np1 -d oneTBB-$version -i $SRC/824.patch
-
   cmake -S oneTBB-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \

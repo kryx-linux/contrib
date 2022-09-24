@@ -4,8 +4,8 @@
 # Depends on: nvidia lsb-release
 
 name=cuda
-version=11.6.2
-_driverver=510.47.03
+version=11.7.1
+_driverver=515.65.01
 release=1
 source=(https://developer.download.nvidia.com/compute/cuda/${version}/local_installers/cuda_${version}_${_driverver}_linux.run
 	cuda.sh cuda.conf $name.revdep
@@ -18,7 +18,7 @@ build() {
 
 	rm -r NVIDIA*.run bin
 	mkdir -p "${PKG}/opt/cuda/extras"
-	mv cuda_samples "${PKG}/opt/cuda/samples"
+	#mv cuda_samples "${PKG}/opt/cuda/samples"
 	mv integration nsight_compute nsight_systems EULA.txt "${PKG}/opt/cuda"
 	mv cuda_sanitizer_api/compute-sanitizer "${PKG}/opt/cuda/extras/compute-sanitizer"
 	rmdir cuda_sanitizer_api
@@ -30,7 +30,7 @@ build() {
 	done
 
 	# Delete some unnecessary files
-	rm -r "${PKG}"/opt/cuda/{bin/cuda-uninstaller,samples/bin/cuda-uninstaller}
+	#rm -r "${PKG}"/opt/cuda/{bin/cuda-uninstaller,samples/bin/cuda-uninstaller}
 
 	# remove foreign archs
 	rm -r "${PKG}"/opt/cuda/nsight_compute/target/linux-desktop-glibc_2_19_0-ppc64le
