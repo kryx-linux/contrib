@@ -4,9 +4,9 @@
 # Depends on: dconf gtk3 libhandy meson vala
 
 name=dconf-editor
-version=43.beta
+version=43.0
 release=1
-source=(https://gitlab.gnome.org/GNOME/dconf-editor/-/archive/$version/dconf-editor-$version.tar.bz2)
+source=(https://download.gnome.org/sources/dconf-editor/${version::2}/$name-$version.tar.xz)
 
 build() {
   ls /usr/share/vala/vapi/dconf.vapi || (printf '\e[1;31m%-6s\e[m\n' "$name needs dconf build with vala bindings, install vala, rebuild dconf, then install $name" ; exit 1)
