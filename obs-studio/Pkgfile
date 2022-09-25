@@ -2,16 +2,16 @@
 # URL: https://obsproject.com/
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: fdk-aac ffmpeg jansson libgmp mbedtls qt5 speexdsp swig x264
-# Optional: ffnvcodec-headers jack-audio-connection-kit libva lua luajit pipewire pulseaudio speexdsp v4l-utils vlc vlc wayland-protocols x265
+# Optional: ffnvcodec-headers jack-audio-connection-kit libva luajit pipewire pulseaudio speexdsp v4l-utils vlc vlc wayland-protocols x265
 
 name=obs-studio
-version=28.0.1
+version=28.0.2
 release=1
 source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz
 	disable-some-plugins.patch)
 
 build() {
-	prt-get isinst lua || PKGMK_OBS+=' -D ENABLE_SCRIPTING_LUA=OFF'
+	prt-get isinst luajit || PKGMK_OBS+=' -D ENABLE_SCRIPTING_LUA=OFF'
 	prt-get isinst pipewire || PKGMK_OBS+=' -D ENABLE_PIPEWIRE=OFF'
 	prt-get isinst pulseaudio || PKGMK_OBS+=' -D ENABLE_PULSEAUDIO=OFF'
 	prt-get isinst v4l-utils || PKGMK_OBS+=' -D ENABLE_V4L2=OFF'
