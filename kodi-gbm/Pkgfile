@@ -79,7 +79,7 @@ build()  {
 
   sed -e 's/autoreconf -vif/echo "autoreconf already done"/' -i \
     xbmc-$version-$_codename/tools/depends/native/TexturePacker/src/autogen.sh \
-    xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh \
+    xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
 
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
     -D CMAKE_INSTALL_PREFIX=/usr \
@@ -122,4 +122,5 @@ build()  {
 
   rm -r $PKG/usr/{lib/firewalld,share/doc}
 }
+
 # vim: foldmethod=marker foldlevelstart=1
