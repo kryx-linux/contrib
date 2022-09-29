@@ -7,11 +7,12 @@ name=inkscape
 _name=inkscape-INKSCAPE
 version=1.2.1
 _version=1.2_2022-05-15_dc2aedaf03
-_pversion=22.05.0
-_psoversion=121
-release=1
+_pversion=22.09.0
+_psoversion=124
+release=2
 source=(https://media.inkscape.org/dl/resources/file/inkscape-$_version.tar.xz
-	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz)
+	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz
+	inkscape-1.2.1-poppler-22.09.0.patch)
 
 poppler() {
 	cmake -S poppler-$_pversion -B build-poppler -G Ninja \
@@ -33,18 +34,23 @@ poppler() {
 
 	cmake --build build-poppler
 	DESTDIR=$SRC/poppler cmake --install build-poppler
-	install -D -t $PKG/usr/lib $SRC/poppler/usr/lib/libpoppler.so.$_psoversion
+	install -D -t $PKG/usr/lib/inkscape $SRC/poppler/usr/lib/libpoppler.so.$_psoversion
 
 	export CXXFLAGS+=" -I$SRC/poppler/usr/include -I$SRC/poppler/usr/include/poppler"
 	export PKG_CONFIG_PATH="$SRC/poppler/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
 build() {
-	[ ! -e "/usr/lib/libpoppler.so.$_psoversion" ] && poppler
+	#[ ! -e "/usr/lib/inkscape/libpoppler.so.$_psoversion" ] && 
+	poppler
+
+	# https://gitlab.com/inkscape/inkscape/-/merge_requests/4719
+	patch -d $name-$_version -p1 -i $SRC/inkscape-1.2.1-poppler-22.09.0.patch
 
 	# https://gitlab.gnome.org/GNOME/glib/-/issues/2331
-	CFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66'
-	CXXFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66'
+	CFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66 -L/usr/lib/inkscape'
+	CXXFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66 -L/usr/lib/inkscape'
+	export LDFLAGS+=" -Wl,-rpath=/usr/lib/inkscape"
 
 	cmake -S $name-$_version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
