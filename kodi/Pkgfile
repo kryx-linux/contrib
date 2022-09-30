@@ -1,7 +1,7 @@
 # Description: A free and open source software media player and entertainment hub
 # URL: https://kodi.tv/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: cmake fmt ghostscript giflib glu jdk8-bin libass libcdio libmicrohttpd mysql samba swig taglib tinyxml python spdlog libva libvdpau
+# Depends on: cmake fmt ghostscript giflib glu openjdk17-jdk libass libcdio libmicrohttpd mariadb samba swig taglib tinyxml spdlog libva libvdpau libdvdnav
 
 name=kodi
 version=19.4
@@ -9,9 +9,13 @@ release=1
 source=(https://github.com/xbmc/xbmc/archive/$version-Matrix/$name-$version.tar.gz gl-headers.patch $name-19.4-fmt-9.patch)
 
 build() {
+	export PATH="/usr/lib/java/openjdk17-jdk/bin:$PATH"
+
 	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+
 	patch -d xbmc-$version-Matrix -p1 -i $SRC/gl-headers.patch
 	patch -d xbmc-$version-Matrix -p1 -i $SRC/$name-19.4-fmt-9.patch
+
 	cmake -Bbuild \
 		-DVERBOSE=ON \
 		-DAPP_RENDER_SYSTEM=gl \
