@@ -4,7 +4,7 @@
 # Depends on: rust wayland
 
 name=wl-clipboard-rs
-version=0.6.0
+version=0.7.0
 release=1
 source=(https://github.com/YaLTeR/wl-clipboard-rs/archive/v$version/$name-$version.tar.gz)
 
@@ -13,8 +13,7 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-  cargo update --manifest-path $name-$version/Cargo.toml
-  cargo build --release --locked --manifest-path $name-$version/Cargo.toml \
+  cargo build --release --manifest-path $name-$version/Cargo.toml \
     --all --features=dlopen
 
   install -Dt $PKG/usr/bin $name-$version/target/release/wl-paste
