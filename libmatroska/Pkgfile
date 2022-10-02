@@ -4,13 +4,12 @@
 # Depends on: libebml
 
 name=libmatroska
-version=1.6.3
+version=1.7.0
 release=1
 source=(https://dl.matroska.org/downloads/$name/$name-$version.tar.xz)
 
 build() {
-	[[ -e /usr/bin/ninja ]] && PKGMK_LIBMATROSKA+=' -G Ninja'
-	cmake -S $name-$version -B build $PKGMK_LIBMATROSKA \
+	cmake -S $name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
