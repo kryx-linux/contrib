@@ -4,24 +4,25 @@
 # Depends on: cmake ninja wasi-libc
 
 name=wasi-compiler-rt
-version=14.0.6
+version=15.0.1
 release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/compiler-rt-$version.src.tar.xz
 	https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz
+	https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/cmake-$version.src.tar.xz
 	WASI.cmake wasi-toolchain.cmake)
 
 build() {
 	# Platform files have been copied from https://github.com/WebAssembly/wasi-sdk
-	mkdir -p cmake/Platform
-	cp WASI.cmake cmake/Platform
 	mv llvm-$version.src llvm
+	mv cmake-$version.src cmake
+	install -D WASI.cmake cmake/Platform/WASI.cmake
 
 	cmake -S compiler-rt-$version.src/lib/builtins -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX="/usr/lib/clang/$version" \
 		-D COMPILER_RT_INSTALL_PATH="/usr/lib/clang/$version" \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -fno-exceptions --sysroot=/usr/share/wasi-sysroot' \
-		-D CMAKE_MODULE_PATH="$SRC/make" \
+		-D CMAKE_MODULE_PATH="$SRC/cmake" \
 		-D CMAKE_TOOLCHAIN_FILE="$SRC/wasi-toolchain.cmake" \
 		-D COMPILER_RT_BAREMETAL_BUILD=ON \
 		-D COMPILER_RT_INCLUDE_TESTS=OFF \
