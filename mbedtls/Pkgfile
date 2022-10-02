@@ -4,7 +4,7 @@
 # Depends on: cmake python3
 
 name=mbedtls
-version=2.26.0
+version=2.28.1
 release=1
 source=(https://github.com/ARMmbed/mbedtls/archive/$name-$version.tar.gz)
 
@@ -15,9 +15,7 @@ build() {
 	sed -i 's|//\(#define MBEDTLS_THREADING_C\)|\1|' $name-$name-$version/include/mbedtls/config.h
 	sed -i 's|//\(#define MBEDTLS_THREADING_PTHREAD\)|\1|' $name-$name-$version/include/mbedtls/config.h
 
-	[[ -e '/usr/bin/ninja' ]] && PKGMK_MBEDTLS+=' -G Ninja'
-
-	cmake -S $name-$name-$version -B build $PKGMK_MBEDTLS \
+	cmake -S $name-$name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \

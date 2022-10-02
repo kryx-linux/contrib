@@ -1,6 +1,5 @@
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
--rwxr-xr-x	root/root	usr/bin/aescrypt2
 -rwxr-xr-x	root/root	usr/bin/benchmark
 -rwxr-xr-x	root/root	usr/bin/cert_app
 -rwxr-xr-x	root/root	usr/bin/cert_req
@@ -25,6 +24,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/key_app_writer
 -rwxr-xr-x	root/root	usr/bin/key_ladder_demo
 -rwxr-xr-x	root/root	usr/bin/key_ladder_demo.sh
+-rwxr-xr-x	root/root	usr/bin/load_roots
 -rwxr-xr-x	root/root	usr/bin/mini_client
 -rwxr-xr-x	root/root	usr/bin/mpi_demo
 -rwxr-xr-x	root/root	usr/bin/pem2der
@@ -78,6 +78,7 @@ drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/compat-1.3.h
 -rw-r--r--	root/root	usr/include/mbedtls/config.h
 -rw-r--r--	root/root	usr/include/mbedtls/config_psa.h
+-rw-r--r--	root/root	usr/include/mbedtls/constant_time.h
 -rw-r--r--	root/root	usr/include/mbedtls/ctr_drbg.h
 -rw-r--r--	root/root	usr/include/mbedtls/debug.h
 -rw-r--r--	root/root	usr/include/mbedtls/des.h
@@ -138,9 +139,13 @@ drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/xtea.h
 drwxr-xr-x	root/root	usr/include/psa/
 -rw-r--r--	root/root	usr/include/psa/crypto.h
+-rw-r--r--	root/root	usr/include/psa/crypto_builtin_composites.h
+-rw-r--r--	root/root	usr/include/psa/crypto_builtin_primitives.h
 -rw-r--r--	root/root	usr/include/psa/crypto_compat.h
 -rw-r--r--	root/root	usr/include/psa/crypto_config.h
 -rw-r--r--	root/root	usr/include/psa/crypto_driver_common.h
+-rw-r--r--	root/root	usr/include/psa/crypto_driver_contexts_composites.h
+-rw-r--r--	root/root	usr/include/psa/crypto_driver_contexts_primitives.h
 -rw-r--r--	root/root	usr/include/psa/crypto_extra.h
 -rw-r--r--	root/root	usr/include/psa/crypto_platform.h
 -rw-r--r--	root/root	usr/include/psa/crypto_se_driver.h
@@ -150,14 +155,14 @@ drwxr-xr-x	root/root	usr/include/psa/
 -rw-r--r--	root/root	usr/include/psa/crypto_values.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libmbedcrypto.a
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.6
--rw-r--r--	root/root	usr/lib/libmbedcrypto.so.2.26.0
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.6 -> libmbedcrypto.so.2.26.0
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.7
+-rw-r--r--	root/root	usr/lib/libmbedcrypto.so.2.28.1
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.7 -> libmbedcrypto.so.2.28.1
 -rw-r--r--	root/root	usr/lib/libmbedtls.a
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.13
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.13 -> libmbedtls.so.2.26.0
--rw-r--r--	root/root	usr/lib/libmbedtls.so.2.26.0
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.14
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.14 -> libmbedtls.so.2.28.1
+-rw-r--r--	root/root	usr/lib/libmbedtls.so.2.28.1
 -rw-r--r--	root/root	usr/lib/libmbedx509.a
 lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.1
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.1 -> libmbedx509.so.2.26.0
--rw-r--r--	root/root	usr/lib/libmbedx509.so.2.26.0
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.1 -> libmbedx509.so.2.28.1
+-rw-r--r--	root/root	usr/lib/libmbedx509.so.2.28.1
