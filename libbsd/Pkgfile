@@ -5,12 +5,15 @@
 
 name=libbsd
 version=0.11.6
-release=1
-source=(https://libbsd.freedesktop.org/releases/$name-$version.tar.xz)
+release=2
+source=(https://libbsd.freedesktop.org/releases/$name-$version.tar.xz \
+  $name.conf)
 
 build() {
   cd $name-$version
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr/opt/$name \
+    --mandir=/usr/share/man
   make
   make install DESTDIR=$PKG
+  install -Dm0644 $SRC/$name.conf $PKG/etc/ld.so.conf.d/$name.conf
 }
