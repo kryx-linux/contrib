@@ -5,11 +5,12 @@
 
 name=bumblebee
 version=3.2.1
-release=1
+release=2
 source=(http://bumblebee-project.org/$name-$version.tar.gz \
 	libglvnd.patch blacklist.conf bumblebeed.rc)
 
 build() {
+	export PKG_CONFIG_PATH="/usr/opt/libbsd/lib/pkgconfig"
 	CFLAGS="${CFLAGS} -fcommon"
 	cd $name-$version
 	patch -p1 -i $SRC/libglvnd.patch
