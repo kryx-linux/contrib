@@ -9,9 +9,9 @@ release=1
 source=(https://pypi.python.org/packages/source/P/PyQt6-sip/PyQt6_sip-$version.tar.gz)
 
 build() {
-      cd PyQt6_sip-$version
-      /usr/bin/python3 setup.py build
-      /usr/bin/python3 setup.py install --prefix=/usr \
-        --root=$PKG \
-        --skip-build
+  cd PyQt6_sip-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
 }
