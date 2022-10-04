@@ -1,0 +1,18 @@
+# Description: Data parsing and validation using Python type hints
+# URL: https://github.com/samuelcolvin/pydantic
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-typing_extensions
+
+name=python3-pydantic
+version=1.10.2
+release=1
+source=(https://github.com/samuelcolvin/pydantic/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd pydantic-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
