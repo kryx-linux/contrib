@@ -5,7 +5,7 @@
 
 name=monit
 version=5.32.0
-release=1
+release=2
 source=(http://mmonit.com/$name/dist/$name-$version.tar.gz \
 	monitd)
 
@@ -14,7 +14,8 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--sysconfdir=/etc
+		--sysconfdir=/etc \
+		--runstatedir=/run
 
 	make
 	make DESTDIR=$PKG install
