@@ -1,0 +1,19 @@
+# Description: a nodejs package manager
+# URL: https://classic.yarnpkg.com/lang/en/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: nodejs-lts-gallium
+
+name=yarn-gallium
+version=1.22.19
+release=1
+source=(https://github.com/yarnpkg/yarn/releases/download/v$version/yarn-v$version.tar.gz)
+
+build() {
+  cd yarn-v$version
+  install -dm755  $PKG/usr/opt/nodejs-lts-gallium/lib/node_modules/yarn
+  cp -R * $PKG/usr/opt/nodejs-lts-gallium/lib/node_modules/yarn
+
+  install -dm755 $PKG/usr/opt/nodejs-lts-gallium/bin
+  ln -s /usr/opt/nodejs-lts-gallium/lib/node_modules/yarn/bin/yarn.js $PKG/usr/opt/nodejs-lts-gallium/bin/yarn
+  ln -s /usr/opt/nodejs-lts-gallium/lib/node_modules/yarn/bin/yarn.js $PKG/usr/opt/nodejs-lts-gallium/bin/yarnpkg
+}
