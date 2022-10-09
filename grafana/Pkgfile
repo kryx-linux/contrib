@@ -1,10 +1,10 @@
 # Description: The analytics platform for all your metrics
 # URL: https://grafana.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fontconfig go yarn
+# Depends on: fontconfig go yarn-gallium
 
 name=grafana
-version=9.1.6
+version=9.1.7
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
@@ -20,6 +20,10 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/gopath" || true
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
+  export PKG_CONFIG_PATH="/usr/opt/nodejs-lts-gallium/lib/pkgconfig:$PKG_CONFIG_PATH"
+  export PKG_CONFIG_PATH="/usr/lib/openssl-1.1/pkgconfig:$PKG_CONFIG_PATH"
+  export PATH="/usr/opt/nodejs-lts-gallium/bin:$PATH"
+
   cd $SRC/$name-$version
 
   sed -ri 's,^(\s*data\s*=).*,\1 /var/lib/grafana,' conf/defaults.ini
@@ -27,15 +31,20 @@ build() {
   sed -ri 's,^(\s*provisioning\s*=).*,\1 /var/lib/grafana/conf/provisioning,' conf/defaults.ini
   sed -ri 's,^(\s*logs\s*=).*,\1 /var/log/grafana,' conf/defaults.ini
 
+  # backend
   make gen-go
   go run build.go setup
   go run build.go build
-  export NPM_CONFIG_PREFIX="$srcdir/npm"
-  export PATH+=":$NPM_CONFIG_PREFIX/bin"
-  export NODE_OPTIONS="--max-old-space-size=16000" # Increase to 8 GB
-  yarn install
-  NODE_ENV=production yarn run build
 
+  # frontend
+  export NPM_CONFIG_PREFIX="$SRC/npm"
+  export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+  export NODE_OPTIONS="--max-old-space-size=16000"
+
+  /usr/opt/nodejs-lts-gallium/bin/yarn install
+  NODE_ENV=production /usr/opt/nodejs-lts-gallium/bin/yarn run build
+
+  # install
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name
   install -Dsm755 bin/linux-amd64/grafana-server $PKG/usr/bin/grafana-server
   install -Dsm755 bin/linux-amd64/grafana-cli $PKG/usr/bin/grafana-cli
