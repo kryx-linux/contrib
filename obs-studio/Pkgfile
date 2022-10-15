@@ -5,9 +5,10 @@
 # Optional: ffnvcodec-headers jack-audio-connection-kit libva luajit pipewire pulseaudio speexdsp v4l-utils vlc vlc wayland-protocols x265
 
 name=obs-studio
-version=28.0.2
+version=28.0.3
 release=1
 source=(https://github.com/obsproject/$name/archive/$version/$name-$version.tar.gz
+	7531.patch
 	disable-some-plugins.patch)
 
 build() {
@@ -22,6 +23,7 @@ build() {
 		-v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
 	patch -Np1 -d $name-$version -i $SRC/disable-some-plugins.patch
+	patch -Np1 -d $name-$version -i $SRC/7531.patch
 
 	export QT_QPA_PLATFORMTHEME="qt5ct"
 	cmake -S $name-$version -B build -G Ninja $PKGMK_OBS \
