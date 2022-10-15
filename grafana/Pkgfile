@@ -1,10 +1,10 @@
 # Description: The analytics platform for all your metrics
 # URL: https://grafana.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fontconfig go yarn-gallium
+# Depends on: fontconfig go yarn
 
 name=grafana
-version=9.1.7
+version=9.2.0
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
@@ -20,9 +20,9 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/gopath" || true
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
-  export PKG_CONFIG_PATH="/usr/opt/nodejs-lts-gallium/lib/pkgconfig:$PKG_CONFIG_PATH"
-  export PKG_CONFIG_PATH="/usr/lib/openssl-1.1/pkgconfig:$PKG_CONFIG_PATH"
-  export PATH="/usr/opt/nodejs-lts-gallium/bin:$PATH"
+  export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+  #export PKG_CONFIG_PATH="/usr/lib/openssl-1.1/pkgconfig:$PKG_CONFIG_PATH"
+  export PATH="/usr/bin:$PATH"
 
   cd $SRC/$name-$version
 
@@ -41,8 +41,8 @@ build() {
   export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
   export NODE_OPTIONS="--max-old-space-size=16000"
 
-  /usr/opt/nodejs-lts-gallium/bin/yarn install
-  NODE_ENV=production /usr/opt/nodejs-lts-gallium/bin/yarn run build
+  /usr/bin/yarn install
+  NODE_ENV=production /usr/bin/yarn run build
 
   # install
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name
