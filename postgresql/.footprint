@@ -67,6 +67,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/informix/esql/
 -rw-r--r--	root/root	usr/include/postgresql/informix/esql/sqltypes.h
 drwxr-xr-x	root/root	usr/include/postgresql/internal/
 -rw-r--r--	root/root	usr/include/postgresql/internal/c.h
+-rw-r--r--	root/root	usr/include/postgresql/internal/fe-auth-sasl.h
 -rw-r--r--	root/root	usr/include/postgresql/internal/libpq-int.h
 drwxr-xr-x	root/root	usr/include/postgresql/internal/libpq/
 -rw-r--r--	root/root	usr/include/postgresql/internal/libpq/pqcomm.h
@@ -155,8 +156,11 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/access/
 -rw-r--r--	root/root	usr/include/postgresql/server/access/xlogarchive.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/xlogdefs.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/xloginsert.h
+-rw-r--r--	root/root	usr/include/postgresql/server/access/xlogprefetcher.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/xlogreader.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/xlogrecord.h
+-rw-r--r--	root/root	usr/include/postgresql/server/access/xlogrecovery.h
+-rw-r--r--	root/root	usr/include/postgresql/server/access/xlogstats.h
 -rw-r--r--	root/root	usr/include/postgresql/server/access/xlogutils.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/bootstrap/
 -rw-r--r--	root/root	usr/include/postgresql/server/bootstrap/bootstrap.h
@@ -243,6 +247,8 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/catalog/
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_operator_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_opfamily.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_opfamily_d.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_parameter_acl.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_parameter_acl_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_partitioned_table.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_partitioned_table_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_policy.h
@@ -251,6 +257,8 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/catalog/
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_proc_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_publication.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_publication_d.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_publication_namespace.h
+-rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_publication_namespace_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_publication_rel.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_publication_rel_d.h
 -rw-r--r--	root/root	usr/include/postgresql/server/catalog/pg_range.h
@@ -345,6 +353,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/common/
 -rw-r--r--	root/root	usr/include/postgresql/server/common/archive.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/base64.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/checksum_helper.h
+-rw-r--r--	root/root	usr/include/postgresql/server/common/compression.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/config_info.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/connect.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/controldata_utils.h
@@ -365,6 +374,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/common/
 -rw-r--r--	root/root	usr/include/postgresql/server/common/md5.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/openssl.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/pg_lzcompress.h
+-rw-r--r--	root/root	usr/include/postgresql/server/common/pg_prng.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/relpath.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/restricted_token.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/saslprep.h
@@ -374,6 +384,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/common/
 -rw-r--r--	root/root	usr/include/postgresql/server/common/shortest_dec.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/string.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/unicode_combining_table.h
+-rw-r--r--	root/root	usr/include/postgresql/server/common/unicode_east_asian_fw_table.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/unicode_norm.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/unicode_norm_hashfunc.h
 -rw-r--r--	root/root	usr/include/postgresql/server/common/unicode_norm_table.h
@@ -496,6 +507,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/libpq/
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/pqformat.h
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/pqmq.h
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/pqsignal.h
+-rw-r--r--	root/root	usr/include/postgresql/server/libpq/sasl.h
 -rw-r--r--	root/root	usr/include/postgresql/server/libpq/scram.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/mb/
 -rw-r--r--	root/root	usr/include/postgresql/server/mb/pg_wchar.h
@@ -564,6 +576,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/parser/
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_enr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_expr.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_func.h
+-rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_merge.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_node.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_oper.h
 -rw-r--r--	root/root	usr/include/postgresql/server/parser/parse_param.h
@@ -656,6 +669,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/port/win32_msvc/sys/
 -rw-r--r--	root/root	usr/include/postgresql/server/port/win32_msvc/unistd.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port/win32_msvc/utime.h
 -rw-r--r--	root/root	usr/include/postgresql/server/port/win32_port.h
+-rw-r--r--	root/root	usr/include/postgresql/server/port/win32ntdll.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/portability/
 -rw-r--r--	root/root	usr/include/postgresql/server/portability/instr_time.h
 -rw-r--r--	root/root	usr/include/postgresql/server/portability/mem.h
@@ -664,6 +678,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/portability/
 -rw-r--r--	root/root	usr/include/postgresql/server/postgres_fe.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/postmaster/
 -rw-r--r--	root/root	usr/include/postgresql/server/postmaster/autovacuum.h
+-rw-r--r--	root/root	usr/include/postgresql/server/postmaster/auxprocess.h
 -rw-r--r--	root/root	usr/include/postgresql/server/postmaster/bgworker.h
 -rw-r--r--	root/root	usr/include/postgresql/server/postmaster/bgworker_internals.h
 -rw-r--r--	root/root	usr/include/postgresql/server/postmaster/bgwriter.h
@@ -682,8 +697,6 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/regex/
 -rw-r--r--	root/root	usr/include/postgresql/server/regex/regexport.h
 -rw-r--r--	root/root	usr/include/postgresql/server/regex/regguts.h
 drwxr-xr-x	root/root	usr/include/postgresql/server/replication/
--rw-r--r--	root/root	usr/include/postgresql/server/replication/backup_manifest.h
--rw-r--r--	root/root	usr/include/postgresql/server/replication/basebackup.h
 -rw-r--r--	root/root	usr/include/postgresql/server/replication/decode.h
 -rw-r--r--	root/root	usr/include/postgresql/server/replication/logical.h
 -rw-r--r--	root/root	usr/include/postgresql/server/replication/logicallauncher.h
@@ -784,6 +797,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/storage/
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/dsm.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/dsm_impl.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/fd.h
+-rw-r--r--	root/root	usr/include/postgresql/server/storage/fileset.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/freespace.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/fsm_internals.h
 -rw-r--r--	root/root	usr/include/postgresql/server/storage/indexfsm.h
@@ -879,7 +893,6 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/hsearch.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/index_selfuncs.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/inet.h
--rw-r--r--	root/root	usr/include/postgresql/server/utils/int8.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/inval.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/json.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/jsonb.h
@@ -898,6 +911,7 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/pg_locale.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/pg_lsn.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/pg_rusage.h
+-rw-r--r--	root/root	usr/include/postgresql/server/utils/pgstat_internal.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/pidfile.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/plancache.h
 -rw-r--r--	root/root	usr/include/postgresql/server/utils/portal.h
@@ -945,26 +959,26 @@ drwxr-xr-x	root/root	usr/include/postgresql/server/utils/
 -rw-r--r--	root/root	usr/include/sqlda.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libecpg.a
-lrwxrwxrwx	root/root	usr/lib/libecpg.so -> libecpg.so.6.14
-lrwxrwxrwx	root/root	usr/lib/libecpg.so.6 -> libecpg.so.6.14
--rwxr-xr-x	root/root	usr/lib/libecpg.so.6.14
+lrwxrwxrwx	root/root	usr/lib/libecpg.so -> libecpg.so.6.15
+lrwxrwxrwx	root/root	usr/lib/libecpg.so.6 -> libecpg.so.6.15
+-rwxr-xr-x	root/root	usr/lib/libecpg.so.6.15
 -rw-r--r--	root/root	usr/lib/libecpg_compat.a
-lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so -> libecpg_compat.so.3.14
-lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so.3 -> libecpg_compat.so.3.14
--rwxr-xr-x	root/root	usr/lib/libecpg_compat.so.3.14
+lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so -> libecpg_compat.so.3.15
+lrwxrwxrwx	root/root	usr/lib/libecpg_compat.so.3 -> libecpg_compat.so.3.15
+-rwxr-xr-x	root/root	usr/lib/libecpg_compat.so.3.15
 -rw-r--r--	root/root	usr/lib/libpgcommon.a
 -rw-r--r--	root/root	usr/lib/libpgcommon_shlib.a
 -rw-r--r--	root/root	usr/lib/libpgfeutils.a
 -rw-r--r--	root/root	usr/lib/libpgport.a
 -rw-r--r--	root/root	usr/lib/libpgport_shlib.a
 -rw-r--r--	root/root	usr/lib/libpgtypes.a
-lrwxrwxrwx	root/root	usr/lib/libpgtypes.so -> libpgtypes.so.3.14
-lrwxrwxrwx	root/root	usr/lib/libpgtypes.so.3 -> libpgtypes.so.3.14
--rwxr-xr-x	root/root	usr/lib/libpgtypes.so.3.14
+lrwxrwxrwx	root/root	usr/lib/libpgtypes.so -> libpgtypes.so.3.15
+lrwxrwxrwx	root/root	usr/lib/libpgtypes.so.3 -> libpgtypes.so.3.15
+-rwxr-xr-x	root/root	usr/lib/libpgtypes.so.3.15
 -rw-r--r--	root/root	usr/lib/libpq.a
-lrwxrwxrwx	root/root	usr/lib/libpq.so -> libpq.so.5.14
-lrwxrwxrwx	root/root	usr/lib/libpq.so.5 -> libpq.so.5.14
--rwxr-xr-x	root/root	usr/lib/libpq.so.5.14
+lrwxrwxrwx	root/root	usr/lib/libpq.so -> libpq.so.5.15
+lrwxrwxrwx	root/root	usr/lib/libpq.so.5 -> libpq.so.5.15
+-rwxr-xr-x	root/root	usr/lib/libpq.so.5.15
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libecpg.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libecpg_compat.pc
@@ -993,9 +1007,6 @@ drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/
 drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/makefiles/
 -rw-r--r--	root/root	usr/lib/postgresql/pgxs/src/makefiles/pgxs.mk
 -rw-r--r--	root/root	usr/lib/postgresql/pgxs/src/nls-global.mk
-drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/pl/
-drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/pl/plpython/
--rw-r--r--	root/root	usr/lib/postgresql/pgxs/src/pl/plpython/regress-python3-mangle.mk
 drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/test/
 drwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/test/isolation/
 -rwxr-xr-x	root/root	usr/lib/postgresql/pgxs/src/test/isolation/isolationtester
@@ -1289,6 +1300,7 @@ drwxr-xr-x	root/root	usr/share/man/man7/
 -rw-r--r--	root/root	usr/share/man/man7/LISTEN.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/LOAD.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/LOCK.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/MERGE.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/MOVE.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/NOTIFY.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/PREPARE.7.gz
