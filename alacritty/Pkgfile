@@ -5,9 +5,9 @@
 # Optional: bash-completion zsh
 
 name=alacritty
-version=0.10.1
+version=0.11.0
 release=1
-_commit=2844606db8201d40462a01b29299ac3c5a52c523
+_commit=8dbaa0bbd308a72075910ff32d8ffcca09ae3529
 source=(https://github.com/alacritty/alacritty/archive/$_commit/$name-$version.tar.gz)
 
 build() {
@@ -15,22 +15,26 @@ build() {
   mkdir $PKGMK_SOURCE_DIR/rust || true
   export CARGO_HOME=$PKGMK_SOURCE_DIR/rust
 
-  cargo update --manifest-path $name-$_commit/Cargo.toml
-  cargo build --release --locked --manifest-path \
-    $name-$_commit/Cargo.toml
+  cargo build --release --manifest-path $name-$_commit/Cargo.toml
 
-  install -D -m755 $name-$_commit/target/release/alacritty $PKG/usr/bin/alacritty
-  install -D -m644 $name-$_commit/extra/alacritty.man $PKG/usr/share/man/man1/alacritty.1
-  install -D -m644 $name-$_commit/extra/linux/io.alacritty.Alacritty.appdata.xml \
+  install -D -m755 $name-$_commit/target/release/alacritty \
+    $PKG/usr/bin/alacritty
+  install -D -m644 $name-$_commit/extra/alacritty.man \
+    $PKG/usr/share/man/man1/alacritty.1
+  install -D -m644 \
+    $name-$_commit/extra/linux/org.alacritty.Alacritty.appdata.xml \
     $PKG/usr/share/appdata/io.alacritty.Alacritty.appdata.xml
 
   # install auto-completion files if the ports for it are installed
-  prt-get isinst zsh && install -D -m644 $name-$_commit/extra/completions/_alacritty \
+  prt-get isinst zsh && install -D -m644 \
+    $name-$_commit/extra/completions/_alacritty \
     $PKG/usr/share/zsh/site-functions/_alacritty
-  prt-get isinst bash-completion && install -D -m644 $name-$_commit/extra/completions/alacritty.bash \
+  prt-get isinst bash-completion && install -D -m644 \
+    $name-$_commit/extra/completions/alacritty.bash \
     $PKG/usr/share/bash-completion/completions/alacritty
 
-  install -D -m644 $name-$_commit/alacritty.yml $PKG/usr/share/alacritty/alacritty.yml
+  install -D -m644 $name-$_commit/alacritty.yml \
+    $PKG/usr/share/alacritty/alacritty.yml
   install -D -m 644 $name-$_commit/extra/linux/Alacritty.desktop \
     $PKG/usr/share/applications/Alacritty.desktop
   install -D -m644 $name-$_commit/extra/logo/alacritty-term.svg \
