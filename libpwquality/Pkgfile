@@ -5,18 +5,21 @@
 
 name=libpwquality
 version=1.4.4
-release=1
+release=2
 source=(https://github.com/libpwquality/libpwquality/releases/download/$name-$version/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
   sed '/mr_IN/d' -i po/LINGUAS
+  autoreconf -fvi
+  export SETUPTOOLS_USE_DISTUTILS=stdlib
+
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --with-securedir=/lib/security \
+    --with-python-binary=/usr/bin/python3 \
     --enable-pam \
-    --with-python-binary=python3 \
     --disable-nls
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
   make
