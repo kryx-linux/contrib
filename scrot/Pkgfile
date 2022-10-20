@@ -1,14 +1,15 @@
 # Description: Commandline screen capture.
 # URL: https://github.com/resurrecting-open-source-projects/scrot
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: autoconf-archive giblib xorg-libxcursor xorg-libxcomposite
+# Depends on: autoconf-archive giblib libbsd xorg-libxcomposite xorg-libxcursor
 
 name=scrot
-version=1.6
+version=1.7
 release=1
 source=(https://github.com/resurrecting-open-source-projects/scrot/archive/$version/$name-$version.tar.gz)
 
 build() {
+	export PKG_CONFIG_PATH="/usr/opt/libbsd/lib/pkgconfig"
 	cd $name-$version
 
 	./autogen.sh
