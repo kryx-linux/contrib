@@ -1,24 +1,17 @@
 # Description: Email client from the Mozilla project
 # URL: https://www.thunderbird.net/en-US/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gnupg gtk libwebp libevent libidl libnotify libvpx lld nodejs nss startup-notification unzip zip wasi-libc++
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gnupg gtk libevent libidl libnotify libvpx libwebp lld nodejs nss startup-notification unzip wasi-libc++ zip
 # Optional: sccache
 
 name=thunderbird
-version=102.2.2
+version=102.4.1
 release=1
 source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
-	$name.desktop
-	cbindgen-0.24.patch
-	rustc_version-0.4.0.patch
-	packed_simd_2-0.3.8.patch)
- 
+	$name.desktop)
+
 build() {
 	cd $name-$version
-
-	patch -p1 -i $SRC/cbindgen-0.24.patch
-	patch -p1 -i $SRC/rustc_version-0.4.0.patch
-	patch -p1 -i $SRC/packed_simd_2-0.3.8.patch
 
 	if [ -e '/usr/bin/ccache' ]; then
 		export OS_CCACHE_COMPILERCHECK="$(/usr/bin/clang -dumpversion | sed -z 's/\n/ /g'; crux | cut -d' ' -f3)"
@@ -29,6 +22,8 @@ build() {
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+	sed -i '/ROOT_CLIP_CHAIN/d' gfx/webrender_bindings/webrender_ffi.h
 
 cat <<- EOF > .mozconfig
 	ac_add_options --prefix=/usr
@@ -41,7 +36,6 @@ cat <<- EOF > .mozconfig
 	ac_add_options --with-system-libevent
 	ac_add_options --with-system-libvpx
 	ac_add_options --with-system-webp
-	ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot
 	ac_add_options --enable-av1
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
@@ -58,14 +52,14 @@ cat <<- EOF > .mozconfig
 	ac_add_options --disable-updater
 	ac_add_options --disable-crashreporter
 	ac_add_options --disable-necko-wifi
-	ac_add_options --disable-pulseaudio
 	ac_add_options --disable-elf-hack
+	ac_add_options --without-wasm-sandboxed-libraries
 EOF
 
 	# audio
-	prt-get isinst alsa-lib && echo 'ac_add_options --enable-alsa' >> .mozconfig || echo 'ac_add_options --disable-alsa' >> .mozconfig
-	prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig || echo 'ac_add_options --disable-jack' >> .mozconfig
-	prt-get isinst pulseaudio && echo 'ac_add_options --enable-pulseaudio' >> .mozconfig || echo 'ac_add_options --disable-pulseaudio' >> .mozconfig
+	prt-get isinst alsa-lib && echo 'ac_add_options --enable-audio-backends=alsa' >> .mozconfig
+	prt-get isinst pulseaudio && sed -i '/audio-backends/s/alsa/&,pulseaudio/' .mozconfig
+	#prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig || echo 'ac_add_options --disable-jack' >> .mozconfig
 
 	prt-get isinst wayland-protocols && \
 		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
