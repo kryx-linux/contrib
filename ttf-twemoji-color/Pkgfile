@@ -4,12 +4,13 @@
 # Depends on: fontconfig xorg-font-bitstream-vera
 
 name=ttf-twemoji-color
-version=13.1.0
-release=2
+version=14.0.2
+release=1
 source=(https://github.com/eosrei/twemoji-color-font/releases/download/v$version/TwitterColorEmoji-SVGinOT-Linux-$version.tar.gz)
 
 build() {
   cd TwitterColorEmoji-SVGinOT-Linux-$version
+
   install -Dm644 TwitterColorEmoji-SVGinOT.ttf -t $PKG/usr/share/fonts/TTF/"Twitter Color Emoji"/
-  install -Dm644 fontconfig/46-twemoji-color.conf $PKG/etc/fonts/conf.avail/46-twemoji-color.conf
+  install -Dm644 fontconfig/46-twemoji-color.conf $PKG/usr/share/fontconfig/conf.avail/46-twemoji-color.conf
 }
