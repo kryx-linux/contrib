@@ -18,12 +18,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.69.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.69.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.69.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.69.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.69.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.69.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/__pycache__/
@@ -146,7 +146,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/emailconfig.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/experimental.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/federation.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/groups.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/homeserver.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/jwt.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/key.cpython-310.opt-2.pyc
@@ -192,7 +191,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/emailconfig.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/experimental.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/federation.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/groups.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/homeserver.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/jwt.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/key.py
@@ -697,6 +695,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/receipts.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/register.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/relations.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/rendezvous.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/report_event.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/room.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/room_batch.cpython-310.opt-2.pyc
@@ -740,6 +739,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/receipts.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/register.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/relations.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/rendezvous.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/report_event.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/room.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/room_batch.py
@@ -1480,6 +1480,11 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/mai
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/04pending_device_list_updates.sql
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/05old_push_actions.sql.postgres
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/05old_push_actions.sql.sqlite
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/06thread_notifications_thread_id_idx.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/08thread_receipts_non_null.sql.postgres
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/08thread_receipts_non_null.sql.sqlite
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/09partial_joined_via_destination.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/09threads_table.sql
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/16/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/16/application_services.sql
