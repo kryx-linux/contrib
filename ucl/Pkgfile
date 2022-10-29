@@ -6,8 +6,9 @@
 
 name=ucl
 version=1.03
-release=2
-source=(http://www.oberhumer.com/opensource/ucl/download/ucl-$version.tar.gz)
+release=3
+source=(http://www.oberhumer.com/opensource/ucl/download/ucl-$version.tar.gz
+  ucl.pc.in)
 
 build() {
 	cd ucl-$version
@@ -15,9 +16,12 @@ build() {
 	CFLAGS+=" -std=gnu90 -fPIC"
 	./configure \
 		--prefix=/usr \
-		--enable-shared
+		--enable-shared \
+		--enable-static
 
 	make
 	make prefix=$PKG/usr install
-}
 
+	mkdir -p $PKG/usr/lib/pkgconfig/
+	sed "s|@VERSION@|$version|" $SRC/ucl.pc.in > $PKG/usr/lib/pkgconfig/ucl.pc
+}
