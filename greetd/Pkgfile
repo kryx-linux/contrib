@@ -1,0 +1,40 @@
+# Description: greetd is a minimal and flexible login manager daemon
+# URL: https://kl.wtf/projects/greetd/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+# Optional: scdoc
+
+name=greetd
+version=0.8.0
+release=1
+source=(https://git.sr.ht/~kennylevinsen/greetd/archive/$version.tar.gz
+  greetd.pam greetd.service)
+renames=($name-$version.tar.gz SKIP SKIP)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  mkdir "$PKGMK_SOURCE_DIR/rust" || true
+  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/greetd
+  install -Dt $PKG/usr/bin $name-$version/target/release/agreety
+  install -Dt $PKG/etc/greetd $name-$version/config.toml
+
+  ## needs scdoc
+  prt-get isinst scdoc && (
+  cd $name-$version/man
+  for i in *scd; do
+    scdoc < "$i"> "$(basename "$i")".roff
+  done
+  install -Dm755 agreety-1.scd.roff $PKG/usr/share/man/man1/agreety.1
+  install -Dm755 greetd-1.scd.roff $PKG/usr/share/man/man1/greetd.1
+  install -Dm755 greetd-5.scd.roff $PKG/usr/share/man/man5/greetd.5
+  install -Dm755 greetd-ipc-7.scd.roff $PKG/usr/share/man/man7/greetd-ipc.7)
+
+  # install pam configuration
+  install -Dm644 $SRC/greetd.pam $PKG/etc/pam.d/greetd
+  # install service file
+  install -Dm755 $SRC/greetd.service $PKG/etc/rc.d/greetd
+}
