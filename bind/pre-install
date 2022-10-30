@@ -7,7 +7,7 @@ fi
 
 if [ -z "`getent passwd named`" ]
 then
-  /usr/sbin/useradd  -u 25 -g named -d /var/named -s /bin/false named
+  /usr/sbin/useradd -r -u 25 -g named -d /var/named -s /bin/false named
   /usr/bin/passwd -l named
 fi
 
