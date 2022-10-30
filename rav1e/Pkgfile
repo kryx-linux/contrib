@@ -1,0 +1,22 @@
+# Description: an AV1 video encoder
+# URL: https://github.com/xiph/rav1e/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: cargo-c nasm
+
+name=rav1e
+version=0.5.1
+release=1
+source=(https://github.com/xiph/rav1e/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+  cargo cbuild --release --prefix=/usr --manifest-path \
+    $name-$version/Cargo.toml
+
+  cargo install --offline --no-track --path $name-$version --root $PKG/usr
+  cd $name-$version
+  cargo cinstall --release --prefix /usr --destdir $PKG
+}
