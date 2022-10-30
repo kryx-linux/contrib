@@ -1,0 +1,28 @@
+# Description: A simple GTK based notification daemon for SwayWM
+# URL: https://github.com/ErikReider/SwayNotificationCenter
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gtk-layer-shell json-glib libhandy
+
+name=swaync
+version=0.7.2
+release=1
+source=(https://github.com/ErikReider/SwayNotificationCenter/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  ls /usr/include/gtk-3.0/gdk/gdkwayland.h || (printf '\e[1;31m%-6s\e[m\n' "gtk3 is missing wayland libraries, rebuild mesa, then gtk3 to install $name" ; exit 1)
+
+  prt-get isinst bash-completions || PKGMK_SWAYNC+=' -D bash-completions=false'
+  prt-get isinst fish || PKGMK_SWAYNC+=' -D fish-completions=false'
+  prt-get isinst scdoc || PKGMK_SWAYNC+=' -D man-pages=false'
+  prt-get isinst zsh || PKGMK_SWAYNC+=' -D zsh-completions=false'
+
+  meson setup SwayNotificationCenter-$version build $PKGMK_SWAYNC \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
