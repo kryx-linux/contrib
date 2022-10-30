@@ -1,0 +1,15 @@
+# Description: Heavily optimized library for DEFLATE/zlib/gzip compression and decompression
+# URL: https://github.com/ebiggers/libdeflate
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=libdeflate
+version=1.14
+release=1
+source=(https://github.com/ebiggers/libdeflate/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  make PREFIX=/usr
+  make PREFIX=/usr DESTDIR=$PKG install
+}
