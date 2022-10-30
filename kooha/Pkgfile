@@ -1,0 +1,31 @@
+# Description: Elegantly record your screen
+# URL: https://github.com/SeaDve/Kooha/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: appstream-glib desktop-file-utils libadwaita pulseaudio python3-gobject
+
+name=kooha
+version=2.2.2
+release=1
+source=(https://github.com/SeaDve/Kooha/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  ls /usr/include/gtk-4.0/gdk/wayland/gdkwayland.h || (printf '\e[1;31m%-6s\e[m\n' "gtk4 is missing wayland libraries, rebuild mesa, then gtk4 to install $name" ; exit 1)
+
+  #export RUSTUP_TOOLCHAIN=stable
+  #export CARGO_TARGET_DIR=target
+
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  mkdir "$PKGMK_SOURCE_DIR/rust" || true
+  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+  meson setup Kooha-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
+}
