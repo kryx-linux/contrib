@@ -2,7 +2,7 @@
 # URL: https://www.gtk.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: adwaita-icon-theme docbook-xsl graphene gst-plugins-bad libxkbcommon sassc xorg-libxcursor xorg-libxinerama
-# Optional: colord cups vulkan wayland
+# Optional: colord cups vulkan wayland-protocols
 
 name=gtk4
 version=4.8.2
@@ -11,14 +11,14 @@ source=(https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/gtk-$version.tar.b
 
 build() {
   prt-get isinst colord && PKGMK_GTK4+=' -D colord=enabled'
-  prt-get isinst wayland || PKGMK_GTK4+=' -D wayland-backend=false'
+  prt-get isinst wayland-protocols || PKGMK_GTK4+=' -D wayland-backend=false'
   # manpages need rst2man, which we don't have
 
   meson setup gtk-$version build $PKGMK_GTK4 \
     --prefix=/usr \
     -D buildtype=plain \
     --wrap-mode nodownload \
-    -D b_lto=false \
+    -D b_lto=true \
     -D b_pie=true \
     -D broadway-backend=true \
     -D man-pages=false \
