@@ -1,0 +1,23 @@
+# Description: blingful character graphics/TUI library. definitely not curses
+# URL: https://nick-black.com/dankwiki/index.php/Notcurses
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: ffmpeg libdeflate libunistring ninja
+# Optional: libqrcodegen ffmpeg python3-cffi python3-pypandoc
+
+name=notcurses
+version=3.0.8
+release=1
+source=(https://github.com/dankamongmen/notcurses/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D USE_DOCTEST=OFF \
+    -D USE_PANDOC=OFF \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
