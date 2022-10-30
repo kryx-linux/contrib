@@ -1,0 +1,29 @@
+# Description: A simple clipboard manager for Wayland
+# URL: https://github.com/yory8/clipman
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: go startup-notification wl-clipboard-rs wlroots wofi
+
+name=clipman
+version=1.6.1
+release=1
+source=(https://github.com/yory8/clipman/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+
+  go build \
+    -trimpath \
+    -buildmode=pie \
+    -mod=readonly \
+    -modcacherw \
+    -o $name .
+  install -Dm755 $name $PKG/usr/bin/$name
+}
