@@ -1,0 +1,26 @@
+# Description: Displays keys being pressed on a Wayland session
+# URL: https://git.sr.ht/~sircmpwn/wshowkeys
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libinput libxkbcommon pango wayland-protocols
+
+name=wshowkeys
+# https://github.com/ammgws/wshowkeys/blob/e8bfc78f08ebdd1316daae59ecc77e62bba68b2b/meson.build#L4
+version=0.1.0
+release=1
+_commit=e8bfc78f08ebdd1316daae59ecc77e62bba68b2b
+source=(https://github.com/ammgws/wshowkeys/archive/$_commit/$name-$version.tar.gz)
+
+build() {
+  CC=gcc
+
+  meson setup $name-$_commit build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  chmod a+s $PKG/usr/bin/$name
+}
