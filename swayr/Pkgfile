@@ -1,0 +1,23 @@
+# Description: a window switcher for sway
+# URL: https://sr.ht/~tsdh/swayr/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=swayr
+version=0.22.0
+release=1
+# https://git.sr.ht/~tsdh/swayr/refs
+_commit=c4893cbcedb5948985cc49d2af5998092c0d6e71
+source=(https://git.sr.ht/~tsdh/swayr/archive/$_commit.tar.gz)
+renames=($name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  mkdir "$PKGMK_SOURCE_DIR/rust" || true
+  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+  cargo build --release --manifest-path $name-$_commit/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$_commit/target/release/$name
+  install -Dt $PKG/usr/bin $name-$_commit/target/release/${name}d
+}
