@@ -1,0 +1,18 @@
+# Description: Code formatter for Lua
+# URL: https://github.com/JohnnyMorganz/StyLua
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=stylua
+version=0.15.1
+release=1
+source=(https://github.com/JohnnyMorganz/StyLua/archive/v$version/StyLua-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  mkdir "$PKGMK_SOURCE_DIR/rust" || true
+  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+  cargo build --release --manifest-path StyLua-$version/Cargo.toml
+  install -Dt $PKG/usr/bin StyLua-$version/target/release/$name
+}
