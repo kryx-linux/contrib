@@ -1,0 +1,13 @@
+# Description: "zpool iostats" for humans; find the slow parts of your ZFS pool
+# URL: https://github.com/chadmiller/zpool-iostat-viz
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3
+
+name=zpool-iostat-viz
+version=3
+release=1
+source=(https://github.com/chadmiller/zpool-iostat-viz/archive/$version/$name-$version.tar.gz)
+
+build() {
+  install -Dt $PKG/usr/bin $name-$version/$name
+}
