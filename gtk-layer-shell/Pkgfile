@@ -1,17 +1,20 @@
 # Description: Library to create Wayland desktop components using the Layer Shell protocol
 # URL: https://github.com/wmww/gtk-layer-shell
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gtk3 wayland-protocols
+# Depends on: gtk3 libxkbcommon wayland-protocols
+# Optional: vala
 
 name=gtk-layer-shell
-version=0.7.0
+version=0.8.0
 release=1
 source=(https://github.com/wmww/gtk-layer-shell/archive/v$version/$name-$version.tar.gz)
 
 build() {
   ls /usr/include/gtk-3.0/gdk/gdkwayland.h || (printf '\e[1;31m%-6s\e[m\n' "gtk3 is missing wayland libraries, rebuild mesa, then gtk3 to install $name" ; exit 1)
 
-  meson setup $name-$version build \
+  prt-get isinst vala || PKGMK_GLS+=' -D vapi=false'
+
+  meson setup $name-$version build $PKGMK_GLS \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
