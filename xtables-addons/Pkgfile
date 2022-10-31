@@ -5,13 +5,12 @@
 # Depends on: iptables libmnl
 
 name=xtables-addons
-version=3.21
+version=3.22
 release=1
 source=(https://inai.de/files/$name/$name-$version.tar.xz)
 
 build() {
 	cd $name-$version
-	./autogen.sh
 	./configure \
 		--prefix=/usr \
 		--libexecdir=/usr/lib \
