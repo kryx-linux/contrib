@@ -4,7 +4,7 @@
 # Depends on: glade vala
 
 name=gtksourceview4
-version=4.8.2
+version=4.8.3
 release=1
 source=(https://ftp.gnome.org/pub/gnome/sources/gtksourceview/${version:0:3}/gtksourceview-$version.tar.xz)
 
@@ -12,6 +12,9 @@ build() {
 	meson setup gtksourceview-$version build \
 		--prefix=/usr \
 		--buildtype=plain \
+		--wrap-mode nodownload \
+		-D b_lto=true \
+		-D b_pie=true \
 		-D glade_catalog=true
 	meson compile -C build -j ${JOBS:-1}
 	DESTDIR=$PKG meson install -C build
