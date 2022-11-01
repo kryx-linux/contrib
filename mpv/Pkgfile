@@ -6,28 +6,18 @@
 
 name=mpv
 version=0.34.1
-release=2
-source=(https://github.com/$name-player/$name/archive/v$version/$name-v$version.tar.gz
-	https://waf.io/waf-2.0.9
-	mpv.1)
+release=4
+_commit=d3a28f12c9ced29982fc831722075bd0c73fb821
+source=(https://github.com/mpv-player/mpv/archive/$_commit/$name-v$version-$release.tar.gz)
 
 build() {
-	cd $name-$version
+  meson setup $name-$_commit build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
 
-	install -m0755 $SRC/waf-2.0.9 waf
-
-	[[ -e '/usr/lib/pkgconfig/libcdio_cdda.pc' ]] && PKGMK_MPV+=' --enable-cdda'
-	[[ -e '/usr/lib/pkgconfig/dvdnav.pc' ]] && PKGMK_MPV+=' --enable-dvdnav'
-
-	/usr/bin/python3 waf configure ${PKGMK_MPV} \
-		--prefix=/usr \
-		--enable-libarchive \
-		--enable-libmpv-shared \
-		-j ${JOBS-1}
-
-	/usr/bin/python3 waf build
-	/usr/bin/python3 waf install --destdir=$PKG
-	rm -r $PKG/usr/share/doc
-
-	[ -e '/usr/bin/rst2man.py' ] || install -D -m 0644 -t $PKG/usr/share/man/man1 $SRC/mpv.1
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
