@@ -9,7 +9,7 @@ release=1
 source=(https://code.videolan.org/videolan/libplacebo/-/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	CXXFLAGS+=" -I/usr/include/glslang"
+	CXXFLAGS+=' -I/usr/include/glslang' \
 	meson setup build $name-v$version \
 		--prefix=/usr \
 		--buildtype=plain \
@@ -17,6 +17,7 @@ build() {
 		-D b_lto=true \
 		-D b_pie=true \
 		-D vulkan=enabled \
+		-D vulkan-registry=/usr/share/vulkan/registry/vk.xml \
 		-D glslang=enabled \
 		-D shaderc=enabled \
 		-D lcms=enabled \
