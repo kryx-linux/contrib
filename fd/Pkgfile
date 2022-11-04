@@ -4,23 +4,20 @@
 # Depends on: rust
 
 name=fd
-version=8.4.0
+version=8.5.2
 release=1
 source=(https://github.com/sharkdp/fd/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	cd $name-$version
-
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
 	mkdir "$PKGMK_SOURCE_DIR/rust" || true
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-	cargo fetch
-	cargo build --release --locked
+	cargo build --release --manifest-path $name-$version/Cargo.toml
 
-	install -Dm755 target/release/fd $PKG/usr/bin/fd
-	install -Dm644 target/release/build/fd-find-*/out/fd.bash $PKG/usr/share/bash-completion/completions/fd
-	install -Dm644 target/release/build/fd-find-*/out/fd.fish $PKG/usr/share/fish/vendor_completions.d/fd.fish
-	install -Dm644 contrib/completion/_fd $PKG/usr/share/zsh/site-functions/_fd
-	install -Dm644 doc/fd.1 $PKG/usr/share/man/man1/fd.1
+	install -Dt $PKG/usr/bin $name-$version/target/release/$name
+
+	prt-get isinst bash-completions && install -Dm644 $name-$version/target/release/build/fd-find-*/out/fd.bash $PKG/usr/share/bash-completion/completions/fd
+	prt-get isinst zsh && install -Dm644 $name-$version/contrib/completion/_fd $PKG/usr/share/zsh/site-functions/_fd
+	install -Dm644 $name-$version/doc/fd.1 $PKG/usr/share/man/man1/fd.1
 }
