@@ -5,17 +5,16 @@
 # Optional: docutils youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libsdl2 libvdpau rubberband xorg-libxpresent
 
 name=mpv
-version=0.34.1
-release=4
-_commit=d3a28f12c9ced29982fc831722075bd0c73fb821
-source=(https://github.com/mpv-player/mpv/archive/$_commit/$name-v$version-$release.tar.gz)
+version=0.35.0
+release=1
+source=(https://github.com/mpv-player/mpv/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst libdvdnav && PKGMK_MPV="-D dvdnav=enabled"
   prt-get isinst libcdio-paranoia && PKGMK_MPV+=" -D cdda=enabled"
   prt-get isinst libsdl2 && PKGMK_MPV+=" -D sdl2=enabled"
 
-  meson setup $name-$_commit build $PKGMK_MPV \
+  meson setup $name-$version build $PKGMK_MPV \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
