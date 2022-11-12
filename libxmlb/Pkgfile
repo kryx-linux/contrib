@@ -5,12 +5,13 @@
 
 name=libxmlb
 version=0.3.10
-release=1
+release=2
 source=(https://people.freedesktop.org/~hughsient/releases/$name-$version.tar.xz)
 
 build() {
   meson setup $name-$version build \
     --prefix=/usr \
+    --libexecdir=lib/$name \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
