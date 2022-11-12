@@ -18,12 +18,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.70.1.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.71.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.71.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.71.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.71.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.71.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.71.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/__pycache__/
@@ -58,7 +58,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/_scripts/__pycache
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/_scripts/review_recent_signups.py
 -rwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/_scripts/synapse_port_db.py
 -rwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/_scripts/synctl.py
--rwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/_scripts/update_synapse_database.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/_scripts/update_synapse_database.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/api/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/api/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/api/__pycache__/
@@ -582,6 +582,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/replication/tcp/st
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/res/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/providers.json
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/_base.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/account_previously_renewed.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/account_renewed.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/add_threepid.html
@@ -626,6 +627,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/sso_new_user_consent.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/sso_partial_profile.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/sso_redirect_confirm.html
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/style.css
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/terms.html
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/__init__.py
@@ -827,7 +829,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/clien
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/oidc/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/oidc/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/oidc/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/oidc/__pycache__/backchannel_logout_resource.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/oidc/__pycache__/callback_resource.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/oidc/backchannel_logout_resource.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/oidc/callback_resource.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/password_reset.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/pick_idp.py
@@ -1485,6 +1489,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/mai
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/08thread_receipts_non_null.sql.sqlite
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/09partial_joined_via_destination.sql
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/09threads_table.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/10_update_sqlite_fts4_tokenizer.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/10login_tokens.sql
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/73/__pycache__/10_update_sqlite_fts4_tokenizer.cpython-310.opt-2.pyc
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/16/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/16/application_services.sql
