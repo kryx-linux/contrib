@@ -4,7 +4,7 @@
 # Depends on: nodejs
 
 name=npm
-version=8.19.2
+version=9.1.1
 release=1
 source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz
   destdir.patch)
@@ -20,15 +20,9 @@ build() {
   export npm_config_userconfig="$SRC/.npm/cache"
   export GATSBY_TELEMETRY_DISABLED="1"
 
-  # fix some build issues
-  # starting with 8.6.0, `make mandocs` would remove the node_modules dir
-  awk -i inplace \
-    '/node bin\/npm-cli.js run resetdeps/ gsub(/resetdeps/, "dumpconf")' \
-    Makefile
-  node bin/npm-cli.js install marked-man --no-global --no-timing --no-save
   patch -Np1 -i $SRC/destdir.patch
 
-  make mandocs
+  NODE_PATH=/usr/lib/node_modules node bin/npm-cli.js install
   NODE_PATH=/usr/lib/node_modules node bin/npm-cli.js pack
   NODE_PATH=/usr/lib/node_modules DESTDIR=$PKG node bin/npm-cli.js \
     install -g -f npm-$version.tgz
