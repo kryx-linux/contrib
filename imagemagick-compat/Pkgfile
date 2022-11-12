@@ -4,7 +4,7 @@
 # Depends on: lcms2 pango xorg-libxt
 
 name=imagemagick-compat
-version=6.9.12-30
+version=6.9.12-67
 release=1
 source=(https://www.imagemagick.org/download/releases/ImageMagick-$version.tar.xz
 	IM6-GS-policy.patch)
@@ -42,5 +42,5 @@ build() {
     rm -r $PKG/usr/{bin,share/man}
     rm $PKG/usr/lib/*.la
 
-    rm $PKG/usr/lib/perl5/site_perl/5.32/linux-thread-multi/Image/Magick.pm
+    rm $PKG/usr/lib/perl5/site_perl/5.36/linux-thread-multi/Image/Magick.pm
 }
