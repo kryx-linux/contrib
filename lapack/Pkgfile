@@ -1,17 +1,15 @@
 # Description: Linear Algebra PACKage - F77 routines for Linear Algebra.
 # URL: https://performance.netlib.org/lapack/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cmake gcc-fortran python3 openblas
+# Depends on: gcc-fortran python3 openblas
 
 name=lapack
-version=3.10.1
-release=1
+version=3.11
+release=2
 source=(https://github.com/Reference-LAPACK/lapack/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
-  export CFLAGS+=' -fPIC'
-  prt-get isinst ninja && PKGMK_LAPACK+=' -G Ninja'
-  cmake -S $name-$version -B build $PKGMK_LAPACK \
+  cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
