@@ -5,13 +5,16 @@
 
 name=chafa
 version=1.12.4
-release=1
+release=2
 source=(https://github.com/hpjansson/chafa/releases/download/$version/chafa-$version.tar.xz)
 
 build() {
   cd $name-$version
   ./autogen.sh
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr \
+    --enable-gtk-doc-html=no
   make
   make DESTDIR=$PKG install
+
+  rm -rf $PKG/usr/share/gtk-doc
 }
