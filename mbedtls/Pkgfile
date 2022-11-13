@@ -1,20 +1,14 @@
 # Description: Cryptographic library for embedded systems
 # URL: https://tls.mbed.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake python3
+# Depends on: python3
 
 name=mbedtls
-version=2.28.1
+version=3.2.1
 release=1
 source=(https://github.com/ARMmbed/mbedtls/archive/$name-$version.tar.gz)
 
 build() {
-	# enable flags for non-embedded systems
-	sed -i 's|//\(#define MBEDTLS_HAVE_SSE2\)|\1|' $name-$name-$version/include/mbedtls/config.h
-	sed -i 's|//\(#define MBEDTLS_ZLIB_SUPPORT\)|\1|' $name-$name-$version/include/mbedtls/config.h
-	sed -i 's|//\(#define MBEDTLS_THREADING_C\)|\1|' $name-$name-$version/include/mbedtls/config.h
-	sed -i 's|//\(#define MBEDTLS_THREADING_PTHREAD\)|\1|' $name-$name-$version/include/mbedtls/config.h
-
 	cmake -S $name-$name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_BUILD_TYPE=Release \
