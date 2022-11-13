@@ -5,7 +5,7 @@
 
 name=suitesparse
 version=6.0.0
-release=1
+release=2
 source=(https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version/$name-$version.tar.gz
   769870a0.patch)
 
@@ -14,10 +14,12 @@ build() {
 
   patch -Np1 -i $SRC/769870a0.patch
 
-  CMAKE_OPTIONS="-DBLA_VENDOR=Generic \
-  -DCMAKE_INSTALL_PREFIX=/usr \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_CXX_FLAGS_RELEASE=\"$CXXFLAGS -ffat-lto-objects\"" \
+  CMAKE_OPTIONS="-D BLA_VENDOR=Generic \
+  -D CMAKE_INSTALL_PREFIX=/usr \
+  -D CMAKE_INSTALL_LIBDIR=lib \
+  -D CMAKE_BUILD_TYPE=Release \
+  -D CMAKE_C_FLAGS_RELEASE=\"$CFLAGS -ffat-lto-objects\" \
+  -D CMAKE_CXX_FLAGS_RELEASE=\"$CXXFLAGS -ffat-lto-objects\"" \
   make
 
   make DESTDIR=$PKG install
