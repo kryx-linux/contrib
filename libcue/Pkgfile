@@ -1,17 +1,16 @@
 # Description: CUE Sheet Parser Library
 # URL: https://github.com/lipnitsk/libcue/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake
 
 name=libcue
 version=2.2.1
-release=1
+release=2
 source=(https://github.com/lipnitsk/libcue/archive/v$version/$name-$version.tar.gz)
 
 build() {
-	[[ -e /usr/bin/ninja ]] && PKGMK_LIBCUE+=' -G Ninja'
-	cmake -S $name-$version -B build $PKGMK_DOXYGEN \
+	cmake -S $name-$version -B build -G Ninja $PKGMK_DOXYGEN \
 		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
