@@ -4,15 +4,14 @@
 # Depends on: cmake readline
 
 name=physfs
-version=3.0.2
+version=3.2.0
 release=1
-source=(https://icculus.org/$name/downloads/$name-$version.tar.bz2)
+source=(https://github.com/icculus/physfs/archive/release-$version/$name-$version.tar.gz)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_PHYSFS+=' -G Ninja'
-
-	cmake -S $name-$version -B build $PKGMK_PHYSFS \
+	cmake -S $name-release-$version -B build -G Ninja $PKGMK_PHYSFS \
 		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
