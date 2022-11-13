@@ -5,12 +5,13 @@
 
 name=mbedtls
 version=3.2.1
-release=1
+release=2
 source=(https://github.com/ARMmbed/mbedtls/archive/$name-$version.tar.gz)
 
 build() {
 	cmake -S $name-$name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
 		-D ENABLE_ZLIB_SUPPORT=ON \
