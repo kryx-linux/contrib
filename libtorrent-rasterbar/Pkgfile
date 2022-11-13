@@ -4,29 +4,22 @@
 # Depends on: boost python3-setuptools
 
 name=libtorrent-rasterbar
-version=1.2.11
+version=2.0.8
 release=1
-source=(https://github.com/arvidn/libtorrent/releases/download/v$version/$name-$version.tar.gz
-	libtorrent-rasterbar-cxx14-fix.patch
-	really-disable-debug-flags.patch)
+source=(https://github.com/arvidn/libtorrent/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D python-bindings=ON \
+    -D boost-python-module-name="python" \
+    -D python-egg-info=ON \
+    -Wno-dev
 
-	# https://github.com/arvidn/libtorrent/issues/5024
-	patch -p1 -i $SRC/libtorrent-rasterbar-cxx14-fix.patch
-
-	patch -p1 -i $SRC/really-disable-debug-flags.patch
-	autoreconf -fi
-
-	PYTHON='/usr/bin/python3' \
-	./configure \
-		--prefix=/usr \
-		--enable-python-binding \
-		--with-libiconv \
-		--enable-python-binding \
-		--with-boost-python=boost_python3
-
-	make
-	make DESTDIR=$PKG install
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }
