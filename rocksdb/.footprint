@@ -60,17 +60,21 @@ drwxr-xr-x	root/root	usr/include/rocksdb/
 -rw-r--r--	root/root	usr/include/rocksdb/thread_status.h
 -rw-r--r--	root/root	usr/include/rocksdb/threadpool.h
 -rw-r--r--	root/root	usr/include/rocksdb/trace_reader_writer.h
+-rw-r--r--	root/root	usr/include/rocksdb/trace_record.h
+-rw-r--r--	root/root	usr/include/rocksdb/trace_record_result.h
 -rw-r--r--	root/root	usr/include/rocksdb/transaction_log.h
 -rw-r--r--	root/root	usr/include/rocksdb/types.h
+-rw-r--r--	root/root	usr/include/rocksdb/unique_id.h
 -rw-r--r--	root/root	usr/include/rocksdb/universal_compaction.h
 drwxr-xr-x	root/root	usr/include/rocksdb/utilities/
+-rw-r--r--	root/root	usr/include/rocksdb/utilities/agg_merge.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/backup_engine.h
--rw-r--r--	root/root	usr/include/rocksdb/utilities/backupable_db.h
+-rw-r--r--	root/root	usr/include/rocksdb/utilities/cache_dump_load.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/checkpoint.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/convenience.h
+-rw-r--r--	root/root	usr/include/rocksdb/utilities/customizable_util.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/db_ttl.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/debug.h
--rw-r--r--	root/root	usr/include/rocksdb/utilities/env_librados.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/env_mirror.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/info_log_finder.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/ldb_cmd.h
@@ -85,16 +89,17 @@ drwxr-xr-x	root/root	usr/include/rocksdb/utilities/lua/
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/option_change_migration.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/options_type.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/options_util.h
+-rw-r--r--	root/root	usr/include/rocksdb/utilities/replayer.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/sim_cache.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/stackable_db.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/table_properties_collectors.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/transaction.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/transaction_db.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/transaction_db_mutex.h
--rw-r--r--	root/root	usr/include/rocksdb/utilities/utility_db.h
 -rw-r--r--	root/root	usr/include/rocksdb/utilities/write_batch_with_index.h
 -rw-r--r--	root/root	usr/include/rocksdb/version.h
 -rw-r--r--	root/root	usr/include/rocksdb/wal_filter.h
+-rw-r--r--	root/root	usr/include/rocksdb/wide_columns.h
 -rw-r--r--	root/root	usr/include/rocksdb/write_batch.h
 -rw-r--r--	root/root	usr/include/rocksdb/write_batch_base.h
 -rw-r--r--	root/root	usr/include/rocksdb/write_buffer_manager.h
@@ -113,9 +118,12 @@ drwxr-xr-x	root/root	usr/lib/cmake/rocksdb/modules/
 -rw-r--r--	root/root	usr/lib/cmake/rocksdb/modules/FindTBB.cmake
 -rw-r--r--	root/root	usr/lib/cmake/rocksdb/modules/Findgflags.cmake
 -rw-r--r--	root/root	usr/lib/cmake/rocksdb/modules/Findlz4.cmake
+-rw-r--r--	root/root	usr/lib/cmake/rocksdb/modules/Finduring.cmake
 -rw-r--r--	root/root	usr/lib/cmake/rocksdb/modules/Findzstd.cmake
 -rw-r--r--	root/root	usr/lib/cmake/rocksdb/modules/ReadVersion.cmake
 -rw-r--r--	root/root	usr/lib/librocksdb.a
-lrwxrwxrwx	root/root	usr/lib/librocksdb.so -> librocksdb.so.6
-lrwxrwxrwx	root/root	usr/lib/librocksdb.so.6 -> librocksdb.so.6.22.1
--rwxr-xr-x	root/root	usr/lib/librocksdb.so.6.22.1
+lrwxrwxrwx	root/root	usr/lib/librocksdb.so -> librocksdb.so.7
+lrwxrwxrwx	root/root	usr/lib/librocksdb.so.7 -> librocksdb.so.7.7.3
+-rwxr-xr-x	root/root	usr/lib/librocksdb.so.7.7.3
+drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-rw-r--r--	root/root	usr/lib/pkgconfig/rocksdb.pc
