@@ -4,15 +4,12 @@
 # Depends on: lapack metis
 
 name=suitesparse
-version=6.0.0
-release=2
-source=(https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version/$name-$version.tar.gz
-  769870a0.patch)
+version=6.0.1
+release=1
+source=(https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd SuiteSparse-$version
-
-  patch -Np1 -i $SRC/769870a0.patch
 
   CMAKE_OPTIONS="-D BLA_VENDOR=Generic \
   -D CMAKE_INSTALL_PREFIX=/usr \
