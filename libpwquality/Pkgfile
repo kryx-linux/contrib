@@ -4,12 +4,13 @@
 # Depends on: cracklib linux-pam python3
 
 name=libpwquality
-version=1.4.4
-release=2
+version=1.4.5
+release=1
 source=(https://github.com/libpwquality/libpwquality/releases/download/$name-$version/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
+
   sed '/mr_IN/d' -i po/LINGUAS
   autoreconf -fvi
   export SETUPTOOLS_USE_DISTUTILS=stdlib
@@ -22,6 +23,7 @@ build() {
     --enable-pam \
     --disable-nls
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
   make
   make DESTDIR=$PKG install
 }
