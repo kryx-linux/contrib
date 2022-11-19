@@ -4,21 +4,20 @@
 # Depends on: lz4 ucl zlib
 
 name=upx
-version=4.0.0
+version=4.0.1
 release=1
-source=(https://github.com/upx/upx/releases/download/v$version/upx-$version-src.tar.xz
-  system-deps.patch)
+source=(https://github.com/upx/upx/releases/download/v$version/upx-$version-src.tar.xz)
 
 build() {
-	patch -Np1 -d $name-$version-src -i $SRC/system-deps.patch
-	rm -rf $name-$version-src/vendor/ucl
-
 	cmake -S $name-$version-src -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D UPX_CONFIG_DISABLE_WERROR=ON \
+		-D UPX_CONFIG_DISABLE_SANITIZE=ON \
+		-D UPX_CONFIG_DISABLE_GITREV=ON \
 		-Wno-dev
 
 	cmake --build build
