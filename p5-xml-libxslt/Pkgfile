@@ -4,12 +4,17 @@
 # Depends on: libxslt p5-xml-libxml
 
 name=p5-xml-libxslt
-version=2.001000
+version=2.002000
 release=1
-source=(https://www.cpan.org/authors/id/S/SH/SHLOMIF/XML-LibXSLT-$version.tar.gz)
+source=(https://www.cpan.org/authors/id/S/SH/SHLOMIF/XML-LibXSLT-$version.tar.gz
+  59547c5f4103d33c352f8559da9654032cc8c44f.patch)
 
 build() {
   cd XML-LibXSLT-$version
+
+  # latest change made the Makefile not find libxslt, so we revert that here
+  patch -Rp1 -i $SRC/59547c5f4103d33c352f8559da9654032cc8c44f.patch
+
   perl Makefile.PL INSTALLDIRS=vendor
   make
   make DESTDIR=$PKG install
