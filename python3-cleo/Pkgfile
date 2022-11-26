@@ -13,8 +13,9 @@ build() {
 
   if prt-get isinst python3-poetry; then
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+    /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
   else
     /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps cleo
+    rm -r $PKG/usr/lib/python3.10/site-packages/cleo-2.0.1.dist-info/{INSTALLER,REQUESTED}
   fi
 }
