@@ -5,9 +5,10 @@
 # Optional: alsa-utils bluez curl font-awesome-compat font-powerline kdeconnect notmuch pulseaudio upower
 
 name=i3status-rust
-version=0.21.11
+version=0.22.0
 release=1
-source=(https://github.com/greshake/i3status-rust/archive/v$version/$name-$version.tar.gz)
+_commit=227bc31409aef6de90aa37e929da0c6c90134e3c
+source=(https://github.com/greshake/i3status-rust/archive/$_commit/$name-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
@@ -19,18 +20,18 @@ build() {
   prt-get isinst pulseaudio && PKGMK_I3STATUS_RUST+=' libpulse-binding'
 
   [[ -n $PKGMK_I3STATUS_RUST ]] \
-    && cargo build --manifest-path $name-$version/Cargo.toml --release --features "$PKGMK_I3STATUS_RUST" \
-    || cargo build --manifest-path $name-$version/Cargo.toml --release --no-default-features
+    && cargo build --manifest-path $name-$_commit/Cargo.toml --release --features "$PKGMK_I3STATUS_RUST" \
+    || cargo build --manifest-path $name-$_commit/Cargo.toml --release --no-default-features
 
-  install -Dt $PKG/usr/bin $name-$version/target/release/i3status-rs
+  install -Dt $PKG/usr/bin $name-$_commit/target/release/i3status-rs
 
-  install -Dm644 $name-$version/man/i3status-rs.1 -t $PKG/usr/share/man/man1
+  install -Dm644 $name-$_commit/man/i3status-rs.1 -t $PKG/usr/share/man/man1
 
-  for icon_set in $name-$version/files/icons/*.toml; do
+  for icon_set in $name-$_commit/files/icons/*.toml; do
     install -Dm644 $icon_set -t $PKG/usr/share/$name/icons
   done
 
-  for theme in $name-$version/files/themes/*.toml; do
+  for theme in $name-$_commit/files/themes/*.toml; do
     install -Dm644 $theme -t $PKG/usr/share/$name/themes
   done
 }
