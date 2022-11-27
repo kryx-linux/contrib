@@ -1,0 +1,17 @@
+# Description: Simple implementation of msgpack in C Lua 5.1
+# URL: https://github.com/libmpack/libmpack-lua
+# Maintainer:
+# Depends on: libmpack lua51
+
+name=lua51-mpack
+version=1.0.9
+release=1
+source=(https://github.com/libmpack/libmpack-lua/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd libmpack-lua-$version
+
+  gcc -O2 -fPIC -DMPACK_USE_SYSTEM -I/usr/include/lua5.1 -c lmpack.c -o lmpack.o
+  gcc -shared -lmpack -o mpack.so.5.1 lmpack.o
+  install -Dm755 mpack.so.5.1 $PKG/usr/lib/lua/5.1/mpack.so
+}
