@@ -1,22 +1,14 @@
 # Description: Library for decoding ATSC A/52 streams.
-# URL: http://liba52.sourceforge.net/
+# URL: https://liba52.sourceforge.io/
 # Maintainer: Danny Rawlins, crux at romster dot me
 
 name=liba52
-version=0.7.4
+version=0.8.0
 release=7
-source=(http://liba52.sourceforge.net/files/a52dec-$version.tar.gz
-	a52dec-0.7.4-build.patch)
+source=(https://distfiles.adelielinux.org/source/a52dec/a52dec-$version.tar.gz)
 
 build() {
 	cd a52dec-$version
-
-	# fix for automake 1.13.x
-	install -d m4
-	sed -i -e 's/^AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' configure.in
-
-	patch -p 1 -i $SRC/a52dec-0.7.4-build.patch
-	./bootstrap
 
 	./configure \
 		--prefix=/usr \
@@ -28,4 +20,5 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+	install -m644 liba52/a52_internal.h $PKG/usr/include/a52dec/
 }
