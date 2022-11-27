@@ -1,0 +1,27 @@
+# Description: An efficient object serialization library
+# URL: https://msgpack.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: graphviz
+
+name=msgpack-c
+version=4.0.0
+release=1
+source=(https://github.com/msgpack/msgpack-c/releases/download/c-$version/$name-$version.tar.gz)
+
+build() {
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D CMAKE_C_STANDARD='17' \
+    -D BUILD_SHARED_LIBS=ON \
+    -D MSGPACK_ENABLE_STATIC=OFF \
+    -D MSGPACK_BUILD_EXAMPLES=OFF \
+    -D MSGPACK_BUILD_TESTS=OFF \
+    -Wno-dev
+
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
