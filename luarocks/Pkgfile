@@ -1,0 +1,16 @@
+# Description: LuaRocks is the package manager for Lua modules
+# URL: https://luarocks.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: lua unzip zip
+
+name=luarocks
+version=3.9.1
+release=1
+source=(https://luarocks.org/releases/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr
+  make ./build/luarocks ./build/luarocks-admin ./build/config-5.4.lua
+  make DESTDIR=$PKG install
+}
