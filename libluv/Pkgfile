@@ -1,0 +1,29 @@
+# Description: Bare libuv bindings for lua
+# URL: https://github.com/luvit/luv
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libuv luajit
+
+name=libluv
+version=1.44.2-1
+release=1
+source=(https://github.com/luvit/luv/releases/download/$version/luv-$version.tar.gz
+  cmake-use-pkgconfig.patch)
+
+build() {
+  patch -Np1 -d luv-$version -i $SRC/cmake-use-pkgconfig.patch
+
+  cmake -S luv-$version -B build-shared -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D LUA_BUILD_TYPE=System \
+    -D WITH_SHARED_LIBUV=ON \
+    -D BUILD_SHARED_LIBS=ON \
+    -D BUILD_STATIC_LIBS=OFF \
+    -D WITH_LUA_ENGINE=LuaJit \
+    -D BUILD_MODULE=OFF \
+    -Wno-dev
+
+  cmake --build build-shared
+  DESTDIR=$PKG cmake --install build-shared
+}
