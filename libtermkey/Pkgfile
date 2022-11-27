@@ -1,0 +1,15 @@
+# Description: Library for easy processing of keyboard entry from terminal-based programs
+# URL: http://www.leonerd.org.uk/code/libtermkey
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: unibilium
+
+name=libtermkey
+version=0.22
+release=1
+source=(https://www.leonerd.org.uk/code/libtermkey/libtermkey-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  make PREFIX=/usr
+  make PREFIX=/usr DESTDIR=$PKG install
+}
