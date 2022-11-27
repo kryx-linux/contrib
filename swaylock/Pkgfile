@@ -5,7 +5,7 @@
 # Optional: gdk-pixbuf scdoc
 
 name=swaylock
-version=1.6
+version=1.7
 release=1
 source=(https://github.com/swaywm/swaylock/archive/$version/$name-$version.tar.gz)
 
@@ -13,7 +13,7 @@ build() {
   prt-get isinst bash-completion || PKGMK_SWAYLOCK+=' -D bash-completions=false'
   prt-get isinst zsh || PKGMK_SWAYLOCK+=' -D zsh-completions=false'
 
-  CFLAGS+=' -Wno-error' \
+  #CFLAGS+=' -Wno-error' \
   meson setup $name-$version build $PKGMK_SWAYLOCK \
     --prefix=/usr \
     --buildtype=plain \
