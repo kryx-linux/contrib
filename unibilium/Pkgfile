@@ -1,0 +1,15 @@
+# Description: a very basic terminfo library
+# URL: https://github.com/neovim/unibilium
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=unibilium
+version=2.1.1
+release=1
+source=(https://github.com/neovim/unibilium/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  make PREFIX=/usr
+  DESTDIR=$PKG make install PREFIX=/usr
+}
