@@ -1,0 +1,21 @@
+# Description: a new pattern-matching library for Lua, based on Parsing Expression Grammars
+# URL: http://www.inf.puc-rio.br/~roberto/lpeg/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: lua51
+
+name=lua51-lpeg
+version=1.0.2
+release=1
+source=(http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-$version.tar.gz)
+
+build() {
+  cd lpeg-$version
+
+  sed 's/^CFLAGS =/CFLAGS +=/' -i makefile
+  sed 's/^COPT =/# COPT =/' -i makefile
+
+  make LUADIR=/usr/include/lua5.1
+
+  install -Dm0755 lpeg.so $PKG/usr/lib/lua/5.1/lpeg.so
+  install -Dm0644 re.lua "${pkgdir}"/usr/share/lua/5.1/re.lua
+}
