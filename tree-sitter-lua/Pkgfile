@@ -1,0 +1,25 @@
+# Description: Lua grammar for tree-sitter
+# URL: https://github.com/MunifTanjim/tree-sitter-lua
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: npm tree-sitter
+
+name=tree-sitter-lua
+version=0.0.14
+release=1
+source=(https://github.com/MunifTanjim/tree-sitter-lua/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  tree-sitter generate --log
+
+  cd src
+  export CFLAGS+=' -fPIC'
+  cc $CFLAGS -std=c99 -c parser.c
+  cc $CFLAGS -c scanner.c
+  cc $LDFLAGS -shared parser.o scanner.o -o parser.so
+
+  install -Dm 644 parser.so $PKG/usr/lib/libtree-sitter-lua.so
+  install -d $PKG/usr/share/nvim/runtime/parser/
+  ln -s /usr/lib/libtree-sitter-lua.so $PKG/usr/share/nvim/runtime/parser/lua.so
+}
