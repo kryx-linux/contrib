@@ -1,0 +1,23 @@
+# Description: Tree-sitter parser for Vim help files
+# URL: https://github.com/neovim/tree-sitter-vimdoc
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: npm tree-sitter
+
+name=tree-sitter-vimdoc
+version=1.2.5
+release=1
+source=(https://github.com/neovim/tree-sitter-vimdoc/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  tree-sitter generate --log
+  cd src
+  export CFLAGS+=' -fPIC'
+  cc $CFLAGS -std=c99 -c parser.c
+  cc $LDFLAGS -shared parser.o -o parser.so
+
+  install -Dm 644 parser.so $PKG/usr/lib/libtree-sitter-vimdoc.so
+  install -d $PKG/usr/share/nvim/runtime/parser/
+  ln -s /usr/lib/libtree-sitter-vimdoc.so $PKG/usr/share/nvim/runtime/parser/vimdoc.so
+}
