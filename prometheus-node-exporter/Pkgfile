@@ -5,7 +5,7 @@
 # Optional: python3-bcrypt
 
 name=prometheus-node-exporter
-version=1.4.0
+version=1.5.0
 release=1
 source=(https://github.com/prometheus/node_exporter/archive/v$version/$name-$version.tar.gz
   prometheus-node-exporter.service config.yml
@@ -31,6 +31,6 @@ build() {
   install -Dm755 node_exporter $PKG/usr/bin/node_exporter
 
   install -Dm755 $SRC/prometheus-node-exporter.service $PKG/etc/rc.d/$name
-  install -Dm644 $SRC/gen-pass.py $PKG/usr/lib/$name/gen-pass.py
+  prt-get isinst python3-bcrypt && install -Dm644 $SRC/gen-pass.py $PKG/usr/lib/$name/gen-pass.py
   install -Dm644 $SRC/config.yml $PKG/etc/node-exporter/config.yml
 }
