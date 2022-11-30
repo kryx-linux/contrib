@@ -1,11 +1,11 @@
 # Description: GUI for neovim, without any web bloat
 # URL: https://github.com/vhakulinen/gnvim
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gtk3 neovim rust
+# Depends on: gtk4 neovim rust
 # Optional: webkitgtk
 
 name=gnvim
-version=0.1.6
+version=0.2.0
 release=1
 source=(https://github.com/vhakulinen/gnvim/archive/v$version/$name-$version.tar.gz)
 
@@ -16,26 +16,8 @@ build() {
 
   prt-get isinst webkitgtk || PKGMK_GNVIM+=' --no-default-features'
 
-cat <<- EOF > $name-$version/build.rs
-use std::env;
-use std::fs::File;
-use std::io::Write;
-use std::path::Path;
-
-fn main() {
-  let out_dir = env::var("OUT_DIR").unwrap();
-  let dest_path = Path::new(&out_dir).join("gnvim_version.rs");
-  let mut f = File::create(&dest_path).unwrap();
-  f.write_all(b"const VERSION: &str = \"${version}\";").unwrap();
-}
-EOF
-
-  sed \
-    -e s'|/usr/local/share/gnvim/runtime|/usr/share/gnvim/runtime|' \
-    -i $name-$version/src/main.rs
-
-  cargo fetch --manifest-path $name-$version/Cargo.toml --locked
-  cargo build --manifest-path $name-$version/Cargo.toml --release --frozen $PKGMK_GNVIM
-
+  sed -e 's|/usr/local/share/gnvim/runtime|/usr/share/gnvim/runtime|' \
+    -i $name-$version/ui/src/arguments.rs
+  make -C $name-$version build
   make -C $name-$version PREFIX=/usr DESTDIR=$PKG install
 }
