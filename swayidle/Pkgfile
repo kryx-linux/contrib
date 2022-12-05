@@ -1,20 +1,17 @@
 # Description: Idle management daemon for Wayland
 # URL: https://github.com/swaywm/swayidle
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: basu wayland-protocols
+# Depends on: wayland-protocols
 # Optional: scdoc
 
 name=swayidle
-version=1.7.1
+version=1.8.0
 release=1
-source=(https://github.com/swaywm/swayidle/archive/$version/$name-$version.tar.gz
-  89.patch)
+source=(https://github.com/swaywm/swayidle/archive/$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst bash-completion || PKGMK_SWAYIDLE+=' -D bash-completions=false'
   prt-get isinst zsh || PKGMK_SWAYIDLE+=' -D zsh-completions=false'
-
-  patch -Np1 -d $name-$version -i $SRC/89.patch
 
   meson setup $name-$version build $PKGMK_SWAYIDLE \
     --prefix=/usr \
@@ -22,7 +19,6 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D sd-bus-provider=basu \
     -D fish-completions=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
