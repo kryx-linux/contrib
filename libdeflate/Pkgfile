@@ -4,12 +4,18 @@
 # Depends on:
 
 name=libdeflate
-version=1.14
+version=1.15
 release=1
 source=(https://github.com/ebiggers/libdeflate/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  make PREFIX=/usr
-  make PREFIX=/usr DESTDIR=$PKG install
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -Wno-dev
+
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }
