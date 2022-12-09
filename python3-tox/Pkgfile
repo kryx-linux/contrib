@@ -4,15 +4,13 @@
 # Depends on: python3-packaging python3-pluggy python3-py python3-toml python3-virtualenv
 
 name=python3-tox
-version=3.27.1
+version=4.0.3
 release=1
 source=(https://pypi.io/packages/source/t/tox/tox-$version.tar.gz)
 
 build() {
   cd tox-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
