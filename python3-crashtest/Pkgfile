@@ -12,9 +12,10 @@ source=(https://github.com/sdispater/crashtest/archive/$version/$name-$version.t
 build() {
   cd crashtest-$version
   if prt-get isinst python3-poetry; then
-    /usr/bin/poetry build --format wheel
-    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps dist/*.whl
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
   else
     /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps crashtest
+    rm -rf $PKG/usr/lib/python*/site-packages/crashtest-$version.dist-info/{INSTALLER,REQUESTED}
   fi
 }
