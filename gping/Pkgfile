@@ -4,19 +4,15 @@
 # Depends on: rust
 
 name=gping
-version=1.4.0
+version=1.5.1
 release=1
 source=(https://github.com/orf/gping/archive/refs/tags/$name-v$version.tar.gz)
 
 build() {
-	mv $name-$name-v$version $name-v$version
-	cd $name-v$version
-
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-	mkdir "$PKGMK_SOURCE_DIR/rust" || true
-	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+	[[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
-	cargo build --release
+	cargo build --release --manifest-path $name-$name-v$version/Cargo.toml
 
-	install -D -m 0755 -t $PKG/usr/bin target/release/gping
+	install -Dt $PKG/usr/bin $name-$name-v$version/target/release/$name
 }
