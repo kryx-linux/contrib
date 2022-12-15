@@ -74,6 +74,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxrwxr-x	root/root	usr/bin/virt-pki-validate
 -rwxr-xr-x	root/root	usr/bin/virt-qemu-qmp-proxy
 -rwxr-xr-x	root/root	usr/bin/virt-qemu-run
+-rwxr-xr-x	root/root	usr/bin/virt-qemu-sev-validate
 -rwxr-xr-x	root/root	usr/bin/virt-ssh-helper
 -rwxrwxr-x	root/root	usr/bin/virt-xml-validate
 drwxr-xr-x	root/root	usr/include/
@@ -98,22 +99,27 @@ drwxr-xr-x	root/root	usr/include/libvirt/
 -rw-r--r--	root/root	usr/include/libvirt/virterror.h
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/firewalld/
+drwxr-xr-x	root/root	usr/lib/firewalld/policies/
+-rw-r--r--	root/root	usr/lib/firewalld/policies/libvirt-routed-in.xml
+-rw-r--r--	root/root	usr/lib/firewalld/policies/libvirt-routed-out.xml
+-rw-r--r--	root/root	usr/lib/firewalld/policies/libvirt-to-host.xml
 drwxr-xr-x	root/root	usr/lib/firewalld/zones/
+-rw-r--r--	root/root	usr/lib/firewalld/zones/libvirt-routed.xml
 -rw-r--r--	root/root	usr/lib/firewalld/zones/libvirt.xml
 -rwxr-xr-x	root/root	usr/lib/libnss_libvirt.so.2
 -rwxr-xr-x	root/root	usr/lib/libnss_libvirt_guest.so.2
 lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so -> libvirt-admin.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so.0 -> libvirt-admin.so.0.8009.0
--rwxr-xr-x	root/root	usr/lib/libvirt-admin.so.0.8009.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so.0 -> libvirt-admin.so.0.8010.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-admin.so.0.8010.0
 lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so -> libvirt-lxc.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so.0 -> libvirt-lxc.so.0.8009.0
--rwxr-xr-x	root/root	usr/lib/libvirt-lxc.so.0.8009.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so.0 -> libvirt-lxc.so.0.8010.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-lxc.so.0.8010.0
 lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so -> libvirt-qemu.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so.0 -> libvirt-qemu.so.0.8009.0
--rwxr-xr-x	root/root	usr/lib/libvirt-qemu.so.0.8009.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so.0 -> libvirt-qemu.so.0.8010.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-qemu.so.0.8010.0
 lrwxrwxrwx	root/root	usr/lib/libvirt.so -> libvirt.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt.so.0 -> libvirt.so.0.8009.0
--rwxr-xr-x	root/root	usr/lib/libvirt.so.0.8009.0
+lrwxrwxrwx	root/root	usr/lib/libvirt.so.0 -> libvirt.so.0.8010.0
+-rwxr-xr-x	root/root	usr/lib/libvirt.so.0.8010.0
 drwxr-xr-x	root/root	usr/lib/libvirt/
 drwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/
 -rwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/libvirt_driver_ch.so
@@ -350,12 +356,7 @@ drwxr-xr-x	root/root	usr/share/doc/libvirt/html/go/
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/hacking.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/hooks.html
 drwxr-xr-x	root/root	usr/share/doc/libvirt/html/html/
--rw-r--r--	root/root	usr/share/doc/libvirt/html/html/home.png
--rw-r--r--	root/root	usr/share/doc/libvirt/html/html/index-admin.html
--rw-r--r--	root/root	usr/share/doc/libvirt/html/html/index-lxc.html
--rw-r--r--	root/root	usr/share/doc/libvirt/html/html/index-qemu.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/html/index.html
--rw-r--r--	root/root	usr/share/doc/libvirt/html/html/left.png
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/html/libvirt-libvirt-admin.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/html/libvirt-libvirt-common.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/html/libvirt-libvirt-domain-checkpoint.html
@@ -373,8 +374,6 @@ drwxr-xr-x	root/root	usr/share/doc/libvirt/html/html/
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/html/libvirt-libvirt-storage.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/html/libvirt-libvirt-stream.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/html/libvirt-virterror.html
--rw-r--r--	root/root	usr/share/doc/libvirt/html/html/right.png
--rw-r--r--	root/root	usr/share/doc/libvirt/html/html/up.png
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/hvsupport.html
 drwxr-xr-x	root/root	usr/share/doc/libvirt/html/images/
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/images/event_loop_simple.png
@@ -476,6 +475,7 @@ drwxr-xr-x	root/root	usr/share/doc/libvirt/html/manpages/
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/manpages/virt-pki-validate.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/manpages/virt-qemu-qmp-proxy.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/manpages/virt-qemu-run.html
+-rw-r--r--	root/root	usr/share/doc/libvirt/html/manpages/virt-qemu-sev-validate.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/manpages/virt-sanlock-cleanup.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/manpages/virt-ssh-helper.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/manpages/virt-xml-validate.html
@@ -628,6 +628,7 @@ drwxr-xr-x	root/root	usr/share/libvirt/schemas/
 -rw-r--r--	root/root	usr/share/libvirt/schemas/nwfilter.rng
 -rw-r--r--	root/root	usr/share/libvirt/schemas/nwfilter_params.rng
 -rw-r--r--	root/root	usr/share/libvirt/schemas/nwfilterbinding.rng
+-rw-r--r--	root/root	usr/share/libvirt/schemas/privatedata.rng
 -rw-r--r--	root/root	usr/share/libvirt/schemas/secret.rng
 -rw-r--r--	root/root	usr/share/libvirt/schemas/storagecommon.rng
 -rw-r--r--	root/root	usr/share/libvirt/schemas/storagepool.rng
@@ -644,6 +645,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/virt-pki-validate.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/virt-qemu-qmp-proxy.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/virt-qemu-run.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/virt-qemu-sev-validate.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/virt-xml-validate.1.gz
 drwxr-xr-x	root/root	usr/share/man/man7/
 -rw-r--r--	root/root	usr/share/man/man7/virkeycode-atset1.7.gz
