@@ -344,6 +344,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/core/components/TagFilter/
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/TagFilter/TagFilter.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/TagFilter/TagOption.tsx
 drwxr-xr-x	root/root	usr/share/grafana/public/app/core/components/TimePicker/
+-rw-r--r--	root/root	usr/share/grafana/public/app/core/components/TimePicker/TimePickerWithHistory.test.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/TimePicker/TimePickerWithHistory.tsx
 drwxr-xr-x	root/root	usr/share/grafana/public/app/core/components/TraceToLogs/
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/TraceToLogs/KeyValueInput.tsx
@@ -464,7 +465,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/core/services/echo/backends/se
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/impression_srv.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/keybindingSrv.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/search_srv.ts
--rw-r--r--	root/root	usr/share/grafana/public/app/core/services/toggleTheme.ts
+-rw-r--r--	root/root	usr/share/grafana/public/app/core/services/theme.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/withFocusedPanelId.ts
 drwxr-xr-x	root/root	usr/share/grafana/public/app/core/specs/
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/specs/OrgSwitcher.test.tsx
@@ -2976,7 +2977,6 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azu
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azure-monitor-datasource/__mocks__/variables.ts
 drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azure-monitor-datasource/azureMetadata/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azure-monitor-datasource/azureMetadata/index.ts
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azure-monitor-datasource/azureMetadata/locations.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azure-monitor-datasource/azureMetadata/logsResourceTypes.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azure-monitor-datasource/azureMetadata/resourceTypes.ts
 drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-azure-monitor-datasource/azure_log_analytics/
@@ -4356,6 +4356,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugi
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugins/AnnotationsPlugin.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugins/ContextMenuPlugin.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugins/ExemplarMarker.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugins/ExemplarsPlugin.test.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugins/ExemplarsPlugin.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugins/OutsideRangePlugin.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/panel/timeseries/plugins/ThresholdControlsPlugin.tsx
