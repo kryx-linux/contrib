@@ -4,12 +4,13 @@
 # Depends on: dbus meson ninja
 
 name=basu
-version=0.2.0
-release=2
-source=(https://github.com/emersion/basu/archive/v$version/$name-$version.tar.gz)
+version=0.2.1
+release=1
+source=(https://git.sr.ht/~emersion/basu/archive/v0.2.1.tar.gz)
+renames=($name-$version.tar.gz)
 
 build() {
-  meson $name-$version build \
+  meson $name-v$version build \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
