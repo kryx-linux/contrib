@@ -1,18 +1,16 @@
 # Description: Work with version specifiers
 # URL: https://github.com/dephell/dephell_specifier
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-packaging
+# Depends on: python3-flit-core
 
 name=python3-dephell-specifier
-version=0.2.2
+version=0.3.0
 release=1
-source=(https://files.pythonhosted.org/packages/source/d/dephell_specifier/dephell_specifier-$version.tar.gz)
+source=(https://pypi.org/packages/source/d/dephell-specifier/dephell-specifier-$version.tar.gz)
 
 build() {
-  cd dephell_specifier-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+  cd dephell-specifier-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
