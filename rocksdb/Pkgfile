@@ -4,11 +4,12 @@
 # Depends on: gflags jemalloc liburing lz4 snappy
 
 name=rocksdb
-version=7.7.3
+version=7.8.3
 release=1
 source=(https://github.com/facebook/rocksdb/archive/v$version/$name-$version.tar.gz)
 
 build() {
+	[[ -z $CCACHE_PREFIX ]] || unset CCACHE_PREFIX
 	cmake -S $name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
