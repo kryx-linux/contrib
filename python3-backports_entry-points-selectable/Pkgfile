@@ -4,14 +4,13 @@
 # Depends on: python3-setuptools-scm
 
 name=python3-backports_entry-points-selectable
-version=1.1.1
+version=1.2.0
 release=1
 source=(https://pypi.python.org/packages/source/b/backports.entry_points_selectable/backports.entry_points_selectable-$version.tar.gz)
 
 build() {
   cd backports.entry_points_selectable-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
