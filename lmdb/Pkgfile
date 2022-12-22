@@ -1,21 +1,18 @@
 # Description: The Lightning Memory-Mapped Database Manager
-# URL:         https://github.com/LMDB/lmdb
-# (Really:     https://www.OpenLDAP.org/)
-# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# URL: https://github.com/LMDB/lmdb
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=lmdb
-version=20210501
-gitver=4b6154340c27d03592b8824646a3bc4eb7ab61f5
+version=0.9.29
 release=1
-source=(
-   https://github.com/LMDB/${name}/archive/\
-${gitver}/${name}-${version}.tar.gz
-)
+source=(https://github.com/LMDB/lmdb/archive/LMDB_$version/$name-$version.tar.gz
+  lmdb.pc)
 
 build() {
-   cd ${name}-${gitver}/libraries/liblmdb/
+  sed -i "s|@@VERSION@@|$version|" -i $SRC/lmdb.pc
 
-   make prefix=/usr DESTDIR="${PKG}" install
+  cd $name-LMDB_$version/libraries/liblmdb
+  make CFLAGS+=" -fPIC"
+  make DESTDIR=$PKG prefix=/usr install
+  install -Dm0644 $SRC/lmdb.pc -t $PKG/usr/lib/pkgconfig
 }
-
-# s-sh-mode
