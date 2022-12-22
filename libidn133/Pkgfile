@@ -1,0 +1,23 @@
+# Description: Provides support for IETF Internationalized Domain Names (IDN).
+# URL: https://www.gnu.org/software/libidn/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: automake-114
+
+name=libidn133
+version=1.33
+release=1
+source=(https://ftp.gnu.org/gnu/libidn/libidn-$version.tar.gz
+  libidn11-subdirs.patch makefile.patch)
+
+build() {
+  cd libidn-$version
+
+  ./configure \
+    --prefix='/usr' \
+    --disable-nls \
+    --disable-static
+  make
+  make DESTDIR=$PKG install
+
+  rm -r $PKG/usr/{bin,include,lib/{libidn.so,libidn.la,pkgconfig},share}
+}
