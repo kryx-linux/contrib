@@ -1,25 +1,23 @@
 # Description: Tools for configuring WireGuard
-# URL:         https://git.zx2c4.com/wireguard-tools/
-# Maintainer:  Steffen Nurpmeso, steffen at sdaoden dot eu
+# URL: https://git.zx2c4.com/wireguard-tools/
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=wireguard-tools
 version=1.0.20210914
 release=1
-source=(https://git.zx2c4.com/wireguard-tools/snapshot/\
-wireguard-tools-${version}.tar.xz README)
+source=(https://git.zx2c4.com/wireguard-tools/snapshot/wireguard-tools-$version.tar.xz)
 
 build() {
-   cd ${name}-${version}
+  cd $name-$version
 
-   cd src
-   make
-   make install \
-      DESTDIR="${PKG}" \
-      PREFIX=/usr \
-      RUNSTATEDIR=/run \
-      WITH_BASHCOMPLETION=no \
-      WITH_SYSTEMDUNITS=no \
-      WITH_WGQUICK=no
+  prt-get isinst bash-completions && PKGMK_WGTOOLS+=' WITH_BASHCOMPLETION=yes' || PKGMK_WGTOOLS+=' WITH_BASHCOMPLETION=NO'
+
+  cd src
+  make
+  make install $PKGMK_WGTOOLS \
+    DESTDIR=$PKG \
+    PREFIX=/usr \
+    RUNSTATEDIR=/run \
+    WITH_WGQUICK=yes \
+    WITH_SYSTEMDUNITS=no
 }
-
-# s-sh-mode
