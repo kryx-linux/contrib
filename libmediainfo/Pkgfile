@@ -1,15 +1,20 @@
 # Description: MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files
 # URL: https://mediaarea.net/en/MediaInfo
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: libzen tinyxml
+# Depends on: libmms libzen tinyxml
 
 name=libmediainfo
-version=22.09
+version=22.12
 release=1
 source=(https://mediaarea.net/download/source/libmediainfo/$version/libmediainfo_$version.tar.xz)
 
 build() {
   cd MediaInfoLib/Project/GNU/Library
+
+  export CFLAGS="$CFLAGS -I/usr/include/libmms"
+  export CPPFLAGS="$CFLAGS"
+  export CXXFLAGS="$CFLAGS"
+
   ./autogen.sh
   ./configure --prefix=/usr \
     --enable-shared \
