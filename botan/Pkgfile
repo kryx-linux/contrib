@@ -1,7 +1,8 @@
 # Description: Crypto and TLS for Modern C++
 # URL: https://botan.randombit.net/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: sqlite xz
+# Depends on: bzip2 sqlite3 xz
+# Optional: boost
 
 name=botan
 version=2.19.3
@@ -13,7 +14,7 @@ build() {
 
   prt-get isinst boost && PKGMK_BOTAN+=' --with-boost'
 
-  /usr/bin/python3 ./configure.py --prefix=/usr \
+  /usr/bin/python3 ./configure.py --prefix=/usr $PKGMK_BOTAN \
     --with-bzip \
     --with-zlib \
     --with-sqlite3 \
