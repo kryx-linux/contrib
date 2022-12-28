@@ -1,15 +1,18 @@
 # Description: GNOME Keyring is a collection of components in GNOME that store secrets, passwords, keys, certificates and make them available to applications.
 # URL: https://gnome.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: desktop-file-utils docbook-xsl gcr gnome-common
+# Depends on: desktop-file-utils docbook-xsl gcr3 gnome-common
 
 name=gnome-keyring
 version=42.1
-release=1
-source=(https://github.com/GNOME/gnome-keyring/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/GNOME/gnome-keyring/archive/$version/$name-$version.tar.gz
+  0001-build-Use-p11_module_configs-as-default-pkcs11-confi.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/0001-build-Use-p11_module_configs-as-default-pkcs11-confi.patch
 
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr \
