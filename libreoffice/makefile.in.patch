@@ -1,21 +1,19 @@
-diff -Naur libreoffice-7.3.0.2.orig/Makefile.in libreoffice-7.3.0.2/Makefile.in
---- libreoffice-7.3.0.2.orig/Makefile.in	2022-01-12 20:09:02.000000000 +0100
-+++ libreoffice-7.3.0.2/Makefile.in	2022-01-17 09:52:51.876539962 +0100
+diff -Naur libreoffice-7.5.0.1.old/Makefile.in libreoffice-7.5.0.1/Makefile.in
+--- libreoffice-7.5.0.1.old/Makefile.in	2022-12-28 10:49:24.815353715 +0000
++++ libreoffice-7.5.0.1/Makefile.in	2022-12-28 10:50:18.325920089 +0000
 @@ -9,7 +9,7 @@
  
  gb_Top_MODULE_CHECK_TARGETS := slowcheck unitcheck subsequentcheck perfcheck uicheck screenshot
  
--.PHONY : check-if-root bootstrap gbuild build build-non-l10n-only build-l10n-only check clean clean-build clean-host test-install distclean distro-pack-install docs download etags fetch get-submodules id install install-gdb-printers install-strip tags debugrun help showmodules translations packageinfo internal.clean $(gb_Top_MODULE_CHECK_TARGETS)
-+.PHONY : bootstrap gbuild build build-non-l10n-only build-l10n-only check clean clean-build clean-host test-install distclean distro-pack-install docs download etags fetch get-submodules id install install-gdb-printers install-strip tags debugrun help showmodules translations packageinfo internal.clean $(gb_Top_MODULE_CHECK_TARGETS)
+-.PHONY : check-if-root bootstrap gbuild build build-non-l10n-only build-l10n-only check clean clean-build clean-host test-install distclean distro-pack-install docs download etags fetch get-submodules id install install-gdb-printers install-strip tags debugrun help showmodules translations packageinfo coverage internal.clean $(gb_Top_MODULE_CHECK_TARGETS)
++.PHONY : bootstrap gbuild build build-non-l10n-only build-l10n-only check clean clean-build clean-host test-install distclean distro-pack-install docs download etags fetch get-submodules id install install-gdb-printers install-strip tags debugrun help showmodules translations packageinfo coverage internal.clean $(gb_Top_MODULE_CHECK_TARGETS)
  
  MAKECMDGOALS?=build
- build_goal:=$(if $(filter build build-nocheck uicheck,$(MAKECMDGOALS)),build)\
-@@ -58,18 +58,6 @@
+ build_goal:=$(if $(filter build uicheck,$(MAKECMDGOALS)),build)\
+@@ -61,16 +61,6 @@
  
- .DEFAULT_GOAL := build
- 
--# Nested test is to check if the systemd-detect-virt command doesn't exist or it reports we're not
--# in a container:
+ # Nested test is to check if the systemd-detect-virt command doesn't exist or it reports we're not
+ # in a container:
 -check-if-root:
 -	@if test ! `uname` = 'Haiku' -a `id -u` = 0; then \
 -		if test ! -x "$$(command -v systemd-detect-virt)" || ! systemd-detect-virt -c -q; then \
@@ -29,7 +27,7 @@ diff -Naur libreoffice-7.3.0.2.orig/Makefile.in libreoffice-7.3.0.2/Makefile.in
  gb_Side ?= host
  
  include $(BUILDDIR)/config_$(gb_Side).mk
-@@ -275,7 +263,7 @@
+@@ -276,7 +266,7 @@
  #
  # Bootstrap
  #

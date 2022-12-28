@@ -5,9 +5,9 @@
 # Optional: avahi coin-or-mp cups gpgme kio lpsolve mariadb openldap postgresql python3-lxml qt5 sane valgrind
 
 name=libreoffice
-version=7.4.4.1
+version=7.5.0.1
 release=1
-pdfiumversion=5058
+pdfiumversion=5408
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
   https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-dictionaries-$version.tar.xz
   https://dev-www.libreoffice.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
@@ -16,7 +16,6 @@ source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/
   #https://dev-www.libreoffice.org/src/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz
   https://dev-www.libreoffice.org/src/pdfium-$pdfiumversion.tar.bz2
   #https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
-  boost.patch
   makefile.in.patch)
 
 # unpack_source() {{{
@@ -51,7 +50,6 @@ build() {
   cd $name-$version
 
   patch -Np1 -i $SRC/makefile.in.patch
-  patch -Np1 -i $SRC/boost.patch
   sed -i 's:application/pdf;::g' sysui/desktop/menus/draw.desktop
   sed -i 's:text/plain;::g' sysui/desktop/menus/writer.desktop
   sed -i 's:dragonbox-1.0.0:dragonbox:g' configure.ac
@@ -61,6 +59,7 @@ build() {
   prt-get isinst avahi && PKGMK_LIBREOFFICE+=' --enable-avahi' || PKGMK_LIBREOFFICE+=' --disable-avahi'
   #prt-get isinst box2d && PKGMK_LIBREOFFICE+=' --with-system-box2d' || PKGMK_LIBREOFFICE+=' --without-system-box2d'
   #prt-get isinst ccache && PKGMK_LIBREOFFICE+=' --enable-ccache' || PKGMK_LIBREOFFICE+=' --disable-ccache'
+  prt-get isinst ccache && export PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   prt-get isinst ccache && export CCACHE_CPP2=1
   #prt-get isinst clucene && PKGMK_LIBREOFFICE+=' --with-system-clucene' || PKGMK_LIBREOFFICE+=' --without-system-clucene'
   prt-get isinst coin-or-mp && PKGMK_LIBREOFFICE+=' --with-system-coinmp' || PKGMK_LIBREOFFICE+=' --disable-coinmp'
