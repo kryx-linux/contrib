@@ -1,7 +1,7 @@
 # Description: Common libraries and headers for wxgtk2 and wxgtk3
 # URL: http://www.wxwidgets.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gtk glu gst-plugins-base
+# Depends on: gtk3 glu gst-plugins-base
 
 name=wxgtk-common
 version=3.2.1
@@ -15,7 +15,7 @@ build() {
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D wxBUILD_TOOLKIT=gtk2 \
+		-D wxBUILD_TOOLKIT=gtk3 \
 		-D wxUSE_OPENGL=ON \
 		-D wxUSE_REGEX=sys\
 		-D wxUSE_ZLIB=sys \
