@@ -6,13 +6,16 @@
 
 name=seahorse
 version=43.0
-release=1
-source=(https://gitlab.gnome.org/GNOME/seahorse/-/archive/$version/seahorse-$version.tar.bz2)
+release=2
+source=(https://gitlab.gnome.org/GNOME/seahorse/-/archive/$version/seahorse-$version.tar.bz2
+  212.patch)
 
 build() {
   prt-get isinst avahi || PKGMK_SEAHORSE+=' -D key-sharing=false'
   prt-get isinst gpgme || PKGMK_SEAHORSE+=' -D pgp-support=false -D check-compatible-gpg=false'
   prt-get isinst openldap || PKGMK_SEAHORSE+=' -D ldap-support=false -D hkp-support=false'
+
+  patch -Np1 -d $name-$version -i $SRC/212.patch
 
   meson setup $name-$version build $PKGMK_SEAHORSE \
     --prefix=/usr \
