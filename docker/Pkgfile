@@ -12,9 +12,12 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
     http://jaeger.morpheus.net/linux/crux/files/libnetwork-dcdf8f1.tar.xz \
-    $name.rc $name.conf)
+    $name.rc $name.conf
+    btrfs-graphdriver.patch)
 
 build() {
+    patch -p1 -d $SRC/moby-$version -i $SRC/btrfs-graphdriver.patch
+
     export GO111MODULE=auto
     export GOPATH=$SRC
     export DOCKER_GITCOMMIT=42c8b31
