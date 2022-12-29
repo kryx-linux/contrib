@@ -31,5 +31,5 @@ build() {
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
 
-	rm -r $PKG/usr/{include,lib/libwx_base*,bin/wxrc*}
+	rm -r $PKG/usr/{include,lib/{cmake,libwx_base*},bin/wxrc*}
 }
