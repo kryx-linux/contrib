@@ -4,17 +4,27 @@
 # Depends on: cmake fmt ghostscript giflib glu openjdk17-jdk libass libcdio libmicrohttpd mariadb samba swig taglib tinyxml spdlog libva libvdpau libdvdnav
 
 name=kodi
-version=19.4
+version=19.5
 release=1
-source=(https://github.com/xbmc/xbmc/archive/$version-Matrix/$name-$version.tar.gz gl-headers.patch $name-19.4-fmt-9.patch)
+source=(https://github.com/xbmc/xbmc/archive/$version-Matrix/$name-$version.tar.gz gl-headers.patch
+	https://crux.nu/files/kodi-ffmpeg-4.3-kodi-dav1d-1.0.tar.gz
+	mesa-eglchromium.patch)
+
+unpack_source() {
+	cp $PKGMK_ROOT/*.patch $SRC/
+	bsdtar -xf $PKGMK_SOURCE_DIR/$name-$version.tar.gz -C $SRC
+	cp $PKGMK_SOURCE_DIR/kodi-ffmpeg* $SRC/
+}
 
 build() {
+	# https://github.com/xbmc/xbmc/pull/22291/commits/b81d28d5ce679da2ff5f14dca691665551d30351
+	patch -p1 -d xbmc-$version-Matrix -i $SRC/mesa-eglchromium.patch
+
 	export PATH="/usr/lib/java/openjdk17-jdk/bin:$PATH"
 
 	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
 	patch -d xbmc-$version-Matrix -p1 -i $SRC/gl-headers.patch
-	patch -d xbmc-$version-Matrix -p1 -i $SRC/$name-19.4-fmt-9.patch
 
 	cmake -Bbuild \
 		-DVERBOSE=ON \
@@ -24,6 +34,7 @@ build() {
 		-DENABLE_OPTICAL=ON \
 		-DENABLE_PYTHON=ON \
 		-DENABLE_INTERNAL_FFMPEG=ON \
+		-DFFMPEG_URL=$SRC/kodi-ffmpeg-4.3-kodi-dav1d-1.0.tar.gz \
 		-DENABLE_INTERNAL_FLATBUFFERS=ON \
 		-DENABLE_INTERNAL_FSTRCMP=ON \
 		-DENABLE_INTERNAL_RapidJSON=ON \
