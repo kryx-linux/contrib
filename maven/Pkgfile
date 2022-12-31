@@ -4,19 +4,19 @@
 # Depends on: openjdk17-jdk
 
 name=maven
-version=3.8.6
+version=3.8.7
 release=1
 source=(https://www-eu.apache.org/dist/maven/maven-3/$version/source/apache-$name-$version-src.tar.gz)
 bin_source=(https://archive.apache.org/dist/maven/maven-3/$version/binaries/apache-$name-$version-bin.tar.gz)
-_bootstrapsum=c7047a48deb626abf26f71ab3643d296db9b1e67f1faa7d988637deac876b5a9
+_bootstrapsum=628b49352130d1d25d5519b1c724f0efe58b86bad55f37a694ca8f73f11e3604
 
 # bootstrap_mvn() {{{
 bootstrap_mvn() {
   # check if the binary is already available
   if [ ! -f "$PKGMK_SOURCE_DIR/apache-$name-$version-bin.tar.gz" ];
   then
-    wget $bin_source \
-    --output-document="$PKGMK_SOURCE_DIR/apache-$name-$version-bin.tar.gz"
+    curl -L $bin_source \
+    --output "$PKGMK_SOURCE_DIR/apache-$name-$version-bin.tar.gz"
   fi
 
   # check checksum of the binary package
