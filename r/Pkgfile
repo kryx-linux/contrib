@@ -6,9 +6,11 @@
 
 name=r
 version=4.2.2
-release=1
+release=2
 source=(https://cran.r-project.org/src/base/R-${version::1}/R-$version.tar.gz
   r.desktop r.png R.conf
+  R-4.2.2-browser-pdf-prefs.patch
+  R-4.2.2-isspace-without-readline.patch R-4.2.2-parallel-rmath-h-install.patch
   R-3.4.1-parallel.patch R-3.4.1-rmath-shared.patch
   R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch)
 
@@ -19,22 +21,36 @@ build() {
   patch -Np1 -i $SRC/R-3.4.1-parallel.patch
   patch -Np1 -i $SRC/R-3.4.1-rmath-shared.patch
   patch -Np1 -i $SRC/R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch
+  patch -Np1 -i $SRC/R-4.2.2-browser-pdf-prefs.patch
+  patch -Np1 -i $SRC/R-4.2.2-isspace-without-readline.patch
+  patch -Np1 -i $SRC/R-4.2.2-parallel-rmath-h-install.patch
 
   # configuring R
   prt-get isinst tk && PKGMK_R+=" --with-x=yes" || PKGMK_R+=" --with-x=no"
-  prt-get isinst lapack && PKGMK_R+=" --with-lapack LAPACK_LIBS=$(pkg-config --libs lapack)"
+  prt-get isinst lapack && PKGMK_R+=" --with-lapack LAPACK_LIBS=$(pkgconf --libs lapack)"
   # this needs a properly working java environment!
   [[ -e $(whereis javac) ]] && PKGMK_R+=" --enable-java" || PKGMK_R+=" --disable-java"
 
   # set the correct dir for texmf distribution
   sed -i 's|$(rsharedir)/texmf|${datarootdir}/texmf|' share/Makefile.in
 
+  sed -i -e '/R_LIBS_SITE=/s/^/#/g' etc/Renviron.in
+  echo 'R_LIBS_SITE=${R_LIBS_SITE-'"'/usr/lib/R/library:/usr/share/R/library'"'}' >> etc/Renviron.in
+
+  export R_PDFVIEWER=/usr/bin/xdg-open
+  export R_PRINTCMD=lpr
+  export R_BROWSER=/usr/bin/xdg-open
+
   unset R_HOME
+  export ldpath="/usr/lib/R/lib"
 
   # version 3.6.2 needs at least the addition to FCFLAGS
   export CFLAGS+=' -fPIC'
   export CPPFLAGS+=' -fPIC'
   export FCFLAGS+=' -fPIC'
+
+  CFLAGS+=" -ffat-lto-objects" \
+  CXXFLAGS+=" -ffat-lto-objects" \
   ./configure $PKGMK_R \
     --prefix=/usr \
     --libdir=/usr/lib \
@@ -44,31 +60,43 @@ build() {
     rincludedir=/usr/include/R/ \
     F77=gfortran \
     LIBnn=lib \
-    BLAS_LIBS=$(pkg-config --libs blas) \
-    PKG_CONFIG=/usr/bin/pkg-config \
-    --with-blas \
+    BLAS_LIBS=$(pkgconf --libs blas) \
+    PKG_CONFIG=/usr/bin/pkgconf \
+    --with-blas=openblas \
     --enable-BLAS-shlib \
     --enable-R-shlib \
     --enable-byte-compiled-packages \
-    --disable-nls
+    --enable-lto \
+    --enable-R-profiling \
+    --enable-memory-profiling \
+    --with-cairo \
+    --with-ICU \
+    --with-jpeglib \
+    --with-lapack \
+    --with-libpng \
+    --with-libtiff \
+    --with-system-tre \
+    --without-recommended-packages \
+    --disable-nls | tee CONFIGURE.log
+cat CONFIGURE.log | grep -A30 'R is now' - > CAPABILITIES
   make
 
-  # make nmath library
-  pushd src/nmath/standalone
-  make shared
-  popd
+  make -C src/nmath/standalone shared
 
-  # install R to $PKG
   make DESTDIR=$PKG install
-  # same for the nmath library
-  pushd src/nmath/standalone
-  make DESTDIR=$PKG install
-  #popd
+  make -C src/nmath/standalone DESTDIR=$PKG install
 
-  sed -i "s|$PKG ||" "$PKG/usr/bin/R"
+  chmod +x $PKG/usr/lib/R/bin/*
+  chmod +x $PKG/usr/share/R/sh/echo.sh
+  #chmod -x $PKG/usr/lib/R/library/mgcv/CITATION
+
+  sed -i "s|$PKG ||" $PKG/usr/bin/R
   rm $PKG/usr/lib/R/bin/R
   cd $PKG/usr/lib/R/bin
   ln -s ../../../bin/R
+
+  cd $PKG/usr/lib/R
+  ln -s ../../include/R include
 
   install -Dm644 $SRC/r.desktop \
     $PKG/usr/share/applications/r.desktop
