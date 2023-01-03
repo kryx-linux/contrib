@@ -1,21 +1,30 @@
 # Description: Tools to create, alter and inspect Matroska files.
 # URL: https://mkvtoolnix.download/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: boost cmark docbook-xsl file flac libmatroska libpcre2 libvorbis qt5 ruby
-# Optional: hicolor-icon-theme qt6
+# Depends on: boost cmark docbook-xsl flac fmt libdvdread libmatroska nlohmann-json pugixml qt6-multimedia qt6-svg qt6-tools ruby
+# Optional: hicolor-icon-theme
 
 name=mkvtoolnix
-version=72.0.0
+version=73.0.0
 release=1
-source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
+source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz
+  ruby3.2.patch)
 
 build() {
 	cd $name-$version
 
+	patch -Np1 -i $SRC/ruby3.2.patch
+	rm -rf lib/{fmt,libebml,libmatroska,nlohmann-json,pugixml}
+
+	./autogen.sh
 	./configure $PKGMK_MKVTOOLNIX \
 		--prefix=/usr \
+		--enable-qt6 \
+		--with-qmake=/usr/lib/qt6/bin/qmake6 \
+		--disable-optimization \
 		--disable-precompiled-headers \
-		--disable-update-check
+		--disable-update-check \
+		--disable-qt5
 
 	rake --multitask --jobs=${JOBS-1}
 	rake DESTDIR=$PKG install
