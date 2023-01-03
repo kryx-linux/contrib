@@ -6,7 +6,7 @@
 
 name=sway
 version=1.8
-release=1
+release=2
 source=(https://github.com/swaywm/sway/archive/$version/$name-$version.tar.gz
   6249.patch)
 
@@ -29,4 +29,8 @@ build() {
     -D werror=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  # needs CONFIG_*_FS_SECURITY to work
+  # https://github.com/swaywm/sway/pull/6994
+  setcap 'cap_sys_nice=eip' $PKG/usr/bin/sway || true
 }
