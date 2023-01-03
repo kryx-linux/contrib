@@ -4,15 +4,15 @@
 # Depends on: giflib gtk3 libspiro libuninameslist libwebp potrace woff2
 
 name=fontforge
-version=20220308
+version=20230101
 release=1
 source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.xz)
 
 build() {
-if [ -e '/usr/lib/ccache' ]; then
-	PKGMK_FONTFORGE+=' -D CMAKE_CXX_COMPILER_LAUNCHER=ccache -D CMAKE_C_COMPILER_LAUNCHER=ccache'
-	PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
-fi
+	if [ -e '/usr/lib/ccache' ]; then
+		PKGMK_FONTFORGE+=' -D CMAKE_CXX_COMPILER_LAUNCHER=ccache -D CMAKE_C_COMPILER_LAUNCHER=ccache'
+		PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+	fi
 
 	cmake -S $name-$version -B build -G Ninja $PKGMK_FONTFORGE \
 		-D CMAKE_INSTALL_PREFIX=/usr \
