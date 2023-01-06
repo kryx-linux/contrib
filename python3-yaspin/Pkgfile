@@ -1,21 +1,17 @@
 # Description: Yet Another Terminal Spinner
 # URL: https://github.com/pavdmyt/yaspin
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-termcolor
+# Depends on: python3-poetry-core python3-termcolor
 
 name=python3-yaspin
-version=2.2.0
+version=2.3.0
 release=1
 source=(https://github.com/pavdmyt/yaspin/archive/v$version/$name-$version.tar.gz
   setup.py)
 
 build() {
   cd yaspin-$version
-  #dephell deps convert --from pyproject.toml --to setup.py
-  cp ../setup.py .
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
