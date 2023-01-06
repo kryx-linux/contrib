@@ -5,19 +5,40 @@
 
 name=openblas
 version=0.3.21
-release=1
-source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz)
+release=2
+source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz
+  openblas-0.3.21-clang16.patch)
 
 build () {
   cd OpenBLAS-$version
-  make NO_LAPACK=1 NO_LAPACKE=1 NO_STATIC=1 NO_AFFINITY=1 \
-    USE_OPENMP=1 DYNAMIC_ARCH=1 NUM_THREADS=64 MAJOR_VERSION=3 \
-    CFLAGS="$CFLAGS $CPPFLAGS" libs netlib shared
-  make PREFIX=$PKG/usr install
 
-  # Symlink to provide blas, cblas
+  patch -Np1 -i $SRC/openblas-0.3.21-clang16.patch
+
+  export MAKE_NB_JOBS=-1 \
+    COMMON_OPT=" " \
+    FCOMMON_OPT=" "
+
+  local flags=(
+    PREFIX=$PKG/usr
+    NO_LAPACK=1
+    NO_LAPACKE=1
+    NO_STATIC=1
+    NO_AFFINITY=1
+    USE_OPENMP=1
+    DYNAMIC_ARCH=1
+    NUM_THREADS=64
+    MAJOR_VERSION=3
+    USE_THREAD=1
+    CFLAGS="$CFLAGS $CPPFLAGS"
+  )
+
+  make "${flags[@]}"
+
+  make "${flags[@]}" install
+
+  # Symlink to provide blas & cblas
   cd $PKG/usr/lib/
-  local _lapackver='3.10.0'
+  local _lapackver='3.11.0'
   # BLAS
   ln -sf libopenblasp-r$version.so libblas.so
   ln -sf libopenblasp-r$version.so libblas.so.${_lapackver:0:1}
@@ -30,7 +51,7 @@ build () {
   # provided by lapack
   # LAPACKE
   # provided by lapack
-  rm -r $PKG/usr/include/lapack*
+  #rm -r $PKG/usr/include/lapack*
 
   # fix paths
   sed -i 's|'$PKG'||g' $PKG/usr/lib/cmake/$name/*.cmake
