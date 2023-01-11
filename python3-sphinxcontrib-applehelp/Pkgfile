@@ -1,23 +1,16 @@
 # Description: sphinx extension which outputs Apple help books
 # URL:         https://github.com/sphinx-doc/sphinxcontrib-applehelp/
 # Maintainer:  Danny Rawlins, crux at romster dot me
-# Depends on:  python3-setuptools
+# Depends on:  python3-setuptools python3-installer python3-build python3-flit-core
 
 name=python3-sphinxcontrib-applehelp
-version=1.0.2
+version=1.0.3
 release=1
 source=(https://github.com/sphinx-doc/${name#*-}/archive/$version/${name#*-}-$version.tar.gz)
 
 build() {
 	cd ${name#*-}-$version
 
-	sed -i '/^tag_build =/s/= .*$/=/' setup.cfg
-	sed -i '/^tag_date =/s/true/false/' setup.cfg
-
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install \
-		--prefix=/usr \
-		--root=$PKG
-
-	chmod -R go-w,a+r,u+w $PKG
+	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+	/usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
