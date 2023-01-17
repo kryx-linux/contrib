@@ -6,16 +6,12 @@
 # Optional: dnsmasq gnupg lua
 
 name=lxc
-version=5.0.1
-release=2
+version=5.0.2
+release=1
 source=(https://linuxcontainers.org/downloads/$name/$name-$version.tar.gz
-  default.conf lxc-usernet lxc-users-setup lxc-users lxc-cgroups lxc-net
-  4179.patch
-  02-distrosysconfdir.patch)
+  default.conf lxc-usernet lxc-users-setup lxc-users lxc-cgroups lxc-net)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/02-distrosysconfdir.patch
-  patch -Np1 -d $name-$version -i $SRC/4179.patch
 
   # fix pam_libdir
   sed "/pam_security/s/libdir/'\/', 'lib'/" -i $name-$version/meson.build
