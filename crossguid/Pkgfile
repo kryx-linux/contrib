@@ -5,18 +5,22 @@
 
 name=crossguid
 version=0.2.2
-release=1
-source=(https://github.com/graeme-hill/crossguid/archive/v$version/$name-$version.tar.gz)
+_commit=ca1bf4b810e2d188d04cb6286f957008ee1b7681
+release=2
+source=(https://github.com/graeme-hill/crossguid/archive/$_commit/$name-$version-$release.tar.gz)
 
 build() {
-  cmake -S $name-$version -B build -G Ninja \
+  sed -i 's!${CMAKE_INSTALL_DATADIR}/crossguid/cmake!${CMAKE_INSTALL_LIBDIR}/cmake/crossguid!' $name-$_commit/CMakeLists.txt
+
+  cmake -S $name-$_commit -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -Wno-dev
   cmake --build build
+  DESTDIR=$PKG cmake --build build --target install
 
-  install -D -m 0644 build/libxg.a $PKG/usr/lib/libxg.a
-  install -D -m 0644 $name-$version/Guid.hpp $PKG/usr/include/Guid.hpp
+  rm -rf $PKG/usr/share
 }
