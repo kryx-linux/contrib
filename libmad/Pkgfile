@@ -1,15 +1,16 @@
 # Description: High-quality MPEG Audio Decoder library.
-# URL: http://www.underbit.com/products/mad/
+# URL: http://codeberg.org/tenacityteam/libmad
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake
+# Depends on: 
 
 name=libmad
 version=0.16.3
 release=1
-source=(https://github.com/tenacityteam/libmad/archive/$version/$name-$version.tar.gz)
+source=(https://codeberg.org/tenacityteam/$name/archive/$version.tar.gz)
+renames=($name-$version.tar.gz)
 
 build() {
-	cmake -S $name-$version -B build \
+	cmake -S $name -B build \
 	  -D CMAKE_INSTALL_PREFIX=/usr \
 	  -D CMAKE_INSTALL_LIBDIR=lib \
 	  -D CMAKE_BUILD_TYPE=Release \
