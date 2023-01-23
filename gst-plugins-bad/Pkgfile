@@ -2,6 +2,7 @@
 # URL: https://gstreamer.freedesktop.org/modules/gst-plugins-bad.html
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: bluez brotli bzip2 chromaprint curl dav1d eudev expat faac faad2 fdk-aac ffmpeg flac glib gst-plugins-base gstreamer ladspa lame lcms2 libass libdrm libffi libglvnd libgmp libgudev libjpeg-turbo libmodplug libnghttp2 libnice libogg libpcre libpng libsndfile libsrtp libtheora libva libvdpau libvorbis libvpx libwebp lilv mjpegtools neon openal openjpeg2 opus orc rtmpdump shaderc soundtouch util-linux vulkan-loader x264 x265 xz zlib zstd
+# Optional: openh264
 
 name=gst-plugins-bad
 version=1.20.5
@@ -9,30 +10,32 @@ release=1
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
-	meson build $name-$version \
-		--prefix /usr \
-		--libexecdir lib \
-		--buildtype plain \
-		--wrap-mode nodownload \
-		-D b_pie=true \
-		-D doc=disabled \
-		-D nls=disabled \
-		-D directfb=disabled \
-		-D flite=disabled \
-		-D gsm=disabled \
-		-D iqa=disabled \
-		-D magicleap=disabled \
-		-D msdk=disabled \
-		-D openh264=disabled \
-		-D openmpt=disabled \
-		-D openni2=disabled \
-		-D opensles=disabled \
-		-D tinyalsa=disabled \
-		-D voaacenc=disabled \
-		-D voamrwbenc=disabled \
-		-D wasapi2=disabled \
-		-D wasapi=disabled \
-		-D gobject-cast-checks=disabled \
+	PKGMK_GSTBAD="--prefix=/usr
+		--libexecdir=lib
+		--buildtype=plain
+		--wrap-mode=nodownload
+		-D b_pie=true
+		-D doc=disabled
+		-D nls=disabled
+		-D directfb=disabled
+		-D flite=disabled
+		-D gsm=disabled
+		-D iqa=disabled
+		-D magicleap=disabled
+		-D msdk=disabled
+		-D openmpt=disabled
+		-D openni2=disabled
+		-D opensles=disabled
+		-D tinyalsa=disabled
+		-D voaacenc=disabled
+		-D voamrwbenc=disabled
+		-D wasapi2=disabled
+		-D wasapi=disabled
+		-D gobject-cast-checks=disabled"
+	prt-get isinst openh264 && PKGMK_GSTBAD+=" -D openh264=enabled" || \
+		PKGMK_GSTBAD+=" -D openh264=disabled"
+
+	meson setup build $name-$version $PKGMK_GSTBAD \
 		-D package-name="GStreamer Bad Plugins (CRUX Linux)" \
 		-D package-origin="https://crux.nu/"
 
