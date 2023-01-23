@@ -37,8 +37,8 @@ build() {
 	for vminor in 5 4 3 2; do
 		dest="/usr/share/xml/docbook/xml-dtd-4.$vminor"
 		install -d -m755 "$PKG$dest"
-		bsdtar xf "$SRC/$name-4.$vminor.zyp" -C "$PKG$dest" && \
-			mv "$PKG$dest/catalog.xml" "$PKG$dest/catalog"
+		bsdtar xf "$SRC/$name-4.$vminor.zyp" --uid 0 --gid 0 -C "$PKG$dest" \
+			&& mv "$PKG$dest/catalog.xml" "$PKG$dest/catalog"
 
 		[ "$vminor" -lt 4 ] && xml="" || xml=" XML"
 		cd "$PKG$dest"
