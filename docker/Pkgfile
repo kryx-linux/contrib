@@ -3,24 +3,21 @@
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
-# LIBNETWORK_COMMIT:=dcdf8f176d1e13ad719e913e796fb698d846de98
+# LIBNETWORK_COMMIT:=05b93e0d3a95952f70c113b0bc5bdb538d7afdd7
 
 name=docker
-version=20.10.22
+version=20.10.23
 release=1
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
-    http://jaeger.morpheus.net/linux/crux/files/libnetwork-dcdf8f1.tar.xz \
-    $name.rc $name.conf
-    btrfs-graphdriver.patch)
+    http://jaeger.morpheus.net/linux/crux/files/libnetwork-05b93e0.tar.xz \
+    $name.rc $name.conf)
 
 build() {
-    patch -p1 -d $SRC/moby-$version -i $SRC/btrfs-graphdriver.patch
-
     export GO111MODULE=auto
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=42c8b31
+    export DOCKER_GITCOMMIT=6051f14
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
 
@@ -46,7 +43,7 @@ build() {
 
     (cd ..; \
         GOROOT=/usr/lib/go GOPATH=${PKGMK_WORK_DIR} go build -o $PKG/usr/bin/$name-proxy \
-            libnetwork-dcdf8f1/cmd/proxy)
+            libnetwork-05b93e0/cmd/proxy)
 
     for M in 1 5 8; do
         install -d -m 0755 $PKG/usr/share/man/man${M}
