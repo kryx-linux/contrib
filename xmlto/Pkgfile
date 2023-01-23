@@ -1,6 +1,6 @@
 # Description: Convert xml to many other formats.
 # URL: https://pagure.io/xmlto
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: docbook-xsl
 
 name=xmlto
@@ -12,7 +12,7 @@ build() {
 	cd $name-$version
 
 	sed -i -e 's,4\.2,4\.5,g' doc/xmlif.xml
-	sed -i -e 's,4\.2,4\.5,g' doc/xmlto.xml
+	sed -i -e 's,4\.2,4\.5,g; /productname/s|25|28|;' doc/xmlto.xml
 
 	./configure \
 		--prefix=/usr
