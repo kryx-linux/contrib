@@ -1,7 +1,8 @@
 # Description: Network UPS Tools. Monitor of UPS hardware.
 # URL: http://www.networkupstools.org/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: libusb openssl tcp_wrappers
+# Depends on: libusb openssl
+# Optional: avahi neon nss
 
 name=nut
 version=2.8.0
@@ -16,6 +17,7 @@ build() {
 		--prefix=/usr \
 		--with-user=nut \
 		--with-group=nut \
+		--with-pidpath=/run \
 		--sysconfdir=/etc/$name \
 		--datadir=/usr/share/$name \
 		--localstatedir=/var/$name
