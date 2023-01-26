@@ -4,14 +4,14 @@
 # Depends on: faad2 jansson lame libass libdvdcss libjpeg-turbo libsamplerate libtheora libva libvpx libxml2 numactl speex x264
 
 name=handbrake
-version=1.6.0
+version=1.6.1
 release=1
-_HASH=9951c73a797b9c22814a1cfcbb0341d66853a262
-_HASHDATE="2022-12-29 18:02:17 +0000"
+_HASH=04413a27e6d616cddd98c2c6468aca2bf91b87b5
+_HASHDATE="2023-01-23 18:02:17 +0000"
 source=(https://github.com/HandBrake/HandBrake/releases/download/$version/$name-$version-source.tar.bz2)
 
 build() {
-  [[ -e /usr/lib/pkgconfig/gdk-x11-3.0.pc ]] || PKGMK_HANDBRAKE+='--disable-gtk --disable-gtk-update-checks'
+  prt-get isinst gtk3 || PKGMK_HANDBRAKE+='--disable-gtk --disable-gtk-update-checks'
 
   ## from inside a git checkout..
   #./HandBrake-$version/scripts/repo-info.sh HandBrake-$version > HandBrake-$version/version.txt
