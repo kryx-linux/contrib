@@ -4,7 +4,7 @@
 # Depends on: fontconfig go yarn
 
 name=grafana
-version=9.3.4
+version=9.3.6
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   #https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
@@ -20,8 +20,6 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/gopath" || true
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
-  export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-  #export PKG_CONFIG_PATH="/usr/lib/openssl-1.1/pkgconfig:$PKG_CONFIG_PATH"
   export PATH="/usr/bin:$PATH"
 
   cd $SRC/$name-$version
