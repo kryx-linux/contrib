@@ -1,8 +1,8 @@
 # Description: Server and user space API to deal with multimedia pipelines
 # URL: https://pipewire.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: alsa-utils dbus fdk-aac ffmpeg glib lame libva libvpx libwebp x264 x265
-# Optional: alsa-ucm-conf avahi bluez gst-plugins-base jack libldac pulseaudio rtkit v4l2 vulkan-loader wireplumber
+# Depends on: alsa-lib dbus ffmpeg gst-plugins-base
+# Optional: alsa-ucm-conf avahi bluez fdk-aac flatpak graphviz jack libcanberra libsndfile libuv lilv pulseaudio rtkit speexdsp v4l-utils vulkan-loader wireplumber
 
 name=pipewire
 version=0.3.65
@@ -12,7 +12,8 @@ source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar
 build() {
   prt-get isinst avahi || PKGMK_PW+=' -Davahi=disabled'
   prt-get isinst bluez || PKGMK_PW+=' -Dbluez5=disabled'
-  prt-get isinst gst-plugins-base || PKGMK_PW+=' -Dgstreamer=disabled'
+  prt-get isinst fdk-aac || PKGMK_PW+=' -Dbluez5-codec-aac=disabled'
+  prt-get isinst flatpak || PKGMK_PW+=' -Dflatpak=disabled'
   prt-get isinst jack || PKGMK_PW+=' -Dpipewire-jack=disabled -Djack=disabled'
   prt-get isinst pulseaudio || PKGMK_PW+=' -Dlibpulse=disabled'
   prt-get isinst v4l-utils || PKGMK_PW+=' -Dv4l2=disabled'
@@ -26,8 +27,6 @@ build() {
     -D docs=disabled \
     -D tests=disabled \
     -D session-managers=""
-  # will remove executable pipewire-media-session
-  #  -D examples=false \
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
