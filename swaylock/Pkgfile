@@ -5,9 +5,9 @@
 # Optional: gdk-pixbuf scdoc
 
 name=swaylock
-version=1.7
+version=1.7.1
 release=1
-source=(https://github.com/swaywm/swaylock/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/swaywm/swaylock/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst bash-completion || PKGMK_SWAYLOCK+=' -D bash-completions=false'
