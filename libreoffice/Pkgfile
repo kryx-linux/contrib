@@ -5,7 +5,7 @@
 # Optional: avahi coin-or-mp cups gpgme kio lpsolve mariadb openldap postgresql python3-lxml qt5 sane valgrind
 
 name=libreoffice
-version=7.5.0.1
+version=7.5.0.3
 release=1
 pdfiumversion=5408
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
@@ -16,6 +16,7 @@ source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/
   #https://dev-www.libreoffice.org/src/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz
   https://dev-www.libreoffice.org/src/pdfium-$pdfiumversion.tar.bz2
   #https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
+  mdds.patch
   makefile.in.patch)
 
 # unpack_source() {{{
@@ -49,6 +50,7 @@ build() {
 
   cd $name-$version
 
+  patch -Np1 -i $SRC/mdds.patch
   patch -Np1 -i $SRC/makefile.in.patch
   sed -i 's:application/pdf;::g' sysui/desktop/menus/draw.desktop
   sed -i 's:text/plain;::g' sysui/desktop/menus/writer.desktop
