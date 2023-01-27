@@ -5,12 +5,13 @@
 
 name=docbook-xsl
 version=1.79.2
-release=3
-source=(https://github.com/docbook/xslt10-stylesheets/releases/download/release/$version/$name-nons-$version.tar.bz2)
+release=4
+source=(https://github.com/docbook/xslt10-stylesheets/releases/download/release/$version/$name-nons-$version.tar.bz2 non-recursive-string-subst.patch)
 
 build() {
 	cd $name-nons-$version
 
+	patch -Np2 -i $SRC/non-recursive-string-subst.patch
 	install -v -m 0755 -d $PKG/usr/share/xml/docbook/xsl-stylesheets-$version
 
 	cp -v -R \
