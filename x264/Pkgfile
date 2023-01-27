@@ -1,16 +1,16 @@
 # Description: Library for encoding H264/AVC video streams (snapshot).
-# URL: http://www.videolan.org/developers/x264.html
+# URL: https://www.videolan.org/developers/x264.html
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Rouven Schuerch, rs at tegonal dot com
 # Depends on: yasm
 
 name=x264
-version=148.20160808
-release=2
-source=(http://crux.ster.zone/downloads/$name/$name-$version-a5e06b9.tar.xz)
+version=0.164.3103
+release=1
+_commit=941cae6d1d6d6344c9a1d27440eaf2872b18ca9a
+source=(https://code.videolan.org/videolan/x264/-/archive/$_commit/x264-$_commit.tar.bz2)
 
 build() {
-	cp -al $name $name-10
+	cp -al $name-$_commit $name-10
 
 	cd $name-10
 
@@ -28,7 +28,7 @@ build() {
 	make
 	make DESTDIR=$PKG install-lib-shared
 
-	cd $SRC/$name
+	cd $SRC/$name-$_commit
 
 	./configure \
 		--prefix=/usr \
