@@ -5,11 +5,17 @@
 
 name=librevenge
 version=0.0.5
-release=1
-source=(https://sourceforge.net/projects/libwpd/files/librevenge/$name-$version/$name-$version.tar.gz)
+release=2
+source=(https://sourceforge.net/projects/libwpd/files/librevenge/$name-$version/$name-$version.tar.gz
+  librevenge-bundled-soname.patch.0
+  rpath.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np0 -i $SRC/librevenge-bundled-soname.patch.0
+  patch -Np0 -i $SRC/rpath.patch
+
   ./configure --prefix=/usr \
     --disable-werror \
     --without-docs
