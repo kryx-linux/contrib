@@ -5,7 +5,7 @@
 # Optional: qt5
 
 name=appstream
-version=0.15.6
+version=0.16.0
 release=1
 source=(https://www.freedesktop.org/software/appstream/releases/AppStream-$version.tar.xz)
 
@@ -23,6 +23,7 @@ build() {
     -D compose=true \
     -D docs=false \
     -D apidocs=false \
+    -D systemd=false \
     -D install-docs=false
 
   meson compile -C build
