@@ -5,11 +5,15 @@
 
 name=libmythes
 version=1.2.5
-release=1
-source=(https://github.com/hunspell/mythes/releases/download/v$version/mythes-$version.tar.xz)
+release=2
+source=(https://github.com/hunspell/mythes/releases/download/v$version/mythes-$version.tar.xz
+  mythes-1.2.0-vanilla-th-gen-idx.patch)
 
 build() {
   cd mythes-$version
+
+  patch -Np2 -i $SRC/mythes-1.2.0-vanilla-th-gen-idx.patch
+
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
