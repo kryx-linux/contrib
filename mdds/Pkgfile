@@ -5,12 +5,17 @@
 
 name=mdds
 version=2.1.0
-release=1
-source=(https://kohei.us/files/mdds/src/$name-$version.tar.bz2)
+release=2
+source=(https://kohei.us/files/mdds/src/$name-$version.tar.bz2
+  use-after-free.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np0 -i $SRC/use-after-free.patch
+
   ./autogen.sh --prefix=/usr
   make DESTDIR=$PKG install
+
   rm -fr $PKG/usr/share/doc
 }
