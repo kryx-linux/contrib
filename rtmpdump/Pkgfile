@@ -5,15 +5,16 @@
 
 name=rtmpdump
 version=2.4
+_commit=c5f04a58fc2aeea6296ca7c44ee4734c18401aa3
 release=3
-source=(http://crux.ster.zone/downloads/$name/$name-$version-c5f04a58.tar.xz)
+source=(http://git.ffmpeg.org/gitweb/$name.git/snapshot/$_commit.tar.gz)
+renames=($name-$version-${_commit:0:8}.tar.gz)
 
 build() {
-	cd $name
+	cd $name-*
 
 	sed \
-		-e 's/^CRYPTO=OPENSSL/#CRYPTO=OPENSSL/' \
-		-e 's/#CRYPTO=GNUTLS/CRYPTO=GNUTLS/' \
+		-e '/^CRYPTO=/s/OPENSSL/GNUTLS/' \
 		-i Makefile -i librtmp/Makefile
 
 	sed \
