@@ -5,13 +5,20 @@
 
 name=liblangtag
 version=0.6.4
-release=1
-source=(https://bitbucket.org/tagoh/liblangtag/downloads/$name-$version.tar.bz2)
+release=2
+source=(https://bitbucket.org/tagoh/liblangtag/downloads/$name-$version.tar.bz2
+  langtag-libtool-rpath.patch.0
+  liblangtag-bundled-soname.patch.0)
 
 build() {
   cd $name-$version
+
+  patch -Np0 -i $SRC/langtag-libtool-rpath.patch.0
+  patch -Np0 -i $SRC/liblangtag-bundled-soname.patch.0
+
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
+
   rm -r $PKG/usr/share/gtk-doc
 }
