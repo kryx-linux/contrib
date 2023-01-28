@@ -5,15 +5,36 @@
 
 name=raptor
 version=2.0.15
-release=2
-source=(http://librdf.org/dist/source/raptor2-$version.tar.gz)
+release=3
+source=(http://librdf.org/dist/source/raptor2-$version.tar.gz
+  0001-CVE-2020-25713-raptor2-malformed-input-file-can-lead.patch.1
+  0001-Calcualte-max-nspace-declarations-correctly-for-XML-.patch.1
+  Wint-conversion.patch
+  libtool.patch
+  raptor-bundled-soname.patch.1
+  raptor-emscripten.patch.1
+  rpath.patch
+  ubsan.patch
+  xml2-config.patch)
 
 build() {
   cd "$name"2-$version
+
+  patch -Np1 -i $SRC/0001-CVE-2020-25713-raptor2-malformed-input-file-can-lead.patch.1
+  patch -Np1 -i $SRC/0001-Calcualte-max-nspace-declarations-correctly-for-XML-.patch.1
+  patch -Np0 -i $SRC/Wint-conversion.patch
+  patch -Np0 -i $SRC/libtool.patch
+  patch -Np1 -i $SRC/raptor-bundled-soname.patch.1
+  patch -Np1 -i $SRC/raptor-emscripten.patch.1
+  patch -Np0 -i $SRC/rpath.patch
+  patch -Np0 -i $SRC/ubsan.patch
+  patch -Np0 -i $SRC/xml2-config.patch
+
   ./configure --prefix=/usr \
     --with-yajl=no \
     --with-icu-config=/usr/bin/icu-config
   make
   make prefix="$PKG"/usr install
+
   rm -r $PKG/usr/share/gtk-doc
 }
