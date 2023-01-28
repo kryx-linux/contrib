@@ -4,12 +4,15 @@
 
 name=libnumbertext
 version=1.0.11
-release=1
-source=(https://github.com/Numbertext/libnumbertext/archive/$version/$name-$version.tar.gz libnumbertext-updateautotools.patch)
+release=2
+source=(https://github.com/Numbertext/libnumbertext/archive/$version/$name-$version.tar.gz
+  libnumbertext-updateautotools.patch
+  deprecated.patch.0)
 
 build() {
   cd $name-$version
 
+  patch -Np0 -i $SRC/deprecated.patch.0
   patch -Np1 -i $SRC/libnumbertext-updateautotools.patch
 
   autoreconf -vfi

@@ -1,0 +1,17 @@
+--- src/Numbertext.cxx
++++ src/Numbertext.cxx
+@@ -41,7 +41,14 @@
+     std::wifstream wif(filename);
+     if (wif.fail())
+         return false;
++#if defined __GNUC__
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
++#endif
+     wif.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
++#if defined __GNUC__
++#pragma GCC diagnostic pop
++#endif
+     std::wstringstream wss;
+     wss << wif.rdbuf();
+     result = wss.str();
