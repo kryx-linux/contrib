@@ -5,11 +5,19 @@
 
 name=libwps
 version=0.4.13
-release=1
-source=(https://downloads.sourceforge.net/project/libwps/$name/$name-$version/$name-$version.tar.xz)
+release=2
+source=(https://downloads.sourceforge.net/project/libwps/$name/$name-$version/$name-$version.tar.xz
+  libtool.patch.0
+  libwps-bundled-soname.patch.0
+  rpath.patch.0)
 
 build() {
   cd $name-$version
+
+  patch -Np0 -i $SRC/libtool.patch.0
+  patch -Np0 -i $SRC/libwps-bundled-soname.patch.0
+  patch -Np0 -i $SRC/rpath.patch.0
+
   ./configure --prefix=/usr \
     --without-docs
   make
