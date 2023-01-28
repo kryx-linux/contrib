@@ -5,11 +5,17 @@
 
 name=coin-or-cbc
 version=2.10.8
-release=1
-source=(https://github.com/coin-or/Cbc/archive/releases/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/coin-or/Cbc/archive/releases/$version/$name-$version.tar.gz
+  libtool.patch
+  rpath.patch)
 
 build() {
   cd Cbc-releases-$version
+
+  patch -Np1 -i $SRC/libtool.patch
+  patch -Np1 -i $SRC/rpath.patch
+
   COIN_SKIP_PROJECTS="Sample" \
   ./configure --prefix=/usr \
     --with-osi-lib="$(pkg-config --libs osi)" \
@@ -23,7 +29,9 @@ build() {
     --enable-dependency-linking \
     --enable-cbc-parallel
   make
+
   PKG_CONFIG_LIBDIR="$PKG"/usr/lib/pkgconfig/ \
   make DESTDIR=$PKG install
+
   rm -fr $PKG/usr/share/coin/doc
 }
