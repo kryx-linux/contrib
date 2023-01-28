@@ -4,11 +4,14 @@
 
 name=lpsolve
 version=5.5.2.11
-release=2
-source=(https://downloads.sourceforge.net/project/lpsolve/lpsolve/$version/lp_solve_"$version"_source.tar.gz)
+release=3
+source=(https://downloads.sourceforge.net/project/lpsolve/lpsolve/$version/lp_solve_"$version"_source.tar.gz
+  lpsolve-ubsan.patch.0)
 
 build() {
   cd lp_solve_${version:0:3}
+
+  patch -Np0 -i $SRC/lpsolve-ubsan.patch.0
 
   sed -e "s|^\(opts=\).*|\1'$CFLAGS'|" -i lpsolve55/ccc lp_solve/ccc
 
