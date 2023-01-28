@@ -6,18 +6,29 @@
 
 name=redland
 version=1.0.17
-release=2
-source=(http://download.librdf.org/source/$name-$version.tar.gz rpath.diff)
+release=3
+source=(http://download.librdf.org/source/$name-$version.tar.gz
+  libtool.patch
+  redland-bundled-soname.patch.1
+  redland-format.patch.0
+  redland-xcompile.patch.1
+  rpath.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np0 -i $SRC/libtool.patch
+  patch -Np1 -i $SRC/redland-bundled-soname.patch.1
+  patch -Np0 -i $SRC/redland-format.patch.0
+  patch -Np1 -i $SRC/redland-xcompile.patch.1
+  patch -Np0 -i $SRC/rpath.patch
+
   ./configure --prefix=/usr \
     --enable-release \
     --with-raptor=system \
     --with-rasqal=system \
     --with-sqlite=3 \
     --with-bdb=no
-  patch -Np0 -i $SRC/rpath.diff
   make
   make DESTDIR=$PKG install
   rm -r $PKG/usr/share/gtk-doc
