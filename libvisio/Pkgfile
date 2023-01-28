@@ -5,11 +5,15 @@
 
 name=libvisio
 version=0.1.7
-release=2
-source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
+release=3
+source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
+  ubsan.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np0 -i $SRC/ubsan.patch
+
   ./configure --prefix=/usr \
     --without-docs
   make
