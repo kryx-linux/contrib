@@ -5,11 +5,15 @@
 
 name=libqxp
 version=0.0.2
-release=1
-source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
+release=2
+source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
+  ax_gcc_func_attribute.m4.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np0 -i $SRC/ax_gcc_func_attribute.m4.patch
+
   ./configure --prefix=/usr \
     --without-docs
   make
