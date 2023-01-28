@@ -5,18 +5,26 @@
 
 name=coin-or-osi
 version=0.108.7
-release=1
-source=(https://github.com/coin-or/Osi/archive/releases/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/coin-or/Osi/archive/releases/$version/$name-$version.tar.gz
+  libtool.patch
+  rpath.patch)
 
 build() {
   cd Osi-releases-$version
+
+  patch -Np1 -i $SRC/libtool.patch
+  patch -Np1 -i $SRC/rpath.patch
+
   COIN_SKIP_PROJECTS="Sample" \
   ./configure --prefix=/usr \
     --enable-dependency-linking \
     --with-coinutils-lib="$(pkg-config --libs coinutils)" \
     --with-coinutils-incdir="/usr/include/coin/"
   make
+
   PKG_CONFIG_LIBDIR="${PKG}/usr/lib/pkgconfig/" \
   make DESTDIR="$PKG" install
+
   rm -fr $PKG/usr/share/coin/doc
 }
