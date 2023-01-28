@@ -1,0 +1,36 @@
+diff -Naur libetonyek-0.1.10.orig/configure.ac libetonyek-0.1.10/configure.ac
+--- libetonyek-0.1.10.orig/configure.ac	2023-01-28 15:58:44.501436820 +0100
++++ libetonyek-0.1.10/configure.ac	2023-01-28 16:39:38.681363319 +0100
+@@ -102,7 +102,7 @@
+         boost/none.hpp \
+         boost/numeric/conversion/cast.hpp \
+         boost/optional.hpp \
+-        boost/spirit/include/phoenix.hpp \
++        boost/phoenix.hpp \
+         boost/spirit/include/qi.hpp \
+         boost/variant/recursive_variant.hpp \
+         boost/variant/variant.hpp \
+diff -Naur libetonyek-0.1.10.orig/src/lib/contexts/KEY1DivElement.cpp libetonyek-0.1.10/src/lib/contexts/KEY1DivElement.cpp
+--- libetonyek-0.1.10.orig/src/lib/contexts/KEY1DivElement.cpp	2023-01-28 15:58:44.474769901 +0100
++++ libetonyek-0.1.10/src/lib/contexts/KEY1DivElement.cpp	2023-01-28 16:39:07.884404770 +0100
+@@ -8,7 +8,7 @@
+  */
+ 
+ #include <boost/spirit/include/qi.hpp>
+-#include <boost/spirit/include/phoenix.hpp>
++#include <boost/phoenix.hpp>
+ #include <memory>
+ 
+ #include "KEY1DivElement.h"
+diff -Naur libetonyek-0.1.10.orig/src/lib/contexts/KEY1StringConverter.cpp libetonyek-0.1.10/src/lib/contexts/KEY1StringConverter.cpp
+--- libetonyek-0.1.10.orig/src/lib/contexts/KEY1StringConverter.cpp	2023-01-28 15:58:44.478103266 +0100
++++ libetonyek-0.1.10/src/lib/contexts/KEY1StringConverter.cpp	2023-01-28 16:39:23.404551864 +0100
+@@ -11,7 +11,7 @@
+ 
+ #include <boost/fusion/include/std_pair.hpp>
+ #include <boost/spirit/include/qi.hpp>
+-#include <boost/spirit/include/phoenix.hpp>
++#include <boost/phoenix.hpp>
+ 
+ #include "KEY1StringConverter.h"
+ 

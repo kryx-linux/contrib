@@ -1,17 +1,38 @@
 # Description: Library and a set of tools for reading and converting Apple Keynote presentations
 # URL: https://wiki.documentfoundation.org/DLP/Libraries/libetonyek
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: glm liblangtag librevenge mdds
+# Depends on: boost-1.80 glm liblangtag librevenge mdds
 
 name=libetonyek
 version=0.1.10
-release=2
-source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
+release=3
+source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
+  0001-allow-0-size-message.patch.1
+  libetonyek-bundled-soname.patch.0
+  rpath.patch
+  ubsan.patch
+  warnings.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/0001-allow-0-size-message.patch.1
+  patch -Np0 -i $SRC/libetonyek-bundled-soname.patch.0
+  patch -Np0 -i $SRC/rpath.patch
+  patch -Np0 -i $SRC/ubsan.patch
+  patch -Np0 -i $SRC/warnings.patch
+
+  # boost 1.81.0 breaks libetonyek
+  CXXFLAGS="-I/usr/opt/boost-1.80/include $CFLAGS"
+  CPPFLAGS="-I/usr/opt/boost-1.80/include $CFLAGS"
+
+  autoreconf -fvi
+
   ./configure --prefix=/usr \
-    --with-mdds=2.0 \
+    --with-pic \
+    --with-mdds=2.1 \
+    --disable-static \
+    --disable-werror \
     --without-docs
   make
   make DESTDIR=$PKG install
