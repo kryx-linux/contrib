@@ -5,11 +5,19 @@
 
 name=coin-or-cgl
 version=0.60.6
-release=1
-source=(https://github.com/coin-or/Cgl/archive/releases/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/coin-or/Cgl/archive/releases/$version/$name-$version.tar.gz
+  configure-exit.patch
+  libtool.patch
+  rpath.patch)
 
 build() {
   cd Cgl-releases-$version/Cgl
+
+  patch -Np1 -i $SRC/configure-exit.patch
+  patch -Np1 -i $SRC/libtool.patch
+  patch -Np1 -i $SRC/rpath.patch
+
   COIN_SKIP_PROJECTS="Sample" \
   ./configure --prefix=/usr \
     --with-osi-lib="$(pkg-config --libs osi)" \
@@ -20,7 +28,9 @@ build() {
     --with-coinutils-incdir="/usr/include/coin/" \
     --enable-dependency-linking
   make
+
   PKG_CONFIG_LIBDIR="$PKG"/usr/lib/pkgconfig/ \
   make DESTDIR="$PKG" install
+
   rm -fr $PKG/usr/share/coin/doc
 }
