@@ -5,11 +5,19 @@
 
 name=coin-or-mp
 version=1.8.4
-release=4
-source=(https://www.coin-or.org/download/source/CoinMP/CoinMP-$version.tgz)
+release=5
+source=(https://www.coin-or.org/download/source/CoinMP/CoinMP-$version.tgz
+  werror-undef.patch.0
+  ubsan.patch.0
+  libtool.patch)
 
 build() {
   cd CoinMP-$version
+
+  patch -Np0 -i $SRC/werror-undef.patch.0
+  patch -Np0 -i $SRC/ubsan.patch.0
+  patch -Np1 -i $SRC/libtool.patch
+
   COIN_SKIP_PROJECTS="Sample" \
   ./configure --prefix=/usr \
     --with-osi-lib="$(pkg-config --libs osi)" \
@@ -24,8 +32,10 @@ build() {
     --with-coinutils-incdir="/usr/include/coin/"
   make
   make DESTDIR=$PKG install-exec
+
   mkdir -p $PKG/usr/{include/coin,lib/pkgconfig}
   install -c -m 644 CoinMP/src/CoinMP.h $PKG/usr/include/coin/CoinMP.h
   install -c -m 644 CoinMP/coinmp.pc $PKG/usr/lib/pkgconfig/coinmp.pc
+
   rm -fr $PKG/usr/share
 }
