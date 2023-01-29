@@ -1,22 +1,28 @@
 # Description: Collection of free plugins compatible with LADSPA, LV2 and LinuxVST
 # URL: https://lsp-plug.in
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cairo libsndfile mesa
-# Optional: jack ladspa lv2
+# Depends on: cairo libsndfile lv2 mesa
+# Optional: jack ladspa
 
 name=lsp-plugins
-version=1.2.4
+version=1.2.5
 release=1
 source=(https://github.com/sadko4u/lsp-plugins/releases/download/$version/$name-src-$version.tar.gz)
 
 build() {
   cd $name
 
-  prt-get isinst jack && PKGMK_LSP+=' jack'
-  prt-get isinst ladspa && PKGMK_LSP+=' ladspa'
-  prt-get isinst lv2 && PKGMK_LSP+=' lv2'
+  prt-get isinst jack && PKGMK_LSP+=' jack' || PKGMK_LSP_SUB+=' jack'
+  prt-get isinst ladspa && PKGMK_LSP+=' ladspa' || PKGMK_LSP_SUB+=' ladspa'
 
-  make config PREFIX=/usr SHARE_PATH=/usr/share FEATURES="xdg $PKGMK_LSP"
+  export CFLAGS="$CFLAGS -O2 -flto=auto"
+  export CXXFLAGS="$CXXFLAGS -O2 -flto=auto"
+
+  make config \
+    PREFIX=/usr \
+    SHARE_PATH=/usr/share \
+    ADD_FEATURES="xdg$PKGMK_LSP" \
+    SUB_FEATURES="doc$PKGMK_LSP_SUB"
   make
   make DESTDIR=$PKG install
 
