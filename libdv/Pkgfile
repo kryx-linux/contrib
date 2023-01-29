@@ -1,15 +1,14 @@
 # Description: Software codec for DV video.
 # URL: http://libdv.sourceforge.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Hannes Mayer, kontakt at ecarux dot de
 # Depends on: libsdl popt
-# Optional: gtk1
+# Optional: gtk
 
 name=libdv
 version=1.0.0
 release=3
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
-	http://crux.ster.zone/downloads/$name/$name-1.0.0-pic.patch.bz2
+	$name-1.0.0-pic.patch.bz2
 	$name-0.99-2.6.patch)
 
 build() {
@@ -18,10 +17,15 @@ build() {
 	bzcat $SRC/$name-1.0.0-pic.patch.bz2 |patch -p 1
 	patch -p 1 -i $SRC/$name-0.99-2.6.patch
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/share/man \
-		--enable-sdl
+	PKGMK_LIBDV="--prefix=/usr --mandir=/usr/share/man --enable-sdl"
+	if prt-get isinst gtk; then
+		export GTK_CFLAGS="$(pkgconf --cflags gtk+-2.0 glib-2.0)"
+		export GTK_LIBS="$(pkgconf --libs gtk+-2.0 glib-2.0)"
+	else
+		PKGMK_LIBDV+=" --disable-gtk"
+	fi
+
+	./configure $PKGMK_LIBDV
 
 	make
 	make DESTDIR=$PKG install
