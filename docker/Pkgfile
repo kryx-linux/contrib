@@ -6,8 +6,8 @@
 # LIBNETWORK_COMMIT:=05b93e0d3a95952f70c113b0bc5bdb538d7afdd7
 
 name=docker
-version=20.10.23
-release=2
+version=23.0.0
+release=1
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
@@ -17,7 +17,7 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
 build() {
     export GO111MODULE=auto
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=6051f14
+    export DOCKER_GITCOMMIT=d7573ab
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
 
@@ -38,7 +38,7 @@ build() {
     popd
 
     install -D -m 0755 cli-$version/build/$name $PKG/usr/bin/$name
-    install -D -m 0755 moby-$version/bundles/dynbinary-daemon/dockerd-$version \
+    install -D -m 0755 moby-$version/bundles/dynbinary-daemon/dockerd \
         $PKG/usr/bin/dockerd
 
     (cd ..; \
