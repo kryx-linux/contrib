@@ -5,14 +5,14 @@
 # Optional: docbook-xsl libxslt xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-kde
 
 name=flatpak
-version=1.15.1
+version=1.15.2
 release=1
 source=(https://github.com/flatpak/flatpak/releases/download/$version/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
 
-  prt-get isinst libxslt docbook-xsl || PKGMK_FLATPAK+=' --disable-documentation'
+  prt-get isinst libxslt docbook-xsl docbook-dtd || PKGMK_FLATPAK+=' --disable-documentation'
 
   ./configure $PKGMK_FLATPAK \
     --prefix=/usr \
