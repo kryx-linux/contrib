@@ -4,15 +4,13 @@
 # Depends on: libixion zstd
 
 name=liborcus
-version=0.18.0
-release=2
+version=0.18.1
+release=1
 source=(https://kohei.us/files/orcus/src/$name-$version.tar.xz
   rpath.patch.0
   libtool.patch.0
   fix-pch.patch.0
-  liborcus_newline.patch.1
-  liborcus-no-benchmark.patch.1
-  bugfix-0.18.0-unset-border-colors.patch.1)
+  liborcus_newline.patch.1)
 
 build() {
   cd $name-$version
@@ -21,8 +19,6 @@ build() {
   patch -Np0 -i $SRC/libtool.patch.0
   patch -Np0 -i $SRC/fix-pch.patch.0
   patch -Np1 -i $SRC/liborcus_newline.patch.1
-  patch -Np1 -i $SRC/liborcus-no-benchmark.patch.1
-  patch -Np1 -i $SRC/bugfix-0.18.0-unset-border-colors.patch.1
 
   ./configure --prefix=/usr --disable-python
   make
