@@ -1,17 +1,21 @@
 # Description: Nextcloud desktop client
 # URL: https://nextcloud.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: libevent pciutils qtkeychain
-# Optional: doxygen kde5 librsvg qtwebengine
+# Depends on: libevent librsvg pciutils qtkeychain
+# Optional: doxygen karchive qtwebengine
 
 name=nextcloud-client
-version=3.6.6
+version=3.7.3
 release=1
-source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz)
+source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz
+  4875.patch)
 
 build() {
+  # do not hard depend on qtwebengine
+  patch -Rp1 -d desktop-$version -i $SRC/4875.patch
+
   # you need both librsvg and qtwebengine to build the gui client
-  prt-get isinst librsvg qtwebengine && \
+  prt-get isinst karchive librsvg qtwebengine && \
     PKGMK_NCC+=' -D SVG_CONVERTER=/usr/bin/rsvg-convert' || \
     PKGMK_NCC+=' -D BUILD_GUI=OFF'
 
@@ -25,6 +29,8 @@ build() {
     -D APPLICATION_HELP_URL="https://crux.nu/bugs/" \
     -D BUILD_SHELL_INTEGRATION_DOLPHIN=OFF \
     -D BUILD_SHELL_INTEGRATION_NAUTILUS=OFF \
+    -D BUILD_TESTING=OFF \
+    -D BUILD_UPDATER=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build

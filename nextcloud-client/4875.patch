@@ -1,0 +1,77 @@
+From b81cdf177d3410db45e6f97eb3575ceddabb73dd Mon Sep 17 00:00:00 2001
+From: Matthieu Gallien <matthieu.gallien@nextcloud.com>
+Date: Mon, 29 Aug 2022 11:46:13 +0200
+Subject: [PATCH] makes Qt WebEngine optional only on macOS
+
+should avoid distributing broken builds missing out web flow login that
+is required by some cusotmers
+
+Signed-off-by: Matthieu Gallien <matthieu.gallien@nextcloud.com>
+---
+ src/CMakeLists.txt | 53 ++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 51 insertions(+), 2 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index cd3805799ee..a4d06844abc 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -4,8 +4,57 @@ endif()
+ 
+ include(ECMEnableSanitizers)
+ 
+-find_package(Qt5 5.15 COMPONENTS Core Network Xml Concurrent REQUIRED)
+-find_package(Qt5 5.15 COMPONENTS WebEngineWidgets WebEngine)
++set(REQUIRED_QT_VERSION "5.15.0")
++
++find_package(Qt5Core ${REQUIRED_QT_VERSION} CONFIG QUIET)
++set_package_properties(Qt5Core PROPERTIES
++    DESCRIPTION "Qt5 Core component."
++    TYPE REQUIRED
++)
++
++find_package(Qt5Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
++set_package_properties(Qt5Network PROPERTIES
++    DESCRIPTION "Qt5 Network component."
++    TYPE REQUIRED
++)
++
++find_package(Qt5Xml ${REQUIRED_QT_VERSION} CONFIG QUIET)
++set_package_properties(Qt5Xml PROPERTIES
++    DESCRIPTION "Qt5 Xml component."
++    TYPE REQUIRED
++)
++
++find_package(Qt5Concurrent ${REQUIRED_QT_VERSION} CONFIG QUIET)
++set_package_properties(Qt5Concurrent PROPERTIES
++    DESCRIPTION "Qt5 Concurrent component."
++    TYPE REQUIRED
++)
++
++find_package(Qt5WebEngineWidgets ${REQUIRED_QT_VERSION} CONFIG QUIET)
++if(APPLE)
++    set_package_properties(Qt5WebEngineWidgets PROPERTIES
++        DESCRIPTION "Qt5 WebEngineWidgets component."
++        TYPE RECOMMENDED
++    )
++else()
++    set_package_properties(Qt5WebEngineWidgets PROPERTIES
++        DESCRIPTION "Qt5 WebEngineWidgets component."
++        TYPE REQUIRED
++    )
++endif()
++
++find_package(Qt5WebEngine ${REQUIRED_QT_VERSION} CONFIG QUIET)
++if(APPLE)
++    set_package_properties(Qt5WebEngine PROPERTIES
++        DESCRIPTION "Qt5 WebEngine component."
++        TYPE RECOMMENDED
++    )
++else()
++    set_package_properties(Qt5WebEngine PROPERTIES
++        DESCRIPTION "Qt5 WebEngine component."
++        TYPE REQUIRED
++    )
++endif()
+ 
+ if(Qt5WebEngine_FOUND AND Qt5WebEngineWidgets_FOUND)
+   add_compile_definitions(WITH_WEBENGINE=1)
