@@ -4,22 +4,19 @@
 # Depends on: 
 # Nice to have: libcuefile libreplaygain
 
-name=libmpcdec
+name=musepack
 version=1.3.0
 release=1
-source=(https://files.musepack.net/source/musepack_src_r475.tar.gz)
+source=(https://files.musepack.net/source/${name}_src_r475.tar.gz)
 
 build() {
 	cd musepack_src_r475
 
-	# disable mpcenc unless we have an older glibc
-	local build_enc=$(prt-get current glibc | \
-		awk -v FS="-" '{if ($1 < 2.32) print 1; else print 0;}')
-	[ "$build_enc" = 1 ] || sed -e '/add_subdirectory(mpcenc)/d' \
-				-e '/add_subdirectory(mpcpsy)/d' \
-				-i CMakeLists.txt
-	
-	# disable targets whose dependencies are not present
+	# disable mpcenc (broken when built against recent glibc)
+	# and any targets whose dependencies are not present
+	sed -e '/add_subdirectory(mpcenc)/d' \
+		-e '/add_subdirectory(mpcpsy)/d' \
+		-i CMakeLists.txt
 	[ -e /usr/lib/libcuefile.so ] || \
 		sed '/add_subdirectory(mpcchap)/d' -i CMakeLists.txt
 	[ -e /usr/lib/libreplaygain.so ] || \
@@ -34,29 +31,17 @@ build() {
 	done
 
 	mkdir build && cd build
-	cmake -G Ninja -Wno-dev	-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_C_FLAGS="$CFLAGS" \
-		-DCMAKE_INSTALL_PREFIX="/usr" ..
+	cmake -G Ninja -Wno-dev	\
+		-DCMAKE_INSTALL_PREFIX="/usr" \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_C_FLAGS="$CFLAGS" ..
 
 	ninja -j ${JOBS:-1}
 	DESTDIR=$PKG ninja install
 	rm -rf $PKG/usr/include/mpc/.svn
 
-	install -d "$PKG/usr/lib/pkgconfig"
+	install -d "$PKG/usr/lib"
 	install -m 0755 libmpcdec/libmpcdec.so "$PKG/usr/lib/libmpcdec.so.6.1.0"
 	ln -s libmpcdec.so.6.1.0 "$PKG/usr/lib/libmpcdec.so.6"
 	ln -s libmpcdec.so.6.1.0 "$PKG/usr/lib/libmpcdec.so"
-
-	cat >"$PKG/usr/lib/pkgconfig/$name.pc" <<EOF
-prefix=/usr
-includedir=\${prefix}/include/mpc
-libdir=\${prefix}/lib
-
-Name: $name
-Description: decoder library for MusePack files
-Version: $version
-URL: https://www.musepack.net/
-Libs: -L\${libdir} -l${name#lib}
-Cflags: -I\${includedir}
-EOF
 }
