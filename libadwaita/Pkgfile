@@ -4,7 +4,7 @@
 # Depends on: gtk4 libsass sassc wayland-protocols
 
 name=libadwaita
-version=1.2.1
+version=1.2.2
 release=1
 source=(https://gitlab.gnome.org/GNOME/libadwaita/-/archive/$version/libadwaita-$version.tar.bz2)
 
@@ -15,7 +15,7 @@ build() {
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
-    -D b_lto=false \
+    -D b_lto=true \
     -D b_pie=true \
     -D examples=false \
     -D tests=false
