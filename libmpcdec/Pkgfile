@@ -1,22 +1,62 @@
-# Description: Encoder, Decoder and replaygain for Musepack audio streams.
+# Description: tools and libraries for working with Musepack audio streams.
 # URL: http://www.musepack.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Jukka Heino, vector at pp dot nic dot fi
-# Depends on: nasm
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: 
+# Nice to have: libcuefile libreplaygain
 
 name=libmpcdec
-version=1.2.6
+version=1.3.0
 release=1
-source=(http://files.musepack.net/source/libmpcdec-$version.tar.bz2)
+source=(https://files.musepack.net/source/musepack_src_r475.tar.gz)
 
 build() {
-	cd libmpcdec-$version
+	cd musepack_src_r475
 
-	./configure \
-		--prefix=/usr \
-		--disable-static
+	# disable mpcenc unless we have an older glibc
+	local build_enc=$(prt-get current glibc | \
+		awk -v FS="-" '{if ($1 < 2.32) print 1; else print 0;}')
+	[ "$build_enc" = 1 ] || sed -e '/add_subdirectory(mpcenc)/d' \
+				-e '/add_subdirectory(mpcpsy)/d' \
+				-i CMakeLists.txt
+	
+	# disable targets whose dependencies are not present
+	[ -e /usr/lib/libcuefile.so ] || \
+		sed '/add_subdirectory(mpcchap)/d' -i CMakeLists.txt
+	[ -e /usr/lib/libreplaygain.so ] || \
+		sed '/add_subdirectory(mpcgain)/d' -i CMakeLists.txt
+	
+	# fix the headers
+	sed -i 's/^const /extern const /' libmpcdec/requant.h
+	sed -e '/^# ifdef USE_TERMIOS/i\#include <sys/time.h>\ \ ' \
+		-i mpcenc/keyboard.c
+	for INC in $(grep -lrE "^#include <cuetools/" .); do
+		sed -i 's|^#include <cuetools|#include <cuefile|' $INC
+	done
 
-	make
-	make DESTDIR=$PKG install
+	mkdir build && cd build
+	cmake -G Ninja -Wno-dev	-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_C_FLAGS="$CFLAGS" \
+		-DCMAKE_INSTALL_PREFIX="/usr" ..
+
+	ninja -j ${JOBS:-1}
+	DESTDIR=$PKG ninja install
+	rm -rf $PKG/usr/include/mpc/.svn
+
+	install -d "$PKG/usr/lib/pkgconfig"
+	install -m 0755 libmpcdec/libmpcdec.so "$PKG/usr/lib/libmpcdec.so.6.1.0"
+	ln -s libmpcdec.so.6.1.0 "$PKG/usr/lib/libmpcdec.so.6"
+	ln -s libmpcdec.so.6.1.0 "$PKG/usr/lib/libmpcdec.so"
+
+	cat >"$PKG/usr/lib/pkgconfig/$name.pc" <<EOF
+prefix=/usr
+includedir=\${prefix}/include/mpc
+libdir=\${prefix}/lib
+
+Name: $name
+Description: decoder library for MusePack files
+Version: $version
+URL: https://www.musepack.net/
+Libs: -L\${libdir} -l${name#lib}
+Cflags: -I\${includedir}
+EOF
 }
-
