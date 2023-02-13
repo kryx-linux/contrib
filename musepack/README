@@ -1,0 +1,14 @@
+The musepack audio codec has not been actively developed in many years.
+This port is kept as a convenience for users who have *.mpc files in 
+their collections and want to crop them, decode them, or play them in 
+apps (like moc) which do not bundle a copy of the libraries.
+
+The encoder tool (mpcenc) has not kept up with changes in glibc, and
+therefore would be broken if built on CRUX 3.7. But the statically-linked
+binary available upstream (built against an older glibc) should still
+work, if encoding from lossless to *.mpc is what you want to do.
+
+Also available on the musepack project site are two optional libraries:
+libreplaygain and libcuefile. If you install them before this port (under
+the standard prefix /usr), then the targets mpcchap and mpcgain should 
+also appear in your package.

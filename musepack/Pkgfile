@@ -2,7 +2,6 @@
 # URL: http://www.musepack.net/
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: 
-# Nice to have: libcuefile libreplaygain
 
 name=musepack
 version=1.3.0
@@ -10,7 +9,7 @@ release=1
 source=(https://files.musepack.net/source/${name}_src_r475.tar.gz)
 
 build() {
-	cd musepack_src_r475
+	cd ${name}*
 
 	# disable mpcenc (broken when built against recent glibc)
 	# and any targets whose dependencies are not present
@@ -41,7 +40,5 @@ build() {
 	rm -rf $PKG/usr/include/mpc/.svn
 
 	install -d "$PKG/usr/lib"
-	install -m 0755 libmpcdec/libmpcdec.so "$PKG/usr/lib/libmpcdec.so.6.1.0"
-	ln -s libmpcdec.so.6.1.0 "$PKG/usr/lib/libmpcdec.so.6"
-	ln -s libmpcdec.so.6.1.0 "$PKG/usr/lib/libmpcdec.so"
+	install -m 0755 libmpcdec/libmpcdec.so "$PKG/usr/lib/libmpcdec.so"
 }
