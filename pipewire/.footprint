@@ -3,6 +3,9 @@ drwxr-xr-x	root/root	etc/alsa/
 drwxr-xr-x	root/root	etc/alsa/conf.d/
 lrwxrwxrwx	root/root	etc/alsa/conf.d/50-pipewire.conf -> /usr/share/alsa/alsa.conf.d/50-pipewire.conf
 lrwxrwxrwx	root/root	etc/alsa/conf.d/99-pipewire-default.conf -> /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
+drwxr-xr-x	root/root	etc/security/
+drwxr-xr-x	root/root	etc/security/limits.d/
+-rw-r--r--	root/root	etc/security/limits.d/25-pw-rlimits.conf
 drwxr-xr-x	root/root	lib/
 drwxr-xr-x	root/root	lib/udev/
 drwxr-xr-x	root/root	lib/udev/rules.d/
@@ -10,6 +13,7 @@ drwxr-xr-x	root/root	lib/udev/rules.d/
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/pipewire
+-rwxr-xr-x	root/root	usr/bin/pipewire-aes67
 -rwxr-xr-x	root/root	usr/bin/pipewire-avb
 -rwxr-xr-x	root/root	usr/bin/pipewire-pulse
 -rwxr-xr-x	root/root	usr/bin/pw-cli
@@ -253,14 +257,15 @@ drwxr-xr-x	root/root	usr/lib/alsa-lib/
 drwxr-xr-x	root/root	usr/lib/gstreamer-1.0/
 -rwxr-xr-x	root/root	usr/lib/gstreamer-1.0/libgstpipewire.so
 lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so -> libpipewire-0.3.so.0
-lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.365.0
--rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.365.0
+lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.366.0
+-rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.366.0
 drwxr-xr-x	root/root	usr/lib/pipewire-0.3/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-access.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-adapter.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-avb.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-client-device.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-client-node.so
+-rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-combine-stream.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-echo-cancel.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-fallback-sink.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-filter-chain.so
@@ -409,6 +414,7 @@ drwxr-xr-x	root/root	usr/share/pipewire/filter-chain/
 drwxr-xr-x	root/root	usr/share/pipewire/media-session.d/
 -rw-r--r--	root/root	usr/share/pipewire/media-session.d/with-alsa (EMPTY)
 -rw-r--r--	root/root	usr/share/pipewire/minimal.conf
+-rw-r--r--	root/root	usr/share/pipewire/pipewire-aes67.conf
 -rw-r--r--	root/root	usr/share/pipewire/pipewire-avb.conf
 -rw-r--r--	root/root	usr/share/pipewire/pipewire-pulse.conf
 -rw-r--r--	root/root	usr/share/pipewire/pipewire.conf
