@@ -1,7 +1,7 @@
 # Description: High-quality MPEG Audio Decoder library.
-# URL: http://codeberg.org/tenacityteam/libmad
+# URL: https://codeberg.org/tenacityteam/libmad
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: 
+# Depends on:
 
 name=libmad
 version=0.16.3
@@ -10,13 +10,13 @@ source=(https://codeberg.org/tenacityteam/$name/archive/$version.tar.gz)
 renames=($name-$version.tar.gz)
 
 build() {
-	cmake -S $name -B build \
-	  -D CMAKE_INSTALL_PREFIX=/usr \
-	  -D CMAKE_INSTALL_LIBDIR=lib \
-	  -D CMAKE_BUILD_TYPE=Release \
-	  -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-	  -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-	  -Wno-dev
+	cmake -S $name-$version -B build \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-Wno-dev
 
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
