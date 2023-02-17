@@ -10,7 +10,7 @@ source=(https://codeberg.org/tenacityteam/$name/archive/$version.tar.gz)
 renames=($name-$version.tar.gz)
 
 build() {
-	cmake -S $name-$version -B build \
+	cmake -S $name -B build \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
