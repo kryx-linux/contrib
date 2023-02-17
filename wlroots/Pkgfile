@@ -6,7 +6,7 @@
 
 name=wlroots
 version=0.16.2
-release=1
+release=2
 source=(https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/$version/wlroots-$version.tar.bz2)
 
 build() {
@@ -20,7 +20,8 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D backends=drm$WLROOTS_BACKENDS
+    -D backends=drm$WLROOTS_BACKENDS \
+    -D examples=false
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
