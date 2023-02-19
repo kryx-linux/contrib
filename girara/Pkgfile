@@ -1,8 +1,8 @@
 # Description: User interface library focusing on simplicity and minimalism
 # URL: https://pwmt.org/projects/girara
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gtk3 libnotify meson ninja
-# Optional: json-c libnotify
+# Depends on: libnotify
+# Optional: json-glib libnotify
 
 name=girara
 version=0.3.9
@@ -10,7 +10,7 @@ release=1
 source=(https://git.pwmt.org/pwmt/$name/-/archive/$version/$name-$version.tar.bz2)
 
 build() {
-  prt-get isinst json-c && PKGMK_GIRARA+=' -D json=enabled' || PKGMK_GIRARA+=' -D json=disabled'
+  prt-get isinst json-glib && PKGMK_GIRARA+=' -D json=enabled' || PKGMK_GIRARA+=' -D json=disabled'
   prt-get isinst libnotify && PKGMK_GIRARA+=' -D notify=enabled' || PKGMK_GIRARA+=' -D notify=disabled'
 
   meson setup $name-$version build $PKGMK_GIRARA \
