@@ -1,15 +1,17 @@
 # Description: kodi inputstream addon for several manifest types
 # URL: https://github.com/peak3d/inputstream.adaptive
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: kodi
+# Depends on: kodi-gbm
 
 name=kodi-addon-inputstream-adaptive
-version=19.0.7
+version=20.3.3
 release=1
+_bento4=1.6.0-639-5
+_codename=Nexus
 
-_codename=Matrix
-
-source=(https://github.com/peak3d/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz)
+source=(https://github.com/peak3d/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz
+  https://github.com/xbmc/Bento4/archive/refs/tags/$_bento4-$_codename.tar.gz)
+renames=(SKIP bento4-$_bento4-$_codename.tar.gz)
 
 build() {
   cmake -S inputstream.adaptive-$version-$_codename -B build -G Ninja \
@@ -18,6 +20,9 @@ build() {
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D BUILD_SHARED_LIBS=ON \
+    -D ENABLE_INTERNAL_BENTO4=ON \
+    -D BENTO4_URL=$PKGMK_SOURCE_DIR/bento4-$_bento4-$_codename.tar.gz \
+    -D USE_LTO=ON \
     -D BUILD_TESTING=OFF \
     -Wno-dev
   cmake --build build
