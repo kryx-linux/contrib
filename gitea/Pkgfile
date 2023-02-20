@@ -1,0 +1,49 @@
+# Description: painless self-hosted Git service
+# URL: https://gitea.io/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: git go npm openssh postgresql
+
+name=gitea
+version=1.18.4
+release=1
+source=(https://github.com/go-gitea/gitea/archive/v$version/$name-$version.tar.gz
+  gitea.service)
+
+build() {
+  cd $name-$version
+
+  [ ! -d "$PKGMK_SOURCE_DIR/gopath" ] && mkdir "$PKGMK_SOURCE_DIR/gopath"
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+  [ ! -d $PKGMK_SOURCE_DIR/npm_cache ] && mkdir $PKGMK_SOURCE_DIR/npm_cache
+  export npm_config_cache=$PKGMK_SOURCE_DIR/npm_cache
+  export NPM_CONFIG_PREFIX="$SRC/npm"
+  export PATH+=":$NPM_CONFIG_PREFIX/bin"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+  export LDFLAGS="-X 'code.gitea.io/gitea/modules/setting.AppWorkPath=/home/gitea/'"
+  export LDFLAGS="$LDFLAGS -X 'code.gitea.io/gitea/modules/setting.CustomConf=/etc/gitea/app.ini'"
+  export LDFLAGS="$LDFLAGS -X 'code.gitea.io/gitea/modules/setting.StaticRootPath=/usr/share/gitea/'"
+  export TAGS="bindata pam"
+
+  export GITEA_VERSION="$version"
+  make deps
+  make -j1 EXTRA_GOFLAGS="$GOFLAGS" backend frontend
+
+  install -Dm755 $name -t $PKG/usr/bin/
+  #setcap cap_net_bind_service=+ep $PKG/usr/bin/$name
+
+  install -D -o gitea -g gitea custom/conf/app.example.ini -t $PKG/etc/gitea/
+
+  install -Dm 755 $SRC/$name.service $PKG/etc/rc.d/$name
+
+  install -d -m 755 -o gitea -g gitea $PKG/var/log/$name
+  install -d -m 755 -o gitea -g gitea $PKG/home/$name
+  install -d -m 755 $PKG/usr/share/$name
+
+  mv assets options public templates $PKG/usr/share/$name/
+  for dir in $name $name/git $name/data $name/db $name/custom; do
+    install -d -m 750 -o gitea -g gitea $PKG/home/$dir
+  done
+}
