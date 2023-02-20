@@ -1,31 +1,27 @@
 # Description: Open source home theater software, wayland native version
 # URL: https://kodi.tv/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: dbus flatbuffers fstrcmp glu libass libcdio libdvdread libinput libxkbcommon openjdk17-jdk rapidjson rtmpdump spdlog swig taglib tinyxml waylandpp
+# Depends on: crossguid dbus flatbuffers fstrcmp glu libass libcdio libdvdread libinput libxkbcommon openjdk17-jdk rapidjson rtmpdump spdlog swig taglib tinyxml waylandpp
 # Optional: alsa-lib avahi bluez dav1d libmicrohttpd libnfs libva libva-vdpau-driver libxslt mariadb mysql pipewire pulseaudio
 
 name=kodi-wayland
-version=19.5
+version=20.0
 release=1
 
 # version variables {{{
-_codename=Matrix
-_ffmpeg_version="4.3-kodi-dav1d-1.0"
-_crossguid_version="8f399e8bd4"
-_fmt_version="6.1.2"
-_libdvdcss_version="1.4.2-Leia-Beta-5"
-_libdvdnav_version="6.0.0-Leia-Alpha-3"
-_libdvdread_version="6.0.0-Leia-Alpha-3"
+_codename=Nexus
+_ffmpeg_version="4.4.1-${_codename}-Alpha1"
+_libdvdcss_version="1.4.3-Next-${_codename}-Alpha2-2"
+_libdvdnav_version="6.1.1-Next-${_codename}-Alpha2-2"
+_libdvdread_version="6.1.3-Next-${_codename}-Alpha2-2"
 # }}}
 # source {{{
 source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$_codename.tar.gz
-  #https://github.com/BlackIkeEagle/kodi-FFmpeg/archive/refs/heads/fix/$_ffmpeg_version.tar.gz
-  https://sources.archlinux.org/other/community/kodi/kodi-ffmpeg-$_ffmpeg_version.tar.gz
-  #http://mirrors.kodi.tv/build-deps/sources/fmt-$_fmt_version.tar.gz
-  http://mirrors.kodi.tv/build-deps/sources/crossguid-$_crossguid_version.tar.gz
+  https://github.com/xbmc/FFmpeg/archive/$_ffmpeg_version/ffmpeg-$_ffmpeg_version.tar.gz
   https://github.com/xbmc/libdvdcss/archive/$_libdvdcss_version/${name/-wayland/}-libdvdcss-$_libdvdcss_version.tar.gz
   https://github.com/xbmc/libdvdnav/archive/$_libdvdnav_version/${name/-wayland/}-libdvdnav-$_libdvdnav_version.tar.gz
-  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-wayland}-libdvdread-$_libdvdread_version.tar.gz)
+  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-wayland/}-libdvdread-$_libdvdread_version.tar.gz
+  22658.patch)
 # }}}
 # unpack_source() {{{
 unpack_source() {
@@ -53,6 +49,7 @@ build()  {
   prt-get isinst alsa-lib && KODI_EXTRA+=' -D ENABLE_ALSA=ON' || KODI_EXTRA+=' -D ENABLE_ALSA=OFF'
   prt-get isinst avahi && KODI_EXTRA+=' -D ENABLE_AVAHI=ON' || KODI_EXTRA+=' -D ENABLE_AVAHI=OFF'
   prt-get isinst bluez sbc && KODI_EXTRA+=' -D ENABLE_BLUETOOTH=ON' || KODI_EXTRA+=' -D ENABLE_BLUETOOTH=OFF'
+  prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   prt-get isinst dav1d && KODI_EXTRA+=' -D ENABLE_INTERNAL_DAV1D=OFF' || KODI_EXTRA+=' -D ENABLE_INTERNAL_DAV1D=ON'
   prt-get isinst libmicrohttpd && KODI_EXTRA+=' -D ENABLE_MICROHTTPD=ON' || KODI_EXTRA+=' -D ENABLE_MICROHTTPD=OFF'
   prt-get isinst libnfs && KODI_EXTRA+=' -D ENABLE_NFS=ON' || KODI_EXTRA+=' -D ENABLE_NFS=OFF'
@@ -62,8 +59,7 @@ build()  {
   prt-get isinst mysql && KODI_EXTRA+=' -D ENABLE_MYSQLCLIENT=ON'
   prt-get isinst mariadb && KODI_EXTRA+=' -D ENABLE_MARIADBCLIENT=ON'
   prt-get isinst pulseaudio && KODI_EXTRA+=' -D ENABLE_PULSEAUDIO=ON' || KODI_EXTRA+=' -D ENABLE_PULSEAUDIO=OFF'
-
-  prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+  prt-get isinst pipewire && KODI_EXTRA+=' -D ENABLE_PIPEWIRE=ON' || KODI_EXTRA+=' -D ENABLE_PIPEWIRE=OFF'
   # }}}
 
   # grabbed off from gentoo
@@ -76,6 +72,8 @@ build()  {
     xbmc-$version-$_codename/tools/depends/native/TexturePacker/src/autogen.sh \
     xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
 
+  patch -Np1 -d xbmc-$version-$_codename -i $SRC/22658.patch
+
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
@@ -84,6 +82,7 @@ build()  {
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D CORE_PLATFORM_NAME=wayland \
     -D APP_RENDER_SYSTEM=gl \
+    -D ENABLE_EGL=ON \
     -D ENABLE_DBUS=ON \
     -D ENABLE_DVDCSS=ON \
     -D ENABLE_EVENTCLIENTS=ON \
@@ -92,14 +91,13 @@ build()  {
     -D fmt_DIR=/usr/lib/cmake/fmt \
     -D spdlog_DIR=/usr/lib/cmake/spdlog \
     -D ENABLE_ISO9660PP=OFF \
-    -D ENABLE_LDGOLD=OFF \
+    -D ENABLE_GOLD=OFF \
     -D ENABLE_OPTICAL=OFF \
     -D ENABLE_TESTING=OFF \
     -D VERBOSE=OFF \
     -D ENABLE_INTERNAL_FFMPEG=ON \
-    -D FFMPEG_URL="$SRC/kodi-ffmpeg-$_ffmpeg_version.tar.gz" \
-    -D ENABLE_INTERNAL_CROSSGUID=ON \
-    -D CROSSGUID_URL="$SRC/crossguid-$_crossguid_version.tar.gz" \
+    -D FFMPEG_URL="$SRC/ffmpeg-$_ffmpeg_version.tar.gz" \
+    -D ENABLE_INTERNAL_CROSSGUID=OFF \
     -D LIBDVDCSS_URL="$SRC/${name/-wayland/}-libdvdcss-$_libdvdcss_version.tar.gz" \
     -D LIBDVDNAV_URL="$SRC/${name/-wayland/}-libdvdnav-$_libdvdnav_version.tar.gz" \
     -D LIBDVDREAD_URL="$SRC/${name/-wayland/}-libdvdread-$_libdvdread_version.tar.gz" \
