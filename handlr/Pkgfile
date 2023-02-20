@@ -1,22 +1,24 @@
 # Description: xdg-utils replacement written in rust
-# URL: https://github.com/chmln/handlr
+# URL: https://github.com/Anomalocaridid/handlr-regex
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: rust xdg-utils
 
 name=handlr
-version=0.6.4
-release=2
-source=(https://github.com/chmln/handlr/archive/v$version/$name-$version.tar.gz
+version=0.8.2
+release=1
+source=(https://github.com/Anomalocaridid/handlr-regex/archive/v$version/$name-$version.tar.gz
   xdg-open.sh)
 
 build() {
-  prt-get isinst zsh && install -Dm644 $SRC/$name-$version/completions/_handlr \
+  prt-get isinst zsh && install -Dm644 $SRC/$name-regex-$version/completions/_handlr \
     $PKG/usr/share/zsh/site-functions/_handlr
+
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-  mkdir "$PKGMK_SOURCE_DIR/rust" || true
-  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
-  cargo update --manifest-path $name-$version/Cargo.toml
-  cargo build --release --locked --manifest-path $name-$version/Cargo.toml
-  install -Dt $PKG/usr/bin $name-$version/target/release/$name
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-regex-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-regex-$version/target/release/$name
+  install -Dt $PKG/usr/bin $name-regex-$version/target/release/$name
   install -Dm755 $SRC/xdg-open.sh $PKG/usr/local/bin/xdg-open
 }
