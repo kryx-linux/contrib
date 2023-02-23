@@ -10,13 +10,15 @@ source=(https://github.com/Anomalocaridid/handlr-regex/archive/v$version/$name-$
   xdg-open.sh)
 
 build() {
-  prt-get isinst zsh && install -Dm644 $SRC/$name-regex-$version/completions/_handlr \
-    $PKG/usr/share/zsh/site-functions/_handlr
-
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
   cargo build --release --manifest-path $name-regex-$version/Cargo.toml
+
+  prt-get isinst bash-completion && install -Dm644 $SRC/$name-regex-$version/assets/completions/handlr \
+    $PKG/usr/share/bash-completion/completions/handlr
+  prt-get isinst zsh && install -Dm644 $SRC/$name-regex-$version/assets/completions/_handlr \
+    $PKG/usr/share/zsh/site-functions/_handlr
 
   install -Dt $PKG/usr/bin $name-regex-$version/target/release/$name
   install -Dt $PKG/usr/bin $name-regex-$version/target/release/$name
