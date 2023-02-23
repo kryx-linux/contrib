@@ -5,7 +5,7 @@
 # Optional: docbook-xsl libxslt xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-kde
 
 name=flatpak
-version=1.15.2
+version=1.15.3
 release=1
 source=(https://github.com/flatpak/flatpak/releases/download/$version/$name-$version.tar.xz)
 
@@ -13,6 +13,8 @@ build() {
   cd $name-$version
 
   prt-get isinst libxslt docbook-xsl docbook-dtd || PKGMK_FLATPAK+=' --disable-documentation'
+
+  NOCONFIGURE=1 ./autogen.sh
 
   ./configure $PKGMK_FLATPAK \
     --prefix=/usr \
