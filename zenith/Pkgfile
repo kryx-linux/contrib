@@ -1,23 +1,22 @@
 # Description: Terminal system monitor with histograms
 # URL: https://github.com/bvaisvil/zenith
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: clang rust
 # Optional: nvidia
 
 name=zenith
-version=0.13.1
+version=0.14.0
 release=1
 source=(https://github.com/bvaisvil/zenith/archive/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-	mkdir "$PKGMK_SOURCE_DIR/rust" || true
-	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
-	prt-get isinst nvidia && PKGMK_ZENITH+=' --features nvidia'
-	prt-get isinst nvidia-sl && PKGMK_ZENITH+=' --features nvidia'
+  prt-get isinst nvidia && PKGMK_ZENITH+=' --features nvidia'
+  prt-get isinst nvidia-sl && PKGMK_ZENITH+=' --features nvidia'
 
-	cargo build --release ${PKGMK_ZENITH}
-	install -Dt $PKG/usr/bin target/release/zenith
+  cargo build --release --manifest-path $name-$version/Cargo.toml ${PKGMK_ZENITH}
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
 }
