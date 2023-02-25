@@ -1,23 +1,22 @@
 # Description: Simple, fast and user-friendly alternative to find
 # URL: https://github.com/sharkdp/fd
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: rust
 
 name=fd
-version=8.6.0
+version=8.7.0
 release=1
 source=(https://github.com/sharkdp/fd/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-	mkdir "$PKGMK_SOURCE_DIR/rust" || true
-	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
-	cargo build --release --manifest-path $name-$version/Cargo.toml
+  cargo build --release --manifest-path $name-$version/Cargo.toml
 
-	install -Dt $PKG/usr/bin $name-$version/target/release/$name
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
 
-	prt-get isinst bash-completions && install -Dm644 $name-$version/target/release/build/fd-find-*/out/fd.bash $PKG/usr/share/bash-completion/completions/fd
-	prt-get isinst zsh && install -Dm644 $name-$version/contrib/completion/_fd $PKG/usr/share/zsh/site-functions/_fd
-	install -Dm644 $name-$version/doc/fd.1 $PKG/usr/share/man/man1/fd.1
+  prt-get isinst bash-completions && install -Dm644 $name-$version/target/release/build/fd-find-*/out/fd.bash $PKG/usr/share/bash-completion/completions/fd
+  prt-get isinst zsh && install -Dm644 $name-$version/contrib/completion/_fd $PKG/usr/share/zsh/site-functions/_fd
+  install -Dm644 $name-$version/doc/fd.1 $PKG/usr/share/man/man1/fd.1
 }
