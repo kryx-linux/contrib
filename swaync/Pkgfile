@@ -1,10 +1,10 @@
 # Description: A simple GTK based notification daemon for SwayWM
 # URL: https://github.com/ErikReider/SwayNotificationCenter
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gtk-layer-shell json-glib libhandy
+# Depends on: gtk-layer-shell json-glib libgee libhandy pulseaudio
 
 name=swaync
-version=0.7.3
+version=0.8.0
 release=1
 source=(https://github.com/ErikReider/SwayNotificationCenter/archive/v$version/$name-$version.tar.gz)
 
@@ -21,7 +21,8 @@ build() {
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
-    -D b_pie=true
+    -D b_pie=true \
+    -D scripting=true
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
