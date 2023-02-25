@@ -1,0 +1,21 @@
+# Description: a collection library providing GObject-based interfaces and classes
+# URL: https://gitlab.gnome.org/GNOME/libgee
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: autoconf-archive glib gobject-introspection vala
+
+name=libgee
+version=0.20.6
+release=1
+source=(https://gitlab.gnome.org/GNOME/libgee/-/archive/$version/$name-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+
+  NOCONFIGURE=1 ./autogen.sh
+
+  ./configure --prefix=/usr $PKGMK_LIBGEE \
+    --disable-static \
+    --disable-nls
+  make
+  make DESTDIR=$PKG install
+}
