@@ -4,7 +4,7 @@
 # Depends on: iniparser json-c keyutils meson ninja
 
 name=ndctl
-version=75
+version=76.1
 release=1
 source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version-$release.tar.gz)
 
@@ -17,7 +17,8 @@ build() {
     -D b_pie=true \
     -D asciidoctor=disabled \
     -D docs=disabled \
-    -D systemd=disabled
+    -D systemd=disabled \
+    -D libtracefs=disabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
