@@ -4,12 +4,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry-1.3.2.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.3.2.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.3.2.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.3.2.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.3.2.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.3.2.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry-1.4.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.4.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.4.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.4.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.4.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry-1.4.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/__main__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/__pycache__/
@@ -20,8 +20,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/__pycache__/locations.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/__pycache__/poetry.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/__version__.py
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/_vendor/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/_vendor/.gitignore
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/config/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/config/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/config/__pycache__/
@@ -207,6 +205,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/installation/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/__pycache__/installer.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/__pycache__/noop_installer.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/__pycache__/pip_installer.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/__pycache__/wheel_installer.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/base_installer.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/chef.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/chooser.py
@@ -226,6 +225,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/installation/operat
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/operations/uninstall.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/operations/update.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/pip_installer.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/installation/wheel_installer.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/json/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/json/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/json/__pycache__/
@@ -342,24 +342,19 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/repositories/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/abstract_repository.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/cached.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/cached_repository.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/exceptions.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/http.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/http_repository.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/installed_repository.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/legacy_repository.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/lockfile_repository.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/pool.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/pypi_repository.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/repository.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/repository_pool.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/__pycache__/single_page_repository.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/abstract_repository.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/cached.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/cached_repository.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/exceptions.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/http.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/http_repository.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/installed_repository.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/legacy_repository.py
@@ -374,7 +369,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/poetry/repositories/link_s
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/link_sources/html.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/link_sources/json.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/lockfile_repository.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/pool.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/pypi_repository.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/repository.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/poetry/repositories/repository_pool.py
