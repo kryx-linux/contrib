@@ -6,7 +6,7 @@
 # LIBNETWORK_COMMIT:=05b93e0d3a95952f70c113b0bc5bdb538d7afdd7
 
 name=docker
-version=23.0.0
+version=23.0.1
 release=1
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
@@ -17,16 +17,21 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
 build() {
     export GO111MODULE=auto
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=d7573ab
+    export DOCKER_GITCOMMIT=bc3805a
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
+    export CGO_CFLAGS="${CFLAGS}"
+    export CGO_CPPFLAGS="${CPPFLAGS}"
+    export CGO_CXXFLAGS="${CXXFLAGS}"
+    export CGO_LDFLAGS="${LDFLAGS}"
+    export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw -ldflags=-linkmode=external"
 
     mkdir -p src/github.com/docker
 
     pushd src/github.com/docker
     ln -s $SRC/cli-$version cli
     pushd cli
-    make VERSION=$version dynbinary
+    make VERSION=$version GITCOMMIT=${DOCKER_GITCOMMIT} dynbinary
     popd
     popd
 
