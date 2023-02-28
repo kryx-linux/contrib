@@ -1,0 +1,26 @@
+# Description: Docker CLI plugin for extended build capabilities with BuildKit
+# URL: https://github.com/docker/buildx/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on:
+
+name=docker-buildx
+version=0.10.3
+release=1
+source=(https://github.com/docker/buildx/archive/v${version}/$name-$version.tar.gz)
+
+build() {
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+	export CGO_CXXFLAGS="${CXXFLAGS}"
+	export CGO_LDFLAGS="${LDFLAGS}"
+	export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+	export GO111MODULE=on
+
+	cd buildx-$version
+	go build -mod=vendor -o docker-buildx -ldflags "-linkmode=external \
+		-X github.com/docker/buildx/version.Version=$version \
+		-X github.com/docker/buildx/version.Revision=79e156beb11f697f06ac67fa1fb958e4762c0fab \
+		-X github.com/docker/buildx/version.Package=github.com/docker/buildx" \
+		./cmd/buildx
+	install -Dm755 $name $PKG/usr/lib/docker/cli-plugins/$name
+}
