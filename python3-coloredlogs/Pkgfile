@@ -1,0 +1,18 @@
+# Description: Colored terminal output for Python's logging module
+# URL: https://coloredlogs.readthedocs.io/en/latest/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-humanfriendly
+
+name=python3-coloredlogs
+version=15.0.1
+release=1
+source=(https://pypi.org/packages/source/c/coloredlogs/coloredlogs-$version.tar.gz)
+
+build() {
+  cd coloredlogs-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
