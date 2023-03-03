@@ -1,20 +1,20 @@
-# Description: Compacts directories by replacing duplicate files by symbolic links and placing the origional files in ${parent_dir}/common-files/
+# Description: Compacts directories by replacing duplicate files by symbolic links and placing the original files in ${parent_dir}/common-files/
 # URL: https://bootlin.com/blog/clink/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: help2man
 
 name=clink
 version=1.1.1
 release=3
-source=(https://bootlin.com/pub/utils/clink/clink-$version README)
+source=(https://bootlin.com/pub/utils/$name/$name-$version README)
 
 build() {
 	# purge the source code of any idiosyncratic indentation
 	REINDENT="/$(prt-get cat python3 .footprint | grep reindent.py$ | cut -f3)"
-	[ -x "$REINDENT" ] && $REINDENT clink-$version \
-		|| { error "reindent.py unavailable, aborting."; return 1; }
+	[ -x "$REINDENT" ] && $REINDENT $name-$version \
+		|| { error "reindent failed, $name will be unusable with python3."; return 1; }
 
-	# tranlate module names and dictionary lookups from python2 to python3
+	# translate module names and dictionary lookups from python2 to python3
 	sed -i  -e "s|^#!/usr/bin/env python|#!/usr/bin/env python3|" \
 		-e "/^import/ s/md5, sha/hashlib/" \
 		-e "s/sha\.new/hashlib.sha256/; s/md5\.new/hashlib.md5/" \
@@ -22,16 +22,16 @@ build() {
 		-e "/while.*line/ s/= ''/= b''/" \
 		-e "/fid\.readline/ s/readline()/read(8192)/" \
 		-e "s/shasums\.has_key.*:/shsum in shasums:/" \
-		clink-$version
+		$name-$version
 
 	# parenthesize all arguments to the print function
-	sed -i  -E "s/^(\s*)print (.*)/\1print(\2)/" clink-$version
+	sed -i  -E "s/^(\s*)print (.*)/\1print(\2)/" $name-$version
 
-	install -D -m755 clink-$version $PKG/usr/bin/clink
+	install -D -m755 $name-$version $PKG/usr/bin/$name
 
 	# generate a man-page from the inline help and the README
 	mkdir -p $PKG/usr/share/man/man1
 	help2man -n"mitigate redundant disk usage" -N -s1 \
 		-S"CRUX-contrib" -m"User Commands" -I $SRC/README \
-		-o $PKG/usr/share/man/man1/clink.1 $PKG/usr/bin/clink
+		-o $PKG/usr/share/man/man1/$name.1 $PKG/usr/bin/$name
 }
