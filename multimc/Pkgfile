@@ -1,6 +1,6 @@
 # Description: Minecraft launcher with ability to manage multiple instances.
 # URL: https://multimc.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: openjdk17-jdk qt5
 
 name=multimc
@@ -19,7 +19,7 @@ source=(#https://github.com/MultiMC/Launcher/archive/refs/tags/0.6.16.tar.gz
         "mmc-brand.patch"
         "multimc.desktop"
 )
- 
+
 build() {
 	cd Launcher-$version
 
@@ -58,7 +58,7 @@ build() {
 
 	mkdir -p "${PKG}/etc/ld.so.conf.d"
 	echo -e "/usr/lib/${_pkgname}" > "${PKG}/etc/ld.so.conf.d/multimc5.conf"
-	
+
 
 	install -D $SRC/Launcher-$version/launcher/package/ubuntu/multimc/opt/multimc/icon.svg \
 		$PKG/usr/share/pixmaps/multimc.svg
