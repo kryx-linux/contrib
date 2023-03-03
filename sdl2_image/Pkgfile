@@ -1,23 +1,23 @@
 # Description:  SDL_image is an image file loading library.
 # URL: https://github.com/libsdl-org/SDL_image
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: libsdl2 libwebp
 
 name=sdl2_image
 version=2.6.3
-release=1
+release=2
 source=(https://github.com/libsdl-org/SDL_image/releases/download/release-$version/SDL2_image-$version.tar.gz)
 
 build() {
-	cd SDL2_image-$version
+	cmake -S SDL2_image-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS"
 
-	./configure \
-		--prefix=/usr \
-		--disable-jpg-shared \
-		--disable-png-shared \
-		--disable-tif-shared \
-		--disable-webp-shared
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
 
-	make
-	make DESTDIR=$PKG install
+	# delete installed license.txt
+	rm -rf $PKG/usr/share
 }

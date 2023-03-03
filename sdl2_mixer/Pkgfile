@@ -1,19 +1,26 @@
 # Description: A sample multi-channel audio mixer library.
 # URL: https://github.com/libsdl-org/SDL_mixer
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: libvorbis libmodplug flac libsdl2 mpg123
+# Optional: fluidsynth
 
 name=sdl2_mixer
 version=2.6.3
-release=1
+release=2
 source=(https://github.com/libsdl-org/SDL_mixer/releases/download/release-$version/SDL2_mixer-$version.tar.gz)
 
 build() {
-	cd SDL2_mixer-$version
+	prt-get isinst fluidsynth \
+		|| PKGMK_SDLMIX="-D SDL2MIXER_MIDI_FLUIDSYNTH=OFF"
+	cmake -S SDL2_mixer-$version -B build -G Ninja \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_INSTALL_LIBDIR=lib \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" $PKGMK_SDLMIX
 
-	CONFIG_SHELL=/bin/bash ./configure \
-		--prefix=/usr
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
 
-	make
-	make DESTDIR=$PKG install
+	# delete installed license.txt
+	rm -rf $PKG/usr/share
 }
