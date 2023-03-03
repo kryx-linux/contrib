@@ -1,7 +1,6 @@
 # Description: Perl Digest::SHA1
 # URL: https://metacpan.org/pod/Digest::SHA1
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: perl
+# Maintainer: John McQuah, jmcquah at disroot dot org
 
 name=p5-digest-sha1
 version=2.13
@@ -24,7 +23,7 @@ build() {
 		-name 'perllocal.pod' \) -delete
 
 	# Remove empty directories
-	find $PKG -depth -empty -exec rm -rf {} \;
+	find $PKG -depth -empty -delete
 	# Fix perms
-	find $PKG -type f -a ! -perm -u+w -exec chmod u+w {} \;
+	find $PKG -type f -a ! -perm -u+w -exec chmod u+w '{}' +
 }

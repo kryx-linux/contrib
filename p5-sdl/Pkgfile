@@ -1,6 +1,6 @@
 # Description: Simple DirectMedia Layer for Perl
 # URL: http://sdl.perl.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: p5-alien-build p5-alien-sdl p5-tie-simple sdl_gfx sdl_image sdl_mixer sdl_net sdl_pango sdl_ttf
 
 name=p5-sdl
@@ -19,4 +19,7 @@ build() {
 
 	find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
 	find $PKG -depth -empty -delete
+
+	# fix perms
+	find $PKG -type f -a ! -perm -u+w -exec chmod u+w '{}' +
 }
