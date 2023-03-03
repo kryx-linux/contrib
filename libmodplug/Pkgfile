@@ -1,16 +1,23 @@
 # Description: Library for playing module music.
-# URL: http://modplug-xmms.sourceforge.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Jukka Heino, vector at pp dot nic dot fi
+# URL: https://github.com/Konstanty/libmodplug
+# Maintainer: John McQuah, jmcquah at disroot dot org
 
 name=libmodplug
-version=0.8.9.0
+version=0.8.9.1
+_commit=d1b97ed00
 release=1
-source=(http://downloads.sourceforge.net/project/modplug-xmms/$name/$version/$name-$version.tar.gz)
+source=(https://github.com/Konstanty/$name/archive/$_commit.zip)
+renames=($name-$version-$_commit.zip)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+	cmake -B build -S $name-$_commit* -G Ninja \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+		-DCMAKE_C_FLAGS="$CFLAGS" \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DBUILD_SHARED_LIBS=ON
+
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
 }
