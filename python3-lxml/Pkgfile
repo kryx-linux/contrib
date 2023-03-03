@@ -1,16 +1,16 @@
 # Description: A pythonic binding for the libxml2 and libxslt libraries.
 # URL: https://lxml.de/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: python3-beautifulsoup4 python3-cssselect python3-cython python3-html5lib libxslt
 
 name=python3-lxml
 _name=${name#*-}
 version=4.9.2
 release=1
-source=(https://github.com/$_name/$_name/archive/refs/tags/$_name-$version.tar.gz)
+source=(https://github.com/$_name/$_name/releases/download/$_name-$version/$_name-$version.tar.gz)
 
 build() {
-	cd $_name-$_name-$version
+	cd $_name-$version
 
 	/usr/bin/python3 setup.py build
 
