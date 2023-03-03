@@ -2,7 +2,7 @@
 # URL: https://github.com/libsdl-org/SDL_mixer
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: libvorbis libmodplug flac libsdl2 mpg123
-# Optional: fluidsynth
+# Optional: fluidsynth opusfile
 
 name=sdl2_mixer
 version=2.6.3
@@ -12,6 +12,8 @@ source=(https://github.com/libsdl-org/SDL_mixer/releases/download/release-$versi
 build() {
 	prt-get isinst fluidsynth \
 		|| PKGMK_SDLMIX="-D SDL2MIXER_MIDI_FLUIDSYNTH=OFF"
+	prt-get isinst opusfile \
+		|| PKGMK_SDLMIX+=" -D SDL2MIXER_OPUS=OFF"
 	cmake -S SDL2_mixer-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
