@@ -1,20 +1,21 @@
 # Description: A library which supports many formats, including: mod, s3m, it, and xm.
-# URL: http://mikmod.raphnet.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# URL: https://sourceforge.net/projects/mikmod/
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: alsa-lib
 
 name=libmikmod
 version=3.3.11.1
 release=1
-source=(https://downloads.sourceforge.net/project/mikmod/libmikmod/$version/$name-$version.tar.gz)
+source=(https://github.com/sezero/mikmod/archive/refs/tags/$name-$version.tar.gz)
 
 build(){
-	cd $name-$version
+	cmake -B build -S mikmod-$name-$version/$name \
+		-G Ninja -D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D ENABLE_DOC=OFF \
+		-Wno-dev
 
-	./configure --prefix=/usr
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-	make
-	make DESTDIR=$PKG install
-
-	rm -r $PKG/usr/share/info
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
 }
