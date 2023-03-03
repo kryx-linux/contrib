@@ -1,42 +1,48 @@
 # Description: Freely available NTFS driver with read and write support.
 # URL: https://www.tuxera.com/company/open-source/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: fuse gnutls libgcrypt
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: gnutls libgcrypt
+# Optional: fuse
 
 name=ntfs-3g
 version=2022.10.3
-release=1
-source=(https://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
+release=2
+source=(https://tuxera.com/opensource/${name}_ntfsprogs-$version.tgz)
 
 build() {
-	cd ntfs-3g_ntfsprogs-$version
+	cd ${name}_ntfsprogs-$version
 
-	sed 's|$(DESTDIR)/sbin|$(DESTDIR)/usr/bin|' -i {ntfsprogs,src}/Makefile.in
-	install -d $PKG/lib
+	# $DESTDIR/lib must exist during install; the Makefile honors
+	# EPREFIX by moving to the desired location afterward
+	mkdir $PKG/lib
 
-	./configure \
-		--prefix=/usr \
-		--exec-prefix=/usr \
-		--enable-crypto \
-		--enable-extras \
-		--enable-ldscript \
-		--enable-posix-acls \
-		--enable-xattr-mappings \
-		--with-fuse=external \
-		--disable-ldconfig \
-		--disable-static \
-		--without-uuid \
-		--without-hd
+	PKGMK_NTFS3="--prefix=/usr
+		--exec-prefix=/usr
+		--bindir=/usr/bin
+		--sbindir=/usr/sbin
+		--libexecdir=/usr/lib
+		--enable-crypto
+		--enable-extras
+		--enable-ldscript
+		--enable-posix-acls
+		--enable-xattr-mappings
+		--disable-ldconfig
+		--disable-static
+		--without-uuid
+		--without-hd"
+	prt-get isinst fuse && PKGMK_NTFS3+=" --with-fuse=external" \
+		|| PKGMK_NTFS3+=" --with-fuse=internal"
+
+	./configure $PKGMK_NTFS3
 
 	make
 	make DESTDIR=$PKG install
 
-	mkdir $PKG/sbin
-	ln -s ../usr/bin/ntfs-3g $PKG/sbin/mount.ntfs
-	ln -s ../usr/bin/ntfsfix $PKG/sbin/fsck.ntfs
+	ln -s /usr/bin/ntfs-3g $PKG/sbin/mount.ntfs
+	ln -s /usr/bin/ntfsfix $PKG/sbin/fsck.ntfs
 
 	ln -s ntfs-3g.8 $PKG/usr/share/man/man8/mount.ntfs.8
 	ln -s ntfsfix.8 $PKG/usr/share/man/man8/fsck.ntfs.8
 
-	rm -r $PKG/usr/share/doc
+	rm -r $PKG/usr/share/doc $PKG/usr/lib/$name $PKG/lib $PKG/usr/lib/*.la
 }

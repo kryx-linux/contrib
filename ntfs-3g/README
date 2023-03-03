@@ -1,15 +1,16 @@
 Kernel Configuration
+  Linux 5.15.55 and later come with robust read/write support for NTFS
+  partitions. If the ntfs3 driver has been built as a module, then it should
+  appear under /lib/modules/$(uname -r)/kernel/fs; if built into a monolithic
+  kernel, it should be listed under /proc/filesystems. Mounting and copying
+  to/from an NTFS partition can be accomplished with the kernel driver alone,
+  but by installing this port you get additional userspace tools for fsck,
+  mkfs, wiping, and resizing NTFS partitions.
 
-  Enable the following options in the kernel configuration and recompile the
-  kernel if necessary:
+Alternative to the (probably unsafe) `chmod 4755 /usr/bin/ntfs-3g` 
+  To allow ordinary users to mount NTFS partitions, you can either set ntfs-3g
+  with the root user ID, or list the filesystem in /etc/fstab with the 
+  rw,noauto,uid,gid options (assuming you compiled the ntfs3 driver with
+  your kernel). Example /etc/fstab line:
 
-    File systems  --->
-    <*/M> FUSE (Filesystem in Userspace) support [CONFIG_FUSE_FS]
-
-Installation of Ntfs-3g
-  If you want ordinary users to be able to mount NTFS partitions you'll need to
-  set mount.ntfs with the root user ID. Note: it is probably unsafe to do this
-  on a computer that needs to be secure (like a server). As the root user:
-
-  chmod -v 4755 /sbin/mount.ntfs
-
+/dev/sdb1       /media/ntfs     ntfs3      rw,uid=1000,gid=1000,noauto
