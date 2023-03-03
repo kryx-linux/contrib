@@ -1,6 +1,6 @@
 # Description: A SDL MPEG player library.
 # URL: http://icculus.org/smpeg/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: glu libsdl
 
 name=smpeg
@@ -13,7 +13,7 @@ build() {
 	cd $name-release_*
 
 	CFLAGS+=' -Wno-error=narrowing'
-	export LDFLAGS="${LDFLAGS} -lX11"
+	LDFLAGS+=' -lX11'
 	./autogen.sh
 	./configure \
 		--prefix=/usr \
