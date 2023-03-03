@@ -1,16 +1,15 @@
 # Description: Generic archive extracting mechanism
 # URL: https://metacpan.org/release/Archive-Extract
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 
 name=p5-archive-extract
-_realname=Archive-Extract
 _author=BINGOS
 version=0.88
 release=1
-source=(https://cpan.metacpan.org/authors/id/${_author::1}/${_author::2}/$_author/$_realname-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/${_author::1}/${_author::2}/$_author/Archive-Extract-$version.tar.gz)
 
 build() {
-	cd $_realname-$version
+	cd Archive-Extract-$version
 
 	export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
 	unset PERL5LIB PERL_MM_OPT
