@@ -1,24 +1,23 @@
 # Description: Display a random fortune
 # URL: http://www.ibiblio.org/pub/Linux/games/amusements/fortune/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Daniel Mueller, daniel at danm dot de
+# Maintainer: John McQuah, jmcquah at disroot dot org
 
 name=fortune
 version=0.2
 release=6
-source=(http://www.ibiblio.org/pub/Linux/games/amusements/$name/$name-$version.tar.gz \
+source=(https://www.ibiblio.org/pub/Linux/games/amusements/$name/$name-$version.tar.gz \
         $name-$version.patch \
-  http://crux.nu/~tek/fortune_big.zip \
-  http://www.schwarzvogel.de/pkgs/kernelcookies-8.tar.gz \
-  http://www.splitbrain.org/_media/projects/fortunes/fortune-simpsons-chalkboard.tgz \
-  http://www.splitbrain.org/_media/projects/fortunes/fortune-discworld.tgz \
-  http://crux.nu/files/distfiles/fortune-mod-prog-style.tar.gz)
+  https://crux.nu/~tek/fortune_big.zip \
+  https://www.schwarzvogel.de/pkgs/kernelcookies-8.tar.gz \
+  https://www.splitbrain.org/_media/projects/fortunes/fortune-simpsons-chalkboard.tgz \
+  https://www.splitbrain.org/_media/projects/fortunes/fortune-discworld.tgz \
+  https://crux.nu/files/distfiles/fortune-mod-prog-style.tar.gz)
 
 build(){
   local cookie
   cd $name-$version
 
-  patch -p1 < ../$name-$version.patch
+  patch -p1 -i $SRC/$name-$version.patch
   make
 
   mkdir -p $PKG/usr/{bin,share/man/man6,share/games/fortunes}
