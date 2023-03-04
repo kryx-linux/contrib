@@ -1,41 +1,24 @@
-# Description: A port of 7-zip for POSIX systems.
-# URL: http://p7zip.sourceforge.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: yasm
+# Description: 7-zip compression utilities
+# URL: https://github.com/p7zip-project/
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: 
+# Optional: yasm
 
 name=p7zip
-version=16.02
-release=3
-source=(https://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version}_src_all.tar.bz2
-	CVE-2016-9296.patch
-	CVE-2017-17969.patch
-	CVE-2018-5996.patch
-	CPP_Windows_ErrorMsg.patch)
+version=17.05
+release=1
+source=(https://github.com/$name-project/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
-	cd ${name}_$version
+  cd $name-$version
+  prt-get isinst yasm && cp makefile.linux_amd64_asm makefile.linux \
+          || cp makefile.linux_amd64 makefile.linux
 
-	# https://nvd.nist.gov/vuln/detail/CVE-2016-9296
-	patch -p1 -i $SRC/CVE-2016-9296.patch
+  make -j ${JOBS:-1} all3
 
-	# https://nvd.nist.gov/vuln/detail/CVE-2017-17969
-	patch -p1 -i $SRC/CVE-2017-17969.patch
-
-	# https://nvd.nist.gov/vuln/detail/CVE-2018-5996
-	patch -p1 -i $SRC/CVE-2018-5996.patch
-
-	# fix build against gcc 10
-	patch -p0 -i $SRC/CPP_Windows_ErrorMsg.patch
-
-	sed -i 's/ -pipe / /g' makefile.*
-	cp makefile.linux_amd64_asm makefile.machine
-
-	make all3 OPTFLAGS="$CFLAGS"
-
-	make install \
-		DEST_DIR="$PKG" \
-		DEST_HOME=/usr \
-		DEST_MAN=/usr/share/man
-
-	rm -r $PKG/usr/share/doc
+  mkdir -p $PKG/usr/bin $PKG/usr/share/man $PKG/usr/lib/$name
+  install -m 0755 bin/{7z,7za,7zr} $PKG/usr/bin
+  install -m 0755 bin/{7z.so,7zCon.sfx} $PKG/usr/lib/$name
+  cp -r bin/Codecs $PKG/usr/lib/$name
+  cp -r man1 $PKG/usr/share/man
 }
