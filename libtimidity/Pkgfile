@@ -1,0 +1,27 @@
+# Description:	midi to wav converter, extracted from SDL_sound
+# URL:		http://libtimidity.sourceforge.net/
+# Maintainer:	John McQuah, jmcquah at disroot dot org
+# Depends on:	alsa-lib
+
+name=libtimidity
+version=0.2.7
+release=1
+source=(
+http://downloads.sourceforge.net/$name/$name-$version.tar.gz
+)
+
+build(){
+	cd $name-$version
+
+	./configure \
+		--prefix=/usr \
+		--enable-static=no \
+		--enable-shared=yes \
+		--with-timidity-cfg=/etc/timidity.cfg
+
+	make
+	make DESTDIR=$PKG install
+
+	# strip .la files
+	rm $PKG/usr/lib/*.la
+}
