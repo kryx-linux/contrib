@@ -1,18 +1,20 @@
-# Description: A script intended to be run by Linux system administrators to help thwart ssh server attacks. (fork of denyhosts)
-# URL: http://denyhost.sourceforge.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
+# Description: A script intended to be run by Linux system administrators to help thwart ssh server attacks.
+# URL: https://github.com/denyhosts/denyhosts
+# Maintainer: unmaintained
 # Depends on: python
 
 name=denyhost
-version=2.9
+version=2.10
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name-$version/denyhosts-$version.tar.gz)
+source=(https://github.com/denyhosts/denyhosts/archive/v$version/$name-$version.tar.gz)
 
 build() {
-	cd DenyHosts-$version
+	cd denyhosts-$version
 
 	/usr/bin/python setup.py install --root=$PKG
+
+	chmod g-w $PKG/usr/share/man/man8/$name* \
+		$PKG/etc/denyhosts.conf
 
 	install -d $PKG/etc/{denyhosts,rc.d} $PKG/usr/sbin
 
