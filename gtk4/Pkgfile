@@ -1,16 +1,19 @@
 # Description: A multi-platform toolkit for creating graphical user interfaces, version 4
 # URL: https://www.gtk.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: adwaita-icon-theme docbook-xsl graphene gst-plugins-bad libxkbcommon sassc xorg-libxcursor xorg-libxinerama
-# Optional: colord cups vulkan wayland-protocols
+# Depends on: adwaita-icon-theme docbook-xsl graphene libxkbcommon sassc xorg-libxcursor xorg-libxinerama
+# Optional: colord cups gst-plugins-bad  wayland-protocols
 
 name=gtk4
 version=4.10.0
-release=1
+release=2
 source=(https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/gtk-$version.tar.bz2)
 
 build() {
   prt-get isinst colord && PKGMK_GTK4+=' -D colord=enabled'
+  ## ffmpeg is experimental
+  #prt-get isinst ffmpeg || PKGMK_GTK4+=' -D ffmpeg=disabled'
+  prt-get isinst gst-plugins-bad || PKGMK_GTK4+=' -D media-gstreamer=disabled'
   prt-get isinst wayland-protocols || PKGMK_GTK4+=' -D wayland-backend=false'
   # manpages need rst2man, which we don't have
 
@@ -21,8 +24,10 @@ build() {
     -D b_lto=true \
     -D b_pie=true \
     -D broadway-backend=true \
+    -D introspection=enabled \
     -D man-pages=false \
     -D build-tests=false \
+    -D build-testsuite=false \
     -D build-examples=false \
     -D demos=false
   meson compile -C build
