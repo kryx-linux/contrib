@@ -6,7 +6,7 @@
 
 name=libreoffice
 version=7.5.1.2
-release=1
+release=2
 pdfiumversion=5408
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
   https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-dictionaries-$version.tar.xz
@@ -99,7 +99,7 @@ build() {
     --with-external-hyph-dir=/usr/share/hypen \
     --with-external-thes-dir=/usr/share/mythes \
     --without-{doxygen,fonts,gssapi,help,helppack-integration,java,system-firebird} \
-    --disable-{ccache,cmis,dependency-tracking,extension-update,fetch-external,firebird-sdbc} \
+    --disable-{ccache,dependency-tracking,extension-update,fetch-external,firebird-sdbc} \
     --disable-{online-update,poppler,report-builder,sdremote-bluetooth,skia,werror,zxing}
 
   touch {sources.ver,src.downloaded}
