@@ -1,0 +1,21 @@
+# Description: h.265 video codec implementation
+# URL: https://github.com/strukturag/libde265
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: 
+
+name=libde265
+version=1.0.11
+release=1
+source=(https://github.com/strukturag/$name/releases/download/v$version/$name-$version.tar.gz)
+
+build() {
+	mkdir build && cd build
+	cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_C_FLAGS="$CFLAGS" \
+		../$name-$version
+
+	ninja -j ${JOBS:-1}
+	DESTDIR=$PKG ninja install
+}
