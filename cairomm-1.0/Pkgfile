@@ -1,0 +1,24 @@
+# Description: C++ wrapper for the cairo graphics library.
+# URL: http://cairographics.org/cairomm/
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: cairo libsigc++2
+
+name=cairomm-1.0
+version=1.14.0
+release=1
+source=(https://cairographics.org/releases/cairomm-$version.tar.xz)
+
+build() {
+	mkdir bld && cd bld
+
+	meson setup ../cairomm-$version \
+		--prefix=/usr \
+		--buildtype=release \
+		-D build-tests=false \
+		-D build-documentation=false \
+		-D b_lto=true \
+		-D b_pie=true
+
+	ninja -j ${JOBS:-1}
+	DESTDIR=$PKG ninja install
+}
