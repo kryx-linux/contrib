@@ -1,6 +1,6 @@
 # Description: General Purpose video player based on MPlayer and mplayer2
 # URL: https://mpv.io/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: ffmpeg libass libplacebo util-linux xorg-libxscrnsaver
 # Optional: docutils youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libsdl2 libvdpau rubberband xorg-libxpresent
 
@@ -23,4 +23,7 @@ build() {
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion
+  prt-get isinst zsh || rm -rf $PKG/usr/share/zsh
 }
