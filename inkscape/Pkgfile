@@ -1,54 +1,20 @@
 # Description: An open source SVG editor.
 # URL: https://www.inkscape.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: boehm-gc boost double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler-glib popt potrace gdl
 
 name=inkscape
-_name=inkscape-INKSCAPE
 version=1.2.2
-_version=1.2_2022-05-15_dc2aedaf03
-_pversion=22.09.0
-_psoversion=124
 release=3
-source=(https://inkscape.org/gallery/item/37360/inkscape-1.2.2.tar.xz
-	https://poppler.freedesktop.org/poppler-$_pversion.tar.xz)
-
-poppler() {
-	cmake -S poppler-$_pversion -B build-poppler -G Ninja \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_INSTALL_LIBDIR=lib \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D ENABLE_UNSTABLE_API_ABI_HEADERS=ON \
-		-D ENABLE_UTILS=ON \
-		-D ENABLE_CPP=ON \
-		-D ENABLE_GLIB=ON \
-		-D ENABLE_QT5=OFF \
-		-D ENABLE_ZLIB=ON \
-		-D ENABLE_CMS=lcms2 \
-		-D ENABLE_LIBOPENJPEG=none \
-		-D WITH_NSS3=OFF \
-		-Wno-dev
-
-	cmake --build build-poppler
-	DESTDIR=$SRC/poppler cmake --install build-poppler
-	install -D -t $PKG/usr/lib/inkscape $SRC/poppler/usr/lib/libpoppler.so.$_psoversion
-
-	export CXXFLAGS+=" -I$SRC/poppler/usr/include -I$SRC/poppler/usr/include/poppler"
-	export PKG_CONFIG_PATH="$SRC/poppler/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-}
+source=(https://inkscape.org/gallery/item/37360/inkscape-$version.tar.xz)
 
 build() {
-	#[ ! -e "/usr/lib/inkscape/libpoppler.so.$_psoversion" ] &&
-	#poppler
-
 	# https://gitlab.gnome.org/GNOME/glib/-/issues/2331
 	CFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66 -L/usr/lib/inkscape'
 	CXXFLAGS+=' -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66 -L/usr/lib/inkscape'
 	export LDFLAGS+=" -Wl,-rpath=/usr/lib/inkscape"
 
-	cmake -S inkscape-1.2.2_2022-12-01_b0a8486541 -B build -G Ninja \
+	cmake -S inkscape-${version}* -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
@@ -64,11 +30,12 @@ build() {
 		$PKG/usr/share/locale \
 		$PKG/usr/share/inkscape/doc
 
-	find $PKG/usr/share/inkscape \( -name 'README' -o -name 'README.*' \) -exec rm -f {} +
+	find $PKG/usr/share/inkscape \( -name 'README' -o -name 'README.*' \) -delete
 
 	/usr/bin/python3 -mcompileall $PKG
 	/usr/bin/python3 -O -m compileall $PKG
 	/usr/bin/python3 -OO -m compileall $PKG
 
-	rm -rf $PKG/usr/share/man/zh_TW
+	rm -rf	$PKG/usr/share/man/zh_TW \
+		$PKG/usr/share/man/pt_BR
 }
