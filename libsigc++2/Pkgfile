@@ -1,19 +1,25 @@
 # Description: A callback framework for C++.
 # URL: https://libsigcplusplus.github.io/libsigcplusplus/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: mm-common
 
 name=libsigc++2
-version=2.10.8
+version=2.12.0
 release=1
 source=(https://download.gnome.org/sources/libsigc++/${version%.*}/libsigc++-$version.tar.xz)
 
 build() {
-	cd libsigc++-$version
+	mkdir bld && cd bld
 
-	NOCONFIGURE=1 ./autogen.sh
-	./configure --prefix=/usr --disable-documentation
+	meson setup ../libsigc++-$version \
+		--prefix=/usr \
+		--buildtype=release \
+		-D build-documentation=false \
+		-D b_lto=true \
+		-D b_pie=true
 
-	make
-	make install DESTDIR=$PKG
+	ninja -j ${JOBS:-1}
+	DESTDIR=$PKG ninja install
+
+	find $PKG \( -type f -a -perm -g+w \) -exec chmod g-w '{}' +
 }
