@@ -1,17 +1,21 @@
-# Description: Library of OpenCORE Framework implementation of Adaptive Multi Rate Narrowband and Wideband (AMR-NB and AMR-WB) speech codec.
+# Description: Fraunhofer Advanced Audio Coding, extracted from the Android Open Source Project
 # URL: https://sourceforge.net/projects/opencore-amr/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 
 name=fdk-aac
 version=2.0.2
-release=1
+release=2
 source=(https://downloads.sourceforge.net/project/opencore-amr/$name/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+	cmake -S $name-$version -B build -G Ninja \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+		-Wno-dev
 
-	./configure --prefix=/usr
-
-	make
-	make DESTDIR=$PKG install
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
 }
