@@ -1,6 +1,6 @@
 # Description: C++ interface for atk
 # URL: https://www.gtkmm.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: at-spi2-core glibmm
 
 name=atkmm
@@ -15,7 +15,10 @@ build() {
 		--wrap-mode nodownload \
 		-D b_lto=true \
 		-D b_pie=true \
+		-D build-documentation=false
 
 	meson compile -C build -j ${JOBS-1}
 	DESTDIR=$PKG meson install -C build
+
+	find $PKG -type f -name '*.h' -exec chmod g-w '{}' +
 }
