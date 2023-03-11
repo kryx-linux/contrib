@@ -1,6 +1,6 @@
 # Description: DVD reading library.
 # URL: https://www.videolan.org/developers/libdvdnav.html
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: libdvdcss
 
 name=libdvdread
@@ -20,5 +20,5 @@ build() {
 	make
 	make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/doc
+	rm -rf $PKG/usr/share
 }
