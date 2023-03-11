@@ -1,26 +1,25 @@
 # Description: Sound sample rate conversion library.
 # URL: https://libsndfile.github.io/libsamplerate/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: cmake libsndfile
-# Optional: fftw ninja
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: libsndfile
+# Optional: fftw
 
 name=libsamplerate
 version=0.2.2
 release=1
-source=(https://github.com/libsndfile/libsamplerate/releases/download/$version/$name-$version.tar.xz)
+source=(https://github.com/libsndfile/$name/releases/download/$version/$name-$version.tar.xz)
 
 build() {
-	prt-get isinst ninja && PKGMK_LSR+=' -G Ninja'
-
-	cmake -S $name-$version -B build $PKGMK_LSR \
+	cmake -S $name-$version -B build -G Ninja \
 		-D CMAKE_INSTALL_PREFIX=/usr \
 		-D CMAKE_INSTALL_LIBDIR=lib \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
 		-D BUILD_SHARED_LIBS=ON \
 		-Wno-dev
-	cmake --build build
-	DESTDIR=$PKG cmake --install build
+
+	ninja -C build -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C build install
 
 	rm -r $PKG/usr/share
 }
