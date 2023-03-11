@@ -1,6 +1,6 @@
 # Description: CD paranoia libraries from libcdio
-# URL: http://www.gnu.org/software/libcdio/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# URL: https://github.com/rocky/libcdio-paranoia
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: libcdio
 
 name=libcdio-paranoia
@@ -13,10 +13,8 @@ build() {
 
 	./configure \
 		--prefix=/usr \
-		--enable-cpp-progs \
 		--disable-example-progs
 		
-
 	make
 	make DESTDIR=$PKG install
 
