@@ -1,6 +1,6 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
-# Maintainer: unmaintained
+# Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: aom autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libevent libnotify libvpx libwebp libxkbcommon lld nodejs nss pulseaudio unzip wasi-libc++ xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
 # Optional: sccache jack pipewire
 
@@ -9,7 +9,10 @@ version=110.0.1
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
 	firefox.desktop
-	node-stdout-nonblocking-wrapper)
+	node-stdout-nonblocking-wrapper
+	0001-libwebrtc-screen-cast-sync.patch
+	0002-Bug-1819374-Squashed-ffmpeg-6.0-update.patch
+	0003-Bug-1820416-Use-correct-FFVPX-headers-from-ffmpeg-6.patch)
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/$1/.cargo-checksum.json
@@ -17,6 +20,10 @@ _clear_vendor_checksums() {
 
 build() {
 	cd $name-$version
+
+	for p in $SRC/*.patch; do
+		patch -p1 -i $p
+	done
 
 	if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
 		printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
