@@ -5,18 +5,15 @@
 
 name=bb-top
 version=0.4.3
-release=1
-source=(https://github.com/epilys/bb/archive/$version/bb-$version.tar.gz)
+release=2
+_commit=6c36391b85b93aec5d14864f6822d00dd79f9ba6
+source=(https://github.com/TimB87/bb/archive/$_commit/bb-$_commit.tar.gz)
 
 build() {
-  cd bb-$version
-
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-  mkdir "$PKGMK_SOURCE_DIR/rust" || true
-  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
-  cargo update
-  cargo fetch
-  cargo build --release --locked
-  install -Dt $PKG/usr/bin target/release/bb
+  cargo build --release --manifest-path bb-$_commit/Cargo.toml
+
+  install -Dt $PKG/usr/bin bb-$_commit/target/release/bb
 }
