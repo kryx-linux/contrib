@@ -5,7 +5,7 @@
 # Optional: alsa-lib avahi bluez dav1d libmicrohttpd libnfs libva libva-vdpau-driver libxslt mariadb mysql pipewire pulseaudio
 
 name=kodi-wayland
-version=20.0
+version=20.1
 release=1
 
 # version variables {{{
@@ -20,8 +20,7 @@ source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$
   https://github.com/xbmc/FFmpeg/archive/$_ffmpeg_version/ffmpeg-$_ffmpeg_version.tar.gz
   https://github.com/xbmc/libdvdcss/archive/$_libdvdcss_version/${name/-wayland/}-libdvdcss-$_libdvdcss_version.tar.gz
   https://github.com/xbmc/libdvdnav/archive/$_libdvdnav_version/${name/-wayland/}-libdvdnav-$_libdvdnav_version.tar.gz
-  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-wayland/}-libdvdread-$_libdvdread_version.tar.gz
-  22658.patch)
+  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-wayland/}-libdvdread-$_libdvdread_version.tar.gz)
 # }}}
 # unpack_source() {{{
 unpack_source() {
@@ -71,8 +70,6 @@ build()  {
   sed -e 's/autoreconf -vif/echo "autoreconf already done"/' -i \
     xbmc-$version-$_codename/tools/depends/native/TexturePacker/src/autogen.sh \
     xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
-
-  patch -Np1 -d xbmc-$version-$_codename -i $SRC/22658.patch
 
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
     -D CMAKE_INSTALL_PREFIX=/usr \
