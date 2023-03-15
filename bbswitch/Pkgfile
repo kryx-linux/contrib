@@ -6,11 +6,12 @@ name=bbswitch
 version=0.8
 release=1
 source=(https://github.com/Bumblebee-Project/$name/archive/v$version/$name-$version.tar.gz \
-	$name-kernel56.patch)
+	$name-kernel56.patch acpi.patch)
 
 build() {
 	cd $name-$version
 	patch -p1 -i $SRC/$name-kernel56.patch
+	patch -p1 -i $SRC/acpi.patch
 	make
 	install -D -m 0644 $name.ko $PKG/lib/modules/$(uname -r)/misc/$name.ko
 }
