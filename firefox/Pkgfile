@@ -5,14 +5,13 @@
 # Optional: sccache jack pipewire
 
 name=firefox
-version=110.0.1
+version=111.0
 release=1
 source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
 	firefox.desktop
 	node-stdout-nonblocking-wrapper
-	0001-libwebrtc-screen-cast-sync.patch
-	0002-Bug-1819374-Squashed-ffmpeg-6.0-update.patch
-	0003-Bug-1820416-Use-correct-FFVPX-headers-from-ffmpeg-6.patch)
+	0001-Bug-1819374-Squashed-ffmpeg-6.0-update.patch
+	0002-Bug-1820416-Use-correct-FFVPX-headers-from-ffmpeg-6.patch)
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/$1/.cargo-checksum.json
