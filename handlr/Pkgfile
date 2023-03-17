@@ -4,7 +4,7 @@
 # Depends on: rust xdg-utils
 
 name=handlr
-version=0.8.2
+version=0.8.3
 release=1
 source=(https://github.com/Anomalocaridid/handlr-regex/archive/v$version/$name-$version.tar.gz
   xdg-open.sh)
@@ -20,7 +20,6 @@ build() {
   prt-get isinst zsh && install -Dm644 $SRC/$name-regex-$version/assets/completions/_handlr \
     $PKG/usr/share/zsh/site-functions/_handlr
 
-  install -Dt $PKG/usr/bin $name-regex-$version/target/release/$name
   install -Dt $PKG/usr/bin $name-regex-$version/target/release/$name
   install -Dm755 $SRC/xdg-open.sh $PKG/usr/local/bin/xdg-open
 }
