@@ -4,15 +4,22 @@
 # Depends on:
 
 name=cracklib
-version=2.9.8
+version=2.9.10
 release=1
 source=(https://github.com/cracklib/cracklib/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
+  cp -p lib/packer.h lib/packer.h.in
+  AUTOPOINT=true autoreconf -fi
+
+  PYTHON=/usr/bin/python3 \
   ./configure --prefix=/usr \
     --sbindir=/usr/bin \
-    --without-python
+    --enable-static \
+    --disable-nls
+
   make
   make DESTDIR=$PKG install
 
@@ -20,5 +27,4 @@ build() {
   ln -sf /usr/share/cracklib/cracklib-small $PKG/usr/share/dict/cracklib-small
   sh ./util/cracklib-format dicts/cracklib-small \
     | sh ./util/cracklib-packer $PKG/usr/share/cracklib/pw_dict
-  rm -r $PKG/usr/share/locale/
 }
