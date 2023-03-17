@@ -5,12 +5,12 @@
 # Optional: lapack openjdk8 texlive tk
 
 name=r
-version=4.2.2
-release=2
+version=4.2.3
+release=1
 source=(https://cran.r-project.org/src/base/R-${version::1}/R-$version.tar.gz
   r.desktop r.png R.conf
   R-4.2.2-browser-pdf-prefs.patch
-  R-4.2.2-isspace-without-readline.patch R-4.2.2-parallel-rmath-h-install.patch
+  R-4.2.2-parallel-rmath-h-install.patch
   R-3.4.1-parallel.patch R-3.4.1-rmath-shared.patch
   R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch)
 
@@ -22,7 +22,6 @@ build() {
   patch -Np1 -i $SRC/R-3.4.1-rmath-shared.patch
   patch -Np1 -i $SRC/R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch
   patch -Np1 -i $SRC/R-4.2.2-browser-pdf-prefs.patch
-  patch -Np1 -i $SRC/R-4.2.2-isspace-without-readline.patch
   patch -Np1 -i $SRC/R-4.2.2-parallel-rmath-h-install.patch
 
   # configuring R
