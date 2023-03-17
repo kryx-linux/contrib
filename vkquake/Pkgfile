@@ -4,19 +4,33 @@
 # Depends on: libmad libsdl2 libvorbis vulkan-loader xorg-libx11 zopfli
 
 name=vkquake
-version=1.22.3
+version=1.30.1
 release=1
 source=(https://github.com/Novum/vkQuake/archive/$version/$name-$version.tar.gz
   vkquake.desktop vkquake.png)
 
 build() {
+  rm -rf vkQuake-$version/Windows
+  sed -i 's#vulkan_core.h#vulkan.h#' vkQuake-$version/Quake/quakedef.h
+
+  #meson setup vkQuake-$version build \
+  #  --prefix=/usr \
+  #  --buildtype=plain \
+  #  --wrap-mode nodownload \
+  #  -D b_lto=false \
+  #  -D b_pie=false \
+  #  -D do_userdirs=enabled
+
+  #meson compile -C build -j 1
+  #DESTDIR=$PKG meson install -C build
+
   make -C vkQuake-$version/Quake clean
   make -C vkQuake-$version/Quake \
     DO_USERDIRS=1
-  make -C vkQuake-$version/Misc/vq_pak
+  #make -C vkQuake-$version/Misc/vq_pak
 
   install -Dm755 vkQuake-$version/Quake/vkquake $PKG/usr/bin/vkquake
-  install -Dm644 vkQuake-$version/Misc/vq_pak/vkquake.pak $PKG/usr/share/games/vkquake/vkquake.pak
+  #install -Dm644 vkQuake-$version/Misc/vq_pak/vkquake.pak $PKG/usr/share/games/vkquake/vkquake.pak
 
   install -Dm644 $SRC/$name.desktop $PKG/usr/share/applications/vkquake.desktop
   install -Dm644 $SRC/$name.png $PKG/usr/share/pixmaps/vkquake.png
