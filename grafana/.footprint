@@ -477,7 +477,6 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/core/services/echo/backends/se
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/echo/backends/sentry/transports/CustomEndpointTransport.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/echo/backends/sentry/transports/EchoSrvTransport.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/echo/backends/sentry/types.ts
--rw-r--r--	root/root	usr/share/grafana/public/app/core/services/echo/utils.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/echo/utils.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/impression_srv.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/services/keybindingSrv.ts
@@ -1103,6 +1102,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/features/commandPalette/
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/commandPalette/KBarResults.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/commandPalette/ResultItem.tsx
 drwxr-xr-x	root/root	usr/share/grafana/public/app/features/commandPalette/actions/
+-rw-r--r--	root/root	usr/share/grafana/public/app/features/commandPalette/actions/dashboardActions.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/commandPalette/actions/dashboardActions.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/commandPalette/actions/staticActions.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/commandPalette/actions/useActions.ts
@@ -3572,6 +3572,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/im
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/img/influxdb_logo.svg
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/influxQLMetadataQuery.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/influx_query_model.ts
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/influx_series.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/migrations.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/module.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/plugin.json
@@ -3584,6 +3585,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/im
 drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/specs/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/specs/datasource.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/specs/influx_query_model.test.ts
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/specs/influx_series.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/specs/query_builder.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/specs/query_part.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/influxdb/specs/response_parser.test.ts
@@ -3954,6 +3956,8 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/LabelFilters.test.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/LabelFilters.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/LabelParamEditor.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/MetricEncyclopediaModal.test.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/MetricEncyclopediaModal.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/MetricSelect.test.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/MetricSelect.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/prometheus/querybuilder/components/NestedQuery.tsx
