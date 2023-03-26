@@ -3,9 +3,9 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=parallel
-version=20230222
+version=20230322
 release=1
-source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
+source=(https://ftp.gnu.org/gnu/parallel/parallel-$version.tar.bz2)
 
 build() {
   cd $name-$version
@@ -16,5 +16,6 @@ build() {
 
   prt-get isinst zsh || rm -r $PKG/usr/share/zsh
   prt-get isinst bash-completion || rm -r $PKG/usr/share/bash-completion
+
   rm -r $PKG/usr/share/doc
 }
