@@ -17,6 +17,10 @@ source=(https://cran.r-project.org/src/base/R-${version::1}/R-$version.tar.gz
 build() {
   cd R-$version
 
+  # override the upstream opinion that curl 8 has an incompatible API
+  curlTest=$(grep -n "LIBCURL_VERSION_MAJOR > 7" configure | cut -d: -f1)
+  sed -i "$((curlTest + 1))s/exit.1./exit(0)/" configure
+
   # https://gitweb.gentoo.org/repo/gentoo.git/tree/dev-lang/R/files
   patch -Np1 -i $SRC/R-3.4.1-parallel.patch
   patch -Np1 -i $SRC/R-3.4.1-rmath-shared.patch
