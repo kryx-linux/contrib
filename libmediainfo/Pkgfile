@@ -1,26 +1,32 @@
 # Description: MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files
 # URL: https://mediaarea.net/en/MediaInfo
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: libmms libzen tinyxml
+# Depends on: libzen
+# Optional: libmms tinyxml
 
 name=libmediainfo
-version=22.12
+version=23.03
 release=1
 source=(https://mediaarea.net/download/source/libmediainfo/$version/libmediainfo_$version.tar.xz)
 
 build() {
   cd MediaInfoLib/Project/GNU/Library
 
-  export CFLAGS="$CFLAGS -I/usr/include/libmms"
-  export CPPFLAGS="$CFLAGS"
-  export CXXFLAGS="$CFLAGS"
+  prt-get isinst libmms && PKGMK_LIBMEDIAINFO+=' --with-libmms'
+  #prt-get isinst tinyxml && PKGMK_LIBMEDIAINFO+=' --with-libtinyxml2'
+
+  if prt-get isinst libmms; then
+    export CFLAGS="$CFLAGS -I/usr/include/libmms -I /usr/include/ti "
+    export CPPFLAGS="$CFLAGS"
+    export CXXFLAGS="$CFLAGS"
+  fi
 
   ./autogen.sh
-  ./configure --prefix=/usr \
+  ./configure --prefix=/usr $PKGMK_LIBMEDIAINFO \
     --enable-shared \
     --disable-static \
-    --with-libcurl \
-    --with-libmms
+    --with-libcurl
+
   make
   make DESTDIR=$PKG install
 }
