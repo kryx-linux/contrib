@@ -4,14 +4,16 @@
 # Depends on: p5-class-load p5-class-singleton p5-list-allutils p5-params-validate
 
 name=p5-datetime-timezone
-version=2.59
+version=2.60
 release=1
 source=(https://www.cpan.org/authors/id/D/DR/DROLSKY/DateTime-TimeZone-$version.tar.gz)
 
 build() {
   cd DateTime-TimeZone-$version
+
   PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
   make
   make install DESTDIR=$PKG
+
   find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
 }
