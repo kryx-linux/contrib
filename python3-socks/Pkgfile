@@ -4,12 +4,13 @@
 # Depends on: python3-setuptools
 
 name=python3-socks
-version=2.0.3
+version=2.2.0
 release=1
 source=(https://pypi.org/packages/source/p/python-socks/python-socks-$version.tar.gz)
 
 build() {
   cd python-socks-$version
+
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
