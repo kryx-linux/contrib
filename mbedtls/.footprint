@@ -37,6 +37,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/pk_verify
 -rwxr-xr-x	root/root	usr/bin/psa_constant_names
 -rwxr-xr-x	root/root	usr/bin/query_compile_time_config
+-rwxr-xr-x	root/root	usr/bin/query_included_headers
 -rwxr-xr-x	root/root	usr/bin/req_app
 -rwxr-xr-x	root/root	usr/bin/rsa_decrypt
 -rwxr-xr-x	root/root	usr/bin/rsa_encrypt
@@ -57,11 +58,6 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/strerror
 -rwxr-xr-x	root/root	usr/bin/udp_proxy
 -rwxr-xr-x	root/root	usr/bin/zeroize
-drwxr-xr-x	root/root	usr/cmake/
--rw-r--r--	root/root	usr/cmake/MbedTLSConfig.cmake
--rw-r--r--	root/root	usr/cmake/MbedTLSConfigVersion.cmake
--rw-r--r--	root/root	usr/cmake/MbedTLSTargets-release.cmake
--rw-r--r--	root/root	usr/cmake/MbedTLSTargets.cmake
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/aes.h
@@ -148,15 +144,21 @@ drwxr-xr-x	root/root	usr/include/psa/
 -rw-r--r--	root/root	usr/include/psa/crypto_types.h
 -rw-r--r--	root/root	usr/include/psa/crypto_values.h
 drwxr-xr-x	root/root	usr/lib/
+drwxr-xr-x	root/root	usr/lib/cmake/
+drwxr-xr-x	root/root	usr/lib/cmake/MbedTLS/
+-rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSConfig.cmake
+-rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSConfigVersion.cmake
+-rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSTargets-release.cmake
+-rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSTargets.cmake
 -rw-r--r--	root/root	usr/lib/libmbedcrypto.a
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.13
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.13 -> libmbedcrypto.so.3.3.0
--rwxr-xr-x	root/root	usr/lib/libmbedcrypto.so.3.3.0
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.14
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.14 -> libmbedcrypto.so.3.4.0
+-rwxr-xr-x	root/root	usr/lib/libmbedcrypto.so.3.4.0
 -rw-r--r--	root/root	usr/lib/libmbedtls.a
 lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.19
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.19 -> libmbedtls.so.3.3.0
--rwxr-xr-x	root/root	usr/lib/libmbedtls.so.3.3.0
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.19 -> libmbedtls.so.3.4.0
+-rwxr-xr-x	root/root	usr/lib/libmbedtls.so.3.4.0
 -rw-r--r--	root/root	usr/lib/libmbedx509.a
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.4
--rwxr-xr-x	root/root	usr/lib/libmbedx509.so.3.3.0
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.4 -> libmbedx509.so.3.3.0
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.5
+-rwxr-xr-x	root/root	usr/lib/libmbedx509.so.3.4.0
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.5 -> libmbedx509.so.3.4.0
