@@ -1,0 +1,16 @@
+# Description: Utility functions for Python class constructs
+# URL: https://github.com/jaraco/jaraco.classes
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-more-itertools python3-setuptools-scm
+
+name=python3-jaraco-classes
+version=3.2.3
+release=1
+source=(https://pypi.org/packages/source/j/jaraco.classes/jaraco.classes-$version.tar.gz)
+
+build() {
+  cd jaraco.classes-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
