@@ -1,0 +1,17 @@
+# Description: rapid fuzzy string matching
+# URL: https://github.com/maxbachmann/RapidFuzz
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-jarowinkler python3-rapidfuzz-capi python3-scikit-build
+# Optional: python3-numpy
+
+name=python3-rapidfuzz
+version=2.13.7
+release=1
+source=(https://pypi.org/packages/source/r/rapidfuzz/rapidfuzz-$version.tar.gz)
+
+build() {
+  cd rapidfuzz-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
