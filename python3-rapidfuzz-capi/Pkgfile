@@ -1,0 +1,16 @@
+# Description: C-API of RapidFuzz, which can be used to extend RapidFuzz from separate packages
+# URL: https://github.com/maxbachmann/rapidfuzz_capi
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-build python3-installer
+
+name=python3-rapidfuzz-capi
+version=1.0.5
+release=1
+source=(https://files.pythonhosted.org/packages/source/r/rapidfuzz_capi/rapidfuzz_capi-$version.tar.gz)
+
+build() {
+  cd rapidfuzz_capi-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
