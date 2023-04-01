@@ -4,15 +4,12 @@
 # Depends on: gnupg swig python3-setuptools
 
 name=gpgme
-version=1.18.0
+version=1.19.0
 release=1
-source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2
-	python310.patch)
+source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
 
 build() {
 	cd $name-$version
-
-	patch -Np1 -i $SRC/python310.patch
 
 	export PYTHON='/usr/bin/python3'
 	./configure \
