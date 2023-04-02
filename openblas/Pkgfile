@@ -4,15 +4,12 @@
 # Depends on: gcc-fortran
 
 name=openblas
-version=0.3.21
-release=2
-source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz
-  openblas-0.3.21-clang16.patch)
+version=0.3.23
+release=1
+source=(https://github.com/xianyi/OpenBLAS/archive/v$version/OpenBLAS-$version.tar.gz)
 
 build () {
   cd OpenBLAS-$version
-
-  patch -Np1 -i $SRC/openblas-0.3.21-clang16.patch
 
   export MAKE_NB_JOBS=-1 \
     COMMON_OPT=" " \
