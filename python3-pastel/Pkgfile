@@ -1,8 +1,7 @@
 # Description: Bring colors to your terminal
 # URL: https://github.com/sdispater/pastel
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-certifi python3-pip python3-ruamel-yaml-clib
-# Optional: python3-poetry-core
+# Depends on: python3-certifi python3-poetry-core python3-ruamel-yaml-clib
 
 name=python3-pastel
 version=0.2.1
@@ -12,14 +11,6 @@ source=(https://github.com/sdispater/pastel/archive/$version/$name-$version.tar.
 build() {
   cd pastel-$version
 
-  _pyver=$(/usr/bin/python3 -c 'import sys; print("%s.%s" % sys.version_info[:2])')
-
-  if prt-get isinst python3-poetry-core; then
-    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
-  else
-    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --compile --no-deps pastel==$version
-  fi
-
-  rm -rf $PKG/usr/lib/python$_pyver/site-packages/pastel-$version.dist-info/{INSTALLER,REQUESTED}
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
 }
