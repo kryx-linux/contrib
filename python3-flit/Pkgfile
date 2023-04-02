@@ -1,7 +1,7 @@
 # Description: Simplified packaging of Python modules
 # URL: https://github.com/takluyver/flit
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-flit-core python3-docutils python3-requests python3-tomli python3-pip
+# Depends on: python3-docutils python3-requests python3-tomli-w
 
 name=python3-flit
 version=3.8.0
@@ -11,9 +11,8 @@ source=(https://github.com/takluyver/flit/archive/$version/flit-$version.tar.gz)
 build() {
   rm flit-$version/tests/test_sdist.py
 
-  cd flit-$version/flit_core
-  /usr/bin/python3 build_dists.py
-  cd ..
-  PYTHONPATH=flit_core /usr/bin/python3 -m flit build --format wheel
-  PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps $SRC/flit-$version/dist/*.whl
+  cd flit-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
