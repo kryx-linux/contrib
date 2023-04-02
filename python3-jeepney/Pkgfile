@@ -2,7 +2,7 @@
 # URL: https://gitlab.com/takluyver/jeepney
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-pip
-# Optional: python3-flit
+# Optional: python3-flit-core
 
 name=python3-jeepney
 version=0.8.0
@@ -11,10 +11,15 @@ source=(https://pypi.io/packages/source/j/jeepney/jeepney-$version.tar.gz)
 
 build() {
   cd jeepney-$version
-  if prt-get isinst python3-flit; then
-    /usr/bin/python3 -m flit build --format wheel
-    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps dist/*.whl
+
+  _pyver=$(/usr/bin/python3 -c 'import sys; print("%s.%s" % sys.version_info[:2])')
+
+  if prt-get isinst python3-flit-core; then
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
   else
-    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps jeepney
+    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --compile --no-deps jeepney==$version
   fi
+
+  rm -rf $PKG/usr/lib/python$_pyver/site-packages/jeepney-$version.dist-info/{INSTALLER,REQUESTED}
 }
