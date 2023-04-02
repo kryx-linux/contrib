@@ -18,7 +18,7 @@ build() {
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
     /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
   else
-    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps typing_extensions
+    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps typing_extensions==$version
   fi
 
   rm -rf $PKG/usr/lib/python$_pyver/site-packages/typing_extensions-$version.dist-info/{INSTALLER,REQUESTED}
