@@ -4,7 +4,7 @@
 # Depends on: npm tree-sitter
 
 name=tree-sitter-vimdoc
-version=1.3.0
+version=2.0.0
 release=1
 source=(https://github.com/neovim/tree-sitter-vimdoc/archive/v$version/$name-$version.tar.gz)
 
@@ -19,5 +19,6 @@ build() {
 
   install -Dm 644 parser.so $PKG/usr/lib/libtree-sitter-vimdoc.so
   install -d $PKG/usr/share/nvim/runtime/parser/
+
   ln -s /usr/lib/libtree-sitter-vimdoc.so $PKG/usr/share/nvim/runtime/parser/vimdoc.so
 }
