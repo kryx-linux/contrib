@@ -15,7 +15,8 @@ build() {
     --prefix=/usr \
     --sbindir=/usr/bin \
     --sysconfdir=/etc \
-    --enable-plugins
+    --enable-plugins \
+    --disable-cairo
   make
   make DESTDIR=$PKG install
 }
