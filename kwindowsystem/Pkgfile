@@ -6,12 +6,12 @@
 name=kwindowsystem
 version=5.104.0
 release=1
-source=(https://download.kde.org/stable/frameworks/${version:0:5}/$name-$version.tar.xz)
+source=(https://invent.kde.org/frameworks/kwindowsystem/-/archive/v$version/kwindowsystem-v$version.tar.bz2)
 
 build() {
-  rm -r $name-$version/poqm/*
+  rm -r $name-v$version/poqm/*
 
-  cmake -S $name-$version -B build -G Ninja \
+  cmake -S $name-v$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
