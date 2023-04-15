@@ -1,16 +1,17 @@
 # Description: Improved build system generator for Python C/C++/Fortran/Cython extensions
 # URL: https://github.com/scikit-build/scikit-build
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-distro python3-packaging python3-setuptools-scm
+# Depends on: python3-distro python3-hatch-fancy-pypi-readme python3-hatch-vcs
 
 name=python3-scikit-build
-version=0.16.7
+version=0.17.1
 release=1
-source=(https://pypi.org/packages/source/s/scikit-build/scikit-build-$version.tar.gz)
+source=(https://github.com/scikit-build/scikit-build/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd scikit-build-$version
 
+  export SETUPTOOLS_SCM_PRETEND_VERSION=$version
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
