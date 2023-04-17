@@ -5,7 +5,7 @@
 # Optional: libappindicator-gtk3
 
 name=network-manager-applet
-version=1.30.0
+version=1.32.0
 release=1
 source=(https://gitlab.gnome.org/GNOME/network-manager-applet/-/archive/$version/network-manager-applet-$version.tar.bz2)
 
@@ -26,4 +26,7 @@ build() {
   DESTDIR=$PKG meson install -C build
 
   rm -r $PKG/usr/share/locale
+
+  # provided by libnma
+  rm -r $PKG/usr/share/glib-2.0/schemas
 }
