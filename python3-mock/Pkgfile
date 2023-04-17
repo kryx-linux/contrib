@@ -4,12 +4,13 @@
 # Depends on: python3-pbr python3-six
 
 name=python3-mock
-version=5.0.1
+version=5.0.2
 release=1
 source=(https://github.com/testing-cabal/mock/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd mock-$version
+
   sed -i 's/unittest2/unittest/g' mock/tests/*.py
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG --optimize=1
