@@ -4,12 +4,12 @@
 # Depends on: python3-pyasn1
 
 name=python3-pyasn1-modules
-version=0.2.8
+version=0.3.0
 release=1
-source=(https://pypi.io/packages/source/p/pyasn1-modules/pyasn1-modules-$version.tar.gz)
+source=(https://pypi.io/packages/source/p/pyasn1_modules/pyasn1_modules-$version.tar.gz)
 
 build() {
-  cd pyasn1-modules-$version
+  cd pyasn1_modules-$version
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
