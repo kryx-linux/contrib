@@ -5,13 +5,11 @@
 # Optional: lapack openjdk8 texlive tk
 
 name=r
-version=4.2.3
+version=4.3.0
 release=1
 source=(https://cran.r-project.org/src/base/R-${version::1}/R-$version.tar.gz
   r.desktop r.png R.conf
-  R-4.2.2-browser-pdf-prefs.patch
-  R-4.2.2-parallel-rmath-h-install.patch
-  R-3.4.1-parallel.patch R-3.4.1-rmath-shared.patch
+  R-3.4.1-parallel.patch
   R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch)
 
 build() {
@@ -23,10 +21,7 @@ build() {
 
   # https://gitweb.gentoo.org/repo/gentoo.git/tree/dev-lang/R/files
   patch -Np1 -i $SRC/R-3.4.1-parallel.patch
-  patch -Np1 -i $SRC/R-3.4.1-rmath-shared.patch
   patch -Np1 -i $SRC/R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch
-  patch -Np1 -i $SRC/R-4.2.2-browser-pdf-prefs.patch
-  patch -Np1 -i $SRC/R-4.2.2-parallel-rmath-h-install.patch
 
   # configuring R
   prt-get isinst tk && PKGMK_R+=" --with-x=yes" || PKGMK_R+=" --with-x=no"
