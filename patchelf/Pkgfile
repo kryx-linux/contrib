@@ -3,7 +3,7 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=patchelf
-version=0.17.2
+version=0.18.0
 release=1
 source=(https://github.com/Nixos/$name/archive/$version/$name-$version.tar.gz)
 
@@ -13,5 +13,8 @@ build() {
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
+
+  prt-get isinst zsh || rm -rf $PKG/usr/share/zsh/
+
   rm -r $PKG/usr/share/doc
 }
