@@ -4,15 +4,13 @@
 # Depends on: python3-click python3-importlib_metadata python3-itsdangerous python3-jinja2 python3-werkzeug
 
 name=python3-flask
-version=2.2.3
+version=2.3.1
 release=1
 source=(https://github.com/pallets/flask/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd flask-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
