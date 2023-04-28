@@ -1,18 +1,16 @@
 # Description: Command-line tool to run Windows apps with Wine and bwrap/bubblewrap isolation
 # URL: https://github.com/hartwork/sandwine
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: bubblewrap python3-coloredlogs python3-entrypoints wine
+# Depends on: bubblewrap python3-coloredlogs python3-entrypoints python3-wheel wine
 
 name=sandwine
-version=1.3.2
+version=2.0.0
 release=1
 source=(https://pypi.org/packages/source/s/sandwine/sandwine-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
