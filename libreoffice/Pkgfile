@@ -60,8 +60,8 @@ build() {
   # optionals {{{
   prt-get isinst avahi && PKGMK_LIBREOFFICE+=' --enable-avahi' || PKGMK_LIBREOFFICE+=' --disable-avahi'
   #prt-get isinst box2d && PKGMK_LIBREOFFICE+=' --with-system-box2d' || PKGMK_LIBREOFFICE+=' --without-system-box2d'
-  #prt-get isinst ccache && PKGMK_LIBREOFFICE+=' --enable-ccache' || PKGMK_LIBREOFFICE+=' --disable-ccache'
-  prt-get isinst ccache && export PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+  prt-get isinst ccache && PKGMK_LIBREOFFICE+=' --enable-ccache' || PKGMK_LIBREOFFICE+=' --disable-ccache'
+  #prt-get isinst ccache && export PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   prt-get isinst ccache && export CCACHE_CPP2=1
   #prt-get isinst clucene && PKGMK_LIBREOFFICE+=' --with-system-clucene' || PKGMK_LIBREOFFICE+=' --without-system-clucene'
   prt-get isinst coin-or-mp && PKGMK_LIBREOFFICE+=' --with-system-coinmp' || PKGMK_LIBREOFFICE+=' --disable-coinmp'
