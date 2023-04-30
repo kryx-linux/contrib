@@ -4,12 +4,12 @@
 # Depends on: python3-pyqt6 qt6-webengine python3-pyqt-builder sip python3-ply
 
 name=python3-pyqt6-webengine
-version=6.4.0
+version=6.5.0
 release=1
 source=(https://pypi.python.org/packages/source/P/PyQt6-WebEngine/PyQt6_WebEngine-$version.tar.gz)
 
 build() {
-  ls /usr/lib/python*/site-packages/PyQt6/QtWebChannel.*so || (echo "rebuild pyqt6"; exit 1)
+  ls /usr/lib/python*/site-packages/PyQt6/QtWebChannel.*so || (echo "rebuild python3-pyqt6"; exit 1)
   cd PyQt6_WebEngine-$version
 
   sip-build \
