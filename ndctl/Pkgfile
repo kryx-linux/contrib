@@ -4,7 +4,7 @@
 # Depends on: iniparser json-c keyutils meson ninja
 
 name=ndctl
-version=76.1
+version=77
 release=1
 source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version-$release.tar.gz)
 
@@ -21,4 +21,6 @@ build() {
     -D libtracefs=disabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion
 }
