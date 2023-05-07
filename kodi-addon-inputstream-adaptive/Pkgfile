@@ -4,14 +4,14 @@
 # Depends on: kodi-gbm
 
 name=kodi-addon-inputstream-adaptive
-version=20.3.6
+version=20.3.7
 release=1
-_bento4=1.6.0-639-6
+_bento4=1.6.0-639-7
 _codename=Nexus
 
 source=(https://github.com/peak3d/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz
-  https://github.com/xbmc/Bento4/archive/refs/tags/$_bento4-$_codename.tar.gz)
-renames=(SKIP bento4-$_bento4-$_codename.tar.gz)
+  https://github.com/xbmc/Bento4/archive/refs/tags/$_bento4-Omega.tar.gz)
+renames=(SKIP bento4-$_bento4-Omega.tar.gz)
 
 build() {
   cmake -S inputstream.adaptive-$version-$_codename -B build -G Ninja \
@@ -21,7 +21,7 @@ build() {
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D BUILD_SHARED_LIBS=ON \
     -D ENABLE_INTERNAL_BENTO4=ON \
-    -D BENTO4_URL=$PKGMK_SOURCE_DIR/bento4-$_bento4-$_codename.tar.gz \
+    -D BENTO4_URL=$PKGMK_SOURCE_DIR/bento4-$_bento4-Omega.tar.gz \
     -D USE_LTO=ON \
     -D BUILD_TESTING=OFF \
     -Wno-dev
