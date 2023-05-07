@@ -5,8 +5,9 @@
 
 name=raptor
 version=2.0.16
-release=1
+release=2
 source=(http://librdf.org/dist/source/raptor2-$version.tar.gz
+  libxml-2.11.0.patch
   libtool.patch
   rpath.patch
   xml2-config.patch)
@@ -17,10 +18,14 @@ build() {
   patch -Np0 -i $SRC/libtool.patch
   patch -Np0 -i $SRC/rpath.patch
   patch -Np0 -i $SRC/xml2-config.patch
+  patch -Np1 -i $SRC/libxml-2.11.0.patch
 
   ./configure --prefix=/usr \
     --with-yajl=no \
-    --with-icu-config=/usr/bin/icu-config
+    --with-icu-config=/usr/bin/icu-config \
+    --disable-static
+
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
   make
   make prefix="$PKG"/usr install
 
