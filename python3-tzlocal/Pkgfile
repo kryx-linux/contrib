@@ -1,19 +1,16 @@
 # Description: Tzinfo object for the local timezone
 # URL: https://github.com/regebro/tzlocal
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-pytz
+# Depends on: python3-build python3-installer python3-wheel
 
 name=python3-tzlocal
-version=4.3
+version=5.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/t/tzlocal/tzlocal-$version.tar.gz)
 
 build() {
   cd tzlocal-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install \
-    --prefix=/usr \
-    --optimize=1 \
-    --skip-build \
-    --root=$PKG
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
