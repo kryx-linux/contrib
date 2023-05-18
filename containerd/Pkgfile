@@ -16,7 +16,7 @@ build() {
     cd $name
     export GOPATH=$SRC
     # use the long commit hash here
-    make GIT_COMMIT=1fbd70374134b891f97ce19c70b6e50c7b9f4e0d
+    make GIT_COMMIT=1677a17964311325ed1c31e2c0a3589ce6d5c30d
     install -d -m 0755 $PKG/usr/bin
     install -m 0755 bin/* $PKG/usr/bin/
 }
