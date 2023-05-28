@@ -5,10 +5,10 @@
 
 name=rtmpdump
 version=2.4
-_commit=c5f04a58fc2aeea6296ca7c44ee4734c18401aa3
-release=3
+_commit=f1b83c10d8beb43fcc70a6e88cf4325499f25857
+release=4
 source=(http://git.ffmpeg.org/gitweb/$name.git/snapshot/$_commit.tar.gz)
-renames=($name-$version-${_commit:0:8}.tar.gz)
+renames=($name-$version-${_commit:0:8}-$release.tar.gz)
 
 build() {
 	cd $name-*
