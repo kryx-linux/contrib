@@ -6,12 +6,10 @@
 name=pugixml
 version=1.13
 release=1
-source=(http://github.com/zeux/pugixml/releases/download/v$version/$name-$version.tar.gz)
+source=(https://github.com/zeux/pugixml/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-  prt-get isinst ninja && PKGMK_PUGIXML+=' -G Ninja'
-  #cmake -S $name-$version -B build $PKGMK_PUGIXML \
-  cmake -S $name-${version:0:4} -B build $PKGMK_PUGIXML \
+  cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
