@@ -6,7 +6,7 @@
 SSD=/sbin/start-stop-daemon
 PROG=/usr/bin/node_exporter
 PORT=9100
-OPTS="--collector.processes --web.listen-address=":${PORT}" --web.config=/etc/node-exporter/config.yml"
+OPTS="--collector.processes --web.listen-address=":${PORT}" --web.config.file=/etc/node-exporter/config.yml"
 
 case $1 in
   start)
