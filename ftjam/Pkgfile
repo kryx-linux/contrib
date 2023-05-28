@@ -1,7 +1,6 @@
 # Description: Build tool that can be used as a replacement for Make.
-# URL: http://freetype.sourceforge.net/jam/index.html
+# URL: https://freetype.sourceforge.net/jam/index.html
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on:
 
 name=ftjam
 version=2.5.3rc2
@@ -10,8 +9,8 @@ source=(https://www.mirrorservice.org/sites/download.salixos.org/i486/14.0/sourc
 
 build() {
   cd ftjam-$version
+
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
 }
-
