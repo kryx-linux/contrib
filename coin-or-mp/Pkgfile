@@ -1,21 +1,18 @@
 # Description: C-API library that supports most of the functionality of CLP (Coin LP), CBC (Coin Branch-and-Cut), and CGL (Cut Generation Library) projects
-# URL: https://projects.coin-or.org/CoinMP
+# URL: https://github.com/coin-or/CoinMP
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: coin-or-cbc
 
 name=coin-or-mp
 version=1.8.4
-release=5
-source=(https://www.coin-or.org/download/source/CoinMP/CoinMP-$version.tgz
-  werror-undef.patch.0
-  ubsan.patch.0
+release=6
+source=(https://github.com/coin-or/CoinMP/archive/refs/tags/releases/$version.tar.gz
   libtool.patch)
+renames=($name-$version.tar.gz SKIP SKIP SKIP)
 
 build() {
-  cd CoinMP-$version
+  cd CoinMP-releases-$version/CoinMP
 
-  patch -Np0 -i $SRC/werror-undef.patch.0
-  patch -Np0 -i $SRC/ubsan.patch.0
   patch -Np1 -i $SRC/libtool.patch
 
   COIN_SKIP_PROJECTS="Sample" \
@@ -34,8 +31,8 @@ build() {
   make DESTDIR=$PKG install-exec
 
   mkdir -p $PKG/usr/{include/coin,lib/pkgconfig}
-  install -c -m 644 CoinMP/src/CoinMP.h $PKG/usr/include/coin/CoinMP.h
-  install -c -m 644 CoinMP/coinmp.pc $PKG/usr/lib/pkgconfig/coinmp.pc
+  install -c -m 644 src/CoinMP.h $PKG/usr/include/coin/CoinMP.h
+  install -c -m 644 coinmp.pc $PKG/usr/lib/pkgconfig/coinmp.pc
 
   rm -fr $PKG/usr/share
 }
