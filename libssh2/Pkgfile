@@ -3,15 +3,12 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=libssh2
-version=1.10.0
-release=2
-source=(https://www.libssh2.org/download/$name-$version.tar.gz
-  libssh2-1.10.0-upstream_fix-1.patch)
+version=1.11.0
+release=1
+source=(https://www.libssh2.org/download/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
-
-  patch -Np1 -i $SRC/libssh2-1.10.0-upstream_fix-1.patch
 
   ./configure --prefix=/usr \
     --disable-static
