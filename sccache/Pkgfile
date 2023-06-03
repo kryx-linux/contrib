@@ -4,7 +4,7 @@
 # Depends on: rust
 
 name=sccache
-version=0.5.1
+version=0.5.2
 release=1
 source=(https://github.com/mozilla/sccache/archive/v$version/$name-v$version.tar.gz)
 
@@ -13,8 +13,11 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
+  export CFLAGS+=' -ffat-lto-objects'
+  export LDFLAGS+=' -lzstd'
+
   cargo build --manifest-path $name-$version/Cargo.toml --release \
-    --features all --features native-zlib
+    --features all --features native-zlib,dist-server,all
   cargo install --path $name-$version --root $PKG/usr --no-track \
-    --features all --features native-zlib
+    --frozen --offline --features native-zlib,dist-server,all
 }
