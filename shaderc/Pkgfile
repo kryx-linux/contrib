@@ -1,11 +1,11 @@
-# Description: A collection of tools, libraries and tests for shader compilation.
+# Description: A collection of tools, libraries and tests for shader compilation
 # URL: https://github.com/google/shaderc
 # Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: glslang spirv-tools
 # Optional: asciidoctor
 
 name=shaderc
-version=2023.3
+version=2023.4
 release=1
 source=(https://github.com/google/shaderc/archive/v$version/$name-v$version.tar.gz
 	glslc.1)
@@ -19,8 +19,8 @@ build() {
 "$(prt-get info spirv-tools | awk '/^Version:/ {print $2}')\\n"
 "$(prt-get info glslang | awk '/^Version:/ {print $2}')\\n"
 EOF
-		sed -i -e "s|\$<TARGET_FILE:spirv-dis>|spirv-dis|" \
-			$name-$version/glslc/test/CMakeLists.txt
+	sed -i -e "s|\$<TARGET_FILE:spirv-dis>|spirv-dis|" \
+		$name-$version/glslc/test/CMakeLists.txt
 
 	cmake -S $name-$version -B build -G Ninja $PKGMK_SHADERC \
 		-D CMAKE_INSTALL_PREFIX=/usr \
