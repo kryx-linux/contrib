@@ -4,7 +4,7 @@
 # Depends on: rust
 
 name=sccache
-version=0.5.2
+version=0.5.3
 release=1
 source=(https://github.com/mozilla/sccache/archive/v$version/$name-v$version.tar.gz)
 
@@ -17,7 +17,7 @@ build() {
   export LDFLAGS+=' -lzstd'
 
   cargo build --manifest-path $name-$version/Cargo.toml --release \
-    --features all --features native-zlib,dist-server,all
+    --features native-zlib,dist-server,all
   cargo install --path $name-$version --root $PKG/usr --no-track \
     --frozen --offline --features native-zlib,dist-server,all
 }
