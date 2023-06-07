@@ -19,6 +19,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/bin/node-gyp-bin/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/arborist-cmd.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/base-command.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/cli-entry.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/cli.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/access.js
@@ -87,6 +88,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/version.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/view.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/whoami.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/es6/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/es6/validate-engines.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/lifecycle-cmd.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/npm.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/package-url-cmd.js
@@ -585,8 +588,13 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/chalk/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/templates.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/util.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/utilities.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/vendor/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/vendor/ansi-styles/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/vendor/ansi-styles/index.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/vendor/supports-color/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/vendor/supports-color/browser.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chalk/source/vendor/supports-color/index.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/chownr/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chownr/chownr.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/chownr/package.json
@@ -936,9 +944,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/graceful-fs/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/graceful-fs/legacy-streams.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/graceful-fs/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/graceful-fs/polyfills.js
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/has-flag/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/has-flag/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/has-flag/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/has-unicode/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/has-unicode/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/has-unicode/package.json
@@ -2287,10 +2292,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/strip-ansi-cjs/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/strip-ansi/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/strip-ansi/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/strip-ansi/package.json
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/supports-color/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/supports-color/browser.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/supports-color/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/supports-color/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/tar/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/tar/index.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/tar/lib/
