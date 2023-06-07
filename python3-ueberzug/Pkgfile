@@ -4,12 +4,13 @@
 # Depends on: python3-docopt python3-pillow python3-xlib xorg-libxres
 
 name=python3-ueberzug
-version=18.2.0
+version=18.2.1
 release=1
 source=(https://github.com/ueber-devel/ueberzug/archive/$version/ueberzug-$version.tar.gz)
 
 build() {
   cd ueberzug-$version
+
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
