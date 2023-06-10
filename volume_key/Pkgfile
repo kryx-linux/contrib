@@ -5,14 +5,24 @@
 
 name=volume_key
 version=0.3.12
-release=1
+release=2
 source=(https://releases.pagure.org/$name/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
+
+  autoreconf -fiv
+  find . -name ".pyc" -delete
+
+  export CFLAGS+=" $(/usr/bin/python3-config --includes)"
+
   ./configure \
       --prefix=/usr \
+      --with-python3 \
+      --with-python=no \
       --disable-nls
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
   make
   make DESTDIR=$PKG install
 }
