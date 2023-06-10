@@ -5,14 +5,13 @@
 # Optional: python3-lockfile
 
 name=python3-cachecontrol
-version=0.13.0
+version=0.13.1
 release=1
 source=(https://github.com/ionrock/cachecontrol/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd cachecontrol-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
