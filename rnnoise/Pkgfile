@@ -1,20 +1,21 @@
 # Description: Recurrent neural network for audio noise reduction
-# URL: https://gitlab.xiph.org/xiph/rnnoise
+# URL: https://github.com/xiph/rnnoise
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on:
 
 name=rnnoise
 version=0.4.1
 _commit=1cbdbcf1283499bbb2230a6b0f126eb9b236defd
 release=1
-source=(https://gitlab.xiph.org/xiph/rnnoise/-/archive/$_commit/rnnoise-$_commit.tar.gz)
+source=(https://github.com/xiph/rrnoise/archive/$_commit/rnnoise-$_commit.tar.gz)
 
 build() {
   cd $name-$_commit
+
   ./autogen.sh
   ./configure --prefix=/usr \
     --disable-doc
   make
   make DESTDIR=$PKG install
+
   rm -rf $PKG/usr/share/doc
 }
