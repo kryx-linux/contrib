@@ -4,9 +4,9 @@
 # Depends on: fontconfig-32 freeglut-32 gnutls-32 lcms2-32 mpg123-32 openal-32 prelink xorg-libxcomposite-32 xorg-libxcursor-32 xorg-libxinerama-32 xorg-libxrandr-32 vkd3d-32 mingw-w64-gcc libgcrypt-32
 
 name=wine-staging
-version=8.9.1
+version=8.10
 release=1
-source=(https://dl.winehq.org/wine/source/8.x/wine-${version:0:3}.tar.xz \
+source=(https://dl.winehq.org/wine/source/8.x/wine-${version:0:4}.tar.xz \
 	https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz \
 	https://dl.winehq.org/wine/wine-gecko/2.47.4/wine-gecko-2.47.4-x86.msi \
 	https://dl.winehq.org/wine/wine-gecko/2.47.4/wine-gecko-2.47.4-x86_64.msi \
@@ -15,7 +15,7 @@ source=(https://dl.winehq.org/wine/source/8.x/wine-${version:0:3}.tar.xz \
 build() {
 	# apply staging patches
 	cd $name-$version
-	./staging/patchinstall.py DESTDIR=../wine-${version:0:3} --all
+	./staging/patchinstall.py DESTDIR=../wine-${version:0:4} --all
 	cd ..
 
 	install -d wine32 wine64
@@ -24,7 +24,7 @@ build() {
 
 	cd wine64
 
-	../wine-${version:0:3}/configure \
+	../wine-${version:0:4}/configure \
 		--prefix=/usr \
 		--libdir=/usr/lib \
 		--enable-win64
@@ -39,7 +39,7 @@ build() {
 	LDFLAGS="${LDFLAGS} -m32"
 	export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
 
-	../wine-${version:0:3}/configure \
+	../wine-${version:0:4}/configure \
 		--prefix=/usr \
 		--libdir=/usr/lib32 \
 		--x-includes=/usr/include/X11 \
