@@ -6,12 +6,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy-1.24.3.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.24.3.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.24.3.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.24.3.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.24.3.dist-info/entry_points.txt
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.24.3.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy-1.25.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.25.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.25.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.25.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.25.0.dist-info/entry_points.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy-1.25.0.dist-info/top_level.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__config__.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd
@@ -27,7 +27,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/_version.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/conftest.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/ctypeslib.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/dual.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/dtypes.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/exceptions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/matlib.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/setup.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/__pycache__/version.cpython-310.pyc
@@ -54,7 +55,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/_char_codes.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/_dtype_like.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/_extended_precision.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/_generic_alias.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/_nbit.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/_nested_sequence.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/_scalars.cpython-310.pyc
@@ -66,13 +66,20 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/_typing/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_char_codes.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_dtype_like.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_extended_precision.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_generic_alias.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_nbit.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_nested_sequence.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_scalars.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_shape.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/_ufunc.pyi
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_typing/setup.py
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/_utils/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_utils/__init__.py
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/_utils/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_utils/__pycache__/__init__.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_utils/__pycache__/_inspect.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_utils/__pycache__/_pep440.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_utils/_inspect.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_utils/_pep440.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/_version.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/array_api/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__init__.py
@@ -84,6 +91,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache_
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache__/_data_type_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache__/_dtypes.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache__/_elementwise_functions.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache__/_indexing_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache__/_manipulation_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache__/_searching_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache__/_set_functions.cpython-310.pyc
@@ -99,6 +107,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/array_api/__pycache_
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/_data_type_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/_dtypes.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/_elementwise_functions.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/_indexing_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/_manipulation_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/_searching_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/_set_functions.py
@@ -116,6 +125,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_creation_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_data_type_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_elementwise_functions.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_indexing_functions.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_manipulation_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_set_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_sorting_functions.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__pycache__/test_validation.cpython-310.pyc
@@ -123,6 +134,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/__py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_creation_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_data_type_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_elementwise_functions.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_indexing_functions.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_manipulation_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_set_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_sorting_functions.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/array_api/tests/test_validation.py
@@ -130,12 +143,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/compat/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/compat/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/__pycache__/__init__.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/__pycache__/_inspect.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/__pycache__/_pep440.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/__pycache__/py3k.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/__pycache__/setup.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/_inspect.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/_pep440.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/py3k.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/compat/setup.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/compat/tests/
@@ -223,15 +232,16 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/.doxyfile
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/__multiarray_api.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/__ufunc_api.h
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/_dtype_api.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/_neighborhood_iterator_imp.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/_numpyconfig.h
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/_numpyconfig.h.in
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/arrayobject.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/arrayscalars.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/experimental_dtype_api.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/halffloat.h
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/libdivide/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/libdivide/libdivide.h
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/multiarray_api.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/ndarrayobject.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/ndarraytypes.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/noprefix.h
@@ -250,7 +260,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/l
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/random/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/random/bitgen.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/random/distributions.h
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/ufunc_api.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/ufuncobject.h
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/core/include/numpy/utils.h
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/core/lib/
@@ -457,6 +466,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache_
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache__/exec_command.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache__/extension.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache__/from_template.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache__/fujitsuccompiler.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache__/intelccompiler.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache__/lib2def.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/__pycache__/line_endings.cpython-310.pyc
@@ -488,6 +498,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/cpu_avx512_knl.c
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/cpu_avx512_knm.c
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/cpu_avx512_skx.c
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/cpu_avx512_spr.c
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/cpu_avx512cd.c
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/cpu_avx512f.c
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/checks/cpu_f16c.c
@@ -603,6 +614,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/distutils/fcompiler/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/fcompiler/sun.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/fcompiler/vast.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/from_template.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/fujitsuccompiler.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/intelccompiler.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/lib2def.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/distutils/line_endings.py
@@ -661,7 +673,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/doc/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/doc/__pycache__/ufuncs.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/doc/constants.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/doc/ufuncs.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/dual.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/dtypes.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/dtypes.pyi
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/exceptions.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/exceptions.pyi
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/f2py/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/__init__.pyi
@@ -762,6 +777,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crack
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/foo_deps.f90
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/gh15035.f
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/gh17859.f
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/gh23533.f
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/gh23598.f90
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/gh23598Warn.f90
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/gh2848.f90
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/operators.f90
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/f2py/tests/src/crackfortran/privatemod.f90
@@ -1028,14 +1046,12 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/ma/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__init__.pyi
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/__init__.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/bench.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/core.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/extras.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/mrecords.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/setup.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/testutils.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/__pycache__/timer_comparison.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/bench.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/core.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/core.pyi
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/ma/extras.py
@@ -1243,37 +1259,27 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/testing/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/__init__.pyi
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/testing/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/__pycache__/__init__.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/__pycache__/overrides.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/__pycache__/print_coercion_tables.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/__pycache__/setup.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/__pycache__/utils.cpython-310.pyc
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/__init__.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/decorators.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/extbuild.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/noseclasses.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/nosetester.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/parameterized.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/__pycache__/utils.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/decorators.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/extbuild.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/noseclasses.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/nosetester.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/parameterized.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/utils.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/_private/utils.pyi
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/overrides.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/print_coercion_tables.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/setup.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/__pycache__/__init__.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/__pycache__/test_doctesting.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/__pycache__/test_utils.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/test_doctesting.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/tests/test_utils.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/testing/utils.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/
@@ -1282,6 +1288,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/test_ctypeslib.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/test_lazyloading.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/test_matlib.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/test_numpy_config.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/test_numpy_version.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/test_public_api.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/test_reloading.cpython-310.pyc
@@ -1291,6 +1298,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/test_ctypeslib.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/test_lazyloading.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/test_matlib.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/test_numpy_config.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/test_numpy_version.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/test_public_api.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/tests/test_reloading.py
@@ -1308,7 +1316,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/__pycache__/__init__.cpython-310.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/__pycache__/test_generic_alias.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/__pycache__/test_isfile.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/__pycache__/test_runtime.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/__pycache__/test_typing.cpython-310.pyc
@@ -1482,7 +1489,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/data/re
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/data/reveal/ufuncs.pyi
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/data/reveal/version.pyi
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/data/reveal/warnings_and_errors.pyi
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/test_generic_alias.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/test_isfile.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/test_runtime.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/numpy/typing/tests/test_typing.py
