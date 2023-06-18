@@ -4,15 +4,13 @@
 # Depends on: python3-attrs python3-cryptography python3-idna python3-pyasn1-modules
 
 name=python3-service-identity
-version=21.1.0
+version=23.1.0
 release=1
 source=(https://github.com/pyca/service-identity/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd service-identity-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
