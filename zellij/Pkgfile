@@ -4,14 +4,13 @@
 # Depends on: rust
 
 name=zellij
-version=0.36.0
+version=0.37.0
 release=1
 source=(https://github.com/zellij-org/zellij/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-  mkdir "$PKGMK_SOURCE_DIR/rust" || true
-  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
   cargo build --release --manifest-path $name-$version/Cargo.toml
 
