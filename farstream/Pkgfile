@@ -14,7 +14,16 @@ build() {
 	cd $name-$version
 
 	patch -p1 -i $SRC/farstream-make-4.3.patch
-	./autogen.sh --disable-gtk-doc
+
+	sed -i '/gtk-doc.mak/d;' $(grep -lr gtk-doc.mak)
+	sed -i '/gtk-doc-plugins.mak/d;' $(grep -lr gtk-doc-plugins.mak)
+
+	sed '/parameters for aclocal/a AC_CONFIG_MACRO_DIRS([common/m4])' \
+		-i configure.ac
+
+	aclocal
+	libtoolize -f
+	automake --add-missing
 
 	./configure \
 		--prefix=/usr \
@@ -24,7 +33,4 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
-
-	# gtk-doc is still generated!
-	rm -r $PKG/usr/share/gtk-doc
 }
