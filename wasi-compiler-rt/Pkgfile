@@ -4,7 +4,7 @@
 # Depends on: wasi-libc
 
 name=wasi-compiler-rt
-version=15.0.7
+version=16.0.6
 release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/compiler-rt-$version.src.tar.xz
 	https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz
@@ -18,8 +18,8 @@ build() {
 	install -D WASI.cmake cmake/Platform/WASI.cmake
 
 	cmake -S compiler-rt-$version.src/lib/builtins -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX="/usr/lib/clang/$version" \
-		-D COMPILER_RT_INSTALL_PATH="/usr/lib/clang/$version" \
+		-D CMAKE_INSTALL_PREFIX="/usr/lib/clang/${version%%.*}" \
+		-D COMPILER_RT_INSTALL_PATH="/usr/lib/clang/${version%%.*}" \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -fno-exceptions --sysroot=/usr/share/wasi-sysroot' \
 		-D CMAKE_MODULE_PATH="$SRC/cmake" \
@@ -34,5 +34,5 @@ build() {
 	cmake --build build
 	DESTDIR=$PKG cmake --install build
 
-	/usr/bin/llvm-strip --strip-debug $PKG/usr/lib/clang/$version/lib/wasi/libclang_rt.builtins-wasm32.a
+	/usr/bin/llvm-strip --strip-debug $PKG/usr/lib/clang/${version%%.*}/lib/wasi/libclang_rt.builtins-wasm32.a
 }
