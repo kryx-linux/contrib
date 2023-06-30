@@ -1,18 +1,17 @@
 # Description: A library for manipulating block devices
 # URL: https://github.com/storaged-project/libblockdev
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gobject-introspection libbytesize libyaml ndctl parted volume_key
+# Depends on: gobject-introspection libbytesize libyaml ndctl nvme-cli parted volume_key
 
 name=libblockdev
-version=2.28
+version=3.0
 release=1
-source=(https://github.com/storaged-project/$name/releases/download/$version-1/$name-$version.tar.gz foo.patch)
+source=(https://github.com/storaged-project/$name/releases/download/$version-1/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
   export CFLAGS="${CFLAGS} -Wno-deprecated-declarations"
-  patch -Np1 -i $SRC/foo.patch
   aclocal
   automake
 
