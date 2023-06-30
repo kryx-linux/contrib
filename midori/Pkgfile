@@ -1,12 +1,13 @@
 # Description: Midori is a lightweight web browser.
 # URL: https://www.midori-browser.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: aria2 desktop-file-utils gcr gst-libav gst-plugins-good json-glib libnotify libpeas webkitgtk-40 xorg-libxscrnsaver
+# Maintainer: UNMAINTAINED
+# Depends on: aria2 desktop-file-utils gcr3 gst-libav gst-plugins-good json-glib libnotify libpeas webkitgtk xorg-libxscrnsaver
 
 name=midori
 version=9.0
 release=1
-source=(https://github.com/midori-browser/core/releases/download/v$version/$name-v$version.tar.gz)
+_shasum=0cc28643593f53c47b453838152dcbe35a9a287bff38bda830844eb8f321a4f48c99b21e16a9b07bebdd0abc936d88fd759c3222a36325aa667a28ae00148be3
+source=(https://src.fedoraproject.org/repo/pkgs/$name/$name-v$version.tar.gz/sha512/$_shasum/$name-v$version.tar.gz)
 
 build() {
 	cmake -S $name-v$version -B build -G Ninja \
