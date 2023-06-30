@@ -1,0 +1,10 @@
+# Scorched3D: known issues
+
+xorg-server is needed to play this game, but not to build it. Scorched3D is
+linked against libsdl 1.2, which unlike SDL2 does not support newer video
+protocols. A pure-Wayland desktop can launch the server (scorched3ds), but
+not the client (scorched3dc) which relies on an Xorg-compatible build of
+glew.
+
+It is normal to encounter WxGtk errors when first launching scorched3d.
+Click through, and you should be able to reach the settings menu.

@@ -1,44 +1,36 @@
 # Description: A 3D recreation of the classic DOS game Scorched Earth.
-# URL: http://www.scorched3d.co.uk/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: dos2unix fftw freealut glew sdl_mixer sdl_net wxgtk3
+# URL: https://github.com/jjaxse2017/scorched-earth-3d
+# Maintainer: UNMAINTAINED
+# Depends on: fftw freealut glew sdl_mixer sdl_net wxgtk3 p7zip
 
 name=scorched3d
 version=44
-release=1
-source=(https://sourceforge.net/projects/scorched3d/files/scorched3d/Version%2044/Scorched3D-$version-src.tar.gz
-	# https://gitweb.gentoo.org/repo/gentoo.git/tree/games-strategy/scorched3d/files
-	scorched3d-44-fix-c++14.patch scorched3d-44-fixups.patch scorched3d-44-freetype.patch
-	scorched3d-44-gcc43.patch scorched3d-44-jpeg9.patch scorched3d-44-odbc.patch scorched3d-44-win32.patch
-	scorched3d-44-wxgtk.patch)
+release=2
+source=(https://github.com/jjaxse2017/scorched-earth-3d/archive/x86_64_gcc_7/$name-$version-src.tar.gz)
 
 build() {
-	cd scorched
-	patch -Np1 -i $SRC/scorched3d-44-fixups.patch
-	patch -Np1 -i $SRC/scorched3d-44-gcc43.patch
-	patch -Np1 -i $SRC/scorched3d-44-odbc.patch
-	patch -Np1 -i $SRC/scorched3d-44-win32.patch
-	patch -Np1 -i $SRC/scorched3d-44-freetype.patch
-	patch -Np1 -i $SRC/scorched3d-44-jpeg9.patch
-	patch -Np1 -i $SRC/scorched3d-44-fix-c++14.patch
-	#patch -Np1 -i $SRC/scorched3d-44-wxgtk.patch
+	cd scorched-earth-3d-*/data/globalmods
+	7z x apoc.7z
+	7z x none.7z.001
+	cd ../..
 
-#	dos2unix \
-#		src/launcher/wxdialogs/SettingsDialog.cpp \
-#		src/launcher/wxdialogs/DisplayDialog.cpp \
-#		src/launcher/wxdialogs/Display.cpp \
-#		src/launcher/wxdialogs/KeyDialog.cpp
+	# accommodate the new wxgtk function signatures
+	sed -e '/SetTickFreq/s/4, 0/4/' \
+	    -i src/launcher/wxdialogs/DisplayDialog.cpp
+	
+	# update the version string, and respect the syntax expected by test
+	sed -e '/ VERSION=43/s/43/44/; /test/s/== /= /g' -i configure
 
-#	autoreconf -fvi --no-recursive
-
-CONFIG_SHELL=/bin/bash \
-	./configure \
+	# configure using pkgconf, not the deprecated freetype-config
+	FT2_CONFIG="/usr/bin/pkgconf freetype2" \
+		/bin/bash ./configure \
 		--prefix=/usr \
 		--datadir=/usr/share/scorched3d \
 		--with-wx-config=/usr/bin/wx-config-gtk3 \
 		--without-pgsql \
+		--disable-freetypetest \
 		--disable-dependency-tracking
-  SHELL=/bin/bash \
+
 	make
 	make DESTDIR=$PKG install
 	rm -r $PKG/usr/share/scorched3d/documentation
