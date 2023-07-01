@@ -1,11 +1,7 @@
-For h.264 support you will need to install the additional port:
+For sandboxing webapps you will need to install the additional ports:
+wasi-libc
+wasi-compiler-rt
+wasi-libc++
 
-contrib/ffmpeg
-
-For hardware video playback:
-
-about:config
-
-media.glvideo.enabled=true
-
-https://github.com/servo/servo/pull/23483 -> Media player rendering with GL textures by ceyusa
+If you compile firefox frequently, consider installing ccache and sccache,
+so that later updates can use the artifacts left over from previous builds.

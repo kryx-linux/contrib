@@ -1,140 +1,139 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: aom autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libevent libnotify libvpx libwebp libxkbcommon nodejs nss pulseaudio unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
 # Optional: sccache lld wasi-libc++ alsa-lib jack pipewire 
 
 name=firefox
-version=114.0.2
+version=115.0
 release=1
-source=(https://archive.mozilla.org/pub/firefox/releases/$version/source/$name-$version.source.tar.xz
-	firefox.desktop
-	node-stdout-nonblocking-wrapper)
+source=(https://ftp.mozilla.org/pub/firefox/releases/${version}esr/source/$name-${version}esr.source.tar.xz
+  firefox.desktop
+  node-stdout-nonblocking-wrapper)
 
 _clear_vendor_checksums() {
-	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/$1/.cargo-checksum.json
+  sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/$1/.cargo-checksum.json
 }
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	#for p in $SRC/*.patch; do
-	#	patch -p1 -i $p
-	#done
+  #for p in $SRC/*.patch; do
+  #	patch -p1 -i $p
+  #done
 
-	local clangVer=$(/usr/bin/clang -dumpversion)
-	local cruxVer=$(/usr/bin/crux | cut -d' ' -f3)
+  if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
+  	printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
+  	exit 1
+  fi
 
-	if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
-		printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
-		exit 1
-	fi
-
-	if [ -e '/usr/bin/ccache' ]; then
-		export OS_CCACHE_COMPILERCHECK="$clangVer $cruxVer"
-		export CCACHE_COMPILERCHECK="string:$OS_CCACHE_COMPILERCHECK"
-		PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
-	fi
-
-	prt-get isinst sccache && export RUSTC_WRAPPER='/usr/bin/sccache'
-	mkdir -p "$PKGMK_SOURCE_DIR/rust"
-	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+  prt-get isinst sccache && export RUSTC_WRAPPER='/usr/bin/sccache'
+  mkdir -p "$PKGMK_SOURCE_DIR/rust"
+  export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
 cat <<- EOF > .mozconfig
-	export NODEJS="$SRC/node-stdout-nonblocking-wrapper"
-	mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-shared
-	unset MOZ_TELEMETRY_REPORTING
-	ac_add_options --prefix=/usr
-	ac_add_options --enable-application=browser
-	#ac_add_options --with-system-harfbuzz
-	#ac_add_options --with-system-graphite2
-	#ac_add_options --with-system-av1
-	ac_add_options --with-system-jpeg
-	ac_add_options --with-system-zlib
-	ac_add_options --with-system-png
-	ac_add_options --with-system-nspr
-	ac_add_options --with-system-nss
-	ac_add_options --with-system-libevent
-	ac_add_options --with-system-libvpx
-	ac_add_options --with-system-webp
-	ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot
-	ac_add_options --enable-av1
-	ac_add_options --enable-system-ffi
-	ac_add_options --enable-system-pixman
-	ac_add_options --enable-optimize
-	ac_add_options --enable-release
-	ac_add_options --enable-rust-simd
-	ac_add_options --enable-sandbox
-	ac_add_options --enable-official-branding
-	ac_add_options --with-distribution-id=nu.crux
-	ac_add_options --enable-lto=thin
-	ac_add_options --disable-tests
-	ac_add_options --disable-debug-symbols
-	ac_add_options --disable-updater
-	ac_add_options --disable-crashreporter
-	ac_add_options --disable-necko-wifi
-	ac_add_options --disable-parental-controls
-	ac_add_options --disable-elf-hack
+  export NODEJS="$SRC/node-stdout-nonblocking-wrapper"
+  mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-shared
+  unset MOZ_TELEMETRY_REPORTING
+  ac_add_options --prefix=/usr
+  ac_add_options --enable-application=browser
+  #ac_add_options --with-system-harfbuzz
+  #ac_add_options --with-system-graphite2
+  #ac_add_options --with-system-av1
+  ac_add_options --with-system-jpeg
+  ac_add_options --with-system-zlib
+  ac_add_options --with-system-png
+  ac_add_options --with-system-nspr
+  ac_add_options --with-system-nss
+  ac_add_options --with-system-libevent
+  ac_add_options --with-system-libvpx
+  ac_add_options --with-system-webp
+  ac_add_options --enable-av1
+  ac_add_options --enable-pulseaudio
+  ac_add_options --enable-system-ffi
+  ac_add_options --enable-system-pixman
+  ac_add_options --enable-optimize
+  ac_add_options --enable-release
+  ac_add_options --enable-rust-simd
+  ac_add_options --enable-sandbox
+  ac_add_options --enable-official-branding
+  ac_add_options --with-distribution-id=nu.crux
+  ac_add_options --enable-lto=thin
+  ac_add_options --disable-tests
+  ac_add_options --disable-debug-symbols
+  ac_add_options --disable-updater
+  ac_add_options --disable-crashreporter
+  ac_add_options --disable-necko-wifi
+  ac_add_options --disable-parental-controls
+  ac_add_options --disable-elf-hack
 EOF
 
-	# audio
-	prt-get isinst alsa-lib && echo 'ac_add_options --enable-alsa' >> .mozconfig
-	prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig
-	prt-get isinst pulseaudio && echo 'ac_add_options --enable-pulseaudio' >> .mozconfig
+  # audio
+  prt-get isinst alsa-lib && echo 'ac_add_options --enable-alsa' >> .mozconfig
+  prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig
 
-	prt-get isinst wayland-protocols && \
-		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
-		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3' >> .mozconfig
+  prt-get isinst wayland-protocols && \
+  	echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
+  	echo 'ac_add_options --enable-default-toolkit=cairo-gtk3' >> .mozconfig
 
-	# use gold linker, if present
-	prt-get isinst lld && \
-		{ echo 'ac_add_options --enable-linker=lld' >> .mozconfig;
-		  export LDFLAGS+=" -Wl,--thinlto-jobs=$((JOBS / 2))"; } || \
-		echo 'ac_add_options --enable-linker=bfd' >> .mozconfig
+  # use llvm linker, if present
+  prt-get isinst lld && \
+  	{ echo 'ac_add_options --enable-linker=lld' >> .mozconfig;
+  	  export LDFLAGS+=" -Wl,--thinlto-jobs=$((JOBS / 2))"; } || \
+  	echo 'ac_add_options --enable-linker=bfd' >> .mozconfig
 
-	# sandboxed web apps
-	[ -e /usr/lib/clang/${clangVer%%.*}/lib/wasi/libclang_rt.builtins-wasm32.a ] \
-		|| echo 'ac_add_options --without-wasm-sandboxed-libraries' >> .mozconfig
+  local clangVer=$(/usr/bin/clang -dumpversion)
+  local cruxVer=$(/usr/bin/crux | cut -d' ' -f3)
 
-	[[ -e '/usr/bin/ccache' ]] && echo 'ac_add_options --enable-ccache' >> .mozconfig
+  # sandboxed web apps
+  [ -e /usr/lib/clang/${clangVer%%.*}/lib/wasi/libclang_rt.builtins-wasm32.a ] && \
+  echo 'ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot' >> .mozconfig \
+     || echo 'ac_add_options --without-wasm-sandboxed-libraries' >> .mozconfig
 
-	export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib RUSTFLAGS="-C opt-level=2 $RUSTFLAGS"
-	export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
-	export MOZBUILD_STATE_PATH="$SRC"/mozbuild
+  if [ -e '/usr/bin/ccache' ]; then
+     echo 'ac_add_options --enable-ccache' >> .mozconfig
+     export OS_CCACHE_COMPILERCHECK="$clangVer $cruxVer"
+     export CCACHE_COMPILERCHECK="string:$OS_CCACHE_COMPILERCHECK"
+     PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+  fi
 
-	# Disable notification when build system has finished
-	export MOZ_NOSPAM=1
+  export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib RUSTFLAGS="-C opt-level=2 $RUSTFLAGS"
+  export MOZ_MAKE_FLAGS="-j ${JOBS-1}"
+  export MOZBUILD_STATE_PATH="$SRC"/mozbuild
 
-	# Use system's Python environment
-	export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
-	#export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
-	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
-	mkdir $SRC/bin
-	ln -s /usr/bin/pip3 $SRC/bin/pip
-	ln -s /usr/bin/python3 $SRC/bin/python
-	export PATH="$SRC/bin:$PATH"
+  # Disable notification when build system has finished
+  export MOZ_NOSPAM=1
 
-	# Show flags set at the beginning
-	echo "Current BINDGEN_CFLAGS:\t${BINDGEN_CFLAGS:-no value set}"
-	echo "Current CFLAGS:\t\t${CFLAGS:-no value set}"
-	echo "Current CXXFLAGS:\t\t${CXXFLAGS:-no value set}"
-	echo "Current LDFLAGS:\t\t${LDFLAGS:-no value set}"
-	echo "Current RUSTFLAGS:\t\t${RUSTFLAGS:-no value set}"
+  # Use system's Python environment
+  export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
+  #export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
+  export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
+  mkdir $SRC/bin
+  ln -s /usr/bin/pip3 $SRC/bin/pip
+  ln -s /usr/bin/python3 $SRC/bin/python
+  export PATH="$SRC/bin:$PATH"
 
-	# python/mach/mach/mixin/process.py fails to detect SHELL
-	export SHELL='/usr/bin/bash'
+  # Show flags set at the beginning
+  echo "Current BINDGEN_CFLAGS:\t${BINDGEN_CFLAGS:-no value set}"
+  echo "Current CFLAGS:\t\t${CFLAGS:-no value set}"
+  echo "Current CXXFLAGS:\t\t${CXXFLAGS:-no value set}"
+  echo "Current LDFLAGS:\t\t${LDFLAGS:-no value set}"
+  echo "Current RUSTFLAGS:\t\t${RUSTFLAGS:-no value set}"
 
-	./mach build
-	#./mach build toolkit/library/rust
-	DESTDIR=$PKG ./mach install
+  # python/mach/mach/mixin/process.py fails to detect SHELL
+  export SHELL='/usr/bin/bash'
 
-	install -d $PKG/usr/share/pixmaps
-	ln -s /usr/lib/firefox/browser/chrome/icons/default/default48.png $PKG/usr/share/pixmaps/firefox.png
-	install -D -m 0644 $SRC/firefox.desktop $PKG/usr/share/applications/firefox.desktop
-	# Remove crap
-	rm -r $PKG/usr/lib/firefox/browser/features
-	rm $PKG/usr/lib/firefox/removed-files
+  ./mach build
+  #./mach build toolkit/library/rust
+  DESTDIR=$PKG ./mach install
 
-	install -d $PKG/etc/revdep.d
-	echo "/usr/lib/firefox" > $PKG/etc/revdep.d/firefox
+  install -d $PKG/usr/share/pixmaps
+  ln -s /usr/lib/firefox/browser/chrome/icons/default/default48.png $PKG/usr/share/pixmaps/firefox.png
+  install -D -m 0644 $SRC/firefox.desktop $PKG/usr/share/applications/firefox.desktop
+  # Remove crap
+  rm -r $PKG/usr/lib/firefox/browser/features
+  rm $PKG/usr/lib/firefox/removed-files
+
+  install -d $PKG/etc/revdep.d
+  echo "/usr/lib/firefox" > $PKG/etc/revdep.d/firefox
 }
