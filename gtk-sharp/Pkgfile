@@ -1,20 +1,25 @@
 # Description:  C# bindings for GTK
 # URL: https://www.mono-project.com/docs/gui/gtksharp/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: libglade mono
+# Depends on: glade gtk mono
 
 name=gtk-sharp
 version=2.12.45
-release=3
+release=4
 source=(https://download.mono-project.com/sources/${name}212/gtk-sharp-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   sed -e 's/SUBDIRS = test/SUBDIRS =/g' -i sample/Makefile.am
   sed -e 's/SUBDIRS = test/SUBDIRS =/g' -i sample/Makefile.in
+
+  autoreconf -fvi
+
   ./configure --prefix=/usr \
     --disable-static
   make
+
   make DESTDIR=$PKG \
     PREFIX=/usr \
     MANDIR=/usr/share/man \
