@@ -1,44 +1,18 @@
-Upstream: Should be
-Reason: Use pkgconfig to find luajit
-
-diff --git a/cmake/Modules/FindLuaJIT.cmake b/cmake/Modules/FindLuaJIT.cmake
-index 0d0786e..3ab8602 100644
---- a/cmake/Modules/FindLuaJIT.cmake
-+++ b/cmake/Modules/FindLuaJIT.cmake
-@@ -1,55 +1,72 @@
-+# - Try to find LuaJIT
-+# Once done this will define
-+#
-+#  LUAJIT_FOUND - system has LuaJIT
-+#  LUAJIT_INCLUDE_DIR - the LuaJIT include directory
-+#  LUAJIT_LIBRARIES - Link these to use LuaJIT
-+#  LUAJIT_DEFINITIONS - Compiler switches required for using LuaJIT
-+#
- #=============================================================================
--# Copyright 2007-2009 Kitware, Inc.
--# Copyright 2013 Rolf Eike Beer <eike@sf-mail.de>
-+#  Copyright (c) 2016 Andrea Schneider <asn@cryptomilk.org>
- #
--# Distributed under the OSI-approved BSD License (the "License");
--# see accompanying file Copyright.txt for details.
-+#  Distributed under the OSI-approved BSD License (the "License");
-+#  see accompanying file Copyright.txt for details.
- #
--# This software is distributed WITHOUT ANY WARRANTY; without even the
--# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
--# See the License for more information.
-+#  This software is distributed WITHOUT ANY WARRANTY; without even the
-+#  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-+#  See the License for more information.
+diff -Naur luv-1.45.0-0.orig/cmake/Modules/FindLuaJIT.cmake luv-1.45.0-0/cmake/Modules/FindLuaJIT.cmake
+--- luv-1.45.0-0.orig/cmake/Modules/FindLuaJIT.cmake	2023-07-02 20:42:04.879145563 +0200
++++ luv-1.45.0-0/cmake/Modules/FindLuaJIT.cmake	2023-07-02 20:47:02.921598475 +0200
+@@ -9,47 +9,54 @@
+ # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ # See the License for more information.
  #=============================================================================
 -# We use code from the CMake project to detect the Lua version.
--
+ 
 -# Locate LuaJIT library
 -# This module defines
 -#  LUAJIT_FOUND, if false, do not try to link to Lua JIT
 -#  LUAJIT_LIBRARIES
 -#  LUAJIT_INCLUDE_DIR, where to find lua.h
- #
+-#
 -# Additionally it defines the Lua API/ABI version:
 -#  LUA_VERSION_STRING - the version of Lua found
 -#  LUA_VERSION_MAJOR  - the major version of Lua
@@ -69,13 +43,6 @@ index 0d0786e..3ab8602 100644
 -        string(REGEX REPLACE "^[0-9]+\\.([0-9]+)[0-9.]*$" "\\1" LUA_VERSION_MINOR "${LUA_VERSION_STRING}")
 -        string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]).*" "\\1" LUA_VERSION_PATCH "${LUA_VERSION_STRING}")
 -    endif ()
--
--    unset(lua_version_strings)
--endif()
--
--INCLUDE(FindPackageHandleStandardArgs)
--FIND_PACKAGE_HANDLE_STANDARD_ARGS(LUAJIT DEFAULT_MSG LUAJIT_LIBRARIES LUAJIT_INCLUDE_DIR)
-+
 +if (UNIX)
 +  find_package(PkgConfig)
 +  if (PKG_CONFIG_FOUND)
@@ -120,11 +87,13 @@ index 0d0786e..3ab8602 100644
 +        ${LUAJIT_LIBRARY}
 +    )
 +endif (LUAJIT_LIBRARY)
-+
+ 
+-    unset(lua_version_strings)
+-endif()
 +include(FindPackageHandleStandardArgs)
 +find_package_handle_standard_args(LuaJIT DEFAULT_MSG LUAJIT_LIBRARIES LUAJIT_INCLUDE_DIR)
-+
+ 
+-INCLUDE(FindPackageHandleStandardArgs)
+-FIND_PACKAGE_HANDLE_STANDARD_ARGS(LuaJIT DEFAULT_MSG LUAJIT_LIBRARIES LUAJIT_INCLUDE_DIR)
 +# show the LUAJIT_INCLUDE_DIR and LUAJIT_LIBRARIES variables only in the advanced view
 +mark_as_advanced(LUAJIT_INCLUDE_DIR LUAJIT_LIBRARIES)
-+
-+
