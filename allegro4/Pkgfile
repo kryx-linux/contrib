@@ -1,7 +1,7 @@
 # Description: A multi-platform game programming library for C/C++.
 # URL: https://liballeg.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: alsa-lib glu libidn libpng libvorbis xorg-libxcursor xorg-libxpm xorg-libxxf86dga
+# Maintainer: UNMAINTAINED
+# Depends on: alsa-lib glu libpng libvorbis xorg-libxcursor xorg-libxpm
 
 name=allegro4
 version=4.4.3.1
@@ -22,4 +22,5 @@ build() {
 
 	install -Dm644 allegro-$version/misc/allegro.m4 \
 		$PKG/usr/share/aclocal/allegro.m4
+	rm -rf $PKG/usr/doc
 }
