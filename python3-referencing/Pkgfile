@@ -1,0 +1,15 @@
+# Description: An implementation-agnostic implementation of JSON reference resolution
+# URL: https://pypi.org/project/referencing/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: python3-rpds-py python3-hatch-vcs
+
+name=python3-referencing
+version=0.29.1
+release=1
+source=(https://pypi.python.org/packages/source/r/referencing/referencing-$version.tar.gz)
+
+build() {
+	cd referencing-$version
+	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+	PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+}
