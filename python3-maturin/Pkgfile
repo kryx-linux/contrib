@@ -1,0 +1,15 @@
+# Description: Build and publish crates with pyo3, rust-cpython and cffi bindings as well as rust binaries as python packages
+# URL: https://pypi.org/project/maturin/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: python3-setuptools-rust
+
+name=python3-maturin
+version=1.1.0
+release=1
+source=(https://pypi.python.org/packages/source/m/maturin/maturin-$version.tar.gz)
+
+build() {
+	cd maturin-$version
+	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+	PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+}
