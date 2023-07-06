@@ -1,0 +1,15 @@
+# Description: The JSON Schema meta-schemas and vocabularies, exposed as a Registry
+# URL: https://pypi.org/project/jsonschema-specifications/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: python3-build python3-hatchling
+
+name=python3-jsonschema-specifications
+version=2023.6.1
+release=1
+source=(https://pypi.python.org/packages/source/j/jsonschema-specifications/jsonschema_specifications-$version.tar.gz)
+
+build() {
+	cd jsonschema_specifications-$version
+	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+	PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+}
