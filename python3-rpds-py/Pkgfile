@@ -1,0 +1,15 @@
+# Description: Python bindings to the Rust rpds crate
+# URL: https://pypi.org/project/rpds-py/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: python3-build python3-maturin
+
+name=python3-rpds-py
+version=0.8.8
+release=1
+source=(https://pypi.python.org/packages/source/r/rpds-py/rpds_py-$version.tar.gz)
+
+build() {
+	cd rpds_py-$version
+	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+	PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+}
