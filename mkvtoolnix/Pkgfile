@@ -1,32 +1,32 @@
 # Description: Tools to create, alter and inspect Matroska files.
 # URL: https://mkvtoolnix.download/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: boost cmark docbook-xsl flac fmt libdvdread libmatroska nlohmann-json pugixml qt6-multimedia qt6-svg qt6-tools ruby
 # Optional: hicolor-icon-theme
 
 name=mkvtoolnix
-version=77.0
+version=78.0
 release=1
 source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	rm -rf lib/{fmt,libebml,libmatroska,nlohmann-json,pugixml}
+  rm -rf lib/{fmt,libebml,libmatroska,nlohmann-json,pugixml}
 
-	./autogen.sh
-	./configure $PKGMK_MKVTOOLNIX \
-		--prefix=/usr \
-		--enable-qt6 \
-		--with-qmake=/usr/lib/qt6/bin/qmake6 \
-		--disable-optimization \
-		--disable-precompiled-headers \
-		--disable-update-check \
-		--disable-qt5
+  ./autogen.sh
+  ./configure $PKGMK_MKVTOOLNIX \
+    --prefix=/usr \
+    --enable-qt6 \
+    --with-qmake=/usr/lib/qt6/bin/qmake6 \
+    --disable-optimization \
+    --disable-precompiled-headers \
+    --disable-update-check \
+    --disable-qt5
 
-	rake --multitask --jobs=${JOBS-1}
-	rake DESTDIR=$PKG install
+  rake --multitask --jobs=${JOBS-1}
+  rake DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/locale
-	rm -rf $PKG/usr/share/doc
+  rm -r $PKG/usr/share/locale
+  rm -rf $PKG/usr/share/doc
 }
