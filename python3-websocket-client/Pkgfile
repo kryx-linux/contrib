@@ -1,18 +1,18 @@
 # Description: WebSocket client library for Python.
 # URL: https://github.com/liris/websocket-client
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot dey
 # Depends on: python3-setuptools python3-six
 
 name=python3-websocket-client
-version=1.5.2
+version=1.6.1
 release=1
 source=(https://pypi.python.org/packages/source/w/websocket-client/websocket-client-$version.tar.gz)
 
 build() {
-	cd websocket-client-$version
+  cd websocket-client-$version
 
-	sed -i "s/'backports.ssl_match_hostname'//" setup.py
+  sed -i "s/'backports.ssl_match_hostname'//" setup.py
 
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --root=$PKG --optimize=1
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
 }
