@@ -1,33 +1,33 @@
 # Description: A C wrapper and Python bindings library for GnuPG
 # URL: https://www.gnupg.org/related_software/gpgme/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: gnupg swig python3-setuptools
 
 name=gpgme
-version=1.20.0
+version=1.21.0
 release=1
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	export PYTHON='/usr/bin/python3'
-	./configure \
-		--prefix=/usr \
-		--disable-fd-passing \
-		--disable-gpgsm-test \
-		--enable-languages='cl cpp python'
+  export PYTHON='/usr/bin/python3'
+  ./configure \
+    --prefix=/usr \
+    --disable-fd-passing \
+    --disable-gpgsm-test \
+    --enable-languages='cl cpp python'
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	cd lang/python
-	make DESTDIR=$PKG install
+  cd lang/python
+  make DESTDIR=$PKG install
 
-	install -d $PKG/usr/etc/gpgme
-	echo 'c cl cpp' > $PKG/usr/etc/gpgme/base
-	echo 'python3' > $PKG/usr/etc/gpgme/python
+  install -d $PKG/usr/etc/gpgme
+  echo 'c cl cpp' > $PKG/usr/etc/gpgme/base
+  echo 'python3' > $PKG/usr/etc/gpgme/python
 
-	rm -r $PKG/usr/share/info
-	rm -rf $PKG/usr/lib/python2.7
+  rm -r $PKG/usr/share/info
+  #rm -rf $PKG/usr/lib/python2.7
 }
