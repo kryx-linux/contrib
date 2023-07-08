@@ -1,0 +1,1546 @@
+From 9f92d3414458346dfab644b89925913042e609f4 Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Fri, 10 Mar 2023 17:07:00 +0100
+Subject: [PATCH 1/9] Whitespace fix
+
+---
+ .../mono/libayatana-appindicator-api.metadata |  34 +-
+ .../libayatana-appindicator3-api.metadata     |  34 +-
+ tests/test-libappindicator-dbus-server.c      |  32 +-
+ tests/test-libappindicator-status-server.c    |  58 +-
+ tests/test-libappindicator.c                  | 546 +++++++++---------
+ 5 files changed, 352 insertions(+), 352 deletions(-)
+
+diff --git a/bindings/mono/libayatana-appindicator-api.metadata b/bindings/mono/libayatana-appindicator-api.metadata
+index e610c88b..ecceaf16 100644
+--- a/bindings/mono/libayatana-appindicator-api.metadata
++++ b/bindings/mono/libayatana-appindicator-api.metadata
+@@ -1,22 +1,22 @@
+ <?xml version="1.0"?>
+ <metadata>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']" name="name">ApplicationIndicator</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="name">NewAttentionIcon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="cname">new-attention-icon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="name">NewStatus</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="cname">new-status</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="name">NewLabel</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="cname">new-label</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="name">NewAccessibleDesc</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="cname">new-accessible-desc</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="name">ConnectionChanged</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="cname">connection-changed</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="name">ScrollEvent</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="cname">scroll-event</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="name">NewIcon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="cname">new-icon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="name">NewIconThemePath</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="cname">new-icon-theme-path</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']" name="name">ApplicationIndicator</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="name">NewAttentionIcon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="cname">new-attention-icon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="name">NewStatus</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="cname">new-status</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="name">NewLabel</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="cname">new-label</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="name">NewAccessibleDesc</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="cname">new-accessible-desc</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="name">ConnectionChanged</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="cname">connection-changed</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="name">ScrollEvent</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="cname">scroll-event</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="name">NewIcon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="cname">new-icon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="name">NewIconThemePath</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="cname">new-icon-theme-path</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ID_S']" name="name">ID</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_CATEGORY_S']" name="hidden">true</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_STATUS_S']" name="hidden">true</attr>
+diff --git a/bindings/mono/libayatana-appindicator3-api.metadata b/bindings/mono/libayatana-appindicator3-api.metadata
+index e610c88b..ecceaf16 100644
+--- a/bindings/mono/libayatana-appindicator3-api.metadata
++++ b/bindings/mono/libayatana-appindicator3-api.metadata
+@@ -1,22 +1,22 @@
+ <?xml version="1.0"?>
+ <metadata>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']" name="name">ApplicationIndicator</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="name">NewAttentionIcon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="cname">new-attention-icon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="name">NewStatus</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="cname">new-status</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="name">NewLabel</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="cname">new-label</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="name">NewAccessibleDesc</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="cname">new-accessible-desc</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="name">ConnectionChanged</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="cname">connection-changed</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="name">ScrollEvent</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="cname">scroll-event</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="name">NewIcon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="cname">new-icon</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="name">NewIconThemePath</attr>
+-	<attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="cname">new-icon-theme-path</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']" name="name">ApplicationIndicator</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="name">NewAttentionIcon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_attention_icon']" name="cname">new-attention-icon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="name">NewStatus</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="cname">new-status</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="name">NewLabel</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="cname">new-label</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="name">NewAccessibleDesc</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="cname">new-accessible-desc</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="name">ConnectionChanged</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="cname">connection-changed</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="name">ScrollEvent</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="cname">scroll-event</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="name">NewIcon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon']" name="cname">new-icon</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="name">NewIconThemePath</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_icon_theme_path']" name="cname">new-icon-theme-path</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ID_S']" name="name">ID</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_CATEGORY_S']" name="hidden">true</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_STATUS_S']" name="hidden">true</attr>
+diff --git a/tests/test-libappindicator-dbus-server.c b/tests/test-libappindicator-dbus-server.c
+index 744ac0ec..affa5eae 100644
+--- a/tests/test-libappindicator-dbus-server.c
++++ b/tests/test-libappindicator-dbus-server.c
+@@ -30,33 +30,33 @@ static GMainLoop * mainloop = NULL;
+ gboolean
+ kill_func (gpointer userdata)
+ {
+-	g_main_loop_quit(mainloop);
+-	return FALSE;
++    g_main_loop_quit(mainloop);
++    return FALSE;
+ }
+ 
+ gint
+ main (gint argc, gchar * argv[])
+ {
+-	gtk_init(&argc, &argv);
++    gtk_init(&argc, &argv);
+ 
+-	AppIndicator * ci = app_indicator_new (TEST_ID, TEST_ICON_NAME, TEST_CATEGORY);
++    AppIndicator * ci = app_indicator_new (TEST_ID, TEST_ICON_NAME, TEST_CATEGORY);
+ 
+-	app_indicator_set_status (ci, TEST_STATE);
+-	app_indicator_set_attention_icon (ci, TEST_ATTENTION_ICON_NAME);
++    app_indicator_set_status (ci, TEST_STATE);
++    app_indicator_set_attention_icon (ci, TEST_ATTENTION_ICON_NAME);
+ 
+-	GtkMenu * menu = GTK_MENU(gtk_menu_new());
+-	GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Label"));
+-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), GTK_WIDGET(item));
++    GtkMenu * menu = GTK_MENU(gtk_menu_new());
++    GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Label"));
++    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GTK_WIDGET(item));
+ 
+-	app_indicator_set_menu(ci, menu);
++    app_indicator_set_menu(ci, menu);
+ 
+-	g_timeout_add_seconds(2, kill_func, NULL);
++    g_timeout_add_seconds(2, kill_func, NULL);
+ 
+-	mainloop = g_main_loop_new(NULL, FALSE);
+-	g_main_loop_run(mainloop);
++    mainloop = g_main_loop_new(NULL, FALSE);
++    g_main_loop_run(mainloop);
+ 
+-	g_object_unref(G_OBJECT(ci));
+-	g_debug("Quiting");
++    g_object_unref(G_OBJECT(ci));
++    g_debug("Quiting");
+ 
+-	return 0;
++    return 0;
+ }
+diff --git a/tests/test-libappindicator-status-server.c b/tests/test-libappindicator-status-server.c
+index 9674f61e..72ffcdde 100644
+--- a/tests/test-libappindicator-status-server.c
++++ b/tests/test-libappindicator-status-server.c
+@@ -33,57 +33,57 @@ static GDBusConnection * connection = NULL;
+ static gboolean
+ times_up (gpointer unused G_GNUC_UNUSED)
+ {
+-	g_dbus_connection_flush_sync (connection, NULL, NULL);
+-	g_clear_object (&connection);
++    g_dbus_connection_flush_sync (connection, NULL, NULL);
++    g_clear_object (&connection);
+ 
+-	g_main_loop_quit (mainloop);
+-	return G_SOURCE_REMOVE;
++    g_main_loop_quit (mainloop);
++    return G_SOURCE_REMOVE;
+ }
+ 
+ gboolean
+ toggle (gpointer userdata)
+ {
+-	const AppIndicatorStatus new_status = active ? APP_INDICATOR_STATUS_ATTENTION
++    const AppIndicatorStatus new_status = active ? APP_INDICATOR_STATUS_ATTENTION
+                                                  : APP_INDICATOR_STATUS_ACTIVE;
+-	app_indicator_set_status (APP_INDICATOR(userdata), new_status);
+-	++toggle_count;
+-	active = !active;
++    app_indicator_set_status (APP_INDICATOR(userdata), new_status);
++    ++toggle_count;
++    active = !active;
+ 
+-	if (toggle_count == 100) {
+-		g_timeout_add (100, times_up, NULL);
+-		return G_SOURCE_REMOVE;
+-	}
++    if (toggle_count == 100) {
++        g_timeout_add (100, times_up, NULL);
++        return G_SOURCE_REMOVE;
++    }
+ 
+-	return G_SOURCE_CONTINUE;
++    return G_SOURCE_CONTINUE;
+ }
+ 
+ gint
+ main (gint argc, gchar * argv[])
+ {
+-	gtk_init(&argc, &argv);
++    gtk_init(&argc, &argv);
+ 
+-	g_usleep(100000);
++    g_usleep(100000);
+ 
+-	connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+-	g_debug("DBus Name: %s", g_dbus_connection_get_unique_name (connection));
++    connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
++    g_debug("DBus Name: %s", g_dbus_connection_get_unique_name (connection));
+ 
+-	AppIndicator * ci = app_indicator_new ("my-id", "my-icon-name", APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+-	app_indicator_set_attention_icon (ci, "my-attention-icon");
++    AppIndicator * ci = app_indicator_new ("my-id", "my-icon-name", APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++    app_indicator_set_attention_icon (ci, "my-attention-icon");
+ 
+-	GtkMenu * menu = GTK_MENU(gtk_menu_new());
+-	GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Label"));
+-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), GTK_WIDGET(item));
++    GtkMenu * menu = GTK_MENU(gtk_menu_new());
++    GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Label"));
++    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GTK_WIDGET(item));
+ 
+-	app_indicator_set_menu(ci, menu);
++    app_indicator_set_menu(ci, menu);
+ 
+-	g_timeout_add(50, toggle, ci);
++    g_timeout_add(50, toggle, ci);
+ 
+-	mainloop = g_main_loop_new(NULL, FALSE);
+-	g_main_loop_run(mainloop);
++    mainloop = g_main_loop_new(NULL, FALSE);
++    g_main_loop_run(mainloop);
+ 
+-	g_object_unref(G_OBJECT(ci));
++    g_object_unref(G_OBJECT(ci));
+ 
+-	g_debug("Quiting");
++    g_debug("Quiting");
+ 
+-	return 0;
++    return 0;
+ }
+diff --git a/tests/test-libappindicator.c b/tests/test-libappindicator.c
+index 0c69fde4..7bf4c621 100644
+--- a/tests/test-libappindicator.c
++++ b/tests/test-libappindicator.c
+@@ -6,16 +6,16 @@ Copyright 2009 Canonical Ltd.
+ Authors:
+     Ted Gould <ted@canonical.com>
+ 
+-This program is free software: you can redistribute it and/or modify it 
+-under the terms of the GNU General Public License version 3, as published 
++This program is free software: you can redistribute it and/or modify it
++under the terms of the GNU General Public License version 3, as published
+ by the Free Software Foundation.
+ 
+-This program is distributed in the hope that it will be useful, but 
+-WITHOUT ANY WARRANTY; without even the implied warranties of 
+-MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
++This program is distributed in the hope that it will be useful, but
++WITHOUT ANY WARRANTY; without even the implied warranties of
++MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ PURPOSE.  See the GNU General Public License for more details.
+ 
+-You should have received a copy of the GNU General Public License along 
++You should have received a copy of the GNU General Public License along
+ with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+@@ -32,128 +32,128 @@ static gboolean
+ allow_warnings (const gchar *log_domain, GLogLevelFlags log_level,
+                 const gchar *message, gpointer user_data)
+ {
+-	// By default, gtest will fail a test on even a warning message.
+-	// But since some of our sub-libraries are noisy (especially at-spi2),
+-	// only fail on critical or worse.
+-	return ((log_level & G_LOG_LEVEL_MASK) <= G_LOG_LEVEL_CRITICAL);
++    // By default, gtest will fail a test on even a warning message.
++    // But since some of our sub-libraries are noisy (especially at-spi2),
++    // only fail on critical or worse.
++    return ((log_level & G_LOG_LEVEL_MASK) <= G_LOG_LEVEL_CRITICAL);
+ }
+ 
+ void
+ test_libappindicator_prop_signals_status_helper (AppIndicator * ci, gchar * status, gboolean * signalactivated)
+ {
+-	*signalactivated = TRUE;
+-	return;
++    *signalactivated = TRUE;
++    return;
+ }
+ 
+ void
+ test_libappindicator_prop_signals_helper (AppIndicator * ci, gboolean * signalactivated)
+ {
+-	*signalactivated = TRUE;
+-	return;
++    *signalactivated = TRUE;
++    return;
+ }
+ 
+ void
+ test_libappindicator_prop_signals (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+         AppIndicator * ci = app_indicator_new ("test-app-indicator",
+                                                "indicator-messages",
+                                                APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_assert(ci != NULL);
++    g_assert(ci != NULL);
+ 
+-	gboolean signaled = FALSE;
+-	gulong handlerid;
++    gboolean signaled = FALSE;
++    gulong handlerid;
+ 
+-	handlerid = 0;
+-	handlerid = g_signal_connect(G_OBJECT(ci), "new-icon", G_CALLBACK(test_libappindicator_prop_signals_helper), &signaled);
+-	g_assert(handlerid != 0);
++    handlerid = 0;
++    handlerid = g_signal_connect(G_OBJECT(ci), "new-icon", G_CALLBACK(test_libappindicator_prop_signals_helper), &signaled);
++    g_assert(handlerid != 0);
+ 
+-	handlerid = 0;
+-	handlerid = g_signal_connect(G_OBJECT(ci), "new-attention-icon", G_CALLBACK(test_libappindicator_prop_signals_helper), &signaled);
+-	g_assert(handlerid != 0);
++    handlerid = 0;
++    handlerid = g_signal_connect(G_OBJECT(ci), "new-attention-icon", G_CALLBACK(test_libappindicator_prop_signals_helper), &signaled);
++    g_assert(handlerid != 0);
+ 
+-	handlerid = 0;
+-	handlerid = g_signal_connect(G_OBJECT(ci), "new-status", G_CALLBACK(test_libappindicator_prop_signals_status_helper), &signaled);
+-	g_assert(handlerid != 0);
++    handlerid = 0;
++    handlerid = g_signal_connect(G_OBJECT(ci), "new-status", G_CALLBACK(test_libappindicator_prop_signals_status_helper), &signaled);
++    g_assert(handlerid != 0);
+ 
+ 
+-	signaled = FALSE;
+-	app_indicator_set_icon(ci, "bob");
+-	g_assert(signaled);
++    signaled = FALSE;
++    app_indicator_set_icon(ci, "bob");
++    g_assert(signaled);
+ 
+-	signaled = FALSE;
+-	app_indicator_set_icon(ci, "bob");
+-	g_assert(!signaled);
++    signaled = FALSE;
++    app_indicator_set_icon(ci, "bob");
++    g_assert(!signaled);
+ 
+-	signaled = FALSE;
+-	app_indicator_set_icon(ci, "al");
+-	g_assert(signaled);
++    signaled = FALSE;
++    app_indicator_set_icon(ci, "al");
++    g_assert(signaled);
+ 
+ 
+-	signaled = FALSE;
+-	app_indicator_set_attention_icon(ci, "bob");
+-	g_assert(signaled);
++    signaled = FALSE;
++    app_indicator_set_attention_icon(ci, "bob");
++    g_assert(signaled);
+ 
+-	signaled = FALSE;
+-	app_indicator_set_attention_icon(ci, "bob");
+-	g_assert(!signaled);
++    signaled = FALSE;
++    app_indicator_set_attention_icon(ci, "bob");
++    g_assert(!signaled);
+ 
+-	signaled = FALSE;
+-	app_indicator_set_attention_icon(ci, "al");
+-	g_assert(signaled);
++    signaled = FALSE;
++    app_indicator_set_attention_icon(ci, "al");
++    g_assert(signaled);
+ 
+ 
+-	signaled = FALSE;
+-	app_indicator_set_status(ci, APP_INDICATOR_STATUS_PASSIVE);
+-	g_assert(!signaled);
++    signaled = FALSE;
++    app_indicator_set_status(ci, APP_INDICATOR_STATUS_PASSIVE);
++    g_assert(!signaled);
+ 
+-	signaled = FALSE;
+-	app_indicator_set_status(ci, APP_INDICATOR_STATUS_ACTIVE);
+-	g_assert(signaled);
++    signaled = FALSE;
++    app_indicator_set_status(ci, APP_INDICATOR_STATUS_ACTIVE);
++    g_assert(signaled);
+ 
+-	signaled = FALSE;
+-	app_indicator_set_status(ci, APP_INDICATOR_STATUS_ACTIVE);
+-	g_assert(!signaled);
++    signaled = FALSE;
++    app_indicator_set_status(ci, APP_INDICATOR_STATUS_ACTIVE);
++    g_assert(!signaled);
+ 
+-	signaled = FALSE;
+-	app_indicator_set_status(ci, APP_INDICATOR_STATUS_ATTENTION);
+-	g_assert(signaled);
++    signaled = FALSE;
++    app_indicator_set_status(ci, APP_INDICATOR_STATUS_ATTENTION);
++    g_assert(signaled);
+ 
+-	return;
++    return;
+ }
+ 
+ void
+ test_libappindicator_init_set_props (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+         AppIndicator * ci = app_indicator_new ("my-id",
+                                                "my-name",
+                                                APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_assert(ci != NULL);
++    g_assert(ci != NULL);
+ 
+-	app_indicator_set_status(ci, APP_INDICATOR_STATUS_ACTIVE);
+-	app_indicator_set_attention_icon(ci, "my-attention-name");
+-	app_indicator_set_title(ci, "My Title");
++    app_indicator_set_status(ci, APP_INDICATOR_STATUS_ACTIVE);
++    app_indicator_set_attention_icon(ci, "my-attention-name");
++    app_indicator_set_title(ci, "My Title");
+ 
+-	g_assert(!g_strcmp0("my-id", app_indicator_get_id(ci)));
+-	g_assert(!g_strcmp0("my-name", app_indicator_get_icon(ci)));
+-	g_assert(!g_strcmp0("my-attention-name", app_indicator_get_attention_icon(ci)));
+-	g_assert(!g_strcmp0("My Title", app_indicator_get_title(ci)));
+-	g_assert(app_indicator_get_status(ci) == APP_INDICATOR_STATUS_ACTIVE);
+-	g_assert(app_indicator_get_category(ci) == APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++    g_assert(!g_strcmp0("my-id", app_indicator_get_id(ci)));
++    g_assert(!g_strcmp0("my-name", app_indicator_get_icon(ci)));
++    g_assert(!g_strcmp0("my-attention-name", app_indicator_get_attention_icon(ci)));
++    g_assert(!g_strcmp0("My Title", app_indicator_get_title(ci)));
++    g_assert(app_indicator_get_status(ci) == APP_INDICATOR_STATUS_ACTIVE);
++    g_assert(app_indicator_get_category(ci) == APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_object_unref(G_OBJECT(ci));
+-	return;
++    g_object_unref(G_OBJECT(ci));
++    return;
+ }
+ 
+ void
+ test_libappindicator_init_with_props (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+         AppIndicator * ci = app_indicator_new ("my-id",
+                                                "my-name",
+@@ -162,315 +162,315 @@ test_libappindicator_init_with_props (void)
+         app_indicator_set_status (ci, APP_INDICATOR_STATUS_ACTIVE);
+         app_indicator_set_attention_icon (ci, "my-attention-name");
+ 
+-	g_assert(ci != NULL);
++    g_assert(ci != NULL);
+ 
+-	g_assert(!g_strcmp0("my-id", app_indicator_get_id(ci)));
+-	g_assert(!g_strcmp0("my-name", app_indicator_get_icon(ci)));
+-	g_assert(!g_strcmp0("my-attention-name", app_indicator_get_attention_icon(ci)));
+-	g_assert(app_indicator_get_status(ci) == APP_INDICATOR_STATUS_ACTIVE);
+-	g_assert(app_indicator_get_category(ci) == APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++    g_assert(!g_strcmp0("my-id", app_indicator_get_id(ci)));
++    g_assert(!g_strcmp0("my-name", app_indicator_get_icon(ci)));
++    g_assert(!g_strcmp0("my-attention-name", app_indicator_get_attention_icon(ci)));
++    g_assert(app_indicator_get_status(ci) == APP_INDICATOR_STATUS_ACTIVE);
++    g_assert(app_indicator_get_category(ci) == APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_object_unref(G_OBJECT(ci));
+-	return;
++    g_object_unref(G_OBJECT(ci));
++    return;
+ }
+ 
+ void
+ test_libappindicator_init (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+         AppIndicator * ci = app_indicator_new ("my-id", "my-name", APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+-	g_assert(ci != NULL);
+-	g_object_unref(G_OBJECT(ci));
+-	return;
++    g_assert(ci != NULL);
++    g_object_unref(G_OBJECT(ci));
++    return;
+ }
+ 
+ void
+ test_libappindicator_set_label (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+-	AppIndicator * ci = app_indicator_new ("my-id",
+-	                                       "my-name",
+-	                                       APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++    AppIndicator * ci = app_indicator_new ("my-id",
++                                           "my-name",
++                                           APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_assert(ci != NULL);
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(ci != NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	/* First check all the clearing modes, this is important as
+-	   we're going to use them later, we need them to work. */
+-	app_indicator_set_label(ci, NULL, NULL);
++    /* First check all the clearing modes, this is important as
++       we're going to use them later, we need them to work. */
++    app_indicator_set_label(ci, NULL, NULL);
+ 
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_set_label(ci, "", NULL);
++    app_indicator_set_label(ci, "", NULL);
+ 
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_set_label(ci, NULL, "");
++    app_indicator_set_label(ci, NULL, "");
+ 
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_set_label(ci, "", "");
++    app_indicator_set_label(ci, "", "");
+ 
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_set_label(ci, "label", "");
++    app_indicator_set_label(ci, "label", "");
+ 
+-	g_assert(g_strcmp0(app_indicator_get_label(ci), "label") == 0);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(g_strcmp0(app_indicator_get_label(ci), "label") == 0);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_set_label(ci, NULL, NULL);
++    app_indicator_set_label(ci, NULL, NULL);
+ 
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_set_label(ci, "label", "guide");
++    app_indicator_set_label(ci, "label", "guide");
+ 
+-	g_assert(g_strcmp0(app_indicator_get_label(ci), "label") == 0);
+-	g_assert(g_strcmp0(app_indicator_get_label_guide(ci), "guide") == 0);
++    g_assert(g_strcmp0(app_indicator_get_label(ci), "label") == 0);
++    g_assert(g_strcmp0(app_indicator_get_label_guide(ci), "guide") == 0);
+ 
+-	app_indicator_set_label(ci, "label2", "guide");
++    app_indicator_set_label(ci, "label2", "guide");
+ 
+-	g_assert(g_strcmp0(app_indicator_get_label(ci), "label2") == 0);
+-	g_assert(g_strcmp0(app_indicator_get_label_guide(ci), "guide") == 0);
++    g_assert(g_strcmp0(app_indicator_get_label(ci), "label2") == 0);
++    g_assert(g_strcmp0(app_indicator_get_label_guide(ci), "guide") == 0);
+ 
+-	app_indicator_set_label(ci, "trick-label", "trick-guide");
++    app_indicator_set_label(ci, "trick-label", "trick-guide");
+ 
+-	g_assert(g_strcmp0(app_indicator_get_label(ci), "trick-label") == 0);
+-	g_assert(g_strcmp0(app_indicator_get_label_guide(ci), "trick-guide") == 0);
++    g_assert(g_strcmp0(app_indicator_get_label(ci), "trick-label") == 0);
++    g_assert(g_strcmp0(app_indicator_get_label_guide(ci), "trick-guide") == 0);
+ 
+-	g_object_unref(G_OBJECT(ci));
+-	return;
++    g_object_unref(G_OBJECT(ci));
++    return;
+ }
+ 
+ void
+ test_libappindicator_set_menu (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+-	AppIndicator * ci = app_indicator_new ("my-id",
+-	                                       "my-name",
+-	                                       APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++    AppIndicator * ci = app_indicator_new ("my-id",
++                                           "my-name",
++                                           APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_assert(ci != NULL);
++    g_assert(ci != NULL);
+ 
+-	GtkMenu * menu = GTK_MENU(gtk_menu_new());
++    GtkMenu * menu = GTK_MENU(gtk_menu_new());
+ 
+-	GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Test Label"));
+-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), GTK_WIDGET(item));
+-	gtk_widget_show(GTK_WIDGET(item));
++    GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Test Label"));
++    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GTK_WIDGET(item));
++    gtk_widget_show(GTK_WIDGET(item));
+ 
+-	app_indicator_set_menu(ci, menu);
++    app_indicator_set_menu(ci, menu);
+ 
+-	g_assert(app_indicator_get_menu(ci) != NULL);
++    g_assert(app_indicator_get_menu(ci) != NULL);
+ 
+-	GValue serverval = {0};
+-	g_value_init(&serverval, DBUSMENU_TYPE_SERVER);
+-	g_object_get_property(G_OBJECT(ci), "dbus-menu-server", &serverval);
++    GValue serverval = {0};
++    g_value_init(&serverval, DBUSMENU_TYPE_SERVER);
++    g_object_get_property(G_OBJECT(ci), "dbus-menu-server", &serverval);
+ 
+-	DbusmenuServer * server = DBUSMENU_SERVER(g_value_get_object(&serverval));
+-	g_assert(server != NULL);
++    DbusmenuServer * server = DBUSMENU_SERVER(g_value_get_object(&serverval));
++    g_assert(server != NULL);
+ 
+-	GValue rootval = {0};
+-	g_value_init(&rootval, DBUSMENU_TYPE_MENUITEM);
+-	g_object_get_property(G_OBJECT(server), DBUSMENU_SERVER_PROP_ROOT_NODE, &rootval);
+-	DbusmenuMenuitem * root = DBUSMENU_MENUITEM(g_value_get_object(&rootval));
+-	g_assert(root != NULL);
++    GValue rootval = {0};
++    g_value_init(&rootval, DBUSMENU_TYPE_MENUITEM);
++    g_object_get_property(G_OBJECT(server), DBUSMENU_SERVER_PROP_ROOT_NODE, &rootval);
++    DbusmenuMenuitem * root = DBUSMENU_MENUITEM(g_value_get_object(&rootval));
++    g_assert(root != NULL);
+ 
+-	GList * children = dbusmenu_menuitem_get_children(root);
+-	g_assert(children != NULL);
+-	g_assert(g_list_length(children) == 1);
++    GList * children = dbusmenu_menuitem_get_children(root);
++    g_assert(children != NULL);
++    g_assert(g_list_length(children) == 1);
+ 
+-	const gchar * label = dbusmenu_menuitem_property_get(DBUSMENU_MENUITEM(children->data), DBUSMENU_MENUITEM_PROP_LABEL);
+-	g_assert(label != NULL);
+-	g_assert(g_strcmp0(label, "Test Label") == 0);
++    const gchar * label = dbusmenu_menuitem_property_get(DBUSMENU_MENUITEM(children->data), DBUSMENU_MENUITEM_PROP_LABEL);
++    g_assert(label != NULL);
++    g_assert(g_strcmp0(label, "Test Label") == 0);
+ 
+-	/* Interesting, eh?  We need this because we send out events on the bus
+-	   but they don't come back until the idle is run.  So we need those
+-	   events to clear before removing the object */
+-	while (g_main_context_pending(NULL)) {
+-		g_main_context_iteration(NULL, TRUE);
+-	}
++    /* Interesting, eh?  We need this because we send out events on the bus
++       but they don't come back until the idle is run.  So we need those
++       events to clear before removing the object */
++    while (g_main_context_pending(NULL)) {
++        g_main_context_iteration(NULL, TRUE);
++    }
+ 
+-	g_object_unref(G_OBJECT(ci));
+-	return;
++    g_object_unref(G_OBJECT(ci));
++    return;
+ }
+ 
+ void
+ label_signals_cb (AppIndicator * appindicator, gchar * label, gchar * guide, gpointer user_data)
+ {
+-	gint * label_signals_count = (gint *)user_data;
+-	(*label_signals_count)++;
+-	return;
++    gint * label_signals_count = (gint *)user_data;
++    (*label_signals_count)++;
++    return;
+ }
+ 
+ void
+ label_signals_check (void)
+ {
+-	while (g_main_context_pending(NULL)) {
+-		g_main_context_iteration(NULL, TRUE);
+-	}
++    while (g_main_context_pending(NULL)) {
++        g_main_context_iteration(NULL, TRUE);
++    }
+ 
+-	return;
++    return;
+ }
+ 
+ void
+ test_libappindicator_label_signals (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
+-
+-	gint label_signals_count = 0;
+-	AppIndicator * ci = app_indicator_new ("my-id",
+-	                                       "my-name",
+-	                                       APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+-
+-	g_assert(ci != NULL);
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
+-
+-	g_signal_connect(G_OBJECT(ci), APP_INDICATOR_SIGNAL_NEW_LABEL, G_CALLBACK(label_signals_cb), &label_signals_count);
+-
+-	/* Shouldn't be a signal as it should be stuck in idle */
+-	app_indicator_set_label(ci, "label", "guide");
+-	g_assert(label_signals_count == 0);
+-
+-	/* Should show up after idle processing */
+-	label_signals_check();
+-	g_assert(label_signals_count == 1);
+-
+-	/* Shouldn't signal with no change */
+-	label_signals_count = 0;
+-	app_indicator_set_label(ci, "label", "guide");
+-	label_signals_check();
+-	g_assert(label_signals_count == 0);
+-
+-	/* Change one, we should get one signal */
+-	app_indicator_set_label(ci, "label2", "guide");
+-	label_signals_check();
+-	g_assert(label_signals_count == 1);
+-
+-	/* Change several times, one signal */
+-	label_signals_count = 0;
+-	app_indicator_set_label(ci, "label1", "guide0");
+-	app_indicator_set_label(ci, "label1", "guide1");
+-	app_indicator_set_label(ci, "label2", "guide2");
+-	app_indicator_set_label(ci, "label3", "guide3");
+-	label_signals_check();
+-	g_assert(label_signals_count == 1);
+-
+-	/* Clear should signal too */
+-	label_signals_count = 0;
+-	app_indicator_set_label(ci, NULL, NULL);
+-	label_signals_check();
+-	g_assert(label_signals_count == 1);
+-
+-	return;
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
++
++    gint label_signals_count = 0;
++    AppIndicator * ci = app_indicator_new ("my-id",
++                                           "my-name",
++                                           APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++
++    g_assert(ci != NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
++
++    g_signal_connect(G_OBJECT(ci), APP_INDICATOR_SIGNAL_NEW_LABEL, G_CALLBACK(label_signals_cb), &label_signals_count);
++
++    /* Shouldn't be a signal as it should be stuck in idle */
++    app_indicator_set_label(ci, "label", "guide");
++    g_assert(label_signals_count == 0);
++
++    /* Should show up after idle processing */
++    label_signals_check();
++    g_assert(label_signals_count == 1);
++
++    /* Shouldn't signal with no change */
++    label_signals_count = 0;
++    app_indicator_set_label(ci, "label", "guide");
++    label_signals_check();
++    g_assert(label_signals_count == 0);
++
++    /* Change one, we should get one signal */
++    app_indicator_set_label(ci, "label2", "guide");
++    label_signals_check();
++    g_assert(label_signals_count == 1);
++
++    /* Change several times, one signal */
++    label_signals_count = 0;
++    app_indicator_set_label(ci, "label1", "guide0");
++    app_indicator_set_label(ci, "label1", "guide1");
++    app_indicator_set_label(ci, "label2", "guide2");
++    app_indicator_set_label(ci, "label3", "guide3");
++    label_signals_check();
++    g_assert(label_signals_count == 1);
++
++    /* Clear should signal too */
++    label_signals_count = 0;
++    app_indicator_set_label(ci, NULL, NULL);
++    label_signals_check();
++    g_assert(label_signals_count == 1);
++
++    return;
+ }
+ 
+ void
+ test_libappindicator_desktop_menu (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+-	AppIndicator * ci = app_indicator_new ("my-id-desktop-menu",
+-	                                       "my-name",
+-	                                       APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++    AppIndicator * ci = app_indicator_new ("my-id-desktop-menu",
++                                           "my-name",
++                                           APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_assert(ci != NULL);
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(ci != NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_build_menu_from_desktop(ci, SRCDIR "/test-libappindicator.desktop", "Test Program");
++    app_indicator_build_menu_from_desktop(ci, SRCDIR "/test-libappindicator.desktop", "Test Program");
+ 
+-	GValue serverval = {0};
+-	g_value_init(&serverval, DBUSMENU_TYPE_SERVER);
+-	g_object_get_property(G_OBJECT(ci), "dbus-menu-server", &serverval);
++    GValue serverval = {0};
++    g_value_init(&serverval, DBUSMENU_TYPE_SERVER);
++    g_object_get_property(G_OBJECT(ci), "dbus-menu-server", &serverval);
+ 
+-	DbusmenuServer * server = DBUSMENU_SERVER(g_value_get_object(&serverval));
+-	g_assert(server != NULL);
++    DbusmenuServer * server = DBUSMENU_SERVER(g_value_get_object(&serverval));
++    g_assert(server != NULL);
+ 
+-	GValue rootval = {0};
+-	g_value_init(&rootval, DBUSMENU_TYPE_MENUITEM);
+-	g_object_get_property(G_OBJECT(server), DBUSMENU_SERVER_PROP_ROOT_NODE, &rootval);
+-	DbusmenuMenuitem * root = DBUSMENU_MENUITEM(g_value_get_object(&rootval));
+-	g_assert(root != NULL);
++    GValue rootval = {0};
++    g_value_init(&rootval, DBUSMENU_TYPE_MENUITEM);
++    g_object_get_property(G_OBJECT(server), DBUSMENU_SERVER_PROP_ROOT_NODE, &rootval);
++    DbusmenuMenuitem * root = DBUSMENU_MENUITEM(g_value_get_object(&rootval));
++    g_assert(root != NULL);
+ 
+-	GList * children = dbusmenu_menuitem_get_children(root);
+-	g_assert(children != NULL);
+-	g_assert(g_list_length(children) == 3);
++    GList * children = dbusmenu_menuitem_get_children(root);
++    g_assert(children != NULL);
++    g_assert(g_list_length(children) == 3);
+ 
+ 
+ 
+-	g_object_unref(G_OBJECT(ci));
+-	return;
++    g_object_unref(G_OBJECT(ci));
++    return;
+ }
+ 
+ void
+ test_libappindicator_desktop_menu_bad (void)
+ {
+-	g_test_log_set_fatal_handler (allow_warnings, NULL);
++    g_test_log_set_fatal_handler (allow_warnings, NULL);
+ 
+-	AppIndicator * ci = app_indicator_new ("my-id-desktop-menu-bad",
+-	                                       "my-name",
+-	                                       APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
++    AppIndicator * ci = app_indicator_new ("my-id-desktop-menu-bad",
++                                           "my-name",
++                                           APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+-	g_assert(ci != NULL);
+-	g_assert(app_indicator_get_label(ci) == NULL);
+-	g_assert(app_indicator_get_label_guide(ci) == NULL);
++    g_assert(ci != NULL);
++    g_assert(app_indicator_get_label(ci) == NULL);
++    g_assert(app_indicator_get_label_guide(ci) == NULL);
+ 
+-	app_indicator_build_menu_from_desktop(ci, SRCDIR "/test-libappindicator.desktop", "Not Test Program");
++    app_indicator_build_menu_from_desktop(ci, SRCDIR "/test-libappindicator.desktop", "Not Test Program");
+ 
+-	GValue serverval = {0};
+-	g_value_init(&serverval, DBUSMENU_TYPE_SERVER);
+-	g_object_get_property(G_OBJECT(ci), "dbus-menu-server", &serverval);
++    GValue serverval = {0};
++    g_value_init(&serverval, DBUSMENU_TYPE_SERVER);
++    g_object_get_property(G_OBJECT(ci), "dbus-menu-server", &serverval);
+ 
+-	DbusmenuServer * server = DBUSMENU_SERVER(g_value_get_object(&serverval));
+-	g_assert(server != NULL);
++    DbusmenuServer * server = DBUSMENU_SERVER(g_value_get_object(&serverval));
++    g_assert(server != NULL);
+ 
+-	GValue rootval = {0};
+-	g_value_init(&rootval, DBUSMENU_TYPE_MENUITEM);
+-	g_object_get_property(G_OBJECT(server), DBUSMENU_SERVER_PROP_ROOT_NODE, &rootval);
+-	DbusmenuMenuitem * root = DBUSMENU_MENUITEM(g_value_get_object(&rootval));
+-	g_assert(root != NULL);
++    GValue rootval = {0};
++    g_value_init(&rootval, DBUSMENU_TYPE_MENUITEM);
++    g_object_get_property(G_OBJECT(server), DBUSMENU_SERVER_PROP_ROOT_NODE, &rootval);
++    DbusmenuMenuitem * root = DBUSMENU_MENUITEM(g_value_get_object(&rootval));
++    g_assert(root != NULL);
+ 
+-	GList * children = dbusmenu_menuitem_get_children(root);
+-	g_assert(g_list_length(children) == 0);
++    GList * children = dbusmenu_menuitem_get_children(root);
++    g_assert(g_list_length(children) == 0);
+ 
+-	g_object_unref(G_OBJECT(ci));
+-	return;
++    g_object_unref(G_OBJECT(ci));
++    return;
+ }
+ 
+ void
+ test_libappindicator_props_suite (void)
+ {
+-	g_test_add_func ("/indicator-application/libappindicator/init",            test_libappindicator_init);
+-	g_test_add_func ("/indicator-application/libappindicator/init_props",      test_libappindicator_init_with_props);
+-	g_test_add_func ("/indicator-application/libappindicator/init_set_props",  test_libappindicator_init_set_props);
+-	g_test_add_func ("/indicator-application/libappindicator/prop_signals",    test_libappindicator_prop_signals);
+-	g_test_add_func ("/indicator-application/libappindicator/set_label",       test_libappindicator_set_label);
+-	g_test_add_func ("/indicator-application/libappindicator/set_menu",        test_libappindicator_set_menu);
+-	g_test_add_func ("/indicator-application/libappindicator/label_signals",   test_libappindicator_label_signals);
+-	g_test_add_func ("/indicator-application/libappindicator/desktop_menu",    test_libappindicator_desktop_menu);
+-	g_test_add_func ("/indicator-application/libappindicator/desktop_menu_bad",test_libappindicator_desktop_menu_bad);
+-
+-	return;
++    g_test_add_func ("/indicator-application/libappindicator/init",            test_libappindicator_init);
++    g_test_add_func ("/indicator-application/libappindicator/init_props",      test_libappindicator_init_with_props);
++    g_test_add_func ("/indicator-application/libappindicator/init_set_props",  test_libappindicator_init_set_props);
++    g_test_add_func ("/indicator-application/libappindicator/prop_signals",    test_libappindicator_prop_signals);
++    g_test_add_func ("/indicator-application/libappindicator/set_label",       test_libappindicator_set_label);
++    g_test_add_func ("/indicator-application/libappindicator/set_menu",        test_libappindicator_set_menu);
++    g_test_add_func ("/indicator-application/libappindicator/label_signals",   test_libappindicator_label_signals);
++    g_test_add_func ("/indicator-application/libappindicator/desktop_menu",    test_libappindicator_desktop_menu);
++    g_test_add_func ("/indicator-application/libappindicator/desktop_menu_bad",test_libappindicator_desktop_menu_bad);
++
++    return;
+ }
+ 
+ gint
+ main (gint argc, gchar * argv[])
+ {
+-	gtk_init(&argc, &argv);
+-	g_test_init(&argc, &argv, NULL);
++    gtk_init(&argc, &argv);
++    g_test_init(&argc, &argv, NULL);
+ 
+-	/* Test suites */
+-	test_libappindicator_props_suite();
++    /* Test suites */
++    test_libappindicator_props_suite();
+ 
+ 
+-	return g_test_run ();
++    return g_test_run ();
+ }
+
+From 833d2c96917c16ca7e7de85911f3eb444d1224be Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Fri, 10 Mar 2023 15:21:57 +0100
+Subject: [PATCH 2/9] bindings/mono/libayatana-appindicator*-api.metadata:
+ Drop/fix properties, methods and signals
+
+---
+ bindings/mono/libayatana-appindicator-api.metadata  | 13 +------------
+ bindings/mono/libayatana-appindicator3-api.metadata | 13 +------------
+ 2 files changed, 2 insertions(+), 24 deletions(-)
+
+diff --git a/bindings/mono/libayatana-appindicator-api.metadata b/bindings/mono/libayatana-appindicator-api.metadata
+index ecceaf16..7ce5c32d 100644
+--- a/bindings/mono/libayatana-appindicator-api.metadata
++++ b/bindings/mono/libayatana-appindicator-api.metadata
+@@ -7,8 +7,6 @@
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="cname">new-status</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="name">NewLabel</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="cname">new-label</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="name">NewAccessibleDesc</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="cname">new-accessible-desc</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="name">ConnectionChanged</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="cname">connection-changed</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="name">ScrollEvent</attr>
+@@ -23,13 +21,11 @@
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ICON_NAME_S']" name="name">IconName</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ATTENTION_ICON_NAME_S']" name="name">AttentionIconName</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ICON_THEME_PATH_S']" name="name">IconThemePath</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_MENU_S']" name="name">Menu</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_MENU_S']" name="type">GtkMenu*</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_CONNECTED_S']" name="name">Connected</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_LABEL_S']" name="name">Label</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_LABEL_GUIDE_S']" name="name">LabelGuide</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ACCESSIBLE_DESC_S']" name="name">AccessibleDesc</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ORDERING_INDEX_S']" name="name">OrderingIndex</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_DBUS_MENU_SERVER_S']" name="hidden">true</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/method[@name='SetMenu']" name="name">SetMenu</attr>
+ 
+     <attr path="/api/namespace/object[@cname='AppIndicator']/constructor[@cname='app_indicator_new']/*/*[@name='id']" name="property_name">id</attr>
+@@ -40,11 +36,6 @@
+     <attr path="/api/namespace/object[@cname='AppIndicator']/constructor[@cname='app_indicator_new_with_path']/*/*[@name='category']" name="property_name">category</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/constructor[@cname='app_indicator_new_with_path']/*/*[@name='icon_theme_path']" name="property_name">icon-theme-path</attr>
+ 
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_LABEL_S']" />
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_LABEL_GUIDE_S']" />
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_ORDERING_INDEX_S']" />
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_ACCESSIBLE_DESC_S']" />
+-
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_id']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_status']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_icon']" />
+@@ -54,7 +45,6 @@
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_label']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_label_guide']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_ordering_index']" />
+-    <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_accessible_desc']" />
+ 
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_status']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_icon']" />
+@@ -62,5 +52,4 @@
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_attention_icon']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_label']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_ordering_index']" />
+-    <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_accessible_desc']" />
+ </metadata>
+diff --git a/bindings/mono/libayatana-appindicator3-api.metadata b/bindings/mono/libayatana-appindicator3-api.metadata
+index ecceaf16..7ce5c32d 100644
+--- a/bindings/mono/libayatana-appindicator3-api.metadata
++++ b/bindings/mono/libayatana-appindicator3-api.metadata
+@@ -7,8 +7,6 @@
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_status']" name="cname">new-status</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="name">NewLabel</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_label']" name="cname">new-label</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="name">NewAccessibleDesc</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='new_accessible_desc']" name="cname">new-accessible-desc</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="name">ConnectionChanged</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='connection_changed']" name="cname">connection-changed</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/signal[@field_name='scroll_event']" name="name">ScrollEvent</attr>
+@@ -23,13 +21,11 @@
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ICON_NAME_S']" name="name">IconName</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ATTENTION_ICON_NAME_S']" name="name">AttentionIconName</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ICON_THEME_PATH_S']" name="name">IconThemePath</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_MENU_S']" name="name">Menu</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_MENU_S']" name="type">GtkMenu*</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_CONNECTED_S']" name="name">Connected</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_LABEL_S']" name="name">Label</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_LABEL_GUIDE_S']" name="name">LabelGuide</attr>
+-    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ACCESSIBLE_DESC_S']" name="name">AccessibleDesc</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_ORDERING_INDEX_S']" name="name">OrderingIndex</attr>
++    <attr path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_DBUS_MENU_SERVER_S']" name="hidden">true</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/method[@name='SetMenu']" name="name">SetMenu</attr>
+ 
+     <attr path="/api/namespace/object[@cname='AppIndicator']/constructor[@cname='app_indicator_new']/*/*[@name='id']" name="property_name">id</attr>
+@@ -40,11 +36,6 @@
+     <attr path="/api/namespace/object[@cname='AppIndicator']/constructor[@cname='app_indicator_new_with_path']/*/*[@name='category']" name="property_name">category</attr>
+     <attr path="/api/namespace/object[@cname='AppIndicator']/constructor[@cname='app_indicator_new_with_path']/*/*[@name='icon_theme_path']" name="property_name">icon-theme-path</attr>
+ 
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_LABEL_S']" />
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_LABEL_GUIDE_S']" />
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_ORDERING_INDEX_S']" />
+-    <remove-node path="/api/namespace/object[@cname='AppIndicator']/property[@cname='PROP_X_ACCESSIBLE_DESC_S']" />
+-
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_id']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_status']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_icon']" />
+@@ -54,7 +45,6 @@
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_label']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_label_guide']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_ordering_index']" />
+-    <remove-node path="/api/namespace/object/method[@cname='app_indicator_get_accessible_desc']" />
+ 
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_status']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_icon']" />
+@@ -62,5 +52,4 @@
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_attention_icon']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_label']" />
+     <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_ordering_index']" />
+-    <remove-node path="/api/namespace/object/method[@cname='app_indicator_set_accessible_desc']" />
+ </metadata>
+
+From 6f8cdd5e5059111f39c97fa7d88a6d969b156456 Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Fri, 10 Mar 2023 15:23:16 +0100
+Subject: [PATCH 3/9] bindings/mono/CMakeLists.txt: Drop unused properties
+
+---
+ bindings/mono/CMakeLists.txt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/bindings/mono/CMakeLists.txt b/bindings/mono/CMakeLists.txt
+index 693097a0..9df65953 100644
+--- a/bindings/mono/CMakeLists.txt
++++ b/bindings/mono/CMakeLists.txt
+@@ -82,13 +82,10 @@ add_custom_command(
+     -e "s|PROP_ATTENTION_ICON_DESC_S|AttentionIconDesc|"
+     -e "s|PROP_ATTENTION_ICON_DESC_S|attention-icon-desc|"
+     -e "s|PROP_ICON_THEME_PATH_S|icon-theme-path|"
+-    -e "s|PROP_MENU_S|menu|"
+     -e "s|PROP_CONNECTED_S|connected|"
+     -e "s|PROP_LABEL_S|label|"
+     -e "s|PROP_LABEL_GUIDE_S|label-guide|"
+     -e "s|PROP_ORDERING_INDEX_S|ordering-index|"
+-    -e "s|PROP_DBUS_MENU_SERVER_S|DbusMenuServer|"
+-    -e "s|PROP_DBUS_MENU_SERVER_S|dbus-menu-server|"
+     -e "s|PROP_TITLE_S|Title|"
+     -e "s|PROP_TITLE_S|title|"
+     "${CMAKE_CURRENT_BINARY_DIR}/lib${ayatana_appindicator_gtkver}-api.middle" > "${CMAKE_CURRENT_BINARY_DIR}/lib${ayatana_appindicator_gtkver}-api.xml"
+
+From 483cd99b3329e7342b9ddc6df32210b5676fe393 Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Fri, 10 Mar 2023 15:27:25 +0100
+Subject: [PATCH 4/9] src/AyatanaAppIndicator*-0.1.metadata: Drop unused
+ metadata
+
+---
+ src/AyatanaAppIndicator-0.1.metadata  | 2 --
+ src/AyatanaAppIndicator3-0.1.metadata | 2 --
+ 2 files changed, 4 deletions(-)
+
+diff --git a/src/AyatanaAppIndicator-0.1.metadata b/src/AyatanaAppIndicator-0.1.metadata
+index 09d457d4..ad20f4e7 100644
+--- a/src/AyatanaAppIndicator-0.1.metadata
++++ b/src/AyatanaAppIndicator-0.1.metadata
+@@ -1,3 +1 @@
+ AyatanaAppIndicator3 name="AppIndicator"
+-Indicator.priv hidden="1"
+-IndicatorPrivate hidden="1"
+diff --git a/src/AyatanaAppIndicator3-0.1.metadata b/src/AyatanaAppIndicator3-0.1.metadata
+index 09d457d4..ad20f4e7 100644
+--- a/src/AyatanaAppIndicator3-0.1.metadata
++++ b/src/AyatanaAppIndicator3-0.1.metadata
+@@ -1,3 +1 @@
+ AyatanaAppIndicator3 name="AppIndicator"
+-Indicator.priv hidden="1"
+-IndicatorPrivate hidden="1"
+
+From aec1741226036036b2498f7b664221e649b4ff81 Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Fri, 10 Mar 2023 16:59:27 +0100
+Subject: [PATCH 5/9] Explicitly mark deprecated functions and use substitutes
+
+---
+ src/app-indicator.h                        |  4 ++--
+ tests/test-libappindicator-dbus-server.c   |  4 +++-
+ tests/test-libappindicator-status-server.c |  4 +++-
+ tests/test-libappindicator.c               | 18 ++++++++++--------
+ 4 files changed, 18 insertions(+), 12 deletions(-)
+
+diff --git a/src/app-indicator.h b/src/app-indicator.h
+index c1bc9d6a..75cf875d 100644
+--- a/src/app-indicator.h
++++ b/src/app-indicator.h
+@@ -260,14 +260,14 @@ AppIndicator                   *app_indicator_new_with_path      (const gchar
+ void                            app_indicator_set_status         (AppIndicator       *self,
+                                                                   AppIndicatorStatus  status);
+ void                            app_indicator_set_attention_icon (AppIndicator       *self,
+-                                                                  const gchar        *icon_name);
++                                                                  const gchar        *icon_name) G_GNUC_DEPRECATED_FOR (app_indicator_set_attention_icon_full);
+ void                            app_indicator_set_attention_icon_full (AppIndicator       *self,
+                                                                   const gchar        *icon_name,
+                                                                   const gchar        *icon_desc);
+ void                            app_indicator_set_menu           (AppIndicator       *self,
+                                                                   GtkMenu            *menu);
+ void                            app_indicator_set_icon           (AppIndicator       *self,
+-                                                                  const gchar        *icon_name);
++                                                                  const gchar        *icon_name) G_GNUC_DEPRECATED_FOR (app_indicator_set_icon_full);
+ void                            app_indicator_set_icon_full      (AppIndicator       *self,
+                                                                   const gchar        *icon_name,
+                                                                   const gchar        *icon_desc);
+diff --git a/tests/test-libappindicator-dbus-server.c b/tests/test-libappindicator-dbus-server.c
+index affa5eae..fdc760e7 100644
+--- a/tests/test-libappindicator-dbus-server.c
++++ b/tests/test-libappindicator-dbus-server.c
+@@ -3,9 +3,11 @@ Tests for the libappindicator library that are over DBus.  This is
+ the server side of those tests.
+ 
+ Copyright 2009 Canonical Ltd.
++Copyright 2023 Robert Tari
+ 
+ Authors:
+     Ted Gould <ted@canonical.com>
++    Robert Tari <robert@tari.in>
+ 
+ This program is free software: you can redistribute it and/or modify it
+ under the terms of the GNU General Public License version 3, as published
+@@ -42,7 +44,7 @@ main (gint argc, gchar * argv[])
+     AppIndicator * ci = app_indicator_new (TEST_ID, TEST_ICON_NAME, TEST_CATEGORY);
+ 
+     app_indicator_set_status (ci, TEST_STATE);
+-    app_indicator_set_attention_icon (ci, TEST_ATTENTION_ICON_NAME);
++    app_indicator_set_attention_icon_full (ci, TEST_ATTENTION_ICON_NAME, NULL);
+ 
+     GtkMenu * menu = GTK_MENU(gtk_menu_new());
+     GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Label"));
+diff --git a/tests/test-libappindicator-status-server.c b/tests/test-libappindicator-status-server.c
+index 72ffcdde..72e09550 100644
+--- a/tests/test-libappindicator-status-server.c
++++ b/tests/test-libappindicator-status-server.c
+@@ -3,9 +3,11 @@ Tests for the libappindicator library that are over DBus.  This is
+ the server side of those tests.
+ 
+ Copyright 2009 Canonical Ltd.
++Copyright 2023 Robert Tari
+ 
+ Authors:
+     Ted Gould <ted@canonical.com>
++    Robert Tari <robert@tari.in>
+ 
+ This program is free software: you can redistribute it and/or modify it
+ under the terms of the GNU General Public License version 3, as published
+@@ -68,7 +70,7 @@ main (gint argc, gchar * argv[])
+     g_debug("DBus Name: %s", g_dbus_connection_get_unique_name (connection));
+ 
+     AppIndicator * ci = app_indicator_new ("my-id", "my-icon-name", APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+-    app_indicator_set_attention_icon (ci, "my-attention-icon");
++    app_indicator_set_attention_icon_full (ci, "my-attention-icon", NULL);
+ 
+     GtkMenu * menu = GTK_MENU(gtk_menu_new());
+     GtkMenuItem * item = GTK_MENU_ITEM(gtk_menu_item_new_with_label("Label"));
+diff --git a/tests/test-libappindicator.c b/tests/test-libappindicator.c
+index 7bf4c621..68c6a93c 100644
+--- a/tests/test-libappindicator.c
++++ b/tests/test-libappindicator.c
+@@ -2,9 +2,11 @@
+ Tests for the libappindicator library.
+ 
+ Copyright 2009 Canonical Ltd.
++Copyright 2023 Robert Tari
+ 
+ Authors:
+     Ted Gould <ted@canonical.com>
++    Robert Tari <robert@tari.in>
+ 
+ This program is free software: you can redistribute it and/or modify it
+ under the terms of the GNU General Public License version 3, as published
+@@ -80,28 +82,28 @@ test_libappindicator_prop_signals (void)
+ 
+ 
+     signaled = FALSE;
+-    app_indicator_set_icon(ci, "bob");
++    app_indicator_set_icon_full (ci, "bob", NULL);
+     g_assert(signaled);
+ 
+     signaled = FALSE;
+-    app_indicator_set_icon(ci, "bob");
++    app_indicator_set_icon_full (ci, "bob", NULL);
+     g_assert(!signaled);
+ 
+     signaled = FALSE;
+-    app_indicator_set_icon(ci, "al");
++    app_indicator_set_icon_full (ci, "al", NULL);
+     g_assert(signaled);
+ 
+ 
+     signaled = FALSE;
+-    app_indicator_set_attention_icon(ci, "bob");
++    app_indicator_set_attention_icon_full (ci, "bob", NULL);
+     g_assert(signaled);
+ 
+     signaled = FALSE;
+-    app_indicator_set_attention_icon(ci, "bob");
++    app_indicator_set_attention_icon_full (ci, "bob", NULL);
+     g_assert(!signaled);
+ 
+     signaled = FALSE;
+-    app_indicator_set_attention_icon(ci, "al");
++    app_indicator_set_attention_icon_full (ci, "al", NULL);
+     g_assert(signaled);
+ 
+ 
+@@ -136,7 +138,7 @@ test_libappindicator_init_set_props (void)
+     g_assert(ci != NULL);
+ 
+     app_indicator_set_status(ci, APP_INDICATOR_STATUS_ACTIVE);
+-    app_indicator_set_attention_icon(ci, "my-attention-name");
++    app_indicator_set_attention_icon_full (ci, "my-attention-name", NULL);
+     app_indicator_set_title(ci, "My Title");
+ 
+     g_assert(!g_strcmp0("my-id", app_indicator_get_id(ci)));
+@@ -160,7 +162,7 @@ test_libappindicator_init_with_props (void)
+                                                APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+ 
+         app_indicator_set_status (ci, APP_INDICATOR_STATUS_ACTIVE);
+-        app_indicator_set_attention_icon (ci, "my-attention-name");
++        app_indicator_set_attention_icon_full (ci, "my-attention-name", NULL);
+ 
+     g_assert(ci != NULL);
+ 
+
+From f7f4a8dd6b12327e37f918a2f5f65e3a0a8dc413 Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Fri, 10 Mar 2023 19:21:40 +0100
+Subject: [PATCH 6/9] src/app-indicator.c: Fix documentation related errors
+
+---
+ src/app-indicator.c | 33 +++++++++++++++++++++++++++++----
+ 1 file changed, 29 insertions(+), 4 deletions(-)
+
+diff --git a/src/app-indicator.c b/src/app-indicator.c
+index 70c75366..c44b3a4b 100644
+--- a/src/app-indicator.c
++++ b/src/app-indicator.c
+@@ -142,7 +142,8 @@ enum {
+     PROP_LABEL_GUIDE,
+     PROP_ORDERING_INDEX,
+     PROP_DBUS_MENU_SERVER,
+-    PROP_TITLE
++    PROP_TITLE,
++    PROP_MENU
+ };
+ 
+ /* The strings so that they can be slowly looked up. */
+@@ -160,6 +161,7 @@ enum {
+ #define PROP_ORDERING_INDEX_S        "ordering-index"
+ #define PROP_DBUS_MENU_SERVER_S      "dbus-menu-server"
+ #define PROP_TITLE_S                 "title"
++#define PROP_MENU_S                 "menu"
+ 
+ /* Default Path */
+ #define DEFAULT_ITEM_PATH   "/org/ayatana/NotificationItem"
+@@ -497,6 +499,20 @@ app_indicator_class_init (AppIndicatorClass *klass)
+                                                          NULL,
+                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+ 
++    /**
++     * AppIndicator:menu:
++     *
++     * The menu that should be shown when the Application Indicator
++     * is clicked on in the panel.
++     */
++    g_object_class_install_property(object_class,
++                                    PROP_MENU,
++                                    g_param_spec_string (PROP_MENU_S,
++                                                         "The menu of the application indicator",
++                                                         "The menu that should be shown when the Application Indicator is clicked on in the panel.",
++                                                         NULL,
++                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
++
+     /* Signals */
+ 
+     /**
+@@ -1031,6 +1047,11 @@ G_GNUC_END_IGNORE_DEPRECATIONS
+             priv->menuservice = DBUSMENU_SERVER (g_value_dup_object(value));
+             break;
+ 
++        case PROP_MENU:
++            g_clear_object (&priv->menu);
++            priv->menu = GTK_WIDGET (g_value_dup_object(value));
++            break;
++
+         default:
+           G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+           break;
+@@ -1117,6 +1138,10 @@ app_indicator_get_property (GObject * object, guint prop_id, GValue * value, GPa
+             g_value_set_string(value, priv->title);
+             break;
+ 
++        case PROP_MENU:
++            g_value_set_object(value, priv->menu);
++            break;
++
+         default:
+           G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+           break;
+@@ -2006,7 +2031,7 @@ app_indicator_set_icon (AppIndicator *self, const gchar *icon_name)
+  * application icon for the program.
+  *
+  * Wrapper function for property #AppIndicator:icon-name and
+- * #AppIndicator::icon-desc.
++ * #AppIndicator:icon-desc.
+  */
+ void
+ app_indicator_set_icon_full (AppIndicator *self, const gchar *icon_name, const gchar * icon_desc)
+@@ -2074,7 +2099,7 @@ app_indicator_set_icon_full (AppIndicator *self, const gchar *icon_name, const g
+  * @guide: A guide to size the label correctly.
+  *
+  * This is a wrapper function for the #AppIndicator:label and
+- * #AppIndicator:guide properties.  This function can take #NULL
++ * #AppIndicator:label-guide properties.  This function can take #NULL
+  * as either @label or @guide and will clear the entries.
+ */
+ void
+@@ -2300,7 +2325,7 @@ app_indicator_set_ordering_index (AppIndicator *self, guint32 ordering_index)
+  * middle-click) is emitted over the #AppIndicator icon/label.
+  *
+  * The @menuitem can be also a complex #GtkWidget, but to get activated when
+- * a secondary activation occurs in the #Appindicator, it must be a visible and
++ * a secondary activation occurs in the #AppIndicator, it must be a visible and
+  * active child (or inner-child) of the #AppIndicator:menu.
+  *
+  * Setting @menuitem to %NULL causes to disable this feature.
+
+From d848644c60d5d60a831bcb286c521508fa4f3fde Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Sat, 11 Mar 2023 18:31:29 +0100
+Subject: [PATCH 7/9] src/app-indicator.c: Don't use GNU old-style field
+ designator extension
+
+---
+ src/app-indicator.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/app-indicator.c b/src/app-indicator.c
+index c44b3a4b..ebedc65d 100644
+--- a/src/app-indicator.c
++++ b/src/app-indicator.c
+@@ -3,7 +3,7 @@ An object to represent the application as an application indicator
+ in the system panel.
+ 
+ Copyright 2009 Canonical Ltd.
+-Copyright 2022 Robert Tari
++Copyright 2022-2023 Robert Tari
+ 
+ Authors:
+     Ted Gould <ted@canonical.com>
+@@ -207,9 +207,9 @@ static void bus_method_call (GDBusConnection * connection, const gchar * sender,
+ static void bus_creation (GObject * obj, GAsyncResult * res, gpointer user_data);
+ 
+ static const GDBusInterfaceVTable item_interface_table = {
+-    method_call:    bus_method_call,
+-    get_property:   bus_get_prop,
+-    set_property:   NULL /* No properties that can be set */
++    .method_call = bus_method_call,
++    .get_property = bus_get_prop,
++    .set_property = NULL /* No properties that can be set */
+ };
+ 
+ /* GObject type */
+
+From e67e62e1cb2c2e9e9b3ccab5ccd0a5b73b564192 Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Sat, 11 Mar 2023 19:08:26 +0100
+Subject: [PATCH 8/9] bindings/mono/CMakeLists.txt: Drop path from linked
+ resource file
+
+---
+ bindings/mono/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/bindings/mono/CMakeLists.txt b/bindings/mono/CMakeLists.txt
+index 9df65953..af25c722 100644
+--- a/bindings/mono/CMakeLists.txt
++++ b/bindings/mono/CMakeLists.txt
+@@ -248,7 +248,7 @@ add_custom_command(
+     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+     COMMAND
+     ${AL}
+-    -link:"${CMAKE_CURRENT_BINARY_DIR}/policy.0.0.${ayatana_appindicator_gtkver}-sharp.config"
++    -link:"policy.0.0.${ayatana_appindicator_gtkver}-sharp.config"
+     -out:"${CMAKE_CURRENT_BINARY_DIR}/policy.0.0.${ayatana_appindicator_gtkver}-sharp.dll"
+     -keyfile:"${CMAKE_CURRENT_SOURCE_DIR}/${ayatana_appindicator_gtkver}-sharp.snk"
+ )
+@@ -271,7 +271,7 @@ add_custom_command(
+     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+     COMMAND
+     ${AL}
+-    -link:"${CMAKE_CURRENT_BINARY_DIR}/policy.0.1.${ayatana_appindicator_gtkver}-sharp.config"
++    -link:"policy.0.1.${ayatana_appindicator_gtkver}-sharp.config"
+     -out:"${CMAKE_CURRENT_BINARY_DIR}/policy.0.1.${ayatana_appindicator_gtkver}-sharp.dll"
+     -keyfile:"${CMAKE_CURRENT_SOURCE_DIR}/${ayatana_appindicator_gtkver}-sharp.snk"
+ )
+
+From 05913e6762f369d487053953c30fff2afd52e6c2 Mon Sep 17 00:00:00 2001
+From: Robert Tari <robert@tari.in>
+Date: Sat, 11 Mar 2023 19:29:47 +0100
+Subject: [PATCH 9/9] .build.yml: Add doc requirements and build with GTKDOC
+
+---
+ .build.yml | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/.build.yml b/.build.yml
+index 4ebc8b7d..d6a6b06d 100644
+--- a/.build.yml
++++ b/.build.yml
+@@ -18,6 +18,7 @@ requires:
+     - libdbusmenu-gtk3
+     - dbus-glib
+     - gobject-introspection
++    - gtk3-docs
+ 
+   debian:
+     # Useful URL: https://salsa.debian.org/debian-ayatana-team/libayatana-appindicator
+@@ -53,6 +54,8 @@ requires:
+     - libdbusmenu-gtk3-dev
+     - libdbusmenu-gtk-dev
+     - libgirepository1.0-dev
++    - libgtk-3-doc
++    - libdbusmenu-glib-doc
+ 
+   ubuntu:
+     - autopoint
+@@ -87,6 +90,8 @@ requires:
+     - libdbusmenu-gtk3-dev
+     - libdbusmenu-gtk-dev
+     - libgirepository1.0-dev
++    - libgtk-3-doc
++    - libdbusmenu-glib-doc
+ 
+ variables:
+   - 'CHECKERS="
+@@ -147,7 +152,8 @@ build_scripts:
+   -     mkdir -p build/gtk3/
+   -     cd build/gtk3/
+   -     if [ ${DISTRO_NAME} == "debian" ] || [ ${DISTRO_NAME} == "ubuntu" ]; then
+-  -         scan-build $CHECKERS cmake ../../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON -DENABLE_TESTS=ON -DFLAVOUR_GTK3=ON
++            # We could use -DENABLE_WERROR=ON, but Debian Stable has an ancient Clang.
++  -         scan-build $CHECKERS cmake ../../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON -DENABLE_TESTS=ON -DFLAVOUR_GTK3=ON -DENABLE_GTKDOC=ON
+   -     else
+   -         scan-build $CHECKERS cmake ../../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON -DFLAVOUR_GTK3=ON
+   -     fi
+@@ -155,7 +161,7 @@ build_scripts:
+   -     mkdir -p build/gtk2/
+   -     cd build/gtk2/
+   -     if [ ${DISTRO_NAME} == "debian" ] || [ ${DISTRO_NAME} == "ubuntu" ]; then
+-  -         scan-build $CHECKERS cmake ../../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON -DENABLE_TESTS=ON -DFLAVOUR_GTK2=ON
++  -         scan-build $CHECKERS cmake ../../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON -DENABLE_TESTS=ON -DFLAVOUR_GTK2=ON -DENABLE_GTKDOC=ON
+   -     else
+   -         scan-build $CHECKERS cmake ../../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON -DFLAVOUR_GTK2=ON
+   -     fi

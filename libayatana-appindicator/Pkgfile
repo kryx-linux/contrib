@@ -1,0 +1,28 @@
+# Description: Ayatana Application Indicators shared library
+# URL: https://github.com/AyatanaIndicators/libayatana-appindicator
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libayatana-indicator libdbusmenu-gtk3
+
+name=libayatana-appindicator
+version=0.5.92
+release=1
+source=(https://github.com/AyatanaIndicators/libayatana-appindicator/archive/$version/$name-$version.tar.gz
+    63.patch)
+
+build() {
+  patch -Np1 -d $name-$version -i $SRC/63.patch
+
+  cmake -S $name-$version -B build-gtk3 -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D FLAVOUR_GTK3=ON \
+    -D ENABLE_BINDINGS_MONO=OFF \
+    -Wno-dev
+
+  cmake --build build-gtk3
+
+  DESTDIR=$PKG cmake --install build-gtk3
+}
