@@ -1,22 +1,27 @@
 # Description: Library for passing menus over DBus - Glib part
 # URL: https://launchpad.net/libdbusmenu
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: glib gnome-common gtk-doc intltool
+# Depends on: gnome-common gtk-doc intltool
 # Optional: gobject-introspection vala
 
 name=libdbusmenu-glib
 version=18.10
-release=1
-source=(http://cdn-fastly.deb.debian.org/debian/pool/main/libd/libdbusmenu/libdbusmenu_18.10.20180917~bzr490+repack1.orig.tar.xz
-0001_no-deprecated-gnome-common-macros.patch)
+release=2
+source=(http://cdn-fastly.deb.debian.org/debian/pool/main/libd/libdbusmenu/libdbusmenu_18.10.20180917~bzr492+repack1.orig.tar.xz
+  0001_no-deprecated-gnome-common-macros.patch
+  0003_port-tools-dbusmenu-bench-to-py3.patch
+  0004_prevent-test-json-from-failing.patch)
 
 build() {
-  cd libdbusmenu-18.10.20180917~bzr490
+  cd libdbusmenu-18.10.20180917~bzr492
 
   export HAVE_VALGRIND_TRUE='#'
   export HAVE_VALGRIND_FALSE=''
 
   patch -Np1 -i $SRC/0001_no-deprecated-gnome-common-macros.patch
+  patch -Np1 -i $SRC/0003_port-tools-dbusmenu-bench-to-py3.patch
+  patch -Np1 -i $SRC/0004_prevent-test-json-from-failing.patch
+
   sed -e 's/-Werror -Wno-error=deprecated-declarations//g' -i libdbusmenu-{glib,gtk}/Makefile.am
   sed -e 's/gtkdocize || exit 1//g' -i autogen.sh
   sed -e 's/--enable-gtk-doc//g' -i autogen.sh
@@ -33,5 +38,8 @@ build() {
   make DESTDIR=$PKG -C libdbusmenu-glib -j1 install
 
   find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
-  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+    | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+  # add file to footprint
+  mkdir -p $PKG/usr/share/glib-2.0/gettext
 }

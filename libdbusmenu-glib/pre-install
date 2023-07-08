@@ -1,2 +1,6 @@
 #!/bin/bash
-mkdir -p /usr/share/glib-2.0/gettext
+
+# if this directory is not present it fails the build
+if [ ! -d "/usr/share/glib-2.0/gettext" ]; then
+    mkdir -p "/usr/share/glib-2.0/gettext"
+fi
