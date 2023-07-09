@@ -1,14 +1,21 @@
-# Description: Set or autodetect the media type or mii chipset-based ethernet devices.
-# URL: http://freshmeat.sourceforge.net/projects/mii-tool/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Description: Set or autodetect the media type of mii chipset-based ethernet devices.
+# URL: https://sourceforge.net/projects/net-tools
+# Maintainer: unmaintained
 
 name=mii-tool
-version=1.65.0
+version=2.10
 release=1
-source=(https://repo.or.cz/w/oss-qm-packages.git/snapshot/METUX.mii-tool-$version.0.tar.gz)
+source=(https://downloads.sourceforge.net/project/net-tools/net-tools-$version.tar.xz)
 
 build() {
-	cd oss-qm-packages-METUX.mii-tool-$version.*
-	make
-	make DESTDIR=$PKG install
+  cd net-tools-$version
+
+  awk 'BEGIN { YN["y"] = 1; YN["n"] = 0; } /^bool/ { printf("#define %s %s\n", $(NF-1), YN[$NF]) }' config.in > config.h
+  
+  awk '/^bool .*y$/ { printf("%s=1\n", $(NF-1)) } /^bool .*n$/ { printf("# %s=0\n", $(NF-1)) }' config.in > config.make
+  
+  make mii-tool
+
+  install -Dt $PKG/sbin -m0755 mii-tool
+  install -Dt $PKG/usr/share/man/man8 -m0644 man/en_US/mii-tool.8
 }
