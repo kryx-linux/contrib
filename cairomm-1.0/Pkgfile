@@ -4,14 +4,12 @@
 # Depends on: cairo libsigc++2
 
 name=cairomm-1.0
-version=1.14.0
+version=1.14.4
 release=1
 source=(https://cairographics.org/releases/cairomm-$version.tar.xz)
 
 build() {
-	mkdir bld && cd bld
-
-	meson setup ../cairomm-$version \
+	meson setup cairomm-$version bld \
 		--prefix=/usr \
 		--buildtype=release \
 		-D build-tests=false \
@@ -19,6 +17,6 @@ build() {
 		-D b_lto=true \
 		-D b_pie=true
 
-	ninja -j ${JOBS:-1}
-	DESTDIR=$PKG ninja install
+	ninja -C bld -j ${JOBS:-1}
+	DESTDIR=$PKG ninja -C bld install
 }
