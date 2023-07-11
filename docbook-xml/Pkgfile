@@ -6,14 +6,14 @@
 name=docbook-xml
 version=4.5
 release=8
-source=(http://www.oasis-open.org/docbook/xml/${version}/docbook-xml-${version}.zip
- http://www.oasis-open.org/docbook/xml/4.4/docbook-xml-4.4.zip
- http://www.oasis-open.org/docbook/xml/4.3/docbook-xml-4.3.zip
- http://www.oasis-open.org/docbook/xml/4.2/docbook-xml-4.2.zip)
-renames=(docbook-xml-${version}.zyp
- docbook-xml-4.4.zyp
- docbook-xml-4.3.zyp
- docbook-xml-4.2.zyp)
+source=(https://docbook.org/xml/$version/$name-$version.zip
+        https://docbook.org/xml/4.4/$name-4.4.zip
+        https://docbook.org/xml/4.3/$name-4.3.zip
+        https://docbook.org/xml/4.2/$name-4.2.zip)
+renames=($name-$version.zyp
+         $name-4.4.zyp
+         $name-4.3.zyp
+         $name-4.2.zyp)
 
 build() {
 	# map module filenames to their descriptions
