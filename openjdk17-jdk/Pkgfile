@@ -1,17 +1,16 @@
 # Description: OpenJDK 17 Java Development Kit
 # URL: https://openjdk.java.net/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Co-Maintainer: Danny Rawlins, crux at romster dot me
 # Depends on: alsa-lib cups giflib harfbuzz lcms2 libxslt nss unzip xorg-libxrandr xorg-libxt xorg-libxtst zip
 
 name=openjdk17-jdk
-version=17.0.6+2
+version=17.0.8+6
 _boot_ver=20211106
 _cert_ver=20210916
 release=1
 source=(https://github.com/openjdk/jdk17u/archive/jdk-$version/$name-$version.tar.gz
-  https://crux.ster.zone/downloads/java/openjdk17-boot-$_boot_ver.tar.xz
-  https://crux.ster.zone/downloads/java/java_cacerts-${_cert_ver})
+  https://nullvoid.de/crux/distfiles/openjdk17-boot-20211106.tar.xz
+  https://nullvoid.de/crux/distfiles/java_cacerts-${_cert_ver})
 
 build() {
   if [ -e '/usr/bin/ccache' ]; then
