@@ -1,11 +1,11 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: aom autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libevent libnotify libvpx libwebp libxkbcommon nodejs nss pulseaudio unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
-# Optional: sccache lld wasi-libc++ alsa-lib jack pipewire 
+# Depends on: aom autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libevent libnotify libvpx libwebp libxkbcommon nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
+# Optional: sccache lld wasi-libc++ alsa-lib pulseaudio jack pipewire 
 
 name=firefox
-version=115.0.1
+version=115.0.2
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/${version}esr/source/$name-${version}esr.source.tar.xz
   firefox.desktop
@@ -49,7 +49,6 @@ cat <<- EOF > .mozconfig
   ac_add_options --with-system-libvpx
   ac_add_options --with-system-webp
   ac_add_options --enable-av1
-  ac_add_options --enable-pulseaudio
   ac_add_options --enable-system-ffi
   ac_add_options --enable-system-pixman
   ac_add_options --enable-optimize
@@ -69,8 +68,11 @@ cat <<- EOF > .mozconfig
 EOF
 
   # audio
-  prt-get isinst alsa-lib && echo 'ac_add_options --enable-alsa' >> .mozconfig
-  prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig
+  prt-get isinst alsa-lib && PKGMK_FFAUDIO=",alsa"
+  prt-get isinst pulseaudio && PKGMK_FFAUDIO+=",pulseaudio"
+  [ -e /usr/lib/libjack.so ] && PKGMK_FFAUDIO+=",jack"
+  [ -e /usr/lib/libsndio.so ] && PKGMK_FFAUDIO+=",sndio"
+  echo "ac_add_options --enable-audio-backends=${PKGMK_FFAUDIO#,}" >> .mozconfig
 
   prt-get isinst wayland-protocols && \
   	echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
