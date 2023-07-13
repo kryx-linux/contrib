@@ -1,13 +1,13 @@
 # Description: Email client from the Mozilla project
 # URL: https://www.thunderbird.net/en-US/
 # Maintainer: unmaintained
-# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gnupg libevent libidl libnotify libvpx libwebp lld nodejs nss startup-notification unzip wasi-libc++ xorg-libxcomposite xorg-libxcursor zip
-# Optional: sccache
+# Depends on: alsa-lib autoconf-2.13 cbindgen clang dbus-glib gnupg libevent libidl libnotify libvpx libwebp nodejs nss startup-notification unzip xorg-libxcomposite xorg-libxcursor zip
+# Optional: pulseaudio sccache lld
 
 name=thunderbird
-version=102.13.0
+version=115.0
 release=1
-source=(https://archive.mozilla.org/pub/thunderbird/releases/$version/source/$name-$version.source.tar.xz
+source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
 	$name.desktop)
 
 build() {
@@ -20,7 +20,7 @@ build() {
 	fi
 
 	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-	mkdir "$PKGMK_SOURCE_DIR/rust" || true
+	mkdir -p "$PKGMK_SOURCE_DIR/rust"
 	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
 	sed -i '/ROOT_CLIP_CHAIN/d' gfx/webrender_bindings/webrender_ffi.h
@@ -40,12 +40,11 @@ cat <<- EOF > .mozconfig
 	ac_add_options --enable-system-ffi
 	ac_add_options --enable-system-pixman
 	ac_add_options --enable-optimize
-	ac_add_options --enable-linker=lld
-	ac_add_options --enable-lto=thin
 	ac_add_options --enable-release
 	ac_add_options --enable-rust-simd
 	ac_add_options --enable-official-branding
 	ac_add_options --with-distribution-id=nu.crux
+	ac_add_options --enable-lto=thin
 	ac_add_options --disable-debug
 	ac_add_options --disable-debug-symbols
 	ac_add_options --disable-tests
@@ -56,16 +55,22 @@ cat <<- EOF > .mozconfig
 	ac_add_options --without-wasm-sandboxed-libraries
 EOF
 
+	# use llvm linker, if available
+	prt-get isinst lld && \
+          { echo -e "ac_add_options --enable-linker=lld" >> .mozconfig;
+	    export LDFLAGS+=" -Wl,--thinlto-jobs=$((JOBS / 2))"; } || \
+	  echo "ac_add_options --enable-linker=bfd" >> .mozconfig
+
 	# audio
-	prt-get isinst alsa-lib && echo 'ac_add_options --enable-audio-backends=alsa' >> .mozconfig
-	prt-get isinst pulseaudio && sed -i '/audio-backends/s/alsa/&,pulseaudio/' .mozconfig
-	#prt-get isinst jack && echo 'ac_add_options --enable-jack' >> .mozconfig || echo 'ac_add_options --disable-jack' >> .mozconfig
+	local PKGMK_MOZAUD="--enable-audio-backends=alsa"
+	prt-get isinst pulseaudio && PKGMK_MOZAUD+=",pulseaudio"
+	echo "ac_add_options $PKGMK_MOZAUD" >> .mozconfig
 
 	prt-get isinst wayland-protocols && \
 		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
 		echo 'ac_add_options --enable-default-toolkit=cairo-gtk3' >> .mozconfig
 
-	[[ -e '/usr/bin/ccache' ]] && echo 'ac_add_options --enable-ccache' >> .mozconfig
+	[ -e '/usr/bin/ccache' ] && echo 'ac_add_options --enable-ccache' >> .mozconfig
 
 	export PYTHON=/usr/bin/python3
 	export RUSTFLAGS="$RUSTFLAGS -C debuginfo=0"
