@@ -2,27 +2,30 @@
 # URL: http://www.graphicsmagick.org
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: brotli freetype jasper lcms2 libwebp
-# Optional: libpng libjpeg-turbo libtiff libxml2 graphviz libheif libde265
+# Optional: libpng libjpeg-turbo libtiff libxml2 dav1d graphviz libheif libde265
 
 name=graphicsmagick
 version=1.3.40
-release=1
-source=(https://downloads.sourceforge.net/project/$name/$name/$version/GraphicsMagick-$version.tar.xz)
+release=2
+source=(https://downloads.sourceforge.net/project/$name/$name/$version/GraphicsMagick-$version.tar.xz jpegturbo3-api-fixes.patch)
 
 build() {
-	cd GraphicsMagick-$version
+  cd GraphicsMagick-$version
 
-	./configure \
-		--prefix=/usr \
-		--enable-shared \
-		--with-modules \
-		--with-perl \
-		--with-gs-font-dir='/usr/share/fonts/X11/Type1' \
-		--with-quantum-depth=16 \
-		--with-threads
+  patch -p1 -i ../jpegturbo3-api-fixes.patch
 
-	make
-	make DESTDIR=$PKG install
+  ./configure \
+    --prefix=/usr \
+    --enable-shared \
+    --with-modules \
+    --with-perl \
+    --with-gs-font-dir='/usr/share/fonts/X11/Type1' \
+    --with-quantum-depth=16 \
+    --with-threads
 
-	rm -r $PKG/usr/share/doc $PKG/usr/share/GraphicsMagick-$version
+  make
+  make DESTDIR=$PKG install
+
+  rm -r $PKG/usr/share/doc $PKG/usr/share/GraphicsMagick-$version
+  find $PKG/usr/lib -name "*.la" -delete
 }
