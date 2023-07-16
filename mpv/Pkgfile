@@ -2,26 +2,28 @@
 # URL: https://mpv.io/
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: ffmpeg libass libplacebo util-linux xorg-libxscrnsaver
-# Optional: docutils youtube-dl libquvi libdvdnav libbluray libcdio-paranoia libsdl2 libvdpau rubberband xorg-libxpresent
+# Optional: libdvdnav libbluray libcdio-paranoia libsdl2 libvdpau pipewire pulseaudio sndio rubberband xorg-libxpresent
 
 name=mpv
 version=0.35.1
-release=1
-source=(https://github.com/mpv-player/mpv/archive/v$version/$name-$version.tar.gz)
+_commit=f1600ea9cf1664a094983cf75d63dc6ea09fe1b6
+release=2
+source=(https://github.com/mpv-player/mpv/archive/$_commit/$name-$version-${_commit:0:8}.tar.gz)
 
 build() {
   prt-get isinst libdvdnav && PKGMK_MPV="-D dvdnav=enabled"
   prt-get isinst libcdio-paranoia && PKGMK_MPV+=" -D cdda=enabled"
   prt-get isinst libsdl2 && PKGMK_MPV+=" -D sdl2=enabled"
+  [ -e /usr/lib/libsndio.so ] && PKGMK_MPV+=" -D sndio=enabled"
 
-  meson setup $name-$version build $PKGMK_MPV \
+  meson setup $name-$_commit build $PKGMK_MPV \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true
 
-  meson compile -C build
+  ninja -C build -j ${JOBS:-1}
   DESTDIR=$PKG meson install -C build
 
   prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion
