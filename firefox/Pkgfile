@@ -1,11 +1,11 @@
 # Description: The Mozilla Firefox browser with Alsa support
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: aom autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libevent libnotify libvpx libwebp libxkbcommon nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
-# Optional: sccache lld wasi-libc++ alsa-lib pulseaudio jack pipewire 
+# Depends on: alsa-lib aom autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libevent libnotify libvpx libwebp libxkbcommon nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
+# Optional: apulse jack pulseaudio pipewire sndio sccache lld wasi-libc++
 
 name=firefox
-version=115.0.2
+version=115.0.3
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/${version}esr/source/$name-${version}esr.source.tar.xz
   firefox.desktop
@@ -68,11 +68,11 @@ cat <<- EOF > .mozconfig
 EOF
 
   # audio
-  prt-get isinst alsa-lib && PKGMK_FFAUDIO=",alsa"
-  prt-get isinst pulseaudio && PKGMK_FFAUDIO+=",pulseaudio"
+  PKGMK_FFAUDIO="alsa"
+  [ -e /usr/lib/libpulse.so -o -e /usr/lib/apulse/libpulse.so ] && PKGMK_FFAUDIO+=",pulseaudio"
   [ -e /usr/lib/libjack.so ] && PKGMK_FFAUDIO+=",jack"
   [ -e /usr/lib/libsndio.so ] && PKGMK_FFAUDIO+=",sndio"
-  echo "ac_add_options --enable-audio-backends=${PKGMK_FFAUDIO#,}" >> .mozconfig
+  echo "ac_add_options --enable-audio-backends=${PKGMK_FFAUDIO}" >> .mozconfig
 
   prt-get isinst wayland-protocols && \
   	echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland' >> .mozconfig || \
@@ -106,10 +106,10 @@ EOF
   # Disable notification when build system has finished
   export MOZ_NOSPAM=1
 
-  # Use system's Python environment
-  export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
+  # Specify the Python environment to use
   #export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
   export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
+  export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
   mkdir $SRC/bin
   ln -s /usr/bin/pip3 $SRC/bin/pip
   ln -s /usr/bin/python3 $SRC/bin/python
