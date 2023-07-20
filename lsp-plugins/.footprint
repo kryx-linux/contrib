@@ -7,10 +7,10 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/clap/
 -rwxr-xr-x	root/root	usr/lib/clap/lsp-plugins-clap.clap
--rw-r--r--	root/root	usr/lib/liblsp-r3d-glx-lib-1.0.11.a
--rwxr-xr-x	root/root	usr/lib/liblsp-r3d-glx-lib-1.0.11.so
-lrwxrwxrwx	root/root	usr/lib/liblsp-r3d-glx-lib.a -> liblsp-r3d-glx-lib-1.0.11.a
-lrwxrwxrwx	root/root	usr/lib/liblsp-r3d-glx-lib.so -> liblsp-r3d-glx-lib-1.0.11.so
+-rw-r--r--	root/root	usr/lib/liblsp-r3d-glx-lib-1.0.12.a
+-rwxr-xr-x	root/root	usr/lib/liblsp-r3d-glx-lib-1.0.12.so
+lrwxrwxrwx	root/root	usr/lib/liblsp-r3d-glx-lib.a -> liblsp-r3d-glx-lib-1.0.12.a
+lrwxrwxrwx	root/root	usr/lib/liblsp-r3d-glx-lib.so -> liblsp-r3d-glx-lib-1.0.12.so
 drwxr-xr-x	root/root	usr/lib/lv2/
 drwxr-xr-x	root/root	usr/lib/lv2/lsp-plugins.lv2/
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/ab_tester_x2_mono.ttl
@@ -40,10 +40,18 @@ drwxr-xr-x	root/root	usr/lib/lv2/lsp-plugins.lv2/
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/expander_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/expander_ms.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/expander_stereo.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/filter_mono.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/filter_stereo.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/flanger_mono.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/flanger_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gate_lr.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gate_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gate_ms.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gate_stereo.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gott_compressor_lr.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gott_compressor_mono.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gott_compressor_ms.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/gott_compressor_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/graph_equalizer_x16_lr.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/graph_equalizer_x16_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/graph_equalizer_x16_ms.ttl
@@ -80,6 +88,8 @@ drwxr-xr-x	root/root	usr/lib/lv2/lsp-plugins.lv2/
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mb_gate_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mb_gate_ms.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mb_gate_stereo.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mb_limiter_mono.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mb_limiter_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mixer_x16_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mixer_x16_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/mixer_x4_mono.ttl
@@ -130,6 +140,10 @@ drwxr-xr-x	root/root	usr/lib/lv2/lsp-plugins.lv2/
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_gate_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_gate_ms.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_gate_stereo.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_gott_compressor_lr.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_gott_compressor_mono.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_gott_compressor_ms.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_gott_compressor_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_limiter_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_limiter_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_mb_compressor_lr.ttl
@@ -148,6 +162,8 @@ drwxr-xr-x	root/root	usr/lib/lv2/lsp-plugins.lv2/
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_mb_gate_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_mb_gate_ms.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_mb_gate_stereo.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_mb_limiter_mono.ttl
+-rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/sc_mb_limiter_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/slap_delay_mono.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/slap_delay_stereo.ttl
 -rw-r--r--	root/root	usr/lib/lv2/lsp-plugins.lv2/spectrum_analyzer_x1.ttl
@@ -193,10 +209,18 @@ drwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/expander-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/expander-ms.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/expander-stereo.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/filter-mono.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/filter-stereo.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/flanger-mono.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/flanger-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gate-lr.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gate-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gate-ms.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gate-stereo.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gott-compressor-lr.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gott-compressor-mono.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gott-compressor-ms.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/gott-compressor-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/graph-equalizer-x16-lr.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/graph-equalizer-x16-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/graph-equalizer-x16-ms.so
@@ -214,7 +238,7 @@ drwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/limiter-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/loud-comp-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/loud-comp-stereo.so
--rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/lsp-plugins-vst2-1.2.7.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/lsp-plugins-vst2-1.2.8.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-compressor-lr.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-compressor-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-compressor-ms.so
@@ -231,6 +255,8 @@ drwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-gate-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-gate-ms.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-gate-stereo.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-limiter-mono.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mb-limiter-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mixer-x16-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mixer-x16-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/mixer-x4-mono.so
@@ -281,6 +307,10 @@ drwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-gate-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-gate-ms.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-gate-stereo.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-gott-compressor-lr.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-gott-compressor-mono.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-gott-compressor-ms.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-gott-compressor-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-limiter-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-limiter-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-mb-compressor-lr.so
@@ -299,6 +329,8 @@ drwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-mb-gate-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-mb-gate-ms.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-mb-gate-stereo.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-mb-limiter-mono.so
+-rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/sc-mb-limiter-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/slap-delay-mono.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/slap-delay-stereo.so
 -rwxr-xr-x	root/root	usr/lib/vst/lsp-plugins/spectrum-analyzer-x1.so
@@ -342,10 +374,18 @@ drwxr-xr-x	root/root	usr/share/applications/
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_expander_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_expander_ms.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_expander_stereo.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_filter_mono.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_filter_stereo.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_flanger_mono.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_flanger_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gate_lr.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gate_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gate_ms.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gate_stereo.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gott_compressor_lr.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gott_compressor_mono.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gott_compressor_ms.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_gott_compressor_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_graph_equalizer_x16_lr.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_graph_equalizer_x16_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_graph_equalizer_x16_ms.desktop
@@ -379,6 +419,8 @@ drwxr-xr-x	root/root	usr/share/applications/
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mb_gate_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mb_gate_ms.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mb_gate_stereo.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mb_limiter_mono.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mb_limiter_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mixer_x16_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mixer_x16_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_mixer_x4_mono.desktop
@@ -429,6 +471,10 @@ drwxr-xr-x	root/root	usr/share/applications/
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_gate_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_gate_ms.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_gate_stereo.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_gott_compressor_lr.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_gott_compressor_mono.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_gott_compressor_ms.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_gott_compressor_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_limiter_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_limiter_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_mb_compressor_lr.desktop
@@ -447,6 +493,8 @@ drwxr-xr-x	root/root	usr/share/applications/
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_mb_gate_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_mb_gate_ms.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_mb_gate_stereo.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_mb_limiter_mono.desktop
+-rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_sc_mb_limiter_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_slap_delay_mono.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_slap_delay_stereo.desktop
 -rw-r--r--	root/root	usr/share/applications/in.lsp_plug.lsp_plugins_spectrum_analyzer_x1.desktop
