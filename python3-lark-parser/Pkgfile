@@ -4,7 +4,7 @@
 # Depends on: python3-build python3-installer
 
 name=python3-lark-parser
-version=1.1.5
+version=1.1.6
 release=1
 
 # https://github.com/lark-parser/lark/tree/master/tests/test_nearley
@@ -19,6 +19,6 @@ build() {
 
   cd lark-$version
 
-  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG \
+    --ignore-installed --no-deps .
 }
