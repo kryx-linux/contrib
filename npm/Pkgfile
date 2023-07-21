@@ -4,7 +4,7 @@
 # Depends on: nodejs
 
 name=npm
-version=9.7.2
+version=9.8.1
 release=1
 source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz
   destdir.patch)
@@ -20,6 +20,9 @@ build() {
   export npm_config_userconfig="$SRC/.npm/cache"
   export GATSBY_TELEMETRY_DISABLED="1"
 
+  cp -r workspaces/config node_modules/@npmcli/
+  cp -r workspaces/libnpmfund node_modules/libnpmfund
+  cp -r workspaces/arborist node_modules/@npmcli/arborist
   patch -Np1 -i $SRC/destdir.patch
 
   NODE_PATH=/usr/lib/node_modules node bin/npm-cli.js install
