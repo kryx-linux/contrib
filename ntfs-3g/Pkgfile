@@ -45,7 +45,7 @@ build() {
   # A wrapper script lets us silently discard any unsupported flags (from /etc/rc)
   cat >$PKG/sbin/fsck.ntfs <<\EOF
 #!/bin/sh
-ARGS="$(echo "$*" | sed 's/ -a/ -d/; s/ -p/ -d/; s/ -f//;')"
+ARGS="$(echo "$* " | sed 's/-a /-d /g; s/-p /-d /g; s/-f //g;')"
 exec /usr/bin/ntfsfix $ARGS
 EOF
   chmod 0755 $PKG/sbin/fsck.ntfs
