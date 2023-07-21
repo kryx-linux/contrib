@@ -1,12 +1,13 @@
 # Description: The Pek Window Manager.
 # URL: https://www.pekwm.se
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: xorg-libxft xorg-libxpm xorg-libxrandr
+# Depends on: xorg-libxft xorg-libxpm xorg-libxrandr xorg-xprop
 
 name=pekwm
 version=0.3.0
 release=1
-source=(https://github.com/pekdon/pekwm/archive/release-$version.tar.gz)
+source=(https://github.com/pekdon/$name/archive/release-$version.tar.gz)
+renames=($name-release-$version.tar.gz)
 
 build() {
 	cmake -S $name-release-$version -B build -G Ninja \
