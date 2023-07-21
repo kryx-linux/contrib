@@ -1,18 +1,21 @@
 # Description:  A language server for Bash
 # URL: https://github.com/bash-lsp/bash-language-server
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: acorn typescript yarn
+# Depends on: acorn pnpm typescript
 
 name=bash-language-server
-version=4.10.2
+version=5.0.0
 release=1
 source=(https://github.com/bash-lsp/bash-language-server/archive/server-$version/$name-$version.tar.gz)
 
 build() {
   cd $name-server-$version
 
-  yarn
-  yarn run compile
+  pnpm install --frozen-lockfile
+  pnpm run compile
+
+  rm -rf node_modules
+  pnpm install --frozen-lockfile -P
 
   install -d $PKG/usr/lib/$name
   cp -a server/* $PKG/usr/lib/$name
