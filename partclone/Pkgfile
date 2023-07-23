@@ -1,32 +1,32 @@
 # Description: Utilities to save and restore used blocks on a partition.
 # URL: https://partclone.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: e2fsprogs ntfs-3g
 
 name=partclone
-version=0.3.23
+version=0.3.24
 release=1
 source=(https://github.com/Thomas-Tsai/partclone/archive/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./autogen
+  ./autogen
 
-	./configure \
-		--prefix=/usr \
-		--enable-extfs \
-		--enable-fat \
-		--enable-hfsp \
-		--enable-btrfs \
-		--enable-ncursesw \
-		--enable-ntfs \
-		--enable-exfat \
-		--enable-f2fs \
-		--enable-minix
+  ./configure \
+    --prefix=/usr \
+    --enable-extfs \
+    --enable-fat \
+    --enable-hfsp \
+    --enable-btrfs \
+    --enable-ncursesw \
+    --enable-ntfs \
+    --enable-exfat \
+    --enable-f2fs \
+    --enable-minix
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/locale
+  rm -r $PKG/usr/share/locale
 }
