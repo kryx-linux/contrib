@@ -1,17 +1,17 @@
 # Description: Command-line copy/paste utilities for Wayland
 # URL: https://github.com/bugaevc/wl-clipboard
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: wayland
-# Optional: wayland-protocols xdg-utils
+# Depends on: wayland-protocols
+# Optional: xdg-utils
 
 name=wl-clipboard
-version=2.1.0
+version=2.2.0
 release=1
 source=(https://github.com/bugaevc/wl-clipboard/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  prt-get isinst zsh || PKGMK_WLC+=' -D zshcompletiondir=no'
-  #prt-get isinst zsh && PKGMK_WLC+=' -D zshcompletiondir=/usr/share/zsh/site-functions/'
+  #prt-get isinst zsh || PKGMK_WLC+=' -D zshcompletiondir=no'
+  prt-get isinst zsh && PKGMK_WLC+=' -D zshcompletiondir=/usr/share/zsh/site-functions/' || PKGMK_WLC+=' -D zshcompletiondir=no'
 
   meson setup $name-$version build $PKGMK_WLC \
     --prefix=/usr \
