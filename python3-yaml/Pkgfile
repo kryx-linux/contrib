@@ -5,17 +5,15 @@
 
 name=python3-yaml
 version=6.0.1
-release=1
-source=(https://pypi.python.org/packages/source/P/PyYAML/PyYAML-$version.tar.gz)
-#source=(https://github.com/yaml/pyyaml/archive/$version/PyYAML-$version.tar.gz)
+release=2
+source=(https://pypi.python.org/packages/source/P/PyYAML/PyYAML-$version.tar.gz
+  731.patch)
 
 build() {
-  #cd pyyaml-$version
   cd PyYAML-$version
-  /usr/bin/python3 setup.py --with-libyaml build
-  /usr/bin/python3 setup.py  --with-libyaml install \
-    --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  patch -Np1 -i $SRC/731.patch
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
