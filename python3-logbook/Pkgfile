@@ -5,13 +5,17 @@
 
 name=python3-logbook
 version=1.5.3
-release=1
+release=2
 source=(https://github.com/mitsuhiko/logbook/archive/$version/$name-$version.tar.gz
-  reproducibility.patch)
+  reproducibility.patch
+  337.patch)
 
 build() {
   cd logbook-$version
+
   patch -Np1 -i $SRC/reproducibility.patch
+  patch -Np1 -i $SRC/337.patch
+
   /usr/bin/cython3 logbook/_speedups.pyx
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
