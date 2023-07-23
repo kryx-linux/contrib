@@ -1,36 +1,27 @@
 # Description: Time-stretching and pitch-shifting audio library and utility.
 # URL: https://www.breakfastquay.com/rubberband/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: fftw libsamplerate vamp-plugin-sdk
-# Optional: openjdk8 openjdk11 openjdk15 ladspa libogg libvorbis opus
+# Optional: ladspa libogg libvorbis openjdk17-jdk opus
 
 name=rubberband
 version=3.2.1
 release=1
-source=(https://github.com/breakfastquay/$name/archive/v$version/$name-v$version.tar.gz)
+source=(https://github.com/breakfastquay/rubberband/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	if [ -e '/usr/lib/java' ]; then
-		[ -n "${JAVA_HOME}" ] || export JAVA_HOME="/usr/lib/java/openjdk8"
+  if prt-get isinst openjdk17-jdk; then
+    export PKGMK_RUBBERBAND+=" -D extra_include_dirs=/usr/lib/java/openjdk17-jdk/include,/usr/lib/java/openjdk17-jdk/include/linux"
+    export JAVA_HOME=/usr/lib/java/openjdk17-jdk
+    export PATH+=":$JAVA_HOME/bin"
+  fi
 
-		if prt-get isinst openjdk8; then
-local java_major="$($JAVA_HOME/bin/java -version 2>&1 | awk '/openjdk/ {split($3,java,".");  print java[2]}')"
-PKGMK_RUBBERBAND+=" -D extra_include_dirs=/usr/lib/java/openjdk${java_major}/include,/usr/lib/java/openjdk${java_major}/include/linux"
-export PATH="/usr/lib/java/openjdk${java_major}/bin:$PATH"
-		else
-#local java_major=$($JAVA_HOME/bin/java -version 2>&1 | awk '/openjdk/ {split($3,java,"."); print java[1]}' | awk -F'"' '{print $1}')
-local java_major="$($JAVA_HOME/bin/java -version 2>&1 | awk '/OpenJDK 64-Bit/ {split($6,java,"."); print java[1]}')"
-PKGMK_RUBBERBAND+=" -D extra_include_dirs=/usr/lib/java/openjdk${java_major}-jdk/include,/usr/lib/java/openjdk${java_major}-jdk/include/linux"
-export PATH="/usr/lib/java/openjdk${java_major}-jdk/bin:$PATH"
-		fi
-	fi
+  meson setup build $name-$version $PKGMK_RUBBERBAND \
+    --prefix=/usr \
+    --buildtype=plain \
+    -D fft=fftw \
+    -D resampler=libsamplerate
 
-	meson setup build $name-$version ${PKGMK_RUBBERBAND} \
-		--prefix=/usr \
-		--buildtype=plain \
-		-D fft=fftw \
-		-D resampler=libsamplerate
-
-	meson compile -C build -j ${JOBS:-1}
-	DESTDIR=$PKG meson install -C build
+  meson compile -C build -j ${JOBS:-1}
+  DESTDIR=$PKG meson install -C build
 }
