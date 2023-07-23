@@ -1,13 +1,13 @@
 # Description: Header files for AMD Advanced Media Framework
 # URL: https://github.com/GPUOpen-LibrariesAndSDKs/AMF/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=amf-headers
-version=1.4.29
+version=1.4.30
 release=1
 source=(https://github.com/GPUOpen-LibrariesAndSDKs/AMF/archive/v$version/$name-$version.tar.gz)
 
 build() {
-	install -dm 755 $PKG/usr/include
-	cp -dr --no-preserve=ownership AMF-$version/amf/public/include "${PKG}"/usr/include/AMF
+  install -dm 755 $PKG/usr/include
+  cp -dr --no-preserve=ownership AMF-$version/amf/public/include $PKG/usr/include/AMF
 }
