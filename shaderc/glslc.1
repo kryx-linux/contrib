@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: glslc Manual
 .\"    Author: [see the "AUTHOR(S)" section]
-.\" Generator: Asciidoctor 2.0.17
-.\"      Date: 2022-02-03
+.\" Generator: Asciidoctor 2.0.20
+.\"      Date: 2023-07-19
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "`GLSLC`" "1" "2022-02-03" "\ \&" "\ \&"
+.TH "GLSLC" "1" "2023-07-19" "\ \&" "\ \&"
 .ie \n(.g .ds Aq \(aq
 .el       .ds Aq '
 .ss \n[.ss] 0
@@ -28,7 +28,7 @@
 .  LINKSTYLE blue R < >
 .\}
 .SH "NAME"
-`glslc` \- A command\-line GLSL/HLSL to SPIR\-V compiler with Clang\-compatible arguments.
+glslc \- A command\-line GLSL/HLSL to SPIR\-V compiler with Clang\-compatible arguments.
 .SH "SYNOPSIS"
 .sp
 .if n .RS 4
@@ -42,6 +42,7 @@ glslc [\-\-show\-limits]
 glslc [\-c|\-S|\-E]
       [\-x ...] [\-std=standard]
       [ ... options for resource bindings ... ]
+      [\-fhlsl\-16bit\-types]
       [\-fhlsl\-offsets]
       [\-fhlsl\-functionality1]
       [\-fentry\-point=<name>]
@@ -826,6 +827,9 @@ Content of output_file.txt:
 T}
 .TE
 .sp
+.SS "\f(CR\-fhlsl\-16bit\-types\fP"
+.sp
+Enables 16bit types for HLSL compilation.
 .SS "\f(CR\-fhlsl\-offsets\fP"
 .sp
 Use HLSL packing rules instead of GLSL rules when determining offsets of
@@ -917,6 +921,12 @@ In an HLSL shader, use a \f(CRvk::location\fP attribute:
 .fam
 .fi
 .if n .RE
+.sp
+[[option\-fpreserve\-bindings
+==== \f(CR\-fpreserve\-bindings\fP
+.sp
+Directs the optimizer to preserve bindings declarations, even when those
+bindings are known to be unused.
 .SS "Warning and Error Options"
 .SS "\f(CR\-w\fP"
 .sp

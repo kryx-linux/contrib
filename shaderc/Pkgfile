@@ -5,7 +5,7 @@
 # Optional: asciidoctor
 
 name=shaderc
-version=2023.4
+version=2023.5
 release=1
 source=(https://github.com/google/shaderc/archive/v$version/$name-v$version.tar.gz
 	glslc.1)
@@ -16,8 +16,8 @@ build() {
 	sed '/build-version/d' -i $name-$version/glslc/CMakeLists.txt
 	cat <<- EOF > $name-$version/glslc/src/build-version.inc
 "${version}\\n"
-"$(prt-get info spirv-tools | awk '/^Version:/ {print $2}')\\n"
-"$(prt-get info glslang | awk '/^Version:/ {print $2}')\\n"
+"$(prt-get printf '%v\n' --filter=spirv-tools)"
+"$(prt-get printf '%v\n' --filter=glslang)"
 EOF
 	sed -i -e "s|\$<TARGET_FILE:spirv-dis>|spirv-dis|" \
 		$name-$version/glslc/test/CMakeLists.txt
@@ -34,10 +34,9 @@ EOF
 	DESTDIR=$PKG cmake --install build
 
 	if [ -e '/usr/bin/asciidoctor' ]; then
-		cd $name-$version/glslc
-		asciidoctor -b manpage README.asciidoc -o glslc.1
+		sed 's/^`glslc`/glslc/' $name-$version/glslc/README.asciidoc \
+		| asciidoctor -q -b manpage -o glslc.1 -
 		install -D -m 0644 -t $PKG/usr/share/man/man1 glslc.1
-		cd -
 	else
 		install -D -m 0644 -t $PKG/usr/share/man/man1 $SRC/glslc.1
 	fi
