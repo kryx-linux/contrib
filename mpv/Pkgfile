@@ -5,10 +5,9 @@
 # Optional: libdvdnav libbluray libcdio-paranoia libsdl2 libvdpau pipewire pulseaudio sndio rubberband xorg-libxpresent
 
 name=mpv
-version=0.35.1
-_commit=f1600ea9cf1664a094983cf75d63dc6ea09fe1b6
-release=2
-source=(https://github.com/mpv-player/mpv/archive/$_commit/$name-$version-${_commit:0:8}.tar.gz)
+version=0.36.0
+release=1
+source=(https://github.com/mpv-player/mpv/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst libdvdnav && PKGMK_MPV="-D dvdnav=enabled"
@@ -16,7 +15,7 @@ build() {
   prt-get isinst libsdl2 && PKGMK_MPV+=" -D sdl2=enabled"
   [ -e /usr/lib/libsndio.so ] && PKGMK_MPV+=" -D sndio=enabled"
 
-  meson setup $name-$_commit build $PKGMK_MPV \
+  meson setup $name-$version build $PKGMK_MPV \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
