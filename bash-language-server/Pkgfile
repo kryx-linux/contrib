@@ -17,10 +17,13 @@ build() {
   rm -rf node_modules
   pnpm install --frozen-lockfile -P
 
-  install -d $PKG/usr/lib/$name
-  cp -a server/* $PKG/usr/lib/$name
+  install -d $PKG/usr/lib/$name $PKG/usr/bin #$PKG/usr/lib/node_modules
+  cp -a $SRC/$name-server-$version/server/* $PKG/usr/lib/$name/.
+  #cp -a $SRC/$name-server-$version/node_modules/ $PKG/usr/lib/.
+  chmod +x $PKG/usr/lib/$name/out/cli.js
+
   install -d $PKG/usr/bin
-  ln -s /usr/lib/$name/bin/main.js $PKG/usr/bin/$name
+  ln -s /usr/lib/$name/out/cli.js $PKG/usr/bin/$name
 
   find $PKG \(\
     -iname "*README.md*" -o \
