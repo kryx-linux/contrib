@@ -5,11 +5,17 @@
 # Optional: aspell graphite2 icu
 
 name=qownnotes
-version=23.7.2
+version=23.7.3
 release=1
 source=(https://github.com/pbek/QOwnNotes/releases/download/v$version/qownnotes-$version.tar.xz)
 
 build() {
+  if [[ ! -e /usr/include/xkbcommon/xkbcommon-x11.h ]]; then
+    printf '\e[31m%s\e[m\n' "libxkbcommon is not built with x11 support but needs to be!"
+    printf '\e[33m%s\e[m\n' "Install xkeyboard-config and rebuild libxkbcommon and qt5 in that order to build $name"
+    exit 1
+  fi
+
   cd qownnotes-$version
 
   echo "#define RELEASE \"CRUX\"" > release.h
