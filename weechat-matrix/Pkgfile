@@ -6,15 +6,17 @@
 name=weechat-matrix
 version=0.3.0
 release=1
-source=(https://github.com/poljar/weechat-matrix/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/poljar/weechat-matrix/archive/$version/$name-$version.tar.gz
+  0001-Switch-to-correct-build-system-definition.patch)
 
 build() {
   cd $name-$version
-  dephell deps convert --from pyproject.toml --to setup.py
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+
+  patch -Np1 -i $SRC/0001-Switch-to-correct-build-system-definition.patch
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+
   install -Dm755 main.py $PKG/usr/share/weechat/python/weechat-matrix.py
   for _script in matrix_decrypt matrix_sso_helper matrix_upload
   do
