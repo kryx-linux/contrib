@@ -1,0 +1,16 @@
+# Description: API to interact with the python pyproject.toml based projects
+# URL: https://github.com/tox-dev/pyproject-api
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-hatch-vcs
+
+name=python3-pyproject-api
+version=1.5.3
+release=1
+source=(https://files.pythonhosted.org/packages/source/p/pyproject_api/pyproject_api-$version.tar.gz)
+
+build() {
+  cd pyproject_api-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
