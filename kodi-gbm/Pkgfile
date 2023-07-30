@@ -1,12 +1,12 @@
 # Description: Open source home theater software, running in a gbm buffer
 # URL: https://kodi.tv/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: crossguid dbus flatbuffers fstrcmp libass libcdio libdvdread libinput libmicrohttpd libxkbcommon mesa openjdk17-jdk rapidjson rtmpdump spdlog swig taglib tinyxml
+# Depends on: crossguid dbus flatbuffers fstrcmp libass libcdio libdvdread libinput libmicrohttpd libxkbcommon mesa openjdk17-jdk rapidjson rtmpdump spdlog swig taglib tinyxml xkeyboard-config
 # Optional: alsa-lib avahi bluez dav1d libmicrohttpd libnfs libnghttp2 libva libva-vdpau-driver libxslt mariadb mysql pipewire pulseaudio
 
 name=kodi-gbm
 version=20.2
-release=1
+release=2
 
 # version variables {{{
 _codename=Nexus
@@ -20,7 +20,8 @@ source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$
   https://github.com/xbmc/FFmpeg/archive/$_ffmpeg_version/ffmpeg-$_ffmpeg_version.tar.gz
   https://github.com/xbmc/libdvdcss/archive/$_libdvdcss_version/${name/-gbm/}-libdvdcss-$_libdvdcss_version.tar.gz
   https://github.com/xbmc/libdvdnav/archive/$_libdvdnav_version/${name/-gbm/}-libdvdnav-$_libdvdnav_version.tar.gz
-  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-gbm}-libdvdread-$_libdvdread_version.tar.gz)
+  https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-gbm}-libdvdread-$_libdvdread_version.tar.gz
+  23453.patch)
 # }}}
 # unpack_source() {{{
 unpack_source() {
@@ -72,6 +73,8 @@ build()  {
   sed -e 's/autoreconf -vif/echo "autoreconf already done"/' -i \
     xbmc-$version-$_codename/tools/depends/native/TexturePacker/src/autogen.sh \
     xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
+
+  patch -Np1 -d xbmc-$version-$_codename -i $SRC/23453.patch
 
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
     -D CMAKE_INSTALL_PREFIX=/usr \
