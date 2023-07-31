@@ -1,12 +1,12 @@
 # Description: A free and open source software media player and entertainment hub
 # URL: https://kodi.tv/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: cmake fmt ghostscript giflib glu openjdk17-jdk libass libcdio libmicrohttpd mariadb samba swig taglib tinyxml spdlog libva libvdpau libdvdnav
+# Depends on: cmake fmt ghostscript giflib glu openjdk17-jdk libass libcdio libmicrohttpd mariadb samba swig taglib tinyxml spdlog libva libvdpau libdvdnav xkeyboard-config
 
 name=kodi
 version=20.2
-release=1
-source=(https://github.com/xbmc/xbmc/archive/$version-Nexus/$name-$version.tar.gz gl-headers.patch)
+release=2
+source=(https://github.com/xbmc/xbmc/archive/$version-Nexus/$name-$version.tar.gz gl-headers.patch 23453.patch)
 
 build() {
 	export PATH="/usr/lib/java/openjdk17-jdk/bin:$PATH"
@@ -14,6 +14,7 @@ build() {
 	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
 	patch -d xbmc-$version-Nexus -p1 -i $SRC/gl-headers.patch
+	patch -d xbmc-$version-Nexus -p1 -i $SRC/23453.patch
 
 	cmake -Bbuild \
 		-DVERBOSE=ON \
