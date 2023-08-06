@@ -1,17 +1,23 @@
-# Description: D-Bus proxy
+# Description: filtering proxy for D-Bus connections
 # URL: https://github.com/flatpak/xdg-dbus-proxy
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: glib docbook-xsl
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: glib
+# Optional: docbook-xsl
 
 name=xdg-dbus-proxy
 version=0.1.4
-release=1
+release=2
 source=(https://github.com/flatpak/xdg-dbus-proxy/releases/download/$version/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D tests=false
 
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
