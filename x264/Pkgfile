@@ -1,45 +1,45 @@
 # Description: Library for encoding H264/AVC video streams (snapshot).
 # URL: https://www.videolan.org/developers/x264.html
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: yasm
 
 name=x264
-version=0.164.3103
+version=0.164.a8b68eb
 release=1
-_commit=941cae6d1d6d6344c9a1d27440eaf2872b18ca9a
+_commit=a8b68ebfaa68621b5ac8907610d3335971839d52
 source=(https://code.videolan.org/videolan/x264/-/archive/$_commit/x264-$_commit.tar.bz2)
 
 build() {
-	cp -al $name-$_commit $name-10
+  cp -al $name-$_commit $name-10
 
-	cd $name-10
+  cd $name-10
 
-	./configure \
-		--prefix=/usr \
-		--libdir=/usr/lib/libx264-10bit \
-		--includedir=/usr/lib/libx264-10bit/include \
-		--enable-pic \
-		--enable-shared \
-		--bit-depth='10' \
-		--disable-cli \
-		--disable-interlaced \
-		--extra-cflags="$CFLAGS"
+  ./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib/libx264-10bit \
+    --includedir=/usr/lib/libx264-10bit/include \
+    --enable-pic \
+    --enable-shared \
+    --bit-depth='10' \
+    --disable-cli \
+    --disable-interlaced \
+    --extra-cflags="$CFLAGS"
 
-	make
-	make DESTDIR=$PKG install-lib-shared
+  make
+  make DESTDIR=$PKG install-lib-shared
 
-	cd $SRC/$name-$_commit
+  cd $SRC/$name-$_commit
 
-	./configure \
-		--prefix=/usr \
-		--enable-pic \
-		--enable-shared \
-		--bit-depth='8' \
-		--disable-cli \
-		--extra-cflags="$CFLAGS"
+  ./configure \
+    --prefix=/usr \
+    --enable-pic \
+    --enable-shared \
+    --bit-depth='8' \
+    --disable-cli \
+    --extra-cflags="$CFLAGS"
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	chmod a-x $PKG/usr/lib/*.so $PKG/usr/lib/libx264-10bit/*.so
+  chmod a-x $PKG/usr/lib/*.so $PKG/usr/lib/libx264-10bit/*.so
 }
