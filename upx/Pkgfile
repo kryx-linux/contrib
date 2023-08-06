@@ -1,6 +1,6 @@
 # Description: Ultimate Packer for eXecutables.
 # URL: http://upx.sourceforge.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: lz4 ucl zlib
 
 name=upx
@@ -9,19 +9,19 @@ release=1
 source=(https://github.com/upx/upx/releases/download/v$version/upx-$version-src.tar.xz)
 
 build() {
-	cmake -S $name-$version-src -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_INSTALL_LIBDIR=lib \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D UPX_CONFIG_DISABLE_WERROR=ON \
-		-D UPX_CONFIG_DISABLE_SANITIZE=ON \
-		-D UPX_CONFIG_DISABLE_GITREV=ON \
-		-Wno-dev
+  cmake -S $name-$version-src -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D UPX_CONFIG_DISABLE_WERROR=ON \
+    -D UPX_CONFIG_DISABLE_SANITIZE=ON \
+    -D UPX_CONFIG_DISABLE_GITREV=ON \
+    -Wno-dev
 
-	cmake --build build
-	DESTDIR=$PKG cmake --install build
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 
-	rm -r $PKG/usr/share/doc
+  rm -r $PKG/usr/share/doc
 }
