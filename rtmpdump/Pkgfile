@@ -1,7 +1,7 @@
 # Description: A tool to download rtmp streams.
 # URL: http://rtmpdump.mplayerhq.hu/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: zlib gnutls
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gnutls
 
 name=rtmpdump
 version=2.4
@@ -11,34 +11,33 @@ source=(http://git.ffmpeg.org/gitweb/$name.git/snapshot/$_commit.tar.gz)
 renames=($name-$version-${_commit:0:8}-$release.tar.gz)
 
 build() {
-	cd $name-*
+  cd $name-*
 
-	sed \
-		-e '/^CRYPTO=/s/OPENSSL/GNUTLS/' \
-		-i Makefile -i librtmp/Makefile
+  sed \
+    -e '/^CRYPTO=/s/OPENSSL/GNUTLS/' \
+    -i Makefile -i librtmp/Makefile
 
-	sed \
-		-e 's|OPT=|&-fPIC |' \
-		-e 's|OPT|OPTS|' \
-		-e 's|CFLAGS=.*|& $(OPT)|' \
-		-i librtmp/Makefile
+  sed \
+    -e 's|OPT=|&-fPIC |' \
+    -e 's|OPT|OPTS|' \
+    -e 's|CFLAGS=.*|& $(OPT)|' \
+    -i librtmp/Makefile
 
+  install -d $PKG/usr/lib
 
-	install -d $PKG/usr/lib
+  [ "$CC" ] || CC=gcc
 
-	[ "$CC" ] || CC=gcc
+  make \
+    CC="$CC" \
+    $MAKEFLAGS \
+    OPT="$CFLAGS" \
+    XLDFLAGS="$LDFLAGS" \
+    SYS=posix
 
-	make \
-		CC="$CC" \
-		$MAKEFLAGS \
-		OPT="$CFLAGS" \
-		XLDFLAGS="$LDFLAGS" \
-		SYS=posix
-
-	make \
-		prefix=/usr \
-		sbindir=/usr/bin \
-		mandir=/usr/share/man \
-		DESTDIR=$PKG \
-		install
+  make \
+    prefix=/usr \
+    sbindir=/usr/bin \
+    mandir=/usr/share/man \
+    DESTDIR=$PKG \
+    install
 }
