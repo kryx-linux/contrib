@@ -1,15 +1,18 @@
 # Description: A featureful, correct URL for Python.
 # URL: https://pypi.python.org/pypi/hyperlink
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3-setuptools
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools python3-idna
 
 name=python3-hyperlink
 version=21.0.0
 release=1
-source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
+source=(https://pypi.org/packages/source/h/hyperlink/hyperlink-$version.tar.gz)
 
 build() {
-	cd ${name#*-}-$version
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
+  cd hyperlink-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
 }
