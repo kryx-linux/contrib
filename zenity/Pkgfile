@@ -1,7 +1,7 @@
 # Description: Display graphical dialog boxes from shell scripts.
 # URL: https://gitlab.gnome.org/GNOME/zenity
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gtk3 itstool
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gtk3
 # Optional: libnotify webkitgtk
 
 name=zenity
@@ -10,15 +10,16 @@ release=1
 source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
-	meson setup $name-$version build \
-		--prefix=/usr \
-		--buildtype=plain \
-		--wrap-mode nodownload \
-		-D b_lto=true \
-		-D b_pie=true
+  prt-get isinst webkitgtk && PKGMK_ZENITY+=' -D webkitgtk=true'
+  meson setup $name-$version build $PKGMK_ZENITY \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
 
-	meson compile -C build
-	DESTDIR=$PKG meson install -C build
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
-	rm -r $PKG/usr/share/{locale,help}
+  rm -r $PKG/usr/share/{locale,help}
 }
