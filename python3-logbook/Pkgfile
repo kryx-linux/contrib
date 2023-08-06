@@ -1,24 +1,16 @@
 # Description: replaces the standard librarys logging module
-# URL: https://logbook.readthedocs.io/en/stable/
+# URL: https://github.com/mitsuhiko/logbook/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-cython python3-six
 
 name=python3-logbook
-version=1.5.3
-release=2
-source=(https://github.com/mitsuhiko/logbook/archive/$version/$name-$version.tar.gz
-  reproducibility.patch
-  337.patch)
+version=1.6.0
+release=1
+source=(https://github.com/mitsuhiko/logbook/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd logbook-$version
 
-  patch -Np1 -i $SRC/reproducibility.patch
-  patch -Np1 -i $SRC/337.patch
-
-  /usr/bin/cython3 logbook/_speedups.pyx
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
