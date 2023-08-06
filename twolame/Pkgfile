@@ -1,6 +1,6 @@
 # Description: An optimized MPEG Audio Layer 2 (MP2) encoder.
 # URL: https://www.twolame.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: libsndfile
 
 name=twolame
@@ -9,13 +9,13 @@ release=1
 source=(https://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	sed -i -e '/WARNING_CFLAGS/s:-Werror::' configure
+  sed -i -e '/WARNING_CFLAGS/s:-Werror::' configure
 
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/doc
+  rm -r $PKG/usr/share/doc
 }
