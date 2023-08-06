@@ -1,17 +1,16 @@
 # Description: The Sphinx documentaion generator
 # URL: https://www.sphinx-doc.org/en/master/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: python3-alabaster python3-docutils python3-flit-core python3-imagesize python3-jinja2 python3-packaging python3-pygments python3-requests python3-snowballstemmer python3-sphinxcontrib-applehelp python3-sphinxcontrib-devhelp python3-sphinxcontrib-htmlhelp python3-sphinxcontrib-jsmath python3-sphinxcontrib-qthelp python3-sphinxcontrib-serializinghtml python3-sphinxcontrib-websupport
+# Maintainer: unmaintained
+# Depends on: python3-alabaster python3-docutils python3-imagesize python3-jinja2 python3-pygments python3-requests python3-snowballstemmer python3-sphinxcontrib-applehelp python3-sphinxcontrib-devhelp python3-sphinxcontrib-htmlhelp python3-sphinxcontrib-jsmath python3-sphinxcontrib-qthelp python3-sphinxcontrib-serializinghtml python3-sphinxcontrib-websupport
 
 name=python3-sphinx
-_name=Sphinx
-version=7.0.1
+version=7.1.2
 release=1
-source=(https://pypi.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
+source=(https://pypi.org/packages/source/s/sphinx/sphinx-$version.tar.gz)
 
 build() {
-	cd $_name-$version
+  cd sphinx-$version
 
-	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-	/usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
