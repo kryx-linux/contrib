@@ -1,27 +1,27 @@
 # Description: Python HTTP for Humans
 # URL: https://pypi.org/project/requests/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-chardet python3-idna python3-urllib3
 
 name=python3-requests
 version=2.31.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz
-	certs.patch)
+  certs.patch)
 
 build() {
-	cd ${name#*-}-$version
+  cd ${name#*-}-$version
 
-	# Stay with chardet for now: https://github.com/psf/requests/issues/5871
+  # Stay with chardet for now: https://github.com/psf/requests/issues/5871
 
-	sed \
-		-e '/certifi/d' \
-		-e "s/,<.*'/'/" \
-		-e '/charset_normalizer/d' \
-		-i setup.py
+  sed \
+    -e '/certifi/d' \
+    -e "s/,<.*'/'/" \
+    -e '/charset_normalizer/d' \
+    -i setup.py
 
-	patch -p1 -i $SRC/certs.patch
+  patch -p1 -i $SRC/certs.patch
 
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG
 }
