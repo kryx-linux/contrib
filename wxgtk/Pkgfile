@@ -1,6 +1,6 @@
 # Description: GTK+2 implementation of wxWidgets API for GUI
 # URL: http://www.wxwidgets.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: gtk wxgtk-common
 
 name=wxgtk
@@ -9,27 +9,27 @@ release=1
 source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2)
 
 build() {
-	cmake -S wxWidgets-$version -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_INSTALL_LIBDIR=lib \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D wxBUILD_TOOLKIT=gtk2 \
-		-D wxUSE_OPENGL=ON \
-		-D wxUSE_REGEX=sys\
-		-D wxUSE_ZLIB=sys \
-		-D wxUSE_EXPAT=sys \
-		-D wxUSE_LIBJPEG=sys \
-		-D wxUSE_LIBPNG=sys \
-		-D wxUSE_LIBTIFF=sys \
-		-D wxUSE_LIBLZMA=sys \
-		-D wxUSE_LIBMSPACK=ON \
-		-D wxUSE_PRIVATE_FONTS=ON \
-		-Wno-dev
+  cmake -S wxWidgets-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D wxBUILD_TOOLKIT=gtk2 \
+    -D wxUSE_OPENGL=ON \
+    -D wxUSE_REGEX=sys\
+    -D wxUSE_ZLIB=sys \
+    -D wxUSE_EXPAT=sys \
+    -D wxUSE_LIBJPEG=sys \
+    -D wxUSE_LIBPNG=sys \
+    -D wxUSE_LIBTIFF=sys \
+    -D wxUSE_LIBLZMA=sys \
+    -D wxUSE_LIBMSPACK=ON \
+    -D wxUSE_PRIVATE_FONTS=ON \
+    -Wno-dev
 
-	cmake --build build
-	DESTDIR=$PKG cmake --install build
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 
-	rm -r $PKG/usr/{include,lib/{cmake,libwx_base*},bin/wxrc*}
+  rm -r $PKG/usr/{include,lib/{cmake,libwx_base*},bin/wxrc*}
 }
