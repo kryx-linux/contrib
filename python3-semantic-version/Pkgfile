@@ -1,6 +1,6 @@
 # Description: A library implementing the 'SemVer' scheme.
 # URL: https://github.com/rbarrois/python-semanticversion
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-setuptools
 
 name=python3-semantic-version
@@ -9,7 +9,10 @@ release=1
 source=(https://github.com/rbarrois/python-semanticversion/archive/$version/python-semanticversion-$version.tar.gz)
 
 build() {
-	cd python-semanticversion-$version
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1 --skip-build
+  cd python-semanticversion-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
 }
