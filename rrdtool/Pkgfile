@@ -1,7 +1,7 @@
-# Description: A system to store and display time-series data.
+# Description: A system to store and display time-series data
 # URL: https://oss.oetiker.ch/rrdtool/index.en.html
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: intltool libxml2 pango python3-setuptools
+# Maintainer: unmaintained
+# Depends on: intltool libxml2 pango
 
 name=rrdtool
 version=1.8.0
@@ -9,31 +9,30 @@ release=2
 source=(https://github.com/oetiker/rrdtool-1.x/releases/download/v$version/rrdtool-$version.tar.gz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	PYTHON=/usr/bin/python3 \
-	./configure \
-		--prefix=/usr \
-		--enable-shared \
-		--enable-perl-site-install \
-		--enable-ruby-site-install \
-		--disable-libwrap \
-		--disable-rpath
+  PYTHON=/usr/bin/python3 \
+  ./configure \
+    --prefix=/usr \
+    --enable-shared \
+    --enable-perl-site-install \
+    --enable-ruby-site-install \
+    --disable-libwrap \
+    --disable-rpath
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	rm -r \
-		$PKG/usr/share/doc \
-		$PKG/usr/share/locale \
-		$PKG/usr/share/rrdtool/examples
+  rm -r $PKG/usr/share/doc \
+    $PKG/usr/share/locale \
+    $PKG/usr/share/rrdtool/examples
 
-	# Remove perl crap
-	find $PKG \( \
-		-name '.packlist' -o \
-		-name '*.bs' -o \
-		-name 'perllocal.pod' \) -delete
+  # Remove perl crap
+  find $PKG \( \
+    -name '.packlist' -o \
+    -name '*.bs' -o \
+    -name 'perllocal.pod' \) -delete
 
-	# Remove empty directories
-	find $PKG -depth -empty -delete
+  # Remove empty directories
+  find $PKG -depth -empty -delete
 }
