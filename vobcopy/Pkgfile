@@ -1,23 +1,23 @@
 # Description: Extract DVD .vob files.
 # URL: https://github.com/barak/vobcopy
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: libdvdnav
 
 name=vobcopy
 version=1.2.1
 release=1
 source=(https://github.com/barak/vobcopy/archive/$version/$name-$version.tar.gz
-	vobcopy-1.2.0_hardcode-tries-to-1.patch)
+  vobcopy-1.2.0_hardcode-tries-to-1.patch)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	patch -p 1 -i $SRC/vobcopy-1.2.0_hardcode-tries-to-1.patch
+  patch -p 1 -i $SRC/vobcopy-1.2.0_hardcode-tries-to-1.patch
 
-	autoreconf --install --force --symlink
-	./configure --prefix=/usr
-	make
-	make DESTDIR="$PKG" PREFIX=/usr/ MANDIR=/usr/share/man install
+  autoreconf --install --force --symlink
+  ./configure --prefix=/usr
+  make
+  make DESTDIR="$PKG" PREFIX=/usr/ MANDIR=/usr/share/man install
 
-	rm -r $PKG/usr/share/{man/de,doc}
+  rm -r $PKG/usr/share/{man/de,doc}
 }
