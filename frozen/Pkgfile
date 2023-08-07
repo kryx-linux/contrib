@@ -1,0 +1,27 @@
+# Description: a header-only, constexpr alternative to gperf for C++14 users
+# URL: https://github.com/serge-sans-paille/frozen
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=frozen
+version=1.1.1
+release=1
+source=(https://github.com/serge-sans-paille/frozen/archive/$version/$name-$version.tar.gz
+  frozen-1.1.1-missing-include.patch
+  079f73cc5c6413127d47f325cbb34a607e2cb030.patch)
+
+build() {
+  patch -Np1 -d $name-$version -i $SRC/frozen-1.1.1-missing-include.patch
+  patch -Np1 -d $name-$version -i $SRC/079f73cc5c6413127d47f325cbb34a607e2cb030.patch
+
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D BUILD_TESTING=OFF \
+    -D CMAKE_SKIP_RPATH=ON \
+    -Wno-dev
+
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
