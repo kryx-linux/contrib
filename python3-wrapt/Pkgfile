@@ -1,0 +1,18 @@
+# Description: Module for decorators, wrappers and monkey patching
+# URL: https://github.com/GrahamDumpleton/wrapt
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-wrapt
+version=1.15.0
+release=1
+source=(https://pypi.org/packages/source/w/wrapt/wrapt-$version.tar.gz)
+
+build() {
+  cd wrapt-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
