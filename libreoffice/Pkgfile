@@ -1,11 +1,11 @@
 # Description: LibreOffice is a powerful office suite
 # URL: https://www.libreoffice.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: abseil-cpp box2d clucene dragonbox fakeroot fontforge graphite2 gst-plugins-base hyphen icu libabw libcdr libcmis libcuckoo libe-book libepubgen libetonyek libexttextcat libfixmath libfreehand libmspub libmwaw libmythes libnumbertext libodfgen liborcus libpagemaker libqrcodegen libqxp libstaroffice libtommath libvisio libwpg libwps libzmf neon nss openjpeg2 paper redland unzip xmlsec xorg-libxcomposite zip
+# Depends on: abseil-cpp box2d clucene dragonbox fakeroot fontforge frozen graphite2 gst-plugins-base hyphen libabw libcdr libcmis libcuckoo libe-book libepubgen libetonyek libexttextcat libfixmath libfreehand libmspub libmwaw libmythes libnumbertext libodfgen liborcus libpagemaker libqrcodegen libqxp libstaroffice libtommath libvisio libwpg libwps libzmf neon nss openjpeg2 paper redland unzip xmlsec xorg-libxcomposite zip
 # Optional: avahi coin-or-mp cups gpgme kio lpsolve mariadb openldap postgresql python3-lxml qt5 sane valgrind
 
 name=libreoffice
-version=7.5.5.1
+version=7.6.0.2
 release=1
 pdfiumversion=5778
 source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/$name-$version.tar.xz
@@ -16,7 +16,7 @@ source=(https://downloadarchive.documentfoundation.org/libreoffice/old/$version/
   #https://dev-www.libreoffice.org/src/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz
   https://dev-www.libreoffice.org/src/pdfium-$pdfiumversion.tar.bz2
   #https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
-  mdds.patch
+  optjava.patch
   makefile.in.patch)
 
 # unpack_source() {{{
@@ -50,13 +50,12 @@ build() {
 
   cd $name-$version
 
-  patch -Np1 -i $SRC/mdds.patch
   patch -Np1 -i $SRC/makefile.in.patch
   sed -i 's:application/pdf;::g' sysui/desktop/menus/draw.desktop
   sed -i 's:text/plain;::g' sysui/desktop/menus/writer.desktop
   sed -i 's:dragonbox-1.0.0:dragonbox:g' configure.ac
 
-  prt-get isinst gpgme && export ac_cv_lib_gpgmepp_progress_callback=yes
+  patch -Np0 -i $SRC/optjava.patch
   # optionals {{{
   prt-get isinst avahi && PKGMK_LIBREOFFICE+=' --enable-avahi' || PKGMK_LIBREOFFICE+=' --disable-avahi'
   #prt-get isinst box2d && PKGMK_LIBREOFFICE+=' --with-system-box2d' || PKGMK_LIBREOFFICE+=' --without-system-box2d'
@@ -67,6 +66,7 @@ build() {
   prt-get isinst coin-or-mp && PKGMK_LIBREOFFICE+=' --with-system-coinmp' || PKGMK_LIBREOFFICE+=' --disable-coinmp'
   prt-get isinst cups && PKGMK_LIBREOFFICE+=' --enable-cups' || PKGMK_LIBREOFFICE+=' --disable-cups'
   prt-get isinst gpgme && PKGMK_LIBREOFFICE+=' --enable-gpgmepp' || PKGMK_LIBREOFFICE+=' --disable-gpgmepp'
+  prt-get isinst gpgme && export ac_cv_lib_gpgmepp_progress_callback=yes
   prt-get isinst dconf && PKGMK_LIBREOFFICE+=' --enable-dconf' || PKGMK_LIBREOFFICE+=' --disable-dconf'
   #prt-get isinst gtk4 && PKGMK_LIBREOFFICE+=' --enable-gtk4'
   prt-get isinst kio && PKGMK_LIBREOFFICE+=' --enable-kde5 --enable-gtk3-kde5'
