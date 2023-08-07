@@ -4,24 +4,9 @@
 # Depends on:
 
 name=p5-mozilla-ca
-version=20230801
+version=20230807
 release=1
 source=(https://cpan.metacpan.org/authors/id/L/LW/LWP/Mozilla-CA-$version.tar.gz)
-
-# unpack_source() {{{
-unpack_source() {
-  mkdir $SRC/tarballs
-  for file in ${source[@]}; do
-    case ${file##*/} in
-      Mozilla-CA-$version.tar.gz)
-        echo "Unpacking $(get_filename $file)"
-        bsdtar -p -o -C $SRC -xf $(get_filename $file) ;;
-      *)
-        cp $(get_filename $file) $SRC ;;
-    esac
-  done
-}
-# }}}
 
 build() {
   cd Mozilla-CA-$version
