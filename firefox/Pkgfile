@@ -5,15 +5,12 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wasi-libc++ wayland
 
 name=firefox
-version=116.0.1
+version=116.0.2
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/${version}/source/$name-${version}.source.tar.xz
   firefox.desktop
+  pkg-config-wrapper
   node-stdout-nonblocking-wrapper)
-
-_clear_vendor_checksums() {
-  sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/$1/.cargo-checksum.json
-}
 
 build() {
   cd $name-$version
@@ -33,6 +30,7 @@ build() {
 
 cat <<- EOF > .mozconfig
   export NODEJS="$SRC/node-stdout-nonblocking-wrapper"
+  export PKG_CONFIG_PATH="$SRC/pkg-config-wrapper"
   mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-shared
   unset MOZ_TELEMETRY_REPORTING
   ac_add_options --prefix=/usr
@@ -127,7 +125,7 @@ EOF
   echo "Current RUSTFLAGS:\t\t${RUSTFLAGS:-no value set}"
 
   # python/mach/mach/mixin/process.py fails to detect SHELL
-  export SHELL='/usr/bin/bash'
+  export SHELL='/bin/bash'
 
   ./mach build
   #./mach build toolkit/library/rust

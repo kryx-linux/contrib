@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# pkgconf complains when given multiple arguments to a modversion query.
+# https://github.com/pkgconf/pkgconf/issues/310
+# At least in this source tree, the expected (pkg-config-compatible) result 
+# can be reproduced by ignoring all but the first argument.
+
+if [ "$1" = "--modversion" ] && [ "$#" -gt 2 ]; then
+    /usr/bin/pkgconf --modversion "$2"
+else
+    /usr/bin/pkgconf "$@"
+fi
