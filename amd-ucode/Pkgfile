@@ -1,0 +1,18 @@
+# Description: Microcode update image for AMD CPUs
+# URL: https://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=summary
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: linux-firmware
+
+name=amd-ucode
+version=20230804
+release=1
+source=(https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-$version.tar.gz)
+
+build() {
+  mkdir -p kernel/x86/microcode
+  cat linux-firmware-$version/amd-ucode/microcode_amd*.bin > kernel/x86/microcode/AuthenticAMD.bin
+
+  echo kernel/x86/microcode/AuthenticAMD.bin | bsdcpio -o -H newc -R 0:0 > amd-ucode.img
+
+  install -Dt $PKG/boot -m644 amd-ucode.img
+}
