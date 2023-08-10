@@ -1,25 +1,26 @@
 # Description: Cryptographic library for embedded systems
 # URL: https://tls.mbed.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-jsonschema python3-jinja2
 
 name=mbedtls
-version=3.4.0
+version=3.4.1
 release=1
 source=(https://github.com/ARMmbed/mbedtls/archive/$name-$version.tar.gz)
 
 build() {
-	cmake -S $name-$name-$version -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_INSTALL_LIBDIR=lib \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D ENABLE_ZLIB_SUPPORT=ON \
-		-D USE_SHARED_MBEDTLS_LIBRARY=ON \
-		-D INSTALL_MBEDTLS_HEADERS=ON \
-		-D MBEDTLS_FATAL_WARNINGS=OFF \
-		-Wno-dev
+  cmake -S $name-$name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D USE_SHARED_MBEDTLS_LIBRARY=ON \
+    -D USE_STATIC_MBEDTLS_LIBRARY=ON \
+    -D ENABLE_ZLIB_SUPPORT=ON \
+    -D INSTALL_MBEDTLS_HEADERS=ON \
+    -D MBEDTLS_FATAL_WARNINGS=OFF \
+    -Wno-dev
 
-	cmake --build build
-	DESTDIR=$PKG cmake --install build
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }
