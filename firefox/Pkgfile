@@ -30,7 +30,7 @@ build() {
 
 cat <<- EOF > .mozconfig
   export NODEJS="$SRC/node-stdout-nonblocking-wrapper"
-  export PKG_CONFIG_PATH="$SRC/pkg-config-wrapper"
+  export PKG_CONFIG="$SRC/pkg-config-wrapper"
   mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-shared
   unset MOZ_TELEMETRY_REPORTING
   ac_add_options --prefix=/usr
