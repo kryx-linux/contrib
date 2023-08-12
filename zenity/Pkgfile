@@ -10,7 +10,9 @@ release=1
 source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
-  prt-get isinst webkitgtk && PKGMK_ZENITY+=' -D webkitgtk=true'
+  # disabled for now as it requires webkitgtk4.1
+  prt-get isinst webkitgtk && PKGMK_ZENITY+=' -D webkitgtk=false'
+
   meson setup $name-$version build $PKGMK_ZENITY \
     --prefix=/usr \
     --buildtype=plain \
