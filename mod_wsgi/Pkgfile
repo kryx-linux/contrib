@@ -1,6 +1,6 @@
 # Description: Python WSGI adapter module for Apache.
 # URL: https://www.modwsgi.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: apache python3
 
 name=mod_wsgi
@@ -9,10 +9,12 @@ release=1
 source=(https://github.com/GrahamDumpleton/$name/archive/$version.tar.gz)
 
 build() {
-	cd mod_wsgi-$version
-	./configure --prefix=/usr PYTHON=/usr/bin/python3
-	make
-	make DESTDIR=$PKG install
-	chmod a-x $PKG/usr/lib/apache/mod_wsgi.so
-}
+  cd mod_wsgi-$version
 
+  ./configure --prefix=/usr \
+    PYTHON=/usr/bin/python3
+  make
+  make DESTDIR=$PKG install
+
+  chmod a-x $PKG/usr/lib/apache/mod_wsgi.so
+}
