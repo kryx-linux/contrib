@@ -1,6 +1,6 @@
 # Description: Matt's traceroute - network diagnostic tool.
 # URL: http://www.bitwizard.nl/mtr/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: ncurses
 
 name=mtr
@@ -9,14 +9,14 @@ release=1
 source=(https://github.com/traviscross/mtr/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./bootstrap.sh
-	./configure \
-		--prefix=/usr \
-		--sbindir=/usr/bin \
-		--without-gtk
+  ./bootstrap.sh
+  ./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --without-gtk
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 }
