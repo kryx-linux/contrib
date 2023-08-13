@@ -1,6 +1,6 @@
 # Description: An ISO MPEG-4 compliant video codec
 # URL: https://www.xvid.com/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Optional: yasm
 
 name=libxvid
@@ -9,8 +9,9 @@ release=1
 source=(https://downloads.xvid.com/downloads/xvidcore-$version.tar.bz2)
 
 build() {
-	cd xvidcore/build/generic
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+  cd xvidcore/build/generic
+
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
 }
