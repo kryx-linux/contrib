@@ -1,32 +1,42 @@
 # Description: Software codec for DV video.
 # URL: http://libdv.sourceforge.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: libsdl popt
-# Optional: gtk
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: popt
+# Optional: libsdl gtk
 
 name=libdv
 version=1.0.0
-release=3
+release=4
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
-	$name-1.0.0-pic.patch.bz2
-	$name-0.99-2.6.patch)
+  libdv-dso-linking.patch
+  libdv-0.104-no-exec-stack.patch
+  libdv-1.0.0-pic.patch.bz2
+  libdv-0.99-2.6.patch)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	bzcat $SRC/$name-1.0.0-pic.patch.bz2 |patch -p 1
-	patch -p 1 -i $SRC/$name-0.99-2.6.patch
+  bzcat $SRC/libdv-1.0.0-pic.patch.bz2 | patch -p 1
+  patch -Np 1 -i $SRC/libdv-0.99-2.6.patch
+  patch -Np1 -i $SRC/libdv-0.104-no-exec-stack.patch
+  patch -Np1 -i $SRC/libdv-dso-linking.patch
 
-	PKGMK_LIBDV="--prefix=/usr --mandir=/usr/share/man --enable-sdl"
-	if prt-get isinst gtk; then
-		export GTK_CFLAGS="$(pkgconf --cflags gtk+-2.0 glib-2.0)"
-		export GTK_LIBS="$(pkgconf --libs gtk+-2.0 glib-2.0)"
-	else
-		PKGMK_LIBDV+=" --disable-gtk"
-	fi
+  if prt-get isinst gtk; then
+    export GTK_CFLAGS="$(pkgconf --cflags gtk+-2.0 glib-2.0)"
+    export GTK_LIBS="$(pkgconf --libs gtk+-2.0 glib-2.0)"
+  else
+    PKGMK_LIBDV+=' --disable-gtk'
+  fi
+  prt-get isinst libsdl && PKGMK_LIBDV+='--enable-sdl'
 
-	./configure $PKGMK_LIBDV
+  ./configure $PKGMK_LIBDV \
+    --prefix=/usr \
+    --mandir=/usr/share/man \
+    --disable-static \
+    --without-debug
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
+
+  find $PKG -name '*.la' -delete
 }
