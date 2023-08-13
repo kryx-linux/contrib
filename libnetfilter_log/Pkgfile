@@ -1,7 +1,6 @@
-# Description: A userspace library providing interface to packets that have been logged by the kernel packet filter.
+# Description: A userspace library providing interface to packets that have been logged by the kernel packet filter
 # URL: https://netfilter.org/projects/libnetfilter_log/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Beneyto, Jose V at dot dot net sepen sourceforge users
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: libmnl libnfnetlink
 
 name=libnetfilter_log
@@ -10,12 +9,12 @@ release=1
 source=(http://www.netfilter.org/projects/$name/files/$name-$version.tar.bz2)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--disable-static
+  ./configure \
+    --prefix=/usr \
+    --disable-static
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 }
