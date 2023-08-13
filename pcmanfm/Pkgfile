@@ -1,6 +1,6 @@
 # Description: Fast and lightweight file manager.
 # URL: http://pcmanfm.sourceforge.net/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: desktop-file-utils libfm
 # Optional: gvfs udisks xarchiver
 
@@ -10,14 +10,14 @@ release=1
 source=(https://downloads.sourceforge.net/$name/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--sysconfdir=/etc
+  ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/locale
+  rm -r $PKG/usr/share/locale
 }
