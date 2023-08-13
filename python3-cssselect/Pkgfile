@@ -1,6 +1,6 @@
 # Description: A Python library that parses CSS3 Selectors and translates them to XPath 1.0.
 # URL: http://pypi.python.org/pypi/cssselect
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: python3-setuptools
 
 name=python3-cssselect
@@ -9,10 +9,7 @@ release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
 
 build() {
-	cd ${name#*-}-$version
-
-	/usr/bin/python3 setup.py build
-
-	/usr/bin/python3 setup.py install \
-		--prefix=/usr --root=$PKG --optimize=1
+  cd ${name#*-}-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
 }
