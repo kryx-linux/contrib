@@ -1,6 +1,6 @@
 # Description: Internationalized Domain Names in Applications (IDNA).
 # URL: https://github.com/kjd/idna
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-build python3-flit-core python3-installer
 
 name=python3-idna
@@ -9,8 +9,8 @@ release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
 
 build() {
-	cd ${name#*-}-$version
+  cd ${name#*-}-$version
 
-	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-	/usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
 }
