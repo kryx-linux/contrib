@@ -1,6 +1,6 @@
 # Description: Perl Terminal Readkey Library.
 # URL: https://metacpan.org/release/TermReadKey
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 
 name=p5-term-readkey
 version=2.38
@@ -15,13 +15,12 @@ build() {
    make DESTDIR=$PKG install
 
    # Remove perlcrap
-	find $PKG -type f \( \
-		-name '.packlist' -o \
-		-name '*.bs' -o \
-		-name 'autosplit.ix' -o \
-		-name 'perllocal.pod' \) -delete
+  find $PKG -type f \( \
+    -name '.packlist' -o \
+    -name '*.bs' -o \
+    -name 'autosplit.ix' -o \
+    -name 'perllocal.pod' \) -delete
 
-	# Remove empty directories
-	find $PKG -depth -empty -delete
+  # Remove empty directories
+  find $PKG -depth -empty -delete
 }
-
