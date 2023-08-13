@@ -1,20 +1,19 @@
-# Description: A replacement for the old crypt() package.
-# URL: http://mcrypt.sourceforge.net/
+# Description: A replacement for the old crypt() package
+# URL: https://mcrypt.sourceforge.net/
 # Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Younes Hafri, ycrux at club-internet dot fr
 
 name=libmcrypt
 version=2.5.8
 release=3
-source=(http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/$version/$name-$version.tar.gz)
+source=(https://downloads.sourceforge.net/project/mcrypt/Libmcrypt/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/share/man \
-		--disable-posix-threads
+  ./configure \
+    --prefix=/usr \
+    --mandir=/usr/share/man \
+    --disable-posix-threads
 
-	make DESTDIR=$PKG install
+  make DESTDIR=$PKG install
 }
