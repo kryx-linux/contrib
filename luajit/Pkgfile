@@ -1,17 +1,31 @@
-# Description: Just-in-time compiler and drop-in replacement for Lua 5.1.
+# Description: Just-In-Time Compiler for the Lua programming language
 # URL: https://luajit.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=luajit
-version=2.0.5
+# https://github.com/LuaJIT/LuaJIT/issues/665#issuecomment-784452583
+_commit=72efc42ef2258086a9cb797c676e2916b0a9e7e1
+version=2.1.0-beta3
 release=1
-source=(https://luajit.org/download/LuaJIT-$version.tar.gz)
+source=(https://github.com/LuaJIT/LuaJIT/archive/$_commit/$name-$version-release.tar.gz)
 
 build() {
-	cd LuaJIT-$version
+  cd LuaJIT-$_commit
 
-	make PREFIX=/usr CFLAGS+=' -fPIC' amalg
-	make PREFIX=/usr DESTDIR=$PKG install
+  sed -i 's/%{_libexecdir}/%{_libdir}/' etc/luajit.pc
 
-	ln -s luajit-2.0 $PKG/usr/include/luajit
+  make PREFIX="/usr" \
+    MULTILIB="/usr/lib" \
+    CFLAGS="" \
+    LDFLAGS="" \
+    DYNAMIC_CC="cc -fPIC -DLUAJIT_ENABLE_LUA52COMPAT" \
+    LDCONFIG="true" \
+    TARGET_STRIP="true" \
+    amalg
+  make PREFIX=/usr DESTDIR=$PKG install
+
+  ln -s luajit-2.1 $PKG/usr/include/luajit
+  ln -s luajit-2.1.0-beta3 $PKG/usr/bin/luajit
+
+  find $PKG -type f -name *.a -delete -print
 }
