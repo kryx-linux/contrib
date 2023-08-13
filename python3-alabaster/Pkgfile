@@ -1,6 +1,6 @@
 # Description: Visually (c)lean, responsive, configurable theme for Sphinx.
 # URL: https://alabaster.readthedocs.io/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: python3-setuptools
 
 name=python3-alabaster
@@ -9,10 +9,10 @@ release=1
 source=(https://github.com/bitprophet/${name#*-}/archive/$version/${name#*-}-$version.tar.gz)
 
 build() {
-	cd ${name#*-}-$version
+  cd ${name#*-}-$version
 
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
 
-	find $PKG -perm -g+w | xargs chmod g-w
+  find $PKG -perm -g+w | xargs chmod g-w
 }
