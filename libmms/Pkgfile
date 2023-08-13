@@ -1,7 +1,6 @@
-# Description: LibMMS aims to be common mms:// and mmsh:// (Microsoft streaming protocols) parsing library.
+# Description: LibMMS aims to be common mms:// and mmsh:// (Microsoft streaming protocols) parsing library
 # URL: https://sourceforge.net/projects/libmms/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Packager: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: glib
 
 name=libmms
@@ -10,8 +9,8 @@ release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+  cd $name-$version
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
 }
