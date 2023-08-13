@@ -1,6 +1,6 @@
 # Description: IPv4 and IPv6 validation methods
 # URL: https://metacpan.org/release/Data-Validate-IP
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: p5-netaddr-ip
 
 name=p5-data-validate-ip
@@ -9,18 +9,18 @@ release=1
 source=(https://www.cpan.org/modules/by-module/Data/Data-Validate-IP-$version.tar.gz)
 
 build() {
-	cd Data-Validate-IP-$version
-	perl Makefile.PL INSTALLDIRS=vendor
-	make
-	make DESTDIR=$PKG install
+  cd Data-Validate-IP-$version
+  perl Makefile.PL INSTALLDIRS=vendor
+  make
+  make DESTDIR=$PKG install
 
-	# Remove perlcrap
-	find $PKG -type f \( \
-		-name '.packlist' -or \
-		-name '*.bs' -or \
-		-name 'autosplit.ix' -or \
-		-name 'perllocal.pod' \) -delete
+  # Remove perlcrap
+  find $PKG -type f \( \
+    -name '.packlist' -or \
+    -name '*.bs' -or \
+    -name 'autosplit.ix' -or \
+    -name 'perllocal.pod' \) -delete
 
-	# Remove empty directories
-	find $PKG -depth -empty -exec rm -rf {} \;
+  # Remove empty directories
+  find $PKG -depth -empty -exec rm -rf {} \;
 }
