@@ -1,7 +1,6 @@
 # Description: Mozilla's Universal Charset Detector C/C++ API
 # URL: https://github.com/Joungkyun/libchardet
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on:
+# Maintainer: unmaintained
 
 name=libchardet
 version=1.0.6
@@ -9,11 +8,11 @@ release=1
 source=(https://github.com/Joungkyun/libchardet/archive/$version/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr \
-		--disable-static
-	make
-	make DESTDIR=$PKG install
+  cd $name-$version
+  ./configure --prefix=/usr \
+    --disable-static
+  make
+  make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/{doc,man/ko}
+  rm -r $PKG/usr/share/{doc,man/ko}
 }
