@@ -4,12 +4,12 @@
 # Depends on: chromaprint python3-dateutil python3-discid python3-fasteners python3-mutagen python3-pyqt5
 
 name=picard
-version=2.9
+version=2.9.1
 release=1
 source=(ftp://ftp.musicbrainz.org/pub/musicbrainz/$name/$name-$version.tar.gz)
 
 build () {
-  cd $name-release-$version
+  cd $name-$version
 
   sed -i '/import sip/d' setup.py
   sed -i '/^sip.setapi/d' setup.py
