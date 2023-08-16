@@ -4,15 +4,12 @@
 # Depends on: python3-cython
 
 name=python3-peewee
-version=3.16.2
-release=2
-source=(https://github.com/coleifer/peewee/archive/$version/$name-$version.tar.gz
-  83c6b78bd5df2c8c942f4fc32c4daedde01e8a63.patch)
+version=3.16.3
+release=1
+source=(https://github.com/coleifer/peewee/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd peewee-$version
-
-  patch -Np1 -i $SRC/83c6b78bd5df2c8c942f4fc32c4daedde01e8a63.patch
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
