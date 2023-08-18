@@ -1,21 +1,19 @@
 # Description: Text based document generation.
 # URL: https://asciidoc.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: docbook-xsl python3-build python3-installer
 
 name=asciidoc
 version=10.2.0
 release=1
-source=(https://github.com/asciidoc/$name-py3/archive/$version/$name-py3-$version.tar.gz)
+source=(https://github.com/$name-py/$name-py/archive/$version/$name-py-$version.tar.gz)
 
 build() {
-	cd $name-py-$version
-	PYTHON='/usr/bin/python3'
-	autoconf
-	./configure \
-		--prefix=/usr \
-		--sysconfdir=/usr/etc
+  cd $name-py-$version
+  PYTHON='/usr/bin/python3'
+  autoconf
+  ./configure --prefix=/usr --sysconfdir=/usr/etc
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 }
