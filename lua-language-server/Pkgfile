@@ -1,13 +1,14 @@
 # Description: lua language server
 # URL: https://github.com/sumneko/lua-language-server
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: lua ninja
+# Depends on: lua
 
 name=lua-language-server
 version=3.6.25
-release=1
+release=2
 source=(https://github.com/sumneko/lua-language-server/archive/$version/$name-$version.tar.gz
   https://github.com/sumneko/lua-language-server/releases/download/$version/lua-language-server-$version-submodules.zip
+  linux.ninja.patch
   wrapper.sh)
 
 build() {
@@ -15,13 +16,22 @@ build() {
 
   cd $name-$version
 
+  patch -Np1 -i $SRC/linux.ninja.patch
+  sed -i -e "s/^cc = REPLACE_ME/cc = cc/" \
+    -e "s/^ar = REPLACE_AR/ar = ar/" \
+    -e "s/CFLAGS/${CFLAGS}/" \
+    -e "s/CXXFLAGS/${CXXFLAGS}/" \
+    -e "s/LDFLAGS/${LDFLAGS}/" \
+    3rd/luamake/compile/ninja/linux.ninja
+
   ninja -C 3rd/luamake -f compile/ninja/linux.ninja
   ./3rd/luamake/luamake rebuild
 
+  install -Dm0755 $SRC/wrapper.sh $PKG/usr/bin/lua-language-server
   install -Dt $PKG/usr/lib/$name/bin bin/$name
   install -m644 -t $PKG/usr/lib/$name/bin bin/main.lua
   install -m644 -t $PKG/usr/lib/$name {debugger,main}.lua
-  cp -r locale meta script $PKG/usr/lib/$name
 
-  install -Dm0755 $SRC/wrapper.sh $PKG/usr/bin/lua-language-server
-  }
+  rm -r meta/198256b1
+  cp -r locale meta script $PKG/usr/lib/$name
+}
