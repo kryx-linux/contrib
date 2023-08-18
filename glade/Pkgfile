@@ -1,26 +1,33 @@
 # Description: GTK Interface Builder.
 # URL: https://glade.gnome.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: gtk3 itstool xorg-libxcursor xorg-libxcomposite xorg-libxinerama
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gtk3 xorg-libxcomposite xorg-libxcursor xorg-libxinerama
 # Optional: docbook-xsl gtk-doc python3-gobject webkitgtk
 
 name=glade
 version=3.40.0
-release=1
-source=(https://download.gnome.org/sources/$name/${version::4}/$name-$version.tar.xz)
+release=2
+source=(https://download.gnome.org/sources/$name/${version::4}/$name-$version.tar.xz
+  fix-build.diff)
 
 build() {
-	prt-get isinst gtk-doc || PKGMK_GLADE+=' -D gtk_doc=false'
-	prt-get isinst libxslt docbook-xsl || PKGMK_GLADE+=' -D man=false'
+  prt-get isinst gtk-doc || PKGMK_GLADE+=' -D gtk_doc=false'
+  prt-get isinst libxslt docbook-xsl || PKGMK_GLADE+=' -D man=false'
 
-	sed -i  -e "/^subdir.*'po'/d" \
-		-e "/^subdir.*'help'/d" \
-		$name-$version/meson.build
-	meson setup build $name-$version ${PKGMK_GLADE} \
-		--prefix=/usr \
-		--buildtype=plain \
-		-D gladeui=true
+  sed -i  -e "/^subdir.*'po'/d" \
+    -e "/^subdir.*'help'/d" \
+    $name-$version/meson.build
 
-	meson compile -C build -j ${JOBS-1}
-	DESTDIR=$PKG meson install -C build
+  patch -Np1 -d $name-$version -i $SRC/fix-build.diff
+
+  meson setup $name-$version build $PKGMK_GLADE \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D gladeui=true
+
+  meson compile -C build -j ${JOBS-1}
+  DESTDIR=$PKG meson install -C build
 }
