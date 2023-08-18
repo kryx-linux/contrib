@@ -1,6 +1,6 @@
-# Description: Network bandwidth monitor and rate estimator.
-# URL: https://github.com/tgraf/bmon/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Description: Network bandwidth monitor and rate estimator
+# URL: https://github.com/tgraf/bmon
+# Maintainer: unmaintained
 # Depends on: ncurses libconfuse libnl
 
 name=bmon
@@ -9,13 +9,13 @@ release=1
 source=(https://github.com/tgraf/$name/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./autogen.sh
-	./configure --prefix=/usr
+  ./autogen.sh
+  ./configure --prefix=/usr
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 
-	rm -r $PKG/usr/share/doc
+  rm -r $PKG/usr/share/doc
 }
