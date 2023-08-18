@@ -1,6 +1,6 @@
-# Description: MPEG-4 audio codecs.
+# Description: MPEG-4 audio codecs
 # URL: https://www.audiocoding.com/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=faac
 version=1.30
@@ -8,11 +8,11 @@ release=2
 source=(https://github.com/knik0/faac/archive/${version/./_}/$name-${version/./_}.tar.gz)
 
 build() {
-	cd $name-${version/./_}
+  cd $name-${version/./_}
 
-	./bootstrap
-	./configure --prefix=/usr
+  ./bootstrap
+  ./configure --prefix=/usr
 
-	make
-	make DESTDIR=$PKG install
+  make
+  make DESTDIR=$PKG install
 }
