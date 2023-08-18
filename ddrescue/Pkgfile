@@ -1,6 +1,6 @@
-# Description: ddrescue is a data recovery tool. It copies data from one file or block device (hard disc, cdrom, etc) to another, trying hard to rescue data in case of read errors.
+# Description: ddrescue is a data recovery tool
 # URL: https://www.gnu.org/software/ddrescue/ddrescue.html
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 
 name=ddrescue
 version=1.27
@@ -8,13 +8,13 @@ release=1
 source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.lz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./configure --prefix=/usr
+  ./configure --prefix=/usr
 
-	make CXXFLAGS="$CXXFLAGS" $MAKEFLAGS
-	make DESTDIR=$PKG install
+  make CXXFLAGS="$CXXFLAGS" $MAKEFLAGS
+  make DESTDIR=$PKG install
 
-	rm -rf $PKG/usr/share/info
-	find $PKG/usr/share -depth -empty -delete
+  rm -rf $PKG/usr/share/info
+  find $PKG/usr/share -depth -empty -delete
 }
