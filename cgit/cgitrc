@@ -1,0 +1,144 @@
+# /etc/cgitrc (location can be changed using the env var CGIT_CONFIG)
+
+# Enable caching of up to 1000 output entries
+cache-size=1000
+
+# Customize the appearance
+css=/cgit.css
+favicon=/favicon.ico
+logo=/cgit.png
+
+# Show owner on index page
+enable-index-owner=1
+
+# Allow http transport git clone
+enable-http-clone=1
+
+# Show extra links for each repository on the index page
+enable-index-links=1
+
+# Enable blame page and create links to it from tree page
+enable-blame=1
+
+# Enable ASCII art commit history graph on the log pages
+enable-commit-graph=1
+
+# Show number of affected files per commit on the log pages
+enable-log-filecount=1
+
+# Show number of added/removed lines per commit on the log pages
+enable-log-linecount=1
+
+# Sort branches by date
+branch-sort=age
+
+# Enable statistics per week, month and quarter
+max-stats=quarter
+
+# Set the title and heading of the repository index page
+root-title=crux.nu git repositories
+
+# Set a subheading for the repository index page
+root-desc=tracking the development of crux ports
+
+# Include some more info about this site on the index page
+root-readme=/var/www/htdocs/about.html
+
+# Allow download of tar.gz, tar.bz2 and zip-files
+snapshots=tar.gz tar.bz2 zip
+
+##
+## List of common mimetypes
+##
+
+mimetype.gif=image/gif
+mimetype.html=text/html
+mimetype.jpg=image/jpeg
+mimetype.jpeg=image/jpeg
+mimetype.pdf=application/pdf
+mimetype.png=image/png
+mimetype.svg=image/svg+xml
+
+# Highlight source code with python pygments-based highlighter
+source-filter=/usr/lib/cgit/filters/syntax-highlighting.py
+
+# Format markdown, restructuredtext, manpages, text files, and html files
+# through the right converters
+about-filter=/usr/lib/cgit/filters/about-formatting.sh
+
+##
+## Search for these files in the root of the default branch of repositories
+## for coming up with the about page:
+##
+readme=:README.md
+readme=:readme.md
+readme=:README.mkd
+readme=:readme.mkd
+readme=:README.rst
+readme=:readme.rst
+readme=:README.html
+readme=:readme.html
+readme=:README.htm
+readme=:readme.htm
+readme=:README.txt
+readme=:readme.txt
+readme=:README
+readme=:readme
+readme=:INSTALL.md
+readme=:install.md
+readme=:INSTALL.mkd
+readme=:install.mkd
+readme=:INSTALL.rst
+readme=:install.rst
+readme=:INSTALL.html
+readme=:install.html
+readme=:INSTALL.htm
+readme=:install.htm
+readme=:INSTALL.txt
+readme=:install.txt
+readme=:INSTALL
+readme=:install
+
+##
+## List of repositories.
+## PS: Any repositories listed when section is unset will not be
+##     displayed under a section heading
+## PPS: This list could be kept in a different file (e.g. '/etc/cgitrepos')
+##      and included like this:
+##        include=/etc/cgitrepos
+##
+
+repo.url=core
+repo.path=/usr/ports/core/.git
+repo.desc=the core collection
+repo.owner=core-ports@crux.nu
+repo.readme=info/web/about.html
+
+repo.url=xorg
+repo.url=opt
+repo.path=/usr/ports/opt/.git
+repo.desc=the opt collection
+repo.owner=opt-ports@crux.nu
+repo.readme=info/web/about.html
+
+repo.url=xorg
+repo.path=/usr/ports/xorg/.git
+repo.desc=the xorg collection
+repo.owner=xorg-ports@crux.nu
+repo.readme=info/web/about.html
+
+# The next repositories will be displayed under the 'extras' heading
+section=extras
+
+repo.url=contrib
+repo.path=/usr/ports/contrib/.git
+repo.desc=the contrib collection
+
+# Disable adhoc downloads of this repo
+repo.snapshots=0
+
+# Disable line-counts for this repo
+repo.enable-log-linecount=0
+
+# Restrict the max statistics period for this repo
+repo.max-stats=month
