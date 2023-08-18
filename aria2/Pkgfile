@@ -1,6 +1,6 @@
-# Description: Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink.
+# Description: Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink
 # URL: https://aria2.github.io/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: c-ares gnutls libxml2
 
 name=aria2
@@ -9,14 +9,14 @@ release=2
 source=(https://github.com/aria2/aria2/releases/download/release-$version/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--disable-nls
+  ./configure \
+    --prefix=/usr \
+    --disable-nls
 
-	make
-	make prefix=$PKG/usr install
+  make
+  make prefix=$PKG/usr install
 
-	rm -r $PKG/usr/share/doc $PKG/usr/share/man/{ru,pt}
+  rm -r $PKG/usr/share/doc $PKG/usr/share/man/{ru,pt}
 }
