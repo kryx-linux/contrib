@@ -1,7 +1,8 @@
-# Description: A bittorrent client based on Python and GTK.
+# Description: A bittorrent client based on Python and GTK
 # URL: https://www.deluge-torrent.org/
-# Maintainer: Danny Rawlins, crux at romster dot me
-# Depends on: librsvg libtorrent-rasterbar python3-chardet python3-pyopenssl python3-pyxdg python3-twisted python3-pyxdg
+# Maintainer: unmaintained
+# Depends on: librsvg libtorrent-rasterbar python3-chardet python3-mako python3-pyasn1 python3-pyopenssl python3-pyxdg python3-twisted
+# Missing ports: python3-rencode
 
 name=deluge
 version=2.1.1
@@ -9,8 +10,8 @@ release=1
 source=(https://ftp.osuosl.org/pub/deluge/source/${version%.*}/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	/usr/bin/python3 setup.py build
-	/usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1 --skip-build
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1 --skip-build
 }
