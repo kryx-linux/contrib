@@ -1,6 +1,6 @@
-# Description: System's hardware information of your BIOS according to SMBIOS/DMI standard.
+# Description: System's hardware information of your BIOS according to SMBIOS/DMI standard
 # URL: https://www.nongnu.org/dmidecode/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=dmidecode
 version=3.5
@@ -8,9 +8,10 @@ release=1
 source=(https://download.savannah.gnu.org/releases/$name/$name-$version.tar.xz)
 
 build() {
-	cd $name-$version
+  cd $name-$version
 
-	make prefix=/usr CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
-	make prefix=/usr DESTDIR=$PKG install
-	rm -r $PKG/usr/share/doc
+  make prefix=/usr CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
+  make prefix=/usr DESTDIR=$PKG install
+
+  rm -r $PKG/usr/share/doc
 }
