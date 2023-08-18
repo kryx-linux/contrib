@@ -1,6 +1,6 @@
-# Description: A log colorizer written in C with plugin support.
+# Description: A log colorizer written in C with plugin support
 # URL: https://git.madhouse-project.org/archive/ccze/
-# Maintainer: Danny Rawlins, crux at romster dot me
+# Maintainer: unmaintained
 # Depends on: libpcre ncurses
 
 name=ccze
@@ -10,12 +10,12 @@ release=1
 source=(https://git.madhouse-project.org/archive/$name/archive/$name-$sversion.tar.gz)
 
 build() {
-	cd $name
+  cd $name
 
-	autoheader
-	autoconf
+  autoheader
+  autoconf
 
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$PKG install
 }
