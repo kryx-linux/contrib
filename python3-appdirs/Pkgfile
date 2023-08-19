@@ -1,0 +1,22 @@
+# Description: module for determining appropriate platform-specific dirs
+# URL: https://github.com/ActiveState/appdirs
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-appdirs
+version=1.4.4
+release=2
+source=(https://pypi.org/packages/source/a/appdirs/appdirs-$version.tar.gz)
+
+build() {
+  cd appdirs-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+
+  # remove sdist metadata, as wheel metadata will be used with python3-pip
+  find $PKG/usr/lib/python*/site-packages/ -maxdepth 1 -type f \
+    -name "${name#*-}-$version-py*.egg-info" -delete
+}
