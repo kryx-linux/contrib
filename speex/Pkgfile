@@ -1,0 +1,25 @@
+# Description: A free codec library for speech
+# URL: https://www.speex.org
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libogg
+
+name=speex
+version=1.2.1
+release=2
+source=(https://gitlab.xiph.org/xiph/speex/-/archive/Speex-$version/speex-Speex-$version.tar.bz2)
+
+build() {
+  cd $name-Speex-$version
+
+  NO_CONFIGURE=1 ./autogen.sh
+  ./configure \
+    --prefix=/usr \
+    --enable-epic-48k \
+    --enable-binaries \
+    --disable-static
+
+  sed -i -e "/^SUBDIRS = /s/doc //" Makefile
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  make
+  make DESTDIR=$PKG install
+}
