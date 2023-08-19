@@ -1,0 +1,25 @@
+# Description: Perl Uniform Resource Identifiers Library
+# URL: https://metacpan.org/release/URI
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=p5-uri
+version=5.19
+release=1
+source=(https://www.cpan.org/modules/by-module/URI/URI-$version.tar.gz)
+
+build() {
+  cd URI-$version
+
+  perl Makefile.PL INSTALLDIRS=vendor
+  make
+  make install DESTDIR=$PKG
+
+  find $PKG -type f \( \
+    -name '.packlist' -or \
+    -name '*.bs' -or \
+    -name 'autosplit.ix' -or \
+    -name 'perllocal.pod' \) -delete
+
+  # Remove empty directories
+  find $PKG -depth -empty -exec rm -rf {} \;
+}
