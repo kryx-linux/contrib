@@ -1,0 +1,107 @@
+From: Ingo Klöcker <dev@ingo-kloecker.de>
+Date: Tue, 15 Aug 2023 09:56:40 +0000 (+0200)
+Subject: qt: Make toLogString helper public
+X-Git-Tag: gpgme-1.22.0~3
+X-Git-Url: http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gpgme.git;a=commitdiff_plain;h=c3171d0cf1a249618f0763fe141ab84d8a4be240
+
+qt: Make toLogString helper public
+
+* lang/qt/src/util.h: Move toLogString ...
+* lang/qt/src/debug.h: ... here.
+* lang/qt/tests/run-importjob.cpp (main): Use toLogString.
+--
+
+This allows using the helper in dependent projects without duplicating
+it everywhere.
+
+GnuPG-bug-id: 6584
+---
+
+diff --git a/lang/qt/src/debug.h b/lang/qt/src/debug.h
+index 791726ca..03894768 100644
+--- a/lang/qt/src/debug.h
++++ b/lang/qt/src/debug.h
+@@ -36,6 +36,8 @@
+ 
+ #include "qgpgme_export.h"
+ 
++#include <sstream>
++
+ namespace GpgME
+ {
+ class Error;
+@@ -45,4 +47,18 @@ class QDebug;
+ 
+ QGPGME_EXPORT QDebug operator<<(QDebug debug, const GpgME::Error &err);
+ 
++namespace QGpgME
++{
++/**
++ * Helper to log GpgME objects which provide the output stream operator.
++ */
++template<class GpgMEClass>
++std::string toLogString(const GpgMEClass &object)
++{
++    std::stringstream stream;
++    stream << object;
++    return stream.str();
++}
++}
++
+ #endif // QGPGME_DEBUG_H
+diff --git a/lang/qt/src/util.h b/lang/qt/src/util.h
+index 475d477b..626de3df 100644
+--- a/lang/qt/src/util.h
++++ b/lang/qt/src/util.h
+@@ -38,7 +38,6 @@
+ 
+ #include <gpgme.h>
+ 
+-#include <sstream>
+ #include <string>
+ #include <vector>
+ 
+@@ -56,12 +55,4 @@ std::vector<std::string> toStrings(const QStringList &l);
+ 
+ QStringList toFingerprints(const std::vector<GpgME::Key> &keys);
+ 
+-template<class Result>
+-std::string toLogString(const Result &result)
+-{
+-    std::stringstream stream;
+-    stream << result;
+-    return stream.str();
+-}
+-
+ #endif // __QGPGME_UTIL_H__
+diff --git a/lang/qt/tests/run-importjob.cpp b/lang/qt/tests/run-importjob.cpp
+index b1814fa0..0ae92b09 100644
+--- a/lang/qt/tests/run-importjob.cpp
++++ b/lang/qt/tests/run-importjob.cpp
+@@ -34,6 +34,7 @@
+  #include "config.h"
+ #endif
+ 
++#include <debug.h>
+ #include <importjob.h>
+ #include <importresult.h>
+ #include <protocol.h>
+@@ -44,7 +45,6 @@
+ #include <QDebug>
+ 
+ #include <set>
+-#include <sstream>
+ 
+ GpgME::Protocol guessProtocol(const QString &filename)
+ {
+@@ -90,9 +90,7 @@ int main(int argc, char **argv)
+     auto job = (protocol == GpgME::CMS ? QGpgME::smime() : QGpgME::openpgp())->importJob();
+     const auto result = job->exec(keyData);
+     qDebug() << "Result error:" << result.error().asString();
+-    std::ostringstream ostr;
+-    ostr << result;
+-    for (const auto &line : QString::fromStdString(ostr.str()).split('\n')) {
++    for (const auto &line : QString::fromStdString(QGpgME::toLogString(result)).split('\n')) {
+         qDebug().noquote() << line;
+     }
+     return 0;
