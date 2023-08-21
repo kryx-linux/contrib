@@ -5,7 +5,7 @@
 
 name=docker
 version=24.0.5
-release=1
+release=2
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
     http://jaeger.morpheus.net/linux/crux/files/$name-man-pages-$version.tar.xz \
@@ -66,4 +66,6 @@ build() {
         $PKG/etc/udev/rules.d/80-$name.rules
     install -D -m 0644 cli-$version/contrib/completion/bash/docker \
         $PKG/etc/bash_completion.d/docker
+
+    mkdir -p $PKG/usr/lib/docker/cli-plugins
 }
