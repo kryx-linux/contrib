@@ -1,4 +1,4 @@
-# Description: Cleo allows you to create beautiful and testable command-line interfaces.
+# Description: Cleo allows you to create beautiful and testable command-line interfaces
 # URL: https://github.com/python-poetry/cleo
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-clikit python3-rapidfuzz
@@ -11,11 +11,6 @@ source=(https://github.com/python-poetry/cleo/archive/$version/$name-$version.ta
 build() {
   cd cleo-$version
 
-  if prt-get isinst python3-poetry; then
-    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
-  else
-    /usr/bin/pip3 install --isolate --root=$PKG --ignore-installed --no-deps cleo
-    rm -r $PKG/usr/lib/python3.10/site-packages/cleo-2.0.1.dist-info/{INSTALLER,REQUESTED}
-  fi
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
 }
