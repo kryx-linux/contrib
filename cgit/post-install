@@ -1,5 +1,5 @@
 #!/bin/sh
 
-if prt-get isinst lighttpd 2>/dev/null; then
+if prt-get isinst lighttpd && [ -e /etc/lighttpd-cgit.conf ]; then
     echo 'include "lighttpd-cgit.conf"' >> /etc/lighttpd.conf
 fi
