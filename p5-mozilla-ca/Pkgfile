@@ -4,14 +4,16 @@
 # Depends on:
 
 name=p5-mozilla-ca
-version=20230807
+version=20230821
 release=1
 source=(https://cpan.metacpan.org/authors/id/L/LW/LWP/Mozilla-CA-$version.tar.gz)
 
 build() {
   cd Mozilla-CA-$version
+
   perl Makefile.PL INSTALLDIRS=vendor
   make
   make DESTDIR=$PKG install
+
   find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
 }
