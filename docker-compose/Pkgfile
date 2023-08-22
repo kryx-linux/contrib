@@ -13,8 +13,8 @@ build() {
     export CGO_CPPFLAGS="${CXXFLAGS}"
     export CGO_CXXFLAGS="${CXXFLAGS}"
     cd compose-$version
-    go build -trimpath -o ${name} ./cmd
-    install -Dm0755 ${name} ${PKG}/usr/bin/${name}
+    make VERSION=v$version
+    install -Dm0755 bin/build/${name} ${PKG}/usr/bin/${name}
     install -dm0755 ${PKG}/usr/lib/docker/cli-plugins
     ln -s /usr/bin/docker-compose ${PKG}/usr/lib/docker/cli-plugins/
 }
