@@ -1,7 +1,7 @@
 # Description: Python package wrapping the IANA time zone database
 # URL: https://github.com/python/tzdata
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-build python3-installer
+# Depends on: python3-build python3-installer python3-wheel
 
 name=python3-tzdata
 version=2023.3
@@ -10,11 +10,7 @@ source=(https://files.pythonhosted.org/packages/source/t/tzdata/tzdata-$version.
 
 build() {
   cd tzdata-$version
-  /usr/bin/python3 -m build \
-    --wheel \
-    --skip-dependency-check \
-    --no-isolation
-  /usr/bin/python3 -m installer \
-    --compile-bytecode 2 \
-    --destdir=$PKG dist/*.whl
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
