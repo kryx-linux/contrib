@@ -1,0 +1,18 @@
+# Description: A fast, extensible Markdown parser in pure Python
+# URL: https://github.com/miyuchina/mistletoe
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-mistletoe
+version=1.1.0
+release=1
+source=(https://pypi.org/packages/source/m/mistletoe/mistletoe-$version.tar.gz)
+
+build() {
+  cd mistletoe-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
