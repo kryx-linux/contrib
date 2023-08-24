@@ -1,0 +1,17 @@
+# Description: Additional utilities for click
+# URL: https://github.com/domdfcoding/consolekit
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-click python3-deprecation-alias python3-domdf-python-tools python3-mistletoe python3-wheel
+
+name=python3-consolekit
+version=1.5.1
+release=1
+source=(https://pypi.org/packages/source/c/consolekit/consolekit-$version.tar.gz)
+renames=(python3-consolekit.tar.gz)
+
+build() {
+  cd consolekit-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
