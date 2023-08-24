@@ -1,0 +1,16 @@
+# Description: Dom's tools for Tom's Obvious, Minimal Language
+# URL: https://github.com/domdfcoding/dom_toml
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-domdf-python-tools python3-toml python3-wheel
+
+name=python3-dom-toml
+version=0.6.1
+release=1
+source=(https://pypi.org/packages/source/d/dom_toml/dom_toml-$version.tar.gz)
+
+build() {
+  cd dom_toml-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
