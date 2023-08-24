@@ -1,0 +1,18 @@
+# Description: A wrapper around 'deprecation' providing support for deprecated aliases
+# URL: https://github.com/domdfcoding/deprecation-alias
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-deprecation
+
+name=python3-deprecation-alias
+version=0.3.2
+release=1
+source=(https://pypi.org/packages/source/d/deprecation-alias/deprecation-alias-$version.tar.gz)
+
+build() {
+  cd deprecation-alias-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
