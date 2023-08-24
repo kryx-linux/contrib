@@ -1,0 +1,18 @@
+# Description: Parser for pyproject.toml
+# URL: https://github.com/repo-helper/pyproject-parser
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-attrs python3-shippinglabel
+
+name=python3-pyproject-parser
+version=0.9.1
+release=1
+source=(https://pypi.org/packages/source/p/pyproject-parser/pyproject-parser-$version.tar.gz)
+
+build() {
+  cd pyproject-parser-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
