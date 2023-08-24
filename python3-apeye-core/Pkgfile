@@ -1,0 +1,16 @@
+# Description: Core (offline) functionality for the apeye library
+# URL: https://github.com/domdfcoding/apeye-core
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-domdf-python-tools python3-hatch-requirements-txt python3-idna
+
+name=python3-apeye-core
+version=1.1.3
+release=1
+source=(https://pypi.org/packages/source/a/apeye_core/apeye_core-$version.tar.gz)
+
+build() {
+  cd apeye_core-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
