@@ -2,38 +2,32 @@
 # URL: https://www.gnupg.org/related_software/gpgme/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: gnupg swig python3-setuptools
-# Optional: qt5 qt6-base
 
 name=gpgme
-version=1.22.0
+version=1.21.0
 release=1
-source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2
-  qt5.patch)
+source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
-
-  ## revert c3171d0cf1a249618f0763fe141ab84d8a4be240
-  ## https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gpgme.git;a=commitdiff;h=c3171d0cf1a249618f0763fe141ab84d8a4be240
-  patch -Rp1 -i $SRC/qt5.patch
-  prt-get isinst qt5 && PKGMK_GPGME_LANG+=' qt'
-  ## fails to build as well
-  #prt-get isinst qt6-base && PKGMK_GPGME_LANG+=' qt6'
 
   export PYTHON='/usr/bin/python3'
   ./configure \
     --prefix=/usr \
     --disable-fd-passing \
     --disable-gpgsm-test \
-    --enable-languages="cl cpp python $PKGMK_GPGME_LANG"
+    --enable-languages='cl cpp python'
 
   make
   make DESTDIR=$PKG install
 
   cd lang/python
-  top_builddir=$SRC/name-$version /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  make DESTDIR=$PKG install
 
-  rm -rf $PKG/usr/share
+  install -d $PKG/usr/etc/gpgme
+  echo 'c cl cpp' > $PKG/usr/etc/gpgme/base
+  echo 'python3' > $PKG/usr/etc/gpgme/python
+
+  rm -r $PKG/usr/share/info
+  #rm -rf $PKG/usr/lib/python2.7
 }
