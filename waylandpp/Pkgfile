@@ -1,14 +1,17 @@
 # Description: Wayland C++ bindings
 # URL: https://github.com/NilsBrause/waylandpp
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: egl-wayland pugixml wayland-protocols
+# Depends on: egl-wayland pugixml
 
 name=waylandpp
 version=1.0.0
 release=1
-source=(https://github.com/NilsBrause/waylandpp/archive/$version/$name-$version.zip)
+source=(https://github.com/NilsBrause/waylandpp/archive/$version/$name-$version.tar.gz
+  waylandpp-1.0.0-gcc13.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/waylandpp-1.0.0-gcc13.patch
+
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
