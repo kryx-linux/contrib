@@ -1,0 +1,18 @@
+# Description: Helpful functions for Python
+# URL: https://github.com/domdfcoding/domdf_python_tools
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-natsort python3-typing_extensions
+
+name=python3-domdf-python-tools
+version=3.6.1
+release=1
+source=(https://pypi.org/packages/source/d/domdf_python_tools/domdf_python_tools-$version.tar.gz)
+
+build() {
+  cd domdf_python_tools-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
