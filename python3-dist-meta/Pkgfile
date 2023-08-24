@@ -1,0 +1,18 @@
+# Description: Parse and create Python distribution metadata
+# URL: https://github.com/repo-helper/dist-meta
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-domdf-python-tools python3-handy-archives
+
+name=python3-dist-meta
+version=0.8.0
+release=1
+source=(https://pypi.org/packages/source/d/dist-meta/dist-meta-$version.tar.gz)
+
+build() {
+  cd dist-meta-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
