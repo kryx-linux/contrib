@@ -1,7 +1,7 @@
 # Description: Python bindings for QT6WebEngine
 # URL: https://www.riverbankcomputing.com/software/pyqtwebengine/intro
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-pyqt6 qt6-webengine python3-pyqt-builder sip python3-ply
+# Depends on: python3-pyqt6 qt6-webengine
 
 name=python3-pyqt6-webengine
 version=6.5.0
@@ -15,7 +15,9 @@ build() {
   sip-build \
     --no-make \
     --qmake=/usr/lib/qt6/bin/qmake6 \
-    --concatenate 1
+    --concatenate 1 \
+    --verbose
+
   cd build
   make
   make INSTALL_ROOT=$PKG install
