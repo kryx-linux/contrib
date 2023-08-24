@@ -7,10 +7,13 @@ name=crossguid
 version=0.2.2
 _commit=ca1bf4b810e2d188d04cb6286f957008ee1b7681
 release=2
-source=(https://github.com/graeme-hill/crossguid/archive/$_commit/$name-$version-$release.tar.gz)
+source=(https://github.com/graeme-hill/crossguid/archive/$_commit/$name-$version-$release.tar.gz
+  crossguid2-fix_GCC13.patch)
 
 build() {
   sed -i 's!${CMAKE_INSTALL_DATADIR}/crossguid/cmake!${CMAKE_INSTALL_LIBDIR}/cmake/crossguid!' $name-$_commit/CMakeLists.txt
+
+  patch -Np1 -d $name-$_commit -i $SRC/crossguid2-fix_GCC13.patch
 
   cmake -S $name-$_commit -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
