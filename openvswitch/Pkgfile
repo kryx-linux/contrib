@@ -4,12 +4,21 @@
 # Depends on: python3-six
 
 name=openvswitch
-version=3.1.2
+version=3.2.0
 release=1
-source=(http://openvswitch.org/releases/openvswitch-$version.tar.gz ovsd)
+source=(http://openvswitch.org/releases/openvswitch-$version.tar.gz
+  docs-1-Add-nowarn-region-option-to-tables.patch
+  docs-2-Run_tbl_preprocessor_in_manpage-check_rule.patch
+  lib-fatal-signal-Drop-logging-of-failed-dummy-backtr.patch
+  ovsd)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/docs-1-Add-nowarn-region-option-to-tables.patch
+  patch -Np1 -i $SRC/docs-2-Run_tbl_preprocessor_in_manpage-check_rule.patch
+  patch -Np1 -i $SRC/lib-fatal-signal-Drop-logging-of-failed-dummy-backtr.patch
+
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \

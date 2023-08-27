@@ -1,0 +1,41 @@
+From 2d9cee25d9f196759ef0a54bcb8635e462b9bb5f Mon Sep 17 00:00:00 2001
+From: Frode Nordahl <frode.nordahl@canonical.com>
+Date: Tue, 22 Aug 2023 10:31:49 +0200
+Subject: [PATCH] lib/fatal-signal: Drop logging of failed dummy backtrace.
+
+Some systems may provide backtrace() in libc but for some reason
+not provide any frames when attempting to use it.
+
+On those systems the fatal_signal_init() function currently logs
+this debug message: "Capturing of dummy backtrace has failed."
+
+A consequence of this logging may be false negative test results.
+
+Logging the fact that backtrace() does not work has limited value
+on a production system and I propose we drop it.
+
+Fixes: 759a29dc2d97 ("backtrace: Extend the backtrace functionality.")
+Reported-at: https://launchpad.net/bugs/2032623
+Signed-off-by: Frode Nordahl <frode.nordahl@canonical.com>
+---
+ lib/fatal-signal.c | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/lib/fatal-signal.c b/lib/fatal-signal.c
+index 77f0c87dd..953150074 100644
+--- a/lib/fatal-signal.c
++++ b/lib/fatal-signal.c
+@@ -138,10 +138,6 @@ fatal_signal_init(void)
+ 
+         backtrace_capture(&dummy_bt);
+ 
+-        if (!dummy_bt.n_frames) {
+-            VLOG_DBG("Capturing of dummy backtrace has failed.");
+-        }
+-
+         fatal_signal_create_wakeup_events();
+ 
+ #ifdef _WIN32
+-- 
+2.40.1
+
