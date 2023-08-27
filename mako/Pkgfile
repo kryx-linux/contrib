@@ -9,12 +9,13 @@ release=1
 source=(https://github.com/emersion/mako/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  meson $name-$version build \
+  meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true
+
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }
