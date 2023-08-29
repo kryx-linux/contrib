@@ -4,15 +4,13 @@
 # Depends on: python3-automat python3-constantly python3-hyperlink python3-incremental python3-zope-interface
 
 name=python3-twisted
-version=22.10.0
+version=23.8.0
 release=1
 source=(https://github.com/twisted/twisted/archive/twisted-$version.tar.gz)
 
 build() {
   cd twisted-twisted-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
