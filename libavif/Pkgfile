@@ -4,14 +4,11 @@
 # Depends on: aom dav1d gdk-pixbuf libyuv rav1e svt-av1
 
 name=libavif
-version=1.0.0
+version=1.0.1
 release=1
-source=(https://github.com/AOMediaCodec/libavif/archive/v$version/$name-$version.tar.gz
-  1525.patch)
+source=(https://github.com/AOMediaCodec/libavif/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/1525.patch
-
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
