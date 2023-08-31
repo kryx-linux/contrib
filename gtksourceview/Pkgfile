@@ -1,29 +1,23 @@
 # Description: A text widget adding syntax highlighting.
 # URL: http://www.gnome.org/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: gtk3
-# Optional: glade vala
+# Depends on: gtk4
 
 name=gtksourceview
-version=3.24.11
+version=5.8.0
 release=1
-source=(https://ftp.gnome.org/pub/gnome/sources/$name/${version:0:4}/$name-$version.tar.xz)
+source=(https://ftp.gnome.org/pub/gnome/sources/$name/${version:0:3}/$name-$version.tar.xz)
 
 build() {
-  cd $name-$version
-
-  if [ -n "$(pkginfo -i | grep '^glade ')" ]; then
-    local glade=--enable-glade-catalog
-  fi
-
-  ./configure \
+  meson setup $name-$version build \
     --prefix=/usr \
-    --disable-nls \
-    --disable-dependency-tracking \
-    "$glade"
+    --buildtype=plain \
+    -D vapi=false \
+    -D b_lto=true \
+    -D b_pie=true
 
-  make
-  make DESTDIR=$PKG install
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
-  rm -r $PKG/usr/share/gtk-doc
+  rm -r $PKG/usr/share/locale
 }
