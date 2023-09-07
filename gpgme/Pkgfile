@@ -6,7 +6,7 @@
 
 name=gpgme
 version=1.22.0
-release=3
+release=4
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2
   qt5.patch)
 
@@ -25,7 +25,8 @@ build() {
     --prefix=/usr \
     --disable-fd-passing \
     --disable-gpgsm-test \
-    --enable-languages="cl cpp python $PKGMK_GPGME_LANG"
+    --enable-languages="cl cpp python $PKGMK_GPGME_LANG" \
+    --enable-static
 
   make
   make DESTDIR=$PKG install
