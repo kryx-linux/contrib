@@ -11,8 +11,8 @@ source=(https://github.com/flatpak/libportal/releases/download/$version/$name-$v
 
 build() {
   prt-get isinst gobject-introspection || PKGMK_LIBPORTAL+=' -D introspection=false'
-  prt-get isinst gtk4 && PKGMK_LIBPORTAL+=' --backend-gtk4=enabled'
-  prt-get isinst qt5 && PKGMK_LIBPORTAL+=' --backend-qt5=enabled'
+  prt-get isinst gtk4 && PKGMK_LIBPORTAL+=' -D backend-gtk4=enabled'
+  prt-get isinst qt5 && PKGMK_LIBPORTAL+=' -D backend-qt5=enabled'
   prt-get isinst vala || PKGMK_LIBPORTAL+=' -D vapi=false'
 
   meson setup $name-$version build $PKGMK_LIBPORTAL \
