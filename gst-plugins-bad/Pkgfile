@@ -1,12 +1,12 @@
-# Description: A set of plugins for gstreamer that may pose distribution problems.
+# Description: a set of plug-ins that aren't up to par compared to the rest
 # URL: https://gstreamer.freedesktop.org/modules/gst-plugins-bad.html
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: bluez brotli bzip2 chromaprint curl dav1d eudev expat faac faad2 fdk-aac ffmpeg flac glib gst-plugins-base gstreamer ladspa lame lcms2 libass libdrm libffi libglvnd libgmp libgudev libjpeg-turbo libmodplug libnghttp2 libnice libogg libpcre libpng libsndfile libsrtp libtheora libva libvdpau libvorbis libvpx libwebp lilv mjpegtools neon openal openjpeg2 opus orc rtmpdump shaderc soundtouch util-linux vulkan-loader x265 xz zlib zstd
-# Optional: openh264 x264
+# Depends on: brotli dav1d faac faad2 fdk-aac ffmpeg gst-plugins-base lame libass libmodplug libnice libsrtp libva libvdpau libvpx libwebp lilv mjpegtools neon openjpeg2 rtmpdump shaderc
+# Optional: aom bluez chromaprint ladspa libde265 lv2 musepack openal openh264 soundtouch x265
 
 name=gst-plugins-bad
 version=1.22.5
-release=1
+release=2
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
@@ -31,9 +31,24 @@ build() {
     -D voamrwbenc=disabled
     -D wasapi2=disabled
     -D wasapi=disabled
+    -D extra-checks=disabled
     -D gobject-cast-checks=disabled"
-  prt-get isinst openh264 && PKGMK_GSTBAD+=" -D openh264=enabled" || \
-    PKGMK_GSTBAD+=" -D openh264=disabled"
+
+    optional="aom
+      bluez
+      chromaprint
+      ladspa
+      libde265
+      lv2
+      musepack
+      openal
+      openh264
+      soundtouch
+      x265"
+
+  for feat in $optional; do
+    prt-get isinst $feat || PKGMK_GSTBAD+=" -D $feat=disabled"
+  done
 
   meson setup build $name-$version $PKGMK_GSTBAD \
     -D package-name="GStreamer Bad Plugins (CRUX Linux)" \
