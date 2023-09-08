@@ -1,7 +1,7 @@
 # Description: An open source SVG editor.
 # URL: https://www.inkscape.org/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: boehm-gc boost double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler-glib popt potrace gdl
+# Depends on: boehm-gc boost double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler popt potrace gdl
 
 name=inkscape
 version=1.3
@@ -9,6 +9,7 @@ release=1
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz)
 
 build() {
+    [ -e /usr/include/poppler/glib/poppler.h ] || { echo "install glib and then rebuild poppler, you need it for ${name}."; exit 1; }
     export LDFLAGS+=" -Wl,-rpath=/usr/lib/inkscape"
 
     cmake -S inkscape-${version}* -B build -G Ninja \
