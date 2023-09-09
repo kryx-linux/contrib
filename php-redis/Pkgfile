@@ -7,17 +7,21 @@
 name=php-redis
 version=5.3.7
 release=1
-source=(https://github.com/phpredis/phpredis/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/phpredis/phpredis/archive/refs/tags/$version.tar.gz)
+renames=($name-$version.tar.gz)
 
 build() {
   cd phpredis-$version
+
   echo -e "; this extension requires igbinary to be activated as well\n;extension=redis" > "redis.ini"
   phpize
+
   ./configure --prefix=/usr \
     --enable-redis-igbinary \
     --enable-redis-lzf \
     --with-liblzf=/usr/lib/
   make
   make INSTALL_ROOT=$PKG/ install
+
   install -vDm 644 redis.ini -t $PKG/etc/php/conf.d/
 }
