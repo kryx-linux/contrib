@@ -18,7 +18,7 @@ build() {
   patch -Np1 -i $SRC/postgresql-perl-rpath.patch
 
   # optionals {{{
-  prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
+  #prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
   prt-get isinst icu && PKGMK_PGSQL+=' --with-icu'
   prt-get isinst krb5 && PKGMK_PGSQL+=' --with-gssapi'
   prt-get isinst libxml2 && PKGMK_PGSQL+=' --with-libxml'
