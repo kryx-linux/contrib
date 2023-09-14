@@ -5,7 +5,7 @@
 # Optional: clang icu krb5 libxml2 libxslt openldap tcl
 
 name=postgresql
-version=15.4
+version=16.0
 release=1
 source=(https://ftp.postgresql.org/pub/source/v$version/postgresql-$version.tar.bz2
   postgresql-run-socket.patch postgresql-perl-rpath.patch
@@ -19,7 +19,7 @@ build() {
 
   # optionals {{{
   #prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
-  prt-get isinst icu && PKGMK_PGSQL+=' --with-icu'
+  prt-get isinst icu || PKGMK_PGSQL+=' --without-icu'
   prt-get isinst krb5 && PKGMK_PGSQL+=' --with-gssapi'
   prt-get isinst libxml2 && PKGMK_PGSQL+=' --with-libxml'
   prt-get isinst libxslt && PKGMK_PGSQL+=' --with-libxslt'
