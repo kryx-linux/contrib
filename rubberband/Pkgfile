@@ -2,23 +2,25 @@
 # URL: https://www.breakfastquay.com/rubberband/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: fftw libsamplerate vamp-plugin-sdk
-# Optional: ladspa libogg libvorbis openjdk17-jdk opus
+# Optional: ladspa libogg libvorbis openjdk20-jdk opus
 
 name=rubberband
 version=3.3.0
-release=1
+release=2
 source=(https://github.com/breakfastquay/rubberband/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-  if prt-get isinst openjdk17-jdk; then
-    export PKGMK_RUBBERBAND+=" -D extra_include_dirs=/usr/lib/java/openjdk17-jdk/include,/usr/lib/java/openjdk17-jdk/include/linux"
-    export JAVA_HOME=/usr/lib/java/openjdk17-jdk
-    export PATH+=":$JAVA_HOME/bin"
+  if prt-get isinst openjdk20-jdk; then
+    export PKGMK_RUBBERBAND+=" -D extra_include_dirs=/usr/lib/java/openjdk20-jdk/include,/usr/lib/java/openjdk20-jdk/include/linux"
+    export JAVA_HOME=/usr/lib/java/openjdk20-jdk
+    export PATH="/usr/lib/java/openjdk20-jdk/bin:/usr/bin:/bin:/usr/sbin:/sbin"
   fi
 
   meson setup build $name-$version $PKGMK_RUBBERBAND \
     --prefix=/usr \
     --buildtype=plain \
+    -D b_lto=true \
+    -D b_pie=true \
     -D fft=fftw \
     -D resampler=libsamplerate
 
