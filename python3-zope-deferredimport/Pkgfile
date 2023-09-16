@@ -4,12 +4,13 @@
 # Depends on: python3-zope-proxy
 
 name=python3-zope-deferredimport
-version=4.4
+version=5.0
 release=1
 source=(https://github.com/zopefoundation/zope.deferredimport/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd zope.deferredimport-$version
+
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG --optimize=1
 }

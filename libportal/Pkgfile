@@ -1,18 +1,18 @@
 # Description: libportal provides GIO-style async APIs for most Flatpak portals.
 # URL: https://github.com/flatpak/libportal
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: glib gtk3
-# Optional: gtk4 qt5 gobject-introspection vala
+# Depends on: gtk3
+# Optional: gobject-introspection gtk4 qt5 vala
 
 name=libportal
-version=0.6
+version=0.7.1
 release=1
 source=(https://github.com/flatpak/libportal/releases/download/$version/$name-$version.tar.xz)
 
 build() {
-  prt-get isinst gtk4 && LIBPORTAL_BACKENDS+=',gtk4'
-  prt-get isinst qt5 && LIBPORTAL_BACKENDS+=',qt5'
   prt-get isinst gobject-introspection || PKGMK_LIBPORTAL+=' -D introspection=false'
+  prt-get isinst gtk4 && PKGMK_LIBPORTAL+=' -D backend-gtk4=enabled'
+  prt-get isinst qt5 && PKGMK_LIBPORTAL+=' -D backend-qt5=enabled'
   prt-get isinst vala || PKGMK_LIBPORTAL+=' -D vapi=false'
 
   meson setup $name-$version build $PKGMK_LIBPORTAL \
@@ -21,8 +21,8 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D docs=false \
-    -D backends=gtk3$LIBPORTAL_BACKENDS
+    -D docs=false
+
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 }

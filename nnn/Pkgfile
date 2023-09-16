@@ -1,11 +1,11 @@
 # Description: Tiny, lightning fast, feature-packed file manager
 # URL: https://github.com/jarun/nnn
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: ncurses readline
-# Optional: patool mediainfo icons-in-terminal
+# Depends on: readline
+# Optional: git icons-in-terminal mediainfo patool
 
 name=nnn
-version=4.8
+version=4.9
 release=1
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
@@ -16,8 +16,14 @@ build() {
 
   # build with icons support if contrib/icons-in-terminal is installed
   prt-get isinst icons-in-terminal && PKGMK_NNN+=' O_ICONS=1'
+  prt-get isinst git && PKGMK_NNN+=' O_GITSTATUS=1'
+  prt-get listinst ttf*nerd* && PKGMK_NNN+=' O_NERD=1'
 
-  make $PKGMK_NNN
+  make $PKGMK_NNN \
+    O_NOX11=1 \
+    O_RESTOREPREVIEW=1 \
+    O_NOLC=0
+
   make DESTDIR=$PKG PREFIX=/usr install
   make DESTDIR=$PKG PREFIX=/usr install-desktop
 

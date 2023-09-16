@@ -1,0 +1,70 @@
+From 4deb986bdbdf49d7cd5189383782b70442680c36 Mon Sep 17 00:00:00 2001
+From: Frode Nordahl <frode.nordahl@canonical.com>
+Date: Mon, 21 Aug 2023 09:15:24 +0200
+Subject: [PATCH v3 1/2] docs: Add `nowarn` region option to tables.
+
+Starting with groff 1.23.0 a warning is produced if the tbl
+preprocessor is not run.  A side effect of enabling it is that
+new warnings on table formatting is printed.
+
+As requested during the review [0] of a series [1] attempting to
+address this, this patch makes use of the `nowarn` region option
+as opposed to attempting to change the formatting.
+
+0: https://patchwork.ozlabs.org/project/openvswitch/patch/ZM00Wfa80rOb2oCA@riva.ucam.org/#3164177
+1: https://patchwork.ozlabs.org/project/openvswitch/list/?series=367378&state=*
+
+Reported-by: Lucas Nussbaum <lucas@debian.org>
+Reported-at: https://bugs.debian.org/1042358
+Signed-off-by: Frode Nordahl <frode.nordahl@canonical.com>
+---
+ build-aux/extract-ofp-fields | 6 +++---
+ lib/meta-flow.xml            | 1 +
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/build-aux/extract-ofp-fields b/build-aux/extract-ofp-fields
+index efec59c25..6366bd446 100755
+--- a/build-aux/extract-ofp-fields
++++ b/build-aux/extract-ofp-fields
+@@ -216,7 +216,7 @@ def field_to_xml(field_node, f, body, summary):
+         """.PP
+ \\fB%s Field\\fR
+ .TS
+-tab(;);
++tab(;),nowarn;
+ l lx.
+ """
+         % title
+@@ -317,7 +317,7 @@ def group_xml_to_nroff(group_node, fields):
+         '.SH "%s"\n' % build.nroff.text_to_nroff(title.upper() + " FIELDS"),
+         '.SS "Summary:"\n',
+         ".TS\n",
+-        "tab(;);\n",
++        "tab(;),nowarn;\n",
+         "l l l l l l l.\n",
+         "Name;Bytes;Mask;RW?;Prereqs;NXM/OXM Support\n",
+         "\_;\_;\_;\_;\_;\_\n",
+@@ -329,7 +329,7 @@ def group_xml_to_nroff(group_node, fields):
+ 
+ 
+ def make_oxm_classes_xml(document):
+-    s = """tab(;);
++    s = """tab(;),nowarn;
+ l l l.
+ Prefix;Vendor;Class
+ \_;\_;\_
+diff --git a/lib/meta-flow.xml b/lib/meta-flow.xml
+index bdd12f6a7..416ea0cf2 100644
+--- a/lib/meta-flow.xml
++++ b/lib/meta-flow.xml
+@@ -3517,6 +3517,7 @@ actions=clone(load:0->NXM_OF_IN_PORT[],output:123)
+     </p>
+ 
+     <tbl>
++nowarn;
+ r r r r r.
+ Criteria        OpenFlow 1.0    OpenFlow 1.1    OpenFlow 1.2+   NXM
+ \_      \_      \_      \_      \_
+-- 
+2.40.1
+

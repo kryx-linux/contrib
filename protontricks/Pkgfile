@@ -5,12 +5,13 @@
 # Optional: zenity
 
 name=protontricks
-version=1.10.3
+version=1.10.5
 release=1
-source=(https://files.pythonhosted.org/packages/source/${name:0:1}/$name/$name-$version.tar.gz)
+source=(https://pypi.org/packages/source/p/protontricks/protontricks-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG --optimize=1 --skip-build
 }

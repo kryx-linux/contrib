@@ -1,0 +1,23 @@
+# Description: A text widget adding syntax highlighting.
+# URL: http://www.gnome.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: gtk4
+
+name=gtksourceview
+version=5.8.0
+release=1
+source=(https://ftp.gnome.org/pub/gnome/sources/$name/${version:0:3}/$name-$version.tar.xz)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    -D vapi=false \
+    -D b_lto=true \
+    -D b_pie=true
+
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
+}

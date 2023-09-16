@@ -1,23 +1,23 @@
 # Description: A set of services and modules that enable several features in VMware products for better management of, and seamless user interactions with, guests
 # URL: https://github.com/vmware/open-vm-tools
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: libmspack libdnet glib rpcsvc-proto fuse
+# Depends on: libmspack glib rpcsvc-proto fuse
 
 name=open-vm-tools
-version=12.2.5-21855600
+version=12.3.0-22234872
 release=1
 source=(https://github.com/vmware/$name/releases/download/stable-${version%-*}/$name-$version.tar.gz \
-	vmtoolsd)
+  vmtoolsd)
 
 build() {
-	cd $name-$version
-	./configure --prefix=/usr \
-		--without-icu \
-		--without-x \
-		--without-xerces
-	make
-	make DESTDIR=$PKG install
+  cd $name-$version
+  ./configure --prefix=/usr \
+    --without-icu \
+    --without-x \
+    --without-xerces
+  make
+  make DESTDIR=$PKG install
 
-	install -o root -g root -m 0755 -D $SRC/vmtoolsd \
-		$PKG/etc/rc.d/vmtoolsd
+  install -o root -g root -m 0755 -D $SRC/vmtoolsd \
+    $PKG/etc/rc.d/vmtoolsd
 }

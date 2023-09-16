@@ -1,50 +1,51 @@
-#!/bin/sh
+#!/bin/bash
 #
 # /etc/rc.d/synapse: start/stop synapse daemon
 #
 
-SUDO=/usr/bin/sudo
+error() {
+  printf "\e[31m%s\e[0m\n" "[ERRO] $*"
+}
+
+if [[ -e /usr/bin/doas ]]; then
+  SUDO=/usr/bin/doas
+elif [[ -e /usr/bin/sudo ]]; then
+  SUDO=/usr/bin/sudo
+else
+  error "Needs either core/sudo or contrib/opendoas installed and configured!"
+  exit 1
+fi
+
 PID=/var/run/homeserver.pid
 
 case $1 in
   start)
-    # sanity checks
     if [ ! -e /etc/synapse/homeserver.yaml ]; then
-      echo "Please read README.md from this port and create a homeserver.yaml file first"
+      printf "\e[31m%s\e[0m\n" "[ERRO] Needs either core/sudo or contrib/opendoas installed and configured!"
+      error "Please read README.md from this port and create a homeserver.yaml file first"
       exit 1
     fi
 
-    # 
-    if [ "$(stat -c '%a' /var/run)" != "777" ]; then
-      echo "rundir needs to be world writeable for synapse to be able to write to it"
-      exit 1
-    fi
+    [[ ! -e /run/synapse ]] && install -g synapse -o synapse -d /run/synapse
 
-    $SUDO -u synapse /usr/bin/synctl start /etc/synapse/homeserver.yaml
-    ;;
+    $SUDO -u synapse /usr/bin/synctl start /etc/synapse/homeserver.yaml ;;
   stop)
-    /usr/bin/synctl stop /etc/synapse/homeserver.yaml
-    ;;
+    /usr/bin/synctl stop /etc/synapse/homeserver.yaml ;;
   restart)
     $0 stop
-    $0 start
-    ;;
+    $0 start ;;
   status)
-    if [ -e $PID ]
-    then
-      if [ -d "/proc/$(cat $PID)" ]
-      then
+    if [ -e $PID ]; then
+      if [ -d "/proc/$(cat $PID)" ]; then
         echo "synapse server is running with pid $(cat $PID)"
       else
-      echo "pidfile $PID exists, but synapse server is not running"
+        echo "pidfile $PID exists, but synapse server is not running"
       fi
     else
       echo "synapse server is not running"
-    fi
-    ;;
+    fi ;;
   *)
-    echo "usage: $0 [start|stop|restart|status]"
-    ;;
+    echo "usage: $0 [start|stop|restart|status]" ;;
 esac
 
 # End of file

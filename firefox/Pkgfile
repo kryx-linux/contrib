@@ -5,7 +5,7 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wasi-libc++ wayland
 
 name=firefox
-version=116.0.3
+version=117.0.1
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/${version}/source/$name-${version}.source.tar.xz
   firefox.desktop
@@ -14,8 +14,8 @@ source=(https://ftp.mozilla.org/pub/firefox/releases/${version}/source/$name-${v
 build() {
   cd $name-$version
 
-  #for p in $SRC/*.patch; do
-  #	patch -p1 -i $p
+  #for p in $SRC/REV*.patch; do
+  #  patch -p1 -R -i $p
   #done
 
   if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
