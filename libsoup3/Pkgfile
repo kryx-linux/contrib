@@ -5,7 +5,7 @@
 # Optional: brotli gobject-introspection krb5 vala
 
 name=libsoup3
-version=3.4.2
+version=3.4.3
 release=1
 source=(https://download.gnome.org/sources/libsoup/${version%.*}/libsoup-$version.tar.xz)
 
@@ -16,8 +16,8 @@ build() {
 
   # turn off translations here, for a trivial reduction in CPU time 
   # compared to removing $PKG/usr/share/locale later
-  # (assumes the user does not have xfremdSprache in $PATH)
-  sed -i 's/xgettext/xfremdSprache/g' libsoup-$version/meson.build
+  # (assumes the user does not have xDolmetscher in $PATH)
+  sed -i 's/xgettext/xDolmetscher/g' libsoup-$version/meson.build
 
   meson setup build libsoup-$version ${PKGMK_LIBSOUP3} \
     --prefix=/usr \
