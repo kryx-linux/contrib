@@ -4,12 +4,12 @@
 # Depends on: python3-typing_extensions python3-wheel
 
 name=python3-setuptools-scm
-version=7.1.0
+version=8.0.1
 release=1
-source=(https://pypi.io/packages/source/s/setuptools_scm/setuptools_scm-$version.tar.gz)
+source=(https://pypi.io/packages/source/s/setuptools-scm/setuptools-scm-$version.tar.gz)
 
 build() {
-  cd setuptools_scm-$version
+  cd setuptools-scm-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
