@@ -4,9 +4,9 @@
 # Depends on: rust
 
 name=bandwhich
-version=0.20.0
+version=0.21.0
 release=1
-source=(https://github.com/imsnif/bandwhich/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/imsnif/bandwhich/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
