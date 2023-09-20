@@ -4,32 +4,30 @@
 
 name=bftpd
 version=6.1
-release=1
+release=2
 source=(https://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz
-	ftpd)
+  ftpd)
 
 build() {
-	cd $name
+  cd $name
 
-	CFLAGS+=' -fcommon'
-	./configure \
-		--prefix=/usr \
-		--sysconfdir=/etc \
-		--mandir=/usr/share/man \
-		--localstatedir=/var \
-		--enable-libz
+  CFLAGS+=' -fcommon'
+  sed -e '/var\/run/d' \
+      -e '/^sbindir=/a sysconfdir=@sysconfdir@\nlocalstatedir=@localstatedir@' \
+      -e 's/$.prefix.\/etc/$(sysconfdir)/' \
+      -e 's/$.prefix.\/var/$(localstatedir)/' \
+      -i Makefile.in
+  ./configure --prefix=/usr \
+    --mandir=/usr/share/man \
+    --localstatedir=/var    \
+    --sysconfdir=/etc       \
+    --enable-libz
 
-	make
-	install -d $PKG/usr/sbin $PKG/etc $PKG/etc/rc.d
-	make DESTDIR=$PKG install
+  make
+  install -d $PKG/usr/sbin $PKG/etc $PKG/etc/rc.d
+  make DESTDIR=$PKG install
 
-	# bftpd version 3.7 moved these directories and --sysconfdir
-	# --localstatedir does not work currently
-	mv $PKG/usr/etc/bftpd.conf $PKG/etc/
-	mv $PKG/usr/var $PKG/var/
-	rmdir $PKG/usr/etc
-
-	install -D -m 0755 $SRC/ftpd $PKG/etc/rc.d/ftpd
-	chmod 0600 $PKG/etc/bftpd.conf
-	ln -sf bftpd $PKG/usr/sbin/in.ftpd
+  install -D -m 0755 $SRC/ftpd $PKG/etc/rc.d/ftpd
+  chmod 0600 $PKG/etc/bftpd.conf
+  ln -sf bftpd $PKG/usr/sbin/in.ftpd
 }
