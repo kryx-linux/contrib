@@ -1,0 +1,21 @@
+# Description: a nodejs package manager (build for lts version hydrogen)
+# URL: https://classic.yarnpkg.com/lang/en/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: nodejs-lts-hydrogen
+
+name=yarn-hydrogen
+version=1.22.19
+release=1
+source=(https://github.com/yarnpkg/yarn/releases/download/v$version/yarn-v$version.tar.gz)
+
+build() {
+  cd yarn-v$version
+  install -dm755 "$PKG/usr/opt/nodejs-lts-hydrogen/lib/node_modules/yarn"
+
+  # Copy specific files and directories, excluding 'bin' and 'lib'
+  find . -maxdepth 1 \( -type f -o -type d \) -exec cp -Rp {} "$PKG/usr/opt/nodejs-lts-hydrogen/lib/node_modules/yarn" \;
+
+  install -dm755 $PKG/usr/opt/nodejs-lts-hydrogen/bin
+  ln -s /usr/opt/nodejs-lts-hydrogen/lib/node_modules/yarn/bin/yarn.js $PKG/usr/opt/nodejs-lts-hydrogen/bin/yarn
+  ln -s /usr/opt/nodejs-lts-hydrogen/lib/node_modules/yarn/bin/yarn.js $PKG/usr/opt/nodejs-lts-hydrogen/bin/yarnpkg
+}
