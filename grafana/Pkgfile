@@ -1,7 +1,7 @@
 # Description: The analytics platform for all your metrics
 # URL: https://grafana.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fontconfig go yarn
+# Depends on: fontconfig go yarn-hydrogen
 
 name=grafana
 version=10.1.1
@@ -20,7 +20,8 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/gopath" || true
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
-  export PATH="/usr/bin:$PATH"
+  #export PATH="/usr/bin:$PATH"
+  export GOEXPERIMENT=boringcrypto
 
   cd $SRC/$name-$version
 
@@ -39,8 +40,10 @@ build() {
   export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
   export NODE_OPTIONS="--max-old-space-size=16000"
 
-  /usr/bin/yarn install
-  NODE_ENV=production /usr/bin/yarn run build
+  export PATH="/usr/opt/nodejs-lts-hydrogen/bin:$PATH"
+
+  /usr/opt/nodejs-lts-hydrogen/bin/yarn install
+  NODE_ENV=production /usr/opt/nodejs-lts-hydrogen/bin/yarn build
 
   # install
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name
