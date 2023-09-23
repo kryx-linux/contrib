@@ -4,25 +4,25 @@
 # Depends on: clang
 
 name=wasi-libc
-version=0.20230713
-_commit=9f51a7102085ec6a6ced5778f0864c9af9f50000
+version=0.20230918
+_commit=ce2f157d46e04f323edf93f02c8f60069d88df96
 release=1
-source=(https://github.com/WebAssembly/wasi-libc/archive/$_commit/$name-$version.tar.gz
-	no-double-build.patch)
+source=(https://github.com/WebAssembly/$name/archive/$_commit/$name-$version.tar.gz
+  no-double-build.patch)
 
 build() {
-	cd $name-$_commit
+  cd $name-$_commit
 
-	patch -p1 -i $SRC/no-double-build.patch
+  patch -p1 -i $SRC/no-double-build.patch
 
-	# Remove bulk memory support
-	# https://bugzilla.mozilla.org/show_bug.cgi?id=1773200#c4
-	make CC=clang BULK_MEMORY_SOURCES=
-	make INSTALL_DIR="$PKG"/usr/share/wasi-sysroot install
+  # Remove bulk memory support
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=1773200#c4
+  make CC=clang BULK_MEMORY_SOURCES=
+  make INSTALL_DIR="$PKG/usr/share/wasi-sysroot" install
 
-	cd $PKG/usr/share/wasi-sysroot/lib/wasm32-wasi
-	for f in *.a; do
-		/usr/bin/llvm-ranlib $f
-		/usr/bin/llvm-strip --strip-debug $f
-	done
+  cd $PKG/usr/share/wasi-sysroot/lib/wasm32-wasi
+  for f in *.a; do
+    /usr/bin/llvm-ranlib $f
+    /usr/bin/llvm-strip --strip-debug $f
+  done
 }
