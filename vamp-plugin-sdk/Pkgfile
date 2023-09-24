@@ -1,17 +1,41 @@
-# Description: The Vamp audio analysis plug-in system.
+# Description: The Vamp audio analysis plug-in system
 # URL: https://www.vamp-plugins.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Packager: Danny Rawlins, crux at romster dot me
 # Depends on: libsndfile
 
 name=vamp-plugin-sdk
 version=2.10.0
-release=1
-source=(https://code.soundsoftware.ac.uk/attachments/download/2691/$name-$version.tar.gz)
+release=2
+source=(https://code.soundsoftware.ac.uk/attachments/download/2691/$name-$version.tar.gz
+  01-fix_multiarch.patch
+  02-fix_pkg-config.patch
+  0003-Link-with-dl.patch
+  0004-do-not-run-test-always.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/01-fix_multiarch.patch
+  patch -Np1 -i $SRC/02-fix_pkg-config.patch
+  patch -Np1 -i $SRC/0003-Link-with-dl.patch
+  patch -Np1 -i $SRC/0004-do-not-run-test-always.patch
+
+  export LIBDIR=lib
+  export CFLAGS="$CFLAGS -fPIC -Wall"
+  export CXXFLAGS="$CFLAGS -fPIC -Wall"
+
+  autoreconf -vfi
+
   ./configure --prefix=/usr
-  make
+
+  make \
+    AR=/usr/bin/ar \
+    RANLIB=/usr/bin/ranlib
+
   make DESTDIR=$PKG install
+
+  find $PKG/usr/lib \(\
+    -name '*.a' -o \
+    -name '*.la' \
+    \) -print -delete
 }
