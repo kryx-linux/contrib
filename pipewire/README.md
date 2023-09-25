@@ -121,7 +121,7 @@ Make sure to kill your previous session.
  - optional: `prt-get depinst xorg-libxtst pulseaudio` et al, see Pkgfile
  - install `prt-get depinst pipewire`
  - setup `pipewire` to use `wireplumber` as your session-manager
- - execute while starting your X11/Wayland-Session: `/usr/bin/pipewire`
+ - execute while starting your X11/Wayland-Session: `/usr/bin/pipewire` & `/usr/bin/pipewire-pulse` & `/usr/bin/wireplumber` (setting up a basic config is cooler though)
 
 ## Ressources
 
