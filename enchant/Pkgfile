@@ -1,10 +1,11 @@
 # Description: A wrapper library for generic spell checking.
 # URL: https://abiword.github.io/enchant/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: aspell glib hunspell
+# Depends on: aspell glib
+# Optional: hunspell
 
 name=enchant
-version=2.5.0
+version=2.6.1
 release=1
 source=(https://github.com/AbiWord/$name/releases/download/v$version/$name-$version.tar.gz)
 
@@ -16,4 +17,6 @@ build() {
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
   make
   make DESTDIR=$PKG install
+
+  find $PKG -name '*.la' -delete
 }
