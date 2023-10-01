@@ -4,35 +4,36 @@
 # Depends on: wasi-libc
 
 name=wasi-compiler-rt
-version=16.0.6
+version=17.0.1
 release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/compiler-rt-$version.src.tar.xz
-	https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz
-	https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/cmake-$version.src.tar.xz
-	WASI.cmake wasi-toolchain.cmake)
+  https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz
+  https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/cmake-$version.src.tar.xz
+  WASI.cmake wasi-toolchain.cmake)
 
 build() {
-	# Platform files have been copied from https://github.com/WebAssembly/wasi-sdk
-	mv llvm-$version.src llvm
-	mv cmake-$version.src cmake
-	install -D WASI.cmake cmake/Platform/WASI.cmake
+  # Platform files have been copied from https://github.com/WebAssembly/wasi-sdk
+  mv llvm-$version.src llvm
+  mv cmake-$version.src cmake
+  install -D WASI.cmake cmake/Platform/WASI.cmake
 
-	cmake -S compiler-rt-$version.src/lib/builtins -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX="/usr/lib/clang/${version%%.*}" \
-		-D COMPILER_RT_INSTALL_PATH="/usr/lib/clang/${version%%.*}" \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -fno-exceptions --sysroot=/usr/share/wasi-sysroot' \
-		-D CMAKE_MODULE_PATH="$SRC/cmake" \
-		-D CMAKE_TOOLCHAIN_FILE="$SRC/wasi-toolchain.cmake" \
-		-D COMPILER_RT_BAREMETAL_BUILD=ON \
-		-D COMPILER_RT_INCLUDE_TESTS=OFF \
-		-D COMPILER_RT_HAS_FPIC_FLAG=OFF \
-		-D COMPILER_RT_DEFAULT_TARGET_ONLY=ON \
-		-D COMPILER_RT_OS_DIR=wasi \
-		-D WASI_SDK_PREFIX=/usr
+  cmake -S compiler-rt-$version.src/lib/builtins -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX="/usr/lib/clang/${version%%.*}" \
+    -D COMPILER_RT_INSTALL_PATH="/usr/lib/clang/${version%%.*}" \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS='-O3 -DNDEBUG -fno-exceptions --sysroot=/usr/share/wasi-sysroot' \
+    -D CMAKE_C_COMPILER_WORKS=ON \
+    -D CMAKE_MODULE_PATH="$SRC/cmake" \
+    -D CMAKE_TOOLCHAIN_FILE="$SRC/wasi-toolchain.cmake" \
+    -D COMPILER_RT_BAREMETAL_BUILD=ON \
+    -D COMPILER_RT_INCLUDE_TESTS=OFF \
+    -D COMPILER_RT_HAS_FPIC_FLAG=OFF \
+    -D COMPILER_RT_DEFAULT_TARGET_ONLY=ON \
+    -D COMPILER_RT_OS_DIR=wasi \
+    -D WASI_SDK_PREFIX=/usr
 
-	cmake --build build
-	DESTDIR=$PKG cmake --install build
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 
-	/usr/bin/llvm-strip --strip-debug $PKG/usr/lib/clang/${version%%.*}/lib/wasi/libclang_rt.builtins-wasm32.a
+  /usr/bin/llvm-strip --strip-debug $PKG/usr/lib/clang/${version%%.*}/lib/wasi/libclang_rt.builtins-wasm32.a
 }

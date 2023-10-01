@@ -1,0 +1,18 @@
+# Description: Command line csv viewer
+# URL: https://github.com/YS-L/csvlens
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=csvlens
+version=0.3.1
+release=1
+source=(https://github.com/YS-L/csvlens/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
+}

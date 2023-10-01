@@ -1,0 +1,96 @@
+Description: Patch fixing pkg-config.
+Author: Jaromír Mikeš <mira.mikes@seznam.cz>
+Forwarded: cannam@all-day-breakfast.com
+
+Index: vamp-plugin-sdk/pkgconfig/vamp-hostsdk.pc.in
+===================================================================
+--- vamp-plugin-sdk.orig/pkgconfig/vamp-hostsdk.pc.in
++++ vamp-plugin-sdk/pkgconfig/vamp-hostsdk.pc.in
+@@ -1,7 +1,7 @@
+-prefix=%PREFIX%
+-exec_prefix=${prefix}
+-libdir=${exec_prefix}/lib
+-includedir=${prefix}/include
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
+ 
+ Name: vamp-hostsdk
+ Version: 2.10
+Index: vamp-plugin-sdk/pkgconfig/vamp-sdk.pc.in
+===================================================================
+--- vamp-plugin-sdk.orig/pkgconfig/vamp-sdk.pc.in
++++ vamp-plugin-sdk/pkgconfig/vamp-sdk.pc.in
+@@ -1,7 +1,7 @@
+-prefix=%PREFIX%
+-exec_prefix=${prefix}
+-libdir=${exec_prefix}/lib
+-includedir=${prefix}/include
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
+ 
+ Name: vamp-sdk
+ Version: 2.10
+Index: vamp-plugin-sdk/pkgconfig/vamp.pc.in
+===================================================================
+--- vamp-plugin-sdk.orig/pkgconfig/vamp.pc.in
++++ vamp-plugin-sdk/pkgconfig/vamp.pc.in
+@@ -1,7 +1,7 @@
+-prefix=%PREFIX%
+-exec_prefix=${prefix}
+-libdir=${exec_prefix}/lib
+-includedir=${prefix}/include
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
+ 
+ Name: vamp
+ Version: 2.10
+Index: vamp-plugin-sdk/Makefile.in
+===================================================================
+--- vamp-plugin-sdk.orig/Makefile.in
++++ vamp-plugin-sdk/Makefile.in
+@@ -280,6 +280,7 @@ clean:
+ distclean:	clean
+ 		rm -f $(SDK_STATIC) $(SDK_DYNAMIC) $(HOSTSDK_STATIC) $(HOSTSDK_DYNAMIC) $(PLUGIN_TARGET) $(HOST_TARGET) $(RDFGEN_TARGET) *~ */*~
+ 		rm -f config.log config.status Makefile
++		rm -f $(PCDIR)/vamp.pc $(PCDIR)/vamp-sdk.pc $(PCDIR)/vamp-hostsdk.pc
+ 
+ install:	$(SDK_STATIC) $(SDK_DYNAMIC) $(HOSTSDK_STATIC) $(HOSTSDK_DYNAMIC) $(PLUGIN_TARGET) $(HOST_TARGET) $(RDFGEN_TARGET)
+ 		mkdir -p $(DESTDIR)$(INSTALL_API_HEADERS)
+@@ -309,12 +310,9 @@ install:	$(SDK_STATIC) $(SDK_DYNAMIC) $(
+ 		ln -s $(INSTALL_SDK_LIBNAME) $(DESTDIR)$(INSTALL_SDK_LIBS)/$(INSTALL_SDK_LINK_DEV)
+ 		rm -f $(DESTDIR)$(INSTALL_SDK_LIBS)/$(INSTALL_HOSTSDK_LINK_DEV)
+ 		ln -s $(INSTALL_HOSTSDK_LIBNAME) $(DESTDIR)$(INSTALL_SDK_LIBS)/$(INSTALL_HOSTSDK_LINK_DEV)
+-		sed "s,%PREFIX%,$(INSTALL_PREFIX)," $(PCDIR)/vamp.pc.in \
+-		> $(DESTDIR)$(INSTALL_PKGCONFIG)/vamp.pc
+-		sed "s,%PREFIX%,$(INSTALL_PREFIX)," $(PCDIR)/vamp-sdk.pc.in \
+-		> $(DESTDIR)$(INSTALL_PKGCONFIG)/vamp-sdk.pc
+-		sed "s,%PREFIX%,$(INSTALL_PREFIX)," $(PCDIR)/vamp-hostsdk.pc.in \
+-		> $(DESTDIR)$(INSTALL_PKGCONFIG)/vamp-hostsdk.pc
++		cp $(PCDIR)/vamp.pc $(DESTDIR)$(INSTALL_PKGCONFIG)/vamp.pc
++		cp $(PCDIR)/vamp-sdk.pc $(DESTDIR)$(INSTALL_PKGCONFIG)/vamp-sdk.pc
++		cp $(PCDIR)/vamp-hostsdk.pc $(DESTDIR)$(INSTALL_PKGCONFIG)/vamp-hostsdk.pc
+ 		sed -e "s,%LIBNAME%,$(INSTALL_SDK_LIBNAME),g" \
+ 		    -e "s,%LINK_ABI%,$(INSTALL_SDK_LINK_ABI),g" \
+ 		    -e "s,%LINK_DEV%,$(INSTALL_SDK_LINK_DEV),g" \
+Index: vamp-plugin-sdk/configure.ac
+===================================================================
+--- vamp-plugin-sdk.orig/configure.ac
++++ vamp-plugin-sdk/configure.ac
+@@ -59,5 +59,10 @@ changequote([,])dnl
+ 
+ AC_SUBST(CXXFLAGS)
+ AC_SUBST(CFLAGS)
+-AC_OUTPUT([Makefile])
++AC_OUTPUT([
++	Makefile
++	pkgconfig/vamp.pc
++	pkgconfig/vamp-hostsdk.pc
++	pkgconfig/vamp-sdk.pc
++])
+ 

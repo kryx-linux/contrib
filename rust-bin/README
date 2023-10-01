@@ -1,13 +1,13 @@
 # rust-bin README
 
 This port is provided as a convenience for users who are interested in
-compiling rust code, but are otherwise discouraged by the costly
-interruption of rebuilding a toolchain every month or so. As a **consumer**
-of rust code you will enjoy mostly the same experience using this port
-as you would with opt/rust. All you need to do is put the line 
+compiling rust code, but are otherwise discouraged by the prospect of 
+rebuilding a toolchain every six weeks. As a **consumer** of rust code 
+you will enjoy mostly the same experience using this port as you would 
+with opt/rust. All you need to do is put the line 
   rust-bin: rust
-into your prt-get aliases file, to ensure that dependency resolution does
-not trigger building rust from source.
+into your prt-get aliases file, to ensure that dependency resolution 
+does not trigger building rust from source.
 
 Caution: if you want to **author** a rust project, and you rely on hints
 from an IDE, the absence of binaries in the expected location /usr/libexec

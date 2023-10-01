@@ -5,6 +5,7 @@
 
 case $1 in
 start)
+	[ -d /run/bftpd ] || mkdir /run/bftpd
 	/usr/sbin/bftpd -d
 	;;
 stop)

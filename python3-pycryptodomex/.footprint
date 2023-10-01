@@ -312,6 +312,8 @@ drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/Math/__pycache_
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Math/__pycache__/__init__.cpython-311.pyc
 -rwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/Math/_modexp.abi3.so
 drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/DH.py
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/DH.pyi
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/KDF.py
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/KDF.pyi
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/SecretSharing.py
@@ -319,6 +321,8 @@ drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__init__.pyi
 drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__pycache__/DH.cpython-311.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__pycache__/DH.cpython-311.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__pycache__/KDF.cpython-311.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__pycache__/KDF.cpython-311.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/Protocol/__pycache__/SecretSharing.cpython-311.opt-1.pyc
@@ -552,10 +556,13 @@ drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protoc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/__pycache__/test_KDF.cpython-311.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/__pycache__/test_SecretSharing.cpython-311.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/__pycache__/test_SecretSharing.cpython-311.pyc
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/__pycache__/test_ecdh.cpython-311.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/__pycache__/test_ecdh.cpython-311.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/__pycache__/test_rfc1751.cpython-311.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/__pycache__/test_rfc1751.cpython-311.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/test_KDF.py
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/test_SecretSharing.py
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/test_ecdh.py
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/Protocol/test_rfc1751.py
 drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/PublicKey/
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/SelfTest/PublicKey/__init__.py
@@ -732,9 +739,9 @@ drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/Cryptodome/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/__pycache__/__init__.cpython-311.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/__pycache__/__init__.cpython-311.pyc
 -rw-r--r--	root/root	usr/lib/python3.11/site-packages/Cryptodome/py.typed (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.18.0-py3.11.egg-info/
--rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.18.0-py3.11.egg-info/PKG-INFO
--rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.18.0-py3.11.egg-info/SOURCES.txt
--rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.18.0-py3.11.egg-info/dependency_links.txt
--rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.18.0-py3.11.egg-info/not-zip-safe
--rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.18.0-py3.11.egg-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.19.0-py3.11.egg-info/
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.19.0-py3.11.egg-info/PKG-INFO
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.19.0-py3.11.egg-info/SOURCES.txt
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.19.0-py3.11.egg-info/dependency_links.txt
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.19.0-py3.11.egg-info/not-zip-safe
+-rw-r--r--	root/root	usr/lib/python3.11/site-packages/pycryptodomex-3.19.0-py3.11.egg-info/top_level.txt

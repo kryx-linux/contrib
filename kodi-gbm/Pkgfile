@@ -1,12 +1,12 @@
 # Description: Open source home theater software, running in a gbm buffer
 # URL: https://kodi.tv/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: crossguid dbus flatbuffers fstrcmp libass libcdio libdvdread libinput libmicrohttpd libxkbcommon mesa openjdk17-jdk rapidjson spdlog swig taglib tinyxml xkeyboard-config
+# Depends on: crossguid dbus flatbuffers fstrcmp libass libcdio libdvdread libinput libmicrohttpd libxkbcommon mesa openjdk20-jdk rapidjson spdlog swig taglib tinyxml xkeyboard-config
 # Optional: alsa-lib avahi bluez dav1d libmicrohttpd libnfs libnghttp2 libva libva-vdpau-driver libxslt mariadb mysql pipewire pulseaudio
 
 name=kodi-gbm
 version=20.2
-release=2
+release=3
 
 # version variables {{{
 _codename=Nexus
@@ -44,7 +44,7 @@ build()  {
   fi
   # }}}
   unset PATH
-  export PATH="/usr/lib/java/openjdk17-jdk/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  export PATH="/usr/lib/java/openjdk20-jdk/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
   # optionals {{{
   prt-get isinst alsa-lib && KODI_EXTRA+=' -D ENABLE_ALSA=ON' || KODI_EXTRA+=' -D ENABLE_ALSA=OFF'

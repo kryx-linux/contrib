@@ -4,9 +4,10 @@
 # Depends on: gtk4
 
 name=gtksourceview
-version=5.8.0
+version=5.10.0
 release=1
-source=(https://ftp.gnome.org/pub/gnome/sources/$name/${version:0:3}/$name-$version.tar.xz)
+source=(https://ftp.gnome.org/pub/gnome/sources/$name/${version:0:4}/$name-$version.tar.xz)
+source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
   meson setup $name-$version build \

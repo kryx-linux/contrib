@@ -1,6 +1,0 @@
-#!/bin/sh
-
-getent group ffmpegfs || /usr/sbin/groupadd ffmpegfs
-getent passwd ffmpegfs || /usr/sbin/useradd -d /var/empty -g ffmpegfs \
-	-c "FUSE-based transcoding filesystem" -s /bin/sh ffmpegfs
-/usr/bin/passwd -l ffmpegfs

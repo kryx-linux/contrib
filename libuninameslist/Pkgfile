@@ -3,7 +3,7 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=libuninameslist
-version=20221022
+version=20230916
 release=1
 source=(https://github.com/fontforge/$name/releases/download/$version/$name-dist-$version.tar.gz)
 
@@ -13,7 +13,8 @@ build() {
   autoreconf -i
   automake --foreign -Wall
 
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr \
+    --disable-static
   make
   make DESTDIR=$PKG install
 }

@@ -5,7 +5,7 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wasi-libc++ wayland
 
 name=firefox
-version=117.0.1
+version=118.0.1
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/${version}/source/$name-${version}.source.tar.xz
   firefox.desktop
@@ -14,8 +14,8 @@ source=(https://ftp.mozilla.org/pub/firefox/releases/${version}/source/$name-${v
 build() {
   cd $name-$version
 
-  #for p in $SRC/REV*.patch; do
-  #  patch -p1 -R -i $p
+  #for p in $SRC/*.patch; do
+  #  patch -p1 -i $p
   #done
 
   if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
@@ -72,7 +72,7 @@ EOF
 
   if prt-get isinst wayland xorg-server 2>/dev/null ; then
         echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-x11-wayland' >> .mozconfig
-  elif prt-get isinst wayland 2>/dev/null ; then 
+  elif prt-get isinst wayland 2>/dev/null ; then
         echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland-only' >> .mozconfig
   else
         echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-x11-only' >> .mozconfig
@@ -88,7 +88,7 @@ EOF
   local cruxVer=$(/usr/bin/crux | cut -d' ' -f3)
 
   # sandboxed web apps
-  [ -e /usr/lib/clang/${clangVer%%.*}/lib/wasi/libclang_rt.builtins-wasm32.a ] && \
+  prt-get isinst wasi-compiler-rt wasi-libc++ && \
   echo 'ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot' >> .mozconfig \
      || echo 'ac_add_options --without-wasm-sandboxed-libraries' >> .mozconfig
 

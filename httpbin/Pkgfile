@@ -1,22 +1,16 @@
 # Description: HTTP Request and Response Service
-# URL: https://github.com/requests/httpbin
+# URL: https://github.com/psf/httpbin
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: brotli python3-blinker python3-decorator python3-flasgger python3-gevent python3-raven
+# Depends on: python3-brotlicffi python3-decorator python3-flasgger python3-gevent python3-raven
 
 name=httpbin
-version=0.7.0
+version=0.10.1
 release=1
-source=(https://github.com/requests/httpbin/archive/v$version/$name-$version.tar.gz
-  httpbin-werkzeug-0.15.1.patch)
+source=(https://github.com/psf/httpbin/archive/release-v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd $name-release-v$version
 
-  patch -Np1 -i $SRC/httpbin-werkzeug-0.15.1.patch
-  sed -i 's/brotlipy/Brotli/g' setup.py
-  LC_CTYPE=en_US.UTF-8 /usr/bin/python3 setup.py build
-  LC_CTYPE=en_US.UTF-8 /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }

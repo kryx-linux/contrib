@@ -1,6 +1,0 @@
-#!/bin/sh
-
-getent group nut || /usr/sbin/groupadd nut
-getent passwd nut || /usr/sbin/useradd -d /var/empty -g nut \
-	-c "Network UPS Tools" -s /bin/sh nut
-/usr/bin/passwd -l nut

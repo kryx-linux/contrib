@@ -4,12 +4,11 @@
 # Depends on: libixion
 
 name=liborcus
-version=0.18.1
-release=2
+version=0.19.0
+release=1
 source=(https://kohei.us/files/orcus/src/$name-$version.tar.xz
   rpath.patch.0
   libtool.patch.0
-  fix-pch.patch.0
   liborcus_newline.patch.1)
 
 build() {
@@ -17,7 +16,6 @@ build() {
 
   patch -Np0 -i $SRC/rpath.patch.0
   patch -Np0 -i $SRC/libtool.patch.0
-  patch -Np0 -i $SRC/fix-pch.patch.0
   patch -Np1 -i $SRC/liborcus_newline.patch.1
 
   ./configure --prefix=/usr --disable-python
