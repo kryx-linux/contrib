@@ -1,0 +1,25 @@
+# Description: xdg-user-dirs is a tool to help manage "well known" user directories like the desktop folder and the music folder
+# URL: https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+# Optional: libxslt
+
+name=xdg-user-dirs
+version=0.18
+release=1
+source=(https://gitlab.freedesktop.org/xdg/xdg-user-dirs/-/archive/$version/xdg-user-dirs-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+
+  prt-get isinst libxslt || PKGMK_XUD+=' --disable-documentation'
+
+  NOCONFIGURE=1 ./autogen.sh
+  ./configure --prefix=/usr $PKGMK_XUD \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --disable-nls
+  make DESTDIR=$PKG install
+
+  rm -rf $PKG/usr/share/locale
+}
