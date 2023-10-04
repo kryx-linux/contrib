@@ -1,0 +1,19 @@
+# Description: A Node.js style checker and lint tool for Markdown/CommonMark files
+# URL: https://github.com/DavidAnson/markdownlint
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: npm
+
+name=markdownlint
+version=0.31.1
+release=1
+source=(https://registry.npmjs.org/$name/-/$name-$version.tgz)
+
+build() {
+  cp $PKGMK_SOURCE_DIR/$name-$version.tgz .
+  npm install -g --prefix $PKG/usr $SRC/$name-$version.tgz
+
+  find $PKG \(\
+    -iname "*README.md*" -o \
+    -iname "*CHANGELOG.md*" -o \
+    -iname "*LICENSE*" \) -delete
+}
