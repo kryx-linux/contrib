@@ -1,0 +1,18 @@
+# Description: dynamic output configuration tool that automatically detects and configures connected outputs
+# URL: https://gitlab.com/w0lff/shikane
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust wlroots
+
+name=shikane
+version=0.2.0
+release=1
+source=(https://gitlab.com/w0lff/shikane/-/archive/v$version/shikane-v$version.tar.bz2)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-v$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-v$version/target/release/$name
+}
