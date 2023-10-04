@@ -1,0 +1,18 @@
+# Description: MarkdownLint Command Line Interface
+# URL: https://github.com/igorshubovych/markdownlint-cli
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: markdownlint
+
+name=markdownlint-cli
+version=0.37.0
+release=1
+source=(https://registry.npmjs.org/$name/-/$name-$version.tgz)
+
+build() {
+  npm install -g --prefix $PKG/usr $PKGMK_SOURCE_DIR/$name-$version.tgz
+
+  find $PKG \(\
+    -iname "*README.md*" -o \
+    -iname "*CHANGELOG.md*" -o \
+    -iname "*LICENSE*" \) -delete
+}
