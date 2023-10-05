@@ -1,19 +1,25 @@
 # Description: Network configuration tool
 # URL: https://wiki.gnome.org/Projects/NetworkManager/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gnutls libndp libnewt libxslt nss polkit python3-gobject
-# Optional: ppp avahi bash-completion dbus libnl jansson libteam dnsmasq wireguard-tools
+# Depends on: dbus gnutls libndp libnewt libxslt nss polkit python3-gobject
+# Optional: bash-completion dnsmasq iwd jansson libpsl libteam modemmanager ppp vala wireguard-tools
 
 name=networkmanager
 version=1.44.2
-release=1
+release=2
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
   networkmanager.rc NetworkManager.conf polkit.conf dhcp.conf org.freedesktop.NetworkManager.rules)
 
 build() {
-  prt-get isinst ppp || PKGMK_NM+=' -D ppp=false'
+  prt-get isinst iwd && PKGMK_NM+=' -D iwd=true'
   prt-get isinst jansson || PKGMK_NM+=' -D ovs=false'
   prt-get isinst libpsl || PKGMK_NM+=' -D libpsl=false'
+  prt-get isinst modemmanager || PKGMK_NM+=' -D modem_manager=false'
+  prt-get isinst ppp || PKGMK_NM+=' -D ppp=false'
+  #prt-get isinst vala || PKGMK_NM+=' -D vapi=false'
+  prt-get isinst vala && PKGMK_NM+=' -D vapi=false'
+
+  /usr/bin/grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
 
   meson setup NetworkManager-$version build $PKGMK_NM \
     --prefix /usr \
@@ -27,6 +33,9 @@ build() {
     -D crypto=nss \
     -D dbus_conf_dir=/usr/share/dbus-1/system.d \
     -D udev_dir=/lib/udev \
+    -D dhcpcd=/sbin/dhcpcd \
+    -D iptables=/usr/sbin/iptables \
+    -D nft=/usr/bin/nft \
     -D resolvconf=true \
     -D config_dns_rc_manager_default=resolvconf \
     -D modify_system=true \
@@ -35,11 +44,11 @@ build() {
     -D selinux=false \
     -D session_tracking=no \
     -D libaudit=no \
-    -D modem_manager=false \
     -D more_logging=false \
     -D qt=false \
     -D systemdsystemunitdir=no \
-    -D systemd_journal=false
+    -D systemd_journal=false \
+    -D nm_cloud_setup=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 
