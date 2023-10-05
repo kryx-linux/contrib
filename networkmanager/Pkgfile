@@ -2,7 +2,7 @@
 # URL: https://wiki.gnome.org/Projects/NetworkManager/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: dbus gnutls libndp libnewt libxslt nss polkit python3-gobject
-# Optional: bash-completion dnsmasq iwd jansson libpsl libteam modemmanager ppp vala wireguard-tools
+# Optional: bash-completion dnsmasq iwd jansson libpsl libteam mobile-broadband-provider-info modemmanager ppp vala wireguard-tools
 
 name=networkmanager
 version=1.44.2
@@ -14,7 +14,7 @@ build() {
   prt-get isinst iwd && PKGMK_NM+=' -D iwd=true'
   prt-get isinst jansson || PKGMK_NM+=' -D ovs=false'
   prt-get isinst libpsl || PKGMK_NM+=' -D libpsl=false'
-  prt-get isinst modemmanager || PKGMK_NM+=' -D modem_manager=false'
+  prt-get isinst modemmanager mobile-broadband-provider-info || PKGMK_NM+=' -D modem_manager=false'
   prt-get isinst ppp || PKGMK_NM+=' -D ppp=false'
   #prt-get isinst vala || PKGMK_NM+=' -D vapi=false'
   prt-get isinst vala && PKGMK_NM+=' -D vapi=false'
