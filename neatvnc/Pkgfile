@@ -1,0 +1,26 @@
+# Description: A liberally licensed VNC server library with a clean interface
+# URL: https://github.com/any1/neatvnc
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: aml ffmpeg libdrm mesa xorg-libpixman
+# Optional: gnutls libjpeg-turbo nettle openh264
+
+name=neatvnc
+version=0.7.0
+release=1
+source=(https://github.com/any1/neatvnc/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst gnutls && PKGMK_NEATVNC+=' -D jpeg=enabled'
+  prt-get isinst libjpeg-turbo && PKGMK_NEATVNC+=' -D jpeg=enabled'
+  prt-get isinst nettle && PKGMK_NEATVNC+=' -D nettle=enabled'
+  prt-get isinst openh264 && PKGMK_NEATVNC+=' -D h264=enabled'
+
+  meson setup $name-$version build $PKGMK_NEATVNC \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
