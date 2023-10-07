@@ -1,0 +1,19 @@
+# Description: Another Main Loop
+# URL: https://github.com/any1/aml
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=aml
+version=0.3.0
+release=1
+source=(https://github.com/any1/aml/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
