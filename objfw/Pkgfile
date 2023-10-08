@@ -11,8 +11,9 @@ source=(https://objfw.nil.im/downloads/$name-$version.tar.gz)
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr
-  make
-
+  ./configure \
+    --prefix=/usr \
+    --with-tls=openssl \
+    OBJC=clang
   make DESTDIR=$PKG install
 }
