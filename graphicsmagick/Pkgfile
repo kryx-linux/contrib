@@ -1,25 +1,32 @@
 # Description: Image processing system
 # URL: http://www.graphicsmagick.org
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: brotli freetype jasper lcms2 libwebp
-# Optional: libpng libjpeg-turbo libtiff libxml2 dav1d graphviz libheif libde265
+# Depends on: brotli freetype lcms2 libjpeg-turbo libwebp
+# Optional: jasper libpng libjxl libtiff libxml2 dav1d graphviz libheif libde265 x265
 
 name=graphicsmagick
-version=1.3.41
+version=1.3.42
 release=1
 source=(https://downloads.sourceforge.net/project/$name/$name/$version/GraphicsMagick-$version.tar.xz)
 
 build() {
+  PKGMK_GMAGICK="--prefix=/usr
+                 --enable-shared
+                 --with-modules
+                 --with-perl
+                 --with-gs-font-dir=/usr/share/fonts/X11/Type1
+                 --with-quantum-depth=16
+                 --with-threads"
+
+  prt-get isinst libpng || PKGMK_GMAGICK+=" --with-png=no"
+  prt-get isinst libheif x265 || PKGMK_GMAGICK+=" --with-heif=no"
+  prt-get isinst jasper x265 || PKGMK_GMAGICK+=" --with-jp2=no"
+  prt-get isinst libtiff || PKGMK_GMAGICK+=" --with-tiff=no"
+  [ -e /usr/include/jxl/decode.h ] || PKGMK_GMAGICK+=" --with-jxl=no"
+
   cd GraphicsMagick-$version
 
-  ./configure \
-    --prefix=/usr \
-    --enable-shared \
-    --with-modules \
-    --with-perl \
-    --with-gs-font-dir=/usr/share/fonts/X11/Type1 \
-    --with-quantum-depth=16 \
-    --with-threads
+  ./configure $PKGMK_GMAGICK
 
   make
   make DESTDIR=$PKG install
