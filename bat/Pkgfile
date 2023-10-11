@@ -25,7 +25,7 @@ build() {
 
   prt-get isinst bash-completion && install -Dm644 \
     $name-$version/target/release/build/bat-*/out/assets/completions/bat.bash \
-    $PKG/usr/share/bash-completion/completions/bash
+    $PKG/usr/share/bash-completion/completions/bat
   prt-get isinst zsh && install -Dm644 \
     $name-$version/target/release/build/bat-*/out/assets/completions/bat.zsh \
     $PKG/usr/share/zsh/site-functions/_bat
