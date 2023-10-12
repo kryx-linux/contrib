@@ -319,7 +319,9 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/core/components/RolePicker/
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/RolePicker/styles.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/RolePicker/utils.ts
 drwxr-xr-x	root/root	usr/share/grafana/public/app/core/components/SVG/
+-rw-r--r--	root/root	usr/share/grafana/public/app/core/components/SVG/SanitizedSVG.test.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/SVG/SanitizedSVG.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/core/components/SVG/utils.ts
 drwxr-xr-x	root/root	usr/share/grafana/public/app/core/components/Select/
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/Select/DashboardPicker.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/core/components/Select/FolderPicker.tsx
@@ -848,14 +850,13 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/features/alerting/unified/comp
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/AnnotationHeaderField.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/AnnotationKeyInput.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/AnnotationsField.test.tsx
--rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/AnnotationsField.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/AnnotationsStep.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/CloudAlertPreview.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/CloudEvaluationBehavior.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/CloudRulesSourcePicker.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/CustomAnnotationHeaderField.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/DashboardAnnotationField.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/DashboardPicker.tsx
--rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/DetailsStep.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/ExpressionEditor.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/ExpressionsEditor.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/FolderAndGroup.tsx
@@ -874,6 +875,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/features/alerting/unified/comp
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/QueryRows.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/QueryWrapper.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/RecordingRuleEditor.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/RecordingRulesNameSpaceAndGroupStep.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/RuleEditorSection.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/RuleFolderPicker.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/alerting/unified/components/rule-editor/RuleInspector.tsx
@@ -3510,6 +3512,8 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/DynamicLabelsField.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/Forms.tsx
 drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/LogGroups/
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/LogGroups/LegacyLogGroupNamesSelection.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/LogGroups/LegacyLogGroupSelector.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/LogGroups/LogGroupsField.test.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/LogGroups/LogGroupsField.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/cloudwatch/components/LogGroups/LogGroupsSelector.test.tsx
