@@ -59,6 +59,28 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/udp_proxy
 -rwxr-xr-x	root/root	usr/bin/zeroize
 drwxr-xr-x	root/root	usr/include/
+drwxr-xr-x	root/root	usr/include/everest/
+-rw-r--r--	root/root	usr/include/everest/Hacl_Curve25519.h
+-rw-r--r--	root/root	usr/include/everest/everest.h
+-rw-r--r--	root/root	usr/include/everest/kremlib.h
+drwxr-xr-x	root/root	usr/include/everest/kremlib/
+-rw-r--r--	root/root	usr/include/everest/kremlib/FStar_UInt128.h
+-rw-r--r--	root/root	usr/include/everest/kremlib/FStar_UInt64_FStar_UInt32_FStar_UInt16_FStar_UInt8.h
+drwxr-xr-x	root/root	usr/include/everest/kremlin/
+-rw-r--r--	root/root	usr/include/everest/kremlin/c_endianness.h
+drwxr-xr-x	root/root	usr/include/everest/kremlin/internal/
+-rw-r--r--	root/root	usr/include/everest/kremlin/internal/builtin.h
+-rw-r--r--	root/root	usr/include/everest/kremlin/internal/callconv.h
+-rw-r--r--	root/root	usr/include/everest/kremlin/internal/compat.h
+-rw-r--r--	root/root	usr/include/everest/kremlin/internal/debug.h
+-rw-r--r--	root/root	usr/include/everest/kremlin/internal/target.h
+-rw-r--r--	root/root	usr/include/everest/kremlin/internal/types.h
+-rw-r--r--	root/root	usr/include/everest/kremlin/internal/wasmsupport.h
+drwxr-xr-x	root/root	usr/include/everest/vs2013/
+-rw-r--r--	root/root	usr/include/everest/vs2013/Hacl_Curve25519.h
+-rw-r--r--	root/root	usr/include/everest/vs2013/inttypes.h
+-rw-r--r--	root/root	usr/include/everest/vs2013/stdbool.h
+-rw-r--r--	root/root	usr/include/everest/x25519.h
 drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/aes.h
 -rw-r--r--	root/root	usr/include/mbedtls/aria.h
@@ -75,6 +97,12 @@ drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/cipher.h
 -rw-r--r--	root/root	usr/include/mbedtls/cmac.h
 -rw-r--r--	root/root	usr/include/mbedtls/compat-2.x.h
+-rw-r--r--	root/root	usr/include/mbedtls/config_adjust_legacy_crypto.h
+-rw-r--r--	root/root	usr/include/mbedtls/config_adjust_legacy_from_psa.h
+-rw-r--r--	root/root	usr/include/mbedtls/config_adjust_psa_from_legacy.h
+-rw-r--r--	root/root	usr/include/mbedtls/config_adjust_psa_superset_legacy.h
+-rw-r--r--	root/root	usr/include/mbedtls/config_adjust_ssl.h
+-rw-r--r--	root/root	usr/include/mbedtls/config_adjust_x509.h
 -rw-r--r--	root/root	usr/include/mbedtls/config_psa.h
 -rw-r--r--	root/root	usr/include/mbedtls/constant_time.h
 -rw-r--r--	root/root	usr/include/mbedtls/ctr_drbg.h
@@ -90,7 +118,6 @@ drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/gcm.h
 -rw-r--r--	root/root	usr/include/mbedtls/hkdf.h
 -rw-r--r--	root/root	usr/include/mbedtls/hmac_drbg.h
--rw-r--r--	root/root	usr/include/mbedtls/legacy_or_psa.h
 -rw-r--r--	root/root	usr/include/mbedtls/lms.h
 -rw-r--r--	root/root	usr/include/mbedtls/mbedtls_config.h
 -rw-r--r--	root/root	usr/include/mbedtls/md.h
@@ -114,6 +141,7 @@ drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/rsa.h
 -rw-r--r--	root/root	usr/include/mbedtls/sha1.h
 -rw-r--r--	root/root	usr/include/mbedtls/sha256.h
+-rw-r--r--	root/root	usr/include/mbedtls/sha3.h
 -rw-r--r--	root/root	usr/include/mbedtls/sha512.h
 -rw-r--r--	root/root	usr/include/mbedtls/ssl.h
 -rw-r--r--	root/root	usr/include/mbedtls/ssl_cache.h
@@ -128,15 +156,22 @@ drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/x509_crt.h
 -rw-r--r--	root/root	usr/include/mbedtls/x509_csr.h
 drwxr-xr-x	root/root	usr/include/psa/
+-rw-r--r--	root/root	usr/include/psa/build_info.h
 -rw-r--r--	root/root	usr/include/psa/crypto.h
+-rw-r--r--	root/root	usr/include/psa/crypto_adjust_auto_enabled.h
+-rw-r--r--	root/root	usr/include/psa/crypto_adjust_config_key_pair_types.h
+-rw-r--r--	root/root	usr/include/psa/crypto_adjust_config_synonyms.h
 -rw-r--r--	root/root	usr/include/psa/crypto_builtin_composites.h
+-rw-r--r--	root/root	usr/include/psa/crypto_builtin_key_derivation.h
 -rw-r--r--	root/root	usr/include/psa/crypto_builtin_primitives.h
 -rw-r--r--	root/root	usr/include/psa/crypto_compat.h
 -rw-r--r--	root/root	usr/include/psa/crypto_config.h
 -rw-r--r--	root/root	usr/include/psa/crypto_driver_common.h
 -rw-r--r--	root/root	usr/include/psa/crypto_driver_contexts_composites.h
+-rw-r--r--	root/root	usr/include/psa/crypto_driver_contexts_key_derivation.h
 -rw-r--r--	root/root	usr/include/psa/crypto_driver_contexts_primitives.h
 -rw-r--r--	root/root	usr/include/psa/crypto_extra.h
+-rw-r--r--	root/root	usr/include/psa/crypto_legacy.h
 -rw-r--r--	root/root	usr/include/psa/crypto_platform.h
 -rw-r--r--	root/root	usr/include/psa/crypto_se_driver.h
 -rw-r--r--	root/root	usr/include/psa/crypto_sizes.h
@@ -150,15 +185,17 @@ drwxr-xr-x	root/root	usr/lib/cmake/MbedTLS/
 -rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSConfigVersion.cmake
 -rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSTargets-release.cmake
 -rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSTargets.cmake
+-rw-r--r--	root/root	usr/lib/libeverest.a
 -rw-r--r--	root/root	usr/lib/libmbedcrypto.a
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.14
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.14 -> libmbedcrypto.so.3.4.1
--rwxr-xr-x	root/root	usr/lib/libmbedcrypto.so.3.4.1
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.15
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.15 -> libmbedcrypto.so.3.5.0
+-rwxr-xr-x	root/root	usr/lib/libmbedcrypto.so.3.5.0
 -rw-r--r--	root/root	usr/lib/libmbedtls.a
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.19
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.19 -> libmbedtls.so.3.4.1
--rwxr-xr-x	root/root	usr/lib/libmbedtls.so.3.4.1
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.20
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.20 -> libmbedtls.so.3.5.0
+-rwxr-xr-x	root/root	usr/lib/libmbedtls.so.3.5.0
 -rw-r--r--	root/root	usr/lib/libmbedx509.a
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.5
--rwxr-xr-x	root/root	usr/lib/libmbedx509.so.3.4.1
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.5 -> libmbedx509.so.3.4.1
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.6
+-rwxr-xr-x	root/root	usr/lib/libmbedx509.so.3.5.0
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.6 -> libmbedx509.so.3.5.0
+-rw-r--r--	root/root	usr/lib/libp256m.a

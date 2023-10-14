@@ -4,13 +4,12 @@
 # Depends on: python3-hatchling python3-pyopenssl
 
 name=python3-urllib3
-_name=${name#*-}
-version=2.0.5
+version=2.0.6
 release=1
-source=(https://files.pythonhosted.org/packages/source/${_name::1}/$_name/$_name-$version.tar.gz)
+source=(https://pypi.org/packages/source/u/urllib3/urllib3-$version.tar.gz)
 
 build() {
-  cd $_name-$version
+  cd urllib3-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl

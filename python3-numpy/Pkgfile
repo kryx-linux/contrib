@@ -1,28 +1,27 @@
 # Description: Array processing for numbers, strings, records, and objects with Python
-# URL: https://numpy.org/
+# URL: https://numpy.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
+<<<<<<< HEAD
 # Depends on: lapack python3-cython
+=======
+# Depends on: lapack python3-cython python3-build python3-wheel python3-installer meson-python
+>>>>>>> origin/3.7
 
 name=python3-numpy
 version=1.26.0
-release=1
-source=(https://github.com/${name#*-}/${name#*-}/releases/download/v$version/${name#*-}-$version.tar.gz)
+release=2
+source=(https://github.com/numpy/numpy/releases/download/v$version/numpy-$version.tar.gz)
 
 build() {
-  export CFLAGS+=' -fno-strict-aliasing'
-  export ATLAS=None
-  export LDFLAGS="$LDFLAGS -shared"
+  cd numpy-$version
 
-  ## broken port, this requires an older setuptools
-  cd ${name#*-}-$version
+  CFLAGS+=" -ffat-lto-objects" \
+  CXXFLAGS+=" -ffat-lto-objects" \
+  /usr/bin/python3 -m build --wheel --no-isolation \
+    -Csetup-args="-Dblas=blas" \
+    -Csetup-args="-Dlapack=lapack"
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
-
-  local pyv="$(python3 -c "import sys; print (sys.version_info[0], sys.version_info[1])" | sed -e 's/\ /./g')"
-  rm $PKG/usr/lib/python$pyv/site-packages/numpy/LICENSE.txt
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
   find $PKG \( \
     -iname "LICENSE.txt" -o \
     -iname "*README*" \

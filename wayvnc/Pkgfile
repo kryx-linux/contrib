@@ -1,0 +1,21 @@
+# Description: A VNC server for wlroots based Wayland compositors
+# URL: https://github.com/any1/wayvnc
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: linux-pam neatvnc wlroots
+# Optional: scdoc
+
+name=wayvnc
+version=0.7.1
+release=1
+source=(https://github.com/any1/wayvnc/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}

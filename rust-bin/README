@@ -11,8 +11,7 @@ does not trigger building rust from source.
 
 Caution: if you want to **author** a rust project, and you rely on hints
 from an IDE, the absence of binaries in the expected location /usr/libexec
-might cause problems. Feel free to create symlinks for the binaries:
+might cause problems. Feel free to create a symlink for:
   /usr/lib/rust-analyzer-proc-macro-srv,
-  /usr/lib/cargo-credential-1password,
 because chrpath cannot accomplish the libexec-dir-change that the patches
 for opt/rust would do.

@@ -4,14 +4,11 @@
 # Depends on: libayatana-indicator libdbusmenu-gtk3
 
 name=libayatana-appindicator
-version=0.5.92
+version=0.5.93
 release=1
-source=(https://github.com/AyatanaIndicators/libayatana-appindicator/archive/$version/$name-$version.tar.gz
-    63.patch)
+source=(https://github.com/AyatanaIndicators/libayatana-appindicator/archive/$version/$name-$version.tar.gz)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/63.patch
-
   cmake -S $name-$version -B build-gtk3 -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
