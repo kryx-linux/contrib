@@ -1,27 +1,35 @@
 # Description: Operating system and container binary deployment and upgrades
 # URL: https://ostree.readthedocs.org/en/latest/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: avahi fuse gpgme keyutils libsoup
-# Optional: docbook-xsl
+# Depends on: fuse3 gpgme grub2 keyutils libsoup
+# Optional: avahi brotli docbook-xsl dracut libsodium
 
 name=ostree
 version=2023.7
-release=1
+release=2
 source=(https://github.com/ostreedev/ostree/releases/download/v$version/libostree-$version.tar.xz)
 
 build() {
+  prt-get isinst avahi || PKGMK_OSTREE+=' --without-avahi'
   prt-get isinst docbook-xsl && PKGMK_OSTREE+=' --enable-man=yes' || PKGMK_OSTREE+=' --enable-man=no'
+  prt-get isinst dracut && PKGMK_OSTREE+=' --with-dracut=yesbutnoconf'
+  prt-get isinst libsodium && PKGMK_OSTREE+=' --with-ed25519-libsodium'
 
   cd lib$name-$version
+
   ./configure $PKGMK_OSTREE \
     --prefix=/usr \
     --libexecdir=/usr/lib/$name \
     --with-openssl \
-    --with-builtin-grub2-mkconfig \
+    --with-modern-grub \
+    --with-grub2-mkconfig-path=/usr/bin/grub-mkconfig \
     --enable-experimental-api \
     --disable-static
   make
   make DESTDIR=$PKG install
+
+  install -d -m0755 $PKG/etc
+  mv $PKG/usr/etc/grub.d $PKG/etc
 
   rm -fr $PKG/usr/share/ostree/trusted.gpg.d/README-gpg
 }
