@@ -5,19 +5,18 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wasi-libc++ wayland
 
 name=firefox
-version=118.0.2
+version=119.0
 release=1
 source=(https://ftp.mozilla.org/pub/firefox/releases/${version}/source/$name-${version}.source.tar.xz
   firefox.desktop
-  simd039.patch
   node-stdout-nonblocking-wrapper)
 
 build() {
   cd $name-$version
 
-  for p in $SRC/*.patch; do
-    patch -p1 -i $p
-  done
+  #for p in $SRC/*.patch; do
+  #  patch -p1 -i $p
+  #done
 
   if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
   	printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
@@ -89,7 +88,7 @@ EOF
   local cruxVer=$(/usr/bin/crux | cut -d' ' -f3)
 
   # sandboxed web apps
-  prt-get isinst wasi-compiler-rt wasi-libc++ && \
+  prt-get isinst lld wasi-libc++ && \
   echo 'ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot' >> .mozconfig \
      || echo 'ac_add_options --without-wasm-sandboxed-libraries' >> .mozconfig
 
