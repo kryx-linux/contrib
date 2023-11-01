@@ -1,17 +1,16 @@
 # Description: JOSE protocol implementation in Python using cryptography
 # URL: https://pypi.org/project/josepy/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-pyopenssl
+# Depends on: python3-pyopenssl python3-poetry-core
 
 name=python3-josepy
-version=1.13.0
+version=1.14.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/j/josepy/josepy-$version.tar.gz)
 
 build() {
   cd josepy-$version
-  rm pytest.ini
-  sed -e '/setuptools>=/d' -i setup.py
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
