@@ -4,15 +4,13 @@
 # Depends on: httpbin python3-requests python3-service-identity python3-twisted
 
 name=python3-treq
-version=22.2.0
+version=23.11.0
 release=1
-source=(https://github.com/twisted/treq/archive/release-$version/$name-$version.tar.gz)
+source=(https://pypi.org/packages/source/t/treq/treq-$version.tar.gz)
 
 build() {
-  cd treq-release-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+  cd treq-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
