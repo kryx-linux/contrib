@@ -4,22 +4,22 @@
 # Depends on: mm-common
 
 name=libsigc++2
-version=2.12.0
+version=2.12.1
 release=1
 source=(https://download.gnome.org/sources/libsigc++/${version%.*}/libsigc++-$version.tar.xz)
 
 build() {
-	mkdir bld && cd bld
+  mkdir bld && cd bld
 
-	meson setup ../libsigc++-$version \
-		--prefix=/usr \
-		--buildtype=release \
-		-D build-documentation=false \
-		-D b_lto=true \
-		-D b_pie=true
+  meson setup ../libsigc++-$version \
+    --prefix=/usr \
+    --buildtype=release \
+    -D build-documentation=false \
+    -D b_lto=true \
+    -D b_pie=true
 
-	ninja -j ${JOBS:-1}
-	DESTDIR=$PKG ninja install
+  ninja -j ${JOBS:-1}
+  DESTDIR=$PKG ninja install
 
-	find $PKG \( -type f -a -perm -g+w \) -exec chmod g-w '{}' +
+  find $PKG \( -type f -a -perm -g+w \) -exec chmod g-w '{}' +
 }

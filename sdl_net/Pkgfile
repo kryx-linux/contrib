@@ -4,15 +4,14 @@
 # Depends on: libsdl
 
 name=sdl_net
-version=1.2.8
+version=1.2.9
+_commit=f5e3ef18937df3593c2d742ccfa89845ba13be4d
 release=1
-source=(https://github.com/libsdl-org/SDL_net/archive/refs/tags/release-$version.tar.gz)
-renames=($name-release-$version.tar.gz)
+source=(https://github.com/libsdl-org/SDL_net/archive/$_commit/$name-$version.tar.gz)
 
 build() {
-	cd SDL_net-release-$version
-	./configure --prefix=/usr --enable-gui=no --disable-sdltest
-	make
-	make DESTDIR=$PKG install
+  cd SDL_net-$_commit
+  ./configure --prefix=/usr --enable-gui=no --disable-sdltest
+  make
+  make DESTDIR=$PKG install
 }
-

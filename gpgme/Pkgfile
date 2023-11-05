@@ -5,17 +5,13 @@
 # Optional: qt5 qt6-base
 
 name=gpgme
-version=1.22.0
-release=4
-source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2
-  qt5.patch)
+version=1.23.1
+release=1
+source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
 
-  ## revert c3171d0cf1a249618f0763fe141ab84d8a4be240
-  ## https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gpgme.git;a=commitdiff;h=c3171d0cf1a249618f0763fe141ab84d8a4be240
-  patch -Rp1 -i $SRC/qt5.patch
   prt-get isinst qt5 && PKGMK_GPGME_LANG+=' qt'
   ## fails to build as well
   #prt-get isinst qt6-base && PKGMK_GPGME_LANG+=' qt6'

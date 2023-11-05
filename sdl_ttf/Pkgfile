@@ -5,16 +5,16 @@
 
 name=sdl_ttf
 version=2.0.11.1
-release=1
-source=(https://github.com/libsdl-org/SDL_ttf/archive/refs/heads/SDL-1.2.zip)
-renames=($name-$version.zip)
+_commit=73202c5e6fc28b8ac68f5b62e2507f6214755689
+release=2
+source=(https://github.com/libsdl-org/SDL_ttf/archive/$_commit/$name-$version-$release.zip)
 
 build() {
-	cd SDL_ttf-*
+  cd SDL_ttf-$_commit
 
-	./configure --prefix=/usr \
-		--disable-sdltest \
-		--disable-freetypetest
-	make 
-	make DESTDIR=$PKG install
+  ./configure --prefix=/usr \
+    --disable-sdltest \
+    --disable-freetypetest
+  make 
+  make DESTDIR=$PKG install
 }

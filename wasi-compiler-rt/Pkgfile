@@ -4,7 +4,7 @@
 # Depends on: wasi-libc
 
 name=wasi-compiler-rt
-version=17.0.2
+version=17.0.4
 release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/compiler-rt-$version.src.tar.xz
   https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz
@@ -22,7 +22,6 @@ build() {
     -D COMPILER_RT_INSTALL_PATH="/usr/lib/clang/${version%%.*}" \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_C_FLAGS='-O3 -DNDEBUG -fno-exceptions --sysroot=/usr/share/wasi-sysroot' \
-    -D CMAKE_C_COMPILER_WORKS=ON \
     -D CMAKE_MODULE_PATH="$SRC/cmake" \
     -D CMAKE_TOOLCHAIN_FILE="$SRC/wasi-toolchain.cmake" \
     -D COMPILER_RT_BAREMETAL_BUILD=ON \

@@ -1,23 +1,24 @@
 # Description: A cross-platform networking library for SDL2.
-# URL: https://www.libsdl.org/projects/SDL_net/
+# URL: https://www.github.com/libsdl-org/SDL_net/
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: libsdl2
 
 name=sdl2_net
 version=2.2.0
-release=2
-source=(https://www.libsdl.org/projects/SDL_net/release/SDL2_net-$version.tar.gz)
+_commit=6d9b64c438b3f60f08ea5c43d678f2beaf10ea70
+release=3
+source=(https://www.github.com/libsdl-org/SDL_net/archive/$_commit/$name-$version.tar.gz)
 
 build() {
-	cmake -S SDL2_net-$version -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_INSTALL_LIBDIR=lib \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS"
+  cmake -S SDL_net-$_commit -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS"
 
-	ninja -C build -j ${JOBS:-1}
-	DESTDIR=$PKG ninja -C build install
+  ninja -C build -j ${JOBS:-1}
+  DESTDIR=$PKG ninja -C build install
 
-	# delete installed license.txt
-	rm -rf $PKG/usr/share
+  # delete installed license.txt
+  rm -rf $PKG/usr/share
 }
