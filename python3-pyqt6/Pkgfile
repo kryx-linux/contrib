@@ -7,10 +7,13 @@
 name=python3-pyqt6
 version=6.5.2
 release=1
-source=(https://pypi.python.org/packages/source/P/PyQt6/PyQt6-$version.tar.gz)
+source=(https://pypi.python.org/packages/source/P/PyQt6/PyQt6-$version.tar.gz
+  qt-6.6.patch)
 
 build() {
   cd PyQt6-$version
+
+  patch -Np1 -i $SRC/qt-6.6.patch
 
   sip-build \
     --confirm-license \
