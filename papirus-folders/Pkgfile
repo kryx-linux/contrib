@@ -2,14 +2,20 @@
 # URL: https://github.com/PapirusDevelopmentTeam/papirus-folders
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: papirus-icon-theme
+# Optional: bash-completion zsh
 
 name=papirus-folders
-version=1.12.1
+version=1.13.0
 release=1
 source=(https://github.com/PapirusDevelopmentTeam/papirus-folders/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   make DESTDIR=$PKG install
-  [[ ! -d  /lib/zsh || ! -d /usr/lib/zsh ]] && rm -r $PKG/usr/share/zsh
+
+  ! prt-get isinst bash-completion && rm -r $PKG/usr/share/bash-completion/
+  ! prt-get isinst zsh && rm -r $PKG/usr/share/zsh
+
+  rmdir $PKG/usr/share || true
 }
