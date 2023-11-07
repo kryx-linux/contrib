@@ -4,7 +4,7 @@
 # Depends on: lua
 
 name=lua-language-server
-version=3.7.0
+version=3.7.1
 release=1
 source=(https://github.com/sumneko/lua-language-server/archive/$version/$name-$version.tar.gz
   https://github.com/sumneko/lua-language-server/releases/download/$version/lua-language-server-$version-submodules.zip
@@ -32,6 +32,5 @@ build() {
   install -m644 -t $PKG/usr/lib/$name/bin bin/main.lua
   install -m644 -t $PKG/usr/lib/$name {debugger,main}.lua
 
-  rm -r meta/198256b1
   cp -r locale meta script $PKG/usr/lib/$name
 }
