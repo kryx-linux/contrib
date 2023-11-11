@@ -4,16 +4,14 @@
 # Depends on: python3-beautifulsoup4 python3-cssselect python3-cython python3-html5lib libxslt
 
 name=python3-lxml
-_name=${name#*-}
+_name=${name#python3-}
 version=4.9.3
-release=1
+release=2
 source=(https://github.com/$_name/$_name/releases/download/$_name-$version/$_name-$version.tar.gz)
 
 build() {
-	cd $_name-$version
+  cd $_name-$version
 
-	/usr/bin/python3 setup.py build
-
-	/usr/bin/python3 setup.py install \
-		--prefix=/usr --root=$PKG --optimize=1
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }

@@ -2,16 +2,15 @@
 # URL: https://wiki.gnome.org/action/show/Projects/libsoup
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: glib-networking libpsl libxml2
-# Optional: brotli gobject-introspection krb5 vala
+# Optional: brotli krb5 vala
 
 name=libsoup3
-version=3.4.3
+version=3.4.4
 release=1
 source=(https://download.gnome.org/sources/libsoup/${version%.*}/libsoup-$version.tar.xz)
 
 build() {
   prt-get isinst brotli && PKGMK_LIBSOUP3+=' -D brotli=enabled'
-  prt-get isinst gobject-introspection && PKGMK_LIBSOUP3+=' -D introspection=enabled'
   prt-get isinst vala && PKGMK_LIBSOUP3+=' -D vapi=enabled'
 
   # turn off translations here, for a trivial reduction in CPU time
@@ -22,6 +21,7 @@ build() {
   meson setup build libsoup-$version ${PKGMK_LIBSOUP3} \
     --prefix=/usr \
     --buildtype=plain \
+    -D introspection=enabled \
     -D b_lto=true \
     -D b_pie=true \
     --wrap-mode nodownload \

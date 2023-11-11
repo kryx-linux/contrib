@@ -1,22 +1,18 @@
 # Description: Python Build Reasonableness
 # URL: https://pypi.python.org/pypi/pbr
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-setuptools
+# Depends on: python3-build python3-wheel python3-installer
 
 name=python3-pbr
-version=5.11.1
+version=6.0.0
 release=1
 source=(https://pypi.org/packages/source/p/pbr/pbr-$version.tar.gz)
 
 build() {
   cd pbr-$version
-  sed -i 's/virtualenv.create_environment(path, clear=True)/virtualenv.cli_run([path, "--clear"])/' pbr/tests/test_packaging.py
-  find . -name \*.py -exec sed -i '1s/python$/&3/' {} +
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 
   find $PKG -iname "*README*" -delete
 }
