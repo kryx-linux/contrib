@@ -4,10 +4,13 @@
 
 name=faad2
 version=2.11.0
-release=1
-source=(https://github.com/knik0/faad2/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/knik0/faad2/archive/$version/$name-$version.tar.gz
+  92ce281311f629faa99c9e06baaf41977f431f1b.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/92ce281311f629faa99c9e06baaf41977f431f1b.patch
+
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
