@@ -1,0 +1,16 @@
+# Description: expand system variables Unix style
+# URL: https://github.com/sayanarijit/expandvars
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-build python3-wheel python3-installer
+
+name=python3-expandvars
+version=0.11.0
+release=1
+source=(https://pypi.org/packages/source/e/expandvars/expandvars-$version.tar.gz)
+
+build() {
+  cd expandvars-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
