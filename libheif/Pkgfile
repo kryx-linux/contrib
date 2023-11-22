@@ -5,18 +5,17 @@
 # Optional: x265 dav1d aom rav1e svt-av1
 
 name=libheif
-version=1.17.3
+version=1.17.5
 release=1
 source=(https://github.com/strukturag/$name/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-  mkdir build && cd build
-  cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX="/usr"       \
-        -DCMAKE_INSTALL_LIBDIR=lib          \
-        -DCMAKE_C_FLAGS="$CFLAGS"           \
-        ../$name-$version
+  cmake -B build -S $name-$version -G Ninja \
+        -DCMAKE_INSTALL_PREFIX="/usr" \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_C_FLAGS="$CFLAGS"
 
-  ninja -j ${JOBS:-1}
-  DESTDIR=$PKG ninja install
+  ninja -C build -j ${JOBS:-1}
+  DESTDIR=$PKG ninja -C build install
 }
