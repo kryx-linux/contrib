@@ -1,21 +1,30 @@
 # Description: Portable cross-platform audio I/O library
 # URL: http://portaudio.com
-# Maintainer: unmaintained
+# Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: alsa-lib
-# Optional: jack-audio-connection-kit
+# Optional: pulseaudio jack-audio-connection-kit
 
 name=portaudio
-version=190700_20210406
+version=190700_20231103
+_commit=8a9ebfd29f2818d6ce6e8b6c3b9e3cccce0e0691
 release=1
-source=(http://files.portaudio.com/archives/pa_stable_v$version.tgz)
+source=(https://github.com/PortAudio/$name/archive/$_commit/$name-$version.tar.gz)
 
 build() {
-  cd $name
+  PKGMK_PORTAU=(-Wno-dev
+                -DCMAKE_BUILD_TYPE=Release 
+                -DCMAKE_INSTALL_PREFIX="/usr"
+                -DCMAKE_INSTALL_LIBDIR=lib
+                -DPA_BUILD_SHARED_LIBS=ON
+                -DCMAKE_C_FLAGS_RELEASE="$CFLAGS"
+                -DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS")
 
-  ./configure \
-    --prefix=/usr \
-    --enable-cxx
+  prt-get isinst jack-audio-connection-kit || PKGMK_PORTAU+=(-DPA_USE_JACK=OFF)
+  cmake -S $name-$_commit -B build -G Ninja "${PKGMK_PORTAU[@]}"
 
-  make -j1
-  make DESTDIR=$PKG install
+  ninja -C build -j ${JOBS:-1}
+  DESTDIR=$PKG ninja -C build install
+
+  # delete junk files
+  rm -rf $PKG/usr/share
 }
