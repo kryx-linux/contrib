@@ -18,5 +18,5 @@ build() {
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 
-  rm -fr $PKG/usr/share/locale
+  rm -fr $PKG/usr/{lib/gconv/gconv-modules,share/locale}
 }
