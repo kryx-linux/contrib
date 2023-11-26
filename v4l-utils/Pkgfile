@@ -4,20 +4,19 @@
 # Depends on: libjpeg-turbo
 
 name=v4l-utils
-version=1.24.1
+version=1.26.0
 release=1
-source=(https://linuxtv.org/downloads/v4l-utils/$name-$version.tar.bz2)
+source=(https://linuxtv.org/downloads/v4l-utils/$name-$version.tar.xz)
 
 build() {
-  cd $name-$version
-
-  prt-get isinst clang && PKGMK_V4L+=" --enable-bpf" || PKGMK_V4L+=" --disable-bpf"
-
-  ./configure $PKGMK_V4L \
+  meson setup $name-$version build \
     --prefix=/usr \
-    --disable-nls
-  make
-  MAKEFLAGS="-j1" make install DESTDIR=$PKG
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
-  rm $PKG/usr/bin/ivtv-ctl
+  rm -fr $PKG/usr/share/locale
 }
