@@ -1,0 +1,18 @@
+# Description: Generator-based operators for asynchronous iteration
+# URL: https://github.com/vxgmichel/aiostream
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-typing_extensions
+
+name=python3-aiostream
+version=0.5.2
+release=1
+source=(https://pypi.org/packages/source/a/aiostream/aiostream-$version.tar.gz)
+
+build() {
+  cd aiostream-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
