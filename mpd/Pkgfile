@@ -6,8 +6,10 @@
 
 name=mpd
 version=0.23.14
-release=1
-source=(https://www.musicpd.org/download/mpd/${version:0:4}/$name-$version.tar.xz mpd)
+release=2
+source=(https://www.musicpd.org/download/mpd/${version:0:4}/$name-$version.tar.xz
+  50c1e3738a672f933560247b5527d365d17b1c02.patch
+  mpd)
 
 build() {
   # optional features {{{
@@ -44,6 +46,8 @@ build() {
   prt-get isinst yajl && PKGMK_MPD+=' -D yajl=enabled'
   prt-get isinst zziplib && PKGMK_MPD+=' -D zzip=enabled'
   # }}}
+
+  patch -Np1 -d $name-$version -i $SRC/50c1e3738a672f933560247b5527d365d17b1c02.patch
 
   meson setup $name-$version build $PKGMK_MPD \
     --prefix=/usr \
