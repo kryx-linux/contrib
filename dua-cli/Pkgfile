@@ -5,13 +5,16 @@
 
 name=dua-cli
 version=2.22.0
-release=1
-source=(https://github.com/Byron/dua-cli/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/Byron/dua-cli/archive/v$version/$name-$version.tar.gz
+  195.patch)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+
+  patch -Np1 -d $name-$version -i $SRC/195.patch
 
   cargo build --release --locked --manifest-path $name-$version/Cargo.toml
 

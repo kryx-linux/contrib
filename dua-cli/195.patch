@@ -1,0 +1,52 @@
+From 192460e5bc72781be1d238912c5d590bfed706cf Mon Sep 17 00:00:00 2001
+From: Sebastian Thiel <sebastian.thiel@icloud.com>
+Date: Mon, 11 Dec 2023 12:33:44 +0100
+Subject: [PATCH] fix: single files will not cause IO error (#194)
+
+Running `dua <filename>` will once again provide size information
+about that filename.
+---
+ src/main.rs                         | 2 +-
+ tests/snapshots/success-single-file | 1 +
+ tests/stateless-journey.sh          | 6 ++++++
+ 3 files changed, 8 insertions(+), 1 deletion(-)
+ create mode 100644 tests/snapshots/success-single-file
+
+diff --git a/src/main.rs b/src/main.rs
+index a655ea1..a610f6f 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -130,7 +130,7 @@ fn extract_paths_maybe_set_cwd(
+     mut paths: Vec<PathBuf>,
+     cross_filesystems: bool,
+ ) -> Result<Vec<PathBuf>, io::Error> {
+-    if paths.len() == 1 {
++    if paths.len() == 1 && paths[0].is_dir() {
+         std::env::set_current_dir(&paths[0])?;
+         paths.clear();
+     }
+diff --git a/tests/snapshots/success-single-file b/tests/snapshots/success-single-file
+new file mode 100644
+index 0000000..8321cbf
+--- /dev/null
++++ b/tests/snapshots/success-single-file
+@@ -0,0 +1 @@
++[32m   4.10 KB[39m a
+\ No newline at end of file
+diff --git a/tests/stateless-journey.sh b/tests/stateless-journey.sh
+index 37a32c2..2557f3a 100755
+--- a/tests/stateless-journey.sh
++++ b/tests/stateless-journey.sh
+@@ -31,6 +31,12 @@ WITH_FAILURE=1
+               expect_run ${SUCCESSFULLY} "$exe" aggregate
+             }
+           )
++          (with "a single file argument"
++            it "produces a human-readable (metric) size display of that file" && {
++              WITH_SNAPSHOT="$snapshot/success-single-file" \
++              expect_run ${SUCCESSFULLY} "$exe" aggregate a
++            }
++          )
+           (with "sorting disabled"
+             it "produces a human-readable (metric) aggregate of everything within the current directory, alphabetically sorted, with total" && {
+               WITH_SNAPSHOT="$snapshot/success-no-arguments-no-sort" \
