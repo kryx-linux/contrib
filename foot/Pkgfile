@@ -8,6 +8,7 @@ name=foot
 version=1.16.2
 release=1
 source=(https://codeberg.org/dnkl/foot/archive/$version.tar.gz)
+renames=($name-$version.tar.gz)
 
 build() {
   prt-get isinst utf8proc && PKGMK_FOOT+=' -D grapheme-clustering=enabled'
