@@ -1,11 +1,11 @@
 # Description: High performance message passing library (MPI)
 # URL: https://www.open-mpi.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: eudev gcc-fortran libevent libnl zlib
-# Optional: cuda hwloc
+# Depends on: eudev gcc-fortran hwloc libevent libnl zlib
+# Optional: cuda
 
 name=openmpi
-version=4.1.6
+version=5.0.1
 release=1
 source=(https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$name-$version.tar.bz2)
 
@@ -17,9 +17,12 @@ build() {
     --sysconfdir=/etc/$name \
     --enable-mpi-fortran=all \
     --libdir=/usr/lib/$name \
+    --with-hwloc=/usr \
     --enable-builtin-atomics \
-    --enable-mpi-cxx \
     --enable-pretty-print-stacktrace \
+    --enable-ipv6 \
+    --enable-mpi1-compatibility \
+    --with-sge \
     --without-slurm \
     FC=/usr/bin/gfortran \
     LDFLAGS="${LDFLAGS} -Wl,-z,noexecstack"
