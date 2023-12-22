@@ -1,20 +1,27 @@
 # Description: Bluetooth libraries and utilities
 # URL: https://www.bluez.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: alsa-lib dbus glib
-# Optional: cups docutils libical
+# Depends on: dbus glib
+# Optional: alsa-lib cups docutils json-c libical
 
 name=bluez
 version=5.71
-release=1
+release=2
 source=(https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
+  fix-bluez-5.71-autoconnection.diff
+  fix-bluez-5.71-coredump-on-a2dp-suspend.diff
   bluetoothd)
 
 build() {
   cd bluez-$version
 
+  patch -Np1 -i $SRC/fix-bluez-5.71-autoconnection.diff
+  patch -Np1 -i $SRC/fix-bluez-5.71-coredump-on-a2dp-suspend.diff
+
+  prt-get isinst alsa-lib && PKGMK_BLUEZ+=' --enable-midi'
   prt-get isinst cups && PKGMK_BLUEZ+=' --enable-cups' || PKGMK_BLUEZ+=' --disable-cups'
   prt-get isinst docutils || PKGMK_BLUEZ+=' --disable-manpages'
+  prt-get isinst json-c && PKGMK_BLUEZ+=' --enable-mesh'
   prt-get isinst libical && PKGMK_BLUEZ+=' --enable-obex' || PKGMK_BLUEZ+=' --disable-obex'
 
   ./configure $PKGMK_BLUEZ \
@@ -22,7 +29,7 @@ build() {
     --sysconfdir=/etc \
     --localstatedir=/var \
     --libexecdir=/usr/lib \
-    --enable-{a2dp,experimental,library,midi,tools} \
+    --enable-{a2dp,experimental,hid2hci,library,tools} \
     --disable-systemd
   make
   make DESTDIR=$PKG install
