@@ -2,10 +2,10 @@
 # URL: https://github.com/alacritty/alacritty
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: fontconfig libxkbcommon rust util-linux xorg-libxcb
-# Optional: bash-completion zsh
+# Optional: bash-completion scdoc zsh
 
 name=alacritty
-version=0.12.3
+version=0.13.0
 release=1
 source=(https://github.com/alacritty/alacritty/archive/refs/tags/v$version.tar.gz)
 renames=($name-$version.tar.gz)
@@ -19,8 +19,15 @@ build() {
 
   install -D -m755 $name-$version/target/release/alacritty \
     $PKG/usr/bin/alacritty
-  install -D -m644 $name-$version/extra/alacritty.man \
-    $PKG/usr/share/man/man1/alacritty.1
+
+  if prt-get isinst scdoc; then
+    for i in 1 5; do
+      scdoc < $name-$version/extra/man/alacritty.${i}.scd | tee alacritty.${i}
+    install -D -m644 alacritty.${i} \
+      $PKG/usr/share/man/man${i}/alacritty.${i}
+    done
+  fi
+
   install -D -m644 \
     $name-$version/extra/linux/org.alacritty.Alacritty.appdata.xml \
     $PKG/usr/share/appdata/io.alacritty.Alacritty.appdata.xml
@@ -33,8 +40,8 @@ build() {
     $name-$version/extra/completions/alacritty.bash \
     $PKG/usr/share/bash-completion/completions/alacritty
 
-  install -D -m644 $name-$version/alacritty.yml \
-    $PKG/usr/share/alacritty/alacritty.yml
+  #install -D -m644 $name-$version/alacritty.yml \
+  #  $PKG/usr/share/alacritty/alacritty.yml
   install -D -m 644 $name-$version/extra/linux/Alacritty.desktop \
     $PKG/usr/share/applications/Alacritty.desktop
   install -D -m644 $name-$version/extra/logo/alacritty-term.svg \
