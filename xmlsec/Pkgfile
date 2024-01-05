@@ -5,15 +5,12 @@
 # Optional: gnutls libgcrypt nss
 
 name=xmlsec
-version=1.3.2
-release=2
-source=(https://www.aleksey.com/xmlsec/download/${name}1-$version.tar.gz
-  729.patch)
+version=1.3.3
+release=1
+source=(https://www.aleksey.com/xmlsec/download/${name}1-$version.tar.gz)
 
 build() {
   cd ${name}1-$version
-
-  patch -Np1 -i $SRC/729.patch
 
   ./configure --prefix=/usr
 
