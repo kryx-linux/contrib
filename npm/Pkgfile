@@ -4,10 +4,9 @@
 # Depends on: nodejs
 
 name=npm
-version=10.2.5
+version=10.3.0
 release=1
-source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz
-  destdir.patch)
+source=(https://github.com/npm/cli/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd cli-$version
@@ -23,7 +22,6 @@ build() {
   cp -r workspaces/config node_modules/@npmcli/
   cp -r workspaces/libnpmfund node_modules/libnpmfund
   cp -r workspaces/arborist node_modules/@npmcli/arborist
-  patch -Np1 -i $SRC/destdir.patch
 
   NODE_PATH=/usr/lib/node_modules node bin/npm-cli.js install
   NODE_PATH=/usr/lib/node_modules node bin/npm-cli.js pack
@@ -41,5 +39,4 @@ build() {
     -iname "AUTHORS*" \)\
     -exec rm '{}' \+
   rm -r $PKG/usr/lib/node_modules/npm/docs
-  #$PKG/usr/lib/node_modules/npm/changelogs
 }
