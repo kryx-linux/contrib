@@ -7,7 +7,9 @@
 name=pipewire
 version=1.0.1
 release=1
-source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/PipeWire/pipewire/archive/$version/$name-$version.tar.gz
+  268f4856f852d72a749932630223f928acd1a704.patch
+  4b145ad444b8fc70b6cb375b6447e9c9793e2238.patch)
 
 build() {
   prt-get isinst avahi || PKGMK_PW+=' -Davahi=disabled'
@@ -18,6 +20,9 @@ build() {
   prt-get isinst pulseaudio || PKGMK_PW+=' -Dlibpulse=disabled'
   prt-get isinst v4l-utils || PKGMK_PW+=' -Dv4l2=disabled'
   prt-get isinst vulkan-loader || PKGMK_PW+=' -Dvulkan=disabled -Dvulkan=disabled'
+
+  patch -Np1 -d $name-$version -i $SRC/268f4856f852d72a749932630223f928acd1a704.patch
+  patch -Np1 -d $name-$version -i $SRC/4b145ad444b8fc70b6cb375b6447e9c9793e2238.patch
 
   meson setup $name-$version build $PKGMK_PW \
     -D prefix=/usr \
