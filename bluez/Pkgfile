@@ -5,18 +5,13 @@
 # Optional: alsa-lib cups docutils json-c libical
 
 name=bluez
-version=5.71
-release=2
+version=5.72
+release=1
 source=(https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
-  fix-bluez-5.71-autoconnection.diff
-  fix-bluez-5.71-coredump-on-a2dp-suspend.diff
   bluetoothd.service)
 
 build() {
   cd bluez-$version
-
-  patch -Np1 -i $SRC/fix-bluez-5.71-autoconnection.diff
-  patch -Np1 -i $SRC/fix-bluez-5.71-coredump-on-a2dp-suspend.diff
 
   prt-get isinst alsa-lib && PKGMK_BLUEZ+=' --enable-midi'
   prt-get isinst cups && PKGMK_BLUEZ+=' --enable-cups' || PKGMK_BLUEZ+=' --disable-cups'
