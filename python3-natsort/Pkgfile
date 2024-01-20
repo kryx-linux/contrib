@@ -1,0 +1,18 @@
+# Description: simple yet flexible natural sorting in Python
+# URL: https://github.com/SethMMorton/natsort
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-natsort
+version=8.4.0
+release=1
+source=(https://pypi.org/packages/source/n/natsort/natsort-$version.tar.gz)
+
+build() {
+  cd natsort-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
