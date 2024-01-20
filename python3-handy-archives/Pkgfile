@@ -1,0 +1,16 @@
+# Description: Some handy archive helpers for Python
+# URL: https://github.com/domdfcoding/handy-archives
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-build python3-wheel python3-installer python3-flit-core
+
+name=python3-handy-archives
+version=0.2.0
+release=1
+source=(https://pypi.org/packages/source/h/handy_archives/handy_archives-$version.tar.gz)
+
+build() {
+  cd handy_archives-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
