@@ -24,6 +24,6 @@ build() {
     -buildmode=pie \
     -mod=readonly \
     -modcacherw \
-    -o glow .
-  install -Dm755 glow $PKG/usr/bin/glow
+    -o $name .
+  install -Dm755 $name $PKG/usr/bin/$name
 }
