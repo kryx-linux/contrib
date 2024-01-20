@@ -1,0 +1,16 @@
+# Description: Reusable constraint types to use with typing.Annotated
+# URL: https://github.com/annotated-types/annotated-types
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-hatchling
+
+name=python3-annotated-types
+version=0.6.0
+release=1
+source=(https://pypi.org/packages/source/a/annotated_types/annotated_types-$version.tar.gz)
+
+build() {
+  cd annotated_types-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
