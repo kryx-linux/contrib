@@ -1,0 +1,16 @@
+# Description: Display a warning at the top of module documentation that it has additional requirements
+# URL: https://github.com/sphinx-toolbox/extras_require
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-whey
+
+name=python3-extras-require
+version=0.4.3
+release=1
+source=(https://pypi.org/packages/source/e/extras_require/extras_require-$version.tar.gz)
+
+build() {
+  cd extras_require-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
