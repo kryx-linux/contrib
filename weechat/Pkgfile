@@ -7,9 +7,12 @@
 name=weechat
 version=4.1.3
 release=1
-source=(https://weechat.org/files/src/$name-$version.tar.xz)
+source=(https://weechat.org/files/src/$name-$version.tar.xz
+  ruby.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/ruby.patch
+
   prt-get isinst asciidoc || PKGMK_WEECHAT+=' -D ENABLE_MAN=OFF'
   prt-get isinst aspell || PKGMK_WEECHAT+=' -D ENABLE_SPELL=OFF'
   prt-get isinst guile || PKGMK_WEECHAT+=' -D ENABLE_GUILE=OFF'
