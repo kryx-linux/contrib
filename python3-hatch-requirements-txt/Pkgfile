@@ -1,0 +1,16 @@
+# Description: Hatchling plugin to read project dependencies from requirements.txt
+# URL: https://github.com/repo-helper/hatch-requirements-txt
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-hatchling
+
+name=python3-hatch-requirements-txt
+version=0.4.0
+release=1
+source=(https://pypi.org/packages/source/h/hatch_requirements_txt/hatch_requirements_txt-$version.tar.gz)
+
+build() {
+  cd hatch_requirements_txt-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
