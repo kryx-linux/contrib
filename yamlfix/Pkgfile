@@ -1,0 +1,16 @@
+# Description: A simple opinionated yaml formatter that keeps your comments
+# URL: https://github.com/lyz-code/yamlfix
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-maison python3-pdm-backend python3-ruyaml
+
+name=yamlfix
+version=1.16.0
+release=1
+source=(https://github.com/lyz-code/yamlfix/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd yamlfix-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
