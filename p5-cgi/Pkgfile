@@ -4,9 +4,22 @@
 # Depends on: p5-html-parser
 
 name=p5-cgi
-version=4.60
+version=4.61
 release=1
 source=(https://cpan.metacpan.org/authors/id/L/LE/LEEJO/CGI-$version.tar.gz)
+
+unpack_source() {
+  mkdir $SRC/tarballs
+  for file in ${source[@]}; do
+    case ${file##*/} in
+      CGI-*.tar.gz)
+        echo "Unpacking $(get_filename $file)"
+        bsdtar -p -o -C $SRC -xf $(get_filename $file) ;;
+      *)
+        cp $(get_filename $file) $SRC ;;
+    esac
+  done
+}
 
 build() {
   cd CGI-$version
