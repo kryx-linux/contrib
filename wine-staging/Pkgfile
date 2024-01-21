@@ -7,49 +7,28 @@
 # MONO_VERSION:  8.1.0
 
 name=wine-staging
-version=8.21
+version=9.0
 release=1
-source=(https://dl.winehq.org/wine/source/8.x/wine-${version:0:4}.tar.xz \
+source=(https://dl.winehq.org/wine/source/9.0/wine-${version:0:3}.tar.xz \
 	https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz \
 	https://dl.winehq.org/wine/wine-gecko/2.47.4/wine-gecko-2.47.4-x86.msi \
 	https://dl.winehq.org/wine/wine-gecko/2.47.4/wine-gecko-2.47.4-x86_64.msi \
 	https://dl.winehq.org/wine/wine-mono/8.1.0/wine-mono-8.1.0-x86.msi)
 
 build() {
-	# apply staging patches
 	cd $name-$version
-	./staging/patchinstall.py DESTDIR=../wine-${version:0:4} --all
+	./staging/patchinstall.py DESTDIR=../wine-${version:0:3} --all
 	cd ..
-
-	install -d wine32 wine64
 
 	export CPPFLAGS="${CPPFLAGS/-D_FORTIFY_SOURCE=2/} -D_FORTIFY_SOURCE=0"
 
+	install -d wine64
 	cd wine64
-
-	../wine-${version:0:4}/configure \
+	../wine-${version:0:3}/configure \
 		--prefix=/usr \
 		--libdir=/usr/lib \
-		--enable-win64
-
-	make depend
-	make
-	make DESTDIR=$PKG install
-
-	cd ../wine32
-	CFLAGS="${CFLAGS} -m32"
-	CXXFLAGS="${CXXFLAGS} -m32"
-	LDFLAGS="${LDFLAGS} -m32"
-	export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
-
-	../wine-${version:0:4}/configure \
-		--prefix=/usr \
-		--libdir=/usr/lib32 \
-		--x-includes=/usr/include/X11 \
-		--x-libraries=/usr/lib32 \
-		--cache-file=config.cache \
-		--with-wine64=../wine64
-
+		--enable-win64 \
+		--enable-archs=i386,x86_64
 	make depend
 	make
 	make DESTDIR=$PKG install
@@ -66,5 +45,5 @@ build() {
 	rm -r $PKG/usr/share/man/??.UTF-8
 
 	install -d $PKG/etc/revdep.d
-	echo -e "/usr/lib/wine/x86_64-unix\n/usr/lib32/wine/i386-unix\n" > $PKG/etc/revdep.d/$name
+	echo -e "/usr/lib/wine/x86_64-unix\n" > $PKG/etc/revdep.d/$name
 }
