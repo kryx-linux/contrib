@@ -4,7 +4,7 @@
 # Depends on: go btrfs-progs git libseccomp
 
 name=containerd
-version=1.7.11
+version=1.7.12
 release=1
 source=(https://crux.nu/files/$name-$version.tar.xz)
 
@@ -16,7 +16,7 @@ build() {
     cd $name
     export GOPATH=$SRC
     # use the long commit hash here
-    make GIT_COMMIT=64b8a811b07ba6288238eefc14d898ee0b5b99ba
+    make GIT_COMMIT=71909c1814c544ac47ab91d2e8b84718e517bb99
     install -d -m 0755 $PKG/usr/bin
     install -m 0755 bin/* $PKG/usr/bin/
 }
