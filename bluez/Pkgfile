@@ -6,12 +6,15 @@
 
 name=bluez
 version=5.72
-release=1
+release=2
 source=(https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
-  bluetoothd.service)
+  bluetoothd.service
+  bluez-5.72-obexd_without_systemd-1.patch)
 
 build() {
   cd bluez-$version
+
+  patch -Np1 -i $SRC/bluez-5.72-obexd_without_systemd-1.patch
 
   prt-get isinst alsa-lib && PKGMK_BLUEZ+=' --enable-midi'
   prt-get isinst cups && PKGMK_BLUEZ+=' --enable-cups' || PKGMK_BLUEZ+=' --disable-cups'
