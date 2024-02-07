@@ -1,0 +1,6 @@
+#!/bin/sh
+rm -f footprint.in
+mv .footprint footprint.in
+
+grep -v -E 'sccache-dist$' footprint.in > .footprint
+rm -f footprint.in
