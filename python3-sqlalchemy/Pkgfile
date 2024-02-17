@@ -1,0 +1,18 @@
+# Description: Database Abstraction Library
+# URL: https://www.sqlalchemy.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-greenlet python3-typing_extensions
+
+name=python3-sqlalchemy
+version=2.0.27
+release=1
+source=(https://pypi.org/packages/source/S/SQLAlchemy/SQLAlchemy-$version.tar.gz)
+
+build() {
+  cd SQLAlchemy-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
