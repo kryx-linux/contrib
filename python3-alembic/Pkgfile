@@ -1,0 +1,18 @@
+# Description: A database migration tool for SQLAlchemy
+# URL: https://alembic.sqlalchemy.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-mako python3-sqlalchemy
+
+name=python3-alembic
+version=1.13.1
+release=1
+source=(https://pypi.org/packages/source/a/alembic/alembic-$version.tar.gz)
+
+build() {
+  cd alembic-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
