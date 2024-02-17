@@ -1,0 +1,18 @@
+# Description: comprehensive password hashing framework supporting over 30 schemes
+# URL: https://passlib.readthedocs.io/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-setuptools
+
+name=python3-passlib
+version=1.7.4
+release=1
+source=(https://pypi.org/packages/source/p/passlib/passlib-$version.tar.gz)
+
+build() {
+  cd passlib-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
