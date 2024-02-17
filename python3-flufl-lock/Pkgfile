@@ -1,0 +1,16 @@
+# Description: NFS-safe file locking with timeouts for POSIX and Windows
+# URL: https://flufllock.readthedocs.io/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-atpublic python3-psutil
+
+name=python3-flufl-lock
+version=8.0.2
+release=1
+source=(https://gitlab.com/warsaw/flufl.lock/-/archive/$version/flufl.lock-$version.tar.bz2)
+
+build() {
+  cd flufl.lock-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
