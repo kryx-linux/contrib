@@ -1,0 +1,16 @@
+# Description: Create configuration schemas, and process and validate configurations
+# URL: https://launchpad.net/lazr.config
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-build python3-installer python3-lazr-delegates python3-wheel
+
+name=python3-lazr-config
+version=3.0
+release=1
+source=(https://pypi.org/packages/source/l/lazr.config/lazr.config-$version.tar.gz)
+
+build() {
+  cd lazr.config-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
