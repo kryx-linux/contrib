@@ -1,0 +1,16 @@
+# Description: A high level API for internationalizing Python libraries and applications
+# URL: https://flufli18n.readthedocs.io/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-atpublic
+
+name=python3-flufl-i18n
+version=5.0.2
+release=1
+source=(https://gitlab.com/warsaw/flufl.i18n/-/archive/$version/flufl.i18n-$version.tar.bz2)
+
+build() {
+  cd flufl.i18n-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
