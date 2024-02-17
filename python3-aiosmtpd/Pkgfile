@@ -1,0 +1,18 @@
+# Description: aiosmtpd - asyncio based SMTP server
+# URL: https://aiosmtpd.readthedocs.io/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-atpublic python3-attrs
+
+name=python3-aiosmtpd
+version=1.4.4.post2
+release=1
+source=(https://pypi.org/packages/source/a/aiosmtpd/aiosmtpd-$version.tar.gz)
+
+build() {
+  cd aiosmtpd-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
