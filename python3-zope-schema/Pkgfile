@@ -1,0 +1,18 @@
+# Description: zope.interface extension for defining data schemas
+# URL: https://github.com/zopefoundation/zope.schema
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-zope-event python3-zope-interface
+
+name=python3-zope-schema
+version=7.0.1
+release=1
+source=(https://pypi.org/packages/source/z/zope.schema/zope.schema-$version.tar.gz)
+
+build() {
+  cd zope.schema-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
