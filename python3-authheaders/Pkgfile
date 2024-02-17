@@ -1,0 +1,18 @@
+# Description: A library wrapping email authentication header verification and generation
+# URL: https://github.com/ValiMail/authentication-headers
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-dkim python3-publicsuffix-list python3-publicsuffix2
+
+name=python3-authheaders
+version=0.16.2
+release=1
+source=(https://pypi.org/packages/source/a/authheaders/authheaders-$version.tar.gz)
+
+build() {
+  cd authheaders-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
