@@ -1,0 +1,16 @@
+# Description: A generic, spec-compliant, thorough implementation of the OAuth request-signing logic
+# URL: https://github.com/oauthlib/oauthlib
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-cryptography
+
+name=python3-oauthlib
+version=3.2.2
+release=1
+source=(https://pypi.org/packages/source/o/oauthlib/oauthlib-$version.tar.gz)
+
+build() {
+  cd oauthlib-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
