@@ -1,0 +1,16 @@
+# Description: Python bindings for Mailman REST API
+# URL: https://www.list.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-requests
+
+name=python3-mailmanclient
+version=3.3.5
+release=1
+source=(https://pypi.org/packages/source/m/mailmanclient/mailmanclient-$version.tar.gz)
+
+build() {
+  cd mailmanclient-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
