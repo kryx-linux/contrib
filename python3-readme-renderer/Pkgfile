@@ -1,0 +1,17 @@
+# Description: readme_renderer is a library for rendering readme descriptions for Warehouse
+# URL: https://github.com/pypa/readme_renderer
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-docutils python3-nh3 python3-pygments
+# Optional: python3-cmarkgfm
+
+name=python3-readme-renderer
+version=42.0
+release=1
+source=(https://pypi.org/packages/source/r/readme_renderer/readme_renderer-$version.tar.gz)
+
+build() {
+  cd readme_renderer-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
