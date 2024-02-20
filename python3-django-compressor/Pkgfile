@@ -1,0 +1,17 @@
+# Description: Compresses linked and inline JavaScript or CSS into single cached files.
+# URL: https://django-compressor.readthedocs.io/en/latest/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-appconf python3-django python3-rcssmin python3-rjsmin
+
+name=python3-django-compressor
+version=4.4
+release=1
+source=(https://github.com/django-compressor/django-compressor/archive/refs/tags/4.4.tar.gz)
+renames=($name-$version.tar.gz)
+
+build() {
+  cd django-compressor-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
