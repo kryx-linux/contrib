@@ -1,0 +1,22 @@
+# Description: Mailman Web is the web interface for Mailman 3
+# URL: https://gitlab.com/mailman/mailman-web
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: hyperkitty postorius
+# Optional: mailman uwsgi-plugin-python
+
+name=mailman-web
+version=0.0.8
+release=1
+source=(https://pypi.org/packages/source/m/mailman-web/mailman-web-$version.tar.gz
+  mailman-web-0.0.5-fhs.patch
+  mailman-web-0.0.8-remove_django_versioned_dependency.patch)
+
+build() {
+  cd $name-$version
+
+  patch -Np1 -i $SRC/mailman-web-0.0.5-fhs.patch
+  #patch -Np1 -i $SRC/mailman-web-0.0.8-remove_django_versioned_dependency.patch
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
