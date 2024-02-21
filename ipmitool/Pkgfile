@@ -1,0 +1,23 @@
+# Description: An open-source tool for controlling IPMI-enabled systems
+# URL: https://github.com/ipmitool/ipmitool
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: openssl
+
+name=ipmitool
+version=1.8.19
+release=1
+source=(https://github.com/ipmitool/ipmitool/archive/IPMITOOL_${version//./_}.tar.gz)
+renames=($name-$version.tar.gz)
+
+build() {
+  cd ipmitool-IPMITOOL_${version//./_}
+
+  ./bootstrap
+  IANADIR=/usr/share/misc ./configure --prefix=/usr \
+    --datarootdir=/usr/share
+
+  make
+  make DESTDIR=$PKG install
+
+  rm -rf $PKG/usr/share/doc
+}
