@@ -1,0 +1,29 @@
+# Description: A runner for Gitea based on act
+# URL: https://gitea.com/gitea/act_runner
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: docker
+
+name=act-runner
+version=0.2.6
+release=2
+source=(https://gitea.com/gitea/act_runner/archive/v$version.tar.gz
+  act-runner.service)
+renames=($name-$version.tar.gz SKIP)
+
+build() {
+  cd act_runner
+
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+
+  go build \
+    -buildvcs=false \
+    -ldflags "-linkmode=external -X main.version=$version"
+
+  install -Dm755 act_runner -t $PKG/usr/bin
+  install -d -m 755 $PKG/{var/lib/act_runner,usr/share/act_runner}
+  $PKG/usr/bin/act_runner generate-config > $PKG/usr/share/act_runner/config.yaml
+  install -Dm 755 $SRC/$name.service $PKG/etc/rc.d/$name
+}
