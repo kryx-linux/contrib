@@ -2,7 +2,7 @@
 # URL: https://github.com/ibus/ibus/wiki
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: dconf iso-codes libdbusmenu-gtk3 libxkbcommon python3-gobject unicode-cldr unicode-emoji vala
-# Optional:  desktop-file-utils gtk4 libappindicator-gtk3 libnotify unicode-character-database wayland-protocols xorg-setxkbmap
+# Optional:  desktop-file-utils gtk4 libayatana-appindicator libnotify unicode-character-database wayland-protocols xorg-setxkbmap
 #  xorg-libxcomposite xorg-libxcursor xorg-libxinerama
 
 name=ibus
@@ -20,7 +20,7 @@ build() {
   prt-get isinst dconf && PKGMK_IBUS+=' --enable-dconf' || PKGMK_IBUS+=' --disable-dconf'
   prt-get isinst gtk3 && PKGMK_IBUS+=' --enable-gtk3' || PKGMK_IBUS+=' --disable-gtk3'
   prt-get isinst gtk4 && PKGMK_IBUS+=' --enable-gtk4' || PKGMK_IBUS+=' --disable-gtk4'
-  prt-get isinst libappindicator-gtk3 && PKGMK_IBUS+=' --enable-appindicator' || PKGMK_IBUS+=' --disable-appindicator'
+  prt-get isinst libayatana-appindicator && PKGMK_IBUS+=' --enable-appindicator' || PKGMK_IBUS+=' --disable-appindicator'
   prt-get isinst libnotify && PKGMK_IBUS+=' --enable-libnotify' || PKGMK_IBUS+=' --disable-libnotify'
   prt-get isinst unicode-emoji && PKGMK_IBUS+=' --enable-emoji-dict' || PKGMK_IBUS+=' --disable-emoji-dict'
   prt-get isinst unicode-character-database && PKGMK_IBUS+=' --enable-unicode-dict' || PKGMK_IBUS+=' --disable-unicode-dict'
