@@ -1,44 +1,139 @@
-From 2f304ef0532a45d00b2ec2c7fc63adef0aec7607 Mon Sep 17 00:00:00 2001
-From: Felix Weilbach <felix.weilbach@t-online.de>
-Date: Sun, 30 May 2021 20:45:01 +0200
-Subject: [PATCH] Tray: Implement dbusmenu
-
-Co-authored-by: Ian Fan <ianfan0@gmail.com>
-Co-authored-by: Nathan Schulte <nmschulte@gmail.com>
-
-Signed-off-by: Felix Weilbach <felix.weilbach@t-online.de>
----
- include/swaybar/bar.h           |    1 +
- include/swaybar/input.h         |    5 +-
- include/swaybar/tray/dbusmenu.h |   27 +
- include/swaybar/tray/item.h     |    2 +
- include/swaybar/tray/tray.h     |    3 +
- swaybar/bar.c                   |    4 +
- swaybar/input.c                 |   49 +-
- swaybar/meson.build             |    3 +-
- swaybar/render.c                |    2 +
- swaybar/tray/dbusmenu.c         | 1367 +++++++++++++++++++++++++++++++
- swaybar/tray/item.c             |   16 +-
- 11 files changed, 1468 insertions(+), 11 deletions(-)
- create mode 100644 include/swaybar/tray/dbusmenu.h
- create mode 100644 swaybar/tray/dbusmenu.c
-
-diff --git a/include/swaybar/bar.h b/include/swaybar/bar.h
-index 3ad0bdf3ce..3c0b49265e 100644
---- a/include/swaybar/bar.h
-+++ b/include/swaybar/bar.h
-@@ -31,6 +31,7 @@ struct swaybar {
- 	struct zwlr_layer_shell_v1 *layer_shell;
+diff -Naur sway-1.9-rc1.orig/include/swaybar/bar.h sway-1.9-rc1/include/swaybar/bar.h
+--- sway-1.9-rc1.orig/include/swaybar/bar.h	2024-01-28 19:08:45.574503847 +0100
++++ sway-1.9-rc1/include/swaybar/bar.h	2024-01-28 19:09:13.007620155 +0100
+@@ -33,6 +33,7 @@
  	struct zxdg_output_manager_v1 *xdg_output_manager;
+ 	struct wp_cursor_shape_manager_v1 *cursor_shape_manager;
  	struct wl_shm *shm;
 +	struct xdg_wm_base *wm_base;
  
  	struct swaybar_config *config;
  	struct status_line *status;
-diff --git a/include/swaybar/input.h b/include/swaybar/input.h
-index 8ea88a69a0..81ccaa989a 100644
---- a/include/swaybar/input.h
-+++ b/include/swaybar/input.h
+diff -Naur sway-1.9-rc1.orig/include/swaybar/bar.h.orig sway-1.9-rc1/include/swaybar/bar.h.orig
+--- sway-1.9-rc1.orig/include/swaybar/bar.h.orig	1970-01-01 01:00:00.000000000 +0100
++++ sway-1.9-rc1/include/swaybar/bar.h.orig	2024-01-26 15:26:37.000000000 +0100
+@@ -0,0 +1,118 @@
++#ifndef _SWAYBAR_BAR_H
++#define _SWAYBAR_BAR_H
++#include <wayland-client.h>
++#include "config.h"
++#include "input.h"
++#include "pool-buffer.h"
++#include "cursor-shape-v1-client-protocol.h"
++#include "wlr-layer-shell-unstable-v1-client-protocol.h"
++#include "xdg-output-unstable-v1-client-protocol.h"
++
++struct swaybar_config;
++struct swaybar_output;
++#if HAVE_TRAY
++struct swaybar_tray;
++#endif
++struct swaybar_workspace;
++struct loop;
++
++struct swaybar {
++	char *id;
++	char *mode;
++	bool mode_pango_markup;
++
++	// only relevant when bar is in "hide" mode
++	bool visible_by_modifier;
++	bool visible_by_urgency;
++	bool visible_by_mode;
++	bool visible;
++
++	struct wl_display *display;
++	struct wl_compositor *compositor;
++	struct zwlr_layer_shell_v1 *layer_shell;
++	struct zxdg_output_manager_v1 *xdg_output_manager;
++	struct wp_cursor_shape_manager_v1 *cursor_shape_manager;
++	struct wl_shm *shm;
++
++	struct swaybar_config *config;
++	struct status_line *status;
++
++	struct loop *eventloop;
++
++	int ipc_event_socketfd;
++	int ipc_socketfd;
++
++	struct wl_list outputs; // swaybar_output::link
++	struct wl_list unused_outputs; // swaybar_output::link
++	struct wl_list seats; // swaybar_seat::link
++
++#if HAVE_TRAY
++	struct swaybar_tray *tray;
++#endif
++
++	bool running;
++};
++
++struct swaybar_output {
++	struct wl_list link; // swaybar::outputs
++	struct swaybar *bar;
++	struct wl_output *output;
++	struct zxdg_output_v1 *xdg_output;
++	struct wl_surface *surface;
++	struct zwlr_layer_surface_v1 *layer_surface;
++	uint32_t wl_name;
++
++	struct wl_list workspaces; // swaybar_workspace::link
++	struct wl_list hotspots; // swaybar_hotspot::link
++
++	char *name;
++	char *identifier;
++	bool focused;
++
++	uint32_t width, height;
++	int32_t scale;
++	enum wl_output_subpixel subpixel;
++	struct pool_buffer buffers[2];
++	struct pool_buffer *current_buffer;
++	bool dirty;
++	bool frame_scheduled;
++
++	uint32_t output_height, output_width, output_x, output_y;
++};
++
++struct swaybar_workspace {
++	struct wl_list link; // swaybar_output::workspaces
++	int num;
++	char *name;
++	char *label;
++	bool focused;
++	bool visible;
++	bool urgent;
++};
++
++bool bar_setup(struct swaybar *bar, const char *socket_path);
++void bar_run(struct swaybar *bar);
++void bar_teardown(struct swaybar *bar);
++
++void set_bar_dirty(struct swaybar *bar);
++
++/*
++ * Determines whether the bar should be visible and changes it to be so.
++ * If the current visibility of the bar is the different to what it should be,
++ * then it adds or destroys the layer surface as required,
++ * as well as sending the cont or stop signal to the status command.
++ * If the current visibility of the bar is already what it should be,
++ * then this function is a no-op, unless moving_layer is true, which occurs
++ * when the bar changes from "hide" to "dock" mode or vice versa, and the bar
++ * needs to be destroyed and re-added in order to change its layer.
++ *
++ * Returns true if the bar is now visible, otherwise false.
++ */
++bool determine_bar_visibility(struct swaybar *bar, bool moving_layer);
++void free_workspaces(struct wl_list *list);
++
++void status_in(int fd, short mask, void *data);
++
++void destroy_layer_surface(struct swaybar_output *output);
++
++#endif
+diff -Naur sway-1.9-rc1.orig/include/swaybar/input.h sway-1.9-rc1/include/swaybar/input.h
+--- sway-1.9-rc1.orig/include/swaybar/input.h	2024-01-28 19:08:45.574503847 +0100
++++ sway-1.9-rc1/include/swaybar/input.h	2024-01-28 19:09:13.007620155 +0100
 @@ -15,6 +15,7 @@
  
  struct swaybar;
@@ -47,7 +142,7 @@ index 8ea88a69a0..81ccaa989a 100644
  
  struct swaybar_pointer {
  	struct wl_pointer *pointer;
-@@ -48,8 +49,8 @@ struct swaybar_hotspot {
+@@ -48,8 +49,8 @@
  	struct wl_list link; // swaybar_output::hotspots
  	int x, y, width, height;
  	enum hotspot_event_handling (*callback)(struct swaybar_output *output,
@@ -58,11 +153,9 @@ index 8ea88a69a0..81ccaa989a 100644
  	void (*destroy)(void *data);
  	void *data;
  };
-diff --git a/include/swaybar/tray/dbusmenu.h b/include/swaybar/tray/dbusmenu.h
-new file mode 100644
-index 0000000000..dc90f6e571
---- /dev/null
-+++ b/include/swaybar/tray/dbusmenu.h
+diff -Naur sway-1.9-rc1.orig/include/swaybar/tray/dbusmenu.h sway-1.9-rc1/include/swaybar/tray/dbusmenu.h
+--- sway-1.9-rc1.orig/include/swaybar/tray/dbusmenu.h	1970-01-01 01:00:00.000000000 +0100
++++ sway-1.9-rc1/include/swaybar/tray/dbusmenu.h	2024-01-28 19:09:13.007620155 +0100
 @@ -0,0 +1,27 @@
 +#ifndef _SWAYBAR_TRAY_DBUSMENU_H
 +#define _SWAYBAR_TRAY_DBUSMENU_H
@@ -91,11 +184,10 @@ index 0000000000..dc90f6e571
 +bool dbusmenu_pointer_axis(struct swaybar_seat *data, struct wl_pointer *wl_pointer);
 +
 +#endif
-diff --git a/include/swaybar/tray/item.h b/include/swaybar/tray/item.h
-index 73937a0cc2..9a4a00ff66 100644
---- a/include/swaybar/tray/item.h
-+++ b/include/swaybar/tray/item.h
-@@ -18,6 +18,7 @@ struct swaybar_pixmap {
+diff -Naur sway-1.9-rc1.orig/include/swaybar/tray/item.h sway-1.9-rc1/include/swaybar/tray/item.h
+--- sway-1.9-rc1.orig/include/swaybar/tray/item.h	2024-01-28 19:08:45.574503847 +0100
++++ sway-1.9-rc1/include/swaybar/tray/item.h	2024-01-28 19:09:13.007620155 +0100
+@@ -18,6 +18,7 @@
  struct swaybar_sni_slot {
  	struct wl_list link; // swaybar_sni::slots
  	struct swaybar_sni *sni;
@@ -103,7 +195,7 @@ index 73937a0cc2..9a4a00ff66 100644
  	const char *prop;
  	const char *type;
  	void *dest;
-@@ -48,6 +49,7 @@ struct swaybar_sni {
+@@ -48,6 +49,7 @@
  	char *icon_theme_path; // non-standard KDE property
  
  	struct wl_list slots; // swaybar_sni_slot::link
@@ -111,11 +203,10 @@ index 73937a0cc2..9a4a00ff66 100644
  };
  
  struct swaybar_sni *create_sni(char *id, struct swaybar_tray *tray);
-diff --git a/include/swaybar/tray/tray.h b/include/swaybar/tray/tray.h
-index d2e80a6d47..853f17cdc1 100644
---- a/include/swaybar/tray/tray.h
-+++ b/include/swaybar/tray/tray.h
-@@ -32,6 +32,9 @@ struct swaybar_tray {
+diff -Naur sway-1.9-rc1.orig/include/swaybar/tray/tray.h sway-1.9-rc1/include/swaybar/tray/tray.h
+--- sway-1.9-rc1.orig/include/swaybar/tray/tray.h	2024-01-28 19:08:45.574503847 +0100
++++ sway-1.9-rc1/include/swaybar/tray/tray.h	2024-01-28 19:09:13.007620155 +0100
+@@ -32,6 +32,9 @@
  
  	list_t *basedirs; // char *
  	list_t *themes; // struct swaybar_theme *
@@ -125,10 +216,9 @@ index d2e80a6d47..853f17cdc1 100644
  };
  
  struct swaybar_tray *create_tray(struct swaybar *bar);
-diff --git a/swaybar/bar.c b/swaybar/bar.c
-index 5e4ebd97c9..177b870b48 100644
---- a/swaybar/bar.c
-+++ b/swaybar/bar.c
+diff -Naur sway-1.9-rc1.orig/swaybar/bar.c sway-1.9-rc1/swaybar/bar.c
+--- sway-1.9-rc1.orig/swaybar/bar.c	2024-01-28 19:08:45.578503864 +0100
++++ sway-1.9-rc1/swaybar/bar.c	2024-01-28 19:13:44.806046172 +0100
 @@ -29,6 +29,7 @@
  #include "pool-buffer.h"
  #include "wlr-layer-shell-unstable-v1-client-protocol.h"
@@ -137,16 +227,16 @@ index 5e4ebd97c9..177b870b48 100644
  
  void free_workspaces(struct wl_list *list) {
  	struct swaybar_workspace *ws, *tmp;
-@@ -362,6 +363,8 @@ static void handle_global(void *data, struct wl_registry *registry,
+@@ -362,6 +363,8 @@
  	} else if (strcmp(interface, zxdg_output_manager_v1_interface.name) == 0) {
  		bar->xdg_output_manager = wl_registry_bind(registry, name,
  			&zxdg_output_manager_v1_interface, 2);
 +	} else if (strcmp(interface, xdg_wm_base_interface.name) == 0) {
 +		bar->wm_base = wl_registry_bind(registry, name, &xdg_wm_base_interface, 1);
- 	}
- }
- 
-@@ -534,6 +537,7 @@ void bar_teardown(struct swaybar *bar) {
+ 	} else if (strcmp(interface, wp_cursor_shape_manager_v1_interface.name) == 0) {
+ 		bar->cursor_shape_manager = wl_registry_bind(registry, name,
+ 			&wp_cursor_shape_manager_v1_interface, 1);
+@@ -539,6 +542,7 @@
  #if HAVE_TRAY
  	destroy_tray(bar->tray);
  #endif
@@ -154,10 +244,9 @@ index 5e4ebd97c9..177b870b48 100644
  	free_outputs(&bar->outputs);
  	free_outputs(&bar->unused_outputs);
  	free_seats(&bar->seats);
-diff --git a/swaybar/input.c b/swaybar/input.c
-index 8eccf5420b..4ee4915991 100644
---- a/swaybar/input.c
-+++ b/swaybar/input.c
+diff -Naur sway-1.9-rc1.orig/swaybar/input.c sway-1.9-rc1/swaybar/input.c
+--- sway-1.9-rc1.orig/swaybar/input.c	2024-01-28 19:08:45.578503864 +0100
++++ sway-1.9-rc1/swaybar/input.c	2024-01-28 19:12:59.419072660 +0100
 @@ -10,6 +10,10 @@
  #include "swaybar/input.h"
  #include "swaybar/ipc.h"
@@ -169,31 +258,20 @@ index 8eccf5420b..4ee4915991 100644
  void free_hotspots(struct wl_list *list) {
  	struct swaybar_hotspot *hotspot, *tmp;
  	wl_list_for_each_safe(hotspot, tmp, list, link) {
-@@ -112,10 +116,23 @@ static void wl_pointer_enter(void *data, struct wl_pointer *wl_pointer,
- 		}
- 	}
- 	update_cursor(seat);
-+
+@@ -130,6 +134,12 @@
+ 	} else {
+ 		pointer->serial = serial;
+ 		update_cursor(seat);
 +#if HAVE_TRAY
 +	if (dbusmenu_pointer_enter(data, wl_pointer, serial, surface, surface_x,
 +		surface_y)) {
 +		return;
 +	}
 +#endif
+ 	}
  }
  
- static void wl_pointer_leave(void *data, struct wl_pointer *wl_pointer,
- 		uint32_t serial, struct wl_surface *surface) {
-+#if HAVE_TRAY
-+	if (dbusmenu_pointer_leave(data, wl_pointer, serial, surface)) {
-+		return;
-+	}
-+#endif
-+
- 	struct swaybar_seat *seat = data;
- 	seat->pointer.current = NULL;
- }
-@@ -125,6 +142,11 @@ static void wl_pointer_motion(void *data, struct wl_pointer *wl_pointer,
+@@ -144,6 +154,11 @@
  	struct swaybar_seat *seat = data;
  	seat->pointer.x = wl_fixed_to_double(surface_x);
  	seat->pointer.y = wl_fixed_to_double(surface_y);
@@ -205,7 +283,7 @@ index 8eccf5420b..4ee4915991 100644
  }
  
  static bool check_bindings(struct swaybar *bar, uint32_t button,
-@@ -141,6 +163,7 @@ static bool check_bindings(struct swaybar *bar, uint32_t button,
+@@ -160,6 +175,7 @@
  }
  
  static bool process_hotspots(struct swaybar_output *output,
@@ -213,7 +291,7 @@ index 8eccf5420b..4ee4915991 100644
  		double x, double y, uint32_t button, uint32_t state) {
  	bool released = state == WL_POINTER_BUTTON_STATE_RELEASED;
  	struct swaybar_hotspot *hotspot;
-@@ -148,7 +171,7 @@ static bool process_hotspots(struct swaybar_output *output,
+@@ -167,7 +183,7 @@
  		if (x >= hotspot->x && y >= hotspot->y
  				&& x < hotspot->x + hotspot->width
  				&& y < hotspot->y + hotspot->height) {
@@ -222,7 +300,7 @@ index 8eccf5420b..4ee4915991 100644
  					button, released, hotspot->data)) {
  				return true;
  			}
-@@ -161,13 +184,19 @@ static bool process_hotspots(struct swaybar_output *output,
+@@ -180,13 +196,19 @@
  static void wl_pointer_button(void *data, struct wl_pointer *wl_pointer,
  		uint32_t serial, uint32_t time, uint32_t button, uint32_t state) {
  	struct swaybar_seat *seat = data;
@@ -243,7 +321,7 @@ index 8eccf5420b..4ee4915991 100644
  		return;
  	}
  
-@@ -221,7 +250,7 @@ static void process_discrete_scroll(struct swaybar_seat *seat,
+@@ -240,7 +262,7 @@
  		struct swaybar_output *output, struct swaybar_pointer *pointer,
  		uint32_t axis, wl_fixed_t value) {
  	uint32_t button = wl_axis_to_button(axis, value);
@@ -252,7 +330,7 @@ index 8eccf5420b..4ee4915991 100644
  		// (Currently hotspots don't do anything on release events, so no need to emit one)
  		return;
  	}
-@@ -278,6 +307,12 @@ static void wl_pointer_axis(void *data, struct wl_pointer *wl_pointer,
+@@ -297,6 +319,12 @@
  		return;
  	}
  
@@ -265,7 +343,7 @@ index 8eccf5420b..4ee4915991 100644
  	// If there's a while since the last scroll event,
  	// set 'value' to zero as if to reset the "virtual scroll wheel"
  	if (seat->axis[axis].discrete_steps == 0 &&
-@@ -294,6 +329,12 @@ static void wl_pointer_frame(void *data, struct wl_pointer *wl_pointer) {
+@@ -313,6 +341,12 @@
  	struct swaybar_pointer *pointer = &seat->pointer;
  	struct swaybar_output *output = pointer->current;
  
@@ -278,7 +356,7 @@ index 8eccf5420b..4ee4915991 100644
  	if (output == NULL) {
  		return;
  	}
-@@ -401,7 +442,7 @@ static void wl_touch_up(void *data, struct wl_touch *wl_touch,
+@@ -420,7 +454,7 @@
  	}
  	if (time - slot->time < 500) {
  		// Tap, treat it like a pointer click
@@ -287,11 +365,10 @@ index 8eccf5420b..4ee4915991 100644
  		// (Currently hotspots don't do anything on release events, so no need to emit one)
  	}
  	slot->output = NULL;
-diff --git a/swaybar/meson.build b/swaybar/meson.build
-index e5f1811eb0..fef1ee778f 100644
---- a/swaybar/meson.build
-+++ b/swaybar/meson.build
-@@ -3,7 +3,8 @@ tray_files = have_tray ? [
+diff -Naur sway-1.9-rc1.orig/swaybar/meson.build sway-1.9-rc1/swaybar/meson.build
+--- sway-1.9-rc1.orig/swaybar/meson.build	2024-01-28 19:08:45.578503864 +0100
++++ sway-1.9-rc1/swaybar/meson.build	2024-01-28 19:09:13.007620155 +0100
+@@ -3,7 +3,8 @@
  	'tray/icon.c',
  	'tray/item.c',
  	'tray/tray.c',
@@ -301,11 +378,10 @@ index e5f1811eb0..fef1ee778f 100644
  ] : []
  
  swaybar_deps = [
-diff --git a/swaybar/render.c b/swaybar/render.c
-index ccf3656378..2385a2f46d 100644
---- a/swaybar/render.c
-+++ b/swaybar/render.c
-@@ -160,6 +160,7 @@ static void render_sharp_line(cairo_t *cairo, uint32_t color,
+diff -Naur sway-1.9-rc1.orig/swaybar/render.c sway-1.9-rc1/swaybar/render.c
+--- sway-1.9-rc1.orig/swaybar/render.c	2024-01-28 19:08:45.578503864 +0100
++++ sway-1.9-rc1/swaybar/render.c	2024-01-28 19:09:13.007620155 +0100
+@@ -160,6 +160,7 @@
  
  static enum hotspot_event_handling block_hotspot_callback(
  		struct swaybar_output *output, struct swaybar_hotspot *hotspot,
@@ -313,7 +389,7 @@ index ccf3656378..2385a2f46d 100644
  		double x, double y, uint32_t button, bool released, void *data) {
  	struct i3bar_block *block = data;
  	struct status_line *status = output->bar->status;
-@@ -599,6 +600,7 @@ static uint32_t render_binding_mode_indicator(struct render_context *ctx,
+@@ -599,6 +600,7 @@
  
  static enum hotspot_event_handling workspace_hotspot_callback(
  		struct swaybar_output *output, struct swaybar_hotspot *hotspot,
@@ -321,11 +397,9 @@ index ccf3656378..2385a2f46d 100644
  		double x, double y, uint32_t button, bool released, void *data) {
  	if (button != BTN_LEFT) {
  		return HOTSPOT_PROCESS;
-diff --git a/swaybar/tray/dbusmenu.c b/swaybar/tray/dbusmenu.c
-new file mode 100644
-index 0000000000..8821cacaec
---- /dev/null
-+++ b/swaybar/tray/dbusmenu.c
+diff -Naur sway-1.9-rc1.orig/swaybar/tray/dbusmenu.c sway-1.9-rc1/swaybar/tray/dbusmenu.c
+--- sway-1.9-rc1.orig/swaybar/tray/dbusmenu.c	1970-01-01 01:00:00.000000000 +0100
++++ sway-1.9-rc1/swaybar/tray/dbusmenu.c	2024-01-28 19:09:13.008620160 +0100
 @@ -0,0 +1,1367 @@
 +#define _POSIX_C_SOURCE 200809L
 +#include <linux/input-event-codes.h>
@@ -1694,10 +1768,9 @@ index 0000000000..8821cacaec
 +
 +	return false;
 +}
-diff --git a/swaybar/tray/item.c b/swaybar/tray/item.c
-index 1f18b8bb32..d159640f67 100644
---- a/swaybar/tray/item.c
-+++ b/swaybar/tray/item.c
+diff -Naur sway-1.9-rc1.orig/swaybar/tray/item.c sway-1.9-rc1/swaybar/tray/item.c
+--- sway-1.9-rc1.orig/swaybar/tray/item.c	2024-01-28 19:08:45.578503864 +0100
++++ sway-1.9-rc1/swaybar/tray/item.c	2024-01-28 19:09:13.008620160 +0100
 @@ -8,6 +8,7 @@
  #include "swaybar/bar.h"
  #include "swaybar/config.h"
@@ -1706,7 +1779,7 @@ index 1f18b8bb32..d159640f67 100644
  #include "swaybar/tray/host.h"
  #include "swaybar/tray/icon.h"
  #include "swaybar/tray/item.h"
-@@ -333,8 +334,9 @@ void destroy_sni(struct swaybar_sni *sni) {
+@@ -333,8 +334,9 @@
  	free(sni);
  }
  
@@ -1718,7 +1791,7 @@ index 1f18b8bb32..d159640f67 100644
  	const char *method = NULL;
  	struct tray_binding *binding = NULL;
  	wl_list_for_each(binding, &sni->tray->bar->config->tray_bindings, link) {
-@@ -365,7 +367,11 @@ static void handle_click(struct swaybar_sni *sni, int x, int y,
+@@ -365,7 +367,11 @@
  		method = "ContextMenu";
  	}
  
@@ -1731,7 +1804,7 @@ index 1f18b8bb32..d159640f67 100644
  		char dir = method[strlen("Scroll")];
  		char *orientation = (dir == 'U' || dir == 'D') ? "vertical" : "horizontal";
  		int sign = (dir == 'U' || dir == 'L') ? -1 : 1;
-@@ -385,6 +391,7 @@ static int cmp_sni_id(const void *item, const void *cmp_to) {
+@@ -385,6 +391,7 @@
  
  static enum hotspot_event_handling icon_hotspot_callback(
  		struct swaybar_output *output, struct swaybar_hotspot *hotspot,
@@ -1739,7 +1812,7 @@ index 1f18b8bb32..d159640f67 100644
  		double x, double y, uint32_t button, bool released, void *data) {
  	sway_log(SWAY_DEBUG, "Clicked on %s", (char *)data);
  
-@@ -406,7 +413,8 @@ static enum hotspot_event_handling icon_hotspot_callback(
+@@ -406,7 +413,8 @@
  				(int) output->output_height - config->gaps.bottom - y);
  
  		sway_log(SWAY_DEBUG, "Guessing click position at (%d, %d)", global_x, global_y);
