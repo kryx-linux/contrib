@@ -1,23 +1,16 @@
 # Description: Python API to easily integrate Sphinx documentation into web applications.
 # URL: https://github.com/sphinx-doc/sphinxcontrib-websupport/
-# Maintainer: unmaintained
+# Maintainer: CRUX System Team, core-ports at crux dot nu
 # Depends on: python3-sphinxcontrib-serializinghtml
 
 name=python3-sphinxcontrib-websupport
-version=1.2.4
+version=1.2.7
 release=1
-source=(https://github.com/sphinx-doc/${name#*-}/archive/$version/${name#*-}-$version.tar.gz)
+source=(https://pypi.org/packages/source/s/sphinxcontrib_websupport/sphinxcontrib_websupport-$version.tar.gz)
 
 build() {
-  cd ${name#python3-}-$version
+  cd sphinxcontrib_websupport-$version
 
-  sed -i setup.cfg \
-           -e '/tag_build =.*/d' \
-    -e 's,tag_date = true,tag_date = false,'
-
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
-
-  find $PKG -name '*.txt' -exec chmod -x {} \;
-  find $PKG ! -type l -a \( -perm /go+w -o ! -perm /u+rw \) -exec chmod go-w,u+rw {} \;
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
