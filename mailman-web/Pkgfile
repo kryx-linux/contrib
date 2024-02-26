@@ -9,6 +9,7 @@ version=0.0.8
 release=1
 source=(https://pypi.org/packages/source/m/mailman-web/mailman-web-$version.tar.gz
   mailman-web.service
+  mailman-qcluster.service
   settings.py
   mailman-web-0.0.5-fhs.patch)
 
@@ -30,4 +31,5 @@ build() {
   install -vdm 750 "$PKG/var/log/$name/"
 
   install -Dm755 $SRC/mailman-web.service $PKG/etc/rc.d/$name
+  install -Dm755 $SRC/mailman-qcluster.service $PKG/etc/rc.d/mailman-qcluster
 }
