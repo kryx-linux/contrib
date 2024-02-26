@@ -7,7 +7,7 @@ name=mailman
 version=3.3.9
 release=1
 source=(https://gitlab.com/mailman/mailman/-/archive/v$version/mailman-v$version.tar.bz2
-  $name.rc)
+  $name.service)
 
 build() {
   cd $name-v$version
@@ -29,4 +29,6 @@ build() {
     $PKG/etc/mailman.d
   chmod 0775 $PKG/var/log/$name
   chmod 1777 $PKG/var/lock
+
+  install -Dm755 $SRC/mailman.service $PKG/etc/rc.d/$name
 }
