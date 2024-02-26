@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# /etc/rc.d/mailman: start/stop mailman daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/mailman-web
+PID=/run/mailman-web/master.pid
+USER=mailman
+PORT=8000
+OPTS="runserver $PORT --settings settings --pythonpath /etc/webapps/mailman-web/"
+
+case $1 in
+start)
+  if [ ! -e /run/mailman-web ]; then 
+    mkdir -p /run/mailman-web
+  fi
+  $SSD --start -c $USER --background --pidfile $PID --make-pidfile --exec $PROG -- $OPTS
+  ;;
+stop)
+  $SSD --stop -c $USER --retry 10 --pidfile $PID --remove-pidfile
+  ;;
+restart)
+  $0 stop
+  $0 start
+  ;;
+reload)
+  $0 stop
+  $0 start
+  ;;
+status)
+  $SSD --status -u $USER -c $USER --pidfile $PID
+  case $? in
+  0) echo "$PROG is running with pid $(cat $PID)" ;;
+  1) echo "$PROG is not running but the pid file $PID exists" ;;
+  3) echo "$PROG is not running" ;;
+  4) echo "Unable to determine the program status" ;;
+  esac
+  ;;
+*)
+  echo "usage: $0 [start|stop|restart|reload|status]"
+  ;;
+esac
+
+# End of file
