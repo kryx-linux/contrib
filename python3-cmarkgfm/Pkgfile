@@ -1,0 +1,16 @@
+# Description: Minimal bindings to GitHub's fork of cmark
+# URL: https://github.com/theacodes/cmarkgfm
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-cffi python3-cython
+
+name=python3-cmarkgfm
+version=2024.1.14
+release=1
+source=(https://pypi.org/packages/source/c/cmarkgfm/cmarkgfm-$version.tar.gz)
+
+build() {
+  cd cmarkgfm-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
