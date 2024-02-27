@@ -5,13 +5,34 @@
 # Optional: python3-django-debug-toolbar python3-elasticsearch python3-xapian-haystack
 
 name=hyperkitty
-version=1.3.8
+version=1.3.9
 release=1
-source=(https://pypi.org/packages/source/H/HyperKitty/HyperKitty-$version.tar.gz)
+source=(https://pypi.org/packages/source/h/hyperkitty/hyperkitty-$version.tar.gz
+  hyperkitty-1.3.5-settings.patch)
 
 build() {
-  cd HyperKitty-$version
+  cd hyperkitty-$version
+
+  local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")
+  patch -Np1 -i $SRC/hyperkitty-1.3.5-settings.patch
+  touch settings_local.py
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+
+  rm -rfv $PKG/$site_packages/example_project/
+  rm -rfv $PKG/$site_packages/$name/tests/
+
+  install -vDm 644 -o hyperkitty example_project/{__init__,manage,settings,wsgi}.py -t $PKG/usr/share/webapps/$name
+  ln -svf /var/lib/$name/locale/ $PKG/usr/share/webapps/$name
+  ln -svf /var/lib/$name/static/ $PKG/usr/share/webapps/$name
+  # state dir
+  install -vdm 750 $PKG/var/lib/$name/data
+  install -vdm 755 $PKG/var/lib/$name/{locale,static}
+  # log dir
+  install -vdm 750 $PKG/var/log/$name
+  # config
+  install -vDm 640 settings_local.py example_project/urls.py -t $PKG/etc/webapps/$name
+  ln -svf /etc/webapps/$name/settings_local.py $PKG/usr/share/webapps/$name/settings_local.py
+  ln -svf /etc/webapps/$name/urls.py $PKG/usr/share/webapps/$name/urls.py
 }
