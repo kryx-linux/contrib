@@ -9,8 +9,8 @@ _boot_ver=20230715
 _cert_ver=20210916
 release=1
 source=(https://github.com/openjdk/jdk20u/archive/jdk-$version/$name-$version.tar.gz
-  https://git.crux.nu:82/tb/java-distfiles/raw/branch/master/distfiles/openjdk20-boot-20230715.tar.xz
-  https://git.crux.nu:82/tb/java-distfiles/raw/branch/master/distfiles/java_cacerts-${_cert_ver})
+  https://git.crux.nu/tb/java-distfiles/raw/branch/master/distfiles/openjdk20-boot-20230715.tar.xz
+  https://git.crux.nu/tb/java-distfiles/raw/branch/master/distfiles/java_cacerts-${_cert_ver})
 
 build() {
   if [ -e '/usr/bin/ccache' ]; then
