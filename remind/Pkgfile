@@ -3,13 +3,19 @@
 # Maintainer: Juergen Daubert, jue at crux dot nu
 
 name=remind
-version=04.02.09
+version=04.03.01
 release=1
 source=(https://dianne.skoll.ca/projects/$name/download/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
+
 	./configure --prefix=/usr
+
 	make
 	make DESTDIR=$PKG install
+
+	# remove tkremind
+	rm $PKG/usr/{bin/tkremind,share/man/man1/tkremind.1}
+	rm -r  $PKG/usr/{applications,icons}
 }
