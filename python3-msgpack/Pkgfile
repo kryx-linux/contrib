@@ -4,12 +4,12 @@
 # Depends on: python3-cython
 
 name=python3-msgpack
-version=1.0.7
+version=1.0.8
 release=1
-source=(https://pypi.io/packages/source/m/msgpack/msgpack-$version.tar.gz)
+source=(https://github.com/msgpack/msgpack-python/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd msgpack-$version
+  cd msgpack-python-$version
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG --prefix=/usr --optimize=1 --skip-build
 }
