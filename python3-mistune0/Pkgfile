@@ -5,11 +5,16 @@
 
 name=python3-mistune0
 version=0.8.4
-release=1
-source=(https://github.com/lepture/mistune/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/lepture/mistune/archive/v$version/$name-$version.tar.gz
+  patch-setup.py)
 
 build() {
   cd mistune-$version
+
+  patch -Np0 -i $SRC/patch-setup.py
+  mv mistune.py mistune0.py
+
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --optimize=1 --root=$PKG
 }
