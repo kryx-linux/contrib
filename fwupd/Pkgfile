@@ -1,0 +1,63 @@
+# Description: system daemon to allow session software to update firmware
+# URL: https://github.com/fwupd/fwupd
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gcab libjcat libqmi libsmbios libxmlb python3-gobject python3-jinja2 python3-pillow vala
+# Optional: bash-completion bluez consolekit efivar flashrom fwupd-efi libcbor libdrm libgusb modemmanager pandoc-bin polkit protobuf-c python3-markdown tpm2-tss udisks2 valgrind
+
+name=fwupd
+version=1.9.14
+release=1
+source=(https://github.com/fwupd/fwupd/releases/download/$version/fwupd-$version.tar.xz
+  fwupd.service)
+
+build() {
+  prt-get isinst bash-completion || PKGMK_FWUPD+=' -D bash_completion=false'
+  prt-get isinst bluez || PKGMK_FWUPD+=' -D bluez=disabled'
+  prt-get isinst consolekit && PKGMK_FWUPD+=' -D consolekit=enabled' || PKGMK_FWUPD+=' -D consolekit=disabled'
+  prt-get isinst flashrom || PKGMK_FWUPD+=' -D plugin_flashrom=disabled'
+  prt-get isinst fwupd-efi && PKGMK_FWUPD+=' -D plugin_uefi_capsule=enabled' || PKGMK_FWUPD+=' -D plugin_uefi_capsule=disabled'
+  prt-get isinst libcbor || PKGMK_FWUPD+=' -D cbor=disabled'
+  prt-get isinst libdrm && PKGMK_FWUPD+=' -D plugin_amdgpu=enabled'
+  prt-get isinst libgusb || PKGMK_FWUPD+=' -D gusb=disabled'
+  prt-get isinst modemmanager && PKGMK_FWUPD+=' -D plugin_modem_manager=disabled'
+  prt-get isinst pandoc-bin && PKGMK_FWUPD+=' -D man=true'
+  prt-get isinst polkit && PKGMK_FWUPD+=' -D polkit=enabled' || PKGMK_FWUPD+=' -D polkit=disabled'
+  prt-get isinst protobuf-c || PKGMK_FWUPD+=' -D plugin_logitech_bulkcontroller=disabled'
+  prt-get isinst python3-markdown || PKGMK_FWUPD+='  -D docs=disabled'
+  prt-get isinst tpm2-tss || PKGMK_FWUPD+=' -D plugin_tpm=disabled'
+  prt-get isinst upower || PKGMK_FWUPD+=' -D plugin_upower=disabled'
+
+  meson setup $name-$version build $PKGMK_FWUPD \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D hsi=enabled \
+    -D lvfs=true \
+    -D plugin_intel_spi=true \
+    -D supported_build=enabled \
+    -D udevdir=/lib/udev \
+    -D efi_os_dir=CRUX \
+    -D efi_binary=false \
+    -D launchd=disabled \
+    -D systemd=disabled \
+    -D elogind=disabled \
+    -D passim=disabled \
+    -D tests=false \
+    -D fish_completion=false
+    #-D dbus_socket_address=/run/dbus/system_bus_socket \
+
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  mv $PKG/usr/bin/{,fwupd-}dbxtool
+
+  prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion
+
+  rm -rf $PKG/usr/share/locale
+
+  prt-get isinst polkit && chown -R root:polkitd $PKG/usr/share/polkit-1/rules.d
+  install -Dm755 $SRC/fwupd.service $PKG/etc/rc.d/fwupd
+}

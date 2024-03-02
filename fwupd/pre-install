@@ -1,0 +1,5 @@
+#!/bin/sh
+
+getent group fwupd || /usr/sbin/groupadd fwupd
+getent passwd fwupd || /usr/sbin/useradd -M -g fwupd -c "fwupd system user" fwupd
+/usr/bin/passwd -l fwupd
