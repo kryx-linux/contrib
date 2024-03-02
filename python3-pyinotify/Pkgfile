@@ -1,0 +1,18 @@
+# Description: Python module used for monitoring filesystems events on Linux platforms with inotify
+# URL: https://github.com/seb-m/pyinotify
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-pyinotify
+version=0.9.6
+release=1
+source=(https://github.com/seb-m/pyinotify/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd pyinotify-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build -O1
+}
