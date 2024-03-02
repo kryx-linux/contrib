@@ -1,0 +1,27 @@
+# Description: Library for reading and writing Jcat files
+# URL: https://github.com/hughsie/libjcat
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gnutls json-glib
+# Optional: gobject-introspection gpgme help2man vala
+
+name=libjcat
+version=0.2.1
+release=1
+source=(https://github.com/hughsie/libjcat/archive/$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst gobject-introspection || PKGMK_LIBJCAT+=' -D introspection=false'
+  prt-get isinst gpgme || PKGMK_LIBJCAT+=' -D gpg=false'
+  prt-get isinst help2man || PKGMK_LIBJCAT+=' -D man=false'
+  prt-get isinst vala || PKGMK_LIBJCAT+=' -D vapi=false'
+
+  meson setup $name-$version build $PKGMK_LIBJCAT \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D tests=false
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
