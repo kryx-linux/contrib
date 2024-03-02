@@ -1,0 +1,8 @@
+#!/bin/sh
+_USER=tss
+_GROUP=tss
+
+getent group $_GROUP || /usr/sbin/groupadd $_GROUP
+getent passwd $_USER || /usr/sbin/useradd -g $_GROUP -d /var/empty -s /bin/false -c "tpm-tss user" $_USER
+
+/usr/bin/passwd -l $_USER
