@@ -1,7 +1,8 @@
 # Description: The analytics platform for all your metrics
 # URL: https://grafana.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fontconfig go wire-go yarn-hydrogen
+# Depends on: fontconfig wire-go yarn-hydrogen
+# Optional: postgresql redis
 
 name=grafana
 version=10.3.3
@@ -20,7 +21,6 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/gopath" || true
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
-  #export PATH="/usr/bin:$PATH"
   export GOEXPERIMENT=boringcrypto
 
   cd $SRC/$name-$version
