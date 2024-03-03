@@ -5,13 +5,12 @@
 # Optional: json-glib libnotify
 
 name=girara
-version=0.4.2
+version=0.4.3
 release=1
 source=(https://git.pwmt.org/pwmt/$name/-/archive/$version/$name-$version.tar.bz2)
 
 build() {
   prt-get isinst json-glib && PKGMK_GIRARA+=' -D json=enabled' || PKGMK_GIRARA+=' -D json=disabled'
-  prt-get isinst libnotify && PKGMK_GIRARA+=' -D notify=enabled' || PKGMK_GIRARA+=' -D notify=disabled'
 
   meson setup $name-$version build $PKGMK_GIRARA \
     --prefix=/usr \
