@@ -5,8 +5,8 @@
 # Optional: alsa-lib avahi bluez dav1d libmicrohttpd libnfs libva libva-vdpau-driver libxslt mariadb mysql pipewire pulseaudio
 
 name=kodi-wayland
-version=20.4
-release=2
+version=20.5
+release=1
 
 # version variables {{{
 _codename=Nexus
@@ -21,8 +21,7 @@ source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$
   https://github.com/xbmc/libdvdcss/archive/$_libdvdcss_version/${name/-wayland/}-libdvdcss-$_libdvdcss_version.tar.gz
   https://github.com/xbmc/libdvdnav/archive/$_libdvdnav_version/${name/-wayland/}-libdvdnav-$_libdvdnav_version.tar.gz
   https://github.com/xbmc/libdvdread/archive/$_libdvdread_version/${name/-wayland/}-libdvdread-$_libdvdread_version.tar.gz
-  swig-4.2.0.patch
-  taglib.patch)
+  swig-4.2.0.patch)
 # }}}
 # unpack_source() {{{
 unpack_source() {
@@ -73,7 +72,6 @@ build()  {
     xbmc-$version-$_codename/tools/depends/native/TexturePacker/src/autogen.sh \
     xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
 
-  patch -Np1 -d xbmc-$version-$_codename -i $SRC/taglib.patch
   patch -Np1 -d xbmc-$version-$_codename -i $SRC/swig-4.2.0.patch
 
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
