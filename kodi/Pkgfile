@@ -4,41 +4,40 @@
 # Depends on: cmake fmt ghostscript giflib glu openjdk17-jdk libass libcdio libmicrohttpd mariadb samba swig taglib tinyxml spdlog libva libvdpau libdvdnav xkeyboard-config
 
 name=kodi
-version=20.4
+version=20.5
 release=1
 source=(https://github.com/xbmc/xbmc/archive/$version-Nexus/$name-$version.tar.gz gl-headers.patch \
-	taglib.patch swig-4.2.0.patch)
+    swig-4.2.0.patch)
 
 build() {
-	export PATH="/usr/lib/java/openjdk17-jdk/bin:$PATH"
+    export PATH="/usr/lib/java/openjdk17-jdk/bin:$PATH"
 
-	[[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+    [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
-	patch -d xbmc-$version-Nexus -p1 -i $SRC/gl-headers.patch
-	patch -d xbmc-$version-Nexus -p1 -i $SRC/taglib.patch
-	patch -d xbmc-$version-Nexus -p1 -i $SRC/swig-4.2.0.patch
+    patch -d xbmc-$version-Nexus -p1 -i $SRC/gl-headers.patch
+    patch -d xbmc-$version-Nexus -p1 -i $SRC/swig-4.2.0.patch
 
-	cmake -Bbuild \
-		-DVERBOSE=ON \
-		-DAPP_RENDER_SYSTEM=gl \
-		-DCORE_PLATFORM_NAME=x11 \
-		-DENABLE_DVDCSS=ON \
-		-DENABLE_OPTICAL=ON \
-		-DENABLE_PYTHON=ON \
-		-DENABLE_INTERNAL_FFMPEG=ON \
-		-DENABLE_INTERNAL_FLATBUFFERS=ON \
-		-DENABLE_INTERNAL_FSTRCMP=ON \
-		-DENABLE_INTERNAL_RapidJSON=ON \
-		-DENABLE_TESTING=OFF \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
-		-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
-		-Wno-dev \
-		xbmc-$version-Nexus
-	cmake --build build
-	DESTDIR=$PKG cmake --install build
+    cmake -Bbuild \
+        -DVERBOSE=ON \
+        -DAPP_RENDER_SYSTEM=gl \
+        -DCORE_PLATFORM_NAME=x11 \
+        -DENABLE_DVDCSS=ON \
+        -DENABLE_OPTICAL=ON \
+        -DENABLE_PYTHON=ON \
+        -DENABLE_INTERNAL_FFMPEG=ON \
+        -DENABLE_INTERNAL_FLATBUFFERS=ON \
+        -DENABLE_INTERNAL_FSTRCMP=ON \
+        -DENABLE_INTERNAL_RapidJSON=ON \
+        -DENABLE_TESTING=OFF \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_C_FLAGS_RELEASE="$CFLAGS -DNDEBUG" \
+        -DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNDEBUG" \
+        -Wno-dev \
+        xbmc-$version-Nexus
+    cmake --build build
+    DESTDIR=$PKG cmake --install build
 
-	find $PKG -name "README*" -delete
+    find $PKG -name "README*" -delete
 }
