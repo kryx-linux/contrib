@@ -4,17 +4,17 @@
 # Depends on: clang wasi-libc wasi-compiler-rt
 
 name=wasi-libc++
-version=17.0.6
+version=18.1.0
 release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-project-$version.src.tar.xz
-  wasi-sdk.cmake WASI.cmake)
+  wasi-sdk.cmake)
 
 build() {
   cd llvm-project-$version.src
 
   mkdir -p build cmake/Platform
   cp "$SRC"/wasi-sdk.cmake build
-  cp "$SRC"/WASI.cmake cmake/Platform
+  echo "set(WASI 1)" > cmake/Platform/WASI.cmake
 
   cmake -G Ninja -S runtimes -B build  \
     -D CMAKE_BUILD_TYPE=Release \
@@ -27,9 +27,7 @@ build() {
     -D LLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" \
     -D LLVM_DEFAULT_TARGET_TRIPLE=wasm32-wasi \
     -D LIBCXX_ABI_VERSION=2 \
-    -D LIBCXX_BUILD_EXTERNAL_THREAD_LIBRARY=OFF \
     -D LIBCXX_ENABLE_EXCEPTIONS=OFF \
-    -D LIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF \
     -D LIBCXX_ENABLE_FILESYSTEM=OFF \
     -D LIBCXX_ENABLE_SHARED=OFF \
     -D LIBCXX_ENABLE_THREADS=OFF \
@@ -38,7 +36,6 @@ build() {
     -D LIBCXX_HAS_WIN32_THREAD_API=OFF \
     -D LIBCXX_INCLUDE_TESTS=OFF \
     -D LIBCXX_LIBDIR_SUFFIX=/wasm32-wasi \
-    -D LIBCXXABI_BUILD_EXTERNAL_THREAD_LIBRARY=OFF \
     -D LIBCXXABI_ENABLE_EXCEPTIONS=OFF \
     -D LIBCXXABI_ENABLE_SHARED=OFF \
     -D LIBCXXABI_ENABLE_THREADS=OFF \
@@ -48,6 +45,7 @@ build() {
     -D LIBCXXABI_INCLUDE_TESTS=OFF \
     -D LIBCXXABI_LIBDIR_SUFFIX=/wasm32-wasi \
     -D LIBCXXABI_SILENT_TERMINATE:BOOL=ON \
+    -D LIBCXXABI_USE_LLVM_UNWINDER=OFF \
     -D UNIX=ON \
     -D WASI_SDK_PREFIX=/usr
 
