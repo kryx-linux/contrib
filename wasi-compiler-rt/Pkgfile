@@ -4,18 +4,19 @@
 # Depends on: wasi-libc
 
 name=wasi-compiler-rt
-version=17.0.6
+version=18.1.0
 release=1
 source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/compiler-rt-$version.src.tar.xz
   https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/llvm-$version.src.tar.xz
   https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/cmake-$version.src.tar.xz
-  WASI.cmake wasi-toolchain.cmake)
+  wasi-toolchain.cmake)
 
 build() {
   # Platform files have been copied from https://github.com/WebAssembly/wasi-sdk
   mv llvm-$version.src llvm
   mv cmake-$version.src cmake
-  install -D WASI.cmake cmake/Platform/WASI.cmake
+  mkdir cmake/Platform
+  echo "set(WASI 1)" > cmake/Platform/WASI.cmake
 
   cmake -S compiler-rt-$version.src/lib/builtins -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX="/usr/lib/clang/${version%%.*}" \
