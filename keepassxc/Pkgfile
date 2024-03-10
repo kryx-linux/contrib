@@ -5,10 +5,9 @@
 # Optional: asciidoctor xorg-libxtst
 
 name=keepassxc
-version=2.7.6
-release=2
-source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$name-$version-src.tar.xz
-  cc0530ba4671a7e2b6ac4a6c00cd097f4114fd22.patch)
+version=2.7.7
+release=1
+source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$name-$version-src.tar.xz)
 
 build() {
   prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
@@ -16,8 +15,6 @@ build() {
 
   prt-get isinst asciidoctor && PKGMK_KEEPASSXC+=' -D WITH_XC_DOCS=ON' || PKGMK_KEEPASSXC+=' -D WITH_XC_DOCS=OFF'
   prt-get isinst xorg-libxtst || PKGMK_KEEPASSXC+=' -D WITH_XC_X11=OFF'
-
-  patch -Np1 -d $name-$version -i $SRC/cc0530ba4671a7e2b6ac4a6c00cd097f4114fd22.patch
 
   cmake -S $name-$version -B build -G Ninja $PKGMK_KEEPASSXC \
     -D CMAKE_INSTALL_PREFIX=/usr \
