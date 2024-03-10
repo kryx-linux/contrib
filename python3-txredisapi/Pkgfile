@@ -1,0 +1,18 @@
+# Description: Non-blocking redis client for python
+# URL: https://pypi.python.org/pypi/txredisapi/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-twisted
+
+name=python3-txredisapi
+version=1.4.10
+release=1
+source=(https://pypi.org/packages/source/t/txredisapi/txredisapi-$version.tar.gz)
+
+build() {
+  cd txredisapi-$version
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    -O1 \
+    --skip-build
+}
