@@ -5,16 +5,16 @@
 # Optional: mailman uwsgi-plugin-python
 
 name=mailman-web
-version=0.0.8
+version=0.0.9
 release=1
-source=(https://pypi.org/packages/source/m/mailman-web/mailman-web-$version.tar.gz
+source=(https://pypi.org/packages/source/m/mailman_web/mailman_web-$version.tar.gz
   mailman-web.service
   mailman-qcluster.service
   settings.py
   mailman-web-0.0.5-fhs.patch)
 
 build() {
-  cd $name-$version
+  cd mailman_web-$version
 
   local site_packages=$(/usr/bin/python3 -c "import site; print(site.getsitepackages()[0])")
   patch -Np1 -i $SRC/mailman-web-0.0.5-fhs.patch
