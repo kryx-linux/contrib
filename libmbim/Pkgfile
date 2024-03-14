@@ -1,0 +1,26 @@
+# Description: libmbim is a glib-based library for talking to WWAN modems and devices which speak the Mobile Interface Broadband Model (MBIM) protocol
+# URL: https://www.freedesktop.org/wiki/Software/libmbim
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gobject-introspection
+# Optional: bash-completion help2man
+
+name=libmbim
+version=1.30.0
+release=1
+source=(https://gitlab.freedesktop.org/mobile-broadband/libmbim/-/archive/$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst bash-completion || PKGMK_LIBMBIM+=" -D bash_completion=false"
+  prt-get isinst help2man || PKGMK_LIBMBIM+=" -D man=false"
+
+  meson setup $name-$version build $PKGMK_LIBMBIM \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D udevdir=/lib/udev
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}
