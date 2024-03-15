@@ -35,7 +35,7 @@ build() {
     --disable-nls \
     --disable-rpath \
     PYTHON=/usr/bin/python3
-  make
+  make -j ${JOBS:-1}
   make DESTDIR=$PKG install
 
   cd doc/src/sgml
