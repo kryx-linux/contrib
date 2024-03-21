@@ -2,12 +2,12 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.3.2.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.3.2.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.3.2.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.3.2.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.3.2.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.3.2.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.4.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.4.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.4.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.4.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.4.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources-6.4.0.dist-info/top_level.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pycache__/
@@ -16,6 +16,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pycache__/_common.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pycache__/_itertools.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pycache__/abc.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pycache__/functional.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pycache__/readers.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/__pycache__/simple.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/_adapters.py
@@ -30,6 +31,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/compat
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/compat/__pycache__/py39.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/compat/py38.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/compat/py39.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/functional.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/future/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/future/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/future/__pycache__/
@@ -48,6 +50,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/__pycache__/test_contents.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/__pycache__/test_custom.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/__pycache__/test_files.cpython-310.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/__pycache__/test_functional.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/__pycache__/test_open.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/__pycache__/test_path.cpython-310.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/__pycache__/test_read.cpython-310.pyc
@@ -103,6 +106,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/test_contents.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/test_custom.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/test_files.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/test_functional.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/test_open.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/test_path.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/importlib_resources/tests/test_read.py
