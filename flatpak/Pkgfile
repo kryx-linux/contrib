@@ -1,36 +1,45 @@
 # Description: Linux application sandboxing and distribution framework (formerly xdg-app)
 # URL: https://flatpak.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: appstream appstream-glib bubblewrap libseccomp ostree polkit python3-pyparsing
+# Depends on: appstream appstream-glib bubblewrap libseccomp ostree polkit python3-pyparsing socat
 # Optional: dconf docbook-xsl libxslt xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-kde
 
 name=flatpak
-version=1.15.6
-release=3
+version=1.15.7
+release=1
 source=(https://github.com/flatpak/flatpak/releases/download/$version/$name-$version.tar.xz)
 
 build() {
-  cd $name-$version
-
-  prt-get isinst libxslt docbook-xsl docbook-dtd || PKGMK_FLATPAK+=' --disable-documentation'
-
-  NOCONFIGURE=1 ./autogen.sh
-
-  ./configure $PKGMK_FLATPAK \
+  meson setup $name-$version build \
     --prefix=/usr \
-    --libexecdir=/usr/lib \
-    --with-system-bubblewrap \
-    --with-priv-mode=setuid \
-    --with-profile-dir=/etc/profile.d \
-    --with-dbus-config-dir=/usr/share/dbus-1/system.d \
-    --with-system-helper-user=flatpak \
-    --disable-static \
-    --disable-nls
-  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+    --libexecdir=lib \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D dbus_config_dir=/usr/share/dbus-1/system.d \
+    -D profile_dir=/etc/profile.d \
+    -D system_helper_user=flatpak \
+    -D system_bubblewrap=/usr/bin/bwrap
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
-  make
-  make DESTDIR=$PKG install
+  #cd $name-$version
+
+  #prt-get isinst libxslt docbook-xsl docbook-dtd || PKGMK_FLATPAK+=' --disable-documentation'
+
+  #NOCONFIGURE=1 ./autogen.sh
+
+  #./configure $PKGMK_FLATPAK \
+  #  --prefix=/usr \
+  #  --libexecdir=/usr/lib \
+  #  --with-priv-mode=setuid \
+  #  --disable-static \
+  #sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+  #make
+  #make DESTDIR=$PKG install
 
   rm -fr $PKG/usr/lib/{systemd,sysusers.d}
-  rm -fr $PKG/usr/share/{gtk-doc,doc,selinux,fish}
+  rm -fr $PKG/usr/share/{fish,locale}
 }
