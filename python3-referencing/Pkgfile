@@ -4,12 +4,12 @@
 # Depends on: python3-rpds-py python3-hatch-vcs python3-attrs
 
 name=python3-referencing
-version=0.33.0
+version=0.34.0
 release=1
 source=(https://pypi.python.org/packages/source/r/referencing/referencing-$version.tar.gz)
 
 build() {
-	cd referencing-$version
-	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-	PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+    cd referencing-$version
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
 }
