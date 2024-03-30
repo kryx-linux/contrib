@@ -5,15 +5,12 @@
 # Optional: libayatana-appindicator
 
 name=blueman
-version=2.3.5
-release=2
-source=(https://github.com/blueman-project/$name/releases/download/$version/$name-$version.tar.xz
-  iptables.patch)
+version=2.4
+release=1
+source=(https://github.com/blueman-project/$name/releases/download/$version/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
-
-  patch -Np1 -i $SRC/iptables.patch
 
   sed -e 's/cython/cython3/g' -i configure
 
