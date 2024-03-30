@@ -28,6 +28,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/key_ladder_demo.sh
 -rwxr-xr-x	root/root	usr/bin/load_roots
 -rwxr-xr-x	root/root	usr/bin/md_hmac_demo
+-rwxr-xr-x	root/root	usr/bin/metatest
 -rwxr-xr-x	root/root	usr/bin/mini_client
 -rwxr-xr-x	root/root	usr/bin/mpi_demo
 -rwxr-xr-x	root/root	usr/bin/pem2der
@@ -36,6 +37,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/pk_sign
 -rwxr-xr-x	root/root	usr/bin/pk_verify
 -rwxr-xr-x	root/root	usr/bin/psa_constant_names
+-rwxr-xr-x	root/root	usr/bin/psa_hash
 -rwxr-xr-x	root/root	usr/bin/query_compile_time_config
 -rwxr-xr-x	root/root	usr/bin/query_included_headers
 -rwxr-xr-x	root/root	usr/bin/req_app
@@ -88,6 +90,7 @@ drwxr-xr-x	root/root	usr/include/mbedtls/
 -rw-r--r--	root/root	usr/include/mbedtls/asn1write.h
 -rw-r--r--	root/root	usr/include/mbedtls/base64.h
 -rw-r--r--	root/root	usr/include/mbedtls/bignum.h
+-rw-r--r--	root/root	usr/include/mbedtls/block_cipher.h
 -rw-r--r--	root/root	usr/include/mbedtls/build_info.h
 -rw-r--r--	root/root	usr/include/mbedtls/camellia.h
 -rw-r--r--	root/root	usr/include/mbedtls/ccm.h
@@ -187,15 +190,19 @@ drwxr-xr-x	root/root	usr/lib/cmake/MbedTLS/
 -rw-r--r--	root/root	usr/lib/cmake/MbedTLS/MbedTLSTargets.cmake
 -rw-r--r--	root/root	usr/lib/libeverest.a
 -rw-r--r--	root/root	usr/lib/libmbedcrypto.a
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.15
-lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.15 -> libmbedcrypto.so.3.5.2
--rwxr-xr-x	root/root	usr/lib/libmbedcrypto.so.3.5.2
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so -> libmbedcrypto.so.16
+lrwxrwxrwx	root/root	usr/lib/libmbedcrypto.so.16 -> libmbedcrypto.so.3.6.0
+-rwxr-xr-x	root/root	usr/lib/libmbedcrypto.so.3.6.0
 -rw-r--r--	root/root	usr/lib/libmbedtls.a
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.20
-lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.20 -> libmbedtls.so.3.5.2
--rwxr-xr-x	root/root	usr/lib/libmbedtls.so.3.5.2
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so -> libmbedtls.so.21
+lrwxrwxrwx	root/root	usr/lib/libmbedtls.so.21 -> libmbedtls.so.3.6.0
+-rwxr-xr-x	root/root	usr/lib/libmbedtls.so.3.6.0
 -rw-r--r--	root/root	usr/lib/libmbedx509.a
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.6
--rwxr-xr-x	root/root	usr/lib/libmbedx509.so.3.5.2
-lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.6 -> libmbedx509.so.3.5.2
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so -> libmbedx509.so.7
+-rwxr-xr-x	root/root	usr/lib/libmbedx509.so.3.6.0
+lrwxrwxrwx	root/root	usr/lib/libmbedx509.so.7 -> libmbedx509.so.3.6.0
 -rw-r--r--	root/root	usr/lib/libp256m.a
+drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-rw-r--r--	root/root	usr/lib/pkgconfig/mbedcrypto.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/mbedtls.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/mbedx509.pc
