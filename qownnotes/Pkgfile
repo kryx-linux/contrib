@@ -1,28 +1,21 @@
 # Description: Plain-text file notepad with markdown support and ownCloud integration
 # URL: https://www.qownnotes.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: qt5
-# Optional: aspell graphite2 icu
+# Depends on: aspell qt6-5compat qt6-svg qt6-websockets
 
 name=qownnotes
-version=24.3.5
+version=24.4.0
 release=1
 source=(https://github.com/pbek/QOwnNotes/releases/download/v$version/qownnotes-$version.tar.xz)
 
 build() {
-  if [[ ! -e /usr/include/xkbcommon/xkbcommon-x11.h ]]; then
-    printf '\e[31m%s\e[m\n' "libxkbcommon is not built with x11 support but needs to be!"
-    printf '\e[33m%s\e[m\n' "Install xkeyboard-config and rebuild libxkbcommon and qt5 in that order to build $name"
-    exit 1
-  fi
-
-  cd qownnotes-$version
+  cd $name-$version
 
   echo "#define RELEASE \"CRUX\"" > release.h
-  /usr/lib/qt5/bin/qmake \
-     QMAKE_CFLAGS_RELEASE="${CFLAGS}" \
-     QMAKE_CXXFLAGS_RELEASE="${CXXFLAGS}" \
-     QMAKE_LFLAGS_RELEASE="${LDFLAGS}"
+  /usr/lib/qt6/bin/qmake \
+    QMAKE_CFLAGS_RELEASE="${CFLAGS}" \
+    QMAKE_CXXFLAGS_RELEASE="${CXXFLAGS}" \
+    QMAKE_LFLAGS_RELEASE="${LDFLAGS}"
   make
 
   install -D -m755 QOwnNotes $PKG/usr/bin/QOwnNotes
