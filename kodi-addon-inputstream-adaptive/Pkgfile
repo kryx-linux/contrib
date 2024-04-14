@@ -4,19 +4,16 @@
 # Depends on: kodi-gbm pugixml
 
 name=kodi-addon-inputstream-adaptive
-version=21.4.4
+version=21.4.5
 release=1
 _bento4=1.6.0-641
 _codename=Omega
 
 source=(https://github.com/xbmc/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz
-  https://github.com/xbmc/Bento4/archive/refs/tags/$_bento4-$_codename.tar.gz
-  a82e3eb8333187d8bb346bf5eca384524a553e57.patch)
+  https://github.com/xbmc/Bento4/archive/refs/tags/$_bento4-$_codename.tar.gz)
 renames=(SKIP bento4-$_bento4-Omega.tar.gz)
 
 build() {
-  patch -Np1 -d inputstream.adaptive-$version-$_codename -i $SRC/a82e3eb8333187d8bb346bf5eca384524a553e57.patch
-
   cmake -S inputstream.adaptive-$version-$_codename -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
