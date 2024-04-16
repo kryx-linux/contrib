@@ -4,9 +4,9 @@
 # Depends on: gnu-efi python3-pefile
 
 name=fwupd-efi
-version=1.5
+version=1.6
 release=1
-source=(https://people.freedesktop.org/~hughsient/releases/$name-$version.tar.xz)
+source=(https://github.com/fwupd/fwupd-efi/releases/download/$version/fwupd-efi-$version.tar.xz)
 
 build() {
   meson setup $name-$version build \
