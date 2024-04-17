@@ -2,13 +2,13 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx-3.2.1.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.2.1.dist-info/LICENSE.txt
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.2.1.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.2.1.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.2.1.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.2.1.dist-info/entry_points.txt
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.2.1.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx-3.3.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.3.dist-info/LICENSE.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.3.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.3.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.3.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.3.dist-info/entry_points.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx-3.3.dist-info/top_level.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/__pycache__/
@@ -26,6 +26,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pycache__/asteroidal.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pycache__/boundary.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pycache__/bridges.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pycache__/broadcasting.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pycache__/chains.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pycache__/chordal.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/__pycache__/clique.cpython-310.opt-2.pyc
@@ -226,6 +227,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/bipart
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/bipartite/tests/test_spectral_bipartivity.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/boundary.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/bridges.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/broadcasting.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/centrality/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/centrality/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/centrality/__pycache__/
@@ -342,6 +344,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/commun
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/__pycache__/asyn_fluid.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/__pycache__/centrality.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/__pycache__/community_utils.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/__pycache__/divisive.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/__pycache__/kclique.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/__pycache__/kernighan_lin.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/__pycache__/label_propagation.cpython-310.opt-2.pyc
@@ -352,6 +355,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/commun
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/asyn_fluid.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/centrality.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/community_utils.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/divisive.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/kclique.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/kernighan_lin.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/label_propagation.py
@@ -365,6 +369,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/commun
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/test_asyn_fluid.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/test_centrality.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/test_divisive.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/test_kclique.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/test_kernighan_lin.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/test_label_propagation.cpython-310.opt-2.pyc
@@ -375,6 +380,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/commun
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/__pycache__/test_utils.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/test_asyn_fluid.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/test_centrality.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/test_divisive.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/test_kclique.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/test_kernighan_lin.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/community/tests/test_label_propagation.py
@@ -672,6 +678,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/__pycache__/test_asteroidal.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/__pycache__/test_boundary.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/__pycache__/test_bridges.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/__pycache__/test_broadcasting.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/__pycache__/test_chains.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/__pycache__/test_chordal.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/__pycache__/test_clique.cpython-310.opt-2.pyc
@@ -727,6 +734,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/test_asteroidal.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/test_boundary.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/test_bridges.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/test_broadcasting.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/test_chains.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/test_chordal.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/algorithms/tests/test_clique.py
@@ -875,7 +883,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__p
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/dispatch_interface.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/historical_tests.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/test_backends.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/test_coreviews.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/test_digraph.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/test_digraph_historical.cpython-310.opt-2.pyc
@@ -891,7 +898,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__p
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/__pycache__/test_subgraphviews.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/dispatch_interface.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/historical_tests.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/test_backends.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/test_coreviews.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/test_digraph.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/classes/tests/test_digraph_historical.py
@@ -1205,6 +1211,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/utils/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/backends.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/configs.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/decorators.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/heaps.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/mapped_queue.cpython-310.opt-2.pyc
@@ -1213,6 +1220,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/rcm.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/__pycache__/union_find.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/backends.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/configs.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/decorators.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/heaps.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/mapped_queue.py
@@ -1224,6 +1232,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test__init.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test_backends.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test_config.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test_decorators.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test_heaps.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test_mapped_queue.cpython-310.opt-2.pyc
@@ -1232,6 +1242,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test_rcm.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/__pycache__/test_unionfind.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/test__init.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/test_backends.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/test_config.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/test_decorators.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/test_heaps.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/networkx/utils/tests/test_mapped_queue.py
