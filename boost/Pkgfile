@@ -5,7 +5,7 @@
 # Optional: icu openmpi python3-numpy
 
 name=boost
-version=1.84.0
+version=1.85.0
 release=1
 source=(https://boostorg.jfrog.io/artifactory/main/release/$version/source/${name}_${version//./_}.tar.bz2
   boost-ublas-c++20-iterator.patch)
@@ -55,5 +55,5 @@ build() {
     linkflags="$LDFLAGS"
 
   prt-get isinst python3-numpy || rm -r $PKG/usr/include/boost/python/numpy*
-  prt-get isinst openmpi || rm -r $PKG//usr/include/boost/mpi/python*
+  prt-get isinst openmpi || rm -r $PKG/usr/include/boost/mpi/python*
 }
