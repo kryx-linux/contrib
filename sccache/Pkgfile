@@ -4,7 +4,7 @@
 # Depends on: rust
 
 name=sccache
-version=0.7.7
+version=0.8.0
 release=1
 source=(https://github.com/mozilla/sccache/archive/v$version/$name-v$version.tar.gz)
 
@@ -16,9 +16,9 @@ build() {
   export CFLAGS+=' -ffat-lto-objects'
   export LDFLAGS+=' -lzstd'
 
-  if [ $(uname -m) == "x86_64" ]; then
-    PKGMK_SCCACHE+=',dist-server'
-  fi
+  #if [ $(uname -m) == "x86_64" ]; then
+  #  PKGMK_SCCACHE+=',dist-server'
+  #fi
 
   cargo build --manifest-path $name-$version/Cargo.toml --release \
     --features native-zlib,all$PKGMK_SCCACHE
