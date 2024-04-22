@@ -5,18 +5,18 @@
 # Optional: hunspell
 
 name=enchant
-version=2.6.9
+version=2.7.0
 release=1
 source=(https://github.com/AbiWord/$name/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr --enable-relocatable
 
-  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
   make
   make DESTDIR=$PKG install
 
+  rm -rf $PKG/usr/share/doc
   find $PKG -name '*.la' -delete
 }
