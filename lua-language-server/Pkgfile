@@ -4,11 +4,10 @@
 # Depends on: lua
 
 name=lua-language-server
-version=3.7.4
+version=3.8.0
 release=1
 source=(https://github.com/sumneko/lua-language-server/archive/$version/$name-$version.tar.gz
   https://github.com/sumneko/lua-language-server/releases/download/$version/lua-language-server-$version-submodules.zip
-  linux.ninja.patch
   wrapper.sh)
 
 build() {
@@ -16,7 +15,6 @@ build() {
 
   cd $name-$version
 
-  patch -Np1 -i $SRC/linux.ninja.patch
   sed -i -e "s/^cc = REPLACE_ME/cc = cc/" \
     -e "s/^ar = REPLACE_AR/ar = ar/" \
     -e "s/CFLAGS/${CFLAGS}/" \
