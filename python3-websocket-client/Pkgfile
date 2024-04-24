@@ -4,12 +4,12 @@
 # Depends on: python3-six
 
 name=python3-websocket-client
-version=1.7.0
+version=1.8.0
 release=1
-source=(https://pypi.python.org/packages/source/w/websocket-client/websocket-client-$version.tar.gz)
+source=(https://pypi.python.org/packages/source/w/websocket_client/websocket_client-$version.tar.gz)
 
 build() {
-  cd websocket-client-$version
+  cd websocket_client-$version
 
   sed -i "s/'backports.ssl_match_hostname'//" setup.py
 
