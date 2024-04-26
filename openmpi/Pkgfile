@@ -5,12 +5,16 @@
 # Optional: cuda
 
 name=openmpi
-version=5.0.2
+version=5.0.3
 release=1
-source=(https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$name-$version.tar.bz2)
+source=(https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$name-$version.tar.bz2
+  fortran-flags.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/fortran-flags.patch
+  ./autogen.pl --force
 
   ./configure \
     --prefix=/usr \
@@ -24,6 +28,7 @@ build() {
     --enable-mpi1-compatibility \
     --with-sge \
     --without-slurm \
+    --with-libevent=external \
     FC=/usr/bin/gfortran \
     LDFLAGS="${LDFLAGS} -Wl,-z,noexecstack"
 
@@ -37,4 +42,6 @@ build() {
 
   install -dm 755 $PKG/etc/ld.so.conf.d
   echo /usr/lib/$name > $PKG/etc/ld.so.conf.d/$name.conf
+
+  rm -r $PKG/usr/share/doc
 }
