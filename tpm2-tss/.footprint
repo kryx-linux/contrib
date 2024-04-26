@@ -3,7 +3,12 @@ drwxr-xr-x	root/root	etc/tpm2-tss/
 -rw-r--r--	root/root	etc/tpm2-tss/fapi-config.json
 drwxr-xr-x	root/root	etc/tpm2-tss/fapi-profiles/
 -rw-r--r--	root/root	etc/tpm2-tss/fapi-profiles/P_ECCP256SHA256.json
+-rw-r--r--	root/root	etc/tpm2-tss/fapi-profiles/P_ECCP384SHA384.json
 -rw-r--r--	root/root	etc/tpm2-tss/fapi-profiles/P_RSA2048SHA256.json
+-rw-r--r--	root/root	etc/tpm2-tss/fapi-profiles/P_RSA3072SHA384.json
+drwxr-xr-x	root/root	run/
+drwxr-xr-x	root/root	run/tpm2-tss/
+drwxr-xr-x	root/root	run/tpm2-tss/eventlog/
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/tss2/
@@ -17,10 +22,13 @@ drwxr-xr-x	root/root	usr/include/tss2/
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti_cmd.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti_device.h
+-rw-r--r--	root/root	usr/include/tss2/tss2_tcti_i2c_helper.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti_libtpms.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti_mssim.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti_pcap.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti_spi_helper.h
+-rw-r--r--	root/root	usr/include/tss2/tss2_tcti_spi_ltt2go.h
+-rw-r--r--	root/root	usr/include/tss2/tss2_tcti_spidev.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tcti_swtpm.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tctildr.h
 -rw-r--r--	root/root	usr/include/tss2/tss2_tpm2_types.h
@@ -65,6 +73,11 @@ lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-cmd.so.0 -> libtss2-tcti-cmd.so.0.0.0
 lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-device.so -> libtss2-tcti-device.so.0.0.0
 lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-device.so.0 -> libtss2-tcti-device.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libtss2-tcti-device.so.0.0.0
+-rw-r--r--	root/root	usr/lib/libtss2-tcti-i2c-helper.a
+-rwxr-xr-x	root/root	usr/lib/libtss2-tcti-i2c-helper.la
+lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-i2c-helper.so -> libtss2-tcti-i2c-helper.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-i2c-helper.so.0 -> libtss2-tcti-i2c-helper.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libtss2-tcti-i2c-helper.so.0.0.0
 -rw-r--r--	root/root	usr/lib/libtss2-tcti-libtpms.a
 -rwxr-xr-x	root/root	usr/lib/libtss2-tcti-libtpms.la
 lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-libtpms.so -> libtss2-tcti-libtpms.so.0.0.0
@@ -85,6 +98,16 @@ lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-pcap.so.0 -> libtss2-tcti-pcap.so.0.0.
 lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-spi-helper.so -> libtss2-tcti-spi-helper.so.0.0.0
 lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-spi-helper.so.0 -> libtss2-tcti-spi-helper.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libtss2-tcti-spi-helper.so.0.0.0
+-rw-r--r--	root/root	usr/lib/libtss2-tcti-spi-ltt2go.a
+-rwxr-xr-x	root/root	usr/lib/libtss2-tcti-spi-ltt2go.la
+lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-spi-ltt2go.so -> libtss2-tcti-spi-ltt2go.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-spi-ltt2go.so.0 -> libtss2-tcti-spi-ltt2go.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libtss2-tcti-spi-ltt2go.so.0.0.0
+-rw-r--r--	root/root	usr/lib/libtss2-tcti-spidev.a
+-rwxr-xr-x	root/root	usr/lib/libtss2-tcti-spidev.la
+lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-spidev.so -> libtss2-tcti-spidev.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-spidev.so.0 -> libtss2-tcti-spidev.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/libtss2-tcti-spidev.so.0.0.0
 -rw-r--r--	root/root	usr/lib/libtss2-tcti-swtpm.a
 -rwxr-xr-x	root/root	usr/lib/libtss2-tcti-swtpm.la
 lrwxrwxrwx	root/root	usr/lib/libtss2-tcti-swtpm.so -> libtss2-tcti-swtpm.so.0.0.0
@@ -104,10 +127,13 @@ drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-sys.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-cmd.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-device.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-i2c-helper.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-libtpms.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-mssim.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-pcap.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-spi-helper.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-spi-ltt2go.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-spidev.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tcti-swtpm.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/tss2-tctildr.pc
 drwxr-xr-x	root/root	usr/lib/udev/
@@ -129,6 +155,17 @@ drwxr-xr-x	root/root	usr/share/man/man5/
 drwxr-xr-x	root/root	usr/share/man/man7/
 -rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-cmd.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-device.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-i2c-ftdi.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-i2c-helper.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-mssim.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-spi-ftdi.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-spi-helper.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-spi-ltt2go.7.gz
+-rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-spidev.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/tss2-tcti-swtpm.7.gz
 -rw-r--r--	root/root	usr/share/man/man7/tss2-tctildr.7.gz
+drwxr-xr-x	root/root	var/
+drwxr-xr-x	root/root	var/lib/
+drwxr-xr-x	root/root	var/lib/tpm2-tss/
+drwxr-xr-x	root/root	var/lib/tpm2-tss/system/
+drwxr-xr-x	root/root	var/lib/tpm2-tss/system/keystore/
