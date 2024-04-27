@@ -6,10 +6,13 @@
 name=tpm2-tss
 version=4.1.0
 release=1
-source=(https://github.com/tpm2-software/tpm2-tss/releases/download/$version/$name-$version.tar.gz)
+source=(https://github.com/tpm2-software/tpm2-tss/releases/download/$version/$name-$version.tar.gz
+  https://raw.githubusercontent.com/tpm2-software/tpm2-tss/e237e4d33cbf280292a480edd8ad061dcd3a37a2/lib/tss2-tcti-libtpms.map)
 
 build() {
   cd $name-$version
+
+  cp $SRC/tss2-tcti-libtpms.map lib
 
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
