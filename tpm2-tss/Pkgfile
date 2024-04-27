@@ -7,12 +7,22 @@ name=tpm2-tss
 version=4.1.0
 release=1
 source=(https://github.com/tpm2-software/tpm2-tss/releases/download/$version/$name-$version.tar.gz
-  https://raw.githubusercontent.com/tpm2-software/tpm2-tss/e237e4d33cbf280292a480edd8ad061dcd3a37a2/lib/tss2-tcti-libtpms.map)
+  https://raw.githubusercontent.com/tpm2-software/tpm2-tss/bb6453c652508c6d92da73c0f895009388194e63/lib/tss2-tcti-libtpms.map
+  https://raw.githubusercontent.com/tpm2-software/tpm2-tss/e107c0126a636d7ac6a3546850bdfa3b6f2211cb/lib/tss2-tcti-i2c-ftdi.map
+  https://raw.githubusercontent.com/tpm2-software/tpm2-tss/86349e033f59e42c4c785c5e2472694a0a3bfb18/lib/tss2-tcti-spi-ftdi.map
+)
+renames=(SKIP
+  tss2-tcti-libtpms.map-bb6453c652508c6d92da73c0f895009388194e63
+  tss2-tcti-i2c-ftdi.map-e107c0126a636d7ac6a3546850bdfa3b6f2211cb
+  tss2-tcti-spi-ftdi.map-86349e033f59e42c4c785c5e2472694a0a3bfb18
+)
 
 build() {
   cd $name-$version
 
-  cp $SRC/tss2-tcti-libtpms.map lib
+  cp $SRC/tss2-tcti-libtpms.map-bb6453c652508c6d92da73c0f895009388194e63 lib/tss2-tcti-libtpms.map
+  cp $SRC/tss2-tcti-i2c-ftdi.map-e107c0126a636d7ac6a3546850bdfa3b6f2211cb lib/tss2-tcti-i2c-ftdi.map
+  cp $SRC/tss2-tcti-spi-ftdi.map-86349e033f59e42c4c785c5e2472694a0a3bfb18 lib/tss2-tcti-spi-ftdi.map
 
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
