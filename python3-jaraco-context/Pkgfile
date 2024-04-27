@@ -1,0 +1,16 @@
+# Description: Useful decorators and context managers
+# URL: https://github.com/jaraco/jaraco.context
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools-scm
+
+name=python3-jaraco-context
+version=4.3.0
+release=1
+source=(https://pypi.org/packages/source/j/jaraco.context/jaraco.context-$version.tar.gz)
+
+build() {
+  cd jaraco.context-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
