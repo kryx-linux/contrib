@@ -1,0 +1,24 @@
+# Description: PMIx Reference RunTime Environment
+# URL: https://pmix.github.io/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: openpmix
+
+name=prrte
+version=3.0.5
+release=1
+source=(https://github.com/openpmix/prrte/releases/download/v$version/prrte-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+
+  ./autogen.pl
+
+  PYTHON=/usr/bin/python3 \
+  ./configure --prefix=/usr \
+    --sysconfdir=/etc/prrte \
+    --enable-ipv6
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+  make
+  make DESTDIR=$PKG install
+}
