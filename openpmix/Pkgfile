@@ -1,0 +1,24 @@
+# Description: Reference Implementation of the Process Management Interface Exascale (PMIx) standard
+# URL: https://openpmix.github.io/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: hwloc libevent perl
+
+name=openpmix
+version=4.2.9
+release=1
+source=(https://github.com/openpmix/openpmix/releases/download/v$version/pmix-$version.tar.bz2)
+
+build() {
+  cd pmix-$version
+
+  ./autogen.pl
+
+  PYTHON=/usr/bin/python3 \
+  ./configure --prefix=/usr \
+    --sysconfdir=/etc/openpmix \
+    --enable-ipv6
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+  make
+  make DESTDIR=$PKG install
+}
