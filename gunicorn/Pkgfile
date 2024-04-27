@@ -1,18 +1,16 @@
 # Description: a Python WSGI HTTP Server for UNIX
 # URL: https://gunicorn.org/
 # Maintainer: CRUX System Team, core-ports at crux dot nu
-# Depends on: python3-packaging
+# Depends on: python3-build python3-installer python3-wheel
 
 name=gunicorn
-version=21.2.0
+version=22.0.0
 release=1
 source=(https://pypi.org/packages/source/g/gunicorn/gunicorn-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
