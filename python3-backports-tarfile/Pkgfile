@@ -1,0 +1,16 @@
+# Description: Backport of CPython tarfile module
+# URL: https://github.com/jaraco/backports.tarfile
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools-scm
+
+name=python3-backports-tarfile
+version=1.1.1
+release=1
+source=(https://pypi.org/packages/source/b/backports_tarfile/backports_tarfile-$version.tar.gz)
+
+build() {
+  cd backports_tarfile-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
