@@ -3,13 +3,12 @@
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 
 name=pv
-version=1.8.5
+version=1.8.9
 release=1
 source=(http://www.ivarch.com/programs/sources/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    #sed -i -e '/^all-am:.*/s/$(DATA)//g' Makefile.in
     sed -i -e '/^install-data-am:.*/s/install-dist_docDATA//g' Makefile.in
     ./configure --prefix=/usr \
         --disable-nls
