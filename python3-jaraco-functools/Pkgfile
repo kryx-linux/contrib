@@ -4,12 +4,12 @@
 # Depends on: python3-more-itertools python3-setuptools-scm
 
 name=python3-jaraco-functools
-version=4.0.0
+version=4.0.1
 release=1
-source=(https://pypi.org/packages/source/j/jaraco.functools/jaraco.functools-$version.tar.gz)
+source=(https://pypi.org/packages/source/j/jaraco_functools/jaraco_functools-$version.tar.gz)
 
 build() {
-  cd jaraco.functools-$version
+  cd jaraco_functools-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
