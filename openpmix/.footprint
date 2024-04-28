@@ -3,6 +3,7 @@ drwxr-xr-x	root/root	etc/openpmix/
 -rw-r--r--	root/root	etc/openpmix/pmix-mca-params.conf
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/palloc
 -rwxr-xr-x	root/root	usr/bin/pattrs
 -rwxr-xr-x	root/root	usr/bin/pctrl
 -rwxr-xr-x	root/root	usr/bin/pevent
@@ -63,14 +64,9 @@ drwxr-xr-x	root/root	usr/include/pmix/src/mca/base/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/bfrops/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/bfrops/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/bfrops/base/base.h
+-rw-r--r--	root/root	usr/include/pmix/src/mca/bfrops/base/bfrop_base_tma.h
 -rw-r--r--	root/root	usr/include/pmix/src/mca/bfrops/bfrops.h
 -rw-r--r--	root/root	usr/include/pmix/src/mca/bfrops/bfrops_types.h
-drwxr-xr-x	root/root	usr/include/pmix/src/mca/common/
-drwxr-xr-x	root/root	usr/include/pmix/src/mca/common/dstore/
--rw-r--r--	root/root	usr/include/pmix/src/mca/common/dstore/dstore_base.h
--rw-r--r--	root/root	usr/include/pmix/src/mca/common/dstore/dstore_common.h
--rw-r--r--	root/root	usr/include/pmix/src/mca/common/dstore/dstore_file.h
--rw-r--r--	root/root	usr/include/pmix/src/mca/common/dstore/dstore_segment.h
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/gds/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/gds/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/gds/base/base.h
@@ -130,10 +126,6 @@ drwxr-xr-x	root/root	usr/include/pmix/src/mca/psensor/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/psensor/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/psensor/base/base.h
 -rw-r--r--	root/root	usr/include/pmix/src/mca/psensor/psensor.h
-drwxr-xr-x	root/root	usr/include/pmix/src/mca/pshmem/
-drwxr-xr-x	root/root	usr/include/pmix/src/mca/pshmem/base/
--rw-r--r--	root/root	usr/include/pmix/src/mca/pshmem/base/base.h
--rw-r--r--	root/root	usr/include/pmix/src/mca/pshmem/pshmem.h
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/psquash/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/psquash/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/psquash/base/base.h
@@ -189,6 +181,7 @@ drwxr-xr-x	root/root	usr/include/pmix/src/util/
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_path.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_printf.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_pty.h
+-rw-r--r--	root/root	usr/include/pmix/src/util/pmix_shmem.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_show_help.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_string_copy.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_strnlen.h
@@ -201,9 +194,9 @@ drwxr-xr-x	root/root	usr/include/pmix/src/util/
 -rw-r--r--	root/root	usr/include/pmix_version.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libpmix.la
-lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.9.5
-lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.9.5
--rwxr-xr-x	root/root	usr/lib/libpmix.so.2.9.5
+lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.13.1
+lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.13.1
+-rwxr-xr-x	root/root	usr/lib/libpmix.so.2.13.1
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/pmix.pc
 drwxr-xr-x	root/root	usr/lib/pmix/
@@ -284,6 +277,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/news/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v2.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v3.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v4.x.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v5.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/quickstart.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/release-notes.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/release-notes/
@@ -399,6 +393,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/news/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v2.x.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v3.x.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v4.x.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v5.x.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/objects.inv
 -rw-r--r--	root/root	usr/share/doc/pmix/html/quickstart.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/release-notes.html
@@ -423,6 +418,7 @@ drwxr-xr-x	root/root	usr/share/man/man5/
 -rw-r--r--	root/root	usr/share/man/man5/openpmix.5.gz
 drwxr-xr-x	root/root	usr/share/pmix/
 -rw-r--r--	root/root	usr/share/pmix/help-cli.txt
+-rw-r--r--	root/root	usr/share/pmix/help-palloc.txt
 -rw-r--r--	root/root	usr/share/pmix/help-pattrs.txt
 -rw-r--r--	root/root	usr/share/pmix/help-pcompress.txt
 -rw-r--r--	root/root	usr/share/pmix/help-pctrl.txt
