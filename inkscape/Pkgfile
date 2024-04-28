@@ -1,7 +1,7 @@
 # Description: An open source SVG editor.
 # URL: https://www.inkscape.org/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: boehm-gc double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler-ink popt potrace gdl
+# Depends on: boehm-gc double-conversion graphicsmagick gsl gtkmm3 librsvg libsoup libxslt poppler popt potrace gdl
 
 name=inkscape
 version=1.3.2
@@ -9,10 +9,7 @@ release=3
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz 6209.patch)
 
 build() {
-    export CXXFLAGS+=" -I/usr/include/poppler-ink"
-    export LDFLAGS+=" -Wl,-rpath=/usr/lib/inkscape"
-    export PKG_CONFIG_PATH="/usr/lib/inkscape/pkgconfig:$PKG_CONFIG_PATH"
-
+    [ -e /usr/bin/pdftocairo ] || { echo "install cairo and then rebuild poppler, else inkscape will fail to build."; exit 1; }
     cd ${name}-${version}*
 
     # patch for the new poppler ABI
@@ -26,9 +23,10 @@ build() {
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D CMAKE_INSTALL_LIBDIR=lib \
         -D CMAKE_BUILD_TYPE=Release \
-        -D CMAKE_CXX_FLAGS_RELEASE="-L/usr/lib/inkscape" \
-        -D CMAKE_C_FLAGS_RELEASE="-L/usr/lib/inkscape" \
+        -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+        -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
         -D WITH_INTERNAL_2GEOM=ON \
+	-D WITH_LIBCDR=OFF \
         -D WITH_NLS=OFF \
         -Wno-dev
 
