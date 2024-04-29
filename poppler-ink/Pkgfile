@@ -1,11 +1,11 @@
 # Description: PDF rendering library needed for inkscape
 # URL: https://poppler.freedesktop.org/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: fontconfig boost lcms2 libjpeg-turbo cairo
+# Depends on: fontconfig boost lcms2 librsvg libjpeg-turbo cairo
 
 name=poppler-ink
 version=24.04.0
-release=1
+release=2
 source=(https://poppler.freedesktop.org/poppler-$version.tar.xz)
 
 build() {
@@ -31,14 +31,18 @@ build() {
            -D BUILD_QT6_TESTS=OFF
            -Wno-dev"
 
-    cmake -S poppler-$version -B build $PKGMK_INKPOP \
-          -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-          -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS"
+    cd poppler-$version
+    sed -e "/ENABLE_RELOCATABLE OFF/s/OFF/ON/" -i CMakeLists.txt
 
+    cmake -S . -B build $PKGMK_INKPOP \
+           -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+           -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" 
     cmake --build build -j ${JOBS:-1}
+
+    sed -e "s;include/poppler;include/poppler-ink;" \
+        -i build/{,cpp,glib}/cmake_install.cmake
     DESTDIR=$PKG cmake --install build
 
-    mv $PKG/usr/include/poppler{,-ink}
     sed -e "/^Cflags/s;poppler;poppler-ink;" \
         -i $PKG/usr/lib/inkscape/pkgconfig/poppler{,-cpp,-glib}.pc
 
