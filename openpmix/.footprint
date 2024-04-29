@@ -194,9 +194,9 @@ drwxr-xr-x	root/root	usr/include/pmix/src/util/
 -rw-r--r--	root/root	usr/include/pmix_version.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libpmix.la
-lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.13.1
-lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.13.1
--rwxr-xr-x	root/root	usr/lib/libpmix.so.2.13.1
+lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.13.2
+lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.13.2
+-rwxr-xr-x	root/root	usr/lib/libpmix.so.2.13.2
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/pmix.pc
 drwxr-xr-x	root/root	usr/lib/pmix/
@@ -204,6 +204,8 @@ drwxr-xr-x	root/root	usr/lib/pmix/
 -rwxr-xr-x	root/root	usr/lib/pmix/pmix_mca_pcompress_zlib.so
 -rwxr-xr-x	root/root	usr/lib/pmix/pmix_mca_prm_default.la
 -rwxr-xr-x	root/root	usr/lib/pmix/pmix_mca_prm_default.so
+-rwxr-xr-x	root/root	usr/lib/pmix/pmix_mca_prm_pbs.la
+-rwxr-xr-x	root/root	usr/lib/pmix/pmix_mca_prm_pbs.so
 -rwxr-xr-x	root/root	usr/lib/pmix/pmix_mca_prm_slurm.la
 -rwxr-xr-x	root/root	usr/lib/pmix/pmix_mca_prm_slurm.so
 drwxr-xr-x	root/root	usr/share/
@@ -236,6 +238,9 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/exceptions.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/getting-help.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/history.rst.txt
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/how-things-work/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/index.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/session_dirs.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/index.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/installing-pmix/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/installing-pmix/compilers-and-flags.rst.txt
@@ -261,7 +266,14 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/man/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/index.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/man/man1/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/index.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/palloc.1.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/pattrs.1.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/pevent.1.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/plookup.1.rst.txt.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/pmix_info.1.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/pmixcc.1.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/pps.1.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man1/pquery.1.rst.txt.gz
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/man/man3/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/PMIx_Abort.3.rst.txt.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/PMIx_Finalize.3.rst.txt.gz
@@ -352,6 +364,9 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/genindex.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/getting-help.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/history.html
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/how-things-work/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/index.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/session_dirs.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/index.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/installing-pmix/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/installing-pmix/compilers-and-flags.html
@@ -377,7 +392,14 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/man/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/index.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/man/man1/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/index.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/palloc.1.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/pattrs.1.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/pevent.1.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/plookup.1.html.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/pmix_info.1.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/pmixcc.1.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/pps.1.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man1/pquery.1.html.gz
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/man/man3/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/PMIx_Abort.3.html.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/PMIx_Finalize.3.html.gz
