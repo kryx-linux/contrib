@@ -18,13 +18,13 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.105.1.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.105.1.dist-info/AUTHORS.rst
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.105.1.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.105.1.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.105.1.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.105.1.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.105.1.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.106.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.106.0.dist-info/AUTHORS.rst
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.106.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.106.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.106.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.106.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.106.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/__pycache__/
@@ -615,6 +615,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/add_threepid.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/add_threepid_failure.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/add_threepid_success.html
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/already_in_use.html
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/already_in_use.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/auth_success.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/invalid_token.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/res/templates/mail-Element.css
@@ -847,6 +849,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/clien
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/__pycache__/password_reset.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/__pycache__/pick_idp.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/__pycache__/pick_username.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/__pycache__/rendezvous.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/__pycache__/sso_register.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/__pycache__/unsubscribe.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/jwks.py
@@ -862,6 +865,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/clien
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/password_reset.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/pick_idp.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/pick_username.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/rendezvous.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/saml2/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/saml2/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/synapse/client/saml2/__pycache__/
@@ -1645,6 +1649,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/synapse_rust/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/synapse_rust/acl.pyi
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/synapse_rust/events.pyi
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/synapse_rust/push.pyi
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/synapse_rust/rendezvous.pyi
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/types/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/types/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/types/__pycache__/
