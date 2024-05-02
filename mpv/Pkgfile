@@ -15,6 +15,10 @@ build() {
   prt-get isinst libsdl2 && PKGMK_MPV+=" -D sdl2=enabled"
   [ -e /usr/lib/libsndio.so ] && PKGMK_MPV+=" -D sndio=enabled"
 
+  # issue 12941 (unbreak build without X11 and Wayland)
+  sed -e "/features.'wayland'. or features.'x11'./s/$/ or features['drm']/" \
+      -i $name-$version/meson.build
+
   meson setup $name-$version build $PKGMK_MPV \
     --prefix=/usr \
     --buildtype=plain \
