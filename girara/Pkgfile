@@ -5,9 +5,9 @@
 # Optional: json-glib libnotify
 
 name=girara
-version=0.4.3
+version=0.4.4
 release=1
-source=(https://git.pwmt.org/pwmt/$name/-/archive/$version/$name-$version.tar.bz2)
+source=(https://github.com/pwmt/girara/archive/$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst json-glib && PKGMK_GIRARA+=' -D json=enabled' || PKGMK_GIRARA+=' -D json=disabled'
