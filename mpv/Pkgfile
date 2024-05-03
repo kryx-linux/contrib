@@ -5,7 +5,7 @@
 # Optional: libdvdnav libbluray libcdio-paranoia libsdl2 libvdpau pipewire pulseaudio sndio rubberband xorg-libxpresent
 
 name=mpv
-version=0.37.0
+version=0.38.0
 release=1
 source=(https://github.com/mpv-player/mpv/archive/v$version/$name-$version.tar.gz)
 
@@ -15,9 +15,9 @@ build() {
   prt-get isinst libsdl2 && PKGMK_MPV+=" -D sdl2=enabled"
   [ -e /usr/lib/libsndio.so ] && PKGMK_MPV+=" -D sndio=enabled"
 
-  # issue 12941 (unbreak build without X11 and Wayland)
-  sed -e "/features.'wayland'. or features.'x11'./s/$/ or features['drm']/" \
-      -i $name-$version/meson.build
+  # PR12941 (unbreak build without X11 and Wayland)
+  # sed -e "/features.'wayland'. or features.'x11'./s/$/ or features['drm']/" \
+  #     -i $name-$version/meson.build
 
   meson setup $name-$version build $PKGMK_MPV \
     --prefix=/usr \
