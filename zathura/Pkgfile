@@ -7,7 +7,7 @@
 name=zathura
 version=0.5.5
 release=1
-source=(https://git.pwmt.org/pwmt/$name/-/archive/$version/$name-$version.tar.bz2)
+source=(https://github.com/pwmt/zathura/archive/$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst texlive && PKGMK_ZATHURA+=" -D synctex=enabled" || PKGMK_ZATHURA=" -D synctex=disabled"
