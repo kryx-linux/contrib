@@ -5,32 +5,32 @@
 # Nice to have: bash-completion
 
 name=libvirt
-version=10.2.0
+version=10.3.0
 release=1
 source=(https://libvirt.org/sources/$name-$version.tar.xz
-  libvirtd.rc virtlogd.rc libvirtd.conf qemu.conf)
+    libvirtd.rc virtlogd.rc libvirtd.conf qemu.conf)
 
 build() {
-  meson setup $name-$version build \
-    --prefix=/usr \
-    --libexecdir=/usr/lib/$name \
-    --buildtype=plain \
-    -Ddriver_qemu=enabled \
-    -Dqemu_user=libvirt \
-    -Dqemu_group=libvirt \
-    -Dtests=disabled
-  meson compile -C build
-  DESTDIR=$PKG meson install -C build
+    meson setup $name-$version build \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/$name \
+        --buildtype=plain \
+        -Ddriver_qemu=enabled \
+        -Dqemu_user=libvirt \
+        -Dqemu_group=libvirt \
+        -Dtests=disabled
+    meson compile -C build
+    DESTDIR=$PKG meson install -C build
 
-  install -D -o root -g root -m 0755 $SRC/libvirtd.rc \
-    $PKG/etc/rc.d/libvirtd
-  install -D -o root -g root -m 0755 $SRC/virtlogd.rc \
-    $PKG/etc/rc.d/virtlogd
+    install -D -o root -g root -m 0755 $SRC/libvirtd.rc \
+        $PKG/etc/rc.d/libvirtd
+    install -D -o root -g root -m 0755 $SRC/virtlogd.rc \
+        $PKG/etc/rc.d/virtlogd
 
-  install -D -o root -g root -m 0644 $SRC/libvirtd.conf \
-    $PKG/etc/libvirt/libvirtd.conf
-  install -D -o root -g root -m 0644 $SRC/qemu.conf \
-    $PKG/etc/libvirt/qemu.conf
+    install -D -o root -g root -m 0644 $SRC/libvirtd.conf \
+        $PKG/etc/libvirt/libvirtd.conf
+    install -D -o root -g root -m 0644 $SRC/qemu.conf \
+        $PKG/etc/libvirt/qemu.conf
 
-  rm -r $PKG/usr/share/locale
+    rm -r $PKG/usr/share/locale
 }
