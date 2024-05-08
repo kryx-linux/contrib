@@ -4,14 +4,11 @@
 # Depends on: polkit
 
 name=pcsclite
-version=2.2.0
+version=2.2.1
 release=1
-source=(https://pcsclite.apdu.fr/files/pcsc-lite-$version.tar.xz
-  960e367edc01518b90684ffff99010ee07ae1bd4.patch)
+source=(https://pcsclite.apdu.fr/files/pcsc-lite-$version.tar.xz)
 
 build() {
-  patch -Np1 -d pcsc-lite-$version -i $SRC/960e367edc01518b90684ffff99010ee07ae1bd4.patch
-
   meson setup pcsc-lite-$version build \
     --prefix=/usr \
     --sysconfdir=/etc \
