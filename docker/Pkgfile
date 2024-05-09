@@ -4,7 +4,7 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=26.1.1
+version=26.1.2
 release=1
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
@@ -14,7 +14,7 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
 build() {
     export GO111MODULE=auto
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=ac2de55
+    export DOCKER_GITCOMMIT=ef1912d
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
     export CGO_CFLAGS="${CFLAGS}"
