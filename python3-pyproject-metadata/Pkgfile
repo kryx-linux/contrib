@@ -1,15 +1,15 @@
 # Description: PEP 621 metadata parsing
 # URL: https://github.com/FFY00/python-pyproject-metadata
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-flit-core python3-build python3-wheel python3-installer
+# Depends on: python3-build python3-installer python3-wheel
 
 name=python3-pyproject-metadata
-version=0.7.1
+version=0.8.0
 release=1
-source=(https://pypi.org/packages/source/p/pyproject-metadata/pyproject-metadata-$version.tar.gz)
+source=(https://pypi.org/packages/source/p/pyproject_metadata/pyproject_metadata-$version.tar.gz)
 
 build() {
-  cd pyproject-metadata-$version
+  cd pyproject_metadata-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl

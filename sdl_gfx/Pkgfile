@@ -4,24 +4,25 @@
 # Depends on: libsdl
 
 name=sdl_gfx
-version=2.0.26
-release=2
-source=(https://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-$version.tar.gz)
+version=2.0.27
+release=1
+source=(https://sourceforge.net/projects/sdlgfx/files/SDL_gfx-$version.tar.gz/download)
+renames=($name-$version.tar.gz)
 
 build() {
-	cd SDL_gfx-$version
+    cd SDL_gfx-$version
 
-	# shipped configure was not regenerated since 2.0.25, resulting in bad soname
-	sed -i -e 's/-O //' configure.in
-	mv configure.in configure.ac
-	autoreconf -fvi
+    # shipped configure was not regenerated since 2.0.25, resulting in bad soname
+    sed -e 's/-O //' -e '/^MICRO_VERSION=/s/26/27/' -i configure.in
+    mv configure.in configure.ac
+    autoreconf -fvi
 
-	./configure --prefix=/usr
-	make
-	make DESTDIR=$PKG install
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+    rm $PKG/usr/lib/*.la
 
-	# not sure why this path is wrong, it breaks mjpegtools
-	sed \
-		-e 's|^#include <SDL.h>|#include <SDL/SDL.h>|' \
-		-i $PKG/usr/include/SDL/SDL_gfxPrimitives.h
+    # not sure why this path is wrong, it breaks mjpegtools
+    sed -e 's|^#include <SDL.h>|#include <SDL/SDL.h>|' \
+        -i $PKG/usr/include/SDL/SDL_gfxPrimitives.h
 }

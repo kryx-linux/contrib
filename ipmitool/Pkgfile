@@ -1,0 +1,55 @@
+# Description: An open-source tool for controlling IPMI-enabled systems
+# URL: https://github.com/ipmitool/ipmitool
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: openssl
+
+name=ipmitool
+version=1.8.19
+release=2
+source=(https://github.com/ipmitool/ipmitool/archive/IPMITOOL_${version//./_}/$name-$version.tar.gz
+  ipmitool-1.8.19-set-kg-key.patch
+  0004-slowswid.patch
+  0005-sensor-id-length.patch
+  0007-check-input.patch
+  0014-lanplus-cipher-retry.patch
+  0100-fix_buf_overflow.patch
+  0105-sensor_reading.patch
+  be11d948f89b10be094e28d8a0a5e8fb532c7b60.patch
+  https://crux.nu/files/distfiles/enterprise-numbers-20240223.txt.gz
+  382.patch)
+
+build() {
+  gzip -d enterprise-numbers-20240223.txt.gz
+  cd ipmitool-IPMITOOL_${version//./_}
+
+  patch -Np1 -i $SRC/382.patch
+  patch -Np1 -i $SRC/be11d948f89b10be094e28d8a0a5e8fb532c7b60.patch
+  # https://src.fedoraproject.org/rpms/ipmitool/blob/rawhide/f/ipmitool.spec#_20
+  patch -Np1 -i $SRC/ipmitool-1.8.19-set-kg-key.patch
+  patch -Np1 -i $SRC/0004-slowswid.patch
+  patch -Np1 -i $SRC/0005-sensor-id-length.patch
+  patch -Np1 -i $SRC/0007-check-input.patch
+  patch -Np1 -i $SRC/0014-lanplus-cipher-retry.patch
+  patch -Np1 -i $SRC/0100-fix_buf_overflow.patch
+  patch -Np1 -i $SRC/0105-sensor_reading.patch
+
+  aclocal
+  libtoolize --automake --copy
+  autoheader
+  automake --foreign --add-missing --copy
+  aclocal
+  autoconf
+  automake --foreign
+
+  ./configure --prefix=/usr \
+    --datarootdir=/usr/share \
+    --enable-file-security \
+    --enable-registry-download=no \
+    --disable-dependency-tracking
+
+  make -j ${JOBS:-1}
+  make DESTDIR=$PKG install
+
+  install -Dm755 $SRC/enterprise-numbers-20240223.txt $PKG/usr/share/misc/enterprise-numbers
+  rm -rf $PKG/usr/share/doc
+}

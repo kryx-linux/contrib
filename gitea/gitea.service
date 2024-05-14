@@ -5,22 +5,28 @@
 
 SSD=/sbin/start-stop-daemon
 PROG=/usr/bin/gitea
-OPTS=""
+OPTS="web"
 USER="gitea"
+GROUP="www"
+PID=/run/gitea/gitea.pid
 
 case $1 in
   start)
-    $SSD --start -b -c $USER -u $USER --exec $PROG -- $OPTS
+    if [ ! -e /run/gitea ]; then
+      install -d -o $USER -g $GROUP -m 644 /run/gitea
+    fi
+
+    $SSD --start -b --pidfile $PID --make-pidfile -c $USER -u $USER --exec $PROG -- $OPTS
     ;;
   stop)
-    $SSD --stop -u $USER --retry 10 --exec $PROG
+    $SSD --stop -u $USER --retry 10 --pidfile $PID
     ;;
   restart)
     $0 stop
     $0 start
     ;;
   status)
-    $SSD --status --exec $PROG
+    $SSD --status --pidfile $PID
     case $? in
     0) echo "$PROG is running with pid $(pidof $PROG)" ;;
     1) echo "$PROG is not running but the pid file $PID exists" ;;

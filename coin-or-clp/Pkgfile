@@ -5,7 +5,7 @@
 
 name=coin-or-clp
 version=1.17.9
-release=1
+release=2
 source=(https://github.com/coin-or/Clp/archive/releases/$version/$name-$version.tar.gz
   configure-exit.patch
   libtool.patch
@@ -24,11 +24,13 @@ build() {
     --with-osi-incdir="/usr/include/coin/" \
     --with-coinutils-lib="$(pkg-config --libs coinutils)" \
     --with-coinutils-incdir="/usr/include/coin/" \
-    --with-cholmod-lib='-lcholmod' --with-cholmod-incdir=/usr/include
+    --with-cholmod-lib='-lcholmod' \
+    --with-cholmod-incdir=/usr/include/suitesparse
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
   make
 
-  PKG_CONFIG_LIBDIR="$PKG"/usr/lib/pkgconfig/ \
-  make DESTDIR="$PKG" install
+  make DESTDIR=$PKG install
 
   rm -fr $PKG/usr/share/coin/doc
 }

@@ -1,3 +1,7 @@
+drwxr-xr-x	root/root	etc/
+drwxr-xr-x	root/root	etc/rc_keymaps/
+drwxr-xr-x	root/root	etc/rc_keymaps/protocols/
+-rw-r--r--	root/root	etc/rc_maps.cfg
 drwxr-xr-x	root/root	lib/
 drwxr-xr-x	root/root	lib/udev/
 drwxr-xr-x	root/root	lib/udev/rc_keymaps/
@@ -24,6 +28,7 @@ drwxr-xr-x	root/root	lib/udev/rc_keymaps/
 -rw-r--r--	root/root	lib/udev/rc_keymaps/az6027.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/azurewave_ad_tu700.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/beelink_gs1.toml
+-rw-r--r--	root/root	lib/udev/rc_keymaps/beelink_mxiii.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/behold.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/behold_columbus.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/budget_ci_old.toml
@@ -44,11 +49,13 @@ drwxr-xr-x	root/root	lib/udev/rc_keymaps/
 -rw-r--r--	root/root	lib/udev/rc_keymaps/dm1105_nec.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/dntv_live_dvb_t.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/dntv_live_dvbt_pro.toml
+-rw-r--r--	root/root	lib/udev/rc_keymaps/dreambox.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/dtt200u.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/dvbsky.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/dvico_mce.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/dvico_portable.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/em_terratec.toml
+-rw-r--r--	root/root	lib/udev/rc_keymaps/empty.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/encore_enltv.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/encore_enltv2.toml
 -rw-r--r--	root/root	lib/udev/rc_keymaps/encore_enltv_fm53.toml
@@ -168,14 +175,12 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/dvbv5-zap
 -rwxr-xr-x	root/root	usr/bin/ir-ctl
 -rwxr-xr-x	root/root	usr/bin/ir-keytable
+-rwxr-xr-x	root/root	usr/bin/ivtv-ctl
 -rwxr-xr-x	root/root	usr/bin/media-ctl
 -rwxr-xr-x	root/root	usr/bin/rds-ctl
 -rwxr-xr-x	root/root	usr/bin/v4l2-compliance
 -rwxr-xr-x	root/root	usr/bin/v4l2-ctl
 -rwxr-xr-x	root/root	usr/bin/v4l2-sysfs-path
-drwxr-xr-x	root/root	usr/etc/
-drwxr-xr-x	root/root	usr/etc/rc_keymaps/
--rw-r--r--	root/root	usr/etc/rc_maps.cfg
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/libdvbv5/
 -rw-r--r--	root/root	usr/include/libdvbv5/atsc_eit.h
@@ -233,38 +238,30 @@ drwxr-xr-x	root/root	usr/include/libdvbv5/
 -rw-r--r--	root/root	usr/include/libv4lconvert.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libdvbv5.a
--rwxr-xr-x	root/root	usr/lib/libdvbv5.la
-lrwxrwxrwx	root/root	usr/lib/libdvbv5.so -> libdvbv5.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libdvbv5.so -> libdvbv5.so.0
 lrwxrwxrwx	root/root	usr/lib/libdvbv5.so.0 -> libdvbv5.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libdvbv5.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/libv4l/
 -rwxr-xr-x	root/root	usr/lib/libv4l/ov511-decomp
 -rwxr-xr-x	root/root	usr/lib/libv4l/ov518-decomp
 drwxr-xr-x	root/root	usr/lib/libv4l/plugins/
--rwxr-xr-x	root/root	usr/lib/libv4l/plugins/libv4l-mplane.la
 -rwxr-xr-x	root/root	usr/lib/libv4l/plugins/libv4l-mplane.so
--rwxr-xr-x	root/root	usr/lib/libv4l/v4l1compat.la
 -rwxr-xr-x	root/root	usr/lib/libv4l/v4l1compat.so
--rwxr-xr-x	root/root	usr/lib/libv4l/v4l2convert.la
 -rwxr-xr-x	root/root	usr/lib/libv4l/v4l2convert.so
 -rw-r--r--	root/root	usr/lib/libv4l1.a
--rwxr-xr-x	root/root	usr/lib/libv4l1.la
-lrwxrwxrwx	root/root	usr/lib/libv4l1.so -> libv4l1.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libv4l1.so -> libv4l1.so.0
 lrwxrwxrwx	root/root	usr/lib/libv4l1.so.0 -> libv4l1.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libv4l1.so.0.0.0
 -rw-r--r--	root/root	usr/lib/libv4l2.a
--rwxr-xr-x	root/root	usr/lib/libv4l2.la
-lrwxrwxrwx	root/root	usr/lib/libv4l2.so -> libv4l2.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libv4l2.so -> libv4l2.so.0
 lrwxrwxrwx	root/root	usr/lib/libv4l2.so.0 -> libv4l2.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libv4l2.so.0.0.0
 -rw-r--r--	root/root	usr/lib/libv4l2rds.a
--rwxr-xr-x	root/root	usr/lib/libv4l2rds.la
-lrwxrwxrwx	root/root	usr/lib/libv4l2rds.so -> libv4l2rds.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libv4l2rds.so -> libv4l2rds.so.0
 lrwxrwxrwx	root/root	usr/lib/libv4l2rds.so.0 -> libv4l2rds.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libv4l2rds.so.0.0.0
 -rw-r--r--	root/root	usr/lib/libv4lconvert.a
--rwxr-xr-x	root/root	usr/lib/libv4lconvert.la
-lrwxrwxrwx	root/root	usr/lib/libv4lconvert.so -> libv4lconvert.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/libv4lconvert.so -> libv4lconvert.so.0
 lrwxrwxrwx	root/root	usr/lib/libv4lconvert.so.0 -> libv4lconvert.so.0.0.0
 -rwxr-xr-x	root/root	usr/lib/libv4lconvert.so.0.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
@@ -273,8 +270,6 @@ drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libv4l2.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libv4l2rds.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libv4lconvert.pc
-lrwxrwxrwx	root/root	usr/lib/v4l1compat.so -> libv4l/v4l1compat.so
-lrwxrwxrwx	root/root	usr/lib/v4l2convert.so -> libv4l/v4l2convert.so
 drwxr-xr-x	root/root	usr/sbin/
 -rwxr-xr-x	root/root	usr/sbin/v4l2-dbg
 drwxr-xr-x	root/root	usr/share/

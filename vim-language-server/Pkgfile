@@ -1,0 +1,15 @@
+# Description: VimScript language server
+# URL: https://github.com/iamcco/vim-language-server
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: npm
+
+name=vim-language-server
+version=2.3.1
+release=1
+source=(https://registry.npmjs.org/$name/-/$name-$version.tgz)
+
+build() {
+  export NODE_ENV=production
+  npm install -g --cache $SRC/npm-cache --prefix $PKG/usr $PKGMK_SOURCE_DIR/$name-$version.tgz
+  rm -rf $PKG/usr/lib/node_modules/vim-language-server/.github/
+}

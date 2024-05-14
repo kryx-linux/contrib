@@ -1,0 +1,17 @@
+# Description: Visually (c)lean, responsive, configurable theme for Sphinx.
+# URL: https://alabaster.readthedocs.io/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-build python3-wheel python3-installer python3-flit-core
+
+name=python3-alabaster
+version=0.7.16
+release=1
+source=(https://github.com/bitprophet/${name#*-}/archive/$version/${name#*-}-$version.tar.gz)
+
+build() {
+  cd alabaster-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+
+}

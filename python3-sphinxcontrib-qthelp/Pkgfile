@@ -1,0 +1,16 @@
+# Description: sphinx extension which outputs QtHelp document
+# URL: https://github.com/sphinx-doc/sphinxcontrib-qthelp/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-build python3-flit-core python3-installer python3-wheel
+
+name=python3-sphinxcontrib-qthelp
+version=1.0.7
+release=1
+source=(https://github.com/sphinx-doc/${name#*-}/archive/$version/${name#*-}-$version.tar.gz)
+
+build() {
+  cd sphinxcontrib-qthelp-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

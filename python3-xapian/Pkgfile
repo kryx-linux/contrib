@@ -1,0 +1,28 @@
+# Description: Python bindings for Xapian
+# URL: https://xapian.org/docs/bindings/python
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-sphinx xapian-core
+
+name=python3-xapian
+version=1.4.25
+release=1
+source=(https://oligarchy.co.uk/xapian/$version/xapian-bindings-$version.tar.xz)
+
+build() {
+  cd xapian-bindings-$version
+
+  aclocal
+  autoconf
+  libtoolize
+  autoreconf -fiv
+  mkdir -p python3/docs/_static
+
+  ./configure --prefix=/usr \
+    --with-python3 \
+    XAPIAN_CONFIG=/usr/bin/xapian-config \
+    --disable-documentation
+  make
+  make DESTDIR=$PKG install
+
+  rm -r $PKG/usr/share
+}

@@ -1,15 +1,16 @@
 # Description: Display graphical dialog boxes from shell scripts.
 # URL: https://gitlab.gnome.org/GNOME/zenity
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gtk3
-# Optional: libnotify webkitgtk
+# Depends on: libadwaita
+# Optional: help2man libnotify webkitgtk
 
 name=zenity
-version=3.44.2
+version=4.0.1
 release=1
-source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
+source=(https://download.gnome.org/sources/$name/${version:0:3}/$name-$version.tar.xz)
 
 build() {
+  prt-get isinst help2man || PKGMK_ZENITY+=' -D manpage=false'
   # disabled for now as it requires webkitgtk4.1
   prt-get isinst webkitgtk && PKGMK_ZENITY+=' -D webkitgtk=false'
 

@@ -1,0 +1,16 @@
+# Description: A Django Debug Toolbar panel for requests
+# URL: https://github.com/gtnx/django-requests-panel
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-django
+
+name=python3-django-requests-panel
+version=0.4.1
+release=1
+source=(https://pypi.org/packages/source/d/django-requests-panel/django-requests-panel-$version.tar.gz)
+
+build() {
+  cd django-requests-panel-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

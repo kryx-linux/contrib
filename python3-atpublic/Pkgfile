@@ -1,0 +1,16 @@
+# Description: Keep all y'all's __all__'s in sync
+# URL: https://public.readthedocs.io/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-pdm-backend python3-hatchling
+
+name=python3-atpublic
+version=4.1.0
+release=1
+source=(https://pypi.org/packages/source/a/atpublic/atpublic-$version.tar.gz)
+
+build() {
+  cd atpublic-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

@@ -1,0 +1,18 @@
+# Description: CSS Minifier
+# URL: http://opensource.perlig.de/rcssmin/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-setuptools
+
+name=python3-rcssmin
+version=1.1.2
+release=1
+source=(https://pypi.org/packages/source/r/rcssmin/rcssmin-$version.tar.gz)
+
+build() {
+  cd rcssmin-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

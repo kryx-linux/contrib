@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools-scm
 
 name=python3-zipp
-version=3.17.0
+version=3.18.1
 release=1
 source=(https://pypi.python.org/packages/source/z/zipp/zipp-$version.tar.gz)
 
 build() {
-	cd zipp-$version
-	/usr/bin/pip3 install --isolate --root=${PKG} --ignore-installed --no-deps .
-	rm ${PKG}/usr/lib/python*/site-packages/zipp*/INSTALLER
+    cd zipp-$version
+    /usr/bin/pip3 install --isolate --root=${PKG} --ignore-installed --no-deps .
+    rm ${PKG}/usr/lib/python*/site-packages/zipp*/INSTALLER
 }

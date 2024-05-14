@@ -1,0 +1,30 @@
+# Description: A library for providing access to as much BIOS information as possible
+# URL: https://github.com/dell/libsmbios
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: chrpath cppunit libxml2
+# Optional: help2man
+
+name=libsmbios
+version=2.4.3
+release=1
+source=(https://github.com/dell/libsmbios/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./autogen.sh --no-configure
+  unset MAKEFLAGS
+  mkdir build
+  cd build
+  CONFIG_SHELL='/bin/bash' ../configure --prefix=/usr \
+    --sbindir=/usr/bin \
+    --sysconfdir=/etc \
+    --disable-static \
+    --disable-nls
+  make
+  make DESTDIR=$PKG install
+
+  chrpath -d $PKG/usr/bin/smbios-sys-info-lite
+  install -m755 -d $PKG/usr/include
+  cp -a ../src/include/* $PKG/usr/include/
+  cp -a out/public-include/* $PKG/usr/include/
+}

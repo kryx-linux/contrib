@@ -1,0 +1,30 @@
+# Description: A command line tool to interact with Gitea servers
+# URL: https://gitea.com/gitea/tea
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: go
+
+name=tea
+version=0.9.2
+release=1
+source=(https://gitea.com/gitea/tea/archive/v$version.tar.gz)
+renames=($name-$version.tar.gz)
+
+build() {
+  cd $name
+
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+
+  go build \
+    -trimpath \
+    -buildmode=pie \
+    -mod=readonly \
+    -modcacherw \
+    -o $name .
+  install -Dm755 $name $PKG/usr/bin/$name
+}

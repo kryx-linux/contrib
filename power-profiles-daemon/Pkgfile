@@ -1,0 +1,28 @@
+# Description: Makes power profiles handling available over D-Bus
+# URL: https://gitlab.freedesktop.org/upower/power-profiles-daemon
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libgudev polkit python3-shtab
+
+name=power-profiles-daemon
+version=0.21
+release=1
+source=(https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/archive/$version/power-profiles-daemon-$version.tar.bz2
+  ppd.service)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --libexecdir=lib/$name \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D systemdsystemunitdir=/delete \
+    -D tests=false
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/delete
+
+  install -Dm 755 $SRC/ppd.service $PKG/etc/rc.d/power-profiles-daemon
+}

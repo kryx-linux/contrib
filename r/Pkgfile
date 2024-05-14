@@ -5,7 +5,7 @@
 # Optional: lapack openjdk8 texlive tk
 
 name=r
-version=4.3.2
+version=4.4.0
 release=1
 source=(https://cran.r-project.org/src/base/R-${version::1}/R-$version.tar.gz
   r.desktop r.png R.conf
@@ -25,7 +25,7 @@ build() {
 
   # configuring R
   prt-get isinst tk && PKGMK_R+=" --with-x=yes" || PKGMK_R+=" --with-x=no"
-  prt-get isinst lapack && PKGMK_R+=" --with-lapack LAPACK_LIBS=$(pkgconf --libs lapack)"
+  prt-get isinst lapack && PKGMK_R+=" --with-lapack LAPACK_LIBS=$(pkgconf --libs lapack)" || PKGMK_R+=' --without-lapack'
   # this needs a properly working java environment!
   [[ -e $(whereis javac) ]] && PKGMK_R+=" --enable-java" || PKGMK_R+=" --disable-java"
 
@@ -60,7 +60,6 @@ build() {
     LIBnn=lib \
     BLAS_LIBS=$(pkgconf --libs blas) \
     PKG_CONFIG=/usr/bin/pkgconf \
-    --with-blas=openblas \
     --enable-BLAS-shlib \
     --enable-R-shlib \
     --enable-byte-compiled-packages \
@@ -70,13 +69,12 @@ build() {
     --with-cairo \
     --with-ICU \
     --with-jpeglib \
-    --with-lapack \
     --with-libpng \
     --with-libtiff \
     --with-system-tre \
     --without-recommended-packages \
-    --disable-nls | tee CONFIGURE.log
-cat CONFIGURE.log | grep -A30 'R is now' - > CAPABILITIES
+    --disable-R-static-lib \
+    --disable-nls
   make
 
   make -C src/nmath/standalone shared

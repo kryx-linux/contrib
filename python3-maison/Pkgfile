@@ -1,0 +1,16 @@
+# Description: Read settings from config files
+# URL: https://github.com/dbatten5/maison
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-click python3-poetry-core python3-pydantic
+
+name=python3-maison
+version=1.4.3
+release=1
+source=(https://pypi.org/packages/source/m/maison/maison-$version.tar.gz)
+
+build() {
+  cd maison-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

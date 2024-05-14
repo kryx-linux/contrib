@@ -4,6 +4,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/gtk4-builder-tool
 -rwxr-xr-x	root/root	usr/bin/gtk4-encode-symbolic-svg
 -rwxr-xr-x	root/root	usr/bin/gtk4-launch
+-rwxr-xr-x	root/root	usr/bin/gtk4-path-tool
 -rwxr-xr-x	root/root	usr/bin/gtk4-query-settings
 -rwxr-xr-x	root/root	usr/bin/gtk4-rendernode-tool
 -rwxr-xr-x	root/root	usr/bin/gtk4-update-icon-cache
@@ -35,6 +36,9 @@ drwxr-xr-x	root/root	usr/include/gtk-4.0/gdk/deprecated/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdevicetool.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdisplay.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdisplaymanager.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdmabufformats.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdmabuftexture.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdmabuftexturebuilder.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdrag.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdragsurface.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gdk/gdkdragsurfacesize.h
@@ -93,17 +97,27 @@ drwxr-xr-x	root/root	usr/include/gtk-4.0/gsk/broadway/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/broadway/gskbroadwayrenderer.h
 drwxr-xr-x	root/root	usr/include/gtk-4.0/gsk/gl/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gl/gskglrenderer.h
+drwxr-xr-x	root/root	usr/include/gtk-4.0/gsk/gpu/
+-rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gpu/gskvulkanrenderer.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gsk.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskcairorenderer.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskenums.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskenumtypes.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskglshader.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskpath.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskpathbuilder.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskpathmeasure.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskpathpoint.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskrenderer.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskrendernode.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskroundedrect.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gskstroke.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gsktransform.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gsk/gsktypes.h
 drwxr-xr-x	root/root	usr/include/gtk-4.0/gtk/
+drwxr-xr-x	root/root	usr/include/gtk-4.0/gtk/a11y/
+-rw-r--r--	root/root	usr/include/gtk-4.0/gtk/a11y/gtkatspi.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gtk/a11y/gtkatspisocket.h
 drwxr-xr-x	root/root	usr/include/gtk-4.0/gtk/css/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/css/gtkcss.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/css/gtkcssenums.h
@@ -172,6 +186,7 @@ drwxr-xr-x	root/root	usr/include/gtk-4.0/gtk/deprecated/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkaccelgroup.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkaccessible.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkaccessiblerange.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkaccessibletext.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkactionable.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkactionbar.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkadjustment.h
@@ -204,6 +219,7 @@ drwxr-xr-x	root/root	usr/include/gtk-4.0/gtk/deprecated/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkcolumnviewcolumn.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkcolumnviewrow.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkcolumnviewsorter.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkconfig.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkconstraint.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkconstraintguide.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkconstraintlayout.h
@@ -258,6 +274,7 @@ drwxr-xr-x	root/root	usr/include/gtk-4.0/gtk/deprecated/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkgestureswipe.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkgesturezoom.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkglarea.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkgraphicsoffload.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkgrid.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkgridlayout.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkgridview.h
@@ -306,6 +323,7 @@ drwxr-xr-x	root/root	usr/include/gtk-4.0/gtk/deprecated/
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkpopover.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkpopovermenu.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkpopovermenubar.h
+-rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkprintdialog.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkprogressbar.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkrange.h
 -rw-r--r--	root/root	usr/include/gtk-4.0/gtk/gtkrecentmanager.h
@@ -406,9 +424,10 @@ drwxr-xr-x	root/root	usr/lib/gtk-4.0/4.0.0/
 drwxr-xr-x	root/root	usr/lib/gtk-4.0/4.0.0/printbackends/
 -rwxr-xr-x	root/root	usr/lib/gtk-4.0/4.0.0/printbackends/libprintbackend-file.so
 lrwxrwxrwx	root/root	usr/lib/libgtk-4.so -> libgtk-4.so.1
-lrwxrwxrwx	root/root	usr/lib/libgtk-4.so.1 -> libgtk-4.so.1.1200.4
--rwxr-xr-x	root/root	usr/lib/libgtk-4.so.1.1200.4
+lrwxrwxrwx	root/root	usr/lib/libgtk-4.so.1 -> libgtk-4.so.1.1500.0
+-rwxr-xr-x	root/root	usr/lib/libgtk-4.so.1.1500.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-rw-r--r--	root/root	usr/lib/pkgconfig/gtk4-atspi.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/gtk4-broadway.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/gtk4-unix-print.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/gtk4-x11.pc
@@ -431,20 +450,27 @@ drwxr-xr-x	root/root	usr/share/glib-2.0/schemas/
 -rw-r--r--	root/root	usr/share/glib-2.0/schemas/org.gtk.gtk4.Settings.FileChooser.gschema.xml
 drwxr-xr-x	root/root	usr/share/gtk-4.0/
 drwxr-xr-x	root/root	usr/share/gtk-4.0/emoji/
+-rw-r--r--	root/root	usr/share/gtk-4.0/emoji/bn.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/da.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/de.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/es.gresource
+-rw-r--r--	root/root	usr/share/gtk-4.0/emoji/et.gresource
+-rw-r--r--	root/root	usr/share/gtk-4.0/emoji/fi.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/fr.gresource
+-rw-r--r--	root/root	usr/share/gtk-4.0/emoji/hi.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/hu.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/it.gresource
+-rw-r--r--	root/root	usr/share/gtk-4.0/emoji/ja.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/ko.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/lt.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/ms.gresource
+-rw-r--r--	root/root	usr/share/gtk-4.0/emoji/nb.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/nl.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/pl.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/pt.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/ru.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/sv.gresource
+-rw-r--r--	root/root	usr/share/gtk-4.0/emoji/th.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/uk.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/emoji/zh.gresource
 -rw-r--r--	root/root	usr/share/gtk-4.0/gtk4builder.rng

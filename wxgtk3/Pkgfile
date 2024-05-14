@@ -1,0 +1,35 @@
+# Description: GTK+3 implementation of wxWidgets API for GUI
+# URL: http://www.wxwidgets.org/
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: gtk3
+# Optional: gstreamer libmspack libnotify libsdl libsdl2 libsoup wayland webkitgtk
+
+name=wxgtk3
+version=3.2.4
+release=1
+source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2 glegl-no-wayland.patch)
+
+build() {
+  patch -d wxWidgets-$version -Np1 -i $SRC/glegl-no-wayland.patch
+
+  cmake -S wxWidgets-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D wxBUILD_TOOLKIT=gtk3 \
+    -D wxUSE_OPENGL=ON \
+    -D wxUSE_REGEX=sys\
+    -D wxUSE_ZLIB=sys \
+    -D wxUSE_EXPAT=sys \
+    -D wxUSE_LIBJPEG=sys \
+    -D wxUSE_LIBPNG=sys \
+    -D wxUSE_LIBTIFF=sys \
+    -D wxUSE_LIBLZMA=sys \
+    -D wxUSE_PRIVATE_FONTS=ON \
+    -D wxUSE_GTKPRINT=ON \
+    -Wno-dev
+
+  ninja -C build -j ${JOBS:-1}
+  DESTDIR=$PKG ninja -C build install
+}

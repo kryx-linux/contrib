@@ -1,0 +1,18 @@
+# Description: OAuthlib authentication support for Requests
+# URL: https://github.com/requests/requests-oauthlib
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-requests python3-oauthlib
+
+name=python3-requests-oauthlib
+version=2.0.0
+release=1
+source=(https://pypi.org/packages/source/r/requests-oauthlib/requests-oauthlib-$version.tar.gz)
+
+build() {
+  cd requests-oauthlib-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

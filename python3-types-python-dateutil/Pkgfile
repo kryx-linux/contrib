@@ -1,0 +1,18 @@
+# Description: Typing stubs for python-dateutil
+# URL: https://github.com/python/typeshed
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-types-python-dateutil
+version=2.9.0.20240316
+release=1
+source=(https://pypi.org/packages/source/t/types-python-dateutil/types-python-dateutil-$version.tar.gz)
+
+build() {
+  cd types-python-dateutil-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

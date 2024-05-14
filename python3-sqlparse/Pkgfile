@@ -1,0 +1,16 @@
+# Description: A non-validating SQL parser
+# URL: https://github.com/andialbrecht/sqlparse
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-hatchling
+
+name=python3-sqlparse
+version=0.5.0
+release=1
+source=(https://pypi.org/packages/source/s/sqlparse/sqlparse-$version.tar.gz)
+
+build() {
+  cd sqlparse-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

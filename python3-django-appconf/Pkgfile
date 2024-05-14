@@ -1,0 +1,16 @@
+# Description: A helper class for handling configuration defaults of packaged apps gracefully
+# URL: https://django-appconf.readthedocs.io/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-django
+
+name=python3-django-appconf
+version=1.0.6
+release=1
+source=(https://pypi.org/packages/source/d/django-appconf/django-appconf-$version.tar.gz)
+
+build() {
+  cd django-appconf-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

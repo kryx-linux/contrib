@@ -1,0 +1,35 @@
+# Description: Cellular modem control and connectivity
+# URL: https://modemmanager.org
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libqmi mobile-broadband-provider-info polkit
+# Optional: libxslt
+
+name=modemmanager
+version=1.22.0
+release=2
+source=(https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/archive/$version/ModemManager-$version.tar.gz
+  modemmanager.service)
+
+build() {
+  prt-get isinst bash-completion || PKGMK_MODEMMANAGER+=" -Dbash_completion=false"
+  prt-get isinst vala && PKGMK_MODEMMANAGER+=' -D vapi=true' || PKGMK_MODEMMANAGER+=' -D vapi=false'
+
+  meson setup ModemManager-$version build $PKGMK_MODEMMANAGER \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D at_command_via_dbus=true \
+    -D polkit=permissive \
+    -D systemdsystemunitdir=no \
+    -D systemd_suspend_resume=false \
+    -D systemd_journal=false
+
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  install -Dm755 $SRC/modemmanager.service $PKG/etc/rc.d/$name
+
+  rm -rf $PKG/usr/share/locale
+}

@@ -1,15 +1,17 @@
 # Description: Array processing for numbers, strings, records, and objects with Python
 # URL: https://numpy.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: lapack python3-cython python3-build python3-wheel python3-installer meson-python
+# Depends on: lapack meson-python python3-cython
 
 name=python3-numpy
-version=1.26.2
+version=1.26.4
 release=1
 source=(https://github.com/numpy/numpy/releases/download/v$version/numpy-$version.tar.gz)
 
 build() {
   cd numpy-$version
+
+  sed -e "/meson-python/s/,<0.16.0//" -i pyproject.toml
 
   CFLAGS+=" -ffat-lto-objects" \
   CXXFLAGS+=" -ffat-lto-objects" \

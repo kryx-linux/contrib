@@ -11,6 +11,7 @@ drwxr-xr-x	root/root	usr/include/glm/detail/
 -rw-r--r--	root/root	usr/include/glm/detail/_swizzle_func.hpp
 -rw-r--r--	root/root	usr/include/glm/detail/_vectorize.hpp
 -rw-r--r--	root/root	usr/include/glm/detail/compute_common.hpp
+-rw-r--r--	root/root	usr/include/glm/detail/compute_vector_decl.hpp
 -rw-r--r--	root/root	usr/include/glm/detail/compute_vector_relational.hpp
 -rw-r--r--	root/root	usr/include/glm/detail/func_common.inl
 -rw-r--r--	root/root	usr/include/glm/detail/func_common_simd.inl
@@ -68,6 +69,7 @@ drwxr-xr-x	root/root	usr/include/glm/detail/
 -rw-r--r--	root/root	usr/include/glm/exponential.hpp
 -rw-r--r--	root/root	usr/include/glm/ext.hpp
 drwxr-xr-x	root/root	usr/include/glm/ext/
+-rw-r--r--	root/root	usr/include/glm/ext/_matrix_vectorize.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_clip_space.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_clip_space.inl
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_common.hpp
@@ -126,6 +128,8 @@ drwxr-xr-x	root/root	usr/include/glm/ext/
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_int4x3_sized.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_int4x4.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_int4x4_sized.hpp
+-rw-r--r--	root/root	usr/include/glm/ext/matrix_integer.hpp
+-rw-r--r--	root/root	usr/include/glm/ext/matrix_integer.inl
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_projection.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_projection.inl
 -rw-r--r--	root/root	usr/include/glm/ext/matrix_relational.hpp
@@ -176,6 +180,8 @@ drwxr-xr-x	root/root	usr/include/glm/ext/
 -rw-r--r--	root/root	usr/include/glm/ext/scalar_integer.inl
 -rw-r--r--	root/root	usr/include/glm/ext/scalar_packing.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/scalar_packing.inl (EMPTY)
+-rw-r--r--	root/root	usr/include/glm/ext/scalar_reciprocal.hpp
+-rw-r--r--	root/root	usr/include/glm/ext/scalar_reciprocal.inl
 -rw-r--r--	root/root	usr/include/glm/ext/scalar_relational.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/scalar_relational.inl
 -rw-r--r--	root/root	usr/include/glm/ext/scalar_uint_sized.hpp
@@ -219,6 +225,8 @@ drwxr-xr-x	root/root	usr/include/glm/ext/
 -rw-r--r--	root/root	usr/include/glm/ext/vector_integer.inl
 -rw-r--r--	root/root	usr/include/glm/ext/vector_packing.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/vector_packing.inl (EMPTY)
+-rw-r--r--	root/root	usr/include/glm/ext/vector_reciprocal.hpp
+-rw-r--r--	root/root	usr/include/glm/ext/vector_reciprocal.inl
 -rw-r--r--	root/root	usr/include/glm/ext/vector_relational.hpp
 -rw-r--r--	root/root	usr/include/glm/ext/vector_relational.inl
 -rw-r--r--	root/root	usr/include/glm/ext/vector_uint1.hpp
@@ -233,6 +241,7 @@ drwxr-xr-x	root/root	usr/include/glm/ext/
 -rw-r--r--	root/root	usr/include/glm/ext/vector_ulp.inl
 -rw-r--r--	root/root	usr/include/glm/fwd.hpp
 -rw-r--r--	root/root	usr/include/glm/geometric.hpp
+-rw-r--r--	root/root	usr/include/glm/glm.cppm
 -rw-r--r--	root/root	usr/include/glm/glm.hpp
 drwxr-xr-x	root/root	usr/include/glm/gtc/
 -rw-r--r--	root/root	usr/include/glm/gtc/bitfield.hpp
@@ -262,7 +271,6 @@ drwxr-xr-x	root/root	usr/include/glm/gtc/
 -rw-r--r--	root/root	usr/include/glm/gtc/random.hpp
 -rw-r--r--	root/root	usr/include/glm/gtc/random.inl
 -rw-r--r--	root/root	usr/include/glm/gtc/reciprocal.hpp
--rw-r--r--	root/root	usr/include/glm/gtc/reciprocal.inl
 -rw-r--r--	root/root	usr/include/glm/gtc/round.hpp
 -rw-r--r--	root/root	usr/include/glm/gtc/round.inl
 -rw-r--r--	root/root	usr/include/glm/gtc/type_aligned.hpp
@@ -352,11 +360,12 @@ drwxr-xr-x	root/root	usr/include/glm/gtx/
 -rw-r--r--	root/root	usr/include/glm/gtx/normalize_dot.hpp
 -rw-r--r--	root/root	usr/include/glm/gtx/normalize_dot.inl
 -rw-r--r--	root/root	usr/include/glm/gtx/number_precision.hpp
--rw-r--r--	root/root	usr/include/glm/gtx/number_precision.inl
 -rw-r--r--	root/root	usr/include/glm/gtx/optimum_pow.hpp
 -rw-r--r--	root/root	usr/include/glm/gtx/optimum_pow.inl
 -rw-r--r--	root/root	usr/include/glm/gtx/orthonormalize.hpp
 -rw-r--r--	root/root	usr/include/glm/gtx/orthonormalize.inl
+-rw-r--r--	root/root	usr/include/glm/gtx/pca.hpp
+-rw-r--r--	root/root	usr/include/glm/gtx/pca.inl
 -rw-r--r--	root/root	usr/include/glm/gtx/perpendicular.hpp
 -rw-r--r--	root/root	usr/include/glm/gtx/perpendicular.inl
 -rw-r--r--	root/root	usr/include/glm/gtx/polar_coordinates.hpp

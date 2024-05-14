@@ -13,9 +13,11 @@ build() {
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr \
     --program-prefix=gmime3 \
+    --enable-crypto \
     --enable-smime \
     --disable-gtk-doc \
-    --disable-static
+    --disable-static \
+    --disable-largefile
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
   make
   make DESTDIR=$PKG install

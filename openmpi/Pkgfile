@@ -1,28 +1,48 @@
 # Description: High performance message passing library (MPI)
 # URL: https://www.open-mpi.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: eudev gcc-fortran libevent libnl zlib
-# Optional: cuda hwloc
+# Depends on: eudev gcc-fortran libnl prrte
+# Optional: cuda
 
 name=openmpi
-version=4.1.6
+version=5.0.3
 release=1
-source=(https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$name-$version.tar.bz2)
+source=(https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$name-$version.tar.bz2
+  fortran-flags.patch)
 
 build() {
   cd $name-$version
 
+  patch -Np1 -i $SRC/fortran-flags.patch
+
+  sed -e 's,sys/unistd.h,unistd.h,g' -i opal/include/opal/sys/cma.h
+
+  export CFLAGS+=" -O3"
+  export CXXFLAGS+=" -O3"
+  export FCFLAGS+=" -O3"
+
+  ./autogen.pl --force --no-3rdparty libevent,hwloc,pmix,prrte
+
+  sed -i 's|WRAPPER__FCFLAGS|WRAPPER_FCFLAGS|g' configure
+  sed -i 's|WRAPPER_EXTRA_FCFLAGS|WRAPPER_FCFLAGS|g' configure
+
   ./configure \
     --prefix=/usr \
     --sysconfdir=/etc/$name \
-    --enable-mpi-fortran=all \
     --libdir=/usr/lib/$name \
     --enable-builtin-atomics \
-    --enable-mpi-cxx \
+    --enable-mpi-fortran=all \
     --enable-pretty-print-stacktrace \
-    --without-slurm \
+    --enable-ipv6 \
+    --enable-mpi1-compatibility \
+    --with-devel-headers \
+    --with-hwloc=/usr \
+    --with-pmix=/usr \
+    --with-libevent=/usr \
+    --with-prrte=/usr \
     FC=/usr/bin/gfortran \
     LDFLAGS="${LDFLAGS} -Wl,-z,noexecstack"
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
   make
   make DESTDIR=$PKG install
@@ -34,4 +54,6 @@ build() {
 
   install -dm 755 $PKG/etc/ld.so.conf.d
   echo /usr/lib/$name > $PKG/etc/ld.so.conf.d/$name.conf
+
+  rm -r $PKG/usr/share/doc
 }

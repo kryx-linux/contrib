@@ -1,0 +1,22 @@
+From 32c76f150347c1cd044e90b8e2bc73c00677fa55 Mon Sep 17 00:00:00 2001
+From: Christian Clason <c.clason@uni-graz.at>
+Date: Sat, 30 Sep 2023 15:42:23 +0200
+Subject: [PATCH] fix(scanner): use local include
+
+tree-sitter CLI no longer installs the header globally
+---
+ src/scanner.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/scanner.c b/src/scanner.c
+index 1a2d96a..f77fefd 100644
+--- a/src/scanner.c
++++ b/src/scanner.c
+@@ -1,6 +1,6 @@
+ #include "stdio.h"
+ #include "stdlib.h"
+-#include <tree_sitter/parser.h>
++#include "tree_sitter/parser.h"
+ #include <string.h>
+ #include <wctype.h>
+ #include <assert.h>

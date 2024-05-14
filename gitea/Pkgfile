@@ -2,10 +2,10 @@
 # URL: https://gitea.io/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: git go npm openssh postgresql
-# Optional: python3-poetry
+# Optional: python3-poetry redis
 
 name=gitea
-version=1.21.0
+version=1.21.11
 release=1
 source=(https://github.com/go-gitea/gitea/archive/v$version/$name-$version.tar.gz
   gitea.service)
@@ -32,7 +32,7 @@ build() {
   prt-get isinst python3-poetry && PKGMK_GITEA+=' deps-py'
 
   make $PKGMK_GITEA deps-frontend deps-backend deps-tools
-  make -j1 EXTRA_GOFLAGS="$GOFLAGS" backend frontend
+  make -j1 EXTRA_GOFLAGS="$GOFLAGS"
 
   install -Dm755 $name -t $PKG/usr/bin/
   #setcap cap_net_bind_service=+ep $PKG/usr/bin/$name

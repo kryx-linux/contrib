@@ -1,0 +1,51 @@
+# Description: PDF rendering library needed for inkscape
+# URL: https://poppler.freedesktop.org/
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: fontconfig boost lcms2 librsvg libjpeg-turbo cairo
+
+name=poppler-ink
+version=24.04.0
+release=2
+source=(https://poppler.freedesktop.org/poppler-$version.tar.xz)
+
+build() {
+    PKGMK_INKPOP="-G Ninja -D CMAKE_BUILD_TYPE=Release
+           -D CMAKE_INSTALL_PREFIX=/usr
+           -D CMAKE_INSTALL_LIBDIR=/usr/lib/inkscape
+           -D ENABLE_UNSTABLE_API_ABI_HEADERS=ON
+           -D ENABLE_UTILS=OFF
+           -D ENABLE_CPP=ON
+           -D ENABLE_BOOST=ON
+           -D ENABLE_GLIB=ON
+           -D ENABLE_GOBJECT_INTROSPECTION=OFF
+           -D ENABLE_GPGME=OFF
+           -D ENABLE_QT5=OFF
+           -D ENABLE_QT6=OFF
+           -D ENABLE_LCMS=ON
+           -D ENABLE_LIBOPENJPEG=none
+           -D ENABLE_LIBTIFF=OFF
+           -D ENABLE_NSS3=OFF
+           -D BUILD_MANUAL_TESTS=OFF
+           -D BUILD_CPP_TESTS=OFF
+           -D BUILD_QT5_TESTS=OFF
+           -D BUILD_QT6_TESTS=OFF
+           -Wno-dev"
+
+    cd poppler-$version
+    sed -e "/ENABLE_RELOCATABLE OFF/s/OFF/ON/" -i CMakeLists.txt
+
+    cmake -S . -B build $PKGMK_INKPOP \
+           -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+           -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" 
+    cmake --build build -j ${JOBS:-1}
+
+    sed -e "s;include/poppler;include/poppler-ink;" \
+        -i build/{,cpp,glib}/cmake_install.cmake
+    DESTDIR=$PKG cmake --install build
+
+    sed -e "/^Cflags/s;poppler;poppler-ink;" \
+        -i $PKG/usr/lib/inkscape/pkgconfig/poppler{,-cpp,-glib}.pc
+
+    mkdir -p $PKG/etc/ld.so.conf.d
+    echo "/usr/lib/inkscape" > $PKG/etc/ld.so.conf.d/$name.conf
+}

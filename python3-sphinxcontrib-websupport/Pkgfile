@@ -1,0 +1,16 @@
+# Description: Python API to easily integrate Sphinx documentation into web applications.
+# URL: https://github.com/sphinx-doc/sphinxcontrib-websupport/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-sphinxcontrib-serializinghtml
+
+name=python3-sphinxcontrib-websupport
+version=1.2.7
+release=1
+source=(https://pypi.org/packages/source/s/sphinxcontrib_websupport/sphinxcontrib_websupport-$version.tar.gz)
+
+build() {
+  cd sphinxcontrib_websupport-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

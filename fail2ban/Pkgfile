@@ -2,17 +2,18 @@
 # URL: http://www.fail2ban.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-setuptools
+# Optional: python3-pyinotify whois
 
 name=fail2ban
-version=1.0.2
+version=1.1.0
 release=1
 source=(https://github.com/fail2ban/$name/archive/$version/$name-$version.tar.gz
-  fail2ban.rc paths-crux.conf)
+  fail2ban.rc
+  paths-crux.conf)
 
 build() {
   cd $name-$version
 
-  ./fail2ban-2to3
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG --prefix=/usr --skip-build
   /usr/bin/python3 -mcompileall $PKG
@@ -21,6 +22,13 @@ build() {
   install -Dm664 $SRC/paths-crux.conf $PKG/etc/fail2ban/paths-crux.conf
 
   find $PKG -iname "*README*" -exec rm '{}' \+
+
+  install -Dm644 -t $PKG/usr/share/man/man1 man/*.1
+  install -Dm644 -t $PKG/usr/share/man/man5 man/*.5
+
+  prt-get isinst bash-completion && install -Dm644 files/bash-completion \
+    $PKG/usr/share/bash-completion/completions/fail2ban
+
   rm -r $PKG/etc/fail2ban/paths-{arch,debian,fedora,freebsd,opensuse,osx}.conf
   rm -r $PKG/usr/share/doc
 }

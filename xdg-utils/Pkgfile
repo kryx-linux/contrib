@@ -4,17 +4,17 @@
 # Depends on: xmlto lynx
 
 name=xdg-utils
-version=1.1.3
+version=1.2.1
 release=1
-source=(https://portland.freedesktop.org/download/$name-$version.tar.gz
-  drop_obsolete_GNOME_support.patch)
+source=(https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v$version/xdg-utils-v$version.tar.bz2)
 
 build() {
-  cd $name-$version
-  patch -Np1 -i ../drop_obsolete_GNOME_support.patch
+  cd $name-v$version
 
   ./configure --prefix=/usr \
     --disable-nls
   make
   make DESTDIR=$PKG install
+
+  mkdir $PKG/usr/share/desktop-directories
 }

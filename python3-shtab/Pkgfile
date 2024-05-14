@@ -1,0 +1,16 @@
+# Description: Automagic shell tab completion for Python CLI applications
+# URL: https://github.com/iterative/shtab
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools-scm
+
+name=python3-shtab
+version=1.7.1
+release=1
+source=(https://pypi.org/packages/source/s/shtab/shtab-$version.tar.gz)
+
+build() {
+  cd shtab-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

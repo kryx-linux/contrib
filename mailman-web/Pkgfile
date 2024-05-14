@@ -1,0 +1,35 @@
+# Description: Mailman Web is the web interface for Mailman 3
+# URL: https://gitlab.com/mailman/mailman-web
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: hyperkitty postorius
+# Optional: mailman uwsgi-plugin-python
+
+name=mailman-web
+version=0.0.9
+release=1
+source=(https://pypi.org/packages/source/m/mailman_web/mailman_web-$version.tar.gz
+  mailman-web.service
+  mailman-qcluster.service
+  settings.py
+  mailman-web-0.0.5-fhs.patch)
+
+build() {
+  cd mailman_web-$version
+
+  local site_packages=$(/usr/bin/python3 -c "import site; print(site.getsitepackages()[0])")
+  patch -Np1 -i $SRC/mailman-web-0.0.5-fhs.patch
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+
+  install -vDm 640 ../settings.py "$PKG/etc/webapps/$name/settings.py"
+  install -vDm 640 mailman_web/urls.py "$PKG/etc/webapps/$name/urls.py"
+  ln -sfv /etc/webapps/$name/urls.py "$PKG/$site_packages/${name/-/_}/urls.py"
+
+  install -vdm 750 "$PKG/var/lib/$name/data/"
+  install -vdm 755 "$PKG/var/lib/$name/static/"
+  install -vdm 750 "$PKG/var/log/$name/"
+
+  install -Dm755 $SRC/mailman-web.service $PKG/etc/rc.d/$name
+  install -Dm755 $SRC/mailman-qcluster.service $PKG/etc/rc.d/mailman-qcluster
+}

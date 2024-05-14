@@ -1,0 +1,40 @@
+# Description: A library to talk to FTDI chips, optional python bindings
+# URL: https://www.intra2net.com/en/developer/libftdi/index.php
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: confuse libusb boost swig
+
+name=libftdi
+version=1.5
+release=3
+source=(https://www.intra2net.com/en/developer/libftdi/download/${name}1-$version.tar.bz2
+  fix_includes_path.patch)
+
+build() {
+  sed -i 's|LIB_SUFFIX 64|LIB_SUFFIX ""|' ${name}1-$version/CMakeLists.txt
+  sed -i "s|MODE=\"0664\", GROUP=\"plugdev\"|TAG+=\"wheel\"|g" ${name}1-$version/packages/99-libftdi.rules
+
+  patch -p1 -d ${name}1-$version < $SRC/fix_includes_path.patch
+
+  cmake -S ${name}1-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D CMAKE_SKIP_BUILD_RPATH=ON \
+    -D BUILD_SHARED_LIBS=ON \
+    -D FTDI_EEPROM=ON \
+    -D FTDIPP=ON \
+    -D PYTHON_BINDINGS=ON \
+    -D LINK_PYTHON_LIBRARY=ON \
+    -D STATICLIBS=OFF \
+    -D EXAMPLES=OFF \
+    -D DOCUMENTATION=OFF \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+
+  install -Dm644 ${name}1-$version/packages/99-libftdi.rules $PKG/lib/udev/rules.d/69-libftdi.rules
+
+  rm -r $PKG/usr/share
+}

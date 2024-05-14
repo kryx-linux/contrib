@@ -2,20 +2,23 @@
 # URL: https://github.com/strukturag/libde265
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: 
+# Optional: libsdl2
 
 name=libde265
-version=1.0.12
+version=1.0.15
 release=1
 source=(https://github.com/strukturag/$name/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
-	mkdir build && cd build
-	cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_C_FLAGS="$CFLAGS" \
-		../$name-$version
+  prt-get isinst libsdl2 && PKGMK_DE2SDL=ON || PKGMK_DE2SDL=OFF
+  cmake -B build -S $name-$version -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DENABLE_ENCODER=ON \
+    -DENABLE_SDL=$PKGMK_DE2SDL \
+    -DCMAKE_C_FLAGS="$CFLAGS"
 
-	ninja -j ${JOBS:-1}
-	DESTDIR=$PKG ninja install
+  ninja -C build -j ${JOBS:-1}
+  DESTDIR=$PKG ninja -C build install
 }

@@ -1,0 +1,18 @@
+# Description: Fast, pure-Python full text indexing, search, and spell checking library
+# URL: https://github.com/mchaput/whoosh
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-setuptools
+
+name=python3-whoosh
+version=2.7.4
+release=1
+source=(https://pypi.org/packages/source/W/Whoosh/Whoosh-$version.tar.gz)
+
+build() {
+  cd Whoosh-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

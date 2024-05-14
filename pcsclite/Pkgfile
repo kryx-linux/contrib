@@ -1,25 +1,28 @@
-# Description: Middleware to access a smart card using SCard API (PC/SC).
-# URL: https://pcsclite.apdu.fr/
+# Description: Middleware to access a smart card using SCard API (PC/SC)
+# URL: https://pcsclite.apdu.fr
 # Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: polkit
 
 name=pcsclite
-version=2.0.0
+version=2.2.1
 release=1
-source=(https://pcsclite.apdu.fr/files/pcsc-lite-$version.tar.bz2)
+source=(https://pcsclite.apdu.fr/files/pcsc-lite-$version.tar.xz)
 
 build() {
-  cd pcsc-lite-$version
-
-  ./configure \
+  meson setup pcsc-lite-$version build \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --enable-filter \
-    --enable-ipcdir=/run/pcscd \
-    --enable-libudev \
-    --enable-usbdropdir=/usr/lib/pcsc/drivers \
-    --disable-libsystemd
-  make
-  make DESTDIR=$PKG install
+    --sbindir=/usr/sbin/ \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D libudev=true \
+    -D usb=true \
+    -D usbdropdir=/usr/lib/pcsc/drivers \
+    -D libsystemd=false
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
   rm -r $PKG/usr/share/doc
   install -d $PKG/usr/lib/pcsc/drivers

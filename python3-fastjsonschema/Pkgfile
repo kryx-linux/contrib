@@ -1,0 +1,18 @@
+# Description: Fastest Python implementation of JSON schema
+# URL: https://github.com/horejsek/python-fastjsonschema
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-fastjsonschema
+version=2.19.1
+release=1
+source=(https://pypi.org/packages/source/f/fastjsonschema/fastjsonschema-$version.tar.gz)
+
+build() {
+  cd fastjsonschema-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

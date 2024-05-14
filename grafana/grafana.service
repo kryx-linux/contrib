@@ -4,22 +4,26 @@
 #
 
 SSD=/sbin/start-stop-daemon
-PROG=/usr/bin/grafana-server
-OPTS="--homepath /usr/share/grafana"
+PROG=/usr/share/grafana/bin/grafana
+OPTS="server --homepath /usr/share/grafana --config /etc/grafana/grafana.ini"
+PID="/run/grafana/grafana.pid"
 
 case $1 in
   start)
-    $SSD --start -b --exec $PROG -- $OPTS
+    if [ ! -e /run/grafana ]; then 
+      mkdir -p /run/grafana
+    fi
+    $SSD --start -b --pidfile $PID --make-pidfile --exec $PROG -- $OPTS
     ;;
   stop)
-    $SSD --stop --retry 10 --exec $PROG
+    $SSD --stop --retry 10 --pidfile $PID
     ;;
   restart)
     $0 stop
     $0 start
     ;;
   status)
-    $SSD --status --exec $PROG
+    $SSD --status --pidfile $PID
     case $? in
     0) echo "$PROG is running with pid $(pidof $PROG)" ;;
     1) echo "$PROG is not running but the pid file $PID exists" ;;

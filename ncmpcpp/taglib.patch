@@ -1,0 +1,47 @@
+--- ncmpcpp-0.9.2/src/tags.cpp.old	2024-01-28 16:15:20.612778227 +0100
++++ ncmpcpp-0.9.2/src/tags.cpp	2024-01-28 16:15:30.945741026 +0100
+@@ -40,6 +40,8 @@
+ #include "utility/string.h"
+ #include "utility/wide_string.h"
+ 
++#include <taglib/taglib.h>
++
+ namespace {
+ 
+ TagLib::StringList tagList(const MPD::MutableSong &s, MPD::Song::GetFunction f)
+@@ -122,12 +124,20 @@
+ 	tag->setArtist(ToWString(s.getArtist()));
+ 	tag->setAlbum(ToWString(s.getAlbum()));
+ 	try {
+-		tag->setYear(boost::lexical_cast<TagLib::uint>(s.getDate()));
++		#if (TAGLIB_MAJOR_VERSION >= 2)
++			tag->setYear(boost::lexical_cast<unsigned int>(s.getDate()));
++		#else
++			tag->setYear(boost::lexical_cast<TagLib::uint>(s.getDate()));
++		#endif
+ 	} catch (boost::bad_lexical_cast &) {
+ 		std::cerr << "writeCommonTags: couldn't write 'year' tag to '" << s.getURI() << "' as it's not a positive integer\n";
+ 	}
+ 	try {
+-		tag->setTrack(boost::lexical_cast<TagLib::uint>(s.getTrack()));
++		#if (TAGLIB_MAJOR_VERSION >= 2)
++			tag->setTrack(boost::lexical_cast<unsigned int>(s.getTrack()));
++		#else
++			tag->setTrack(boost::lexical_cast<TagLib::uint>(s.getTrack()));
++		#endif
+ 	} catch (boost::bad_lexical_cast &) {
+ 		std::cerr << "writeCommonTags: couldn't write 'track' tag to '" << s.getURI() << "' as it's not a positive integer\n";
+ 	}
+@@ -294,7 +304,11 @@
+ 	{
+ 		writeID3v2Tags(s, mpeg_file->ID3v2Tag(true));
+ 		// write id3v2.4 tags only
+-		if (!mpeg_file->save(TagLib::MPEG::File::ID3v2, true, 4, false))
++		#if (TAGLIB_MAJOR_VERSION >= 2)
++			if (!mpeg_file->save(TagLib::MPEG::File::ID3v2, TagLib::File::StripNone, TagLib::ID3v2::Version::v4, TagLib::File::DuplicateTags::DoNotDuplicate))
++		#else
++			if (!mpeg_file->save(TagLib::MPEG::File::ID3v2, true, 4, false))
++		#endif
+ 			return false;
+ 		// do not call generic save() as it will duplicate tags
+ 		saved = true;

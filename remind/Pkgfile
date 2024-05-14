@@ -3,13 +3,15 @@
 # Maintainer: Juergen Daubert, jue at crux dot nu
 
 name=remind
-version=04.02.07
+version=04.03.07
 release=1
 source=(https://dianne.skoll.ca/projects/$name/download/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version
+
 	./configure --prefix=/usr
+
 	make
 	make DESTDIR=$PKG install
 }

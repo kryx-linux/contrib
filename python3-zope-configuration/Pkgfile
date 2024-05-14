@@ -1,0 +1,18 @@
+# Description: Zope Configuration Markup Language (ZCML)
+# URL: https://github.com/zopefoundation/zope.configuration
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-zope-i18nmessageid python3-zope-schema
+
+name=python3-zope-configuration
+version=5.0.1
+release=1
+source=(https://pypi.org/packages/source/z/zope.configuration/zope.configuration-$version.tar.gz)
+
+build() {
+  cd zope.configuration-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

@@ -1,0 +1,18 @@
+# Description: Measures the displayed width of unicode strings in a terminal
+# URL: https://github.com/jquast/wcwidth
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools
+
+name=python3-wcwidth
+version=0.2.13
+release=1
+source=(https://pypi.org/packages/source/w/wcwidth/wcwidth-$version.tar.gz)
+
+build() {
+  cd wcwidth-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

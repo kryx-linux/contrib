@@ -1,24 +1,24 @@
 # Description: kodi inputstream addon for several manifest types
-# URL: https://github.com/peak3d/inputstream.adaptive
+# URL: https://github.com/xbmc/inputstream.adaptive
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: kodi-gbm
+# Depends on: kodi-gbm pugixml
 
 name=kodi-addon-inputstream-adaptive
-version=20.3.14
+version=21.4.7
 release=1
-_bento4=1.6.0-639-7
-_codename=Nexus
+_bento4=1.6.0-641
+_codename=Omega
 
-source=(https://github.com/peak3d/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz
-  https://github.com/xbmc/Bento4/archive/refs/tags/$_bento4-Omega.tar.gz)
+source=(https://github.com/xbmc/inputstream.adaptive/archive/$version-$_codename/$name-$version.tar.gz
+  https://github.com/xbmc/Bento4/archive/refs/tags/$_bento4-$_codename.tar.gz)
 renames=(SKIP bento4-$_bento4-Omega.tar.gz)
 
 build() {
   cmake -S inputstream.adaptive-$version-$_codename -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
-    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -ffat-lto-objects" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -ffat-lto-objects" \
     -D BUILD_SHARED_LIBS=ON \
     -D ENABLE_INTERNAL_BENTO4=ON \
     -D BENTO4_URL=$PKGMK_SOURCE_DIR/bento4-$_bento4-Omega.tar.gz \

@@ -1,0 +1,17 @@
+# Description: Web APIs for Django, made easy
+# URL: https://github.com/encode/django-rest-framework
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-django python3-setuptools-scm
+# Optional: python3-django-filter python3-django-guardian python3-markdown python3-psycopg2 python3-pygments python3-yaml
+
+name=python3-djangorestframework
+version=3.15.1
+release=1
+source=(https://pypi.org/packages/source/d/djangorestframework/djangorestframework-$version.tar.gz)
+
+build() {
+  cd djangorestframework-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

@@ -1,0 +1,42 @@
+# Description: like Prometheus, but for logs
+# URL: https://github.com/grafana/loki
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: go
+
+name=loki
+version=3.0.0
+release=1
+source=(https://github.com/grafana/loki/archive/v$version/$name-$version.tar.gz
+  loki.service
+  promtail.service)
+
+build() {
+  cd $name-$version
+
+  go mod download
+  export CGO_LDFLAGS=${LDFLAGS}
+  export CGO_CFLAGS=${CFLAGS}
+  export CGO_CPPFLAGS=${CPPFLAGS}
+  export CGO_CXXFLAGS=${CXXFLAGS}
+  export GOPROXY=off
+  for path in cmd/loki cmd/loki-canary cmd/logcli clients/cmd/promtail; do
+    go build \
+      -trimpath \
+      -buildmode=pie \
+      -mod=readonly \
+      -modcacherw \
+      -ldflags " \
+         -X github.com/grafana/loki/pkg/util/build.Version=$version
+         -X github.com/grafana/loki/pkg/util/build.BuildDate=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+         -linkmode external" \
+      ./$path
+  done
+
+  install -Dm755 -t $PKG/usr/bin loki
+  install -Dm644 cmd/loki/loki-local-config.yaml $PKG/etc/loki/loki.yaml
+  install -Dm755 -t $PKG/usr/bin promtail
+  install -Dm644 clients/cmd/promtail/promtail-local-config.yaml $PKG/etc/loki/promtail.yaml
+  install -Dm755 -t $PKG/usr/bin logcli
+  install -Dm755 $SRC/promtail.service $PKG/etc/rc.d/promtail
+  install -Dm755 $SRC/loki.service $PKG/etc/rc.d/loki
+}

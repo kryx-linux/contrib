@@ -1,0 +1,16 @@
+# Description: A Python utility / library to sort Python imports
+# URL: https://pycqa.github.io/isort/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-build python3-installer python3-wheel python3-poetry-core
+
+name=python3-isort
+version=5.13.2
+release=1
+source=(https://pypi.org/packages/source/i/isort/isort-$version.tar.gz)
+
+build() {
+  cd isort-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

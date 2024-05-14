@@ -1,0 +1,20 @@
+# Description: Low Complexity Communication Codec library and tools
+# URL: https://github.com/google/liblc3
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=liblc3
+version=1.1.1
+release=1
+source=(https://github.com/google/liblc3/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}

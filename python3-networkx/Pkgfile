@@ -1,0 +1,16 @@
+# Description: Python package for creating and manipulating graphs and networks
+# URL: https://github.com/networkx/networkx
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-build python3-wheel python3-installer
+
+name=python3-networkx
+version=3.3
+release=1
+source=(https://pypi.org/packages/source/n/networkx/networkx-$version.tar.gz)
+
+build() {
+  cd networkx-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

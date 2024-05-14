@@ -4,7 +4,7 @@
 # Depends on: python3-setuptools
 
 name=flatbuffers
-version=23.5.26
+version=24.3.25
 release=1
 source=(https://github.com/google/flatbuffers/archive/v$version/$name-$version.tar.gz)
 
@@ -14,7 +14,6 @@ build() {
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D FLATBUFFERS_BUILD_FLATLIB=OFF \
     -D FLATBUFFERS_BUILD_SHAREDLIB=ON \
     -Wno-dev

@@ -1,0 +1,16 @@
+# Description: Integrated set of Django applications addressing authentication etc
+# URL: https://allauth.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-django python3-openid python3-pyjwt python3-requests-oauthlib
+
+name=python3-django-allauth
+version=0.61.1
+release=1
+source=(https://pypi.org/packages/source/d/django-allauth/django-allauth-$version.tar.gz)
+
+build() {
+  cd django-allauth-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

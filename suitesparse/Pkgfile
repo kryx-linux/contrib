@@ -4,21 +4,19 @@
 # Depends on: lapack metis
 
 name=suitesparse
-version=7.3.1
+version=7.7.0
 release=1
 source=(https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd SuiteSparse-$version
-
-  CMAKE_OPTIONS="-G Ninja \
-    -D BLA_VENDOR=Generic \
+  cmake -S SuiteSparse-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
-    -D CMAKE_C_FLAGS_RELEASE=\"$CFLAGS -ffat-lto-objects\" \
-    -D CMAKE_CXX_FLAGS_RELEASE=\"$CXXFLAGS -ffat-lto-objects\"" \
-  make
-
-  make DESTDIR=$PKG install
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -ffat-lto-objects" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -ffat-lto-objects" \
+    -D BLA_VENDOR=Generic \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }

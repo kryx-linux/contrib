@@ -1,0 +1,18 @@
+# Description: Javascript Minifier
+# URL: http://opensource.perlig.de/rjsmin/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-setuptools
+
+name=python3-rjsmin
+version=1.2.2
+release=1
+source=(https://pypi.org/packages/source/r/rjsmin/rjsmin-$version.tar.gz)
+
+build() {
+  cd rjsmin-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

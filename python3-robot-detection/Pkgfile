@@ -1,0 +1,18 @@
+# Description: Library for detecting if a HTTP User Agent header is likely to be a bot
+# URL: https://github.com/rory/robot-detection
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-six
+
+name=python3-robot-detection
+version=0.4
+release=1
+source=(https://pypi.org/packages/source/r/robot-detection/robot-detection-$version.tar.gz)
+
+build() {
+  cd robot-detection-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

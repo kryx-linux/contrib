@@ -1,0 +1,30 @@
+# Description: EFI Application used by uefi-capsule plugin in fwupd
+# URL: https://github.com/fwupd/fwupd-efi
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: gnu-efi python3-pefile
+
+name=fwupd-efi
+version=1.6
+release=1
+source=(https://github.com/fwupd/fwupd-efi/releases/download/$version/fwupd-efi-$version.tar.xz)
+
+build() {
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D efi-libdir=/usr/lib \
+    -D efi-ldsdir=/usr/lib \
+    -D efi-includedir=/usr/include/efi \
+    -D efi_sbat_distro_id='CRUX' \
+    -D efi_sbat_distro_summary='CRUX' \
+    -D efi_sbat_distro_pkgname=$name \
+    -D efi_sbat_distro_version=$version \
+    -D efi_sbat_distro_url="https://crux.nu/"
+
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+}

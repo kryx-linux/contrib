@@ -4,20 +4,20 @@
 # Depends on: libsdl2 libwebp
 
 name=sdl2_image
-version=2.6.3
-release=2
+version=2.8.2
+release=1
 source=(https://github.com/libsdl-org/SDL_image/releases/download/release-$version/SDL2_image-$version.tar.gz)
 
 build() {
-	cmake -S SDL2_image-$version -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_INSTALL_LIBDIR=lib \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS"
+    cmake -S SDL2_image-$version -B build -G Ninja \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D CMAKE_INSTALL_LIBDIR=lib \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_C_FLAGS_RELEASE="$CFLAGS"
 
-	ninja -C build -j ${JOBS:-1}
-	DESTDIR=$PKG ninja -C build install
+    ninja -C build -j ${JOBS:-1}
+    DESTDIR=$PKG ninja -C build install
 
-	# delete installed license.txt
-	rm -rf $PKG/usr/share
+    # delete installed license.txt
+    rm -rf $PKG/usr/share
 }

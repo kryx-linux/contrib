@@ -1,0 +1,19 @@
+# Description: Get a public suffix for a domain name using the Public Suffix List. Forked from and using the same API as the publicsuffix package
+# URL: https://github.com/nexb/python-publicsuffix2
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-setuptools-scm publicsuffix-list
+
+name=python3-publicsuffix2
+version=2.20191221
+release=1
+source=(https://pypi.org/packages/source/p/publicsuffix2/publicsuffix2-$version.tar.gz)
+
+build() {
+  cd publicsuffix2-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+
+  ln -svf /usr/share/publicsuffix/public_suffix_list.dat \
+    $PKG/usr/lib/python3.*/site-packages/publicsuffix2/public_suffix_list.dat
+}

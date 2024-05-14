@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# /etc/rc.d/gitea: start/stop gitea daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/act_runner
+HOME=/var/lib/act_runner
+OPTS="daemon --config config.yaml"
+
+case $1 in
+  start)
+    if [[ $(/etc/rc.d/docker status) =~ "is not" ]]; then
+      echo "[ERR] This service depends on docker running!"
+      exit 1
+    fi
+    $SSD --start -b -d $HOME --exec $PROG -- $OPTS
+    ;;
+  stop)
+    $SSD --stop -u $USER --retry 10 --exec $PROG
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  status)
+    $SSD --status --exec $PROG
+    case $? in
+    0) echo "$PROG is running with pid $(pidof $PROG)" ;;
+    1) echo "$PROG is not running but the pid file $PID exists" ;;
+    3) echo "$PROG is not running" ;;
+    4) echo "Unable to determine the program status" ;;
+    esac
+    ;;
+  *)
+    echo "usage: $0 [start|stop|restart|status]"
+    ;;
+esac
+
+# End of file
