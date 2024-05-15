@@ -13,10 +13,12 @@ source=(https://github.com/fulhax/ncpamixer/archive/$version/$name-$version.tar.
 build() {
   prt-get isinst git pandoc-bin || PKGMK_NCPAMIXER+=' -D BUILD_MANPAGES=OFF'
 
+  sed -i "/-Werror/d" $name-$version/src/CMakeLists.txt
+
   cmake -S $name-$version/src -B build -G Ninja $PKGMK_NCPAMIXER \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
-    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -DNCURSES_INTERNALS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -Wno-dev
   cmake --build build
