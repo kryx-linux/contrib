@@ -15,7 +15,10 @@ build() {
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D ASSIMP_BUILD_ASSIMP_TOOLS=ON \
     -D ASSIMP_BUILD_SAMPLES=OFF \
+    -D ASSIMP_WARNINGS_AS_ERRORS=OFF \
+    -D ASSIMP_BUILD_ZLIB=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
