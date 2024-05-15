@@ -6,10 +6,29 @@
 name=chmlib
 version=0.40
 release=1
-source=(http://www.jedrea.com/chmlib/$name-$version.tar.bz2)
+source=(http://www.jedrea.com/chmlib/$name-$version.tar.bz2
+  chmlib-0001-Patch-to-fix-integer-types-problem-by-Goswin-von-Bre.patch
+  chmlib-0002-Fix-for-extract_chmLib-confusing-empty-files-with-di.patch
+  chm_http-port-shortopt.patch
+  chm_http-bind-localhost.patch
+  chm_http-output-server-address.patch
+  chmlib-c99.patch
+)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/chmlib-0001-Patch-to-fix-integer-types-problem-by-Goswin-von-Bre.patch
+  patch -Np1 -i $SRC/chmlib-0002-Fix-for-extract_chmLib-confusing-empty-files-with-di.patch
+  patch -Np1 -i $SRC/chm_http-port-shortopt.patch
+  patch -Np1 -i $SRC/chm_http-bind-localhost.patch
+  patch -Np1 -i $SRC/chm_http-output-server-address.patch
+  patch -Np1 -i $SRC/chmlib-c99.patch
+
+  rm -f libtool
+  mv configure.in configure.ac
+  autoreconf -ivf
+
   ./configure --prefix=/usr \
     --enable-examples=no
   make
