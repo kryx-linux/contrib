@@ -1,4 +1,4 @@
-# Description:  C# bindings for GTK
+# Description: C# bindings for GTK
 # URL: https://www.mono-project.com/docs/gui/gtksharp/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: glade gtk mono
@@ -6,13 +6,21 @@
 name=gtk-sharp
 version=2.12.45
 release=4
-source=(https://download.mono-project.com/sources/${name}212/gtk-sharp-$version.tar.gz)
+source=(https://download.mono-project.com/sources/${name}212/gtk-sharp-$version.tar.gz
+  gtk-sharp2-2.12.12-glib-include.patch
+  gtk-sharp2-2.12.12-gtkrange.patch
+  gtk-sharp2-c99.patch
+)
 
 build() {
   cd $name-$version
 
   sed -e 's/SUBDIRS = test/SUBDIRS =/g' -i sample/Makefile.am
   sed -e 's/SUBDIRS = test/SUBDIRS =/g' -i sample/Makefile.in
+
+  patch -Np1 -i $SRC/gtk-sharp2-2.12.12-glib-include.patch
+  patch -Np1 -i $SRC/gtk-sharp2-2.12.12-gtkrange.patch
+  patch -Np1 -i $SRC/gtk-sharp2-c99.patch
 
   autoreconf -fvi
 
