@@ -5,7 +5,7 @@
 # Optional: postgresql redis
 
 name=grafana
-version=10.4.2
+version=11.0.0
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   #https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
@@ -44,8 +44,8 @@ build() {
 
   #/usr/opt/nodejs-lts-hydrogen/bin/yarn install
   #NODE_ENV=production /usr/opt/nodejs-lts-hydrogen/bin/yarn build
-  /usr/bin/yarn install
-  NODE_ENV=production /usr/bin/yarn build
+  UV_USE_IO_URING=0 /usr/bin/yarn install
+  UV_USE_IO_URING=0 NODE_ENV=production /usr/bin/yarn build
 
   # install
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name

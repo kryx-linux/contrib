@@ -120,9 +120,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/is-windows.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/log-file.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/npm-usage.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/open-url-prompt.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/open-url.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/otplease.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/output-error.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/ping.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/queryable.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/read-user-info.js
@@ -135,7 +134,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/update-workspaces.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/validate-lockfile.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/verify-signatures.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/web-auth.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/.bin/
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/arborist -> ../@npmcli/arborist/bin/index.js
@@ -146,7 +144,7 @@ lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/mkdirp -> ../mkd
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/node-gyp -> ../node-gyp/bin/node-gyp.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/node-which -> ../which/bin/which.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/nopt -> ../nopt/bin/nopt.js
-lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/pacote -> ../pacote/lib/bin.js
+lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/pacote -> ../pacote/bin/index.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/qrcode-terminal -> ../qrcode-terminal/bin/qrcode-terminal.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/semver -> ../semver/bin/semver.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@isaacs/
@@ -239,6 +237,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/optional-set.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/override-resolves.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/override-set.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/packument-cache.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/peer-entry-sets.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/place-dep.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/printable.js
@@ -455,6 +454,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/b
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/error.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/external/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/external/error.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/external/fetch.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/external/fulcio.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/external/rekor.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@sigstore/sign/dist/external/tsa.js
@@ -615,9 +615,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/binary-extensions/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/brace-expansion/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/brace-expansion/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/brace-expansion/package.json
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/builtins/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/builtins/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/builtins/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/cacache/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/cacache/LICENSE.md
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/cacache/lib/
@@ -1451,8 +1448,9 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/p-map/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/p-map/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/p-map/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/bin/
+-rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/bin/index.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/
--rwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/bin.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/dir.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/fetcher.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/file.js
@@ -1465,6 +1463,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/cache-dir.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/is-package-bin.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/npm.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/protected.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/tar-create-options.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/lib/util/trailing-slashes.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/pacote/package.json
@@ -1664,12 +1663,9 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/semver/internal/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/internal/constants.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/internal/debug.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/internal/identifiers.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/internal/lrucache.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/internal/parse-options.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/internal/re.js
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/semver/node_modules/
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/semver/node_modules/lru-cache/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/node_modules/lru-cache/index.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/node_modules/lru-cache/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/preload.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/semver/range.bnf
