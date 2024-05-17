@@ -4,12 +4,12 @@
 # Depends on: python3-calver
 
 name=python3-trove-classifiers
-version=2024.4.10
+version=2024.5.17
 release=1
-source=(https://pypi.org/packages/source/t/trove-classifiers/trove-classifiers-$version.tar.gz)
+source=(https://pypi.org/packages/source/t/trove_classifiers/trove_classifiers-$version.tar.gz)
 
 build() {
-  cd trove-classifiers-$version
+  cd trove_classifiers-$version
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
