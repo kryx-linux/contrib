@@ -1,8 +1,9 @@
-diff --git a/build.rs b/build.rs
-index 64470c1..874a5d7 100644
---- a/build.rs
-+++ b/build.rs
-@@ -1,34 +1,10 @@
+diff -Naur gitui-0.26.2.old/build.rs gitui-0.26.2/build.rs
+--- gitui-0.26.2.old/build.rs	2024-05-18 11:54:21.421351742 +0200
++++ gitui-0.26.2/build.rs	2024-05-18 11:59:51.821050430 +0200
+@@ -1,24 +1,5 @@
+ use chrono::TimeZone;
+ 
 -fn get_git_hash() -> String {
 -	use std::process::Command;
 -
@@ -23,7 +24,10 @@ index 64470c1..874a5d7 100644
 -}
 -
  fn main() {
- 	let build_date = chrono::Local::now().date_naive();
+ 	let now = match std::env::var("SOURCE_DATE_EPOCH") {
+ 		Ok(val) => chrono::Local
+@@ -29,14 +10,9 @@
+ 	let build_date = now.date_naive();
  
  	let build_name = if std::env::var("GITUI_RELEASE").is_ok() {
 -		format!(
