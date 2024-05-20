@@ -4,7 +4,7 @@
 # Depends on: python3-chardet python3-idna python3-urllib3
 
 name=python3-requests
-version=2.31.0
+version=2.32.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz
   certs.patch)
@@ -20,7 +20,7 @@ build() {
     -e '/charset_normalizer/d' \
     -i setup.py
 
-  patch -p1 -i $SRC/certs.patch
+  patch -p1 -d src -i $SRC/certs.patch
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG
