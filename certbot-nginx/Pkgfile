@@ -4,12 +4,12 @@
 # Depends on: certbot python3-mock python3-pyparsing
 
 name=certbot-nginx
-version=2.10.0
+version=2.11.0
 release=1
-source=(https://pypi.io/packages/source/c/certbot-nginx/certbot-nginx-$version.tar.gz)
+source=(https://pypi.io/packages/source/c/certbot_nginx/certbot_nginx-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd certbot_nginx-$version
   /usr/bin/python3 -m build --wheel --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
