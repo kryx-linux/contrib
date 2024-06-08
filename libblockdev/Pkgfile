@@ -11,6 +11,8 @@ source=(https://github.com/storaged-project/$name/releases/download/$version-1/$
 build() {
   cd $name-$version
 
+  find -type f \( -name "Makefile.am" -o -name "configure.ac" \) -print0 \
+    | xargs --null sed "s@ -Werror@@" -i
   export CFLAGS="${CFLAGS} -Wno-deprecated-declarations"
   aclocal
   automake
