@@ -154,6 +154,6 @@ build() {
   ln -vsrf $PKG/usr/etc/libreoffice/{bootstraprc,sofficerc} .
 
   # cleanup {{{
-  find $PKG -iname "*readme*" -exec rm -fr '{}' \+
+  find $PKG \( -iname "*readme*" -o -iname "gid_Module*" \) -exec rm -fr '{}' \+
   # }}}
 }
