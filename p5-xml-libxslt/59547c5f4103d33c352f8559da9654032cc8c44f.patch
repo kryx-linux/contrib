@@ -29,29 +29,6 @@ index d3ee9d1..079f8ea 100644
  options:
    LIBS='$config{LIBS}'
    INC='$config{INC}'
-@@ -120,15 +120,15 @@ OPT
- if ($config{LIBS} !~ /\-l(lib)?xslt\b/) {
-     # in this case we are not able to run xml2-config. therefore we need to
-     # expand the libz as well.
--  if ($::is_Win32) {
--    if( $ENV{ACTIVEPERL_MINGW} ) {
--      $config{LIBS} .= ' -llibxslt.lib -llibxml2.lib';
-+    if ($::is_Win32) {
-+        if( $ENV{ACTIVEPERL_MINGW} ) {
-+            $config{LIBS} .= ' -llibxslt.lib -llibxml2.lib';
-+        } else {
-+            $config{LIBS} .= ' -llibxslt -llibxml2';
-+        }
-     } else {
--      $config{LIBS} .= ' -llibxslt -llibxml2';
-+        $config{LIBS} .= ' -lxml2 -lz';
-     }
--  } else {
--    $config{LIBS} .= ' -lxml2 -lz';
--  }
- }
- 
- if ($config{LIBS} !~ /\-lz(lib)?\b/ and !($::is_Win32 && $config{LIBS} !~ /\-lzlib\b/)) {
 @@ -140,15 +140,15 @@ if ($config{LIBS} !~ /\-lz(lib)?\b/ and !($::is_Win32 && $config{LIBS} !~ /\-lzl
          warn "zlib was not configured\n";
          warn "set zlib\n" if $::is_Win32;
