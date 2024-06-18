@@ -18,13 +18,13 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.108.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.108.0.dist-info/AUTHORS.rst
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.108.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.108.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.108.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.108.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.108.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.109.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.109.0.dist-info/AUTHORS.rst
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.109.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.109.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.109.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.109.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.109.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/__pycache__/
@@ -149,6 +149,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/api.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/appservice.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/auth.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/auto_accept_invites.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/background_updates.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/cache.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__/captcha.cpython-310.opt-2.pyc
@@ -194,6 +195,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/config/__pycache__
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/api.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/appservice.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/auth.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/auto_accept_invites.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/background_updates.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/cache.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/config/captcha.py
@@ -247,11 +249,13 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/events/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/auto_accept_invites.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/builder.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/presence_router.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/snapshot.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/utils.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/__pycache__/validator.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/auto_accept_invites.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/builder.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/presence_router.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/events/snapshot.py
@@ -716,6 +720,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/login.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/login_token_request.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/logout.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/media.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/models.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/mutual_rooms.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/notifications.cpython-310.opt-2.pyc
@@ -761,6 +766,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/login.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/login_token_request.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/logout.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/media.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/models.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/mutual_rooms.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/notifications.py
@@ -1600,6 +1606,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/mai
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/84/04_access_token_index.sql
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/85/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/85/01_add_suspended.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/85/02_add_instance_names.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/85/03_new_sequences.sql.postgres
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/85/04_cleanup_device_federation_outbox.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/85/05_add_instance_names_converted_pos.sql
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/72/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/72/full.sql.postgres
