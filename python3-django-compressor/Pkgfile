@@ -4,13 +4,12 @@
 # Depends on: python3-django-appconf python3-rcssmin python3-rjsmin
 
 name=python3-django-compressor
-version=4.4
+version=4.5
 release=1
-source=(https://github.com/django-compressor/django-compressor/archive/refs/tags/4.4.tar.gz)
-renames=($name-$version.tar.gz)
+source=(https://pypi.org/packages/source/d/django_compressor/django_compressor-$version.tar.gz)
 
 build() {
-  cd django-compressor-$version
+  cd django_compressor-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
