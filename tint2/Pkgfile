@@ -9,18 +9,26 @@ release=2
 source=(https://gitlab.com/nick87720z/$name/-/archive/$version/$name-$version.tar.bz2 $name-glib.patch)
 
 build() {
-	patch -p1 -d $name-$version -i $SRC/$name-glib.patch
+    patch -p1 -d $name-$version -i $SRC/$name-glib.patch
 
-	cmake -S $name-$version -B build -G Ninja \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D ENABLE_TINT2CONF=OFF \
-		-Wno-dev
+    # fix an off-by-two error in the pointer arithmetic, stemming from
+    # upstream commit 120f72a77e8e73398dc5334848b23ee1ae13dd94.
+    # This commit introduced the abstraction strlen_const(stuff) to replace
+    # sizeof(stuff) - 1, but failed to apply the distributive law when
+    # doing the subtraction to calculate dir_end.
+    sed -e "/dir_end = userpath/s/);/) - 2;/" \
+        -i $name-$version/src/config.c
 
-	ninja -C build -j ${JOBS:-1}
-	DESTDIR=$PKG ninja -C build install
+    cmake -S $name-$version -B build -G Ninja \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+        -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+        -D ENABLE_TINT2CONF=OFF \
+        -Wno-dev
 
-	rm -r $PKG/{etc,usr/share/doc}
+    ninja -C build -j ${JOBS:-1}
+    DESTDIR=$PKG ninja -C build install
+
+    rm -r $PKG/{etc,usr/share/doc}
 }

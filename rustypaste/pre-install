@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+_USER=rustypaste
+_HOME=/var/lib/rustypaste
+_GROUP=rustypaste
+
+test -d $_HOME && exit 0
+
+/usr/bin/getent group $_GROUP > /dev/null 2>&1 || /usr/sbin/groupadd $_GROUP
+/usr/bin/getent passwd $_USER > /dev/null 2>&1 || /usr/sbin/useradd -c "${_USER} system user" -g $_GROUP -d $_HOME -s /bin/false $_USER
+passwd -l $_USER > /dev/nulL

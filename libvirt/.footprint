@@ -6,6 +6,7 @@ drwxr-xr-x	root/root	etc/libvirt/
 -rw-r--r--	root/root	etc/libvirt/lxc.conf
 drwxr-xr-x	root/root	etc/libvirt/lxc/
 drwxr-xr-x	root/root	etc/libvirt/lxc/autostart/
+-rw-r--r--	root/root	etc/libvirt/network.conf
 drwxr-xr-x	root/root	etc/libvirt/nwfilter/
 -rw-r--r--	root/root	etc/libvirt/nwfilter/allow-arp.xml
 -rw-r--r--	root/root	etc/libvirt/nwfilter/allow-dhcp-server.xml
@@ -64,6 +65,9 @@ drwxr-xr-x	root/root	etc/logrotate.d/
 drwxr-xr-x	root/root	etc/rc.d/
 -rwxr-xr-x	root/root	etc/rc.d/libvirtd
 -rwxr-xr-x	root/root	etc/rc.d/virtlogd
+drwxr-xr-x	root/root	etc/ssh/
+drwxr-xr-x	root/root	etc/ssh/ssh_config.d/
+-rw-r--r--	root/root	etc/ssh/ssh_config.d/30-libvirt-ssh-proxy.conf
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/virsh
@@ -109,17 +113,17 @@ drwxr-xr-x	root/root	usr/lib/firewalld/zones/
 -rwxr-xr-x	root/root	usr/lib/libnss_libvirt.so.2
 -rwxr-xr-x	root/root	usr/lib/libnss_libvirt_guest.so.2
 lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so -> libvirt-admin.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so.0 -> libvirt-admin.so.0.10003.0
--rwxr-xr-x	root/root	usr/lib/libvirt-admin.so.0.10003.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so.0 -> libvirt-admin.so.0.10004.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-admin.so.0.10004.0
 lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so -> libvirt-lxc.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so.0 -> libvirt-lxc.so.0.10003.0
--rwxr-xr-x	root/root	usr/lib/libvirt-lxc.so.0.10003.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so.0 -> libvirt-lxc.so.0.10004.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-lxc.so.0.10004.0
 lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so -> libvirt-qemu.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so.0 -> libvirt-qemu.so.0.10003.0
--rwxr-xr-x	root/root	usr/lib/libvirt-qemu.so.0.10003.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so.0 -> libvirt-qemu.so.0.10004.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-qemu.so.0.10004.0
 lrwxrwxrwx	root/root	usr/lib/libvirt.so -> libvirt.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt.so.0 -> libvirt.so.0.10003.0
--rwxr-xr-x	root/root	usr/lib/libvirt.so.0.10003.0
+lrwxrwxrwx	root/root	usr/lib/libvirt.so.0 -> libvirt.so.0.10004.0
+-rwxr-xr-x	root/root	usr/lib/libvirt.so.0.10004.0
 drwxr-xr-x	root/root	usr/lib/libvirt/
 drwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/
 -rwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/libvirt_driver_ch.so
@@ -133,6 +137,7 @@ drwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/
 -rwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/libvirt_driver_storage.so
 -rwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/libvirt_driver_vbox.so
 -rwxr-xr-x	root/root	usr/lib/libvirt/libvirt-guests.sh
+-rwxr-xr-x	root/root	usr/lib/libvirt/libvirt-ssh-proxy
 -rwxr-xr-x	root/root	usr/lib/libvirt/libvirt_iohelper
 -rwxr-xr-x	root/root	usr/lib/libvirt/libvirt_leaseshelper
 -rwxr-xr-x	root/root	usr/lib/libvirt/libvirt_lxc
@@ -180,11 +185,13 @@ drwxr-xr-x	root/root	usr/share/augeas/lenses/
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirt_lockd.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd_lxc.aug
+-rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd_network.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd_qemu.aug
 drwxr-xr-x	root/root	usr/share/augeas/lenses/tests/
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirt_lockd.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirtd.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirtd_lxc.aug
+-rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirtd_network.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirtd_qemu.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_virtchd.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_virtinterfaced.aug
@@ -516,6 +523,7 @@ drwxr-xr-x	root/root	usr/share/doc/libvirt/html/manpages/
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/python.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/remote.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/securityprocess.html
+-rw-r--r--	root/root	usr/share/doc/libvirt/html/ssh-proxy.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/storage.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/strategy.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/styleguide.html

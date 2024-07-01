@@ -5,12 +5,12 @@
 # Optional: python3-elasticsearch python3-pysolr python3-whoosh
 
 name=python3-django-haystack
-version=3.2.1
+version=3.3.0
 release=1
-source=(https://pypi.org/packages/source/d/django-haystack/django-haystack-$version.tar.gz)
+source=(https://pypi.org/packages/source/d/django_haystack/django_haystack-$version.tar.gz)
 
 build() {
-  cd django-haystack-$version
+  cd django_haystack-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl

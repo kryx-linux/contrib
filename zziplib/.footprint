@@ -16,7 +16,9 @@ drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/zzip/
 -rw-r--r--	root/root	usr/include/zzip/_config.h
 -rw-r--r--	root/root	usr/include/zzip/_msvc.h
+-rw-r--r--	root/root	usr/include/zzip/cdecl.h
 -rw-r--r--	root/root	usr/include/zzip/conf.h
+-rw-r--r--	root/root	usr/include/zzip/cstdint.h
 -rw-r--r--	root/root	usr/include/zzip/fetch.h
 -rw-r--r--	root/root	usr/include/zzip/file.h
 -rw-r--r--	root/root	usr/include/zzip/format.h
@@ -34,31 +36,36 @@ drwxr-xr-x	root/root	usr/include/zzip/
 -rw-r--r--	root/root	usr/include/zzip/zzip32.h
 -rw-r--r--	root/root	usr/include/zziplib.h
 drwxr-xr-x	root/root	usr/lib/
+drwxr-xr-x	root/root	usr/lib/cmake/
+drwxr-xr-x	root/root	usr/lib/cmake/zziplib/
+-rw-r--r--	root/root	usr/lib/cmake/zziplib/zziplib-config.cmake
+-rw-r--r--	root/root	usr/lib/cmake/zziplib/zziplibTargets-release.cmake
+-rw-r--r--	root/root	usr/lib/cmake/zziplib/zziplibTargets.cmake
 lrwxrwxrwx	root/root	usr/lib/libzzip-0.so -> libzzip-0.so.13
-lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.10 -> libzzip-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.11 -> libzzip-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.12 -> libzzip-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.13 -> libzzip-0.so.13.0.72
--rwxr-xr-x	root/root	usr/lib/libzzip-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzip.so -> libzzip-0.so.13.0.72
+lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.10 -> libzzip-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.11 -> libzzip-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.12 -> libzzip-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzip-0.so.13 -> libzzip-0.so.13.0.77
+-rwxr-xr-x	root/root	usr/lib/libzzip-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzip.so -> libzzip-0.so.13.0.77
 lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so -> libzzipfseeko-0.so.13
-lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.10 -> libzzipfseeko-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.11 -> libzzipfseeko-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.12 -> libzzipfseeko-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.13 -> libzzipfseeko-0.so.13.0.72
--rwxr-xr-x	root/root	usr/lib/libzzipfseeko-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipfseeko.so -> libzzipfseeko-0.so.13.0.72
+lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.10 -> libzzipfseeko-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.11 -> libzzipfseeko-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.12 -> libzzipfseeko-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipfseeko-0.so.13 -> libzzipfseeko-0.so.13.0.77
+-rwxr-xr-x	root/root	usr/lib/libzzipfseeko-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipfseeko.so -> libzzipfseeko-0.so.13.0.77
 lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so -> libzzipmmapped-0.so.13
-lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.10 -> libzzipmmapped-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.11 -> libzzipmmapped-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.12 -> libzzipmmapped-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.13 -> libzzipmmapped-0.so.13.0.72
--rwxr-xr-x	root/root	usr/lib/libzzipmmapped-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipmmapped.so -> libzzipmmapped-0.so.13.0.72
+lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.10 -> libzzipmmapped-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.11 -> libzzipmmapped-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.12 -> libzzipmmapped-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipmmapped-0.so.13 -> libzzipmmapped-0.so.13.0.77
+-rwxr-xr-x	root/root	usr/lib/libzzipmmapped-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipmmapped.so -> libzzipmmapped-0.so.13.0.77
 lrwxrwxrwx	root/root	usr/lib/libzzipwrap-0.so -> libzzipwrap-0.so.13
-lrwxrwxrwx	root/root	usr/lib/libzzipwrap-0.so.13 -> libzzipwrap-0.so.13.0.72
--rwxr-xr-x	root/root	usr/lib/libzzipwrap-0.so.13.0.72
-lrwxrwxrwx	root/root	usr/lib/libzzipwrap.so -> libzzipwrap-0.so.13.0.72
+lrwxrwxrwx	root/root	usr/lib/libzzipwrap-0.so.13 -> libzzipwrap-0.so.13.0.77
+-rwxr-xr-x	root/root	usr/lib/libzzipwrap-0.so.13.0.77
+lrwxrwxrwx	root/root	usr/lib/libzzipwrap.so -> libzzipwrap-0.so.13.0.77
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/zzipfseeko.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/zziplib.pc
@@ -139,7 +146,3 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/zzip_tell32.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/zzip_telldir.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/zzip_telldir32.3.gz
-drwxr-xr-x	root/root	usr/share/zziplib/
--rw-r--r--	root/root	usr/share/zziplib/zziplib-config.cmake
--rw-r--r--	root/root	usr/share/zziplib/zziplibTargets-release.cmake
--rw-r--r--	root/root	usr/share/zziplib/zziplibTargets.cmake

@@ -5,11 +5,12 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wasi-libc++ wayland
 
 name=firefox
-version=125.0.3
+version=127.0.2
 release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
   icu-linebreak-classes.patch
+  fix-target-detection.patch
   node-stdout-nonblocking-wrapper)
 
 build() {
@@ -20,8 +21,8 @@ build() {
   done
 
   if [ "$(/usr/bin/python3 -c "import sys; print(sys.stdout.encoding)")" != 'utf-8' ]; then
-  	printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
-  	exit 1
+    printf "\e[031mError: set an UTF-8 locale to compile this!\033[0m\n"
+    exit 1
   fi
 
   prt-get isinst sccache && export RUSTC_WRAPPER='/usr/bin/sccache'
@@ -37,28 +38,36 @@ cat <<- EOF > .mozconfig
   ac_add_options --with-system-jpeg
   ac_add_options --with-system-zlib
   ac_add_options --with-system-png
+  ac_add_options --with-system-ffi
   ac_add_options --with-system-nspr
   ac_add_options --with-system-nss
   ac_add_options --with-system-libevent
   ac_add_options --with-system-libvpx
   ac_add_options --with-system-webp
   ac_add_options --enable-av1
-  ac_add_options --enable-system-ffi
   ac_add_options --enable-system-pixman
   ac_add_options --enable-optimize
+  ac_add_options --enable-strip
   ac_add_options --enable-release
   ac_add_options --enable-rust-simd
+  ac_add_options --enable-install-strip
   ac_add_options --enable-sandbox
   ac_add_options --enable-official-branding
   ac_add_options --with-distribution-id=nu.crux
   ac_add_options --enable-lto=thin
   ac_add_options --disable-tests
+  ac_add_options --disable-debug
   ac_add_options --disable-debug-symbols
+  ac_add_options --disable-elf-hack
+  ac_add_options --disable-eme
+  ac_add_options --disable-callgrind
   ac_add_options --disable-updater
   ac_add_options --disable-crashreporter
   ac_add_options --disable-necko-wifi
+  ac_add_options --disable-profiling
+  ac_add_options --disable-vtune
   ac_add_options --disable-parental-controls
-  ac_add_options --disable-elf-hack
+  ac_add_options --disable-system-extension-dirs
 EOF
 
   # audio
@@ -131,7 +140,7 @@ EOF
   DESTDIR=$PKG ./mach install
 
   install -d $PKG/usr/share/pixmaps
-  ln -s /usr/lib/firefox/browser/chrome/icons/default/default48.png $PKG/usr/share/pixmaps/firefox.png
+  ln -s /usr/lib/firefox/browser/chrome/icons/default/default128.png $PKG/usr/share/pixmaps/firefox.png
   install -D -m 0644 $SRC/firefox.desktop $PKG/usr/share/applications/firefox.desktop
   # Remove crap
   rm -r $PKG/usr/lib/firefox/browser/features

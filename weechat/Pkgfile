@@ -2,10 +2,10 @@
 # URL: https://weechat.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: gnutls libgcrypt
-# Optional: asciidoc aspell guile lua ninja ruby tcl
+# Optional: asciidoc aspell guile libcjson lua ninja ruby tcl
 
 name=weechat
-version=4.2.2
+version=4.3.3
 release=1
 source=(https://weechat.org/files/src/$name-$version.tar.xz)
 
@@ -26,6 +26,7 @@ build() {
     -D ENABLE_PYTHON=ON \
     -D ENABLE_PHP=OFF \
     -D ENABLE_NLS=OFF \
+    -D ENABLE_CJSON=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build

@@ -1,21 +1,22 @@
 # Description: ini file parser
 # URL: https://github.com/ndevilla/iniparser
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: chrpath
+# Depends on:
 
 name=iniparser
-version=4.2.1
+version=4.2.4
 release=1
 source=(https://github.com/ndevilla/iniparser/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  make
-
-  install -Dm0644 src/iniparser.h $PKG/usr/include/iniparser.h
-  install -Dm0644 src/dictionary.h $PKG/usr/include/dictionary.h
-  install -Dm0644 libiniparser.so.1 $PKG/usr/lib/libiniparser.so.1
-
-  ln -sf libiniparser.so.1 $PKG/usr/lib/libiniparser.so
-  chrpath -d $PKG/usr/lib/libiniparser.so
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D BUILD_DOCS=OFF \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 }

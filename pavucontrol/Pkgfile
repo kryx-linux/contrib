@@ -1,28 +1,24 @@
 # Description: PulseAudio Volume Control
 # URL: https://freedesktop.org/software/pulseaudio/pavucontrol/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gtkmm3 json-glib libcanberra pulseaudio
+# Depends on: gtkmm4 json-glib pulseaudio
+# Optional: libcanberra
 
 name=pavucontrol
-version=5.0
-release=2
-source=(http://freedesktop.org/software/pulseaudio/$name/$name-$version.tar.gz
-  # https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/org.pulseaudio.pavucontrol.png
-  pavucontrol.desktop
-  org.pulseaudio.pavucontrol.png)
+version=6.0
+release=1
+source=(http://freedesktop.org/software/pulseaudio/$name/$name-$version.tar.gz)
 
 build() {
-  export CXXFLAGS="${CXXFLAGs} -std=c++11"
-
-  cd $name-$version
-  ./configure --prefix=/usr \
-    --disable-lynx \
-    --disable-nls
-  make
-  make DESTDIR=$PKG install
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D lynx=false
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 
   rm -r $PKG/usr/share/{doc,locale}
-
-  install -Dm755 $SRC/org.pulseaudio.pavucontrol.png $PKG/usr/share/pixmaps/pavucontrol.png
-  install -Dm644 $SRC/$name.desktop $PKG/usr/share/applications/$name.desktop
 }

@@ -1,17 +1,17 @@
 # Description: open source video transcoder
 # URL: https://handbrake.fr/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: faad2 jansson lame libass libdvdcss libjpeg-turbo libsamplerate libtheora libva libvpx libxml2 numactl speex x264
+# Depends on: faad2 jansson lame libass libdvdcss libjpeg-turbo libsamplerate libtheora libva libvpx libxml2 numactl speex x264 x265
 
 name=handbrake
-version=1.7.3
+version=1.8.1
 release=1
-_HASH=86156a66c0d5ccc306487c1ff961a7b2328961b3
-_HASHDATE="2024-02-11 21:55:00 +0000"
+_HASH=e9ff2bdf1ac670eb9c6d6170e27c999c05535127
+_HASHDATE="2024-06-22 21:55:00 +0000"
 source=(https://github.com/HandBrake/HandBrake/releases/download/$version/$name-$version-source.tar.bz2)
 
 build() {
-  prt-get isinst gtk3 || PKGMK_HANDBRAKE+='--disable-gtk'
+  prt-get isinst gtk4 || PKGMK_HANDBRAKE+='--disable-gtk'
 
   ## from inside a git checkout..
   #./HandBrake-$version/scripts/repo-info.sh HandBrake-$version > HandBrake-$version/version.txt

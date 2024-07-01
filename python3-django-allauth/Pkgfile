@@ -4,12 +4,12 @@
 # Depends on: python3-django python3-openid python3-pyjwt python3-requests-oauthlib
 
 name=python3-django-allauth
-version=0.63.0
+version=0.63.3
 release=1
-source=(https://pypi.org/packages/source/d/django-allauth/django-allauth-$version.tar.gz)
+source=(https://pypi.org/packages/source/d/django_allauth/django_allauth-$version.tar.gz)
 
 build() {
-  cd django-allauth-$version
+  cd django_allauth-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl

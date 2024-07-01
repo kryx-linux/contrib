@@ -1,0 +1,25 @@
+# Description: A minimal file upload/pastebin service
+# URL: https://github.com/orhun/rustypaste
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=rustypaste
+version=0.15.0
+release=1
+source=(https://github.com/orhun/rustypaste/archive/v$version/$name-$version.tar.gz
+  rustypaste.service)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  CFLAGS+=' -ffat-lto-objects' \
+  cargo build --release --manifest-path $name-$version/Cargo.toml \
+    --no-default-features --features openssl
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
+  install -Dm644 $name-$version/config.toml -t $PKG/etc/rustypaste
+  install -Dm755 $SRC/rustypaste.service $PKG/etc/rc.d/rustypaste
+  sed -i 's!./upload!/var/lib/rustypaste/upload!' $PKG/etc/rustypaste/config.toml
+  install -d -o rustypaste -g rustypaste $PKG/var/lib/rustypaste
+}

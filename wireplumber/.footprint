@@ -48,8 +48,8 @@ drwxr-xr-x	root/root	usr/include/wireplumber-0.5/wp/
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/wpversion.h
 drwxr-xr-x	root/root	usr/lib/
 lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.5.so -> libwireplumber-0.5.so.0
-lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.5.so.0 -> libwireplumber-0.5.so.0.502.0
--rwxr-xr-x	root/root	usr/lib/libwireplumber-0.5.so.0.502.0
+lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.5.so.0 -> libwireplumber-0.5.so.0.504.0
+-rwxr-xr-x	root/root	usr/lib/libwireplumber-0.5.so.0.504.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/wireplumber-0.5.pc
 drwxr-xr-x	root/root	usr/lib/wireplumber-0.5/
@@ -63,7 +63,6 @@ drwxr-xr-x	root/root	usr/lib/wireplumber-0.5/
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.5/libwireplumber-module-reserve-device.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.5/libwireplumber-module-settings.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.5/libwireplumber-module-si-audio-adapter.so
--rwxr-xr-x	root/root	usr/lib/wireplumber-0.5/libwireplumber-module-si-audio-virtual.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.5/libwireplumber-module-si-node.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.5/libwireplumber-module-si-standard-link.so
 -rwxr-xr-x	root/root	usr/lib/wireplumber-0.5/libwireplumber-module-standard-event-source.so
@@ -79,9 +78,10 @@ drwxr-xr-x	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/
 -rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/libcamera.conf
 -rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/linking.conf
 -rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/log.conf
+-rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/media-role-nodes.conf
+-rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/smart-equalizer.conf
 -rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/stream.conf
 -rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/v4l2.conf
--rw-r--r--	root/root	usr/share/doc/wireplumber/examples/wireplumber.conf.d/virtual.conf
 drwxr-xr-x	root/root	usr/share/wireplumber/
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/client/
@@ -106,7 +106,6 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/device/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/device/state-profile.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/device/state-routes.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/fallback-sink.lua
--rw-r--r--	root/root	usr/share/wireplumber/scripts/intended-roles.lua
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/lib/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/lib/common-utils.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/lib/device-info-cache.lua
@@ -119,12 +118,12 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/linking/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-default-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-defined-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-filter-target.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-media-role-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-user-target.lua.example
--rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-virtual-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/get-filter-from-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/link-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/prepare-link.lua
--rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/rescan-virtual-links.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/rescan-media-role-links.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/rescan.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/metadata.lua
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/
@@ -146,7 +145,6 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/v4l2/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/v4l2/name-node.lua
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/node/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/create-item.lua
--rw-r--r--	root/root	usr/share/wireplumber/scripts/node/create-virtual-item.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/filter-forward-format.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/software-dsp.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/state-stream.lua
