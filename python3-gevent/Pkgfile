@@ -6,10 +6,13 @@
 name=python3-gevent
 version=24.2.1
 release=1
-source=(https://github.com/gevent/gevent/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/gevent/gevent/archive/$version/$name-$version.tar.gz
+  workaround-cython-bug.patch)
 
 build() {
   cd gevent-$version
+
+  patch -Np1 -i $SRC/workaround-cython-bug.patch
 
   CYTHON=cython3 \
   /usr/bin/python3 setup.py build
