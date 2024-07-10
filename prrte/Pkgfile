@@ -4,9 +4,22 @@
 # Depends on: openpmix
 
 name=prrte
-version=3.0.5
+version=3.0.6
 release=1
 source=(https://github.com/openpmix/prrte/releases/download/v$version/prrte-$version.tar.bz2)
+
+# unpack_source() {{{
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+      $name-$version.tar.bz2)
+        bsdtar -o -C $SRC -xf $(get_filename $file) ;;
+      *)
+        cp $(get_filename $file) $SRC ;;
+    esac
+  done
+}
+# }}}
 
 build() {
   cd $name-$version
