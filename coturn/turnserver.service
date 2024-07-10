@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# /etc/rc.d/coturn: start/stop coturn daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/turnserver
+PIDFILE=/run/turnserver/turnserver.pid
+USER=coturn
+OPTS="-c /etc/turnserver/turnserver.conf --no-stdout-log --daemon --pidfile $PIDFILE"
+
+case $1 in
+start)
+  if [ ! -e /run/turnserver ]; then 
+    install -vdm 750 -o coturn -g root /run/turnserver
+  fi
+  $SSD --start -u $USER -c $USER --background --exec $PROG -- $OPTS
+  ;;
+stop)
+  $SSD --stop -u $USER --retry 10 --pidfile $PIDFILE --remove-pidfile
+  ;;
+restart)
+  $0 stop
+  $0 start
+  ;;
+reload)
+  $0 stop
+  $0 start
+  ;;
+status)
+  $SSD --status -u $USER --name turnserver --pidfile $PIDFILE
+  case $? in
+  0) echo "$PROG is running with pid $(cat $PIDFILE)" ;;
+  1) echo "$PROG is not running but the pid file $PIDFILE exists" ;;
+  3) echo "$PROG is not running" ;;
+  4) echo "Unable to determine the program status" ;;
+  esac
+  ;;
+*)
+  echo "usage: $0 [start|stop|restart|reload|status]"
+  ;;
+esac
+
+# End of file
