@@ -1,0 +1,39 @@
+# Description: an open source implementation of the Domain Keys Identified Mail sender authentication system
+# URL: http://www.opendkim.org/
+# Maintainer:
+# Depends on: libbsd libmilter
+# Optional: openldap jansson
+
+name=opendkim
+version=2.11.0-Beta2
+release=2
+source=(https://github.com/trusteddomainproject/OpenDKIM/archive/$version/$name-$version.tar.gz
+  opendkim.rc
+  7c70ee7c86da1cecc621182355cc950d3b193314.patch)
+
+build() {
+  cd OpenDKIM-$version
+
+  prt-get isinst openldap && PKGMK_OPENDKIM+=' --with-openldap'
+  prt-get isinst jansson && PKGMK_OPENDKIM+=' --with-libjansson'
+
+  patch -p1 -i $SRC/7c70ee7c86da1cecc621182355cc950d3b193314.patch
+  autoreconf -fi
+
+  CFLAGS="${CFLAGS} -I/usr/opt/libbsd/include" \
+  LDFLAGS="${LDFLAGS} -L/usr/opt/libbsd/lib" \
+  LD_LIBRARY_PATH="/usr/oprt/libbsd/lib" \
+  PKG_CONFIG_PATH="/usr/opt/libbsd/lib/pkgconfig" \
+  ./configure --prefix=/usr \
+    --with-milter
+  make
+  make DESTDIR=$PKG install
+
+  install -o root -g root -m 0755 -D $SRC/$name.rc $PKG/etc/rc.d/$name
+  install -o root -g root -m 0755 -d $PKG/etc/$name/keys
+  install -o root -g root -m 0644 $name/$name.conf.sample $PKG/etc/$name/$name.conf
+
+  install -o opendkim -g opendkim -m 0755 -d $PKG/var/lib/opendkim
+
+  rm -r $PKG/usr/share/doc
+}

@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# /etc/rc.d/opendkim: start/stop the opendkim daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/opendkim
+PID=/run/opendkim/opendkim.pid
+OPTS="-x /etc/opendkim/opendkim.conf"
+USER=opendkim
+GROUP=$USER
+HOME="/run/opendkim"
+
+case $1 in
+    "start")
+        [ ! -e /run/opendkim ] && install -o $USER -g $GROUP -m 0755 -d $HOME
+        $SSD --start --pidfile $PID -u $USER --exec $PROG -- $OPTS
+        ;;
+    "stop")
+        $SSD --stop --retry 10 --exec $PROG --pidfile $PID
+        ;;
+    "restart")
+        $0 stop
+        $0 start
+        ;;
+    "status")
+        $SSD --status --name opendkim --pidfile $PID
+        case $? in
+            0)
+                echo "$PROG is running with pid $(cat $PID)"
+                ;;
+            1)
+                echo "$PROG is not running but pid file $PID exists"
+                ;;
+            3)
+                echo "$PROG is not running"
+                ;;
+            4)
+                echo "Unable to determine program status"
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 [start|stop|restart|status]"
+        ;;
+esac
