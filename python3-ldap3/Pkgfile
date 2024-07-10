@@ -1,0 +1,18 @@
+# Description: 	A strictly RFC 4510 conforming LDAP V3 pure Python client library
+# URL: https://github.com/cannatag/ldap3
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pyasn1
+
+name=python3-ldap3
+version=2.9.1
+release=1
+source=(https://pypi.org/packages/source/l/ldap3/ldap3-$version.tar.gz)
+
+build() {
+  cd ldap3-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}
