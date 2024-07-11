@@ -6,7 +6,7 @@
 
 name=hyperkitty
 version=1.3.11
-release=1
+release=2
 source=(https://pypi.org/packages/source/h/hyperkitty/hyperkitty-$version.tar.gz
   hyperkitty-1.3.5-settings.patch)
 
@@ -16,6 +16,7 @@ build() {
   local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")
   patch -Np1 -i $SRC/hyperkitty-1.3.5-settings.patch
   touch settings_local.py
+  sed '/example_project/d' -i pyproject.toml
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
