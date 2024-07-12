@@ -1,0 +1,50 @@
+# Description: Light LDAP implementation
+# URL: https://github.com/lldap/lldap
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: wasm-bindgen wasm-pack
+
+name=lldap
+version=0.5.0
+release=1
+source=(https://github.com/lldap/lldap/archive/v$version/$name-$version.tar.gz
+  lldap.service
+  config-template.patch)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cd $name-$version
+  patch -p1 -i $SRC/config-template.patch
+  xargs curl --remote-name-all --output-dir app/static/fonts < app/static/fonts/fonts.txt
+  xargs curl --remote-name-all --output-dir app/static < app/static/libraries.txt
+  cargo fetch --locked --target "x86_64-unknown-linux-gnu"
+
+  cargo build \
+    --frozen \
+    --release \
+    --all-features \
+    -p lldap \
+    -p lldap_migration_tool \
+    -p lldap_set_password
+  ./app/build.sh
+  find target/release \
+    -maxdepth 1 \
+    -executable \
+    -type f \
+    -exec install -vDm755 -t "$PKG/usr/bin/" {} +
+
+  # configuration
+  install -Dm640 lldap_config.docker_template.toml "$PKG/etc/$name.toml"
+
+  # frontend assets
+  install -m 0750 -d $PKG/var/lib/$name
+  install -m 0750 -d $PKG/var/lib/$name/data
+  install -Dm644 app/index_local.html $PKG/var/lib/$name/app/index.html
+  install -Dm644 -t $PKG/var/lib/$name/app/static app/static/*.{css,js,gif}
+  install -Dm644 -t $PKG/var/lib/$name/app/static/fonts app/static/fonts/*.woff2
+  install -Dm644 -t $PKG/var/lib/$name/app/pkg app/pkg/*
+
+  chown -R lldap:lldap $PKG/var/lib/$name
+  install -o root -g root -m 0755 -D $SRC/$name.service $PKG/etc/rc.d/$name
+}
