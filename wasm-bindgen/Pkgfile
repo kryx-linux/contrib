@@ -1,0 +1,25 @@
+# Description: Facilitating high-level interactions between Wasm modules and JavaScript
+# URL: https://github.com/rustwasm/wasm-bindgen
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust-wasm
+
+name=wasm-bindgen
+version=0.2.92
+release=1
+source=(https://github.com/rustwasm/wasm-bindgen/archive/$version/$name-$version.tar.gz
+  Cargo.lock)
+
+build() {
+  cd $name-$version/crates/cli
+
+  cp $SRC/Cargo.lock .
+  cargo fetch --target "$(rustc -vV | sed -n 's/host: //p')"
+  export OPENSSL_NO_VENDOR=1
+  cargo build --release --all-features
+  find $SRC/$name-$version/target/release \
+    -maxdepth 1 \
+    -executable \
+    -type f \
+    -exec install -Dm0755 -t $PKG/usr/bin/ {} \;
+
+}
