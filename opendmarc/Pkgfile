@@ -1,0 +1,31 @@
+# Description: Free open source software implementation of the DMARC specification
+# URL: https://github.com/trusteddomainproject/OpenDMARC
+# Maintainer:
+# Depends on: libbsd libidn libspf2
+
+name=opendmarc
+version=1.4.2
+release=1
+source=(https://github.com/trusteddomainproject/OpenDMARC/archive/rel-${name}-${version//./-}.tar.gz
+  opendmarc.conf opendmarc.rc
+  arcseal-segfaults.patch)
+
+build() {
+  cd OpenDMARC-rel-$name-${version//./-}
+
+  patch -Np1 -i $SRC/arcseal-segfaults.patch
+
+  autoreconf -vi
+  ./configure --prefix=/usr \
+    --sysconfdir="/etc/$name" \
+    --with-spf \
+    --with-spf2-include=/usr/include/spf2 \
+    --with-spf2-lib=/usr/lib/
+
+  make
+  make DESTDIR=$PKG install
+
+  install -o root -g root -m 0755 -D $SRC/$name.rc $PKG/etc/rc.d/$name
+  install -o opendmarc -g opendmarc -m 0755 -d $PKG/var/lib/opendmarc
+  install -o root -g root -Dm 0644 $SRC/$name.conf $PKG/etc/$name/$name.conf
+}

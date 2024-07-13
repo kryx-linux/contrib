@@ -10,24 +10,23 @@ USER=mailman
 
 case $1 in
 start)
-  if [ ! -e /run/mailman ]; then 
+  if [ ! -e /run/mailman ]; then
     mkdir -p /run/mailman
   fi
   $SSD --start -c $USER --pidfile $PID --exec $PROG -- start
   ;;
 stop)
-  $SSD --start -c $USER --pidfile $PID --exec $PROG -- stop
-  $SSD --stop -c $USER --retry 10 --pidfile $PID
+  $SSD --stop -c $USER --retry 10 --exec "/usr/bin/python3" --pidfile $PID
   ;;
 restart)
   $0 stop
   $0 start
   ;;
 reload)
-  $SSD --start -c $USER --pidfile $PID --exec $PROG -- restart
+  $SSD --start -c $USER --pidfile $PID --exec "/usr/bin/python3" --exec $PROG -- restart
   ;;
 status)
-  $SSD --status -u $USER -c $USER --pidfile $PID
+  $SSD --status -u $USER -c $USER --exec "/usr/bin/python3" --pidfile $PID
   case $? in
   0) echo "$PROG is running with pid $(cat $PID)" ;;
   1) echo "$PROG is not running but the pid file $PID exists" ;;

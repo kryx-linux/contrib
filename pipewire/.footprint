@@ -6,10 +6,6 @@ lrwxrwxrwx	root/root	etc/alsa/conf.d/99-pipewire-default.conf -> /usr/share/alsa
 drwxr-xr-x	root/root	etc/security/
 drwxr-xr-x	root/root	etc/security/limits.d/
 -rw-r--r--	root/root	etc/security/limits.d/25-pw-rlimits.conf
-drwxr-xr-x	root/root	lib/
-drwxr-xr-x	root/root	lib/udev/
-drwxr-xr-x	root/root	lib/udev/rules.d/
--rw-r--r--	root/root	lib/udev/rules.d/90-pipewire-alsa.rules
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/pipewire
@@ -18,6 +14,7 @@ lrwxrwxrwx	root/root	usr/bin/pipewire-avb -> pipewire
 lrwxrwxrwx	root/root	usr/bin/pipewire-pulse -> pipewire
 -rwxr-xr-x	root/root	usr/bin/pw-cli
 -rwxr-xr-x	root/root	usr/bin/pw-config
+-rwxr-xr-x	root/root	usr/bin/pw-container
 -rwxr-xr-x	root/root	usr/bin/pw-dot
 -rwxr-xr-x	root/root	usr/bin/pw-dump
 -rwxr-xr-x	root/root	usr/bin/pw-link
@@ -50,6 +47,7 @@ drwxr-xr-x	root/root	usr/include/pipewire-0.3/pipewire/extensions/
 -rw-r--r--	root/root	usr/include/pipewire-0.3/pipewire/extensions/metadata.h
 -rw-r--r--	root/root	usr/include/pipewire-0.3/pipewire/extensions/profiler.h
 -rw-r--r--	root/root	usr/include/pipewire-0.3/pipewire/extensions/protocol-native.h
+-rw-r--r--	root/root	usr/include/pipewire-0.3/pipewire/extensions/security-context.h
 -rw-r--r--	root/root	usr/include/pipewire-0.3/pipewire/extensions/session-manager.h
 drwxr-xr-x	root/root	usr/include/pipewire-0.3/pipewire/extensions/session-manager/
 -rw-r--r--	root/root	usr/include/pipewire-0.3/pipewire/extensions/session-manager/impl-interfaces.h
@@ -108,6 +106,7 @@ drwxr-xr-x	root/root	usr/include/spa-0.2/spa/debug/
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/buffer.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/context.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/dict.h
+-rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/file.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/format.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/log.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/mem.h
@@ -265,8 +264,8 @@ drwxr-xr-x	root/root	usr/lib/alsa-lib/
 drwxr-xr-x	root/root	usr/lib/gstreamer-1.0/
 -rwxr-xr-x	root/root	usr/lib/gstreamer-1.0/libgstpipewire.so
 lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so -> libpipewire-0.3.so.0
-lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.1007.0
--rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.1007.0
+lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.1201.0
+-rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.1201.0
 drwxr-xr-x	root/root	usr/lib/pipewire-0.3/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-access.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-adapter.so
@@ -282,6 +281,7 @@ drwxr-xr-x	root/root	usr/lib/pipewire-0.3/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-metadata.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-netjack2-driver.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-netjack2-manager.so
+-rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-parametric-equalizer.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-pipe-tunnel.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-portal.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-profiler.so
@@ -328,6 +328,9 @@ drwxr-xr-x	root/root	usr/lib/spa-0.2/videoconvert/
 -rwxr-xr-x	root/root	usr/lib/spa-0.2/videoconvert/libspa-videoconvert.so
 drwxr-xr-x	root/root	usr/lib/spa-0.2/videotestsrc/
 -rwxr-xr-x	root/root	usr/lib/spa-0.2/videotestsrc/libspa-videotestsrc.so
+drwxr-xr-x	root/root	usr/lib/udev/
+drwxr-xr-x	root/root	usr/lib/udev/rules.d/
+-rw-r--r--	root/root	usr/lib/udev/rules.d/90-pipewire-alsa.rules
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/alsa-card-profile/
 drwxr-xr-x	root/root	usr/share/alsa-card-profile/mixer/

@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# /etc/rc.d/opendmarc: start/stop the opendmarc daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/opendmarc
+PID=/run/opendmarc/opendmarc.pid
+OPTS="-c /etc/opendmarc/opendmarc.conf"
+HOME="/run/opendmarc"
+USER=opendmarc
+GROUP=$USER
+
+case $1 in
+    "start")
+        [ ! -e $HOME ] && install -o $USER -g $GROUP -m 0755 -d $HOME
+        $SSD --start --pidfile $PID -u $USER --exec $PROG -- $OPTS
+        ;;
+    "stop")
+        $SSD --stop --retry 10 --exec $PROG --pidfile $PID
+        ;;
+    "restart")
+        $0 stop
+        $0 start
+        ;;
+    "status")
+        $SSD --status --name opendmarc --pidfile $PID
+        case $? in
+            0)
+                echo "$PROG is running with pid $(cat $PID)"
+                ;;
+            1)
+                echo "$PROG is not running but pid file $PID exists"
+                ;;
+            3)
+                echo "$PROG is not running"
+                ;;
+            4)
+                echo "Unable to determine program status"
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 [start|stop|restart|status]"
+        ;;
+esac

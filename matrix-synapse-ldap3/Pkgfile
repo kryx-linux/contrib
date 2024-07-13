@@ -1,0 +1,16 @@
+# Description: An LDAP3 auth provider for Synapse
+# URL: https://github.com/matrix-org/matrix-synapse-ldap3
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-ldap3 python3-service-identity python3-twisted
+
+name=matrix-synapse-ldap3
+version=0.3.0
+release=1
+source=(https://github.com/matrix-org/matrix-synapse-ldap3/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

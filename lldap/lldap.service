@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# /etc/rc.d/lldap: start/stop lldap daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/lldap
+OPTS="run --config-file /etc/lldap.toml"
+HOME="/var/lib/lldap"
+USER="lldap"
+PID="/run/lldap.pid"
+
+case $1 in
+  start)
+    $SSD --start -b --user $USER --chuid $USER --chdir $HOME --make-pidfile --pidfile $PID --exec $PROG -- $OPTS ;;
+  stop)
+    $SSD --stop --retry 10 --exec $PROG --pidfile $PID ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  status)
+    $SSD --status --name lldap --pidfile $PID
+    case $? in
+      0) echo "$PROG is running with pid $(pidof $PROG)" ;;
+      1) echo "$PROG is not running but the pid file $PID exists" ;;
+      3) echo "$PROG is not running" ;;
+      4) echo "Unable to determine the program status" ;;
+      esac
+    ;;
+  *)
+    echo "usage: $0 [start|stop|restart|status]" ;;
+esac
+
+# End of file

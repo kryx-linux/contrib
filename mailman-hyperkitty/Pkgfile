@@ -1,0 +1,18 @@
+# Description: Mailman archiver plugin for HyperKitty
+# URL: https://gitlab.com/mailman/mailman-hyperkitty/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: mailman
+
+name=mailman-hyperkitty
+version=1.2.1
+release=1
+source=(https://pypi.org/packages/source/m/mailman-hyperkitty/mailman-hyperkitty-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  /usr/bin/python3 setup.py build
+  /usr/bin/python3 setup.py install --prefix=/usr \
+    --root=$PKG \
+    --skip-build
+}

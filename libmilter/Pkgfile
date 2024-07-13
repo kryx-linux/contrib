@@ -1,0 +1,16 @@
+# Description: Sendmail Mail Filter API (Milter)
+# URL: https://www.proofpoint.com/us/products/email-protection/open-source-email-solution
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=libmilter
+version=8.18.1
+release=1
+source=(http://ftp.sendmail.org/sendmail.${version}.tar.gz)
+
+build() {
+  cd sendmail-$version/$name
+  install -o root -g root -m 0755 -d $PKG/usr/lib
+  ./Build DESTDIR=$PKG install
+  chown -R root:root $PKG
+}

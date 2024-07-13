@@ -1,0 +1,28 @@
+From 246b6f0a2ef0583ecb780ef9b1eac13a6604d284 Mon Sep 17 00:00:00 2001
+From: Jelle van der Waa <jelle@vdwaa.nl>
+Date: Sat, 1 Jun 2024 11:44:53 +0200
+Subject: [PATCH] Add django 5.0 support
+
+---
+ .gitlab-ci.yml | 5 +++++
+ README.rst     | 1 +
+ pyproject.toml | 2 +-
+ tox.ini        | 3 ++-
+ 4 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 74c8812..6852b16 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -18,7 +18,7 @@ classifiers = [
+ ]
+ requires-python = ">=3.9"
+ dependencies = [
+-    "django>=4.0,<4.3",
++    "django>=4.0,<5.1",
+     "hyperkitty",
+     "postorius",
+     "whoosh",
+-- 
+GitLab
+

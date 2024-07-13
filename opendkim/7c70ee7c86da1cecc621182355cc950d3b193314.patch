@@ -1,0 +1,39 @@
+From 7c70ee7c86da1cecc621182355cc950d3b193314 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?David=20B=C3=BCrgin?= <dbuergin@gluet.ch>
+Date: Sat, 14 Oct 2023 09:19:37 +0200
+Subject: [PATCH] Delete Authentication-Results headers in reverse
+
+---
+ opendkim/opendkim.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/opendkim/opendkim.c b/opendkim/opendkim.c
+index 803f37b0..cfa5f018 100644
+--- a/opendkim/opendkim.c
++++ b/opendkim/opendkim.c
+@@ -13653,8 +13653,15 @@ mlfi_eom(SMFICTX *ctx)
+ 			return SMFIS_TEMPFAIL;
+ 		}
+ 
+-		c = 0;
++		c = 1;
++
+ 		for (hdr = dfc->mctx_hqhead; hdr != NULL; hdr = hdr->hdr_next)
++		{
++			if (strcasecmp(hdr->hdr_hdr, AUTHRESULTSHDR) == 0)
++				c++;
++		}
++
++		for (hdr = dfc->mctx_hqtail; hdr != NULL; hdr = hdr->hdr_prev)
+ 		{
+ 			memset(ares, '\0', sizeof(struct authres));
+ 
+@@ -13666,7 +13673,7 @@ mlfi_eom(SMFICTX *ctx)
+ 				char *slash;
+ 
+ 				/* remember index */
+-				c++;
++				c--;
+ 
+ 				/* parse the header */
+ 				arstat = ares_parse((u_char *) hdr->hdr_val,
