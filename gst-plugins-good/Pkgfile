@@ -10,7 +10,7 @@ release=1
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
-  prt-get prt-get isinst qt5 && PKGMK_GST_GOOD+=' -D qt5=enabled'
+  prt-get isinst qt5 && PKGMK_GST_GOOD+=' -D qt5=enabled'
 
   meson setup $name-$version build $PKGMK_GST_GOOD \
     --prefix=/usr \

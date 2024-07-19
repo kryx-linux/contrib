@@ -12,7 +12,7 @@ start)
   $SSD --start --background --exec $PROG -- $OPTS
   ;;
 stop)
-  $SSD --stop -u $USER --retry 10 --exec $PROG
+  $SSD --stop --retry 10 --exec $PROG
   ;;
 restart)
   $0 stop

@@ -1,0 +1,16 @@
+# Description: A streaming multipart parser for Python
+# URL: https://github.com/andrew-d/python-multipart
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-hatchling
+
+name=python3-python-multipart
+version=0.0.9
+release=1
+source=(https://pypi.org/packages/source/p/python_multipart/python_multipart-$version.tar.gz)
+
+build() {
+  cd python_multipart-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
