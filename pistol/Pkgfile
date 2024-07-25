@@ -4,7 +4,7 @@
 # Depends on: go
 
 name=pistol
-version=0.5
+version=0.5.1
 release=1
 source=(https://github.com/doronbehar/pistol/archive/v$version/$name-$version.tar.gz)
 
@@ -23,6 +23,7 @@ build() {
   export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
   go build -ldflags "-X 'main.Version=${version}-git'" ./cmd/pistol
+  prt-get isinst dmidecode && PKGMK_PKGMK+=' -D use_internal_dmi=false'
 
   install -Dm755 pistol $PKG/usr/bin/pistol
 }
