@@ -1,16 +1,16 @@
 # Description: A small library that versions your Python projects.
 # URL: https://pypi.python.org/pypi/incremental
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-setuptools
+# Depends on: python3-build python3-wheel python3-installer
 
 name=python3-incremental
-version=22.10.0
+version=24.7.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz)
 
 build() {
   cd ${name#*-}-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
