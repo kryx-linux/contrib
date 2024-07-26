@@ -6,7 +6,7 @@
 name=containerd
 version=1.7.20
 release=1
-source=(https://crux.nu/files/$name-$version.tar.xz)
+source=(https://github.com/containerd/containerd/archive/v$version/$name-$version.tar.gz)
 
 build() {
     export GO111MODULE=auto
@@ -16,7 +16,7 @@ build() {
     cd $name
     export GOPATH=$SRC
     # use the long commit hash here
-    make GIT_COMMIT=8fc6bcff51318944179630522a095cc9dbf9f353
+    make VERSION=v$version REVISION=8fc6bcff51318944179630522a095cc9dbf9f353
     install -d -m 0755 $PKG/usr/bin
     install -m 0755 bin/* $PKG/usr/bin/
 }
