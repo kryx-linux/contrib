@@ -280,6 +280,12 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/restkit/response.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/restkit/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/sessionkit.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/tests/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/tests/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/tests/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/tests/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/tests/__pycache__/test_authkit.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/internal/tests/test_authkit.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/__pycache__/
@@ -294,8 +300,14 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/__pycache__/test_recovery_codes.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/__pycache__/test_totp.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/__pycache__/test_views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/__pycache__/test_webauthn.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/test_recovery_codes.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/test_totp.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/test_views.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/tests/test_webauthn.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/mfa/views.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/socialaccount/
@@ -540,58 +552,131 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/admin.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/app_settings.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/apps.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/forms.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/models.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/recovery_codes.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/signals.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/stages.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/totp.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/urls.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/utils.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/__pycache__/views.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/adapter.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/admin.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/app_settings.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/apps.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/forms.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/__init__.py (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/__pycache__/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/__pycache__/__init__.cpython-312.opt-2.pyc
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/__init__.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/__pycache__/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/__pycache__/__init__.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/__pycache__/authentication.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/__pycache__/recovery_codes.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/__pycache__/totp.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/authentication.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/recovery_codes.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/internal/flows/totp.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/__pycache__/forms.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/__pycache__/urls.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/__pycache__/views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/forms.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/internal/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/internal/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/internal/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/internal/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/internal/__pycache__/flows.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/internal/flows.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/tests/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/tests/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/tests/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/tests/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/tests/__pycache__/test_views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/tests/test_views.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/urls.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/base/views.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/0001_initial.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/0002_authenticator_timestamps.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/0003_authenticator_type_uniq.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/__pycache__/0001_initial.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/__pycache__/0002_authenticator_timestamps.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/__pycache__/0003_authenticator_type_uniq.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/migrations/__pycache__/__init__.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/models.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/__pycache__/forms.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/__pycache__/urls.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/__pycache__/views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/forms.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/__pycache__/auth.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/__pycache__/flows.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/auth.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/internal/flows.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/__pycache__/test_auth.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/__pycache__/test_views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/test_auth.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/tests/test_views.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/urls.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/recovery_codes/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/signals.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/stages.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/__init__.py (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/__pycache__/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/__pycache__/__init__.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/__pycache__/test_recovery_codes.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/__pycache__/test_views.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/test_recovery_codes.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/tests/test_views.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/static/
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/static/mfa/
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/static/mfa/js/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/static/mfa/js/webauthn-json.js
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/static/mfa/js/webauthn.js
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/__pycache__/forms.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/__pycache__/urls.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/__pycache__/views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/forms.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/__pycache__/auth.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/__pycache__/flows.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/auth.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/internal/flows.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/tests/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/tests/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/tests/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/tests/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/tests/__pycache__/test_views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/tests/test_views.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/urls.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/totp/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/utils.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/views.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/__pycache__/forms.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/__pycache__/urls.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/__pycache__/views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/forms.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/__pycache__/auth.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/__pycache__/flows.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/auth.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/internal/flows.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/tests/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/tests/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/tests/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/tests/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/tests/__pycache__/test_views.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/tests/test_views.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/urls.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/mfa/webauthn/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/models.py (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/ratelimit.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/
@@ -1185,7 +1270,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/prov
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feedly/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feedly/views.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feishu/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feishu/__init__.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feishu/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feishu/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feishu/__pycache__/__init__.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/feishu/__pycache__/client.cpython-312.opt-2.pyc
@@ -2373,6 +2458,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/alert.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/badge.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/button.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/button_group.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/field.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/fields.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/form.html
@@ -2385,6 +2471,11 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/provider.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/provider_list.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/table.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/tbody.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/td.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/th.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/thead.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/tr.html
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/layouts/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/layouts/base.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/layouts/entrance.html
@@ -2400,11 +2491,17 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/emai
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/email/totp_activated_subject.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/email/totp_deactivated_message.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/email/totp_deactivated_subject.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/email/webauthn_added_message.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/email/webauthn_added_subject.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/email/webauthn_removed_message.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/email/webauthn_removed_subject.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/index.html
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/messages/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/messages/recovery_codes_generated.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/messages/totp_activated.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/messages/totp_deactivated.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/messages/webauthn_added.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/messages/webauthn_removed.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/reauthenticate.html
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/recovery_codes/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/recovery_codes/base.html
@@ -2415,6 +2512,16 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/totp
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/totp/activate_form.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/totp/base.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/totp/deactivate_form.html
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/add_form.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/authenticator_confirm_delete.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/authenticator_list.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/base.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/edit_form.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/reauthenticate.html
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/snippets/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/snippets/login_script.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/mfa/webauthn/snippets/scripts.html
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/openid/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/openid/base.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/openid/login.html
@@ -2505,10 +2612,10 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/tests
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/utils.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-0.63.6.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-0.63.6.dist-info/AUTHORS
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-0.63.6.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-0.63.6.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-0.63.6.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-0.63.6.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-0.63.6.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-64.0.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-64.0.0.dist-info/AUTHORS
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-64.0.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-64.0.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-64.0.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-64.0.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-64.0.0.dist-info/top_level.txt

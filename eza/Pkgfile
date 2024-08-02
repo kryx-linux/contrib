@@ -4,14 +4,16 @@
 # Depends on: rust
 
 name=eza
-version=0.18.22
-release=1
-source=(https://github.com/eza-community/eza/archive/v$version/$name-$version.tar.gz)
+version=0.18.23
+release=2
+source=(https://github.com/eza-community/eza/archive/v$version/$name-$version.tar.gz
+  6ca47ee7a8e4dac3ac67adf405d59a46129b7901.patch)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
+  patch -Np1 -d $name-$version -i $SRC/6ca47ee7a8e4dac3ac67adf405d59a46129b7901.patch
   cargo build --release --manifest-path $name-$version/Cargo.toml
 
   prt-get isinst bash-completions && install -Dm644 $name-$version/completions/bash/eza $PKG/usr/share/bash-completion/completions/eza
