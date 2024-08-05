@@ -4,12 +4,12 @@
 # Depends on: python3-build python3-installer python3-wheel
 
 name=python3-cython
-version=3.0.10
+version=3.0.11
 release=1
-source=(https://pypi.org/packages/source/C/Cython/Cython-$version.tar.gz)
+source=(https://pypi.org/packages/source/c/cython/cython-$version.tar.gz)
 
 build() {
-  cd Cython-$version
+  cd cython-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
