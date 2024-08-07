@@ -4,15 +4,12 @@
 # Depends on: libyaml python3-cython
 
 name=python3-yaml
-version=6.0.1
-release=2
-source=(https://pypi.python.org/packages/source/P/PyYAML/PyYAML-$version.tar.gz
-  731.patch)
+version=6.0.2
+release=1
+source=(https://pypi.org/packages/source/p/pyyaml/pyyaml-$version.tar.gz)
 
 build() {
-  cd PyYAML-$version
-
-  patch -Np1 -i $SRC/731.patch
+  cd pyyaml-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
