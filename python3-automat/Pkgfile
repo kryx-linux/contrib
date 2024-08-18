@@ -4,17 +4,13 @@
 # Depends on: python3-attrs python3-m2r python3-six
 
 name=python3-automat
-version=22.10.0
+version=24.8.0
 release=1
-source=(https://pypi.org/packages/source/A/Automat/Automat-$version.tar.gz)
+source=(https://pypi.org/packages/source/a/automat/automat-$version.tar.gz)
 
 build() {
-  cd Automat-$version
+  cd automat-$version
 
-  export SETUPTOOLS_SCM_PRETEND_VERSION=$version
-
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
