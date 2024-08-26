@@ -5,7 +5,7 @@
 # Optional: bash-completion dnsmasq iwd jansson libpsl libteam mobile-broadband-provider-info modemmanager ppp vala wireguard-tools
 
 name=networkmanager
-version=1.48.8
+version=1.48.10
 release=1
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
   networkmanager.rc
@@ -14,7 +14,6 @@ source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkM
   dhcp.conf
   org.freedesktop.NetworkManager.rules
   1966.patch
-  2012.patch
 )
 
 build() {
@@ -27,7 +26,6 @@ build() {
 
   /usr/bin/grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
   patch -Np1 -d NetworkManager-$version -i $SRC/1966.patch
-  patch -Np1 -d NetworkManager-$version -i $SRC/2012.patch
 
   meson setup NetworkManager-$version build $PKGMK_NM \
     --prefix /usr \
