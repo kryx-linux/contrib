@@ -411,6 +411,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/dinputd.h
 -rw-r--r--	root/root	usr/include/wine/windows/directmanipulation.h
 -rw-r--r--	root/root	usr/include/wine/windows/directmanipulation.idl
+-rw-r--r--	root/root	usr/include/wine/windows/dispatcherqueue.h
+-rw-r--r--	root/root	usr/include/wine/windows/dispatcherqueue.idl
 -rw-r--r--	root/root	usr/include/wine/windows/dispdib.h
 -rw-r--r--	root/root	usr/include/wine/windows/dispex.h
 -rw-r--r--	root/root	usr/include/wine/windows/dispex.idl
@@ -880,6 +882,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/rmxftmpl.x
 -rw-r--r--	root/root	usr/include/wine/windows/roapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/roerrorapi.h
+-rw-r--r--	root/root	usr/include/wine/windows/rometadata.h
 -rw-r--r--	root/root	usr/include/wine/windows/rometadataresolution.h
 -rw-r--r--	root/root	usr/include/wine/windows/roparameterizediid.h
 -rw-r--r--	root/root	usr/include/wine/windows/roparameterizediid.idl
@@ -933,6 +936,7 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/shdispid.h
 -rw-r--r--	root/root	usr/include/wine/windows/shellapi.h
 -rw-r--r--	root/root	usr/include/wine/windows/shellscalingapi.h
+-rw-r--r--	root/root	usr/include/wine/windows/sherrors.h
 -rw-r--r--	root/root	usr/include/wine/windows/shimgdata.h
 -rw-r--r--	root/root	usr/include/wine/windows/shimgdata.idl
 -rw-r--r--	root/root	usr/include/wine/windows/shldisp.h
@@ -1088,10 +1092,16 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/windef.h
 -rw-r--r--	root/root	usr/include/wine/windows/windns.h
 -rw-r--r--	root/root	usr/include/wine/windows/windot11.h
+-rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.activation.h
+-rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.activation.idl
+-rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.background.h
+-rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.background.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.core.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.core.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.applicationmodel.idl
+-rw-r--r--	root/root	usr/include/wine/windows/windows.data.json.h
+-rw-r--r--	root/root	usr/include/wine/windows/windows.data.json.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.bluetooth.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.bluetooth.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.enumeration.h
@@ -1100,6 +1110,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.geolocation.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.haptics.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.haptics.idl
+-rw-r--r--	root/root	usr/include/wine/windows/windows.devices.input.h
+-rw-r--r--	root/root	usr/include/wine/windows/windows.devices.input.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.power.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.power.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.devices.radios.h
@@ -1134,8 +1146,10 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.directx.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.effects.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.effects.idl
+-rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.holographic.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.holographic.idl
+-rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.imaging.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.graphics.imaging.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.h
@@ -1207,6 +1221,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/ddk/
 -rw-r--r--	root/root	usr/include/wine/windows/windows.ui.core.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.ui.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.ui.idl
+-rw-r--r--	root/root	usr/include/wine/windows/windows.ui.input.h
+-rw-r--r--	root/root	usr/include/wine/windows/windows.ui.input.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.ui.viewmanagement.h
 -rw-r--r--	root/root	usr/include/wine/windows/windows.ui.viewmanagement.idl
 -rw-r--r--	root/root	usr/include/wine/windows/windows.ui.xaml.hosting.desktopwindowxamlsource.h
@@ -1364,6 +1380,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/avifil32.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/avifile.dll16
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/avrt.dll
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/bcp47langs.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/bcrypt.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/bcryptprimitives.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/bluetoothapis.dll
@@ -1395,6 +1412,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/conhost.exe
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/connect.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/control.exe
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/coremessaging.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/credui.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/crtdll.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/crypt32.dll
@@ -1627,6 +1645,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libavicap32.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libavifil32.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libavrt.a
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/libbcp47langs.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libbcrypt.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libbluetoothapis.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libcabinet.a
@@ -1748,6 +1767,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libnddeapi.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libnetapi32.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libnetio.a
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/libnetutils.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libnewdev.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libninput.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libnormaliz.a
@@ -1755,7 +1775,6 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libntdll.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libntdsapi.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libntoskrnl.a
--rw-r--r--	root/root	usr/lib/wine/i386-windows/libodbc32.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libodbccp32.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libole32.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/liboleacc.a
@@ -1768,6 +1787,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libpdh.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libpowrprof.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libprntvpt.a
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/libprofapi.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libpropsys.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libpsapi.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libquartz.a
@@ -1776,6 +1796,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/librasdlg.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libresutils.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libriched20.a
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/librometadata.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/librpcrt4.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/librsaenh.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/librtutils.a
@@ -1999,7 +2020,6 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/ntoskrnl.exe
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/ntprint.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/objsel.dll
--rw-r--r--	root/root	usr/lib/wine/i386-windows/odbc32.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/odbcbcp.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/odbccp32.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/odbccu32.dll
@@ -2035,6 +2055,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/presentationfontcache.exe
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/printui.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/prntvpt.dll
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/profapi.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/progman.exe
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/propsys.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/psapi.dll
@@ -2063,6 +2084,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/riched20.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/riched32.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/robocopy.exe
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/rometadata.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/rpcrt4.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/rpcss.exe
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/rsabase.dll
@@ -2230,6 +2252,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/windows.storage.applicationdata.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/windows.system.profile.systemmanufacturers.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/windows.ui.dll
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/windows.web.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/windowscodecs.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/windowscodecsext.dll
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/winealsa.drv
@@ -2372,6 +2395,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libavicap32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libavifil32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libavrt.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libbcp47langs.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libbcrypt.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libbluetoothapis.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libcabinet.a
@@ -2492,6 +2516,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libnddeapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libnetapi32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libnetio.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libnetutils.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libnewdev.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libninput.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libnormaliz.a
@@ -2499,7 +2524,6 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libntdll.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libntdsapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libntoskrnl.a
--rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libodbc32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libodbccp32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libole32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/liboleacc.a
@@ -2512,6 +2536,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libpdh.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libpowrprof.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libprntvpt.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libprofapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libpropsys.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libpsapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libquartz.a
@@ -2520,6 +2545,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/librasdlg.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libresutils.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libriched20.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-unix/librometadata.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/librpcrt4.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/librsaenh.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/librtutils.a
@@ -2641,6 +2667,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/avicap32.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/avifil32.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/avrt.dll
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/bcp47langs.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/bcrypt.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/bcryptprimitives.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/bluetoothapis.dll
@@ -2669,6 +2696,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/conhost.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/connect.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/control.exe
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/coremessaging.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/credui.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/crtdll.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/crypt32.dll
@@ -2891,6 +2919,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libavicap32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libavifil32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libavrt.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libbcp47langs.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libbcrypt.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libbluetoothapis.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libcabinet.a
@@ -3011,6 +3040,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libnddeapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libnetapi32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libnetio.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libnetutils.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libnewdev.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libninput.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libnormaliz.a
@@ -3018,7 +3048,6 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libntdll.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libntdsapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libntoskrnl.a
--rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libodbc32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libodbccp32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libole32.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/liboleacc.a
@@ -3031,6 +3060,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libpdh.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libpowrprof.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libprntvpt.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libprofapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libpropsys.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libpsapi.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libquartz.a
@@ -3039,6 +3069,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/librasdlg.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libresutils.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libriched20.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/librometadata.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/librpcrt4.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/librsaenh.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/librtutils.a
@@ -3255,7 +3286,6 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/ntoskrnl.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/ntprint.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/objsel.dll
--rw-r--r--	root/root	usr/lib/wine/x86_64-windows/odbc32.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/odbcbcp.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/odbccp32.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/odbccu32.dll
@@ -3283,6 +3313,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/presentationfontcache.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/printui.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/prntvpt.dll
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/profapi.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/progman.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/propsys.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/psapi.dll
@@ -3310,6 +3341,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/riched20.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/riched32.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/robocopy.exe
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/rometadata.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/rpcrt4.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/rpcss.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/rsabase.dll
@@ -3454,6 +3486,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/windows.storage.applicationdata.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/windows.system.profile.systemmanufacturers.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/windows.ui.dll
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/windows.web.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/windowscodecs.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/windowscodecsext.dll
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winealsa.drv
@@ -3662,7 +3695,7 @@ drwxr-xr-x	root/root	usr/share/wine/gecko/
 -rwxr-xr-x	root/root	usr/share/wine/gecko/wine-gecko-2.47.4-x86.msi
 -rwxr-xr-x	root/root	usr/share/wine/gecko/wine-gecko-2.47.4-x86_64.msi
 drwxr-xr-x	root/root	usr/share/wine/mono/
--rwxr-xr-x	root/root	usr/share/wine/mono/wine-mono-9.1.0-x86.msi
+-rwxr-xr-x	root/root	usr/share/wine/mono/wine-mono-9.2.0-x86.msi
 drwxr-xr-x	root/root	usr/share/wine/nls/
 -rw-r--r--	root/root	usr/share/wine/nls/c_037.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_10000.nls
