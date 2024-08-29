@@ -4,7 +4,7 @@
 # Depends on: grub2
 
 name=os-prober
-version=1.82
+version=1.83
 release=1
 source=(http://ftp.de.debian.org/debian/pool/main/o/$name/${name}_$version.tar.xz
   # grabbed from gentoo
@@ -16,7 +16,7 @@ source=(http://ftp.de.debian.org/debian/pool/main/o/$name/${name}_$version.tar.x
   add-CRUX-detection.patch)
 
 build() {
-  cd $name-$version
+  cd work
 
   patch -Np1 -i $SRC/add-CRUX-detection.patch
   patch -Np1 -i $SRC/os-prober-1.79-btrfs-subvolume-detection.patch
