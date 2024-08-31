@@ -55,6 +55,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/f
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/email_verification.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/email_verification_by_code.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/login.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/login_by_code.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/logout.cpython-310.opt-2.pyc
@@ -63,6 +65,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/f
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/password_reset.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/reauthentication.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/signup.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/email_verification.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/email_verification_by_code.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/login.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/login_by_code.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/logout.py
@@ -126,8 +130,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_change_email.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_change_password.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_commands.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_confirm_email.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_decorators.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_email_verification.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_email_verification_by_code.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_login.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_login_by_code.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__pycache__/test_logout.cpython-310.opt-2.pyc
@@ -145,8 +150,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/__py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_change_email.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_change_password.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_commands.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_confirm_email.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_decorators.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_email_verification.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_email_verification_by_code.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_login.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_login_by_code.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/tests/test_logout.py
@@ -536,6 +542,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/locale/uk/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/locale/uk/LC_MESSAGES/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/locale/uk/LC_MESSAGES/django.mo
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/locale/uk/LC_MESSAGES/django.po
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/locale/uz/
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/locale/uz/LC_MESSAGES/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/locale/uz/LC_MESSAGES/django.mo
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/locale/uz/LC_MESSAGES/django.po
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/locale/zh_Hans/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/locale/zh_Hans/LC_MESSAGES/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/locale/zh_Hans/LC_MESSAGES/django.mo
@@ -724,7 +734,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/inte
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/internal/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/internal/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/internal/tests/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/internal/tests/__pycache__/test_jwtkit.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/internal/tests/__pycache__/test_statekit.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/internal/tests/test_jwtkit.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/internal/tests/test_statekit.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/migrations/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/socialaccount/migrations/0001_initial.py
@@ -2392,6 +2404,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/base_manage_email.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/base_manage_password.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/base_reauthenticate.html
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/confirm_email_verification_code.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/confirm_login_code.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/email.html
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/email/
@@ -2612,10 +2625,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/tests
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/urls.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/views.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/utils.py
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/django_allauth-64.1.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.1.0.dist-info/AUTHORS
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.1.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.1.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.1.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.1.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.1.0.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.0.dist-info/AUTHORS
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.0.dist-info/top_level.txt
