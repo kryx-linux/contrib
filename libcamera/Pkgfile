@@ -14,6 +14,7 @@ build() {
   printf "%s\n" "$version" > $name-$version/.tarball-version
   meson setup $name-$version build \
     --prefix=/usr \
+    --libexecdir=lib \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
