@@ -13,7 +13,7 @@ PID=/run/gitea/gitea.pid
 case $1 in
   start)
     if [ ! -e /run/gitea ]; then
-      install -d -o $USER -g $GROUP -m 644 /run/gitea
+      install -d -o $USER -g $GROUP -m 755 /run/gitea
     fi
 
     $SSD --start -b --pidfile $PID --make-pidfile -c $USER -u $USER --exec $PROG -- $OPTS
