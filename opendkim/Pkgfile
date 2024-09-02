@@ -1,12 +1,12 @@
 # Description: an open source implementation of the Domain Keys Identified Mail sender authentication system
 # URL: http://www.opendkim.org/
-# Maintainer:
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: libbsd libmilter
 # Optional: openldap jansson
 
 name=opendkim
 version=2.11.0-Beta2
-release=2
+release=3
 source=(https://github.com/trusteddomainproject/OpenDKIM/archive/$version/$name-$version.tar.gz
   opendkim.rc
   7c70ee7c86da1cecc621182355cc950d3b193314.patch)
@@ -22,7 +22,7 @@ build() {
 
   CFLAGS="${CFLAGS} -I/usr/opt/libbsd/include" \
   LDFLAGS="${LDFLAGS} -L/usr/opt/libbsd/lib" \
-  LD_LIBRARY_PATH="/usr/oprt/libbsd/lib" \
+  LD_LIBRARY_PATH="/usr/opt/libbsd/lib" \
   PKG_CONFIG_PATH="/usr/opt/libbsd/lib/pkgconfig" \
   ./configure --prefix=/usr \
     --with-milter
