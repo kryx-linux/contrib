@@ -18,13 +18,13 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.113.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.113.0.dist-info/AUTHORS.rst
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.113.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.113.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.113.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.113.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.113.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.114.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.114.0.dist-info/AUTHORS.rst
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.114.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.114.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.114.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.114.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.114.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/__pycache__/
@@ -343,7 +343,6 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache__/search.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache__/send_email.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache__/set_password.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache__/sliding_sync.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache__/sso.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache__/state_deltas.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache__/stats.cpython-310.opt-2.pyc
@@ -391,7 +390,16 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/handlers/__pycache
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/search.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/send_email.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/set_password.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync.py
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/__init__.py
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/__pycache__/extensions.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/__pycache__/room_lists.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/__pycache__/store.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/extensions.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/room_lists.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sliding_sync/store.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/sso.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/state_deltas.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/handlers/stats.py
@@ -993,6 +1001,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/__pycache__/search.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/__pycache__/session.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/__pycache__/signatures.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/__pycache__/sliding_sync.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/__pycache__/state.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/__pycache__/state_deltas.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/__pycache__/stats.cpython-310.opt-2.pyc
@@ -1041,6 +1050,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/search.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/session.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/signatures.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/sliding_sync.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/state.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/state_deltas.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/databases/main/stats.py
@@ -1611,6 +1621,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/mai
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/85/06_add_room_reports.sql
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/86/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/86/01_authenticate_media.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/86/02_receipts_event_id_index.sql
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/87/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/87/02_per_connection_state.sql
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/72/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/full_schemas/72/full.sql.postgres
@@ -1674,6 +1687,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/types/handlers/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/types/handlers/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/types/handlers/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/types/handlers/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/types/handlers/__pycache__/sliding_sync.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/types/handlers/sliding_sync.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/types/rest/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/types/rest/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/types/rest/__pycache__/
@@ -1693,6 +1708,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/check_dependencies.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/daemonize.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/distributor.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/events.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/file_consumer.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/frozenutils.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/__pycache__/gai_resolver.cpython-310.opt-2.pyc
@@ -1747,6 +1763,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/util/caches/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/check_dependencies.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/daemonize.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/distributor.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/events.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/file_consumer.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/frozenutils.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/util/gai_resolver.py
