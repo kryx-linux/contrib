@@ -7,11 +7,12 @@ SSD=/sbin/start-stop-daemon
 PROG=/usr/bin/mailman
 PID=/run/mailman/master.pid
 USER=mailman
+GROUP=mail
 
 case $1 in
 start)
   if [ ! -e /run/mailman ]; then
-    mkdir -p /run/mailman
+    install -d -o $USER -g $GROUP -m 755 /run/mailman
   fi
   $SSD --start -c $USER --pidfile $PID --exec $PROG -- start
   ;;
