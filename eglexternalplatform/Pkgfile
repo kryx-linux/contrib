@@ -4,12 +4,19 @@
 # Depends on:
 
 name=eglexternalplatform
-version=1.1
+version=1.2
 release=1
 source=(https://github.com/NVIDIA/eglexternalplatform/archive/$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-$version
-  install -Dt $PKG/usr/include/EGL -m644 interface/*
-  install -Dt $PKG/usr/share/pkgconfig -m644 *.pc
+  meson setup $name-$version build \
+    --prefix=/usr \
+    --includedir=include/EGL \
+    --libdir=share \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
