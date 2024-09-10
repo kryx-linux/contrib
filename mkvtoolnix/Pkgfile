@@ -5,16 +5,14 @@
 # Optional: hicolor-icon-theme
 
 name=mkvtoolnix
-version=86.0
+version=87.0
 release=1
-source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz
-  b57dde69dc80b151844e0762a2ae6bca3ba86d95.patch)
+source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
 
   rm -rf lib/{fmt,libebml,libmatroska,nlohmann-json,pugixml}
-  patch -Np1 -i $SRC/b57dde69dc80b151844e0762a2ae6bca3ba86d95.patch
 
   ./autogen.sh
   ./configure $PKGMK_MKVTOOLNIX \
