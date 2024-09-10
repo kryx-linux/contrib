@@ -17,6 +17,7 @@ lrwxrwxrwx	root/root	usr/bin/pipewire-pulse -> pipewire
 -rwxr-xr-x	root/root	usr/bin/pw-container
 -rwxr-xr-x	root/root	usr/bin/pw-dot
 -rwxr-xr-x	root/root	usr/bin/pw-dump
+-rwxr-xr-x	root/root	usr/bin/pw-jack
 -rwxr-xr-x	root/root	usr/bin/pw-link
 -rwxr-xr-x	root/root	usr/bin/pw-loopback
 -rwxr-xr-x	root/root	usr/bin/pw-metadata
@@ -31,6 +32,24 @@ lrwxrwxrwx	root/root	usr/bin/pipewire-pulse -> pipewire
 -rwxr-xr-x	root/root	usr/bin/spa-json-dump
 -rwxr-xr-x	root/root	usr/bin/spa-monitor
 drwxr-xr-x	root/root	usr/include/
+drwxr-xr-x	root/root	usr/include/jack/
+-rw-r--r--	root/root	usr/include/jack/control.h
+-rw-r--r--	root/root	usr/include/jack/intclient.h
+-rw-r--r--	root/root	usr/include/jack/jack.h
+-rw-r--r--	root/root	usr/include/jack/jslist.h
+-rw-r--r--	root/root	usr/include/jack/metadata.h
+-rw-r--r--	root/root	usr/include/jack/midiport.h
+-rw-r--r--	root/root	usr/include/jack/net.h
+-rw-r--r--	root/root	usr/include/jack/ringbuffer.h
+-rw-r--r--	root/root	usr/include/jack/session.h
+-rw-r--r--	root/root	usr/include/jack/statistics.h
+-rw-r--r--	root/root	usr/include/jack/systemdeps.h
+-rw-r--r--	root/root	usr/include/jack/thread.h
+-rw-r--r--	root/root	usr/include/jack/transport.h
+-rw-r--r--	root/root	usr/include/jack/types.h
+-rw-r--r--	root/root	usr/include/jack/uuid.h
+-rw-r--r--	root/root	usr/include/jack/weakjack.h
+-rw-r--r--	root/root	usr/include/jack/weakmacros.h
 drwxr-xr-x	root/root	usr/include/pipewire-0.3/
 drwxr-xr-x	root/root	usr/include/pipewire-0.3/pipewire/
 -rw-r--r--	root/root	usr/include/pipewire-0.3/pipewire/array.h
@@ -263,6 +282,15 @@ drwxr-xr-x	root/root	usr/lib/alsa-lib/
 -rwxr-xr-x	root/root	usr/lib/alsa-lib/libasound_module_pcm_pipewire.so
 drwxr-xr-x	root/root	usr/lib/gstreamer-1.0/
 -rwxr-xr-x	root/root	usr/lib/gstreamer-1.0/libgstpipewire.so
+lrwxrwxrwx	root/root	usr/lib/libjack.so -> libjack.so.0
+lrwxrwxrwx	root/root	usr/lib/libjack.so.0 -> libjack.so.0.3.1203
+-rwxr-xr-x	root/root	usr/lib/libjack.so.0.3.1203
+lrwxrwxrwx	root/root	usr/lib/libjacknet.so -> libjacknet.so.0
+lrwxrwxrwx	root/root	usr/lib/libjacknet.so.0 -> libjacknet.so.0.3.1203
+-rwxr-xr-x	root/root	usr/lib/libjacknet.so.0.3.1203
+lrwxrwxrwx	root/root	usr/lib/libjackserver.so -> libjackserver.so.0
+lrwxrwxrwx	root/root	usr/lib/libjackserver.so.0 -> libjackserver.so.0.3.1203
+-rwxr-xr-x	root/root	usr/lib/libjackserver.so.0.3.1203
 lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so -> libpipewire-0.3.so.0
 lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.1203.0
 -rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.1203.0
@@ -304,6 +332,7 @@ drwxr-xr-x	root/root	usr/lib/pipewire-0.3/
 drwxr-xr-x	root/root	usr/lib/pipewire-0.3/v4l2/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/v4l2/libpw-v4l2.so
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-rw-r--r--	root/root	usr/lib/pkgconfig/jack.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libpipewire-0.3.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libspa-0.2.pc
 drwxr-xr-x	root/root	usr/lib/spa-0.2/
