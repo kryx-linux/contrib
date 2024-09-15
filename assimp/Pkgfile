@@ -9,6 +9,8 @@ release=1
 source=(https://github.com/assimp/assimp/archive/v$version/$name-$version.tar.gz)
 
 build() {
+  which ccache && PATH="$(echo "$PATH" | awk -v RS=: -v ORS=: '$0 !~ /ccache/ {print}')"
+
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
