@@ -16,6 +16,13 @@ build() {
   prt-get isinst libao || PKGMK_VORBISTOOLS+=(--disable-ogg123)
 
   cd $name-$version
+
+  GCC_VER="$(gcc --version | awk '(NR==1) {print $3}')"
+  if [ "${GCC_VER%%.*}" -ge 14 ]; then
+     sed -e '30a#include "utf8.h"'    -i ogginfo/codec_skeleton.c
+     sed -e '30a#include "charset.h"' -i share/utf8.c
+  fi
+
   ./configure "${PKGMK_VORBISTOOLS[@]}"
 
   make
