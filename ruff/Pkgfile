@@ -1,0 +1,23 @@
+# Description: An extremely fast Python linter and code formatter
+# URL: https://github.com/astral-sh/ruff
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-maturin
+
+name=ruff
+version=0.6.5
+release=1
+source=(https://github.com/astral-sh/ruff/releases/download/$version/source.tar.gz)
+renames=($name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cd $name-$version
+  /usr/bin/maturin build --locked --release --all-features --strip
+
+  prt-get isinst bash-completion && target/release/$name generate-shell-completion bash | install -Dm0644 /dev/stdin $PKG/usr/share/bash-completion/completions/$name.bash
+  prt-get isinst zsh && target/release/$name generate-shell-completion zsh | install -Dm0644 /dev/stdin $PKG/usr/share/zsh/site-functions/_$name
+
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG target/wheels/*.whl
+}
