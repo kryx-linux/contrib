@@ -51,6 +51,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/__pycache__/decorators.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/__pycache__/stagekit.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/decorators.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/__pycache__/
@@ -75,6 +78,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/f
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/password_reset.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/reauthentication.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/flows/signup.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/internal/stagekit.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/management/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/account/management/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/account/management/__pycache__/
@@ -562,6 +566,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/admin.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/app_settings.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/apps.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/checks.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/models.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/signals.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/__pycache__/stages.cpython-310.opt-2.pyc
@@ -593,6 +598,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/__p
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/test_views.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/urls.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/views.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/checks.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/__pycache__/
@@ -678,6 +684,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/__pycache__/forms.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/__pycache__/stages.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/__pycache__/urls.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/__pycache__/views.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/forms.py
@@ -689,6 +696,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/inter
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/internal/__pycache__/flows.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/internal/auth.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/internal/flows.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/stages.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/webauthn/tests/__pycache__/
@@ -2472,6 +2480,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/reauthenticate.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/request_login_code.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/signup.html
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/signup_by_passkey.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/signup_closed.html
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/snippets/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/account/snippets/already_logged_in.html
@@ -2544,6 +2553,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/weba
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/base.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/edit_form.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/reauthenticate.html
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/signup_form.html
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/snippets/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/snippets/login_script.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/snippets/scripts.html
@@ -2637,10 +2647,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/tests
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/urls.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/views.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/utils.py
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.1.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.1.dist-info/AUTHORS
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.1.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.1.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.1.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.1.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-64.2.1.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/django_allauth-65.0.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.0.0.dist-info/AUTHORS
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.0.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.0.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.0.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.0.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.0.0.dist-info/top_level.txt
