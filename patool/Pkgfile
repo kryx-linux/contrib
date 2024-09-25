@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools
 
 name=patool
-version=2.4.0
+version=3.0.0
 release=1
-source=(https://github.com/wummel/patool/archive/dist/patool-$version-py2.py3-none-any.whl/$name-$version.tar.gz)
+source=(https://pypi.org/packages/source/p/patool/patool-$version.tar.gz)
 
 build() {
-  cd patool-dist-patool-$version-py2.py3-none-any.whl
+  cd patool-$version
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG \
