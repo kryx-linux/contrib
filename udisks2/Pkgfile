@@ -13,6 +13,7 @@ build() {
   prt-get isinst btrfs-progs && PKGMK_UDISKS+=' --enable-btrfs'
   prt-get isinst lvm2 && PKGMK_UDISKS+=' --enable-lvm2'
   prt-get isinst doxygen || PKGMK_UDISKS+=' --disable-man'
+  prt-get isinst parted || PKGMK_UDISKS+=' --disable-daemon'
 
   cd udisks-$version
 
