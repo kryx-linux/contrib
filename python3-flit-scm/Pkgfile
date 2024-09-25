@@ -1,0 +1,17 @@
+# Description: A PEP 518 build backend that uses setuptools_scm to generate a version file from your version control system, then flit to build the package
+# URL: https://gitlab.com/WillDaSilva/flit_scm
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools-scm
+
+name=python3-flit-scm
+version=1.7.0
+release=1
+source=(https://pypi.org/packages/source/f/flit_scm/flit_scm-$version.tar.gz)
+
+build() {
+  cd flit_scm-$version
+
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
