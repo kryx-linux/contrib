@@ -3,13 +3,15 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=ttf-inconsolata
-version=3.000
-release=2
-source=(https://github.com/googlefonts/Inconsolata/archive/v$version/$name-$version.tar.gz
+version=3.001
+release=1
+_commit=540ba910bb13ab92147f8d064d6f9ec070fe1820
+
+source=(https://github.com/googlefonts/Inconsolata/archive/$_commit/$name-$version.tar.gz
   75-ttf-inconsolata.conf)
 
 build() {
-  find Inconsolata-$version/fonts/ttf \
+  find Inconsolata-$_commit/fonts/ttf \
     -iname "*.ttf" \
     -execdir install -Dm644 {} $PKG/usr/share/fonts/TTF/Inconsolata/{} \;
 
