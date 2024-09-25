@@ -1,4 +1,4 @@
-# Description: An open source camera stack and framework for Linux, Android, and ChromeOS
+# Description: An open source camera stack and framework
 # URL: https://libcamera.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: glib graphviz libdrm libtiff python3-jinja2 python3-ply python3-pyyaml
@@ -24,4 +24,6 @@ build() {
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
+
+  rm -rf $PKG/usr/share/doc
 }
