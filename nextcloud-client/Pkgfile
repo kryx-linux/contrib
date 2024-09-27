@@ -5,7 +5,7 @@
 # Optional: doxygen librsvg qt6-webengine
 
 name=nextcloud-client
-version=3.14.0
+version=3.14.1
 release=1
 source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz)
 
@@ -18,7 +18,6 @@ build() {
   cmake -S desktop-$version -B build -G Ninja $PKGMK_NCC \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
-    -D CMAKE_INSTALL_SYSCONFDIR=/usr/etc/nextcloud \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
