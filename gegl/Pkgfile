@@ -25,7 +25,9 @@ build() {
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
-    -D b_pie=true
+    -D b_pie=true \
+    -D docs=false \
+    -D gtk-doc=false
   meson compile -C build -j ${JOBS:-1}
   DESTDIR=$PKG meson install -C build
 
