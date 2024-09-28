@@ -2,10 +2,10 @@
 # URL: https://www.postgresql.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: openssl
-# Optional: clang icu krb5 libxml2 libxslt openldap tcl
+# Optional: clang docbook-xsl icu krb5 libxml2 libxslt openldap tcl
 
 name=postgresql
-version=16.4
+version=17.0
 release=1
 source=(https://ftp.postgresql.org/pub/source/v$version/postgresql-$version.tar.bz2
   postgresql-run-socket.patch postgresql-perl-rpath.patch
@@ -18,7 +18,7 @@ build() {
   patch -Np1 -i $SRC/postgresql-perl-rpath.patch
 
   # optionals {{{
-  #prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
+  prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
   prt-get isinst icu || PKGMK_PGSQL+=' --without-icu'
   prt-get isinst krb5 && PKGMK_PGSQL+=' --with-gssapi'
   prt-get isinst libxml2 && PKGMK_PGSQL+=' --with-libxml'
@@ -38,13 +38,16 @@ build() {
   make -j ${JOBS:-1}
   make DESTDIR=$PKG install
 
-  cd doc/src/sgml
-  make DESTDIR=$PKG install-man
-  rm -rf $PKG/usr/share/doc
+  if prt-get isinst libxml2 docbook-xsl; then
+    cd doc/src/sgml
+    make DESTDIR=$PKG install-man
+    rm -rf $PKG/usr/share/doc
+  fi
 
   install -Dm 755 $SRC/postgresql.rc $PKG/etc/rc.d/postgresql
   install -Dm 755 $SRC/postgresql.pam $PKG/etc/pam.d/postgresql
 
   install -Dm 660 -o postgres -g postgres /dev/null $PKG/var/log/postgresql
 }
+
 # vim: foldmethod=marker foldlevelstart=0
