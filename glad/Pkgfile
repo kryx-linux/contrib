@@ -4,15 +4,13 @@
 # Depends on: python3-jinja2
 
 name=glad
-version=2.0.7
+version=2.0.8
 release=1
 source=(https://github.com/Dav1dde/glad/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
