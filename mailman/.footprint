@@ -11,13 +11,13 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman-3.3.9.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.9.dist-info/COPYING
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.9.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.9.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.9.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.9.dist-info/entry_points.txt
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.9.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman-3.3.10.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.10.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.10.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.10.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.10.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman-3.3.10.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman-3.3.10.dist-info/licenses/COPYING
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/__pycache__/
@@ -192,6 +192,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/cli_addmembers.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/cli_admins.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/cli_aliases.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/cli_changeaddress.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/cli_conf.cpython-310.opt-2.pyc
@@ -220,6 +221,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/eml_membership.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/__pycache__/eml_who.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/cli_addmembers.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/cli_admins.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/cli_aliases.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/cli_changeaddress.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/cli_conf.py
@@ -246,6 +248,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/addmembers.rst
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/admins.rst
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/aliases.rst
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/changeaddress.rst
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/commands.rst
@@ -271,6 +274,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/__py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/shell.rst
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/status.rst
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/syncmembers.rst
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/tmpfile
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/unshunt.rst
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/version.rst
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/docs/who.rst
@@ -285,6 +289,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/__pycache__/test_cli_addmembers.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/__pycache__/test_cli_admins.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/__pycache__/test_cli_changeaddress.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/__pycache__/test_cli_conf.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/__pycache__/test_cli_control.cpython-310.opt-2.pyc
@@ -313,6 +318,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/dat
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/data/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/data/no-runners.cfg
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/test_cli_addmembers.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/test_cli_admins.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/test_cli_changeaddress.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/test_cli_conf.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/commands/tests/test_cli_control.py
@@ -451,10 +457,12 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/v
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/4bd95c99b2e7_fix_template_password.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/51b7f92bd06c_initial.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/70af5a4e5790_digests.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/729a8f2045da_add_domain_webhost.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/781a38e146bf_mailinglist_indexes.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/7b254d88f122_members_and_list_moderation_action.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/83339e4039da_add_usenet_watermark.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/89913992dd5a_remove_mime_is_default_digest.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/8cc1f79f4459_add__member_id_index_on_member.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/9735f5e5dbdb_add_archive_rendering_mode.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/98224512c9c2_mysql_extend_autoresponse_text_fields_.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/
@@ -477,10 +485,12 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/v
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/4bd95c99b2e7_fix_template_password.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/51b7f92bd06c_initial.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/70af5a4e5790_digests.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/729a8f2045da_add_domain_webhost.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/781a38e146bf_mailinglist_indexes.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/7b254d88f122_members_and_list_moderation_action.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/83339e4039da_add_usenet_watermark.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/89913992dd5a_remove_mime_is_default_digest.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/8cc1f79f4459_add__member_id_index_on_member.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/9735f5e5dbdb_add_archive_rendering_mode.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/98224512c9c2_mysql_extend_autoresponse_text_fields_.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/database/alembic/versions/__pycache__/a46993b05703_increase_pendedkeyvalue_value_size.cpython-310.opt-2.pyc
@@ -781,6 +791,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/__pycache__/__init__.cpython-310.opt-2.pyc
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/ar/
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/ar/LC_MESSAGES/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/ar/LC_MESSAGES/mailman.mo
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/ar/LC_MESSAGES/mailman.po
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/bg/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/bg/LC_MESSAGES/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/bg/LC_MESSAGES/mailman.mo
@@ -906,6 +920,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hans/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hans/LC_MESSAGES/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hans/LC_MESSAGES/mailman.mo
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hans/LC_MESSAGES/mailman.po
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hant/
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hant/LC_MESSAGES/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hant/LC_MESSAGES/mailman.mo
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/messages/zh_Hant/LC_MESSAGES/mailman.po
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/model/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/model/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/model/__pycache__/
@@ -1464,6 +1482,35 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/__pycache__/__init__.cpython-310.opt-2.pyc
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ar/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/help.txt
@@ -1477,11 +1524,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:notice:post.txt
@@ -1490,6 +1540,35 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bg/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/bn/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/help.txt
@@ -1497,14 +1576,20 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:action:unsubscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:notice:disable.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:notice:pending.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:notice:removal.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:user:action:invite.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ca/list:user:notice:post.txt
@@ -1526,11 +1611,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/cs/list:user:notice:post.txt
@@ -1556,11 +1644,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/__pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:notice:post.txt
@@ -1569,6 +1660,35 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/__pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/de/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/el/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/en/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/en/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/en/__pycache__/
@@ -1602,10 +1722,33 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/en/__pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/en/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/en/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:notice:removal.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:notice:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:member:digest:masthead.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:no-more-today.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:refuse.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:rejected.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:warning.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/eo/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/domain:admin:notice:new-list.txt
@@ -1620,11 +1763,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:notice:post.txt
@@ -1633,6 +1779,64 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/es/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fa/list:user:notice:welcome.txt (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fi/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/fr/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/fr/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/fr/__pycache__/
@@ -1679,11 +1883,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:notice:post.txt
@@ -1693,9 +1900,33 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/he/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/help.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:action:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:action:unsubscribe.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:notice:disable.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:notice:pending.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:notice:removal.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:warning.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/hu/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/domain:admin:notice:new-list.txt
@@ -1703,17 +1934,25 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:action:post.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:notice:pending.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:notice:removal.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:hold.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:no-more-today.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:probe.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:refuse.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/id/list:user:notice:warning.txt
@@ -1729,6 +1968,8 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/__pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:action:unsubscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:notice:disable.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:notice:pending.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:notice:removal.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:admin:notice:unrecognized.txt
@@ -1750,7 +1991,34 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/__pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/it/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/domain:admin:notice:new-list.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/help.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:action:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:action:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:notice:disable.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:notice:increment.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:notice:pending.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:notice:removal.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:notice:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:member:digest:masthead.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:action:invite.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:action:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:hold.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:no-more-today.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:probe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:refuse.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:rejected.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:warning.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ja/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/help.txt
@@ -1758,14 +2026,20 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:action:unsubscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:notice:disable.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:notice:pending.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:notice:removal.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:action:invite.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:notice:post.txt
@@ -1774,6 +2048,35 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ko/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nb_NO/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/help.txt
@@ -1787,11 +2090,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:notice:post.txt
@@ -1801,22 +2107,84 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/nl/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/help.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/oc/list:user:notice:welcome.txt (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pl/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/help.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:action:post.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:notice:pending.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:notice:removal.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:post.txt
@@ -1824,6 +2192,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:refuse.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:warning.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/help.txt
@@ -1837,11 +2206,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:notice:post.txt
@@ -1851,9 +2223,63 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/pt_BR/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/domain:admin:notice:new-list.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/help.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:action:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:action:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:notice:disable.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:notice:increment.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:notice:pending.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:notice:removal.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:notice:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:notice:unrecognized.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:action:invite.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:hold.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:no-more-today.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:probe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:refuse.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:rejected.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:warning.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/ru/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/si/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/sk/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sk/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/sk/__pycache__/
@@ -1884,6 +2310,64 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/sk/__pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sk/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sk/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sk/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sq/list:user:notice:welcome.txt (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/sv/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/help.txt
@@ -1897,11 +2381,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:member:digest:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:notice:post.txt
@@ -1910,6 +2397,35 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/tr/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/domain:admin:notice:new-list.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/help.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:action:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:action:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:notice:disable.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:notice:increment.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:notice:pending.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:notice:removal.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:notice:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:notice:unrecognized.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:member:digest:masthead.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:action:invite.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:action:subscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:hold.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:no-more-today.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:post.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:probe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:refuse.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:rejected.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:warning.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/uk/list:user:notice:welcome.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/domain:admin:notice:new-list.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/help.txt
@@ -1923,11 +2439,14 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:admin:notice:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:admin:notice:unrecognized.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:admin:notice:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:member:digest:header.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:member:digest:masthead.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:member:generic:footer.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:member:regular:header.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:action:invite.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:action:subscribe.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:action:unsubscribe.txt
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:notice:goodbye.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:notice:hold.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:notice:no-more-today.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:notice:post.txt
@@ -1936,6 +2455,35 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:notice:rejected.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:notice:warning.txt
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hans/list:user:notice:welcome.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/domain:admin:notice:new-list.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/help.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:action:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:notice:disable.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:notice:increment.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:notice:pending.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:notice:removal.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:notice:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:notice:unrecognized.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:admin:notice:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:member:digest:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:member:digest:masthead.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:member:generic:footer.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:member:regular:header.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:action:invite.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:action:subscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:action:unsubscribe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:goodbye.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:hold.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:no-more-today.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:post.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:probe.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:refuse.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:rejected.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:warning.txt (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/templates/zh_Hant/list:user:notice:welcome.txt (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/testing/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/mailman/testing/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/mailman/testing/__pycache__/
