@@ -1,0 +1,16 @@
+# Description: Accelerated property cache
+# URL: https://github.com/aio-libs/propcache
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-cython python3-expandvars
+
+name=python3-propcache
+version=0.2.0
+release=1
+source=(https://pypi.org/packages/source/p/propcache/propcache-$version.tar.gz)
+
+build() {
+  cd propcache-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
