@@ -5,7 +5,7 @@
 # Optional: bash-completion bluez consolekit efivar flashrom fwupd-efi libcbor libdrm libgusb modemmanager pandoc-bin polkit protobuf-c python3-markdown tpm2-tss udisks2 valgrind
 
 name=fwupd
-version=1.9.25
+version=2.0.0
 release=1
 source=(https://github.com/fwupd/fwupd/releases/download/$version/fwupd-$version.tar.xz
   fwupd.service)
@@ -36,9 +36,7 @@ build() {
     -D b_pie=true \
     -D hsi=enabled \
     -D lvfs=true \
-    -D plugin_intel_spi=true \
     -D supported_build=enabled \
-    -D udevdir=/lib/udev \
     -D efi_os_dir=CRUX \
     -D efi_binary=false \
     -D launchd=disabled \
