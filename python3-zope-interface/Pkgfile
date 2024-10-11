@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools
 
 name=python3-zope-interface
-version=7.0.3
+version=7.1.0
 release=1
-source=(https://pypi.io/packages/source/z/zope.interface/zope.interface-$version.tar.gz)
+source=(https://pypi.io/packages/source/z/zope.interface/zope_interface-$version.tar.gz)
 
 build() {
-  cd zope.interface-$version
+  cd zope_interface-$version
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
