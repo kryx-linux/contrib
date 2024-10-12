@@ -1,0 +1,16 @@
+# Description: Backport of PEP 654
+# URL: https://github.com/agronholm/exceptiongroup
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-flit-scm
+
+name=python3-exceptiongroup
+version=1.2.2
+release=1
+source=(https://pypi.org/packages/source/e/exceptiongroup/exceptiongroup-$version.tar.gz)
+
+build() {
+  cd exceptiongroup-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}

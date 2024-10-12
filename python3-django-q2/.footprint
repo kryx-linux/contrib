@@ -12,6 +12,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/cluster.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/conf.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/core_signing.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/exceptions.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/humanhash.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/models.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/monitor.cpython-312.opt-2.pyc
@@ -23,6 +24,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/signing.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/status.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/tasks.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/timeout.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/utils.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/__pycache__/worker.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/admin.py
@@ -44,6 +46,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/brokers/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/cluster.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/conf.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/core_signing.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/exceptions.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/humanhash.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/locale/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/locale/de/
@@ -89,6 +92,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/migrations/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/0015_alter_schedule_schedule_type.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/0016_schedule_intended_date_kwarg.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/0017_task_cluster_alter.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/0018_task_success_index.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pycache__/0001_initial.cpython-312.opt-2.pyc
@@ -108,6 +112,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pyca
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pycache__/0015_alter_schedule_schedule_type.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pycache__/0016_schedule_intended_date_kwarg.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pycache__/0017_task_cluster_alter.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pycache__/0018_task_success_index.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/migrations/__pycache__/__init__.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/models.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/monitor.py
@@ -149,11 +154,12 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q/tests/testing_uti
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/tests/testing_utilities/__pycache__/multiple_database_routers.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/tests/testing_utilities/multiple_database_routers.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/tests/urls.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/timeout.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/utils.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q/worker.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q2-1.6.2.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.6.2.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.6.2.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.6.2.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.6.2.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.6.2.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_q2-1.7.2.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.7.2.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.7.2.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.7.2.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.7.2.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_q2-1.7.2.dist-info/entry_points.txt

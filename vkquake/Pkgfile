@@ -4,17 +4,15 @@
 # Depends on: glslang libmad libsdl2 libvorbis vulkan-loader zopfli
 
 name=vkquake
-version=1.31.0
+version=1.31.2
 release=1
 source=(https://github.com/Novum/vkQuake/archive/$version/$name-$version.tar.gz
-  f1a54fbdf403f0b2f54dd89879b82e68d5f08fcf.patch
   vkquake.desktop vkquake.png)
 
 build() {
   rm -rf vkQuake-$version/Windows
   sed -i 's#vulkan_core.h#vulkan.h#' vkQuake-$version/Quake/quakedef.h
 
-  patch -Np1 -d vkQuake-$version -i $SRC/f1a54fbdf403f0b2f54dd89879b82e68d5f08fcf.patch
   #meson setup vkQuake-$version build \
   #  --prefix=/usr \
   #  --buildtype=plain \

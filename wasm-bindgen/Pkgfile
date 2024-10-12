@@ -4,22 +4,19 @@
 # Depends on: rust-wasm
 
 name=wasm-bindgen
-version=0.2.92
+version=0.2.95
 release=1
-source=(https://github.com/rustwasm/wasm-bindgen/archive/$version/$name-$version.tar.gz
-  Cargo.lock)
+source=(https://github.com/rustwasm/wasm-bindgen/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version/crates/cli
 
-  cp $SRC/Cargo.lock .
-  cargo fetch --target "$(rustc -vV | sed -n 's/host: //p')"
   export OPENSSL_NO_VENDOR=1
   cargo build --release --all-features
+
   find $SRC/$name-$version/target/release \
     -maxdepth 1 \
     -executable \
     -type f \
     -exec install -Dm0755 -t $PKG/usr/bin/ {} \;
-
 }

@@ -6,8 +6,9 @@
 
 name=mpd
 version=0.23.15
-release=1
+release=2
 source=(https://www.musicpd.org/download/mpd/${version:0:4}/$name-$version.tar.xz
+  fmt.patch
   mpd)
 
 build() {
@@ -29,7 +30,7 @@ build() {
   prt-get isinst libmad && PKGMK_MPD+=' -D mad=enabled'
   prt-get isinst libmkikmod && PKGMK_MPD+=' -D mikmod=enabled'
   prt-get isinst libmodplug && PKGMK_MPD+=' -D modplug=enabled'
- #prt-get isinst libmpcdec && PKGMK_MPD+=' -D mpcdec=enabled'
+  #prt-get isinst libmpcdec && PKGMK_MPD+=' -D mpcdec=enabled'
   prt-get isinst libsamplerate && PKGMK_MPD+=' -D libsamplerate=enabled'
   prt-get isinst libsndfile && PKGMK_MPD+=' -D sndfile=enabled'
   prt-get isinst libsoxr && PKGMK_MPD+=' -D soxr=enabled'
@@ -45,6 +46,8 @@ build() {
   prt-get isinst yajl && PKGMK_MPD+=' -D yajl=enabled'
   prt-get isinst zziplib && PKGMK_MPD+=' -D zzip=enabled'
   # }}}
+
+  patch -Np1 -d $name-$version -i $SRC/fmt.patch
 
   meson setup $name-$version build $PKGMK_MPD \
     --prefix=/usr \

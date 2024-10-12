@@ -1,0 +1,24 @@
+# Description: Static type checker for Python
+# URL: https://microsoft.github.io/pyright/#/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: npm
+
+name=pyright
+version=1.1.384
+release=1
+source=(https://github.com/microsoft/pyright/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  npm ci
+  cd packages/pyright
+  npm run build
+
+  local mod_dir=/usr/lib/node_modules/$name
+  install -d "$PKG"/{usr/bin,$mod_dir}
+  ln -s $mod_dir/index.js "$PKG"/usr/bin/$name
+  ln -s $mod_dir/langserver.index.js "$PKG"/usr/bin/$name-langserver
+
+  cp -r dist {,langserver.}index.js package.json "$PKG"/$mod_dir
+}

@@ -18,13 +18,13 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.12/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.112.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.112.0.dist-info/AUTHORS.rst
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.112.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.112.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.112.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.112.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.112.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.116.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.116.0.dist-info/AUTHORS.rst
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.116.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.116.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.116.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.116.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/matrix_synapse-1.116.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/__pycache__/
@@ -311,6 +311,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/auth.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/cas.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/deactivate_account.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/delayed_events.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/device.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/devicemessage.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/directory.cpython-312.opt-2.pyc
@@ -343,7 +344,6 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/search.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/send_email.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/set_password.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/sliding_sync.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/sso.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/state_deltas.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache__/stats.cpython-312.opt-2.pyc
@@ -359,6 +359,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/auth.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/cas.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/deactivate_account.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/delayed_events.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/device.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/devicemessage.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/directory.py
@@ -391,7 +392,16 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/handlers/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/search.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/send_email.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/set_password.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/__init__.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/__pycache__/extensions.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/__pycache__/room_lists.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/__pycache__/store.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/extensions.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/room_lists.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sliding_sync/store.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/sso.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/state_deltas.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/handlers/stats.py
@@ -555,6 +565,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/_
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/__init__.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/_base.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/account_data.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/delayed_events.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/devices.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/federation.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/login.cpython-312.opt-2.pyc
@@ -568,6 +579,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/_
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/__pycache__/streams.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/_base.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/account_data.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/delayed_events.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/devices.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/federation.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/replication/http/login.py
@@ -711,6 +723,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pycache__/auth.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pycache__/auth_issuer.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pycache__/capabilities.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pycache__/delayed_events.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pycache__/devices.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pycache__/directory.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pycache__/events.cpython-312.opt-2.pyc
@@ -756,6 +769,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/auth.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/auth_issuer.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/capabilities.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/delayed_events.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/devices.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/directory.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/rest/client/events.py
@@ -960,6 +974,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/cache.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/censor_events.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/client_ips.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/delayed_events.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/deviceinbox.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/devices.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/directory.cpython-312.opt-2.pyc
@@ -993,6 +1008,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/search.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/session.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/signatures.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/sliding_sync.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/state.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/state_deltas.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/__pycache__/stats.cpython-312.opt-2.pyc
@@ -1008,6 +1024,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/cache.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/censor_events.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/client_ips.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/delayed_events.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/deviceinbox.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/devices.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/directory.py
@@ -1041,6 +1058,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/search.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/session.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/signatures.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/sliding_sync.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/state.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/state_deltas.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/databases/main/stats.py
@@ -1611,6 +1629,13 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/mai
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/85/06_add_room_reports.sql
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/86/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/86/01_authenticate_media.sql
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/86/02_receipts_event_id_index.sql
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/87/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/87/01_sliding_sync_memberships.sql
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/87/02_per_connection_state.sql
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/87/03_current_state_index.sql
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/88/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/delta/88/01_add_delayed_events.sql
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/full_schemas/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/full_schemas/72/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/storage/schema/main/full_schemas/72/full.sql.postgres
@@ -1674,6 +1699,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/handlers/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/handlers/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/handlers/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/handlers/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/handlers/__pycache__/sliding_sync.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/handlers/sliding_sync.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/rest/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/rest/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/rest/__pycache__/
@@ -1683,6 +1710,10 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/rest/client/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/rest/client/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/rest/client/__pycache__/__init__.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/state.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/storage/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/storage/__init__.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/types/storage/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/types/storage/__pycache__/__init__.cpython-312.opt-2.pyc
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/util/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/
@@ -1693,6 +1724,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/check_dependencies.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/daemonize.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/distributor.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/events.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/file_consumer.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/frozenutils.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/__pycache__/gai_resolver.cpython-312.opt-2.pyc
@@ -1747,6 +1779,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/synapse/util/caches/__pyca
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/check_dependencies.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/daemonize.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/distributor.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/events.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/file_consumer.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/frozenutils.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/synapse/util/gai_resolver.py

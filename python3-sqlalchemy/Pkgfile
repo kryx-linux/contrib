@@ -4,12 +4,12 @@
 # Depends on: python3-greenlet python3-typing_extensions
 
 name=python3-sqlalchemy
-version=2.0.31
+version=2.0.35
 release=1
-source=(https://pypi.org/packages/source/S/SQLAlchemy/SQLAlchemy-$version.tar.gz)
+source=(https://pypi.org/packages/source/s/sqlalchemy/sqlalchemy-$version.tar.gz)
 
 build() {
-  cd SQLAlchemy-$version
+  cd sqlalchemy-$version
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \

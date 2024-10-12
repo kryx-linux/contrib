@@ -10,7 +10,7 @@ OPTS="daemon --config config.yaml"
 
 case $1 in
   start)
-    if [[ $(/etc/rc.d/docker status) =~ "is not" ]]; then
+    if /etc/rc.d/docker status | grep -q "is not"; then
       echo "[ERR] This service depends on docker running!"
       exit 1
     fi

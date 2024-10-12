@@ -1,15 +1,15 @@
 # Description: Python implementation of John Gruber's Markdown
 # URL: https://python-markdown.github.io/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-yaml
+# Depends on: python3-pyyaml
 
 name=python3-markdown
-version=3.6
+version=3.7
 release=1
-source=(https://files.pythonhosted.org/packages/source/M/Markdown/Markdown-$version.tar.gz)
+source=(https://pypi.org/packages/source/m/markdown/markdown-$version.tar.gz)
 
 build() {
-  cd Markdown-$version
+  cd markdown-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl

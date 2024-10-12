@@ -2,6 +2,7 @@
 # URL: https://nmap.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: libpcap libpcre libssh2 lua
+# Optional: cairo gobject-introspection python3-build
 
 name=nmap
 version=7.95
@@ -12,10 +13,15 @@ source=(https://nmap.org/dist/$name-$version.tar.bz2)
 build () {
   cd $name-$version
 
+  prt-get isinst cairo gobject-introspection python3-build || PKGMK_NMAP+=' --without-zenmap'
+  prt-get isinst python3-build || PKGMK_NMAP+=' --without-ndiff'
+
   rm -rf liblua libpcap libpcre macosx mwin32 libssh2 libz
   autoreconf -fiv
 
-  ./configure --prefix=/usr \
+  PYTHON=/usr/bin/python3 \
+  ./configure $PKGMK_NMAP \
+    --prefix=/usr \
     --libexecdir=/usr/lib \
     --with-libpcap=/usr \
     --with-libpcre=/usr \
@@ -23,12 +29,13 @@ build () {
     --with-libssh2=/usr \
     --with-liblua=/usr \
     --disable-nls \
-    --without-ndiff \
-    --without-nmap-update \
-    --without-zenmap
+    --without-nmap-update
 
   make
   make DESTDIR=$PKG install
 
-  find $PKG -iname '*readme*' -exec rm -fr '{}' \+
+  find $PKG \( \
+    -iname '*readme*' -o \
+    -iname 'uninstall_ndiff' \)\
+    -exec rm -fr '{}' \+
 }

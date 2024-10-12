@@ -5,7 +5,7 @@
 # Optional: bash-completion dnsmasq iwd jansson libpsl libteam mobile-broadband-provider-info modemmanager ppp vala wireguard-tools
 
 name=networkmanager
-version=1.48.6
+version=1.50.0
 release=1
 source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkManager-$version.tar.xz
   networkmanager.rc
@@ -13,7 +13,7 @@ source=(https://download.gnome.org/sources/NetworkManager/${version::4}/NetworkM
   polkit.conf
   dhcp.conf
   org.freedesktop.NetworkManager.rules
-  1966.patch)
+)
 
 build() {
   prt-get isinst iwd && PKGMK_NM+=' -D iwd=true'
@@ -24,7 +24,6 @@ build() {
   prt-get isinst vala && PKGMK_NM+=' -D vapi=false'
 
   /usr/bin/grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
-  patch -Np1 -d NetworkManager-$version -i $SRC/1966.patch
 
   meson setup NetworkManager-$version build $PKGMK_NM \
     --prefix /usr \
@@ -53,7 +52,10 @@ build() {
     -D qt=false \
     -D systemdsystemunitdir=no \
     -D systemd_journal=false \
-    -D nm_cloud_setup=false
+    -D nm_cloud_setup=false \
+    -D ebpf=false \
+    -Dmore_asserts=0 \
+    -Dmore_logging=false
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 

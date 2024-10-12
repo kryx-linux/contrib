@@ -5,11 +5,13 @@
 # Optional: krb5 lua51
 
 name=wireshark
-version=4.2.6
+version=4.4.1
 release=1
-source=(https://www.wireshark.org/download/src/$name-$version.tar.xz)
+source=(https://www.wireshark.org/download/src/$name-$version.tar.xz
+  7c1418625d2ba5095ef5393abdb2141c990a662c.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/7c1418625d2ba5095ef5393abdb2141c990a662c.patch
   prt-get isinst ccache && PKGMK_WIRESHARK+=' -D ENABLE_CCACHE=ON' && \
     PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
