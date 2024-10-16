@@ -2,24 +2,22 @@
 # URL: https://www.inkscape.org/
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: boehm-gc double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler-ink popt potrace
+# Optional: libcdr libvisio libwpg
 
 name=inkscape
-version=1.3.2
-release=3
-source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz 6209.patch)
+version=1.4
+release=1
+source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz)
 
 build() {
     export LDFLAGS+=" -Wl,-rpath=/usr/lib/inkscape"
     export PKG_CONFIG_PATH="/usr/lib/inkscape/pkgconfig:$PKG_CONFIG_PATH"
+    INK_OPTS="-D WITH_INTERNAL_2GEOM=ON -D BUILD_TESTING=OFF -D WITH_NLS=OFF"
+    prt-get isinst libcdr || INK_OPTS+=" -D WITH_LIBCDR=OFF"
+    prt-get isinst libvisio || INK_OPTS+=" -D WITH_LIBVISIO=OFF"
+    prt-get isinst libwpg || INK_OPTS+=" -D WITH_LIBWPG=OFF"
 
     cd ${name}-${version}*
-
-    # patch for the new poppler ABI
-    patch -Np1 -i ../6209.patch
-
-    # add missing header file (merge request 6089)
-    sed -e '/^#include <libxml.uri/a #include <libxml/xmlmemory.h>' \
-        -i src/object/uri.h
 
     cmake -S . -B build -G Ninja \
         -D CMAKE_INSTALL_PREFIX=/usr \
@@ -29,14 +27,13 @@ build() {
         -D CMAKE_C_FLAGS_RELEASE="-L/usr/lib/inkscape $CXXFLAGS" \
 	-D POPPLER_INCLUDE_DIR="/usr/include/poppler-ink" \
 	-D POPPLER_GLIB_INCLUDE_DIR="/usr/include/poppler-ink/glib" \
-        -D WITH_INTERNAL_2GEOM=ON \
-	-D BUILD_TESTING=OFF \
-	-D WITH_LIBCDR=OFF \
-        -D WITH_NLS=OFF \
+        $INK_OPTS \
         -Wno-dev
 
-    sed -e '/^#include <poppler/s;poppler/;;' \
-        -i src/extension/internal/pdfinput/pdf-input.cpp
+    for _f in pdf-input.cpp poppler-transition-api.h poppler-utils.cpp; do
+        sed -e '/^#include <poppler/s;poppler/;;' \
+            -i src/extension/internal/pdfinput/${_f};
+    done
 
     cmake --build build
     DESTDIR=$PKG cmake --install build
