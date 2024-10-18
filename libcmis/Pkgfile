@@ -7,12 +7,14 @@ name=libcmis
 version=0.6.2
 release=2
 source=(https://github.com/tdf/libcmis/releases/download/v${version}/$name-$version.tar.gz
+  boost-1.86.0.patch
   libxml2-2.12.patch)
 
 build() {
   cd $name-$version
 
   patch -Np1 -i $SRC/libxml2-2.12.patch
+  patch -Np1 -i $SRC/boost-1.86.0.patch
 
   ./configure --prefix=/usr \
     --disable-werror \
