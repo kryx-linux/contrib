@@ -5,10 +5,9 @@
 # Optional: postgresql redis
 
 name=grafana
-version=11.2.3
+version=11.3.0
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
-  0001-Fix-panic-with-golang-1.23.patch
   grafana.confd grafana.service)
 
 build() {
@@ -24,8 +23,6 @@ build() {
   export GOEXPERIMENT=boringcrypto
 
   cd $SRC/$name-${version/+/-}
-
-  patch -Np1 -i $SRC/0001-Fix-panic-with-golang-1.23.patch
 
   sed -ri 's,^(\s*data\s*=).*,\1 /var/lib/grafana,' conf/defaults.ini
   sed -ri 's,^(\s*plugins\s*=).*,\1 /var/lib/grafana/plugins,' conf/defaults.ini
