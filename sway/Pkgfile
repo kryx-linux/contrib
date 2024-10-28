@@ -5,8 +5,8 @@
 # Optional: gdk-pixbuf scdoc seatd
 
 name=sway
-version=1.9
-release=2
+version=1.10
+release=1
 source=(https://github.com/swaywm/sway/archive/$version/$name-$version.tar.gz
   6249.patch)
 
@@ -15,7 +15,6 @@ build() {
 
   prt-get isinst bash-completion || PKGMK_SWAY+=' -D bash-completions=false'
   prt-get isinst zsh || PKGMK_SWAY+=' -D zsh-completions=false'
-  prt-get isinst xorg-xwayland && PKGMK_SWAY+=' -D xwayland=enabled' || PKGMK_SWAY+=' -D xwayland=disabled'
 
   meson setup $name-$version build $PKGMK_SWAY \
     --prefix=/usr \

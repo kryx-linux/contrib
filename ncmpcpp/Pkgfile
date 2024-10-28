@@ -5,9 +5,9 @@
 # Optional: mpd fftw taglib
 
 name=ncmpcpp
-version=0.10
+version=0.10.1
 release=1
-source=(https://github.com/arybczak/$name/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/ncmpcpp/ncmpcpp/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
@@ -15,7 +15,7 @@ build() {
   prt-get isinst fftw && PKGMK_NCMPCPP+=' --with-fftw --enable-visualizer'
   prt-get isinst taglib && PKGMK_NCMPCPP+=' --with-taglib'
 
-  ./autogen.sh
+  autoreconf -vfi
   ./configure $PKGMK_NCMPCPP \
     --prefix=/usr \
     --enable-shared='yes' \

@@ -5,10 +5,9 @@
 # Optional: postgresql redis
 
 name=grafana
-version=11.2.2
+version=11.3.0
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
-  #https://dl.grafana.com/oss/release/grafana-$version.linux-amd64.tar.gz
   grafana.confd grafana.service)
 
 build() {
@@ -23,7 +22,7 @@ build() {
 
   export GOEXPERIMENT=boringcrypto
 
-  cd $SRC/$name-$version
+  cd $SRC/$name-${version/+/-}
 
   sed -ri 's,^(\s*data\s*=).*,\1 /var/lib/grafana,' conf/defaults.ini
   sed -ri 's,^(\s*plugins\s*=).*,\1 /var/lib/grafana/plugins,' conf/defaults.ini

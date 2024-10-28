@@ -7,9 +7,12 @@
 name=neatvnc
 version=0.8.1
 release=1
-source=(https://github.com/any1/neatvnc/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/any1/neatvnc/archive/v$version/$name-$version.tar.gz
+  ffmpeg-7.1.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/ffmpeg-7.1.patch
+
   prt-get isinst gnutls && PKGMK_NEATVNC+=' -D jpeg=enabled'
   prt-get isinst libjpeg-turbo && PKGMK_NEATVNC+=' -D jpeg=enabled'
   prt-get isinst nettle && PKGMK_NEATVNC+=' -D nettle=enabled'
