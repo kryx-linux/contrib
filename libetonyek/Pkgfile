@@ -4,23 +4,20 @@
 # Depends on: glm liblangtag librevenge mdds
 
 name=libetonyek
-version=0.1.10
+version=0.1.11
 release=4
 source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
-  0001-allow-0-size-message.patch.1
   libetonyek-bundled-soname.patch.0
   rpath.patch
   ubsan.patch
-  warnings.patch)
+)
 
 build() {
   cd $name-$version
 
-  patch -Np1 -i $SRC/0001-allow-0-size-message.patch.1
   patch -Np0 -i $SRC/libetonyek-bundled-soname.patch.0
   patch -Np0 -i $SRC/rpath.patch
   patch -Np0 -i $SRC/ubsan.patch
-  patch -Np0 -i $SRC/warnings.patch
 
   autoreconf -fvi
 

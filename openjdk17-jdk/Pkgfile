@@ -4,30 +4,35 @@
 # Depends on: alsa-lib cups giflib harfbuzz lcms2 libxslt nss unzip xorg-libxrandr xorg-libxt xorg-libxtst zip
 
 name=openjdk17-jdk
-version=17.0.8+6
-_boot_ver=20230715
+version=17.0.14+1
+_boot_ver=16.0.2+7
+_boot_date=20241103
 _cert_ver=20210916
 release=1
-source=(https://github.com/openjdk/jdk17u/archive/jdk-$version/$name-$version.tar.gz
-  https://git.crux.nu/tb/java-distfiles/raw/branch/master/distfiles/openjdk17-boot-${_boot_ver}.tar.xz
-  https://git.crux.nu/tb/java-distfiles/raw/branch/master/distfiles/java_cacerts-${_cert_ver})
+source=(https://github.com/openjdk/jdk17u/archive/jdk-$version/jdk-$version.tar.gz
+  https://git.crux.nu/tb/java-distfiles/src/branch/master/distfiles/openjdk${_boot_ver::2}-boot-${_boot_ver}-${_boot_date}.tar.xz
+  https://git.crux.nu/tb/java-distfiles/raw/branch/master/distfiles/java_cacerts-${_cert_ver}
+  system-public-suffix.patch
+)
 
 build() {
-  if [ -e '/usr/bin/ccache' ]; then
-    PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+  if command -v ccache >/dev/null 2>&1; then
+    export PATH=$(echo $PATH | tr ':' '\n' | grep -E '/(s?bin)$' | tr '\n' ':')
     PKGMK_JDK17+=' --enable-ccache'
   fi
 
+  patch -p1 -d $SRC/jdk${version::2}u-jdk-${version/+/-} -i $SRC/system-public-suffix.patch
+
   OLD_PATH=$PATH
-  export JAVA_HOME=$SRC/openjdk17-boot
+  export JAVA_HOME=$SRC/openjdk${_boot_ver::2}-boot
   export PATH=$JAVA_HOME/bin:$OLD_PATH
 
+  export EXTRA_CPP_FLAGS="$CXXFLAGS -fcommon"
+  export EXTRA_CFLAGS="$CFLAGS -fcommon"
   unset CFLAGS
   unset CXXFLAGS
   unset LDFLAGS
   unset MAKEFLAGS
-  export _CFLAGS+=' -fcommon'
-  export _CXXFLAGS+=' -fcommon'
 
   [ -z $JOBS ] && JOBS=$(nproc)
 
@@ -59,8 +64,8 @@ build() {
     --with-lcms=system \
     --with-freetype=system \
     --with-harfbuzz=system \
-    --with-extra-cflags="$_CFLAGS" \
-    --with-extra-cxxflags="$_CXXFLAGS"
+    --with-extra-cflags="$EXTRA_CFLAGS" \
+    --with-extra-cxxflags="$EXTRA_CPP_FLAGS"
 
   # NOTE: for debugging build issues: set LOG to debug, JOBS to 1.
   LC_ALL=C \

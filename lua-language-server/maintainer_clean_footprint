@@ -1,0 +1,7 @@
+#!/bin/sh
+rm -f footprint.in
+mv .footprint footprint.in
+
+awk '!/meta\/[a-z0-9]{8}\/$/ || /meta\/template\//' footprint.in > .footprint
+
+rm -f footprint.in
