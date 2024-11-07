@@ -4,10 +4,9 @@
 # Depends on: gobject-introspection libbytesize libyaml ndctl volume_key
 
 name=libblockdev
-version=3.2.0
+version=3.2.1
 release=1
-source=(https://github.com/storaged-project/$name/releases/download/$version/$name-$version.tar.gz
-  1059.patch)
+source=(https://github.com/storaged-project/$name/releases/download/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
@@ -15,7 +14,6 @@ build() {
   find -type f \( -name "Makefile.am" -o -name "configure.ac" \) -print0 \
     | xargs --null sed "s@ -Werror@@" -i
   export CFLAGS="${CFLAGS} -Wno-deprecated-declarations"
-  patch -Np1 -i $SRC/1059.patch
   aclocal
   automake
 
