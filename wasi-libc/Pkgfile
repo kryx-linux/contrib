@@ -4,9 +4,10 @@
 # Depends on: clang
 
 name=wasi-libc
-version=0.20240411
-_commit=98897e29fcfc81e2b12e487e4154ac99188330c4
-release=2
+version=24
+# https://github.com/WebAssembly/wasi-sdk/tree/main/src latest tagged version
+_commit=b9ef79d7dbd47c6c5bafdae760823467c2f60b70
+release=1
 source=(https://github.com/WebAssembly/$name/archive/$_commit/$name-$version.tar.gz
   no-double-build.patch)
 
