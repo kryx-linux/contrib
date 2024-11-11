@@ -9,7 +9,7 @@ version=1.82.0
 _date=2024-09-05
 _rustc=1.81.0
 _cargo=$_rustc
-release=1
+release=2
 
 source=(https://static.rust-lang.org/dist/${name/-wasm/}c-$version-src.tar.xz
   https://static.rust-lang.org/dist/$_date/rust-std-$_rustc-x86_64-unknown-linux-gnu.tar.xz
@@ -112,7 +112,7 @@ build() {
   dist-stage = 2
   install-stage = 2
   host = ["x86_64-unknown-linux-gnu"]
-  target = ["wasm32-unknown-unknown", "wasm32-wasi"]
+  target = ["wasm32-unknown-unknown", "wasm32-wasi", "wasm32-wasip1", "wasm32-wasip2"]
   docs = false
   extended = false
   sanitizers = false
@@ -142,11 +142,32 @@ build() {
   sanitizers = false
   profiler = false
   wasi-root = "/usr/share/wasi-sysroot"
+  linker = "/usr/bin/wasm-ld"
 
   [target.wasm32-unknown-unknown]
   profiler = false
   sanitizers = false
-  linker = "lld"
+  linker = "/usr/bin/wasm-ld"
+
+  [target.wasm32-wasip1]
+  cc = "/usr/bin/clang"
+  cxx = "/usr/bin/clang++"
+  ar = "/usr/bin/llvm-ar"
+  ranlib = "/usr/bin/llvm-ranlib"
+  linker = "/usr/bin/wasm-ld"
+  sanitizers = false
+  profiler = false
+  wasi-root = "/usr/share/wasi-sysroot"
+
+  [target.wasm32-wasip2]
+  cc = "/usr/bin/clang"
+  cxx = "/usr/bin/clang++"
+  ar = "/usr/bin/llvm-ar"
+  ranlib = "/usr/bin/llvm-ranlib"
+  linker = "/usr/bin/wasm-ld"
+  sanitizers = false
+  profiler = false
+  wasi-root = "/usr/share/wasi-sysroot"
 EOF
   # }}}
 

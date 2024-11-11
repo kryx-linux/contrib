@@ -1,11 +1,12 @@
 # Description: WASI libc implementation for WebAssembly
 # URL: https://github.com/WebAssembly/wasi-libc
-# Maintainer: John McQuah, jmcquah at disroot dot org
+# Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: clang
 
 name=wasi-libc
-version=0.20240411
-_commit=9e8c542319242a5e536e14e6046de5968d298038
+version=24
+# https://github.com/WebAssembly/wasi-sdk/tree/main/src latest tagged version
+_commit=b9ef79d7dbd47c6c5bafdae760823467c2f60b70
 release=1
 source=(https://github.com/WebAssembly/$name/archive/$_commit/$name-$version.tar.gz
   no-double-build.patch)
@@ -15,13 +16,16 @@ build() {
 
   patch -p1 -i $SRC/no-double-build.patch
 
-  # Remove bulk memory support
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1773200#c4
-  make CC=clang BULK_MEMORY_SOURCES=
+  MAKE_ARGS="WASM_CC=/usr/bin/clang WASM_AR=/usr/bin/llvm-ar WASM_NM=/usr/bin/llvm-nm BULK_MEMORY_SOURCES="
+  for target in wasi wasip1 wasip2; do
+    [ "${target#wasi}" = p2 ] && MAKE_ARGS+=" WASI_SNAPSHOT=p2"
+    make TARGET_TRIPLE="wasm32-$target" $MAKE_ARGS
+  done
+
   make INSTALL_DIR="$PKG/usr/share/wasi-sysroot" install
 
-  cd $PKG/usr/share/wasi-sysroot/lib/wasm32-wasi
-  for f in *.a; do
+  cd $PKG/usr/share/wasi-sysroot/lib
+  for f in wasm32-wasi*/*.a; do
     /usr/bin/llvm-ranlib $f
     /usr/bin/llvm-strip --strip-debug $f
   done
