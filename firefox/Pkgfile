@@ -5,7 +5,7 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wayland
 
 name=firefox
-version=132.0.1
+version=132.0.2
 release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
@@ -86,7 +86,7 @@ EOF
 
   if prt-get isinst wayland xorg-server >/dev/null ; then
     echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-x11-wayland' >> .mozconfig
-  elif prt-get isinst wayland 2>/dev/null ; then 
+  elif prt-get isinst wayland >/dev/null ; then 
     echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-wayland-only' >> .mozconfig
   else
     echo 'ac_add_options --enable-default-toolkit=cairo-gtk3-x11-only' >> .mozconfig
