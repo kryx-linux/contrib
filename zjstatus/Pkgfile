@@ -4,7 +4,7 @@
 # Depends on: rust-wasm zellij
 
 name=zjstatus
-version=0.18.1
+version=0.19.0
 release=1
 source=(https://github.com/dj95/zjstatus/archive/v$version/$name-$version.tar.gz)
 
@@ -16,4 +16,5 @@ build() {
   cargo build --release
 
   install -Dt $PKG/usr/bin target/wasm32-wasip1/release/$name.wasm
+  install -Dt $PKG/usr/bin target/wasm32-wasip1/release/zjframes.wasm
 }
