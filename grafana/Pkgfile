@@ -5,7 +5,7 @@
 # Optional: postgresql redis
 
 name=grafana
-version=11.3.0
+version=11.3.1
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   grafana.confd grafana.service)
@@ -24,6 +24,7 @@ build() {
 
   cd $SRC/$name-${version/+/-}
 
+
   sed -ri 's,^(\s*data\s*=).*,\1 /var/lib/grafana,' conf/defaults.ini
   sed -ri 's,^(\s*plugins\s*=).*,\1 /var/lib/grafana/plugins,' conf/defaults.ini
   sed -ri 's,^(\s*provisioning\s*=).*,\1 /var/lib/grafana/conf/provisioning,' conf/defaults.ini
@@ -39,7 +40,7 @@ build() {
   export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
   export NODE_OPTIONS="--max-old-space-size=16000"
 
-  export PATH="/usr/opt/nodejs-lts-hydrogen/bin:$PATH"
+  #export PATH="/usr/opt/nodejs-lts-hydrogen/bin:$PATH"
 
   #/usr/opt/nodejs-lts-hydrogen/bin/yarn install
   #NODE_ENV=production /usr/opt/nodejs-lts-hydrogen/bin/yarn build
