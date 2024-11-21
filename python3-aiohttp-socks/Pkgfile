@@ -4,15 +4,13 @@
 # Depends on: python3-aiohttp python3-socks
 
 name=python3-aiohttp-socks
-version=0.9.0
+version=0.9.1
 release=1
 source=(https://github.com/romis2012/aiohttp-socks/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd aiohttp-socks-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
