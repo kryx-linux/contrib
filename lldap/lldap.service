@@ -12,7 +12,8 @@ PID="/run/lldap.pid"
 
 case $1 in
   start)
-    $SSD --start -b --user $USER --chuid $USER --chdir $HOME --make-pidfile --pidfile $PID --exec $PROG -- $OPTS ;;
+    $SSD --start -b --user $USER --chuid $USER --chdir $HOME --make-pidfile \
+      --pidfile $PID --exec $PROG -- $OPTS ;;
   stop)
     $SSD --stop --retry 10 --exec $PROG --pidfile $PID ;;
   restart)
