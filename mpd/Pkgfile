@@ -5,10 +5,9 @@
 # Optional: alsa-lib audiofile avahi chromaprint dbus faad2 ffmpeg flac fluidsynth icu jack lame libcdio-paranoia libid3tag libisofs libmad libmikmod libmodplug libmpcdec libsamplerate libsndfile libsoxr liburing libvorbis mpg123 opus pipewire pulseaudio python3-sphinx samba twolame wavpack yajl zziplib
 
 name=mpd
-version=0.23.15
-release=2
+version=0.23.16
+release=1
 source=(https://www.musicpd.org/download/mpd/${version:0:4}/$name-$version.tar.xz
-  fmt.patch
   mpd)
 
 build() {
@@ -46,8 +45,6 @@ build() {
   prt-get isinst yajl && PKGMK_MPD+=' -D yajl=enabled'
   prt-get isinst zziplib && PKGMK_MPD+=' -D zzip=enabled'
   # }}}
-
-  patch -Np1 -d $name-$version -i $SRC/fmt.patch
 
   meson setup $name-$version build $PKGMK_MPD \
     --prefix=/usr \
