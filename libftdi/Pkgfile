@@ -7,6 +7,7 @@ name=libftdi
 version=1.5
 release=3
 source=(https://www.intra2net.com/en/developer/libftdi/download/${name}1-$version.tar.bz2
+  libftdi-1.5-swig-4.3.patch
   fix_includes_path.patch)
 
 build() {
@@ -14,6 +15,7 @@ build() {
   sed -i "s|MODE=\"0664\", GROUP=\"plugdev\"|TAG+=\"wheel\"|g" ${name}1-$version/packages/99-libftdi.rules
 
   patch -p1 -d ${name}1-$version < $SRC/fix_includes_path.patch
+  patch -p1 -d ${name}1-$version < $SRC/libftdi-1.5-swig-4.3.patch
 
   cmake -S ${name}1-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
