@@ -5,14 +5,14 @@
 # Optional: bash-completion dmidecode
 
 name=flashrom
-version=1.4.0
+version=1.5.0
 release=1
-source=(https://download.flashrom.org/releases/$name-$version.tar.xz)
+source=(https://download.flashrom.org/releases/$name-v$version.tar.xz)
 
 build() {
   prt-get isinst bash-completion || PKGMK_FLASHROM+=' -D bash_completion=disabled'
 
-  meson setup $name-$version build $PKGMK_FLASHROM \
+  meson setup $name-v$version build $PKGMK_FLASHROM \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
