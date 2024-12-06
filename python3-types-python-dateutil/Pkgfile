@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools
 
 name=python3-types-python-dateutil
-version=2.9.0.20241003
+version=2.9.0.20241206
 release=1
-source=(https://pypi.org/packages/source/t/types-python-dateutil/types-python-dateutil-$version.tar.gz)
+source=(https://pypi.org/packages/source/t/types-python-dateutil/types_python_dateutil-$version.tar.gz)
 
 build() {
-  cd types-python-dateutil-$version
+  cd types_python_dateutil-$version
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
