@@ -4,13 +4,16 @@
 # Depends on: python3-pyqt6 qt6-webengine
 
 name=python3-pyqt6-webengine
-version=6.7.0
+version=6.8.0
 release=1
-source=(https://pypi.python.org/packages/source/P/PyQt6-WebEngine/PyQt6_WebEngine-$version.tar.gz)
+source=(https://pypi.python.org/packages/source/P/PyQt6-WebEngine/PyQt6_WebEngine-$version.tar.gz
+  pyqt6-webengine-fix-build.patch)
 
 build() {
   ls /usr/lib/python*/site-packages/PyQt6/QtWebChannel.*so || (echo "rebuild python3-pyqt6"; exit 1)
   cd PyQt6_WebEngine-$version
+
+  patch -Np1 -i $SRC/pyqt6-webengine-fix-build.patch
 
   sip-build \
     --no-make \

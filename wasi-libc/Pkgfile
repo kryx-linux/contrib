@@ -4,9 +4,9 @@
 # Depends on: clang
 
 name=wasi-libc
-version=24
+version=25
 # https://github.com/WebAssembly/wasi-sdk/tree/main/src latest tagged version
-_commit=b9ef79d7dbd47c6c5bafdae760823467c2f60b70
+_commit=574b88da481569b65a237cb80daf9a2d5aeaf82d
 release=1
 source=(https://github.com/WebAssembly/$name/archive/$_commit/$name-$version.tar.gz
   no-double-build.patch)
@@ -17,8 +17,11 @@ build() {
   patch -p1 -i $SRC/no-double-build.patch
 
   MAKE_ARGS="WASM_CC=/usr/bin/clang WASM_AR=/usr/bin/llvm-ar WASM_NM=/usr/bin/llvm-nm BULK_MEMORY_SOURCES="
-  for target in wasi wasip1 wasip2; do
-    [ "${target#wasi}" = p2 ] && MAKE_ARGS+=" WASI_SNAPSHOT=p2"
+  for target in wasi wasip1 wasip1-threads wasip2; do
+    case $target in
+      wasip1-threads) MAKE_ARGS=' THREAD_MODEL=posix';;
+      wasip2) MAKE_ARGS=' WASI_SNAPSHOT=p2';;
+    esac
     make TARGET_TRIPLE="wasm32-$target" $MAKE_ARGS
   done
 

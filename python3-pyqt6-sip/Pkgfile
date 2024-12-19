@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools
 
 name=python3-pyqt6-sip
-version=13.8.0
+version=13.9.1
 release=1
-source=(https://pypi.python.org/packages/source/P/PyQt6-sip/PyQt6_sip-$version.tar.gz)
+source=(https://pypi.org/packages/source/p/pyqt6_sip/pyqt6_sip-$version.tar.gz)
 
 build() {
-  cd PyQt6_sip-$version
+  cd pyqt6_sip-$version
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
