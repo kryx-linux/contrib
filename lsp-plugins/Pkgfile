@@ -5,25 +5,26 @@
 # Optional: jack ladspa
 
 name=lsp-plugins
-version=1.2.19
+version=1.2.20
 release=1
 source=(https://github.com/sadko4u/lsp-plugins/releases/download/$version/$name-src-$version.tar.gz)
 
 build() {
   cd $name
 
-  prt-get isinst jack && PKGMK_LSP+=' jack' || PKGMK_LSP_SUB+=' jack'
-  prt-get isinst ladspa && PKGMK_LSP+=' ladspa' || PKGMK_LSP_SUB+=' ladspa'
-  PKGMK_LSP_SUB+=' gst'
+  prt-get isinst jack && PKGMK_LSP+=' jack'
+  prt-get isinst ladspa && PKGMK_LSP+=' ladspa'
 
-  export CFLAGS="$CFLAGS -O2 -flto=auto"
-  export CXXFLAGS="$CXXFLAGS -O2 -flto=auto"
+  sed -i 's!gst/gst.h!gstreamer-1.0/gst/gst.h!' modules/lsp-plugin-fw/include/lsp-plug.in/plug-fw/wrap/gstreamer/defs.h
+
+  export CFLAGS="$CFLAGS -O2 -fno-lto"
+  export CXXFLAGS="$CXXFLAGS -O2 -fno-lto"
 
   make config \
     PREFIX=/usr \
     SHARE_PATH=/usr/share \
-    ADD_FEATURES="xdg$PKGMK_LSP" \
-    SUB_FEATURES="doc$PKGMK_LSP_SUB"
+    STRICT=1 \
+    FEATURES="clap lv2 ui vst2 vst3 xdg $PKGMK_LSP"
   make
   make DESTDIR=$PKG install
 

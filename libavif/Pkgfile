@@ -1,26 +1,33 @@
 # Description: Library for encoding and decoding .avif files
 # URL: https://github.com/AOMediaCodec/libavif
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: aom dav1d gdk-pixbuf libyuv rav1e svt-av1
+# Depends on: libpng libyuv
+# Optional: aom dav1d gdk-pixbuf libjpeg-turbo libwebp pandoc-bin rav1e svt-av1
+
 
 name=libavif
 version=1.1.1
-release=1
+release=2
 source=(https://github.com/AOMediaCodec/libavif/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S $name-$version -B build -G Ninja \
+  prt-get isinst aom && PKGMK_LIBAVIF+=' -D AVIF_CODEC_AOM=SYSTEM'
+  prt-get isinst dav1d && PKGMK_LIBAVIF+=' -D AVIF_CODEC_DAV1D=SYSTEM'
+  prt-get isinst gdk-pixbuf && PKGMK_LIBAVIF+=' -D AVIF_BUILD_GDK_PIXBUF=ON'
+  prt-get isinst libjpeg-turbo && PKGMK_LIBAVIF+=' -D AVIF_JPEG=SYSTEM'
+  prt-get isinst libwebp && PKGMK_LIBAVIF+=' -D AVIF_LIBSHARPYUV=SYSTEM'
+  prt-get isinst pandoc-bin && PKGMK_LIBAVIF+=' -D AVIF_BUILD_MAN_PAGES=ON'
+  prt-get isinst rav1e && PKGMK_LIBAVIF+=' -D AVIF_CODEC_RAV1E=SYSTEM'
+  prt-get isinst svt-av1 && PKGMK_LIBAVIF+=' -D AVIF_CODEC_SVT=SYSTEM'
+
+  cmake -S $name-$version -B build -G Ninja $PKGMK_LIBAVIF \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D AVIF_BUILD_APPS=ON \
-    -D AVIF_CODEC_AOM=ON \
-    -D AVIF_CODEC_DAV1D=ON \
-    -D AVIF_CODEC_RAV1E=ON \
-    -D AVIF_CODEC_SVT=ON \
-    -D AVIF_BUILD_GDK_PIXBUF=ON \
+    -D AVIF_LIBYUV=SYSTEM \
     -Wno-dev
 
   cmake --build build
