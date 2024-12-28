@@ -3,9 +3,24 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=p5-class-data-inheritable
-version=0.09
+version=0.10
 release=1
-source=(https://www.cpan.org/authors/id/R/RS/RSHERER/Class-Data-Inheritable-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/R/RS/RSHERER/Class-Data-Inheritable-$version.tar.gz)
+
+unpack_source() {
+  mkdir -p $SRC/tarballs $SRC/$name-$version/external/tarballs
+  for file in ${source[@]}; do
+    case ${file##*/} in
+    Class-Data-Inheritable-$version.tar.gz)
+      echo "Unpacking $(get_filename $file)"
+      bsdtar -p -o -C $SRC -xf $(get_filename $file)
+      ;;
+    *)
+      cp $(get_filename $file) $SRC
+      ;;
+    esac
+  done
+}
 
 build() {
   cd Class-Data-Inheritable-$version
