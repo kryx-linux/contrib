@@ -4,14 +4,14 @@
 # Depends on: python3-ruamel-yaml-clib
 
 name=python3-ruamel-yaml
-version=0.18.6
+version=0.18.7
 release=1
 source=(https://files.pythonhosted.org/packages/source/r/ruamel.yaml/ruamel.yaml-$version.tar.gz)
 
 build() {
   cd ruamel.yaml-$version
   RUAMEL_NO_PIP_INSTALL_CHECK=False \
-  python3 setup.py install --root=$PKG \
+  /usr/bin/python3 setup.py install --root=$PKG \
     --optimize=1
   find $PKG \
     -iname "*INSTALLER*" \
