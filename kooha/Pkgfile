@@ -1,15 +1,17 @@
 # Description: Elegantly record your screen
 # URL: https://github.com/SeaDve/Kooha/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: appstream-glib desktop-file-utils gst-plugins-base libadwaita pulseaudio python3-gobject
+# Depends on: appstream-glib desktop-file-utils gst-plugins-base libadwaita pulseaudio python3-gobject wayland-protocols
 
 name=kooha
-version=2.2.4
+version=2.3.0
 release=1
-source=(https://github.com/SeaDve/Kooha/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/SeaDve/Kooha/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
-  ls /usr/include/gtk-4.0/gdk/wayland/gdkwayland.h || (printf '\e[1;31m%-6s\e[m\n' "gtk4 is missing wayland libraries, rebuild mesa, then gtk4 to install $name" ; exit 1)
+  ls /usr/lib/libEGL_mesa.so || (printf '\e[1;31m%-6s\e[m\n' "mesa is missing wayland libraries, rebuilt it, then try to build $name again" ; exit 1)
+  ls /usr/include/gtk-4.0/gdk/wayland/gdkwayland.h || (printf '\e[1;31m%-6s\e[m\n' "gtk4 is missing wayland libraries, rebuild it, then try to build $name again" ; exit 1)
+  ls /usr/include/gstreamer-1.0/gst/gl/wayland/gstgldisplay_wayland.h || (printf '\e[1;31m%-6s\e[m\n' "gst-plugins-base is missing wayland libraries, rebuild it, then try to build $name again" ; exit 1)
 
   #export RUSTUP_TOOLCHAIN=stable
   #export CARGO_TARGET_DIR=target
