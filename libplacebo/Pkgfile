@@ -6,10 +6,14 @@
 
 name=libplacebo
 version=7.349.0
-release=1
+release=2
 source=(https://github.com/haasn/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
+    # patch for glslang 15.0.0
+    sed -e "41i    glslang_deps += cxx.find_library('glslang',required: required,static: static)" \
+        -i $name-$version/src/glsl/meson.build
+
     meson setup build $name-$version \
         --prefix=/usr \
         --buildtype=plain \
