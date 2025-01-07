@@ -5,7 +5,7 @@
 # Optional: asciidoctor
 
 name=shaderc
-version=2024.3
+version=2024.4
 release=1
 source=(https://github.com/google/$name/archive/v$version/$name-v$version.tar.gz glslc.1)
 
@@ -23,6 +23,11 @@ EOF
   sed -e "s|\$<TARGET_FILE:spirv-dis>|spirv-dis|" \
       -i glslc/test/CMakeLists.txt
 
+  # avoid referring to uninitialized values while vulkan-* is less than version 1.4
+  sed -e "/VULKAN_1_4/d" -i libshaderc_util/src/spirv_tools_wrapper.cc
+  local VL=$(grep -n Vulkan_1_4 libshaderc_util/src/compiler.cc | awk -v FS=: '(NR==1) {print $1}')
+  sed -e "$VL,$((VL+2))d" -i libshaderc_util/src/compiler.cc
+
   cmake -S . -B build -G Ninja -Wno-dev \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
@@ -35,7 +40,7 @@ EOF
   cmake --build build -j ${JOBS:-1}
   DESTDIR=$PKG cmake --install build
 
-  if prt-get isinst asciidoctor 2>/dev/null; then
+  if prt-get isinst asciidoctor >/dev/null; then
     sed 's/^`glslc`/glslc/' glslc/README.asciidoc \
     | asciidoctor -q -b manpage -o glslc.1 -
     install -D -m 0644 -t $PKG/usr/share/man/man1 glslc.1
