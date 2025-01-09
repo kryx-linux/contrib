@@ -5,9 +5,9 @@
 # Optional: clang ccache libgit2 polly sccache
 
 name=rust-wasm
-version=1.83.0
-_date=2024-10-17
-_rustc=1.82.0
+version=1.84.0
+_date=2024-11-28
+_rustc=1.83.0
 _cargo=$_rustc
 release=1
 
@@ -73,7 +73,8 @@ build() {
   # config.toml {{{
   cat <<-EOF >$SRC/config.toml
   profile = "dist"
-  change-id = 131075
+  change-id = 133207
+
 
   [llvm]
   ninja = true
@@ -114,7 +115,7 @@ build() {
   dist-stage = 2
   install-stage = 2
   host = ["x86_64-unknown-linux-gnu"]
-  target = ["wasm32-unknown-unknown", "wasm32-wasi", "wasm32-wasip1", "wasm32-wasip2"]
+  target = ["wasm32-unknown-unknown", "wasm32-wasip1", "wasm32-wasip2"]
   docs = false
   extended = false
   sanitizers = false
