@@ -1,16 +1,18 @@
 # Description: A SIXEL encoder/decoder implementation derived from kmiya's sixel
 # URL: https://github.com/libsixel/libsixel/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: meson ninja
-# Optional: gd libjpeg-turbo libpng
+# Depends on:
+# Optional: gd gdk-pixbuf libjpeg-turbo libpng
 
 name=libsixel
-version=1.10.3
+version=1.10.5
 release=1
 source=(https://github.com/libsixel/libsixel/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  meson setup $name-$version build \
+  prt-get isinst gdk-pixbuf && PKGMK_SIXEL+=' -D gdk-pixbuf2=enabled'
+
+  meson setup $name-$version build $PKGMK_SIXEL \
     --prefix /usr \
     --buildtype=plain \
     --wrap-mode nodownload \
