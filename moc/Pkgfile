@@ -1,30 +1,28 @@
 # Description: Console audio player.
-# URL: http://moc.daper.net/
+# URL: https://gitlab.com/tomaszg/mocp
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: curl libid3tag libmad libsndfile popt
-# Optional: faad2 lame libmodplug libtimidity mpg123 musepack speex taglib wavpack
+# Depends on: git curl libid3tag libmad libsndfile popt
+# Optional: faad2 ffmpeg lame libmodplug libtimidity mpg123 musepack opusfile pulseaudio sndio speex taglib wavpack
 
 name=moc
-version=2.5.2
-release=3
-source=(http://ftp.daper.net/pub/soft/moc/stable/$name-$version.tar.bz2
-	moc-https.patch)
-
+version=2.6alpha3
+release=1
+_commit=76a2ed3d6a4630122a962348ca6d52325765654d
+source=("https://gitlab.com/tomaszg/mocp/-/archive/master/mocp-master.tar.gz?sha=$_commit")
+renames=(mocp-$_commit.tar.gz)
 
 build() {
-	cd $name-$version
+    cd mocp-master
 
-	patch -p0 -i $SRC/moc-https.patch
+    autoreconf -ivf
+    ./configure --prefix=/usr \
+                --disable-cache \
+                --disable-nls \
+                --disable-debug
 
-	./configure \
-		--prefix=/usr \
-		--disable-nls \
-		--without-ffmpeg \
-		--disable-debug
-
-	make
-	make DESTDIR=$PKG install
-	install -D -m 0644 -t $PKG/usr/share/moc/ config.example keymap.example
-	rm -rf $PKG/usr/share/doc
-	rm -f $PKG/usr/lib/moc/decoder_plugins/*.la
+    make
+    make DESTDIR="$PKG" install
+    install -D -m 0644 -t "$PKG"/usr/share/moc/ config.example keymap.example
+    rm -rf "$PKG"/usr/share/doc
+    rm -f "$PKG"/usr/lib/moc/decoder_plugins/*.la
 }
