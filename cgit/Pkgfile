@@ -6,39 +6,42 @@
 
 name=cgit
 version=1.2.3
-_gitver=2.25.1
-release=2
-source=(https://git.zx2c4.com/cgit/snapshot/$name-$version.tar.xz
+_commit=09d24d7cd0b7e85633f2f43808b12871bb209d69
+_gitver=2.46.0
+release=3
+source=(https://git.zx2c4.com/$name/snapshot/$name-$_commit.tar.xz
         https://www.kernel.org/pub/software/scm/git/git-${_gitver}.tar.xz
         cgitrc
         cgit.conf
         lighttpd-cgit.conf)
 
 build() {
-  cd $name-$version
+  local CGIT_FLAGS
+  cd $name-$_commit
 
-  rm -rf git && mv $SRC/git-${_gitver} git
-  make
-  make CGIT_SCRIPT_PATH=/usr/lib/cgit DESTDIR=$PKG prefix=/usr install
+  rm -rf git && mv "$SRC"/git-${_gitver} git
+  prt-get isinst musl >/dev/null && CGIT_FLAGS="NO_REGEX=NeedsStartEnd"
+  make $CGIT_FLAGS
+  make $CGIT_FLAGS CGIT_SCRIPT_PATH=/usr/lib/cgit DESTDIR="$PKG" prefix=/usr install
 
-  install -m 0644 $SRC/cgitrc $PKG/etc/cgitrc
-  mkdir -p $PKG/var/cache/cgit
+  install -D -m 0644 "$SRC"/cgitrc "$PKG"/etc/cgitrc
+  mkdir -p "$PKG"/var/cache/cgit
 
   # a web server should be present prior to building this port;
   # otherwise the config files must be created manually
 
-  if prt-get isinst apache 2>/dev/null; then
-    install -D -m 0644 $SRC/cgit.conf $PKG/etc/apache/original/extra/cgit.conf
-    install -D -m 0644 $SRC/cgit.conf $PKG/etc/apache/extra/cgit.conf
+  if prt-get isinst apache >/dev/null; then
+    install -D -m 0644 "$SRC"/cgit.conf "$PKG"/etc/apache/original/extra/cgit.conf
+    install -D -m 0644 "$SRC"/cgit.conf "$PKG"/etc/apache/extra/cgit.conf
   fi
 
-  if prt-get isinst lighttpd 2>/dev/null; then
-    install -D -m 0644 $SRC/lighttpd-cgit.conf $PKG/etc/lighttpd-cgit.conf
+  if prt-get isinst lighttpd >/dev/null; then
+    install -D -m 0644 "$SRC"/lighttpd-cgit.conf "$PKG"/etc/lighttpd-cgit.conf
   fi
 
   # asciidoc is needed to generate the man-page
   if command -v a2x >/dev/null; then
     make doc-man
-    make DESTDIR=$PKG prefix=/usr install-man
+    make DESTDIR="$PKG" prefix=/usr install-man
   fi
 }

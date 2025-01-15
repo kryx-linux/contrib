@@ -5,8 +5,8 @@
 # Optional: libgit2
 
 name=bat
-version=0.24.0
-release=1
+version=0.25.0
+release=2
 source=(https://github.com/sharkdp/bat/archive/v$version/$name-$version.tar.gz)
 
 build() {
@@ -15,12 +15,8 @@ build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
   [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
 
-  # always build man files and completion files
-  sed -i -e '1,/cfg(feature = "application"/d' $name-$version/build.rs
-
   export CFLAGS+=' -ffat-lto-objects -w'
   cargo build --release --manifest-path $name-$version/Cargo.toml \
-    --no-default-features \
     --features "bugreport build-assets minimal-application $PKGMK_BAT"
 
   prt-get isinst bash-completion && install -Dm644 \

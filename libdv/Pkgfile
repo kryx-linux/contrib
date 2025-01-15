@@ -6,37 +6,27 @@
 
 name=libdv
 version=1.0.0
-release=4
-source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz
+_commit=4a28ebb4a169644ea6180795b1f39db7c4c07212
+release=5
+source=(https://gitlab.freedesktop.org/gstreamer/meson-ports/libdv/-/archive/$_commit/libdv-$_commit.tar.bz2
   libdv-dso-linking.patch
   libdv-0.104-no-exec-stack.patch
   libdv-1.0.0-pic.patch.bz2
   libdv-0.99-2.6.patch)
 
 build() {
-  cd $name-$version
+  bzcat $SRC/libdv-1.0.0-pic.patch.bz2 | patch -p 1 -d $name-$_commit
+  patch -Np1 -d $name-$_commit -i $SRC/libdv-0.99-2.6.patch
+  patch -Np1 -d $name-$_commit -i $SRC/libdv-0.104-no-exec-stack.patch
+  patch -Np1 -d $name-$_commit -i $SRC/libdv-dso-linking.patch
 
-  bzcat $SRC/libdv-1.0.0-pic.patch.bz2 | patch -p 1
-  patch -Np 1 -i $SRC/libdv-0.99-2.6.patch
-  patch -Np1 -i $SRC/libdv-0.104-no-exec-stack.patch
-  patch -Np1 -i $SRC/libdv-dso-linking.patch
-
-  if prt-get isinst gtk; then
-    export GTK_CFLAGS="$(pkgconf --cflags gtk+-2.0 glib-2.0)"
-    export GTK_LIBS="$(pkgconf --libs gtk+-2.0 glib-2.0)"
-  else
-    PKGMK_LIBDV+=' --disable-gtk'
-  fi
-  prt-get isinst libsdl && PKGMK_LIBDV+='--enable-sdl'
-
-  ./configure $PKGMK_LIBDV \
+  meson setup $name-$_commit build \
     --prefix=/usr \
-    --mandir=/usr/share/man \
-    --disable-static \
-    --without-debug
-
-  make
-  make DESTDIR=$PKG install
-
-  find $PKG -name '*.la' -delete
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D tools=enabled
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
 }
