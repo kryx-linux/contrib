@@ -23,11 +23,6 @@ EOF
   sed -e "s|\$<TARGET_FILE:spirv-dis>|spirv-dis|" \
       -i glslc/test/CMakeLists.txt
 
-  # avoid referring to uninitialized values while vulkan-* is less than version 1.4
-  sed -e "/VULKAN_1_4/d" -i libshaderc_util/src/spirv_tools_wrapper.cc
-  local VL=$(grep -n Vulkan_1_4 libshaderc_util/src/compiler.cc | awk -v FS=: '(NR==1) {print $1}')
-  sed -e "$VL,$((VL+2))d" -i libshaderc_util/src/compiler.cc
-
   cmake -S . -B build -G Ninja -Wno-dev \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
