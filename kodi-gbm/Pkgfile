@@ -5,12 +5,11 @@
 # Optional: alsa-lib avahi bluez dav1d libmicrohttpd libnfs libnghttp2 libva libva-vdpau-driver libxslt mariadb mysql pipewire pulseaudio
 
 name=kodi-gbm
-version=21.1
-release=2
+version=21.2
+release=1
 _codename=Omega
 
-source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$_codename.tar.gz
-  25863.patch
+source=(https://github.com/xbmc/xbmc/archive/v$version-$_codename/xbmc-$version-$_codename.tar.gz
   24972.patch)
 
 build()  {
@@ -52,7 +51,6 @@ build()  {
     xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
 
   patch -Np1 -d xbmc-$version-$_codename -i $SRC/24972.patch
-  patch -Np1 -d xbmc-$version-$_codename -i $SRC/25863.patch
 
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
     -D CMAKE_INSTALL_PREFIX=/usr \
