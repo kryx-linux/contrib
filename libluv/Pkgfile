@@ -4,15 +4,15 @@
 # Depends on: libuv luajit
 
 name=libluv
-version=1.48.0-2
+version=1.50.0-0
 release=1
-source=(https://github.com/luvit/luv/releases/download/$version/luv-$version.tar.gz
+source=(https://github.com/luvit/luv/releases/download/v$version/luv-v$version.tar.gz
   cmake-use-pkgconfig.patch)
 
 build() {
-  patch -Np1 -d luv-$version -i $SRC/cmake-use-pkgconfig.patch
+  patch -Np1 -d luv-v$version -i $SRC/cmake-use-pkgconfig.patch
 
-  cmake -S luv-$version -B build-shared -G Ninja \
+  cmake -S luv-v$version -B build-shared -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
