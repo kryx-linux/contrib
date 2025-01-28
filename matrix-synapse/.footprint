@@ -18,13 +18,13 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.10/
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.122.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.122.0.dist-info/AUTHORS.rst
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.122.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.122.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.122.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.122.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.122.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.123.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.123.0.dist-info/AUTHORS.rst
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.123.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.123.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.123.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.123.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/matrix_synapse-1.123.0.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/__pycache__/
@@ -721,7 +721,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/account_validity.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/appservice_ping.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/auth.cpython-310.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/auth_issuer.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/auth_metadata.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/capabilities.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/delayed_events.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pycache__/devices.cpython-310.opt-2.pyc
@@ -767,7 +767,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/__pyca
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/account_validity.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/appservice_ping.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/auth.py
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/auth_issuer.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/auth_metadata.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/capabilities.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/delayed_events.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/rest/client/devices.py
@@ -1636,6 +1636,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/mai
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/87/03_current_state_index.sql
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/88/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/88/01_add_delayed_events.sql
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/88/01_custom_profile_fields.sql
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/88/02_fix_sliding_sync_membership_snapshots_forgotten_column.sql
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/88/03_add_otk_ts_added_index.sql
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/synapse/storage/schema/main/delta/88/04_current_state_delta_index.sql
