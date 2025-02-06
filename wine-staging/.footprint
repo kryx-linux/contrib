@@ -184,6 +184,8 @@ drwxr-xr-x	root/root	usr/include/wine/windows/
 -rw-r--r--	root/root	usr/include/wine/windows/bits5_0.idl
 -rw-r--r--	root/root	usr/include/wine/windows/bitsmsg.h
 -rw-r--r--	root/root	usr/include/wine/windows/bluetoothapis.h
+-rw-r--r--	root/root	usr/include/wine/windows/bthdef.h
+-rw-r--r--	root/root	usr/include/wine/windows/bthioctl.h
 -rw-r--r--	root/root	usr/include/wine/windows/bthsdpdef.h
 -rw-r--r--	root/root	usr/include/wine/windows/cderr.h
 -rw-r--r--	root/root	usr/include/wine/windows/cdosys.h
@@ -1722,6 +1724,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libd3dx11.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libd3dx11_42.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libd3dx9.a
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/libd3dx9_43.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libd3dxof.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libdataexchange.a
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/libdbgeng.a
@@ -2303,6 +2306,7 @@ drwxr-xr-x	root/root	usr/lib/wine/i386-windows/
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/winealsa.drv
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/wineboot.exe
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/winebrowser.exe
+-rw-r--r--	root/root	usr/lib/wine/i386-windows/winebth.sys
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/winebus.sys
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/winecfg.exe
 -rw-r--r--	root/root	usr/lib/wine/i386-windows/wineconsole.exe
@@ -2488,6 +2492,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libd3dx11.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libd3dx11_42.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libd3dx9.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libd3dx9_43.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libd3dxof.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libdataexchange.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-unix/libdbgeng.a
@@ -2685,6 +2690,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/secur32.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/win32u.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winealsa.so
+-rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winebth.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winebus.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/winedmo.so
 -rwxr-xr-x	root/root	usr/lib/wine/x86_64-unix/wineps.so
@@ -3025,6 +3031,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libd3dx11.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libd3dx11_42.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libd3dx9.a
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libd3dx9_43.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libd3dxof.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libdataexchange.a
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/libdbgeng.a
@@ -3566,6 +3573,7 @@ drwxr-xr-x	root/root	usr/lib/wine/x86_64-windows/
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winealsa.drv
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wineboot.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winebrowser.exe
+-rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winebth.sys
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winebus.sys
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/winecfg.exe
 -rw-r--r--	root/root	usr/lib/wine/x86_64-windows/wineconsole.exe
@@ -3773,7 +3781,7 @@ drwxr-xr-x	root/root	usr/share/wine/gecko/
 -rwxr-xr-x	root/root	usr/share/wine/gecko/wine-gecko-2.47.4-x86.msi
 -rwxr-xr-x	root/root	usr/share/wine/gecko/wine-gecko-2.47.4-x86_64.msi
 drwxr-xr-x	root/root	usr/share/wine/mono/
--rwxr-xr-x	root/root	usr/share/wine/mono/wine-mono-9.3.0-x86.msi
+-rwxr-xr-x	root/root	usr/share/wine/mono/wine-mono-9.4.0-x86.msi
 drwxr-xr-x	root/root	usr/share/wine/nls/
 -rw-r--r--	root/root	usr/share/wine/nls/c_037.nls
 -rw-r--r--	root/root	usr/share/wine/nls/c_10000.nls
