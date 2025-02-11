@@ -1,0 +1,15 @@
+# Description: OCI container runtime monitor
+# URL: https://github.com/containers/conmon
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: glib
+
+name=conmon
+version=2.1.12
+release=1
+source=(https://github.com/containers/conmon/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  make PREFIX=/usr LIBEXECDIR=/usr/lib DESTDIR=$PKG
+  install -Dm755 bin/conmon $PKG/usr/bin/conmon
+}
