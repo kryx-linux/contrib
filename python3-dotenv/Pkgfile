@@ -1,0 +1,16 @@
+# Description: Read key-value pairs from a .env file and set them as environment variables
+# URL: https://github.com/theskumar/python-dotenv/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-click
+
+name=python3-dotenv
+version=1.0.1
+release=1
+source=(https://pypi.org/packages/source/p/python-dotenv/python-dotenv-$version.tar.gz)
+
+build() {
+  cd python-dotenv-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
