@@ -1,0 +1,28 @@
+# Description: Work with remote images registries - retrieving information, images, signing content
+# URL: https://github.com/containers/skopeo
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: btrfs-progs containers-common gpgme libdevmapper
+
+name=skopeo
+version=1.17.0
+release=1
+source=(https://github.com/containers/skopeo/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  sed -i 's|.PHONY: bin/skopeo||' Makefile
+  sed -i 's|-gcflags "$(GOGCFLAGS)"||' Makefile
+
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+
+  make bin/skopeo GO_DYN_FLAGS="-buildmode=pie -trimpath" BUILDTAGS='containers_image_ostree_stub'
+  make docs
+  make DESTDIR=$PKG PREFIX=/usr install
+
+  rm -rf $PKG/etc/containers/registries.d
+  rm $PKG/etc/containers/policy.json
+}
