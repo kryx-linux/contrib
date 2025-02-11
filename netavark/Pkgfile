@@ -1,0 +1,20 @@
+# Description: Container network stack
+# URL: https://github.com/containers/netavark
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: aardvark-dns go-md2man protobuf
+
+name=netavark
+version=1.13.1
+release=1
+source=(https://github.com/containers/netavark/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml --all-features
+  make -C $name-$version/docs
+
+  install -Dt $PKG/usr/lib/podman/ $name-$version/target/release/$name
+  DESTDIR=$PKG PREFIX=/usr make -C $name-$version/docs install
+}
