@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# /etc/rc.d/podman-autostart: start/stop podman containers
+#
+
+PODMAN=/usr/bin/podman
+RUNDIR="/run/podman"
+SOCKET=$RUNDIR/podman.sock
+
+case $1 in
+start)
+  test -S $PIDFILE || echo "Rootful daemon not running."
+  $PODMAN start --all
+  ;;
+stop)
+  $PODMAN stop --all
+  ;;
+restart)
+  $0 stop
+  $0 start
+  ;;
+status)
+  _total_number=$($PODMAN ps --all --noheading | wc -l)
+  _running_number=$($PODMAN ps --all --noheading --filter status=running | wc -l)
+  _stopped_number=$($PODMAN ps --all --noheading --filter status=exited | wc -l)
+
+  _running=$($PODMAN ps --all --noheading --filter status=running --format "Container: {{.Names}}, Status: {{.Status}}" | sed '/^$/d')
+  _stopped=$($PODMAN ps --all --noheading --filter status=exited --format "Container: {{.Names}}, Status: {{.Status}}" | sed '/^$/d')
+
+  echo "Podman Container Status:"
+  echo "--------------------------------"
+  echo "Total containers: $_total_number"
+  echo "Running containers: $_running_number"
+  if [ "$_running_number" -gt 0 ]; then
+    echo
+    echo "Running containers:"
+    echo "$_running"
+  fi
+  echo "Stopped containers: $_stopped_number"
+  if [ "$_stopped_number" -gt 0 ]; then
+    echo
+    echo "Stopped containers:"
+    echo "$_stopped"
+  fi
+  echo "--------------------------------"
+  ;;
+*)
+  echo "usage: $0 [start|stop|restart|reload|status]"
+  ;;
+esac
+
+# End of file

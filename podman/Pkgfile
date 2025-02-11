@@ -1,0 +1,33 @@
+# Description: A tool for managing OCI containers and pods
+# URL: https://podman.io/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: catatonit conmon containers-common gpgme libseccomp shadow
+# Optional: bash-completion btrfs-progs cni-plugins fuse-overlayfs passt podman-compose slirp4netns zsh
+
+name=podman
+version=5.4.0
+release=1
+source=(https://github.com/containers/podman/archive/v$version/$name-$version.tar.gz
+  podman.service podman-autostart.service)
+
+build() {
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export GOFLAGS="-buildmode=pie"
+  export GOPATH="$SRC"
+
+  make -j1 EXTRA_LDFLAGS='-compressdwarf=false -linkmode=external' PREFIX=/usr -C $SRC/$name-$version
+  make docker-docs -C $SRC/$name-$version
+  make install install.completions DESTDIR=$PKG PREFIX=/usr LIBEXECDIR=/usr/lib -C $SRC/$name-$version
+  make -j1 install.docker-full DESTDIR=$PKG PREFIX=/usr -C $SRC/$name-$version
+
+  rm -r $PKG/usr/lib/systemd $PKG/usr/share/user-tmpfiles.d/ $PKG/usr/lib/tmpfiles.d/
+  prt-get isinst bash-completion || rm -r $PKG/usr/share/bash-completion
+  prt-get isinst fish || rm -r $PKG/usr/share/fish
+  prt-get isinst zsh || rm -r $PKG/usr/share/zsh
+
+  install -Dm755 $SRC/podman.service $PKG/etc/rc.d/podman
+  install -Dm755 $SRC/podman-autostart.service $PKG/etc/rc.d/podman-autostart
+}
