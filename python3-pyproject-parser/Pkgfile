@@ -4,15 +4,13 @@
 # Depends on: python3-attrs python3-shippinglabel python3-deprecation-alias
 
 name=python3-pyproject-parser
-version=0.11.1
+version=0.12.0
 release=1
-source=(https://pypi.org/packages/source/p/pyproject-parser/pyproject-parser-$version.tar.gz)
+source=(https://pypi.org/packages/source/p/pyproject_parser/pyproject_parser-$version.tar.gz)
 
 build() {
-  cd pyproject-parser-$version
+  cd pyproject_parser-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }

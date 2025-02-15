@@ -4,15 +4,13 @@
 # Depends on: protobuf
 
 name=protobuf-c
-version=1.5.0
-release=2
-source=(https://github.com/protobuf-c/protobuf-c/releases/download/v$version/$name-$version.tar.gz
-  protobuf-c-1.5.0-Clean-CMake.patch)
+version=1.5.1
+release=1
+source=(https://github.com/protobuf-c/protobuf-c/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  patch -Np1 -i $SRC/protobuf-c-1.5.0-Clean-CMake.patch
   autoreconf -fvi
 
   ./configure --prefix=/usr \

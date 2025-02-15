@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# /etc/rc.d/podman: start/stop podman daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/podman
+OPTS="system service --time=0"
+RUNDIR="/run/podman"
+PIDFILE=$RUNDIR/podman.pid
+
+case $1 in
+start)
+  test -d $RUNDIR || mkdir -p $RUNDIR
+  $SSD --start --background --pidfile $PIDFILE --make-pidfile --exec $PROG -- $OPTS
+  ;;
+stop)
+  $SSD --stop -u $USER --retry 10 --exec $PROG 
+  ;;
+restart)
+  $0 stop
+  $0 start
+  ;;
+reload)
+  $0 stop
+  $0 start
+  ;;
+status)
+  $SSD --status --name podman
+  case $? in
+  0) echo "$PROG is running with pid $(cat $PIDFILE)" ;;
+  1) echo "$PROG is not running but the pid file $PIDFILE exists" ;;
+  3) echo "$PROG is not running" ;;
+  4) echo "Unable to determine the program status" ;;
+  esac
+  ;;
+*)
+  echo "usage: $0 [start|stop|restart|reload|status]"
+  ;;
+esac
+
+# End of file

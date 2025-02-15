@@ -1,0 +1,16 @@
+# Description: Plug A Simple Socket Transport
+# URL: https://passt.top/passt/about/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=passt
+version=2025_01_21.4f2c8e7
+release=1
+source=(https://passt.top/passt/snapshot/passt-$version.tar)
+
+build() {
+  cd $name-$version
+
+  make VERSION=$version
+  make DESTDIR=$PKG prefix=/usr install
+}

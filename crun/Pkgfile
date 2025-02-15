@@ -1,0 +1,21 @@
+# Description: A fast and lightweight fully featured OCI runtime and C library for running containers
+# URL: https://github.com/containers/crun
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: criu libseccomp yajl
+
+name=crun
+version=1.20
+release=1
+source=(https://github.com/containers/crun/releases/download/$version/crun-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure \
+    --prefix=/usr \
+    --enable-shared \
+    --enable-dynamic \
+    --with-python-bindings \
+    --disable-systemd
+  make
+  make DESTDIR=$PKG install
+}

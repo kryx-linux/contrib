@@ -1,0 +1,20 @@
+# Description: Authoritative dns server for A/AAAA container records
+# URL: https://github.com/containers/aardvark-dns
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libgit2 rust
+
+name=aardvark-dns
+version=1.14.0
+release=1
+source=(https://github.com/containers/aardvark-dns/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
+  install -d $PKG/usr/lib/podman
+  ln -s /usr/bin/aardvark-dns $PKG/usr/lib/podman/aardvark-dns
+}

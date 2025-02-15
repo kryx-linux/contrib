@@ -1,0 +1,7 @@
+#!/bin/sh
+
+rm -f footprint.in
+mv .footprint footprint.in
+sed "/avx2/d" footprint.in > .footprint
+
+rm -f footprint.in

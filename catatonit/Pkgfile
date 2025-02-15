@@ -1,0 +1,21 @@
+# Description: A container init that is so simple it's effectively brain-dead
+# URL: https://github.com/openSUSE/catatonit/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on:
+
+name=catatonit
+version=0.2.1
+release=1
+source=(https://github.com/openSUSE/catatonit/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+
+  autoreconf -fiv
+  ./configure --prefix=/usr
+  make
+  make PREFIX=/usr DESTDIR=$PKG install
+
+  install -vdm 755 $PKG/usr/lib/podman/
+  ln -sv /usr/bin/$name $PKG/usr/lib/podman/
+}
