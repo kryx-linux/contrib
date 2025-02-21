@@ -4,7 +4,7 @@
 
 name=go
 version=1.24.0
-release=1
+release=2
 source=(https://golang.org/dl/go${version}.src.tar.gz \
     https://golang.org/dl/go${version}.linux-amd64.tar.gz)
 
@@ -33,6 +33,8 @@ build() {
 
     find $PKG \( -name "README*" -o -name "AUTHORS" -o -name "TODO" \) -delete
     rm $PKG/usr/lib/go/src/*.bat
+
+    rm $PKG/usr/lib/go/src/debug/elf/testdata/libtiffxx.so_
 }
 
 # vim: set ts=4 et:
