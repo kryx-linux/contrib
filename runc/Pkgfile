@@ -4,7 +4,7 @@
 # Depends on: go libseccomp git
 
 name=runc
-version=1.2.4
+version=1.2.5
 release=1
 source=(https://github.com/opencontainers/runc/archive/v${version}/$name-${version}.tar.gz \
     https://crux.nu/files/$name-man-pages-$version.tar.xz)
@@ -17,7 +17,7 @@ build() {
     export GOPATH=$SRC
     export BUILDTAGS="seccomp"
     # use the long commit hash here
-    make COMMIT=7cb363254b69e10320360b63fb73e0ffb5da7bf2
+    make COMMIT=59923ef18c98053ddb1acf23ecba10344056c28e
 
     install -D -m 0755 $name $PKG/usr/bin/$name
     install -d -m 0755 $PKG/usr/share/man/man8
