@@ -4,15 +4,12 @@
 # Depends on: boost
 
 name=mdds
-version=2.1.1
+version=3.0.0
 release=1
-source=(https://kohei.us/files/mdds/src/$name-$version.tar.bz2
-  use-after-free.patch)
+source=(https://gitlab.com/api/v4/projects/mdds%2Fmdds/packages/generic/source/$version/mdds-$version.tar.xz)
 
 build() {
   cd $name-$version
-
-  patch -Np0 -i $SRC/use-after-free.patch
 
   ./autogen.sh --prefix=/usr
   make DESTDIR=$PKG install
