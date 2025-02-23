@@ -4,12 +4,12 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.12/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry-2.0.1.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.0.1.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.0.1.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.0.1.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.0.1.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.0.1.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry-2.1.1.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.1.1.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.1.1.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.1.1.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.1.1.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.1.1.dist-info/entry_points.txt
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/__main__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/__pycache__/
@@ -88,8 +88,10 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/de
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/debug/__pycache__/__init__.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/debug/__pycache__/info.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/debug/__pycache__/resolve.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/debug/__pycache__/tags.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/debug/info.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/debug/resolve.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/debug/tags.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/env/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/env/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/env/__pycache__/
@@ -112,6 +114,16 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/en
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/lock.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/new.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/publish.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/__pycache__/install.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/__pycache__/list.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/__pycache__/remove.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/install.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/list.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/python/remove.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/remove.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/run.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/commands/search.py
@@ -160,16 +172,6 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/events/__py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/events/__pycache__/console_events.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/events/console_events.py (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/exceptions.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/io/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/io/__init__.py (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/io/__pycache__/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/io/__pycache__/__init__.cpython-312.opt-2.pyc
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/io/inputs/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/io/inputs/__init__.py (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/io/inputs/__pycache__/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/io/inputs/__pycache__/__init__.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/io/inputs/__pycache__/run_argv_input.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/io/inputs/run_argv_input.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/logging/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/console/logging/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/console/logging/__pycache__/
@@ -396,6 +398,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/password_manager.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/patterns.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/pip.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/threading.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/wheel.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/_compat.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/authenticator.py
@@ -412,7 +415,6 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/generic_env.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/mock_env.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/null_env.cpython-312.opt-2.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/python_manager.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/script_strings.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/site_packages.cpython-312.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/system_env.cpython-312.opt-2.pyc
@@ -423,7 +425,18 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/generic_env.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/mock_env.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/null_env.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python_manager.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/__init__.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/__pycache__/__init__.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/__pycache__/exceptions.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/__pycache__/installer.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/__pycache__/manager.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/__pycache__/providers.cpython-312.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/exceptions.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/installer.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/manager.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/python/providers.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/script_strings.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/site_packages.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/system_env.py
@@ -434,6 +447,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/password_manager.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/patterns.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/pip.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/threading.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/wheel.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/vcs/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/vcs/__init__.py (EMPTY)

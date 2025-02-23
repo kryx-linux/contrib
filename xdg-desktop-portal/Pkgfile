@@ -2,10 +2,10 @@
 # URL: https://flatpak.github.io/xdg-desktop-portal/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: flatpak libportal pipewire
-# Optional: geoclue
+# Optional: geoclue python3-docutils
 
 name=xdg-desktop-portal
-version=1.18.4
+version=1.20.0
 release=1
 source=(https://github.com/flatpak/xdg-desktop-portal/archive/$version/$name-$version.tar.gz)
 
@@ -18,7 +18,7 @@ build() {
     -D b_lto=true \
     -D b_pie=true \
     -D systemd=disabled \
-    -D docbook-docs=disabled
+    -D tests=disabled
 
   meson compile -C build
   DESTDIR=$PKG meson install -C build
