@@ -5,11 +5,12 @@
 
 name=libetonyek
 version=0.1.12
-release=1
+release=2
 source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz
   libetonyek-bundled-soname.patch.0
   rpath.patch
   ubsan.patch
+  mdds3.patch
 )
 
 build() {
@@ -18,12 +19,13 @@ build() {
   patch -Np0 -i $SRC/libetonyek-bundled-soname.patch.0
   patch -Np0 -i $SRC/rpath.patch
   patch -Np0 -i $SRC/ubsan.patch
+  patch -Np0 -i $SRC/mdds3.patch
 
   autoreconf -fvi
 
   ./configure --prefix=/usr \
     --with-pic \
-    --with-mdds=2.1 \
+    --with-mdds=3.0 \
     --disable-static \
     --disable-werror \
     --without-docs

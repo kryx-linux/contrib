@@ -1,0 +1,16 @@
+# Description: A utility to find python versions on your system
+# URL: https://github.com/frostming/findpython
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pdm-backend
+
+name=python3-findpython
+version=0.6.2
+release=1
+source=(https://pypi.org/packages/source/f/findpython/findpython-$version.tar.gz)
+
+build() {
+  cd findpython-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+}
