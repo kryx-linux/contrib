@@ -7,7 +7,8 @@
 name=gst-plugins-bad
 version=1.24.12
 release=1
-source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz
+  8539.patch)
 
 build() {
   PKGMK_GSTBAD="--prefix=/usr
@@ -49,6 +50,8 @@ build() {
   for feat in $optional; do
     prt-get isinst $feat || PKGMK_GSTBAD+=" -D $feat=disabled"
   done
+
+  patch -Np3 -d $name-$version -i $SRC/8539.patch
 
   meson setup $name-$version build $PKGMK_GSTBAD \
     --prefix=/usr \
