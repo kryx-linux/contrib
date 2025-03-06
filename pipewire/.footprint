@@ -121,6 +121,7 @@ drwxr-xr-x	root/root	usr/include/spa-0.2/spa/buffer/
 drwxr-xr-x	root/root	usr/include/spa-0.2/spa/control/
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/control/control.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/control/type-info.h
+-rw-r--r--	root/root	usr/include/spa-0.2/spa/control/ump-utils.h
 drwxr-xr-x	root/root	usr/include/spa-0.2/spa/debug/
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/buffer.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/context.h
@@ -132,6 +133,8 @@ drwxr-xr-x	root/root	usr/include/spa-0.2/spa/debug/
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/node.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/pod.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/debug/types.h
+drwxr-xr-x	root/root	usr/include/spa-0.2/spa/filter-graph/
+-rw-r--r--	root/root	usr/include/spa-0.2/spa/filter-graph/filter-graph.h
 drwxr-xr-x	root/root	usr/include/spa-0.2/spa/graph/
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/graph/graph.h
 drwxr-xr-x	root/root	usr/include/spa-0.2/spa/interfaces/
@@ -181,6 +184,7 @@ drwxr-xr-x	root/root	usr/include/spa-0.2/spa/param/audio/
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/param/audio/opus.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/param/audio/ra-utils.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/param/audio/ra.h
+-rw-r--r--	root/root	usr/include/spa-0.2/spa/param/audio/raw-json.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/param/audio/raw-types.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/param/audio/raw-utils.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/param/audio/raw.h
@@ -263,8 +267,10 @@ drwxr-xr-x	root/root	usr/include/spa-0.2/spa/utils/
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/defs.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/dict.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/dll.h
+-rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/endian.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/enum-types.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/hook.h
+-rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/json-core.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/json-pod.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/json.h
 -rw-r--r--	root/root	usr/include/spa-0.2/spa/utils/keys.h
@@ -283,17 +289,17 @@ drwxr-xr-x	root/root	usr/lib/alsa-lib/
 drwxr-xr-x	root/root	usr/lib/gstreamer-1.0/
 -rwxr-xr-x	root/root	usr/lib/gstreamer-1.0/libgstpipewire.so
 lrwxrwxrwx	root/root	usr/lib/libjack.so -> libjack.so.0
-lrwxrwxrwx	root/root	usr/lib/libjack.so.0 -> libjack.so.0.3.1207
--rwxr-xr-x	root/root	usr/lib/libjack.so.0.3.1207
+lrwxrwxrwx	root/root	usr/lib/libjack.so.0 -> libjack.so.0.3.1400
+-rwxr-xr-x	root/root	usr/lib/libjack.so.0.3.1400
 lrwxrwxrwx	root/root	usr/lib/libjacknet.so -> libjacknet.so.0
-lrwxrwxrwx	root/root	usr/lib/libjacknet.so.0 -> libjacknet.so.0.3.1207
--rwxr-xr-x	root/root	usr/lib/libjacknet.so.0.3.1207
+lrwxrwxrwx	root/root	usr/lib/libjacknet.so.0 -> libjacknet.so.0.3.1400
+-rwxr-xr-x	root/root	usr/lib/libjacknet.so.0.3.1400
 lrwxrwxrwx	root/root	usr/lib/libjackserver.so -> libjackserver.so.0
-lrwxrwxrwx	root/root	usr/lib/libjackserver.so.0 -> libjackserver.so.0.3.1207
--rwxr-xr-x	root/root	usr/lib/libjackserver.so.0.3.1207
+lrwxrwxrwx	root/root	usr/lib/libjackserver.so.0 -> libjackserver.so.0.3.1400
+-rwxr-xr-x	root/root	usr/lib/libjackserver.so.0.3.1400
 lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so -> libpipewire-0.3.so.0
-lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.1207.0
--rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.1207.0
+lrwxrwxrwx	root/root	usr/lib/libpipewire-0.3.so.0 -> libpipewire-0.3.so.0.1400.0
+-rwxr-xr-x	root/root	usr/lib/libpipewire-0.3.so.0.1400.0
 drwxr-xr-x	root/root	usr/lib/pipewire-0.3/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-access.so
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/libpipewire-module-adapter.so
@@ -333,6 +339,7 @@ drwxr-xr-x	root/root	usr/lib/pipewire-0.3/v4l2/
 -rwxr-xr-x	root/root	usr/lib/pipewire-0.3/v4l2/libpw-v4l2.so
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/jack.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/jackserver.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libpipewire-0.3.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libspa-0.2.pc
 drwxr-xr-x	root/root	usr/lib/spa-0.2/
@@ -350,6 +357,11 @@ drwxr-xr-x	root/root	usr/lib/spa-0.2/avb/
 -rwxr-xr-x	root/root	usr/lib/spa-0.2/avb/libspa-avb.so
 drwxr-xr-x	root/root	usr/lib/spa-0.2/control/
 -rwxr-xr-x	root/root	usr/lib/spa-0.2/control/libspa-control.so
+drwxr-xr-x	root/root	usr/lib/spa-0.2/filter-graph/
+-rwxr-xr-x	root/root	usr/lib/spa-0.2/filter-graph/libspa-filter-graph-plugin-builtin.so
+-rwxr-xr-x	root/root	usr/lib/spa-0.2/filter-graph/libspa-filter-graph-plugin-ladspa.so
+-rwxr-xr-x	root/root	usr/lib/spa-0.2/filter-graph/libspa-filter-graph.so
+-rwxr-xr-x	root/root	usr/lib/spa-0.2/libspa.so
 drwxr-xr-x	root/root	usr/lib/spa-0.2/support/
 -rwxr-xr-x	root/root	usr/lib/spa-0.2/support/libspa-dbus.so
 -rwxr-xr-x	root/root	usr/lib/spa-0.2/support/libspa-support.so
@@ -421,6 +433,7 @@ drwxr-xr-x	root/root	usr/share/alsa-card-profile/mixer/profile-sets/
 -rw-r--r--	root/root	usr/share/alsa-card-profile/mixer/profile-sets/dell-dock-tb16-usb-audio.conf
 -rw-r--r--	root/root	usr/share/alsa-card-profile/mixer/profile-sets/force-speaker-and-int-mic.conf
 -rw-r--r--	root/root	usr/share/alsa-card-profile/mixer/profile-sets/force-speaker.conf
+-rw-r--r--	root/root	usr/share/alsa-card-profile/mixer/profile-sets/hdmi-ac3.conf
 -rw-r--r--	root/root	usr/share/alsa-card-profile/mixer/profile-sets/hp-tbt-dock-120w-g2.conf
 -rw-r--r--	root/root	usr/share/alsa-card-profile/mixer/profile-sets/hp-tbt-dock-audio-module.conf
 -rw-r--r--	root/root	usr/share/alsa-card-profile/mixer/profile-sets/kinect-audio.conf
@@ -444,9 +457,6 @@ drwxr-xr-x	root/root	usr/share/alsa/alsa.conf.d/
 -rw-r--r--	root/root	usr/share/alsa/alsa.conf.d/50-pipewire.conf
 -rw-r--r--	root/root	usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
 drwxr-xr-x	root/root	usr/share/pipewire/
--rw-r--r--	root/root	usr/share/pipewire/client-rt.conf
-drwxr-xr-x	root/root	usr/share/pipewire/client-rt.conf.avail/
--rw-r--r--	root/root	usr/share/pipewire/client-rt.conf.avail/20-upmix.conf
 -rw-r--r--	root/root	usr/share/pipewire/client.conf
 drwxr-xr-x	root/root	usr/share/pipewire/client.conf.avail/
 -rw-r--r--	root/root	usr/share/pipewire/client.conf.avail/20-upmix.conf
@@ -458,6 +468,7 @@ drwxr-xr-x	root/root	usr/share/pipewire/filter-chain/
 -rw-r--r--	root/root	usr/share/pipewire/filter-chain/sink-make-LFE.conf
 -rw-r--r--	root/root	usr/share/pipewire/filter-chain/sink-matrix-spatialiser.conf
 -rw-r--r--	root/root	usr/share/pipewire/filter-chain/sink-mix-FL-FR.conf
+-rw-r--r--	root/root	usr/share/pipewire/filter-chain/sink-upmix-5.1-filter.conf
 -rw-r--r--	root/root	usr/share/pipewire/filter-chain/sink-virtual-surround-5.1-kemar.conf
 -rw-r--r--	root/root	usr/share/pipewire/filter-chain/sink-virtual-surround-7.1-hesuvi.conf
 -rw-r--r--	root/root	usr/share/pipewire/filter-chain/source-duplicate-FL.conf
