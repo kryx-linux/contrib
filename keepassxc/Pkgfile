@@ -5,7 +5,7 @@
 # Optional: asciidoctor xorg-libxtst
 
 name=keepassxc
-version=2.7.9
+version=2.7.10
 release=1
 source=(https://github.com/keepassxreboot/keepassxc/releases/download/$version/$name-$version-src.tar.xz)
 
@@ -23,7 +23,6 @@ unpack_source() {
 
 # }}}
 build() {
-  ls -la
   prt-get isinst ccache && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
   prt-get isinst ccache && PKGMK_KEEPASSXC+=' -D WITH_CCACHE=ON'
 
