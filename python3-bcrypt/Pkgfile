@@ -11,5 +11,7 @@ source=(https://pypi.python.org/packages/source/b/bcrypt/bcrypt-$version.tar.gz)
 build() {
     cd bcrypt-$version
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
+
+# vim: set ts=4 et:
