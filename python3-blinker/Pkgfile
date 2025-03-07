@@ -11,6 +11,6 @@ source=(https://files.pythonhosted.org/packages/source/b/blinker/blinker-$versio
 build() {
   cd blinker-$version
 
-  PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG \
-    --ignore-installed --no-deps .
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
