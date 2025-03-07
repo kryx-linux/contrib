@@ -9,7 +9,9 @@ release=1
 source=(https://pypi.python.org/packages/source/j/jsonschema-specifications/jsonschema_specifications-$version.tar.gz)
 
 build() {
-	cd jsonschema_specifications-$version
-	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-	PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG --ignore-installed --no-deps dist/*.whl
+    cd jsonschema_specifications-$version
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
+
+# vim: set ts=4 et:
