@@ -10,7 +10,9 @@ source=(https://pypi.python.org/packages/source/i/importlib_metadata/importlib_m
 
 build() {
     cd importlib_metadata-$version
-    /usr/bin/pip3 install --isolate --root=${PKG} --ignore-installed --no-deps .
+
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
 
 # vim: set ts=4 et:
