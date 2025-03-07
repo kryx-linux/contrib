@@ -1,7 +1,7 @@
 # Description: Distro - an OS platform information API
 # URL: https://pypi.org/project/distro/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: python3-build python3-wheel
+# Depends on: python3-wheel
 
 name=python3-distro
 version=1.9.0
@@ -11,7 +11,7 @@ source=(https://pypi.io/packages/source/d/distro/distro-$version.tar.gz)
 build() {
     cd distro-$version
     /usr/bin/python3 -m build --wheel --no-isolation
-    PIP_CONFIG_FILE=/dev/null /usr/bin/pip3 install --isolated --root=$PKG \
-        --ignore-installed --no-deps dist/*.whl
-    rm $PKG/usr/lib/python*/site-packages/distro-$version.dist-info/INSTALLER
+    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
+
+# vim: set ts=4 et:
