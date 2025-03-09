@@ -4,7 +4,7 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=27.5.1
+version=28.0.1
 release=1
 source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
@@ -14,7 +14,7 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
 build() {
     export GO111MODULE=auto
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=4c9b3b0
+    export DOCKER_GITCOMMIT=bbd0a17
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
     export CGO_CFLAGS="${CFLAGS}"
@@ -45,7 +45,7 @@ build() {
     install -D -m 0755 moby-$version/bundles/dynbinary-daemon/docker-proxy \
         $PKG/usr/bin/docker-proxy
 
-    for M in 1 5 8; do
+    for M in 1 5; do
         install -d -m 0755 $PKG/usr/share/man/man${M}
         install -m 0644 $SRC/man${M}/* $PKG/usr/share/man/man${M}/
     done
