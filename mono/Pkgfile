@@ -4,23 +4,27 @@
 # Depends on:
 
 name=mono
-version=6.12.0.205
+version=6.14.0
 release=1
-source=(https://download.mono-project.com/sources/$name/preview/$name-$version.tar.xz)
+source=(https://dl.winehq.org/mono/sources/mono/mono-$version.tar.xz)
 
 build() {
   cd $name-$version
 
-  [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
+  if command -v ccache >/dev/null 2>&1; then
+    export PATH=$(echo $PATH | tr ':' '\n' | grep -E '/(s?bin)$' | tr '\n' ':')
+  fi
 
   CFLAGS+=" -ffat-lto-objects" \
-  ./configure --prefix=/usr \
+  PYTHON=/usr/bin/python3 \
+  ./autogen.sh --prefix=/usr \
     --mandir=/usr/share/man \
-    --enable-ninja \
     --with-mcs-docs=no \
     --disable-crash-reporting \
-    --disable-nls
+    --disable-nls \
+    --disable-llvm
 
+  PYTHON=/usr/bin/python3 make get-monolite-latest
   PYTHON=/usr/bin/python3 make
   make DESTDIR=$PKG install
 
