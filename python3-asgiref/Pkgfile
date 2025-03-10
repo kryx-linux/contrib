@@ -1,7 +1,7 @@
 # Description: ASGI specs, helper code, and adapters
 # URL: https://github.com/django/asgiref/
 # Maintainer: CRUX System Team, core-ports at crux dot nu
-# Depends on: python3-typing_extensions
+# Depends on: python3-wheel
 
 name=python3-asgiref
 version=3.8.1
@@ -11,8 +11,6 @@ source=(https://pypi.org/packages/source/a/asgiref/asgiref-$version.tar.gz)
 build() {
   cd asgiref-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
