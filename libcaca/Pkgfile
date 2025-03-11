@@ -1,15 +1,21 @@
 # Description: Color AsCii Art library
 # URL: http://caca.zoy.org/wiki/libcaca
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: imlib2 xorg-libx11
+# Depends on: imlib2
 
 name=libcaca
 version=0.99.beta20
 release=2
-source=(https://github.com/cacalabs/libcaca/releases/download/v$version/libcaca-$version.tar.bz2)
+source=(https://github.com/cacalabs/libcaca/releases/download/v$version/libcaca-$version.tar.bz2
+  libcaca-0.99.beta20-c99.patch
+  libcaca-0.99.beta20-CVE-2022-0856.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/libcaca-0.99.beta20-CVE-2022-0856.patch
+  patch -Np1 -i $SRC/libcaca-0.99.beta20-c99.patch
+  autoreconf -vfi
 
   ./configure \
     --prefix=/usr \
