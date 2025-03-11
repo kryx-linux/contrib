@@ -2,17 +2,20 @@
 # URL: https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on:
-# Optional: libxslt
+# Optional: docbook-xsl libxslt
 
 name=xdg-user-dirs
 version=0.18
 release=1
-source=(https://gitlab.freedesktop.org/xdg/xdg-user-dirs/-/archive/$version/xdg-user-dirs-$version.tar.bz2)
+source=(https://gitlab.freedesktop.org/xdg/xdg-user-dirs/-/archive/$version/xdg-user-dirs-$version.tar.bz2
+  po.patch)
 
 build() {
   cd $name-$version
 
-  prt-get isinst libxslt || PKGMK_XUD+=' --disable-documentation'
+  prt-get isinst dockbook-xsl libxslt || PKGMK_XUD+=' --disable-documentation'
+
+  patch -Np1 -i $SRC/po.patch
 
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr $PKGMK_XUD \
