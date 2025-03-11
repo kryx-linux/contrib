@@ -7,13 +7,13 @@
 name=podman-compose
 version=1.3.0
 release=1
-source=(https://pypi.org/packages/source/p/podman_compose/podman_compose-$version.tar.gz)
+source=(https://github.com/containers/podman-compose/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd podman_compose-$version
+  cd $name-$version
 
   prt-get isinst bash-completion && install -D -m644 \
-    $name-$version/completion/podman-compose \
+    completion/bash/podman-compose \
     $PKG/usr/share/bash-completion/completions/podman-compose
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
