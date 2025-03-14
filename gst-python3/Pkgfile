@@ -1,10 +1,10 @@
 # Description: Python bindings for gstreamer.
 # URL: https://gstreamer.freedesktop.org/modules/gst-python.html
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gst-plugins-base python3-gobject
+# Depends on: gst-plugins-bad python3-gobject
 
 name=gst-python3
-version=1.24.12
+version=1.26.0
 release=1
 source=(https://gstreamer.freedesktop.org/src/gst-python/gst-python-$version.tar.xz)
 
@@ -16,7 +16,8 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D python=/usr/bin/python3
+    -D python-exe=/usr/bin/python3 \
+    -D tests=disabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 

@@ -2,13 +2,12 @@
 # URL: https://gstreamer.freedesktop.org/modules/gst-plugins-bad.html
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: brotli dav1d faac faad2 fdk-aac ffmpeg gst-plugins-base lame libass libmodplug libnice libsrtp libva libvdpau libvpx libwebp lilv mjpegtools neon openjpeg2 rtmpdump shaderc
-# Optional: aom bluez chromaprint ladspa libde265 lv2 musepack openal openh264 soundtouch x265
+# Optional: aom bluez chromaprint ladspa libde265 lv2 musepack openal openh264 x265
 
 name=gst-plugins-bad
-version=1.24.12
+version=1.26.0
 release=1
-source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz
-  8539.patch)
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
 
 build() {
   PKGMK_GSTBAD="--prefix=/usr
@@ -44,14 +43,11 @@ build() {
     musepack
     openal
     openh264
-    soundtouch
     x265"
 
   for feat in $optional; do
     prt-get isinst $feat || PKGMK_GSTBAD+=" -D $feat=disabled"
   done
-
-  patch -Np3 -d $name-$version -i $SRC/8539.patch
 
   meson setup $name-$version build $PKGMK_GSTBAD \
     --prefix=/usr \
