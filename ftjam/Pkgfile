@@ -5,11 +5,14 @@
 name=ftjam
 version=2.5.3rc2
 release=1
-source=(https://www.mirrorservice.org/sites/download.salixos.org/i486/14.0/source/d/ftjam/$name-$version.tar.bz2)
+source=(https://www.mirrorservice.org/sites/download.salixos.org/i486/14.0/source/d/ftjam/$name-$version.tar.bz2
+  ftjam-2.5.3-clang16.patch)
 
 build() {
   cd ftjam-$version
 
+  patch -Np1 -i $SRC/ftjam-2.5.3-clang16.patch
+  CFLAGS+=' -fno-strict-aliasing' \
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
