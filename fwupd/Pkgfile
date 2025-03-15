@@ -8,6 +8,7 @@ name=fwupd
 version=2.0.6
 release=1
 source=(https://github.com/fwupd/fwupd/releases/download/$version/fwupd-$version.tar.xz
+  8588.patch
   fwupd.service)
 
 build() {
@@ -25,6 +26,8 @@ build() {
   prt-get isinst python3-markdown || PKGMK_FWUPD+='  -D docs=disabled'
   prt-get isinst tpm2-tss || PKGMK_FWUPD+=' -D plugin_tpm=disabled'
   prt-get isinst upower || PKGMK_FWUPD+=' -D plugin_upower=disabled'
+
+  patch -Np1 -d $name-$version -i $SRC/8588.patch
 
   meson setup $name-$version build $PKGMK_FWUPD \
     --prefix=/usr \
