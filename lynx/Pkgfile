@@ -11,6 +11,10 @@ source=(https://invisible-mirror.net/archives/lynx/tarballs/${name}${version}.ta
 build() {
 	cd ${name}${version}
 
+	# cuserid is considered "extern" in glibc, resulting in an 
+	# implicit function declaration error.
+	sed -i '/Global variables/a #undef HAVE_CUSERID' src/LYMain.c
+
 	./configure \
 		--prefix=/usr \
 		--enable-color-style \
