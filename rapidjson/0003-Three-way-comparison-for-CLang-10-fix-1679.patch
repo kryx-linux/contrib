@@ -1,0 +1,50 @@
+From 2cecf24712bfe0f3d821a6f3763156066c7c40ec Mon Sep 17 00:00:00 2001
+From: Nikolay <211292+kolya7k@users.noreply.github.com>
+Date: Mon, 30 Mar 2020 07:20:35 +0500
+Subject: [PATCH 3/9] Three-way comparison for CLang 10 fix (#1679)
+
+C++20 features must enable additional functionality, not to change interface completely
+---
+ include/rapidjson/document.h | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
+
+diff --git a/include/rapidjson/document.h b/include/rapidjson/document.h
+index 19f5a6a5..8e13d1cc 100644
+--- a/include/rapidjson/document.h
++++ b/include/rapidjson/document.h
+@@ -24,6 +24,9 @@
+ #include "encodedstream.h"
+ #include <new>      // placement new
+ #include <limits>
++#ifdef __cpp_lib_three_way_comparison
++#include <compare>
++#endif
+ 
+ RAPIDJSON_DIAG_PUSH
+ #ifdef _MSC_VER
+@@ -168,12 +171,16 @@ public:
+ 
+     //! @name relations
+     //@{
+-    bool operator==(ConstIterator that) const { return ptr_ == that.ptr_; }
+-    bool operator!=(ConstIterator that) const { return ptr_ != that.ptr_; }
+-    bool operator<=(ConstIterator that) const { return ptr_ <= that.ptr_; }
+-    bool operator>=(ConstIterator that) const { return ptr_ >= that.ptr_; }
+-    bool operator< (ConstIterator that) const { return ptr_ < that.ptr_; }
+-    bool operator> (ConstIterator that) const { return ptr_ > that.ptr_; }
++    template <bool Const_> bool operator==(const GenericMemberIterator<Const_, Encoding, Allocator>& that) const { return ptr_ == that.ptr_; }
++    template <bool Const_> bool operator!=(const GenericMemberIterator<Const_, Encoding, Allocator>& that) const { return ptr_ != that.ptr_; }
++    template <bool Const_> bool operator<=(const GenericMemberIterator<Const_, Encoding, Allocator>& that) const { return ptr_ <= that.ptr_; }
++    template <bool Const_> bool operator>=(const GenericMemberIterator<Const_, Encoding, Allocator>& that) const { return ptr_ >= that.ptr_; }
++    template <bool Const_> bool operator< (const GenericMemberIterator<Const_, Encoding, Allocator>& that) const { return ptr_ < that.ptr_; }
++    template <bool Const_> bool operator> (const GenericMemberIterator<Const_, Encoding, Allocator>& that) const { return ptr_ > that.ptr_; }
++
++#ifdef __cpp_lib_three_way_comparison
++    template <bool Const_> std::strong_ordering operator<=>(const GenericMemberIterator<Const_, Encoding, Allocator>& that) const { return ptr_ <=> that.ptr_; }
++#endif
+     //@}
+ 
+     //! @name dereference
+-- 
+2.45.2
+
