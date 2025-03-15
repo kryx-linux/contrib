@@ -6,10 +6,11 @@
 
 name=kodi-wayland
 version=21.2
-release=1
+release=2
 _codename=Omega
 
 source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$_codename.tar.gz
+  269053ebbfd3cc4a3156a511f54ab7f08a09a730.patch
   24972.patch)
 
 build()  {
@@ -49,6 +50,7 @@ build()  {
     xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
 
   patch -Np1 -d xbmc-$version-$_codename -i $SRC/24972.patch
+  patch -Np1 -d xbmc-$version-$_codename -i $SRC/269053ebbfd3cc4a3156a511f54ab7f08a09a730.patch
 
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
     -D CMAKE_INSTALL_PREFIX=/usr \
