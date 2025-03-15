@@ -4,26 +4,26 @@
 # Depends on: ncurses openssl zlib
 
 name=lynx
-version=2.9.0dev.12
+version=2.9.2
 release=1
 source=(https://invisible-mirror.net/archives/lynx/tarballs/${name}${version}.tar.bz2)
 
 build() {
-	cd ${name}${version}
+   cd ${name}${version}
 
-	# cuserid is considered "extern" in glibc, resulting in an 
-	# implicit function declaration error.
-	sed -i '/Global variables/a #undef HAVE_CUSERID' src/LYMain.c
+   # cuserid is considered "extern" in glibc, resulting in an 
+   # implicit function declaration error.
+   sed -i '/Global variables/a #undef HAVE_CUSERID' src/LYMain.c
 
-	./configure \
-		--prefix=/usr \
-		--enable-color-style \
-		--enable-default-colors \
-		--disable-nls \
-		--enable-ipv6 \
-		--with-ssl \
-		--with-zlib
+   ./configure \
+      --prefix=/usr \
+      --enable-color-style \
+      --enable-default-colors \
+      --disable-nls \
+      --enable-ipv6 \
+      --with-ssl \
+      --with-zlib
 
-	make
-	make DESTDIR=$PKG install
+   make
+   make DESTDIR=$PKG install
 }
