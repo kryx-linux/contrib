@@ -2,10 +2,10 @@
 # URL: https://notmuchmail.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: gmime3 talloc xapian-core
-# Optional: bash-completion mutt neomutt ruby zsh
+# Optional: bash-completion mutt neomutt ruby zsh python3-cffi
 
 name=notmuch
-version=0.38.3
+version=0.39
 release=1
 source=(https://notmuchmail.org/releases/$name-$version.tar.xz)
 
@@ -18,10 +18,12 @@ build() {
     --zshcompletiondir=/usr/share/zsh/site-functions
   make DESTDIR=$PKG LIBDIR_IN_LDCONFIG=0 WITH_EMACS=0 install
 
-  pushd bindings/python
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG --optimize=1 --skip-build
-  popd
+  if prt-get isinst python3-cffi; then
+    pushd bindings/python-cffi
+    /usr/bin/python3 setup.py build
+    /usr/bin/python3 setup.py install --root=$PKG --optimize=1 --skip-build
+    popd
+  fi
 
   make -C vim DESTDIR=$PKG prefix=/usr/share/vim install
   install -Dm755 notmuch-shared $PKG/usr/bin/notmuch

@@ -1,24 +1,27 @@
 # Description: A C/C++ MIME creation and parser library with support for S/MIME, PGP, and Unix mbox spools
 # URL: https://github.com/jstedfast/gmime
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gpgme gtk-doc libidn2
+# Depends on: glib-introspection gpgme libidn2
+# Optional: vala
 
 name=gmime3
 version=3.2.15
-release=1
-source=(https://github.com/jstedfast/gmime/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/jstedfast/gmime/releases/download/$version/gmime-$version.tar.xz)
 
 build() {
   cd gmime-$version
-  NOCONFIGURE=1 ./autogen.sh
-  ./configure --prefix=/usr \
+
+  prt-get isinst vala && PKGMK_GMIME+=' --enable-vala'
+  ./configure --prefix=/usr $PKGMK_GMIME \
     --program-prefix=gmime3 \
     --enable-crypto \
     --enable-smime \
     --disable-gtk-doc \
-    --disable-static \
-    --disable-largefile
+    --disable-static
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
   make
   make DESTDIR=$PKG install
+
+  rm -rf $PKG/usr/share/gtk-doc
 }
