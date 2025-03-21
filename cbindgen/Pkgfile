@@ -10,13 +10,16 @@ release=1
 source=(https://github.com/mozilla/$name/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	cd $name-$version
+    cd $name-$version
 
-	prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
-	mkdir -p "$PKGMK_SOURCE_DIR/rust"
-	export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
+    prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+    mkdir -p "$PKGMK_SOURCE_DIR/rust"
+    export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
-	cargo fetch --target x86_64-unknown-linux-gnu
-	cargo build --release --frozen --bins
-	install -Dt $PKG/usr/bin target/release/cbindgen
+    LIBC=$(awk -v RS="" -v FS="\n" '/\nusr\/lib\/libc.so\n/ { print $1 }' /var/lib/pkg/db)
+    [ "$LIBC" != "glibc" ] || LIBC=gnu
+
+    cargo fetch --target x86_64-unknown-linux-$LIBC
+    cargo build --release --frozen --bins
+    install -Dt $PKG/usr/bin target/release/cbindgen
 }

@@ -4,10 +4,24 @@
 # Depends on:
 
 name=p5-path-tiny
-version=0.146
+version=0.148
 release=1
 source=(https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Path-Tiny-$version.tar.gz)
 
+unpack_source() {
+  mkdir -p $SRC/tarballs $SRC/$name-$version/external/tarballs
+  for file in ${source[@]}; do
+    case ${file##*/} in
+    Path-Tiny-$version.tar.gz)
+      echo "Unpacking $(get_filename $file)"
+      bsdtar -p -o -C $SRC -xf $(get_filename $file)
+      ;;
+    *)
+      cp $(get_filename $file) $SRC
+      ;;
+    esac
+  done
+}
 build() {
   cd Path-Tiny-${version/-TRIAL/}
   export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps

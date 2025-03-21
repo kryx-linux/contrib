@@ -4,19 +4,73 @@
 # Depends on: llvm
 
 name=rust-bin
-version=1.85.0
+version=1.85.1
 release=1
-source=(https://static.rust-lang.org/dist/rust-$version-x86_64-unknown-linux-gnu.tar.gz)
+source=()
+LIBC=$(awk -v RS="" -v FS="\n" '/\nusr\/lib\/libc.so\n/ { print $1 }' /var/lib/pkg/db)
+[ "$LIBC" != glibc ] || LIBC=gnu
+
+download_source() {
+  local u="https://static.rust-lang.org/dist/rust-$version-x86_64-unknown-linux-$LIBC.tar.gz"
+  local h="${u##*/}"
+  local completed
+  [ -s "$PKGMK_SOURCE_DIR/$h" ] && completed=1 || completed=0
+
+  # start with the mirrors defined in pkgmk.conf, then go to the url found in the Pkgfile
+  while (( m <= ${#PKGMK_SOURCE_MIRRORS[@]} )) && [ $completed = 0 ]; do
+    [ "${PKGMK_SOURCE_MIRRORS[m]}" = "" ] && um="$u" || um=${PKGMK_SOURCE_MIRRORS[m]%/}/$h
+    m=$(( m+1 ))
+    # interrupted downloads from a previous run should be put where curl will find them
+    if [ -f "$PKGMK_SOURCE_DIR/$h.partial" ]; then
+        ln -sf "$PKGMK_SOURCE_DIR/$h.partial" .
+        OCONTINUE="-C -"
+    fi
+
+    if curl -L -# --fail --ftp-pasv --retry 3 --retry-delay 3 -o $h.partial $OCONTINUE $um; then
+       completed=1
+       mv "$h.partial" "$PKGMK_SOURCE_DIR/$h"
+       ln -sf "$PKGMK_SOURCE_DIR/$h" .
+    else
+       [ ! -s "$h.partial" ] || mv "$h.partial" "$PKGMK_SOURCE_DIR"
+    fi
+  done
+
+  [ $completed = 1 ] || return $E_DOWNLOAD
+}
+
+unpack_source() {
+  declare -A cksums
+  # Remember to edit this array whenever a new rust is released.
+  cksums=([gnu]=b7202563a52b47f575b284a5a4794fafd688e39bfe8fd855b5e80129e671cb7f
+        [musl]=202369248281427e22585dcb78fd9c81efc26c84fbe935669f99b7667fb0c3af)
+  local h="$PKGMK_SOURCE_DIR/rust-$version-x86_64-unknown-linux-$LIBC.tar.gz"
+  [ -s "$h" ] && cksums[found]=$(shasum -a 256 "$h" | cut -d" " -f1)
+  [ "${cksums[found]}" = "${cksums[$LIBC]}" ] || return $E_UNPACK
+  bsdtar -p -o -C $SRC -xf "$h"
+}
 
 build() {
-  cd rust-$version-x86_64-unknown-linux-gnu
+  cd rust-$version-x86_64-unknown-linux-$LIBC
   ./install.sh --prefix=/usr --destdir=$PKG --disable-ldconfig
 
   # clean up junk files
   mv $PKG/usr/libexec/* $PKG/usr/lib
   rmdir $PKG/usr/libexec
   rm -rf $PKG/usr/share/doc
-  prt-get isinst bash-completion || rm -rf $PKG/usr/etc/bash_completion.d
-  prt-get isinst zsh || rm -rf $PKG/usr/share/zsh
+  prt-get isinst bash-completion >/dev/null || rm -rf $PKG/usr/etc/bash_completion.d
+  prt-get isinst zsh >/dev/null || rm -rf $PKG/usr/share/zsh
   rm -f $PKG/usr/lib/rustlib/{install.log,uninstall.sh}
+}
+
+make_footprint() {
+  pkginfo -f "$PKGMK_PACKAGE_DIR/$name#$version-$release.pkg.tar.$PKGMK_COMPRESSION_MODE" \
+    | sed -e 's,\(gnu\|musl\)\(/\|$\),LIBC\2,' \
+          -e '/[0-9a-f]\{16\}/d; /lib\/self-contained/d' \
+          -e '/librustc-stable.*\(dfsan\|safestack\).a/d' \
+          -e '/libLLVM.*19/d' | sort -k 3
+  # lib/self-contained/ path only appears in the musl tarball,
+  # libLLVM.*19 and librustc-stable.* paths only appear in the glibc tarball.
+  # Filenames with 16-digit random hashes will also be different between the
+  # two tarballs. Delete such paths here, and the same footprint file can 
+  # serve for both libc providers.
 }
