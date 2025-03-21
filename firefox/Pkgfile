@@ -5,7 +5,7 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wayland
 
 name=firefox
-version=136.0.1
+version=136.0.2
 release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
@@ -39,6 +39,7 @@ build() {
   unset MOZ_TELEMETRY_REPORTING
   ac_add_options --prefix=/usr
   ac_add_options --libdir=/usr/lib
+  ac_add_options --with-libclang-path=/usr/lib
   ac_add_options --enable-strip
   ac_add_options --enable-release
   ac_add_options --enable-install-strip
@@ -47,6 +48,7 @@ build() {
   ac_add_options --enable-optimize
   ac_add_options --with-system-ffi
   ac_add_options --with-system-jpeg
+  ac_add_options --with-system-libevent
   ac_add_options --with-system-libvpx
   ac_add_options --with-system-nspr
   ac_add_options --with-system-nss
@@ -59,7 +61,6 @@ build() {
   ac_add_options --disable-tests
   ac_add_options --disable-vtune
   ac_add_options --disable-updater
-  ac_add_options --disable-jemalloc
   ac_add_options --disable-elf-hack
   ac_add_options --disable-callgrind
   ac_add_options --disable-profiling
@@ -76,6 +77,14 @@ EOF
   local ICU_VER=$(prt-get printf "%v" --filter=icu)
   if (( ${ICU_VER%.*} >= 76 )); then
     echo 'ac_add_options --with-system-icu' >> .mozconfig
+  fi
+
+  # disable jemalloc on systems without glibc 
+  local LIBC=$(</var/lib/pkg/db awk -v RS="" -v FS="\n" '/\nusr\/lib\/libc.so\n/ { print $1 }')
+  if [ "$LIBC" = glibc ]; then
+     echo "ac_add_options --enable-jemalloc" >> .mozconfig
+  else
+     echo "ac_add_options --disable-jemalloc" >> .mozconfig
   fi
 
   # audio
@@ -104,7 +113,7 @@ EOF
 
   if prt-get isinst lld >/dev/null; then
       echo 'ac_add_options --enable-linker=lld' >> .mozconfig
-      export LDFLAGS+=" -Wl,--thinlto-jobs=$((JOBS / 2))"
+      export LDFLAGS+=",--thinlto-jobs=$((JOBS / 2))"
   else
       echo 'ac_add_options --enable-linker=bfd' >> .mozconfig
   fi
