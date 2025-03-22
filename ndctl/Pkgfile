@@ -4,14 +4,11 @@
 # Depends on: iniparser json-c keyutils libtracefs
 
 name=ndctl
-version=80
+version=81
 release=1
-source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version-$release.tar.gz
-  268.patch)
+source=(https://github.com/pmem/ndctl/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/268.patch
-
   meson setup $name-$version build $PKGMK_NDCTL \
     --prefix=/usr \
     --buildtype=plain \
