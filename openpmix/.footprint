@@ -179,9 +179,9 @@ drwxr-xr-x	root/root	usr/include/pmix/src/util/
 -rw-r--r--	root/root	usr/include/pmix_version.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libpmix.la
-lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.13.6
-lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.13.6
--rwxr-xr-x	root/root	usr/lib/libpmix.so.2.13.6
+lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.13.7
+lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.13.7
+-rwxr-xr-x	root/root	usr/lib/libpmix.so.2.13.7
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/pmix.pc
 drwxr-xr-x	root/root	usr/lib/pmix/
@@ -221,6 +221,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/history.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/how-things-work/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/index.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/resolve.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/session_dirs.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/index.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/installing-pmix/
@@ -308,38 +309,12 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/css/fonts/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/doctools.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/documentation_options.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/file.png
-drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/fonts/
-drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.eot
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.ttf
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.woff
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.woff2
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.eot
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.ttf
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.woff
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.woff2
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.eot
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.ttf
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.woff
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.woff2
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.eot
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.ttf
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.woff
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.woff2
-drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.eot
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.ttf
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.woff
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.woff2
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.eot
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.ttf
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.woff
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.woff2
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/jquery.js
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/js/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/badge_only.js
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/html5shiv-printshiv.min.js
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/html5shiv.min.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/theme.js
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/versions.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/language_data.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/minus.png
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/plus.png
@@ -373,6 +348,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/history.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/how-things-work/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/index.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/resolve.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/session_dirs.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/index.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/installing-pmix/
