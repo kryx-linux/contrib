@@ -1,33 +1,26 @@
 # Description: system daemon to allow session software to update firmware
 # URL: https://github.com/fwupd/fwupd
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: gcab hwdata libjcat libqmi libsmbios libxmlb python3-gobject python3-jinja2 python3-pillow vala
-# Optional: bash-completion bluez consolekit efivar flashrom fwupd-efi libcbor libdrm libgusb modemmanager pandoc-bin polkit protobuf-c python3-markdown tpm2-tss udisks2 valgrind
+# Depends on: gcab hwdata libjcat libqmi libsmbios libxmlb pango python3-gobject python3-jinja2 python3-pillow vala xorg-font-dejavu-ttf
+# Optional: bash-completion bluez efivar flashrom libcbor libdrm libgusb modemmanager pandoc-bin polkit protobuf-c python3-markdown tpm2-tss udisks2 valgrind
 
 name=fwupd
-version=2.0.6
+version=2.0.7
 release=1
 source=(https://github.com/fwupd/fwupd/releases/download/$version/fwupd-$version.tar.xz
-  8588.patch
   fwupd.service)
 
 build() {
   prt-get isinst bash-completion || PKGMK_FWUPD+=' -D bash_completion=false'
   prt-get isinst bluez || PKGMK_FWUPD+=' -D bluez=disabled'
-  prt-get isinst consolekit && PKGMK_FWUPD+=' -D consolekit=enabled' || PKGMK_FWUPD+=' -D consolekit=disabled'
   prt-get isinst flashrom || PKGMK_FWUPD+=' -D plugin_flashrom=disabled'
-  prt-get isinst fwupd-efi && PKGMK_FWUPD+=' -D plugin_uefi_capsule=enabled' || PKGMK_FWUPD+=' -D plugin_uefi_capsule=disabled'
   prt-get isinst libcbor || PKGMK_FWUPD+=' -D cbor=disabled'
   prt-get isinst libdrm && PKGMK_FWUPD+=' -D plugin_amdgpu=enabled'
   prt-get isinst modemmanager && PKGMK_FWUPD+=' -D plugin_modem_manager=disabled'
   prt-get isinst pandoc-bin && PKGMK_FWUPD+=' -D man=true'
   prt-get isinst polkit && PKGMK_FWUPD+=' -D polkit=enabled' || PKGMK_FWUPD+=' -D polkit=disabled'
-  prt-get isinst protobuf-c || PKGMK_FWUPD+=' -D plugin_logitech_bulkcontroller=disabled'
+  prt-get isinst protobuf-c || PKGMK_FWUPD+=' -D protobuf=disabled'
   prt-get isinst python3-markdown || PKGMK_FWUPD+='  -D docs=disabled'
-  prt-get isinst tpm2-tss || PKGMK_FWUPD+=' -D plugin_tpm=disabled'
-  prt-get isinst upower || PKGMK_FWUPD+=' -D plugin_upower=disabled'
-
-  patch -Np1 -d $name-$version -i $SRC/8588.patch
 
   meson setup $name-$version build $PKGMK_FWUPD \
     --prefix=/usr \
@@ -41,9 +34,7 @@ build() {
     -D supported_build=enabled \
     -D efi_os_dir=CRUX \
     -D efi_binary=false \
-    -D launchd=disabled \
     -D systemd=disabled \
-    -D elogind=disabled \
     -D passim=disabled \
     -D tests=false \
     -D fish_completion=false
