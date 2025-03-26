@@ -6,10 +6,13 @@
 
 name=calf
 version=0.90.5
-release=1
-source=(https://github.com/calf-studio-gear/calf/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/calf-studio-gear/calf/archive/$version/$name-$version.tar.gz
+  https://github.com/calf-studio-gear/calf/commit/86ee99719b2068b50e96994ab53439ca325eb1bc.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/86ee99719b2068b50e96994ab53439ca325eb1bc.patch
+
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
