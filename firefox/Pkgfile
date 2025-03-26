@@ -5,7 +5,7 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wayland
 
 name=firefox
-version=136.0.2
+version=136.0.3
 release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
@@ -149,6 +149,6 @@ EOF
   echo "/usr/lib/firefox" > $PKG/etc/revdep.d/firefox
 
   mkdir -p $PKG/usr/share/pixmaps
-  ln -s /usr/lib/firefox/browser/chrome/icons/default/default128.png \
+  ln -sf /usr/lib/firefox/browser/chrome/icons/default/default128.png \
           $PKG/usr/share/pixmaps/firefox.png
 }
