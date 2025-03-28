@@ -370,10 +370,12 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/__pycache__/test_recovery_codes.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/__pycache__/test_totp.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/__pycache__/test_trust.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/__pycache__/test_views.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/__pycache__/test_webauthn.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/test_recovery_codes.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/test_totp.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/test_trust.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/test_views.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/tests/test_webauthn.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/headless/mfa/urls.py
@@ -680,7 +682,11 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/__pycache__/__init__.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/__pycache__/test_trust.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/__pycache__/test_trust_fingerprint.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/__pycache__/test_views.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/test_trust.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/test_trust_fingerprint.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/tests/test_views.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/urls.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/base/views.py
@@ -694,7 +700,9 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/flows
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/flows/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/flows/__pycache__/__init__.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/flows/__pycache__/add.cpython-310.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/flows/__pycache__/trust.cpython-310.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/flows/add.py
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/internal/flows/trust.py
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/mfa/migrations/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/migrations/0001_initial.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/mfa/migrations/0002_authenticator_timestamps.py
@@ -2656,6 +2664,7 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/totp
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/totp/activate_form.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/totp/base.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/totp/deactivate_form.html
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/trust.html
 drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/add_form.html
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/templates/mfa/webauthn/authenticator_confirm_delete.html
@@ -2762,10 +2771,10 @@ drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/tests
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/urls.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/usersessions/views.py
 -rw-r--r--	root/root	usr/lib/python3.10/site-packages/allauth/utils.py
-drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/django_allauth-65.5.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.5.0.dist-info/AUTHORS
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.5.0.dist-info/LICENSE
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.5.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.5.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.5.0.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.5.0.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.10/site-packages/django_allauth-65.6.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.6.0.dist-info/AUTHORS
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.6.0.dist-info/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.6.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.6.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.6.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.10/site-packages/django_allauth-65.6.0.dist-info/top_level.txt
