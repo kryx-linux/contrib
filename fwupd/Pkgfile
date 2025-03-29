@@ -15,7 +15,6 @@ build() {
   prt-get isinst bluez || PKGMK_FWUPD+=' -D bluez=disabled'
   prt-get isinst flashrom || PKGMK_FWUPD+=' -D plugin_flashrom=disabled'
   prt-get isinst libcbor || PKGMK_FWUPD+=' -D cbor=disabled'
-  prt-get isinst libdrm && PKGMK_FWUPD+=' -D plugin_amdgpu=enabled'
   prt-get isinst modemmanager && PKGMK_FWUPD+=' -D plugin_modem_manager=disabled'
   prt-get isinst pandoc-bin && PKGMK_FWUPD+=' -D man=true'
   prt-get isinst polkit && PKGMK_FWUPD+=' -D polkit=enabled' || PKGMK_FWUPD+=' -D polkit=disabled'

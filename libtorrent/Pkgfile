@@ -4,7 +4,7 @@
 # Depends on: curl libsigc++
 
 name=libtorrent
-version=0.15.1
+version=0.15.2
 release=1
 source=(https://github.com/rakshasa/libtorrent/archive/v$version/$name-$version.tar.gz)
 
@@ -12,6 +12,7 @@ build() {
   cd $name-$version
 
   autoreconf -vfi
+  CONFIG_SHELL=/bin/bash \
   ./configure --prefix=/usr \
     --enable-debug=no
   make
