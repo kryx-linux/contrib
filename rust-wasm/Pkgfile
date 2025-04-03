@@ -5,9 +5,9 @@
 # Optional: clang ccache libgit2 polly sccache
 
 name=rust-wasm
-version=1.85.1
-_date=2025-01-09
-_rustc=1.84.0
+version=1.86.0
+_date=2025-02-20
+_rustc=1.85.0
 _cargo=$_rustc
 release=1
 
@@ -18,7 +18,8 @@ source=(https://static.rust-lang.org/dist/${name/-wasm/}c-$version-src.tar.xz
   0001-bootstrap-Change-libexec-dir.patch
   0002-bootstrap-Change-bash-completion-dir.patch
   0003-compiler-Change-LLVM-targets.patch
-  0004-compiler-Use-wasm-ld-for-wasm-targets.patch)
+  0004-compiler-Use-wasm-ld-for-wasm-targets.patch
+  0006-bootstrap-Use-lld-mode-only-for-host-linked-targets.patch)
 
 unpack_source() { # {{{
   for file in ${source[@]}; do
@@ -69,6 +70,7 @@ build() {
   patch -p1 -i $SRC/0002-bootstrap-Change-bash-completion-dir.patch
   patch -p1 -i $SRC/0003-compiler-Change-LLVM-targets.patch
   patch -p1 -i $SRC/0004-compiler-Use-wasm-ld-for-wasm-targets.patch
+  patch -p1 -i $SRC/0006-bootstrap-Use-lld-mode-only-for-host-linked-targets.patch
 
   # config.toml {{{
   cat <<-EOF >$SRC/config.toml
