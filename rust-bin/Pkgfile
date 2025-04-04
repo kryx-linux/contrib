@@ -4,7 +4,7 @@
 # Depends on: llvm
 
 name=rust-bin
-version=1.85.1
+version=1.86.0
 release=1
 source=()
 LIBC=$(awk -v RS="" -v FS="\n" '/\nusr\/lib\/libc.so\n/ { print $1 }' /var/lib/pkg/db)
@@ -16,7 +16,7 @@ download_source() {
   local completed
   [ -s "$PKGMK_SOURCE_DIR/$h" ] && completed=1 || completed=0
 
-  # start with the mirrors defined in pkgmk.conf, then go to the url found in the Pkgfile
+  # start with the mirrors defined in pkgmk.conf, then fall back to the upstream url
   while (( m <= ${#PKGMK_SOURCE_MIRRORS[@]} )) && [ $completed = 0 ]; do
     [ "${PKGMK_SOURCE_MIRRORS[m]}" = "" ] && um="$u" || um=${PKGMK_SOURCE_MIRRORS[m]%/}/$h
     m=$(( m+1 ))
@@ -41,8 +41,8 @@ download_source() {
 unpack_source() {
   declare -A cksums
   # Remember to edit this array whenever a new rust is released.
-  cksums=([gnu]=b7202563a52b47f575b284a5a4794fafd688e39bfe8fd855b5e80129e671cb7f
-        [musl]=202369248281427e22585dcb78fd9c81efc26c84fbe935669f99b7667fb0c3af)
+  cksums=([gnu]=f6a8c0d8b8a8a737c40eee78abe286a3cbe984d96b63de9ae83443360e3264bf
+        [musl]=2d399a43e1e4a2dea0e16f83cd0a1dd53f7f32250ba25970ea5d9c31a16df611)
   local h="$PKGMK_SOURCE_DIR/rust-$version-x86_64-unknown-linux-$LIBC.tar.gz"
   [ -s "$h" ] && cksums[found]=$(shasum -a 256 "$h" | cut -d" " -f1)
   [ "${cksums[found]}" = "${cksums[$LIBC]}" ] || return $E_UNPACK
