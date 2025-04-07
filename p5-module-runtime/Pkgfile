@@ -4,9 +4,23 @@
 # Depends on: p5-module-build
 
 name=p5-module-runtime
-version=0.016
+version=0.017
 release=1
-source=(https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Module-Runtime-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/H/HA/HAARG/Module-Runtime-$version.tar.gz)
+
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+    Module-Runtime-$version.tar.gz)
+      echo "Unpacking $(get_filename $file)"
+      bsdtar -p -o -C $SRC -xf $(get_filename $file)
+      ;;
+    *)
+      cp $(get_filename $file) $SRC
+      ;;
+    esac
+  done
+}
 
 build() {
   cd Module-Runtime-$version
