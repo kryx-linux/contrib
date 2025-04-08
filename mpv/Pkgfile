@@ -5,7 +5,7 @@
 # Optional: libdvdnav libbluray libcdio-paranoia libsdl2 libvdpau luajit pipewire pulseaudio sndio rubberband xorg-libxpresent
 
 name=mpv
-version=0.39.0
+version=0.40.0
 release=1
 source=(https://github.com/mpv-player/mpv/archive/v$version/$name-$version.tar.gz)
 
@@ -26,5 +26,6 @@ build() {
   DESTDIR=$PKG meson install -C build
 
   prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion
+  prt-get isinst fish || rm -rf $PKG/usr/share/fish
   prt-get isinst zsh || rm -rf $PKG/usr/share/zsh
 }
