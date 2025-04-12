@@ -4,15 +4,12 @@
 # Depends on: appstream gtk4
 
 name=libadwaita
-version=1.7.0
+version=1.7.1
 release=1
-source=(https://gitlab.gnome.org/GNOME/libadwaita/-/archive/$version/libadwaita-$version.tar.bz2
-  1440.patch)
+source=(https://gitlab.gnome.org/GNOME/libadwaita/-/archive/$version/libadwaita-$version.tar.bz2)
 
 build() {
   prt-get isinst vala || PKGMK_LIBADWAITA+=' -D vapi=false'
-
-  patch -Np1 -d $name-$version -i $SRC/1440.patch
 
   meson setup $name-$version build $PKGMK_LIBADWAITA \
     --prefix=/usr \
