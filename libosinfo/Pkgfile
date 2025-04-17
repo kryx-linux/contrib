@@ -5,10 +5,12 @@
 
 name=libosinfo
 version=1.12.0
-release=1
-source=(https://releases.pagure.org/libosinfo/$name-$version.tar.xz)
+release=2
+source=(https://releases.pagure.org/libosinfo/$name-$version.tar.xz \
+  162.diff)
 
 build() {
+  patch -d $name-$version -p1 -i $SRC/162.diff
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
