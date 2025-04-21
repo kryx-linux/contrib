@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# /etc/rc.d/sndiod: start/stop the sndio server
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/sndiod
+# edit the next line to match your preferred ALSA device (index or name)
+OPTS="-f rsnd/1,1 -F rsnd/1,0"
+
+case $1 in
+start)
+	$SSD --start --quiet --oknodo --exec $PROG -- $OPTS
+	;;
+stop)
+	$SSD --stop --quiet --oknodo --retry 10 --exec $PROG
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+status)
+	$SSD --status --exec $PROG
+	case $? in
+	0)   echo "$PROG is running with pid $(pidof $PROG)" ;;
+	1|3) echo "$PROG is not running" ;;
+	4)   echo "Unable to determine the program status" ;;
+	esac
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac

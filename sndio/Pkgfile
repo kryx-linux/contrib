@@ -1,0 +1,18 @@
+# Description: small audio and midi framework
+# URL:  http://www.sndio.org/
+# Maintainer:  John McQuah, jmcquah at disroot dot org
+# Depends on: alsa-lib 
+
+name=sndio
+version=1.10.0
+release=1
+source=(http://www.$name.org/$name-$version.tar.gz sndiod)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --mandir=/usr/share/man
+    make
+    make DESTDIR=$PKG install
+
+    install -Dt $PKG/etc/rc.d -m0755 $SRC/sndiod
+}
