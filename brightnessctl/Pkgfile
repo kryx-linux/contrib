@@ -1,0 +1,25 @@
+# Description: A program to read and control device brightness
+# URL: https://github.com/Hummer12007/brightnessctl/tree/
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on:
+
+name=brightnessctl
+version=0.5.1
+_commit=304d6c58fdd58019dc70fde7854c819672385b78
+release=1
+source=(https://github.com/Hummer12007/$name/archive/$_commit.tar.gz)
+
+build() {
+  cd $name-$_commit
+
+  sed -e "/VERSION/s/0.5$/$version/" -i Makefile
+  sed -e '/specific delta/s/\(Example:\).*/\1 +10 or 50- (or -- -50)\\n\\/' \
+      -e '/percentage delta/s/\(Example:\).*/\1 +10%% or 20%%- (or -- -20%%)\\n\\/' \
+      -e '/percentage delta/a \
+  Note: use -- to signal the end of options, \\n\\\
+  so that a delta of -20%% is not treated as another option.\\n\\' -i $name.c
+
+  ./configure --prefix=/usr --disable-logind
+  make
+  make DESTDIR=$PKG install
+}
