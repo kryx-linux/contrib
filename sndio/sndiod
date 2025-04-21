@@ -4,9 +4,9 @@
 #
 
 SSD=/sbin/start-stop-daemon
-PROG=/usr/sbin/sndiod
+PROG=/usr/bin/sndiod
 # edit the next line to match your preferred ALSA device (index or name)
-OPTS="-f rsnd/1,1 -F rsnd/1,0"
+OPTS="-f rsnd/1,0 -F rsnd/2,0"
 
 case $1 in
 start)
