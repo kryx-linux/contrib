@@ -8,6 +8,7 @@ version=0.5.1
 _commit=304d6c58fdd58019dc70fde7854c819672385b78
 release=1
 source=(https://github.com/Hummer12007/$name/archive/$_commit.tar.gz)
+renames=($name-${_commit:0:8}.tar.gz)
 
 build() {
   cd $name-$_commit
