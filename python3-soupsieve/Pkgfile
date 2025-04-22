@@ -5,13 +5,13 @@
 
 name=python3-soupsieve
 _name=${name#*-}
-version=2.6
+version=2.7
 release=1
 source=(https://files.pythonhosted.org/packages/source/${_name::1}/$_name/$_name-$version.tar.gz)
 
 build() {
-	cd $_name-$version
+   cd $_name-$version
 
-	/usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-	/usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 }
