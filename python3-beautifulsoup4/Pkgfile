@@ -5,7 +5,7 @@
 
 name=python3-beautifulsoup4
 _name=${name#*-}
-version=4.13.2
+version=4.13.4
 release=1
 source=(https://files.pythonhosted.org/packages/source/${_name::1}/$_name/$_name-$version.tar.gz)
 
@@ -15,5 +15,5 @@ build() {
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
     /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 
-    rm -rf $PKG/usr/lib/python3.10/site-packages/$_name-$version.dist-info/licenses/
+    rm -rf $PKG/usr/lib/python3.12/site-packages/$_name-$version.dist-info/licenses/
 }
