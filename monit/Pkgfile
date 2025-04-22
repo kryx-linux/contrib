@@ -4,22 +4,22 @@
 # Depends on: libnsl libtirpc linux-pam openssl zlib
 
 name=monit
-version=5.34.4
+version=5.35.0
 release=1
 source=(http://mmonit.com/$name/dist/$name-$version.tar.gz \
 	monitd)
 
 build() {
-	cd $name-$version
+    cd $name-$version
 
-	./configure \
-		--prefix=/usr \
-		--sysconfdir=/etc \
-		--runstatedir=/run
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --runstatedir=/run
 
-	make
-	make DESTDIR=$PKG install
+    make
+    make DESTDIR=$PKG install
 
-	install -D -m 0755 $SRC/monitd $PKG/etc/rc.d/monitd
-	install -D -m 0700 monitrc $PKG/etc/monitrc
+    install -D -m 0755 $SRC/monitd $PKG/etc/rc.d/monitd
+    install -D -m 0700 monitrc $PKG/etc/monitrc
 }
