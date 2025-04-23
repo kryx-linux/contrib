@@ -4,12 +4,12 @@
 # Depends on: python3-build python3-installer
 
 name=python3-more-itertools
-version=10.6.0
+version=10.7.0
 release=1
-source=(https://pypi.org/packages/source/m/more-itertools/more-itertools-$version.tar.gz)
+source=(https://pypi.org/packages/source/m/more_itertools/more_itertools-$version.tar.gz)
 
 build() {
-  cd more-itertools-$version
+  cd more_itertools-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
