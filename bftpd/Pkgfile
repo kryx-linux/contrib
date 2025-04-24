@@ -1,9 +1,10 @@
 # Description: Small, easy-to-configure FTP server.
 # URL: http://bftpd.sourceforge.net/
 # Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: zlib
 
 name=bftpd
-version=6.2
+version=6.3
 release=1
 source=(https://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz
   ftpd)
@@ -11,7 +12,7 @@ source=(https://downloads.sourceforge.net/project/$name/$name/$name-$version/$na
 build() {
   cd $name
 
-  CFLAGS+=' -fcommon'
+  autoreconf -fiv
   sed -e '/var\/run/d' \
       -e '/^sbindir=/a sysconfdir=@sysconfdir@\nlocalstatedir=@localstatedir@' \
       -e 's/$.prefix.\/etc/$(sysconfdir)/' \
