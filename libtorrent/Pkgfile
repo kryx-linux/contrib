@@ -4,15 +4,13 @@
 # Depends on: curl libsigc++
 
 name=libtorrent
-version=0.15.2
+version=0.15.3
 release=1
-source=(https://github.com/rakshasa/libtorrent/archive/v$version/$name-$version.tar.gz
-  include.patch)
+source=(https://github.com/rakshasa/libtorrent/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
-  patch -Np1 -i $SRC/include.patch
   autoreconf -vfi
 
   CONFIG_SHELL=/bin/bash \
