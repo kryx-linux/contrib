@@ -1,7 +1,7 @@
 # Description: A SDL MPEG player library.
 # URL: http://icculus.org/smpeg/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: glu libsdl
+# Depends on: libsdl
 
 name=smpeg
 version=0.4.5
@@ -10,20 +10,20 @@ source=(https://github.com/icculus/smpeg/archive/refs/tags/release_${version//./
 renames=($name-$version.zip)
 
 build() {
-	cd $name-release_*
+    cd $name-release_*
 
-	CFLAGS+=' -Wno-error=narrowing'
-	LDFLAGS+=' -lX11'
-	./autogen.sh
-	./configure \
-		--prefix=/usr \
-		--mandir=/usr/share/man \
-		--enable-gtk-player=no  # but its man-page is still installed?
+    CFLAGS+=' -Wno-error=narrowing'
+    LDFLAGS+=' -lX11'
+    ./autogen.sh
+    ./configure \
+        --prefix=/usr \
+        --mandir=/usr/share/man \
+        --enable-gtk-player=no  # but its man-page is still installed?
 
-	make
-	make install DESTDIR=$PKG
+    make
+    make install DESTDIR=$PKG
 
-	# delete la file and the dangling man-page
-	rm -f $PKG/usr/lib/lib$name.la
-	rm -f $PKG/usr/share/man/man1/gtv.1
+    # delete la file and the dangling man-page
+    rm -f $PKG/usr/lib/lib$name.la
+    rm -f $PKG/usr/share/man/man1/gtv.1
 }
