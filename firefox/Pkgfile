@@ -5,7 +5,7 @@
 # Optional: apulse jack pulseaudio pipewire sndio sccache lld wayland
 
 name=firefox
-version=137.0.2
+version=138.0.1
 release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
@@ -130,8 +130,8 @@ EOF
   DESTDIR=$PKG ./mach install
 
   # Remove crap
-  rm -r $PKG/usr/lib/firefox/browser/features
-  rm $PKG/usr/lib/firefox/removed-files
+  rm -rf $PKG/usr/lib/firefox/browser/features
+  rm -f $PKG/usr/lib/firefox/removed-files
 
   install -D -m 0644 $SRC/firefox.desktop $PKG/usr/share/applications/firefox.desktop
 
