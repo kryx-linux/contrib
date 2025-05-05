@@ -5,14 +5,14 @@
 
 name=python3-backports_entry-points-selectable
 version=1.3.0
-release=2
+release=3
 source=(https://pypi.python.org/packages/source/b/backports.entry_points_selectable/backports.entry_points_selectable-$version.tar.gz)
 
 build() {
   cd backports.entry_points_selectable-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 
   rm $PKG/usr/lib/python*/site-packages/backports/__init__.py* \
     $PKG/usr/lib/python*/site-packages/backports/__pycache__/__init__.*
