@@ -5,7 +5,7 @@
 
 name=python3-lark-parser
 version=1.2.2
-release=1
+release=2
 
 # https://github.com/lark-parser/lark/tree/master/tests/test_nearley
 _nearley_commit=326831689826cb1b9a4d21d1ce0d5db9278e9636
@@ -20,5 +20,5 @@ build() {
   cd lark-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
