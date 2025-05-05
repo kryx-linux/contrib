@@ -5,7 +5,7 @@
 
 name=python3-cryptography
 version=44.0.3
-release=1
+release=2
 source=(https://pypi.python.org/packages/source/c/cryptography/cryptography-$version.tar.gz)
 
 build() {
@@ -16,5 +16,5 @@ build() {
   cd ${name#*-}-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
