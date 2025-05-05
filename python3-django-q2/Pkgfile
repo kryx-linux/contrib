@@ -6,12 +6,12 @@
 
 name=python3-django-q2
 version=1.8.0
-release=1
+release=2
 source=(https://pypi.org/packages/source/d/django_q2/django_q2-$version.tar.gz)
 
 build() {
   cd django_q2-$version
 
   /usr/bin/python3 -m poetry build
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
