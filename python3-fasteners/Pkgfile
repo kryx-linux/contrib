@@ -6,11 +6,11 @@
 
 name=python3-fasteners
 version=0.19
-release=1
+release=2
 source=(https://pypi.org/packages/source/f/fasteners/fasteners-$version.tar.gz)
 
 build() {
   cd fasteners-$version
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
