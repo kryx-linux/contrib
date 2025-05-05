@@ -5,12 +5,12 @@
 
 name=python3-yarl
 version=1.18.3
-release=1
+release=2
 source=(https://github.com/aio-libs/yarl/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd yarl-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
