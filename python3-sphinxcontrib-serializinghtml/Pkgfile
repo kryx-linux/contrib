@@ -5,12 +5,12 @@
 
 name=python3-sphinxcontrib-serializinghtml
 version=2.0.0
-release=1
+release=2
 source=(https://pypi.org/packages/source/s/sphinxcontrib_serializinghtml/sphinxcontrib_serializinghtml-$version.tar.gz)
 
 build() {
   cd sphinxcontrib_serializinghtml-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
