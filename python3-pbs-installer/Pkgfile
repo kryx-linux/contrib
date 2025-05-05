@@ -5,12 +5,12 @@
 
 name=python3-pbs-installer
 version=2025.4.9
-release=1
+release=2
 source=(https://pypi.org/packages/source/p/pbs_installer/pbs_installer-$version.tar.gz)
 
 build() {
   cd pbs_installer-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
