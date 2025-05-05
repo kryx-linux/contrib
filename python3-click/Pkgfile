@@ -5,12 +5,12 @@
 
 name=python3-click
 version=8.1.8
-release=1
+release=2
 source=(https://github.com/pallets/click/archive/$version/click-$version.tar.gz)
 
 build() {
   cd click-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
