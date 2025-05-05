@@ -5,12 +5,12 @@
 
 name=python3-pydantic-core
 version=2.34.1
-release=1
+release=2
 source=(https://pypi.org/packages/source/p/pydantic_core/pydantic_core-$version.tar.gz)
 
 build() {
   cd pydantic_core-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
