@@ -1,16 +1,16 @@
 # Description: Shims to make deprecation of pytz easier
 # URL: https://github.com/pganssle/pytz-deprecation-shim
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-tzdata pytz-deprecation-shim
+# Depends on: python3-tzdata
 
 name=python3-pytz-deprecation-shim
 version=0.1.0.post0
-release=1
+release=2
 source=(https://files.pythonhosted.org/packages/source/p/pytz_deprecation_shim/pytz_deprecation_shim-$version.tar.gz)
 
 build() {
   cd pytz_deprecation_shim-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
