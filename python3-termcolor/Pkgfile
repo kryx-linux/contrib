@@ -5,12 +5,12 @@
 
 name=python3-termcolor
 version=3.1.0
-release=1
+release=2
 source=(https://pypi.python.org/packages/source/t/termcolor/termcolor-$version.tar.gz)
 
 build() {
   cd termcolor-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
