@@ -5,7 +5,7 @@
 
 name=python3-m2r
 version=0.3.1
-release=1
+release=2
 source=(https://github.com/miyakogi/m2r/archive/v$version/$name-$version.tar.gz
   2003_mistune0.patch)
 
@@ -15,5 +15,5 @@ build() {
   patch -Np1 -i $SRC/2003_mistune0.patch
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
