@@ -5,12 +5,12 @@
 
 name=python3-apeye-core
 version=1.1.5
-release=1
+release=2
 source=(https://pypi.org/packages/source/a/apeye_core/apeye_core-$version.tar.gz)
 
 build() {
   cd apeye_core-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
