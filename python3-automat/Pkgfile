@@ -5,12 +5,12 @@
 
 name=python3-automat
 version=25.4.16
-release=1
+release=2
 source=(https://pypi.org/packages/source/a/automat/automat-$version.tar.gz)
 
 build() {
   cd automat-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
