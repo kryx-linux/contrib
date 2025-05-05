@@ -5,12 +5,12 @@
 
 name=python3-pysaml2
 version=7.5.2
-release=1
+release=2
 source=(https://pypi.org/packages/source/p/pysaml2/pysaml2-$version.tar.gz)
 
 build() {
   cd pysaml2-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
