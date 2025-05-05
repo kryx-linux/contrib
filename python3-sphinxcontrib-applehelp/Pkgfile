@@ -5,12 +5,12 @@
 
 name=python3-sphinxcontrib-applehelp
 version=2.0.0
-release=1
+release=2
 source=(https://github.com/sphinx-doc/${name#*-}/archive/$version/${name#*-}-$version.tar.gz)
 
 build() {
   cd ${name#*-}-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
