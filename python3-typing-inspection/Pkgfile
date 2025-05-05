@@ -5,12 +5,12 @@
 
 name=python3-typing-inspection
 version=0.4.0
-release=1
+release=2
 source=(https://pypi.org/packages/source/t/typing_inspection/typing_inspection-$version.tar.gz)
 
 build() {
   cd typing_inspection-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
