@@ -5,12 +5,12 @@
 
 name=python3-service-identity
 version=24.2.0
-release=1
+release=2
 source=(https://github.com/pyca/service-identity/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd service-identity-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
