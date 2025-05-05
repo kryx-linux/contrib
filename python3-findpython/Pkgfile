@@ -5,12 +5,12 @@
 
 name=python3-findpython
 version=0.6.3
-release=1
+release=2
 source=(https://pypi.org/packages/source/f/findpython/findpython-$version.tar.gz)
 
 build() {
   cd findpython-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
