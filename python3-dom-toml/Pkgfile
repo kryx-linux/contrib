@@ -5,12 +5,12 @@
 
 name=python3-dom-toml
 version=2.0.1
-release=1
+release=2
 source=(https://pypi.org/packages/source/d/dom_toml/dom_toml-$version.tar.gz)
 
 build() {
   cd dom_toml-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
