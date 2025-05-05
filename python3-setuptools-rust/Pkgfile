@@ -5,7 +5,7 @@
 
 name=python3-setuptools-rust
 version=1.11.1
-release=1
+release=2
 source=(https://github.com/PyO3/setuptools-rust/archive/v$version/python-setuptools-rust-$version.tar.gz)
 
 build() {
@@ -14,5 +14,5 @@ build() {
   cd setuptools-rust-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
