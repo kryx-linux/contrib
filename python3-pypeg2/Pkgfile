@@ -5,12 +5,12 @@
 
 name=python3-pypeg2
 version=2.15.2
-release=2
+release=3
 source=(https://pypi.python.org/packages/source/p/pyPEG2/pyPEG2-$version.tar.gz)
 
 build() {
   cd pyPEG2-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
