@@ -5,12 +5,12 @@
 
 name=python3-poetry-plugin-export
 version=1.9.0
-release=1
+release=2
 source=(https://github.com/python-poetry/poetry-plugin-export/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd poetry-plugin-export-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
