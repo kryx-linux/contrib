@@ -5,12 +5,12 @@
 
 name=python3-markdown
 version=3.8
-release=1
+release=2
 source=(https://pypi.org/packages/source/m/markdown/markdown-$version.tar.gz)
 
 build() {
   cd markdown-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
