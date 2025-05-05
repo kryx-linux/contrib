@@ -5,12 +5,12 @@
 
 name=python3-deprecation-alias
 version=0.4.0
-release=1
+release=2
 source=(https://pypi.org/packages/source/d/deprecation_alias/deprecation_alias-$version.tar.gz)
 
 build() {
   cd deprecation_alias-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
