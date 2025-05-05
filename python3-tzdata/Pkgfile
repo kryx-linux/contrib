@@ -5,7 +5,7 @@
 
 name=python3-tzdata
 version=2025.2
-release=1
+release=2
 source=(https://files.pythonhosted.org/packages/source/t/tzdata/tzdata-$version.tar.gz)
 
 build() {
@@ -15,6 +15,6 @@ build() {
     --skip-dependency-check \
     --no-isolation
   /usr/bin/python3 -m installer \
-    --compile-bytecode 2 \
+    \
     --destdir=$PKG dist/*.whl
 }
