@@ -5,12 +5,12 @@
 
 name=python3-pefile
 version=2024.8.26
-release=1
+release=2
 source=(https://github.com/erocarrera/pefile/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd pefile-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
