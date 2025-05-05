@@ -5,11 +5,11 @@
 
 name=python3-hatch-vcs
 version=0.4.0
-release=1
+release=2
 source=(https://github.com/ofek/hatch-vcs/archive/v$version/hatch-vcs-$version.tar.gz)
 
 build() {
   cd hatch-vcs-$version
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
