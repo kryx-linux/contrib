@@ -5,13 +5,13 @@
 
 name=python3-jsonschema-specifications
 version=2024.10.1
-release=1
+release=2
 source=(https://pypi.python.org/packages/source/j/jsonschema-specifications/jsonschema_specifications-$version.tar.gz)
 
 build() {
     cd jsonschema_specifications-$version
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
 
 # vim: set ts=4 et:
