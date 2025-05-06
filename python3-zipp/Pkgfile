@@ -5,11 +5,11 @@
 
 name=python3-zipp
 version=3.21.0
-release=1
+release=2
 source=(https://pypi.python.org/packages/source/z/zipp/zipp-$version.tar.gz)
 
 build() {
     cd zipp-$version
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
