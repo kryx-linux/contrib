@@ -1,0 +1,30 @@
+# README for grub2-theme-catppuccin
+
+If using grub-mkconfig, select a theme by adding a line to /etc/default/grub
+like so:
+
+  GRUB_THEME="/usr/share/grub/themes/catppuccin-mocha-grub-theme/theme.txt"
+
+And then run 'grub-mkconfig -o /boot/grub/grub.cfg' to regenerate the grub
+boot menu configuration file.
+
+
+If NOT using grub-mkconfig, something like the following can be used in
+grub.cfg directly:
+
+  insmod font
+  if loadfont ($root)/usr/share/grub/themes/catppuccin-mocha-grub-theme/font.pf2; then
+    insmod efi_gop
+    insmod gfxmenu
+    insmod gfxterm
+    insmod png
+    set gfxmode=auto
+    set gfxpayload=keep
+    set theme=($root)/usr/share/grub/themes/catppuccin-mocha-grub-theme/theme.txt
+    export theme
+    terminal_output gfxterm
+  fi
+
+Set your $root variable manually or via search, for example:
+
+  search --no-floppy --fs-uuid --set root <UUID of root partition>

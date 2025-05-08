@@ -1,0 +1,13 @@
+# Description: A soothing pastel theme for GRUB 2
+# URL: https://github.com/catppuccin/grub
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+
+name=grub2-theme-catppuccin
+version=1.0.0
+release=1
+source=(https://github.com/catppuccin/grub/archive/v${version}/$name-$version.tar.gz)
+
+build() {
+	install -d -o root -g root -m 0755 $PKG/usr/share/grub/themes
+	cp -a grub-$version/src/* $PKG/usr/share/grub/themes/
+}
