@@ -5,7 +5,7 @@
 # Optional: libcdr libvisio libwpg
 
 name=inkscape
-version=1.4
+version=1.4.1
 release=1
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz)
 
@@ -36,18 +36,18 @@ build() {
     done
 
     cmake --build build
-    DESTDIR=$PKG cmake --install build
+    DESTDIR="$PKG" cmake --install build
 
-    rm -r $PKG/usr/share/man/?? \
-          $PKG/usr/share/man/??_?? \
-          $PKG/usr/share/inkscape/doc
+    rm -r "$PKG"/usr/share/man/?? \
+          "$PKG"/usr/share/man/??_?? \
+          "$PKG"/usr/share/inkscape/doc
 
-    find $PKG/usr/share/inkscape \( -name 'README' -o -name 'README.*' \
+    find "$PKG"/usr/share/inkscape \( -name 'README' -o -name 'README.*' \
         -o -name 'LICENSE.txt' \) -delete
 
-    prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion
+    prt-get isinst bash-completion || rm -rf "$PKG"/usr/share/bash-completion
 
-    /usr/bin/python3 -m compileall $PKG
-    /usr/bin/python3 -O -m compileall $PKG
-    /usr/bin/python3 -OO -m compileall $PKG
+    /usr/bin/python3 -m compileall "$PKG"
+    /usr/bin/python3 -O -m compileall "$PKG"
+    /usr/bin/python3 -OO -m compileall "$PKG"
 }
