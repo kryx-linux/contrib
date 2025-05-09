@@ -1,0 +1,27 @@
+From 940e9e2c823a7a14c222d283486f692277251157 Mon Sep 17 00:00:00 2001
+From: Sam James <sam@gentoo.org>
+Date: Sun, 21 May 2023 19:25:36 +0100
+Subject: [PATCH 7/11] Fix netutil else for datalen
+
+Imported from nmap-9999-netutil-else.patch.
+
+Signed-off-by: Sam James <sam@gentoo.org>
+---
+ libnetutil/netutil.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libnetutil/netutil.cc b/libnetutil/netutil.cc
+index 011d249..9033878 100644
+--- a/libnetutil/netutil.cc
++++ b/libnetutil/netutil.cc
+@@ -2509,7 +2509,7 @@ const char *ippackethdrinfo(const u8 *packet, u32 len, int detail) {
+ 
+     /* CASE 4: where we (finally!) have a full 20 byte TCP header so we can
+      * safely print all fields */
+-    else { /* if (datalen >= 20) */
++    else if (datalen >= 20) {
+ 
+       /* TCP Flags */
+       p = tflags;
+-- 
+2.44.0
