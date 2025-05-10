@@ -4,7 +4,7 @@
 # Depends on: python3-zipp
 
 name=python3-importlib_metadata
-version=8.5.0
+version=8.7.0
 release=1
 source=(https://pypi.python.org/packages/source/i/importlib_metadata/importlib_metadata-$version.tar.gz)
 
@@ -12,7 +12,7 @@ build() {
     cd importlib_metadata-$version
 
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
 
 # vim: set ts=4 et:
