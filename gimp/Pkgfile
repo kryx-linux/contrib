@@ -14,6 +14,7 @@ build() {
 
   meson setup $name-$version build \
     --prefix=/usr \
+    --libexecdir=lib/$name \
     --buildtype=plain \
     --wrap-mode nodownload \
     -D b_lto=true \
