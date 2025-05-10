@@ -5,7 +5,7 @@
 
 name=xorg-font-terminus
 version=4.49.1
-release=1
+release=2
 source=(http://downloads.sourceforge.net/terminus-font/terminus-font-$version.tar.gz)
 
 build () {
@@ -13,8 +13,8 @@ build () {
 	chmod +x configure
 	./configure --prefix=/usr \
 		--x11dir=/usr/share/fonts/X11/terminus
-	make pcf
-	make DESTDIR=$PKG install-pcf
+	make otb pcf
+	make DESTDIR=$PKG install-otb install-pcf
 	cd $PKG/usr/share/fonts/X11/terminus
 	/usr/bin/mkfontdir
 	sed -e 's|.pcf.gz||' fonts.dir|grep terminus > fonts.alias
