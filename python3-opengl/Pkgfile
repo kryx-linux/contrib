@@ -1,15 +1,15 @@
 # Description: The cross platform Python binding to OpenGL and related APIs
-# URL: https://pypi.org/project/PyOpenGL/
+# URL: https://mcfletch.github.io/pyopengl/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: freeglut
 
 name=python3-opengl
-version=3.1.7
+version=3.1.9
 release=1
-source=(https://pypi.python.org/packages/source/P/PyOpenGL/PyOpenGL-$version.tar.gz)
+source=(https://pypi.org/packages/source/p/pyopengl/pyopengl-$version.tar.gz)
 
 build() {
-  cd PyOpenGL-$version
+  cd pyopengl-$version
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG \
     --optimize=1 \
