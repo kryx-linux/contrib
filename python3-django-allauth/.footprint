@@ -340,6 +340,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/app_settings.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/apps.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/apps.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/checks.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/checks.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/conftest.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/conftest.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/__pycache__/constants.cpython-312.opt-1.pyc
@@ -429,6 +431,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/base/test
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/base/tests/test_views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/base/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/base/views.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/checks.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/conftest.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/headless/constants.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/contrib/
@@ -2305,6 +2308,23 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/prov
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailchimp/tests.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailchimp/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailchimp/views.py
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__init__.py (EMPTY)
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/__init__.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/__init__.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/provider.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/provider.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/tests.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/tests.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/urls.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/urls.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/views.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/__pycache__/views.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/provider.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/tests.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/urls.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailcow/views.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailru/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailru/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/socialaccount/providers/mailru/__pycache__/
@@ -3551,6 +3571,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/messages/login_code_sent.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/messages/password_changed.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/messages/password_set.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/messages/phone_verification_sent.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/messages/phone_verified.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/messages/primary_email_set.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/account/messages/unverified_primary_email.txt
@@ -3577,6 +3598,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/badge.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/button.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/button_group.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/details.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/field.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/fields.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/templates/allauth/elements/form.html
@@ -3760,11 +3782,11 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/tests
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/utils.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/WHEEL
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/licenses/AUTHORS
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/licenses/LICENSE
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.7.0.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/WHEEL
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/licenses/AUTHORS
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/licenses/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/top_level.txt

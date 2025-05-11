@@ -4,12 +4,12 @@
 # Depends on: python3-lazr-delegates python3-wheel
 
 name=python3-lazr-config
-version=3.0
-release=2
-source=(https://pypi.org/packages/source/l/lazr.config/lazr.config-$version.tar.gz)
+version=3.1
+release=1
+source=(https://pypi.org/packages/source/l/lazr_config/lazr_config-$version.tar.gz)
 
 build() {
-  cd lazr.config-$version
+  cd lazr_config-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
