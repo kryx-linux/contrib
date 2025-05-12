@@ -1,13 +1,13 @@
 # Description: Graph based image processing framework
 # URL: https://gegl.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: babl gexiv2 json-glib librsvg poppler graphviz
-# Optional: asciidoc ffmpeg4 gtk-doc jasper lcms2 ruby libsdl2 libspiro libwebp umfpack v4l-utils vala lensfun libopenraw libumfpack luajit openexr
+# Depends on: babl gexiv2 graphviz json-glib librsvg poppler
+# Optional: asciidoc ffmpeg4 gtk-doc jasper lcms2 lensfun libopenraw libsdl2 libspiro libumfpack libwebp luajit openexr ruby umfpack v4l-utils vala
 
 name=gegl
-version=0.4.58
+version=0.4.62
 release=1
-source=(https://download.gimp.org/pub/$name/${version%.*}/$name-$version.tar.xz)
+source=(https://gitlab.gnome.org/GNOME/gegl/-/archive/GEGL_${version//./_}/gegl-GEGL_${version//./_}.tar.bz2)
 
 build() {
   ls /usr/include/poppler/glib/poppler.h || (printf '\e[1;31m%-6s\e[m\n' "rebuild poppler with glib support, you need it for ${name}. Quitting.." ; exit 1)
@@ -15,7 +15,7 @@ build() {
   prt-get isinst ffmpeg && export PKG_CONFIG_PATH='/usr/lib/ffmpeg4/pkgconfig'
   prt-get isinst vala || PKGMK_GEGL+=' -D vapigen=disabled'
 
-  meson setup build $name-$version $PKGMK_GEGL \
+  meson setup build $name-GEGL_${version//./_} $PKGMK_GEGL \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
