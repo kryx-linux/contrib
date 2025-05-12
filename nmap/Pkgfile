@@ -20,7 +20,7 @@ build () {
 
   rm -rf liblua libpcap libpcre macosx mwin32 libssh2 libz
 
-  cat <<EOF > nls.m4
+  cat <<EOF >> acinclude.m4
 # nls.m4 serial 5 (gettext-0.18)
 dnl Copyright (C) 1995-2003, 2005-2006, 2008-2014 Free Software Foundation,
 dnl Inc.
@@ -54,7 +54,6 @@ AC_DEFUN([AM_NLS],
   AC_SUBST([USE_NLS])
 ])
 EOF
-  cp libdnet-stripped/include/config.h.in{,.nmap-orig}
 
   patch -Np1 -i $SRC/0001-Fix-build-conflicting-types-for-strlcat.patch
   patch -Np1 -i $SRC/0007-Fix-netutil-else-for-datalen.patch
