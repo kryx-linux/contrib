@@ -19,4 +19,6 @@ build() {
 
   cmake --build build
   DESTDIR=$PKG cmake --install build
+
+  chmod 755 $PKG/usr/include
 }
