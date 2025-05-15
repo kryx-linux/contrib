@@ -6,9 +6,9 @@
 name=wasi-libc
 version=25
 # https://github.com/WebAssembly/wasi-sdk/tree/main/src latest tagged version
-_commit=574b88da481569b65a237cb80daf9a2d5aeaf82d
-release=1
-source=(https://github.com/WebAssembly/$name/archive/$_commit/$name-$version.tar.gz
+_commit=640c0cfc19a96b099e0791824be5ef0105ce2084
+release=2
+source=(https://github.com/WebAssembly/$name/archive/$_commit/$name-$version-$release.tar.gz
   no-double-build.patch)
 
 build() {
@@ -16,13 +16,19 @@ build() {
 
   patch -p1 -i $SRC/no-double-build.patch
 
-  MAKE_ARGS="WASM_CC=/usr/bin/clang WASM_AR=/usr/bin/llvm-ar WASM_NM=/usr/bin/llvm-nm BULK_MEMORY_SOURCES="
+  MAKE_ARGS="WASM_CC=/usr/bin/clang WASM_AR=/usr/bin/llvm-ar WASM_NM=/usr/bin/llvm-nm"
+
   for target in wasi wasip1 wasip1-threads wasip2; do
+    EXTRA_ARGS=""
     case $target in
-      wasip1-threads) MAKE_ARGS=' THREAD_MODEL=posix';;
-      wasip2) MAKE_ARGS=' WASI_SNAPSHOT=p2';;
+      wasip1-threads)
+        EXTRA_ARGS="THREAD_MODEL=posix"
+        ;;
+      wasip2)
+        EXTRA_ARGS="WASI_SNAPSHOT=p2"
+        ;;
     esac
-    make TARGET_TRIPLE="wasm32-$target" $MAKE_ARGS
+    make TARGET_TRIPLE="wasm32-$target" $MAKE_ARGS $EXTRA_ARGS
   done
 
   make INSTALL_DIR="$PKG/usr/share/wasi-sysroot" install
