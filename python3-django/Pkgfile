@@ -5,12 +5,12 @@
 # Optional: python3-argon2_cffi python3-psycopg2
 
 name=python3-django
-version=5.1.8
-release=2
-source=(https://pypi.org/packages/source/D/Django/Django-$version.tar.gz)
+version=5.2.1
+release=1
+source=(https://pypi.org/packages/source/d/django/django-$version.tar.gz)
 
 build() {
-  cd Django-$version
+  cd django-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
