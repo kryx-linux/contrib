@@ -5,12 +5,12 @@
 # Optional: graphviz python3-ipython python3-werkzeug
 
 name=python3-django-extensions
-version=3.2.3
-release=2
-source=(https://pypi.org/packages/source/d/django-extensions/django-extensions-$version.tar.gz)
+version=4.1
+release=1
+source=(https://pypi.org/packages/source/d/django_extensions/django_extensions-$version.tar.gz)
 
 build() {
-  cd django-extensions-$version
+  cd django_extensions-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
