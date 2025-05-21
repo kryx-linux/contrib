@@ -77,6 +77,10 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycach
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_ecb.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_gcm.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_gcm.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_kw.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_kw.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_kwp.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_kwp.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_ocb.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_ocb.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycache__/_mode_ofb.cpython-312.opt-1.pyc
@@ -102,6 +106,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/__pycach
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_ecb.pyi
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_gcm.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_gcm.pyi
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_kw.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_kwp.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_ocb.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_ocb.pyi
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/Cipher/_mode_ofb.py
@@ -439,6 +445,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_EAX.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_GCM.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_GCM.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_KW.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_KW.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_OCB.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_OCB.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/__pycache__/test_OFB.cpython-312.opt-1.pyc
@@ -469,6 +477,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/test_DES3.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/test_EAX.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/test_GCM.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/test_KW.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/test_OCB.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/test_OFB.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/SelfTest/Cipher/test_OpenPGP.py
@@ -791,9 +800,9 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/Cryptodome/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/__pycache__/__init__.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/__pycache__/__init__.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/Cryptodome/py.typed (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.22.0-py3.12.egg-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.22.0-py3.12.egg-info/PKG-INFO
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.22.0-py3.12.egg-info/SOURCES.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.22.0-py3.12.egg-info/dependency_links.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.22.0-py3.12.egg-info/not-zip-safe
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.22.0-py3.12.egg-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.23.0-py3.12.egg-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.23.0-py3.12.egg-info/PKG-INFO
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.23.0-py3.12.egg-info/SOURCES.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.23.0-py3.12.egg-info/dependency_links.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.23.0-py3.12.egg-info/not-zip-safe
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pycryptodomex-3.23.0-py3.12.egg-info/top_level.txt
