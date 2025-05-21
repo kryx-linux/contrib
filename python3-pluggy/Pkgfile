@@ -4,15 +4,13 @@
 # Depends on: python3-importlib_metadata
 
 name=python3-pluggy
-version=1.5.0
+version=1.6.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/p/pluggy/pluggy-$version.tar.gz)
 
 build() {
   cd pluggy-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
