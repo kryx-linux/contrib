@@ -6,7 +6,7 @@
 
 name=gpgme
 version=1.24.3
-release=1
+release=2
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
 
 build() {
@@ -14,30 +14,26 @@ build() {
 
   prt-get isinst qt5 && PKGMK_GPGME_LANG+=' qt'
 
+  PKGMK_GPGME=(
+    --prefix=/usr
+    --disable-fd-passing
+    --disable-gpgsm-test
+    --enable-static
+    )
+
   export PYTHON='/usr/bin/python3'
   ./configure \
-    --prefix=/usr \
-    --disable-fd-passing \
-    --disable-gpgsm-test \
-    --enable-languages="cl cpp python $PKGMK_GPGME_LANG" \
-    --enable-static
+    "${PKGMK_GPGME[@]}" \
+    --enable-languages="cl cpp python $PKGMK_GPGME_LANG"
 
   make
   make DESTDIR=$PKG install
 
-  pushd lang/python
-  top_builddir=$SRC/$name-$version /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  top_builddir=$SRC/$name-$version /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
-  popd
-
   if prt-get isinst qt6-base; then
     make clean
     ./configure \
-      --prefix=/usr \
-      --disable-fd-passing \
-      --disable-gpgsm-test \
-      --enable-languages="cpp qt6" \
-      --enable-static
+      "${PKGMK_GPGME[@]}" \
+      --enable-languages="cpp qt6"
 
     make
     make DESTDIR=$PKG install
