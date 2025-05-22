@@ -44,9 +44,8 @@ build() {
     DESTDIR=$PKG cmake --install build
 
     sed -e "/^Cflags/s;poppler;poppler-ink;" \
-        -i $PKG/usr/lib/inkscape/pkgconfig/poppler{,-cpp,-glib}.pc
+        -i "$PKG"/usr/lib/inkscape/pkgconfig/poppler{,-cpp,-glib}.pc
 
-    mkdir -p $PKG/etc/ld.so.conf.d $PKG/etc/revdep.d
-    echo "/usr/lib/inkscape" > $PKG/etc/ld.so.conf.d/$name.conf
-    echo "/usr/lib/inkscape" > $PKG/etc/revdep.d/$name
+    mkdir -p "$PKG"/etc/revdep.d
+    echo "/usr/lib/inkscape" > "$PKG"/etc/revdep.d/$name
 }
