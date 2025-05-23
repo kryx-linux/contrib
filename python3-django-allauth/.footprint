@@ -304,9 +304,12 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/__py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/__pycache__/httpkit.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/__pycache__/modelkit.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/__pycache__/modelkit.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/__pycache__/ratelimit.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/__pycache__/ratelimit.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/adapter.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/httpkit.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/modelkit.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/ratelimit.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/__pycache__/
@@ -316,17 +319,12 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/test
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/__pycache__/test_httpkit.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/__pycache__/test_modelkit.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/__pycache__/test_modelkit.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/__pycache__/test_ratelimit.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/__pycache__/test_ratelimit.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/test_httpkit.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/test_modelkit.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/internal/tests/test_ratelimit.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/ratelimit.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/__init__.py (EMPTY)
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/__pycache__/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/__pycache__/__init__.cpython-312.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/__pycache__/__init__.cpython-312.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/__pycache__/test_ratelimit.cpython-312.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/__pycache__/test_ratelimit.cpython-312.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/core/tests/test_ratelimit.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/decorators.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/exceptions.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/headless/
@@ -3782,11 +3780,11 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/tests
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/usersessions/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/allauth/utils.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/WHEEL
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/licenses/AUTHORS
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/licenses/LICENSE
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.0.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/WHEEL
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/licenses/AUTHORS
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/licenses/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_allauth-65.8.1.dist-info/top_level.txt
