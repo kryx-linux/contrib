@@ -1,0 +1,16 @@
+# Description: A subprocess.run drop-in replacement that supports a tee mode
+# URL: https://github.com/pycontribs/subprocess-tee
+# Maintainer:  Tim Biermann, tbier at posteo dot de
+# Depends on: python3-setuptools-scm
+
+name=python3-subprocess-tee
+version=0.4.2
+release=1
+source=(https://pypi.org/packages/source/s/subprocess_tee/subprocess_tee-$version.tar.gz)
+
+build() {
+  cd subprocess_tee-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
