@@ -1,0 +1,17 @@
+# Description: Radically simple IT automation
+# URL: https://www.redhat.com/en/ansible-collaborative
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: ansible-core
+# Optional:
+
+name=ansible
+version=11.6.0
+release=1
+source=(https://pypi.python.org/packages/source/a/ansible/ansible-$version.tar.gz)
+
+build() {
+  cd ansible-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
