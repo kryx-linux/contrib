@@ -1,0 +1,16 @@
+# Description: Ansible compatibility goodies
+# URL: https://github.com/ansible/ansible-compat
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: ansible-core python3-jsonschema python3-subprocess-tee
+
+name=ansible-compat
+version=25.5.0
+release=1
+source=(https://pypi.org/packages/source/a/ansible_compat/ansible_compat-$version.tar.gz)
+
+build() {
+  cd ansible_compat-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
