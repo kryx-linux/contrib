@@ -1,0 +1,83 @@
+# Description: Ansible Language Server
+# URL: https://github.com/ansible/vscode-ansible/tree/main/packages/ansible-language-server
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: ansible yarn
+# Optional: ansible-lint yamllint
+
+name=ansible-language-server
+version=25.4.0
+release=1
+source=(https://github.com/ansible/vscode-ansible/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  cd vscode-ansible-$version/packages/ansible-language-server
+
+  yarn --immutable
+  yarn compile
+
+  local find_files=(
+    -iname '*Makefile*' -o
+    -iname '*appveyor.yml' -o
+    -iname '*.babelrc' -o
+    -iname '*.bak' -o
+    -iname '*bower.json' -o
+    -iname '*.c' -o
+    -iname '*.cc' -o
+    -iname '*.cpp' -o
+    -iname '*.md' -o
+    -iname '*.markdown' -o
+    -iname '*.rst' -o
+    -iname '*.nycrc' -o
+    -iname '*.npmignore' -o
+    -iname '*.editorconfig' -o
+    -iname '*.el' -o
+    -iname '*.eslintignore' -o
+    -iname '*.eslintrc*' -o
+    -iname '*.fimbullinter.yaml' -o
+    -iname '*.gitattributes' -o
+    -iname '*.gitignore' -o
+    -iname '*.gitmodules' -o
+    -iname '*.h' -o
+    -iname '*.html' -o
+    -iname '*.jshintrc' -o
+    -iname '*.jscs.json' -o
+    -iname '*.log' -o
+    -iname '*logo.svg' -o
+    -iname '*.nvmrc' -o
+    -iname '*.o' -o
+    -iname '*package-lock.json' -o
+    -iname '*.travis.yml' -o
+    -iname '*.prettierrc' -o
+    -iname '*.sh' -o
+    -iname '*.tags*' -o
+    -iname '*.tm_properties' -o
+    -iname '*.wotanrc.yaml' -o
+    -iname '*tsconfig.json' -o
+    -iname '*yarn.lock'
+  )
+  local find_dirs=(
+    -iwholename '*.github' -o
+    -iwholename '*.idea' -o
+    -iwholename '*.tscache' -o
+    -iwholename '*/man' -o
+    -iwholename '*/test' -o
+    -iwholename '*/scripts' -o
+    -iwholename '*/git-hooks'
+  )
+
+  cd $SRC/vscode-ansible-$version
+  yarn workspaces focus --production @ansible/$name
+  find node_modules -type f \( "${find_files[@]}" \) -delete
+  find node_modules -type d \( "${find_dirs[@]}" \) -exec rm -rvf {} +
+  find node_modules -empty -type d -delete
+
+  install -vdm 755 "$PKG/usr/lib/node_modules/$name/"
+  cp -av node_modules "$PKG/usr/lib/node_modules/$name/"
+  cd packages/$name
+  cp -av {bin,out,src,package.json} "$PKG/usr/lib/node_modules/$name/"
+  install -vDm 644 LICENSE -t "$PKG/usr/share/licenses/$name/"
+  install -vdm 755 "$PKG/usr/bin/"
+  ln -sv /usr/lib/node_modules/$name/bin/$name "$PKG/usr/bin/$name"
+
+
+}
