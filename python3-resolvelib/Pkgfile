@@ -1,0 +1,16 @@
+# Description: Resolve abstract dependencies into concrete ones
+# URL: https://github.com/sarugaku/resolvelib
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-wheel
+
+name=python3-resolvelib
+version=1.1.0
+release=1
+source=(https://pypi.org/packages/source/r/resolvelib/resolvelib-$version.tar.gz)
+
+build() {
+  cd resolvelib-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
