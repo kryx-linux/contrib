@@ -1,0 +1,17 @@
+# Description: ansible-lint checks playbooks for practices and behavior
+# URL: https://github.com/ansible/ansible-lint
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: ansible-compat black python3-filelock python3-ruamel-yaml python3-wcmatch yamllint
+# Optional: ansible
+
+name=ansible-lint
+version=25.5.0
+release=1
+source=(https://pypi.org/packages/source/a/ansible_lint/ansible_lint-$version.tar.gz)
+
+build() {
+  cd ansible_lint-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
