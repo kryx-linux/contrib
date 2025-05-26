@@ -1,0 +1,17 @@
+# Description: The uncompromising Python code formatter
+# URL: https://github.com/psf/black
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-click python3-mypy-extensions python3-platformdirs python3-hatch-fancy-pypi-readme
+# Optional: python3-colorama python3-uvloop
+
+name=black
+version=25.1.0
+release=1
+source=(https://pypi.org/packages/source/b/black/black-$version.tar.gz)
+
+build() {
+  cd black-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
