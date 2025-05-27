@@ -16,6 +16,7 @@ build() {
   prt-get isinst dockbook-xsl libxslt || PKGMK_XUD+=' --disable-documentation'
 
   patch -Np1 -i $SRC/po.patch
+  sed -i '/-v --install/ s|--install|& -I /usr/share/gettext/m4|' autogen.sh
 
   NOCONFIGURE=1 ./autogen.sh
   ./configure --prefix=/usr $PKGMK_XUD \
