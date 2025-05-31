@@ -1,17 +1,14 @@
 # Description: ZIP-access Library with Easy-to-use API
 # URL: https://github.com/gdraheim/zziplib
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: cmake python3
 
 name=zziplib
-version=0.13.79
+version=0.13.80
 release=1
 source=(https://github.com/gdraheim/$name/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  [[ -e /usr/bin/ninja ]] && PKGMK_ZZIPLIB+=' -G Ninja'
-
-  cmake -S $name-$version -B build $PKGMK_ZZIPLIB \
+  cmake -S $name-$version -B build -G Ninja $PKGMK_ZZIPLIB \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
