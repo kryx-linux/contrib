@@ -19,6 +19,9 @@ build() {
 
     cd ${name}-${version}*
 
+    prt-get isinst glibc || sed -e "/-Werror=format/d" \
+                                -i CMakeScripts/DefineDependsandFlags.cmake
+
     cmake -S . -B build -G Ninja \
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D CMAKE_INSTALL_LIBDIR=lib \
