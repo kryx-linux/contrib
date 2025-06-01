@@ -2,7 +2,7 @@
 # URL: https://www.mozilla.com/firefox/
 # Maintainer: John McQuah, jmcquah at disroot dot org
 # Depends on: alsa-lib aom autoconf-2.13 brotli cbindgen dav1d dbus-glib ffmpeg graphite2 libevent libnotify libvpx libwebp libxkbcommon nodejs nss unzip xorg-libxcomposite xorg-libxcursor xorg-libxinerama xorg-libxt zip
-# Optional: apulse pulseaudio pipewire sndio sccache lld wayland
+# Optional: apulse pulseaudio pipewire sndio sccache icu lld wayland
 
 name=firefox
 version=139.0
@@ -10,6 +10,7 @@ release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
   fix-target-detection.patch
+  sqlite-typedefs.patch
   node-stdout-nonblocking-wrapper)
 
 build() {
@@ -76,10 +77,9 @@ build() {
 EOF
 
   # use system icu only if new enough
-  local ICU_VER=$(prt-get printf "%v" --filter=icu)
-  if (( ${ICU_VER%.*} >= 76 )); then
+  local ICU_VER="$(prt-get current icu)"
+  [[ "$ICU_VER" =~ "not installed" ]] || (( ${ICU_VER%.*} < 76 )) || \
     echo 'ac_add_options --with-system-icu' >> .mozconfig
-  fi
 
   # disable jemalloc on systems without glibc 
   local LIBC=$(</var/lib/pkg/db awk -v RS="" -v FS="\n" '/\nusr\/lib\/libc.so\n/ { print $1 }')
