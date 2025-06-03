@@ -4,7 +4,7 @@
 # Depends on: python3-build
 
 name=python3-typing_extensions
-version=4.13.2
+version=4.14.0
 release=1
 source=(https://pypi.org/packages/source/t/typing_extensions/typing_extensions-$version.tar.gz)
 
@@ -12,5 +12,5 @@ build() {
   cd typing_extensions-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --compile-bytecode 0 --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
