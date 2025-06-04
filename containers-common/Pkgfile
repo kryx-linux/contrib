@@ -4,11 +4,11 @@
 # Depends on: netavark
 
 name=containers-common
-version=0.63.0
+version=0.63.1
 release=1
-_podman_version=5.4.2
+_podman_version=5.5.0
 _image_version=5.35.0
-_skopeo_version=1.18.0
+_skopeo_version=1.19.0
 _storage_version=1.58.0
 _shortnames_version=2025.03.19
 source=(https://github.com/containers/common/archive/v$version/$name-$version.tar.gz
@@ -19,6 +19,7 @@ source=(https://github.com/containers/common/archive/v$version/$name-$version.ta
   https://github.com/containers/shortnames/archive/v$_shortnames_version/shortnames-$_shortnames_version.tar.gz
   containers-common-0.48.0-init_path.patch
   mounts.conf
+  check-versions.sh
 )
 
 build() {
