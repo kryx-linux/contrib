@@ -6,13 +6,20 @@
 name=volume_key
 version=0.3.12
 release=2
-source=(https://releases.pagure.org/$name/$name-$version.tar.xz)
+source=(https://releases.pagure.org/$name/$name-$version.tar.xz
+  volume_key-0.3.12-fix_resource_leaks.patch
+  volume_key-0.3.12-support_LUKS2_and_more.patch
+  volume_key-0.3.12-find_python3.patch)
 
 build() {
   cd $name-$version
 
-  autoreconf -fiv
+  patch -Np1 -i $SRC/volume_key-0.3.12-fix_resource_leaks.patch
+  patch -Np1 -i $SRC/volume_key-0.3.12-support_LUKS2_and_more.patch
+  patch -Np1 -i $SRC/volume_key-0.3.12-find_python3.patch
+
   find . -name ".pyc" -delete
+  autoreconf -fiv
 
   export CFLAGS+=" $(/usr/bin/python3-config --includes)"
 
