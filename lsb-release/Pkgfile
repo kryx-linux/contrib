@@ -1,25 +1,16 @@
-# Description: LSB version query program
+# Description: LSB version query program (wraps around /etc/os-release)
 # URL: https://www.linuxbase.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: bash
+# Depends on: dash
 
 name=lsb-release
-version=3.3
+version=12.1
 release=1
-source=(https://github.com/thkukuk/lsb-release_os-release/archive/v$version/$name-$version.tar.gz)
+source=(https://salsa.debian.org/gioele/lsb-release-minimal/-/archive/v12.1/lsb-release-minimal-v12.1.tar.gz)
 
 build() {
-  cd ${name}_os-release-$version
-  make
-  make INSTALL_ROOT=$PKG/usr install
+  cd $name-minimal-v$version
 
-  install -dm755 "$PKG/etc"
-  cat <<- EOF > $PKG/etc/lsb-release
-# only uncomment if we are LSB compliant and certified..
-#LSB_VERSION=$version
-DISTRIB_ID=CRUX
-DISTRIB_RELEASE=$(crux | awk '{ print $3 }')
-DISTRIB_CODENAME=CRUX
-DISTRIB_DESCRIPTION="CRUX is a lightweight Linux distribution for the x86-64 architecture targeted at experienced Linux users"
-EOF
+  make
+  make DESTDIR=$PKG install
 }
