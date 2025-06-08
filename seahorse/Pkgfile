@@ -6,7 +6,7 @@
 
 name=seahorse
 version=47.0.1
-release=1
+release=2
 source=(https://gitlab.gnome.org/GNOME/seahorse/-/archive/$version/seahorse-$version.tar.bz2)
 
 build() {
@@ -15,6 +15,7 @@ build() {
   prt-get isinst openldap || PKGMK_SEAHORSE+=' -D ldap-support=false -D hkp-support=false'
 
   sed -i -r 's:"(/apps):"/org/gnome\1:' $name-$version/data/*.xml
+  sed -i '/GPGME_EVENT_NEXT_TRUSTITEM/d' $name-$version/pgp/seahorse-gpgme.c
 
   meson setup $name-$version build $PKGMK_SEAHORSE \
     --prefix=/usr \
