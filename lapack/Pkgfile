@@ -4,27 +4,53 @@
 # Depends on: openblas python3
 
 name=lapack
-version=3.12.0
+version=3.12.1
 release=1
-source=(https://github.com/Reference-LAPACK/lapack/archive/v$version/$name-$version-$release.tar.gz)
+source=(https://github.com/Reference-LAPACK/lapack/archive/v$version/$name-$version-$release.tar.gz
+  3aa877584bcc96e1a0ee37742628946c56afc15f.patch
+  b054023bcde8d9d35ed3214fcfea01f7d7afc661.patch
+  304fa305e85190c934e78eae75c7b092fcfd54c1.patch
+  3c209c6bdf524869d18d00119aeae4962740c3b3.patch
+  bc0c38f247f90f815a93f6ca0829004120745da4.patch)
 
 build() {
-  cmake -S $name-$version -B build -G Ninja \
-    -D CMAKE_INSTALL_PREFIX=/usr \
-    -D CMAKE_INSTALL_LIBDIR=lib \
-    -D CMAKE_BUILD_TYPE=Release \
-    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -fPIC" \
-    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC" \
-    -D CMAKE_Fortran_FLAGS="$CFLAGS -fPIC" \
-    -D CMAKE_Fortran_COMPILER=gfortran \
-    -D CMAKE_SKIP_RPATH=YES \
-    -D USE_OPTIMIZED_BLAS=ON \
-    -D CBLAS=OFF \
-    -D LAPACKE_WITH_TMG=ON \
-    -D BUILD_SHARED_LIBS=ON \
-    -D BUILD_DEPRECATED=ON \
+  prt-get isinst doxygen && PKGMK_LAPACK+=' -D BUILD_MAN_DOCUMENTATION=ON'
+
+  patch -Np1 -d $name-$version -i $SRC/3aa877584bcc96e1a0ee37742628946c56afc15f.patch
+  patch -Np1 -d $name-$version -i $SRC/b054023bcde8d9d35ed3214fcfea01f7d7afc661.patch
+  patch -Np1 -d $name-$version -i $SRC/304fa305e85190c934e78eae75c7b092fcfd54c1.patch
+  patch -Np1 -d $name-$version -i $SRC/3c209c6bdf524869d18d00119aeae4962740c3b3.patch
+  patch -Np1 -d $name-$version -i $SRC/bc0c38f247f90f815a93f6ca0829004120745da4.patch
+
+  PKGMK_LAPACK=(
+    -S $name-$version
+    -G Ninja
+    -D CMAKE_INSTALL_PREFIX=/usr
+    -D CMAKE_INSTALL_LIBDIR=lib
+    -D CMAKE_BUILD_TYPE=Release
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -fPIC"
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC"
+    -D CMAKE_Fortran_FLAGS="$CFLAGS -fPIC"
+    -D CMAKE_Fortran_COMPILER=gfortran
+    -D CMAKE_SKIP_RPATH=ON
+    -D USE_OPTIMIZED_BLAS=ON
+    -D CBLAS=OFF
+    -D LAPACKE_WITH_TMG=ON
+    -D BUILD_SHARED_LIBS=ON
+    -D BUILD_DEPRECATED=ON
+    -D BUILD_TESTING=OFF
+    -D BUILD_INDEX64_EXT_API=OFF
     -Wno-dev
+  )
+
+  cmake -S $name-$version -B build -G Ninja "${PKGMK_LAPACK[@]}" \
+    -D BUILD_INDEX64=OFF
+  cmake -S $name-$version -B build64 -G Ninja "${PKGMK_LAPACK[@]}" \
+    -D BUILD_INDEX64=ON
 
   cmake --build build
+  cmake --build build64
+
   DESTDIR=$PKG cmake --install build
+  DESTDIR=$PKG cmake --install build64
 }
