@@ -5,39 +5,24 @@
 # Optional: qt5 qt6-base
 
 name=gpgme
-version=1.24.3
-release=2
+version=2.0.0
+release=1
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version
 
-  prt-get isinst qt5 && PKGMK_GPGME_LANG+=' qt'
-
   PKGMK_GPGME=(
     --prefix=/usr
+    --enable-static
     --disable-fd-passing
     --disable-gpgsm-test
-    --enable-static
     )
 
-  export PYTHON='/usr/bin/python3'
-  ./configure \
-    "${PKGMK_GPGME[@]}" \
-    --enable-languages="cl cpp python $PKGMK_GPGME_LANG"
+  ./configure "${PKGMK_GPGME[@]}"
 
   make
   make DESTDIR=$PKG install
 
-  if prt-get isinst qt6-base; then
-    make clean
-    ./configure \
-      "${PKGMK_GPGME[@]}" \
-      --enable-languages="cpp qt6"
-
-    make
-    make DESTDIR=$PKG install
-  fi
-
-  rm -rf $PKG/usr/share/{common-lisp,info}
+  #rm -rf $PKG/usr/share/{common-lisp,info}
 }
