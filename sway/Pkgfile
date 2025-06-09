@@ -5,13 +5,13 @@
 # Optional: gdk-pixbuf scdoc seatd
 
 name=sway
-version=1.10.1
+version=1.11
 release=1
 source=(https://github.com/swaywm/sway/archive/$version/$name-$version.tar.gz
-  6249.patch)
+  8405.patch)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/6249.patch
+  patch -Np1 -d $name-$version -i $SRC/8405.patch
 
   prt-get isinst bash-completion || PKGMK_SWAY+=' -D bash-completions=false'
   prt-get isinst zsh || PKGMK_SWAY+=' -D zsh-completions=false'
