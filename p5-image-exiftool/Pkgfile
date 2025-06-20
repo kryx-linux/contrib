@@ -4,9 +4,23 @@
 # Depends on:
 
 name=p5-image-exiftool
-version=13.30
+version=13.31
 release=1
 source=(https://exiftool.org/Image-ExifTool-$version.tar.gz)
+
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+    Image-ExifTool-$version.tar.gz)
+      echo "Unpacking $(get_filename $file)"
+      bsdtar -p -o -C $SRC -xf $(get_filename $file)
+      ;;
+    *)
+      cp $(get_filename $file) $SRC
+      ;;
+    esac
+  done
+}
 
 build() {
   cd Image-ExifTool-$version
