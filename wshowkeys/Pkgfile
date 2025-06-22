@@ -4,14 +4,15 @@
 # Depends on: libinput libxkbcommon pango wayland-protocols
 
 name=wshowkeys
-# https://github.com/ammgws/wshowkeys/blob/e8bfc78f08ebdd1316daae59ecc77e62bba68b2b/meson.build#L4
-version=0.1.0
+version=1.0.0
 release=1
-_commit=e8bfc78f08ebdd1316daae59ecc77e62bba68b2b
-source=(https://github.com/ammgws/wshowkeys/archive/$_commit/$name-$version.tar.gz)
+_commit=6388a49e0f431d6d5fcbd152b8ae4fa8e87884ee
+source=(https://github.com/ammgws/wshowkeys/archive/$_commit/$name-$version.tar.gz
+  35b6f15bd088511c28bcb3f2e36cbc4eb3621588.patch)
+renames=($name-$version.tar.gz SKIP)
 
 build() {
-  CC=gcc
+  patch -Np1 -d $name-$_commit -i $SRC/35b6f15bd088511c28bcb3f2e36cbc4eb3621588.patch
 
   meson setup $name-$_commit build \
     --prefix=/usr \
