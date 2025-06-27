@@ -1,13 +1,13 @@
 # Description: The Rust language for WebAssembly
 # URL: https://www.rust-lang.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: lld rust wasi-libc
+# Depends on: rust wasi-libc
 # Optional: clang ccache libgit2 polly sccache
 
 name=rust-wasm
-version=1.87.0
-_date=2025-04-03
-_rustc=1.86.0
+version=1.88.0
+_date=2025-05-15
+_rustc=1.87.0
 _cargo=$_rustc
 release=1
 
@@ -75,7 +75,7 @@ build() {
   # bootstrap.toml {{{
   cat <<-EOF >$SRC/bootstrap.toml
   profile = "dist"
-  change-id = 138986
+  change-id = 140732
 
   [llvm]
   ninja = true
@@ -92,11 +92,14 @@ build() {
   # http://blog.llvm.org/2019/09/closing-gap-cross-language-lto-between.html
   # https://github.com/rust-lang/rust/issues/54872
   channel = "stable"
+  codegen-units = 1
   codegen-units-std = 1
   debuginfo-level = 1
   debuginfo-level-std = 2
   codegen-tests = false
   backtrace-on-ice = true
+  lld = false
+  use-lld = "external"
   remap-debuginfo = true
   jemalloc = true
   debug-assertions = false
@@ -105,9 +108,7 @@ build() {
   frame-pointers = true
   deny-warnings = false
   optimize = true
-  use-lld = true
-  lld = true
-
+  lto = "fat"
   download-rustc = false
 
   [build]
@@ -129,18 +130,18 @@ build() {
   [target.x86_64-unknown-linux-gnu]
   llvm-config = "/usr/bin/llvm-config"
   llvm-filecheck = "/usr/bin/FileCheck"
-  cc = @TARGETCC@
-  cxx = @TARGETCXX@
-  ar = @TARGETAR@
-  ranlib = @TARGETRANLIB@
+  cc = "/usr/bin/clang"
+  cxx = "/usr/bin/clang++"
+  ar = "/usr/bin/llvm-ar"
+  ranlib = "/usr/bin/llvm-ranlib"
 
   [target.i686-unknown-linux-gnu]
   llvm-config = "/usr/bin/llvm-config"
   llvm-filecheck = "/usr/bin/FileCheck"
-  cc = @TARGETCC@
-  cxx = @TARGETCXX@
-  ar = @TARGETAR@
-  ranlib = @TARGETRANLIB@
+  cc = "/usr/bin/clang"
+  cxx = "/usr/bin/clang++"
+  ar = "/usr/bin/llvm-ar"
+  ranlib = "/usr/bin/llvm-ranlib"
 
   [target.wasm32-wasi]
   sanitizers = false
@@ -218,22 +219,6 @@ EOF
     sed -e 's|@CARGO@||' -e 's|@RUST@||' -e 's|@RUSTFMT@||' -i $SRC/bootstrap.toml
   fi
 
-  # needed for other target compilers
-  if prt-get isinst clang lld; then
-    sed -i \
-      -e 's|@TARGETCC@|"/usr/bin/clang"|g' \
-      -e 's|@TARGETCXX@|"/usr/bin/clang++"|g' \
-      -e 's|@TARGETAR@|"/usr/bin/llvm-ar"|g' \
-      -e 's|@TARGETRANLIB@|"/usr/bin/llvm-ranlib"|g' \
-      $SRC/bootstrap.toml
-  else
-    sed -i \
-      -e 's|@TARGETCC@|"/usr/bin/gcc"|g' \
-      -e 's|@TARGETCXX@|"/usr/bin/g++"|g' \
-      -e 's|@TARGETAR@|"/usr/bin/gcc-ar"|g' \
-      -e 's|@TARGETRANLIB@|"/usr/bin/gcc-ranlib"|g' \
-      $SRC/bootstrap.toml
-  fi
   prt-get isinst polly && sed -e 's|@POLLY@|polly = true|' -i $SRC/bootstrap.toml || sed -e 's|@POLLY@||' -i $SRC/bootstrap.toml
 
   cat $SRC/bootstrap.toml
