@@ -35,3 +35,44 @@ make_footprint() {
   # two tarballs. Delete such paths here, and the same footprint file can 
   # serve for both libc providers.
 }
+
+check_signature() {
+  # The corresponding function in the original pkgmk relies on .signature 
+  # itself for the list of filenames. For a flexible port accommodating 
+  # multiple libc providers, signify must be called with a truncated 
+  # list of filenames, otherwise it expects to find on disk all the files 
+  # mentioned in .signature
+  local reqfiles=(Pkgfile .footprint)
+  local SIGNIFY_ARGS=(-q -C -x "$PKGMK_ROOT/$PKGMK_SIGNATURE")
+  cd "$PKGMK_ROOT"
+  for FILE in "${source[@]}"; do
+    [ -e "${FILE##*/}" ] || ln -s $(get_filename -a "$FILE") .
+    reqfiles+=("${FILE##*/}")
+  done
+  [ -r "$PKGMK_PUBLICKEY" ] && SIGNIFY_ARGS+=(-p "$PKGMK_PUBLICKEY")
+  err=$(/usr/bin/signify "${SIGNIFY_ARGS[@]}" "${reqfiles[@]}" 2>&1)
+  RESULT=$?
+
+  # remove soft links
+  find "$PKGMK_ROOT" -maxdepth 1 -mindepth 1 -type l -delete
+
+  if [ $RESULT -ne 0 ]; then
+    if [ "$err" = "signify: signature verification failed" ]; then
+      error "Failed verifying cryptographic digest"
+    else
+      error "Signature mismatch found:"
+      echo "$err" | while read n; do echo 'MISMATCH	'${n%%:*}; done
+    fi
+
+    [ "$PKGMK_KEEP_WORK" = "yes" ] || rm -rf "$PKGMK_WORK_DIR"
+
+    error "Building '$TARGET' failed."
+    exit $E_SIGNATURE
+  fi
+
+  if [ "$PKGMK_CHECK_SIGNATURE" = "yes" ]; then
+    [ "$PKGMK_KEEP_WORK" = "yes" ] || rm -rf "$PKGMK_WORK_DIR"
+    info "Signature ok."
+    exit 0
+  fi
+}
