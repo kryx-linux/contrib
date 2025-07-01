@@ -44,7 +44,10 @@ check_signature() {
   # mentioned in .signature
   local reqfiles=(Pkgfile .footprint)
   local SIGNIFY_ARGS=(-q -C -x "$PKGMK_ROOT/$PKGMK_SIGNATURE")
-  cd "$PKGMK_ROOT"
+  cd "$PKGMK_WORK_DIR"
+  for FILE in "${reqfiles[@]}"; do
+    [ -e "$FILE" ] || ln -s "$PKGMK_ROOT/$FILE" .
+  done
   for FILE in "${source[@]}"; do
     [ -e "${FILE##*/}" ] || ln -s $(get_filename -a "$FILE") .
     reqfiles+=("${FILE##*/}")
@@ -54,8 +57,9 @@ check_signature() {
   RESULT=$?
 
   # remove soft links
-  find "$PKGMK_ROOT" -maxdepth 1 -mindepth 1 -type l -delete
+  find "$PKGMK_WORK_DIR" -maxdepth 1 -mindepth 1 -type l -delete
 
+  cd "$PKGMK_ROOT"
   if [ $RESULT -ne 0 ]; then
     if [ "$err" = "signify: signature verification failed" ]; then
       error "Failed verifying cryptographic digest"
