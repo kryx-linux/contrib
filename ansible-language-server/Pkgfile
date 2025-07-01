@@ -5,12 +5,13 @@
 # Optional: ansible-lint yamllint
 
 name=ansible-language-server
-version=25.4.0
+version=1.2.3
+_repo_version=25.7.0
 release=1
-source=(https://github.com/ansible/vscode-ansible/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/ansible/vscode-ansible/archive/v$_repo_version/$name-$version.tar.gz)
 
 build() {
-  cd vscode-ansible-$version/packages/ansible-language-server
+  cd vscode-ansible-$_repo_version/packages/ansible-language-server
 
   yarn --immutable
   yarn compile
@@ -65,19 +66,17 @@ build() {
     -iwholename '*/git-hooks'
   )
 
-  cd $SRC/vscode-ansible-$version
+  cd $SRC/vscode-ansible-$_repo_version
   yarn workspaces focus --production @ansible/$name
   find node_modules -type f \( "${find_files[@]}" \) -delete
   find node_modules -type d \( "${find_dirs[@]}" \) -exec rm -rvf {} +
   find node_modules -empty -type d -delete
 
-  install -vdm 755 "$PKG/usr/lib/node_modules/$name/"
-  cp -av node_modules "$PKG/usr/lib/node_modules/$name/"
+  install -vdm 755 $PKG/usr/lib/node_modules/$name/
+  cp -av node_modules $PKG/usr/lib/node_modules/$name/
   cd packages/$name
-  cp -av {bin,out,src,package.json} "$PKG/usr/lib/node_modules/$name/"
-  install -vDm 644 LICENSE -t "$PKG/usr/share/licenses/$name/"
-  install -vdm 755 "$PKG/usr/bin/"
-  ln -sv /usr/lib/node_modules/$name/bin/$name "$PKG/usr/bin/$name"
-
-
+  cp -av {bin,out,src,package.json} $PKG/usr/lib/node_modules/$name/
+  install -vDm 644 LICENSE -t $PKG/usr/share/licenses/$name/
+  install -vdm 755 $PKG/usr/bin/
+  ln -sv /usr/lib/node_modules/$name/bin/$name $PKG/usr/bin/$name
 }
