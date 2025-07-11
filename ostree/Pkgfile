@@ -5,10 +5,9 @@
 # Optional: avahi brotli docbook-xsl dracut libsodium
 
 name=ostree
-version=2025.2
+version=2025.3
 release=1
-source=(https://github.com/ostreedev/ostree/releases/download/v$version/libostree-$version.tar.xz
-  ostree-2025.2-fix-compilation.patch)
+source=(https://github.com/ostreedev/ostree/releases/download/v$version/libostree-$version.tar.xz)
 
 build() {
   prt-get isinst avahi || PKGMK_OSTREE+=' --without-avahi'
@@ -17,8 +16,6 @@ build() {
   prt-get isinst libsodium && PKGMK_OSTREE+=' --with-ed25519-libsodium'
 
   cd lib$name-$version
-
-  patch -Np1 -i $SRC/ostree-2025.2-fix-compilation.patch
 
   ./configure $PKGMK_OSTREE \
     --prefix=/usr \
