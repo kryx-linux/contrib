@@ -4,14 +4,11 @@
 # Depends on: egl-wayland pugixml
 
 name=waylandpp
-version=1.0.0
+version=1.0.1
 release=1
-source=(https://github.com/NilsBrause/waylandpp/archive/$version/$name-$version.tar.gz
-  waylandpp-1.0.0-gcc13.patch)
+source=(https://github.com/NilsBrause/waylandpp/archive/$version/$name-$version.tar.gz)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/waylandpp-1.0.0-gcc13.patch
-
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
