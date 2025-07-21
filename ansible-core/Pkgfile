@@ -5,15 +5,12 @@
 # Optional: python3-argcomplete python3-dnspython python3-jmespath python3-netaddr python3-passlib python3-pywinrm sshpass
 
 name=ansible-core
-version=2.18.7
+version=2.19.0
 release=1
-source=(https://github.com/ansible/ansible/archive/v$version/ansible-$version.tar.gz
-  bump_resolvelib_upper_version_bound.patch)
+source=(https://github.com/ansible/ansible/archive/v$version/ansible-$version.tar.gz)
 
 build() {
   cd ansible-$version
-
-  patch -Np1 -i $SRC/bump_resolvelib_upper_version_bound.patch
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
