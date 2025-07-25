@@ -4,14 +4,12 @@
 # Depends on: lapack meson-python python3-cython
 
 name=python3-numpy
-version=2.3.1
+version=2.3.2
 release=1
 source=(https://github.com/numpy/numpy/releases/download/v$version/numpy-$version.tar.gz)
 
 build() {
   cd numpy-$version
-
-  sed -e "/meson-python/s/,<0.16.0//" -i pyproject.toml
 
   CFLAGS+=" -ffat-lto-objects" \
   CXXFLAGS+=" -ffat-lto-objects" \
