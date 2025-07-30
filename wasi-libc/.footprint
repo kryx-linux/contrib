@@ -207,6 +207,7 @@ drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/sys/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/values.h
 drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/wasi/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/wasi/api.h
+-rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/wasi/libc-busywait.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/wasi/libc-environ.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/wasi/libc-find-relpath.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasi/wasi/libc-nocwd.h
@@ -419,6 +420,7 @@ drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/sys/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/values.h
 drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/wasi/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/wasi/api.h
+-rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/wasi/libc-busywait.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/wasi/libc-environ.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/wasi/libc-find-relpath.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1-threads/wasi/libc-nocwd.h
@@ -631,6 +633,7 @@ drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/sys/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/values.h
 drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/wasi/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/wasi/api.h
+-rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/wasi/libc-busywait.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/wasi/libc-environ.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/wasi/libc-find-relpath.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip1/wasi/libc-nocwd.h
@@ -844,6 +847,7 @@ drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/sys/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/values.h
 drwxr-xr-x	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/wasi/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/wasi/api.h
+-rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/wasi/libc-busywait.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/wasi/libc-environ.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/wasi/libc-find-relpath.h
 -rw-r--r--	root/root	usr/share/wasi-sysroot/include/wasm32-wasip2/wasi/libc-nocwd.h
@@ -871,7 +875,6 @@ drwxr-xr-x	root/root	usr/share/wasi-sysroot/lib/wasm32-wasi/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasi/libwasi-emulated-getpid.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasi/libwasi-emulated-mman.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasi/libwasi-emulated-process-clocks.a
--rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasi/libwasi-emulated-pthread.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasi/libwasi-emulated-signal.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasi/libxnet.a
 drwxr-xr-x	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1-threads/
@@ -914,7 +917,6 @@ drwxr-xr-x	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1/libwasi-emulated-getpid.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1/libwasi-emulated-mman.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1/libwasi-emulated-process-clocks.a
--rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1/libwasi-emulated-pthread.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1/libwasi-emulated-signal.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip1/libxnet.a
 drwxr-xr-x	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/
@@ -936,7 +938,6 @@ drwxr-xr-x	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/libwasi-emulated-getpid.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/libwasi-emulated-mman.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/libwasi-emulated-process-clocks.a
--rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/libwasi-emulated-pthread.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/libwasi-emulated-signal.a
 -rw-r--r--	root/root	usr/share/wasi-sysroot/lib/wasm32-wasip2/libxnet.a
 drwxr-xr-x	root/root	usr/share/wasi-sysroot/share/
