@@ -1,0 +1,11 @@
+diff -Naur swaylock-1.8.3.orig/comm.c swaylock-1.8.3/comm.c
+--- swaylock-1.8.3.orig/comm.c	2025-08-03 18:06:14.539816977 +0200
++++ swaylock-1.8.3/comm.c	2025-08-03 18:06:43.630190526 +0200
+@@ -7,6 +7,7 @@
+ #include "log.h"
+ #include "swaylock.h"
+ #include "password-buffer.h"
++#include "signal.h"
+ 
+ static int comm[2][2] = {{-1, -1}, {-1, -1}};
+ 

@@ -5,15 +5,17 @@
 # Optional: gdk-pixbuf scdoc
 
 name=swaylock
-version=1.8.2
+version=1.8.3
 release=1
-source=(https://github.com/swaywm/swaylock/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/swaywm/swaylock/releases/download/v$version/swaylock-$version.tar.gz
+  signal.patch)
 
 build() {
   prt-get isinst bash-completion || PKGMK_SWAYLOCK+=' -D bash-completions=false'
   prt-get isinst zsh || PKGMK_SWAYLOCK+=' -D zsh-completions=false'
 
   #CFLAGS+=' -Wno-error' \
+  patch -Np1 -d $name-$version -i $SRC/signal.patch
   meson setup $name-$version build $PKGMK_SWAYLOCK \
     --prefix=/usr \
     --buildtype=plain \
