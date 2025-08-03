@@ -13,7 +13,9 @@ build() {
   make
   mkdir -p $PKG/usr/{bin,lib,include,share}
   install -p -m 0644 *.h $PKG/usr/include/
-  cp -a libzxcvbn.so* $PKG/usr/lib/
+  cp -a libzxcvbn.so.0.0.0 $PKG/usr/lib/
+  ln -s libzxcvbn.so.0.0.0 $PKG/usr/lib/libzxcvbn.so
+  ln -s libzxcvbn.so.0.0.0 $PKG/usr/lib/libzxcvbn.so.0
   install -p -m 0755 dictgen $PKG/usr/bin
   install -p -m 0644 zxcvbn.dict $PKG/usr/share/zxcvbn
 }
