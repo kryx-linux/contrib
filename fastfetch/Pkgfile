@@ -1,6 +1,7 @@
 # Description: feature-rich and performance oriented system information tool
 # URL: https://github.com/fastfetch-cli/fastfetch
 # Maintainer: Tim Biermann, tbier at posteo dot de
+# Optional: bash-completion fish zsh
 
 name=fastfetch
 version=2.49.0
@@ -17,4 +18,10 @@ build() {
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
+
+  prt-get isinst bash-completion || rm -r $PKG/usr/share/bash-completion
+  prt-get isinst fish || rm -r $PKG/usr/share/fish
+  prt-get isinst zsh || rm -r $PKG/usr/share/zsh
+
+  rm -rf $PKG/usr/share/licenses
 }
