@@ -1,18 +1,16 @@
 # Description: Canonical source for classifiers on PyPI (pypi.org)
 # URL: https://github.com/pypa/trove-classifiers
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-calver
+# Depends on: python3-calver python3-wheel
 
 name=python3-trove-classifiers
 version=2025.8.6.13
-release=1
+release=2
 source=(https://pypi.org/packages/source/t/trove_classifiers/trove_classifiers-$version.tar.gz)
 
 build() {
   cd trove_classifiers-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
