@@ -5,9 +5,9 @@
 # Optional: clang ccache libgit2 polly sccache
 
 name=rust-wasm
-version=1.88.0
-_date=2025-05-15
-_rustc=1.87.0
+version=1.89.0
+_date=2025-06-26
+_rustc=1.88.0
 _cargo=$_rustc
 release=1
 
@@ -75,7 +75,7 @@ build() {
   # bootstrap.toml {{{
   cat <<-EOF >$SRC/bootstrap.toml
   profile = "dist"
-  change-id = 140732
+  change-id = 142379
 
   [llvm]
   ninja = true
@@ -123,9 +123,6 @@ build() {
   sanitizers = false
   profiler = true
   python = "/usr/bin/python3"
-  @CARGO@
-  @RUST@
-  @RUSTFMT@
 
   [target.x86_64-unknown-linux-gnu]
   llvm-config = "/usr/bin/llvm-config"
@@ -203,21 +200,6 @@ build() {
   wasi-root = "/usr/share/wasi-sysroot"
 EOF
   # }}}
-
-  if [ -e '/usr/bin/rustc' ]; then
-    if ! /usr/bin/ldd /usr/bin/rustc | grep -q -E '.*libLLVM.*.so => not found' && \
-    ! /usr/bin/ldd /usr/bin/cargo | grep -q -E 'libgit2.so.* => not found'; then
-      sed -e 's|@CARGO@|cargo = "/usr/bin/cargo"|' \
-        -e 's|@RUST@|rustc = "/usr/bin/rustc"|' \
-        -e 's|@RUSTFMT@|rustfmt = "/usr/bin/rustfmt"|' \
-        -i $SRC/bootstrap.toml
-    else
-      sed -e 's|@CARGO@||' -e 's|@RUST@||' -e 's|@RUSTFMT@||' -i $SRC/bootstrap.toml
-      printf "\e[031mShared library missing, not using system rust to bootstrap.\033[0m\n"
-    fi
-  else
-    sed -e 's|@CARGO@||' -e 's|@RUST@||' -e 's|@RUSTFMT@||' -i $SRC/bootstrap.toml
-  fi
 
   prt-get isinst polly && sed -e 's|@POLLY@|polly = true|' -i $SRC/bootstrap.toml || sed -e 's|@POLLY@||' -i $SRC/bootstrap.toml
 
