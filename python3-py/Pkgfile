@@ -1,17 +1,22 @@
 # Description: library with cross-python path, ini-parsing, io, code, log facilities
 # URL: https://github.com/pytest-dev/py
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on:  python3-apipkg python3-iniconfig
+# Depends on: python3-apipkg python3-iniconfig
 
 name=python3-py
 version=1.11.0
 release=2
-source=(https://github.com/pytest-dev/py/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/pytest-dev/py/archive/$version/$name-$version.tar.gz
+  python3.12.patch scm.patch)
 
 build() {
   cd py-$version
 
+  patch -Np1 -i $SRC/python3.12.patch
+  patch -Np1 -i $SRC/scm.patch
+
   rm -r py/_vendored_packages
+
   export LC_CTYPE=en_US.UTF-8
   export SETUPTOOLS_SCM_PRETEND_VERSION=$version
 

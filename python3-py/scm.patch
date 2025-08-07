@@ -1,0 +1,20 @@
+--- a/pypoject.toml	2025-08-07 21:46:30.286230769 +0200
++++ b/pyproject.toml	2025-08-07 21:55:37.695869136 +0200
+@@ -1,6 +1,13 @@
+ [build-system]
+-requires = [
+-    "setuptools",
+-    "setuptools_scm[toml]",
+-]
++requires = ["setuptools>=80", "setuptools-scm>=8"]
+ build-backend = "setuptools.build_meta"
++
++[project]
++name = "py"
++dynamic = ["version"]
++readme = "README.md"
++requires-python = ">=3.7"
++dependencies = []
++
++[tool.setuptools_scm]
++version_file = "py/_version.py"
