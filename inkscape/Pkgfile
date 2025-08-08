@@ -5,9 +5,11 @@
 # Optional: libcdr libvisio libwpg
 
 name=inkscape
-version=1.4.1
+version=1.4.2
 release=1
-source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz)
+source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
+        MR7261.patch
+	MR7321.patch)
 
 build() {
     export LDFLAGS+=" -Wl,-rpath=/usr/lib/inkscape"
@@ -18,6 +20,9 @@ build() {
     prt-get isinst libwpg || INK_OPTS+=" -D WITH_LIBWPG=OFF"
 
     cd ${name}-${version}*
+
+    patch -Np1 -i ../MR7261.patch
+    patch -Np1 -i ../MR7321.patch
 
     prt-get isinst glibc || sed -e "/-Werror=format/d" \
                                 -i CMakeScripts/DefineDependsandFlags.cmake
