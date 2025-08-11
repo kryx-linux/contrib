@@ -4,12 +4,12 @@
 # Depends on: python3-wheel
 
 name=python3-phonenumbers
-version=9.0.10
+version=9.0.11
 release=1
-source=(https://github.com/daviddrysdale/python-phonenumbers/archive/r$version/$name-$version.tar.gz)
+source=(https://pypi.org/packages/source/p/phonenumbers/phonenumbers-$version.tar.gz)
 
 build() {
-  cd python-phonenumbers-r$version/python
+  cd phonenumbers-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
