@@ -3,13 +3,13 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=lpsolve
-version=5.5.2.11
-release=3
-source=(https://downloads.sourceforge.net/project/lpsolve/lpsolve/$version/lp_solve_"$version"_source.tar.gz
+version=5.5.2.14
+release=1
+source=(https://github.com/lp-solve/lp_solve/releases/download/$version/lp_solve_${version}_source.tar.gz
   lpsolve-ubsan.patch.0)
 
 build() {
-  cd lp_solve_${version:0:3}
+  cd lp_solve
 
   patch -Np0 -i $SRC/lpsolve-ubsan.patch.0
 
