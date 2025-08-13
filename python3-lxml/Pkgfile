@@ -14,7 +14,5 @@ build() {
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
-  find $PKG/usr/lib/python3.12/site-packages/*.dist-info \
-    \( -name "LICENSE*" -o -name METADATA -o -name AUTHORS \
-    -o -name RECORD -o -name WHEEL \) -delete
+  rm -rf "$PKG"/usr/lib/python3.12/site-packages/$_name-$version.dist-info/licenses
 }
