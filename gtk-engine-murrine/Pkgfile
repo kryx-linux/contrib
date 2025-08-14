@@ -9,6 +9,8 @@ release=1
 source=(https://download.gnome.org/sources/murrine/${version:0:4}/murrine-$version.tar.xz)
 
 build() {
+  export CFLAGS+=" -Wno-implicit-function-declaration"
+
   cd murrine-$version
 
   ./configure --prefix=/usr \
