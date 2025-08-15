@@ -1,11 +1,11 @@
 # Description: The analytics platform for all your metrics
 # URL: https://grafana.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: fontconfig git nodejs-lts-jod npm wire-go yarn
+# Depends on: fontconfig git npm wire-go yarn
 # Optional: postgresql redis
 
 name=grafana
-version=12.1.0
+version=12.1.1
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   grafana.confd grafana.service)
@@ -40,8 +40,9 @@ build() {
   export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
   export CYPRESS_INSTALL_BINARY=0
   export NODE_OPTIONS="--max-old-space-size=16000"
+  export TS_NODE_TRANSPILE_ONLY=1
 
-  export PATH="/usr/opt/nodejs-lts-jod/bin:$PATH"
+  #export PATH="/usr/opt/nodejs-lts-jod/bin:$PATH"
 
   yarn cache clean
   rm -rf node_modules yarn.lock
