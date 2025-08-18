@@ -4,7 +4,7 @@
 # Depends on: wasm-bindgen wasm-pack
 
 name=lldap
-version=0.6.1
+version=0.6.2
 release=1
 source=(https://github.com/lldap/lldap/archive/v$version/$name-$version.tar.gz
   lldap.service
@@ -18,7 +18,7 @@ build() {
   patch -p1 -i $SRC/config-template.patch
   xargs curl --remote-name-all --output-dir app/static/fonts < app/static/fonts/fonts.txt
   xargs curl --remote-name-all --output-dir app/static < app/static/libraries.txt
-  cargo fetch --locked --target "x86_64-unknown-linux-gnu"
+  cargo fetch --target "x86_64-unknown-linux-gnu"
 
   cargo build \
     --frozen \
