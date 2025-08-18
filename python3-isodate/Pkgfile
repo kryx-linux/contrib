@@ -6,7 +6,7 @@
 name=python3-isodate
 _name=${name#python3-}
 version=0.7.2
-release=1
+release=2
 source=(https://files.pythonhosted.org/packages/source/${_name:0:1}/$_name/$_name-$version.tar.gz)
 
 build() {
@@ -14,7 +14,6 @@ build() {
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir="$PKG" dist/*.whl
-  find "$PKG/usr/lib/python3.12/site-packages" \
-       \( -name LICENSE  -o -name WHEEL \
-       -o -name METADATA -o -name RECORD \) -delete
+  
+  rm -rf "$PKG"/usr/lib/python3.12/site-packages/$_name-$version.dist-info/licenses
 }
