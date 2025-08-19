@@ -1,0 +1,21 @@
+# Description: compatibility library for software targeting SDL 1.2
+# URL: https://www.libsdl.org/
+# Maintainer: John McQuah, jmcquah at disroot dot org
+# Depends on: libsdl2
+
+name=sdl12-compat
+version=1.2.68
+release=1
+source=(https://github.com/libsdl-org/$name/archive/refs/tags/release-$version.tar.gz)
+renames=($name-$version.tar.gz)
+
+build() {
+  cmake -B build -S $name-release-$version \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+	-DSDL12TESTS=OFF
+
+  cmake --build build
+  DESTDIR="$PKG" cmake --install build
+}
