@@ -5,7 +5,7 @@
 
 name=frozen-bubble
 version=2.2.1
-release=1
+release=2
 source=(https://github.com/kthakore/$name/archive/$version/$name-$version.tar.gz
 	fix-buffer-size-when-formatting-current-date.patch
 	$name.desktop)
@@ -16,7 +16,10 @@ build() {
 	# https://bugzilla.redhat.com/show_bug.cgi?id=1541359
 	patch -p1 -i $SRC/fix-buffer-size-when-formatting-current-date.patch
 
-	sed -e 's|-Werror||' -i inc/My/Builder.pm
+	sed -e "s|-Werror||" -i inc/My/Builder.pm
+
+	# Module Build now takes a number as argument, not a string
+	sed -e "/Module::Build/s/'0\.36' =>/0.36/" -i inc/My/Builder.pm
 
 	perl Build.PL installdirs=vendor
 	perl Build
