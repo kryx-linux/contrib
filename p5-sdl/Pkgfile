@@ -7,11 +7,22 @@ name=p5-sdl
 ## https://metacpan.org/release/SDL
 _author=FROGGS
 version=2.548
-release=1
-source=(https://cpan.metacpan.org/authors/id/${_author::1}/${_author::2}/$_author/SDL-$version.tar.gz)
+release=2
+source=(https://cpan.metacpan.org/authors/id/${_author::1}/${_author::2}/$_author/SDL-$version.tar.gz
+	surface-xs-calc-offset.patch)
 
 build() {
 	cd SDL-$version
+
+	# replace deprecated macro
+	sed -i "s/sv_nv/SvNVx/" src/SDLx/Controller/Interface.xs
+
+	# declare calc_offset earlier
+	patch -p1 -i $SRC/surface-xs-calc-offset.patch
+
+	# avoid undefined import
+	sed -i "/File::Spec/s/ 'catfile'//" t/00-load.t
+	sed -i "/SDLx::Music/s/,.*)/)/" t/sdlx_music.t
 
 	perl Build.PL installdirs=vendor
 	perl Build
