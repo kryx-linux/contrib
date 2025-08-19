@@ -14,6 +14,7 @@ build() {
 	cd SDL_Pango-$version
 	patch -p0 -i $SRC/SDL_Pango-$version-API-adds.patch
 	patch -p1 -i $SRC/matrix_declarations.patch
+	sed -i "/include .SDL_Pango\.h/i #define __FT2_BUILD_UNIX_H__" src/SDL_Pango.c
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG install
