@@ -1,0 +1,36 @@
+# Description: an open source, in-memory data store
+# URL: https://valkey.io/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Optional: jemalloc
+
+name=valkey
+version=8.1.3
+release=1
+source=(https://github.com/valkey-io/valkey/archive/$version/$name-$version.tar.gz
+  valkey.rc
+  remove-deprecated-use-of-je_calloc.patch
+  valkey-5.0-use-system-jemalloc.patch)
+
+build() {
+  prt-get isinst redis && exit 1
+
+  cd $name-$version
+
+  patch -Np1 -i $SRC/remove-deprecated-use-of-je_calloc.patch
+  prt-get isinst jemalloc && patch -Np1 -i $SRC/valkey-5.0-use-system-jemalloc.patch
+  prt-get isinst jemalloc && rm -r deps/jemalloc
+
+  make BUILD_TLS=yes
+  make PREFIX=$PKG/usr install
+
+  install -D -m 755 $SRC/valkey.rc $PKG/etc/rc.d/valkey
+  sed -i -e '/^logfile/ s/.*/logfile \/var\/log\/valkey\/valkey.log/' \
+    -e '/^dir .\// s/.*/dir \/var\/lib\/valkey\//' \
+    -e '/^pidfile/ s/.*/pidfile \/run\/valkey\/valkey.pid/' valkey.conf
+  install -d -o valkey -m 755 $PKG/etc/valkey
+  install -D -o valkey -m 755 valkey.conf $PKG/etc/valkey/valkey.conf
+  install -D -o valkey -m 755 sentinel.conf $PKG/etc/valkey/sentinel.conf
+  install -d -m 755 -o valkey $PKG/var/lib/valkey
+  install -d -m 755 $PKG/var/log/valkey
+  install -m 644 -o valkey /dev/null $PKG/var/log/valkey/valkey.log
+}

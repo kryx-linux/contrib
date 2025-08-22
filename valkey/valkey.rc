@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# /etc/rc.d/valkey: start/stop valkey server
+#
+# make sure to have set daemonize to no in valkey.conf so that PID file
+# creation and tracking by start-stop-daemon work properly
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/bin/valkey-server
+PID=/run/valkey/valkey.pid
+USR=valkey
+
+case $1 in
+start)
+  [ ! -e /run/valkey ] && install -g valkey -o valkey -m 0755 -d /run/valkey
+  $SSD --start -c $USR -b -m --pidfile $PID --exec $PROG -- /etc/valkey/valkey.conf
+  ;;
+stop)
+  $SSD --stop --retry 10 --pidfile $PID --remove-pidfile
+  ;;
+restart)
+  $0 stop
+  $0 start
+  ;;
+status)
+  $SSD --status --pidfile $PID
+  case $? in
+  0) echo "$PROG is running with pid $(cat $PID)" ;;
+  1) echo "$PROG is not running but the pid file $PID exists" ;;
+  3) echo "$PROG is not running" ;;
+  4) echo "Unable to determine the program status" ;;
+  esac
+  ;;
+*)
+  echo "usage: $0 [start|stop|restart|status]"
+  ;;
+esac
+
+# End of file

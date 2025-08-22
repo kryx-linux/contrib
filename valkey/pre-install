@@ -1,0 +1,5 @@
+#!/bin/bash
+
+getent group valkey >/dev/null || groupadd -r valkey
+getent passwd valkey || useradd -m -g valkey -d /var/lib/valkey -s /sbin/nologin valkey
+passwd -l valkey
