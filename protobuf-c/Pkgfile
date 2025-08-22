@@ -11,6 +11,9 @@ source=(https://github.com/protobuf-c/protobuf-c/releases/download/v$version/$na
 build() {
   cd $name-$version
 
+  CFLAGS="-O2 -pipe"
+  CXXFLAGS="-O2 -pipe"
+
   autoreconf -fvi
 
   ./configure --prefix=/usr \
