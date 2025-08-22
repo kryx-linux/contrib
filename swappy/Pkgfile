@@ -9,6 +9,7 @@ release=1
 source=(https://github.com/jtheoof/swappy/archive/v$version/$name-$version.tar.gz)
 
 build() {
+  sed -i 's/if git.found()/if false/' $name-$version/meson.build
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
