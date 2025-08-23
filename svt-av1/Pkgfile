@@ -4,7 +4,7 @@
 # Depends on: nasm
 
 name=svt-av1
-version=3.1.0
+version=3.1.1
 release=1
 source=(https://gitlab.com/AOMediaCodec/SVT-AV1/-/archive/v$version/SVT-AV1-v$version.tar.bz2)
 
@@ -16,7 +16,7 @@ build() {
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D BUILD_SHARED_LIBS=ON \
-    -D USE_SYSTEM_LIBS=ON \
+    -D SVT_AV1_PGO=ON \
     -D NATIVE=OFF \
     -Wno-dev
 
