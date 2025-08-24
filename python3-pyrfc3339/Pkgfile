@@ -1,15 +1,16 @@
 # Description: Generate and parse RFC 3339 timestamps
 # URL: https://pypi.org/project/pyRFC3339/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-pytz
+# Depends on: python3-pytz python3-wheel
 
 name=python3-pyrfc3339
-version=2.0.1
+version=2.1.0
 release=1
 source=(https://pypi.python.org/packages/source/p/pyrfc3339/pyrfc3339-$version.tar.gz)
 
 build() {
   cd pyrfc3339-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG/ --optimize=1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
