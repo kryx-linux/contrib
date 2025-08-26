@@ -1,0 +1,16 @@
+# Description: Parsing ELF and DWARF in Python
+# URL: https://github.com/eliben/pyelftools
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-wheel
+
+name=python3-pyelftools
+version=0.32
+release=1
+source=(https://pypi.org/packages/source/p/pyelftools/pyelftools-$version.tar.gz)
+
+build() {
+  cd pyelftools-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
