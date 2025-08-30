@@ -1,0 +1,20 @@
+# Description: Dynamic Kernel Modules System
+# URL: https://github.com/dell/dkms
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=dkms
+version=3.2.1
+release=1
+source=(https://github.com/dell/dkms/archive/v$version/$name-$version.tar.gz)
+
+
+build() {
+  cd $name-$version
+
+  make \
+    DESTDIR=$PKG \
+    install
+  prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion/
+  prt-get isinst zsh || rm -rf $PKG/usr/share/zsh
+  rm -rf $PKG/etc/kernel/
+}
