@@ -15,10 +15,11 @@ build() {
   cd $name-$version
 
   patch -Np1 -i $SRC/postgresql-run-socket.patch
-  sed -i '/SHLIB_LINK.*=.*perl_embed_ldflags.*/a SHLIB_LINK += $(rpath)' src/pl/plperl/GNUmakefile
+  sed -i '/SHLIB_LINK.*=.*perl_embed_ldflags.*/a SHLIB_LINK += $(rpath)' \
+    src/pl/plperl/GNUmakefile
 
   # optionals {{{
-  prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
+  #prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
   prt-get isinst icu || PKGMK_PGSQL+=' --without-icu'
   prt-get isinst krb5 && PKGMK_PGSQL+=' --with-gssapi'
   prt-get isinst libxml2 && PKGMK_PGSQL+=' --with-libxml'
@@ -36,7 +37,9 @@ build() {
     --disable-rpath \
     PYTHON=/usr/bin/python3
   make -j ${JOBS:-1}
+  make -j ${JOBS:-1} -C contrib
   make DESTDIR=$PKG install
+  make DESTDIR=$PKG -C contrib install
 
   if prt-get isinst libxml2 docbook-xsl; then
     cd doc/src/sgml
