@@ -1,15 +1,16 @@
-# Description: Postscript Utilities
+# Description: Utilities for manipulating PDF and PostScript documents
 # URL: https://github.com/rrthomas/psutils
 # Maintainer: Juergen Daubert, jue at crux dot nu
-# Depends on: p5-ipc-run3 paper ghostscript
+# Depends on: paper python3-argparse-manpage python3-pypdf python3-puremagic
 
 name=psutils
-version=2.10
+version=3.3.12
 release=1
 source=(https://github.com/rrthomas/psutils/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    ./configure --prefix=/usr
-    make DESTDIR=$PKG install
+
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
