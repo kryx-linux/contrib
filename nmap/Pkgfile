@@ -15,9 +15,6 @@ source=(https://nmap.org/dist/$name-$version.tar.bz2
 build () {
   cd $name-$version
 
-  prt-get isinst cairo gobject-introspection python3-wheel python3-gobject || PKGMK_NMAP+=' --without-zenmap'
-  prt-get isinst python3-wheel || PKGMK_NMAP+=' --without-ndiff'
-
   rm -rf liblua libpcap libpcre macosx mwin32 libssh2 libz
 
   patch -Np1 -i $SRC/0001-Fix-build-conflicting-types-for-strlcat.patch
@@ -36,10 +33,26 @@ build () {
     --with-libdnet=included \
     --disable-nls \
     --without-dpdk \
-    --without-nmap-update
+    --without-nmap-update \
+    --without-zenmap \
+    --without-ndiff
 
   make
-  make DESTDIR=$PKG install
+  make DESTDIR=$PKG install-nmap
+
+  if prt-get isinst cairo gobject-introspection python3-wheel python3-gobject; then
+    pushd zenmap
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+    popd
+  fi
+  if prt-get isinst python3-wheel; then
+    pushd ndiff
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+    popd
+  fi
+
 
   find $PKG \( \
     -iname '*readme*' -o \
