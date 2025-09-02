@@ -3,15 +3,15 @@
 # Maintainer: Juergen Daubert, jue at crux dot nu
 
 name=remind
-version=06.00.01
+version=06.00.02
 release=1
 source=(https://dianne.skoll.ca/projects/$name/download/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+    cd $name-$version
 
-	./configure --prefix=/usr
+    ./configure --prefix=/usr
 
-	make
-	make DESTDIR=$PKG install
+    make
+    make DESTDIR=$PKG install
 }
