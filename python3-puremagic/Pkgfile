@@ -1,0 +1,19 @@
+# Description: Python module that will identify a file based off it's magic numbers
+# URL: https://github.com/cdgriffith/puremagic
+# Maintainer: Juergen Daubert, jue at crux dot nu
+# Depends on: python3-wheel
+
+name=python3-puremagic
+version=2.0.0b4
+release=1
+source=(https://github.com/cdgriffith/puremagic/archive/$version/pypdf-$version.tar.gz)
+
+#https://github.com/cdgriffith/puremagic/archive/refs/tags/2.0.0b4.tar.gz
+
+
+build() {
+    cd puremagic-$version
+
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
