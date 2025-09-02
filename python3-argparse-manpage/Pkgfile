@@ -1,0 +1,16 @@
+# Description: Automatically build man-pages for your Python project 
+# URL: https://github.com/praiskup/argparse-manpage
+# Maintainer: Juergen Daubert, jue at crux dot nu
+# Depends on: python3-wheel
+
+name=python3-argparse-manpage
+version=4.7
+release=1
+source=(https://github.com/praiskup/argparse-manpage/releases/download/v$version/argparse_manpage-$version.tar.gz)
+
+build() {
+    cd argparse_manpage-$version
+
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
