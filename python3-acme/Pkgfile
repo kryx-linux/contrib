@@ -4,12 +4,13 @@
 # Depends on: python3-josepy python3-pyrfc3339 python3-requests-toolbelt
 
 name=python3-acme
-version=4.2.0
+version=5.0.0
 release=1
 source=(https://pypi.io/packages/source/a/acme/acme-$version.tar.gz)
 
 build() {
   cd acme-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
