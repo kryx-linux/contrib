@@ -1,0 +1,16 @@
+# Description: Python library for manipulating PDF files
+# URL: https://github.com/py-pdf/pypdf
+# Maintainer: Juergen Daubert, jue at crux dot nu
+# Depends on: python3-wheel
+
+name=python3-pypdf
+version=6.0.0
+release=1
+source=(https://github.com/py-pdf/pypdf/archive/$version/pypdf-$version.tar.gz)
+
+build() {
+    cd pypdf-$version
+
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
