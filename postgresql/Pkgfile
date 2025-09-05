@@ -44,13 +44,14 @@ build() {
   if prt-get isinst libxml2 docbook-xsl; then
     cd doc/src/sgml
     make DESTDIR=$PKG install-man
-    rm -rf $PKG/usr/share/doc
   fi
 
   install -Dm 755 $SRC/postgresql.rc $PKG/etc/rc.d/postgresql
   install -Dm 755 $SRC/postgresql.pam $PKG/etc/pam.d/postgresql
 
   install -Dm 660 -o postgres -g postgres /dev/null $PKG/var/log/postgresql
+
+  rm -rf $PKG/usr/share/doc
 }
 
 # vim: foldmethod=marker foldlevelstart=0
