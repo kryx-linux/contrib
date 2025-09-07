@@ -4,12 +4,13 @@
 # Depends on: python3-greenlet python3-msgpack
 
 name=python3-nvim
-version=0.5.2
+version=0.6.0
 release=1
 source=(https://github.com/neovim/pynvim/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd pynvim-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG --optimize=1 --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
