@@ -4,7 +4,7 @@
 # Depends on: yasm
 
 name=aom
-version=3.13.0
+version=3.13.1
 release=1
 source=(https://storage.googleapis.com/aom-releases/libaom-$version.tar.gz)
 
@@ -15,8 +15,8 @@ build() {
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-    -D BUILD_SHARED_LIBS=1 \
-    -D ENABLE_TESTS=0 \
+    -D BUILD_SHARED_LIBS=ON \
+    -D ENABLE_TESTS=OFF \
     -Wno-dev
 
   cmake --build build
