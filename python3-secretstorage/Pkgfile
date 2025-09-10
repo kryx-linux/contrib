@@ -4,15 +4,13 @@
 # Depends on: python3-cryptography python3-jeepney
 
 name=python3-secretstorage
-version=3.3.3
+version=3.4.0
 release=1
-source=(https://pypi.io/packages/source/S/SecretStorage/SecretStorage-$version.tar.gz)
+source=(https://pypi.org/packages/source/s/secretstorage/secretstorage-$version.tar.gz)
 
 build() {
-  cd SecretStorage-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+  cd secretstorage-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
