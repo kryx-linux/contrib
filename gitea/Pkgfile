@@ -5,10 +5,10 @@
 # Optional: python3-findpython python3-pbs-installer python3-poetry redis
 
 name=gitea
-version=1.24.5
+version=1.24.6
 release=1
 source=(https://github.com/go-gitea/gitea/archive/v$version/$name-$version.tar.gz
-  gitea.service 35271.patch)
+  gitea.service)
 
 build() {
   cd $name-$version
@@ -30,8 +30,6 @@ build() {
   export GITEA_VERSION="$version"
 
   prt-get isinst python3-findpython python3-pbs-installer python3-poetry && PKGMK_GITEA+=' deps-py'
-
-  patch -Np1 -i $SRC/35271.patch
 
   make $PKGMK_GITEA deps-frontend deps-backend deps-tools
   make -j1 EXTRA_GOFLAGS="$GOFLAGS"
