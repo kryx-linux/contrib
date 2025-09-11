@@ -4,12 +4,12 @@
 # Depends on: python3-wheel python3-cffi
 
 name=python3-pynacl
-version=1.5.0
-release=2
-source=(https://files.pythonhosted.org/packages/a7/22/27582568be639dfe22ddb3902225f91f2f17ceff88ce80e4db396c8986da/PyNaCl-$version.tar.gz)
+version=1.6.0
+release=1
+source=(https://files.pythonhosted.org/packages/06/c6/a3124dee667a423f2c637cfd262a54d67d8ccf3e160f3c50f622a85b7723/pynacl-$version.tar.gz)
 
 build() {
-    cd PyNaCl-$version
+    cd pynacl-$version
     /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
     /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
