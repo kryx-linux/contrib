@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools
 
 name=python3-zope-event
-version=5.1.1
+version=6.0
 release=1
-source=(https://github.com/zopefoundation/zope.event/archive/$version/$name-$version.tar.gz)
+source=(https://pypi.org/packages/source/z/zope_event/zope_event-$version.tar.gz)
 
 build() {
-  cd zope.event-$version
+  cd zope_event-$version
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
