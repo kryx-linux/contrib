@@ -4,12 +4,12 @@
 # Depends on: python3-setuptools
 
 name=python3-zope-hookable
-version=7.0
+version=8.0
 release=1
-source=(https://github.com/zopefoundation/zope.hookable/archive/$version/$name-$version.tar.gz)
+source=(https://pypi.org/packages/source/z/zope_hookable/zope_hookable-$version.tar.gz)
 
 build() {
-  cd zope.hookable-$version
+  cd zope_hookable-$version
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --root=$PKG --optimize=1
 }
