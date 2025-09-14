@@ -4,12 +4,13 @@
 # Depends on: python3-cryptography python3-typing_extensions
 
 name=python3-pyopenssl
-version=25.1.0
+version=25.2.0
 release=1
 source=(https://pypi.org/packages/source/p/pyopenssl/pyopenssl-$version.tar.gz)
 
 build() {
   cd pyopenssl-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
