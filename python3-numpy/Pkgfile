@@ -4,11 +4,36 @@
 # Depends on: lapack meson-python python3-cython
 
 name=python3-numpy
-version=2.3.2
+version=2.3.3
 release=1
-source=(https://github.com/numpy/numpy/releases/download/v$version/numpy-$version.tar.gz)
+_vendored_meson=e72c717199fa18d34020c7c97f9de3f388c5e055
+_highway=37c08e5528f63ead9c7e4fd99ba454c1b1a3e3f7
+_x86_simd_sort=c306ac581a59f89585d778254c4ed7197e64ba2d
+_svml=3a713b13018325451c1b939d3914ceff5ec68e19
+_pocketfft=33ae5dc94c9cdc7f1c78346504a85de87cadaa12
+_pythoncapi_comat=90c06a4cae557bdbfa4f231a781d2b5c1a8f6d1c
+source=(https://github.com/numpy/numpy/archive/v$version/numpy-$version.tar.gz
+  https://github.com/numpy/meson/archive/$_vendored_meson/meson-$_vendored_meson.tar.gz
+  https://github.com/google/highway/archive/$_highway/highway-$_highway.tar.gz
+  https://github.com/numpy/x86-simd-sort/archive/$_x86_simd_sort/x86-simd-sort-$_x86_simd_sort.tar.gz
+  https://github.com/numpy/SVML/archive/$_svml/SVML-$_svml.tar.gz
+  https://github.com/python/pythoncapi-compat/archive/$_pythoncapi_comat/pythoncapi-compat-$_pythoncapi_comat.tar.gz
+  https://github.com/mreineck/pocketfft/archive/$_pocketfft/pocketfft-$_pocketfft.tar.gz)
 
 build() {
+  rsync --recursive $SRC/meson-$_vendored_meson/ \
+    -t $SRC/numpy-$version/vendored-meson/meson
+  rsync --recursive $SRC/highway-$_highway/ \
+    -t $SRC/numpy-$version/numpy/_core/src/highway
+  rsync --recursive $SRC/x86-simd-sort-$_x86_simd_sort/ \
+    -t $SRC/numpy-$version/numpy/_core/src/npysort/x86-simd-sort
+  rsync --recursive $SRC/pocketfft-$_pocketfft/ \
+    -t $SRC/numpy-$version/numpy/fft/pocketfft
+  rsync --recursive $SRC/SVML-$_svml/ \
+    -t $SRC/numpy-$version/numpy/_core/src/umath/svml
+  rsync --recursive $SRC/pythoncapi-compat-$_pythoncapi_comat/ \
+    -t $SRC/numpy-$version/numpy/_core/src/common/pythoncapi-compat
+
   cd numpy-$version
 
   CFLAGS+=" -ffat-lto-objects" \
