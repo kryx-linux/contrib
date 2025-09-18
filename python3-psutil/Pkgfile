@@ -4,13 +4,13 @@
 # Depends on: python3-setuptools-scm
 
 name=python3-psutil
-version=7.0.0
+version=7.1.0
 release=1
 source=(https://github.com/giampaolo/psutil/archive/release-$version/$name-release-$version.tar.gz)
 
 build() {
   cd psutil-release-$version
-  /usr/bin/python3 setup.py build --build-lib=build/python
-  /usr/bin/python3 setup.py build --build-lib=build/python \
-    install --root=$PKG --optimize=1 --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
