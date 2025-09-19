@@ -5,9 +5,9 @@
 # Optional: libcanberra
 
 name=pavucontrol
-version=6.1
+version=6.2
 release=1
-source=(https://distributions.freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-$version.tar.gz)
+source=(http://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-6.2.tar.xz)
 
 build() {
   meson setup $name-$version build \
@@ -16,7 +16,7 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D lynx=false
+    -D lynx=disabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 
