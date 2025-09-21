@@ -4,10 +4,12 @@
 
 name=ttf-noto-emoji
 version=2.051
-release=1
+release=2
 source=(https://github.com/googlefonts/noto-emoji/archive/v$version/noto-emoji-$version.tar.gz)
 
 build() {
   mkdir -p $PKG/usr/share/fonts/noto
-  install -m644 noto-emoji-$version/fonts/NotoColorEmoji.ttf $PKG/usr/share/fonts/noto
+  for i in noto-emoji-$version/fonts/*.ttf; do
+    install -m644 $i $PKG/usr/share/fonts/noto
+  done
 }
