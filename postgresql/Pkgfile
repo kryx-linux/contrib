@@ -5,7 +5,7 @@
 # Optional: clang docbook-xsl icu krb5 libxml2 libxslt openldap tcl
 
 name=postgresql
-version=17.6
+version=18.0
 release=1
 source=(https://ftp.postgresql.org/pub/source/v$version/postgresql-$version.tar.bz2
   postgresql-run-socket.patch
@@ -15,11 +15,9 @@ build() {
   cd $name-$version
 
   patch -Np1 -i $SRC/postgresql-run-socket.patch
-  sed -i '/SHLIB_LINK.*=.*perl_embed_ldflags.*/a SHLIB_LINK += $(rpath)' \
-    src/pl/plperl/GNUmakefile
 
   # optionals {{{
-  #prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
+  prt-get isinst clang && PKGMK_PGSQL+=' --with-llvm'
   prt-get isinst icu || PKGMK_PGSQL+=' --without-icu'
   prt-get isinst krb5 && PKGMK_PGSQL+=' --with-gssapi'
   prt-get isinst libxml2 && PKGMK_PGSQL+=' --with-libxml'
@@ -27,6 +25,7 @@ build() {
   prt-get isinst tcl && PKGMK_PGSQL+=' --with-tcl'
   # }}}
 
+  CFLAGS+=" -ffat-lto-objects"
   ./configure --prefix=/usr $PKGMK_PGSQL \
     --with-openssl \
     --with-pam \
@@ -34,7 +33,6 @@ build() {
     --with-python \
     --with-uuid=e2fs \
     --disable-nls \
-    --disable-rpath \
     PYTHON=/usr/bin/python3
   make -j ${JOBS:-1}
   make -j ${JOBS:-1} -C contrib
