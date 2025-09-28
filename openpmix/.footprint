@@ -81,6 +81,10 @@ drwxr-xr-x	root/root	usr/include/pmix/src/mca/pdl/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/pdl/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/pdl/base/base.h
 -rw-r--r--	root/root	usr/include/pmix/src/mca/pdl/pdl.h
+drwxr-xr-x	root/root	usr/include/pmix/src/mca/pgpu/
+drwxr-xr-x	root/root	usr/include/pmix/src/mca/pgpu/base/
+-rw-r--r--	root/root	usr/include/pmix/src/mca/pgpu/base/base.h
+-rw-r--r--	root/root	usr/include/pmix/src/mca/pgpu/pgpu.h
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/pif/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/pif/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/pif/base/base.h
@@ -115,10 +119,6 @@ drwxr-xr-x	root/root	usr/include/pmix/src/mca/psensor/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/psensor/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/psensor/base/base.h
 -rw-r--r--	root/root	usr/include/pmix/src/mca/psensor/psensor.h
-drwxr-xr-x	root/root	usr/include/pmix/src/mca/psquash/
-drwxr-xr-x	root/root	usr/include/pmix/src/mca/psquash/base/
--rw-r--r--	root/root	usr/include/pmix/src/mca/psquash/base/base.h
--rw-r--r--	root/root	usr/include/pmix/src/mca/psquash/psquash.h
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/pstat/
 drwxr-xr-x	root/root	usr/include/pmix/src/mca/pstat/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/pstat/base/base.h
@@ -179,9 +179,9 @@ drwxr-xr-x	root/root	usr/include/pmix/src/util/
 -rw-r--r--	root/root	usr/include/pmix_version.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libpmix.la
-lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.13.8
-lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.13.8
--rwxr-xr-x	root/root	usr/lib/libpmix.so.2.13.8
+lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.18.0
+lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.18.0
+-rwxr-xr-x	root/root	usr/lib/libpmix.so.2.18.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/pmix.pc
 drwxr-xr-x	root/root	usr/lib/pmix/
@@ -193,7 +193,10 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/.buildinfo
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_images/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_images/2XeonE5300.png
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_images/amd-gpus.jpg
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_images/compatibility.png
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_images/summit.png
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/building-apps/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/building-apps/building-static-apps.rst.txt
@@ -220,9 +223,21 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/getting-help.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/history.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/how-things-work/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/distances.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/index.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/resolve.rst.txt
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/how-things-work/schedulers/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/schedulers/index.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/schedulers/overview.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/session_dirs.rst.txt
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/group_async_example.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/group_bootstrap_example.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/group_construct.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/group_example.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/index.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/overview.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/sets_groups/psets.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/index.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/installing-pmix/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/installing-pmix/compilers-and-flags.rst.txt
@@ -272,6 +287,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/news/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v3.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v4.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v5.x.rst.txt
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/news-v6.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/quickstart.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/release-notes.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/release-notes/
@@ -347,9 +363,21 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/getting-help.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/history.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/how-things-work/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/distances.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/index.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/resolve.html
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/how-things-work/schedulers/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/schedulers/index.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/schedulers/overview.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/session_dirs.html
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/group_async_example.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/group_bootstrap_example.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/group_construct.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/group_example.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/index.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/overview.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/sets_groups/psets.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/index.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/installing-pmix/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/installing-pmix/compilers-and-flags.html
@@ -399,6 +427,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/news/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v3.x.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v4.x.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v5.x.html
+-rw-r--r--	root/root	usr/share/doc/pmix/html/news/news-v6.x.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/objects.inv
 -rw-r--r--	root/root	usr/share/doc/pmix/html/quickstart.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/release-notes.html
@@ -422,29 +451,5 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 drwxr-xr-x	root/root	usr/share/man/man5/
 -rw-r--r--	root/root	usr/share/man/man5/openpmix.5.gz
 drwxr-xr-x	root/root	usr/share/pmix/
--rw-r--r--	root/root	usr/share/pmix/help-cli.txt
--rw-r--r--	root/root	usr/share/pmix/help-gds-shmem2.txt
--rw-r--r--	root/root	usr/share/pmix/help-palloc.txt
--rw-r--r--	root/root	usr/share/pmix/help-pattrs.txt
--rw-r--r--	root/root	usr/share/pmix/help-pcompress.txt
--rw-r--r--	root/root	usr/share/pmix/help-pctrl.txt
--rw-r--r--	root/root	usr/share/pmix/help-pevent.txt
--rw-r--r--	root/root	usr/share/pmix/help-pfexec-base.txt
--rw-r--r--	root/root	usr/share/pmix/help-ploc.txt
--rw-r--r--	root/root	usr/share/pmix/help-plookup.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmdl.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-info.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-mca-base.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-mca-var.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-plog.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-psensor-file.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-psensor-heartbeat.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-runtime.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-server.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmix-util.txt
--rw-r--r--	root/root	usr/share/pmix/help-pmixcc.txt
--rw-r--r--	root/root	usr/share/pmix/help-pps.txt
--rw-r--r--	root/root	usr/share/pmix/help-pquery.txt
--rw-r--r--	root/root	usr/share/pmix/help-ptl-base.txt
 -rw-r--r--	root/root	usr/share/pmix/pmix-valgrind.supp
 -rw-r--r--	root/root	usr/share/pmix/pmixcc-wrapper-data.txt
