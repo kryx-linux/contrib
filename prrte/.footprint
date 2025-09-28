@@ -7,11 +7,14 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 lrwxrwxrwx	root/root	usr/bin/pcc -> pmixcc
 -rwxr-xr-x	root/root	usr/bin/prte
--rwxr-xr-x	root/root	usr/bin/prte_info
+-rwxr-xr-x	root/root	usr/bin/prte-info
+-rwxr-xr-x	root/root	usr/bin/prte-submit
+-rwxr-xr-x	root/root	usr/bin/prte-term
+lrwxrwxrwx	root/root	usr/bin/prte_info -> prte-info
 -rwxr-xr-x	root/root	usr/bin/prted
 lrwxrwxrwx	root/root	usr/bin/prterun -> prte
--rwxr-xr-x	root/root	usr/bin/prun
--rwxr-xr-x	root/root	usr/bin/pterm
+lrwxrwxrwx	root/root	usr/bin/prun -> prte-submit
+lrwxrwxrwx	root/root	usr/bin/pterm -> prte-term
 drwxr-xr-x	root/root	usr/include/
 -rw-r--r--	root/root	usr/include/prte.h
 drwxr-xr-x	root/root	usr/include/prte/
@@ -45,10 +48,6 @@ drwxr-xr-x	root/root	usr/include/prte/src/mca/odls/base/
 -rw-r--r--	root/root	usr/include/prte/src/mca/odls/base/base.h
 -rw-r--r--	root/root	usr/include/prte/src/mca/odls/odls.h
 -rw-r--r--	root/root	usr/include/prte/src/mca/odls/odls_types.h
-drwxr-xr-x	root/root	usr/include/prte/src/mca/oob/
-drwxr-xr-x	root/root	usr/include/prte/src/mca/oob/base/
--rw-r--r--	root/root	usr/include/prte/src/mca/oob/base/base.h
--rw-r--r--	root/root	usr/include/prte/src/mca/oob/oob.h
 drwxr-xr-x	root/root	usr/include/prte/src/mca/plm/
 drwxr-xr-x	root/root	usr/include/prte/src/mca/plm/base/
 -rw-r--r--	root/root	usr/include/prte/src/mca/plm/base/base.h
@@ -82,10 +81,6 @@ drwxr-xr-x	root/root	usr/include/prte/src/mca/rmaps/base/
 -rw-r--r--	root/root	usr/include/prte/src/mca/rmaps/base/rmaps_private.h
 -rw-r--r--	root/root	usr/include/prte/src/mca/rmaps/rmaps.h
 -rw-r--r--	root/root	usr/include/prte/src/mca/rmaps/rmaps_types.h
-drwxr-xr-x	root/root	usr/include/prte/src/mca/rtc/
-drwxr-xr-x	root/root	usr/include/prte/src/mca/rtc/base/
--rw-r--r--	root/root	usr/include/prte/src/mca/rtc/base/base.h
--rw-r--r--	root/root	usr/include/prte/src/mca/rtc/rtc.h
 drwxr-xr-x	root/root	usr/include/prte/src/mca/schizo/
 drwxr-xr-x	root/root	usr/include/prte/src/mca/schizo/base/
 -rw-r--r--	root/root	usr/include/prte/src/mca/schizo/base/base.h
@@ -98,9 +93,9 @@ drwxr-xr-x	root/root	usr/include/prte/src/mca/state/base/
 -rw-r--r--	root/root	usr/include/prte_version.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libprrte.la
-lrwxrwxrwx	root/root	usr/lib/libprrte.so -> libprrte.so.3.0.11
-lrwxrwxrwx	root/root	usr/lib/libprrte.so.3 -> libprrte.so.3.0.11
--rwxr-xr-x	root/root	usr/lib/libprrte.so.3.0.11
+lrwxrwxrwx	root/root	usr/lib/libprrte.so -> libprrte.so.4.0.0
+lrwxrwxrwx	root/root	usr/lib/libprrte.so.4 -> libprrte.so.4.0.0
+-rwxr-xr-x	root/root	usr/lib/libprrte.so.4.0.0
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/doc/
 drwxr-xr-x	root/root	usr/share/doc/prrte/
@@ -125,6 +120,11 @@ drwxr-xr-x	root/root	usr/share/doc/prrte/html/_sources/hosts/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/hosts/rm.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/prrte/html/_sources/how-things-work/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/how-things-work/index.rst.txt
+drwxr-xr-x	root/root	usr/share/doc/prrte/html/_sources/how-things-work/schedulers/
+-rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/how-things-work/schedulers/flow_of_control.rst.txt
+-rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/how-things-work/schedulers/index.rst.txt
+-rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/how-things-work/schedulers/overview.rst.txt
+-rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/how-things-work/schedulers/structures.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/how-things-work/session_dirs.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/index.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/install.rst.txt
@@ -147,6 +147,7 @@ drwxr-xr-x	root/root	usr/share/doc/prrte/html/_sources/news/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/news/news-v1.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/news/news-v2.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/news/news-v3.x.rst.txt
+-rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/news/news-v4.x.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/notifications.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/prrte/html/_sources/placement/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/placement/deprecated.rst.txt
@@ -160,6 +161,7 @@ drwxr-xr-x	root/root	usr/share/doc/prrte/html/_sources/placement/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/quickstart.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/release-notes.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/session-directory.rst.txt
+-rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/terminology.rst.txt
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_sources/versions.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/prrte/html/_static/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/_static/_sphinx_javascript_frameworks_compat.js
@@ -220,6 +222,11 @@ drwxr-xr-x	root/root	usr/share/doc/prrte/html/hosts/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/hosts/rm.html
 drwxr-xr-x	root/root	usr/share/doc/prrte/html/how-things-work/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/how-things-work/index.html
+drwxr-xr-x	root/root	usr/share/doc/prrte/html/how-things-work/schedulers/
+-rw-r--r--	root/root	usr/share/doc/prrte/html/how-things-work/schedulers/flow_of_control.html
+-rw-r--r--	root/root	usr/share/doc/prrte/html/how-things-work/schedulers/index.html
+-rw-r--r--	root/root	usr/share/doc/prrte/html/how-things-work/schedulers/overview.html
+-rw-r--r--	root/root	usr/share/doc/prrte/html/how-things-work/schedulers/structures.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/how-things-work/session_dirs.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/index.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/install.html
@@ -242,6 +249,7 @@ drwxr-xr-x	root/root	usr/share/doc/prrte/html/news/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/news/news-v1.x.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/news/news-v2.x.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/news/news-v3.x.html
+-rw-r--r--	root/root	usr/share/doc/prrte/html/news/news-v4.x.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/notifications.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/objects.inv
 drwxr-xr-x	root/root	usr/share/doc/prrte/html/placement/
@@ -258,6 +266,7 @@ drwxr-xr-x	root/root	usr/share/doc/prrte/html/placement/
 -rw-r--r--	root/root	usr/share/doc/prrte/html/search.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/searchindex.js
 -rw-r--r--	root/root	usr/share/doc/prrte/html/session-directory.html
+-rw-r--r--	root/root	usr/share/doc/prrte/html/terminology.html
 -rw-r--r--	root/root	usr/share/doc/prrte/html/versions.html
 drwxr-xr-x	root/root	usr/share/man/
 drwxr-xr-x	root/root	usr/share/man/man1/
@@ -272,46 +281,10 @@ drwxr-xr-x	root/root	usr/share/man/man5/
 drwxr-xr-x	root/root	usr/share/prte/
 drwxr-xr-x	root/root	usr/share/prte/amca-param-sets/
 -rw-r--r--	root/root	usr/share/prte/amca-param-sets/example.conf
--rw-r--r--	root/root	usr/share/prte/help-cli.txt
--rw-r--r--	root/root	usr/share/prte/help-dash-host.txt
--rw-r--r--	root/root	usr/share/prte/help-errmgr-base.txt
--rw-r--r--	root/root	usr/share/prte/help-ess-base.txt
--rw-r--r--	root/root	usr/share/prte/help-hostfile.txt
--rw-r--r--	root/root	usr/share/prte/help-iof-base.txt
--rw-r--r--	root/root	usr/share/prte/help-oob-base.txt
--rw-r--r--	root/root	usr/share/prte/help-oob-tcp.txt
--rw-r--r--	root/root	usr/share/prte/help-plm-base.txt
--rw-r--r--	root/root	usr/share/prte/help-plm-slurm.txt
--rw-r--r--	root/root	usr/share/prte/help-plm-ssh.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-filem-raw.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-hwloc-base.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-info.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-odls-base.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-odls-default.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-rmaps-base.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-rmaps-ppr.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-rmaps-rr.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-rmaps-seq.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-rtc-base.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-rtc-hwloc.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-runtime.txt
--rw-r--r--	root/root	usr/share/prte/help-prte-util.txt
--rw-r--r--	root/root	usr/share/prte/help-prte.txt
--rw-r--r--	root/root	usr/share/prte/help-prted.txt
--rw-r--r--	root/root	usr/share/prte/help-prterun.txt
--rw-r--r--	root/root	usr/share/prte/help-prun.txt
--rw-r--r--	root/root	usr/share/prte/help-psched.txt
--rw-r--r--	root/root	usr/share/prte/help-pterm.txt
--rw-r--r--	root/root	usr/share/prte/help-ras-base.txt
--rw-r--r--	root/root	usr/share/prte/help-ras-pbs.txt
--rw-r--r--	root/root	usr/share/prte/help-ras-simulator.txt
--rw-r--r--	root/root	usr/share/prte/help-ras-slurm.txt
--rw-r--r--	root/root	usr/share/prte/help-rmaps_rank_file.txt
--rw-r--r--	root/root	usr/share/prte/help-schizo-base.txt
--rw-r--r--	root/root	usr/share/prte/help-schizo-ompi.txt
--rw-r--r--	root/root	usr/share/prte/help-state-base.txt
 drwxr-xr-x	root/root	usr/share/prte/rst/
 drwxr-xr-x	root/root	usr/share/prte/rst/prrte-rst-content/
+-rw-r--r--	root/root	usr/share/prte/rst/prrte-rst-content/cli-add-host.rst
+-rw-r--r--	root/root	usr/share/prte/rst/prrte-rst-content/cli-add-hostfile.rst
 -rw-r--r--	root/root	usr/share/prte/rst/prrte-rst-content/cli-allow-run-as-root.rst
 -rw-r--r--	root/root	usr/share/prte/rst/prrte-rst-content/cli-app-prefix.rst
 -rw-r--r--	root/root	usr/share/prte/rst/prrte-rst-content/cli-append-env.rst
