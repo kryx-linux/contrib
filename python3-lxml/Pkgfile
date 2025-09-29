@@ -5,7 +5,7 @@
 
 name=python3-lxml
 _name=${name#python3-}
-version=6.0.0
+version=6.0.2
 release=1
 source=(https://github.com/$_name/$_name/releases/download/$_name-$version/$_name-$version.tar.gz)
 
@@ -13,6 +13,6 @@ build() {
   cd $_name-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+  /usr/bin/python3 -m installer --destdir="$PKG" dist/*.whl
   rm -rf "$PKG"/usr/lib/python3.12/site-packages/$_name-$version.dist-info/licenses
 }
