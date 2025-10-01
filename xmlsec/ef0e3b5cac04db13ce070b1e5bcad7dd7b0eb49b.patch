@@ -1,0 +1,33 @@
+From ef0e3b5cac04db13ce070b1e5bcad7dd7b0eb49b Mon Sep 17 00:00:00 2001
+From: lsh123 <aleksey@aleksey.com>
+Date: Wed, 24 Sep 2025 10:14:12 -0400
+Subject: [PATCH] Fix build for LibXML2 > 2.15.0 (#950)
+
+---
+ src/xmltree.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/xmltree.c b/src/xmltree.c
+index 273355379..5ce90c0f4 100644
+--- a/src/xmltree.c
++++ b/src/xmltree.c
+@@ -24,6 +24,7 @@
+ #include <libxml/valid.h>
+ #include <libxml/xpath.h>
+ #include <libxml/xpathInternals.h>
++#include <libxml/xmlversion.h>
+ 
+ #include <xmlsec/xmlsec.h>
+ #include <xmlsec/xmltree.h>
+@@ -705,7 +706,11 @@ int
+ xmlSecReplaceNodeBufferAndReturn(xmlNodePtr node, const xmlSecByte *buffer, xmlSecSize size, xmlNodePtr *replaced) {
+     xmlNodePtr results = NULL;
+     xmlNodePtr next = NULL;
++#if (LIBXML_VERSION >= 21500)
++    xmlChar *oldenc;
++#else  /* (LIBXML_VERSION >= 21500) */
+     const xmlChar *oldenc;
++#endif /* (LIBXML_VERSION >= 21500) */
+     int len;
+     xmlParserErrors ret;
+ 
