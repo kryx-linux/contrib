@@ -5,7 +5,7 @@
 # Optional: gstreamer libmspack libnotify libsdl libsdl2 libsoup wayland webkitgtk
 
 name=wxgtk3
-version=3.2.6
+version=3.2.8.1
 release=1
 source=(https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2)
 
@@ -30,5 +30,6 @@ build() {
     -Wno-dev
 
   ninja -C build -j ${JOBS:-1}
-  DESTDIR=$PKG ninja -C build install
+  DESTDIR="$PKG" ninja -C build install
+  rm -rf "$PKG"/usr/share/locale
 }
