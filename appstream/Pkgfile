@@ -1,17 +1,19 @@
 # Description: Tools and libraries to work with AppStream metadata
 # URL: https://www.freedesktop.org/wiki/Distributions/AppStream/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: libfyaml librsvg libsoup libxmlb
+# Depends on:  libfyaml librsvg libsoup libxmlb
 # Optional: docbook-xsl qt6-base vala
 
 name=appstream
-version=1.1.0
+version=1.1.1
 release=1
 source=(https://www.freedesktop.org/software/appstream/releases/AppStream-$version.tar.xz)
 
 build() {
+  ls /usr/lib/python3.12/site-packages/libxml2.py || (printf '\e[1;31m%-6s\e[m\n' "You need to install doxygen, then rebuild libxml2 for appstream to work, quitting..." ; exit 1)
+
   prt-get isinst docbook-xsl || sed -i "/subdir('docs\/')/d" AppStream-$version/meson.build
-  prt-get isinst qt6-base && PKGMK_APPSTREAM+=' -D qt=true -D qt-versions=6'
+  prt-get isinst qt6-base && PKGMK_APPSTREAM+=' -D qt=true'
   prt-get isinst vala && PKGMK_APPSTREAM+=' -D vapi=true' || PKGMK_APPSTREAM+=' -D vapi=false'
 
   meson setup AppStream-$version build $PKGMK_APPSTREAM \
