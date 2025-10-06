@@ -4,16 +4,12 @@
 # Depends on: python3-cython python3-expandvars
 
 name=python3-frozenlist
-version=1.7.0
+version=1.8.0
 release=1
 source=(https://github.com/aio-libs/frozenlist/archive/v$version/frozenlist-$version.tar.gz)
 
 build() {
   cd frozenlist-$version
-  sed -e 's|.install-cython ||' \
-    -e '13s|cython|cython3|g' \
-    -i Makefile
-  make cythonize
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
