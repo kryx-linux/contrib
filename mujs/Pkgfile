@@ -4,13 +4,14 @@
 
 name=mujs
 version=1.3.7
-release=1
-source=(https://mujs.com/downloads/$name-$version.tar.gz)
+release=2
+source=(https://mujs.com/downloads/$name-$version.tar.gz 010-mujs-use-arch-flags.patch)
 
 build() {
   cd $name-$version
 
-  make CFLAGS="-std=c99 -O2 -pipe -march=x86-64" release
+  patch -Np1 -i $SRC/010-mujs-use-arch-flags.patch
+  make release
   make prefix=/usr DESTDIR=$PKG install-static install-shared
 
   sed -i -e "s/^Version:.*/Version: $version/" $PKG/usr/lib/pkgconfig/$name.pc
