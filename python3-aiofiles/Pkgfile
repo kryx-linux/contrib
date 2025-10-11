@@ -4,13 +4,14 @@
 # Depends on: python3-cleo python3-tox
 
 name=python3-aiofiles
-version=24.1.0
-release=2
+version=25.1.0
+release=1
 source=(https://github.com/Tinche/aiofiles/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd aiofiles-$version
 
+  SETUPTOOLS_SCM_PRETEND_VERSION=$version \
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
