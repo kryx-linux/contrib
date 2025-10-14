@@ -1,18 +1,16 @@
 # Description: Non-blocking redis client for python
-# URL: https://pypi.org/project/hiredis/
+# URL: https://github.com/redis/hiredis-py
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-twisted
 
 name=python3-hiredis
-version=3.2.1
+version=3.3.0
 release=1
 source=(https://pypi.org/packages/source/h/hiredis/hiredis-$version.tar.gz)
 
 build() {
   cd hiredis-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
