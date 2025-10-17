@@ -1,0 +1,35 @@
+# Description: A lightweight header-only library that exposes C++ types in Python and vice versa
+# URL: https://github.com/pybind/pybind11/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: eigen python3-scikit-build-core
+
+name=pybind11
+version=3.0.1
+release=1
+source=(https://github.com/pybind/pybind11/archive/v$version/pybind11-$version.tar.gz)
+
+build() {
+  cmake -S pybind11-$version -B build \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D USE_PYTHON_INCLUDE_DIR=FALSE \
+    -D PYBIND11_INSTALL=TRUE \
+    -Wno-dev
+
+  cd $name-$version
+
+  PYBIND11_USE_CMAKE=true /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+
+  make -C $SRC/build all mock_install
+
+  PYBIND11_USE_CMAKE=true /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+
+  local _pyver
+  _pyver="$(/usr/bin/python3 -c 'import sys; print("%s.%s" %sys.version_info[0:2])')"
+  install -d -m755 $PKG/usr/{include,lib/{cmake,pkgconfig}}
+  ln -s ../lib/python${_pyver}/site-packages/pybind11/include/pybind11 $PKG/usr/include/pybind11
+  ln -s ../../lib/python${_pyver}/site-packages/pybind11/share/cmake/pybind11 $PKG/usr/lib/cmake/pybind11
+  ln -s ../../lib/python${_pyver}/site-packages/pybind11/share/pkgconfig/pybind11.pc $PKG/usr/lib/pkgconfig/pybind11.pc
+}
