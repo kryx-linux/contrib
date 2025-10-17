@@ -1,0 +1,24 @@
+# Description: Lightweight C++ template library for vector and matrix math, a.k.a. linear algebra
+# URL: https://eigen.tuxfamily.org/
+# Maintainer: CRUX KDE Ports, kde-ports at crux dot nu
+# Depends on: boost fftw freeglut suitesparse
+
+name=eigen
+version=5.0.0
+release=1
+source=(https://gitlab.com/libeigen/eigen/-/archive/$version/$name-$version.tar.bz2)
+
+build() {
+    cmake -S $name-$version -B build -G Ninja \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D CMAKE_INSTALL_LIBDIR=lib \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+        -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+        -Wno-dev
+
+    cmake --build build
+    DESTDIR=$PKG cmake --install build
+}
+
+# vim: set ts=4 et:
