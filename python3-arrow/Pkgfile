@@ -1,18 +1,16 @@
 # Description: Better dates & times for Python
 # URL: https://github.com/arrow-py/arrow
 # Maintainer: CRUX System Team, core-ports at crux dot nu
-# Depends on: python3-dateutil python3-types-python-dateutil
+# Depends on: python3-dateutil python3-tzdata
 
 name=python3-arrow
-version=1.3.0
+version=1.4.0
 release=1
 source=(https://pypi.org/packages/source/a/arrow/arrow-$version.tar.gz)
 
 build() {
   cd arrow-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
