@@ -4,7 +4,7 @@
 # Depends on: docker
 
 name=docker-buildx
-version=0.28.0
+version=0.29.1
 release=1
 source=(https://github.com/docker/buildx/archive/v${version}/$name-$version.tar.gz)
 
@@ -19,7 +19,7 @@ build() {
 	cd buildx-$version
 	go build -mod=vendor -o docker-buildx -ldflags "-linkmode=external \
 		-X github.com/docker/buildx/version.Version=$version \
-		-X github.com/docker/buildx/version.Revision=b1281b81bba797b21d9eaf256e6a13eb14419836 \
+		-X github.com/docker/buildx/version.Revision=a32761aeb3debd39be1eca514af3693af0db334b \
 		-X github.com/docker/buildx/version.Package=github.com/docker/buildx" \
 		./cmd/buildx
 	install -Dm755 $name $PKG/usr/lib/docker/cli-plugins/$name
