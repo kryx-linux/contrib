@@ -5,18 +5,15 @@
 # Optional: doxygen librsvg qt6-webengine
 
 name=nextcloud-client
-version=3.17.3
+version=4.0.0
 release=1
-source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz
-  8766.patch)
+source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
   prt-get isinst librsvg && \
     PKGMK_NCC+=' -D SVG_CONVERTER=/usr/bin/rsvg-convert' || \
     PKGMK_NCC+=' -D BUILD_GUI=OFF'
   prt-get isinst qt6-webengine || PKGMK_NCC+=' -D BUILD_WITH_WEBENGINE=OFF'
-
-  patch -Np1 -d desktop-$version -i $SRC/8766.patch
 
   cmake -S desktop-$version -B build -G Ninja $PKGMK_NCC \
     -D CMAKE_INSTALL_PREFIX=/usr \
