@@ -1,19 +1,22 @@
 # Description: ruamel.yaml is a YAML parser/emitter that support comment preservation
-# URL: https://pypi.org/project/ruamel.yaml/
+# URL: https://sourceforge.net/projects/ruamel-yaml/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-ruamel-yaml-clib
+# Depends on: python3-ruamel-yaml-clib python3-wheel
 
 name=python3-ruamel-yaml
-version=0.18.15
+version=0.18.16
 release=1
 source=(https://files.pythonhosted.org/packages/source/r/ruamel.yaml/ruamel.yaml-$version.tar.gz)
 
 build() {
   cd ruamel.yaml-$version
-  RUAMEL_NO_PIP_INSTALL_CHECK=False \
-  /usr/bin/python3 setup.py install --root=$PKG \
-    --optimize=1
-  find $PKG \
-    -iname "*INSTALLER*" \
-    -delete
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+  #RUAMEL_NO_PIP_INSTALL_CHECK=False \
+  #/usr/bin/python3 setup.py install --root=$PKG \
+  #  --optimize=1
+  #find $PKG \
+  #  -iname "*INSTALLER*" \
+  #  -delete
 }
