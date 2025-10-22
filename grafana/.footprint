@@ -622,6 +622,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/features/admin/ldap/
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/admin/ldap/LdapPage.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/admin/ldap/LdapSettingsPage.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/admin/ldap/LdapSyncInfo.tsx
+-rw-r--r--	root/root	usr/share/grafana/public/app/features/admin/ldap/LdapTestDrawer.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/admin/ldap/LdapUserGroups.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/admin/ldap/LdapUserInfo.tsx
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/admin/ldap/LdapUserMappingInfo.tsx
@@ -2105,6 +2106,7 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene/export/exporters.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene/export/exporters.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene/export/utils.ts
+-rw-r--r--	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene/keyboardShortcuts.test.ts
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene/keyboardShortcuts.ts
 drwxr-xr-x	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene/layout-auto-grid/
 -rw-r--r--	root/root	usr/share/grafana/public/app/features/dashboard-scene/scene/layout-auto-grid/AutoGridItem.tsx
@@ -5678,9 +5680,9 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-pos
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/360.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/447.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/450.js
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/452.js
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/452.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/454.js
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/493.js
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/493.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/501.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/540.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/dist/630.js
@@ -6304,9 +6306,9 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/360.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/447.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/450.js
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/452.js
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/452.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/454.js
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/493.js
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/493.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/501.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/540.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mssql/dist/630.js
@@ -6437,9 +6439,9 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/360.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/447.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/450.js
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/452.js
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/452.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/454.js
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/493.js
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/493.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/501.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/540.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/mysql/dist/630.js
@@ -6698,6 +6700,9 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4039.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4039.js.LICENSE.txt
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4039.js.map
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4271.js
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4271.js.LICENSE.txt
+-rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4271.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4418.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4418.js.LICENSE.txt
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/4418.js.map
@@ -6770,9 +6775,6 @@ drwxr-xr-x	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6014.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6014.js.LICENSE.txt
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6014.js.map
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6067.js
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6067.js.LICENSE.txt
--rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6067.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6082.js
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6082.js.map
 -rw-r--r--	root/root	usr/share/grafana/public/app/plugins/datasource/tempo/dist/6110.js
