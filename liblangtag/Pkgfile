@@ -17,7 +17,6 @@ build() {
   patch -Np0 -i $SRC/langtag-libtool-rpath.patch.0
   patch -Np0 -i $SRC/liblangtag-bundled-soname.patch.0
 
-  CONFIG_SHELL=/bin/bash \
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
