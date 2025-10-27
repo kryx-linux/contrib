@@ -11,6 +11,6 @@ source=(https://pypi.org/packages/source/z/zope_component/zope_component-$versio
 build() {
   cd zope_component-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
