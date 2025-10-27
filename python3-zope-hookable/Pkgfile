@@ -1,7 +1,7 @@
 # Description: Represents the core of the Zope hookable Architecture
 # URL: https://github.com/zopefoundation/zope.hookable
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-setuptools
+# Depends on: python3-wheel
 
 name=python3-zope-hookable
 version=8.0
@@ -10,6 +10,7 @@ source=(https://pypi.org/packages/source/z/zope_hookable/zope_hookable-$version.
 
 build() {
   cd zope_hookable-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG --optimize=1
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
