@@ -12,7 +12,7 @@ source=(https://www.github.com/libsdl-org/SDL_mixer/archive/$_commit/$name-$vers
 build() {
   cd SDL_mixer-$_commit
   sed -i -e 's|/usr/local/lib/timidity|/usr/share/timidity|g' timidity/config.h
-  CONFIG_SHELL=/bin/bash ./configure --prefix=/usr
+  ./configure --prefix=/usr
   make 
-  make DESTDIR=$PKG install
+  make DESTDIR="$PKG" install
 }
