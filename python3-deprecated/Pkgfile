@@ -4,15 +4,13 @@
 # Depends on: python3-wrapt
 
 name=python3-deprecated
-version=1.2.18
+version=1.3.0
 release=1
 source=(https://github.com/tantale/deprecated/archive/v$version/deprecated-$version.tar.gz)
 
 build() {
   cd deprecated-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
