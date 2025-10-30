@@ -4,79 +4,19 @@
 # Depends on: llvm
 
 name=rust-bin
-version=1.90.0
+version=1.91.0
 release=1
-LIBC=$(awk -v RS="" -v FS="\n" '/\nusr\/lib\/libc.so\n/ { print $1 }' /var/lib/pkg/db)
-[ "$LIBC" != glibc ] || LIBC=gnu
-source=(https://static.rust-lang.org/dist/rust-$version-x86_64-unknown-linux-$LIBC.tar.gz)
+source=(https://static.rust-lang.org/dist/rust-$version-x86_64-unknown-linux-gnu.tar.gz)
 
 build() {
-  cd rust-$version-x86_64-unknown-linux-$LIBC
-  ./install.sh --prefix=/usr --destdir=$PKG --disable-ldconfig
+  cd rust-$version-x86_64-unknown-linux-gnu
+  ./install.sh --prefix=/usr --destdir="$PKG" --disable-ldconfig
 
   # clean up junk files
-  mv $PKG/usr/libexec/* $PKG/usr/lib
-  rmdir $PKG/usr/libexec
-  rm -rf $PKG/usr/share/doc
-  prt-get isinst bash-completion >/dev/null || rm -rf $PKG/usr/etc/bash_completion.d
-  prt-get isinst zsh >/dev/null || rm -rf $PKG/usr/share/zsh
-  rm -f $PKG/usr/lib/rustlib/{install.log,uninstall.sh}
-}
-
-make_footprint() {
-  pkginfo -f "$PKGMK_PACKAGE_DIR/$name#$version-$release.pkg.tar.$PKGMK_COMPRESSION_MODE" \
-    | sed -e 's,\(gnu\|musl\)\(/\|$\),LIBC\2,' \
-          -e '/[0-9a-f]\{16\}/d; /lib\/self-contained/d' \
-          -e '/librustc-stable.*\(dfsan\|safestack\).a/d' \
-          -e '/libLLVM.*19/d' | sort -k 3
-  # lib/self-contained/ path only appears in the musl tarball,
-  # libLLVM.*19 and librustc-stable.* paths only appear in the glibc tarball.
-  # Filenames with 16-digit random hashes will also be different between the
-  # two tarballs. Delete such paths here, and the same footprint file can 
-  # serve for both libc providers.
-}
-
-check_signature() {
-  # The corresponding function in the original pkgmk relies on .signature 
-  # itself for the list of filenames. For a flexible port accommodating 
-  # multiple libc providers, signify must be called with a truncated 
-  # list of filenames, otherwise it expects to find on disk all the files 
-  # mentioned in .signature
-  local reqfiles=(Pkgfile .footprint)
-  local SIGNIFY_ARGS=(-q -C -x "$PKGMK_ROOT/$PKGMK_SIGNATURE")
-  cd "$PKGMK_WORK_DIR"
-  for FILE in "${reqfiles[@]}"; do
-    [ -e "$FILE" ] || ln -s "$PKGMK_ROOT/$FILE" .
-  done
-  for FILE in "${source[@]}"; do
-    [ -e "${FILE##*/}" ] || ln -s $(get_filename -a "$FILE") .
-    reqfiles+=("${FILE##*/}")
-  done
-  [ -r "$PKGMK_PUBLICKEY" ] && SIGNIFY_ARGS+=(-p "$PKGMK_PUBLICKEY")
-  err=$(/usr/bin/signify "${SIGNIFY_ARGS[@]}" "${reqfiles[@]}" 2>&1)
-  RESULT=$?
-
-  # remove soft links
-  find "$PKGMK_WORK_DIR" -maxdepth 1 -mindepth 1 -type l -delete
-
-  cd "$PKGMK_ROOT"
-  if [ $RESULT -ne 0 ]; then
-    if [ "$err" = "signify: signature verification failed" ]; then
-      error "Failed verifying cryptographic digest"
-    else
-      error "Signature mismatch found:"
-      echo "$err" | while read n; do echo 'MISMATCH	'${n%%:*}; done
-    fi
-
-    [ "$PKGMK_KEEP_WORK" = "yes" ] || rm -rf "$PKGMK_WORK_DIR"
-
-    error "Building '$TARGET' failed."
-    exit $E_SIGNATURE
-  fi
-
-  if [ "$PKGMK_CHECK_SIGNATURE" = "yes" ]; then
-    [ "$PKGMK_KEEP_WORK" = "yes" ] || rm -rf "$PKGMK_WORK_DIR"
-    info "Signature ok."
-    exit 0
-  fi
+  mv "$PKG"/usr/libexec/* "$PKG"/usr/lib
+  rmdir "$PKG"/usr/libexec
+  rm -rf "$PKG"/usr/share/doc
+  [ -f /etc/bash_completion ] || rm -rf "$PKG"/usr/etc/bash_completion.d
+  [ -x /usr/bin/zsh ] || rm -rf "$PKG"/usr/share/zsh
+  rm -f "$PKG"/usr/lib/rustlib/{install.log,uninstall.sh}
 }
