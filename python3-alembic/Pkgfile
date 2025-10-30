@@ -4,15 +4,13 @@
 # Depends on: python3-mako python3-sqlalchemy
 
 name=python3-alembic
-version=1.17.0
+version=1.17.1
 release=1
 source=(https://pypi.org/packages/source/a/alembic/alembic-$version.tar.gz)
 
 build() {
   cd alembic-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
