@@ -21,6 +21,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/middleware.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/models.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/models.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/sanitize.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/sanitize.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/settings.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/settings.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/__pycache__/store.cpython-312.opt-1.pyc
@@ -163,6 +165,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/alerts.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/cache.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/cache.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/community.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/community.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/headers.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/headers.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/profiling.cpython-312.opt-1.pyc
@@ -183,6 +187,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/__pycache__/versions.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/alerts.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/cache.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/community.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/headers.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/history/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/history/__init__.py
@@ -240,6 +245,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/templ
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/templates/views.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/timer.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/panels/versions.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/sanitize.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/settings.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/static/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/static/debug_toolbar/
@@ -263,6 +269,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/de
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/debug_toolbar/panels/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/debug_toolbar/panels/alerts.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/debug_toolbar/panels/cache.html
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/debug_toolbar/panels/community.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/debug_toolbar/panels/headers.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/debug_toolbar/panels/history.html
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templates/debug_toolbar/panels/history_tr.html
@@ -290,9 +297,9 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/debug_toolbar/templatetags
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/urls.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/utils.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/debug_toolbar/views.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.0.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.0.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.0.0.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.0.0.dist-info/WHEEL
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.0.0.dist-info/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.0.0.dist-info/licenses/LICENSE
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.1.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.1.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.1.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.1.0.dist-info/WHEEL
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.1.0.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/django_debug_toolbar-6.1.0.dist-info/licenses/LICENSE
