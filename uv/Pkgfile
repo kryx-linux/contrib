@@ -1,0 +1,18 @@
+# Description: An extremely fast Python package and project manager, written in Rust
+# URL: https://github.com/astral-sh/uv
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=uv
+version=0.9.7
+release=1
+source=(https://github.com/astral-sh/uv/archive/$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
+}
