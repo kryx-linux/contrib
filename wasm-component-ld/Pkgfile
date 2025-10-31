@@ -1,0 +1,18 @@
+# Description: Command line linker for creating WebAssembly components
+# URL: https://github.com/bytecodealliance/wasm-component-ld
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: rust
+
+name=wasm-component-ld
+version=0.5.18
+release=1
+source=(https://github.com/bytecodealliance/wasm-component-ld/archive/v$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
+  [[ ! -e $PKGMK_SOURCE_DIR/rust ]] && mkdir $PKGMK_SOURCE_DIR/rust
+
+  cargo build --release --manifest-path $name-$version/Cargo.toml
+
+  install -Dt $PKG/usr/bin $name-$version/target/release/$name
+}
