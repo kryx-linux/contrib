@@ -1,0 +1,14 @@
+# Description: Noto fonts
+# URL: https://www.google.com/get/noto/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=otf-noto
+version=2025.11.01
+release=1
+source=(https://github.com/notofonts/notofonts.github.io/archive/refs/tags/noto-monthly-release-$version.tar.gz)
+
+build() {
+  find notofonts.github.io-noto-monthly-release-$version/fonts/*/unhinted/otf \
+    -iname "*.otf" \
+    -execdir install -Dm644 {} $PKG/usr/share/fonts/OTF/noto/{} \;
+}
