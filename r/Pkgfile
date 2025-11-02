@@ -12,6 +12,20 @@ source=(https://cran.r-project.org/src/base/R-${version::1}/R-$version.tar.gz
   R-3.4.1-parallel.patch
   R-3.6.2-no-LDFLAGS-in-libR-pkg-config.patch)
 
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+    R-$version.tar.gz)
+      echo "Unpacking $(get_filename $file)"
+      bsdtar -p -o -C $SRC -xf $(get_filename $file)
+      ;;
+    *)
+      cp $(get_filename $file) $SRC
+      ;;
+    esac
+  done
+}
+
 build() {
   cd R-$version
 
