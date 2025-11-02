@@ -251,6 +251,7 @@ EOF
   echo "/usr/lib/rustlib/wasm32-wasi/lib" >$PKG/etc/revdep.d/$name
 
   #rm -rf $PKG/usr/lib/rustlib/x86_64-unknown-linux-gnu/
+  rm -rf $PKG/etc/target-spec-json-schema.json
   find $PKG/usr/lib/rustlib -type f -perm -600 -exec chmod 644 {} \+
   find $PKG/usr/lib/rustlib -type f -perm -700 -exec chmod 755 {} \+
 }
