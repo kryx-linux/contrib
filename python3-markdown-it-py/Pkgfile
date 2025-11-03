@@ -1,0 +1,16 @@
+# Description: Python port of markdown-it. Markdown parsing, done right!
+# URL: https://github.com/executablebooks/markdown-it-py
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-mdurl
+
+name=python3-markdown-it-py
+version=4.0.0
+release=1
+source=(https://pypi.org/packages/source/m/markdown_it_py/markdown_it_py-$version.tar.gz)
+
+build() {
+  cd markdown_it_py-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
