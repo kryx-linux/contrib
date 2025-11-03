@@ -1,11 +1,11 @@
 # Description: Linux application sandboxing and distribution framework (formerly xdg-app)
 # URL: https://flatpak.org
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: appstream appstream-glib bubblewrap libseccomp ostree polkit python3-pyparsing socat xdg-dbus-proxy
+# Depends on: appstream appstream-glib ostree polkit python3-pyparsing socat xdg-dbus-proxy
 # Optional: dconf docbook-xsl libxslt xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-kde
 
 name=flatpak
-version=1.16.1
+version=1.17.0
 release=1
 source=(https://github.com/flatpak/flatpak/releases/download/$version/$name-$version.tar.xz)
 
@@ -24,22 +24,6 @@ build() {
     -D system_dbus_proxy=/usr/bin/xdg-dbus-proxy
   meson compile -C build
   DESTDIR=$PKG meson install -C build
-
-  #cd $name-$version
-
-  #prt-get isinst libxslt docbook-xsl docbook-dtd || PKGMK_FLATPAK+=' --disable-documentation'
-
-  #NOCONFIGURE=1 ./autogen.sh
-
-  #./configure $PKGMK_FLATPAK \
-  #  --prefix=/usr \
-  #  --libexecdir=/usr/lib \
-  #  --with-priv-mode=setuid \
-  #  --disable-static \
-  #sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-
-  #make
-  #make DESTDIR=$PKG install
 
   rm -fr $PKG/usr/lib/{systemd,sysusers.d}
   rm -fr $PKG/usr/share/{fish,locale}
