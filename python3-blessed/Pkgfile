@@ -1,18 +1,16 @@
 # Description: an easy, practical library for making python terminal apps
 # URL: https://github.com/jquast/blessed
 # Maintainer: CRUX System Team, core-ports at crux dot nu
-# Depends on: python3-six python3-wcwidth
+# Depends on: python3-six python3-wcwidth python3-wheel
 
 name=python3-blessed
-version=1.22.0
+version=1.23.0
 release=1
 source=(https://pypi.org/packages/source/b/blessed/blessed-$version.tar.gz)
 
 build() {
   cd blessed-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
