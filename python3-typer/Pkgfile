@@ -1,0 +1,16 @@
+# Description: Typer, build great CLIs. Easy to code. Based on Python type hints
+# URL: https://github.com/fastapi/typer
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pdm-backend python3-click python3-rich python3-shellingham python3-typing_extensions
+
+name=python3-typer
+version=0.20.0
+release=1
+source=(https://pypi.org/packages/source/t/typer/typer-$version.tar.gz)
+
+build() {
+  cd typer-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
