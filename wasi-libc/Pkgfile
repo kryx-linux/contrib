@@ -4,15 +4,13 @@
 # Depends on: clang
 
 name=wasi-libc
-version=26
-# https://github.com/WebAssembly/wasi-sdk/tree/main/src latest tagged version
-_commit=3f7eb4c7d6ede4dde3c4bffa6ed14e8d656fe93f
+version=27
 release=1
-source=(https://github.com/WebAssembly/$name/archive/$_commit/$name-$version-$release.tar.gz
+source=(https://github.com/WebAssembly/wasi-libc/archive/wasi-sdk-$version/$name-$version.tar.gz
   no-double-build.patch)
 
 build() {
-  cd $name-$_commit
+  cd $name-wasi-sdk-$version
 
   patch -p1 -i $SRC/no-double-build.patch
 
