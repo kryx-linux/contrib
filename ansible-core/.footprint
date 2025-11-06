@@ -646,6 +646,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_inte
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_event_utils.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_messages.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_messages.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_no_six.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_no_six.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_plugin_info.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_plugin_info.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/__pycache__/_stack.cpython-312.opt-1.pyc
@@ -743,6 +745,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_inte
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/_json/_profiles/_module_modern_m2c.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/_json/_profiles/_tagless.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/_messages.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/_no_six.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/_patches/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/_patches/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible/module_utils/_internal/_patches/__pycache__/
@@ -2094,8 +2097,6 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/path.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/plugin_docs.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/plugin_docs.cpython-312.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/py3compat.cpython-312.opt-1.pyc
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/py3compat.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/sentinel.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/sentinel.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/__pycache__/shlex.cpython-312.opt-1.pyc
@@ -2142,7 +2143,6 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible/utils/collection_l
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/multiprocessing.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/path.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/plugin_docs.py
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/py3compat.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/sentinel.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/shlex.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/utils/singleton.py
@@ -2171,20 +2171,20 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible/vars/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/vars/manager.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/vars/plugins.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible/vars/reserved.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/entry_points.txt
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/COPYING
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/licenses/Apache-License.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/licenses/BSD-3-Clause.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/licenses/MIT-license.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/licenses/PSF-license.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/licenses/licenses/simplified_bsd.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.19.3.dist-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/COPYING
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/licenses/Apache-License.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/licenses/BSD-3-Clause.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/licenses/MIT-license.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/licenses/PSF-license.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/licenses/licenses/simplified_bsd.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_core-2.20.0.dist-info/top_level.txt
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/__pycache__/
@@ -2194,7 +2194,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/ansible.cfg (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/completion/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/completion/docker.txt
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/completion/network.txt
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/completion/network.txt (EMPTY)
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/completion/remote.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/completion/windows.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/coveragerc (EMPTY)
@@ -2214,7 +2214,6 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/playboo
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/pytest/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/pytest/config/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/pytest/config/default.ini
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/pytest/config/legacy.ini
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/requirements/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/requirements/ansible-test.txt
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/ansible_test/_data/requirements/ansible.txt
