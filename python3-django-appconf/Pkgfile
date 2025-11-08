@@ -4,12 +4,12 @@
 # Depends on: python3-django
 
 name=python3-django-appconf
-version=1.1.0
-release=2
-source=(https://pypi.org/packages/source/d/django-appconf/django-appconf-$version.tar.gz)
+version=1.2.0
+release=1
+source=(https://pypi.org/packages/source/d/django_appconf/django_appconf-$version.tar.gz)
 
 build() {
-  cd django-appconf-$version
+  cd django_appconf-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
