@@ -4,12 +4,9 @@
 # Depends on: libass libcdio libdvdnav libmicrohttpd libva libvdpau mariadb mesa openjdk21-jdk samba spdlog swig taglib tinyxml tinyxml2
 
 name=kodi
-version=21.2
-release=2
-source=(https://github.com/xbmc/xbmc/archive/$version-Omega/$name-$version.tar.gz
-    0006-PR26441.patch 269053ebbfd3cc4a3156a511f54ab7f08a09a730.patch
-    fix-libnfs-6-compatibility.patch kodi-21-optional-ffmpeg-libx11.patch
-    27269.patch)
+version=21.3
+release=1
+source=(https://github.com/xbmc/xbmc/archive/$version-Omega/$name-$version.tar.gz)
 
 build() {
     export PATH="/usr/lib/java/openjdk21-jdk/bin:$PATH"
@@ -17,12 +14,6 @@ build() {
     [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
 
     sed -i -e 's,EGL/eglextchromium.h,EGL/eglext_angle.h,g' xbmc-$version-Omega/xbmc/windowing/X11/GLContextEGL.h
-
-    patch -d xbmc-$version-Omega -p1 -i $SRC/269053ebbfd3cc4a3156a511f54ab7f08a09a730.patch
-    patch -d xbmc-$version-Omega -p1 -i $SRC/0006-PR26441.patch
-    patch -d xbmc-$version-Omega -p1 -i $SRC/fix-libnfs-6-compatibility.patch
-    patch -d xbmc-$version-Omega -p1 -i $SRC/kodi-21-optional-ffmpeg-libx11.patch
-    patch -d xbmc-$version-Omega -p1 -i $SRC/27269.patch
 
     cmake -Bbuild \
         -DVERBOSE=ON \
