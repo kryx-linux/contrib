@@ -1,17 +1,16 @@
 # Description: Pure python module for (de)serialization to and from VDF that works just like json
-# URL: https://github.com/ValvePython/vdf
+# URL: https://github.com/solsticegamestudios/vdf
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: python3-setuptools
 
 name=python3-vdf
-version=3.4
-release=2
-source=(https://pypi.python.org/packages/source/v/vdf/vdf-$version.tar.gz)
+version=4.0
+release=1
+source=(https://github.com/solsticegamestudios/vdf/archive/v$version/vdf-$version.tar.gz)
 
 build() {
   cd vdf-$version
+
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install -O2 --root=$PKG --skip-build
-
-  chmod 644 $PKG/usr/lib/python3.*/site-packages/vdf-$version-*/*
 }
