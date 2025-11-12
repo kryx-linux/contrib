@@ -15,6 +15,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/ibus-setup
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/ibus-1.0/
+-rw-r--r--	root/root	usr/include/ibus-1.0/ibus-visibility.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibus.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibusaccelgroup.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibusattribute.h
@@ -38,6 +39,7 @@ drwxr-xr-x	root/root	usr/include/ibus-1.0/
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibuskeysyms-compat.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibuskeysyms.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibuslookuptable.h
+-rw-r--r--	root/root	usr/include/ibus-1.0/ibusmessage.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibusobject.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibusobservedpath.h
 -rw-r--r--	root/root	usr/include/ibus-1.0/ibuspanelservice.h
@@ -69,9 +71,9 @@ drwxr-xr-x	root/root	usr/lib/ibus/
 -rwxr-xr-x	root/root	usr/lib/ibus/ibus-portal
 -rwxr-xr-x	root/root	usr/lib/ibus/ibus-x11
 -rwxr-xr-x	root/root	usr/lib/libibus-1.0.la
-lrwxrwxrwx	root/root	usr/lib/libibus-1.0.so -> libibus-1.0.so.5.0.532
-lrwxrwxrwx	root/root	usr/lib/libibus-1.0.so.5 -> libibus-1.0.so.5.0.532
--rwxr-xr-x	root/root	usr/lib/libibus-1.0.so.5.0.532
+lrwxrwxrwx	root/root	usr/lib/libibus-1.0.so -> libibus-1.0.so.5.0.533
+lrwxrwxrwx	root/root	usr/lib/libibus-1.0.so.5 -> libibus-1.0.so.5.0.533
+-rwxr-xr-x	root/root	usr/lib/libibus-1.0.so.5.0.533
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/ibus-1.0.pc
 drwxr-xr-x	root/root	usr/lib/python3.12/
@@ -118,6 +120,7 @@ drwxr-xr-x	root/root	usr/share/ibus/dicts/
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-as.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-ast.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-az.dict
+-rw-r--r--	root/root	usr/share/ibus/dicts/emoji-ba.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-be.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-bew.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-bg.dict
@@ -154,6 +157,7 @@ drwxr-xr-x	root/root	usr/share/ibus/dicts/
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-et.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-eu.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-fa.dict
+-rw-r--r--	root/root	usr/share/ibus/dicts/emoji-ff.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-ff_Adlm.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-fi.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-fil.dict
@@ -234,6 +238,7 @@ drwxr-xr-x	root/root	usr/share/ibus/dicts/
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sat.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sc.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sd.dict
+-rw-r--r--	root/root	usr/share/ibus/dicts/emoji-shn.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-si.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sk.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sl.dict
@@ -245,8 +250,10 @@ drwxr-xr-x	root/root	usr/share/ibus/dicts/
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sr_Latn_BA.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-su.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sv.dict
+-rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sv_FI.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sw.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-sw_KE.dict
+-rw-r--r--	root/root	usr/share/ibus/dicts/emoji-syr.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-ta.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-te.dict
 -rw-r--r--	root/root	usr/share/ibus/dicts/emoji-tg.dict
