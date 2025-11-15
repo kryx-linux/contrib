@@ -1,0 +1,16 @@
+# Description: The uv build backend
+# URL: https://github.com/astral-sh/uv
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-maturin
+
+name=python3-uv-build
+version=0.9.9
+release=1
+source=(https://pypi.org/packages/source/u/uv_build/uv_build-$version.tar.gz)
+
+build() {
+  cd uv_build-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
