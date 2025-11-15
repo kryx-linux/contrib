@@ -5,11 +5,15 @@
 
 name=libixion
 version=0.20.0
-release=1
-source=(https://gitlab.com/api/v4/projects/ixion%2Fixion/packages/generic/source/$version/libixion-$version.tar.xz)
+release=2
+source=(https://gitlab.com/api/v4/projects/ixion%2Fixion/packages/generic/source/$version/libixion-$version.tar.xz
+  boost.m4)
 
 build() {
   cd $name-$version
+
+  mv $SRC/boost.m4 m4/boost.m4
+  autoreconf -vfi
 
   [[ -e /usr/lib/libcuda.so ]] && PKGMK_LIBIXION+=' --enable-cuda'
 
