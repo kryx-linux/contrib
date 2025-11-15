@@ -4,16 +4,13 @@
 # Depends on: python3-wheel
 
 name=python3-cachetools
-version=6.2.1
+version=6.2.2
 release=1
 source=(https://github.com/tkem/cachetools/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd cachetools-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build \
-    -O1
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
