@@ -4,7 +4,7 @@
 # Depends on: clang
 
 name=wasi-libc
-version=27
+version=28
 release=1
 source=(https://github.com/WebAssembly/wasi-libc/archive/wasi-sdk-$version/$name-$version.tar.gz
   no-double-build.patch)
@@ -14,12 +14,12 @@ build() {
 
   patch -p1 -i $SRC/no-double-build.patch
 
-  MAKE_ARGS="WASM_CC=/usr/bin/clang WASM_AR=/usr/bin/llvm-ar WASM_NM=/usr/bin/llvm-nm"
+  MAKE_ARGS="WASM_CC=/usr/bin/clang WASM_AR=/usr/bin/llvm-ar WASM_NM=/usr/bin/llvm-nm CHECK_SYMBOLS=yes"
 
-  for target in wasi wasip1 wasip1-threads wasip2; do
+  for target in wasi wasi-threads wasip1 wasip1-threads wasip2; do
     EXTRA_ARGS=""
     case $target in
-      wasip1-threads)
+      wasip1-threads|wasi-threads)
         EXTRA_ARGS="THREAD_MODEL=posix"
         ;;
       wasip2)
