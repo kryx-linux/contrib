@@ -14,6 +14,8 @@ renames=(mocp-$_commit.tar.gz)
 build() {
     cd mocp-master
 
+    sed -i "/AC_CONFIG_HEADERS/a AM_GNU_GETTEXT([external])\nAM_GNU_GETTEXT_VERSION(0.26)" configure.in
+
     autoreconf -ivf
     ./configure --prefix=/usr \
                 --disable-cache \
