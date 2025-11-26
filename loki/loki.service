@@ -6,18 +6,19 @@
 SSD=/sbin/start-stop-daemon
 PROG=/usr/bin/loki
 OPTS="-config.file /etc/loki/loki.yaml"
+PID=/run/loki.pid
 
 case $1 in
   start)
-    $SSD --start -b --exec $PROG -- $OPTS ;;
+    $SSD --start -b --pidfile $PID --make-pidfile --exec $PROG -- $OPTS ;;
   stop)
-    $SSD --stop --retry 10 --exec $PROG ;;
+    $SSD --stop --retry 10 --exec $PROG --pidfile $PID --remove-pidfile ;;
   restart)
     $0 stop
     $0 start
     ;;
   status)
-    $SSD --status --exec $PROG
+    $SSD --status --pidfile $PID
     case $? in
       0) echo "$PROG is running with pid $(pidof $PROG)" ;;
       1) echo "$PROG is not running but the pid file $PID exists" ;;
