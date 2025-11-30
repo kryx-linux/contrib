@@ -9,7 +9,7 @@ version=18.1
 release=1
 source=(https://ftp.postgresql.org/pub/source/v$version/postgresql-$version.tar.bz2
   postgresql-run-socket.patch
-  postgresql.rc postgresql.pam)
+  postgresql.service postgresql.pam)
 
 build() {
   cd $name-$version
@@ -44,7 +44,7 @@ build() {
     make DESTDIR=$PKG install-man
   fi
 
-  install -Dm 755 $SRC/postgresql.rc $PKG/etc/rc.d/postgresql
+  install -Dm 755 $SRC/postgresql.service $PKG/etc/rc.d/postgresql
   install -Dm 755 $SRC/postgresql.pam $PKG/etc/pam.d/postgresql
 
   install -Dm 660 -o postgres -g postgres /dev/null $PKG/var/log/postgresql
