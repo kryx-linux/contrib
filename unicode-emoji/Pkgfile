@@ -4,11 +4,11 @@
 # Depends on: unicode-character-database
 
 name=unicode-emoji
-version=17.0
+version=17.0.0
 release=1
-source=(https://www.unicode.org/Public/emoji/$version/emoji-sequences.txt
-  https://www.unicode.org/Public/emoji/$version/emoji-test.txt
-  https://www.unicode.org/Public/emoji/$version/emoji-zwj-sequences.txt)
+source=(https://www.unicode.org/Public/$version/emoji/emoji-sequences.txt
+  https://www.unicode.org/Public/$version/emoji/emoji-test.txt
+  https://www.unicode.org/Public/$version/emoji/emoji-zwj-sequences.txt)
 renames=(emoji-sequences-$version.txt emoji-test-$version.txt emoji-zwj-sequences-$version.txt)
 
 build() {
