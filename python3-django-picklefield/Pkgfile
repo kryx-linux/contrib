@@ -4,12 +4,12 @@
 # Depends on: python3-django
 
 name=python3-django-picklefield
-version=3.3
-release=2
-source=(https://pypi.org/packages/source/d/django-picklefield/django-picklefield-$version.tar.gz)
+version=3.4.0
+release=1
+source=(https://pypi.org/packages/source/d/django_picklefield/django_picklefield-$version.tar.gz)
 
 build() {
-  cd django-picklefield-$version
+  cd django_picklefield-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
