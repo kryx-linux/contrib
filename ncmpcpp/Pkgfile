@@ -2,15 +2,27 @@
 # URL: https://rybczak.net/ncmpcpp/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: boost libmpdclient
-# Optional: mpd fftw taglib
+# Optional: fftw mpd taglib
 
 name=ncmpcpp
 version=0.10.1
-release=1
-source=(https://github.com/ncmpcpp/ncmpcpp/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/ncmpcpp/ncmpcpp/archive/$version/$name-$version.tar.gz
+  boost-1.88.patch
+  boost-1.89.patch
+)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/boost-1.88.patch
+  patch -Np1 -i $SRC/boost-1.89.patch
+
+  sed -i \
+    -e 's/CXXFLAGS=/CXXFLAGS+=/' \
+    -e 's/-march=native //' \
+    -e 's/CPPFLAGS=/CPPFLAGS+=/' \
+    -e 's/LDFLAGS=/LDFLAGS+=/' extras/Makefile
 
   prt-get isinst fftw && PKGMK_NCMPCPP+=' --with-fftw --enable-visualizer'
   prt-get isinst taglib && PKGMK_NCMPCPP+=' --with-taglib'
@@ -18,12 +30,13 @@ build() {
   autoreconf -vfi
   ./configure $PKGMK_NCMPCPP \
     --prefix=/usr \
-    --enable-shared='yes' \
-    --enable-static='no' \
-    --enable-fast-install='yes' \
+    --enable-shared \
+    --disable-static \
     --enable-clock \
-    --enable-outputs
+    --enable-outputs \
+    --without-lto
   make
   make DESTDIR=$PKG install
+
   rm -rf $PKG/usr/share
 }
