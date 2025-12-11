@@ -1,0 +1,16 @@
+# Description: a comprehensive utility library to parse, compare, simplify and normalize license expressions
+# URL: https://github.com/aboutcode-org/license-expression
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-boolean-py
+
+name=python3-license-expression
+version=30.4.4
+release=1
+source=(https://pypi.org/packages/source/l/license_expression/license_expression-$version.tar.gz)
+
+build() {
+  cd license_expression-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
