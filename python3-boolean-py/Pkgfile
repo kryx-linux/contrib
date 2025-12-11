@@ -1,0 +1,16 @@
+# Description: Define boolean algebras, create and parse boolean expressions and create custom boolean DSL
+# URL: https://github.com/bastikr/boolean.py
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-wheel
+
+name=python3-boolean-py
+version=5.0
+release=1
+source=(https://pypi.org/packages/source/b/boolean_py/boolean_py-$version.tar.gz)
+
+build() {
+  cd boolean_py-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
