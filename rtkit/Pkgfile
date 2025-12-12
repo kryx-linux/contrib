@@ -4,17 +4,18 @@
 # Depends on: dbus meson ninja vim
 
 name=rtkit
-version=0.13
-release=3
-source=(https://github.com/heftig/rtkit/releases/download/v$version/$name-$version.tar.xz
+version=0.14
+release=1
+source=(https://gitlab.freedesktop.org/pipewire/rtkit/-/archive/v$version/rtkit-v$version.tar.bz2
   rtkit.service org.freedesktop.RealtimeKit1.conf rtkit.rules)
 
 build() {
   # allow rtkit group to own the service besides rtkit user and root
-  mv $SRC/org.freedesktop.RealtimeKit1.conf $name-$version/org.freedesktop.RealtimeKit1.conf
+  mv $SRC/org.freedesktop.RealtimeKit1.conf $name-v$version/org.freedesktop.RealtimeKit1.conf
 
-  meson setup $name-$version build \
+  meson setup $name-v$version build \
     --prefix=/usr \
+    --sbindir=bin \
     --libexecdir=/usr/lib/$name \
     --buildtype=plain \
     -D libsystemd=disabled \
@@ -25,6 +26,5 @@ build() {
   install -Dm755 $SRC/rtkit.service $PKG/etc/rc.d/rtkit
   install -Dm755 $SRC/rtkit.rules $PKG/etc/polkit-1/rules.d/60-rtkit.rules
 
-  rm -r $PKG/usr/lib/systemd
-  rm -r $PKG/usr/share/dbus-1/system-services
+  rm -r $PKG/usr/lib/{systemd,sysusers.d}
 }
