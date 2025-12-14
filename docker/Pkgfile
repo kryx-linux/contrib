@@ -4,9 +4,9 @@
 # Depends on: containerd runc btrfs-progs cgroupfs-mount
 
 name=docker
-version=28.5.2
+version=29.1.3
 release=1
-source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz \
+source=(https://github.com/moby/moby/archive/docker-v${version}/moby-${version}.tar.gz \
     https://github.com/docker/cli/archive/v${version}/cli-${version}.tar.gz \
     https://crux.nu/files/$name-man-pages-$version.tar.xz \
     $name.rc $name.conf)
@@ -14,7 +14,7 @@ source=(https://github.com/moby/moby/archive/v${version}/moby-${version}.tar.gz 
 build() {
     export GO111MODULE=auto
     export GOPATH=$SRC
-    export DOCKER_GITCOMMIT=89c5e8f
+    export DOCKER_GITCOMMIT=fbf3ed2
     export DOCKER_BUILDTAGS='seccomp'
     export DISABLE_WARN_OUTSIDE_CONTAINER=1
     export CGO_CFLAGS="${CFLAGS}"
@@ -33,16 +33,16 @@ build() {
     popd
 
     pushd src/github.com/docker
-    ln -s $SRC/moby-$version docker
+    ln -s $SRC/moby-docker-v$version docker
     pushd docker
     VERSION=$version hack/make.sh dynbinary
     popd
     popd
 
     install -D -m 0755 cli-$version/build/$name $PKG/usr/bin/$name
-    install -D -m 0755 moby-$version/bundles/dynbinary-daemon/dockerd \
+    install -D -m 0755 moby-docker-v$version/bundles/dynbinary-daemon/dockerd \
         $PKG/usr/bin/dockerd
-    install -D -m 0755 moby-$version/bundles/dynbinary-daemon/docker-proxy \
+    install -D -m 0755 moby-docker-v$version/bundles/dynbinary-daemon/docker-proxy \
         $PKG/usr/bin/docker-proxy
 
     for M in 1 5; do
@@ -60,10 +60,8 @@ build() {
     ln -s ctr $PKG/usr/bin/docker-containerd-ctr
     ln -s runc $PKG/usr/bin/docker-runc
 
-    install -D -m 0755 moby-$version/contrib/check-config.sh \
+    install -D -m 0755 moby-docker-v$version/contrib/check-config.sh \
         $PKG/usr/share/$name/check-config.sh
-    install -D -m 0644 moby-$version/contrib/udev/80-$name.rules \
-        $PKG/etc/udev/rules.d/80-$name.rules
     install -D -m 0644 cli-$version/contrib/completion/bash/docker \
         $PKG/etc/bash_completion.d/docker
 
