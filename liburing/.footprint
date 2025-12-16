@@ -5,16 +5,18 @@ drwxr-xr-x	root/root	usr/include/liburing/
 -rw-r--r--	root/root	usr/include/liburing/barrier.h
 -rw-r--r--	root/root	usr/include/liburing/compat.h
 -rw-r--r--	root/root	usr/include/liburing/io_uring.h
+drwxr-xr-x	root/root	usr/include/liburing/io_uring/
+-rw-r--r--	root/root	usr/include/liburing/io_uring/query.h
 -rw-r--r--	root/root	usr/include/liburing/io_uring_version.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/liburing-ffi.a
-lrwxrwxrwx	root/root	usr/lib/liburing-ffi.so -> liburing-ffi.so.2.12
-lrwxrwxrwx	root/root	usr/lib/liburing-ffi.so.2 -> liburing-ffi.so.2.12
--rwxr-xr-x	root/root	usr/lib/liburing-ffi.so.2.12
+lrwxrwxrwx	root/root	usr/lib/liburing-ffi.so -> liburing-ffi.so.2.13
+lrwxrwxrwx	root/root	usr/lib/liburing-ffi.so.2 -> liburing-ffi.so.2.13
+-rwxr-xr-x	root/root	usr/lib/liburing-ffi.so.2.13
 -rw-r--r--	root/root	usr/lib/liburing.a
-lrwxrwxrwx	root/root	usr/lib/liburing.so -> liburing.so.2.12
-lrwxrwxrwx	root/root	usr/lib/liburing.so.2 -> liburing.so.2.12
--rwxr-xr-x	root/root	usr/lib/liburing.so.2.12
+lrwxrwxrwx	root/root	usr/lib/liburing.so -> liburing.so.2.13
+lrwxrwxrwx	root/root	usr/lib/liburing.so.2 -> liburing.so.2.13
+-rwxr-xr-x	root/root	usr/lib/liburing.so.2.13
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/liburing-ffi.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/liburing.pc
@@ -54,6 +56,7 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_get_events.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_get_probe.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_get_sqe.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/io_uring_get_sqe128.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_major_version.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_minor_version.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_opcode_supported.3.gz
@@ -83,6 +86,7 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_futex_wait.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_futex_waitv.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_futex_wake.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_getsockname.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_getxattr.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_link.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_link_timeout.3.gz
@@ -99,6 +103,7 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_multishot_accept.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_multishot_accept_direct.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_nop.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_nop128.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_open.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_open_direct.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_openat.3.gz
@@ -147,6 +152,8 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_timeout_update.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_unlink.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_unlinkat.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_uring_cmd.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_uring_cmd128.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_waitid.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_write.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/io_uring_prep_write_fixed.3.gz
