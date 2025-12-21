@@ -4,10 +4,10 @@
 # Depends on: lapack meson-python python3-cython
 
 name=python3-numpy
-version=2.3.5
+version=2.4.0
 release=1
 _vendored_meson=e72c717199fa18d34020c7c97f9de3f388c5e055
-_highway=37c08e5528f63ead9c7e4fd99ba454c1b1a3e3f7
+_highway=ee36c837129310be19c17c9108c6dc3f6ae06942
 _x86_simd_sort=6a7a01da4b0dfde108aa626a2364c954e2c50fe1
 _svml=3a713b13018325451c1b939d3914ceff5ec68e19
 _pocketfft=33ae5dc94c9cdc7f1c78346504a85de87cadaa12
@@ -27,10 +27,10 @@ build() {
     -t $SRC/numpy-$version/numpy/_core/src/highway
   rsync --recursive $SRC/x86-simd-sort-$_x86_simd_sort/ \
     -t $SRC/numpy-$version/numpy/_core/src/npysort/x86-simd-sort
-  rsync --recursive $SRC/pocketfft-$_pocketfft/ \
-    -t $SRC/numpy-$version/numpy/fft/pocketfft
   rsync --recursive $SRC/SVML-$_svml/ \
     -t $SRC/numpy-$version/numpy/_core/src/umath/svml
+  rsync --recursive $SRC/pocketfft-$_pocketfft/ \
+    -t $SRC/numpy-$version/numpy/fft/pocketfft
   rsync --recursive $SRC/pythoncapi-compat-$_pythoncapi_comat/ \
     -t $SRC/numpy-$version/numpy/_core/src/common/pythoncapi-compat
 
