@@ -4,13 +4,16 @@
 # Depends on: lua unzip zip
 
 name=luarocks
-version=3.12.2
+version=3.13.0
 release=1
 source=(https://luarocks.org/releases/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   ./configure --prefix=/usr
-  make ./build/luarocks ./build/luarocks-admin ./build/config-5.4.lua
+  make ./build/luarocks \
+    ./build/luarocks-admin \
+    ./build/config-5.4.lua
   make DESTDIR=$PKG install
 }
