@@ -6,10 +6,15 @@
 
 name=vkmark
 version=2025.01
-release=1
-source=(https://github.com/vkmark/vkmark/archive/$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/vkmark/vkmark/archive/$version/$name-$version.tar.gz
+  79.patch
+  81.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/79.patch
+  patch -Np1 -d $name-$version -i $SRC/81.patch
+
   meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
