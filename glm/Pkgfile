@@ -3,22 +3,23 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=glm
-version=1.0.2
+version=1.0.3
 release=1
 source=(https://github.com/g-truc/glm/archive/$version/$name-$version-$release.tar.gz
   glm.pc.in glmConfig.cmake.in glmConfigVersion.cmake.in
   glmTargets.cmake)
 
 build() {
-    cd $name-$version
-    mkdir -p $PKG/usr/include/
-    cp -r glm $PKG/usr/include/
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 
-    mkdir -p $PKG/usr/lib/pkgconfig/
-    sed "s/@VERSION@/$version/" $SRC/glm.pc.in > $PKG/usr/lib/pkgconfig/glm.pc
-
-    mkdir -p $PKG/usr/lib/cmake/glm/
-    sed "s/@VERSION@/$version/" $SRC/glmConfigVersion.cmake.in > $PKG/usr/lib/cmake/glm/glmConfigVersion.cmake
-    sed "s/@VERSION@/$version/" $SRC/glmConfig.cmake.in > $PKG/usr/lib/cmake/glm/glmConfig.cmake
-    install -Dm644 $SRC/glmTargets.cmake $PKG/usr/lib/cmake/glm/glmTargets.cmake
+  install -d $PKG/usr/lib/cmake
+  ln -s /usr/share/glm $PKG/usr/lib/cmake/glm
 }
