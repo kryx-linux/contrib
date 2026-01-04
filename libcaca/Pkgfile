@@ -5,16 +5,25 @@
 
 name=libcaca
 version=0.99.beta20
-release=2
+release=3
 source=(https://github.com/cacalabs/libcaca/releases/download/v$version/libcaca-$version.tar.bz2
   libcaca-0.99.beta20-c99.patch
-  libcaca-0.99.beta20-CVE-2022-0856.patch)
+  libcaca-0.99.beta20-CVE-2022-0856.patch
+  76.patch
+  libcaca-0.99_beta20-linking.patch
+  CVE-2018-20546+20547.patch
+)
 
 build() {
   cd $name-$version
 
   patch -Np1 -i $SRC/libcaca-0.99.beta20-CVE-2022-0856.patch
   patch -Np1 -i $SRC/libcaca-0.99.beta20-c99.patch
+  patch -Np1 -i $SRC/76.patch
+  patch -Np1 -i $SRC/libcaca-0.99_beta20-linking.patch
+
+  export CFLAGS+=' -fno-strict-overflow'
+
   autoreconf -vfi
 
   ./configure \
@@ -26,7 +35,8 @@ build() {
     --disable-csharp \
     --disable-python \
     --disable-slang \
-    --disable-static
+    --disable-static \
+    --disable-ruby
 
   make
   make DESTDIR=$PKG install
