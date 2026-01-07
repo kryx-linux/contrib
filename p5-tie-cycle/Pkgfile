@@ -4,17 +4,19 @@
 # Depends on:
 
 name=p5-tie-cycle
-version=1.231
+version=1.232
 release=1
 source=(https://cpan.metacpan.org/authors/id/B/BR/BRIANDFOY/Tie-Cycle-$version.tar.gz)
 
 build() {
   cd Tie-Cycle-$version
+
   unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
   export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
   perl Makefile.PL
   make
   make install INSTALLDIRS=vendor DESTDIR=$PKG
+
   find $PKG -name .packlist -o \
     -name perllocal.pod -o \
     -name README -o \
