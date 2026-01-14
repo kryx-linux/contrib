@@ -1,18 +1,16 @@
 # Description: publicsuffixlist implement
 # URL: https://github.com/ko-zu/psl
 # Maintainer: CRUX System Team, core-ports at crux dot nu
-# Depends on: python3-setuptools
+# Depends on: python3-wheel
 
 name=python3-publicsuffixlist
-version=1.0.2.20260111
+version=1.0.2.20260114
 release=1
 source=(https://pypi.org/packages/source/p/publicsuffixlist/publicsuffixlist-$version.tar.gz)
 
 build() {
   cd publicsuffixlist-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
