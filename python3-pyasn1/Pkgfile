@@ -1,18 +1,16 @@
 # Description: ASN.1 library for Python 3
 # URL: https://github.com/etingof/pyasn1
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-setuptools
+# Depends on: python3-wheel
 
 name=python3-pyasn1
-version=0.6.1
+version=0.6.2
 release=1
 source=(https://pypi.io/packages/source/p/pyasn1/pyasn1-$version.tar.gz)
 
 build() {
   cd pyasn1-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
