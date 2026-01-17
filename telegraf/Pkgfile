@@ -4,7 +4,7 @@
 # Depends on: go
 
 name=telegraf
-version=1.37.0
+version=1.37.1
 release=1
 source=(https://github.com/influxdata/telegraf/archive/refs/tags/v$version.tar.gz
   telegraf.service)
@@ -13,19 +13,31 @@ renames=($name-$version.tar.gz SKIP)
 build() {
   cd $name-$version
 
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+
+  unset GOFLAGS
+  _LDFLAGS="-X main.goos=$(go env GOOS)
+    -X main.goarch=$(go env GOARCH)
+    -X main.version=${version}
+    -X main.branch=tag-${version}
+    -X main.commit=tag-${version}"
+
   export CGO_CPPFLAGS="${CPPFLAGS}"
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export CGO_LDFLAGS="${LDFLAGS}"
 
-  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
-  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
-  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
-  _LDFLAGS="-X main.goos=$(go env GOOS) -X main.goarch=$(go env GOARCH) -X main.version=${version} -X main.branch=tag-${version} -X main.commit=tag-${version} -extldflags ${LDFLAGS}"
-  go build -o build -ldflags="${_LDFLAGS}" "./cmd/telegraf"
+  go build \
+    -trimpath \
+    -buildmode=pie \
+    -mod=readonly \
+    -buildvcs=false \
+    -ldflags "$_LDFLAGS -s -w" \
+    -o build/$name ./cmd/telegraf
 
-  install -Dm755 build $PKG/usr/bin/$name
-  install -d -m 755 $PKG/etc/telegraf
+  install -d -m 755 $PKG/etc/telegraf $PKG/etc/telegraf/telegraf.d
+  install -Dm755 build/$name $PKG/usr/bin/$name
   $PKG/usr/bin/$name -sample-config > $PKG/etc/telegraf/telegraf.conf
   install -Dm755 $SRC/telegraf.service $PKG/etc/rc.d/telegraf
 }
