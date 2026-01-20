@@ -1,0 +1,16 @@
+# Description: Optional static typing for Python
+# URL: https://www.mypy-lang.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-librt python3-mypy-extensions
+
+name=python3-mypy
+version=1.19.1
+release=1
+source=(https://pypi.org/packages/source/m/mypy/mypy-$version.tar.gz)
+
+build() {
+  cd mypy-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
