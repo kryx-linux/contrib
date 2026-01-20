@@ -1,0 +1,16 @@
+# Description: Mypyc runtime library
+# URL: https://github.com/mypyc/librt
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pathspec
+
+name=python3-librt
+version=0.7.8
+release=1
+source=(https://pypi.org/packages/source/l/librt/librt-$version.tar.gz)
+
+build() {
+  cd librt-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
