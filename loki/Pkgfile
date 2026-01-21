@@ -4,7 +4,7 @@
 # Depends on: go
 
 name=loki
-version=3.6.3
+version=3.6.4
 release=1
 source=(https://github.com/grafana/loki/archive/v$version/$name-$version.tar.gz
   loki.service
@@ -19,7 +19,7 @@ build() {
   export CGO_CPPFLAGS=${CPPFLAGS}
   export CGO_CXXFLAGS=${CXXFLAGS}
   export GOPROXY=off
-  for path in cmd/loki cmd/loki-canary cmd/logcli clients/cmd/promtail; do
+  for path in cmd/loki cmd/logcli clients/cmd/promtail; do
     go build \
       -trimpath \
       -buildmode=pie \
