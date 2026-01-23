@@ -1,0 +1,15 @@
+# Description: DOS/Mac to Unix text file format converter
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# URL: https://dos2unix.sourceforge.io/
+
+name=dos2unix
+version=7.5.3
+release=1
+source=(https://sourceforge.net/projects/dos2unix/files/dos2unix/$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  make
+  make DESTDIR=$PKG install
+  rm -r $PKG/usr/share/{doc,locale,man/??{,_??}}
+}
