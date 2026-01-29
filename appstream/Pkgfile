@@ -5,13 +5,14 @@
 # Optional: docbook-xsl qt6-base vala
 
 name=appstream
-version=1.1.1
+version=1.1.2
 release=1
 source=(https://www.freedesktop.org/software/appstream/releases/AppStream-$version.tar.xz)
 
 build() {
   ls /usr/lib/python3.12/site-packages/libxml2.py || (printf '\e[1;31m%-6s\e[m\n' "You need to install doxygen, then rebuild libxml2 for appstream to work, quitting..." ; exit 1)
 
+  prt-get isinst bash-completion || PKGMK_APPSTREAM+=' -D bash-completion=false'
   prt-get isinst docbook-xsl || sed -i "/subdir('docs\/')/d" AppStream-$version/meson.build
   prt-get isinst qt6-base && PKGMK_APPSTREAM+=' -D qt=true'
   prt-get isinst vala && PKGMK_APPSTREAM+=' -D vapi=true' || PKGMK_APPSTREAM+=' -D vapi=false'
