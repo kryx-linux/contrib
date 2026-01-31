@@ -5,7 +5,7 @@
 # Optional: postgresql redis
 
 name=grafana
-version=12.3.1
+version=12.3.2
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   grafana.confd grafana.service)
@@ -44,8 +44,6 @@ build() {
 
   #export PATH="/usr/opt/nodejs-lts-jod/bin:$PATH"
 
-  yarn cache clean
-  rm -rf node_modules yarn.lock
   UV_USE_IO_URING=0 /usr/bin/yarn install
   UV_USE_IO_URING=0 NODE_ENV=production /usr/bin/yarn build
 
