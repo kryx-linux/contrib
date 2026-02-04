@@ -2,16 +2,13 @@
 # URL: https://pwmt.org/projects/girara
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: libnotify
-# Optional: json-glib libnotify
 
 name=girara
-version=2026.01.30
+version=2026.02.04
 release=1
 source=(https://github.com/pwmt/girara/archive/$version/$name-$version.tar.gz)
 
 build() {
-  prt-get isinst json-glib && PKGMK_GIRARA+=' -D json=enabled' || PKGMK_GIRARA+=' -D json=disabled'
-
   meson setup $name-$version build $PKGMK_GIRARA \
     --prefix=/usr \
     --sysconfdir=/etc \
