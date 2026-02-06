@@ -1,9 +1,10 @@
 # Description: A fancy 1.2 YAML and JSON parser/writer
 # URL: https://github.com/pantoniou/libfyaml
 # Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libyaml
 
 name=libfyaml
-version=0.9.3
+version=0.9.4
 release=1
 source=(https://github.com/pantoniou/libfyaml/releases/download/v$version/libfyaml-$version.tar.gz)
 
@@ -14,6 +15,7 @@ build() {
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D BUILD_TESTING=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
