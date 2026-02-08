@@ -6,15 +6,24 @@
 
 name=gmime3
 version=3.2.15
-release=2
-source=(https://github.com/jstedfast/gmime/releases/download/$version/gmime-$version.tar.xz)
+release=3
+source=(https://github.com/jstedfast/gmime/releases/download/$version/gmime-$version.tar.xz
+  gmime-3.2.15-headers.patch)
 
 build() {
   cd gmime-$version
 
+  patch -Np1 -i $SRC/gmime-3.2.15-headers.patch
+  aclocal -I m4
+  libtoolize --force
+  autoheader
+  automake --add-missing
+  autoconf -fvi
+
   prt-get isinst vala && PKGMK_GMIME+=' --enable-vala'
   ./configure --prefix=/usr $PKGMK_GMIME \
     --program-prefix=gmime3 \
+    --enable-largefile \
     --enable-crypto \
     --enable-smime \
     --disable-gtk-doc \
