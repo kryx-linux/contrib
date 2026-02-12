@@ -1,0 +1,16 @@
+# Description: Document parameters, class attributes, return types, and variables inline, with Annotated
+# URL: https://github.com/fastapi/annotated-doc
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-pdm-backend
+
+name=python3-annotated-doc
+version=0.0.4
+release=1
+source=(https://pypi.org/packages/source/a/annotated_doc/annotated_doc-$version.tar.gz)
+
+build() {
+  cd annotated_doc-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
