@@ -6,11 +6,11 @@
 
 name=inkscape
 version=1.4.3
-release=1
+release=2
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
-  7690.patch
-  7691.patch
   7738.patch
+  7773.patch
+  poppler-26.02.patch
 )
 
 build() {
@@ -20,9 +20,9 @@ build() {
   prt-get isinst libvisio || PKGMK_INKSCAPE+=" -D WITH_LIBVISIO=OFF"
   prt-get isinst libwpg || PKGMK_INKSCAPE+=" -D WITH_LIBWPG=OFF"
 
-  #patch -Np1 -d $name-$version -i $SRC/7691.patch
-  #patch -Np1 -d $name-$version -i $SRC/7690.patch
   patch -Np1 -d $name-$version -i $SRC/7738.patch
+  patch -Np1 -d $name-$version -i $SRC/7773.patch
+  patch -Np1 -d $name-$version -i $SRC/poppler-26.02.patch
 
   cmake -S $name-$version -B build -G Ninja $PKGMK_INKSCAPE \
     -D CMAKE_INSTALL_PREFIX=/usr \
