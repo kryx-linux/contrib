@@ -1,11 +1,11 @@
 # Description: Tiny, lightning fast, feature-packed file manager
 # URL: https://github.com/jarun/nnn
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: readline
+# Depends on: libpcre2 readline
 # Optional: git icons-in-terminal mediainfo patool
 
 name=nnn
-version=5.1
+version=5.2
 release=1
 source=(https://github.com/jarun/nnn/releases/download/v$version/$name-v$version.tar.gz)
 
@@ -22,6 +22,7 @@ build() {
   make $PKGMK_NNN \
     O_NOX11=1 \
     O_RESTOREPREVIEW=1 \
+    O_PCRE2=1 \
     O_NOLC=0
 
   make DESTDIR=$PKG PREFIX=/usr install
