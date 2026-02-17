@@ -5,7 +5,7 @@
 # Optional: libunwind
 
 name=libplacebo
-version=7.351.0
+version=7.360.0
 release=1
 source=(https://github.com/haasn/$name/archive/v$version/$name-$version.tar.gz)
 
@@ -26,5 +26,5 @@ build() {
         -D tests=false
 
     meson compile -C build -j ${JOBS:-1}
-    DESTDIR=$PKG meson install -C build
+    DESTDIR="$PKG" meson install -C build
 }
