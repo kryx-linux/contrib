@@ -3,15 +3,14 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: freeglut
 
-name=python3-opengl
+name=python3-pyopengl
 version=3.1.10
 release=1
 source=(https://pypi.org/packages/source/p/pyopengl/pyopengl-$version.tar.gz)
 
 build() {
   cd pyopengl-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG \
-    --optimize=1 \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
