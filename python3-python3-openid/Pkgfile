@@ -1,15 +1,15 @@
 # Description: OpenID support for modern servers and consumers
-# URL: http://github.com/necaris/python3-openid
+# URL: https://github.com/necaris/python3-openid
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Depends on: python3-defusedxml
 
-name=python3-openid
+name=python3-python3-openid
 version=3.2.0
 release=1
 source=(https://pypi.org/packages/source/p/python3-openid/python3-openid-$version.tar.gz)
 
 build() {
-  cd $name-$version
+  cd python3-openid-$version
 
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
