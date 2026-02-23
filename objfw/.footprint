@@ -28,11 +28,13 @@ drwxr-xr-x	root/root	usr/include/ObjFW/
 -rw-r--r--	root/root	usr/include/ObjFW/OFBlock.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFBroadcastConditionFailedException.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFCNAMEDNSResourceRecord.h
+-rw-r--r--	root/root	usr/include/ObjFW/OFCanvas.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFChangeCurrentDirectoryFailedException.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFCharacterSet.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFChecksumMismatchException.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFCollection.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFColor.h
+-rw-r--r--	root/root	usr/include/ObjFW/OFColorSpace.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFCondition.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFConditionStillWaitingException.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFConnectIPSocketFailedException.h
@@ -56,6 +58,8 @@ drwxr-xr-x	root/root	usr/include/ObjFW/
 -rw-r--r--	root/root	usr/include/ObjFW/OFData.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFDatagramSocket.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFDate.h
+-rw-r--r--	root/root	usr/include/ObjFW/OFDeflate64Stream.h
+-rw-r--r--	root/root	usr/include/ObjFW/OFDeflateStream.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFDictionary.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFEmbeddedIRIHandler.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFEnumerationMutationException.h
@@ -84,6 +88,8 @@ drwxr-xr-x	root/root	usr/include/ObjFW/
 -rw-r--r--	root/root	usr/include/ObjFW/OFIPXSocket.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFIRI.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFIRIHandler.h
+-rw-r--r--	root/root	usr/include/ObjFW/OFImage.h
+-rw-r--r--	root/root	usr/include/ObjFW/OFImageFormatHandler.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFIndexSet.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFInflate64Stream.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFInflateStream.h
@@ -125,6 +131,7 @@ drwxr-xr-x	root/root	usr/include/ObjFW/
 -rw-r--r--	root/root	usr/include/ObjFW/OFMutableData.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFMutableDictionary.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFMutableIRI.h
+-rw-r--r--	root/root	usr/include/ObjFW/OFMutableImage.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFMutableIndexSet.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFMutableLHAArchiveEntry.h
 -rw-r--r--	root/root	usr/include/ObjFW/OFMutablePair.h
@@ -264,7 +271,9 @@ drwxr-xr-x	root/root	usr/include/ObjFW/platform/x86/
 drwxr-xr-x	root/root	usr/include/ObjFWHID/
 -rw-r--r--	root/root	usr/include/ObjFWHID/OH8BitDoUltimate2CWirelessGamepad.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHDualSenseGamepad.h
+-rw-r--r--	root/root	usr/include/ObjFWHID/OHDualShock3Gamepad.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHDualShock4Gamepad.h
+-rw-r--r--	root/root	usr/include/ObjFWHID/OHDualShockGamepad.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHExtendedGamepad.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHExtendedN64Controller.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHExtendedSNESGamepad.h
@@ -274,6 +283,7 @@ drwxr-xr-x	root/root	usr/include/ObjFWHID/
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHGameControllerDirectionalPad.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHGameControllerElement.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHGameControllerProfile.h
+-rw-r--r--	root/root	usr/include/ObjFWHID/OHGameCubeController.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHGamepad.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHJoyConPair.h
 -rw-r--r--	root/root	usr/include/ObjFWHID/OHLeftJoyCon.h
@@ -295,19 +305,23 @@ drwxr-xr-x	root/root	usr/include/ObjFWTest/
 -rw-r--r--	root/root	usr/include/ObjFWTest/OTTestCase.h
 -rw-r--r--	root/root	usr/include/ObjFWTest/ObjFWTest.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libobjfw.so -> libobjfw.so.1.4.4
-lrwxrwxrwx	root/root	usr/lib/libobjfw.so.1 -> libobjfw.so.1.4.4
--rwxr-xr-x	root/root	usr/lib/libobjfw.so.1.4.4
-lrwxrwxrwx	root/root	usr/lib/libobjfwhid.so -> libobjfwhid.so.1.4.0
-lrwxrwxrwx	root/root	usr/lib/libobjfwhid.so.1 -> libobjfwhid.so.1.4.0
--rwxr-xr-x	root/root	usr/lib/libobjfwhid.so.1.4.0
-lrwxrwxrwx	root/root	usr/lib/libobjfwrt.so -> libobjfwrt.so.1.4.4
-lrwxrwxrwx	root/root	usr/lib/libobjfwrt.so.1 -> libobjfwrt.so.1.4.4
--rwxr-xr-x	root/root	usr/lib/libobjfwrt.so.1.4.4
+drwxr-xr-x	root/root	usr/lib/cmake/
+drwxr-xr-x	root/root	usr/lib/cmake/ObjFW/
+-rw-r--r--	root/root	usr/lib/cmake/ObjFW/ObjFWConfig.cmake
+-rw-r--r--	root/root	usr/lib/cmake/ObjFW/ObjFWConfigVersion.cmake
+lrwxrwxrwx	root/root	usr/lib/libobjfw.so -> libobjfw.so.1.5.0
+lrwxrwxrwx	root/root	usr/lib/libobjfw.so.1 -> libobjfw.so.1.5.0
+-rwxr-xr-x	root/root	usr/lib/libobjfw.so.1.5.0
+lrwxrwxrwx	root/root	usr/lib/libobjfwhid.so -> libobjfwhid.so.1.5.0
+lrwxrwxrwx	root/root	usr/lib/libobjfwhid.so.1 -> libobjfwhid.so.1.5.0
+-rwxr-xr-x	root/root	usr/lib/libobjfwhid.so.1.5.0
+lrwxrwxrwx	root/root	usr/lib/libobjfwrt.so -> libobjfwrt.so.1.5.0
+lrwxrwxrwx	root/root	usr/lib/libobjfwrt.so.1 -> libobjfwrt.so.1.5.0
+-rwxr-xr-x	root/root	usr/lib/libobjfwrt.so.1.5.0
 -rw-r--r--	root/root	usr/lib/libobjfwtest.a
-lrwxrwxrwx	root/root	usr/lib/libobjfwtls.so -> libobjfwtls.so.1.4.4
-lrwxrwxrwx	root/root	usr/lib/libobjfwtls.so.1 -> libobjfwtls.so.1.4.4
--rwxr-xr-x	root/root	usr/lib/libobjfwtls.so.1.4.4
+lrwxrwxrwx	root/root	usr/lib/libobjfwtls.so -> libobjfwtls.so.1.5.0
+lrwxrwxrwx	root/root	usr/lib/libobjfwtls.so.1 -> libobjfwtls.so.1.5.0
+-rwxr-xr-x	root/root	usr/lib/libobjfwtls.so.1.5.0
 drwxr-xr-x	root/root	usr/lib/objfw-config/
 -rw-r--r--	root/root	usr/lib/objfw-config/ObjFWHID.oc
 -rw-r--r--	root/root	usr/lib/objfw-config/ObjFWTLS.oc
