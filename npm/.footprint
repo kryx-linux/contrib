@@ -89,6 +89,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/test.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/token.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/trust/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/trust/circleci.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/trust/github.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/trust/gitlab.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/trust/index.js
@@ -153,6 +154,21 @@ lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/nopt -> ../nopt/
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/pacote -> ../pacote/bin/index.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/qrcode-terminal -> ../qrcode-terminal/bin/qrcode-terminal.js
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/semver -> ../semver/bin/semver.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@gar/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/lib/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/lib/index.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/example/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/example/dns.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/example/stop.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/index.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/lib/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/lib/retry.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/lib/retry_operation.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/node_modules/retry/package.json
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@gar/promise-retry/package.json
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@isaacs/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@isaacs/fs-minipass/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@isaacs/fs-minipass/dist/
@@ -744,12 +760,6 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/diff/libesm/util/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/diff/libesm/util/string.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/diff/package.json
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/diff/release-notes.md
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/encoding/
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/encoding/lib/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/encoding/lib/encoding.js
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/encoding/package.json
-drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/encoding/test/
--rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/encoding/test/test.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/env-paths/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/env-paths/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/env-paths/package.json
@@ -863,6 +873,8 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/encodings/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/encodings/utf7.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/lib/bom-handling.js
+drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/lib/helpers/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/lib/helpers/merge-exports.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/lib/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/lib/streams.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/iconv-lite/package.json
