@@ -5,10 +5,14 @@
 # Optional: dbus dnsmasq gnupg lua
 
 name=lxc
-version=6.0.5
+version=6.0.6
 release=1
 source=(https://linuxcontainers.org/downloads/$name/$name-$version.tar.gz
-  default.conf lxc-usernet lxc-users-setup lxc-users lxc-cgroups lxc-net)
+  default.conf lxc-usernet lxc-users-setup lxc-net
+  lxc-autostart.service
+  lxc-cgroups.service
+  lxc-users.service
+)
 
 build() {
 
@@ -23,15 +27,15 @@ build() {
     --sysconfdir=/etc \
     --libexecdir=lib \
     --localstatedir=/var \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
     -D distrosysconfdir=/etc/default \
     -D data-path=/var/lib/lxc \
     -D log-path=/var/log/lxc \
     -D rootfs-mount-path=/usr/lib/lxc/rootfs \
     -D runtime-path=/run \
-    --buildtype=plain \
-    --wrap-mode nodownload \
-    -D b_lto=true \
-    -D b_pie=true \
     -D init-script=sysvinit \
     -D pam-cgroup=true \
     -D apparmor=false
@@ -49,12 +53,16 @@ build() {
     $PKG/usr/share/doc \
     $PKG/usr/share/lxc/config/common.conf.d/README
 
-  mv $PKG/etc/init.d/* $PKG/etc/rc.d/
-  install -m755 $SRC/lxc-cgroups $PKG/etc/rc.d/
-  install -m755 $SRC/lxc-users $PKG/etc/rc.d/
+  mv -v $PKG/etc/init.d/* $PKG/etc/rc.d/
+  chmod +x $PKG/etc/rc.d/lxc-{containers,net}
   rmdir $PKG/etc/init.d/
-  install -m644 $SRC/lxc-net $PKG/etc/default/
+
+  install -m755 $SRC/lxc-autostart.service $PKG/etc/rc.d/lxc-autostart
+  install -m755 $SRC/lxc-cgroups.service $PKG/etc/rc.d/lxc-cgroups
+  install -m755 $SRC/lxc-users.service $PKG/etc/rc.d/lxc-users
+
   rm $PKG/etc/lxc/default.conf
+  install -m644 $SRC/lxc-net $PKG/etc/default/
   install -m644 $SRC/default.conf $PKG/etc/lxc/
   install -m644 $SRC/lxc-usernet $PKG/etc/lxc/
 
