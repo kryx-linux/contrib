@@ -1,0 +1,16 @@
+# Description: Python interpreter discovery
+# URL: https://github.com/tox-dev/python-discovery
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-filelock python3-platformdirs
+
+name=python3-python-discovery
+version=1.1.0
+release=1
+source=(https://pypi.org/packages/source/p/python_discovery/python_discovery-$version.tar.gz)
+
+build() {
+  cd python_discovery-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
