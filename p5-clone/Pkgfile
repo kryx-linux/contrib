@@ -4,9 +4,24 @@
 # Depends on:
 
 name=p5-clone
-version=0.47
+version=0.48
 release=1
 source=(https://cpan.metacpan.org/authors/id/A/AT/ATOOMIC/Clone-$version.tar.gz)
+
+unpack_source() {
+  mkdir -p $SRC/tarballs $SRC/$name-$version/external/tarballs
+  for file in ${source[@]}; do
+    case ${file##*/} in
+    Clone-$version.tar.gz)
+      echo "Unpacking $(get_filename $file)"
+      bsdtar -p -o -C $SRC -xf $(get_filename $file)
+      ;;
+    *)
+      cp $(get_filename $file) $SRC
+      ;;
+    esac
+  done
+}
 
 build() {
   cd Clone-$version
