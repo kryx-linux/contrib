@@ -41,6 +41,7 @@ drwxr-xr-x	root/root	etc/libvirt/qemu/networks/
 drwxr-xr-x	root/root	etc/libvirt/qemu/networks/autostart/
 lrwxrwxrwx	root/root	etc/libvirt/qemu/networks/autostart/default.xml -> ../default.xml
 -rw-r--r--	root/root	etc/libvirt/qemu/networks/default.xml
+-rw-r--r--	root/root	etc/libvirt/secret.conf
 drwxr-xr-x	root/root	etc/libvirt/secrets/
 drwxr-xr-x	root/root	etc/libvirt/storage/
 drwxr-xr-x	root/root	etc/libvirt/storage/autostart/
@@ -132,17 +133,17 @@ drwxr-xr-x	root/root	usr/lib/firewalld/zones/
 -rwxr-xr-x	root/root	usr/lib/libnss_libvirt.so.2
 -rwxr-xr-x	root/root	usr/lib/libnss_libvirt_guest.so.2
 lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so -> libvirt-admin.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so.0 -> libvirt-admin.so.0.12000.0
--rwxr-xr-x	root/root	usr/lib/libvirt-admin.so.0.12000.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-admin.so.0 -> libvirt-admin.so.0.12001.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-admin.so.0.12001.0
 lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so -> libvirt-lxc.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so.0 -> libvirt-lxc.so.0.12000.0
--rwxr-xr-x	root/root	usr/lib/libvirt-lxc.so.0.12000.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-lxc.so.0 -> libvirt-lxc.so.0.12001.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-lxc.so.0.12001.0
 lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so -> libvirt-qemu.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so.0 -> libvirt-qemu.so.0.12000.0
--rwxr-xr-x	root/root	usr/lib/libvirt-qemu.so.0.12000.0
+lrwxrwxrwx	root/root	usr/lib/libvirt-qemu.so.0 -> libvirt-qemu.so.0.12001.0
+-rwxr-xr-x	root/root	usr/lib/libvirt-qemu.so.0.12001.0
 lrwxrwxrwx	root/root	usr/lib/libvirt.so -> libvirt.so.0
-lrwxrwxrwx	root/root	usr/lib/libvirt.so.0 -> libvirt.so.0.12000.0
--rwxr-xr-x	root/root	usr/lib/libvirt.so.0.12000.0
+lrwxrwxrwx	root/root	usr/lib/libvirt.so.0 -> libvirt.so.0.12001.0
+-rwxr-xr-x	root/root	usr/lib/libvirt.so.0.12001.0
 drwxr-xr-x	root/root	usr/lib/libvirt/
 drwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/
 -rwxr-xr-x	root/root	usr/lib/libvirt/connection-driver/libvirt_driver_ch.so
@@ -181,6 +182,9 @@ drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libvirt.pc
 drwxr-xr-x	root/root	usr/lib/sysctl.d/
 -rw-r--r--	root/root	usr/lib/sysctl.d/60-libvirtd.conf
+drwxr-xr-x	root/root	usr/lib/systemd/
+drwxr-xr-x	root/root	usr/lib/systemd/system/
+-rw-r--r--	root/root	usr/lib/systemd/system/virt-secret-init-encryption.service
 drwxr-xr-x	root/root	usr/lib/sysusers.d/
 -rw-r--r--	root/root	usr/lib/sysusers.d/libvirt-login-shell.conf
 -rw-r--r--	root/root	usr/lib/sysusers.d/libvirt-qemu.conf
@@ -204,6 +208,7 @@ drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/augeas/
 drwxr-xr-x	root/root	usr/share/augeas/lenses/
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirt_lockd.aug
+-rw-r--r--	root/root	usr/share/augeas/lenses/libvirt_secrets.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd_ch.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd_lxc.aug
@@ -211,6 +216,7 @@ drwxr-xr-x	root/root	usr/share/augeas/lenses/
 -rw-r--r--	root/root	usr/share/augeas/lenses/libvirtd_qemu.aug
 drwxr-xr-x	root/root	usr/share/augeas/lenses/tests/
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirt_lockd.aug
+-rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirt_secrets.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirtd.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirtd_ch.aug
 -rw-r--r--	root/root	usr/share/augeas/lenses/tests/test_libvirtd_lxc.aug
@@ -547,6 +553,7 @@ drwxr-xr-x	root/root	usr/share/doc/libvirt/html/manpages/
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/programming-languages.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/python.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/remote.html
+-rw-r--r--	root/root	usr/share/doc/libvirt/html/secretencryption.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/securityprocess.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/ssh-proxy.html
 -rw-r--r--	root/root	usr/share/doc/libvirt/html/storage.html
@@ -855,6 +862,8 @@ drwxr-xr-x	root/root	var/lib/libvirt/qemu/nvram/
 drwxr-xr-x	root/root	var/lib/libvirt/qemu/ram/
 drwxr-xr-x	root/root	var/lib/libvirt/qemu/save/
 drwxr-xr-x	root/root	var/lib/libvirt/qemu/snapshot/
+drwxr-xr-x	root/root	var/lib/libvirt/qemu/varstore/
+drwxr-xr-x	root/root	var/lib/libvirt/secrets/
 drwxr-xr-x	root/root	var/lib/libvirt/swtpm/
 drwxr-xr-x	root/root	var/log/
 drwxr-xr-x	root/root	var/log/libvirt/
