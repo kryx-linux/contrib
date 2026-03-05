@@ -3,7 +3,7 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=minicom
-version=2.10
+version=2.11.1
 release=1
 source=(https://salsa.debian.org/minicom-team/minicom/-/archive/$version/minicom-$version.tar.gz)
 
@@ -13,7 +13,7 @@ build() {
   ./configure --prefix=/usr \
       --sysconfdir=/etc \
       --disable-nls
-  make
+  make -j1
   make DESTDIR=$PKG install
 
   install -Dm644 doc/minirc.dfl $PKG/etc/minirc.dfl
