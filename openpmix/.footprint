@@ -30,6 +30,7 @@ drwxr-xr-x	root/root	usr/include/pmix/src/client/
 drwxr-xr-x	root/root	usr/include/pmix/src/common/
 -rw-r--r--	root/root	usr/include/pmix/src/common/pmix_attributes.h
 -rw-r--r--	root/root	usr/include/pmix/src/common/pmix_iof.h
+-rw-r--r--	root/root	usr/include/pmix/src/common/pmix_monitor.h
 -rw-r--r--	root/root	usr/include/pmix/src/common/pmix_pfexec.h
 drwxr-xr-x	root/root	usr/include/pmix/src/event/
 -rw-r--r--	root/root	usr/include/pmix/src/event/pmix_event.h
@@ -130,6 +131,7 @@ drwxr-xr-x	root/root	usr/include/pmix/src/mca/ptl/base/
 -rw-r--r--	root/root	usr/include/pmix/src/mca/ptl/ptl.h
 -rw-r--r--	root/root	usr/include/pmix/src/mca/ptl/ptl_types.h
 drwxr-xr-x	root/root	usr/include/pmix/src/runtime/
+-rw-r--r--	root/root	usr/include/pmix/src/runtime/pmix_info_support.h
 -rw-r--r--	root/root	usr/include/pmix/src/runtime/pmix_init_util.h
 -rw-r--r--	root/root	usr/include/pmix/src/runtime/pmix_progress_threads.h
 -rw-r--r--	root/root	usr/include/pmix/src/runtime/pmix_rte.h
@@ -171,6 +173,7 @@ drwxr-xr-x	root/root	usr/include/pmix/src/util/
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_string_copy.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_strnlen.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_timings.h
+-rw-r--r--	root/root	usr/include/pmix/src/util/pmix_tty.h
 -rw-r--r--	root/root	usr/include/pmix/src/util/pmix_vmem.h
 -rw-r--r--	root/root	usr/include/pmix_common.h
 -rw-r--r--	root/root	usr/include/pmix_deprecated.h
@@ -179,9 +182,9 @@ drwxr-xr-x	root/root	usr/include/pmix/src/util/
 -rw-r--r--	root/root	usr/include/pmix_version.h
 drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libpmix.la
-lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.18.0
-lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.18.0
--rwxr-xr-x	root/root	usr/lib/libpmix.so.2.18.0
+lrwxrwxrwx	root/root	usr/lib/libpmix.so -> libpmix.so.2.23.0
+lrwxrwxrwx	root/root	usr/lib/libpmix.so.2 -> libpmix.so.2.23.0
+-rwxr-xr-x	root/root	usr/lib/libpmix.so.2.23.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/pmix.pc
 drwxr-xr-x	root/root	usr/lib/pmix/
@@ -192,6 +195,7 @@ drwxr-xr-x	root/root	usr/share/doc/
 drwxr-xr-x	root/root	usr/share/doc/pmix/
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/.buildinfo
+-rw-r--r--	root/root	usr/share/doc/pmix/html/.buildinfo.bak
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_images/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_images/2XeonE5300.png
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_images/amd-gpus.jpg
@@ -223,6 +227,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/getting-help.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/history.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/how-things-work/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/adding_datatypes.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/distances.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/index.rst.txt
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/how-things-work/resolve.rst.txt
@@ -275,10 +280,15 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/man/man3/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/PMIx_Abort.3.rst.txt.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/PMIx_Finalize.3.rst.txt.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/PMIx_Init.3.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/PMIx_Value_get_number.3.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/PMIx_Value_unload.3.rst.txt.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man3/index.rst.txt.gz
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/man/man5/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man5/index.rst.txt.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man5/openpmix.5.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man5/pmix_byte_object_t.5.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man5/pmix_status_t.5.rst.txt.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/man/man5/pmix_value_t.5.rst.txt.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/mca.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/news/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/news/index.rst.txt
@@ -300,6 +310,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_sources/release-notes/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_sources/versions.rst.txt
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/_sphinx_javascript_frameworks_compat.js
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/base-stemmer.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/basic.css
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/css/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/css/badge_only.css
@@ -324,13 +335,40 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/css/fonts/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/css/theme.css
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/doctools.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/documentation_options.js
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/english-stemmer.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/file.png
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/fonts/
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.eot
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.ttf
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.woff
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bold.woff2
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.eot
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.ttf
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.woff
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-bolditalic.woff2
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.eot
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.ttf
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.woff
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-italic.woff2
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.eot
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.ttf
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.woff
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/Lato/lato-regular.woff2
+drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.eot
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.ttf
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.woff
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.woff2
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.eot
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.ttf
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.woff
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.woff2
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/jquery.js
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/_static/js/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/badge_only.js
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/html5shiv-printshiv.min.js
--rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/html5shiv.min.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/theme.js
+-rw-r--r--	root/root	usr/share/doc/pmix/html/_static/js/versions.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/language_data.js
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/minus.png
 -rw-r--r--	root/root	usr/share/doc/pmix/html/_static/plus.png
@@ -363,6 +401,7 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/developers/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/getting-help.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/history.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/how-things-work/
+-rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/adding_datatypes.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/distances.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/index.html
 -rw-r--r--	root/root	usr/share/doc/pmix/html/how-things-work/resolve.html
@@ -415,10 +454,15 @@ drwxr-xr-x	root/root	usr/share/doc/pmix/html/man/man3/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/PMIx_Abort.3.html.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/PMIx_Finalize.3.html.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/PMIx_Init.3.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/PMIx_Value_get_number.3.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/PMIx_Value_unload.3.html.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man3/index.html.gz
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/man/man5/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man5/index.html.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/man/man5/openpmix.5.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man5/pmix_byte_object_t.5.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man5/pmix_status_t.5.html.gz
+-rw-r--r--	root/root	usr/share/doc/pmix/html/man/man5/pmix_value_t.5.html.gz
 -rw-r--r--	root/root	usr/share/doc/pmix/html/mca.html
 drwxr-xr-x	root/root	usr/share/doc/pmix/html/news/
 -rw-r--r--	root/root	usr/share/doc/pmix/html/news/index.html
@@ -448,8 +492,13 @@ drwxr-xr-x	root/root	usr/share/man/man3/
 -rw-r--r--	root/root	usr/share/man/man3/PMIx_Abort.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/PMIx_Finalize.3.gz
 -rw-r--r--	root/root	usr/share/man/man3/PMIx_Init.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/PMIx_Value_get_number.3.gz
+-rw-r--r--	root/root	usr/share/man/man3/PMIx_Value_unload.3.gz
 drwxr-xr-x	root/root	usr/share/man/man5/
 -rw-r--r--	root/root	usr/share/man/man5/openpmix.5.gz
+-rw-r--r--	root/root	usr/share/man/man5/pmix_byte_object_t.5.gz
+-rw-r--r--	root/root	usr/share/man/man5/pmix_status_t.5.gz
+-rw-r--r--	root/root	usr/share/man/man5/pmix_value_t.5.gz
 drwxr-xr-x	root/root	usr/share/pmix/
 -rw-r--r--	root/root	usr/share/pmix/pmix-valgrind.supp
 -rw-r--r--	root/root	usr/share/pmix/pmixcc-wrapper-data.txt
