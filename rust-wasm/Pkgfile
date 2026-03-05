@@ -5,9 +5,9 @@
 # Optional: libgit2 sccache
 
 name=rust-wasm
-version=1.93.1
-_date=2025-12-11
-_rustc=1.92.0
+version=1.94.0
+_date=2026-01-22
+_rustc=1.93.0
 _cargo=$_rustc
 release=1
 
@@ -80,7 +80,7 @@ build() {
   # bootstrap.toml {{{
   cat <<-EOF >$SRC/bootstrap.toml
 profile = "dist"
-change-id = 148795
+change-id = 148671
 
 [llvm]
 download-ci-llvm = false
@@ -132,7 +132,7 @@ cc = "/usr/bin/clang"
 cxx = "/usr/bin/clang++"
 ar = "/usr/bin/llvm-ar"
 ranlib = "/usr/bin/llvm-ranlib"
-optimized-compiler-builtins = "$clangdir/lib/linux/libclang_rt.builtins-x86_64.a"
+optimized-compiler-builtins = "$clangdir/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a"
 
 [target.i686-unknown-linux-gnu]
 llvm-config = "/usr/bin/llvm-config"
@@ -141,7 +141,7 @@ cc = "/usr/bin/clang"
 cxx = "/usr/bin/clang++"
 ar = "/usr/bin/llvm-ar"
 ranlib = "/usr/bin/llvm-ranlib"
-optimized-compiler-builtins = "$clangdir/lib/linux/libclang_rt.builtins-i386.a"
+optimized-compiler-builtins = "$clangdir/lib/i386-unknown-linux-gnu/libclang_rt.builtins.a"
 
 [target.wasm32-wasi]
 sanitizers = false
@@ -250,7 +250,6 @@ EOF
   echo "/usr/lib/rustlib/wasm32-unknown-unknown/lib" >$PKG/etc/revdep.d/$name
   echo "/usr/lib/rustlib/wasm32-wasi/lib" >$PKG/etc/revdep.d/$name
 
-  #rm -rf $PKG/usr/lib/rustlib/x86_64-unknown-linux-gnu/
   rm -rf $PKG/etc/target-spec-json-schema.json
   find $PKG/usr/lib/rustlib -type f -perm -600 -exec chmod 644 {} \+
   find $PKG/usr/lib/rustlib -type f -perm -700 -exec chmod 755 {} \+
