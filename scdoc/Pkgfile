@@ -6,9 +6,11 @@ name=scdoc
 version=1.11.4
 release=1
 source=(https://git.sr.ht/~sircmpwn/$name/archive/$version.tar.gz)
+renames=($name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   CC="gcc" make PREFIX=/usr
   DESTDIR=$PKG make PREFIX=/usr install
 }
