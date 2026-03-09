@@ -2,15 +2,18 @@
 # URL: https://www.flashrom.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: libftdi libjaylink pciutils
-# Optional: bash-completion dmidecode
+# Optional: bash-completion cmocka dmidecode
 
 name=flashrom
 version=1.7.0
 release=1
-source=(https://download.flashrom.org/releases/$name-v$version.tar.xz)
+source=(https://download.flashrom.org/releases/$name-v$version.tar.xz
+  cmocka-v2-compatibility.patch)
 
 build() {
   prt-get isinst bash-completion || PKGMK_FLASHROM+=' -D bash_completion=disabled'
+
+  patch -Np1 -d $name-v$version -i $SRC/cmocka-v2-compatibility.patch
 
   meson setup $name-v$version build $PKGMK_FLASHROM \
     --prefix=/usr \
