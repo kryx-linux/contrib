@@ -5,7 +5,7 @@
 # Optional: python3-hiredis python3-lxml python3-psutil python3-psycopg2 python3-pyjwt python3-txredisapi
 
 name=matrix-synapse
-version=1.148.0
+version=1.149.0
 release=1
 source=(https://github.com/element-hq/synapse/archive/v$version/$name-$version.tar.gz
   synapse.service)
@@ -16,8 +16,8 @@ build() {
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 
-  install -dm0700 -o synapse -g synapse /etc/synapse
-  install -dm0700 -o synapse -g synapse /var/lib/synapse
+  install -dm0700 -o synapse -g synapse $PKG/etc/synapse
+  install -dm0700 -o synapse -g synapse $PKG/var/lib/synapse
   install -Dm0755 -o root -g root $SRC/synapse.service \
     $PKG/etc/rc.d/synapse
 }
