@@ -4,9 +4,10 @@
 # Depends on: coin-or-osi suitesparse
 
 name=coin-or-clp
-version=1.17.10
+version=1.17.11
 release=1
 source=(https://github.com/coin-or/Clp/archive/releases/$version/$name-$version.tar.gz
+  fix-build.patch
   configure-exit.patch
   libtool.patch
   rpath.patch)
@@ -17,6 +18,7 @@ build() {
   patch -Np1 -i $SRC/configure-exit.patch
   patch -Np1 -i $SRC/libtool.patch
   patch -Np1 -i $SRC/rpath.patch
+  patch -Np2 -i $SRC/fix-build.patch
 
   sed -i 's/ @CLPLIB_PCLIBS@/\nLibs.private:&/' clp.pc.in
 
