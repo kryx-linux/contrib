@@ -4,25 +4,34 @@
 # Depends on: lapack meson-python python3-cython
 
 name=python3-numpy
-version=2.4.2
+version=2.4.3
 release=1
-_vendored_meson=5d5a3d478da115c812be77afa651db2492d52171
+
+_scipy_mathjax=36f4c898f2255e0c98eb6949cd67381552d5ffea
+_pythoncapi_compat=90c06a4cae557bdbfa4f231a781d2b5c1a8f6d1c
 _highway=ee36c837129310be19c17c9108c6dc3f6ae06942
 _x86_simd_sort=6a7a01da4b0dfde108aa626a2364c954e2c50fe1
 _svml=3a713b13018325451c1b939d3914ceff5ec68e19
 _pocketfft=33ae5dc94c9cdc7f1c78346504a85de87cadaa12
-_pythoncapi_comat=90c06a4cae557bdbfa4f231a781d2b5c1a8f6d1c
+_meson=5d5a3d478da115c812be77afa651db2492d52171
+
+doc/source/_static/scipy-mathjax
+
 source=(https://github.com/numpy/numpy/archive/v$version/numpy-$version.tar.gz
-  https://github.com/numpy/meson/archive/$_vendored_meson/meson-$_vendored_meson.tar.gz
+  https://github.com/scipy/scipy-mathjax/archive/$_scipy_mathjax/scipy-mathjax-$_scipy_mathjax.tar.gz
+  https://github.com/python/pythoncapi-compat/archive/$_pythoncapi_compat/pythoncapi-compat-$_pythoncapi_compat.tar.gz
   https://github.com/google/highway/archive/$_highway/highway-$_highway.tar.gz
   https://github.com/numpy/x86-simd-sort/archive/$_x86_simd_sort/x86-simd-sort-$_x86_simd_sort.tar.gz
   https://github.com/numpy/SVML/archive/$_svml/SVML-$_svml.tar.gz
-  https://github.com/python/pythoncapi-compat/archive/$_pythoncapi_comat/pythoncapi-compat-$_pythoncapi_comat.tar.gz
-  https://github.com/mreineck/pocketfft/archive/$_pocketfft/pocketfft-$_pocketfft.tar.gz)
+  https://github.com/mreineck/pocketfft/archive/$_pocketfft/pocketfft-$_pocketfft.tar.gz
+  https://github.com/numpy/meson/archive/$_meson/meson-$_meson.tar.gz
+  versions.sh)
 
 build() {
-  rsync --recursive $SRC/meson-$_vendored_meson/ \
-    -t $SRC/numpy-$version/vendored-meson/meson
+  rsync --recursive $SRC/scipy-mathjax-$_scipy_mathjax/ \
+    -t $SRC/numpy-$version/doc/source/_static/scipy-mathjax
+  rsync --recursive $SRC/pythoncapi-compat-$_pythoncapi_compat/ \
+    -t $SRC/numpy-$version/numpy/_core/src/common/pythoncapi-compat
   rsync --recursive $SRC/highway-$_highway/ \
     -t $SRC/numpy-$version/numpy/_core/src/highway
   rsync --recursive $SRC/x86-simd-sort-$_x86_simd_sort/ \
@@ -31,8 +40,8 @@ build() {
     -t $SRC/numpy-$version/numpy/_core/src/umath/svml
   rsync --recursive $SRC/pocketfft-$_pocketfft/ \
     -t $SRC/numpy-$version/numpy/fft/pocketfft
-  rsync --recursive $SRC/pythoncapi-compat-$_pythoncapi_comat/ \
-    -t $SRC/numpy-$version/numpy/_core/src/common/pythoncapi-compat
+  rsync --recursive $SRC/meson-$_meson/ \
+    -t $SRC/numpy-$version/vendored-meson/meson
 
   cd numpy-$version
 
