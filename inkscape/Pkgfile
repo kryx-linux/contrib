@@ -1,16 +1,17 @@
 # Description: An open source SVG editor
-# URL: https://www.inkscape.org/
+# URL: https://inkscape.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: boehm-gc boost double-conversion graphicsmagick gsl gtkmm3 libsoup libxslt poppler popt potrace
 # Optional: libcdr libvisio libwpg python3-lxml python3-tinycss2
 
 name=inkscape
 version=1.4.3
-release=2
+release=3
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
   7738.patch
   7773.patch
   poppler-26.02.patch
+  7807.patch
 )
 
 build() {
@@ -23,6 +24,7 @@ build() {
   patch -Np1 -d $name-$version -i $SRC/7738.patch
   patch -Np1 -d $name-$version -i $SRC/7773.patch
   patch -Np1 -d $name-$version -i $SRC/poppler-26.02.patch
+  patch -Np1 -d $name-$version -i $SRC/7807.patch
 
   cmake -S $name-$version -B build -G Ninja $PKGMK_INKSCAPE \
     -D CMAKE_INSTALL_PREFIX=/usr \
