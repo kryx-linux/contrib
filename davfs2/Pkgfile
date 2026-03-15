@@ -4,9 +4,9 @@
 # Depends on: neon
 
 name=davfs2
-version=1.7.2
+version=1.7.3
 release=1
-source=(http://mirror.easyname.at/nongnu/$name/$name-$version.tar.gz)
+source=(https://github.com/alisarctl/davfs2/releases/download/rel-${version//./-}/davfs2-$version.tar.gz)
 
 build() {
   cd $name-$version
