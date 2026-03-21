@@ -12,6 +12,7 @@ _codename=Omega
 source=(https://github.com/xbmc/xbmc/archive/$version-$_codename/xbmc-$version-$_codename.tar.gz
   kodi-21-optional-ffmpeg-libx11.patch
   24972.patch
+  28016.patch
 )
 
 build()  {
@@ -51,6 +52,7 @@ build()  {
     xbmc-$version-$_codename/tools/depends/native/JsonSchemaBuilder/src/autogen.sh
 
   patch -Np1 -d xbmc-$version-$_codename -i $SRC/24972.patch
+  patch -Np1 -d xbmc-$version-$_codename -i $SRC/28016.patch
   patch -Np1 -d xbmc-$version-$_codename -i $SRC/kodi-21-optional-ffmpeg-libx11.patch
 
   cmake -S xbmc-$version-$_codename -B build -G Ninja $KODI_EXTRA \
