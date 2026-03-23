@@ -6,9 +6,11 @@
 name=kodi
 version=21.3
 release=1
-source=(https://github.com/xbmc/xbmc/archive/$version-Omega/$name-$version.tar.gz)
+source=(https://github.com/xbmc/xbmc/archive/$version-Omega/$name-$version.tar.gz \
+    28016.patch)
 
 build() {
+    patch -d xbmc-$version-Omega -p1 -i $SRC/28016.patch
     export PATH="/usr/lib/java/openjdk21-jdk/bin:$PATH"
 
     [[ -e /usr/lib/ccache ]] && PATH="$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')"
