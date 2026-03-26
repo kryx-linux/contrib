@@ -1,35 +1,39 @@
 # Description: WASI libc implementation for WebAssembly
 # URL: https://github.com/WebAssembly/wasi-libc
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: clang
+# Depends on: clang lld
 
 name=wasi-libc
-version=29
+version=31
 release=1
-source=(https://github.com/WebAssembly/wasi-libc/archive/wasi-sdk-$version/$name-$version.tar.gz
-  no-double-build.patch)
+source=(https://github.com/WebAssembly/wasi-libc/archive/wasi-sdk-$version/$name-$version.tar.gz)
 
 build() {
-  cd $name-wasi-sdk-$version
+  local options=(-S $name-wasi-sdk-$version -G Ninja
+    -D CMAKE_INSTALL_PREFIX=/usr/share/wasi-sysroot
+    -D CMAKE_BUILD_TYPE=Release
+    -D CMAKE_AR=/usr/bin/llvm-ar
+    -D CMAKE_C_COMPILER=/usr/bin/clang
+    -D CMAKE_NM=/usr/bin/llvm-nm
+    -D CMAKE_LINK_DEPENDS_USE_LINKER=FALSE
+    -D CHECK_SYMBOLS=OFF
+    -Wno-dev
+  )
 
-  patch -p1 -i $SRC/no-double-build.patch
+  local targets=(
+    wasm32-wasip1
+    wasm32-wasip1-threads
+    wasm32-wasip2
+  )
 
-  MAKE_ARGS="WASM_CC=/usr/bin/clang WASM_AR=/usr/bin/llvm-ar WASM_NM=/usr/bin/llvm-nm CHECK_SYMBOLS=yes"
+  unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
+  for i in "${targets[@]}"; do
+    cmake "${options[@]}" -B build-${i} \
+      -D TARGET_TRIPLE=${i}
 
-  for target in wasi wasi-threads wasip1 wasip1-threads wasip2; do
-    EXTRA_ARGS=""
-    case $target in
-      wasip1-threads|wasi-threads)
-        EXTRA_ARGS="THREAD_MODEL=posix"
-        ;;
-      wasip2)
-        EXTRA_ARGS="WASI_SNAPSHOT=p2"
-        ;;
-    esac
-    make TARGET_TRIPLE="wasm32-$target" $MAKE_ARGS $EXTRA_ARGS
+    cmake --build build-${i}
+    DESTDIR=$PKG cmake --install build-${i}
   done
-
-  make INSTALL_DIR="$PKG/usr/share/wasi-sysroot" install
 
   cd $PKG/usr/share/wasi-sysroot/lib
   for f in wasm32-wasi*/*.a; do
