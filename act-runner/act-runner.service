@@ -10,8 +10,9 @@ OPTS="daemon --config config.yaml"
 
 case $1 in
   start)
-    if /etc/rc.d/docker status | grep -q "is not"; then
-      echo "[ERR] This service depends on docker running!"
+    if /etc/rc.d/docker status | grep -q "is not" &&
+      /etc/rc.d/podman status | grep -q "is not"; then
+      echo "[ERR] This service depends on docker/podman running!"
       exit 1
     fi
     $SSD --start -b -d $HOME --exec $PROG -- $OPTS
