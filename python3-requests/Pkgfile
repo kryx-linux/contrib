@@ -1,10 +1,11 @@
 # Description: Python HTTP for Humans
 # URL: https://pypi.org/project/requests/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-chardet python3-idna python3-urllib3
+# Depends on: python3-charset-normalizer python3-idna python3-urllib3 python3-certifi
+# Optional: python3-chardet
 
 name=python3-requests
-version=2.32.5
+version=2.33.0
 release=1
 source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${name#*-}-$version.tar.gz
   certs.patch)
@@ -12,16 +13,6 @@ source=(https://files.pythonhosted.org/packages/source/${name:8:1}/${name#*-}/${
 build() {
   cd ${name#*-}-$version
 
-  # Stay with chardet for now: https://github.com/psf/requests/issues/5871
-
-  sed \
-    -e '/certifi/d' \
-    -e "s/,<.*'/'/" \
-    -e '/charset_normalizer/d' \
-    -i setup.py
-
-  patch -p1 -d src -i $SRC/certs.patch
-
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr --root=$PKG
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
