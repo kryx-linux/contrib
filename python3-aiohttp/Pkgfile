@@ -4,15 +4,13 @@
 # Depends on: python3-aiosignal python3-async-timeout python3-attrs python3-chardet python3-charset-normalizer python3-yarl python3-aiohappyeyeballs
 
 name=python3-aiohttp
-version=3.13.3
+version=3.13.4
 release=1
 source=(https://pypi.org/packages/source/a/aiohttp/aiohttp-$version.tar.gz)
 
 build() {
   cd aiohttp-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    --skip-build
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
