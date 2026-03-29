@@ -1,0 +1,16 @@
+# Description: the blessed package to manage your versions by vcs metadata
+# URL: https://github.com/pypa/setuptools-scm
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-wheel
+
+name=python3-vcs-versioning
+version=1.1.1
+release=1
+source=(https://pypi.org/packages/source/v/vcs_versioning/vcs_versioning-$version.tar.gz)
+
+build() {
+  cd vcs_versioning-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
