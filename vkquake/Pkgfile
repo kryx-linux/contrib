@@ -2,9 +2,10 @@
 # URL: https://github.com/Novum/vkQuake
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: glslang libmad libsdl2 libvorbis mpg123 vulkan-loader zopfli
+# Optional: libsdl3
 
 name=vkquake
-version=1.33.1
+version=1.34.0
 release=1
 source=(https://github.com/Novum/vkQuake/archive/$version/$name-$version.tar.gz
   vkquake.desktop vkquake.png)
@@ -13,23 +14,18 @@ build() {
   rm -rf vkQuake-$version/Windows
   sed -i 's#vulkan_core.h#vulkan.h#' vkQuake-$version/Quake/quakedef.h
 
-  #meson setup vkQuake-$version build \
-  #  --prefix=/usr \
-  #  --buildtype=plain \
-  #  --wrap-mode nodownload \
-  #  -D b_lto=false \
-  #  -D b_pie=false \
-  #  -D do_userdirs=enabled
+  prt-get isinst libsdl3 && PKGMK_VKQUAKE+=' -D use_sdl3=true'
+  meson setup vkQuake-$version build $PKGMK_VKQUAKE \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=false \
+    -D b_pie=false \
+    -D do_userdirs=enabled
 
-  #meson compile -C build -j 1
-  #DESTDIR=$PKG meson install -C build
+  meson compile -C build -j 1
 
-  make -C vkQuake-$version/Quake clean
-  make -C vkQuake-$version/Quake \
-    DO_USERDIRS=1
-  #make -C vkQuake-$version/Misc/vq_pak
-
-  install -Dm755 vkQuake-$version/Quake/vkquake $PKG/usr/bin/vkquake
+  install -Dm755 build/vkquake $PKG/usr/bin/vkquake
   #install -Dm644 vkQuake-$version/Misc/vq_pak/vkquake.pak $PKG/usr/share/games/vkquake/vkquake.pak
 
   install -Dm644 $SRC/$name.desktop $PKG/usr/share/applications/vkquake.desktop
