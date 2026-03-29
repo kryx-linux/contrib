@@ -46,12 +46,6 @@ build () {
     /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
     popd
   fi
-  if prt-get isinst python3-wheel; then
-    pushd ndiff
-    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
-    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
-    popd
-  fi
 
 
   find $PKG \( \
