@@ -4,7 +4,7 @@
 # Depends on: python3-pyqt6 qt6-webengine
 
 name=python3-pyqt6-webengine
-version=6.10.0
+version=6.11.0
 release=1
 source=(https://pypi.org/packages/source/p/pyqt6_webengine/pyqt6_webengine-$version.tar.gz
   pyqt6-webengine-fix-build.patch)
@@ -18,7 +18,10 @@ build() {
   sip-build \
     --no-make \
     --qmake=/usr/lib/qt6/bin/qmake6 \
-    --api-dir=/usr/share/qt6/qsci/api/python
+    --api-dir=/usr/share/qt6/qsci/api/python \
+    --verbose \
+    --qmake-setting QMAKE_CFLAGS_RELEASE="$CFLAGS" \
+    --qmake-setting QMAKE_CXXFLAGS_RELEASE="$CXXFLAGS"
 
   cd build
   make
