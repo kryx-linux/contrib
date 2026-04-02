@@ -1,15 +1,16 @@
 # Description: TeX distribution for UNIX compatible systems
 # URL: https://www.tug.org/texlive
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: clisp ghostscript graphite2 harfbuzz icu libgd libmpfr paper potrace xorg-libxaw xorg-libxi zziplib
+# Depends on: brotli cairo clisp graphite2 harfbuzz icu libmpfr paper potrace xorg-libsm zziplib
 
 name=texlive
-version=20250308
+version=20260301
 release=1
-source=(ftp://tug.org/historic/systems/texlive/${version:0:4}/$name-$version-texmf.tar.xz
-  ftp://tug.org/historic/systems/texlive/${version:0:4}/$name-$version-source.tar.xz
+source=(https://src.rrz.uni-hamburg.de/files/src/texlive/texlive-$version-source.tar.xz
+  https://src.rrz.uni-hamburg.de/files/src/texlive/texlive-$version-texmf.tar.xz
   https://download.savannah.gnu.org/releases/texi2html/texi2html-5.0.tar.bz2
-  tabu.sty.diff)
+  tabu.sty.diff
+  lua-root.patch)
 
 unpack_source() {
   for file in ${source[@]}; do
@@ -30,6 +31,7 @@ unpack_source() {
 build() {
   cd $name-$version-source
 
+  patch -Np1 -i $SRC/lua-root.patch
   # Fix some paths
   sed -i 's/SELFAUTOPARENT/TEXMFROOT/' texk/tex4htk/t4ht.c
   sed -i -e 's|TEXMFROOT = .*|TEXMFROOT = $SELFAUTODIR/share|g' \
