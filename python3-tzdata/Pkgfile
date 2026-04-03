@@ -4,17 +4,13 @@
 # Depends on: python3-wheel
 
 name=python3-tzdata
-version=2025.3
+version=2026.1
 release=1
 source=(https://files.pythonhosted.org/packages/source/t/tzdata/tzdata-$version.tar.gz)
 
 build() {
   cd tzdata-$version
-  /usr/bin/python3 -m build \
-    --wheel \
-    --skip-dependency-check \
-    --no-isolation
-  /usr/bin/python3 -m installer \
-    \
-    --destdir=$PKG dist/*.whl
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
