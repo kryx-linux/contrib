@@ -4,16 +4,35 @@
 # Depends on: libpcre texlive
 
 name=chktex
-version=1.7.9
+version=1.7.10
 release=1
 source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz
+  chktex-1.7.10.patch
   encoding.patch)
+
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+    $name-$version.tar.gz)
+      echo "Unpacking $(get_filename $file)"
+      bsdtar -p -o -C $SRC -xf $(get_filename $file)
+      ;;
+    *)
+      cp $(get_filename $file) $SRC
+      ;;
+    esac
+  done
+}
 
 build() {
   cd $name-$version
+
   patch -Np0 -i $SRC/encoding.patch
-  ./autogen.sh
+  patch -Np1 -i $SRC/chktex-1.7.10.patch
+
+  autoreconf -fvi
   ./configure --prefix=/usr
   make
+
   make DESTDIR=$PKG install
 }
