@@ -2,34 +2,39 @@
 # URL: https://github.com/junegunn/fzf/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: go
+# Optional: tmux
 
 name=fzf
-version=0.70.0
+version=0.71.0
 release=1
 source=(https://github.com/junegunn/fzf/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+  export PATH="${GOPATH}/bin:$PATH"
+  export GOCACHE="${PKGMK_SOURCE_DIR}/gocache"
+  export GOMODCACHE="${PKGMK_SOURCE_DIR}/gomodcache"
+
   export CGO_CPPFLAGS="${CPPFLAGS}"
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export CGO_LDFLAGS="${LDFLAGS}"
-
-  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
-  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
   go build \
     -trimpath \
     -buildmode=pie \
     -mod=readonly \
     -modcacherw \
-    -o $name .
-  go build -o $name .
+    -ldflags "-s -w -linkmode=external"
 
-  install -dm755 $PKG/usr/bin
-  install -m755 fzf bin/fzf-tmux $PKG/usr/bin/
+  prt-get isinst bash-completion && install -Dm644 shell/completion.bash \
+    $PKG/usr/share/bash-completion/completions/fzf
+  prt-get isinst zsh && install -Dm644 shell/completion.zsh \
+    $PKG/usr/share/zsh/site-functions/_fzf
+  prt-get isinst tmux && install -m755 fzf-tmux $PKG/usr/bin/
 
-  install -dm755 $PKG/usr/share/fzf
-  install -m644 shell/*.bash shell/*.zsh $PKG/usr/share/fzf
+  install -Dm755 $name $PKG/usr/bin/$name
 }
