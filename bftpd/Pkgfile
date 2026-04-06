@@ -4,7 +4,7 @@
 # Depends on: zlib
 
 name=bftpd
-version=6.3
+version=6.6
 release=1
 source=(https://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz
   ftpd)
@@ -25,10 +25,10 @@ build() {
     --enable-libz
 
   make
-  install -d $PKG/usr/sbin $PKG/etc $PKG/etc/rc.d
-  make DESTDIR=$PKG install
+  install -d "$PKG"/usr/sbin "$PKG"/etc "$PKG"/etc/rc.d
+  make DESTDIR="$PKG" install
 
-  install -D -m 0755 $SRC/ftpd $PKG/etc/rc.d/ftpd
-  chmod 0600 $PKG/etc/bftpd.conf
-  ln -sf bftpd $PKG/usr/sbin/in.ftpd
+  install -D -m 0755 "$SRC"/ftpd "$PKG"/etc/rc.d/ftpd
+  chmod 0600 "$PKG"/etc/bftpd.conf
+  ln -sf bftpd "$PKG"/usr/sbin/in.ftpd
 }
