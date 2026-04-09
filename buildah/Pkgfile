@@ -5,20 +5,23 @@
 # Optional: bash-completion
 
 name=buildah
-version=1.43.0
+version=1.43.1
 release=1
 source=(https://github.com/containers/buildah/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
 
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+  export PATH="${GOPATH}/bin:$PATH"
+  export GOCACHE="${PKGMK_SOURCE_DIR}/gocache"
+  export GOMODCACHE="${PKGMK_SOURCE_DIR}/gomodcache"
+
   export CGO_CPPFLAGS="${CPPFLAGS}"
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
   export CGO_LDFLAGS="${LDFLAGS}"
-
-  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
-  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
 
   make PREFIX=/usr BUILDTAGS="containers_image_ostree_stub seccomp"
 
