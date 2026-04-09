@@ -4,34 +4,45 @@
 # Depends on: go jq pnpm
 
 name=authelia
-version=4.39.16
+version=4.39.17
 release=1
 source=(https://github.com/authelia/authelia/archive/v$version/$name-$version.tar.gz
   authelia.service)
 
 build() {
-  export GOPATH="$SRC/gopath" PATH="$PATH:$SRC/gopath/bin" _pkgver="v${version}" CGO_CPPFLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong" CGO_LDFLAGS="-Wl,-z,relro,-z,now"
-
   cd $name-$version/web
-
-  COMMIT=$(curl -s https://api.github.com/repos/authelia/authelia/tags | jq -r '.[] | select(.name==env._pkgver) | .commit.sha')
-  TAG=v${version}
-  STATE="tagged clean"
-  DATE=$(date +"%a, %d %b %Y %R:%S %z")
-  XOPTIONS="-X 'github.com/authelia/authelia/v4/internal/utils.BuildBranch=v${version}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildTag=${TAG}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildCommit=${COMMIT}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildDate=${DATE}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildState=${STATE}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildNumber=AUR'"
 
   pnpm install --no-frozen-lockfile --ignore-scripts
   pnpm build
   cd ..
   cp -R api internal/server/public_html/
+
+  mkdir "$PKGMK_SOURCE_DIR/gopath" || true
+  export GOPATH="$PKGMK_SOURCE_DIR/gopath"
+  export PATH="${GOPATH}/bin:$PATH"
+  export GOCACHE="${PKGMK_SOURCE_DIR}/gocache"
+  export GOMODCACHE="${PKGMK_SOURCE_DIR}/gomodcache"
+
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS} -D_FORTIFY_SOURCE=2 -fstack-protector-strong"
+  export CGO_LDFLAGS="${LDFLAGS} -Wl,-z,relro,-z,now"
+  export pkgver="v${version}"
+
+  COMMIT=$(curl -s https://api.github.com/repos/authelia/authelia/tags | jq -r '.[] | select(.name==env.pkgver) | .commit.sha')
+  TAG=v${version}
+  STATE="tagged clean"
+  DATE=$(date +"%a, %d %b %Y %R:%S %z")
+  XOPTIONS="-X 'github.com/authelia/authelia/v4/internal/utils.BuildBranch=v${version}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildTag=${TAG}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildCommit=${COMMIT}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildDate=${DATE}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildState=${STATE}' -X 'github.com/authelia/authelia/v4/internal/utils.BuildNumber=pkgmk'"
+
   go build \
     -trimpath \
     -buildmode=pie \
     -mod=readonly \
     -modcacherw \
+    -buildvcs=false \
     -ldflags "-linkmode external -s -w ${XOPTIONS}" \
-    -o authelia \
-    cmd/authelia/*.go
+    -o authelia cmd/authelia/*.go
 
   install -Dm700 config.template.yml $PKG/etc/$name/configuration.yml
   install -Dm755 $name $PKG/usr/bin/$name
