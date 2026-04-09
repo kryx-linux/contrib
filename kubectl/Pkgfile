@@ -1,0 +1,26 @@
+# Description: A command line tool for communicating with a Kubernetes cluster's control plane, using the Kubernetes API
+# URL: https://kubernetes.io/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: go
+
+name=kubectl
+version=1.35.3
+release=1
+source=(https://github.com/kubernetes/kubernetes/archive/v$version/kubernetes-v$version.tar.gz)
+
+build() {
+	export GOTOOLCHAIN=local
+	export CGO_CPPFLAGS="$CPPFLAGS"  # probably not set but won't hurt
+	export CGO_CFLAGS="$CFLAGS"
+	export CGO_CXXFLAGS="$CXXFLAGS"
+	export CGO_LDFLAGS="$LDFLAGS"
+	export GOFLAGS="-buildmode=pie -ldflags=-linkmode=external -ldflags=-compressdwarf=false -modcacherw"
+
+	cd kubernetes-$version
+	make kubectl
+	./hack/update-generated-docs.sh
+
+	install -Dm0755 _output/bin/$name $PKG/usr/bin/$name
+	install -d $PKG/usr/share/man/man1
+	install -m0644 docs/man/man1/$name* $PKG/usr/share/man/man1/
+}
