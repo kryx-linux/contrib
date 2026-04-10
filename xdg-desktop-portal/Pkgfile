@@ -5,11 +5,14 @@
 # Optional: geoclue python3-docutils
 
 name=xdg-desktop-portal
-version=1.21.0
+version=1.21.1
 release=1
-source=(https://github.com/flatpak/xdg-desktop-portal/archive/$version/$name-$version.tar.gz)
+_glnx=ccea836b799256420788c463a638ded0636b1632
+source=(https://github.com/flatpak/xdg-desktop-portal/archive/$version/$name-$version.tar.gz
+  https://gitlab.gnome.org/GNOME/libglnx/-/archive/$_glnx/libglnx-$_glnx.tar.bz2)
 
 build() {
+  mv libglnx-$_glnx $name-$version/subprojects/libglnx
   meson setup $name-$version build \
     --prefix=/usr \
     --libexecdir=lib/$name \
