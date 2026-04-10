@@ -6,12 +6,13 @@
 
 name=inkscape
 version=1.4.3
-release=3
+release=4
 source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
   7738.patch
   7773.patch
   poppler-26.02.patch
   7807.patch
+  0001-Fix-building-with-Poppler-26.04.0.patch
 )
 
 build() {
@@ -25,6 +26,7 @@ build() {
   patch -Np1 -d $name-$version -i $SRC/7773.patch
   patch -Np1 -d $name-$version -i $SRC/poppler-26.02.patch
   patch -Np1 -d $name-$version -i $SRC/7807.patch
+  patch -Np1 -d $name-$version -i $SRC/0001-Fix-building-with-Poppler-26.04.0.patch
 
   cmake -S $name-$version -B build -G Ninja $PKGMK_INKSCAPE \
     -D CMAKE_INSTALL_PREFIX=/usr \
