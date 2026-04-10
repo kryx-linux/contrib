@@ -4,14 +4,14 @@
 # Optional: docbook-xsl libxslt
 
 name=xdg-user-dirs
-version=0.19
+version=0.20
 release=1
-source=(https://gitlab.freedesktop.org/xdg/xdg-user-dirs/-/archive/v$version/xdg-user-dirs-v$version.tar.bz2)
+source=(https://user-dirs.freedesktop.org/releases/xdg-user-dirs-$version.tar.xz)
 
 build() {
   prt-get isinst dockbook-xsl libxslt || PKGMK_XUD+=' -D docs=false'
 
-  meson setup $name-v$version build \
+  meson setup $name-$version build \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
