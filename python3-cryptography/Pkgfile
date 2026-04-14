@@ -17,4 +17,7 @@ build() {
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+
+  _pyver=$(/usr/bin/python3 -c 'import sys; print("%s.%s" % sys.version_info[:2])')
+  rm -rf $PKG/usr/lib/python${_pyver}/site-packages/tests/
 }
