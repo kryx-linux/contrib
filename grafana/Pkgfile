@@ -5,7 +5,7 @@
 # Optional: postgresql redis
 
 name=grafana
-version=12.4.2
+version=13.0.0
 release=1
 source=(https://github.com/grafana/grafana/archive/v$version/$name-$version.tar.gz
   grafana.confd grafana.service)
@@ -32,8 +32,7 @@ build() {
   # backend
   wire gen -tags oss ./pkg/server ./pkg/cmd/grafana-cli/runner
   local ldflags="-X main.version=$version"
-  go run build.go setup
-  go run build.go build
+  make build-go
 
   # frontend
   export NPM_CONFIG_PREFIX="$SRC/npm"
@@ -51,9 +50,7 @@ build() {
   install -Dm644 $SRC/$name.confd $PKG/etc/conf.d/$name
   install -Dm755 packaging/wrappers/grafana-server $PKG/usr/bin/grafana-server
   install -Dm755 packaging/wrappers/grafana-cli $PKG/usr/bin/grafana-cli
-  install -Dsm755 bin/linux-amd64/grafana $PKG/usr/share/grafana/bin/grafana
-  install -Dsm755 bin/linux-amd64/grafana-cli $PKG/usr/share/grafana/bin/grafana-cli
-  install -Dsm755 bin/linux-amd64/grafana-server $PKG/usr/share/grafana/bin/grafana-server
+  install -Dsm755 bin/linux/amd64/grafana $PKG/usr/share/grafana/bin/grafana
   install -Dm644 conf/sample.ini $PKG/etc/grafana.ini
   install -Dm644 conf/defaults.ini $PKG/usr/share/$name/conf/defaults.ini
   install -dm755 $PKG/usr/share/$name
