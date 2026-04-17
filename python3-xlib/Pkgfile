@@ -5,14 +5,14 @@
 
 name=python3-xlib
 version=0.33
-release=2
-source=(https://github.com/python-xlib/python-xlib/releases/download/$version/python-xlib-$version.tar.bz2)
+release=3
+source=(https://github.com/python-xlib/python-xlib/releases/download/$version/python-xlib-$version.tar.bz2
+  setup.patch)
 
 build() {
   cd python-xlib-$version
 
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --root=$PKG \
-    --optimize=1 \
-    --skip-build
+  patch -Np1 -i $SRC/setup.patch
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
