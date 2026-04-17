@@ -5,10 +5,13 @@
 
 name=corrosion
 version=0.6.1
-release=1
-source=(https://github.com/corrosion-rs/corrosion/archive/v$version/$name-$version.tar.gz)
+release=2
+source=(https://github.com/corrosion-rs/corrosion/archive/v$version/$name-$version.tar.gz
+  cmake.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/cmake.patch
+
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
