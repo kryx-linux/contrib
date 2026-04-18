@@ -6,7 +6,7 @@
 
 name=mailman-web
 version=0.0.9
-release=2
+release=3
 source=(https://pypi.org/packages/source/m/mailman_web/mailman_web-$version.tar.gz
   mailman-web.service
   mailman-qcluster.service
@@ -21,6 +21,7 @@ build() {
   patch -Np1 -i $SRC/mailman-web-0.0.5-fhs.patch
   patch -Np1 -i $SRC/55.patch
 
+  PDM_BUILD_SCM_VERSION=$version \
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
 

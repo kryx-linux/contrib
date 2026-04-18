@@ -4,11 +4,11 @@
 #
 
 SSD=/sbin/start-stop-daemon
-PROG=/usr/bin/mailman-web
+PROG=/usr/bin/gunicorn
 PID=/run/mailman-web/master.pid
 USER=mailman
 PORT=8000
-OPTS="runserver $PORT --settings settings --pythonpath /etc/webapps/mailman-web/"
+OPTS="--pythonpath /etc/webapps/mailman-web/ --bind 0.0.0.0:${PORT} --workers 3 mailman_web.wsgi:application"
 
 case $1 in
 start)
