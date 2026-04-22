@@ -4,52 +4,52 @@
 # Depends on: openmpi
 
 name=fftw
-version=3.3.10
-release=2
+version=3.3.11
+release=1
 source=(http://www.fftw.org/$name-$version.tar.gz)
 
 build() {
-	cp -av $name-$version ${name}-${version}-double
-	cp -av $name-$version ${name}-${version}-long-double
-	cp -av $name-$version ${name}-${version}-quad
+  cp -av $name-$version ${name}-${version}-double
+  cp -av $name-$version ${name}-${version}-long-double
+  cp -av $name-$version ${name}-${version}-quad
 
-	export F77='gfortran'
-	CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
-	# default configure call
-	_default_configure="./configure --prefix=/usr --enable-shared --enable-threads --enable-mpi --enable-openmp"
+  export F77='gfortran'
+  CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
+  # default configure call
+  _default_configure="./configure --prefix=/usr --enable-shared --enable-threads --enable-mpi --enable-openmp"
 
-	# libtool fails to link with ccache in the path
-	[ -e '/usr/bin/ccache' ] && PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
-	# configure single precision
-	cd $SRC/$name-$version
-	${_default_configure} --enable-sse --enable-avx --enable-single
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  # libtool fails to link with ccache in the path
+  [ -e '/usr/bin/ccache' ] && PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/ccache/ {next} {print}' | sed 's/:*$//')
+  # configure single precision
+  cd $SRC/$name-$version
+  ${_default_configure} --enable-sse --enable-avx --enable-single
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	# configure double precision
-	cd $SRC/$name-$version-double
-	${_default_configure} --enable-sse2 --enable-avx
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  # configure double precision
+  cd $SRC/$name-$version-double
+  ${_default_configure} --enable-sse2 --enable-avx
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	# configure long-double precission
-	cd $SRC/$name-$version-long-double
-	${_default_configure} --enable-long-double
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  # configure long-double precission
+  cd $SRC/$name-$version-long-double
+  ${_default_configure} --enable-long-double
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	# configure quad precision
-	cd $SRC/$name-$version-quad
-	${_default_configure} --disable-mpi --enable-quad-precision
-	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  # configure quad precision
+  cd $SRC/$name-$version-quad
+  ${_default_configure} --disable-mpi --enable-quad-precision
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
-	make -C $SRC/$name-$version
-	make -C $SRC/$name-$version-double
-	make -C $SRC/$name-$version-long-double
-	make -C $SRC/$name-$version-quad
+  make -C $SRC/$name-$version
+  make -C $SRC/$name-$version-double
+  make -C $SRC/$name-$version-long-double
+  make -C $SRC/$name-$version-quad
 
-	make DESTDIR=$PKG install -C $SRC/$name-$version
-	make DESTDIR=$PKG install -C $SRC/$name-$version-double
-	make DESTDIR=$PKG install -C $SRC/$name-$version-long-double
-	make DESTDIR=$PKG install -C $SRC/$name-$version-quad
+  make DESTDIR=$PKG install -C $SRC/$name-$version
+  make DESTDIR=$PKG install -C $SRC/$name-$version-double
+  make DESTDIR=$PKG install -C $SRC/$name-$version-long-double
+  make DESTDIR=$PKG install -C $SRC/$name-$version-quad
 
-	rm -r $PKG/usr/share/info
-	rm $PKG/usr/lib/*.la
+  rm -r $PKG/usr/share/info
+  rm $PKG/usr/lib/*.la
 }
