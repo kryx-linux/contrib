@@ -7,7 +7,7 @@
 # MONO_VERSION:  11.0.0
 
 name=wine-staging
-version=11.6
+version=11.7
 release=1
 source=(https://dl.winehq.org/wine/source/11.x/wine-$version.tar.xz \
     https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz \
@@ -16,6 +16,8 @@ source=(https://dl.winehq.org/wine/source/11.x/wine-$version.tar.xz \
     https://dl.winehq.org/wine/wine-mono/11.0.0/wine-mono-11.0.0-x86.msi)
 
 build() {
+    export GAWK_GNU_MATCHERS=1
+
     cd $name-$version
     ./staging/patchinstall.py DESTDIR=../wine-$version --all -W server-Stored_ACLs
     cd ..
