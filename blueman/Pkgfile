@@ -6,13 +6,11 @@
 
 name=blueman
 version=2.4.6
-release=1
+release=2
 source=(https://github.com/blueman-project/$name/releases/download/$version/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
-
-  sed -e 's/cython/cython3/g' -i configure
 
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
@@ -24,6 +22,5 @@ build() {
   make
   make DESTDIR=$PKG install
 
-  rm -r $PKG/usr/share/doc/
-  rm -r $PKG/usr/lib/systemd/
+  rm -r $PKG/usr/{lib/systemd,share/doc}
 }
