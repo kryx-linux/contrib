@@ -1,17 +1,16 @@
 # Description: Python network library that uses greenlet and libev for easy and scalable concurrency
 # URL: https://www.gevent.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: c-ares libev python3-greenlet python3-zope-event python3-zope-interface python3-cython
+# Depends on: c-ares libev python3-cython python3-greenlet python3-zope-event python3-zope-interface
 
 name=python3-gevent
 version=26.4.0
-release=1
+release=2
 source=(https://github.com/gevent/gevent/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd gevent-$version
 
-  CYTHON=cython3 \
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
