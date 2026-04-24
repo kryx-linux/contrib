@@ -1,0 +1,12 @@
+diff -Naur R-4.6.0.orig/src/unix/Makefile.in R-4.6.0/src/unix/Makefile.in
+--- R-4.6.0.orig/src/unix/Makefile.in	2026-04-24 17:33:12.441991417 +0200
++++ R-4.6.0/src/unix/Makefile.in	2026-04-24 17:33:50.402858575 +0200
+@@ -89,7 +89,7 @@
+ 	  -e "s:@rincludedir:$(rincludedir):" \
+ 	  -e "s:@rarch:$(R_ARCH):" \
+ 	  -e 's:@libsprivate:$(STATIC_LIBR_PC):' \
+-	  -e 's:@others:$(MAIN_LDFLAGS) $(LIBR_LDFLAGS):' \
++	  -e 's:@others:$(MAIN_LDFLAGS):' \
+ 	  -e 's/@VERSION/$(VERSION)/' $(srcdir)/libR.pc.in \
+ 	  > "$(DESTDIR)$(libdir)/pkgconfig/libR.pc"
+ 
