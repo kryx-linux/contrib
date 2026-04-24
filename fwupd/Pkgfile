@@ -2,10 +2,10 @@
 # URL: https://github.com/fwupd/fwupd
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: gcab hwdata libjcat libqmi libsmbios libxmlb pango python3-gobject python3-jinja2 python3-pillow vala xorg-font-dejavu-ttf
-# Optional: bash-completion bluez efivar flashrom libcbor libdrm libgusb modemmanager pandoc-bin polkit python3-markdown tpm2-tss udisks2 valgrind
+# Optional: bash-completion bluez efivar flashrom libdrm libgusb modemmanager pandoc-bin polkit python3-markdown tpm2-tss udisks2 valgrind
 
 name=fwupd
-version=2.1.1
+version=2.1.2
 release=1
 source=(https://github.com/fwupd/fwupd/releases/download/$version/fwupd-$version.tar.xz
   fwupd.service)
@@ -14,7 +14,6 @@ build() {
   prt-get isinst bash-completion || PKGMK_FWUPD+=' -D bash_completion=false'
   prt-get isinst bluez || PKGMK_FWUPD+=' -D bluez=disabled'
   prt-get isinst flashrom || PKGMK_FWUPD+=' -D plugin_flashrom=disabled'
-  prt-get isinst libcbor || PKGMK_FWUPD+=' -D cbor=disabled'
   prt-get isinst modemmanager && PKGMK_FWUPD+=' -D plugin_modem_manager=disabled'
   prt-get isinst pandoc-bin && PKGMK_FWUPD+=' -D man=true'
   prt-get isinst polkit && PKGMK_FWUPD+=' -D polkit=enabled' || PKGMK_FWUPD+=' -D polkit=disabled'
