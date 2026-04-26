@@ -5,7 +5,7 @@
 # Optional: tmux
 
 name=fzf
-version=0.71.0
+version=0.72.0
 release=1
 source=(https://github.com/junegunn/fzf/archive/v$version/$name-$version.tar.gz)
 
@@ -34,7 +34,7 @@ build() {
     $PKG/usr/share/bash-completion/completions/fzf
   prt-get isinst zsh && install -Dm644 shell/completion.zsh \
     $PKG/usr/share/zsh/site-functions/_fzf
-  prt-get isinst tmux && install -m755 fzf-tmux $PKG/usr/bin/
+  prt-get isinst tmux && install -Dm755 bin/fzf-tmux -t $PKG/usr/bin/
 
   install -Dm755 $name $PKG/usr/bin/$name
 }
