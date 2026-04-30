@@ -5,7 +5,7 @@
 # Optional: krb5 lua51
 
 name=wireshark
-version=4.6.4
+version=4.6.5
 release=1
 source=(https://www.wireshark.org/download/src/$name-$version.tar.xz)
 
@@ -27,6 +27,7 @@ build() {
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_INSTALL_LIBEXECDIR=lib/$name \
     -D USE_qt6=ON
 
   cmake --build build
