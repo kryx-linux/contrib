@@ -2,22 +2,26 @@
 # URL: https://github.com/libical/libical
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: glib libxml2
+# Optional: glib-introspection
 
 name=libical
-version=3.0.20
+version=4.0.0
 release=1
 source=(https://github.com/libical/libical/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cmake -S $name-$version -B build -G Ninja \
+  prt-get isinst glib-introspection || PKGMK_LIBICAL+=' -D LIBICAL_GOBJECT_INTROSPECTION=OFF'
+
+  cmake -S $name-$version -B build -G Ninja $PKGMK_LIBICAL \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_INSTALL_LIBEXECDIR=lib/$name \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-    -D SHARED_ONLY=true \
-    -D ICAL_BUILD_DOCS=false \
+    -D LIBICAL_JAVA_BINDINGS=OFF \
+    -D ICAL_BUILD_DOCS=OFF \
+    -D LIBICAL_GLIB_BUILD_DOCS=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
