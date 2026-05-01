@@ -4,7 +4,7 @@
 # Depends on: wasm-bindgen wasm-pack
 
 name=lldap
-version=0.6.2
+version=0.6.3
 release=1
 source=(https://github.com/lldap/lldap/archive/v$version/$name-$version.tar.gz
   lldap.service
@@ -27,6 +27,7 @@ build() {
     -p lldap \
     -p lldap_migration_tool \
     -p lldap_set_password
+  CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER=wasm-ld \
   ./app/build.sh
   find target/release \
     -maxdepth 1 \
