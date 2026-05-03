@@ -1,0 +1,28 @@
+From bf3eae03ba6ed416ff58e63ea30dd4b95f310e46 Mon Sep 17 00:00:00 2001
+From: SATOH Fumiyasu <fumiyas@osstech.co.jp>
+Date: Tue, 23 Sep 2025 16:03:02 +0900
+Subject: [PATCH] feat: Add support for Python 3.12 and 3.13, Django 5.2 (LTS)
+
+---
+ .gitlab-ci.yml | 21 ++++++++++-----------
+ README.rst     |  2 ++
+ pyproject.toml |  2 +-
+ tox.ini        |  8 +++-----
+ 4 files changed, 16 insertions(+), 17 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 74c8812..10baf97 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -18,7 +18,7 @@ classifiers = [
+ ]
+ requires-python = ">=3.9"
+ dependencies = [
+-    "django>=4.0,<4.3",
++    "django>=4.2,<5.3",
+     "hyperkitty",
+     "postorius",
+     "whoosh",
+-- 
+GitLab
+
