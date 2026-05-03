@@ -5,12 +5,13 @@
 
 name=python3-clikit
 version=0.6.2
-release=2
+release=3
 source=(https://github.com/sdispater/clikit/archive/$version/$name-$version.tar.gz)
 
 build() {
   cd clikit-$version
 
+  sed -i -e '/^crashtest/s/\^/>=/' pyproject.toml
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
