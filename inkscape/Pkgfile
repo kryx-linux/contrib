@@ -6,8 +6,9 @@
 
 name=inkscape
 version=1.4.4
-release=1
-source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz)
+release=2
+source=(https://media.inkscape.org/dl/resources/file/$name-$version.tar.xz
+  7919.patch)
 
 build() {
   mv inkscape-* inkscape-$version
@@ -15,6 +16,8 @@ build() {
   prt-get isinst libcdr || PKGMK_INKSCAPE+=" -D WITH_LIBCDR=OFF"
   prt-get isinst libvisio || PKGMK_INKSCAPE+=" -D WITH_LIBVISIO=OFF"
   prt-get isinst libwpg || PKGMK_INKSCAPE+=" -D WITH_LIBWPG=OFF"
+
+  patch -Np1 -d $name-$version -i $SRC/7919.patch
 
   cmake -S $name-$version -B build -G Ninja $PKGMK_INKSCAPE \
     -D CMAKE_INSTALL_PREFIX=/usr \
