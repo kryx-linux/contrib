@@ -4,11 +4,11 @@
 # Depends on: go
 # Optional: docker podman
 
-name=act-runner
-version=0.6.1
+name=gitea-runner
+version=1.0.3
 release=1
-source=(https://gitea.com/gitea/act_runner/archive/v$version.tar.gz
-  act-runner.service)
+source=(https://gitea.com/gitea/runner/archive/v$version.tar.gz
+  gitea-runner.service)
 renames=($name-$version.tar.gz SKIP)
 
 build() {
@@ -31,10 +31,10 @@ build() {
     -modcacherw \
     -buildvcs=false \
     -ldflags "-linkmode=external -s -w \
-      -X gitea.com/gitea/act_runner/internal/pkg/ver.version=v$version"
+      -X gitea.com/gitea/runner/internal/pkg/ver.version=v$version"
 
-  install -Dm755 act_runner -t $PKG/usr/bin
-  install -d -m 755 $PKG/{var/lib/act_runner,usr/share/act_runner}
-  $PKG/usr/bin/act_runner generate-config > $PKG/usr/share/act_runner/config.yaml
+  install -Dm755 runner $PKG/usr/bin/gitea-runner
+  install -d -m 755 $PKG/{var/lib/gitea-runner,usr/share/gitea-runner}
+  $PKG/usr/bin/gitea-runner generate-config > $PKG/usr/share/gitea-runner/config.yaml
   install -Dm 755 $SRC/$name.service $PKG/etc/rc.d/$name
 }
