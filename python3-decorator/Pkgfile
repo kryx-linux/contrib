@@ -4,13 +4,12 @@
 # Depends on: python3-wheel
 
 name=python3-decorator
-_name=decorator
-version=5.2.1
-release=2
-source=(https://pypi.python.org/packages/source/${_name:0:1}/${_name}/$_name-$version.tar.gz)
+version=5.3.0
+release=1
+source=(https://pypi.org/packages/source/d/decorator/decorator-$version.tar.gz)
 
 build() {
-  cd $_name-$version
+  cd decorator-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
