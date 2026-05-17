@@ -1,0 +1,23 @@
+# Description: Another packages and ports tool for CRUX
+# URL: https://git.crux.nu/jaeger/ppt
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: go
+
+name=ppt
+version=0.0.6
+release=1
+source=(https://git.crux.nu/jaeger/ppt/releases/download/v${version}/ppt-${version}.tar.xz)
+
+build() {
+    export GOPATH=$PKGMK_SOURCE_DIR/gopath
+    mkdir -p $GOPATH
+    export PATH=$GOPATH/bin:$PATH
+    export GOCACHE=$PKGMK_SOURCE_DIR/gocache
+    export GOMODCACHE=$PKGMK_SOURCE_DIR/gomodcache
+
+    cd $name-$version
+    make
+    make DESTDIR=$PKG install
+}
+
+# vim: set ts=4 et:
