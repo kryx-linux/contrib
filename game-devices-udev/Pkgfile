@@ -3,13 +3,16 @@
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 
 name=game-devices-udev
-version=0.25
-release=2
+version=1.0
+release=1
 source=(https://codeberg.org/fabiscafe/game-devices-udev/archive/$version.tar.gz 70-uinput.rules)
 renames=($name-$version.tar.gz)
 
 build() {
-	install -d -m 0755 $PKG/etc/udev/rules.d
-	install -m 0644 $name/*.rules $SRC/*.rules $PKG/etc/udev/rules.d/
-	sed -i -e 's:\( MODE="0660",\):\1 GROUP="input",:g' $PKG/etc/udev/rules.d/*.rules
+    meson setup $name build \
+        --prefix=/
+    DESTDIR=$PKG meson install -C build
+    sed -i -e 's:\( MODE="0660",\):\1 GROUP="input",:g' $PKG/lib/udev/rules.d/*.rules
+    install -m 0644 $SRC/*.rules $PKG/lib/udev/rules.d/
 }
+
