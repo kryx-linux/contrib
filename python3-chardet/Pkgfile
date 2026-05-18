@@ -1,19 +1,18 @@
 # Description: Python module for character encoding auto-detection.
 # URL: https://github.com/erikrose/chardet
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: python3-build python3-installer
+# Depends on: python3-hatch-vcs
 
 name=python3-chardet
-_name=${name#*-}
-version=5.2.0
-release=2
-source=(https://files.pythonhosted.org/packages/source/${_name::1}/$_name/$_name-$version.tar.gz)
+version=7.4.3
+release=1
+source=(https://files.pythonhosted.org/packages/source/c/chardet/chardet-$version.tar.gz)
 
 build() {
-  cd $_name-$version
+  cd chardet-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir="$PKG" dist/*.whl
 
-  rm -rf "$PKG"/usr/lib/python3.12/site-packages/$_name-$version.dist-info/licenses
+  rm -rf "$PKG"/usr/lib/python3.12/site-packages/chardet-$version.dist-info/licenses
 }
