@@ -1,15 +1,18 @@
 # Description: Qt API bindings/wrapper for GPGME
 # URL: https://dev.gnupg.org/source/gpgmeqt/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on:  gpgmepp qt6-base
+# Depends on: gpgmepp qt6-base
+# Optional: qt5
 
 name=qgpgme
-version=2.0.0
+version=2.1.0
 release=1
 source=(https://www.gnupg.org/ftp/gcrypt/qgpgme/qgpgme-$version.tar.xz)
 
 build() {
-  cmake -S $name-$version -B build -G Ninja \
+  prt-get isinst qt5 || PKGMK_QGPGME+=' -D BUILD_WITH_QT5=OFF'
+
+  cmake -S $name-$version -B build -G Ninja $PKGMK_QGPGME \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D CMAKE_BUILD_TYPE=Release \
