@@ -1,0 +1,19 @@
+# Description: Build.PL install path logic made easy
+# URL: https://metacpan.org/pod/ExtUtils::InstallPaths
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: p5-extutils-config
+
+name=p5-extutils-installpaths
+version=0.015
+release=1
+source=(https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-$version.tar.gz)
+
+build() {
+  cd ExtUtils-InstallPaths-$version
+
+  perl Makefile.PL INSTALLDIRS=vendor
+  make
+  make DESTDIR=$PKG install
+
+  find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
+}
