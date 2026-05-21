@@ -1,17 +1,19 @@
 # Description: Simple http server class
 # URL: https://metacpan.org/pod/HTTP::Daemon
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: p5-http-message
+# Depends on: p5-http-message p5-module-build-tiny
 
 name=p5-http-daemon
-version=6.16
+version=6.17
 release=1
 source=(https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Daemon-$version.tar.gz)
 
 build() {
   cd HTTP-Daemon-$version
-  perl Makefile.PL INSTALLDIRS=vendor
-  make
-  make DESTDIR=$PKG install
+
+  PERL_MM_USE_DEFAULT=1 perl Build.PL --create_packlist=0
+  ./Build
+  ./Build install --installdirs=vendor --destdir=$PKG
+
   find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
 }
