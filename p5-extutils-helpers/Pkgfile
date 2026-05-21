@@ -1,0 +1,19 @@
+# Description: Various portability utilities for module builders
+# URL: https://metacpan.org/pod/ExtUtils::Helpers
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: perl
+
+name=p5-extutils-helpers
+version=0.028
+release=1
+source=(https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-Helpers-$version.tar.gz)
+
+build() {
+  cd ExtUtils-Helpers-$version
+
+  perl Makefile.PL INSTALLDIRS=vendor
+  make
+  make DESTDIR=$PKG install
+
+  find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
+}
