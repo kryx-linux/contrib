@@ -1,0 +1,19 @@
+# Description: Dynamic prerequisites in meta files
+# URL: https://metacpan.org/pod/CPAN::Requirements::Dynamic
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: p5-extutils-config
+
+name=p5-cpan-requirements-dynamic
+version=0.002
+release=1
+source=(https://cpan.metacpan.org/authors/id/L/LE/LEONT/CPAN-Requirements-Dynamic-$version.tar.gz)
+
+build() {
+  cd CPAN-Requirements-Dynamic-$version
+
+  perl Makefile.PL INSTALLDIRS=vendor
+  make
+  make DESTDIR=$PKG install
+
+  find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
+}
