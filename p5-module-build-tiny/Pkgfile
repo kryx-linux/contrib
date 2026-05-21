@@ -1,0 +1,19 @@
+# Description: A tiny replacement for Module::Build
+# URL: https://metacpan.org/pod/Module::Build::Tiny
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: p5-cpan-requirements-dynamic p5-extutils-helpers p5-extutils-installpaths
+
+name=p5-module-build-tiny
+version=0.053
+release=1
+source=(https://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-Tiny-$version.tar.gz)
+
+build() {
+  cd Module-Build-Tiny-$version
+
+  perl Build.PL --installdirs vendor
+  perl Build
+  perl Build install --destdir=$PKG
+
+  find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
+}
