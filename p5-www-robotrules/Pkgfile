@@ -4,14 +4,16 @@
 # Depends on: p5-uri
 
 name=p5-www-robotrules
-version=6.02
+version=6.03
 release=1
-source=(https://cpan.metacpan.org/authors/id/G/GA/GAAS/WWW-RobotRules-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/O/OA/OALDERS/WWW-RobotRules-$version.tar.gz)
 
 build() {
   cd WWW-RobotRules-$version
+
   perl Makefile.PL INSTALLDIRS=vendor
   make
   make DESTDIR=$PKG install
+
   find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
 }
