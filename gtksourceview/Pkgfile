@@ -2,6 +2,7 @@
 # URL: https://www.gnome.org/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 # Depends on: gtk4
+# Optional: vala
 
 name=gtksourceview
 version=5.20.0
@@ -9,10 +10,11 @@ release=1
 source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 
 build() {
-  meson setup $name-$version build \
+  prt-get isinst vala && PKGMK_GTKSV+=' -Dvapi=true' || PKGMK_GTKSV+=' -Dvapi=false'
+
+  meson setup $name-$version build $PKGMK_GTKSV \
     --prefix=/usr \
     --buildtype=plain \
-    -D vapi=false \
     -D b_lto=true \
     -D b_pie=true
 
