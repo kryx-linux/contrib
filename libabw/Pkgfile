@@ -4,12 +4,13 @@
 # Depends on: librevenge libxml2
 
 name=libabw
-version=0.1.3
-release=2
+version=0.1.4
+release=1
 source=(https://dev-www.libreoffice.org/src/$name/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
+
   ./configure --prefix=/usr \
     --without-docs
   make
