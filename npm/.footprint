@@ -31,6 +31,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/cli/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/access.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/adduser.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/approve-scripts.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/audit.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/bugs.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/cache.js
@@ -38,6 +39,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/completion.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/config.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/dedupe.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/deny-scripts.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/deprecate.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/diff.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/commands/dist-tag.js
@@ -116,8 +118,11 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/commands/trust/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/package-url-cmd.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/trust-cmd.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/allow-scripts-cmd.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/allow-scripts-writer.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/audit-error.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/auth.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/check-allow-scripts.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/cmd-list.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/completion.fish
 -rwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/completion.sh
@@ -145,14 +150,17 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/lib/utils/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/read-user-info.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/reify-finish.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/reify-output.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/resolve-allow-scripts.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/sbom-cyclonedx.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/sbom-spdx.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/strict-allow-scripts-preflight.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/tar.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/timers.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/update-workspaces.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/validate-lockfile.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/validate-uuid.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/verify-signatures.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/lib/utils/warn-workspace-allow-scripts.js
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/
 drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/.bin/
 lrwxrwxrwx	root/root	usr/lib/node_modules/npm/node_modules/.bin/arborist -> ../@npmcli/arborist/bin/index.js
@@ -234,6 +242,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/from-path.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/gather-dep-set.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/index.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/install-scripts.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/inventory.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/isolated-classes.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/link.js
@@ -250,6 +259,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/relpath.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/reset-dep-flags.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/retire-path.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/script-allowed.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/shrinkwrap.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/signal-handling.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/signals.js
@@ -270,6 +280,7 @@ drwxr-xr-x	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/de
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/errors.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/nerf-dart.js
+-rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/parse-allow-scripts-list.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/parse-field.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/set-envs.js
 -rw-r--r--	root/root	usr/lib/node_modules/npm/node_modules/@npmcli/config/lib/type-defs.js
@@ -1975,6 +1986,7 @@ drwxr-xr-x	root/root	usr/share/man/
 drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/npm-access.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-adduser.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/npm-approve-scripts.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-audit.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-bugs.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-cache.1.gz
@@ -1982,6 +1994,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/npm-completion.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-config.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-dedupe.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/npm-deny-scripts.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-deprecate.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-diff.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/npm-dist-tag.1.gz
