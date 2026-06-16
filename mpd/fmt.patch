@@ -1,0 +1,67 @@
+diff -Naur mpd-0.24.12.orig/src/net/ToString.cxx mpd-0.24.12/src/net/ToString.cxx
+--- mpd-0.24.12.orig/src/net/ToString.cxx	2026-06-16 23:02:35.341290651 +0200
++++ mpd-0.24.12/src/net/ToString.cxx	2026-06-16 23:03:06.048974539 +0200
+@@ -7,6 +7,7 @@
+ #include "IPv4Address.hxx"
+ 
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ #include <algorithm>
+ #include <cassert>
+diff -Naur mpd-0.24.12.orig/src/output/plugins/httpd/HttpdClient.cxx mpd-0.24.12/src/output/plugins/httpd/HttpdClient.cxx
+--- mpd-0.24.12.orig/src/output/plugins/httpd/HttpdClient.cxx	2026-06-16 23:02:35.350660844 +0200
++++ mpd-0.24.12/src/output/plugins/httpd/HttpdClient.cxx	2026-06-16 23:04:53.652448915 +0200
+@@ -14,6 +14,7 @@
+ #include "Log.hxx"
+ 
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ #include <cassert>
+ 
+diff -Naur mpd-0.24.12.orig/src/output/plugins/httpd/IcyMetaDataServer.cxx mpd-0.24.12/src/output/plugins/httpd/IcyMetaDataServer.cxx
+--- mpd-0.24.12.orig/src/output/plugins/httpd/IcyMetaDataServer.cxx	2026-06-16 23:02:35.350660844 +0200
++++ mpd-0.24.12/src/output/plugins/httpd/IcyMetaDataServer.cxx	2026-06-16 23:09:35.115939800 +0200
+@@ -6,6 +6,7 @@
+ #include "util/TruncateString.hxx"
+ 
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ #include <iterator>
+ 
+diff -Naur mpd-0.24.12.orig/src/song/AddedSinceSongFilter.cxx mpd-0.24.12/src/song/AddedSinceSongFilter.cxx
+--- mpd-0.24.12.orig/src/song/AddedSinceSongFilter.cxx	2026-06-16 23:02:35.367421931 +0200
++++ mpd-0.24.12/src/song/AddedSinceSongFilter.cxx	2026-06-16 23:05:36.606352982 +0200
+@@ -7,6 +7,7 @@
+ #include "util/StringBuffer.hxx"
+ 
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ using std::string_view_literals::operator""sv;
+ 
+diff -Naur mpd-0.24.12.orig/src/song/AudioFormatSongFilter.cxx mpd-0.24.12/src/song/AudioFormatSongFilter.cxx
+--- mpd-0.24.12.orig/src/song/AudioFormatSongFilter.cxx	2026-06-16 23:02:35.367421931 +0200
++++ mpd-0.24.12/src/song/AudioFormatSongFilter.cxx	2026-06-16 23:13:06.798136205 +0200
+@@ -5,7 +5,7 @@
+ #include "LightSong.hxx"
+ #include "util/StringBuffer.hxx"
+ 
+-#include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ using std::string_view_literals::operator""sv;
+ 
+diff -Naur mpd-0.24.12.orig/src/song/ModifiedSinceSongFilter.cxx mpd-0.24.12/src/song/ModifiedSinceSongFilter.cxx
+--- mpd-0.24.12.orig/src/song/ModifiedSinceSongFilter.cxx	2026-06-16 23:02:35.367421931 +0200
++++ mpd-0.24.12/src/song/ModifiedSinceSongFilter.cxx	2026-06-16 23:06:39.552692646 +0200
+@@ -7,6 +7,7 @@
+ #include "util/StringBuffer.hxx"
+ 
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ using std::string_view_literals::operator""sv;
+ 
