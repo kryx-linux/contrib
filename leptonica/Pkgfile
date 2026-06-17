@@ -1,0 +1,24 @@
+# Description: Software that is broadly useful for image processing and image analysis applications
+# URL: https://github.com/DanBloomberg/leptonica
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libwebp openjpeg2
+
+name=leptonica
+version=1.87.0
+release=1
+source=(https://github.com/DanBloomberg/leptonica/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cmake -S $name-$version -B build -G Ninja \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC" \
+    -D SYM_LINK=OFF \
+    -D CMAKE_SKIP_INSTALL_RPATH=ON \
+    -D BUILD_PROG=ON \
+    -D BUILD_SHARED_LIBS=ON \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
