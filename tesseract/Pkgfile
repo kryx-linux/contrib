@@ -1,0 +1,22 @@
+# Description: OCR engine
+# URL: https://github.com/tesseract-ocr/tesseract
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: leptonica tesseract-data
+
+name=tesseract
+version=5.5.2
+release=1
+source=(https://github.com/tesseract-ocr/tesseract/archive/$version/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make
+  make training
+  make DESTDIR=$PKG install
+  make DESTDIR=$PKG training
+
+  rm -r $PKG/usr/share/tessdata/configs
+  rm -r $PKG/usr/share/tessdata/pdf.ttf
+}
