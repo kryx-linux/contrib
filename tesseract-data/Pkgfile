@@ -1,0 +1,13 @@
+# Description: Tesseract OCR data (osd)
+# URL: https://github.com/tesseract-ocr/tessdata
+# Maintainer: Tim Biermann, tbier at posteo dot de
+
+name=tesseract-data
+version=4.1.0
+release=1
+source=(https://github.com/tesseract-ocr/tessdata/archive/$version/$name-$version.tar.gz)
+
+build() {
+  mkdir -p $PKG/usr/share/tessdata/
+  cp -a $SRC/tessdata-$version/* $PKG/usr/share/tessdata/
+}
