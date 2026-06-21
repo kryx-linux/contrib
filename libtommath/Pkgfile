@@ -1,5 +1,5 @@
 # Description: Highly optimized and portable routines for integer based number theoretic applications
-# URL: http://www.libtom.org/
+# URL: https://github.com/libtom/libtommath
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=libtommath
@@ -9,6 +9,7 @@ source=(https://github.com/libtom/libtommath/releases/download/v$version/ltm-$ve
 
 build() {
   cd $name-$version
+
   make -f makefile.shared IGONE_SPEED=1
   make -f makefile.shared PREFIX=/usr DESTDIR=$PKG INSTALL_GROUP=root install
 }
