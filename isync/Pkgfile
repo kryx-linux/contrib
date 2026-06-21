@@ -1,5 +1,5 @@
 # Description: IMAP and MailDir mailbox synchronizer
-# URL: http://isync.sourceforge.net/
+# URL: https://isync.sourceforge.net/
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: cyrus-sasl
 
@@ -10,8 +10,10 @@ source=(https://sourceforge.net/projects/isync/files/$name/$version/$name-$versi
 
 build() {
   cd $name-$version
+
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
+
   rm -fr $PKG/usr/share/doc
 }
