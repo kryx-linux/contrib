@@ -1,12 +1,13 @@
 # Description: Library for dealing with Microsoft ITSS/CHM format files
-# URL: http://www.jedrea.com/chmlib/
+# URL: https://github.com/jedwing/CHMLib
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on:
 
 name=chmlib
 version=0.40
 release=1
-source=(http://www.jedrea.com/chmlib/$name-$version.tar.bz2
+_commit=2bef8d063ec7d88a8de6fd9f0513ea42ac0fa21f
+source=(https://github.com/jedwing/CHMLib/archive/$_commit/$name-$_commit.tar.gz
   chmlib-0001-Patch-to-fix-integer-types-problem-by-Goswin-von-Bre.patch
   chmlib-0002-Fix-for-extract_chmLib-confusing-empty-files-with-di.patch
   chm_http-port-shortopt.patch
@@ -16,10 +17,8 @@ source=(http://www.jedrea.com/chmlib/$name-$version.tar.bz2
 )
 
 build() {
-  cd $name-$version
+  cd CHMLib-$_commit
 
-  patch -Np1 -i $SRC/chmlib-0001-Patch-to-fix-integer-types-problem-by-Goswin-von-Bre.patch
-  patch -Np1 -i $SRC/chmlib-0002-Fix-for-extract_chmLib-confusing-empty-files-with-di.patch
   patch -Np1 -i $SRC/chm_http-port-shortopt.patch
   patch -Np1 -i $SRC/chm_http-bind-localhost.patch
   patch -Np1 -i $SRC/chm_http-output-server-address.patch
