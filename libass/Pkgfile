@@ -4,12 +4,13 @@
 # Depends on: fontconfig fribidi harfbuzz
 
 name=libass
-version=0.17.4
+version=0.17.5
 release=1
 source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
