@@ -4,11 +4,10 @@
 # Optional: jemalloc
 
 name=valkey
-version=9.0.4
+version=9.1.0
 release=1
 source=(https://github.com/valkey-io/valkey/archive/$version/$name-$version.tar.gz
   valkey.rc
-  remove-deprecated-use-of-je_calloc.patch
   valkey-5.0-use-system-jemalloc.patch)
 
 build() {
@@ -16,7 +15,6 @@ build() {
 
   cd $name-$version
 
-  patch -Np1 -i $SRC/remove-deprecated-use-of-je_calloc.patch
   prt-get isinst jemalloc && patch -Np1 -i $SRC/valkey-5.0-use-system-jemalloc.patch
   prt-get isinst jemalloc && rm -r deps/jemalloc
 
