@@ -4,15 +4,16 @@
 # Depends on: cmake
 
 name=libldac
-version=2.0.2.3
+version=2.0.2.6
 release=1
 source=(https://github.com/EHfive/ldacBT/releases/download/v$version/ldacBT-$version.tar.gz)
 
 build() {
-  cmake -S ldacBT -B build -G Ninja \
+  cmake -S . -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D LDAC_SOFT_FLOAT=OFF \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
