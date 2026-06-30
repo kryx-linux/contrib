@@ -1,0 +1,16 @@
+# Description: Python bindings for mypy AST serialization
+# URL: https://github.com/mypyc/ast_serialize
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-maturin
+
+name=python3-ast-serialize
+version=0.5.0
+release=1
+source=(https://pypi.org/packages/source/a/ast_serialize/ast_serialize-$version.tar.gz)
+
+build() {
+  cd ast_serialize-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
