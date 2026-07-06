@@ -4,7 +4,7 @@
 # Depends on: clang lld
 
 name=wasi-libc
-version=31
+version=32
 release=1
 source=(https://github.com/WebAssembly/wasi-libc/archive/wasi-sdk-$version/$name-$version.tar.gz)
 
@@ -24,6 +24,7 @@ build() {
     wasm32-wasip1
     wasm32-wasip1-threads
     wasm32-wasip2
+    wasm32-wasip3
   )
 
   unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
