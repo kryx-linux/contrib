@@ -4,7 +4,7 @@
 # Depends on: libnotify
 
 name=girara
-version=2026.02.04
+version=2026.07.07
 release=1
 source=(https://github.com/pwmt/girara/archive/$version/$name-$version.tar.gz)
 
@@ -16,8 +16,7 @@ build() {
     --wrap-mode nodownload \
     -D b_lto=true \
     -D b_pie=true \
-    -D docs=disabled \
-    -D tests=disabled
+    -D docs=disabled
   meson compile -C build
   DESTDIR=$PKG meson install -C build
 
