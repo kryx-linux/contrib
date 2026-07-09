@@ -5,12 +5,15 @@
 # Optional: texlive
 
 name=zathura
-version=2026.07.02
+version=2026.07.08
 release=1
-source=(https://github.com/pwmt/zathura/archive/$version/$name-$version.tar.gz)
+source=(https://github.com/pwmt/zathura/archive/$version/$name-$version.tar.gz
+  9abd4b74b5b08c89f1bcd50d890c72cf4c6252c2.patch)
 
 build() {
   prt-get isinst texlive && PKGMK_ZATHURA+=" -D synctex=enabled" || PKGMK_ZATHURA=" -D synctex=disabled"
+
+  patch -Np1 -d $name-$version -i $SRC/9abd4b74b5b08c89f1bcd50d890c72cf4c6252c2.patch
 
   meson setup $name-$version build $PKGMK_ZATHURA \
     --prefix=/usr \
