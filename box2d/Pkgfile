@@ -1,14 +1,18 @@
 # Description: A 2D Physics Engine for Games
 # URL: https://box2d.org/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: xorg-libxcursor xorg-libxinerama
+# Depends on: glfw
 
 name=box2d
-version=2.4.2
+version=3.1.1
 release=1
-source=(https://github.com/erincatto/box2d/archive/v$version/$name-$version.tar.gz)
+_enkits=0289cf6ffce86697e1f46cb4eeca1c946bffec71
+source=(https://github.com/erincatto/box2d/archive/v$version/$name-$version.tar.gz
+  https://github.com/dougbinks/enkiTS/archive/$_enkits/enkits-$_enkits.tar.gz
+  libm.patch)
 
 build() {
+  patch -Np1 -d $name-$version -i $SRC/libm.patch
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
@@ -16,9 +20,25 @@ build() {
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS -fPIC" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC" \
     -D BUILD_SHARED_LIBS=ON \
-    -D BOX2D_BUILD_TESTBED=OFF \
-    -D BOX2D_BUILD_UNIT_TESTS=OFF \
+    -D BOX2D_SAMPLES=OFF \
+    -D FETCHCONTENT_SOURCE_DIR_ENKITS=$SRC/enkiTS-$_enkits \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
+
+  install -d $PKG/usr/lib/pkgconfig
+
+cat > "$PKG/usr/lib/pkgconfig/box2d.pc" <<EOF
+prefix=/usr
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: box2d
+Description: 2D physics engine
+Version: $version
+Libs: -L\${libdir} -lbox2d
+Libs.private: -lm
+Cflags: -I\${includedir}
+EOF
 }

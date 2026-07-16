@@ -1,0 +1,15 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -87,6 +87,11 @@ target_include_directories(box2d
+ 
+ set(CMAKE_DEBUG_POSTFIX "d")
+ 
++# libm provides sqrtf(), remainderf(), and other math functions
++if(UNIX AND NOT APPLE AND NOT EMSCRIPTEN)
++    target_link_libraries(box2d PUBLIC m)
++endif()
++
+ # Box2D uses C17 for _Static_assert and anonymous unions
+ set_target_properties(box2d PROPERTIES
+     C_STANDARD 17
