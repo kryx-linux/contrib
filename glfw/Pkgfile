@@ -1,0 +1,28 @@
+# Description: A multi-platform library for OpenGL, OpenGL ES and Vulkan development
+# URL: https://www.glfw.org
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: libglvnd vulkan-loader xorg-libxcursor xorg-libxi xorg-libxinerama
+# Optional: libxkbcommon wayland
+
+name=glfw
+version=3.4
+release=1
+source=(https://github.com/glfw/glfw/archive/$version/$name-$version.tar.gz)
+
+build() {
+  prt-get isinst libxkbcommon wayland || PKGMK_GLFW+=' -D GLFW_BUILD_WAYLAND=OFF'
+  prt-get isinst xorg-libxcursor xorg-libxi xorg-libxinerama || PKGMK_+=' -D GLFW_BUILD_X11=OFF'
+
+  cmake -S $name-$version -B build -G Ninja $PKGMK_GLFW \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D BUILD_SHARED_LIBS=ON \
+    -D GLFW_BUILD_TESTS=OFF \
+    -D GLFW_BUILD_EXAMPLES=OFF \
+    -D GLFW_BUILD_DOCS=OFF \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
+}
