@@ -3,7 +3,7 @@
 # Maintainer: Tim Biermann, tbier at posteo dot de
 
 name=dkms
-version=3.4.1
+version=3.4.2
 release=1
 source=(https://github.com/dell/dkms/archive/v$version/$name-$version.tar.gz)
 
@@ -16,5 +16,6 @@ build() {
     install
   prt-get isinst bash-completion || rm -rf $PKG/usr/share/bash-completion/
   prt-get isinst zsh || rm -rf $PKG/usr/share/zsh
+
   rm -rf $PKG/etc/kernel/
 }
