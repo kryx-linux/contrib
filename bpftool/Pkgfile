@@ -1,0 +1,19 @@
+# Description: tool for inspection and simple manipulation of eBPF programs and maps
+# URL: https://github.com/libbpf/bpftool
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: openssl zlib
+# Optional: bash-completion clang libbpf
+
+name=bpftool
+version=7.7.0
+release=1
+source=(https://github.com/libbpf/bpftool/releases/download/v$version/bpftool-libbpf-v$version-sources.tar.gz)
+
+build() {
+  cd bpftool-libbpf-v$version-sources/src
+
+  make
+  make prefix=/usr DESTDIR=$PKG install
+
+  prt-get isinst bash-completion || rm -r $PKG/usr/share/bash-completion
+}
