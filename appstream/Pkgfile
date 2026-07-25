@@ -5,7 +5,7 @@
 # Optional: bash-completion docbook-xsl libblake3 qt6-base vala wayland
 
 name=appstream
-version=1.1.4
+version=1.1.5
 release=1
 source=(https://www.freedesktop.org/software/appstream/releases/AppStream-$version.tar.xz)
 
@@ -17,7 +17,7 @@ build() {
   prt-get isinst libblake3 || PKGMK_APPSTREAM+=' -D blake3-support=false'
   prt-get isinst qt6-base && PKGMK_APPSTREAM+=' -D qt=true'
   prt-get isinst vala && PKGMK_APPSTREAM+=' -D vapi=true' || PKGMK_APPSTREAM+=' -D vapi=false'
-  prt-get isinst wayland || PKGMK_APPSTREAM+=' -D wayland=false'
+  prt-get isinst wayland || PKGMK_APPSTREAM+=' -D display-detection=none'
 
   meson setup AppStream-$version build $PKGMK_APPSTREAM \
     --prefix=/usr \
