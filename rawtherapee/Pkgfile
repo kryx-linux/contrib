@@ -1,10 +1,10 @@
 # Description: A powerful cross-platform raw image processing program
 # URL: https://rawtherapee.com/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: exiv2 fftw gtkmm3 lcms2 lensfun libcanberra libiptcdata librsvg libwebp tdb
+# Depends on: exiv2 fftw fmt gtkmm3 lensfun libcanberra libiptcdata librsvg libwebp tdb
 
 name=rawtherapee
-version=5.12
+version=5.13
 release=1
 source=(https://github.com/Beep6581/RawTherapee/releases/download/$version/$name-$version.tar.xz)
 
@@ -16,6 +16,7 @@ build() {
     -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
     -D BUILD_SHARED=ON \
+    -D WITH_SYSTEM_FMT=ON \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
