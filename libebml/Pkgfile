@@ -4,13 +4,11 @@
 # Depends on: utfcpp
 
 name=libebml
-version=1.4.6
+version=1.4.7
 release=1
-source=(https://dl.matroska.org/downloads/$name/$name-$version.tar.xz
-  utfcpp.patch)
+source=(https://dl.matroska.org/downloads/$name/$name-$version.tar.xz)
 
 build() {
-  patch -Np1 -d $name-$version -i $SRC/utfcpp.patch
   cmake -S $name-$version -B build -G Ninja \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
