@@ -5,11 +5,14 @@
 
 name=libp11
 version=0.4.19
-release=1
-source=(https://github.com/OpenSC/libp11/releases/download/libp11-$version/libp11-$version.tar.gz)
+release=2
+source=(https://github.com/OpenSC/libp11/releases/download/libp11-$version/libp11-$version.tar.gz
+  libp11-0.4.19-install-libp11-headers.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/libp11-0.4.19-install-libp11-headers.patch
 
   ./configure --prefix=/usr \
     --disable-static
