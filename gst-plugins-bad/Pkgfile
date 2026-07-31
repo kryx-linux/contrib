@@ -6,10 +6,13 @@
 
 name=gst-plugins-bad
 version=1.28.5
-release=1
-source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+release=2
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz
+  gstreamer-1.28.5-faac-2.0-compatibility.patch)
 
 build() {
+  patch -Np3 -d $name-$version -i $SRC/gstreamer-1.28.5-faac-2.0-compatibility.patch
+
   PKGMK_GSTBAD="--prefix=/usr
     --libexecdir=lib
     --buildtype=plain
