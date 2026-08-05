@@ -1,0 +1,18 @@
+# Description: A C library for receiving input from 6 degrees-of-freedom (6dof) input devices
+# URL: https://spacenav.sourceforge.net/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: xorg-libx11
+
+name=libspnav
+version=1.2
+release=1
+source=(https://github.com/FreeSpacenav/libspnav/releases/download/v$version/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+}
+
+# vim: set ts=4 et:
