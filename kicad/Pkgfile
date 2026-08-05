@@ -1,0 +1,51 @@
+# Description: A Cross Platform and Open Source PCB Design Suite
+# URL: https://www.kicad.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: glm libspnav libgit2 boost ngspice opencascade protobuf swig wxgtk3 unixodbc poppler wayland
+
+name=kicad
+version=10.0.5
+release=1
+source=(https://gitlab.com/kicad/code/$name/-/archive/$version/$name-$version.tar.bz2
+    https://gitlab.com/kicad/libraries/$name-footprints/-/archive/$version/$name-footprints-$version.tar.bz2
+    https://gitlab.com/kicad/libraries/$name-packages3D/-/archive/$version/$name-packages3D-$version.tar.bz2
+    https://gitlab.com/kicad/libraries/$name-symbols/-/archive/$version/$name-symbols-$version.tar.bz2
+    https://gitlab.com/kicad/libraries/$name-templates/-/archive/$version/$name-templates-$version.tar.bz2)
+
+build() {
+    # build prerequisite checks
+    if prt-get isinst wxgtk3 > /dev/null; then
+        ls /usr/lib/libwx_gtk3u_webview* 2>/dev/null || (echo -e "\n\e[1;33mERROR: wxgtk3 needs webview support; install webkitgtk40 and libsdl2, then rebuild wxgtk3.\e[0m\n\n"; exit 1)
+    fi
+
+    if prt-get isinst poppler > /dev/null; then
+        if [ ! -f /usr/include/poppler/glib/poppler.h ]; then (echo -e "\n\e[1;33mERROR: poppler needs glib support; ensure glib is installed, then rebuild poppler.\e[0m\n\n"; exit 1); fi
+    fi
+
+    # main program
+    cmake -S $name-$version -B build \
+        -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DKICAD_BUILD_QA_TESTS=OFF \
+        -DKICAD_UPDATE_CHECK=OFF \
+        -DKICAD_SCRIPTING_WXPYTHON=OFF \
+        -DKICAD_IPC_API=OFF \
+        -Wno-dev
+    cmake --build build
+    DESTDIR=$PKG cmake --install build
+
+    # libraries - footprints, packages3D, symbols, templates
+    for D in footprints packages3D symbols templates; do
+        cmake -S $name-${D}-$version -B build-${D} \
+            -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -Wno-dev
+        cmake --build build-${D}
+        DESTDIR=$PKG cmake --install build-${D}
+    done
+
+    rm $PKG/usr/share/kicad/{demos/{simulation/,}*,plugins}/README*
+}
+
+# vim: set ts=4 et:
