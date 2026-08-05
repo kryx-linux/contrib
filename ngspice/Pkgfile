@@ -1,0 +1,20 @@
+# Description: The open source spice simulator for electric and electronic circuits
+# URL: https://ngspice.sourceforge.io/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on:
+
+name=ngspice
+version=46
+release=1
+source=(https://sourceforge.net/projects/ngspice/files/ng-spice-rework/$version/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr \
+        --with-ngshared \
+        --enable-cider
+    make
+    make DESTDIR=$PKG install
+}
+
+# vim: set ts=4 et:
