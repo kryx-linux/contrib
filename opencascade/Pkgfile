@@ -1,0 +1,22 @@
+# Description: An object-oriented C++ class library designed for rapid production of sophisticated domain-specific CAD/CAM/CAE applications
+# URL: https://dev.opencascade.org/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: tk rapidjson libglvnd fontconfig
+
+name=opencascade
+version=8.0.1
+release=1
+source=(https://github.com/Open-Cascade-SAS/OCCT/archive/V$version/$name-$version.tar.gz)
+
+build() {
+    cmake -S OCCT-$version -B build \
+        -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DUSE_RAPIDJSON=ON \
+        -Wno-dev
+    cmake --build build
+    DESTDIR=$PKG cmake --install build
+}
+
+# vim: set ts=4 et:
