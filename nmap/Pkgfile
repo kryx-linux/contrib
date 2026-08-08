@@ -5,11 +5,9 @@
 # Optional: cairo gobject-introspection python3-wheel python3-gobject
 
 name=nmap
-version=7.99
+version=7.991
 release=1
-source=(https://nmap.org/dist/$name-$version.tar.bz2
-  0007-Fix-netutil-else-for-datalen.patch
-  0001-Fix-build-conflicting-types-for-strlcat.patch)
+source=(https://nmap.org/dist/$name-$version.tar.bz2)
 
 
 build () {
@@ -17,9 +15,9 @@ build () {
 
   rm -rf liblua libpcap libpcre macosx mwin32 libssh2 libz
 
-  patch -Np1 -i $SRC/0001-Fix-build-conflicting-types-for-strlcat.patch
-  patch -Np1 -i $SRC/0007-Fix-netutil-else-for-datalen.patch
-  autoreconf -fiv -I /usr/share/gettext/m4
+  sed -e '/strlcat/d' -i libdnet-stripped/acconfig.h
+
+  autoreconf -fiv
 
   PYTHON=/usr/bin/python3 \
   ./configure $PKGMK_NMAP \
