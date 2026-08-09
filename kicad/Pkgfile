@@ -5,7 +5,7 @@
 
 name=kicad
 version=10.0.5
-release=1
+release=2
 source=(https://gitlab.com/kicad/code/$name/-/archive/$version/$name-$version.tar.bz2
     https://gitlab.com/kicad/libraries/$name-footprints/-/archive/$version/$name-footprints-$version.tar.bz2
     https://gitlab.com/kicad/libraries/$name-packages3D/-/archive/$version/$name-packages3D-$version.tar.bz2
@@ -21,6 +21,10 @@ build() {
     if prt-get isinst poppler > /dev/null; then
         if [ ! -f /usr/include/poppler/glib/poppler.h ]; then (echo -e "\n\e[1;33mERROR: poppler needs glib support; ensure glib is installed, then rebuild poppler.\e[0m\n\n"; exit 1); fi
     fi
+
+    # fix for swig 4.5 deprecation of python 2 macros
+    sed -i -e 's,PyString_Check,PyUnicode_Check,g' $name-$version/common/swig/wx.i
+    sed -i -e 's,PyInt_FromLong,PyLong_FromLong,g' $name-$version/common/swig/{math,wx}.i
 
     # main program
     cmake -S $name-$version -B build \
