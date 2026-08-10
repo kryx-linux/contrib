@@ -7,13 +7,18 @@
 name=neatvnc
 version=1.0.1
 release=1
-source=(https://github.com/any1/neatvnc/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/any1/neatvnc/archive/v$version/$name-$version.tar.gz
+  5b190f0fd9e6b0bfd32752a9115242f87ec36c59.patch
+  f97805deaaea489a1c8c851324163a92a3125195.patch)
 
 build() {
   prt-get isinst gnutls && PKGMK_NEATVNC+=' -D jpeg=enabled'
   prt-get isinst libjpeg-turbo && PKGMK_NEATVNC+=' -D jpeg=enabled'
   prt-get isinst nettle && PKGMK_NEATVNC+=' -D nettle=enabled'
   prt-get isinst openh264 && PKGMK_NEATVNC+=' -D h264=enabled'
+
+  patch -Np1 -d $name-$version -i $SRC/5b190f0fd9e6b0bfd32752a9115242f87ec36c59.patch
+  patch -Np1 -d $name-$version -i $SRC/f97805deaaea489a1c8c851324163a92a3125195.patch
 
   meson setup $name-$version build $PKGMK_NEATVNC \
     --prefix=/usr \
