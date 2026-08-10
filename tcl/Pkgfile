@@ -21,7 +21,7 @@ build() {
         $PKG/usr/lib/tcl${version%.*}/init.tcl
 
     ln -s tclsh${version%.*} $PKG/usr/bin/tclsh
-    ln -s libtcl${version%.*} $PKG/usr/lib/libtcl.so
+    ln -s libtcl${version%.*}.so $PKG/usr/lib/libtcl.so
 
     chmod 644 $PKG/usr/lib/libtclstub.a
 
