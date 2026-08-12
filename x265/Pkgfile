@@ -7,6 +7,7 @@ name=x265
 version=4.3
 release=1
 source=(https://github.com/Multicorewareinc/x265/releases/download/$version/${name}_$version.tar.gz
+  x265_4.3_cstdint.patch
   Version.cmake)
 
 build() {
@@ -14,6 +15,7 @@ build() {
   # we don't depend on git to figure out which version we are building, do we?
   sed "s!@@VERSION@@!$version!g" -i Version.cmake && mv Version.cmake ${name}_$version/source/cmake/Version.cmake
 
+  patch -Np1 -d ${name}_$version -i $SRC/x265_4.3_cstdint.patch
   # common args
   local common_args=(
     -G Ninja
