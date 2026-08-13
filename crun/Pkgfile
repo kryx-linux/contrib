@@ -4,12 +4,15 @@
 # Depends on: criu json-c libseccomp
 
 name=crun
-version=1.29
+version=1.29.1
 release=1
-source=(https://github.com/containers/crun/releases/download/$version/crun-$version.tar.gz)
+source=(https://github.com/containers/crun/releases/download/$version/crun-$version.tar.gz
+  spec.patch)
 
 build() {
   cd $name-$version
+
+  patch -Np1 -i $SRC/spec.patch
 
   sed -i \
     's!^crun_LDADD = libcrun.la !crun_LDADD = libcrun.la libocispec/libocispec.la !' \
