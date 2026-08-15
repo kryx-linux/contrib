@@ -5,21 +5,14 @@
 # Optional: python3-pyinotify whois
 
 name=fail2ban
-version=1.1.0
-release=3
+version=1.1.1
+release=1
 source=(https://github.com/fail2ban/$name/archive/$version/$name-$version.tar.gz
-  2fed408c05ac5206b490368d94599869bd6a056d.patch
-  50ff131a0fd8f54fdeb14b48353f842ee8ae8c1a.patch
-  3728.patch
   fail2ban.rc
   paths-crux.conf)
 
 build() {
   cd $name-$version
-
-  patch -Np1 -i $SRC/2fed408c05ac5206b490368d94599869bd6a056d.patch
-  patch -Np1 -i $SRC/50ff131a0fd8f54fdeb14b48353f842ee8ae8c1a.patch
-  patch -Np1 -i $SRC/3728.patch
 
   find . -mindepth 2 -type f -exec sed -i -e 's|/var\(/run/fail2ban\)|\1|g' {} +
 
