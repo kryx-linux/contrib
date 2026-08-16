@@ -12,13 +12,10 @@ source=(https://releases.pagure.org/newt/newt-$version.tar.gz)
 build() {
   cd newt-$version
 
-  if prt-get isinst tcl; then
-    sed -i "s:tcl8.4:tcl8.6:" Makefile.in
-    echo '#define USE_INTERP_RESULT 1' >> config.h
-  fi
-
   ./autogen.sh
-  ./configure --prefix=/usr --disable-nls
+  ./configure --prefix=/usr \
+    --without-tcl \
+    --disable-nls
 
   make
   make DESTDIR=$PKG install
