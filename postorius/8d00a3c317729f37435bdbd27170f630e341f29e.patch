@@ -1,0 +1,25 @@
+From 8d00a3c317729f37435bdbd27170f630e341f29e Mon Sep 17 00:00:00 2001
+From: Danil Smirnov <danil@smirnov.la>
+Date: Sun, 19 Jan 2025 12:22:12 +0200
+Subject: [PATCH] Fixing held_messages.js
+
+---
+ src/postorius/static/postorius/js/held_messages.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/postorius/static/postorius/js/held_messages.js b/src/postorius/static/postorius/js/held_messages.js
+index e5ec7acc..1ddf9e3b 100644
+--- a/src/postorius/static/postorius/js/held_messages.js
++++ b/src/postorius/static/postorius/js/held_messages.js
+@@ -9,7 +9,7 @@ var loadjs = function(rest_url, error_message) {
+       url: rest_url + msgid,
+       success: function(data) {
+         $('#message-source-btn').attr('href', rest_url + msgid + '?raw')
+-        $('#message-title').html(data.subject);
++        $('#message-title').text(data.subject);
+         $('.modal-footer form input[name="msgid"]').attr('value', msgid);
+         if (data.msg.body) {
+           $('#held-message-content').text(data.msg.body);
+-- 
+GitLab
+
