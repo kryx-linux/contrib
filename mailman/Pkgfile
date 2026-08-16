@@ -5,12 +5,17 @@
 
 name=mailman
 version=3.3.10
-release=1
+release=2
 source=(https://gitlab.com/mailman/mailman/-/archive/v$version/mailman-v$version.tar.bz2
+  1309.patch
+  mailman3-3.3.10-stop-modifying-cc-header.patch
   $name.service)
 
 build() {
   cd $name-v$version
+
+  patch -Np1 -i $SRC/mailman3-3.3.10-stop-modifying-cc-header.patch
+  patch -Np1 -i $SRC/1309.patch
 
   printf "[mailman]\nlayout: fhs\n" >> ../$name.cfg
   sed -e 's|/var/tmp/mailman|/var/lib/mailman|g' \
