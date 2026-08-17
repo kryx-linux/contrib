@@ -4,12 +4,13 @@
 # Depends on:
 
 name=confuse
-version=3.3
+version=3.4
 release=1
 source=(https://github.com/libconfuse/libconfuse/releases/download/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   ./configure --prefix=/usr \
     --enable-shared \
     --disable-examples \
