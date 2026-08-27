@@ -1,15 +1,16 @@
 # Description: WASI libc implementation for WebAssembly
 # URL: https://github.com/WebAssembly/wasi-libc
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: clang lld
+# Depends on: wasm-component-ld
 
 name=wasi-libc
-version=33
+version=34
 release=1
-source=(https://github.com/WebAssembly/wasi-libc/archive/wasi-sdk-$version/$name-$version.tar.gz)
+_commit=2e6fb9d8ee0cdf9e431fbcabe8af3115de000a13
+source=(https://github.com/WebAssembly/wasi-libc/archive/$_commit/$name-$version.tar.gz)
 
 build() {
-  local options=(-S $name-wasi-sdk-$version -G Ninja
+  local options=(-S $name-$_commit -G Ninja
     -D CMAKE_INSTALL_PREFIX=/usr/share/wasi-sysroot
     -D CMAKE_BUILD_TYPE=Release
     -D CMAKE_AR=/usr/bin/llvm-ar
@@ -17,6 +18,7 @@ build() {
     -D CMAKE_NM=/usr/bin/llvm-nm
     -D CMAKE_LINK_DEPENDS_USE_LINKER=FALSE
     -D CHECK_SYMBOLS=OFF
+    -D WASM_COMPONENT_LD_EXECUTABLE=/usr/bin/wasm-component-ld
     -Wno-dev
   )
 
