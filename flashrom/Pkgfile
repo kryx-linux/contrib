@@ -5,15 +5,12 @@
 # Optional: bash-completion cmocka dmidecode
 
 name=flashrom
-version=1.7.0
+version=1.8.0
 release=1
-source=(https://download.flashrom.org/releases/$name-v$version.tar.xz
-  cmocka-v2-compatibility.patch)
+source=(https://download.flashrom.org/releases/$name-v$version.tar.xz)
 
 build() {
   prt-get isinst bash-completion || PKGMK_FLASHROM+=' -D bash_completion=disabled'
-
-  patch -Np1 -d $name-v$version -i $SRC/cmocka-v2-compatibility.patch
 
   meson setup $name-v$version build $PKGMK_FLASHROM \
     --prefix=/usr \
