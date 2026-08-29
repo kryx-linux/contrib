@@ -1,0 +1,24 @@
+# Description: A fast image processing library with low memory needs
+# URL: https://libvips.org/
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: glib
+# Optional: libjxl libexif fftw fontconfig libheif openjpeg2 lcms2 imagemagick openexr openjpeg2 highway orc pango cairo poppler librsvg libtiff libwebp
+
+name=libvips
+version=8.18.6
+release=1
+source=(https://github.com/libvips/libvips/releases/download/v$version/vips-$version.tar.xz)
+
+build() {
+  meson setup vips-$version build \
+    --prefix=/usr \
+    --buildtype=plain \
+    --wrap-mode nodownload \
+    -D b_lto=true \
+    -D b_pie=true \
+    -D examples=false
+  meson compile -C build
+  DESTDIR=$PKG meson install -C build
+
+  rm -r $PKG/usr/share/locale
+}
