@@ -13,6 +13,7 @@ drwxr-xr-x	root/root	usr/include/wireplumber-0.5/wp/
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/core.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/defs.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/device.h
+-rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/dynamic-rules.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/error.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/event-dispatcher.h
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/event-hook.h
@@ -50,8 +51,8 @@ drwxr-xr-x	root/root	usr/include/wireplumber-0.5/wp/
 -rw-r--r--	root/root	usr/include/wireplumber-0.5/wp/wpversion.h
 drwxr-xr-x	root/root	usr/lib/
 lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.5.so -> libwireplumber-0.5.so.0
-lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.5.so.0 -> libwireplumber-0.5.so.0.515.0
--rwxr-xr-x	root/root	usr/lib/libwireplumber-0.5.so.0.515.0
+lrwxrwxrwx	root/root	usr/lib/libwireplumber-0.5.so.0 -> libwireplumber-0.5.so.0.516.0
+-rwxr-xr-x	root/root	usr/lib/libwireplumber-0.5.so.0.516.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/wireplumber-0.5.pc
 drwxr-xr-x	root/root	usr/lib/wireplumber-0.5/
@@ -138,7 +139,6 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/linking/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-filter-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-media-role-sink-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-media-role-target.lua
--rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/find-user-target.lua.example
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/get-filter-from-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/link-target.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/linking/mpris-pause.lua
@@ -151,7 +151,17 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/alsa-midi.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/alsa.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez-midi.lua
--rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez.lua
+drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/bluez/
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/create-device.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/create-loopback-node.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/create-node.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/create-offload-node.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/create-set-node.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/enumerate-device.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/name-device.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/name-node.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/remove-device.lua
+-rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/bluez/remove-node.lua
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/libcamera/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/libcamera/create-device.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/monitors/libcamera/create-node.lua
@@ -167,7 +177,6 @@ drwxr-xr-x	root/root	usr/share/wireplumber/scripts/monitors/v4l2/
 drwxr-xr-x	root/root	usr/share/wireplumber/scripts/node/
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/audio-group.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/create-item.lua
--rw-r--r--	root/root	usr/share/wireplumber/scripts/node/filter-forward-format.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/filter-graph.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/find-media-role-default-volume.lua
 -rw-r--r--	root/root	usr/share/wireplumber/scripts/node/software-dsp.lua
