@@ -1,19 +1,16 @@
 # Description: Query metadatdata from sdists / bdists / installed packages
 # URL: https://pypi.python.org/pypi/pkginfo
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: python3-setuptools
+# Depends on: python3-wheel
 
 name=python3-pkginfo
-version=1.12.1.2
+version=1.13
 release=1
 source=(https://pypi.io/packages/source/p/pkginfo/pkginfo-$version.tar.gz)
 
 build() {
   cd pkginfo-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
-  mv $PKG/usr/bin/pkginfo $PKG/usr/bin/py3-pkginfo
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
