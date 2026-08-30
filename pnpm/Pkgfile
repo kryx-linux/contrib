@@ -4,14 +4,24 @@
 # Depends on: npm
 
 name=pnpm
-version=12.0.0
+version=12.1.0
 release=1
 source=(https://registry.npmjs.org/pnpm/-/pnpm-$version.tgz)
 
 build() {
   cp $PKGMK_SOURCE_DIR/$name-$version.tgz .
 
-  npm install -g --prefix "$PKG"/usr $SRC/$name-$version.tgz
+    #--dangerously-allow-all-scripts \
+    #--foreground-scripts \
+  npm install -g \
+    --prefix $PKG/usr \
+    --ignore-scripts \
+    $SRC/$name-$version.tgz
+
+  cd "$PKG/usr/lib/node_modules/pnpm"
+  node install.js
+
+  $PKG/usr/bin/pnpm --version
 
   find $PKG \(\
     -iname "*README.md*" -o \
