@@ -5,7 +5,7 @@
 # Optional: libsdl2
 
 name=libde265
-version=1.0.16
+version=1.1.2
 release=1
 source=(https://github.com/strukturag/$name/releases/download/v$version/$name-$version.tar.gz)
 
@@ -15,10 +15,9 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
-    -DENABLE_ENCODER=ON \
     -DENABLE_SDL=$PKGMK_DE2SDL \
     -DCMAKE_C_FLAGS="$CFLAGS"
 
   ninja -C build -j ${JOBS:-1}
-  DESTDIR=$PKG ninja -C build install
+  DESTDIR="$PKG" ninja -C build install
 }
