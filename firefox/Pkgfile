@@ -5,7 +5,7 @@
 # Optional: apulse pulseaudio pipewire sndio sccache icu lld wayland xdg-desktop-portal-gtk
 
 name=firefox
-version=155.0
+version=155.0.1
 release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
@@ -119,7 +119,8 @@ EOF
   export CXXFLAGS="$CXXFLAGS -w"
   export LDFLAGS="$LDFLAGS -Wl,-rpath=/usr/lib/firefox,--enable-new-dtags"
 
-  if [ -x /usr/bin/clang ] && [ -x /usr/bin/lld ]; then
+  if [ -x /usr/bin/clang ] && [ -x /usr/bin/lld ] && clang --version \
+      | awk '(NR==1) {split($3,v,"."); if (v[1] >= 23) exit 1}'; then
       echo 'ac_add_options --enable-linker=lld' >> .mozconfig
       export LDFLAGS+=",--thinlto-jobs=$((${JOBS-2} / 2))"
       export CC=clang CXX=clang++
