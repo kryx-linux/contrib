@@ -5,7 +5,7 @@
 # Optional: gtk4
 
 name=czkawka
-version=12.0.1
+version=12.0.2
 release=1
 source=(https://github.com/qarmin/czkawka/archive/$version/$name-$version.tar.gz)
 
@@ -14,6 +14,7 @@ build() {
   mkdir "$PKGMK_SOURCE_DIR/rust" || true
   export CARGO_HOME="$PKGMK_SOURCE_DIR/rust"
 
+  export RUSTFLAGS=" -C no-vectorize-loops"
   cargo build --bin czkawka_cli --release --manifest-path $name-$version/Cargo.toml
   cargo build --bin krokiet --release --manifest-path $name-$version/Cargo.toml
   install -Dt $PKG/usr/bin $name-$version/target/release/${name}_cli
