@@ -1,7 +1,7 @@
 # Description: Static type checker for Python
 # URL: https://microsoft.github.io/pyright/#/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: npm
+# Depends on: pnpm
 
 name=pyright
 version=1.1.414
@@ -11,10 +11,10 @@ source=(https://github.com/microsoft/pyright/archive/$version/$name-$version.tar
 build() {
   cd $name-$version
 
-  npm install
-  npm ci
+  pnpm install --frozen-lockfile --prefer-offline
+  pnpm ci
   cd packages/pyright
-  npm run build
+  pnpm run build
 
   local mod_dir=/usr/lib/node_modules/$name
   install -d "$PKG"/{usr/bin,$mod_dir}
