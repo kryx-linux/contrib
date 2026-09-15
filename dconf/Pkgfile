@@ -5,15 +5,20 @@
 # Optional: bash-completion libxslt vala
 
 name=dconf
-version=0.40.0
-release=2
-source=(https://gitlab.gnome.org/GNOME/dconf/-/archive/$version/dconf-$version.tar.bz2)
+version=51.0
+release=1
+
+_gvdb=4758f6fb7f889e074e13df3f914328f3eecb1fd3
+source=(https://gitlab.gnome.org/GNOME/dconf/-/archive/$version/dconf-$version.tar.bz2
+  https://gitlab.gnome.org/GNOME/gvdb/-/archive/$_gvdb/gvdb-$_gvdb.tar.bz2)
 
 build() {
   prt-get isinst bash-completion || PKGMK_DCONF+=' -D bash_completion=false'
   prt-get isinst vala || PKGMK_DCONF+=' -D vapi=false'
   prt-get isinst docbook-xsl || PKGMK_DCONF+=' -D man=false'
 
+  #mv gvdb-$_gvdb $name-$version/subprojects/gvdb
+  rsync --recursive $SRC/gvdb-$_gvdb/ -t $SRC/$name-$version/subprojects/gvdb
   meson setup $name-$version build $PKGMK_DCONF \
     --prefix=/usr \
     --libexecdir=lib/$name \
