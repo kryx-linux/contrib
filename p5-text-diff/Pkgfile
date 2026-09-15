@@ -4,14 +4,16 @@
 # Depends on: p5-algorithm-diff
 
 name=p5-text-diff
-version=1.45
+version=1.46
 release=1
 source=(https://cpan.metacpan.org/authors/id/N/NE/NEILB/Text-Diff-$version.tar.gz)
 
 build() {
   cd Text-Diff-$version
+
   PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
   make
   make install DESTDIR=$PKG
+
   find $PKG \( -name '.packlist' -o -name '*.pod' \) -delete
 }
