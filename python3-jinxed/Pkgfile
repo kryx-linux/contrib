@@ -1,0 +1,16 @@
+# Description: Jinxed Terminal Library
+# URL: https://github.com/Rockhopper-Technologies/jinxed
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: python3-wheel
+
+name=python3-jinxed
+version=2.1.0
+release=1
+source=(https://pypi.org/packages/source/j/jinxed/jinxed-$version.tar.gz)
+
+build() {
+  cd jinxed-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
