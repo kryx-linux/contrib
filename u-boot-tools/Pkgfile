@@ -5,12 +5,14 @@
 
 name=u-boot-tools
 version=2026.07
-release=1
-source=(https://ftp.denx.de/pub/u-boot/u-boot-$version.tar.bz2)
+release=2
+source=(https://ftp.denx.de/pub/u-boot/u-boot-$version.tar.bz2
+  527115ef6783cec49e5610c523c124b399011361.patch)
 
 build() {
   cd u-boot-$version
 
+  patch -Np1 -i $SRC/527115ef6783cec49e5610c523c124b399011361.patch
   make sandbox_config
   make tools TOOLSUBDIRS=""
 
