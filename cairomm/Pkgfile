@@ -4,7 +4,7 @@
 # Depends on: cairo libsigc++
 
 name=cairomm
-version=1.18.0
+version=1.18.1
 release=1
 source=(https://cairographics.org/releases/$name-$version.tar.xz)
 
@@ -16,8 +16,9 @@ build() {
         -D build-examples=false \
         -D build-tests=false \
         -D b_lto=true \
-        -D b_pie=true
+        -D b_pie=true \
+        --wrap-mode nodownload
 
     ninja -C build -j ${JOBS:-1}
-    DESTDIR=$PKG ninja -C build install
+    DESTDIR="$PKG" ninja -C build install
 }
