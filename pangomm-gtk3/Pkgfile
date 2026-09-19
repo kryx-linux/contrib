@@ -4,7 +4,7 @@
 # Depends on: cairomm-1.0 glibmm-gtk3 pango
 
 name=pangomm-gtk3
-version=2.46.4
+version=2.46.5
 release=1
 source=(https://download.gnome.org/sources/${name%-gtk3}/${version%.*}/${name%-gtk3}-$version.tar.xz)
 
@@ -13,8 +13,9 @@ build() {
         --prefix=/usr \
         --buildtype=plain \
         -D b_lto=true \
-        -D b_pie=true
+        -D b_pie=true \
+        --wrap-mode nodownload
 
     meson compile -C build -j ${JOBS:-1}
-    DESTDIR=$PKG meson install -C build
+    DESTDIR="$PKG" meson install -C build
 }
