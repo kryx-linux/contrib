@@ -1,25 +1,22 @@
 # Description: A callback framework for C++.
 # URL: https://libsigcplusplus.github.io/libsigcplusplus/
 # Maintainer: John McQuah, jmcquah at disroot dot org
-# Depends on: mm-common
 
 name=libsigc++2
-version=2.12.1
+version=2.12.2
 release=1
-source=(https://download.gnome.org/sources/libsigc++/${version%.*}/libsigc++-$version.tar.xz)
+source=(https://github.com/libsigcplusplus/libsigcplusplus/releases/download/$version/libsigc++-$version.tar.xz)
 
 build() {
-  mkdir bld && cd bld
-
-  meson setup ../libsigc++-$version \
+  meson setup bld libsigc++-$version \
     --prefix=/usr \
     --buildtype=release \
     -D build-documentation=false \
     -D b_lto=true \
     -D b_pie=true
 
-  ninja -j ${JOBS:-1}
-  DESTDIR=$PKG ninja install
+  ninja -C bld -j ${JOBS:-1}
+  DESTDIR="$PKG" ninja -C bld install
 
-  find $PKG \( -type f -a -perm -g+w \) -exec chmod g-w '{}' +
+  find "$PKG" \( -type f -a -perm -g+w \) -exec chmod g-w '{}' +
 }
