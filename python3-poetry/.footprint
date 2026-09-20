@@ -4,13 +4,13 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.12/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry-2.4.3.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.4.3.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.4.3.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.4.3.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.4.3.dist-info/entry_points.txt
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry-2.4.3.dist-info/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.4.3.dist-info/licenses/LICENSE
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry-2.5.1.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.5.1.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.5.1.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.5.1.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.5.1.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry-2.5.1.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry-2.5.1.dist-info/licenses/LICENSE
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/__main__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/__pycache__/
@@ -295,6 +295,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pyca
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pycache__/executor.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pycache__/installer.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pycache__/installer.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pycache__/uninstaller.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pycache__/uninstaller.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pycache__/wheel_installer.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/__pycache__/wheel_installer.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/chef.py
@@ -318,6 +320,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/installation/operat
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/operations/operation.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/operations/uninstall.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/operations/update.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/uninstaller.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/installation/wheel_installer.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/json/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/json/__init__.py
@@ -553,6 +556,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/constants.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/dependency_specification.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/dependency_specification.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/download.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/download.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/extras.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/extras.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/helpers.cpython-312.opt-1.pyc
@@ -576,6 +581,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/cache.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/constants.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/dependency_specification.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/download.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/poetry/utils/env/__pycache__/
