@@ -5,11 +5,10 @@
 # Optional: apache asciidoc lighttpd luajit
 
 name=cgit
-version=1.2.3
-_commit=09d24d7cd0b7e85633f2f43808b12871bb209d69
-_gitver=2.46.0
-release=3
-source=(https://git.zx2c4.com/$name/snapshot/$name-$_commit.tar.xz
+version=1.3.1
+_gitver=2.54.0
+release=1
+source=(https://git.zx2c4.com/$name/snapshot/$name-$version.tar.xz
         https://www.kernel.org/pub/software/scm/git/git-${_gitver}.tar.xz
         cgitrc
         cgit.conf
@@ -17,7 +16,7 @@ source=(https://git.zx2c4.com/$name/snapshot/$name-$_commit.tar.xz
 
 build() {
   local CGIT_FLAGS
-  cd $name-$_commit
+  cd $name-$version
 
   rm -rf git && mv "$SRC"/git-${_gitver} git
   prt-get isinst musl >/dev/null && CGIT_FLAGS="NO_REGEX=NeedsStartEnd"
