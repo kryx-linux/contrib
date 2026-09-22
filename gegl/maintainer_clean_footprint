@@ -1,0 +1,6 @@
+#!/bin/sh
+rm -f footprint.in
+mv .footprint footprint.in
+
+grep -v -E 'opencl' footprint.in > .footprint
+rm -f footprint.in
