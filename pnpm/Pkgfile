@@ -4,15 +4,13 @@
 # Depends on: npm
 
 name=pnpm
-version=12.5.1
+version=12.6.0
 release=1
 source=(https://registry.npmjs.org/pnpm/-/pnpm-$version.tgz)
 
 build() {
   cp $PKGMK_SOURCE_DIR/$name-$version.tgz .
 
-    #--dangerously-allow-all-scripts \
-    #--foreground-scripts \
   npm install -g \
     --prefix $PKG/usr \
     --ignore-scripts \
