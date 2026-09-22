@@ -5,11 +5,13 @@
 
 name=setconf
 version=0.7.7
-release=1
+release=2
 source=(https://setconf.roboticoverlords.org/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
+
+  sed -i '0,/env python/s//env python3/' $name.py
   install -Dm755 $name.py $PKG/usr/bin/$name
   install -Dm644 $name.1.gz $PKG/usr/share/man/man1/$name.1.gz
 }
