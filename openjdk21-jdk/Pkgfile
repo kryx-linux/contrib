@@ -5,13 +5,13 @@
 # Optional: publicsuffix-list
 
 name=openjdk21-jdk
-version=21.0.13+6
+version=21.0.13+7
 release=1
 _boot_ver=20.0.2+9
-_boot_date=20241103
-_cert_ver=20210916
+_boot_date=20260921
+_cert_ver=20260919
 source=(https://github.com/openjdk/jdk${version::2}u/archive/refs/tags/jdk-$version.tar.gz
-  https://git.crux.nu/tb/java-distfiles/media/branch/master/distfiles/openjdk${_boot_ver::2}-boot-${_boot_ver}-${_boot_date}.tar.xz
+  https://git.crux.nu/tb/java-distfiles/media/branch/master/distfiles/openjdk${_boot_ver::2}-boot-${_boot_ver}-${_boot_date}.tar.zst
   https://git.crux.nu/tb/java-distfiles/media/branch/master/distfiles/java_cacerts-${_cert_ver}
   system-public-suffix.patch
 )
@@ -34,6 +34,7 @@ build() {
   unset CXXFLAGS
   unset LDFLAGS
   unset MAKEFLAGS
+  unset JDK_JAVA_OPTIONS
 
   [ -z $JOBS ] && JOBS=$(nproc)
 
