@@ -7,10 +7,12 @@
 name=boost
 version=1.92.0
 release=1
-source=(https://archives.boost.io/release/$version/source/${name}_${version//./_}.tar.bz2)
+source=(https://archives.boost.io/release/$version/source/${name}_${version//./_}.tar.bz2
+mpi-PR180.diff)
 
 build() {
   cd ${name}_${version//./_}
+  patch -Np1 -d libs/mpi -i "$SRC"/mpi-PR180.diff
 
   # Boost.Build does not allow for disabling of numpy
   # extensions, thereby leading to automagic numpy
