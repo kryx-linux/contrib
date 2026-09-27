@@ -4,12 +4,12 @@
 # Depends on: dbus-glib python3-wheel
 
 name=dbus-python3
-version=1.4.0
+version=1.5.0
 release=1
-source=(https://dbus.freedesktop.org/releases/dbus-python/dbus-python-$version.tar.xz)
+source=(https://dbus.freedesktop.org/releases/dbus-python/dbus_python-$version.tar.gz)
 
 build() {
-  meson setup dbus-python-$version build \
+  meson setup dbus_python-$version build \
     --prefix=/usr \
     --buildtype=plain \
     --wrap-mode nodownload \
