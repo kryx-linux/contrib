@@ -20,7 +20,7 @@ build() {
   # Fix build with json-c 0.14
   sed -e 's/TRUE/1/' -e 's/FALSE/0/' -i ykpers-json.c
 
-  autoreconf --install
+  autoreconf -fvi
   ./configure --prefix=/usr $PKGMK_YK_PERS \
     --with-udevrulesdir=/lib/udev/rules.d/
   make
