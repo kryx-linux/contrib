@@ -1,12 +1,12 @@
 # Description: Run multiple commands in parallel
-# URL: https://github.com/pvolok/mprocs
+# URL: https://github.com/pvolok/dekit
 # Maintainer: Tim Biermann, tbier at posteo dot de
 # Depends on: rust
 
-name=mprocs
-version=0.9.6
+name=dekit
+version=0.10.0
 release=1
-source=(https://github.com/pvolok/mprocs/archive/v$version/$name-$version.tar.gz)
+source=(https://github.com/pvolok/dekit/archive/v$version/$name-$version.tar.gz)
 
 build() {
   prt-get isinst sccache && export RUSTC_WRAPPER=/usr/bin/sccache
