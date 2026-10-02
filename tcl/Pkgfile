@@ -3,8 +3,8 @@
 # Maintainer: Matt Housh, jaeger at crux dot ninja
 
 name=tcl
-version=9.0.1
-release=2
+version=9.1.0
+release=1
 source=(https://downloads.sourceforge.net/sourceforge/tcl/$name$version-src.tar.gz)
 
 build() {
@@ -16,6 +16,10 @@ build() {
         --enable-64bit
     make
     make INSTALL_ROOT=$PKG install install-private-headers
+
+    mkdir -p $PKG/usr/lib/tcl${version%.*}
+    cp -a $SRC/$name$version/library/* \
+        $PKG/usr/lib/tcl${version%.*}/
 
     install -D -m0644 $SRC/$name$version/library/init.tcl \
         $PKG/usr/lib/tcl${version%.*}/init.tcl
@@ -30,14 +34,14 @@ build() {
         -e "s,$SRC/$name$version,/usr/include,g" \
         $PKG/usr/lib/tclConfig.sh
 
-    tdbcdir=tdbc1.1.10
+    tdbcdir=tdbc1.1.15
     sed -i -e "s,$SRC/$name$version/unix/pkgs/$tdbcdir,/usr/lib/$tdbcdir,g" \
         -e "s,$SRC/$name$version/pkgs/$tdbcdir/generic,/usr/include,g" \
         -e "s,$SRC/$name$version/pkgs/$tdbcdir/library,/usr/lib/tcl${version%.*},g" \
         -e "s,$SRC/$name$version/pkgs/$tdbcdir,/usr/include,g" \
         $PKG/usr/lib/$tdbcdir/tdbcConfig.sh
 
-    itcldir=itcl4.3.2
+    itcldir=itcl4.3.8
     sed -i -e "s,$SRC/$name$version/unix/pkgs/$itcldir,/usr/lib/$itcldir,g" \
         -e "s,$SRC/$name$version/pkgs/$itcldir/generic,/usr/include,g" \
         -e "s,$SRC/$name$version/pkgs/$itcldir,/usr/include,g" \
