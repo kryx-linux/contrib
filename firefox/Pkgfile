@@ -5,7 +5,7 @@
 # Optional: apulse pulseaudio pipewire sndio sccache icu lld wayland xdg-desktop-portal-gtk
 
 name=firefox
-version=156.0
+version=157.0
 release=1
 source=(https://ftp.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz
   firefox.desktop
@@ -69,7 +69,6 @@ build() {
   ac_add_options --disable-necko-wifi
   ac_add_options --disable-crashreporter
   ac_add_options --disable-accessibility
-  ac_add_options --disable-webspeech
   ac_add_options --disable-debug
   ac_add_options --disable-debug-symbols
   ac_add_options --disable-parental-controls
@@ -77,7 +76,6 @@ build() {
 EOF
 
   [ -x /usr/bin/uconv ] && echo 'ac_add_options --with-system-icu' >> .mozconfig
-
   # bugzilla 1988166: workaround for systems without the single_threaded header
   [ -e /usr/include/sys/single_threaded.h ] || sed "/sys\/single_threaded.h/d" \
                     -i "$SRC"/$name-$version/config/system-headers.mozbuild
@@ -96,6 +94,9 @@ EOF
   else
      echo "ac_add_options --disable-jemalloc" >> .mozconfig
   fi
+
+  # vendored third-party project needs another header to define int64_t
+  sed "4a #include <cstdint>" -i third_party/parakeet.cpp/src/backend.hpp
 
   # audio
   PKGMK_FFAUDIO="alsa"
@@ -144,7 +145,6 @@ EOF
   DESTDIR="$PKG" ./mach install
 
   # Remove crap
-  rm -rf "$PKG"/usr/lib/firefox/browser/features
   rm -f "$PKG"/usr/lib/firefox/removed-files
 
   install -D -m 0644 "$SRC"/firefox.desktop "$PKG"/usr/share/applications/firefox.desktop
