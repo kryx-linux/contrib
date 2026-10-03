@@ -1,0 +1,17 @@
+# Description: C-friendly API to make path resolution safer on Linux
+# URL: https://github.com/cyphar/libpathrs
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: rust
+
+name=libpathrs
+version=0.2.5
+release=1
+source=(https://github.com/cyphar/libpathrs/releases/download/v$version/$name-$version.tar.xz)
+
+build() {
+    cd $name-$version
+    sed -i -e 's|^crate-type = .*|crate-type = [ "cdylib", "staticlib" ]|g' Cargo.toml
+    cargo fetch --locked --target host-tuple
+    RUSTFLAGS="-C panic=abort" cargo build --frozen --release --features=capi
+    ./install.sh DESTDIR=$PKG --prefix=/usr --lib=/usr/lib
+}
