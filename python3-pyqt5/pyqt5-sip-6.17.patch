@@ -1,0 +1,20 @@
+--- a/project.py
++++ b/project.py
+@@ -221,8 +221,15 @@
+                 self._add_plugin('qmlscene', "qmlscene", 'pyqt5qmlplugin',
+                         'PyQt5', others_debug)
+ 
+-        # Add the dbus-python support.
+-        if self.dbus_python:
++    def verify_configuration(self, tool):
++        """ Verify the configuration before adding the dbus-python module. """
++
++        super().verify_configuration(tool)
++
++        # SIP must resolve the ABI version before creating a limited API module.
++        if tool in Option.BUILD_TOOLS and self.dbus_python:
++            others_debug = self.py_debug or any(
++                    bindings.debug for bindings in self.bindings.values())
+             self._add_dbus(others_debug)
+ 
+     def _add_composite_module(self):
