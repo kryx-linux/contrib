@@ -4,12 +4,13 @@
 # Depends on: elfutils rsync zlib
 
 name=libbpf
-version=1.7.0
+version=1.8.0
 release=1
 source=(https://github.com/libbpf/libbpf/archive/v$version/$name-$version.tar.gz)
 
 build() {
   cd $name-$version
+
   make -C src
   make -C src DESTDIR=$PKG LIBSUBDIR=lib install install_headers
 }
