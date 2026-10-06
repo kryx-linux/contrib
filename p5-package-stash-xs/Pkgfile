@@ -4,12 +4,13 @@
 # Depends on:
 
 name=p5-package-stash-xs
-version=0.30
+version=0.32
 release=1
 source=(https://cpan.metacpan.org/authors/id/E/ET/ETHER/Package-Stash-XS-$version.tar.gz)
 
 build() {
   cd Package-Stash-XS-$version
+
   export PERL_MM_USE_DEFAULT=1 PERL5LIB="" \
     PERL_AUTOINSTALL=--skipdeps \
     PERL_MM_OPT="INSTALLDIRS=vendor" \
@@ -18,6 +19,7 @@ build() {
   perl Makefile.PL
   make
   make DESTDIR=$PKG install
+
   find $PKG -name .packlist -o \
     -name perllocal.pod -o \
     -name README -o \
