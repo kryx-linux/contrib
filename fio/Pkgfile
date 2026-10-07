@@ -1,0 +1,15 @@
+# Description: Flexible I/O Tester
+# URL: https://github.com/axboe/fio/releases
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+
+name=fio
+version=3.43
+release=1
+source=(https://github.com/axboe/fio/archive/$name-$version/$name-$version.tar.gz)
+
+build() {
+    cd $name-$name-$version
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+}
