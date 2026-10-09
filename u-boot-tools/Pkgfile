@@ -4,15 +4,13 @@
 # Depends on: dtc gnutls swig
 
 name=u-boot-tools
-version=2026.07
-release=2
-source=(https://ftp.denx.de/pub/u-boot/u-boot-$version.tar.bz2
-  527115ef6783cec49e5610c523c124b399011361.patch)
+version=2026.10
+release=1
+source=(https://git.u-boot-project.org/u-boot/u-boot/-/archive/v$version/u-boot-v$version.tar.bz2)
 
 build() {
-  cd u-boot-$version
+  cd u-boot-v$version
 
-  patch -Np1 -i $SRC/527115ef6783cec49e5610c523c124b399011361.patch
   make sandbox_config
   make tools TOOLSUBDIRS=""
 
