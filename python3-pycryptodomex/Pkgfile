@@ -4,12 +4,13 @@
 # Depends on: python3-setuptools
 
 name=python3-pycryptodomex
-version=3.24.0
+version=3.24.1
 release=1
 source=(https://pypi.org/packages/source/p/pycryptodomex/pycryptodomex-$version.tar.gz)
 
 build() {
   cd pycryptodomex-$version
+
   /usr/bin/python3 setup.py build
   /usr/bin/python3 setup.py install --prefix=/usr \
     --root=$PKG \
