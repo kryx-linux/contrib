@@ -5,17 +5,14 @@
 # Optional: doxygen kdbusaddons kguiaddons librsvg
 
 name=nextcloud-client
-version=34.0.5
+version=35.0.0
 release=1
-source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz
-  47735a5191d59413db581a09890d18ca60c113fc.patch)
+source=(https://github.com/nextcloud/desktop/archive/v$version/$name-$version-$release.tar.gz)
 
 build() {
   prt-get isinst kdbusaddons kguiaddons librsvg && \
     PKGMK_NCC+=' -D SVG_CONVERTER=/usr/bin/rsvg-convert' || \
     PKGMK_NCC+=' -D BUILD_GUI=OFF'
-
-  patch -Np1 -d desktop-$version -i $SRC/47735a5191d59413db581a09890d18ca60c113fc.patch
 
   cmake -S desktop-$version -B build -G Ninja $PKGMK_NCC \
     -D CMAKE_INSTALL_PREFIX=/usr \
