@@ -4,7 +4,7 @@
 # Depends on: libayatana-indicator libdbusmenu-gtk3
 
 name=libayatana-appindicator
-version=0.6.0
+version=0.6.1
 release=1
 source=(https://github.com/AyatanaIndicators/libayatana-appindicator/archive/$version/$name-$version.tar.gz)
 
@@ -18,8 +18,6 @@ build() {
     -D FLAVOUR_GTK3=ON \
     -D ENABLE_BINDINGS_MONO=OFF \
     -Wno-dev
-
   cmake --build build-gtk3
-
   DESTDIR=$PKG cmake --install build-gtk3
 }
