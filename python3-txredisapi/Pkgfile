@@ -4,15 +4,13 @@
 # Depends on: python3-twisted
 
 name=python3-txredisapi
-version=1.4.12
+version=1.6.0
 release=1
 source=(https://pypi.org/packages/source/t/txredisapi/txredisapi-$version.tar.gz)
 
 build() {
   cd txredisapi-$version
-  /usr/bin/python3 setup.py build
-  /usr/bin/python3 setup.py install --prefix=/usr \
-    --root=$PKG \
-    -O1 \
-    --skip-build
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
 }
