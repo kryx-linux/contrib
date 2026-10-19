@@ -4,11 +4,10 @@
 # Depends on: glfw
 
 name=box2d
-version=3.1.1
+version=3.2.0
 release=1
 _enkits=0289cf6ffce86697e1f46cb4eeca1c946bffec71
 source=(https://github.com/erincatto/box2d/archive/v$version/$name-$version.tar.gz
-  https://github.com/dougbinks/enkiTS/archive/$_enkits/enkits-$_enkits.tar.gz
   libm.patch)
 
 build() {
@@ -21,7 +20,6 @@ build() {
     -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -fPIC" \
     -D BUILD_SHARED_LIBS=ON \
     -D BOX2D_SAMPLES=OFF \
-    -D FETCHCONTENT_SOURCE_DIR_ENKITS=$SRC/enkiTS-$_enkits \
     -Wno-dev
   cmake --build build
   DESTDIR=$PKG cmake --install build
