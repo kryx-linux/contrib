@@ -5,20 +5,26 @@
 
 name=volume_key
 version=0.3.12
-release=2
-source=(https://releases.pagure.org/$name/$name-$version.tar.xz
+release=3
+source=(https://github.com/felixonmars/volume_key/archive/refs/tags/volume_key-$version.tar.gz
   volume_key-0.3.12-fix_resource_leaks.patch
   volume_key-0.3.12-support_LUKS2_and_more.patch
   volume_key-0.3.12-find_python3.patch)
 
 build() {
-  cd $name-$version
+  cd $name-$name-$version
+
+  export CFLAGS+=" -Wno-implicit-function-declaration -Wno-int-conversion "
 
   patch -Np1 -i $SRC/volume_key-0.3.12-fix_resource_leaks.patch
   patch -Np1 -i $SRC/volume_key-0.3.12-support_LUKS2_and_more.patch
   patch -Np1 -i $SRC/volume_key-0.3.12-find_python3.patch
 
   find . -name ".pyc" -delete
+
+  sed -e '/AM_PATH_GPGME/iAM_PATH_GPG_ERROR' \
+    -e 's/gpg2/gpg/' -i configure.ac
+
   autoreconf -fiv
 
   export CFLAGS+=" $(/usr/bin/python3-config --includes)"
