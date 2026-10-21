@@ -4,12 +4,12 @@
 # Depends on: python3-wheel
 
 name=python3-sphinxcontrib-jsmath
-version=1.0.1
-release=2
-source=(https://pypi.org/packages/source/s/sphinxcontrib-jsmath/sphinxcontrib-jsmath-$version.tar.gz)
+version=2.0.0
+release=1
+source=(https://pypi.org/packages/source/s/sphinxcontrib_jsmath/sphinxcontrib_jsmath-$version.tar.gz)
 
 build() {
-  cd sphinxcontrib-jsmath-$version
+  cd sphinxcontrib_jsmath-$version
 
   /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
   /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
