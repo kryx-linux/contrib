@@ -1,24 +1,27 @@
 # Description: Scanner frontend and GIMP plugin for sane
 # URL:         http://www.sane-project.org
 # Maintainer:  Juergen Daubert, jue at crux dot nu
-# Depends on:  gimp, sane
+# Depends on:  gimp sane
 
 name=xsane
 version=0.999
-release=1
-source=(https://fossies.org/linux/misc/$name-$version.tar.gz)
+release=2
+source=(https://gitlab.com/sane-project/frontend/xsane/-/archive/$version/$name-$version.tar.gz)
 
 build () {
     cd $name-$version
     
     # http://www.linuxfromscratch.org/blfs/view/svn/pst/xsane.html
     sed -i -e 's/png_ptr->jmpbuf/png_jmpbuf(png_ptr)/' src/xsane-save.c
-    
+
+    export CFLAGS="$CFLAGS -Wno-implicit-function-declaration"
+
     ./configure --prefix=/usr \
                 --mandir=/usr/share/man \
                 --disable-nls \
                 --enable-gtk2 \
-                --enable-gimp2
+                --enable-gimp2 \
+                --disable-sanetest
     make
     make DESTDIR=$PKG install
 
