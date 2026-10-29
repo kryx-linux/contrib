@@ -262,6 +262,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qpygui_native_interface.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qpygui_qlist.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qpygui_qmap.sip
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qpygui_qrhi_platform.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qpygui_vulkan.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qquaternion.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qrasterwindow.sip
@@ -269,8 +270,11 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qregion.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qrgb.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qrgba64.sip
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qrhi.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qscreen.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qsessionmanager.sip
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qshader.sip
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qshaderdescription.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qshortcut.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qstandarditemmodel.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtGui/qstatictext.sip
@@ -340,6 +344,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/qsslellipticcurve.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/qsslerror.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/qsslkey.sip
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/qsslkeyingmaterial.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/qsslpresharedkeyauthenticator.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/qsslserver.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtNetwork/qsslsocket.sip
@@ -486,6 +491,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/qpushbutton.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/qpywidgets_qlist.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/qradiobutton.sip
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/qrhiwidget.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/qrubberband.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/qscrollarea.sip
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/bindings/QtWidgets/qscrollbar.sip
@@ -654,12 +660,12 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/PyQt6/uic/widget-plugins/_
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/uic/widget-plugins/qtprintsupport.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/uic/widget-plugins/qtquickwidgets.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/PyQt6/uic/widget-plugins/qtwebenginewidgets.py
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/pyqt6-6.11.0.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.11.0.dist-info/INSTALLER
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.11.0.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.11.0.dist-info/RECORD
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/pyqt6-6.11.0.dist-info/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.11.0.dist-info/licenses/LICENSE
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/pyqt6-6.12.0.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.12.0.dist-info/INSTALLER
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.12.0.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.12.0.dist-info/RECORD
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/pyqt6-6.12.0.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/pyqt6-6.12.0.dist-info/licenses/LICENSE
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/qt6/
 drwxr-xr-x	root/root	usr/share/qt6/qsci/
