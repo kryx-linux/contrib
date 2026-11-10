@@ -1,0 +1,16 @@
+# Description: Embed CycloneDX SBOMs into Python distributions (PEP 770): a hatchling build hook plus a backend-agnostic CLI
+# URL: https://github.com/tox-dev/python-sbom
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-hatch-fancy-pypi-readme python3-hatch-vcs python3-packageurl-python python3-zipremove
+
+name=python3-python-sbom
+version=0.3.1
+release=1
+source=(https://pypi.org/packages/source/p/python_sbom/python_sbom-$version.tar.gz)
+
+build() {
+  cd python_sbom-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
