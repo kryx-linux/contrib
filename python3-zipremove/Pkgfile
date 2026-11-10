@@ -1,0 +1,16 @@
+# Description: Extend `zipfile` with remove-related capabilities
+# URL: https://github.com/danny0838/zipremove
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-wheel
+
+name=python3-zipremove
+version=0.10.0
+release=1
+source=(https://pypi.org/packages/source/z/zipremove/zipremove-$version.tar.gz)
+
+build() {
+  cd zipremove-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
