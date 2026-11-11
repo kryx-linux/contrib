@@ -1,10 +1,10 @@
 # Description: A Cross Platform and Open Source PCB Design Suite
 # URL: https://www.kicad.org/
 # Maintainer: Matt Housh, jaeger at crux dot ninja
-# Depends on: glm libspnav libgit2 boost ngspice opencascade protobuf swig wxgtk3 unixodbc poppler wayland
+# Depends on: glm libspnav libgit2 boost ngspice opencascade protobuf swig wxgtk3 unixodbc poppler wayland nng
 
 name=kicad
-version=10.0.6
+version=10.0.8
 release=1
 source=(https://gitlab.com/kicad/code/$name/-/archive/$version/$name-$version.tar.bz2
     https://gitlab.com/kicad/libraries/$name-footprints/-/archive/$version/$name-footprints-$version.tar.bz2
@@ -29,12 +29,12 @@ build() {
     # main program
     cmake -S $name-$version -B build \
         -G Ninja \
-        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_BUILD_TYPE=None \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DKICAD_BUILD_QA_TESTS=OFF \
         -DKICAD_UPDATE_CHECK=OFF \
         -DKICAD_SCRIPTING_WXPYTHON=OFF \
-        -DKICAD_IPC_API=OFF \
+        -DKICAD_IPC_API=ON \
         -Wno-dev
     cmake --build build
     DESTDIR=$PKG cmake --install build
