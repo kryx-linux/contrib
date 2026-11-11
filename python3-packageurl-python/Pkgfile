@@ -1,0 +1,16 @@
+# Description: A purl aka. Package URL parser and builder
+# URL: https://github.com/package-url/packageurl-python
+# Maintainer: Tim Biermann, tbier at posteo dot de
+# Depends on: python3-wheel
+
+name=python3-packageurl-python
+version=0.17.6
+release=1
+source=(https://pypi.org/packages/source/p/packageurl_python/packageurl_python-$version.tar.gz)
+
+build() {
+  cd packageurl_python-$version
+
+  /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+  /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
