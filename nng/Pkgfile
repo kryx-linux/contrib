@@ -1,0 +1,21 @@
+# Description: Light-weight brokerless messaging
+# URL: https://github.com/nanomsg/nng
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: mbedtls
+
+name=nng
+version=1.12.5
+release=1
+source=(https://github.com/nanomsg/nng/archive/v$version/$name-$version.tar.gz)
+
+build() {
+	cmake -S $name-$version -B build \
+		-G Ninja \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DBUILD_SHARED_LIBS=ON \
+		-DNNG_TESTS=OFF \
+		-Wno-dev
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
+}
