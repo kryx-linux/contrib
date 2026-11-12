@@ -5,9 +5,9 @@
 # Optional: libgit2 sccache
 
 name=rust-wasm
-version=1.99.1
-_date=2026-08-20
-_rustc=1.98.0
+version=1.100.0
+_date=2026-10-01
+_rustc=1.99.0
 _cargo=$_rustc
 release=1
 
@@ -80,7 +80,7 @@ build() {
   # bootstrap.toml {{{
   cat <<-EOF >$SRC/bootstrap.toml
 profile = "dist"
-change-id = 160100
+change-id = 162423
 
 [llvm]
 download-ci-llvm = false
@@ -101,7 +101,6 @@ backtrace-on-ice = true
 lld = false
 bootstrap-override-lld = "external"
 llvm-bitcode-linker = false
-jemalloc = true
 rpath = false
 frame-pointers = true
 deny-warnings = false
@@ -120,6 +119,7 @@ extended = false
 sanitizers = false
 profiler = true
 python = "/usr/bin/python3"
+allocator = "jemalloc"
 
 [dist]
 compression-formats = ["gz"]
