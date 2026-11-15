@@ -1,24 +1,30 @@
 # Description: Tools to create, alter and inspect Matroska files.
 # URL: https://mkvtoolnix.download/
 # Maintainer: Tim Biermann, tbier at posteo dot de
-# Depends on: boost cmark docbook-xsl flac fmt libdvdread libmatroska nlohmann-json pugixml qt6-multimedia qt6-tools ruby
-# Optional: hicolor-icon-theme
+# Depends on: boost cmark docbook-xsl flac fmt libdvdread libmatroska libvorbis nlohmann-json pugixml qt6-base ruby
+# Optional: hicolor-icon-theme qt6-multimedia
 
 name=mkvtoolnix
 version=103.0
 release=1
-source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz)
+source=(https://mkvtoolnix.download/sources/$name-$version.tar.xz
+  mktoolnix-101.0-fix-nongui-build.patch)
 
 build() {
   cd $name-$version
 
   rm -rf lib/{fmt,libebml,libmatroska,nlohmann-json,pugixml}
 
-  ./autogen.sh
+  patch -Np1 -i $SRC/mktoolnix-101.0-fix-nongui-build.patch
+
+  prt-get isinst qt6-multimedia \
+    && PKGMK_MKVTOOLNIX+=' --enable-qt6 --with-qmake=/usr/lib/qt6/bin/qmake6' || \
+    PKGMK_MKVTOOLNIX+=' --disable-qt6 --disable-gui'
+
+  NOCONFIGURE=1 ./autogen.sh
+
   ./configure $PKGMK_MKVTOOLNIX \
     --prefix=/usr \
-    --enable-qt6 \
-    --with-qmake=/usr/lib/qt6/bin/qmake6 \
     --disable-optimization \
     --disable-precompiled-headers \
     --disable-update-check \
