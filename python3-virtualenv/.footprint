@@ -4,16 +4,16 @@ drwxr-xr-x	root/root	usr/bin/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python3.12/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/METADATA
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/RECORD
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/WHEEL
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/entry_points.txt
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/licenses/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/licenses/LICENSE
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/licenses/THIRD-PARTY-NOTICES.md
-drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/sboms/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.6.dist-info/sboms/virtualenv.cdx.json
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/METADATA
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/RECORD
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/WHEEL
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/entry_points.txt
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/licenses/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/licenses/LICENSE
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/licenses/THIRD-PARTY-NOTICES.md
+drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/sboms/
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv-21.15.8.dist-info/sboms/virtualenv.cdx.json
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/__main__.py
@@ -99,6 +99,8 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pyca
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/__init__.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/base.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/base.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/cache_migration.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/cache_migration.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/na.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/na.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/read_only.cpython-312.opt-1.pyc
@@ -108,6 +110,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pyca
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/via_tempdir.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/__pycache__/via_tempdir.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/base.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/cache_migration.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/na.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/read_only.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/app_data/via_disk_folder.py
@@ -245,8 +248,14 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/run/
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/__init__.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/__init__.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/cli.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/cli.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/parser.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/parser.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/session.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/__pycache__/session.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/cli.py
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/parser.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/run/plugin/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/run/plugin/__init__.py (EMPTY)
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/run/plugin/__pycache__/
@@ -298,12 +307,15 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/__init__.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/__init__.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/_safe_extract_zip.cpython-312.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/_safe_extract_zip.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/base.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/base.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/copy.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/copy.cpython-312.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/symlink.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/__pycache__/symlink.cpython-312.pyc
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/_safe_extract_zip.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/base.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/copy.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/embed/via_app_data/pip_install/symlink.py
@@ -336,7 +348,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/wheels/emb
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/wheels/periodic_update.py
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/seed/wheels/util.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/util/
--rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/util/__init__.py (EMPTY)
+-rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/util/__init__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/site-packages/virtualenv/util/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/util/__pycache__/__init__.cpython-312.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.12/site-packages/virtualenv/util/__pycache__/__init__.cpython-312.pyc
