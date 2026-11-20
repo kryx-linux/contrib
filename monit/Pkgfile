@@ -2,9 +2,10 @@
 # URL: http://www.tildeslash.com/monit/
 # Maintainer: Juergen Daubert, jue at crux dot nu
 # Depends on: libnsl libtirpc linux-pam openssl zlib
+# Optional: bash-completion
 
 name=monit
-version=6.0.0
+version=6.1.0
 release=1
 source=(http://mmonit.com/$name/dist/$name-$version.tar.gz \
     monitd)
@@ -12,7 +13,9 @@ source=(http://mmonit.com/$name/dist/$name-$version.tar.gz \
 build() {
     cd $name-$version
 
-    ./configure \
+    prt-get isinst bash-completion || PKGMK_MONIT+=' --with-bashcompletiondir=no'
+
+    ./configure $PKGMK_MONIT \
         --prefix=/usr \
         --sysconfdir=/etc \
         --runstatedir=/run
