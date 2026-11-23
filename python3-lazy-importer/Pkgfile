@@ -1,0 +1,17 @@
+# Description: A context manager for portable, opt-in lazy imports
+# URL: https://pypi.org/project/lazy-importer/
+# Maintainer: Matt Housh, jaeger at crux dot ninja
+# Depends on: python3-build
+
+name=python3-lazy-importer
+version=0.1.0
+release=1
+source=(https://files.pythonhosted.org/packages/d9/23/d2c8308466a6831043ac3518e480c2e1a06b21a13e0a8f6542ab29cf592a/lazy_importer-$version.tar.gz)
+
+build() {
+    cd lazy_importer-$version
+    /usr/bin/python3 -m build --wheel --skip-dependency-check --no-isolation
+    /usr/bin/python3 -m installer --destdir=$PKG dist/*.whl
+}
+
+# vim: set ts=4 et:
