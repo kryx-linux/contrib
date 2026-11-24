@@ -5,10 +5,14 @@
 
 name=libdvdread
 version=7.1.1
-release=1
+release=2
 source=(https://download.videolan.org/pub/videolan/$name/$version/$name-$version.tar.xz)
 
 build() {
+    sed -e '/defined(__APPLE__)/s,$, || \\,' \
+        -e '/defined(__APPLE__)/a (defined(__linux__) && !defined(__GLIBC__))' \
+        -i $name-$version/src/dvdread/dvd_filesystem.h
+
     meson setup $name-$version build --prefix=/usr
 
     meson compile -C build -j ${JOBS-1}
