@@ -5,14 +5,13 @@
 # Optional: ansible-lint yamllint
 
 name=ansible-language-server
-version=26.11.0
-_repo_version=26.11.0
+version=26.11.1
 release=1
-source=(https://github.com/ansible/vscode-ansible/archive/v$_repo_version/vscode-ansible-$_repo_version.tar.gz
+source=(https://github.com/ansible/vscode-ansible/archive/v$version/vscode-ansible-$version.tar.gz
   als.sh)
 
 build() {
-  cd vscode-ansible-$_repo_version
+  cd vscode-ansible-$version
 
   pnpm install --frozen-lockfile
 
